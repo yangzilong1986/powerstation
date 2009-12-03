@@ -1,0 +1,26 @@
+CC = /usr/vac/bin/cc_r
+INC= -I/opt/IBM/cicsuc/include
+CFLAGS = -g -DCICS_AIX $(INC)
+
+# Linker settings
+LD = /usr/vac/bin/cc_r
+LPATH = -L/opt/IBM/cicsuc/lib
+
+# Client sample libraries
+LFLAGS = -lpthreads -lc_r -lcclaix
+
+# Linker settings for User Exit sample
+LDX = cc_r
+LFLAGX = -bnoentry
+ECIEXP = -bE:ecix1.exp
+EPIEXP = -bE:epix1.exp
+
+# This is CICS TG specific. It is not used by the CICS UC.
+# Linker settings for CTGSTAT1 sample
+LFLAGZ = -lctgstats
+
+libcicsclisync.so:cicsclisync.o
+        /usr/vac/bin/cc -qmkshrobj -o libcicsclisync.so cicsclisync.o  ${LIB} ${LFLAGS}
+        rm -rf cicsclisync.o
+cicsclisync.o:cicsclisync.c
+        /usr/vac/bin/cc -c cicsclisync.c -I./ -I${JAVA_HOME}/include ${CFLAGS}
