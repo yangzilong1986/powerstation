@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<digester-rules>
+	<pattern value="*/TimeTrigger">
+		<object-create-rule classname="com.hisun.trigger.HiTimeTrigger"/>
+	</pattern>
+	<pattern value="*/SchItem">
+		<object-create-rule classname="com.hisun.trigger.HiSchItem"/>
+		<set-properties-rule/>
+		<set-next-rule methodname="addChilds"/>
+	</pattern>
+</digester-rules>
