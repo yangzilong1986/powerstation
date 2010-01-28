@@ -1,160 +1,160 @@
-/*     */ package com.hisun.engine;
-/*     */ 
-/*     */ import com.hisun.exception.HiException;
-/*     */ import com.hisun.hilog4j.HiLog;
-/*     */ import com.hisun.hilog4j.Logger;
-/*     */ import com.hisun.message.HiETF;
-/*     */ import com.hisun.message.HiMessage;
-/*     */ import com.hisun.message.HiMessageContext;
-/*     */ import com.hisun.util.HiStringManager;
-/*     */ import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
-/*     */ import org.apache.commons.lang.StringUtils;
-/*     */ 
-/*     */ public class HiEngineUtilities
-/*     */ {
-/*     */   private static final String CUR_FLOW_STEP = "CurFlowStep";
-/*     */ 
-/*     */   public static boolean isInnerMessage(HiMessage mess)
-/*     */     throws HiException
-/*     */   {
-/*  77 */     Logger log = HiLog.getLogger(mess);
-/*  78 */     String strType = mess.getHeadItem("ECT");
-/*  79 */     if (strType == null) {
-/*  80 */       throw new HiException("213332", "ECT");
-/*     */     }
-/*     */ 
-/*  84 */     return "text/etf".equals(strType);
-/*     */   }
-/*     */ 
-/*     */   private static void processBAS(String strName, Object value, boolean isSet, String strSign, HiMessageContext messContext)
-/*     */   {
-/*  97 */     String strKey = StringUtils.substringAfter(strName, strSign);
-/*  98 */     if (isSet)
-/*  99 */       messContext.setBaseSource(strKey, value);
-/*     */     else
-/* 101 */       messContext.removeBaseSource(strKey);
-/*     */   }
-/*     */ 
-/*     */   private static void processETF(HiMessage mess, String strName, Object value, boolean isSet, String strSign)
-/*     */   {
-/* 116 */     String strKey = StringUtils.substringAfter(strName, strSign);
-/* 117 */     HiETF etf = (HiETF)mess.getBody();
-/* 118 */     if (isSet)
-/* 119 */       etf.setGrandChildNode(strKey, value.toString());
-/*     */     else
-/* 121 */       etf.removeChildNode(strKey);
-/*     */   }
-/*     */ 
-/*     */   public static void processFlow(String strName, Object value, boolean isSet, HiMessageContext messContext)
-/*     */     throws HiException
-/*     */   {
-/* 135 */     HiMessage mess = messContext.getCurrentMsg();
-/* 136 */     Logger log = HiLog.getLogger(mess);
-/*     */ 
-/* 138 */     if (log.isDebugEnabled()) {
-/* 139 */       if (value == null) {
-/* 140 */         log.debug(HiStringManager.getManager().getString("HiEngineUtilities.processFlow", strName));
-/*     */       }
-/*     */       else {
-/* 143 */         log.debug(HiStringManager.getManager().getString("HiEngineUtilities.processFlow1", strName, value));
-/*     */       }
-/*     */     }
-/*     */ 
-/* 147 */     if (strName.startsWith("@ETF")) {
-/* 148 */       processETF(mess, strName, value, isSet, "@ETF.");
-/* 149 */     } else if (strName.startsWith("$")) {
-/* 150 */       processETF(mess, strName, value, isSet, "$");
-/* 151 */     } else if (strName.startsWith("@BAS")) {
-/* 152 */       processBAS(strName, value, isSet, "@BAS.", messContext);
-/*     */     }
-/* 154 */     else if (strName.startsWith("~")) {
-/* 155 */       processBAS(strName, value, isSet, "~", messContext);
-/* 156 */     } else if (strName.startsWith("@MSG")) {
-/* 157 */       processMess(mess, strName, value, isSet, "@MSG.");
-/* 158 */     } else if (strName.startsWith("%")) {
-/* 159 */       processMess(mess, strName, value, isSet, "%"); } else {
-/* 160 */       if (strName.startsWith("@BCFG"))
-/*     */         return;
-/* 162 */       if (strName.startsWith("@PARA")) {
-/* 163 */         messContext.setPara(StringUtils.substringAfter(strName, "@PARA."), value);
-/* 164 */       } else if (strName.startsWith("#")) {
-/* 165 */         messContext.setPara(StringUtils.substringAfter(strName, "#"), value);
-/* 166 */       } else if (strName.startsWith("@")) {
-/* 167 */         setValueToDS(messContext, strName, value);
-/*     */       } else {
-/* 169 */         HiETF etf = (HiETF)mess.getBody();
-/* 170 */         if (isSet)
-/* 171 */           if (value == null)
-/* 172 */             etf.setGrandChildNode(strName, "");
-/*     */           else
-/* 174 */             etf.setGrandChildNode(strName, value.toString());
-/*     */         else
-/* 176 */           etf.removeGrandChild(strName); 
-/*     */       }
-/*     */     }
-/*     */   }
-/*     */ 
-/*     */   private static void setValueToDS(HiMessageContext ctx, String name, Object value) throws HiException {
-/* 181 */     String key = null;
-/*     */ 
-/* 183 */     int idx = name.indexOf(".");
-/* 184 */     Object o = ctx.getBaseSource(name.substring(1, idx));
-/* 185 */     key = name.substring(idx + 1);
-/* 186 */     if (o instanceof HiETF)
-/* 187 */       ((HiETF)o).setGrandChildNode(key, value.toString());
-/* 188 */     else if (o instanceof HiMessage)
-/* 189 */       ((HiMessage)o).setHeadItem(key, value);
-/* 190 */     else if (o instanceof ConcurrentHashMap)
-/* 191 */       ((ConcurrentHashMap)o).put(key, value);
-/*     */     else
-/* 193 */       throw new HiException("220320", name.substring(1, idx));
-/*     */   }
-/*     */ 
-/*     */   private static void processMess(HiMessage mess, String strName, Object value, boolean isSet, String strSign)
-/*     */   {
-/* 207 */     String strKey = StringUtils.substringAfter(strName, strSign);
-/* 208 */     if (isSet)
-/* 209 */       mess.setHeadItem(strKey, value);
-/*     */     else
-/* 211 */       mess.delHeadItem(strKey);
-/*     */   }
-/*     */ 
-/*     */   public static String getCurFlowStep() {
-/* 215 */     String flowStep = HiMessageContext.getCurrentMessageContext().getStrProp("CurFlowStep");
-/*     */ 
-/* 217 */     if (flowStep == null)
-/* 218 */       flowStep = "1";
-/* 219 */     return StringUtils.leftPad(flowStep, 2, '0');
-/*     */   }
-/*     */ 
-/*     */   public static void setCurFlowStep(int i) {
-/* 223 */     HiMessageContext ctx = HiMessageContext.getCurrentMessageContext();
-/* 224 */     Logger log = HiLog.getLogger(ctx.getCurrentMsg());
-/* 225 */     if (log.isInfoEnabled())
-/* 226 */       HiMessageContext.getCurrentMessageContext().setProperty("CurFlowStep", String.valueOf(i + 1));
-/*     */   }
-/*     */ 
-/*     */   public static void timeoutCheck(HiMessage message)
-/*     */     throws HiException
-/*     */   {
-/* 247 */     Logger log = HiLog.getLogger(message);
-/* 248 */     if (log.isDebugEnabled()) {
-/* 249 */       log.debug("HiRouterOut.timeoutCheck() - start");
-/*     */     }
-/*     */ 
-/* 252 */     Object o = message.getObjectHeadItem("ETM");
-/* 253 */     if (!(o instanceof Long)) {
-/* 254 */       if (log.isDebugEnabled()) {
-/* 255 */         log.debug("HiRouterOut.timeoutCheck() - end");
-/*     */       }
-/* 257 */       return;
-/*     */     }
-/* 259 */     long etm = ((Long)o).longValue();
-/* 260 */     if ((etm > 0L) && (System.currentTimeMillis() > etm)) {
-/* 261 */       throw new HiException("212001");
-/*     */     }
-/*     */ 
-/* 264 */     if (log.isDebugEnabled())
-/* 265 */       log.debug("HiRouterOut.timeoutCheck() - end");
-/*     */   }
-/*     */ }
+ package com.hisun.engine;
+ 
+ import com.hisun.exception.HiException;
+ import com.hisun.hilog4j.HiLog;
+ import com.hisun.hilog4j.Logger;
+ import com.hisun.message.HiETF;
+ import com.hisun.message.HiMessage;
+ import com.hisun.message.HiMessageContext;
+ import com.hisun.util.HiStringManager;
+ import edu.emory.mathcs.backport.java.util.concurrent.ConcurrentHashMap;
+ import org.apache.commons.lang.StringUtils;
+ 
+ public class HiEngineUtilities
+ {
+   private static final String CUR_FLOW_STEP = "CurFlowStep";
+ 
+   public static boolean isInnerMessage(HiMessage mess)
+     throws HiException
+   {
+     Logger log = HiLog.getLogger(mess);
+     String strType = mess.getHeadItem("ECT");
+     if (strType == null) {
+       throw new HiException("213332", "ECT");
+     }
+ 
+     return "text/etf".equals(strType);
+   }
+ 
+   private static void processBAS(String strName, Object value, boolean isSet, String strSign, HiMessageContext messContext)
+   {
+     String strKey = StringUtils.substringAfter(strName, strSign);
+     if (isSet)
+       messContext.setBaseSource(strKey, value);
+     else
+       messContext.removeBaseSource(strKey);
+   }
+ 
+   private static void processETF(HiMessage mess, String strName, Object value, boolean isSet, String strSign)
+   {
+     String strKey = StringUtils.substringAfter(strName, strSign);
+     HiETF etf = (HiETF)mess.getBody();
+     if (isSet)
+       etf.setGrandChildNode(strKey, value.toString());
+     else
+       etf.removeChildNode(strKey);
+   }
+ 
+   public static void processFlow(String strName, Object value, boolean isSet, HiMessageContext messContext)
+     throws HiException
+   {
+     HiMessage mess = messContext.getCurrentMsg();
+     Logger log = HiLog.getLogger(mess);
+ 
+     if (log.isDebugEnabled()) {
+       if (value == null) {
+         log.debug(HiStringManager.getManager().getString("HiEngineUtilities.processFlow", strName));
+       }
+       else {
+         log.debug(HiStringManager.getManager().getString("HiEngineUtilities.processFlow1", strName, value));
+       }
+     }
+ 
+     if (strName.startsWith("@ETF")) {
+       processETF(mess, strName, value, isSet, "@ETF.");
+     } else if (strName.startsWith("$")) {
+       processETF(mess, strName, value, isSet, "$");
+     } else if (strName.startsWith("@BAS")) {
+       processBAS(strName, value, isSet, "@BAS.", messContext);
+     }
+     else if (strName.startsWith("~")) {
+       processBAS(strName, value, isSet, "~", messContext);
+     } else if (strName.startsWith("@MSG")) {
+       processMess(mess, strName, value, isSet, "@MSG.");
+     } else if (strName.startsWith("%")) {
+       processMess(mess, strName, value, isSet, "%"); } else {
+       if (strName.startsWith("@BCFG"))
+         return;
+       if (strName.startsWith("@PARA")) {
+         messContext.setPara(StringUtils.substringAfter(strName, "@PARA."), value);
+       } else if (strName.startsWith("#")) {
+         messContext.setPara(StringUtils.substringAfter(strName, "#"), value);
+       } else if (strName.startsWith("@")) {
+         setValueToDS(messContext, strName, value);
+       } else {
+         HiETF etf = (HiETF)mess.getBody();
+         if (isSet)
+           if (value == null)
+             etf.setGrandChildNode(strName, "");
+           else
+             etf.setGrandChildNode(strName, value.toString());
+         else
+           etf.removeGrandChild(strName); 
+       }
+     }
+   }
+ 
+   private static void setValueToDS(HiMessageContext ctx, String name, Object value) throws HiException {
+     String key = null;
+ 
+     int idx = name.indexOf(".");
+     Object o = ctx.getBaseSource(name.substring(1, idx));
+     key = name.substring(idx + 1);
+     if (o instanceof HiETF)
+       ((HiETF)o).setGrandChildNode(key, value.toString());
+     else if (o instanceof HiMessage)
+       ((HiMessage)o).setHeadItem(key, value);
+     else if (o instanceof ConcurrentHashMap)
+       ((ConcurrentHashMap)o).put(key, value);
+     else
+       throw new HiException("220320", name.substring(1, idx));
+   }
+ 
+   private static void processMess(HiMessage mess, String strName, Object value, boolean isSet, String strSign)
+   {
+     String strKey = StringUtils.substringAfter(strName, strSign);
+     if (isSet)
+       mess.setHeadItem(strKey, value);
+     else
+       mess.delHeadItem(strKey);
+   }
+ 
+   public static String getCurFlowStep() {
+     String flowStep = HiMessageContext.getCurrentMessageContext().getStrProp("CurFlowStep");
+ 
+     if (flowStep == null)
+       flowStep = "1";
+     return StringUtils.leftPad(flowStep, 2, '0');
+   }
+ 
+   public static void setCurFlowStep(int i) {
+     HiMessageContext ctx = HiMessageContext.getCurrentMessageContext();
+     Logger log = HiLog.getLogger(ctx.getCurrentMsg());
+     if (log.isInfoEnabled())
+       HiMessageContext.getCurrentMessageContext().setProperty("CurFlowStep", String.valueOf(i + 1));
+   }
+ 
+   public static void timeoutCheck(HiMessage message)
+     throws HiException
+   {
+     Logger log = HiLog.getLogger(message);
+     if (log.isDebugEnabled()) {
+       log.debug("HiRouterOut.timeoutCheck() - start");
+     }
+ 
+     Object o = message.getObjectHeadItem("ETM");
+     if (!(o instanceof Long)) {
+       if (log.isDebugEnabled()) {
+         log.debug("HiRouterOut.timeoutCheck() - end");
+       }
+       return;
+     }
+     long etm = ((Long)o).longValue();
+     if ((etm > 0L) && (System.currentTimeMillis() > etm)) {
+       throw new HiException("212001");
+     }
+ 
+     if (log.isDebugEnabled())
+       log.debug("HiRouterOut.timeoutCheck() - end");
+   }
+ }

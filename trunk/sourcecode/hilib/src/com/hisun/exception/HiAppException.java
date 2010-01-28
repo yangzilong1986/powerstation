@@ -1,58 +1,63 @@
-/*    */ package com.hisun.exception;
-/*    */ 
-/*    */ public class HiAppException extends HiException
-/*    */ {
-/*  6 */   private int retCode = -1;
-/*    */ 
-/*    */   public HiAppException(int retCode, String code)
-/*    */   {
-/* 10 */     super(code, "");
-/* 11 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public HiAppException(int retCode, String code, String msg)
-/*    */   {
-/* 26 */     super(code, msg);
-/* 27 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public HiAppException(int retCode, String code, String arg0, String arg1)
-/*    */   {
-/* 32 */     super(code, arg0, arg1);
-/* 33 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public HiAppException(int retCode, String code, String[] args)
-/*    */   {
-/* 38 */     super(code, args);
-/*    */ 
-/* 40 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public HiAppException(int retCode, String code, String msg, Throwable nestedException)
-/*    */   {
-/* 58 */     super(code, msg, nestedException);
-/* 59 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public HiAppException(int retCode, String code, String[] msg, Throwable nestedException)
-/*    */   {
-/* 65 */     super(code, msg, nestedException);
-/* 66 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public int getRetCode()
-/*    */   {
-/* 76 */     return this.retCode;
-/*    */   }
-/*    */ 
-/*    */   public void setRetCode(int retCode)
-/*    */   {
-/* 81 */     this.retCode = retCode;
-/*    */   }
-/*    */ 
-/*    */   public String toString()
-/*    */   {
-/* 86 */     return "retCode[" + this.retCode + "] \n" + super.toString();
-/*    */   }
-/*    */ }
+package com.hisun.exception;
+
+public class HiAppException extends HiException {
+    private int retCode = -1;
+
+    public HiAppException(int retCode, String code) {
+
+        super(code, "");
+
+        this.retCode = retCode;
+    }
+
+    public HiAppException(int retCode, String code, String msg) {
+
+        super(code, msg);
+
+        this.retCode = retCode;
+    }
+
+    public HiAppException(int retCode, String code, String arg0, String arg1) {
+
+        super(code, arg0, arg1);
+
+        this.retCode = retCode;
+    }
+
+    public HiAppException(int retCode, String code, String[] args) {
+
+        super(code, args);
+
+
+        this.retCode = retCode;
+    }
+
+    public HiAppException(int retCode, String code, String msg, Throwable nestedException) {
+
+        super(code, msg, nestedException);
+
+        this.retCode = retCode;
+    }
+
+    public HiAppException(int retCode, String code, String[] msg, Throwable nestedException) {
+
+        super(code, msg, nestedException);
+
+        this.retCode = retCode;
+    }
+
+    public int getRetCode() {
+
+        return this.retCode;
+    }
+
+    public void setRetCode(int retCode) {
+
+        this.retCode = retCode;
+    }
+
+    public String toString() {
+
+        return "retCode[" + this.retCode + "] \n" + super.toString();
+    }
+}
