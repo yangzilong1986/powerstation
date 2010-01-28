@@ -1,5 +1,4 @@
 package com.hisun.pubinterface;
 
-public abstract interface IReloadable
-{
+public abstract interface IReloadable {
 }

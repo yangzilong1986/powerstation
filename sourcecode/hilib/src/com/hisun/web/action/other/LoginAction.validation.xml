@@ -1,10 +1,10 @@
 <!DOCTYPE validators PUBLIC
-"-//OpenSymphony Group//XWork Validator 1.0.2//EN"
-"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+        "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+        "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 <validators>
     <field name="userID">
         <field-validator type="required">
-            <message >You must input your userID!</message>
+            <message>You must input your userID!</message>
         </field-validator>
     </field>
 

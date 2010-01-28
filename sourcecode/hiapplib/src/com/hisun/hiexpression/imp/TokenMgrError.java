@@ -1,81 +1,81 @@
-/*     */ package com.hisun.hiexpression.imp;
-/*     */ 
-/*     */ public class TokenMgrError extends Error
-/*     */ {
-/*     */   static final int LEXICAL_ERROR = 0;
-/*     */   static final int STATIC_LEXER_ERROR = 1;
-/*     */   static final int INVALID_LEXICAL_STATE = 2;
-/*     */   static final int LOOP_DETECTED = 3;
-/*     */   int errorCode;
-/*     */ 
-/*     */   protected static final String addEscapes(String str)
-/*     */   {
-/*  41 */     StringBuffer retval = new StringBuffer();
-/*     */ 
-/*  43 */     for (int i = 0; i < str.length(); ++i) {
-/*  44 */       switch (str.charAt(i))
-/*     */       {
-/*     */       case '\0':
-/*  47 */         break;
-/*     */       case '\b':
-/*  49 */         retval.append("\\b");
-/*  50 */         break;
-/*     */       case '\t':
-/*  52 */         retval.append("\\t");
-/*  53 */         break;
-/*     */       case '\n':
-/*  55 */         retval.append("\\n");
-/*  56 */         break;
-/*     */       case '\f':
-/*  58 */         retval.append("\\f");
-/*  59 */         break;
-/*     */       case '\r':
-/*  61 */         retval.append("\\r");
-/*  62 */         break;
-/*     */       case '"':
-/*  64 */         retval.append("\\\"");
-/*  65 */         break;
-/*     */       case '\'':
-/*  67 */         retval.append("\\'");
-/*  68 */         break;
-/*     */       case '\\':
-/*  70 */         retval.append("\\\\");
-/*  71 */         break;
-/*     */       default:
-/*     */         char ch;
-/*  73 */         if (((ch = str.charAt(i)) < ' ') || (ch > '~')) {
-/*  74 */           String s = "0000" + Integer.toString(ch, 16);
-/*  75 */           retval.append("\\u" + s.substring(s.length() - 4, s.length()));
-/*     */         } else {
-/*  77 */           retval.append(ch);
-/*     */         }
-/*     */       }
-/*     */     }
-/*     */ 
-/*  82 */     return retval.toString();
-/*     */   }
-/*     */ 
-/*     */   protected static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar)
-/*     */   {
-/*  98 */     return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + ((EOFSeen) ? "<EOF> " : new StringBuffer().append("\"").append(addEscapes(String.valueOf(curChar))).append("\"").append(" (").append(curChar).append("), ").toString()) + "after : \"" + addEscapes(errorAfter) + "\"";
-/*     */   }
-/*     */ 
-/*     */   public String getMessage()
-/*     */   {
-/* 115 */     return super.getMessage();
-/*     */   }
-/*     */ 
-/*     */   public TokenMgrError()
-/*     */   {
-/*     */   }
-/*     */ 
-/*     */   public TokenMgrError(String message, int reason)
-/*     */   {
-/* 126 */     super(message);
-/* 127 */     this.errorCode = reason;
-/*     */   }
-/*     */ 
-/*     */   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
-/* 131 */     this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
-/*     */   }
-/*     */ }
+ package com.hisun.hiexpression.imp;
+ 
+ public class TokenMgrError extends Error
+ {
+   static final int LEXICAL_ERROR = 0;
+   static final int STATIC_LEXER_ERROR = 1;
+   static final int INVALID_LEXICAL_STATE = 2;
+   static final int LOOP_DETECTED = 3;
+   int errorCode;
+ 
+   protected static final String addEscapes(String str)
+   {
+     StringBuffer retval = new StringBuffer();
+ 
+     for (int i = 0; i < str.length(); ++i) {
+       switch (str.charAt(i))
+       {
+       case '\0':
+         break;
+       case '\b':
+         retval.append("\\b");
+         break;
+       case '\t':
+         retval.append("\\t");
+         break;
+       case '\n':
+         retval.append("\\n");
+         break;
+       case '\f':
+         retval.append("\\f");
+         break;
+       case '\r':
+         retval.append("\\r");
+         break;
+       case '"':
+         retval.append("\\\"");
+         break;
+       case '\'':
+         retval.append("\\'");
+         break;
+       case '\\':
+         retval.append("\\\\");
+         break;
+       default:
+         char ch;
+         if (((ch = str.charAt(i)) < ' ') || (ch > '~')) {
+           String s = "0000" + Integer.toString(ch, 16);
+           retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+         } else {
+           retval.append(ch);
+         }
+       }
+     }
+ 
+     return retval.toString();
+   }
+ 
+   protected static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar)
+   {
+     return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: " + ((EOFSeen) ? "<EOF> " : new StringBuffer().append("\"").append(addEscapes(String.valueOf(curChar))).append("\"").append(" (").append(curChar).append("), ").toString()) + "after : \"" + addEscapes(errorAfter) + "\"";
+   }
+ 
+   public String getMessage()
+   {
+     return super.getMessage();
+   }
+ 
+   public TokenMgrError()
+   {
+   }
+ 
+   public TokenMgrError(String message, int reason)
+   {
+     super(message);
+     this.errorCode = reason;
+   }
+ 
+   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
+     this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
+   }
+ }

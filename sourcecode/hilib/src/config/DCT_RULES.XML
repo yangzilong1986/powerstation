@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <digester-rules>
-	<pattern value="*/Application">
-		<object-create-rule
-			classname="com.hisun.engine.invoke.load.HiDict" />
-		<set-properties-rule />
-	</pattern>
-	<pattern value="*/Application/Item">
-		<object-create-rule
-		classname="com.hisun.engine.invoke.load.HiDictItem"/>
-		<set-properties-rule/>
-		<set-next-rule methodname="addItem" />	
-	</pattern>
+    <pattern value="*/Application">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.load.HiDict"/>
+        <set-properties-rule/>
+    </pattern>
+    <pattern value="*/Application/Item">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.load.HiDictItem"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addItem"/>
+    </pattern>
 </digester-rules>

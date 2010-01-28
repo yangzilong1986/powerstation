@@ -1,5 +1,4 @@
 package com.hisun.pubinterface;
 
-public abstract interface IComponent extends ILifeCycle, IHandler
-{
+public abstract interface IComponent extends ILifeCycle, IHandler {
 }
