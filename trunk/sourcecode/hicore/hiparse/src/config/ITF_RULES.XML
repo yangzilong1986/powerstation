@@ -1,0 +1,581 @@
+<?xml version="1.0"?>
+<digester-rules>
+    <pattern value="Application">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiApplicationITFImpl"/>
+        <set-properties-rule/>
+        <!-- 前处理 -->
+        <call-method-rule methodname="setBeforedll" paramcount="2"/>
+        <call-param-rule attrname="pre_dll" paramnumber="0"/>
+        <call-param-rule attrname="pre_func" paramnumber="1"/>
+        <!-- 后处理 -->
+        <call-method-rule methodname="setAfterdll" paramcount="2"/>
+        <call-param-rule attrname="spe_dll" paramnumber="0"/>
+        <call-param-rule attrname="spe_func" paramnumber="1"/>
+
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- call-method-rule 是调用父节点的方法 -->
+    <!-- <call-method-rule pattern="Table" methodname="setTable"
+     paramcount="2"/> -->
+    <!--DTD( #IMPLIED :可选属性  #FIXED "A":是带有固定值 "A" 的属性  #REQUIRED:必需的文本属性) -->
+    <!-- parsing the CodeSwitching -->
+    <!--  pattern value="*/CodeSwitching/Table"-->
+    <!-- parsing the ConfigDeclare -->
+    <pattern value="*/ConfigDeclare">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.load.HiConfigDeclare"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <call-method-rule pattern="Config" methodname="setConfigInfo"
+                          paramcount="2"/>
+        <call-param-rule pattern="Config" attrname="name"
+                         paramnumber="0"/>
+        <call-param-rule pattern="Config" attrname="value"
+                         paramnumber="1"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!-- addAppdlication
+              <set-next-rule methodname="setCommonds"/>
+          -->
+    </pattern>
+
+    <pattern value="*/CodeSwitching/Table">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.load.HiCodeSwitching"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <!--
+          <call-method-rule pattern="Table" methodname="setTable" paramcount="2"/>
+          <call-param-rule pattern="Table" attrname="name" paramnumber="0"/>
+          <call-param-rule pattern="Table" attrname="file" paramnumber="1"/>
+           -->
+        <set-properties-rule/>
+        <call-method-rule pattern="Column" methodname="setColumn" paramcount="1"/>
+        <call-param-rule pattern="Column" attrname="name" paramnumber="0"/>
+
+        <call-method-rule methodname="loadAfter"/>
+        <!-- addAppdlication
+          <set-next-rule methodname="setCommonds"/>-->
+    </pattern>
+
+    <!-- parsing the NamespaceDeclare -->
+    <pattern value="*/NamespaceDeclare">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.load.HiNamespaceDeclare"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <call-method-rule pattern="Item" methodname="setItem" paramcount="2"/>
+        <call-param-rule pattern="Item" attrname="name" paramnumber="0"/>
+        <call-param-rule pattern="Item" attrname="value" paramnumber="1"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!-- addAppdlication
+          <set-next-rule methodname="setCommonds"/>-->
+    </pattern>
+
+    <pattern value="*/Error">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiErrorProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+          <call-method-rule pattern="Error" methodname="setError" paramcount="1"/>
+          <call-param-rule pattern="Error" attrname="name" paramnumber="0"/>
+          -->
+    </pattern>
+
+    <!-- parsing the GetTxnCode -->
+    <pattern value="*/GetTxnCode">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiGetTxnCode"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <!-- 前处理 -->
+        <call-method-rule methodname="setBeforedll" paramcount="2"/>
+        <call-param-rule attrname="pre_dll" paramnumber="0"/>
+        <call-param-rule attrname="pre_func" paramnumber="1"/>
+
+        <!-- addAppdlication -->
+        <set-next-rule methodname="setTxnCode"/>
+        <!-- parsing the Item -->
+        <pattern value="Item">
+            <object-create-rule
+                    classname="com.hisun.engine.invoke.impl.HiGetTxnCodeItem"/>
+            <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+            <set-properties-rule/>
+            <set-next-rule methodname="addChilds"/>
+            <set-top-rule methodname="setParent"/>
+            <call-method-rule methodname="loadAfter"/>
+            <!--set-root-rule methodname="setCommonds"/-->
+        </pattern>
+    </pattern>
+
+    <!--  -->
+    <!-- parsing the Transaction -->
+    <!--  -->
+    <pattern value="*/Transaction">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiTransactionITFImpl"/>
+        <set-properties-rule/>
+
+        <!--<set-next-rule methodname="addTransaction"/>-->
+        <!--
+          <call-method-rule targetoffset="1" methodname="addTransaction" paramcount="2"
+          paramtypes="com.hisun.invoke.impl.HiTransactionITFImpl,java.lang.String"/>
+          <call-param-rule from-stack="true" paramnumber="0"/>
+          <call-param-rule attrname="code" paramnumber="1"/>
+          -->
+        <!--set-next-rule methodname="addTransaction"
+              paramtype="com.hisun.engine.invoke.impl.HiTransactionITFImpl"/-->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the Request -->
+    <pattern value="*/Request">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiRequest"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <!--
+          <call-method-rule methodname="setProcessType" paramcount="1"/>
+          <object-param-rule type="java.lang.String" paramnumber="0" param=""
+          value="rq"/>
+          -->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+          <set-hisun-rule methodname="setTransaction"
+          paramtype="com.hisun.engine.invoke.impl.HiTransactionITFImpl"/>
+          -->
+    </pattern>
+
+    <!-- parsing the Response -->
+    <pattern value="*/Response">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiResponse"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory" /-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+          <set-hisun-rule methodname="setTransaction"
+          paramtype="com.hisun.engine.invoke.impl.HiTransactionITFImpl"/>
+          -->
+    </pattern>
+
+    <!-- parsing the AddItem -->
+    <pattern value="*/AddItem">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiAddItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <!--
+          <set-hisun-rule methodname="setTransaction"
+              paramtype="com.hisun.engine.invoke.impl.HiTransactionITFImpl"/>
+          -->
+        <!-- 前处理
+          <call-method-rule methodname="setBeforedll" paramcount="2"/>
+          <call-param-rule attrname="pro_dll" paramnumber="0"/>
+          <call-param-rule attrname="pro_func" paramnumber="1"/>
+          -->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the CopyItem -->
+    <pattern value="*/CopyItem">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiCopyItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the PackItem -->
+    <pattern value="*/PackItem">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiPackItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the UnPackItem -->
+    <pattern value="*/UnpackItem">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiUnpackItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the DelItem -->
+    <pattern value="*/DelItem">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiDelItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the SwitchCode -->
+    <pattern value="*/SwitchCode">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiSwitchCode"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <!--
+          <set-properties-rule>
+          <alias attr-name="name" prop-name="name"/>
+          <alias attr-name="new_name" prop-name="new"/>
+          <alias attr-name="tab_name" prop-name="table"/>
+          <alias attr-name="col_name" prop-name="col"/>
+          </set-properties-rule>
+          -->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <!--set-root-rule methodname="setCommonds"/-->
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the if -->
+    <pattern value="*/If">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiIfProcess"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <pattern value="*/ElseIf">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiElseIfProcess"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the else -->
+    <pattern value="*/Else">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiElseProcess"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the Item -->
+    <pattern value="*/Item">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiItem"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+
+    <!-- parsing the Group -->
+    <pattern value="*/Group">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiGroup"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+
+    <!-- parsing the ReadElement -->
+    <pattern value="*/ReadElement">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiReadElement"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <!-- parsing the ReadAttr -->
+    <pattern value="*/ReadAttr">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiReadAttr"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <!-- parsing the WriteElement -->
+    <pattern value="*/WriteElement">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiWriteElement"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <pattern value="*/ReadGroupElement">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiReadGroupElement"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <pattern value="*/WriteGroupElement">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiWriteGroupElement"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <!-- parsing the WriteAttr -->
+    <pattern value="*/WriteAttr">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiWriteAttr"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+
+    <!-- parsing the Return -->
+    <pattern value="*/Return">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiReturnProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the While -->
+    <pattern value="*/While">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiWhileProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the Continue -->
+    <pattern value="*/Continue">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiContinueProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+    </pattern>
+    <!-- parsing the Switch -->
+    <pattern value="*/Switch">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiSwitchProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the Case -->
+    <pattern value="*/Case">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiSwitchCase"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the Break -->
+    <pattern value="*/Break">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiBreakProcess"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+    </pattern>
+
+    <!-- parsing the Default -->
+    <pattern value="*/Default">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiDefault"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <!-- parsing the Set -->
+    <pattern value="*/Set">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiSet"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <call-method-rule methodname="setName" paramcount="0"/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the AddHead -->
+    <pattern value="*/AddHead">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiHeadAdd"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the DelHead -->
+    <pattern value="*/DelHead">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiHeadDel"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the GetHead  -->
+    <pattern value="*/GetHead">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiHeadGet"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the Pack8583 -->
+    <pattern value="*/Pack8583">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiPack8583"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+        <!--
+              <set-root-rule methodname="setCommonds"/>
+          <set-hisun-rule methodname="setType"
+          paramtype="com.hisun.engine.invoke.impl.HiAbstractRqAndRp"/>
+          -->
+    </pattern>
+    <!-- parsing the SaveMsgHead -->
+    <pattern value="*/SaveMsgHead">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiSaveMsgHead"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the RestoreMsgHead -->
+    <pattern value="*/RestoreMsgHead">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiRestoreMsgHead"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- parsing the Tlv  -->
+    <pattern value="*/PackTlv">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiPackTlv"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <pattern value="*/Tlv">
+        <object-create-rule
+                classname="com.hisun.engine.invoke.impl.HiTlv"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+
+    <pattern value="*/CnapsParse">
+        <object-create-rule
+                classname="com.hisun.cnaps.model.HiCnapsModel"/>
+        <!--factory-create-rule classname="com.hisun.engine.HiBeanFactory"/-->
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+        <set-top-rule methodname="setParent"/>
+        <call-method-rule methodname="loadAfter"/>
+    </pattern>
+    <!-- 百富电能新增标签 -->
+    <pattern value="*/UnpackFrame">
+        <object-create-rule
+                classname="com.hisun.agreement.parse.impl.HiUnpackFrame"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+    </pattern>
+
+    <pattern value="*/PackFrame">
+        <object-create-rule
+                classname="com.hisun.agreement.parse.impl.HiPackFrame"/>
+        <set-properties-rule/>
+        <set-next-rule methodname="addChilds"/>
+    </pattern>
+</digester-rules>

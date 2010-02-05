@@ -1,0 +1,6 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.09.13 xu_lw  0000096   HiHttpConnector       增加XML报文协议的HTTP通讯协议
+2007.09.13 xu_lw  0000096   HiETFHttpConnector    增加XML报文协议的HTTP通讯协议
+2008.03.13 xu_lw  0000272   HiHttpConnector       增加charSet设置
+  
+

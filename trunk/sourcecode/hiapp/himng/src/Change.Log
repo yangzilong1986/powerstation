@@ -1,0 +1,12 @@
+修改日期      修改人    BUGID     修改文件名                       修改原因  
+2008.04.26 xu_lw     0000239  HiMonitor                 监控第一次登记、最后一个删除登记
+2008.04.26 xu_lw     0000239  HiMonHandler              增加管理监控handler
+2008.05.26 li_ming   0000266  HiMonitor                 增加异常监控处理方式            
+2008.05.26 li_ming   0000266  HiMonPreProc              增加异常监控处理方式
+2009.02.12 chen_dh            HiMonitor                 解决GetServerList组名相同问题
+2009.05.20 xu_lw              HiApplicationManage       增加应用管理组件
+2009.05.20 xu_lw              HiNodeManage              增加节点管理组件
+2009.05.20 xu_lw              HiServerManage            增加服务器管理组件
+2009.05.20 xu_lw              HiServiceManage           增加交易管理组件
+2009.05.20 xu_lw              HiMonitorATC              增加监控组件
+2009.07.14 xu_lw              HiMonitorATC              增加SetLogIDLogLevel组件

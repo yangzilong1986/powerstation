@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<digester-rules>
+    <pattern value="Server">
+        <!--object-create-rule
+              classname="com.hisun.framework.HiDefaultServer" />
+          <set-properties-rule /-->
+        <factory-create-rule classname="com.hisun.framework.parser.HiServerFactory"/>
+
+        <pattern value="Declare">
+            <!--object-create-rule attrname="class"/-->
+            <factory-create-rule classname="com.hisun.framework.parser.HiBeanFactory"/>
+
+            <set-property-rule pattern="Param" name="name" value="value"/>
+
+            <call-method-rule targetoffset="1" methodname="addDeclare" paramcount="2"
+                              paramtypes="java.lang.String, java.lang.Object"/>
+
+            <call-param-rule paramnumber="0" attrname="name"/>
+            <call-param-rule paramnumber="1" from-stack="true" stack-index="0"/>
+        </pattern>
+
+        <pattern value="Process">
+            <object-create-rule
+                    classname="com.hisun.framework.imp.HiDefaultProcess"/>
+            <set-properties-rule/>
+            <set-top-rule methodname="setServer" paramtype="com.hisun.framework.HiDefaultServer"/>
+            <pattern value="Handler">
+                <call-method-rule targetoffset="0"
+                                  methodname="addHandler" paramcount="2"
+                                  paramtypes="java.lang.String,java.lang.String"/>
+                <call-param-rule paramnumber="0" attrname="name"/>
+                <call-param-rule paramnumber="1" attrname="method"/>
+            </pattern>
+
+            <pattern value="SystemHandler">
+                <call-method-rule targetoffset="0"
+                                  methodname="addSystemHandler" paramcount="2"
+                                  paramtypes="java.lang.String,java.lang.String"/>
+                <call-param-rule paramnumber="0" attrname="name"/>
+                <call-param-rule paramnumber="1" attrname="param"/>
+            </pattern>
+
+            <call-method-rule targetoffset="1" methodname="addProcess"
+                              paramcount="1" paramtypes="com.hisun.framework.imp.HiDefaultProcess"/>
+            <call-param-rule paramnumber="0" from-stack="true"
+                             stack-index="0"/>
+        </pattern>
+        <!-- call-method-rule methodname="endBuild"/-->
+    </pattern>
+</digester-rules>

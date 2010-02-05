@@ -1,0 +1,44 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.08.31 xu_lw  0000026   HiExpBasicFunctions        GETENV不能取环境变量
+2007.09.06 xu_lw  0000072   HiExpBasicFunctions        表达式ADDAMT有问题
+2007.09.06 xu_lw  0000073   HiExpBasicFunctions        需要删除字符串右边的指定字符
+2007.09.18 xu_lw  0000093   HiExpMath                  SUB表达式处理错误
+2007.09.18 xu_lw  0000094   HiExpBasicFunctions        增加正则表达式功能
+2007.10.10 xu_lw  0000115   HiExpBasicFunctions        GETSTRPOS返回值错误
+2007.11.21 xu_lw    0000137   所有文件                     替换log4j
+2007.12.12 xu_lw    0000164 HiExpBasicFunctions        修改一些表达式错误 
+2008.01.08 xu_lw    0000170 HiExpBasicFunctions        增加表达式NullToEmpty，并修改STRGETCOUNT 
+2008.04.09 xu_lw  0000241   HiExpBasicFunctions        增加表达式RANDOM 
+2008.04.09 xu_lw  0000241   HiExpBasicFunctions        修改表达式CHECKDATE,日志长度非法时返回-5
+2008.05.12 xu_lw  0000241   HiExpBasicFunctions        修改表达式COBOL_TO_NORMAL,负数时处理错误
+2008.05.24 xu_lw  0000246   HiExpBasicFunctions        增加时间计算表达CALTIME
+2008.05.24 xu_lw  0000274   HiExpBasicFunctions        修改表达式接口为(HiMessageContext ctx, String[] args)
+2008.05.24 xu_lw  0000274   HiExpMath                  修改表达式接口为(HiMessageContext ctx, String[] args)
+2008.05.24 xu_lw  0000274   HiExpMethodSource          修改表达式接口为(HiMessageContext ctx, String[] args)
+2008.07.27 xu_lw  0000274   HiExpBasicFunctions        修改表达式INTCMP、DOUBLECMP支持le等写法；并修改放回值"0"和"1"为常量
+2008.07.30 xu_lw  0000274   HiExpBasicFunctions        增加ETF表达式
+2008.07.30 xu_lw  0000274   HiExpMethodSource          支持应用自定义表达式
+2008.08.13 xu_lw  0000274   HiExpBasicFunctions        修改部分表达错误(INTCMP、DOUBLECMP、IS_EQUAL_INT、IS_EQUAL_DOUBLE、SUBSTR、SUBRIGHT
+                                                       GETCHARPOS、INSERTCHAR、DELCHAR)
+2008.12.20 xu_lw            HiExpMath                  将接口参数中HiMessageContext替换为Object                                                       
+2008.12.20 xu_lw            HiExpMethodSource          将接口参数中HiMessageContext替换为Object
+2008.12.20 xu_lw            HiExpBasicFunctions        1.GETCHARPOS:需配置为static，另参数len没实现
+                                                       2.增加:HEX2DEC,DEC2HEX
+                                                       3.AMTPOWER:更新实现
+                                                       4.增加:ISALPHANUMERIC，只允许字符串为数字或字母
+2008.12.25 xu_lw            HiExpBasicFunctions        修改HEX2DEC等表达式
+2009.02.11 xu_lw            HiExpBasicFunctions        修改IS_EQUAL_STRING、IS_NOEQUAL_STRING
+2009.02.13 xu_lw            HiExpBasicFunctions        修改EBCD_TO_NORMAL
+2009.02.24 xu_lw            HiExpBasicFunctions        修改IS_EQUAL_STRING
+2009.02.24 xu_lw            HiExpBasicFunctions        修改EBCD_TO_NORMAL，若输入参数为空，则返回全'0'
+2009.03.09 xu_lw            HiExpBasicFunctions        修改GETSECOND
+2009.03.09 xu_lw            HiExpBasicFunctions        修改GETSECOND
+2009.03.14 xu_lw            HiExpBasicFunctions        修改NORMAL_TO_COBOL，若输入参数为空，则返回全'0'
+2009.03.21 xu_lw            HiExpBasicFunctions        修改FMUL                                                                          
+2009.06.05 xu_lw            HiExpBasicFunctions        增加ISDIR、ISFILE、ISJAR等表达式                                                                                              
+2009.06.17 xu_lw            HiExpBasicFunctions        增加SaveToTDS、LoadFromTDS、DeleteTDS                                                                                         
+2009.06.17 xu_lw            HiExpBasicFunctions        增加GetETFValue、SetETFValue、SetETFName、GetETFName
+2009.08.14 xu_lw            HiExpBasicFunctions        增加CHAR表达式                                                                                        
+2009.08.25 xu_lw            HiExpBasicFunctions        修改DELCHAR的BUG                                                                                    
+2009.10.12 xu_lw            HiExpBasicFunctions        修改AMTPROC处理，删除.
+2009.10.27 xu_lw            HiExpBasicFunctions        修改IS_EQUAL_STRING BUG

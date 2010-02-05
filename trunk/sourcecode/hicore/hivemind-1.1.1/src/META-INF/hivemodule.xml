@@ -1,0 +1,739 @@
+<?xml version="1.0"?>
+<!-- 
+   Copyright 2004, 2005 The Apache Software Foundation
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<module id="hivemind" version="1.1.0" package="org.apache.hivemind">
+    
+  The master module for HiveMind, defining core, universal functionality.
+
+  <configuration-point id="SymbolSources">
+    Provides a list of sources for values of substitution symbols.
+        
+    <schema>
+      <element name="source">
+        
+        Describes a single source of symbol values.
+        
+        <attribute name="name" required="true">
+          A unique name used 
+          to identify the source, used when ordering the sources.
+        </attribute> 
+  
+        <attribute name="class" translator="instance">
+          Name of a class implementing the SymbolSource interface.
+        </attribute>
+  
+        <attribute name="service-id" translator="service">
+          Service configuration id for a service which implements the SymbolSource 
+          interface.
+        </attribute> 
+        
+        <attribute name="before">
+          A list of the names of other sources this source should 
+          precede.
+        </attribute> 
+        
+        <attribute name="after">
+          A list of the names of other sources this source should 
+          follow.
+        </attribute> 
+  
+        <conversion class="SymbolSourceContribution"> 
+          <map attribute="class" property="source"/> 
+          <map attribute="service-id" property="source"/> 
+          <map attribute="before" property="followingNames"/> 
+          <map attribute="after" property="precedingNames"/> 
+        </conversion> 
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <contribution configuration-id="SymbolSources">
+    <source before="hivemind.FactoryDefaults"
+      name="hivemind.ApplicationDefaults" service-id="ApplicationDefaultsSymbolSource"/>
+    <source name="hivemind.FactoryDefaults" service-id="FactoryDefaultsSymbolSource"/>
+  </contribution>
+  
+  <schema id="Defaults">
+    <element name="default">
+      
+      Provides a default symbol value.
+        
+      <attribute name="symbol" required="true" unique="true">
+        The id of the symbol to define a default value for.
+      </attribute>
+      <attribute name="value" required="true">
+        The value for the symbol.
+      </attribute>
+      <conversion class="service.impl.FactoryDefault"/>
+    </element>
+  </schema>
+  
+  <configuration-point id="FactoryDefaults" schema-id="Defaults">
+    Extension point for setting "factory defaults" for symbol values.
+  </configuration-point>
+  
+  <service-point id="FactoryDefaultsSymbolSource" interface="SymbolSource" visibility="private">
+    
+    SymbolSource implementation driven by the FactoryDefaults configuration point.
+        
+    <invoke-factory>
+      <construct class="service.impl.DefaultsSymbolSource">
+        <set-configuration configuration-id="FactoryDefaults" property="defaults"/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <configuration-point id="ApplicationDefaults" schema-id="Defaults">
+    Extension point for setting application defaults; these defaults will override factory defaults specified in the FactoryDefaults configuration point.
+  </configuration-point>
+  
+  <service-point id="ApplicationDefaultsSymbolSource" interface="SymbolSource" visibility="private">
+    
+    SymbolSource implementation driven by the ApplicationDefaults configuration point.
+      
+    <invoke-factory>
+      <construct class="service.impl.DefaultsSymbolSource">
+        <set-configuration
+          configuration-id="ApplicationDefaults" property="defaults"/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <service-point id="ClassFactory" interface="org.apache.hivemind.service.ClassFactory">
+    
+    Wrapper around Javassist used to dynamically create classes such as service interceptors.
+      
+    <create-instance class="service.impl.ClassFactoryImpl" model="primitive"/>
+  </service-point>
+  
+  <schema id="MethodFilter">
+    Used primarily as parameters to interceptor factories (such as LoggingInterceptor) to define which methods of service interface are to be included and which excluded.
+      
+    <element name="include">
+      Identifies a method, or set of methods, to be included.
+        
+      <attribute name="method" required="true">
+        A method pattern used to identify the affected methods.
+      </attribute>
+      
+      <rules>
+        <create-object class="service.MethodContribution,include"/>
+        <read-attribute attribute="method" property="methodPattern"/>
+        <invoke-parent method="addElement"/>
+      </rules>
+    </element>
+    <element name="exclude">
+      Identifies a method, or set of methods, to be excluded.
+        
+      <attribute name="method" required="true">
+        A method pattern used to identify the affected methods.
+      </attribute>
+      
+      <rules>
+        <create-object class="service.MethodContribution"/>
+        <read-attribute attribute="method" property="methodPattern"/>
+        <invoke-parent method="addElement"/>
+      </rules>
+    </element>
+  </schema>
+  
+  <service-point id="LoggingInterceptor" interface="ServiceInterceptorFactory" parameters-schema-id="MethodFilter">
+    
+    An interceptor factory for adding method-level logging to a service. 
+    Logging occurs at level DEBUG and uses the service id as the logger. 
+    Method entry (with parameters) and method exit (with return value) are logged, as are any exceptions.
+      
+    <invoke-factory model="primitive">
+      <construct class="service.impl.LoggingInterceptorFactory">
+        <set-service property="factory" service-id="ClassFactory"/>
+      </construct>
+    </invoke-factory> 
+  </service-point>
+  
+  <service-point id="BuilderFactory" interface="ServiceImplementationFactory">
+    
+    Used to construct a service from a class name and optional constructor parameters and properties.
+      
+    <parameters-schema>
+      <element name="construct">
+        A single construct element identifies the class to instantiate.
+       
+        <attribute name="class" required="true">The name of the class to instantiate.</attribute>
+        <attribute name="messages-property">The name of a property to assign invoking module's messages to.</attribute>
+        <attribute name="log-property">The name of a property to assign the Log instance for the service to. The Log instance is built from the service configuration point id.</attribute>
+        <attribute name="service-id-property">The name of a property to assign the configuration point id of the service to.</attribute>
+        <attribute name="initialize-method">The name of a public instance method (taking no parameters) to be invoked after the service is constructed.</attribute>
+        <attribute name="error-handler-property">The name of a property to assign the module's ErrorHandler to.</attribute>
+        <attribute name="class-resolver-property">The name of a property to assign the module's ClassResolver to.</attribute>
+        <attribute name="autowire-services" translator="boolean,default=true">If true (the default), the BuilderFactory will attempt to connect unclaimed properties to services.</attribute>
+        <attribute name="error-log-property">The name of a property to assign the service's ErrorLog to.</attribute>
+        
+        <rules>
+          <create-object class="service.impl.BuilderParameter"/>
+          <read-attribute attribute="class" property="className"/>
+          <read-attribute attribute="initialize-method" property="initializeMethod"/>
+          <read-attribute attribute="autowire-services" property="autowireServices" skip-if-null="false"/>
+          <invoke-parent method="addElement"/>
+          
+          <create-object class="service.impl.BuilderMessagesFacet"/>
+          <read-attribute attribute="messages-property" property="propertyName"/>
+          <invoke-parent depth="1" method="addProperty"/>
+          
+          <create-object class="service.impl.BuilderLogFacet"/>
+          <read-attribute attribute="log-property" property="propertyName"/>
+          <invoke-parent depth="2" method="addProperty"/>
+          
+          <create-object class="service.impl.BuilderServiceIdFacet"/>
+          <read-attribute attribute="service-id-property" property="propertyName"/>
+          <invoke-parent depth="3" method="addProperty"/>
+          
+          <create-object class="service.impl.BuilderErrorHandlerFacet"/>
+          <read-attribute attribute="error-handler-property" property="propertyName"/>
+          <invoke-parent depth="4" method="addProperty"/>
+          
+          <create-object class="service.impl.BuilderClassResolverFacet"/>
+          <read-attribute attribute="class-resolver-property" property="propertyName"/>
+          <invoke-parent depth="5" method="addProperty"/>
+          
+          <create-object class="service.impl.BuilderErrorLogFacet"/>
+          <read-attribute attribute="error-log-property" property="propertyName"/>
+          <invoke-parent depth="6" method="addProperty"/>          
+        </rules>
+        <element name="string">
+          
+          A string value constructor parameter.
+          
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="null"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="int">
+          
+          An integer value constructor parameter.
+          
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="int"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="long">
+          
+          A long (64-bit) integer value constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="long"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="boolean">
+          
+          A boolean value constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="enumeration,java.lang.Boolean,true=TRUE,false=FALSE"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="service">
+          
+          A constructor parameter providing the identified HiveMind service.
+          
+         <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="service"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="configuration">
+          
+          A constructor parameter providing a HiveMind configuration point (as a List).
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="configuration"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="resource">
+          
+          A Resource constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="resource"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="log">
+          
+          Placeholder for a Log instance for the constructed service as constructor parameter.
+          
+          <rules>
+            <create-object class="service.impl.BuilderLogFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="error-handler">
+          
+          Placeholder for the module's ErrorHandler instance passed in as a constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderErrorHandlerFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="error-log">
+          
+          Placeholder for the service's ErrorLog instance passed in as a constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderErrorLogFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+                
+        <element name="class-resolver">
+          
+          Placeholder for the module's ClassResolver instance passed in as a constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderClassResolverFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="messages">
+          
+          Placeholder for a Messages object (from the invoking module) as constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderMessagesFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="service-id">
+          
+          Placeholder for the service id (of the constructed service) as constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderServiceIdFacet"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="object">
+          
+          Placeholder for an object provided by the object translator as a constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="object"/>
+            <read-content property="value"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="null">
+          
+          Placeholder for a null object provided by the object translator as a constructor parameter.
+            
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="object"/>
+            <invoke-parent depth="7" method="addParameter"/>
+          </rules>
+        </element>
+        
+        <element name="set">
+          
+          Configures a property of the service instance.
+            
+          <attribute name="property" required="true">The name of a property of the service instance to configure.</attribute>
+          <attribute name="value" required="true">The value to set the property to. The value will be converted to the type of the property.</attribute>
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="smart"/>
+            <read-attribute attribute="property" property="propertyName"/>
+            <read-attribute attribute="value" property="value"/>
+            <invoke-parent depth="7" method="addProperty"/>
+          </rules>
+        </element>
+        
+        <element name="set-object">
+          
+          Configures a property of the service instance using an object.
+          
+          <attribute name="property" required="true">The name of a property of the service instance to configure.</attribute>
+          <attribute name="value" required="true">The value to set the property to, in the form of a prefix and a locator for that prefix. Prefixes are defined by the ObjectProviders configuration point. Each prefix provides a different interpretation for the locator, such as a service id or class name.</attribute>
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="object"/>
+            <read-attribute attribute="property" property="propertyName"/>
+            <read-attribute attribute="value" property="value"/>
+            <invoke-parent depth="7" method="addProperty"/>
+          </rules>
+        </element>
+        
+        <element name="set-service">
+          
+          Configures a property of the service instance to another service.
+            
+          <attribute name="property" required="true">The name of the property of the service instance to configure.</attribute>
+          <attribute name="service-id" required="true">The id of the service.</attribute>
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="service"/>
+            <read-attribute attribute="property" property="propertyName"/>
+            <read-attribute attribute="service-id" property="value"/>
+            <invoke-parent depth="7" method="addProperty"/>
+          </rules>
+        </element>
+        
+        <element name="set-configuration">
+          
+          Configures a property of the service instance to the elements contributed to an configuration point.
+          
+          <attribute name="property" required="true">The name of the property of the service instance to configure.</attribute>
+          <attribute name="configuration-id" required="true">The id of the configuration point to access.</attribute>
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="configuration"/>
+            <read-attribute attribute="property" property="propertyName"/>
+            <read-attribute attribute="configuration-id" property="value"/>
+            <invoke-parent depth="7" method="addProperty"/>
+          </rules>
+        </element>
+        
+        <element name="set-resource">
+          
+          Configures a property of the service instance to a resource.
+            
+          <attribute name="property" required="true">The name of the property of the service instance to configure.</attribute>
+          <attribute name="path" required="true">The path, relative to the module's deployment descriptor, of the resource.</attribute>
+          <rules>
+            <create-object class="service.impl.BuilderPropertyFacet"/>
+            <set-property property="translator" value="resource"/>
+            <read-attribute attribute="property" property="propertyName"/>
+            <read-attribute attribute="path" property="value"/>
+            <invoke-parent depth="7" method="addProperty"/>
+          </rules>
+        </element>
+        
+        <element name="event-listener">
+          
+          Registers the new services as an event listener for events produced by the specified service.
+            
+          <attribute name="service-id" required="true" translator="service">The service which will produce events.</attribute>
+          <attribute name="event-set">If given, the name of an event set for which the service will be registered. If omitted, the service will be registered for all events sets for which it implements the necessary listener interfaces.</attribute>
+          <rules>
+            <create-object class="service.impl.EventRegistration"/>
+            <read-attribute attribute="service-id" property="producer"/>
+            <read-attribute attribute="event-set" property="eventSetName"/>
+            <invoke-parent depth="7" method="addEventRegistration"/>
+          </rules>
+        </element>
+      </element>      
+    </parameters-schema>
+    
+    <create-instance class="service.impl.BuilderFactory" model="primitive"/>
+  </service-point>
+  
+  <service-point id="ThreadEventNotifier" interface="org.apache.hivemind.service.ThreadEventNotifier">
+    
+    Service used by other services to be alerted when a thread is cleaned up (typically, at the end of a request or transaction).
+      
+    <create-instance class="service.impl.ThreadEventNotifierImpl"/>
+  </service-point>
+  
+  <service-point id="ThreadLocalStorage" interface="org.apache.hivemind.service.ThreadLocalStorage">
+    
+    Service which manages a thread-local map of data items. 
+    This can be used for temporary storage of information when local variables can't be used. 
+    All stored items are released when the thread is cleaned up.
+    Note: this service should be considered deprecated; use the threaded service model
+    instead.
+      
+    <create-instance model="threaded" class="service.impl.ThreadLocalStorageImpl"/>
+  </service-point>
+  
+  <configuration-point id="ServiceModels">
+    
+    Defines service models, providing a name and a class for each.
+      
+    <schema>
+          
+      Describes contributions that define new types of service models by providing service model factories.
+            
+      <element name="service-model">
+        <attribute name="name" required="true" unique="true">The name of the service model, which must be unique.</attribute>
+        <attribute name="class" required="false" translator="instance">The name of the service model factory class to instantiate.</attribute>
+        <conversion class="impl.ServiceModelContribution">
+          <map attribute="class" property="factory"/>
+        </conversion>
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <contribution configuration-id="ServiceModels">
+    <service-model class="impl.servicemodel.PrimitiveServiceModelFactory" name="primitive"/>
+    <service-model class="impl.servicemodel.SingletonServiceModelFactory" name="singleton"/>
+    <service-model class="impl.servicemodel.ThreadedServiceModelFactory" name="threaded"/>
+    <service-model class="impl.servicemodel.PooledServiceModelFactory" name="pooled"/>
+  </contribution>
+  
+  <configuration-point id="Translators">
+    
+    Used to define new translators that can be used in contribution conversion rules. 
+    Translators must have unique names.
+      
+    <schema>
+      
+      Maps translator names to translator classes.
+        
+      <element name="translator">Maps a translator name to a translator class.
+        
+        <attribute name="name" required="true">A unique name for a translator.</attribute>
+        <attribute name="class" required="false" translator="class">The class to instantiate, which must implement the Translator interface.</attribute>
+        <attribute name="service-id" required="false" translator="service">A service which implements the Translator interface.</attribute>
+        <conversion class="impl.TranslatorContribution">
+          <map attribute="class" property="translatorClass"/>
+          <map attribute="service-id" property="translator"/>
+        </conversion>
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <contribution configuration-id="Translators">
+    <translator class="schema.rules.BooleanTranslator" name="boolean"/>
+    <translator class="schema.rules.IntTranslator" name="int"/>
+    <translator class="schema.rules.EnumerationTranslator" name="enumeration"/>
+    <translator class="schema.rules.ConfigurationTranslator" name="configuration"/>
+    <translator class="schema.rules.ResourceTranslator" name="resource"/>
+    <translator class="schema.rules.LongTranslator" name="long"/>
+    <translator class="schema.rules.DoubleTranslator" name="double"/>
+    <translator class="schema.rules.ServicePointTranslator" name="service-point"/>
+    <translator class="schema.rules.QualifiedIdTranslator" name="qualified-id"/>
+    <translator class="schema.rules.IdListTranslator" name="id-list"/>
+    <translator name="object" service-id="ObjectTranslator"/>
+    <translator class="schema.rules.NullTranslator" name="null"/>
+  </contribution>
+  
+  <service-point id="ShutdownCoordinator">
+    
+    A source of event notifications for when the Registry is shutdown.
+      
+    <invoke-factory>
+      <construct class="impl.ShutdownCoordinatorImpl">
+        <log/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <configuration-point id="Startup">
+    
+    A configuration to which startup objects may be contributed (as objects or services). 
+    Startup objects must implement the java.lang.Runnable interface. Order of execution is expliclitly NOT defined.
+      
+    <schema>
+      <element name="startup">
+        
+        Defines a service that implements the Runnable interface.
+          
+       <attribute name="object" translator="object">
+          Reference to the object implementing Runnable.
+        </attribute>
+        
+        <rules>
+          <push-attribute attribute="object"/>
+          <invoke-parent method="addElement"/>
+        </rules>
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <service-point id="Startup" interface="java.lang.Runnable">
+    
+    A service which is used to bootstrap HiveMind; it obtains the hivemind.Startup configuration and runs each 
+    Runnable object or service within as the last step of the Registry construction phase.
+    Note that the execution order is arbitrary and the startup objects are NOT executed in separate threads.
+      
+    <invoke-factory>
+      <construct class="impl.StartupImpl">
+        <set-configuration configuration-id="Startup" property="runnables"/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <configuration-point id="EagerLoad">
+    
+    Configuration to which services may be contributed. The corresponding services are instantiated eagerly, as the Registry is started. 
+    The order in which services are instantiated is not specified.
+      
+    <schema>
+      <element name="load">
+        
+        Identifies a service that will be eagerly loaded.
+          
+        <attribute name="service-id" required="true" translator="service-point"/>
+        <rules>
+          <push-attribute attribute="service-id"/>
+          <invoke-parent method="addElement"/>
+        </rules>
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <service-point id="EagerLoad" interface="java.lang.Runnable">
+    
+    Service that performs eager loading of other services. This service is contributed into the hivemind.Startup configuration.
+      
+    <invoke-factory model="primitive">
+      <construct class="service.impl.EagerLoader">
+        <set-configuration configuration-id="EagerLoad" property="servicePoints"/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <contribution configuration-id="Startup">
+    <startup object="service:EagerLoad"/>
+  </contribution>
+  
+  <configuration-point id="ObjectProviders">
+    
+    Services that can provide objects for the object translator.
+      
+    <schema>
+      <element name="provider" key-attribute="prefix">
+        <attribute name="prefix">The prefix used to identify the provider.</attribute>
+        <attribute name="service-id" required="true" translator="service">The object providing service.</attribute>
+        <rules>
+         <push-attribute attribute="service-id"/>
+         <invoke-parent method="addElement"/>
+        </rules>
+      </element>
+    </schema>
+  </configuration-point>
+  
+  <service-point id="ObjectTranslator" interface="org.apache.hivemind.schema.Translator" visibility="private">
+    
+    Translator that works with ObjectProviders to find or create objects.
+      
+    <invoke-factory>
+      <construct
+        class="service.impl.ObjectTranslator">
+        <set-configuration configuration-id="ObjectProviders" property="contributions"/>
+      </construct>
+    </invoke-factory>
+  </service-point>
+  
+  <service-point id="ServiceObjectProvider" interface="org.apache.hivemind.service.ObjectProvider"  visibility="private">
+    
+    ObjectProvider that can locate services. Mapped to the service: prefix.
+      
+    <create-instance class="service.impl.ServiceObjectProvider"/>
+  </service-point>
+  
+  <service-point id="ConfigurationObjectProvider" interface="org.apache.hivemind.service.ObjectProvider"  visibility="private">
+    
+    ObjectProvider that can locate configurations. Mapped to the configuration: prefix.
+      
+    <create-instance class="service.impl.ConfigurationObjectProvider"/>
+  </service-point>
+  
+  <service-point id="ObjectInstanceObjectProvider" interface="org.apache.hivemind.service.ObjectProvider"  visibility="private">
+    
+    ObjectProvider that will instantiate a new instance of a provided class. 
+    Mapped to the instance: prefix.
+      
+    <create-instance class="service.impl.ObjectInstanceObjectProvider"/>
+  </service-point>
+  
+  <service-point id="ServicePropertyObjectProvider" interface="org.apache.hivemind.service.ObjectProvider"  visibility="private">
+    
+    ObjectProvider that will extra a property from a service.  
+    Mapped to the service-property: prefix.
+      
+    <create-instance class="service.impl.ServicePropertyObjectProvider"/>
+  </service-point>
+  
+  <service-point id="ClassObjectProvider" interface="org.apache.hivemind.service.ObjectProvider"  visibility="private">
+    
+    ObjectProvider that can find Class objects Mapped to the class: prefix.
+      
+    <create-instance class="service.impl.ClassObjectProvider"/>
+  </service-point>  
+  
+  <contribution configuration-id="ObjectProviders">
+    <provider prefix="service" service-id="ServiceObjectProvider"/>
+    <provider prefix="configuration" service-id="ConfigurationObjectProvider"/>
+    <provider prefix="instance" service-id="ObjectInstanceObjectProvider"/>
+    <provider prefix="service-property" service-id="ServicePropertyObjectProvider"/>
+    <provider prefix="class" service-id="ClassObjectProvider"/>
+  </contribution>
+  
+  <service-point id="ThreadLocale" interface="org.apache.hivemind.service.ThreadLocale">
+    
+    Stores the locale for the current thread. The default is determined when the Registry is first
+    constructed.  This locale is used for any messages.
+    
+    <invoke-factory service-id="ThreadLocaleFactory" model="threaded"/>
+    
+  </service-point>
+  
+  <service-point id="ThreadLocaleFactory" interface="ServiceImplementationFactory" parameters-occurs="none" visibility="private">
+    
+    Special service implementation factory for the ThreadLocale service.
+    
+    <create-instance class="service.impl.ThreadLocaleFactory"/>
+    
+  </service-point>
+  
+  <service-point id="InterfaceSynthesizer" interface="org.apache.hivemind.service.InterfaceSynthesizer">
+    
+    Synthesizes a service interface from an ordinary JavaBean.
+    
+    <invoke-factory>
+      <construct class="service.impl.InterfaceSynthesizerImpl">
+        <set-service property="classFactory" service-id="ClassFactory"/>
+      </construct>
+    </invoke-factory>
+    
+  </service-point>
+  
+</module>

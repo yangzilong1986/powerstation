@@ -1,0 +1,75 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.08.29 li_ming  0000029   HiALSConnector2.java    新增文件HiALSConnector2.java, 和银联通讯
+2007.08.29 li_ming  0000029   HiXMLParser.java          HiXMLParser.java重命名为HiIPXMLParser.java
+2007.09.19 li_ming  0000091   HiSocketUtil.java			SCA Socket接收超时
+2007.11.09 li_ming	0000132   HiALSConnector2.java		银联接口关闭不了
+2007.11.09 li_ming  0000133   HiALMListener.java		异步长连接双工关闭时不能关闭已建立的连接
+2007.11.09 li_ming  0000134   LoopFilter.java			出现系统错误时长连接不能断开连接,出现死循环
+2007.11.09 xu_lw    0000118   PoolFilter.java			平台一些程序使用了JDK5.0的特性
+2007.11.14 xu_lw    0000137 	                            替换log4j
+2007.12.06 xu_lw    0000156   HiSocketUtil              增加preLenType属性        
+2007.12.06 xu_lw    0000156   HiMessageInOut            增加preLenType属性    	                         
+2007.12.06 xu_lw    0000156   HiPoolTcpConnector        增加preLenType属性
+2007.12.06 xu_lw    0000156   HiTcpListener             增加preLenType属性
+2007.12.06 xu_lw    0000195   LoopFilter                增加日志
+2007.12.06 xu_lw    0000195   PoolFilter                增加日志
+2007.12.06 xu_lw    0000195   CloseSocketFilter         增加日志
+2008.02.26 li_ming  0000195   HiTcpBuilder              删除pipeline
+2008.02.26 li_ming  0000195   HiTcpEndPoint             增加线程标识
+2008.02.26 li_ming  0000195   LockSendMessageFilter     修改日志
+2008.02.26 li_ming  0000195   LoopFilter                Thread Interrupt时退出
+2008.02.26 li_ming  0000195   PoolFilter                 
+2008.02.26 li_ming  0000195   HiALMListener             关闭时等待所有任务处理完毕，去掉PipeLine                 
+2008.02.26 li_ming  0000195   HiALSConnector2           解决没有发送通道问题                 
+2008.02.26 li_ming  0000195   HiALSListener             关闭时等待所有任务处理完毕，去掉PipeLine                 
+2008.02.26 li_ming  0000195   HiTcpListener             关闭时等待所有任务处理完毕，去掉PipeLine                 
+2008.02.26 li_ming  0000195   HiTcpSynListener          去掉PipeLine
+2008.03.10 li_ming  0000208   MultiReaderPoolHandler    增加多通道连接功能
+2008.03.10 li_ming  0000208   SocketHandlers            增加多通道连接功能
+2008.03.10 li_ming  0000210   HiConnectionPool          修改timeOut属性名                   
+2008.03.10 li_ming  0000210   HiSocketUtil           	增加read返回-1的处理
+2008.03.10 li_ming  0000210   PoolFilter				提交task失败后阻塞重试
+2008.03.10 li_ming  0000210   HiALMListener				工厂方法创建filter
+2008.03.10 li_ming  0000210   HiALSConnector2			超时控制、整理日志、增加可配置QueueSize
+2008.03.10 li_ming  0000210   HiALSListener				工厂方法创建filter
+2008.03.10 li_ming  0000210   HiTcpListener				线程池可配置、修改实现
+2008.03.10 li_ming  0000210   HiTcpSynListener			工厂方法创建filter
+2008.04.19 li_ming  0000237   HiALSConnector2		    将检查时间间隔定为5s
+2008.05.04 xu_lw    0000237   HiALSConnector2           修改为发送错误ERR_CONNECT_IO
+2008.05.27 xu_lw    0000256   HiALSConnector2           第一次连接时出现的异常错误后正常后，没有设置正常状态      	
+2008.05.31 li_ming  0000255   HiTcpSynListener          Server Process异常是直接关闭Socket	
+2008.06.01 xu_lw    0000257   HiTcpSynConnector         通讯异常时存在阻塞问题，重写    
+2008.06.02 li_ming  0000256   HiALSConnector2           检测出现异常时，管理线程由于异常退出    
+2008.06.26 xu_lw    0000284   HiALSConnector2           提交任务时检查线程池是否关闭    
+2008.06.26 xu_lw    0000284   PoolFilter                提交任务时检查线程池是否关闭
+2008.07.17 xu_lw    0000283   HiTcpSynListener          增加IP地址检查
+2008.07.17 xu_lw    0000283   HiIPXMLParser             增加IP地址检查
+2008.07.17 xu_lw    0000282   HiSocketUtil              通讯增加ebcd报文前置长度方式
+2008.12.20 xu_lw              HiAbstractALMClient       增加异步双工 
+2008.12.20 xu_lw              HiAbstractALMCServer      增加异步双工
+2008.12.20 xu_lw              IPreProcHandler           增加异步双工
+2008.12.20 xu_lw              HiWorker                  增加异步双工
+2008.12.20 xu_lw              ICheckConn                增加异步双工
+2008.12.20 xu_lw              HiALMClient               增加异步双工
+2008.12.20 xu_lw              HiALMServer               增加异步双工
+2008.12.30 xu_lw              HiSocketUtil           	增加read方法
+2009.01.06 chen_dh            HiSSLHandler              增加SSL功能
+2009.01.06 chen_dh            HiTcpEndpoint             增加SSL功能
+2009.01.06 chen_dh            HiTcpListener             增加SSL功能
+2009.01.06 chen_dh            HiTcpListener             增加SSL功能
+2009.01.13 xu_lw              HiAbstractALMCServer      不主动发送检测报文
+2009.01.13 xu_lw              HiCheckConnImpl           增加获取回应检测报文
+2009.01.13 xu_lw              ICheckConn                增加获取回应检测报文
+2009.01.13 xu_lw              SetOptionFilter           设置Socket超时时间
+2009.04.21 xu_lw              HiAbstractALMServer       异步双工关闭时直接关闭Socket
+2009.05.12 xu_lw              HiALMServer               增加设置CheckData功能
+2009.05.12 xu_lw              HiALMClient               增加设置CheckData功能
+2009.06.04 xu_lw              HiSSLHandler              修改使用默认算法      
+2009.06.04 xu_lw              HiAbstractALMClient       修改锁的方式                                                                                      
+2009.06.04 xu_lw              HiAbstractALMServer       修改锁的方式
+2009.06.04 xu_lw              HiAbstractALMClient       修改锁的方式
+2009.06.05 tian_feng          HiTcpSynConnector01       增加SSL功能  
+2009.07.01 xu_lw              所有文件                      异常使用HiException异常
+2009.07.01 xu_lw              所有文件                      使用JDK Concurrent
+
+                                              

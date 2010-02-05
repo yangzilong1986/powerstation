@@ -1,0 +1,3 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.11.21 xu_lw    0000137   所有文件                            替换log4j
+2009.01.12 xu_lw              CryptUtilImpl                       增加cryptMd5方法

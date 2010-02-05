@@ -1,0 +1,10 @@
+修改日期      修改人  	BUGID     	修改文件名                       修改原因  
+2007.11.14 xu_lw    0000137 	                            替换log4j
+2008.02.21 xu_lw    0000216     HiLogNoInfo              修改预取数量为1000
+2008.02.21 xu_lw    0000216     HiSqnMng1                预取会计日期
+2008.02.21 xu_lw    0000216     HiSqnMng1                预取会计日期
+2008.08.13 xu_lw    0000281     HiDumTlrInfo             删除分行号等右边空格	                         
+2009.03.14 xu_lw                HiSqnMng                 增加日期接口
+2009.03.14 xu_lw                HiSqnMngMain             增加日期接口
+2009.09.17 xu_lw                HiSqnMngMain             增加预留一个数据库连接
+2009.09.17 xu_lw                HiSqnMng                 由于Motion命名导致;会计日期支持ACC_DT和ACT_DT

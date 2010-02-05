@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 1.5.0_06-b05 (Sun Microsystems Inc.)
+Built-By: Administrator
+IBS-Integrator-Module: hitcpadapter
+IBS-Integrator-Module-Version: 1.0.0.23
+IBS-Integrator-Module-Compile-Time: 2009-07-01 22:19:25
+

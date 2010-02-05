@@ -1,0 +1,130 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.09.04 xu_lw  0000031   HiMultiQueryLib       [PUB:MultiQuery]返回结果[-100]
+2007.09.05 xu_lw  0000039   HiAtcLib              SCA接收数据超时，但CallHostAcc返回-1
+2007.09.06 xu_lw  0000071   HiDBUtils             InsertRecord执行正确但返回值为1
+2007.09.11 xu_lw  0000080   HiCallOut             CallLocal交易超时时返回值错误
+2007.09.11 xu_lw  0000081   HiDataObject          增加组件输出区组件
+2007.09.11 xu_lw  0000082   HiIntegrity           事务组件的调用错误时没有返回值
+2007.09.11 xu_lw  0000083   HiBaseATC             InvokeService产生的日志和原日志混淆在一起
+2007.09.12 xu_lw  0000089   HiBaseATC             外发交易未复制ETF Tree
+2007.09.12 xu_lw  0000089   HiActLib              外发交易未复制ETF Tree
+2007.09.21 xu_lw  0000097   HiAppInfo                     按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiATCConstants                按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiATCMessageCode              按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiBaseATC                     按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiCallOut                     按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiDBUtils                     按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiFileUtils                   按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiIntegrity                   按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiMultiQuery                  按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiReport                      按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiTranCtl                     按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiTransJnl                    按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiTxnJnl                      按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiAtcLib                      按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000097   HiMultiQueryLib               按照最新的命名规范修改交易组件
+2007.09.21 xu_lw  0000074   HiReport                      生成报表原子函数有问题
+2007.10.10 xu_lw  0000116   HiOthOnlAtl                   增强FTP功能
+2007.10.10 xu_lw  0000116   HiFtp                         增强FTP功能
+2007.10.31 xu_lw  0000116   HiOthOnlAtl                   增强FTP功能
+2007.10.31 xu_lw  0000116   HiFtp                         增强FTP功能
+2007.10.31 xu_lw  0000116   HiOthOnlAtl                   增强FTP功能
+2007.10.31 xu_lw  0000105   HiCallOut                     按渤海银行命名规范修改程序
+2007.10.31 chen_dh0000105   HiATCConstants                按渤海银行命名规范修改程序
+2007.10.31 chen_dh0000105   HiBatchProcess                按渤海银行命名规范修改程序
+2007.10.31 chen_dh0000105   HiBatOnlAtl                   按渤海银行命名规范修改程序
+2007.10.31 chen_dh0000105   HiPubBatchInfo                按渤海银行命名规范修改程序
+2007.10.31 li_ming0000144   HiReport                      报表错误
+2007.11.21 xu_lw    0000147   所有文件                         替换log4j
+2007.11.24 xu_lw    0000149   HiTranCtl                   修改从S.SQNSVR取序号等资源  
+2007.12.12 xu_lw    0000160   HiBaseATC                   InvokeService增加同步调用错误处理功能  
+2007.12.12 xu_lw    0000161   HiFileUtils                 GetFileLine文件结束时返回错误  
+2007.12.12 xu_lw    0000162   HiAtcLib                    hstThdTxn连接第三方异常时，返回值错误  
+2008.01.08 xu_lw    0000178   HiTempDataSpace             修改临时表相关组件         
+2008.01.08 xu_lw    0000179   HiBatchProcess              批量组件ImportToDB增加主健重复的返回值
+2008.01.08 xu_lw    0000179   HiBatOnlAtl                 批量组件ImportToDB增加主健重复的返回值
+2008.01.08 xu_lw    0000180   HiReport                    增加GenerateReport组件的错误返回码
+2008.01.18 xu_lw    0000183   HiMultiQueryLib             每次翻页生成的记录都应该从1开始计算
+2008.01.31 xu_lw    0000214   HiBaseATC                   增加DumpStat、ClearStat方法;InitTransaction不能修改ArrayList
+2008.01.31 xu_lw    0000215   HiIntegrity                 修改BeginWorkNew、CommitWorkNew、RollbackNew实现方式
+2008.01.31 xu_lw    0000215   HiTransJnl                  修改BeginWorkNew、CommitWorkNew、RollbackNew实现方式
+2008.01.31 xu_lw    0000216   HiTranCtl                   修改 GetLogNo实现方式
+2008.02.29 chen_dh  0000217   HiOthOnlAtl                 FTP配置文件可用变量，取ETF值
+2008.02.29 chen_dh  0000219   HiDBUtils                   修正，配置了GrpNam的情况，但没有配置可选参数FldLst时，会有空异常
+2008.03.10 xu_lw    0000218   HiMultiQueyrLib             多页翻页中文乱码问题
+2008.03.12 xu_lw    0000220   HiFileUtils                 ReadFile组件修改为按字节长度读
+2008.03.12 xu_lw    0000220   HiFile                      增加按字节读的方法
+2008.03.12 xu_lw    0000221   HiIntegrity                 BeginWorkNew若记录已经存在则Update原记录
+2008.03.13 xu_lw    0000222   HiAgentAgr                  不能修改DataBaseUtils返回的List
+2008.03.13 xu_lw    0000222   HiAppInfo                   不能修改DataBaseUtils返回的List
+2008.03.13 xu_lw    0000224   HiMultiQuery                SavePageNo若已有键值则UPDATE
+2008.03.13 xu_lw    0000225   HiDbtSqlHelper              处理SQL转义字符'(除ExecSql外)
+2008.04.09 xu_lw    0000240   HiAtcLib                    retCode=-1时，设置交易状态为E（其他错误）
+2008.04.10 xu_lw    0000240   HiBaseATC                   增加DumpStat, ClearStat交易组件 
+2008.04.11 xu_lw    0000240   HiAbstractFMT               beanutil不能设置line_wrap，由于isLine_wrap函数导致
+2008.04.11 xu_lw    0000240   HiBatchProcess              修改isLine_wrap为isLineWrap
+2008.04.17 xu_lw    0000240   HiMultiQuery                第一次查询调用savePageNo的当前必须设置为0，以和getFirstPage区分开来
+2008.04.21 xu_lw    0000240   HiAtcLib                    hstThdTxn在ERR_SEND_IO时返回10
+2008.05.02 xu_lw    0000240   HiAtcLib                    外发消息类型为PLTOUT
+2008.05.03 xu_lw    0000240   HiIntegrity                 修改命名： CommitWorkNew为TranCommitWork等
+2008.05.12 xu_lw    0000251   HiBaseATC                   InvokeService不判断MSG_TYP
+2008.05.12 xu_lw    0000252   HiAtcLib                    hstThdTxn异常时需要设置TxnSts
+2008.05.15 xu_lw    0000253   HiCallOut                   增加CallThirdComm组件                   
+2008.05.15 xu_lw    0000254   HiTranCtl                   GetLogNo通过S.SQNSVR来取                   
+2008.06.18 xu_lw    0000274   HiDataObject                CreateDataObject将HashMap替换为ConcurrentHashMap
+2008.06.18 xu_lw    0000291   HiAtcLib                    insertTable、insertRecord增加转义字符
+2008.06.27 xu_lw    0000274   HiDataObject                DeleteDataObject不判断Type, ResetOutputArea不取AreaName
+2008.07.27 xu_lw              HiCallOut                   DefaultErrorProc组件增加通过参数DefaultErrorProc判断是否执行
+2008.07.31 xu_lw              HiBaseATC                   增加SwitchDS组件
+2008.07.31 xu_lw    0000274   HiDataObject                修改DS相关组件，使用Stack方式来保存
+2008.08.01 xu_lw    0000274   HiCmpParam                  新增组件参数的文件                   
+2008.08.06 xu_lw              HiBaseATC                   增加调试组件                   
+2008.09.05 xu_lw              HiBaseATC                   InvokeService增加报文类型属性
+2008.09.05 xu_lw    0000289   HiFileUtils                 GetFileLineAndParse、ReadFileAndParse使用解析文件错误
+2008.09.05 xu_lw    0000290   HiCallOut                   DefaultErrorProc根据组件参数文件判断是否需要进行数据库回滚
+2008.09.27 xu_lw              HiFileUtils                 GetFileLineAndParse文件结束时返回1
+2008.10.22 xu_lw              HiAppInfo                   DeleteGroup组件最后一条没有删除
+2008.12.21 xu_lw              HiDBUtils                   updateRecord组件参数GrpNam修改为可输
+2008.12.21 xu_lw              HiFile                      增加方法：available readBytes
+2008.12.21 xu_lw              HiDbtUtils                  ImportToDB增加可选参数，若记录已存在，是否更新
+2008.12.21 xu_lw              HiPackInfo                  ImportToDB增加可选参数，若记录已存在，是否更新
+2008.12.21 xu_lw              HiBatOnlAtl                 ImportToDB增加可选参数，若记录已存在，是否更新
+2008.12.21 xu_lw              HiBatchProcess              ImportToDB增加可选参数，若记录已存在，是否更新
+2008.12.21 xu_lw              HiBatchProcess              更新241: 批量入库申请流水号，以前没加前缀会计日期
+2008.12.21 xu_lw              HiBaseATC                   增加1610行，用于增加调试标识STF
+2008.12.22 xu_lw              HiDbtSqlHelper              InsertRecord、UpdateRecord节点值为null或""则不增加
+2008.12.23 xu_lw              HiCallOut                   CallThirdComm的消息类型设置为PLTOUT
+2008.12.23 xu_lw              HiDBUtils                   修改UpdateRecord参数为?
+2008.12.27 xu_lw              HiDBUtils                   增加UpdateRecord日志
+2008.12.30 xu_lw              HiBaseATC                   增加VerifyId组件
+2009.01.05 xu_lw              HiCallOut                   修改CallLocal报错信息RspCod为RSP_CD
+2009.01.05 xu_lw              HiDBCursor                  修改HiDataBaseUtil的close调用方式为非static方式
+2009.01.13 chen_dh            HiBatOnAtl                  修改UpdateBatchStatus
+2009.02.09 xu_lw              HiDBCursor                  
+2009.02.17 xu_lw              HiBaseATC                   增加XML2ETF、ETF2XML组件                  
+2009.02.17 xu_lw              HiIntegrity                 修改TransBeginWork,增加数据存储                   
+2009.02.26 xu_lw              HiDBCursor                  改变关闭Statement方式                   
+2009.03.04 xu_lw              HiIntegrator                增加AutoCommit标志
+2009.03.12 xu_lw              HiIntegrator                TranBeingWork若取不到SerNam则使用补偿交易码
+2009.03.14 xu_lw              HiTranCtl                   增加日期接口
+2009.04.16 xu_lw   0000296    HiCallOut                   如果交易不是长连接则关闭数据库连接
+2009.05.05 xu_lw              HiAtcLib                    hstThdTxn增加In、Out参数功能
+2009.05.05 xu_lw              HiOthOnAtl                  按照规范修改FTP组件
+2009.05.05 xu_lw              HiCallOut                   所有Call*组件增加In、Out参数功能
+2009.05.05 xu_lw              HiDBUtils                   InsertRecord组件增加组节点为空的判断
+2009.05.13 xu_lw              HiBatchTaskATC              增加批量任务相关组件
+2009.05.13 xu_lw              HiAtcLib                    若有PLAIN_TYPE消息头则设置为PLAIN_TYPE_BYTE
+2009.05.13 xu_lw              HiCallOut                   若有PLAIN_TYPE消息头则设置为PLAIN_TYPE_BYTE
+2009.06.04 xu_lw              HiFTP                       PUT、GET错误时返回异常信息
+2009.06.12 xu_lw              HiTempDataSpace             增加内存类型
+2009.06.30 xu_lw              HiBatchTaskATC              修改SubmitTaskResult组件
+2009.07.01 xu_lw              HiDBUtils                   修改ExecSql组件，若指定GRP时，节点必须为组节点
+2009.06.30 xu_lw              HiAtcLib                    复制ETF使用copyTo方法
+2009.06.30 xu_lw              HiFTP                       处理异常情况
+2009.07.07 xu_lw              HiCallOut                   修改CallLocal增加记录异常信息，将返回码-4修改-1
+2009.07.15 tian_feng          HiTranCtl                   nGetPubSeqNo 修改SEL_VAL = SE_LVAL的bug
+2009.07.01 xu_lw              HiDBUtils                   增加邦定SQL变量的相关组件
+2009.07.31 xu_lw              HiDBUtils                   ReadRecordBind返回值错误
+2009.10.21 xu_lw              HiReport                    增加GenerateReportNew组件
+2009.10.21 xu_lw              HiAtcLib                    修改appLock和unAppLock为需要Commit
+2009.10.21 xu_lw              HiBaseATC                   增加TriggerMsg和WaitMsg组件
