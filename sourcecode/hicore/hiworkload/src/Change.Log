@@ -1,0 +1,11 @@
+修改日期      修改人    BUGID     修改文件名                       修改原因  
+2009.06.30    xu_lw               HiBatchTaskPool           使用ConcurrentHashMap
+2009.06.30    xu_lw               HiTask                    运行完成后将reqMsg置位null
+2009.06.30    xu_lw               HiWorkLoad                使用JDK Concurrent         
+2009.07.30    xu_lw               HiAbstractTask            修改日志       
+2009.07.30    xu_lw               HiBatchTask               修改日志
+2009.07.30    xu_lw               HiTask                    修改日志
+2009.07.30    xu_lw               HiBatchTaskPool           修改日志
+2009.07.30    xu_lw               HiWorkLoad                修改日志
+2009.07.30    xu_lw               HiWorkLoadPool            修改参数设置
+

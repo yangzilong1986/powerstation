@@ -1,0 +1,122 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.09.04 li_ming  0000002  OpenOnNeedFileAppender.java   服务器运行多日后，日志文件不在当前日期目录
+2007.09.06 xu_lw  0000024    HiStringManager               原来的解决方案使用起来不方便
+2007.09.07 xu_lw  0000075    HiDataBaseUtil                数据库主键重复时未记录日志信息
+2007.09.07 xu_lw  0000076    HiException                   出错时不能报出底层调用方法的错误信息
+2007.09.11 xu_lw  0000081    HiMessage                     增加组件输出区组件
+2007.09.28 chen_dh  0000107    HiXmlHelper                 8583TLV解包错误
+2007.09.28 xu_lw  0000108    OpenOnNeedFileAppender        系统切换日期后，服务trc日志生成到相应的log目录
+2007.10.10 xu_lw  0000113    HiMessageContext              MessageContext增加HiCloseable功能
+2007.11.09 xu_lw  0000118    UpdateListenerHubImpl         平台一些程序使用了JDK5.0的特性
+2007.11.21 xu_lw    0000137   所有文件                           替换log4j
+2007.11.21 xu_lw    0000139   HiDataBaseUtil                删除HiDataBaseUtil日志纪录
+2007.11.24 xu_lw    0000147   Logger                        优化日志
+2007.11.24 xu_lw    0000147   HiDataBaseUtil                优化日志
+2007.12.04 xu_lw    0000152   Logger                        Logger、HiByteBuffer增加方便性方法
+2007.12.04 xu_lw    0000152   HiByteBuffer                  Logger、HiByteBuffer增加方便性方法
+2007.12.04 xu_lw    0000154   HiSystemUtils                 增加HiSystemUtils报错信息
+2008.01.08 xu_lw    0000165   HiDataBaseUtil                数据库查询时，BLOB大对象返回的对象地址
+2008.01.08 xu_lw    0000166   HiSCAPreprocess               修改SCA的接口
+2008.01.08 xu_lw    0000167   Logger                        服务日志不能自动切换日期
+2008.01.08 xu_lw    0000167   HiLog                         服务日志不能自动切换日期
+2008.01.08 xu_lw    0000168   HiThreadPool                  增加Thread的标识，便于查错
+2008.01.08 xu_lw    0000190   HiLog                         Logger缓存在消息头造成日志无法记录
+2008.01.08 xu_lw              Logger                        【优化】大量Logger对象耗费很大的内存
+2008.02.21 li_ming  0000189   HiDataBaseUtil                增加数据库表缓存功能
+2008.02.21 li_ming  0000189   DoubleLinkedList              增加数据库表缓存功能
+2008.02.21 li_ming  0000189   DoubleLinkedListNode          增加数据库表缓存功能
+2008.02.21 li_ming  0000189   HiDBCache                     增加数据库表缓存功能
+2008.02.21 li_ming  0000189   HiSqlParser                   增加数据库表缓存功能
+2008.02.21 li_ming  0000189   LRUElementDescriptor          增加数据库表缓存功能
+2008.02.21 li_ming  0000189   LRUMap                        增加数据库表缓存功能
+2008.02.21 li_ming  0000189   LRUMapEntry                   增加数据库表缓存功能
+2008.03.10 xu_lw    0000211   Logger                        超过设置大小时则创建一个新的日志文件
+2008.03.10 xu_lw    0000212   HiContext                     增加removeCurrentContext方法   
+2008.03.10 xu_lw    0000210   HiThreadPool                  增加QueueSize的相关方法
+2008.04.09 xu_lw              HiLog                         异常时将当前MSG记录到应用日志或服务日志中   
+2008.04.17 xu_lw    0000227   HiContext                     JDK1.4 不支持currentContext.remove()，修改currentContext.set(null)
+2008.05.12 xu_lw    0000242   Logger                        日志文件IOException异常时，不输出错误
+2008.05.24 xu_lw    0000243   HiStringManager               解决性能问题
+2008.05.24 xu_lw    0000244   HiSystemUtils                 记录exec的日志
+2008.06.17 xu_lw    0000245   Logger                        FileWriter在大量线程并发且磁盘空间满时存在句柄泄漏问题
+2008.06.26 xu_lw    0000274   HiMessageContext              修改getPara和setPara方法，为直接增加@PARA命名空间
+2008.06.26 xu_lw    0000274   HiParaParser                  修改Transaction的属性节点为code
+2008.07.17 xu_lw    0000275   HiDataBaseUtil                增加注释
+2008.07.17 xu_lw    0000276   HiResultSet                   增加注释
+2008.07.17 xu_lw    0000276   HiLog                         增加注释
+2008.07.17 xu_lw    0000276   HiTestCase                    注释对HiICSProperty的调用
+2008.07.17 xu_lw    0000276   HiContext                     增加注释
+2008.07.17 xu_lw    0000274   HiMessageContext              增加注释
+2008.07.17 xu_lw    0000276   HiICSProperty                 增加注释
+2008.07.26 xu_lw   0000278    Logger                        使用异步方式记录日志；需要压力测试
+2008.07.27 xu_lw   0000278    Logger                        修改文件名后缀为YYMMDDHHMMSS格式
+2008.07.30 xu_lw   0000275    HiDataBaseUtil                增加对多类型数据支持
+2008.07.30 xu_lw   0000275    HiServiceLocator              增加对多类型数据支持
+2008.07.30 xu_lw   0000274    HiMessageContext              增加Request、Response消息获取
+2008.08.01 xu_lw   0000274    HiComponentParaParser         修改Transaction的name为code
+2008.08.06 xu_lw   0000278    Level                         新增Level文件
+2008.08.06 xu_lw   0000278    Logger                        新增info2、info3级别
+2008.08.12 xu_lw   0000277    HiSystemUtil                  修改System执行方式，支持shell 命令
+2008.08.26 liang_wj 0000276    HiMessage                    支持非ETF报文，根据消息头ECT来判断报文格式，设置body
+2008.08.26 liang_wj 0000276   HiMessage                     toString删除SSZ
+2008.09.23 xu_lw    0000293   HiServiceLocator              允许CCA、OTA、SCA交易码重复
+2008.09.23 xu_lw    0000294   Logger                        修改写日志方式为立即写
+2008.12.20 xu_lw              HiXmlETF                      设置数据使用统一方式
+2008.12.20 xu_lw              HiServiceLocator              增加POJO方式          
+2008.12.20 xu_lw              HiServiceLocatorEJBImpl       增加POJO方式
+2008.12.20 xu_lw              HiServiceLocatorPOJOImpl      增加POJO方式
+2008.12.20 xu_lw              Logger                        对sys.properties的参数进行trim处理
+2009.01.19 xu_lw              HiETFUtils                    增加以下form2etf、etf2form、etf2HashMapList、etf2json等方法
+2009.01.19 xu_lw              HiServiceLocatorPOJOImpl      lookup时先从缓存中查找
+2009.01.19 xu_lw                                            移动database包到hidbutil工程中
+2009.01.20 xu_lw              HiServiceLocatorEJBImpl       WebSphere不支持JNDI邦定功能
+2009.05.13 xu_lw              HiServiceLocator              增加list相关方法
+2009.05.13 xu_lw              HiServiceLocatorEJBImpl       增加list相关方法
+2009.05.13 xu_lw              HiServiceLocatorPOJOImpl      增加list相关方法
+2009.05.26 xu_lw              MessageResources              增加资源读取方法
+2009.05.26 xu_lw              MessageResourcesFactory       增加资源读取方法
+2009.05.26 xu_lw              PropertyMessageResources      增加资源读取方法
+2009.05.26 xu_lw              PropertyMessageResourcesFactory      增加资源读取方法
+2009.05.26 xu_lw              HiException 
+2009.06.17 xu_lw              HiXmlETF                      支持按照序号的层次节点 
+2009.07.12 xu_lw              HiThreadPool                  使用JDK concurrent包
+2009.07.13 xu_lw              PropertyMessageResources      支持conf.message动态加载
+2009.07.13 xu_lw              PropertyMessageResources      支持HiStringManager动态加载
+2009.07.13 xu_lw              HiICSProperty                 修改isPrdEnv方法
+2009.07.13 xu_lw              com.hisun.hilog4j.*           修改log策略
+2009.07.13 xu_lw              HiException                   支持异常事件机制
+2009.07.13 xu_lw              HiSQLException                支持异常事件机制
+2009.07.18 xu_lw              HiStringManager               修改日志性能问题
+2009.07.18 xu_lw              PropertyMessageResources      修改日志性能问题
+2009.07.18 xu_lw              PropertyMessageResourcesFa..  修改日志性能问题
+2009.07.20 xu_lw              Logger                        修改日志性能问题
+2009.07.20 xu_lw              HiLogInfo                     修改日志性能问题
+2009.07.20 xu_lw              HiIndexLogCache               修改日志性能问题
+2009.07.20 xu_lw              HiBufferedLogCache            修改日志性能问题
+2009.07.20 xu_lw              HiDirectLogCache              修改日志性能问题
+2009.07.20 xu_lw              HiClassLoadFactory            支持应用自动部署
+2009.07.20 xu_lw              HiICSProperty                 增加一些方便方法
+2009.07.29 xu_lw              HiMessage                     使用ConcurrentHashMap方法
+2009.07.29 xu_lw              HiICSProperty                 支持应用自动部署
+2009.07.29 xu_lw              HiServiceLocatorPOJOImpl      交易码和服务容器之间使用;分隔符
+2009.07.29 xu_lw              HiServiceLocatorEJBImpl       交易码和服务容器之间使用;分隔符
+2009.07.30 xu_lw              HiETF                         增加ROOT节点复制接口
+2009.07.30 xu_lw              HiXmlETF                      增加ROOT节点复制接口
+2009.07.30 xu_lw              LockableHashtable             使用hashmap替代hastable
+2009.09.03 xu_lw              HiETF                         增加Array功能
+2009.09.03 xu_lw              HiXmlETF                      增加Array功能
+2009.10.09 xu_lw              HiByteBuffer                  增加insert、replace方法
+2009.10.09 xu_lw              HiETFUtils                    增加fromJSON、fromJSONStr方法
+2009.10.23 xu_lw              HiDynTrcFileName              增加指定行长度
+2009.10.23 xu_lw              HiLog                         增加指定行长度
+2009.10.23 xu_lw              HiLogFileName                 增加指定行长度
+2009.10.23 xu_lw              HiTrcFileName                 增加指定行长度
+2009.10.23 xu_lw              IFileName                     增加指定行长度
+2009.10.23 xu_lw              Logger                        增加指定行长度
+2009.11.05 xu_lw              HiDirectLogCache              close和log进行同步等待
+2009.11.05 xu_lw              Logger                        增加可以设置消息ID输出              
+2009.11.16 xu_lw              HiJMSHelper                   增加优先级的sendMessage方法
+2009.11.17 xu_lw              HiAbstractFileName            解决close异常问题
+2009.11.17 xu_lw              HiDirectLogCache              解决close异常问题
+2009.11.17 xu_lw              HiLog                         解决close异常问题
+2009.11.17 xu_lw              Logger                        解决close异常问题

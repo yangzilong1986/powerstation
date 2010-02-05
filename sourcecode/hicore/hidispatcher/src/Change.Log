@@ -1,0 +1,16 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.11.21 xu_lw    0000137   所有文件                        替换log4j
+2008.01.08 xu_lw    0000182   HiStartup                  出现OOM现象
+2008.03.10 xu_lw    0000231   HiStartup                  增加日志，清理缓存的静态class
+2008.03.10 xu_lw    0000230   HiAsyncProcess             异步消息的事务处理
+2008.06.26 xu_lw              HiStartup                  hiboot和hireboot做相同处理
+2009.04.23 xu_lw              HiASyncProcess             修改manange => manage
+2009.04.23 xu_lw              HiRouterInBean             修改manange => manage
+2009.04.23 xu_lw              HiStartupServlet           修改manange => manage
+2009.04.23 xu_lw              HiStartup                  增加J2SE启动单个Server的功能
+2009.04.23 xu_lw              HiBootStrap                增加J2SE启动单个Server的功能
+2009.05.04 xu_lw              HiRouterOut                修改SRN处理
+2009.07.15 xu_lw              HiRouterOut                增加innerSyncProcess方法
+2009.07.15 xu_lw              HiRouterOut                增加innerAsyncProcess方法
+2009.07.20 xu_lw              HiStartup                  支持应用自动部署
+2009.11.15 xu_lw              HiASyncProcess             部署时自动启动

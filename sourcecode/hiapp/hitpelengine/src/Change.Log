@@ -1,0 +1,152 @@
+修改日期      修改人    BUGID     修改文件名                       修改原因  
+2007.08.29 xu_lw    0000008   HiAbstractStrategy.java       SCA Request时需要设置传递HiMessage对象
+2007.08.29 xu_lw    0000008   HiXmlStategy.java             SCA Request时需要设置传递PLAIN_TYPE类型
+2007.09.05 xu_lw    0000067   HiSaveMsgHead.java            GetMessage增加超时功能
+2007.09.05 xu_lw    0000067   HiRestoreMsgHead.java         GetMessage增加超时功能
+2007.09.05 xu_lw    0000067   HiMessagePool.java            GetMessage增加超时功能
+2007.09.05 xu_lw    0000068   HiPack8583.java               HiPack8583程序报HiByteBuffer类型错误
+2007.09.05 xu_lw    0000068   HiStrategyFactory.java        HiPack8583程序报HiByteBuffer类型错误
+2007.09.06 xu_lw    0000070   HiSaveMsgHead.java            银联8583需要在ITF解包前取到交易码
+2007.09.06 xu_lw    0000070   HiRestoreMsgHead.java         银联8583需要在ITF解包前取到交易码
+2007.09.06 xu_lw    0000070   HiMessagePool.java            银联8583需要在ITF解包前取到交易码
+2007.09.11 xu_lw    0000078   HiAbstractTransaction         OTA交易需要支持设置日志标志、监控标志
+2007.09.11 xu_lw    0000078   HiTransactionCTLImpl          OTA交易需要支持设置日志标志、监控标志
+2007.09.11 xu_lw    0000078   HiTransactionITFImpl          OTA交易需要支持设置日志标志、监控标志
+2007.09.11 xu_lw    0000079   HiFunction                    增加Package的Function的Input、Output参数
+2007.09.11 xu_lw    0000079   HiCall                        增加Package的Function的Input、Output参数
+2007.09.11 xu_lw    0000079   HiEngineMessageCode           增加Package的Function的Input、Output参数
+2007.09.11 xu_lw    0000079   HiEngineConstants             增加Package的Function的Input、Output参数
+2007.09.21 xu_lw    0000097   HiApplicationCTLImpl          按照最新的命名规范修改交易组件
+2007.09.21 xu_lw    0000097   HiExec                        按照最新的命名规范修改交易组件
+2007.09.21 xu_lw    0000097   HiTransactionCTLImp           按照最新的命名规范修改交易组件
+2007.09.21 xu_lw    0000098   HiAttributesHelper            CallThirdOther后FetchCursor的错误
+2007.09.26 chen_dh  0000109   HiItem                        【ATMP】 CCA同名不存在的节点组包时错误
+2007.09.26 chen_dh  0000109   HiItemHelper                  【ATMP】 CCA同名不存在的节点组包时错误
+2007.10.18 chen_dh  0000119   HiPack8583                    【ATMP】 8583功能增强
+2007.10.31 chen_dh  0000119   HiPack8583.java               【ATMP】 8583功能增强
+2007.10.31 xu_lw    0000105   HiApplicationCTLImpl.java      按渤海银行命名规范修改程序
+2007.10.31 xu_lw    0000121   HiSwitchProcess.java           CTL、ITF有多余日志
+2007.10.31 xu_lw    0000120   HiTransactionITFImpl.java      AddHead增加STC错误
+2007.10.31 chen_dh  0000135   HiGroup                        Group解析列表数据
+2007.11.21 xu_lw    0000137   所有文件                            替换log4j
+2007.11.21 chen_dh  0000145   HItem                          Item组包错误
+2007.11.21 chen_dh  0000145   HItemHelper                    Item组包错误
+2007.12.04 chen_dh  0000153   HiPack8583                     增加8583 银联2.0功能
+2007.12.04 chen_dh  0000153   HiPack8583Helper               增加8583 银联2.0功能
+2007.12.04 chen_dh  0000153   HiMethodItem                   增加8583 银联2.0功能
+2007.12.04 li_ming  0000145   HItem                          Item组包错误
+2008.01.08 chen_dh  0000171   HiAbstractDoElement            XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiReadAttr                     XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiReadElement                  XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiReadGroupElement             XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiWriteAttr                    XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiWriteElement                 XML解析报文增加necessary属性
+2008.01.08 chen_dh  0000171   HiWriteGroupElement            XML解析报文增加necessary属性
+2008.01.08 xu_lw    0000172   HiFunction                     Function找不到定义的DynSentence语句
+2008.01.08 xu_lw    0000172   HiExec                         Function找不到定义的DynSentence语句
+2008.01.08 xu_lw    0000173   HiCall                         Call错误处理错误
+2008.01.08 xu_lw    0000196   HiGetTxnCodeItem               性能优化：预先创建表达式
+2008.01.08 xu_lw    0000196   HiPack8583                     性能优化：预先创建表达式
+2008.01.08 xu_lw    0000196   HiItemHelper                   性能优化：偏移量使用Integer.valueOf()
+2008.01.10 xu_lw    0000196   HiSwitchCode                   如果对应的转换值不存在则报错
+2008.01.14 xu_lw    0000196   HiSwitchCode                   如果对应的转换值不存在则根据条件判断是否使用默认值还是原来值
+2008.01.15 xu_lw    0000196   HiPack8583                     银联２。０中Ｐ端主动发起时组包时的报文头中第３个域的报文总长度计算有问题
+2008.01.17 xu_lw    0000196   HiItemHelper                   Integer.valueOf() JDK1.5才支持的功能
+2008.01.18 xu_lw    0000196   HiItemHelper                   HiConstants.PLAIN_OFFSET的值不能使用Integer对象
+2008.01.18 xu_lw    0000196   HiSwitchCode                   TabName支持变量；取ETF值应该使用HiItemHelper.getEtfItem方法
+2008.01.18 xu_lw    0000196   HiApplicationITFImpl           增加交易码属性这个字段
+2008.01.19 xu_lw    0000196   HiSwitchCode                   TabName找不到是，报提示信息
+2008.01.19 xu_lw    0000196   HiCodeSwitching                找不到对照值时是否返回原值
+2008.01.19 xu_lw    0000196   HiTableInfo                    找不到对照值时是否返回原值
+2008.01.19 xu_lw    0000198   HiExec                         增加统计信息
+2008.02.21 xu_lw    0000196   HiEngineUtilities              【优化】日志非Info级别时，不计算CurrFlowStep
+2008.03.10 xu_lw    0000223   HiPack8583                     银联2.0包头长度为46而非2E,header_len转换为16机制赋值给hLen_name
+2008.05.04 xu_lw    0000232   HiTransactionCTLImpl           根据消息Response设置消息头为RSP标识  
+2008.05.20 xu_lw    0000260   HiTransactionCTLImpl           before和_after应该放在process中统一处理
+2008.05.31 xu_lw    0000259   HiMessagePool                  增加超时消息的处理,restoreHeader时不设置_MSG_RECVED标志; 冲正交易使用的key和正交易相同，造成冲正交易不能成功
+2008.05.31 xu_lw    0000261   HiCall                         调用交易时不进行前处理后预处理
+2008.06.17 xu_lw    0000274   HiTransactionCTLImpl           使用HiProces调用_before和_after处理
+2008.06.17 xu_lw              HiEngineStack                  线程的处理调用HiTransactionCTLImpl的doProcess来处理
+2008.06.26 xu_lw              HiEngineMessageCode            增加Function的参数个数不符错误码
+2008.06.26 xu_lw   0000274    HiCall                         修改错误信息提示方式
+2008.06.26 xu_lw   0000274    HiEngineUtilities              增加@PARA处理
+2008.06.26 xu_lw   0000274    HiCall                         func支持表达式功能
+2008.06.26 xu_lw   0000274    HiCall                         修改未定义实参情况的处理
+2008.07.31 xu_lw   0000280    HiExitException                新增ExitException 
+2008.07.31 xu_lw   0000274    HiCall                         增加对HiExitException处理
+2008.07.31 xu_lw   0000275    HiTransactionCTLImpl           增加对HiExitException处理
+2008.07.31 xu_lw   0000280    HiExitProcess                  新增程序
+2008.07.31 xu_lw   0000275    HiTransactionCTLImpl           增加是否为函数的属性
+2008.07.31 xu_lw   0000274    HiFunction                     设置是否为函数的属性
+2008.07.31 xu_lw   0000275    HiTransactionCTLImpl           关闭数据库连接时调用closeAll
+2008.07.31 xu_lw   0000275    HiTransactionITFImpl           关闭数据库连接时调用closeAll
+2008.07.31 xu_lw   0000274    HiSet                          支持数组方式
+2008.07.31 xu_lw   0000274    HiFunction                     输入参数从上一次主业务中取
+2008.08.06 xu_lw   0000274    HiCall                         修改日志为info2方式
+2008.08.06 xu_lw   0000274    HiFunction                     修改日志为info2方式
+2008.08.06 xu_lw   0000278    HiExec                         修改日志为info2方式
+2008.08.26 xu_lw   0000279    HiItem                         增加数据字典功能和简单数据校验功能
+2008.08.26 xu_lw   0000279    HiEngine                       修改错误处理功能
+2008.09.24 xu_lw   0000292    HiElseProcess                  子节点为空时报错
+2008.10.29 xu_lw              HiXmlStategy                   XML增加序言
+2008.10.29 xu_lw                                             增加XML Path功能
+2008.12.20 chen_dh            HiITFEngineModel.java          增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiAbstractDoElement.java       增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiReadAttr.java                增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiReadElement.java             增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiReadGroupElement.java        增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiWriteAttr.java               增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiWriteElement.java            增加ignoreCase、necessary属性
+2008.12.20 chen_dh            HiWriteGroupElement.java       增加ignoreCase、necessary属性
+2008.12.21 xu_lw              HiCall                         Package可以使用变量
+2008.12.22 chen_dh            HiWriteElement 
+                              HiWriteAttr                    1. 在没配ETF_name情况下:
+                                                     		 1.1 若有配value,直接以该value给XML节点赋值;
+		                                                     1.2 若有表达式,以该表达式的值给XML节点赋值;
+		                                                     1.3 此情况value和表达式不会同时执行,value优先;
+		                                                     1.4 若都没配,表示构造空节点或其包含子节点
+2008.12.25 xu_lw              HiIfProcess                    加载时检查，如果条件为空，则报空
+2008.12.25 xu_lw              HiAbstractTransaction          查询服务时增加服务容器名称		                                                     
+2008.12.25 xu_lw              HiXmlStategy                   内部消息时若PLAIN_TYPE为空，则设置为BYTE
+2009.01.14 xu_lw              HiExec                         增加Spring组件处理；错误处理组件参数设置为空
+2009.01.14 xu_lw              HiTransactionCTLImpl           错误处理组件参数设置为空
+2009.01.14 xu_lw              HiExec                         
+2009.01.20 chen_dh            HiApplicationBean              TPEL支持Java类方式
+2009.01.20 chen_dh            HiEngineBean                   TPEL支持Java类方式
+2009.01.20 chen_dh            HiITransaciton                 TPEL支持Java类方式
+2009.01.20 chen_dh            HiPojoEngineModel              TPEL支持Java类方式
+2009.01.20 chen_dh            HiTransactionBean              TPEL支持Java类方式
+2009.05.06 xu_lw              HiTransactionCTLImpl           若childs为空则记录日志
+2009.05.19 xu_lw              HiTransactionITFImpl           统一timeout命名
+2009.05.19 xu_lw              HiApplicationITFImpl           统一timeout处理
+2009.05.19 xu_lw              HiAbstractApplication          统一timeout处理
+2009.05.19 xu_lw              HiAbstractTransaction          统一timeout处理
+2009.06.12 xu_lw              HiEngineUtilities              支持删除子节点功能
+2009.06.12 xu_lw              HiSaveMsgHead                  支持多级别节点
+2009.06.12 xu_lw              HiRestoreMsgHead               支持多级别节点
+2009.06.16 xu_lw              HiEngineStack                  修改连接不释放问题
+2009.06.29 xu_lw              HiSet                          名称支持表达式功能
+2009.07.01 xu_lw              HiSet                          若名称以@、~、%、#开始则不作为变量
+2009.07.14 xu_lw              HiTableDeclare                 修改日志
+2009.07.14 xu_lw              HiXmlStategy                   支持ROOT节点为小写
+2009.07.14 xu_lw              HiEgineModel                   增加Thread Interrupte和交易处理超时处理
+2009.07.14 xu_lw              HiWhileProcess                 增加Thread Interrupte和交易处理超时处理
+2009.07.14 xu_lw              HiConstants                    增加Thread Interrupte和交易处理超时处理
+2009.07.14 xu_lw              HiEngineUtilities              增加Thread Interrupte和交易处理超时处理
+2009.07.14 xu_lw              HiWhileProcess                 循环次数从sys.properties中读取
+2009.08.20 xu_lw              HiGetTxnCodeItem               增加新的类型ETF
+2009.08.20 xu_lw              HiETFStategy                   增加新的类型ETF
+2009.08.20 xu_lw              HiETFParse                     增加新的类型ETF
+2009.09.12 xu_lw              HiAbstractApplication          增加ITF、CTL动态装载功能
+2009.09.12 xu_lw              HiEngine                       增加ITF、CTL动态装载功能
+2009.09.12 chen_dh            HiItem                         data_fmt为DEC/HEX/BIN时，fill_asc填充默认为0，align_mode对齐方式默认为右边
+2009.10.24 chen_dh            HiWriteAttr                    更新取ETF 节点方法，支持层次
+2009.10.24 chen_dh            HiWriteElement                 更新取ETF 节点方法，支持层次
+2009.10.24 chen_dh            HiWriteGroupElement            更新取ETF 节点方法，支持层次
+2009.10.24 chen_dh            HiReadGroupElement             更新取ETF 节点方法，支持层次
+2009.10.24 chen_dh            HiItemHelper                   更新取ETF 节点方法，支持层次
+2009.11.05 xu_lw              HiAbstractTransaction          增加自定义日志ID(FID)
+2009.11.05 xu_lw              HiAbstractApplication          增加自定义日志ID(FID)
+2009.11.05 xu_lw              HiTransactionCTLImpl           增加自定义日志ID(FID)
+2009.11.05 xu_lw              HiTransactionITFImpl           增加自定义日志ID(FID)
+

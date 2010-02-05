@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hiappconstant/Hiappconstant.iml" filepath="$PROJECT_DIR$/hiappconstant/Hiappconstant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiatmpatc/Hiatmpatc.iml" filepath="$PROJECT_DIR$/hiatmpatc/Hiatmpatc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hibank/Hibank.iml" filepath="$PROJECT_DIR$/hibank/Hibank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiccb/Hiccb.iml" filepath="$PROJECT_DIR$/hiccb/Hiccb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hicmp/Hicmp.iml" filepath="$PROJECT_DIR$/hicmp/Hicmp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hicnapsmodel/Hicnapsmodel.iml" filepath="$PROJECT_DIR$/hicnapsmodel/Hicnapsmodel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiexpr/Hiexpr.iml" filepath="$PROJECT_DIR$/hiexpr/Hiexpr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiexpression/Hiexpression.iml" filepath="$PROJECT_DIR$/hiexpression/Hiexpression.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hihandlers/Hihandlers.iml" filepath="$PROJECT_DIR$/hihandlers/Hihandlers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiibscomm/Hiibscomm.iml" filepath="$PROJECT_DIR$/hiibscomm/Hiibscomm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hijmsadapter/Hijmsadapter.iml" filepath="$PROJECT_DIR$/hijmsadapter/Hijmsadapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hijmsbean/Hijmsbean.iml" filepath="$PROJECT_DIR$/hijmsbean/Hijmsbean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hilib/Hilib.iml" filepath="$PROJECT_DIR$/hilib/Hilib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/himng/Himng.iml" filepath="$PROJECT_DIR$/himng/Himng.iml" />
+      <module fileurl="file://$PROJECT_DIR$/himonext/Himonext.iml" filepath="$PROJECT_DIR$/himonext/Himonext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiprotocolhttp/Hiprotocolhttp.iml" filepath="$PROJECT_DIR$/hiprotocolhttp/Hiprotocolhttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hipubatc/Hipubatc.iml" filepath="$PROJECT_DIR$/hipubatc/Hipubatc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hireport/Hireport.iml" filepath="$PROJECT_DIR$/hireport/Hireport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hischedule/Hischedule.iml" filepath="$PROJECT_DIR$/hischedule/Hischedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hisqn/Hisqn.iml" filepath="$PROJECT_DIR$/hisqn/Hisqn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiswcode/Hiswcode.iml" filepath="$PROJECT_DIR$/hiswcode/Hiswcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hitcpadapter/Hitcpadapter.iml" filepath="$PROJECT_DIR$/hitcpadapter/Hitcpadapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hitemplate/Hitemplate.iml" filepath="$PROJECT_DIR$/hitemplate/Hitemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hitpelengine/Hitpelengine.iml" filepath="$PROJECT_DIR$/hitpelengine/Hitpelengine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hitpelengineext/Hitpelengineext.iml" filepath="$PROJECT_DIR$/hitpelengineext/Hitpelengineext.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiweb/Hiweb.iml" filepath="$PROJECT_DIR$/hiweb/Hiweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiworkload/Hiworkload.iml" filepath="$PROJECT_DIR$/hiworkload/Hiworkload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hiwsadapter/Hiwsadapter.iml" filepath="$PROJECT_DIR$/hiwsadapter/Hiwsadapter.iml" />
+    </modules>
+  </component>
+</project>
+

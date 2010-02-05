@@ -1,0 +1,8 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2008.11.12 xu_lw                HiMultiService                  修改为按记录长度读取                         
+2008.11.12 xu_lw                HiMultiFileQueryImp             修改为按记录长度读取               
+2008.11.12 xu_lw                HiMulti                         修改为按记录长度读取
+2008.12.2  liang_wj             HiMulti                         TYPE_ETF处理错误
+2009.2.13  chen_dh              HiCCBExpr                       修改表达式接口
+2009.2.24  xu_lw                HiMulti                         修改数据表Update语句
+                                              

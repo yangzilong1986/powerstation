@@ -1,0 +1,9 @@
+修改日期      修改人    BUGID     修改文件名                       修改原因
+2008.04.02  xu_lw      0000271  ibscomm.cpp               删除日志
+2008.04.02  xu_lw      0000271  b52host.c                 繁体中文转换错误                
+2008.04.02  xu_lw      0000271  host2b5.c                 繁体中文转换错误
+2008.04.02  xu_lw      0000271  hibase.c                  没有判断文件指针为空的情况
+2008.04.11  xu_lw      0000271  HiIBSComm                 日志增加消息ID和通讯处理时间
+2008.08.11  xu_lw      0000287  HiIBSComm                 增加指定cicsTxn交易码功能
+2008.12.20  xu_lw               HiCPICComm                JAVA方式调用CPIC
+2008.12.20  xu_lw               HiCicsCliSyncHandler      JAVA方式调用ECI

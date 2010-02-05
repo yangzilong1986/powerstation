@@ -1,0 +1,56 @@
+package com.hisun.constants;
+
+abstract interface HiHandlersCode
+{
+  public static final String ERR_HANDLER_8583_CFG = "231400";
+  public static final String ERR_CFG8583_ETF_NAME = "231401";
+  public static final String ERR_CFG8583_LENGTH_TYPE = "231402";
+  public static final String ERR_CFG8583_LENGTH = "231403";
+  public static final String ERR_INVALID_CFG8583_LENGTH_TYPE = "231404";
+  public static final String ERR_CFG8583_DATA_TYPE = "231405";
+  public static final String ERR_INVALID_CFG8583_DATA_TYPE = "231406";
+  public static final String MUST_CFG8583_FIELD = "231407";
+  public static final String ERR_8583_BITMAP = "231408";
+  public static final String MUST_8583_FIELD = "231409";
+  public static final String ERR_8583_PLAIN_LEN = "231410";
+  public static final String ERR_WSC_ADR_NULL = "231411";
+  public static final String ERR_WSC_OPE_NULL = "231412";
+  public static final String ERR_WSC_SYS = "231413";
+  public static final String ERR_BLHANDLER_SERVER = "231414";
+  public static final String ERR_BLHANDLER_TRAN = "231415";
+  public static final String ERR_BLHANDLER_LEVEL = "231416";
+  public static final String ERR_BLHANDLER_TIME = "231417";
+  public static final String ERR_BLHANDLER_ACTDAT = "231418";
+  public static final String ERR_FILSVR_PACKAGE_LEN = "231419";
+  public static final String ERR_FILSVR_FILENAME = "231420";
+  public static final String ERR_FILSVR_CREATE_FILE = "231421";
+  public static final String ERR_FILSVR_RCV_MSG = "231422";
+  public static final String ERR_FILSVR_RCV_DATA = "231423";
+  public static final String ERR_INVALID_CFG8583_FIDLD_ID = "231424";
+  public static final String ERR_INVALID_CFG8583_TLV_DATA_TYPE = "231425";
+  public static final String ERR_CFG8583_TLV_PRE_LEN = "231426";
+  public static final String ERR_CFG8583_TLV_NOT_FIND = "231427";
+  public static final String ERR_INVALID_CFG8583_ALIGN_MODE = "231428";
+  public static final String ERR_INVALID_CFG8583_VAR_LEN_TYPE = "231429";
+  public static final String ERR_INVALID_CFG8583_PACKDATA_TYPE = "231430";
+  public static final String ERR_HANDLER_TLV_CFG = "231500";
+  public static final String ERR_TLV_CFG_ATTR = "231501";
+  public static final String ERR_TLV_CFG_TAG = "231502";
+  public static final String ERR_TLV_CFG_NULL = "231503";
+  public static final String ERR_TLV_CFG_MUST = "231504";
+  public static final String ERR_TLV_PLAIN_LEN = "231505";
+  public static final String ERR_TLV_PLAIN_TAGLEN = "231506";
+  public static final String ERR_TLV_TAG_NOTFIND = "231507";
+  public static final String ERR_TLVPRO_TAG_NOTSET = "231508";
+  public static final String ERR_TLVPRO_RUN = "231509";
+  public static final String ERR_PTLVPRO_CFGNODE = "231510";
+  public static final String ERR_PTLVPRO_NULL = "231511";
+  public static final String ERR_PTLVPRO_RUN = "231512";
+  public static final String ERR_SIM_ATTR_MUST = "231530";
+  public static final String ERR_SIM_PLAIN_HDLEN = "231531";
+  public static final String ERR_SIM_PARA_LEN = "231532";
+  public static final String ERR_SIM_MAC_LEN = "231533";
+  public static final String ERR_SIM_MSGHEAD = "231540";
+  public static final String ERR_SIM_AHEADLEN = "231541";
+  public static final String ERR_POSPACK_TEXT = "231550";
+}

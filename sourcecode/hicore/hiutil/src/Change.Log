@@ -1,0 +1,41 @@
+修改日期      修改人  BUGID     修改文件名                       修改原因  
+2007.10.31 xu_lw  0000008   HiServerManager.java        繁体环境下显示乱码
+2007.10.31 xu_lw  0000008   HiServerManagerClient.java  繁体环境下显示乱码
+2007.10.31 xu_lw  0000008   HiServerManagerServlet.java  繁体环境下显示乱码
+2007.11.21 xu_lw  0000137   所有文件                            替换log4j
+2007.11.24 xu_lw  0000150   增加util处理类                   增加util处理类               
+2007.12.04 xu_lw  0000155   HiServerManager              服务器管理增加支持JMS功能
+2007.12.04 xu_lw  0000150   增加util处理类                   增加util处理类               
+2008.01.08 xu_lw  0000197   HiServerManagerClient        错误信息记录在SYS.log中               
+2008.01.08 xu_lw  0000197   HiServerManager              修改hiboot -a的错误               
+2008.01.31 xu_lw  0000197   HiServerManagerClient        修改hiboot -a的错误               
+2008.01.31 xu_lw  0000198   HiDummyStat                  增加统计信息处理类
+2008.01.31 xu_lw  0000198   HiStat                       增加统计信息处理类
+2008.01.31 xu_lw  0000198   HiStats                      增加统计信息处理类
+2008.01.31 xu_lw  0000198   HiDummyStat                  增加统计信息处理类
+2008.01.31 xu_lw  0000198   IStat                        增加统计信息处理类
+2008.05.31 xu_lw  0000262   HiInvokeServiceClient        增加通过命令行方式调用服务方式
+2008.05.31 xu_lw  0000262   HiInvokeServiceServlet       增加通过命令行方式调用服务方式
+2008.06.26 xu_lw  0000285   HiServerManager              服务启动增加登记时间
+2008.06.26 xu_lw  0000285   HiServerManager              服务启动增加登记时间
+2008.06.26 xu_lw  0000285   HiServerManagerPOJO          错误时记录
+2008.03.21 xu_lw            HiServerManagerServlet       增加IP地址限制
+2008.03.21 xu_lw            HiServerManager              如果服务容器未部署则继续
+2008.03.21 xu_lw            HiInvokeServiceServlet       增加IP地址限制和支持SDT方式
+2009.05.13 xu_lw            HiAutoBootServerServlet      增加自动启动服务器方法
+2009.05.13 xu_lw            HiGroupNode                  获取Server对应的组名
+2009.05.13 xu_lw            HiServerNode                 获取Server对应的组名
+2009.06.01 xu_lw            HiFrontTabNode               增加groupNodes方法
+2009.06.01 xu_lw            HiAutoBootServerServlet      增加自动启动服务器的Servlet
+2009.07.14 xu_lw            HiClientUtilPOJO             支持从SYSCFG.XML读取默认队列和队列工厂
+2009.07.20 xu_lw            HiSVRLSTParser               支持应用自动部署
+2009.07.20 xu_lw            HiClientUtil                 支持应用自动部署
+2009.07.20 xu_lw            HiClientUtilPOJO             支持应用自动部署
+2009.07.20 xu_lw            HiServerManager              支持应用自动部署
+2009.07.20 xu_lw            HiServerManagerPOJO          支持应用自动部署
+2009.07.20 xu_lw            HiServerManager              List时输出组名
+2009.07.20 xu_lw            HiServerManagerPOJO          List时输出组名                     
+2009.08.19 xu_lw            HiInvokeServiceClient        支持参数方式
+2009.11.05 xu_lw            HiInvokeServiceClient        支持参数方式的BUG
+2009.11.16 xu_lw            HiClientUtil                 MDB服务启动消息使用最高优先级
+2009.11.16 xu_lw            HiClientUtilPOJO             MDB服务启动消息使用最高优先级
