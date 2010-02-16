@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic on JDBC.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- ========================= Socket通信框架对象定义 ========================= -->
+	<bean id="EventType.ACCEPTCLIENT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.ACCEPTCLIENT"/>
+	</bean>
+	<bean id="EventType.CLIENT_CONNECTED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.CLIENT_CONNECTED"/>
+	</bean>
+
+	<bean id="EventType.CLIENTCLOSE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.CLIENTCLOSE"/>
+	</bean>
+	<bean id="EventType.CLIENTTIMEOUT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.CLIENTTIMEOUT"/>
+	</bean>
+	<bean id="EventType.SERVERPROFILE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SERVERPROFILE"/>
+	</bean>
+	<bean id="EventType.SERVERSTARTED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SERVERSTARTED"/>
+	</bean>
+	<bean id="EventType.SERVERSTOPPED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SERVERSTOPPED"/>
+	</bean>
+	<bean id="EventType.SYS_EVENT_PROCESS_TIMEOUT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SYS_EVENT_PROCESS_TIMEOUT"/>
+	</bean>
+	<bean id="EventType.SYS_TIMER"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SYS_TIMER"/>
+	</bean>
+	<bean id="EventType.SYS_MEMORY_PROFILE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SYS_MEMORY_PROFILE"/>
+	</bean>
+	<bean id="EventType.SYS_IDLE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.SYS_IDLE"/>
+	</bean>
+
+	<!-- =====消息相关事件定义==== -->
+	<bean id="EventType.MSG_SEND_FAIL"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_SEND_FAIL"/>
+	</bean>
+	<bean id="EventType.MSG_RECV"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_RECV"/>
+	</bean>
+	<bean id="EventType.MSG_SENT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_SENT"/>
+	</bean>
+	<bean id="EventType.MSG_SIMPLE_RECV"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_SIMPLE_RECV"/>
+	</bean>
+	<bean id="EventType.MSG_SIMPLE_SENT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_SIMPLE_SENT"/>
+	</bean>
+	<bean id="EventType.MSG_PARSE_ERROR"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MSG_PARSE_ERROR"/>
+	</bean>
+	
+	<!-- =====消息相关事件定义==== -->
+	<bean id="EventType.FE_RTU_CHANNEL"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.FE_RTU_CHANNEL"/>
+	</bean>
+	
+	<!-- =====模块相关事件定义==== -->
+	<bean id="EventType.MODULE_STARTTED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MODULE_STARTTED"/>
+	</bean>
+	<bean id="EventType.MODULE_STOPPED"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MODULE_STOPPED"/>
+	</bean>
+	<bean id="EventType.MODULE_PROFILE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.MODULE_PROFILE"/>
+	</bean>
+	
+	<!-- =====数据库相关事件定义==== -->
+	<bean id="EventType.DB_AVAILABLE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.DB_AVAILABLE"/>
+	</bean>
+	<bean id="EventType.DB_UNAVAILABLE"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.DB_UNAVAILABLE"/>
+	</bean>
+
+	<!-- =====业务相关事件定义==== -->
+	<bean id="EventType.BP_RELAY"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.BP_RELAY"/>
+	</bean>
+	<bean id="EventType.BP_READ_CURRENT"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.BP_READ_CURRENT"/>
+	</bean>
+	<bean id="EventType.BP_READ_TASK"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.BP_READ_TASK"/>
+	</bean>
+	<bean id="EventType.BP_EXP_ALARM"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.BP_EXP_ALARM"/>
+	</bean>
+	<bean id="EventType.BP_LOG_DB"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="com.hzjbbis.fk.common.EventType.BP_LOG_DB"/>
+	</bean>
+
+	<!-- 消息对象创建器定义  -->
+	<bean id="messageLoader.MessageZj"
+			class="com.hzjbbis.fk.message.zj.MessageLoader4Zj"/>
+	<bean id="messageCreator.Zj"
+			class="com.hzjbbis.fk.message.zj.MessageZjCreator"/>
+	<bean id="messageCreator.Gate"
+			class="com.hzjbbis.fk.message.gate.MessageGateCreator"/>
+	<bean id="common.timerScheduler" class="com.hzjbbis.fk.common.simpletimer.TimerScheduler"
+		factory-method="getScheduler" destroy-method="destroy">
+	</bean>
+	<bean id="global.event.handler" class="com.hzjbbis.fk.common.events.GlobalEventHandler"
+		factory-method="getInstance" destroy-method="destroy">
+	</bean>
+</beans>

@@ -1,0 +1,1350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic on JDBC.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"><value>${master.jdbc.driver}</value></property>
+		<property name="url"><value>${master.jdbc.url}</value></property>
+		<property name="username"><value>${master.jdbc.username}</value></property>
+		<property name="password"><value>${master.jdbc.password}</value></property>
+		<property name="maxActive"><value>${master.jdbc.maxActive}</value></property> 
+		<property name="maxIdle"><value>${master.jdbc.maxIdle}</value></property> 
+		<property name="maxWait"><value>${master.jdbc.maxWait}</value></property> 
+	</bean>
+	
+	<bean id="dataSource.mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"><value>${mysql.jdbc.driver}</value></property>
+		<property name="url"><value>${mysql.jdbc.url}</value></property>
+		<property name="username"><value>${mysql.jdbc.username}</value></property>
+		<property name="password"><value>${mysql.jdbc.password}</value></property>
+		<property name="maxActive"><value>${mysql.jdbc.maxActive}</value></property> 
+		<property name="maxIdle"><value>${mysql.jdbc.maxIdle}</value></property> 
+		<property name="maxWait"><value>3000</value></property> 
+	</bean>
+	-->
+	
+	<bean id="dataSource"
+    	class="org.logicalcobwebs.proxool.ProxoolDataSource">
+	    <property name="driver"><value>${master.jdbc.driver}</value></property>
+	    <property name="driverUrl"><value>${master.jdbc.url}</value></property>
+	    <property name="user"><value>${master.jdbc.username}</value></property>
+	    <property name="password"><value>${master.jdbc.password}</value></property>
+	    <property name="prototypeCount"><value>1</value></property>
+	    <property name="maximumConnectionCount"><value>${master.jdbc.maxActive}</value></property>
+	    <property name="minimumConnectionCount"><value>${master.jdbc.maxIdle}</value></property>
+	    <property name="trace"><value>true</value></property>
+	    <property name="verbose"><value>true</value></property>
+	</bean>		
+	
+	<bean id="master.dbMonitor" class="com.hzjbbis.db.DbMonitor"
+		factory-method="createInstance" init-method="initialize">
+		<property name="name" value="defaultDbMonitor"/>
+	    <property name="jdbcUrl"><value>${master.jdbc.url}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+	    <property name="testSql"><value>select * from dual</value></property>
+	</bean>
+
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- Activates @Transactional for DefaultImageDatabase -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+		
+	<bean id="event.handle.readTask" class="com.hzjbbis.db.batch.event.adapt.BaseReadTaskHandler">
+		<property name="key" value="4"/>
+	</bean>
+	<bean id="event.handle.expAlarm" class="com.hzjbbis.db.batch.event.adapt.BaseExpAlarmHandler">
+		<property name="key" value="3"/>
+	</bean>
+	<bean id="event.handle.log2Db" class="com.hzjbbis.db.batch.event.adapt.BaseLog2DbHandler">
+		<property name="key" value="2"/>
+	</bean>
+	<bean id="event.handle.updateRtu" class="com.hzjbbis.db.batch.event.adapt.BaseUpdateRtuStatus">
+		<property name="key" value="1"/>
+	</bean>
+
+	<bean id="asyncService" class="com.hzjbbis.db.batch.AsyncService" abstract="true">
+		<property name="daoList">
+			<list>
+				<ref bean="batchDao.updateRtu" />
+			</list>
+		</property>
+		<property name="bpHandlerMap">
+			<map>
+				<entry>
+					<key><ref bean="EventType.BP_READ_TASK" /></key>
+					<ref bean="event.handle.readTask" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.BP_EXP_ALARM" /></key>
+					<ref bean="event.handle.expAlarm" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.BP_LOG_DB" /></key>
+					<ref bean="event.handle.log2Db" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.FE_RTU_CHANNEL" /></key>
+					<ref bean="event.handle.updateRtu" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dao.initComRtu" class="com.hzjbbis.db.initrtu.dao.jdbc.JdbcComRtuDao">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sqlLoadRtu">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS ID,
+						a.DWDM AS DEPT_CODE,
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.SIMKH AS SIM_NUM,						
+						SUBSTR(p0.CSDQZ, 1, 2) AS COMM_TYPE,
+						SUBSTR(p0.CSDQZ, 4) AS COMM_ADDRESS,
+						SUBSTR(p1.CSDQZ, 1, 2) AS B1_COMM_TYPE,
+						SUBSTR(p1.CSDQZ, 4) AS B1_COMM_ADDRESS
+				FROM    ZC_ZDZC a
+				LEFT OUTER JOIN ZD_ZDCS p0
+				ON      a.ZDJH = p0.ZDJH
+				AND     p0.CSX = '8010'
+				LEFT OUTER JOIN ZD_ZDCS p1
+				ON      a.ZDJH = p1.ZDJH
+				AND     p1.CSX = '8011'
+				]]>
+			</value>
+		</property>
+		<property name="sqlLoadGwRtu">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS ID,
+						a.DWDM AS DEPT_CODE,
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.SIMKH AS SIM_NUM,		          				
+						SUBSTR(a.ZDZTXDZ, 1, 2) AS COMM_TYPE,
+						SUBSTR(a.ZDZTXDZ, 4) AS COMM_ADDRESS,
+						SUBSTR(a.ZDTXDZB1, 1, 2) AS B1_COMM_TYPE,
+						SUBSTR(a.ZDTXDZB1, 4) AS B1_COMM_ADDRESS				
+				FROM    ZC_JCZC a
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadRtu">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.ComRtu"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="deptCode"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuProtocol"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="logicAddress"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="manufacturer"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="simNum"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="commType"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="commAddress"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="b1CommType"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="b1CommAddress"/>
+							<property name="index" value="10"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="initRtu" class="com.hzjbbis.db.initrtu.InitRtu">
+		<property name="comRtuDao" ref="dao.initComRtu"/>
+	</bean>
+	
+	<bean id="manageRtu" class="com.hzjbbis.db.managertu.ManageRtu">
+		<property name="comRtuDao" ref="dao.initComRtu"/>
+		<property name="bizRtuDao" ref="dao.initBizRtu"/>
+		<property name="rtuRefreshDao" ref="dao.refreshRtu"/>
+	</bean>
+	
+	<bean id="dao.initBizRtu" class="com.hzjbbis.db.initrtu.dao.jdbc.JdbcBizRtuDao">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sqlLoadRtu">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_ZDZC a
+				]]>
+			</value>
+		</property>
+		<property name="sqlLoadGwRtu">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_JCZC a
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadRtu">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.BizRtu"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="deptCode"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuProtocol"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="logicAddress"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="manufacturer"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="hiAuthPassword"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="loAuthPassword"/>
+							<property name="index" value="7"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadMeasurePoints">
+			<value>
+				<![CDATA[
+				SELECT  m.ZDJH AS RTU_ID,
+						m.CLDH AS TN,
+						m.CLDLX AS STATION_TYPE,
+						m.CLDJH AS STATION_NO,
+						m.CT AS CT,
+						m.PT AS PT,
+            			a.hh AS CUSTOMER_NO,
+            			a.sjid AS DATE_SAVE_ID,
+						p1.CSDQZ AS ATR_ADDRESS,
+						p2.CSDQZ AS ATR_PROTOCOL,
+						p3.CSDQZ AS ATR_PORT
+				FROM  SB_RWSJZB a,ZC_ZDZC Z, ZD_CLD m
+				LEFT OUTER JOIN ZD_CLDCS p1
+				ON      m.CLDID = p1.CLDID
+				AND     p1.CSX = '8902'
+				LEFT OUTER JOIN ZD_CLDCS p2
+				ON      m.CLDID = p2.CLDID
+				AND     p2.CSX = '8903'
+				LEFT OUTER JOIN ZD_CLDCS p3
+				ON      m.CLDID = p3.CLDID
+				AND     p3.CSX = '8904'
+				WHERE   a.zdjh=m.zdjh AND a.dwdm=m.dwdm AND a.cldjh=m.cldjh 
+					    AND a.zdjh=z.zdjh AND a.hh=z.hh
+						AND m.SFYX = '1' AND a.SFYX='1'
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadMeasurePoints">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.MeasuredPoint"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationType"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationNo"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ctStr"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ptStr"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="customerNo"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="dataSaveID"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrAddress"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrProtocol"/>
+							<property name="index" value="10"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrPort"/>
+							<property name="index" value="11"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadGwMeasurePoints">
+			<value>
+				<![CDATA[
+				SELECT  m.ZDJH AS RTU_ID,
+						m.CLDH AS TN,
+						m.CLDLX AS STATION_TYPE,
+						m.CLDJH AS STATION_NO,
+						m.CT AS CT,
+						m.PT AS PT,
+            			a.hh AS CUSTOMER_NO,
+            			a.sjid AS DATE_SAVE_ID
+				FROM  SB_RWSJZB a,ZC_JCZC Z, ZD_JCCLD m
+				WHERE   a.zdjh=m.zdjh AND a.dwdm=m.dwdm AND a.cldjh=m.cldjh 
+					    AND a.zdjh=z.zdjh AND a.hh=z.hh
+						AND m.SFYX = '1' AND a.SFYX='1'
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadGwMeasurePoints">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.MeasuredPoint"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationType"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationNo"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ctStr"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ptStr"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="customerNo"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="dataSaveID"/>
+							<property name="index" value="8"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadAlertCode">
+			<value>
+				<![CDATA[
+		SELECT  GJBM AS CODE
+		FROM    JB_GJBM		
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadAlertCode">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuAlertCode"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="code"/>
+							<property name="index" value="1"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadAlertCodeArgs">
+			<value>
+				<![CDATA[
+		SELECT  GJBM,MRSJX,XH FROM JB_GJBMMRCS ORDER BY XH
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadAlertCodeArgs">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuAlertCodeArg"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="code"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sjx"/>
+							<property name="index" value="2"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		
+		<property name="sqlLoadRtuTask">
+			<value>
+				<![CDATA[
+				SELECT  ZDJH AS RTU_ID,
+						MBID AS TASK_TEMPLATE_ID,
+						RWSX AS TASK_TEMPLATE_PROPERTY,
+						RWH AS RTU_TASK_NUM,
+						CLDH AS TN
+						FROM RW_ZDRW
+				WHERE   SFYX = '1' 
+				]]>
+			</value>
+		</property>
+		<property name="sqlLoadGwRtuTask">
+			<value>
+				<![CDATA[
+				SELECT  ZDJH AS RTU_ID,
+						MBID AS TASK_TEMPLATE_ID,
+						RWSX AS TASK_TEMPLATE_PROPERTY,
+						RWH AS RTU_TASK_NUM,
+						CLDH AS TN
+						FROM RW_JCRW
+				WHERE   SFYX = '1' 
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadRtuTask">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuTask"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateProperty"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuTaskNum"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="5"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+
+		<property name="sqlLoadTaskDbConfig">
+			<value>
+				<![CDATA[
+			select sjbh,path from table(pkg_fep_service.getSjxMap)
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadTaskDbConfig">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.TaskDbConfig"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="code"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="dbConfigStr"/>
+							<property name="index" value="2"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadTaskTemplate">
+			<value>
+				<![CDATA[
+				SELECT  MBID AS TASK_TEMPLATE_ID,
+						RWLX AS TASK_TYPE,
+						CYKSJZSJDW AS SAMPLE_START_TIME_UNIT,
+						CYKSJZSJZ AS SAMPLE_START_TIME,
+						CYJGSJDW AS SAMPLE_INTERVAL_UNIT,
+						CYJGSJ AS SAMPLE_INTERVAL,
+						SBJGSJDW AS UPLOAD_INTERVAL_UNIT,
+						SBJGSJ AS UPLOAD_INTERVAL,
+						SBJZSJDW AS UPLOAD_START_TIME_UNIT,
+						SBJZSJ AS UPLOAD_START_TIME,
+						SBSJPL AS FREQUENCE
+						FROM MB_ZDRW
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadTaskTemplate">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.TaskTemplate"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskType"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleStartTimeUnit"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleStartTime"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleIntervalUnit"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleInterval"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadIntervalUnit"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadInterval"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadStartTimeUnit"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadStartTime"/>
+							<property name="index" value="10"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="frequence"/>
+							<property name="index" value="11"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		
+		<property name="sqlLoadTaskTemplateItem">
+			<value>
+				<![CDATA[
+				SELECT  MBID AS TASK_TEMPLATE_ID,
+                			SJX AS CODE
+		            	FROM  MB_CLSJX 
+				ORDER BY XH     
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadTaskTemplateItem">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.TaskTemplateItem"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="code"/>
+							<property name="index" value="2"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlLoadSysConfig">
+			<value>
+				<![CDATA[
+				SELECT PZZ FROM XT_PZ WHERE XMBM = 'ZDYCGK' AND (PZBM = 'BJ10' OR PZBM = 'BJ11')order by PZBM 
+				]]>
+			</value>
+		</property>
+		<property name="mapperLoadSysConfig">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.SysConfig"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="pzz"/>
+							<property name="index" value="1"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dao.refreshRtu" class="com.hzjbbis.db.rtu.jdbc.JdbcRtuRefreshDao">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sqlGetRtuByRtuId">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_ZDZC a  WHERE a.ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetRtuByRtua">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_ZDZC a  WHERE a.ZDLJDZ = ?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetGwRtuByRtuId">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_JCZC a  WHERE a.ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetGwRtuByRtua">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS RTU_ID,
+						a.DWDM AS DEPT_CODE,						
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.GQXMM AS HI_AUTH_PASSWORD,
+						a.DQXMM AS LO_AUTH_PASSWORD
+				FROM    ZC_JCZC a  WHERE a.ZDLJDZ = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetRtu">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.BizRtu"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="deptCode"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuProtocol"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="logicAddress"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="manufacturer"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="hiAuthPassword"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="loAuthPassword"/>
+							<property name="index" value="7"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlGetComRtuByRtua">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS ID,
+						a.DWDM AS DEPT_CODE,
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.SIMKH AS SIM_NUM,						
+						SUBSTR(p0.CSDQZ, 1, 2) AS COMM_TYPE,
+						SUBSTR(p0.CSDQZ, 4) AS COMM_ADDRESS,
+						SUBSTR(p1.CSDQZ, 1, 2) AS B1_COMM_TYPE,
+						SUBSTR(p1.CSDQZ, 4) AS B1_COMM_ADDRESS
+				FROM    ZC_ZDZC a
+				LEFT OUTER JOIN ZD_ZDCS p0
+				ON      a.ZDJH = p0.ZDJH
+				AND     p0.CSX = '8010'
+				LEFT OUTER JOIN ZD_ZDCS p1
+				ON      a.ZDJH = p1.ZDJH
+				AND     p1.CSX = '8011'
+				WHERE a.ZDLJDZ = ?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetComGwRtuByRtua">
+			<value>
+				<![CDATA[
+				SELECT  a.ZDJH AS ID,
+						a.DWDM AS DEPT_CODE,
+						a.ZDGYLX AS RTU_PROTOCOL,
+						a.ZDLJDZ AS LOGIC_ADDRESS,
+						a.ZZCJBM AS MANUFACTURER,
+						a.SIMKH AS SIM_NUM,		          				
+						SUBSTR(a.ZDZTXDZ, 1, 2) AS COMM_TYPE,
+						SUBSTR(a.ZDZTXDZ, 4) AS COMM_ADDRESS,
+						SUBSTR(a.ZDTXDZB1, 1, 2) AS B1_COMM_TYPE,
+						SUBSTR(a.ZDTXDZB1, 4) AS B1_COMM_ADDRESS				
+				FROM    ZC_JCZC a
+				WHERE a.ZDLJDZ = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetComRtu">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.ComRtu"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="deptCode"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuProtocol"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="logicAddress"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="manufacturer"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="simNum"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="commType"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="commAddress"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="b1CommType"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="b1CommAddress"/>
+							<property name="index" value="10"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlGetMeasurePoints">
+			<value>
+				<![CDATA[
+				SELECT  m.ZDJH AS RTU_ID,
+						m.CLDH AS TN,
+						m.CLDLX AS STATION_TYPE,
+						m.CLDJH AS STATION_NO,
+						m.CT AS CT,
+						m.PT AS PT,
+            			a.hh AS CUSTOMER_NO,
+            			a.sjid AS DATE_SAVE_ID,
+						p1.CSDQZ AS ATR_ADDRESS,
+						p2.CSDQZ AS ATR_PROTOCOL,
+						p3.CSDQZ AS ATR_PORT
+				FROM  SB_RWSJZB a, ZD_CLD m
+				LEFT OUTER JOIN ZD_CLDCS p1
+				ON      m.CLDID = p1.CLDID
+				AND     p1.CSX = '8902'
+				LEFT OUTER JOIN ZD_CLDCS p2
+				ON      m.CLDID = p2.CLDID
+				AND     p2.CSX = '8903'
+				LEFT OUTER JOIN ZD_CLDCS p3
+				ON      m.CLDID = p3.CLDID
+				AND     p3.CSX = '8904'
+				WHERE   a.zdjh=m.zdjh AND a.dwdm=m.dwdm AND a.cldjh=m.cldjh 
+						AND m.SFYX = '1' AND a.SFYX='1' AND a.ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetMeasurePoints">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.MeasuredPoint"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationType"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationNo"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ctStr"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ptStr"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="customerNo"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="dataSaveID"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrAddress"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrProtocol"/>
+							<property name="index" value="10"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="atrPort"/>
+							<property name="index" value="11"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlGetGwMeasurePoints">
+			<value>
+				<![CDATA[
+				SELECT  m.ZDJH AS RTU_ID,
+						m.CLDH AS TN,
+						m.CLDLX AS STATION_TYPE,
+						m.CLDJH AS STATION_NO,
+						m.CT AS CT,
+						m.PT AS PT,
+            			a.hh AS CUSTOMER_NO,
+            			a.sjid AS DATE_SAVE_ID
+				FROM  SB_RWSJZB a, ZD_JCCLD m
+				WHERE   a.zdjh=m.zdjh AND a.dwdm=m.dwdm AND a.cldjh=m.cldjh 
+						AND m.SFYX = '1' AND a.SFYX='1' AND a.ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetGwMeasurePoints">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.MeasuredPoint"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationType"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="stationNo"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ctStr"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="ptStr"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="customerNo"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="dataSaveID"/>
+							<property name="index" value="8"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="sqlGetRtuTask">
+			<value>
+				<![CDATA[
+				SELECT  ZDJH AS RTU_ID,
+						MBID AS TASK_TEMPLATE_ID,
+						RWSX AS TASK_TEMPLATE_PROPERTY,
+						RWH AS RTU_TASK_NUM,
+						CLDH AS TN
+						FROM RW_ZDRW
+				WHERE   SFYX = '1' AND ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetGwRtuTask">
+			<value>
+				<![CDATA[
+				SELECT  ZDJH AS RTU_ID,
+						MBID AS TASK_TEMPLATE_ID,
+						RWSX AS TASK_TEMPLATE_PROPERTY,
+						RWH AS RTU_TASK_NUM,
+						CLDH AS TN
+						FROM RW_JCRW
+				WHERE   SFYX = '1' AND ZDJH = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetRtuTask">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuTask"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateProperty"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuTaskNum"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="tn"/>
+							<property name="index" value="5"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		
+		<property name="sqlGetTaskTemplate">
+			<value>
+				<![CDATA[
+				SELECT  MBID AS TASK_TEMPLATE_ID,
+						RWLX AS TASK_TYPE,
+						CYKSJZSJDW AS SAMPLE_START_TIME_UNIT,
+						CYKSJZSJZ AS SAMPLE_START_TIME,
+						CYJGSJDW AS SAMPLE_INTERVAL_UNIT,
+						CYJGSJ AS SAMPLE_INTERVAL,
+						SBJGSJDW AS UPLOAD_INTERVAL_UNIT,
+						SBJGSJ AS UPLOAD_INTERVAL,
+						SBJZSJDW AS UPLOAD_START_TIME_UNIT,
+						SBJZSJ AS UPLOAD_START_TIME,
+						SBSJPL AS FREQUENCE
+						FROM MB_ZDRW
+				WHERE MBID = ?
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetTaskTemplate">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.TaskTemplate"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskType"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleStartTimeUnit"/>
+							<property name="index" value="3"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleStartTime"/>
+							<property name="index" value="4"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleIntervalUnit"/>
+							<property name="index" value="5"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sampleInterval"/>
+							<property name="index" value="6"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadIntervalUnit"/>
+							<property name="index" value="7"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadInterval"/>
+							<property name="index" value="8"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadStartTimeUnit"/>
+							<property name="index" value="9"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="uploadStartTime"/>
+							<property name="index" value="10"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="frequence"/>
+							<property name="index" value="11"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		
+		<property name="sqlGetTaskTemplateItem">
+			<value>
+				<![CDATA[
+				SELECT  MBID AS TASK_TEMPLATE_ID,
+                			SJX AS CODE
+		            	FROM  MB_CLSJX 
+				WHERE MBID= ? ORDER BY XH     
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetTaskTemplateItem">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.TaskTemplateItem"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="taskTemplateID"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="code"/>
+							<property name="index" value="2"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="master.dbservice" class="com.hzjbbis.db.bizprocess.MasterDbService">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="insertCommandResult">
+			<value>
+			INSERT INTO ZZCZ_MLJG( MLJGID, MLID, CLDH, GJBM, SJX, SJZ, SJSJ, BCSJ, TD )
+			VALUES( S_ZZCZ_MLJG.NEXTVAL, :commandId, :tn, :alertCode, :code,
+					:value, :time ,:programTime , :channel )
+			</value>
+		</property>
+		<property name="insertGwCommandResult">
+			<value>
+			INSERT INTO ZZCZ_JCZCJG(MLID, CLDH, GJBM, SJX, SJZ, SJSJ)
+			VALUES( :commandId, :tn, :alertCode, :code,:value, :time )
+			</value>
+		</property>
+		<property name="insertRtuComdMag">
+			<value>
+			MERGE INTO zd_mlczgl a
+		    USING (SELECT :logicAddress as zdljdz,:zxh as zxh,:cmdId as mlid,:bwsl as bwsl,:zdzjbz as zdzjbz FROM dual) b
+		    ON (a.zdljdz = b.zdljdz AND a.zxh = b.zxh)
+		    WHEN MATCHED THEN
+		      UPDATE SET mlid = b.mlid,bwsl = b.bwsl,czsj=sysdate,zdzjbz=b.zdzjbz
+		    WHEN NOT MATCHED THEN
+		      INSERT (zdljdz,zxh,mlid,bwsl,zdzjbz)
+		      VALUES (b.zdljdz,b.zxh,b.mlid,b.bwsl,b.zdzjbz)    
+			</value>
+		</property>
+		<property name="sqlGetGwRtuSetValue">
+			<value>
+				<![CDATA[
+				SELECT MLID,CLDH,SJXZT FROM ZZCZ_JCSZJG WHERE MLID=?	
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetRtuSetValue">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuSetValue"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="cmdId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="cldh"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="sjxzt"/>
+							<property name="index" value="3"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>	
+		<property name="updateGwRtuSetValue">
+			<value>
+				<![CDATA[
+				UPDATE ZZCZ_JCSZJG SET SJXZT=?  WHERE MLID=?
+				]]>
+			</value>
+		</property>
+		<property name="sqlGetRtuComdItem">
+			<value>
+				<![CDATA[
+				SELECT MLID,BWSL,ZDZJBZ FROM ZD_MLCZGL
+				WHERE ZDLJDZ=? AND ZXH=?	
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetRtuComdItem">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuCmdItem"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="cmdId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="bwsl"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="zdzjbz"/>
+							<property name="index" value="3"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>	
+		<property name="sqlGetRtuSycItem">
+			<value>
+				<![CDATA[
+				SELECT ZDJH,TBLB,TBSJ FROM ZD_CSTB
+				WHERE TBSJ>? 
+				ORDER BY TBSJ
+				]]>
+			</value>
+		</property>
+		<property name="mapperGetRtuSycItem">
+			<bean class="com.hzjbbis.db.resultmap.ResultMapper">
+				<property name="resultClass" value="com.hzjbbis.fk.model.RtuSynchronizeItem"/>
+				<property name="columnMapper">
+					<list>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="rtuId"/>
+							<property name="index" value="1"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="SycType"/>
+							<property name="index" value="2"/>
+						</bean>
+						<bean class="com.hzjbbis.db.resultmap.ColumnMapper">
+							<property name="property" value="SycTime"/>
+							<property name="index" value="3"/>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>		
+		<property name="funcGetRtuCommandSeq">
+			<bean class="com.hzjbbis.db.procedure.DbProcedure">
+				<property name="dataSource" ref="dataSource"/>
+				<property name="callString">
+					<value>{?INTEGER = call pkg_fep_service.get_zdzxh(#p_zdljdz,jdbcType=VARCHAR,mode=IN#,#p_zdywlb,jdbcType=VARCHAR,mode=IN#,#p_zdgylx,jdbcType=VARCHAR,mode=IN#)}</value>
+				</property>
+			</bean>
+		</property>
+		<property name="procUpdateCommandStatus">
+			<bean class="com.hzjbbis.db.procedure.DbProcedure">
+				<property name="dataSource" ref="dataSource"/>
+				<property name="callString">
+					<value>{call comm_service.update_command_status(#id,jdbcType=NUMERIC,mode=IN#,#rtuType,jdbcType=VARCHAR,mode=IN#,#status,jdbcType=VARCHAR,mode=IN#,#errcode,jdbcType=VARCHAR,mode=IN#,#messageCount,jdbcType=NUMERIC,mode=IN#)}</value>
+				</property>
+			</bean>
+		</property>
+		<property name="procUpdateParamResult">
+			<bean class="com.hzjbbis.db.procedure.DbProcedure">
+				<property name="dataSource" ref="dataSource"/>
+				<property name="callString">
+					<value>{call comm_service.update_param_result_value(#rtuId,jdbcType=VARCHAR,mode=IN#,#rtuType,jdbcType=VARCHAR,mode=IN#,#rtuProtocol,jdbcType=VARCHAR,mode=IN#,#tn,jdbcType=VARCHAR,mode=IN#,#code,jdbcType=VARCHAR,mode=IN#,#status,jdbcType=NUMERIC,mode=IN#,#sbyy,jdbcType=VARCHAR,mode=IN#)}</value>
+				</property>
+			</bean>
+		</property>
+		<property name="procPostCreateRtuData">
+			<bean class="com.hzjbbis.db.procedure.DbProcedure">
+				<property name="dataSource" ref="dataSource"/>
+				<property name="callString">
+					<value>{call pkg_fep_service.sbsjmxb_ins(#deptCode,jdbcType=VARCHAR,mode=IN#,#customerNo,jdbcType=VARCHAR,mode=IN#,#rtuId,jdbcType=VARCHAR,mode=IN#,#stationNo,jdbcType=VARCHAR,mode=IN#,#code,jdbcType=VARCHAR,mode=IN#,#value,jdbcType=VARCHAR,mode=IN#,#time,jdbcType=TIMESTAMP,mode=IN#,#txfs,jdbcType=VARCHAR,mode=IN#,#ct,jdbcType=NUMERIC,mode=IN#,#pt,jdbcType=NUMERIC,mode=IN#)}</value>
+				</property>
+			</bean>
+		</property>
+		<property name="procPostCreateRtuAlert">
+			<bean class="com.hzjbbis.db.procedure.DbProcedure">
+				<property name="dataSource" ref="dataSource"/>
+				<property name="callString">
+					<value>{call pkg_fep_service.sb_gj_ins(#dataSaveID,jdbcType=NUMERIC,mode=IN#,#deptCode,jdbcType=VARCHAR,mode=IN#,#customerNo,jdbcType=VARCHAR,mode=IN#,#rtuId,jdbcType=VARCHAR,mode=IN#,#stationNo,jdbcType=VARCHAR,mode=IN#,#alertCodeHex,jdbcType=VARCHAR,mode=IN#,#alertTime,jdbcType=TIMESTAMP,mode=IN#,#sbcs,jdbcType=VARCHAR,mode=IN#,#txfs,jdbcType=VARCHAR,mode=IN#)}</value>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="dao.updateRtuCommInfo" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="batchSize" value="6000"/>
+		<property name="delaySecond" value="10"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				MERGE INTO tj_zdlljs a
+				USING (SELECT :logicAddress AS zdljdz, TO_DATE(:dateString,'YYYY-MM-DD') AS rq, :downGprsFlowmeter AS xxgprs, :downSmsCount AS xxsms, :upGprsFlowmeter AS sxgprs, :upSmsCount AS sxsms, 
+				              :rtuIpAddr AS gprsip, :upMobile AS simkh, :lastGprsRecvTime AS gprssxsj, :lastSmsRecvTime AS smssxsj, :hasTask AS sfyrw, :upGprsCount AS sxgprsbws, 
+				              :downGprsCount AS xxgprsbws, null AS sxyxjbh, null AS xxyxjbh, :activeGprs AS zdztxdz, :activeUms AS dxyyh FROM dual) b
+				ON (a.zdljdz = b.zdljdz AND a.rq = b.rq)
+				WHEN MATCHED then 
+				  UPDATE SET xxgprs = b.xxgprs, xxsms = b.xxsms, sxgprs = b.sxgprs, sxsms = b.sxsms, gprsip = b.gprsip,
+				             simkh = b.simkh, gprssxsj = b.gprssxsj, smssxsj = b.smssxsj, sfyrw = b.sfyrw, sxgprsbws = b.sxgprsbws,
+				             xxgprsbws = b.xxgprsbws, sxyxjbh = b.sxyxjbh, xxyxjbh = b.xxyxjbh, zdztxdz = b.zdztxdz, dxyyh = b.dxyyh
+				WHEN NOT MATCHED then
+				  INSERT (zdljdz, rq, xxgprs, xxsms, sxgprs, sxsms, gprsip, simkh, gprssxsj, smssxsj, sfyrw, sxgprsbws, xxgprsbws, sxyxjbh, xxyxjbh, zdztxdz, dxyyh)
+				  VALUES
+				    (b.zdljdz, b.rq, b.xxgprs, b.xxsms, b.sxgprs, b.sxsms, b.gprsip, b.simkh, b.gprssxsj, b.smssxsj, b.sfyrw, b.sxgprsbws, b.xxgprsbws, b.sxyxjbh, b.xxyxjbh, b.zdztxdz, b.dxyyh)				]]>
+			</value>
+		</property>
+	</bean>	
+	
+	<bean id="app.init.rtu" class="com.hzjbbis.db.managertu.ManageRtu">
+		<property name="comRtuDao" ref="dao.initComRtu"/>
+		<property name="bizRtuDao" ref="dao.initBizRtu"/>
+		<property name="rtuRefreshDao" ref="dao.refreshRtu"/>
+	</bean>
+	
+</beans>

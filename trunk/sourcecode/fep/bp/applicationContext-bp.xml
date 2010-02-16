@@ -1,0 +1,3010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for ...
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- ========================= 业务处理器对象定义 ========================= -->
+	
+	<!-- ========================= 业务处理器的上行消息队列 ========================= -->
+	<bean id="bp.msgqueue.cachequeue" class="com.hzjbbis.fk.common.queue.CacheQueue">
+		<property name="maxSize" value="51200"/>
+		<property name="minSize" value="5120"/>
+		<property name="maxFileSize" value="100"/>
+		<property name="key" value="bp.msgqueue"/>
+		<property name="messageLoader" ref="messageLoader.MessageZj"/>
+	</bean>
+	<bean id="bp.msgqueue" class="com.hzjbbis.fk.bp.msgqueue.BPMessageQueue">
+		<property name="cacheQueue" ref="bp.msgqueue.cachequeue"/>
+		<property name="dbMonitor" ref="master.dbMonitor"/>
+	</bean>
+
+	<!-- =========================通讯前置机客户端收发消息事件处理器 ========================= -->
+	<bean id="bp.event.handle.fe" class="com.hzjbbis.fk.bp.feclient.FEMessageEventHandler">
+		<property name="msgQueue" ref="bp.msgqueue"/>
+	</bean>
+
+	<!-- ========================= 通讯前置机客户端对象 ========================= -->			
+	<bean id="bp.com.client" class="com.hzjbbis.fk.clientmod.ClientModule"
+		parent="JSocket">
+		<property name="moduleType" value="feComClient"/>
+		<property name="name" value="feClinet"/>
+		<property name="hostIp"><value>${bp.fe.client.hostIp}</value></property>
+		<property name="hostPort"><value>${bp.fe.client.hostPort}</value></property>
+		<property name="bufLength" value="10240"/>
+		<property name="messageCreator" ref="messageCreator.Gate"/>
+		<property name="timeout" value="2"/>
+		<property name="txfs" value="02"/>
+		<property name="heartInterval" value="10"/>
+		<property name="requestNum" value="500"/>
+		<property name="eventHandler" ref="bp.event.handle.fe"/>
+	</bean>
+	<bean id="bp.feClientManage" class="com.hzjbbis.fk.bp.feclient.FEClientManage">
+		<property name="client" ref="bp.com.client"/>
+	</bean>
+	
+	<!-- =========================业务处理器报文处理器========================= -->
+	<bean id="bp.msg.processor" class="com.hzjbbis.fk.bp.businessprocess.BProcessor">
+		<property name="msgQueue" ref="bp.msgqueue"/>
+		<property name="asycService" ref="bp.asyncService"/>
+		<property name="masterDbService" ref="master.dbservice"/>
+		<property name="manageRtu" ref="manageRtu"/>	
+	</bean>
+	<!-- ========================= 主站web服务端对象 ========================= -->
+	<bean id="messageCreator.Web"
+			class="com.hzjbbis.fk.bp.webapi.MessageWebCreator"/>
+	<bean id="bp.server.web" class="com.hzjbbis.fk.sockserver.TcpSocketServer"
+		parent="ISocketServer">
+		<property name="name" value="webServer"/>
+		<property name="port"><value>${bp.web.server.port}</value></property>
+		<property name="bufLength" value="20480"/>
+		<property name="ioThreadSize" value="2"/>
+		<property name="messageCreator" ref="messageCreator.Web"/>
+		<property name="writeFirstCount" value="100"/>
+		<property name="maxContinueRead" value="10"/>
+		<property name="timeout" value="36000"/>
+	</bean>
+	<bean id="webserver.event.hook"
+		class="com.hzjbbis.fk.bp.webapi.WebAPIServerEventHandler"
+		parent="SimpleEventHandler" >
+		<property name="name" value="web.EventHook" />
+		<property name="source" ref="bp.server.web"/>
+		<property name="msgQueue" ref="bp.msgqueue"/>
+		<property name="masterDbService" ref="master.dbservice"/>	
+		<property name="manageRtu" ref="manageRtu"/>
+		<property name="timeoutAlarm"><value>1</value></property>
+		<property name="minSize"><value>2</value></property>
+		<property name="maxSize"><value>4</value></property>
+	</bean>
+	
+	<!-- ========================= 终端自动装接接口客户端对象 ========================= -->			
+	<bean id="bp.intf.client" class="com.hzjbbis.fk.clientmod.ClientModule"
+		parent="JSocket">
+		<property name="moduleType" value="intfClient"/>
+		<property name="name" value="intfClient"/>
+		<property name="hostIp"><value>${bp.intf.client.hostIp}</value></property>
+		<property name="hostPort"><value>${bp.intf.client.hostPort}</value></property>
+		<property name="bufLength" value="20480"/>
+		<property name="messageCreator" ref="messageCreator.Web"/>
+		<property name="timeout" value="2"/>
+		<property name="txfs" value="02"/>
+		<property name="heartInterval" value="10"/>
+		<property name="requestNum" value="500"/>
+		<property name="eventHandler" ref="webserver.event.hook"/>
+	</bean>
+	<bean id="bp.IntfClientManage" class="com.hzjbbis.fk.bp.feclient.IntfChannelManage">
+		<property name="client" ref="bp.intf.client"/>
+	</bean>
+	
+	<!-- ========================= 终端对时接口客户端对象 ========================= -->			
+	<bean id="bp.timeCorrector.client" class="com.hzjbbis.fk.clientmod.ClientModule"
+		parent="JSocket">
+		<property name="moduleType" value="timeCorrectorClient"/>
+		<property name="name" value="timeCorrectorClient"/>
+		<property name="hostIp"><value>${bp.timeCorrector.client.hostIp}</value></property>
+		<property name="hostPort"><value>${bp.timeCorrector.client.hostPort}</value></property>
+		<property name="bufLength" value="20480"/>
+		<property name="messageCreator" ref="messageCreator.Web"/>
+		<property name="timeout" value="2"/>
+		<property name="txfs" value="02"/>
+		<property name="heartInterval" value="10"/>
+		<property name="requestNum" value="500"/>
+		<property name="eventHandler" ref="webserver.event.hook"/>
+	</bean>
+	<bean id="bp.TimeCorrectorClientManage" class="com.hzjbbis.fk.bp.feclient.TimeCorrectorChannelManage">
+		<property name="client" ref="bp.timeCorrector.client"/>
+	</bean>
+	
+	<!-- ========================= 漏点补招接口客户端对象 ========================= -->			
+	<bean id="bp.rereadTask.client" class="com.hzjbbis.fk.clientmod.ClientModule"
+		parent="JSocket">
+		<property name="moduleType" value="rereadTaskClient"/>
+		<property name="name" value="rereadTaskClient"/>
+		<property name="hostIp"><value>${bp.rereadTask.client.hostIp}</value></property>
+		<property name="hostPort"><value>${bp.rereadTask.client.hostPort}</value></property>
+		<property name="bufLength" value="20480"/>
+		<property name="messageCreator" ref="messageCreator.Web"/>
+		<property name="timeout" value="2"/>
+		<property name="txfs" value="02"/>
+		<property name="heartInterval" value="10"/>
+		<property name="requestNum" value="500"/>
+		<property name="eventHandler" ref="webserver.event.hook"/>
+	</bean>
+	<bean id="bp.rereadTaskClientManage" class="com.hzjbbis.fk.bp.feclient.RereadTaskChannelManage">
+		<property name="client" ref="bp.rereadTask.client"/>
+	</bean>
+	
+	<!-- ========================= 批量保存服务对象 ========================= -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>jdbc.properties</value>
+				<value>application.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器短表任务插入 -->	
+	<bean id="bp.batchDao.insertTaskData" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="1000"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO SB_SJMXB(SJID,SJSJ,SJBH,SJZ,CT,PT)
+				VALUES(:SJID,:SJSJ,:SJBH,:SJZ,:CT,:PT)
+				]]>
+			</value>
+		</property>
+	</bean>
+		
+	<!-- 业务处理器任务电量数据01临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj01" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1001"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ01(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj01 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj01 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)
+			  LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据02临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj02" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1002"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ02(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>	
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj02 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj02 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '02') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>	
+	</bean>
+	<!-- 业务处理器任务电量数据03临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj03" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1003"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ03(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj03 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj03 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '03') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据04临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1004"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ04(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj04 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj04 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '04') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据05临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj05" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1005"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ05(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj05 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj05 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '05') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据06临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj06" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1006"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ06(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj06 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj06 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '06') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据07临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj07" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1007"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ07(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj07 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj07 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '07') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据08临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj08" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1008"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ08(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj08 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj08 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '08') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据09临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj09" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1009"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ09(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj09 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj09 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '09') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据10临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1010"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ10(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj10 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '10') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电量数据11临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskDlsj11" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1011"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLSJ11(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4,FXYGZ,FXYGZ1,FXYGZ2,FXYGZ3,FXYGZ4,WGZXX1,WGZXX12,WGZXX14,WGZXX4,WGZXX42,WGZXX44,WGZXX2,WGZXX22,WGZXX24,WGZXX3,WGZXX32,WGZXX34,ZXZDXL,ZXZDXLFSSJ,FXZDXL,FXZDXLFSSJ)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4,:FXYGZ,:FXYGZ1,:FXYGZ2,:FXYGZ3,:FXYGZ4,:WGZXX1,:WGZXX12,:WGZXX14,:WGZXX4,:WGZXX42,:WGZXX44,:WGZXX2,:WGZXX22,:WGZXX24,:WGZXX3,:WGZXX32,:WGZXX34,:ZXZDXL,:ZXZDXLFSSJ,:FXZDXL,:FXZDXLFSSJ)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dlsj11 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+							 	max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, max(zxygz3) as zxygz3, max(zxygz4) as zxygz4, 
+							 	max(fxygz) as fxygz, max(fxygz1) as fxygz1, max(fxygz2) as fxygz2, max(fxygz3) as fxygz3, max(fxygz4) as fxygz4, 
+							 	max(wgzxx1) as wgzxx1, max(wgzxx12) as wgzxx12, max(wgzxx14) as wgzxx14, max(wgzxx4) as wgzxx4, max(wgzxx42) as wgzxx42, max(wgzxx44) as wgzxx44, 
+							 	max(wgzxx2) as wgzxx2, max(wgzxx22) as wgzxx22, max(wgzxx24) as wgzxx24, max(wgzxx3) as wgzxx3, max(wgzxx32) as wgzxx32, max(wgzxx34) as wgzxx34, 
+							 	max(zxzdxl) as zxzdxl, max(zxzdxlfssj) as zxzdxlfssj, max(fxzdxl) as fxzdxl, max(fxzdxlfssj) as fxzdxlfssj
+       				 from temp_sb_dlsj11 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+   				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+			  	t.zxygz=nvl(s.zxygz, t.zxygz), t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+			  	t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4), t.fxygz=nvl(s.fxygz, t.fxygz),
+			  	t.fxygz1=nvl(s.fxygz1, t.fxygz1), t.fxygz2=nvl(s.fxygz2, t.fxygz2), t.fxygz3=nvl(s.fxygz3, t.fxygz3),
+			  	t.fxygz4=nvl(s.fxygz4, t.fxygz4), t.wgzxx1=nvl(s.wgzxx1, t.wgzxx1), t.wgzxx12=nvl(s.wgzxx12, t.wgzxx12),
+			  	t.wgzxx14=nvl(s.wgzxx14, t.wgzxx14), t.wgzxx4=nvl(s.wgzxx4, t.wgzxx4), t.wgzxx42=nvl(s.wgzxx42, t.wgzxx42),
+			  	t.wgzxx44=nvl(s.wgzxx44, t.wgzxx44), t.wgzxx2=nvl(s.wgzxx2, t.wgzxx2), t.wgzxx22=nvl(s.wgzxx22, t.wgzxx22),
+			  	t.wgzxx24=nvl(s.wgzxx24, t.wgzxx24), t.wgzxx3=nvl(s.wgzxx3, t.wgzxx3), t.wgzxx32=nvl(s.wgzxx32, t.wgzxx32),
+			  	t.wgzxx34=nvl(s.wgzxx34, t.wgzxx34), t.zxzdxl=nvl(s.zxzdxl, t.zxzdxl), t.zxzdxlfssj=nvl(s.zxzdxlfssj, t.zxzdxlfssj),
+			  	t.fxzdxl=nvl(s.fxzdxl, t.fxzdxl), t.fxzdxlfssj=nvl(s.fxzdxlfssj, t.fxzdxlfssj)          
+				WHEN NOT MATCHED THEN
+			   	INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4, fxygz, fxygz1, fxygz2, 
+			          fxygz3, fxygz4, wgzxx1, wgzxx12, wgzxx14, wgzxx4, wgzxx42, wgzxx44, wgzxx2, wgzxx22, 
+			          wgzxx24, wgzxx3, wgzxx32, wgzxx34, zxzdxl, zxzdxlfssj, fxzdxl, fxzdxlfssj)
+			   	VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4, s.fxygz, s.fxygz1, 
+			          s.fxygz2, s.fxygz3, s.fxygz4, s.wgzxx1, s.wgzxx12, s.wgzxx14, s.wgzxx4, s.wgzxx42, s.wgzxx44, s.wgzxx2, 
+			          s.wgzxx22, s.wgzxx24, s.wgzxx3, s.wgzxx32, s.wgzxx34, s.zxzdxl, s.zxzdxlfssj, s.fxzdxl, s.fxzdxlfssj)	
+				LOG ERRORS INTO sb_dlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '11') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务负荷数据01临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj01" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2001"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ01(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj01 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj01 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据02临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj02" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2002"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ02(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj02 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj02 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '02') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据03临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj03" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2003"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ03(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj03 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj03 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '03') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据04临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2004"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ04(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj04 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj04 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '04') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据05临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj05" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2005"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ05(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj05 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj05 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '05') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据06临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj06" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2006"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ06(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj06 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj06 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '06') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据07临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj07" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2007"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ07(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj07 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj07 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '07') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据08临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj08" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2008"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ08(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj08 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj08 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '08') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据09临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj09" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2009"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ09(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj09 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj09 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '09') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据10临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2010"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ10(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj10 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj10 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '10') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务负荷数据11临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskFhsj11" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2011"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_FHSJ11(SJID,SJSJ,CT,PT,BQBJ,AXDY,BXDY,CXDY,AXDL,BXDL,CXDL,SZGL,GLYS,PJYG,SSYG,PJWG,SSWG,ZXYGZ,YXXWGZ,SXXWGZ,FXYGZ,SSYGA,SSYGB,SSYGC,SSWGA,SSWGB,SSWGC)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:AXDY,:BXDY,:CXDY,:AXDL,:BXDL,:CXDL,:SZGL,:GLYS,:PJYG,:SSYG,:PJWG,:SSWG,:ZXYGZ,:YXXWGZ,:SXXWGZ,:FXYGZ,:SSYGA,:SSYGB,:SSYGC,:SSWGA,:SSWGB,:SSWGC)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_fhsj11 t
+				USING (select b.sjid, b.ct, b.pt, b.sjsj, b.bqbj, b.axdy, b.bxdy, b.cxdy, b.axdl, b.bxdl, b.cxdl, b.szgl, b.glys,
+				       b.zxygz, b.yxxwgz, b.sxxwgz, b.fxygz, b.ssyga, b.ssygb, b.ssygc, b.sswga, b.sswgb, b.sswgc,
+				       b.pjyg, b.ssyg, b.pjwg, b.sswg,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjyg < 0 THEN NULL ELSE b.pjyg END 
+				            WHEN b.pjyg < 0 THEN CASE WHEN b.ssyg < 0 THEN NULL ELSE b.ssyg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.ssyg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjyg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjyg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.ssyg
+				            WHEN b.pjyg IS NOT NULL THEN b.pjyg
+				            ELSE ssyg
+				       END AS ygz,
+				       CASE WHEN b.ssyg < 0 THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            WHEN pjyg < 0 THEN CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= b.ssyg * :bj11 THEN b.sswg
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN b.pjwg
+				            WHEN b.pjyg IS NOT NULL AND b.pjwg > 0 THEN b.pjwg
+				            WHEN b.ssyg IS NOT NULL AND b.sswg > 0 THEN b.sswg
+				            WHEN b.pjyg IS NOT NULL THEN CASE WHEN b.pjwg < 0 THEN NULL ELSE b.pjwg END
+				            ELSE CASE WHEN b.sswg < 0 THEN NULL ELSE b.sswg END 
+				       END AS wgz,
+				       CASE WHEN b.pjyg < 0 OR b.ssyg < 0 OR b.pjwg < 0 OR b.sswg < 0 THEN 8       
+				            WHEN b.ssyg > :bj10 AND b.pjyg >= :bj11 THEN 1
+				            WHEN b.pjyg > 0 AND b.ssyg >= b.pjyg * :bj11 THEN 2
+				       ELSE 0 
+				       END AS fhbj 
+				       from (select sjid, sjsj, max(ct) AS ct, max(pt) AS pt, max(bqbj) AS bqbj, max(axdy) AS axdy, 
+			                max(bxdy) AS bxdy, max(cxdy) AS cxdy, max(axdl) AS axdl, max(bxdl) AS bxdl, 
+			                max(cxdl) AS cxdl, max(szgl) AS szgl, max(glys) AS glys, max(pjyg) AS pjyg, 
+			                max(ssyg) AS ssyg, max(pjwg) AS pjwg, max(sswg) AS sswg, max(ygz) AS ygz, max(wgz) AS wgz, 
+			                max(fhbj) AS fhbj, max(zxygz) AS zxygz, max(yxxwgz) AS yxxwgz, max(sxxwgz) AS sxxwgz, 
+			                max(fxygz) AS fxygz, max(ssyga) AS ssyga, max(ssygb) AS ssygb, max(ssygc) AS ssygc, 
+			                max(sswga) AS sswga, max(sswgb) AS sswgb, max(sswgc) AS sswgc
+				             from temp_sb_fhsj11 group by sjid, sjsj) b) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, 
+				              t.axdy=nvl(s.axdy, t.axdy), t.bxdy=nvl(s.bxdy, t.bxdy), t.cxdy=nvl(s.cxdy, t.cxdy), 
+				              t.axdl=nvl(s.axdl, t.axdl), t.bxdl=nvl(s.bxdl, t.bxdl), t.cxdl=nvl(s.cxdl, t.cxdl),
+				              t.szgl=nvl(s.szgl, t.szgl), t.glys=nvl(s.glys, t.glys), 
+				              t.pjyg=nvl(s.pjyg, t.pjyg), t.ssyg=nvl(s.ssyg, t.ssyg), 
+				              t.pjwg=nvl(s.pjwg, t.pjwg), t.sswg=nvl(s.sswg, t.sswg),
+				              t.ygz=nvl(s.ygz, t.ygz), t.wgz=nvl(s.wgz, t.wgz), t.fhbj=nvl(s.fhbj, t.fhbj),
+				              t.zxygz=nvl(s.zxygz, t.zxygz), t.yxxwgz=nvl(s.yxxwgz, t.yxxwgz), 
+				              t.sxxwgz=nvl(s.sxxwgz, t.sxxwgz), t.fxygz=nvl(s.fxygz, t.fxygz), 
+				              t.ssyga=nvl(s.ssyga, t.ssyga), t.ssygb=nvl(s.ssygb, t.ssygb), t.ssygc=nvl(s.ssygc, t.ssygc), 
+				              t.sswga=nvl(s.sswga, t.sswga), t.sswgb=nvl(s.sswgb, t.sswgb), t.sswgc=nvl(s.sswgc, t.sswgc)         
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, ct, pt, bqbj, axdy, bxdy, cxdy, axdl, bxdl, cxdl, szgl, glys, pjyg, ssyg, pjwg, sswg, 
+				          ygz, wgz, fhbj, zxygz, yxxwgz, sxxwgz, fxygz, ssyga, ssygb, ssygc, sswga, sswgb, sswgc)
+				   VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.axdy, s.bxdy, s.cxdy, s.axdl, s.bxdl, s.cxdl, s.szgl, s.glys, 
+				          s.pjyg, s.ssyg, s.pjwg, s.sswg, s.ygz, s.wgz, s.fhbj, s.zxygz, s.yxxwgz, s.sxxwgz, s.fxygz, 
+				          s.ssyga, s.ssygb, s.ssygc, s.sswga, s.sswgb, s.sswgc)
+				LOG ERRORS INTO sb_fhsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '11') REJECT LIMIT UNLIMITED
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务电压合格率数据数据01临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj01" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3001"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ01(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj01 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj01 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)	
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据02临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj02" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3002"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ02(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj02 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj02 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '02') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据03临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj03" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3003"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ03(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj03 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj03 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '03') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据04临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3004"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ04(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj04 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj04 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '04') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据05临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj05" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3005"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ05(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj05 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj05 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)	
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '05') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据06临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj06" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3006"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ06(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj06 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj06 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '06') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据07临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj07" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3007"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ07(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj07 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj07 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '07') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据08临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj08" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3008"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ08(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj08 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj08 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '08') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据09临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj09" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3009"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ09(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj09 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj09 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '09') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据10临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3010"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ10(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj10 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '10') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务电压合格率数据数据11临时表插入 -->	
+	<bean id="bp.batchDao.insertTaskDyhglsj11" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3011"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DYHGLSJ11(SJID,SJSJ,PT,BQBJ,TJCS,AXCSXCS,AXCXXCS,BXCSXCS,BXCXXCS,CXCSXCS,CXCXXCS,AXFZJFSSJ,AXGZJFSSJ,BXFZJFSSJ,BXGZJFSSJ,CXFZJFSSJ,CXGZJFSSJ)
+				VALUES(:SJID,:SJSJ,:PT,:BQBJ,:TJCS,:AXCSXCS,:AXCXXCS,:BXCSXCS,:BXCXXCS,:CXCSXCS,:CXCXXCS,:AXFZJFSSJ,:AXGZJFSSJ,:BXFZJFSSJ,:BXGZJFSSJ,:CXFZJFSSJ,:CXGZJFSSJ)
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dyhglsj11 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+								max(axcsxcs) as axcsxcs, max(axcxxcs) as axcxxcs, max(bxcsxcs) as bxcsxcs, max(bxcxxcs) as bxcxxcs, 
+								max(cxcsxcs) as cxcsxcs, max(cxcxxcs) as cxcxxcs, max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, 
+								max(bxfzjfssj) as bxfzjfssj, max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+				       from temp_sb_dyhglsj11 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				   UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+				              t.axcsxcs=nvl(s.axcsxcs, t.axcsxcs), t.axcxxcs=nvl(s.axcxxcs, t.axcxxcs), 
+				              t.bxcsxcs=nvl(s.bxcsxcs, t.bxcsxcs), t.bxcxxcs=nvl(s.bxcxxcs, t.bxcxxcs), 
+				              t.cxcsxcs=nvl(s.cxcsxcs, t.cxcsxcs), t.cxcxxcs=nvl(s.cxcxxcs, t.cxcxxcs), 
+				              t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj),
+				              t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), 
+				              t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+				   INSERT (sjid, sjsj, pt, bqbj, tjcs, axcsxcs, axcxxcs, bxcsxcs, bxcxxcs, cxcsxcs, cxcxxcs, 
+				          axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+				   VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.tjcs, s.axcsxcs, s.axcxxcs, s.bxcsxcs, s.bxcxxcs, s.cxcsxcs, s.cxcxxcs, 
+				          s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)
+				LOG ERRORS INTO sb_dyhglsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '11') REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+
+	<!-- 业务处理器任务上报电量统计数据（配变规约）04临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbdltjsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1104"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLTJSJ04
+					(SJID, SJSJ, CT, BQBJ, TJSJ, AXGFHLJSJ, BXGFHLJSJ, CXGFHLJSJ, AXFZJFSSJ, AXGZJFSSJ, BXFZJFSSJ, BXGZJFSSJ, CXFZJFSSJ, CXGZJFSSJ)
+				VALUES 
+					(:SJID, :SJSJ, :CT, :BQBJ, :TJSJ, :AXGFHLJSJ, :BXGFHLJSJ, :CXGFHLJSJ, :AXFZJFSSJ, :AXGZJFSSJ, :BXFZJFSSJ, :BXGZJFSSJ, :CXFZJFSSJ, :CXGZJFSSJ)	
+
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dltjsj04 t
+				USING (select sjid, sjsj, max(ct) as ct, max(bqbj) as bqbj, max(tjsj) as tjsj, 
+			 		max(axgfhljsj) as axgfhljsj, max(bxgfhljsj) as bxgfhljsj, max(cxgfhljsj) as cxgfhljsj, 
+			 		max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, max(bxfzjfssj) as bxfzjfssj, 
+			 		max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+     				from temp_sb_dltjsj04 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.bqbj=s.bqbj, t.tjsj=nvl(s.tjsj, t.tjsj), 
+            		t.axgfhljsj=nvl(s.axgfhljsj, t.axgfhljsj), t.bxgfhljsj=nvl(s.bxgfhljsj, t.bxgfhljsj), t.cxgfhljsj=nvl(s.cxgfhljsj, t.cxgfhljsj), 
+            		t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj), t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), 
+            		t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, ct, bqbj, tjsj, axgfhljsj, bxgfhljsj, cxgfhljsj, 
+ 				 	axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+ 				VALUES (s.sjid, s.sjsj, s.ct, s.bqbj, s.tjsj, s.axgfhljsj, s.bxgfhljsj, s.cxgfhljsj, 
+ 				 	s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)	
+				LOG ERRORS INTO sb_dltjsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务上报电量统计数据（配变规约）10临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbdltjsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1110"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_DLTJSJ10
+					(SJID, SJSJ, CT, BQBJ, TJSJ, AXGFHLJSJ, BXGFHLJSJ, CXGFHLJSJ, AXFZJFSSJ, AXGZJFSSJ, BXFZJFSSJ, BXGZJFSSJ, CXFZJFSSJ, CXGZJFSSJ)
+				VALUES 
+					(:SJID, :SJSJ, :CT, :BQBJ, :TJSJ, :AXGFHLJSJ, :BXGFHLJSJ, :CXGFHLJSJ, :AXFZJFSSJ, :AXGZJFSSJ, :BXFZJFSSJ, :BXGZJFSSJ, :CXFZJFSSJ, :CXGZJFSSJ)	
+
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_dltjsj10 t
+				USING (select sjid, sjsj, max(ct) as ct, max(bqbj) as bqbj, max(tjsj) as tjsj, 
+			 		max(axgfhljsj) as axgfhljsj, max(bxgfhljsj) as bxgfhljsj, max(cxgfhljsj) as cxgfhljsj, 
+			 		max(axfzjfssj) as axfzjfssj, max(axgzjfssj) as axgzjfssj, max(bxfzjfssj) as bxfzjfssj, 
+			 		max(bxgzjfssj) as bxgzjfssj, max(cxfzjfssj) as cxfzjfssj, max(cxgzjfssj) as cxgzjfssj
+     				from temp_sb_dltjsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.bqbj=s.bqbj, t.tjsj=nvl(s.tjsj, t.tjsj), 
+            		t.axgfhljsj=nvl(s.axgfhljsj, t.axgfhljsj), t.bxgfhljsj=nvl(s.bxgfhljsj, t.bxgfhljsj), t.cxgfhljsj=nvl(s.cxgfhljsj, t.cxgfhljsj), 
+            		t.axfzjfssj=nvl(s.axfzjfssj, t.axfzjfssj), t.axgzjfssj=nvl(s.axgzjfssj, t.axgzjfssj), t.bxfzjfssj=nvl(s.bxfzjfssj, t.bxfzjfssj), 
+            		t.bxgzjfssj=nvl(s.bxgzjfssj, t.bxgzjfssj), t.cxfzjfssj=nvl(s.cxfzjfssj, t.cxfzjfssj), t.cxgzjfssj=nvl(s.cxgzjfssj, t.cxgzjfssj)          
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, ct, bqbj, tjsj, axgfhljsj, bxgfhljsj, cxgfhljsj, 
+ 				 	axfzjfssj, axgzjfssj, bxfzjfssj, bxgzjfssj, cxfzjfssj, cxgzjfssj)
+ 				VALUES (s.sjid, s.sjsj, s.ct, s.bqbj, s.tjsj, s.axgfhljsj, s.bxgfhljsj, s.cxgfhljsj, 
+ 				 	s.axfzjfssj, s.axgzjfssj, s.bxfzjfssj, s.bxgzjfssj, s.cxfzjfssj, s.cxgzjfssj)	
+				LOG ERRORS INTO sb_dltjsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务上报功率统计数据（配变规约）04临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbgltjsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2104"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_GLTJSJ04
+					(SJID, SJSJ, CT, PT, BQBJ, TJCS, YGFZJSJ, YGGZJSJ, GXWGFZJSJ, GXWGGZJSJ, RXWGFZJSJ, RXWGGZJSJ, SZGLCSXCS, SZGLFZJSJ, SZGLGZJSJ, GXGLYSZXZJSJ, RXGLYSZXZJSJ)
+				VALUES 
+					(:SJID, :SJSJ, :CT, :PT, :BQBJ, :TJCS, :YGFZJSJ, :YGGZJSJ, :GXWGFZJSJ, :GXWGGZJSJ, :RXWGFZJSJ, :RXWGGZJSJ, :SZGLCSXCS, :SZGLFZJSJ, :SZGLGZJSJ, :GXGLYSZXZJSJ, :RXGLYSZXZJSJ)	
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_gltjsj04 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+			 		max(ygfzjsj) as ygfzjsj, max(yggzjsj) as yggzjsj, max(gxwgfzjsj) as gxwgfzjsj, max(gxwggzjsj) as gxwggzjsj, 
+			 		max(rxwgfzjsj) as rxwgfzjsj, max(rxwggzjsj) as rxwggzjsj, max(szglcsxcs) as szglcsxcs, max(szglfzjsj) as szglfzjsj, 
+			 		max(szglgzjsj) as szglgzjsj, max(gxglyszxzjsj) as gxglyszxzjsj, max(rxglyszxzjsj) as rxglyszxzjsj
+     				from temp_sb_gltjsj04 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+ 				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+            		t.ygfzjsj=nvl(s.ygfzjsj, t.ygfzjsj), t.yggzjsj=nvl(s.yggzjsj, t.yggzjsj), 
+            		t.gxwgfzjsj=nvl(s.gxwgfzjsj, t.gxwgfzjsj), t.gxwggzjsj=nvl(s.gxwggzjsj, t.gxwggzjsj), 
+            		t.rxwgfzjsj=nvl(s.rxwgfzjsj, t.rxwgfzjsj), t.rxwggzjsj=nvl(s.rxwggzjsj, t.rxwggzjsj), 
+            		t.szglcsxcs=nvl(s.szglcsxcs, t.szglcsxcs), t.szglfzjsj=nvl(s.szglfzjsj, t.szglfzjsj), 
+            		t.szglgzjsj=nvl(s.szglgzjsj, t.szglgzjsj), t.gxglyszxzjsj=nvl(s.gxglyszxzjsj, t.gxglyszxzjsj),
+            		t.rxglyszxzjsj=nvl(s.rxglyszxzjsj, t.rxglyszxzjsj)         
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, ct, pt, bqbj, tjcs, ygfzjsj, yggzjsj, gxwgfzjsj, gxwggzjsj, 
+ 				 	rxwgfzjsj, rxwggzjsj, szglcsxcs, szglfzjsj, szglgzjsj, gxglyszxzjsj, rxglyszxzjsj)
+ 				VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.tjcs, s.ygfzjsj, s.yggzjsj, s.gxwgfzjsj, s.gxwggzjsj, 
+ 				 	s.rxwgfzjsj, s.rxwggzjsj, s.szglcsxcs, s.szglfzjsj, s.szglgzjsj, s.gxglyszxzjsj, s.rxglyszxzjsj)	
+				LOG ERRORS INTO sb_gltjsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务上报功率统计数据（配变规约）10临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbgltjsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="2110"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_GLTJSJ10
+					(SJID, SJSJ, CT, PT, BQBJ, TJCS, YGFZJSJ, YGGZJSJ, GXWGFZJSJ, GXWGGZJSJ, RXWGFZJSJ, RXWGGZJSJ, SZGLCSXCS, SZGLFZJSJ, SZGLGZJSJ, GXGLYSZXZJSJ, RXGLYSZXZJSJ)
+				VALUES 
+					(:SJID, :SJSJ, :CT, :PT, :BQBJ, :TJCS, :YGFZJSJ, :YGGZJSJ, :GXWGFZJSJ, :GXWGGZJSJ, :RXWGFZJSJ, :RXWGGZJSJ, :SZGLCSXCS, :SZGLFZJSJ, :SZGLGZJSJ, :GXGLYSZXZJSJ, :RXGLYSZXZJSJ)	
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_gltjsj10 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, max(tjcs) as tjcs, 
+			 		max(ygfzjsj) as ygfzjsj, max(yggzjsj) as yggzjsj, max(gxwgfzjsj) as gxwgfzjsj, max(gxwggzjsj) as gxwggzjsj, 
+			 		max(rxwgfzjsj) as rxwgfzjsj, max(rxwggzjsj) as rxwggzjsj, max(szglcsxcs) as szglcsxcs, max(szglfzjsj) as szglfzjsj, 
+			 		max(szglgzjsj) as szglgzjsj, max(gxglyszxzjsj) as gxglyszxzjsj, max(rxglyszxzjsj) as rxglyszxzjsj
+     				from temp_sb_gltjsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+ 				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.tjcs=nvl(s.tjcs, t.tjcs), 
+            		t.ygfzjsj=nvl(s.ygfzjsj, t.ygfzjsj), t.yggzjsj=nvl(s.yggzjsj, t.yggzjsj), 
+            		t.gxwgfzjsj=nvl(s.gxwgfzjsj, t.gxwgfzjsj), t.gxwggzjsj=nvl(s.gxwggzjsj, t.gxwggzjsj), 
+            		t.rxwgfzjsj=nvl(s.rxwgfzjsj, t.rxwgfzjsj), t.rxwggzjsj=nvl(s.rxwggzjsj, t.rxwggzjsj), 
+            		t.szglcsxcs=nvl(s.szglcsxcs, t.szglcsxcs), t.szglfzjsj=nvl(s.szglfzjsj, t.szglfzjsj), 
+            		t.szglgzjsj=nvl(s.szglgzjsj, t.szglgzjsj), t.gxglyszxzjsj=nvl(s.gxglyszxzjsj, t.gxglyszxzjsj),
+            		t.rxglyszxzjsj=nvl(s.rxglyszxzjsj, t.rxglyszxzjsj)         
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, ct, pt, bqbj, tjcs, ygfzjsj, yggzjsj, gxwgfzjsj, gxwggzjsj, 
+ 				 	rxwgfzjsj, rxwggzjsj, szglcsxcs, szglfzjsj, szglgzjsj, gxglyszxzjsj, rxglyszxzjsj)
+ 				VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.tjcs, s.ygfzjsj, s.yggzjsj, s.gxwgfzjsj, s.gxwggzjsj, 
+ 				 	s.rxwgfzjsj, s.rxwggzjsj, s.szglcsxcs, s.szglfzjsj, s.szglgzjsj, s.gxglyszxzjsj, s.rxglyszxzjsj)	
+				LOG ERRORS INTO sb_gltjsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务上报谐波电流数据（配变规约）10临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbxbdlsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3110"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_XBDLSJ10
+					(SJID, SJSJ, CT, BQBJ, AXFZ2, BXFZ2, CXFZ2, AXFZ3, BXFZ3, CXFZ3, AXFZ5, BXFZ5, CXFZ5, AXFZ7, BXFZ7, CXFZ7, AXFZ9, BXFZ9, CXFZ9, AXFZ11, BXFZ11, CXFZ11, AXFZ13, BXFZ13, CXFZ13, AXFZ15, BXFZ15, CXFZ15)
+				VALUES 
+					(:SJID, :SJSJ, :CT, :BQBJ, :AXFZ2, :BXFZ2, :CXFZ2, :AXFZ3, :BXFZ3, :CXFZ3, :AXFZ5, :BXFZ5, :CXFZ5, :AXFZ7, :BXFZ7, :CXFZ7, :AXFZ9, :BXFZ9, :CXFZ9, :AXFZ11, :BXFZ11, :CXFZ11, :AXFZ13, :BXFZ13, :CXFZ13, :AXFZ15, :BXFZ15, :CXFZ15)	
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_xbdlsj10 t
+				USING (select sjid, sjsj, max(ct) as ct, max(bqbj) as bqbj, max(axfz2) as axfz2, max(bxfz2) as bxfz2, max(cxfz2) as cxfz2, max(axfz3) as axfz3, max(bxfz3) as bxfz3, max(cxfz3) as cxfz3, 
+					max(axfz5) as axfz5, max(bxfz5) as bxfz5, max(cxfz5) as cxfz5, max(axfz7) as axfz7, max(bxfz7) as bxfz7, max(cxfz7) as cxfz7, 
+					max(axfz9) as axfz9, max(bxfz9) as bxfz9, max(cxfz9) as cxfz9, max(axfz11) as axfz11, max(bxfz11) as bxfz11, max(cxfz11) as cxfz11, 
+					max(axfz13) as axfz13, max(bxfz13) as bxfz13, max(cxfz13) as cxfz13, max(axfz15) as axfz15, max(bxfz15) as bxfz15, max(cxfz15) as cxfz15
+     				from temp_sb_xbdlsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+ 				UPDATE SET t.ct=s.ct, t.bqbj=s.bqbj, t.axfz2=nvl(s.axfz2, t.axfz2), t.bxfz2=nvl(s.bxfz2, t.bxfz2), t.cxfz2=nvl(s.cxfz2, t.cxfz2), 
+            		t.axfz3=nvl(s.axfz3, t.axfz3), t.bxfz3=nvl(s.bxfz3, t.bxfz3), t.cxfz3=nvl(s.cxfz3, t.cxfz3), 
+            		t.axfz5=nvl(s.axfz5, t.axfz5), t.bxfz5=nvl(s.bxfz5, t.bxfz5), t.cxfz5=nvl(s.cxfz5, t.cxfz5), 
+            		t.axfz7=nvl(s.axfz7, t.axfz7), t.bxfz7=nvl(s.bxfz7, t.bxfz7), t.cxfz7=nvl(s.cxfz7, t.cxfz7), 
+            		t.axfz9=nvl(s.axfz9, t.axfz9), t.bxfz9=nvl(s.bxfz9, t.bxfz9), t.cxfz9=nvl(s.cxfz9, t.cxfz9), 
+            		t.axfz11=nvl(s.axfz11, t.axfz11), t.bxfz11=nvl(s.bxfz11, t.bxfz11), t.cxfz11=nvl(s.cxfz11, t.cxfz11), 
+            		t.axfz13=nvl(s.axfz13, t.axfz13), t.bxfz13=nvl(s.bxfz13, t.bxfz13), t.cxfz13=nvl(s.cxfz13, t.cxfz13), 
+            		t.axfz15=nvl(s.axfz15, t.axfz15), t.bxfz15=nvl(s.bxfz15, t.bxfz15), t.cxfz15=nvl(s.cxfz15, t.cxfz15)
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, ct, bqbj, axfz2, bxfz2, cxfz2, axfz3, bxfz3, cxfz3, axfz5, bxfz5, cxfz5, axfz7, bxfz7, cxfz7, 
+ 				 	axfz9, bxfz9, cxfz9, axfz11, bxfz11, cxfz11, axfz13, bxfz13, cxfz13, axfz15, bxfz15, cxfz15)
+ 				VALUES (s.sjid, s.sjsj, s.ct, s.bqbj, s.axfz2, s.bxfz2, s.cxfz2, s.axfz3, s.bxfz3, s.cxfz3, s.axfz5, s.bxfz5, s.cxfz5, s.axfz7, s.bxfz7, s.cxfz7, 
+ 				 	s.axfz9, s.bxfz9, s.cxfz9, s.axfz11, s.bxfz11, s.cxfz11, s.axfz13, s.bxfz13, s.cxfz13, s.axfz15, s.bxfz15, s.cxfz15)	
+				LOG ERRORS INTO sb_xbdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 业务处理器任务上报谐波电压数据（配变规约）10临时表插入 -->	
+	<bean id="bp.batchDao.insertTasksbxbdysj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="3210"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_XBDYSJ10
+					(SJID, SJSJ, PT, BQBJ, AXZJBL, BXZJBL, CXZJBL, AXHYL2, BXHYL2, CXHYL2, AXHYL3, BXHYL3, CXHYL3, AXHYL5, BXHYL5, CXHYL5, AXHYL7, BXHYL7, CXHYL7, AXHYL9, BXHYL9, CXHYL9, AXHYL11, BXHYL11, CXHYL11, AXHYL13, BXHYL13, CXHYL13, AXHYL15, BXHYL15, CXHYL15)
+				VALUES 
+					(:SJID, :SJSJ, :PT, :BQBJ, :AXZJBL, :BXZJBL, :CXZJBL, :AXHYL2, :BXHYL2, :CXHYL2, :AXHYL3, :BXHYL3, :CXHYL3, :AXHYL5, :BXHYL5, :CXHYL5, :AXHYL7, :BXHYL7, :CXHYL7, :AXHYL9, :BXHYL9, :CXHYL9, :AXHYL11, :BXHYL11, :CXHYL11, :AXHYL13, :BXHYL13, :CXHYL13, :AXHYL15, :BXHYL15, :CXHYL15)	
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_xbdysj10 t
+				USING (select sjid, sjsj, max(pt) as pt, max(bqbj) as bqbj, max(axzjbl) as axzjbl, max(bxzjbl) as bxzjbl, max(cxzjbl) as cxzjbl, 
+					max(axhyl2) as axhyl2, max(bxhyl2) as bxhyl2, max(cxhyl2) as cxhyl2, max(axhyl3) as axhyl3, max(bxhyl3) as bxhyl3, max(cxhyl3) as cxhyl3, 
+					max(axhyl5) as axhyl5, max(bxhyl5) as bxhyl5, max(cxhyl5) as cxhyl5, max(axhyl7) as axhyl7, max(bxhyl7) as bxhyl7, max(cxhyl7) as cxhyl7, 
+					max(axhyl9) as axhyl9, max(bxhyl9) as bxhyl9, max(cxhyl9) as cxhyl9, max(axhyl11) as axhyl11, max(bxhyl11) as bxhyl11, max(cxhyl11) as cxhyl11, 
+					max(axhyl13) as axhyl13, max(bxhyl13) as bxhyl13, max(cxhyl13) as cxhyl13, max(axhyl15) as axhyl15, max(bxhyl15) as bxhyl15, max(cxhyl15) as cxhyl15
+     				from temp_sb_xbdysj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+ 				UPDATE SET t.pt=s.pt, t.bqbj=s.bqbj, t.axzjbl=nvl(s.axzjbl, t.axzjbl), t.bxzjbl=nvl(s.bxzjbl, t.bxzjbl), t.cxzjbl=nvl(s.cxzjbl, t.cxzjbl), 
+ 					t.axhyl2=nvl(s.axhyl2, t.axhyl2), t.bxhyl2=nvl(s.bxhyl2, t.bxhyl2), t.cxhyl2=nvl(s.cxhyl2, t.cxhyl2), 
+            		t.axhyl3=nvl(s.axhyl3, t.axhyl3), t.bxhyl3=nvl(s.bxhyl3, t.bxhyl3), t.cxhyl3=nvl(s.cxhyl3, t.cxhyl3), 
+            		t.axhyl5=nvl(s.axhyl5, t.axhyl5), t.bxhyl5=nvl(s.bxhyl5, t.bxhyl5), t.cxhyl5=nvl(s.cxhyl5, t.cxhyl5), 
+            		t.axhyl7=nvl(s.axhyl7, t.axhyl7), t.bxhyl7=nvl(s.bxhyl7, t.bxhyl7), t.cxhyl7=nvl(s.cxhyl7, t.cxhyl7), 
+            		t.axhyl9=nvl(s.axhyl9, t.axhyl9), t.bxhyl9=nvl(s.bxhyl9, t.bxhyl9), t.cxhyl9=nvl(s.cxhyl9, t.cxhyl9), 
+            		t.axhyl11=nvl(s.axhyl11, t.axhyl11), t.bxhyl11=nvl(s.bxhyl11, t.bxhyl11), t.cxhyl11=nvl(s.cxhyl11, t.cxhyl11), 
+            		t.axhyl13=nvl(s.axhyl13, t.axhyl13), t.bxhyl13=nvl(s.bxhyl13, t.bxhyl13), t.cxhyl13=nvl(s.cxhyl13, t.cxhyl13), 
+            		t.axhyl15=nvl(s.axhyl15, t.axhyl15), t.bxhyl15=nvl(s.bxhyl15, t.bxhyl15), t.cxhyl15=nvl(s.cxhyl15, t.cxhyl15)
+				WHEN NOT MATCHED THEN
+ 				INSERT (sjid, sjsj, pt, bqbj, axzjbl, bxzjbl, cxzjbl, axhyl2, bxhyl2, cxhyl2, axhyl3, bxhyl3, cxhyl3, axhyl5, bxhyl5, cxhyl5, axhyl7, bxhyl7, cxhyl7, 
+ 				 	axhyl9, bxhyl9, cxhyl9, axhyl11, bxhyl11, cxhyl11, axhyl13, bxhyl13, cxhyl13, axhyl15, bxhyl15, cxhyl15)
+ 				VALUES (s.sjid, s.sjsj, s.pt, s.bqbj, s.axzjbl, s.bxzjbl, s.cxzjbl, s.axhyl2, s.bxhyl2, s.cxhyl2, s.axhyl3, s.bxhyl3, s.cxhyl3, s.axhyl5, s.bxhyl5, s.cxhyl5, s.axhyl7, s.bxhyl7, s.cxhyl7, 
+ 				 	s.axhyl9, s.bxhyl9, s.cxhyl9, s.axhyl11, s.bxhyl11, s.cxhyl11, s.axhyl13, s.bxhyl13, s.cxhyl13, s.axhyl15, s.bxhyl15, s.cxhyl15)	
+				LOG ERRORS INTO sb_xbdysj_log (to_char(sysdate, 'YYYYMMDDHH24MISS')) REJECT LIMIT UNLIMITED	
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器任务集抄电量数据01临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj01" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1201"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ01(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj01 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj01 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据02临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj02" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1202"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ02(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj02 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj02 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据03临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj03" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1203"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ03(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj03 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj03 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据04临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1204"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ04(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj04 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj04 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据05临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj05" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1205"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ05(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj05 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj05 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据06临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj06" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1206"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ06(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj06 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj06 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据07临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj07" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1207"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ07(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj07 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj07 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据08临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj08" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1208"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ08(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj08 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj08 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据09临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj09" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1209"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ09(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj09 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj09 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据10临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1210"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ10(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj10 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj10 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+		<!-- 业务处理器任务集抄电量数据11临时表插入 -->		
+	<bean id="bp.batchDao.insertTaskJcDlsj11" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao2">
+		<property name="key" value="1211"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO TEMP_SB_JCDLSJ11(SJID,SJSJ,CT,PT,BQBJ,ZXYGZ,ZXYGZ1,ZXYGZ2,ZXYGZ3,ZXYGZ4)
+				VALUES(:SJID,:SJSJ,:CT,:PT,:BQBJ,:ZXYGZ,:ZXYGZ1,:ZXYGZ2,:ZXYGZ3,:ZXYGZ4)			
+				]]>
+			</value>
+		</property>
+		<property name="additiveSql">
+			<value>
+				<![CDATA[
+				MERGE INTO sb_jcdlsj11 t
+				USING (select sjid, sjsj, max(ct) as ct, max(pt) as pt, max(bqbj) as bqbj, 
+			 	      max(zxygz) as zxygz, max(zxygz1) as zxygz1, max(zxygz2) as zxygz2, 
+			 	      max(zxygz3) as zxygz3, max(zxygz4) as zxygz4
+			 	from temp_sb_jcdlsj11 group by sjid, sjsj) s
+				ON (t.sjid = s.sjid AND t.sjsj = s.sjsj)
+				WHEN MATCHED THEN
+				UPDATE SET t.ct=s.ct, t.pt=s.pt, t.bqbj=s.bqbj, t.zxygz=nvl(s.zxygz, t.zxygz), 
+						 t.zxygz1=nvl(s.zxygz1, t.zxygz1), t.zxygz2=nvl(s.zxygz2, t.zxygz2), 
+						 t.zxygz3=nvl(s.zxygz3, t.zxygz3), t.zxygz4=nvl(s.zxygz4, t.zxygz4)  
+				WHEN NOT MATCHED THEN
+ 						INSERT (sjid, sjsj, ct, pt, bqbj, zxygz, zxygz1, zxygz2, zxygz3, zxygz4)
+ 						VALUES (s.sjid, s.sjsj, s.ct, s.pt, s.bqbj, s.zxygz, s.zxygz1, s.zxygz2, s.zxygz3, s.zxygz4)
+				LOG ERRORS INTO sb_jcdlsj_log (to_char(sysdate, 'YYYYMMDDHH24MISS') || '01') REJECT LIMIT UNLIMITED;
+				]]>
+			</value>
+		</property>
+	</bean>		
+	<!-- 业务处理器异常数据01表插入 -->	
+	<bean id="bp.batchDao.insertAlarm01" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4001"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ01(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据02表插入 -->	
+	<bean id="bp.batchDao.insertAlarm02" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4002"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ02(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据03表插入 -->	
+	<bean id="bp.batchDao.insertAlarm03" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4003"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ03(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据04表插入 -->	
+	<bean id="bp.batchDao.insertAlarm04" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4004"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ04(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据05表插入 -->	
+	<bean id="bp.batchDao.insertAlarm05" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4005"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ05(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据06表插入 -->	
+	<bean id="bp.batchDao.insertAlarm06" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4006"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ06(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据07表插入 -->	
+	<bean id="bp.batchDao.insertAlarm07" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4007"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ07(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据08表插入 -->	
+	<bean id="bp.batchDao.insertAlarm08" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4008"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ08(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据09表插入 -->	
+	<bean id="bp.batchDao.insertAlarm09" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4009"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ09(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据10表插入 -->	
+	<bean id="bp.batchDao.insertAlarm10" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4010"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ10(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>
+	<!-- 业务处理器异常数据11表插入 -->	
+	<bean id="bp.batchDao.insertAlarm11" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="4011"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[				
+				INSERT INTO SB_GJ11(SJID,GJBM,RQSJ,YCJSSJ,SBCS)
+				VALUES(:dataSaveID,:alertCodeHex,:alertTime,:receiveTime,:sbcs)
+				]]>
+			</value>
+		</property>
+	</bean>		
+	
+	<!-- 业务处理器上行非法原始报文插入 -->
+	<bean id="bp.batchDao.insertUpErrLog" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="5002"/>
+		<property name="batchSize"><value>${bp.batchSize}</value></property>
+		<property name="delaySecond"><value>${bp.delaySecond}</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO RZ_FFBW( ZDLJDZ,QYM,KZM,JSSJ,YSBW)
+								VALUES( :logicAddress,:qym,:kzm,:time,:body)
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="bp.event.handle.readTask" class="com.hzjbbis.fk.bp.processor.TaskMessageHandler">
+		<property name="key" value="4"/>
+	</bean>
+	<bean id="bp.event.handle.expAlarm" class="com.hzjbbis.fk.bp.processor.AlarmMessageHandler">
+		<property name="key" value="3"/>
+		<property name="notifiedAlertCodes" value="0102,0182,01C1"/>
+	</bean>
+
+	<bean id="bp.batchDao.AddtiveParameter" class="com.hzjbbis.db.batch.BatchDaoParameterUtils"
+		factory-method="getInstance">
+		<property name="additiveParameter" value="use ref to another bean"/>
+		<property name="batchDaoList">
+			<list>
+				<ref bean="bp.batchDao.insertTaskFhsj01"/>
+				<ref bean="bp.batchDao.insertTaskFhsj02"/>
+				<ref bean="bp.batchDao.insertTaskFhsj03"/>
+				<ref bean="bp.batchDao.insertTaskFhsj04"/>
+				<ref bean="bp.batchDao.insertTaskFhsj05"/>
+				<ref bean="bp.batchDao.insertTaskFhsj06"/>
+				<ref bean="bp.batchDao.insertTaskFhsj07"/>
+				<ref bean="bp.batchDao.insertTaskFhsj08"/>
+				<ref bean="bp.batchDao.insertTaskFhsj09"/>
+				<ref bean="bp.batchDao.insertTaskFhsj10"/>
+				<ref bean="bp.batchDao.insertTaskFhsj11"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="bp.asyncService" class="com.hzjbbis.db.batch.AsyncService">
+		<property name="daoList">
+			<list>
+				<ref bean="bp.batchDao.insertUpErrLog" />
+				<ref bean="bp.batchDao.insertTaskData" />		
+				<ref bean="bp.batchDao.insertTaskDlsj01" />
+				<ref bean="bp.batchDao.insertTaskDlsj02" />
+				<ref bean="bp.batchDao.insertTaskDlsj03" />
+				<ref bean="bp.batchDao.insertTaskDlsj04" />
+				<ref bean="bp.batchDao.insertTaskDlsj05" />
+				<ref bean="bp.batchDao.insertTaskDlsj06" />
+				<ref bean="bp.batchDao.insertTaskDlsj07" />
+				<ref bean="bp.batchDao.insertTaskDlsj08" />
+				<ref bean="bp.batchDao.insertTaskDlsj09" />
+				<ref bean="bp.batchDao.insertTaskDlsj10" />
+				<ref bean="bp.batchDao.insertTaskDlsj11" />
+				<ref bean="bp.batchDao.insertTaskFhsj01" />
+				<ref bean="bp.batchDao.insertTaskFhsj02" />
+				<ref bean="bp.batchDao.insertTaskFhsj03" />
+				<ref bean="bp.batchDao.insertTaskFhsj04" />
+				<ref bean="bp.batchDao.insertTaskFhsj05" />
+				<ref bean="bp.batchDao.insertTaskFhsj06" />
+				<ref bean="bp.batchDao.insertTaskFhsj07" />
+				<ref bean="bp.batchDao.insertTaskFhsj08" />
+				<ref bean="bp.batchDao.insertTaskFhsj09" />
+				<ref bean="bp.batchDao.insertTaskFhsj10" />
+				<ref bean="bp.batchDao.insertTaskFhsj11" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj01" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj02" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj03" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj04" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj05" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj06" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj07" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj08" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj09" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj10" />
+				<ref bean="bp.batchDao.insertTaskDyhglsj11" />
+				<ref bean="bp.batchDao.insertTasksbdltjsj04" />
+				<ref bean="bp.batchDao.insertTasksbdltjsj10" />
+				<ref bean="bp.batchDao.insertTasksbgltjsj04" />
+				<ref bean="bp.batchDao.insertTasksbgltjsj10" />
+				<ref bean="bp.batchDao.insertTasksbxbdlsj10" />
+				<ref bean="bp.batchDao.insertTasksbxbdysj10" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj01" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj02" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj03" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj04" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj05" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj06" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj07" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj08" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj09" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj10" />		
+				<ref bean="bp.batchDao.insertTaskJcDlsj11" />						
+				<ref bean="bp.batchDao.insertAlarm01" />
+				<ref bean="bp.batchDao.insertAlarm02" />
+				<ref bean="bp.batchDao.insertAlarm03" />
+				<ref bean="bp.batchDao.insertAlarm04" />
+				<ref bean="bp.batchDao.insertAlarm05" />
+				<ref bean="bp.batchDao.insertAlarm06" />
+				<ref bean="bp.batchDao.insertAlarm07" />
+				<ref bean="bp.batchDao.insertAlarm08" />
+				<ref bean="bp.batchDao.insertAlarm09" />
+				<ref bean="bp.batchDao.insertAlarm10" />
+				<ref bean="bp.batchDao.insertAlarm11" />					
+			</list>
+		</property>
+		<property name="bpHandlerMap">
+			<map>
+				<entry>
+					<key><ref bean="EventType.BP_READ_TASK" /></key>
+					<ref bean="bp.event.handle.readTask" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.BP_EXP_ALARM" /></key>
+					<ref bean="bp.event.handle.expAlarm" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="fasSystem" class="com.hzjbbis.fk.FasSystem"
+		init-method="initialize">
+		<property name="eventHooks">
+			<list>
+				<ref bean="webserver.event.hook" />
+				<ref bean="monitor.event.handler" />
+			</list>
+		</property>
+		<property name="modules">
+			<list>
+				<ref bean="bp.server.web" />
+				<ref bean="bp.com.client" />
+				<ref bean="bp.asyncService" />	
+				<ref bean="bp.msg.processor" />	
+				<ref bean="bp.intf.client" />
+				<ref bean="bp.timeCorrector.client" />
+				<ref bean="bp.rereadTask.client" />			
+				<ref bean="monitor.server" />																	
+			</list>
+		</property>		
+	</bean>
+
+	<!-- 定义定时Job -->
+	<bean id="job.showProfile" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="fasSystem" />
+		<property name="targetMethod" value="showProfile" />
+	</bean>
+	<bean id="cronTrigger.showProfile" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.showProfile" />
+		<property name="cronExpression"><value>${sys.showprofile.cronExpression}</value></property>
+	</bean>
+	<bean id="bp.refreshRtu" class="com.hzjbbis.fk.bp.processor.RtuRefreshManage">
+		<property name="masterDbService" ref="master.dbservice"/>
+		<property name="manageRtu" ref="manageRtu"/>	
+	</bean>
+	<bean id="job.refreshRtu" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="bp.refreshRtu" />
+		<property name="targetMethod" value="refreshRtuCache" />
+	</bean>
+	<bean id="cronTrigger.refreshRtuCache" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.refreshRtu" />
+		<property name="cronExpression"><value>${bp.refreshRtu.cronExpression}</value></property>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger.showProfile" />
+				<ref bean="cronTrigger.refreshRtuCache" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

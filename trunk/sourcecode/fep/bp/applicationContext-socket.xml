@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for PetClinic on JDBC.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- ========================= Socket通信框架对象定义 ========================= -->
+	<!-- Socket框架事件处理适配器定义  -->
+	<bean id="SimpleHandler.AcceptEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.AcceptEventAdapt" />
+	<bean id="SimpleHandler.ClientCloseEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ClientCloseEventAdapt" />
+	<bean id="SimpleHandler.ClientTimeoutEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ClientTimeoutEventAdapt" />
+	<bean id="SimpleHandler.MessageSendFailEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.MessageSendFailEventAdapt" />
+	<bean id="SimpleHandler.RecvSimpleMessageEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.RecvSimpleMessageEventAdapt" />
+	<bean id="SimpleHandler.SentSimpleMessageEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.SentSimpleMessageEventAdapt" />
+	<bean id="SimpleHandler.ServerStartedEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ServerStartedEventAdapt" />
+	<bean id="SimpleHandler.ServerStopEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ServerStopEventAdapt" />
+	<bean id="SimpleHandler.ModuleProfileEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ModuleProfileEventAdapt" />
+
+	<bean id="SimpleHandler.ReceiveMessageEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.ReceiveMessageEventAdapt" />
+	<bean id="SimpleHandler.SendMessageEventAdapt"
+		class="com.hzjbbis.fk.sockserver.event.adapt.SendMessageEventAdapt" />
+
+	<!-- 简单Socket服务框架事件处理器 定义  -->
+	<bean id="SimpleEventHandler"
+		class="com.hzjbbis.fk.common.events.BasicEventHook">
+		<property name="minSize"><value>1</value></property>
+		<property name="maxSize"><value>20</value></property>
+		<property name="handlerMap">
+			<map>
+				<entry>
+					<key><ref bean="EventType.ACCEPTCLIENT" /></key>
+					<ref bean="SimpleHandler.AcceptEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.CLIENTCLOSE" /></key>
+					<ref bean="SimpleHandler.ClientCloseEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.CLIENTTIMEOUT" /></key>
+					<ref bean="SimpleHandler.ClientTimeoutEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.SERVERSTARTED" /></key>
+					<ref bean="SimpleHandler.ServerStartedEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.SERVERSTOPPED" /></key>
+					<ref bean="SimpleHandler.ServerStopEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.MODULE_PROFILE" /></key>
+					<ref bean="SimpleHandler.ModuleProfileEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.MSG_SIMPLE_RECV" /></key>
+					<ref bean="SimpleHandler.RecvSimpleMessageEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.MSG_SIMPLE_SENT" /></key>
+					<ref bean="SimpleHandler.SentSimpleMessageEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.MSG_RECV" /></key>
+					<ref bean="SimpleHandler.ReceiveMessageEventAdapt" />
+				</entry>
+				<entry>
+					<key><ref bean="EventType.MSG_SENT" /></key>
+					<ref bean="SimpleHandler.SendMessageEventAdapt" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ISocketServer" abstract="true">
+		<property name="bufLength" value="512"/>
+		<property name="timeout" value="180"/>
+		<property name="oneIpLimit" value="false"/>
+		<property name="messageCreator" ref="messageCreator.Zj"/>
+		<property name="ioHandler" ref="iohandler.SimpleIoHandler"/>
+	</bean>
+
+	<bean id="iohandler.SimpleIoHandler"
+			class="com.hzjbbis.fk.sockserver.io.SimpleIoHandler"/>
+	<bean id="iohandler.SimpleUdpIoHandler"
+			class="com.hzjbbis.fk.sockserver.io.SimpleUdpIoHandler"/>
+
+			
+	<bean id="jSocketListener.Dumy"
+		class="com.hzjbbis.fk.sockclient.DumyJSocketListener" />
+	<bean id="JSocket" abstract="true">
+		<property name="hostIp" value="127.0.0.1"/>
+		<property name="hostPort" value="10001"/>
+		<property name="bufLength" value="512"/>
+		<property name="messageCreator" ref="messageCreator.Gate"/>
+		<property name="timeout" value="2"/>
+		<property name="txfs" value="02"/>
+	</bean>
+	
+		
+</beans>
