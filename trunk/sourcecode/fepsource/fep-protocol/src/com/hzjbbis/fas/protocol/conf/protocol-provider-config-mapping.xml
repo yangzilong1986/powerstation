@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+        "http://castor.exolab.org/mapping.dtd">
+
+<mapping>
+    <description>协议提供者配置的映射文件</description>
+
+    <class name="com.hzjbbis.fas.protocol.conf.ProtocolProviderConfig">
+        <map-to xml="protocol-provider"/>
+        <field name="handlers" type="com.hzjbbis.fas.protocol.conf.ProtocolHandlerConfig" collection="arraylist">
+            <bind-xml name="protocol-handler" node="element"/>
+        </field>
+    </class>
+
+    <class name="com.hzjbbis.fas.protocol.conf.ProtocolHandlerConfig">
+        <field name="messageType" type="string">
+            <bind-xml name="message-type" node="element"/>
+        </field>
+        <field name="handlerClass" type="string">
+            <bind-xml name="handler-class" node="element"/>
+        </field>
+        <field name="codecFactory" type="com.hzjbbis.fas.protocol.conf.CodecFactoryConfig">
+            <bind-xml name="codec-factory" node="element"/>
+        </field>
+    </class>
+
+    <class name="com.hzjbbis.fas.protocol.conf.CodecFactoryConfig">
+        <field name="factoryClass" type="string">
+            <bind-xml name="factory-class" node="element"/>
+        </field>
+        <field name="dataConfigMapping" type="string">
+            <bind-xml name="data-config-mapping" node="element"/>
+        </field>
+        <field name="dataConfigResource" type="string">
+            <bind-xml name="data-config-resource" node="element"/>
+        </field>
+        <field name="codecs" type="com.hzjbbis.fas.protocol.conf.CodecConfig" collection="arraylist">
+            <bind-xml name="codec" node="element"/>
+        </field>
+    </class>
+
+    <class name="com.hzjbbis.fas.protocol.conf.CodecConfig">
+        <field name="funCode" type="int">
+            <bind-xml name="fun-code" node="attribute"/>
+        </field>
+        <field name="encoderClass" type="string">
+            <bind-xml name="encoder-class" node="element"/>
+        </field>
+        <field name="decoderClass" type="string">
+            <bind-xml name="decoder-class" node="element"/>
+        </field>
+    </class>
+</mapping>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<protocol-data>
+    <!--复位命令-->
+    <data-item code="01F001" parentCode="01F001" length="0" type="" format="" description="硬件初始化"/>
+    <data-item code="01F002" parentCode="01F001" length="0" type="" format="" description="数据区初始化"/>
+    <data-item code="01F003" parentCode="01F001" length="0" type="" format="" description="参数及全体数据区初始化（即恢复至出厂配置）"/>
+    <data-item code="01F004" parentCode="01F001" length="0" type="" format="" description="参数（除与系统主站通信有关的）及全体数据区初始化"/>
+    <!--终端参数-->
+    <data-item code="04F001" parentCode="04F001" length="6" type="" format="HTB1#HTB1#BS2#BS1#HTB1"
+               description="终端通信参数"/>
+    <data-item code="04F003" parentCode="04F003" length="28" type="" format="IP6#IP6#ASC16" description="主站IP地址和端口"/>
+    <data-item code="04F004" parentCode="04F004" length="16" type="" format="SIM8#SIM8" description="主站电话号码和短信中心号码"/>
+    <data-item code="04F005" parentCode="04F005" length="3" type="" format="HTB1#HTB2" description="终端通信参数"/>
+    <data-item code="04F008" parentCode="04F008" length="8" type="" format="BS1#HTB2#HTB1#HTB1#BS3"
+               description="终端上行通信工作方式"/>
+    <data-item code="04F009" parentCode="04F009" length="16" type="" format="BS8#BS8" description="终端事件记录配置设置"/>
+    <data-item code="04F010" parentCode="04F010" length="0" type=""
+               format="N2#HTB2#HTB2#BS1#HTB1#A12#HEX6#BS1#BS1#A12#BS1" description="终端电能表/交流采样装置配置参数"/>
+    <data-item code="04F016" parentCode="04F016" length="64" type="" format="ASC32#ASC32" description="虚拟专网用户名、密码"/>
+    <data-item code="04F025" parentCode="04F025" length="11" type="" format="HTB2#HTB2#A7#A22#A23#BS1"
+               description="测量点基本参数"/>
+    <data-item code="04F026" parentCode="04F026" length="57" type=""
+               format="A7#A7#A7#A7#HTB1#A5#A7#HTB1#A5#A25#HTB1#A5#A25#HTB1#A5#A25#HTB1#A5#A23#HTB1#A5#A23#HTB1#A5#A5#HTB1#A5#A5#HTB1#A5#HTB1"
+               description="测量点限值参数"/>
+    <data-item code="04F030" parentCode="04F030" length="1" type="" format="HTB1" description="台区集中抄表停抄/投抄设置"/>
+    <data-item code="04F033" parentCode="04F033" length="0" type="" format="N1#HTB1#BS2#BS4#A19#HTB1#A18#N1#A19#A19"
+               description="终端抄表运行参数设置"/>
+    <data-item code="04F034" parentCode="04F034" length="0" type="" format="N1#HTB1#BS1#HTB4"
+               description="集中器下行通信模块的参数设置"/>
+    <data-item code="04F035" parentCode="04F035" length="0" type="" format="N1#HTB2" description="台区集中抄表重点户设置"/>
+    <data-item code="04F036" parentCode="04F036" length="4" type="" format="HTB4" description="终端上行通信流量门限设置"/>
+    <data-item code="04F059" parentCode="04F059" length="4" type="" format="A22#A22#HTB1#HTB1"
+               description="电能表异常判别阈值设定"/>
+    <data-item code="04F065" parentCode="04F065" length="0" type="" format="BS1#A1#HTB1#N1#STS4"
+               description="定时上报1类数据任务设置"/>
+    <data-item code="04F066" parentCode="04F066" length="0" type="" format="BS1#A1#HTB1#N1#STS4"
+               description="定时上报2类数据任务设置"/>
+    <data-item code="04F067" parentCode="04F067" length="1" type="" format="HEX1" description="定时上报1类数据任务启动/停止设置"/>
+    <data-item code="04F068" parentCode="04F068" length="1" type="" format="HEX1" description="定时上报2类数据任务启动/停止设置"/>
+
+    <!--控制命令-->
+    <data-item code="05F031" parentCode="05F031" length="6" type="" format="A1" description="对时命令"/>
+    <data-item code="05F038" parentCode="05F038" length="0" type="" format="" description="激活终端连接主站"/>
+    <data-item code="05F039" parentCode="05F039" length="0" type="" format="" description="命令终端断开连接"/>
+    <data-item code="05F049" parentCode="05F049" length="1" type="" format="HTB1" description="命令指定通信端口暂停抄表"/>
+    <data-item code="05F050" parentCode="05F050" length="1" type="" format="HTB1" description="命令指定通信端口恢复抄表"/>
+    <data-item code="05F051" parentCode="05F051" length="1" type="" format="HTB1" description="命令指定通信端口重新抄表"/>
+    <data-item code="05F053" parentCode="05F053" length="1" type="" format="HTB1" description="删除指定通信端口下的全部电表"/>
+    <data-item code="05F090" parentCode="05F090" length="0" type="" format="" description="终端启动通信测试请求"/>
+
+    <data-item code="09F001" parentCode="09F001" length="41" type="" format="ASC4#ASC8#ASC4#A20#ASC11#ASC4#ASC4#A20"
+               description="终端版本信息"/>
+    <data-item code="09F002" parentCode="09F002" length="0" type=""
+               format="HTB1#HTB1#HTB1#HTB1#HTB2#HTB2#HTB2#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#N1#BS2#HTB4#HTB2#HTB2##HTB2"
+               description="终端支持的输入、输出及通信端口配置"/>
+    <data-item code="09F003" parentCode="09F003" length="35" type=""
+               format="HTB2#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#BS2#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1#HTB1"
+               description="终端支持的其他配置"/>
+    <data-item code="09F004" parentCode="09F004" length="0" type="" format="N1#BS1" description="终端支持的参数配置"/>
+    <data-item code="09F005" parentCode="09F005" length="0" type="" format="N1#BS1" description="终端支持的控制配置"/>
+    <data-item code="09F008" parentCode="09F008" length="8" type="" format="BS8" description="终端支持的事件记录配置"/>
+
+    <!--一类数据-->
+    <data-item code="0CF002" parentCode="0CF002">
+        <data-item code="0400121000" parentCode="0CF002" length="6" type="" format="A1" description="终端日历时钟"/>
+    </data-item>
+    <data-item code="0CF003" parentCode="0CF003">
+        <data-item code="0400121100" parentCode="0CF003" length="31" type="" format="BS31" description="参数映射表"/>
+    </data-item>
+    <data-item code="0CF004" parentCode="0CF004">
+        <data-item code="0400121200" parentCode="0CF004" length="1" type="" format="BS1" description="终端上行通信状态"/>
+    </data-item>
+    <data-item code="0CF007" parentCode="0CF007">
+        <data-item code="0400121501" parentCode="0CF007" length="1" type="" format="HTB1" description="重要事件计数器EC1值"/>
+        <data-item code="0400121502" parentCode="0CF007" length="1" type="" format="HTB1" description="一般事件计数器EC2值"/>
+    </data-item>
+    <data-item code="0CF008" parentCode="0CF008">
+        <data-item code="0400121600" parentCode="0CF008" length="1" type="" format="HTB1" description="事件状态标志"/>
+    </data-item>
+    <data-item code="0CF010" parentCode="0CF010">
+        <data-item code="0400121801" parentCode="0CF010" length="4" type="" format="HTB4" description="终端与主站当日通信流量"/>
+        <data-item code="0400121802" parentCode="0CF010" length="4" type="" format="HTB4" description="终端与主站当月通信流量"/>
+    </data-item>
+    <data-item code="0CF011" parentCode="0CF011">
+        <data-item code="04001219XX" parentCode="0CF011" length="1" type="" format="HTB1" description="本项数据块个数n"/>
+        <data-item code="0400121901" parentCode="0CF011" length="1" type="" format="HTB1" description="终端通信端口号"/>
+        <data-item code="0400121902" parentCode="0CF011" length="2" type="" format="HTB2" description="要抄电表总数"/>
+        <data-item code="0400121903" parentCode="0CF011" length="1" type="" format="BS1" description="当前抄表工作状态标志"/>
+        <data-item code="0400121904" parentCode="0CF011" length="2" type="" format="HTB2" description="抄表成功块数"/>
+        <data-item code="0400121905" parentCode="0CF011" length="1" type="" format="HTB1" description="抄重点表成功块数"/>
+        <data-item code="0400121906" parentCode="0CF011" length="6" type="" format="A1" description="抄表开始时间"/>
+        <data-item code="0400121907" parentCode="0CF011" length="6" type="" format="A1" description="抄表结束时间"/>
+    </data-item>
+    <data-item code="0CF027" parentCode="0CF027">
+        <data-item code="0400122000" parentCode="0CF027" length="5" type="" format="A5" description="终端抄表时间"/>
+        <data-item code="0400102401" parentCode="0CF027" length="6" type="" format="A1" description="电能表日历时钟"/>
+        <data-item code="0400102402" parentCode="0CF027" length="4" type="" format="A27" description="电池工作时间"/>
+        <data-item code="0400102403" parentCode="0CF027" length="3" type="" format="A10" description="编程总次数"/>
+        <data-item code="0400102404" parentCode="0CF027" length="6" type="" format="A1" description="最近一次编程发生时刻"/>
+        <data-item code="0400102405" parentCode="0CF027" length="3" type="" format="A10" description="电表清零总次数"/>
+        <data-item code="0400102406" parentCode="0CF027" length="6" type="" format="A1" description="最近一次清零发生时刻"/>
+        <data-item code="0400102407" parentCode="0CF027" length="3" type="" format="A10" description="需量清零总次数"/>
+        <data-item code="0400102408" parentCode="0CF027" length="6" type="" format="A1" description="最近一次清零发生时刻"/>
+        <data-item code="0400102409" parentCode="0CF027" length="3" type="" format="A10" description="事件清零总次数"/>
+        <data-item code="0400102410" parentCode="0CF027" length="6" type="" format="A1" description="最近一次清零发生时刻"/>
+        <data-item code="0400102411" parentCode="0CF027" length="3" type="" format="A10" description="校时总次数"/>
+        <data-item code="0400102412" parentCode="0CF027" length="6" type="" format="A1" description="最近一次校时发生时刻"/>
+    </data-item>
+    <data-item code="0CF028" parentCode="0CF028">
+        <data-item code="0400122000" parentCode="0CF028" length="2" type="" format="BS2" description="终端抄表时间"/>
+        <data-item code="0400102501" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志1"/>
+        <data-item code="0400102502" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志2"/>
+        <data-item code="0400102503" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志3"/>
+        <data-item code="0400102504" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志4"/>
+        <data-item code="0400102505" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志5"/>
+        <data-item code="0400102506" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志6"/>
+        <data-item code="0400102507" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字变位标志7"/>
+        <data-item code="0400102601" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字1"/>
+        <data-item code="0400102602" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字2"/>
+        <data-item code="0400102603" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字3"/>
+        <data-item code="0400102604" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字4"/>
+        <data-item code="0400102605" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字5"/>
+        <data-item code="0400102606" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字6"/>
+        <data-item code="0400102607" parentCode="0CF028" length="2" type="" format="BS2" description="电表运行状态字7"/>
+    </data-item>
+    <data-item code="0CF097" parentCode="0CF097">
+        <data-item code="0205110301" parentCode="0CF097" length="2" type="" format="A7" description="小时冻结A相电压"/>
+    </data-item>
+    <data-item code="0CF098" parentCode="0CF098">
+        <data-item code="0205110302" parentCode="0CF098" length="2" type="" format="A7" description="小时冻结B相电压"/>
+    </data-item>
+    <data-item code="0CF099" parentCode="0CF099">
+        <data-item code="0205110303" parentCode="0CF099" length="2" type="" format="A7" description="小时冻结C相电压"/>
+    </data-item>
+    <data-item code="0CF100" parentCode="0CF100">
+        <data-item code="0205110401" parentCode="0CF100" length="3" type="" format="A25" description="小时冻结A相电流"/>
+    </data-item>
+    <data-item code="0CF101" parentCode="0CF101">
+        <data-item code="0205110402" parentCode="0CF101" length="3" type="" format="A25" description="小时冻结B相电流"/>
+    </data-item>
+    <data-item code="0CF102" parentCode="0CF102">
+        <data-item code="0205110403" parentCode="0CF102" length="3" type="" format="A25" description="小时冻结C相电流"/>
+    </data-item>
+    <data-item code="0CF109" parentCode="0CF109">
+        <data-item code="0105100000" parentCode="0CF109" length="4" type="" format="A11" description="小时冻结正向有功总电能示值"/>
+    </data-item>
+    <data-item code="0CF111" parentCode="0CF111">
+        <data-item code="0105100200" parentCode="0CF111" length="4" type="" format="A11" description="小时冻结反向有功总电能示值"/>
+    </data-item>
+    <data-item code="0CF129" parentCode="0CF129">
+        <data-item code="0400122000" parentCode="0CF129" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0CF129" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01001000XX" parentCode="0CF129" length="5" type="" format="A14" description="当前正向有功总电能示值"/>
+    </data-item>
+    <data-item code="0CF131" parentCode="0CF131">
+        <data-item code="0400122000" parentCode="0CF131" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0CF131" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01001001XX" parentCode="0CF131" length="5" type="" format="A14" description="当前反向有功总电能示值"/>
+    </data-item>
+    <data-item code="0CF161" parentCode="0CF161">
+        <data-item code="0400122000" parentCode="0CF161" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0400102001" parentCode="0CF161" length="1" type="" format="HTB1" description="电能表通断电状态"/>
+        <data-item code="0400102002" parentCode="0CF161" length="5" type="" format="A15" description="电能表最近一次远程控制通电时间"/>
+        <data-item code="0400102003" parentCode="0CF161" length="5" type="" format="A15" description="电能表最近一次远程控制断电时间"/>
+    </data-item>
+    <data-item code="0CF165" parentCode="0CF165">
+        <data-item code="0400122000" parentCode="0CF165" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0400102101" parentCode="0CF165" length="2" type="" format="A8" description="电能表编程开关操作次数"/>
+        <data-item code="0400102102" parentCode="0CF165" length="5" type="" format="A15" description="电能表最近一次编程开关操作时间"/>
+        <data-item code="0400102103" parentCode="0CF165" length="2" type="" format="A8" description="电能表尾盖打开次数"/>
+        <data-item code="0400102104" parentCode="0CF165" length="5" type="" format="A15" description="电能表最近一次尾盖打开时间"/>
+    </data-item>
+    <data-item code="0CF166" parentCode="0CF166">
+        <data-item code="0400122000" parentCode="0CF166" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0400102201" parentCode="0CF166" length="2" type="" format="A8" description="电能表时钟修改次数"/>
+        <data-item code="0400102202" parentCode="0CF166" length="5" type="" format="A15" description="电能表最近一次时钟修改时间"/>
+        <data-item code="0400102203" parentCode="0CF166" length="2" type="" format="A8" description="电能表时段参数修改次数"/>
+        <data-item code="0400102204" parentCode="0CF166" length="5" type="" format="A15" description="电能表最近一次时段参数修改时间"/>
+    </data-item>
+    <data-item code="0CF167" parentCode="0CF167">
+        <data-item code="0400122000" parentCode="0CF167" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0400102301" parentCode="0CF167" length="2" type="" format="A8" description="电能表购电次数"/>
+        <data-item code="0400102302" parentCode="0CF167" length="5" type="" format="A14" description="电能表剩余金额"/>
+        <data-item code="0400102303" parentCode="0CF167" length="5" type="" format="A14" description="电能表累计购电金额"/>
+        <data-item code="0400102304" parentCode="0CF167" length="4" type="" format="A11" description="电能表剩余电量"/>
+        <data-item code="0400102305" parentCode="0CF167" length="4" type="" format="A11" description="电能表透支电量"/>
+        <data-item code="0400102306" parentCode="0CF167" length="4" type="" format="A11" description="电能表累计购电量"/>
+        <data-item code="0400102307" parentCode="0CF167" length="4" type="" format="A11" description="电能表赊欠门限电量"/>
+        <data-item code="0400102308" parentCode="0CF167" length="4" type="" format="A11" description="电能表报警电量"/>
+        <data-item code="0400102309" parentCode="0CF167" length="4" type="" format="A11" description="电能表故障电量"/>
+    </data-item>
+    <data-item code="0CF168" parentCode="0CF168">
+        <data-item code="0400122000" parentCode="0CF168" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0CF168" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01162002XX" parentCode="0CF168" length="4" type="" format="A13" description="已结费正向有功总电能"/>
+        <data-item code="01172002XX" parentCode="0CF168" length="4" type="" format="A13" description="未结费正向有功总电能"/>
+    </data-item>
+
+    <!--二类数据-->
+    <data-item code="0DF005" parentCode="0DF005">
+        <data-item code="0000000000" parentCode="0DF005" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01222002XX" parentCode="0DF005" length="4" type="" format="A13" description="日冻结正向有功总电能"/>
+    </data-item>
+    <data-item code="0DF007" parentCode="0DF007">
+        <data-item code="0000000000" parentCode="0DF007" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01222004XX" parentCode="0DF007" length="4" type="" format="A13" description="日冻结反向有功总电能"/>
+    </data-item>
+    <data-item code="0DF021" parentCode="0DF021">
+        <data-item code="0000000000" parentCode="0DF021" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01232002XX" parentCode="0DF021" length="4" type="" format="A13" description="月冻结正向有功总电能"/>
+    </data-item>
+    <data-item code="0DF049" parentCode="0DF049">
+        <data-item code="0422122901" parentCode="0DF049" length="2" type="" format="HTB2" description="日冻结终端供电时间"/>
+        <data-item code="0422122902" parentCode="0DF049" length="2" type="" format="HTB2" description="日冻结终端复位累计次数"/>
+    </data-item>
+    <data-item code="0DF051" parentCode="0DF051">
+        <data-item code="0423122903" parentCode="0DF051" length="2" type="" format="HTB2" description="月冻结终端供电时间"/>
+        <data-item code="0423122904" parentCode="0DF051" length="2" type="" format="HTB2" description="月冻结终端复位累计次数"/>
+    </data-item>
+    <data-item code="0DF053" parentCode="0DF053">
+        <data-item code="0422123101" parentCode="0DF053" length="4" type="" format="HTB4" description="日冻结终端与主站日通信流量"/>
+    </data-item>
+    <data-item code="0DF054" parentCode="0DF054">
+        <data-item code="0423123102" parentCode="0DF054" length="4" type="" format="HTB4" description="月冻结终端与主站月通信流量"/>
+    </data-item>
+    <data-item code="0DF089" parentCode="0DF089">
+        <data-item code="0232110301" parentCode="0DF089" length="2" type="" format="A7" description="测量点A相电压曲线"/>
+    </data-item>
+    <data-item code="0DF090" parentCode="0DF090">
+        <data-item code="0232110302" parentCode="0DF090" length="2" type="" format="A7" description="测量点B相电压曲线"/>
+    </data-item>
+    <data-item code="0DF091" parentCode="0DF091">
+        <data-item code="0232110303" parentCode="0DF091" length="2" type="" format="A7" description="测量点C相电压曲线"/>
+    </data-item>
+    <data-item code="0DF092" parentCode="0DF092">
+        <data-item code="0232110401" parentCode="0DF092" length="2" type="" format="A25" description="测量点A相电流曲线"/>
+    </data-item>
+    <data-item code="0DF093" parentCode="0DF093">
+        <data-item code="0232110402" parentCode="0DF093" length="2" type="" format="A25" description="测量点B相电流曲线"/>
+    </data-item>
+    <data-item code="0DF094" parentCode="0DF094">
+        <data-item code="0232110403" parentCode="0DF094" length="2" type="" format="A25" description="测量点C相电流曲线"/>
+    </data-item>
+    <data-item code="0DF101" parentCode="0DF101">
+        <data-item code="0132100000" parentCode="0DF101" length="4" type="" format="A11" description="测量点正向有功总电能示值曲线"/>
+    </data-item>
+    <data-item code="0DF103" parentCode="0DF103">
+        <data-item code="0132100100" parentCode="0DF103" length="4" type="" format="A11" description="测量点反向有功总电能示值曲线"/>
+    </data-item>
+    <data-item code="0DF161" parentCode="0DF161">
+        <data-item code="0400122000" parentCode="0DF161" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0DF161" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01221000XX" parentCode="0DF161" length="5" type="" format="A14" description="日冻结正向有功总电能示值"/>
+    </data-item>
+    <data-item code="0DF163" parentCode="0DF163">
+        <data-item code="0400122000" parentCode="0DF163" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0DF163" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01221001XX" parentCode="0DF163" length="5" type="" format="A14" description="日冻结反向有功总电能示值"/>
+    </data-item>
+    <data-item code="0DF169" parentCode="0DF169">
+        <data-item code="0400122000" parentCode="0DF169" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0DF169" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01201000XX" parentCode="0DF169" length="5" type="" format="A14" description="抄表日冻结正向有功总电能示值"/>
+    </data-item>
+    <data-item code="0DF177" parentCode="0DF177">
+        <data-item code="0400122000" parentCode="0DF177" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0DF177" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01231000XX" parentCode="0DF177" length="5" type="" format="A14" description="月冻结正向有功总电能示值"/>
+    </data-item>
+    <data-item code="0DF179" parentCode="0DF179">
+        <data-item code="0400122000" parentCode="0DF179" length="5" type="" format="A15" description="终端抄表时间"/>
+        <data-item code="0000000000" parentCode="0DF179" length="1" type="" format="HTB1" description="费率数M"/>
+        <data-item code="01231001XX" parentCode="0DF179" length="5" type="" format="A14" description="月冻结反向有功总电能示值"/>
+    </data-item>
+</protocol-data>

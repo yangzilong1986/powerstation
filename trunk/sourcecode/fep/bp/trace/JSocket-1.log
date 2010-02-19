@@ -1,0 +1,40 @@
+2010-02-19 11:14:14 [sock-127.0.0.1@10010] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10010
+2010-02-19 11:14:14 [sock-127.0.0.1@10030] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10030
+2010-02-19 11:14:14 [sock-127.0.0.1@10040] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10040
+2010-02-19 11:14:14 [sock-127.0.0.1@10045] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10045
+2010-02-19 11:14:15 [sock-127.0.0.1@10010]  - client socket cannot connected to server :127.0.0.1@10010
+2010-02-19 11:14:15 [sock-127.0.0.1@10030]  - client socket cannot connected to server :127.0.0.1@10030
+2010-02-19 11:14:15 [sock-127.0.0.1@10045]  - client socket cannot connected to server :127.0.0.1@10045
+2010-02-19 11:14:15 [sock-127.0.0.1@10040]  - client socket cannot connected to server :127.0.0.1@10040
+2010-02-19 11:14:18 [sock-127.0.0.1@10045] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10045
+2010-02-19 11:14:18 [sock-127.0.0.1@10040] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10040
+2010-02-19 11:14:19 [sock-127.0.0.1@10010] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10010
+2010-02-19 11:14:19 [sock-127.0.0.1@10030] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10030
+2010-02-19 11:14:19 [sock-127.0.0.1@10045]  - client socket cannot connected to server :127.0.0.1@10045
+2010-02-19 11:14:19 [sock-127.0.0.1@10040]  - client socket cannot connected to server :127.0.0.1@10040
+2010-02-19 11:14:20 [sock-127.0.0.1@10010]  - client socket cannot connected to server :127.0.0.1@10010
+2010-02-19 11:14:20 [sock-127.0.0.1@10030]  - client socket cannot connected to server :127.0.0.1@10030
+2010-02-19 11:14:26 [sock-127.0.0.1@10045] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10045
+2010-02-19 11:14:26 [sock-127.0.0.1@10040] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10040
+2010-02-19 11:14:27 [sock-127.0.0.1@10010] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10010
+2010-02-19 11:14:27 [sock-127.0.0.1@10030] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10030
+2010-02-19 11:14:27 [sock-127.0.0.1@10045]  - client socket cannot connected to server :127.0.0.1@10045
+2010-02-19 11:14:27 [sock-127.0.0.1@10040]  - client socket cannot connected to server :127.0.0.1@10040
+2010-02-19 11:14:28 [sock-127.0.0.1@10010]  - client socket cannot connected to server :127.0.0.1@10010
+2010-02-19 11:14:28 [sock-127.0.0.1@10030]  - client socket cannot connected to server :127.0.0.1@10030
+2010-02-19 11:14:42 [sock-127.0.0.1@10045] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10045
+2010-02-19 11:14:42 [sock-127.0.0.1@10040] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10040
+2010-02-19 11:14:43 [sock-127.0.0.1@10010] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10010
+2010-02-19 11:14:43 [sock-127.0.0.1@10030] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10030
+2010-02-19 11:14:43 [sock-127.0.0.1@10045]  - client socket cannot connected to server :127.0.0.1@10045
+2010-02-19 11:14:43 [sock-127.0.0.1@10040]  - client socket cannot connected to server :127.0.0.1@10040
+2010-02-19 11:14:44 [sock-127.0.0.1@10010]  - client socket cannot connected to server :127.0.0.1@10010
+2010-02-19 11:14:44 [sock-127.0.0.1@10030]  - client socket cannot connected to server :127.0.0.1@10030
+2010-02-19 11:15:14 [sock-127.0.0.1@10045] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10045
+2010-02-19 11:15:14 [sock-127.0.0.1@10040] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10040
+2010-02-19 11:15:15 [sock-127.0.0.1@10010] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10010
+2010-02-19 11:15:15 [sock-127.0.0.1@10030] JSocket.java:96 - client socket is connecting to server :127.0.0.1:10030
+2010-02-19 11:15:15 [sock-127.0.0.1@10045]  - client socket cannot connected to server :127.0.0.1@10045
+2010-02-19 11:15:15 [sock-127.0.0.1@10040]  - client socket cannot connected to server :127.0.0.1@10040
+2010-02-19 11:15:16 [sock-127.0.0.1@10010]  - client socket cannot connected to server :127.0.0.1@10010
+2010-02-19 11:15:16 [sock-127.0.0.1@10030]  - client socket cannot connected to server :127.0.0.1@10030

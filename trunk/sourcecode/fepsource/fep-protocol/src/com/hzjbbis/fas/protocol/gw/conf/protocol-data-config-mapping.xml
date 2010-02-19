@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+        "http://castor.exolab.org/mapping.dtd">
+
+<mapping>
+    <description>协议数据项配置的映射文件</description>
+
+    <class name="com.hzjbbis.fas.protocol.conf.ProtocolDataConfig">
+        <map-to xml="protocol-data"/>
+        <field name="dataItems" type="com.hzjbbis.fas.protocol.conf.ProtocolDataItemConfig" collection="arraylist">
+            <bind-xml name="data-item" node="element"/>
+        </field>
+    </class>
+
+    <class name="com.hzjbbis.fas.protocol.conf.ProtocolDataItemConfig">
+        <field name="code" type="string">
+            <bind-xml name="code" node="attribute"/>
+        </field>
+        <field name="parentCode" type="string">
+            <bind-xml name="parentCode" node="attribute"/>
+        </field>
+        <field name="length" type="int">
+            <bind-xml name="length" node="attribute"/>
+        </field>
+        <field name="type" type="string">
+            <bind-xml name="type" node="attribute"/>
+        </field>
+        <field name="format" type="string">
+            <bind-xml name="format" node="attribute"/>
+        </field>
+        <field name="bean" type="string">
+            <bind-xml name="bean" node="attribute"/>
+        </field>
+        <field name="property" type="string">
+            <bind-xml name="property" node="attribute"/>
+        </field>
+        <field name="childItems" type="com.hzjbbis.fas.protocol.conf.ProtocolDataItemConfig" collection="arraylist">
+            <bind-xml name="data-item" node="element"/>
+        </field>
+    </class>
+</mapping>

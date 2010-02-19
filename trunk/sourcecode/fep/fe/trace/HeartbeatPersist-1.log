@@ -1,0 +1,2 @@
+2010-02-19 10:53:11 [main] HeartbeatPersist.java:130 - 心跳初始化initOnStartup
+2010-02-19 10:53:11 [main] HeartbeatPersist.java:138 - 心跳D:\workspace\powerstation\sourcecode\fep\fe\data\heartbeat-19.data文件不存在,初始化结束

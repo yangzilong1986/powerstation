@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fep-common/Fep-common.iml" filepath="$PROJECT_DIR$/fep-common/Fep-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fep-db-service/Fep-db-service.iml" filepath="$PROJECT_DIR$/fep-db-service/Fep-db-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fep-fe/Fep-fe.iml" filepath="$PROJECT_DIR$/fep-fe/Fep-fe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fep-monitor/Fep-monitor.iml" filepath="$PROJECT_DIR$/fep-monitor/Fep-monitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fep-protocol/Fep-protocol.iml" filepath="$PROJECT_DIR$/fep-protocol/Fep-protocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fep-socket/Fep-socket.iml" filepath="$PROJECT_DIR$/fep-socket/Fep-socket.iml" />
+    </modules>
+  </component>
+</project>
+

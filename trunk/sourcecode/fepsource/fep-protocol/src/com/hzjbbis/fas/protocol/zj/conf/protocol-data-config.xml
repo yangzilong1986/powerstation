@@ -1,0 +1,1551 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<protocol-data>
+    <!--终端参数-->
+    <!--
+     <data-item code="8010" length="9" type="" unit="" description="主站通讯地址" />
+     <data-item code="8011" length="9" type="" unit="" description="备用主站通讯地址1" />
+     <data-item code="8012" length="9" type="" unit="" description="备用主站通讯地址2" />
+     <data-item code="8013" length="8" type="" unit="" description="短信中心号码" />
+     <data-item code="8014" length="8" type="" unit="" description="网关地址" />
+     <data-item code="8015" length="16" type="" unit="" description="APN" />
+     <data-item code="8016" length="2" type="" unit="" description="终端地市区县码" />
+     <data-item code="8017" length="2" type="" unit="" description="终端地址" />
+     -->
+    <data-item code="801F" description="801X">
+        <data-item code="8010" length="9" type="1400" unit="" description="主站通讯地址"/>
+        <data-item code="8011" length="9" type="1400" unit="" description="备用主站通讯地址1"/>
+        <data-item code="8012" length="9" type="1400" unit="" description="备用主站通讯地址2"/>
+        <data-item code="8013" length="8" type="1500" unit="" description="短信中心号码"/>
+        <data-item code="8014" length="8" type="1600" unit="" description="网关地址"/>
+        <data-item code="8015" length="16" type="4300" unit="" description="APN"/>
+        <data-item code="8016" length="2" type="0600" unit="" description="终端地市区县码"/>
+        <data-item code="8017" length="2" type="0500" unit="" description="终端地址"/>
+    </data-item>
+
+    <!--
+     <data-item code="8020" length="3" type="" unit="" description="PIN码及保存设置" />
+     <data-item code="8021" length="3" type="" unit="" description="设置密码（低级权限）" />
+     <data-item code="8022" length="3" type="" unit="" description="管理员密码（高级权限）" />
+     <data-item code="8023" length="1" type="" unit="" description="终端复位设置" />
+     -->
+    <data-item code="802F" description="802X">
+        <data-item code="8020" length="3" type="1700" unit="" description="PIN码及保存设置"/>
+        <data-item code="8021" length="3" type="4600" unit="" description="设置密码（低级权限）"/>
+        <data-item code="8022" length="3" type="4600" unit="" description="管理员密码（高级权限）"/>
+        <data-item code="8023" length="1" type="0100" unit="" description="终端复位设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="8030" length="6" type="" unit="" description="终端时间" />
+     <data-item code="8031" length="4" type="" unit="" description="对时规则" />
+     <data-item code="8032" length="1" type="" unit="" description="终端电源接线方式" />
+     <data-item code="8033" length="16" type="" unit="" description="告警屏蔽字" />
+     <data-item code="8034" length="1" type="" unit="" description="异常持续时间" />
+     <data-item code="8035" length="1" type="" unit="" description="异常恢复时间" />
+     <data-item code="8036" length="1" type="" unit="" description="测量点数量" />
+     <data-item code="8037" length="1" type="" unit="" description="信号量输入类型" />
+     -->
+    <data-item code="803F" description="803X">
+        <data-item code="8030" length="6" type="1900" unit="" description="终端时间"/>
+        <data-item code="8031" length="4" type="2000" unit="" description="对时规则"/>
+        <data-item code="8032" length="1" type="0100" unit="" description="终端电源接线方式"/>
+        <data-item code="8033" length="16" type="4500" unit="" description="告警屏蔽字"/>
+        <data-item code="8034" length="1" type="0100" unit="" description="异常持续时间"/>
+        <data-item code="8035" length="1" type="0100" unit="" description="异常恢复时间"/>
+        <data-item code="8036" length="1" type="0100" unit="" description="测量点数量"/>
+        <data-item code="8037" length="1" type="0100" unit="" description="信号量输入类型"/>
+    </data-item>
+
+    <!--
+     <data-item code="8040" length="1" type="" unit="" description="功控有效标识" />
+     <data-item code="8041" length="1" type="" unit="" description="月电控及购电控有效标志" />
+     <data-item code="8042" length="1" type="" unit="" description="功控轮次有效标志" />
+     <data-item code="8043" length="1" type="" unit="" description="电量控轮次有效标志" />
+     <data-item code="8044" length="1" type="" unit="" description="保电状态" />
+     <data-item code="8045" length="3" type="" unit="" description="跳闸的过负荷持续时间" />
+     <data-item code="8046" length="3" type="" unit="" description="跳闸恢复的负荷恢复持续时间" />
+     <data-item code="8047" length="1" type="" unit="" description="拉闸告警延时" />
+     <data-item code="8048" length="9" type="" unit="" description="功率控制用功率累加标志" />
+     <data-item code="8049" length="9" type="" unit="" description="电量控制用电量累加标志" />
+     <data-item code="804A" length="1" type="" unit="" description="功率定值浮动系数" />
+     <data-item code="804B" length="1" type="" unit="" description="月电控定值浮动系数" />
+     <data-item code="804C" length="4" type="" unit="" description="临时限电设置" />
+     <data-item code="804D" length="1" type="" unit="" description="临时限电计算划窗时间" />
+     <data-item code="804E" length="4" type="" unit="" description="最低负荷" />
+     -->
+    <data-item code="804F" description="804X">
+        <data-item code="8040" length="1" type="0100" unit="" description="功控有效标识"/>
+        <data-item code="8041" length="1" type="3300" unit="" description="月电控及购电控有效标志"/>
+        <data-item code="8042" length="1" type="4500" unit="" description="功控轮次有效标志"/>
+        <data-item code="8043" length="1" type="4500" unit="" description="电量控轮次有效标志"/>
+        <data-item code="8044" length="1" type="3300" unit="" description="保电状态"/>
+        <data-item code="8045" length="3" type="0900" unit="" description="跳闸的过负荷持续时间"/>
+        <data-item code="8046" length="3" type="0900" unit="" description="跳闸恢复的负荷恢复持续时间"/>
+        <data-item code="8047" length="1" type="0100" unit="" description="拉闸告警延时"/>
+        <data-item code="8048" length="9" type="2100" unit="" description="功率控制用功率累加标志"/>
+        <data-item code="8049" length="9" type="2100" unit="" description="电量控制用电量累加标志"/>
+        <data-item code="804A" length="1" type="0400" unit="" description="功率定值浮动系数"/>
+        <data-item code="804B" length="1" type="0400" unit="" description="月电控定值浮动系数"/>
+        <data-item code="804C" length="4" type="2200" unit="" description="临时限电设置"/>
+        <data-item code="804D" length="1" type="0100" unit="" description="临时限电计算划窗时间"/>
+        <data-item code="804E" length="4" type="0102" unit="" description="最低负荷"/>
+    </data-item>
+
+    <!--
+     <data-item code="8050" length="1" type="" unit="" description="功率定值系列1时段数" />
+     <data-item code="8051" length="7" type="" unit="" description="功率定值系列1时段1设置" />
+     <data-item code="8052" length="7" type="" unit="" description="功率定值系列1时段2设置" />
+     <data-item code="8053" length="7" type="" unit="" description="功率定值系列1时段3设置" />
+     <data-item code="8054" length="7" type="" unit="" description="功率定值系列1时段4设置" />
+     <data-item code="8055" length="7" type="" unit="" description="功率定值系列1时段5设置" />
+     <data-item code="8056" length="7" type="" unit="" description="功率定值系列1时段6设置" />
+     <data-item code="8057" length="7" type="" unit="" description="功率定值系列1时段7设置" />
+     <data-item code="8058" length="7" type="" unit="" description="功率定值系列1时段8设置" />
+     <data-item code="8059" length="9" type="" unit="" description="功率定值系列1执行设置" />
+     -->
+    <data-item code="805F" description="805X">
+        <data-item code="8050" length="1" type="0100" unit="" description="功率定值系列1时段数"/>
+        <data-item code="8051" length="7" type="2300" unit="" description="功率定值系列1时段1设置"/>
+        <data-item code="8052" length="7" type="2300" unit="" description="功率定值系列1时段2设置"/>
+        <data-item code="8053" length="7" type="2300" unit="" description="功率定值系列1时段3设置"/>
+        <data-item code="8054" length="7" type="2300" unit="" description="功率定值系列1时段4设置"/>
+        <data-item code="8055" length="7" type="2300" unit="" description="功率定值系列1时段5设置"/>
+        <data-item code="8056" length="7" type="2300" unit="" description="功率定值系列1时段6设置"/>
+        <data-item code="8057" length="7" type="2300" unit="" description="功率定值系列1时段7设置"/>
+        <data-item code="8058" length="7" type="2300" unit="" description="功率定值系列1时段8设置"/>
+        <data-item code="8059" length="9" type="2400" unit="" description="功率定值系列1执行设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="8060" length="4" type="" unit="" description="月电量限额" />
+     <data-item code="8061" length="4" type="" unit="" description="电量控轮次电量" />
+     <data-item code="8062" length="5" type="" unit="" description="本次购电量" />
+     <data-item code="8063" length="5" type="" unit="" description="剩余电量" />
+     <data-item code="8064" length="2" type="" unit="" description="遥控拉闸时间" />
+     <data-item code="8065" length="4" type="" unit="" description="月电量告警值" />
+     -->
+    <data-item code="806F" description="806X">
+        <data-item code="8060" length="4" type="0100" unit="" description="月电量限额"/>
+        <data-item code="8061" length="4" type="0101" unit="" description="电量控轮次电量"/>
+        <data-item code="8062" length="5" type="2500" unit="" description="本次购电量"/>
+        <data-item code="8063" length="5" type="0201" unit="" description="剩余电量"/>
+        <data-item code="8064" length="2" type="1300" unit="" description="遥控拉闸时间"/>
+        <data-item code="8065" length="4" type="0100" unit="" description="月电量告警值"/>
+    </data-item>
+
+    <!--
+     <data-item code="8070" length="1" type="" unit="" description="功率定值系列2时段数" />
+     <data-item code="8071" length="7" type="" unit="" description="功率定值系列2时段1设置" />
+     <data-item code="8072" length="7" type="" unit="" description="功率定值系列2时段2设置" />
+     <data-item code="8073" length="7" type="" unit="" description="功率定值系列2时段3设置" />
+     <data-item code="8074" length="7" type="" unit="" description="功率定值系列2时段4设置" />
+     <data-item code="8075" length="7" type="" unit="" description="功率定值系列2时段5设置" />
+     <data-item code="8076" length="7" type="" unit="" description="功率定值系列2时段6设置" />
+     <data-item code="8077" length="7" type="" unit="" description="功率定值系列2时段7设置" />
+     <data-item code="8078" length="7" type="" unit="" description="功率定值系列2时段8设置" />
+     <data-item code="8079" length="9" type="" unit="" description="功率定值系列2执行设置" />
+     -->
+    <data-item code="807F" description="807X">
+        <data-item code="8070" length="1" type="0100" unit="" description="功率定值系列2时段数"/>
+        <data-item code="8071" length="7" type="2300" unit="" description="功率定值系列2时段1设置"/>
+        <data-item code="8072" length="7" type="2300" unit="" description="功率定值系列2时段2设置"/>
+        <data-item code="8073" length="7" type="2300" unit="" description="功率定值系列2时段3设置"/>
+        <data-item code="8074" length="7" type="2300" unit="" description="功率定值系列2时段4设置"/>
+        <data-item code="8075" length="7" type="2300" unit="" description="功率定值系列2时段5设置"/>
+        <data-item code="8076" length="7" type="2300" unit="" description="功率定值系列2时段6设置"/>
+        <data-item code="8077" length="7" type="2300" unit="" description="功率定值系列2时段7设置"/>
+        <data-item code="8078" length="7" type="2300" unit="" description="功率定值系列2时段8设置"/>
+        <data-item code="8079" length="9" type="2400" unit="" description="功率定值系列2执行设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="8080" length="1" type="" unit="" description="功率定值系列3时段数" />
+     <data-item code="8081" length="7" type="" unit="" description="功率定值系列3时段1设置" />
+     <data-item code="8082" length="7" type="" unit="" description="功率定值系列3时段2设置" />
+     <data-item code="8083" length="7" type="" unit="" description="功率定值系列3时段3设置" />
+     <data-item code="8084" length="7" type="" unit="" description="功率定值系列3时段4设置" />
+     <data-item code="8085" length="7" type="" unit="" description="功率定值系列3时段5设置" />
+     <data-item code="8086" length="7" type="" unit="" description="功率定值系列3时段6设置" />
+     <data-item code="8087" length="7" type="" unit="" description="功率定值系列3时段7设置" />
+     <data-item code="8088" length="7" type="" unit="" description="功率定值系列3时段8设置" />
+     <data-item code="8089" length="9" type="" unit="" description="功率定值系列3执行设置" />
+     -->
+    <data-item code="808F" description="808X">
+        <data-item code="8080" length="1" type="0100" unit="" description="功率定值系列3时段数"/>
+        <data-item code="8081" length="7" type="2300" unit="" description="功率定值系列3时段1设置"/>
+        <data-item code="8082" length="7" type="2300" unit="" description="功率定值系列3时段2设置"/>
+        <data-item code="8083" length="7" type="2300" unit="" description="功率定值系列3时段3设置"/>
+        <data-item code="8084" length="7" type="2300" unit="" description="功率定值系列3时段4设置"/>
+        <data-item code="8085" length="7" type="2300" unit="" description="功率定值系列3时段5设置"/>
+        <data-item code="8086" length="7" type="2300" unit="" description="功率定值系列3时段6设置"/>
+        <data-item code="8087" length="7" type="2300" unit="" description="功率定值系列3时段7设置"/>
+        <data-item code="8088" length="7" type="2300" unit="" description="功率定值系列3时段8设置"/>
+        <data-item code="8089" length="9" type="2400" unit="" description="功率定值系列3执行设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="8090" length="1" type="hex" unit="" description="功率定值系列4时段数" />
+     <data-item code="8091" length="7" type="mix" unit="" description="功率定值系列4时段1设置" />
+     <data-item code="8092" length="7" type="mix" unit="" description="功率定值系列4时段2设置" />
+     <data-item code="8093" length="7" type="mix" unit="" description="功率定值系列4时段3设置" />
+     <data-item code="8094" length="7" type="mix" unit="" description="功率定值系列4时段4设置" />
+     <data-item code="8095" length="7" type="mix" unit="" description="功率定值系列4时段5设置" />
+     <data-item code="8096" length="7" type="mix" unit="" description="功率定值系列4时段6设置" />
+     <data-item code="8097" length="7" type="mix" unit="" description="功率定值系列4时段7设置" />
+     <data-item code="8098" length="7" type="mix" unit="" description="功率定值系列4时段8设置" />
+     <data-item code="8099" length="9" type="mix" unit="" description="功率定值系列4执行设置" />
+     -->
+    <data-item code="809F" description="809X">
+        <data-item code="8090" length="1" type="0100" unit="" description="功率定值系列4时段数"/>
+        <data-item code="8091" length="7" type="2300" unit="" description="功率定值系列4时段1设置"/>
+        <data-item code="8092" length="7" type="2300" unit="" description="功率定值系列4时段2设置"/>
+        <data-item code="8093" length="7" type="2300" unit="" description="功率定值系列4时段3设置"/>
+        <data-item code="8094" length="7" type="2300" unit="" description="功率定值系列4时段4设置"/>
+        <data-item code="8095" length="7" type="2300" unit="" description="功率定值系列4时段5设置"/>
+        <data-item code="8096" length="7" type="2300" unit="" description="功率定值系列4时段6设置"/>
+        <data-item code="8097" length="7" type="2300" unit="" description="功率定值系列4时段7设置"/>
+        <data-item code="8098" length="7" type="2300" unit="" description="功率定值系列4时段8设置"/>
+        <data-item code="8099" length="9" type="2400" unit="" description="功率定值系列4执行设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="80A0" length="1" type="hex" unit="" description="功率定值系列5时段数" />
+     <data-item code="80A1" length="7" type="mix" unit="" description="功率定值系列5时段1设置" />
+     <data-item code="80A2" length="7" type="mix" unit="" description="功率定值系列5时段2设置" />
+     <data-item code="80A3" length="7" type="mix" unit="" description="功率定值系列5时段3设置" />
+     <data-item code="80A4" length="7" type="mix" unit="" description="功率定值系列5时段4设置" />
+     <data-item code="80A5" length="7" type="mix" unit="" description="功率定值系列5时段5设置" />
+     <data-item code="80A6" length="7" type="mix" unit="" description="功率定值系列5时段6设置" />
+     <data-item code="80A7" length="7" type="mix" unit="" description="功率定值系列5时段7设置" />
+     <data-item code="80A8" length="7" type="mix" unit="" description="功率定值系列5时段8设置" />
+     <data-item code="80A9" length="9" type="mix" unit="" description="功率定值系列5执行设置" />
+     -->
+    <data-item code="80AF" description="80AX">
+        <data-item code="80A0" length="1" type="0100" unit="" description="功率定值系列5时段数"/>
+        <data-item code="80A1" length="7" type="2300" unit="" description="功率定值系列5时段1设置"/>
+        <data-item code="80A2" length="7" type="2300" unit="" description="功率定值系列5时段2设置"/>
+        <data-item code="80A3" length="7" type="2300" unit="" description="功率定值系列5时段3设置"/>
+        <data-item code="80A4" length="7" type="2300" unit="" description="功率定值系列5时段4设置"/>
+        <data-item code="80A5" length="7" type="2300" unit="" description="功率定值系列5时段5设置"/>
+        <data-item code="80A6" length="7" type="2300" unit="" description="功率定值系列5时段6设置"/>
+        <data-item code="80A7" length="7" type="2300" unit="" description="功率定值系列5时段7设置"/>
+        <data-item code="80A8" length="7" type="2300" unit="" description="功率定值系列5时段8设置"/>
+        <data-item code="80A9" length="9" type="2400" unit="" description="功率定值系列5执行设置"/>
+    </data-item>
+
+    <!--
+     <data-item code="80B0" length="1" type="hex" unit="" description="功率定值系列6时段数" />
+     <data-item code="80B1" length="7" type="mix" unit="" description="功率定值系列6时段1设置" />
+     <data-item code="80B2" length="7" type="mix" unit="" description="功率定值系列6时段2设置" />
+     <data-item code="80B3" length="7" type="mix" unit="" description="功率定值系列6时段3设置" />
+     <data-item code="80B4" length="7" type="mix" unit="" description="功率定值系列6时段4设置" />
+     <data-item code="80B5" length="7" type="mix" unit="" description="功率定值系列6时段5设置" />
+     <data-item code="80B6" length="7" type="mix" unit="" description="功率定值系列6时段6设置" />
+     <data-item code="80B7" length="7" type="mix" unit="" description="功率定值系列6时段7设置" />
+     <data-item code="80B8" length="7" type="mix" unit="" description="功率定值系列6时段8设置" />
+     <data-item code="80B9" length="9" type="mix" unit="" description="功率定值系列6执行设置" />
+     -->
+    <data-item code="80BF" description="80BX">
+        <data-item code="80B0" length="1" type="0100" unit="" description="功率定值系列6时段数"/>
+        <data-item code="80B1" length="7" type="2300" unit="" description="功率定值系列6时段1设置"/>
+        <data-item code="80B2" length="7" type="2300" unit="" description="功率定值系列6时段2设置"/>
+        <data-item code="80B3" length="7" type="2300" unit="" description="功率定值系列6时段3设置"/>
+        <data-item code="80B4" length="7" type="2300" unit="" description="功率定值系列6时段4设置"/>
+        <data-item code="80B5" length="7" type="2300" unit="" description="功率定值系列6时段5设置"/>
+        <data-item code="80B6" length="7" type="2300" unit="" description="功率定值系列6时段6设置"/>
+        <data-item code="80B7" length="7" type="2300" unit="" description="功率定值系列6时段7设置"/>
+        <data-item code="80B8" length="7" type="2300" unit="" description="功率定值系列6时段8设置"/>
+        <data-item code="80B9" length="9" type="2400" unit="" description="功率定值系列6执行设置"/>
+    </data-item>
+
+    <data-item code="8100" length="1" type="0300" unit="" description="任务总数"/>
+    <data-item code="8101" length="0" type="3400" unit="" description="任务1设置"/>
+    <data-item code="8102" length="0" type="3400" unit="" description="任务2设置"/>
+    <data-item code="8103" length="0" type="3400" unit="" description="任务3设置"/>
+    <data-item code="8104" length="0" type="3400" unit="" description="任务4设置"/>
+    <data-item code="8105" length="0" type="3400" unit="" description="任务5设置"/>
+    <data-item code="8106" length="0" type="3400" unit="" description="任务6设置"/>
+    <data-item code="8107" length="0" type="3400" unit="" description="任务7设置"/>
+    <data-item code="8108" length="0" type="3400" unit="" description="任务8设置"/>
+    <data-item code="8109" length="0" type="3400" unit="" description="任务9设置"/>
+    <data-item code="810A" length="0" type="3400" unit="" description="任务10设置"/>
+    <data-item code="810B" length="0" type="3400" unit="" description="任务11设置"/>
+    <data-item code="810C" length="0" type="3400" unit="" description="任务12设置"/>
+    <data-item code="810D" length="0" type="3400" unit="" description="任务13设置"/>
+    <data-item code="810E" length="0" type="3400" unit="" description="任务14设置"/>
+    <data-item code="810F" length="0" type="3400" unit="" description="任务15设置"/>
+
+    <data-item code="8110" length="0" type="3400" unit="" description="任务16设置"/>
+    <data-item code="8111" length="0" type="3400" unit="" description="任务17设置"/>
+    <data-item code="8112" length="0" type="3400" unit="" description="任务18设置"/>
+    <data-item code="8113" length="0" type="3400" unit="" description="任务19设置"/>
+    <data-item code="8114" length="0" type="3400" unit="" description="任务20设置"/>
+    <data-item code="8115" length="0" type="3400" unit="" description="任务21设置"/>
+    <data-item code="8116" length="0" type="3400" unit="" description="任务22设置"/>
+    <data-item code="8117" length="0" type="3400" unit="" description="任务23设置"/>
+    <data-item code="8118" length="0" type="3400" unit="" description="任务24设置"/>
+    <data-item code="8119" length="0" type="3400" unit="" description="任务25设置"/>
+    <data-item code="811A" length="0" type="3400" unit="" description="任务26设置"/>
+    <data-item code="811B" length="0" type="3400" unit="" description="任务27设置"/>
+    <data-item code="811C" length="0" type="3400" unit="" description="任务28设置"/>
+    <data-item code="811D" length="0" type="3400" unit="" description="任务29设置"/>
+    <data-item code="811E" length="0" type="3400" unit="" description="任务30设置"/>
+    <data-item code="811F" length="0" type="3400" unit="" description="任务31设置"/>
+
+    <data-item code="8120" length="0" type="3400" unit="" description="任务32设置"/>
+    <data-item code="8121" length="0" type="3400" unit="" description="任务33设置"/>
+    <data-item code="8122" length="0" type="3400" unit="" description="任务34设置"/>
+    <data-item code="8123" length="0" type="3400" unit="" description="任务35设置"/>
+    <data-item code="8124" length="0" type="3400" unit="" description="任务36设置"/>
+    <data-item code="8125" length="0" type="3400" unit="" description="任务37设置"/>
+    <data-item code="8126" length="0" type="3400" unit="" description="任务38设置"/>
+    <data-item code="8127" length="0" type="3400" unit="" description="任务39设置"/>
+    <data-item code="8128" length="0" type="3400" unit="" description="任务40设置"/>
+    <data-item code="8129" length="0" type="3400" unit="" description="任务41设置"/>
+    <data-item code="812A" length="0" type="3400" unit="" description="任务42设置"/>
+    <data-item code="812B" length="0" type="3400" unit="" description="任务43设置"/>
+    <data-item code="812C" length="0" type="3400" unit="" description="任务44设置"/>
+    <data-item code="812D" length="0" type="3400" unit="" description="任务45设置"/>
+    <data-item code="812E" length="0" type="3400" unit="" description="任务46设置"/>
+    <data-item code="812F" length="0" type="3400" unit="" description="任务47设置"/>
+
+    <data-item code="81FE" length="32" type="4500" unit="" description="任务有效状态"/>
+
+    <!--
+     <data-item code="8210" length="1" type="" unit="" description="输入开关1状态" />
+     <data-item code="8211" length="1" type="" unit="" description="输入开关2状态" />
+     <data-item code="8212" length="1" type="" unit="" description="输入开关3状态" />
+     <data-item code="8213" length="1" type="" unit="" description="输入开关4状态" />
+     <data-item code="8214" length="1" type="" unit="" description="输入开关5状态" />
+     <data-item code="8215" length="1" type="" unit="" description="输入开关6状态" />
+     <data-item code="8216" length="1" type="" unit="" description="输入开关7状态" />
+     <data-item code="8217" length="1" type="" unit="" description="输入开关8状态" />
+     <data-item code="8218" length="1" type="" unit="" description="输入开关9状态" />
+     <data-item code="8219" length="1" type="" unit="" description="输入开关10状态" />
+     <data-item code="821A" length="1" type="" unit="" description="输入开关11状态" />
+     <data-item code="821B" length="1" type="" unit="" description="输入开关12状态" />
+     <data-item code="821C" length="1" type="" unit="" description="输入开关13状态" />
+     <data-item code="821D" length="1" type="" unit="" description="输入开关14状态" />
+     <data-item code="821E" length="1" type="" unit="" description="输入开关15状态" />
+     -->
+    <data-item code="821F" description="821X">
+        <data-item code="8210" length="1" type="0100" unit="" description="输入开关1状态"/>
+        <data-item code="8211" length="1" type="0100" unit="" description="输入开关2状态"/>
+        <data-item code="8212" length="1" type="0100" unit="" description="输入开关3状态"/>
+        <data-item code="8213" length="1" type="0100" unit="" description="输入开关4状态"/>
+        <data-item code="8214" length="1" type="0100" unit="" description="输入开关5状态"/>
+        <data-item code="8215" length="1" type="0100" unit="" description="输入开关6状态"/>
+        <data-item code="8216" length="1" type="0100" unit="" description="输入开关7状态"/>
+        <data-item code="8217" length="1" type="0100" unit="" description="输入开关8状态"/>
+        <data-item code="8218" length="1" type="0100" unit="" description="输入开关9状态"/>
+        <data-item code="8219" length="1" type="0100" unit="" description="输入开关10状态"/>
+        <data-item code="821A" length="1" type="0100" unit="" description="输入开关11状态"/>
+        <data-item code="821B" length="1" type="0100" unit="" description="输入开关12状态"/>
+        <data-item code="821C" length="1" type="0100" unit="" description="输入开关13状态"/>
+        <data-item code="821D" length="1" type="0100" unit="" description="输入开关14状态"/>
+        <data-item code="821E" length="1" type="0100" unit="" description="输入开关15状态"/>
+    </data-item>
+
+    <!--
+     <data-item code="8220" length="1" type="" unit="" description="输出开关1状态" />
+     <data-item code="8221" length="1" type="" unit="" description="输出开关2状态" />
+     <data-item code="8222" length="1" type="" unit="" description="输出开关3状态" />
+     <data-item code="8223" length="1" type="" unit="" description="输出开关4状态" />
+     <data-item code="8224" length="1" type="" unit="" description="输出开关5状态" />
+     <data-item code="8225" length="1" type="" unit="" description="输出开关6状态" />
+     <data-item code="8226" length="1" type="" unit="" description="输出开关7状态" />
+     <data-item code="8227" length="1" type="" unit="" description="输出开关8状态" />
+     <data-item code="8228" length="1" type="" unit="" description="输出开关9状态" />
+     <data-item code="8229" length="1" type="" unit="" description="输出开关10状态" />
+     <data-item code="822A" length="1" type="" unit="" description="输出开关11状态" />
+     <data-item code="822B" length="1" type="" unit="" description="输出开关12状态" />
+     <data-item code="822C" length="1" type="" unit="" description="输出开关13状态" />
+     <data-item code="822D" length="1" type="" unit="" description="输出开关14状态" />
+     <data-item code="822E" length="1" type="" unit="" description="输出开关15状态" />
+     -->
+    <data-item code="822F" description="822X">
+        <data-item code="8220" length="1" type="0100" unit="" description="输出开关1状态"/>
+        <data-item code="8221" length="1" type="0100" unit="" description="输出开关2状态"/>
+        <data-item code="8222" length="1" type="0100" unit="" description="输出开关3状态"/>
+        <data-item code="8223" length="1" type="0100" unit="" description="输出开关4状态"/>
+        <data-item code="8224" length="1" type="0100" unit="" description="输出开关5状态"/>
+        <data-item code="8225" length="1" type="0100" unit="" description="输出开关6状态"/>
+        <data-item code="8226" length="1" type="0100" unit="" description="输出开关7状态"/>
+        <data-item code="8227" length="1" type="0100" unit="" description="输出开关8状态"/>
+        <data-item code="8228" length="1" type="0100" unit="" description="输出开关9状态"/>
+        <data-item code="8229" length="1" type="0100" unit="" description="输出开关10状态"/>
+        <data-item code="822A" length="1" type="0100" unit="" description="输出开关11状态"/>
+        <data-item code="822B" length="1" type="0100" unit="" description="输出开关12状态"/>
+        <data-item code="822C" length="1" type="0100" unit="" description="输出开关13状态"/>
+        <data-item code="822D" length="1" type="0100" unit="" description="输出开关14状态"/>
+        <data-item code="822E" length="1" type="0100" unit="" description="输出开关15状态"/>
+    </data-item>
+
+    <!--
+     <data-item code="8230" length="1" type="" unit="" description="开关1所属轮次号" />
+     <data-item code="8231" length="1" type="" unit="" description="开关2所属轮次号" />
+     <data-item code="8232" length="1" type="" unit="" description="开关3所属轮次号" />
+     <data-item code="8233" length="1" type="" unit="" description="开关4所属轮次号" />
+     <data-item code="8234" length="1" type="" unit="" description="开关5所属轮次号" />
+     <data-item code="8235" length="1" type="" unit="" description="开关6所属轮次号" />
+     <data-item code="8236" length="1" type="" unit="" description="开关7所属轮次号" />
+     <data-item code="8237" length="1" type="" unit="" description="开关8所属轮次号" />
+     <data-item code="8238" length="1" type="" unit="" description="开关9所属轮次号" />
+     <data-item code="8239" length="1" type="" unit="" description="开关10所属轮次号" />
+     <data-item code="823A" length="1" type="" unit="" description="开关11所属轮次号" />
+     <data-item code="823B" length="1" type="" unit="" description="开关12所属轮次号" />
+     <data-item code="823C" length="1" type="" unit="" description="开关13所属轮次号" />
+     <data-item code="823D" length="1" type="" unit="" description="开关14所属轮次号" />
+     <data-item code="823E" length="1" type="" unit="" description="开关15所属轮次号" />
+     -->
+    <data-item code="823F" description="823X">
+        <data-item code="8230" length="1" type="0100" unit="" description="开关1所属轮次号"/>
+        <data-item code="8231" length="1" type="0100" unit="" description="开关2所属轮次号"/>
+        <data-item code="8232" length="1" type="0100" unit="" description="开关3所属轮次号"/>
+        <data-item code="8233" length="1" type="0100" unit="" description="开关4所属轮次号"/>
+        <data-item code="8234" length="1" type="0100" unit="" description="开关5所属轮次号"/>
+        <data-item code="8235" length="1" type="0100" unit="" description="开关6所属轮次号"/>
+        <data-item code="8236" length="1" type="0100" unit="" description="开关7所属轮次号"/>
+        <data-item code="8237" length="1" type="0100" unit="" description="开关8所属轮次号"/>
+        <data-item code="8238" length="1" type="0100" unit="" description="开关9所属轮次号"/>
+        <data-item code="8239" length="1" type="0100" unit="" description="开关10所属轮次号"/>
+        <data-item code="823A" length="1" type="0100" unit="" description="开关11所属轮次号"/>
+        <data-item code="823B" length="1" type="0100" unit="" description="开关12所属轮次号"/>
+        <data-item code="823C" length="1" type="0100" unit="" description="开关13所属轮次号"/>
+        <data-item code="823D" length="1" type="0100" unit="" description="开关14所属轮次号"/>
+        <data-item code="823E" length="1" type="0100" unit="" description="开关15所属轮次号"/>
+    </data-item>
+
+    <!--
+     <data-item code="8240" length="1" type="" unit="" description="输入信号量1状态" />
+     <data-item code="8241" length="1" type="" unit="" description="输入信号量2状态" />
+     <data-item code="8242" length="1" type="" unit="" description="输入信号量3状态" />
+     <data-item code="8243" length="1" type="" unit="" description="输入信号量4状态" />
+     <data-item code="8244" length="1" type="" unit="" description="输入信号量5状态" />
+     <data-item code="8245" length="1" type="" unit="" description="输入信号量6状态" />
+     <data-item code="8246" length="1" type="" unit="" description="输入信号量7状态" />
+     <data-item code="8247" length="1" type="" unit="" description="输入信号量8状态" />
+     <data-item code="8248" length="1" type="" unit="" description="输入信号量9状态" />
+     <data-item code="8249" length="1" type="" unit="" description="输入信号量10状态" />
+     <data-item code="824A" length="1" type="" unit="" description="输入信号量11状态" />
+     <data-item code="824B" length="1" type="" unit="" description="输入信号量12状态" />
+     <data-item code="824C" length="1" type="" unit="" description="输入信号量13状态" />
+     <data-item code="824D" length="1" type="" unit="" description="输入信号量14状态" />
+     <data-item code="824E" length="1" type="" unit="" description="输入信号量15状态" />
+     -->
+    <data-item code="824F" description="824X">
+        <data-item code="8240" length="1" type="0100" unit="" description="输入信号量1状态"/>
+        <data-item code="8241" length="1" type="0100" unit="" description="输入信号量2状态"/>
+        <data-item code="8242" length="1" type="0100" unit="" description="输入信号量3状态"/>
+        <data-item code="8243" length="1" type="0100" unit="" description="输入信号量4状态"/>
+        <data-item code="8244" length="1" type="0100" unit="" description="输入信号量5状态"/>
+        <data-item code="8245" length="1" type="0100" unit="" description="输入信号量6状态"/>
+        <data-item code="8246" length="1" type="0100" unit="" description="输入信号量7状态"/>
+        <data-item code="8247" length="1" type="0100" unit="" description="输入信号量8状态"/>
+        <data-item code="8248" length="1" type="0100" unit="" description="输入信号量9状态"/>
+        <data-item code="8249" length="1" type="0100" unit="" description="输入信号量10状态"/>
+        <data-item code="824A" length="1" type="0100" unit="" description="输入信号量11状态"/>
+        <data-item code="824B" length="1" type="0100" unit="" description="输入信号量12状态"/>
+        <data-item code="824C" length="1" type="0100" unit="" description="输入信号量13状态"/>
+        <data-item code="824D" length="1" type="0100" unit="" description="输入信号量14状态"/>
+        <data-item code="824E" length="1" type="0100" unit="" description="输入信号量15状态"/>
+    </data-item>
+
+    <!--
+     <data-item code="8300" length="1" type="" unit="" description="模拟量数量" />
+     <data-item code="8301" length="3" type="" unit="" description="模拟量1设置" />
+     <data-item code="8302" length="3" type="" unit="" description="模拟量2设置" />
+     <data-item code="8303" length="3" type="" unit="" description="模拟量3设置" />
+     <data-item code="8304" length="3" type="" unit="" description="模拟量4设置" />
+     <data-item code="8305" length="3" type="" unit="" description="模拟量5设置" />
+     <data-item code="8306" length="3" type="" unit="" description="模拟量6设置" />
+     <data-item code="8307" length="3" type="" unit="" description="模拟量7设置" />
+     <data-item code="8308" length="3" type="" unit="" description="模拟量8设置" />
+     <data-item code="8309" length="3" type="" unit="" description="模拟量9设置" />
+     <data-item code="830A" length="3" type="" unit="" description="模拟量10设置" />
+     <data-item code="830B" length="3" type="" unit="" description="模拟量11设置" />
+     <data-item code="830C" length="3" type="" unit="" description="模拟量12设置" />
+     <data-item code="830D" length="3" type="" unit="" description="模拟量13设置" />
+     <data-item code="830E" length="3" type="" unit="" description="模拟量14设置" />
+     <data-item code="830F" length="3" type="" unit="" description="模拟量15设置" />
+     <data-item code="8310" length="3" type="" unit="" description="模拟量16设置" />
+     <data-item code="8311" length="3" type="" unit="" description="模拟量17设置" />
+     <data-item code="8312" length="3" type="" unit="" description="模拟量18设置" />
+     <data-item code="8313" length="3" type="" unit="" description="模拟量19设置" />
+     <data-item code="8314" length="3" type="" unit="" description="模拟量20设置" />
+     <data-item code="8315" length="3" type="" unit="" description="模拟量21设置" />
+     <data-item code="8316" length="3" type="" unit="" description="模拟量22设置" />
+     <data-item code="8317" length="3" type="" unit="" description="模拟量23设置" />
+     <data-item code="8318" length="3" type="" unit="" description="模拟量24设置" />
+     <data-item code="8319" length="3" type="" unit="" description="模拟量25设置" />
+     <data-item code="831A" length="3" type="" unit="" description="模拟量26设置" />
+     <data-item code="831B" length="3" type="" unit="" description="模拟量27设置" />
+     <data-item code="831C" length="3" type="" unit="" description="模拟量28设置" />
+     <data-item code="831D" length="3" type="" unit="" description="模拟量29设置" />
+     <data-item code="831E" length="3" type="" unit="" description="模拟量30设置" />
+     <data-item code="831F" length="3" type="" unit="" description="模拟量31设置" />
+     <data-item code="8320" length="3" type="" unit="" description="模拟量32设置" />
+     <data-item code="83FE" length="32" type="" unit="" description="模拟量有效标志" />
+     -->
+    <data-item code="83FF" description="83XX">
+        <data-item code="8300" length="1" type="0300" unit="" description="模拟量数量"/>
+        <data-item code="8301" length="3" type="2900" unit="" description="模拟量1设置"/>
+        <data-item code="8302" length="3" type="2900" unit="" description="模拟量2设置"/>
+        <data-item code="8303" length="3" type="2900" unit="" description="模拟量3设置"/>
+        <data-item code="8304" length="3" type="2900" unit="" description="模拟量4设置"/>
+        <data-item code="8305" length="3" type="2900" unit="" description="模拟量5设置"/>
+        <data-item code="8306" length="3" type="2900" unit="" description="模拟量6设置"/>
+        <data-item code="8307" length="3" type="2900" unit="" description="模拟量7设置"/>
+        <data-item code="8308" length="3" type="2900" unit="" description="模拟量8设置"/>
+        <data-item code="8309" length="3" type="2900" unit="" description="模拟量9设置"/>
+        <data-item code="830A" length="3" type="2900" unit="" description="模拟量10设置"/>
+        <data-item code="830B" length="3" type="2900" unit="" description="模拟量11设置"/>
+        <data-item code="830C" length="3" type="2900" unit="" description="模拟量12设置"/>
+        <data-item code="830D" length="3" type="2900" unit="" description="模拟量13设置"/>
+        <data-item code="830E" length="3" type="2900" unit="" description="模拟量14设置"/>
+        <data-item code="830F" length="3" type="2900" unit="" description="模拟量15设置"/>
+        <data-item code="8310" length="3" type="2900" unit="" description="模拟量16设置"/>
+        <data-item code="8311" length="3" type="2900" unit="" description="模拟量17设置"/>
+        <data-item code="8312" length="3" type="2900" unit="" description="模拟量18设置"/>
+        <data-item code="8313" length="3" type="2900" unit="" description="模拟量19设置"/>
+        <data-item code="8314" length="3" type="2900" unit="" description="模拟量20设置"/>
+        <data-item code="8315" length="3" type="2900" unit="" description="模拟量21设置"/>
+        <data-item code="8316" length="3" type="2900" unit="" description="模拟量22设置"/>
+        <data-item code="8317" length="3" type="2900" unit="" description="模拟量23设置"/>
+        <data-item code="8318" length="3" type="2900" unit="" description="模拟量24设置"/>
+        <data-item code="8319" length="3" type="2900" unit="" description="模拟量25设置"/>
+        <data-item code="831A" length="3" type="2900" unit="" description="模拟量26设置"/>
+        <data-item code="831B" length="3" type="2900" unit="" description="模拟量27设置"/>
+        <data-item code="831C" length="3" type="2900" unit="" description="模拟量28设置"/>
+        <data-item code="831D" length="3" type="2900" unit="" description="模拟量29设置"/>
+        <data-item code="831E" length="3" type="2900" unit="" description="模拟量30设置"/>
+        <data-item code="831F" length="3" type="2900" unit="" description="模拟量31设置"/>
+        <data-item code="8320" length="3" type="2900" unit="" description="模拟量32设置"/>
+        <data-item code="83FE" length="32" type="0500" unit="" description="模拟量有效标志"/>
+    </data-item>
+
+    <!--
+     <data-item code="8400" length="1" type="" unit="" description="脉冲量数量" />
+     <data-item code="8401" length="5" type="" unit="" description="脉冲量1设置" />
+     <data-item code="8402" length="5" type="" unit="" description="脉冲量2设置" />
+     <data-item code="8403" length="5" type="" unit="" description="脉冲量3设置" />
+     <data-item code="8404" length="5" type="" unit="" description="脉冲量4设置" />
+     <data-item code="8405" length="5" type="" unit="" description="脉冲量5设置" />
+     <data-item code="8406" length="5" type="" unit="" description="脉冲量6设置" />
+     <data-item code="8407" length="5" type="" unit="" description="脉冲量7设置" />
+     <data-item code="8408" length="5" type="" unit="" description="脉冲量8设置" />
+     <data-item code="8409" length="5" type="" unit="" description="脉冲量9设置" />
+     <data-item code="840A" length="5" type="" unit="" description="脉冲量10设置" />
+     <data-item code="840B" length="5" type="" unit="" description="脉冲量11设置" />
+     <data-item code="840C" length="5" type="" unit="" description="脉冲量12设置" />
+     <data-item code="840D" length="5" type="" unit="" description="脉冲量13设置" />
+     <data-item code="840E" length="5" type="" unit="" description="脉冲量14设置" />
+     <data-item code="840F" length="5" type="" unit="" description="脉冲量15设置" />
+     <data-item code="8410" length="5" type="" unit="" description="脉冲量16设置" />
+     <data-item code="8411" length="5" type="" unit="" description="脉冲量17设置" />
+     <data-item code="8412" length="5" type="" unit="" description="脉冲量18设置" />
+     <data-item code="8413" length="5" type="" unit="" description="脉冲量19设置" />
+     <data-item code="8414" length="5" type="" unit="" description="脉冲量20设置" />
+     <data-item code="8415" length="5" type="" unit="" description="脉冲量21设置" />
+     <data-item code="8416" length="5" type="" unit="" description="脉冲量22设置" />
+     <data-item code="8417" length="5" type="" unit="" description="脉冲量23设置" />
+     <data-item code="8418" length="5" type="" unit="" description="脉冲量24设置" />
+     <data-item code="8419" length="5" type="" unit="" description="脉冲量25设置" />
+     <data-item code="841A" length="5" type="" unit="" description="脉冲量26设置" />
+     <data-item code="841B" length="5" type="" unit="" description="脉冲量27设置" />
+     <data-item code="841C" length="5" type="" unit="" description="脉冲量28设置" />
+     <data-item code="841D" length="5" type="" unit="" description="脉冲量29设置" />
+     <data-item code="841E" length="5" type="" unit="" description="脉冲量30设置" />
+     <data-item code="841F" length="5" type="" unit="" description="脉冲量31设置" />
+     <data-item code="8420" length="5" type="" unit="" description="脉冲量32设置" />
+     <data-item code="84FE" length="32" type="" unit="" description="脉冲量有效标志" />
+     -->
+    <data-item code="84FF" description="84XX">
+        <data-item code="8400" length="1" type="0300" unit="" description="脉冲量数量"/>
+        <data-item code="8401" length="5" type="3000" unit="" description="脉冲量1设置"/>
+        <data-item code="8402" length="5" type="3000" unit="" description="脉冲量2设置"/>
+        <data-item code="8403" length="5" type="3000" unit="" description="脉冲量3设置"/>
+        <data-item code="8404" length="5" type="3000" unit="" description="脉冲量4设置"/>
+        <data-item code="8405" length="5" type="3000" unit="" description="脉冲量5设置"/>
+        <data-item code="8406" length="5" type="3000" unit="" description="脉冲量6设置"/>
+        <data-item code="8407" length="5" type="3000" unit="" description="脉冲量7设置"/>
+        <data-item code="8408" length="5" type="3000" unit="" description="脉冲量8设置"/>
+        <data-item code="8409" length="5" type="3000" unit="" description="脉冲量9设置"/>
+        <data-item code="840A" length="5" type="3000" unit="" description="脉冲量10设置"/>
+        <data-item code="840B" length="5" type="3000" unit="" description="脉冲量11设置"/>
+        <data-item code="840C" length="5" type="3000" unit="" description="脉冲量12设置"/>
+        <data-item code="840D" length="5" type="3000" unit="" description="脉冲量13设置"/>
+        <data-item code="840E" length="5" type="3000" unit="" description="脉冲量14设置"/>
+        <data-item code="840F" length="5" type="3000" unit="" description="脉冲量15设置"/>
+        <data-item code="8410" length="5" type="3000" unit="" description="脉冲量16设置"/>
+        <data-item code="8411" length="5" type="3000" unit="" description="脉冲量17设置"/>
+        <data-item code="8412" length="5" type="3000" unit="" description="脉冲量18设置"/>
+        <data-item code="8413" length="5" type="3000" unit="" description="脉冲量19设置"/>
+        <data-item code="8414" length="5" type="3000" unit="" description="脉冲量20设置"/>
+        <data-item code="8415" length="5" type="3000" unit="" description="脉冲量21设置"/>
+        <data-item code="8416" length="5" type="3000" unit="" description="脉冲量22设置"/>
+        <data-item code="8417" length="5" type="3000" unit="" description="脉冲量23设置"/>
+        <data-item code="8418" length="5" type="3000" unit="" description="脉冲量24设置"/>
+        <data-item code="8419" length="5" type="3000" unit="" description="脉冲量25设置"/>
+        <data-item code="841A" length="5" type="3000" unit="" description="脉冲量26设置"/>
+        <data-item code="841B" length="5" type="3000" unit="" description="脉冲量27设置"/>
+        <data-item code="841C" length="5" type="3000" unit="" description="脉冲量28设置"/>
+        <data-item code="841D" length="5" type="3000" unit="" description="脉冲量29设置"/>
+        <data-item code="841E" length="5" type="3000" unit="" description="脉冲量30设置"/>
+        <data-item code="841F" length="5" type="3000" unit="" description="脉冲量31设置"/>
+        <data-item code="8420" length="5" type="3000" unit="" description="脉冲量32设置"/>
+        <data-item code="84FE" length="32" type="0500" unit="" description="脉冲量有效标志"/>
+    </data-item>
+
+    <!--
+     <data-item code="8500" length="1" type="" unit="" description="运算量数量" />
+     <data-item code="8501" length="19" type="" unit="" description="运算量1设置" />
+     <data-item code="8502" length="19" type="" unit="" description="运算量2设置" />
+     <data-item code="8503" length="19" type="" unit="" description="运算量3设置" />
+     <data-item code="8504" length="19" type="" unit="" description="运算量4设置" />
+     <data-item code="8505" length="19" type="" unit="" description="运算量5设置" />
+     <data-item code="8506" length="19" type="" unit="" description="运算量6设置" />
+     <data-item code="8507" length="19" type="" unit="" description="运算量7设置" />
+     <data-item code="8508" length="19" type="" unit="" description="运算量8设置" />
+     <data-item code="8509" length="19" type="" unit="" description="运算量9设置" />
+     <data-item code="850A" length="19" type="" unit="" description="运算量10设置" />
+     <data-item code="850B" length="19" type="" unit="" description="运算量11设置" />
+     <data-item code="850C" length="19" type="" unit="" description="运算量12设置" />
+     <data-item code="850D" length="19" type="" unit="" description="运算量13设置" />
+     <data-item code="850E" length="19" type="" unit="" description="运算量14设置" />
+     <data-item code="850F" length="19" type="" unit="" description="运算量15设置" />
+     <data-item code="8510" length="19" type="" unit="" description="运算量16设置" />
+     <data-item code="8511" length="19" type="" unit="" description="运算量17设置" />
+     <data-item code="8512" length="19" type="" unit="" description="运算量18设置" />
+     <data-item code="8513" length="19" type="" unit="" description="运算量19设置" />
+     <data-item code="8514" length="19" type="" unit="" description="运算量20设置" />
+     <data-item code="8515" length="19" type="" unit="" description="运算量21设置" />
+     <data-item code="8516" length="19" type="" unit="" description="运算量22设置" />
+     <data-item code="8517" length="19" type="" unit="" description="运算量23设置" />
+     <data-item code="8518" length="19" type="" unit="" description="运算量24设置" />
+     <data-item code="8519" length="19" type="" unit="" description="运算量25设置" />
+     <data-item code="851A" length="19" type="" unit="" description="运算量26设置" />
+     <data-item code="851B" length="19" type="" unit="" description="运算量27设置" />
+     <data-item code="851C" length="19" type="" unit="" description="运算量28设置" />
+     <data-item code="851D" length="19" type="" unit="" description="运算量29设置" />
+     <data-item code="851E" length="19" type="" unit="" description="运算量30设置" />
+     <data-item code="851F" length="19" type="" unit="" description="运算量31设置" />
+     <data-item code="8520" length="19" type="" unit="" description="运算量32设置" />
+     <data-item code="85FE" length="32" type="" unit="" description="运算量有效标志" />
+     -->
+    <data-item code="85FF" description="85XX">
+        <data-item code="8500" length="1" type="0300" unit="" description="运算量数量"/>
+        <data-item code="8501" length="19" type="3100" unit="" description="运算量1设置"/>
+        <data-item code="8502" length="19" type="3100" unit="" description="运算量2设置"/>
+        <data-item code="8503" length="19" type="3100" unit="" description="运算量3设置"/>
+        <data-item code="8504" length="19" type="3100" unit="" description="运算量4设置"/>
+        <data-item code="8505" length="19" type="3100" unit="" description="运算量5设置"/>
+        <data-item code="8506" length="19" type="3100" unit="" description="运算量6设置"/>
+        <data-item code="8507" length="19" type="3100" unit="" description="运算量7设置"/>
+        <data-item code="8508" length="19" type="3100" unit="" description="运算量8设置"/>
+        <data-item code="8509" length="19" type="3100" unit="" description="运算量9设置"/>
+        <data-item code="850A" length="19" type="3100" unit="" description="运算量10设置"/>
+        <data-item code="850B" length="19" type="3100" unit="" description="运算量11设置"/>
+        <data-item code="850C" length="19" type="3100" unit="" description="运算量12设置"/>
+        <data-item code="850D" length="19" type="3100" unit="" description="运算量13设置"/>
+        <data-item code="850E" length="19" type="3100" unit="" description="运算量14设置"/>
+        <data-item code="850F" length="19" type="3100" unit="" description="运算量15设置"/>
+        <data-item code="8510" length="19" type="3100" unit="" description="运算量16设置"/>
+        <data-item code="8511" length="19" type="3100" unit="" description="运算量17设置"/>
+        <data-item code="8512" length="19" type="3100" unit="" description="运算量18设置"/>
+        <data-item code="8513" length="19" type="3100" unit="" description="运算量19设置"/>
+        <data-item code="8514" length="19" type="3100" unit="" description="运算量20设置"/>
+        <data-item code="8515" length="19" type="3100" unit="" description="运算量21设置"/>
+        <data-item code="8516" length="19" type="3100" unit="" description="运算量22设置"/>
+        <data-item code="8517" length="19" type="3100" unit="" description="运算量23设置"/>
+        <data-item code="8518" length="19" type="3100" unit="" description="运算量24设置"/>
+        <data-item code="8519" length="19" type="3100" unit="" description="运算量25设置"/>
+        <data-item code="851A" length="19" type="3100" unit="" description="运算量26设置"/>
+        <data-item code="851B" length="19" type="3100" unit="" description="运算量27设置"/>
+        <data-item code="851C" length="19" type="3100" unit="" description="运算量28设置"/>
+        <data-item code="851D" length="19" type="3100" unit="" description="运算量29设置"/>
+        <data-item code="851E" length="19" type="3100" unit="" description="运算量30设置"/>
+        <data-item code="851F" length="19" type="3100" unit="" description="运算量31设置"/>
+        <data-item code="8520" length="19" type="3100" unit="" description="运算量32设置"/>
+        <data-item code="85FE" length="32" type="0500" unit="" description="运算量有效标志"/>
+    </data-item>
+
+    <!--
+     <data-item code="8600" length="1" type="" unit="" description="查动规则数量" />
+     <data-item code="8601" length="11" type="" unit="" description="查动规则1设置" />
+     <data-item code="8602" length="11" type="" unit="" description="查动规则2设置" />
+     <data-item code="8603" length="11" type="" unit="" description="查动规则3设置" />
+     <data-item code="8604" length="11" type="" unit="" description="查动规则4设置" />
+     <data-item code="8605" length="11" type="" unit="" description="查动规则5设置" />
+     <data-item code="8606" length="11" type="" unit="" description="查动规则6设置" />
+     <data-item code="8607" length="11" type="" unit="" description="查动规则7设置" />
+     <data-item code="8608" length="11" type="" unit="" description="查动规则8设置" />
+     <data-item code="8609" length="11" type="" unit="" description="查动规则9设置" />
+     <data-item code="860A" length="11" type="" unit="" description="查动规则10设置" />
+     <data-item code="860B" length="11" type="" unit="" description="查动规则11设置" />
+     <data-item code="860C" length="11" type="" unit="" description="查动规则12设置" />
+     <data-item code="860D" length="11" type="" unit="" description="查动规则13设置" />
+     <data-item code="860E" length="11" type="" unit="" description="查动规则14设置" />
+     <data-item code="860F" length="11" type="" unit="" description="查动规则15设置" />
+     <data-item code="8610" length="11" type="" unit="" description="查动规则16设置" />
+     <data-item code="8611" length="11" type="" unit="" description="查动规则17设置" />
+     <data-item code="8612" length="11" type="" unit="" description="查动规则18设置" />
+     <data-item code="8613" length="11" type="" unit="" description="查动规则19设置" />
+     <data-item code="8614" length="11" type="" unit="" description="查动规则20设置" />
+     <data-item code="8615" length="11" type="" unit="" description="查动规则21设置" />
+     <data-item code="8616" length="11" type="" unit="" description="查动规则22设置" />
+     <data-item code="8617" length="11" type="" unit="" description="查动规则23设置" />
+     <data-item code="8618" length="11" type="" unit="" description="查动规则24设置" />
+     <data-item code="8619" length="11" type="" unit="" description="查动规则25设置" />
+     <data-item code="861A" length="11" type="" unit="" description="查动规则26设置" />
+     <data-item code="861B" length="11" type="" unit="" description="查动规则27设置" />
+     <data-item code="861C" length="11" type="" unit="" description="查动规则28设置" />
+     <data-item code="861D" length="11" type="" unit="" description="查动规则29设置" />
+     <data-item code="861E" length="11" type="" unit="" description="查动规则30设置" />
+     <data-item code="861F" length="11" type="" unit="" description="查动规则31设置" />
+     <data-item code="8620" length="11" type="" unit="" description="查动规则32设置" />
+     <data-item code="86FE" length="32" type="" unit="" description="查动规则有效标志" />
+     -->
+    <data-item code="86FF" description="86XX">
+        <data-item code="8600" length="1" type="0300" unit="" description="查动规则数量"/>
+        <data-item code="8601" length="11" type="3200" unit="" description="查动规则1设置"/>
+        <data-item code="8602" length="11" type="3200" unit="" description="查动规则2设置"/>
+        <data-item code="8603" length="11" type="3200" unit="" description="查动规则3设置"/>
+        <data-item code="8604" length="11" type="3200" unit="" description="查动规则4设置"/>
+        <data-item code="8605" length="11" type="3200" unit="" description="查动规则5设置"/>
+        <data-item code="8606" length="11" type="3200" unit="" description="查动规则6设置"/>
+        <data-item code="8607" length="11" type="3200" unit="" description="查动规则7设置"/>
+        <data-item code="8608" length="11" type="3200" unit="" description="查动规则8设置"/>
+        <data-item code="8609" length="11" type="3200" unit="" description="查动规则9设置"/>
+        <data-item code="860A" length="11" type="3200" unit="" description="查动规则10设置"/>
+        <data-item code="860B" length="11" type="3200" unit="" description="查动规则11设置"/>
+        <data-item code="860C" length="11" type="3200" unit="" description="查动规则12设置"/>
+        <data-item code="860D" length="11" type="3200" unit="" description="查动规则13设置"/>
+        <data-item code="860E" length="11" type="3200" unit="" description="查动规则14设置"/>
+        <data-item code="860F" length="11" type="3200" unit="" description="查动规则15设置"/>
+        <data-item code="8610" length="11" type="3200" unit="" description="查动规则16设置"/>
+        <data-item code="8611" length="11" type="3200" unit="" description="查动规则17设置"/>
+        <data-item code="8612" length="11" type="3200" unit="" description="查动规则18设置"/>
+        <data-item code="8613" length="11" type="3200" unit="" description="查动规则19设置"/>
+        <data-item code="8614" length="11" type="3200" unit="" description="查动规则20设置"/>
+        <data-item code="8615" length="11" type="3200" unit="" description="查动规则21设置"/>
+        <data-item code="8616" length="11" type="3200" unit="" description="查动规则22设置"/>
+        <data-item code="8617" length="11" type="3200" unit="" description="查动规则23设置"/>
+        <data-item code="8618" length="11" type="3200" unit="" description="查动规则24设置"/>
+        <data-item code="8619" length="11" type="3200" unit="" description="查动规则25设置"/>
+        <data-item code="861A" length="11" type="3200" unit="" description="查动规则26设置"/>
+        <data-item code="861B" length="11" type="3200" unit="" description="查动规则27设置"/>
+        <data-item code="861C" length="11" type="3200" unit="" description="查动规则28设置"/>
+        <data-item code="861D" length="11" type="3200" unit="" description="查动规则29设置"/>
+        <data-item code="861E" length="11" type="3200" unit="" description="查动规则30设置"/>
+        <data-item code="861F" length="11" type="3200" unit="" description="查动规则31设置"/>
+        <data-item code="8620" length="11" type="3200" unit="" description="查动规则32设置"/>
+        <data-item code="86FE" length="32" type="0500" unit="" description="查动规则有效标志"/>
+    </data-item>
+
+    <!--
+     <data-item code="8700" length="1" type="" unit="" description="端口0通信波特率" />
+     <data-item code="8701" length="1" type="" unit="" description="端口0奇偶校验" />
+     <data-item code="8702" length="1" type="" unit="" description="端口0数据位" />
+     <data-item code="8703" length="1" type="" unit="" description="端口0停止位" />
+     -->
+    <data-item code="870F" description="870X">
+        <data-item code="8700" length="1" type="0300" unit="" description="端口0通信波特率"/>
+        <data-item code="8701" length="1" type="0100" unit="" description="端口0奇偶校验"/>
+        <data-item code="8702" length="1" type="0100" unit="" description="端口0数据位"/>
+        <data-item code="8703" length="1" type="0100" unit="" description="端口0停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8710" length="1" type="" unit="" description="端口1通信波特率" />
+     <data-item code="8711" length="1" type="" unit="" description="端口1奇偶校验" />
+     <data-item code="8712" length="1" type="" unit="" description="端口1数据位" />
+     <data-item code="8713" length="1" type="" unit="" description="端口1停止位" />
+     -->
+    <data-item code="871F" description="871X">
+        <data-item code="8710" length="1" type="0300" unit="" description="端口1通信波特率"/>
+        <data-item code="8711" length="1" type="0100" unit="" description="端口1奇偶校验"/>
+        <data-item code="8712" length="1" type="0100" unit="" description="端口1数据位"/>
+        <data-item code="8713" length="1" type="0100" unit="" description="端口1停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8720" length="1" type="" unit="" description="端口2通信波特率" />
+     <data-item code="8721" length="1" type="" unit="" description="端口2奇偶校验" />
+     <data-item code="8722" length="1" type="" unit="" description="端口2数据位" />
+     <data-item code="8723" length="1" type="" unit="" description="端口2停止位" />
+     -->
+    <data-item code="872F" description="872X">
+        <data-item code="8720" length="1" type="0300" unit="" description="端口2通信波特率"/>
+        <data-item code="8721" length="1" type="0100" unit="" description="端口2奇偶校验"/>
+        <data-item code="8722" length="1" type="0100" unit="" description="端口2数据位"/>
+        <data-item code="8723" length="1" type="0100" unit="" description="端口2停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8730" length="1" type="" unit="" description="端口3通信波特率" />
+     <data-item code="8731" length="1" type="" unit="" description="端口3奇偶校验" />
+     <data-item code="8732" length="1" type="" unit="" description="端口3数据位" />
+     <data-item code="8733" length="1" type="" unit="" description="端口3停止位" />
+     -->
+    <data-item code="873F" description="873X">
+        <data-item code="8730" length="1" type="0300" unit="" description="端口3通信波特率"/>
+        <data-item code="8731" length="1" type="0100" unit="" description="端口3奇偶校验"/>
+        <data-item code="8732" length="1" type="0100" unit="" description="端口3数据位"/>
+        <data-item code="8733" length="1" type="0100" unit="" description="端口3停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8740" length="1" type="" unit="" description="端口4通信波特率" />
+     <data-item code="8741" length="1" type="" unit="" description="端口4奇偶校验" />
+     <data-item code="8742" length="1" type="" unit="" description="端口4数据位" />
+     <data-item code="8743" length="1" type="" unit="" description="端口4停止位" />
+     -->
+    <data-item code="874F" description="874X">
+        <data-item code="8740" length="1" type="0300" unit="" description="端口4通信波特率"/>
+        <data-item code="8741" length="1" type="0100" unit="" description="端口4奇偶校验"/>
+        <data-item code="8742" length="1" type="0100" unit="" description="端口4数据位"/>
+        <data-item code="8743" length="1" type="0100" unit="" description="端口4停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8750" length="1" type="" unit="" description="端口5通信波特率" />
+     <data-item code="8751" length="1" type="" unit="" description="端口5奇偶校验" />
+     <data-item code="8752" length="1" type="" unit="" description="端口5数据位" />
+     <data-item code="8753" length="1" type="" unit="" description="端口5停止位" />
+     -->
+    <data-item code="875F" description="875X">
+        <data-item code="8750" length="1" type="0300" unit="" description="端口5通信波特率"/>
+        <data-item code="8751" length="1" type="0100" unit="" description="端口5奇偶校验"/>
+        <data-item code="8752" length="1" type="0100" unit="" description="端口5数据位"/>
+        <data-item code="8753" length="1" type="0100" unit="" description="端口5停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8760" length="1" type="" unit="" description="端口6通信波特率" />
+     <data-item code="8761" length="1" type="" unit="" description="端口6奇偶校验" />
+     <data-item code="8762" length="1" type="" unit="" description="端口6数据位" />
+     <data-item code="8763" length="1" type="" unit="" description="端口6停止位" />
+     -->
+    <data-item code="876F" description="876X">
+        <data-item code="8760" length="1" type="0300" unit="" description="端口6通信波特率"/>
+        <data-item code="8761" length="1" type="0100" unit="" description="端口6奇偶校验"/>
+        <data-item code="8762" length="1" type="0100" unit="" description="端口6数据位"/>
+        <data-item code="8763" length="1" type="0100" unit="" description="端口6停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8770" length="1" type="" unit="" description="端口7通信波特率" />
+     <data-item code="8771" length="1" type="" unit="" description="端口7奇偶校验" />
+     <data-item code="8772" length="1" type="" unit="" description="端口7数据位" />
+     <data-item code="8773" length="1" type="" unit="" description="端口7停止位" />
+     -->
+    <data-item code="877F" description="877X">
+        <data-item code="8770" length="1" type="0300" unit="" description="端口7通信波特率"/>
+        <data-item code="8771" length="1" type="0100" unit="" description="端口7奇偶校验"/>
+        <data-item code="8772" length="1" type="0100" unit="" description="端口7数据位"/>
+        <data-item code="8773" length="1" type="0100" unit="" description="端口7停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8780" length="1" type="" unit="" description="端口8通信波特率" />
+     <data-item code="8781" length="1" type="" unit="" description="端口8奇偶校验" />
+     <data-item code="8782" length="1" type="" unit="" description="端口8数据位" />
+     <data-item code="8783" length="1" type="" unit="" description="端口8停止位" />
+     -->
+    <data-item code="878F" description="878X">
+        <data-item code="8780" length="1" type="0300" unit="" description="端口8通信波特率"/>
+        <data-item code="8781" length="1" type="0100" unit="" description="端口8奇偶校验"/>
+        <data-item code="8782" length="1" type="0100" unit="" description="端口8数据位"/>
+        <data-item code="8783" length="1" type="0100" unit="" description="端口8停止位"/>
+    </data-item>
+
+    <!--
+     <data-item code="8800" length="2" type="" unit="" description="终端状态字" />
+     <data-item code="8801" length="2" type="" unit="" description="终端额定供电电压" />
+     <data-item code="8802" length="1" type="" unit="" description="最大脉冲量路数" />
+     <data-item code="8803" length="1" type="" unit="" description="最大遥控量路数" />
+     <data-item code="8804" length="1" type="" unit="" description="最大遥信量路数" />
+     <data-item code="8805" length="1" type="" unit="" description="串行通讯端口数量" />
+     <data-item code="8806" length="1" type="" unit="" description="支持最大测量点数" />
+     <data-item code="8807" length="2" type="" unit="" description="终端功能" />
+     <data-item code="8808" length="1" type="" unit="" description="是否采用标准规约" />
+     <data-item code="8809" length="8" type="" unit="" description="终端软件版本号" />
+     <data-item code="880A" length="2" type="" unit="" description="终端硬件版本号" />
+     -->
+    <data-item code="880F" description="880X">
+        <data-item code="8800" length="2" type="4400" unit="" description="终端状态字"/>
+        <data-item code="8801" length="2" type="0101" unit="" description="终端额定供电电压"/>
+        <data-item code="8802" length="1" type="0300" unit="" description="最大脉冲量路数"/>
+        <data-item code="8803" length="1" type="0300" unit="" description="最大遥控量路数"/>
+        <data-item code="8804" length="1" type="0300" unit="" description="最大遥信量路数"/>
+        <data-item code="8805" length="1" type="0300" unit="" description="串行通讯端口数量"/>
+        <data-item code="8806" length="1" type="0300" unit="" description="支持最大测量点数"/>
+        <data-item code="8807" length="2" type="0500" unit="" description="终端功能"/>
+        <data-item code="8808" length="1" type="3300" unit="" description="是否采用标准规约"/>
+        <data-item code="8809" length="8" type="3300" unit="" description="终端软件版本号"/>
+        <data-item code="880A" length="2" type="3300" unit="" description="终端硬件版本号"/>
+    </data-item>
+
+    <!--HG扩充谐波数据-->
+    <data-item code="881F" description="881X">
+        <data-item code="8811" length="36" type="4701" unit="" description="2～19次谐波电压国标值"/>
+        <data-item code="8812" length="36" type="4702" unit="" description="2～19次谐波电流国标值"/>
+        <data-item code="8813" length="1" type="0100" unit="" description="判断谐波越限告警时间"/>
+        <data-item code="8814" length="1" type="0100" unit="" description="判断谐波越限告警恢复时间"/>
+    </data-item>
+
+    <data-item code="8B0F" description="8B0X">
+        <data-item code="8B01" length="4" type="0102" unit="" description="总基波输入电能"/>
+        <data-item code="8B02" length="4" type="0102" unit="" description="总基波输出电能"/>
+        <data-item code="8B03" length="4" type="0102" unit="" description="总谐波输入电能"/>
+        <data-item code="8B04" length="4" type="0102" unit="" description="总谐波输出电能"/>
+    </data-item>
+
+    <data-item code="8B1F" description="8B1X">
+        <data-item code="8B11" length="6" type="4801" unit="" description="ABC相谐波电压含量U"/>
+        <data-item code="8B12" length="6" type="4802" unit="" description="ABC相谐波电流含量I"/>
+        <data-item code="8B13" length="6" type="4802" unit="" description="ABC相谐波电压总畸变率THD"/>
+        <data-item code="8B14" length="6" type="4802" unit="" description="ABC相谐波电流总畸变率THD"/>
+    </data-item>
+
+    <data-item code="8B2F" description="8B2X">
+        <data-item code="8B21" length="38" type="4901" unit="" description="A相1～19次谐波电压幅值"/>
+        <data-item code="8B22" length="38" type="4901" unit="" description="B相1～19次谐波电压幅值"/>
+        <data-item code="8B23" length="38" type="4901" unit="" description="C相1～19次谐波电压幅值"/>
+    </data-item>
+
+    <data-item code="8B3F" description="8B3X">
+        <data-item code="8B31" length="38" type="4902" unit="" description="A相1～19次谐波电流幅值"/>
+        <data-item code="8B32" length="38" type="4902" unit="" description="B相1～19次谐波电流幅值"/>
+        <data-item code="8B33" length="38" type="4902" unit="" description="C相1～19次谐波电流幅值"/>
+    </data-item>
+
+    <data-item code="8B4F" description="8B4X">
+        <data-item code="8B41" length="38" type="4901" unit="" description="A相1～19次谐波电压最大值"/>
+        <data-item code="8B42" length="38" type="4901" unit="" description="B相1～19次谐波电压最大值"/>
+        <data-item code="8B43" length="38" type="4901" unit="" description="C相1～19次谐波电压最大值"/>
+    </data-item>
+
+    <data-item code="8B5F" description="8B5X">
+        <data-item code="8B51" length="38" type="4901" unit="" description="A相1～19次谐波电压最小值"/>
+        <data-item code="8B52" length="38" type="4901" unit="" description="B相1～19次谐波电压最小值"/>
+        <data-item code="8B53" length="38" type="4901" unit="" description="C相1～19次谐波电压最小值"/>
+    </data-item>
+
+    <data-item code="8B6F" description="8B6X">
+        <data-item code="8B61" length="38" type="4901" unit="" description="A相1～19次谐波电压95%值"/>
+        <data-item code="8B62" length="38" type="4901" unit="" description="B相1～19次谐波电压95%值"/>
+        <data-item code="8B63" length="38" type="4901" unit="" description="C相1～19次谐波电压95%值"/>
+    </data-item>
+
+    <data-item code="8B7F" description="8B7X">
+        <data-item code="8B71" length="38" type="4901" unit="" description="A相1～19次谐波电压平均值"/>
+        <data-item code="8B72" length="38" type="4901" unit="" description="B相1～19次谐波电压平均值"/>
+        <data-item code="8B73" length="38" type="4901" unit="" description="C相1～19次谐波电压平均值"/>
+    </data-item>
+
+    <data-item code="8B8F" description="8B8X">
+        <data-item code="8B81" length="38" type="4902" unit="" description="A相1～19次谐波电流最大值"/>
+        <data-item code="8B82" length="38" type="4902" unit="" description="B相1～19次谐波电流最大值"/>
+        <data-item code="8B83" length="38" type="4902" unit="" description="C相1～19次谐波电流最大值"/>
+    </data-item>
+
+    <data-item code="8B9F" description="8B9X">
+        <data-item code="8B91" length="38" type="4902" unit="" description="A相1～19次谐波电流最小值"/>
+        <data-item code="8B92" length="38" type="4902" unit="" description="B相1～19次谐波电流最小值"/>
+        <data-item code="8B93" length="38" type="4902" unit="" description="C相1～19次谐波电流最小值"/>
+    </data-item>
+
+    <data-item code="8BAF" description="8BAX">
+        <data-item code="8BA1" length="38" type="4902" unit="" description="A相1～19次谐波电流95%值"/>
+        <data-item code="8BA2" length="38" type="4902" unit="" description="B相1～19次谐波电流95%值"/>
+        <data-item code="8BA3" length="38" type="4902" unit="" description="C相1～19次谐波电流95%值"/>
+    </data-item>
+
+    <data-item code="8BBF" description="8BBX">
+        <data-item code="8BB1" length="38" type="4902" unit="" description="A相1～19次谐波电流平均值"/>
+        <data-item code="8BB2" length="38" type="4902" unit="" description="B相1～19次谐波电流平均值"/>
+        <data-item code="8BB3" length="38" type="4902" unit="" description="C相1～19次谐波电流平均值"/>
+    </data-item>
+
+    <data-item code="8BCF" description="8BCX">
+        <data-item code="8BC0" length="2" type="0100" unit="" description="A相日总采样点数"/>
+        <data-item code="8BC1" length="36" type="4700" unit="" description="A相2～19次谐波电压超标点数"/>
+        <data-item code="8BC2" length="36" type="4700" unit="" description="A相2～19次谐波电流超标点数"/>
+    </data-item>
+
+    <data-item code="8BDF" description="8BDX">
+        <data-item code="8BD0" length="2" type="0100" unit="" description="B相日总采样点数"/>
+        <data-item code="8BD1" length="36" type="4700" unit="" description="B相2～19次谐波电压超标点数"/>
+        <data-item code="8BD2" length="36" type="4700" unit="" description="B相2～19次谐波电流超标点数"/>
+    </data-item>
+
+    <data-item code="8BEF" description="8BEX">
+        <data-item code="8BE0" length="2" type="0100" unit="" description="C相日总采样点数"/>
+        <data-item code="8BE1" length="36" type="4700" unit="" description="C相2～19次谐波电压超标点数"/>
+        <data-item code="8BE2" length="36" type="4700" unit="" description="C相2～19次谐波电流超标点数"/>
+    </data-item>
+
+    <!--为保存谐波告警而扩充-->
+    <data-item code="8BF1" length="1" type="0100" unit="" description="相位"/>
+    <data-item code="8BF2" length="1" type="0100" unit="" description="谐波次数"/>
+    <data-item code="8BF3" length="2" type="0101" unit="" description="电压幅值"/>
+    <data-item code="8BF4" length="2" type="0102" unit="" description="电流幅值"/>
+
+
+    <!--测量点参数-->
+    <data-item code="89FF" description="89XX">
+        <!--
+      <data-item code="8900" length="1" type="" unit="" description="测量点状态" />
+      <data-item code="8901" length="1" type="" unit="" description="测量点性质" />
+      <data-item code="8902" length="6" type="" unit="" description="测量点地址" />
+      <data-item code="8903" length="1" type="" unit="" description="测量点通讯规约" />
+      <data-item code="8904" length="1" type="" unit="" description="测量点端口号" />
+      <data-item code="8905" length="1" type="" unit="" description="测量点波特率" />
+      -->
+        <data-item code="890F" description="890X">
+            <data-item code="8900" length="1" type="0100" unit="" description="测量点状态"/>
+            <data-item code="8901" length="1" type="0100" unit="" description="测量点性质"/>
+            <data-item code="8902" length="6" type="4600" unit="" description="测量点地址"/>
+            <data-item code="8903" length="1" type="0100" unit="" description="测量点通讯规约"/>
+            <data-item code="8904" length="1" type="0100" unit="" description="测量点端口号"/>
+            <data-item code="8905" length="1" type="0300" unit="" description="测量点波特率"/>
+        </data-item>
+
+        <!--
+      <data-item code="8910" length="1" type="" unit="" description="测量点接线方式" />
+      <data-item code="8911" length="2" type="" unit="" description="CT" />
+      <data-item code="8912" length="2" type="" unit="" description="PT" />
+      <data-item code="8913" length="2" type="" unit="V" description="额定电压" />
+      <data-item code="8914" length="2" type="" unit="A" description="额定电流" />
+      <data-item code="8915" length="2" type="" unit="KVA" description="用户申报容量" />
+      <data-item code="8916" length="2" type="" unit="KVA" description="变压器容量" />
+      -->
+        <data-item code="891F" description="891X">
+            <data-item code="8910" length="1" type="0100" unit="" description="测量点接线方式"/>
+            <data-item code="8911" length="2" type="0100" unit="" description="CT"/>
+            <data-item code="8912" length="2" type="0100" unit="" description="PT"/>
+            <data-item code="8913" length="2" type="0100" unit="V" description="额定电压"/>
+            <data-item code="8914" length="2" type="0102" unit="A" description="额定电流"/>
+            <data-item code="8915" length="2" type="0102" unit="KVA" description="用户申报容量"/>
+            <data-item code="8916" length="2" type="0102" unit="KVA" description="变压器容量"/>
+        </data-item>
+
+        <!--
+      <data-item code="8921" length="2" type="" unit="" description="电流不平衡阀值" />
+      <data-item code="8922" length="2" type="" unit="" description="电流不平衡恢复阀值" />
+      <data-item code="8923" length="2" type="" unit="" description="合格电压上限" />
+      <data-item code="8924" length="2" type="" unit="" description="合格电压下限" />
+      <data-item code="8925" length="2" type="" unit="" description="电流过负荷的相对额定值的比例" />
+      <data-item code="8926" length="1" type="" unit="" description="判断无功过补偿的功率因数" />
+      <data-item code="8927" length="1" type="" unit="" description="判断无功过补偿恢复的功率因数" />
+      <data-item code="8928" length="1" type="" unit="" description="判断无功欠补偿的功率因数" />
+      <data-item code="8929" length="1" type="" unit="" description="判断无功欠补偿恢复的功率因数" />
+      -->
+        <data-item code="892F" description="892X">
+            <data-item code="8921" length="2" type="0102" unit="" description="电流不平衡阀值"/>
+            <data-item code="8922" length="2" type="0102" unit="" description="电流不平衡恢复阀值"/>
+            <data-item code="8923" length="2" type="0101" unit="" description="合格电压上限"/>
+            <data-item code="8924" length="2" type="0101" unit="" description="合格电压下限"/>
+            <data-item code="8925" length="2" type="0102" unit="" description="电流过负荷的相对额定值的比例"/>
+            <data-item code="8926" length="1" type="0102" unit="" description="判断无功过补偿的功率因数"/>
+            <data-item code="8927" length="1" type="0102" unit="" description="判断无功过补偿恢复的功率因数"/>
+            <data-item code="8928" length="1" type="0102" unit="" description="判断无功欠补偿的功率因数"/>
+            <data-item code="8929" length="1" type="0102" unit="" description="判断无功欠补偿恢复的功率因数"/>
+        </data-item>
+    </data-item>
+    <!--测量点数据-->
+    <!--
+     <data-item code="9010" length="4" type="" unit="kWh" description="当前正向有功总电能" />
+     <data-item code="9011" length="4" type="" unit="kWh" description="当前费率1正向有功总电能" />
+     <data-item code="9012" length="4" type="" unit="kWh" description="当前费率2正向有功总电能" />
+     <data-item code="9013" length="4" type="" unit="kWh" description="当前费率3正向有功总电能" />
+     <data-item code="9014" length="4" type="" unit="kWh" description="当前费率4正向有功总电能" />
+     -->
+    <data-item code="901F" description="正向有功总数据块">
+        <data-item code="9010" length="4" type="0102" property="zxygzdn" unit="kWh" description="当前正向有功总电能"/>
+        <data-item code="9011" length="4" type="0102" property="fl1zxygzdn" unit="kWh" description="当前费率1正向有功总电能"/>
+        <data-item code="9012" length="4" type="0102" property="fl2zxygzdn" unit="kWh" description="当前费率2正向有功总电能"/>
+        <data-item code="9013" length="4" type="0102" property="fl3zxygzdn" unit="kWh" description="当前费率3正向有功总电能"/>
+        <data-item code="9014" length="4" type="0102" property="fl4zxygzdn" unit="kWh" description="当前费率4正向有功总电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="9020" length="4" type="" unit="kWh" description="当前反向有功总电能" />
+     <data-item code="9021" length="4" type="" unit="kWh" description="当前费率1反向有功总电能" />
+     <data-item code="9022" length="4" type="" unit="kWh" description="当前费率2反向有功总电能" />
+     <data-item code="9023" length="4" type="" unit="kWh" description="当前费率3反向有功总电能" />
+     <data-item code="9024" length="4" type="" unit="kWh" description="当前费率4反向有功总电能" />
+     -->
+    <data-item code="902F" description="反向有功电能数据块">
+        <data-item code="9020" length="4" type="0102" property="fxygzdn" unit="kWh" description="当前反向有功总电能"/>
+        <data-item code="9021" length="4" type="0102" property="fl1fxygzdn" unit="kWh" description="当前费率1反向有功总电能"/>
+        <data-item code="9022" length="4" type="0102" property="fl2fxygzdn" unit="kWh" description="当前费率2反向有功总电能"/>
+        <data-item code="9023" length="4" type="0102" property="fl3fxygzdn" unit="kWh" description="当前费率3反向有功总电能"/>
+        <data-item code="9024" length="4" type="0102" property="fl4fxygzdn" unit="kWh" description="当前费率4反向有功总电能"/>
+    </data-item>
+
+
+    <data-item code="911F" description="正向无功总数据块">
+        <data-item code="9110" length="4" type="0102" property="zxwgzdn" unit="kWh" description="当前正向无功总电能"/>
+        <data-item code="9111" length="4" type="0102" property="fl1zxwgzdn" unit="kWh" description="当前费率1正向无功总电能"/>
+        <data-item code="9112" length="4" type="0102" property="fl2zxwgzdn" unit="kWh" description="当前费率2正向无功总电能"/>
+        <data-item code="9113" length="4" type="0102" property="fl3zxwgzdn" unit="kWh" description="当前费率3正向无功总电能"/>
+        <data-item code="9114" length="4" type="0102" property="fl4zxwgzdn" unit="kWh" description="当前费率4正向无功总电能"/>
+    </data-item>
+
+    <data-item code="912F" description="反向无功总数据块">
+        <data-item code="9120" length="4" type="0102" property="fxwgzdn" unit="kWh" description="当前反向无功总电能"/>
+        <data-item code="9121" length="4" type="0102" property="fl1fxwgzdn" unit="kWh" description="当前费率1反向无功总电能"/>
+        <data-item code="9122" length="4" type="0102" property="fl2fxwgzdn" unit="kWh" description="当前费率2反向无功总电能"/>
+        <data-item code="9123" length="4" type="0102" property="fl3fxwgzdn" unit="kWh" description="当前费率3反向无功总电能"/>
+        <data-item code="9124" length="4" type="0102" property="fl4fxwgzdn" unit="kWh" description="当前费率4反向无功总电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="9130" length="4" type="" unit="kvarh" description="当前一象限无功总电能" />
+     <data-item code="9131" length="4" type="" unit="kvarh" description="当前费率1一象限无功电能" />
+     <data-item code="9132" length="4" type="" unit="kvarh" description="当前费率2一象限无功电能" />
+     <data-item code="9133" length="4" type="" unit="kvarh" description="当前费率3一象限无功电能" />
+     <data-item code="9134" length="4" type="" unit="kvarh" description="当前费率4一象限无功电能" />
+     -->
+    <data-item code="913F" description="一象限无功电能数据块">
+        <data-item code="9130" length="4" type="0102" property="xx1wgzdn" unit="kvarh" description="当前一象限无功总电能"/>
+        <data-item code="9131" length="4" type="0102" unit="kvarh" description="当前费率1一象限无功电能"/>
+        <data-item code="9132" length="4" type="0102" unit="kvarh" description="当前费率2一象限无功电能"/>
+        <data-item code="9133" length="4" type="0102" unit="kvarh" description="当前费率3一象限无功电能"/>
+        <data-item code="9134" length="4" type="0102" unit="kvarh" description="当前费率4一象限无功电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="9140" length="4" type="" unit="kvarh" description="当前四象限无功总电能" />
+     <data-item code="9141" length="4" type="" unit="kvarh" description="当前费率1四象限无功电能" />
+     <data-item code="9142" length="4" type="" unit="kvarh" description="当前费率2四象限无功电能" />
+     <data-item code="9143" length="4" type="" unit="kvarh" description="当前费率3四象限无功电能" />
+     <data-item code="9144" length="4" type="" unit="kvarh" description="当前费率4四象限无功电能" />
+     -->
+    <data-item code="914F" description="四象限无功电能数据块">
+        <data-item code="9140" length="4" type="0102" property="xx4wgzdn" unit="kvarh" description="当前四象限无功总电能"/>
+        <data-item code="9141" length="4" type="0102" unit="kvarh" description="当前费率1四象限无功电能"/>
+        <data-item code="9142" length="4" type="0102" unit="kvarh" description="当前费率2四象限无功电能"/>
+        <data-item code="9143" length="4" type="0102" unit="kvarh" description="当前费率3四象限无功电能"/>
+        <data-item code="9144" length="4" type="0102" unit="kvarh" description="当前费率4四象限无功电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="9150" length="4" type="" unit="kvarh" description="当前二象限无功总电能" />
+     <data-item code="9151" length="4" type="" unit="kvarh" description="当前费率1二象限无功电能" />
+     <data-item code="9152" length="4" type="" unit="kvarh" description="当前费率2二象限无功电能" />
+     <data-item code="9153" length="4" type="" unit="kvarh" description="当前费率3二象限无功电能" />
+     <data-item code="9154" length="4" type="" unit="kvarh" description="当前费率4二象限无功电能" />
+     -->
+    <data-item code="915F" description="二象限无功电能数据块">
+        <data-item code="9150" length="4" type="0102" property="xx2wgzdn" unit="kvarh" description="当前二象限无功总电能"/>
+        <data-item code="9151" length="4" type="0102" unit="kvarh" description="当前费率1二象限无功电能"/>
+        <data-item code="9152" length="4" type="0102" unit="kvarh" description="当前费率2二象限无功电能"/>
+        <data-item code="9153" length="4" type="0102" unit="kvarh" description="当前费率3二象限无功电能"/>
+        <data-item code="9154" length="4" type="0102" unit="kvarh" description="当前费率4二象限无功电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="9160" length="4" type="" unit="kvarh" description="当前三象限无功总电能" />
+     <data-item code="9161" length="4" type="" unit="kvarh" description="当前费率1三象限无功电能" />
+     <data-item code="9162" length="4" type="" unit="kvarh" description="当前费率2三象限无功电能" />
+     <data-item code="9163" length="4" type="" unit="kvarh" description="当前费率3三象限无功电能" />
+     <data-item code="9164" length="4" type="" unit="kvarh" description="当前费率4三象限无功电能" />
+     -->
+    <data-item code="916F" description="三象限无功电能数据块">
+        <data-item code="9160" length="4" type="0102" property="xx3wgzdn" unit="kvarh" description="当前三象限无功总电能"/>
+        <data-item code="9161" length="4" type="0102" unit="kvarh" description="当前费率1三象限无功电能"/>
+        <data-item code="9162" length="4" type="0102" unit="kvarh" description="当前费率2三象限无功电能"/>
+        <data-item code="9163" length="4" type="0102" unit="kvarh" description="当前费率3三象限无功电能"/>
+        <data-item code="9164" length="4" type="0102" unit="kvarh" description="当前费率4三象限无功电能"/>
+    </data-item>
+
+    <data-item code="941F" description="上月正向有功总数据块">
+        <data-item code="9410" length="4" type="0102" property="zxygzdn" unit="kWh" description="上月当前正向有功总电能"/>
+        <data-item code="9411" length="4" type="0102" property="fl1zxygzdn" unit="kWh" description="上月当前费率1正向有功总电能"/>
+        <data-item code="9412" length="4" type="0102" property="fl2zxygzdn" unit="kWh" description="上月当前费率2正向有功总电能"/>
+        <data-item code="9413" length="4" type="0102" property="fl3zxygzdn" unit="kWh" description="上月当前费率3正向有功总电能"/>
+        <data-item code="9414" length="4" type="0102" property="fl4zxygzdn" unit="kWh" description="上月当前费率4正向有功总电能"/>
+    </data-item>
+
+    <data-item code="942F" description="上月反向有功电能数据块">
+        <data-item code="9420" length="4" type="0102" property="fxygzdn" unit="kWh" description="上月当前反向有功总电能"/>
+        <data-item code="9421" length="4" type="0102" property="fl1fxygzdn" unit="kWh" description="上月当前费率1反向有功总电能"/>
+        <data-item code="9422" length="4" type="0102" property="fl2fxygzdn" unit="kWh" description="上月当前费率2反向有功总电能"/>
+        <data-item code="9423" length="4" type="0102" property="fl3fxygzdn" unit="kWh" description="上月当前费率3反向有功总电能"/>
+        <data-item code="9424" length="4" type="0102" property="fl4fxygzdn" unit="kWh" description="上月当前费率4反向有功总电能"/>
+    </data-item>
+
+    <!--
+     <data-item code="A010" length="3" type="" unit="kW" description="当前正向有功总最大需量" />
+     <data-item code="A011" length="3" type="" unit="kW" description="当前费率1正向有功最大需量" />
+     <data-item code="A012" length="3" type="" unit="kW" description="当前费率2正向有功最大需量" />
+     <data-item code="A013" length="3" type="" unit="kW" description="当前费率3正向有功最大需量" />
+     <data-item code="A014" length="3" type="" unit="kW" description="当前费率4正向有功最大需量" />
+     -->
+    <data-item code="A01F" description="正向有功最大需量数据块">
+        <data-item code="A010" length="3" type="0104" property="zzzdxl" unit="kW" description="当前正向有功总最大需量"/>
+        <data-item code="A011" length="3" type="0104" unit="kW" description="当前费率1正向有功最大需量"/>
+        <data-item code="A012" length="3" type="0104" unit="kW" description="当前费率2正向有功最大需量"/>
+        <data-item code="A013" length="3" type="0104" unit="kW" description="当前费率3正向有功最大需量"/>
+        <data-item code="A014" length="3" type="0104" unit="kW" description="当前费率4正向有功最大需量"/>
+    </data-item>
+
+    <!--
+     <data-item code="A020" length="3" type="" unit="kW" description="当前反向有功总最大需量" />
+     <data-item code="A021" length="3" type="" unit="kW" description="当前费率1反向有功最大需量" />
+     <data-item code="A022" length="3" type="" unit="kW" description="当前费率2反向有功最大需量" />
+     <data-item code="A023" length="3" type="" unit="kW" description="当前费率3反向有功最大需量" />
+     <data-item code="A024" length="3" type="" unit="kW" description="当前费率4反向有功最大需量" />
+     -->
+    <data-item code="A02F" description="反向有功最大需量数据块">
+        <data-item code="A020" length="3" type="0104" property="fzzdxl" unit="kW" description="当前反向有功总最大需量"/>
+        <data-item code="A021" length="3" type="0104" unit="kW" description="当前费率1反向有功最大需量"/>
+        <data-item code="A022" length="3" type="0104" unit="kW" description="当前费率2反向有功最大需量"/>
+        <data-item code="A023" length="3" type="0104" unit="kW" description="当前费率3反向有功最大需量"/>
+        <data-item code="A024" length="3" type="0104" unit="kW" description="当前费率4反向有功最大需量"/>
+    </data-item>
+
+    <!--
+     <data-item code="A410" length="3" type="" unit="kW" description="上月正向有功总最大需量" />
+     <data-item code="A411" length="3" type="" unit="kW" description="上月费率1正向有功最大需量" />
+     <data-item code="A412" length="3" type="" unit="kW" description="上月费率2正向有功最大需量" />
+     <data-item code="A413" length="3" type="" unit="kW" description="上月费率3正向有功最大需量" />
+     <data-item code="A414" length="3" type="" unit="kW" description="上月费率4正向有功最大需量" />
+     -->
+    <data-item code="A41F" description="上月正向有功最大数据块">
+        <data-item code="A410" length="3" type="0104" unit="kW" description="上月正向有功总最大需量"/>
+        <data-item code="A411" length="3" type="0104" unit="kW" description="上月费率1正向有功最大需量"/>
+        <data-item code="A412" length="3" type="0104" unit="kW" description="上月费率2正向有功最大需量"/>
+        <data-item code="A413" length="3" type="0104" unit="kW" description="上月费率3正向有功最大需量"/>
+        <data-item code="A414" length="3" type="0104" unit="kW" description="上月费率4正向有功最大需量"/>
+    </data-item>
+
+    <!--
+     <data-item code="A420" length="3" type="" unit="kW" description="上月反向有功总最大需量" />
+     <data-item code="A421" length="3" type="" unit="kW" description="上月费率1反向有功最大需量" />
+     <data-item code="A422" length="3" type="" unit="kW" description="上月费率2反向有功最大需量" />
+     <data-item code="A423" length="3" type="" unit="kW" description="上月费率3反向有功最大需量" />
+     <data-item code="A424" length="3" type="" unit="kW" description="上月费率4反向有功最大需量" />
+     -->
+    <data-item code="A42F" description="上月反向有功最大需量数据块">
+        <data-item code="A420" length="3" type="0104" unit="kW" description="上月反向有功总最大需量"/>
+        <data-item code="A421" length="3" type="0104" unit="kW" description="上月费率1反向有功最大需量"/>
+        <data-item code="A422" length="3" type="0104" unit="kW" description="上月费率2反向有功最大需量"/>
+        <data-item code="A423" length="3" type="0104" unit="kW" description="上月费率3反向有功最大需量"/>
+        <data-item code="A424" length="3" type="0104" unit="kW" description="上月费率4反向有功最大需量"/>
+    </data-item>
+
+    <!--
+     <data-item code="B010" length="4" type="" unit="" description="当前正向有功总最大需量发生时间" />
+     <data-item code="B011" length="4" type="" unit="" description="当前费率1正向有功最大需量发生时间" />
+     <data-item code="B012" length="4" type="" unit="" description="当前费率2正向有功最大需量发生时间" />
+     <data-item code="B013" length="4" type="" unit="" description="当前费率3正向有功最大需量发生时间" />
+     <data-item code="B014" length="4" type="" unit="" description="当前费率4正向有功最大需量发生时间" />
+     -->
+    <data-item code="B01F" description="正向有功最大需量发生时间数据块">
+        <data-item code="B010" length="4" type="0700" property="zzzdxlsj" unit="" description="当前正向有功总最大需量发生时间"/>
+        <data-item code="B011" length="4" type="0700" unit="" description="当前费率1正向有功最大需量发生时间"/>
+        <data-item code="B012" length="4" type="0700" unit="" description="当前费率2正向有功最大需量发生时间"/>
+        <data-item code="B013" length="4" type="0700" unit="" description="当前费率3正向有功最大需量发生时间"/>
+        <data-item code="B014" length="4" type="0700" unit="" description="当前费率4正向有功最大需量发生时间"/>
+    </data-item>
+
+    <!--
+     <data-item code="B020" length="4" type="" unit="" description="当前反向有功总最大需量发生时间" />
+     <data-item code="B021" length="4" type="" unit="" description="当前费率1反向有功最大需量发生时间" />
+     <data-item code="B022" length="4" type="" unit="" description="当前费率2反向有功最大需量发生时间" />
+     <data-item code="B023" length="4" type="" unit="" description="当前费率3反向有功最大需量发生时间" />
+     <data-item code="B024" length="4" type="" unit="" description="当前费率4反向有功最大需量发生时间" />
+     -->
+    <data-item code="B02F" description="反向有功最大需量发生时间数据块">
+        <data-item code="B020" length="4" type="0700" property="fzzdxlsj" unit="" description="当前反向有功总最大需量发生时间"/>
+        <data-item code="B021" length="4" type="0700" unit="" description="当前费率1反向有功最大需量发生时间"/>
+        <data-item code="B022" length="4" type="0700" unit="" description="当前费率2反向有功最大需量发生时间"/>
+        <data-item code="B023" length="4" type="0700" unit="" description="当前费率3反向有功最大需量发生时间"/>
+        <data-item code="B024" length="4" type="0700" unit="" description="当前费率4反向有功最大需量发生时间"/>
+    </data-item>
+
+    <!--
+     <data-item code="B410" length="4" type="" unit="" description="上月正向有功总最大需量发生时间" />
+     <data-item code="B411" length="4" type="" unit="" description="上月费率1正向有功最大需量发生时间" />
+     <data-item code="B412" length="4" type="" unit="" description="上月费率2正向有功最大需量发生时间" />
+     <data-item code="B413" length="4" type="" unit="" description="上月费率3正向有功最大需量发生时间" />
+     <data-item code="B414" length="4" type="" unit="" description="上月费率4正向有功最大需量发生时间" />
+     -->
+    <data-item code="B41F" description="上月正向有功总最大需量发生时间数据块">
+        <data-item code="B410" length="4" type="0700" unit="" description="上月正向有功总最大需量发生时间"/>
+        <data-item code="B411" length="4" type="0700" unit="" description="上月费率1正向有功最大需量发生时间"/>
+        <data-item code="B412" length="4" type="0700" unit="" description="上月费率2正向有功最大需量发生时间"/>
+        <data-item code="B413" length="4" type="0700" unit="" description="上月费率3正向有功最大需量发生时间"/>
+        <data-item code="B414" length="4" type="0700" unit="" description="上月费率4正向有功最大需量发生时间"/>
+    </data-item>
+
+    <!--
+     <data-item code="B420" length="4" type="" unit="" description="上月反向有功总最大需量发生时间" />
+     <data-item code="B421" length="4" type="" unit="" description="上月费率1反向有功最大需量发生时间" />
+     <data-item code="B422" length="4" type="" unit="" description="上月费率2反向有功最大需量发生时间" />
+     <data-item code="B423" length="4" type="" unit="" description="上月费率3反向有功最大需量发生时间" />
+     <data-item code="B424" length="4" type="" unit="" description="上月费率4反向有功最大需量发生时间" />
+     -->
+    <data-item code="B42F" description="上月反向有功总最大需量发生时间数据块">
+        <data-item code="B420" length="4" type="0700" unit="" description="上月反向有功总最大需量发生时间"/>
+        <data-item code="B421" length="4" type="0700" unit="" description="上月费率1反向有功最大需量发生时间"/>
+        <data-item code="B422" length="4" type="0700" unit="" description="上月费率2反向有功最大需量发生时间"/>
+        <data-item code="B423" length="4" type="0700" unit="" description="上月费率3反向有功最大需量发生时间"/>
+        <data-item code="B424" length="4" type="0700" unit="" description="上月费率4反向有功最大需量发生时间"/>
+    </data-item>
+
+    <!--
+     <data-item code="B210" length="4" type="" unit="" description="最近一次编程时间" />
+     <data-item code="B211" length="4" type="" unit="" description="最近一次最大需量清零时间" />
+     <data-item code="B212" length="2" type="" unit="" description="编程次数" />
+     <data-item code="B213" length="2" type="" unit="" description="最大需量清零次数" />
+     -->
+    <data-item code="B21F" description="编程记录数据块">
+        <data-item code="B210" length="4" type="0700" unit="" description="最近一次编程时间"/>
+        <data-item code="B211" length="4" type="0700" unit="" description="最近一次最大需量清零时间"/>
+        <data-item code="B212" length="2" type="0100" unit="" description="编程次数"/>
+        <data-item code="B213" length="2" type="0100" unit="" description="最大需量清零次数"/>
+    </data-item>
+
+    <!--
+     <data-item code="B310" length="2" type="" unit="" description="总断相次数" />
+     <data-item code="B311" length="2" type="" unit="" description="A相断相次数" />
+     <data-item code="B312" length="2" type="" unit="" description="B相断相次数" />
+     <data-item code="B313" length="2" type="" unit="" description="C相断相次数" />
+     -->
+    <data-item code="B31F" description="断相次数数据块">
+        <data-item code="B310" length="2" type="0100" unit="" description="总断相次数"/>
+        <data-item code="B311" length="2" type="0100" unit="" description="A相断相次数"/>
+        <data-item code="B312" length="2" type="0100" unit="" description="B相断相次数"/>
+        <data-item code="B313" length="2" type="0100" unit="" description="C相断相次数"/>
+    </data-item>
+
+    <!--
+     <data-item code="B320" length="3" type="" unit="" description="断相时间累计值" />
+     <data-item code="B321" length="3" type="" unit="" description="A相断相时间累计值" />
+     <data-item code="B322" length="3" type="" unit="" description="B相断相时间累计值" />
+     <data-item code="B323" length="3" type="" unit="" description="C相断相时间累计值" />
+     -->
+    <data-item code="B32F" description="断相时间数据块">
+        <data-item code="B320" length="3" type="0100" unit="" description="断相时间累计值"/>
+        <data-item code="B321" length="3" type="0100" unit="" description="A相断相时间累计值"/>
+        <data-item code="B322" length="3" type="0100" unit="" description="B相断相时间累计值"/>
+        <data-item code="B323" length="3" type="0100" unit="" description="C相断相时间累计值"/>
+    </data-item>
+
+    <data-item code="B6FF" description="电压电流功率及功率因数数据块">
+        <!--
+      <data-item code="B611" length="2" type="" unit="V" description="A相电压" />
+      <data-item code="B612" length="2" type="" unit="V" description="B相电压" />
+      <data-item code="B613" length="2" type="" unit="V" description="C相电压" />
+      -->
+        <data-item code="B61F" description="电压数据块">
+            <data-item code="B611" length="2" type="0100" property="axdy" unit="V" description="A相电压"/>
+            <data-item code="B612" length="2" type="0100" property="bxdy" unit="V" description="B相电压"/>
+            <data-item code="B613" length="2" type="0100" property="cxdy" unit="V" description="C相电压"/>
+        </data-item>
+
+        <!--
+      <data-item code="B621" length="2" type="" unit="A" description="A相电流" />
+      <data-item code="B622" length="2" type="" unit="A" description="B相电流" />
+      <data-item code="B623" length="2" type="" unit="A" description="C相电流" />
+      -->
+        <data-item code="B62F" description="电流数据块">
+            <data-item code="B621" length="2" type="0102" property="axdl" unit="A" description="A相电流"/>
+            <data-item code="B622" length="2" type="0102" property="bxdl" unit="A" description="B相电流"/>
+            <data-item code="B623" length="2" type="0102" property="cxdl" unit="A" description="C相电流"/>
+        </data-item>
+
+        <!--
+      <data-item code="B630" length="3" type="" unit="kW" description="瞬时有功功率" />
+      <data-item code="B631" length="3" type="" unit="kW" description="A相有功功率" />
+      <data-item code="B632" length="3" type="" unit="kW" description="B相有功功率" />
+      <data-item code="B633" length="3" type="" unit="kW" description="C相有功功率" />
+      -->
+        <data-item code="B63F" description="有功功率数据块">
+            <data-item code="B630" length="3" type="0104" property="sjyggl" unit="kW" description="瞬时有功功率"/>
+            <data-item code="B631" length="3" type="0104" unit="kW" description="A相有功功率"/>
+            <data-item code="B632" length="3" type="0104" unit="kW" description="B相有功功率"/>
+            <data-item code="B633" length="3" type="0104" unit="kW" description="C相有功功率"/>
+        </data-item>
+
+        <!--
+      <data-item code="B640" length="2" type="" unit="kvar" description="瞬时无功功率" />
+      <data-item code="B641" length="2" type="" unit="kvar" description="A相无功功率" />
+      <data-item code="B642" length="2" type="" unit="kvar" description="B相无功功率" />
+      <data-item code="B643" length="2" type="" unit="kvar" description="C相无功功率" />
+      -->
+        <data-item code="B64F" description="无功功率数据块">
+            <data-item code="B640" length="2" type="0102" property="sjwggl" unit="kvar" description="瞬时无功功率"/>
+            <data-item code="B641" length="2" type="0102" unit="kvar" description="A相无功功率"/>
+            <data-item code="B642" length="2" type="0102" unit="kvar" description="B相无功功率"/>
+            <data-item code="B643" length="2" type="0102" unit="kvar" description="C相无功功率"/>
+        </data-item>
+
+        <!--
+      <data-item code="B650" length="2" type="" unit="" description="总功率因数" />
+      <data-item code="B651" length="2" type="" unit="" description="A相功率因数" />
+      <data-item code="B652" length="2" type="" unit="" description="B相功率因数" />
+      <data-item code="B653" length="2" type="" unit="" description="C相功率因数" />
+      -->
+        <data-item code="B65F" description="功率因数数据块">
+            <data-item code="B650" length="2" type="0103" property="zglys" unit="" description="总功率因数"/>
+            <data-item code="B651" length="2" type="0103" unit="" description="A相功率因数"/>
+            <data-item code="B652" length="2" type="0103" unit="" description="B相功率因数"/>
+            <data-item code="B653" length="2" type="0103" unit="" description="C相功率因数"/>
+        </data-item>
+    </data-item>
+
+    <data-item code="C010" length="4" type="0800" unit="" description="日期及周日"/>
+    <data-item code="C011" length="3" type="0900" unit="" description="时间"/>
+    <data-item code="C020" length="1" type="0100" unit="" description="表计电池失压标识"/>
+    <data-item code="C030" length="3" type="0100" unit="" description="电表常数（有功）"/>
+    <data-item code="C031" length="3" type="0100" unit="" description="电表常数（无功）"/>
+    <data-item code="C119" length="4" type="0102" unit="kWh" description="有功电能表起始读数"/>
+    <data-item code="C11A" length="4" type="0102" unit="kvah" description="无功电能表起始读数"/>
+
+    <!--
+     <data-item code="C331" length="3" type="" unit="" description="第一日时段表第1时段起始时间及费率号" />
+     <data-item code="C332" length="3" type="" unit="" description="第一日时段表第2时段起始时间及费率号" />
+     <data-item code="C333" length="3" type="" unit="" description="第一日时段表第3时段起始时间及费率号" />
+     <data-item code="C334" length="3" type="" unit="" description="第一日时段表第4时段起始时间及费率号" />
+     <data-item code="C335" length="3" type="" unit="" description="第一日时段表第5时段起始时间及费率号" />
+     <data-item code="C336" length="3" type="" unit="" description="第一日时段表第6时段起始时间及费率号" />
+     <data-item code="C337" length="3" type="" unit="" description="第一日时段表第7时段起始时间及费率号" />
+     <data-item code="C338" length="3" type="" unit="" description="第一日时段表第8时段起始时间及费率号" />
+     -->
+    <data-item code="C33F" description="时段费率数据块">
+        <data-item code="C331" length="3" type="1200" unit="" description="第一日时段表第1时段起始时间及费率号"/>
+        <data-item code="C332" length="3" type="1200" unit="" description="第一日时段表第2时段起始时间及费率号"/>
+        <data-item code="C333" length="3" type="1200" unit="" description="第一日时段表第3时段起始时间及费率号"/>
+        <data-item code="C334" length="3" type="1200" unit="" description="第一日时段表第4时段起始时间及费率号"/>
+        <data-item code="C335" length="3" type="1200" unit="" description="第一日时段表第5时段起始时间及费率号"/>
+        <data-item code="C336" length="3" type="1200" unit="" description="第一日时段表第6时段起始时间及费率号"/>
+        <data-item code="C337" length="3" type="1200" unit="" description="第一日时段表第7时段起始时间及费率号"/>
+        <data-item code="C338" length="3" type="1200" unit="" description="第一日时段表第8时段起始时间及费率号"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E11" length="4" type="" unit="V" description="A相电压（一次侧）" />
+     <data-item code="8E12" length="4" type="" unit="V" description="B相电压（一次侧）" />
+     <data-item code="8E13" length="4" type="" unit="V" description="C相电压（一次侧）" />
+     -->
+    <data-item code="8E1F" description="电压（一次侧）数据块">
+        <data-item code="8E11" length="4" type="0102" unit="V" description="A相电压（一次侧）"/>
+        <data-item code="8E12" length="4" type="0102" unit="V" description="B相电压（一次侧）"/>
+        <data-item code="8E13" length="4" type="0102" unit="V" description="C相电压（一次侧）"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E21" length="4" type="" unit="A" description="A相电流（一次侧）" />
+     <data-item code="8E22" length="4" type="" unit="A" description="B相电流（一次侧）" />
+     <data-item code="8E23" length="4" type="" unit="A" description="C相电流（一次侧）" />
+     -->
+    <data-item code="8E2F" description="电流（一次侧）数据块">
+        <data-item code="8E21" length="4" type="0102" unit="A" description="A相电流（一次侧）"/>
+        <data-item code="8E22" length="4" type="0102" unit="A" description="B相电流（一次侧）"/>
+        <data-item code="8E23" length="4" type="0102" unit="A" description="C相电流（一次侧）"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E30" length="4" type="" unit="kW" description="瞬时有功功率（一次侧）" />
+     <data-item code="8E31" length="4" type="" unit="kW" description="A相有功功率（一次侧）" />
+     <data-item code="8E32" length="4" type="" unit="kW" description="B相有功功率（一次侧）" />
+     <data-item code="8E33" length="4" type="" unit="kW" description="C相有功功率（一次侧）" />
+     -->
+    <data-item code="8E3F" description="有功功率（一次侧）数据块">
+        <data-item code="8E30" length="4" type="0201" unit="kW" description="瞬时有功功率（一次侧）"/>
+        <data-item code="8E31" length="4" type="0201" unit="kW" description="A相有功功率（一次侧）"/>
+        <data-item code="8E32" length="4" type="0201" unit="kW" description="B相有功功率（一次侧）"/>
+        <data-item code="8E33" length="4" type="0201" unit="kW" description="C相有功功率（一次侧）"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E40" length="4" type="" unit="kvar" description="瞬时无功功率（一次侧）" />
+     <data-item code="8E41" length="4" type="" unit="kvar" description="A相无功功率（一次侧）" />
+     <data-item code="8E42" length="4" type="" unit="kvar" description="B相无功功率（一次侧）" />
+     <data-item code="8E43" length="4" type="" unit="kvar" description="C相无功功率（一次侧）" />
+     -->
+    <data-item code="8E4F" description="无功功率（一次侧）数据块">
+        <data-item code="8E40" length="4" type="0201" unit="kvar" description="瞬时无功功率（一次侧）"/>
+        <data-item code="8E41" length="4" type="0201" unit="kvar" description="A相无功功率（一次侧）"/>
+        <data-item code="8E42" length="4" type="0201" unit="kvar" description="B相无功功率（一次侧）"/>
+        <data-item code="8E43" length="4" type="0201" unit="kvar" description="C相无功功率（一次侧）"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E60" length="4" type="" unit="kW" description="15分钟平均有功功率（一次侧）" />
+     <data-item code="8E61" length="4" type="" unit="kvar" description="15分钟平均无功功率（一次侧）" />
+     <data-item code="8E62" length="3" type="" unit="kW" description="15分钟平均有功功率（二次侧）" />
+     <data-item code="8E63" length="3" type="" unit="kvar" description="15分钟平均无功功率（二次侧）" />
+     -->
+    <data-item code="8E6F" description="15分钟平均功率数据块">
+        <data-item code="8E60" length="4" type="0201" unit="kW" description="15分钟平均有功功率（一次侧）"/>
+        <data-item code="8E61" length="4" type="0201" unit="kvar" description="15分钟平均无功功率（一次侧）"/>
+        <data-item code="8E62" length="3" type="0202" property="swpjyggl" unit="kW" description="15分钟平均有功功率（二次侧）"/>
+        <data-item code="8E63" length="3" type="0202" property="swpjwggl" unit="kvar" description="15分钟平均无功功率（二次侧）"/>
+    </data-item>
+
+    <data-item code="8E70" length="2" type="0102" unit="A" description="零序电流（二次侧）"/>
+
+    <!--
+     <data-item code="8E80" length="1" type="" unit="次" description="上日A相电压超上限次数" />
+     <data-item code="8E81" length="1" type="" unit="次" description="上日A相电压超下限次数" />
+     <data-item code="8E82" length="1" type="" unit="次" description="上日B相电压超上限次数" />
+     <data-item code="8E83" length="1" type="" unit="次" description="上日B相电压超下限次数" />
+     <data-item code="8E84" length="1" type="" unit="次" description="上日C相电压超上限次数" />
+     <data-item code="8E85" length="1" type="" unit="次" description="上日C相电压超下限次数" />
+     <data-item code="8E86" length="7" type="" unit="" description="上日A相电压峰值及其发生时间" />
+     <data-item code="8E87" length="7" type="" unit="" description="上日A相电压谷值及其发生时间" />
+     <data-item code="8E88" length="7" type="" unit="" description="上日B相电压峰值及其发生时间" />
+     <data-item code="8E89" length="7" type="" unit="" description="上日B相电压谷值及其发生时间" />
+     <data-item code="8E8A" length="7" type="" unit="" description="上日C相电压峰值及其发生时间" />
+     <data-item code="8E8B" length="7" type="" unit="" description="上日C相电压谷值及其发生时间" />
+     -->
+    <data-item code="8E8F" description="电压质量数据块">
+        <data-item code="8E80" length="1" type="0100" unit="次" description="上日A相电压超上限次数"/>
+        <data-item code="8E81" length="1" type="0100" unit="次" description="上日A相电压超下限次数"/>
+        <data-item code="8E82" length="1" type="0100" unit="次" description="上日B相电压超上限次数"/>
+        <data-item code="8E83" length="1" type="0100" unit="次" description="上日B相电压超下限次数"/>
+        <data-item code="8E84" length="1" type="0100" unit="次" description="上日C相电压超上限次数"/>
+        <data-item code="8E85" length="1" type="0100" unit="次" description="上日C相电压超下限次数"/>
+        <data-item code="8E86" length="7" type="1000" unit="" description="上日A相电压峰值及其发生时间"/>
+        <data-item code="8E87" length="7" type="1000" unit="" description="上日A相电压谷值及其发生时间"/>
+        <data-item code="8E88" length="7" type="1000" unit="" description="上日B相电压峰值及其发生时间"/>
+        <data-item code="8E89" length="7" type="1000" unit="" description="上日B相电压谷值及其发生时间"/>
+        <data-item code="8E8A" length="7" type="1000" unit="" description="上日C相电压峰值及其发生时间"/>
+        <data-item code="8E8B" length="7" type="1000" unit="" description="上日C相电压谷值及其发生时间"/>
+    </data-item>
+
+    <!--
+     <data-item code="8E90" length="2" type="" unit="" description="电流过负荷比例" />
+     <data-item code="8E91" length="8" type="" unit="" description="上日最大有功功率及其发生时间" />
+     <data-item code="8E92" length="8" type="" unit="" description="上日最小有功功率及其发生时间" />
+     <data-item code="8E93" length="7" type="" unit="" description="上日A相电流峰值及其发生时间" />
+     <data-item code="8E94" length="7" type="" unit="" description="上日A相电流谷值及其发生时间" />
+     <data-item code="8E95" length="1" type="" unit="" description="上日B相电流峰值及其发生时间" />
+     <data-item code="8E96" length="7" type="" unit="" description="上日B相电流谷值及其发生时间" />
+     <data-item code="8E97" length="7" type="" unit="" description="上日C相电流峰值及其发生时间" />
+     <data-item code="8E98" length="7" type="" unit="" description="上日C相电流谷值及其发生时间" />
+     -->
+    <data-item code="8E9F" description="电流质量数据块">
+        <data-item code="8E90" length="2" type="0101" unit="" description="电流过负荷比例"/>
+        <data-item code="8E91" length="8" type="1100" unit="" description="上日最大有功功率及其发生时间"/>
+        <data-item code="8E92" length="8" type="1100" unit="" description="上日最小有功功率及其发生时间"/>
+        <data-item code="8E93" length="7" type="3500" unit="" description="上日A相电流峰值及其发生时间"/>
+        <data-item code="8E94" length="7" type="3500" unit="" description="上日A相电流谷值及其发生时间"/>
+        <data-item code="8E95" length="7" type="3500" unit="" description="上日B相电流峰值及其发生时间"/>
+        <data-item code="8E96" length="7" type="3500" unit="" description="上日B相电流谷值及其发生时间"/>
+        <data-item code="8E97" length="7" type="3500" unit="" description="上日C相电流峰值及其发生时间"/>
+        <data-item code="8E98" length="7" type="3500" unit="" description="上日C相电流谷值及其发生时间"/>
+    </data-item>
+
+    <data-item code="8EA0" length="2" type="0500" unit="" description="测量点状态字"/>
+
+</protocol-data>
