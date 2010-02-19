@@ -33,7 +33,6 @@
 		class="com.hzjbbis.fk.sockserver.event.adapt.ServerStopEventAdapt" />
 	<bean id="SimpleHandler.ModuleProfileEventAdapt"
 		class="com.hzjbbis.fk.sockserver.event.adapt.ModuleProfileEventAdapt" />
-
 	<bean id="SimpleHandler.ReceiveMessageEventAdapt"
 		class="com.hzjbbis.fk.sockserver.event.adapt.ReceiveMessageEventAdapt" />
 	<bean id="SimpleHandler.SendMessageEventAdapt"

@@ -1,0 +1,317 @@
+2010-02-19 11:14:12,113  INFO [      main] ClassPathXmlApplicationContext:412 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@10bc49d: display name [org.springframework.context.support.ClassPathXmlApplicationContext@10bc49d]; startup date [Fri Feb 19 11:14:12 CST 2010]; root of context hierarchy
+2010-02-19 11:14:12,202  INFO [      main] XmlBeanDefinitionReader:323 - Loading XML bean definitions from URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-common.xml]
+2010-02-19 11:14:12,704  INFO [      main] XmlBeanDefinitionReader:323 - Loading XML bean definitions from URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-socket.xml]
+2010-02-19 11:14:12,736  INFO [      main] XmlBeanDefinitionReader:323 - Loading XML bean definitions from URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-db-batch.xml]
+2010-02-19 11:14:12,904  INFO [      main] XmlBeanDefinitionReader:323 - Loading XML bean definitions from URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-monitor.xml]
+2010-02-19 11:14:12,920  INFO [      main] XmlBeanDefinitionReader:323 - Loading XML bean definitions from URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-bp.xml]
+2010-02-19 11:14:12,967  INFO [      main] DefaultListableBeanFactory:467 - Overriding bean definition for bean 'propertyConfigurer': replacing [Generic bean: class [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]; scope=singleton; abstract=false; lazyInit=false; autowireCandidate=true; autowireMode=0; dependencyCheck=0; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-db-batch.xml]] with [Generic bean: class [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]; scope=singleton; abstract=false; lazyInit=false; autowireCandidate=true; autowireMode=0; dependencyCheck=0; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in URL [file:/D:/workspace/powerstation/sourcecode/fep/bp/applicationContext-bp.xml]]
+2010-02-19 11:14:12,988  INFO [      main] ClassPathXmlApplicationContext:427 - Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@10bc49d]: org.springframework.beans.factory.support.DefaultListableBeanFactory@14d1d41
+2010-02-19 11:14:13,196  INFO [      main] PropertyPlaceholderConfigurer:178 - Loading properties file from class path resource [jdbc.properties]
+2010-02-19 11:14:13,197  INFO [      main] PropertyPlaceholderConfigurer:178 - Loading properties file from class path resource [application.properties]
+2010-02-19 11:14:13,250  INFO [      main] DefaultListableBeanFactory:414 - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@14d1d41: defining beans [EventType.ACCEPTCLIENT,EventType.CLIENT_CONNECTED,EventType.CLIENTCLOSE,EventType.CLIENTTIMEOUT,EventType.SERVERPROFILE,EventType.SERVERSTARTED,EventType.SERVERSTOPPED,EventType.SYS_EVENT_PROCESS_TIMEOUT,EventType.SYS_TIMER,EventType.SYS_MEMORY_PROFILE,EventType.SYS_IDLE,EventType.MSG_SEND_FAIL,EventType.MSG_RECV,EventType.MSG_SENT,EventType.MSG_SIMPLE_RECV,EventType.MSG_SIMPLE_SENT,EventType.MSG_PARSE_ERROR,EventType.FE_RTU_CHANNEL,EventType.MODULE_STARTTED,EventType.MODULE_STOPPED,EventType.MODULE_PROFILE,EventType.DB_AVAILABLE,EventType.DB_UNAVAILABLE,EventType.BP_RELAY,EventType.BP_READ_CURRENT,EventType.BP_READ_TASK,EventType.BP_EXP_ALARM,EventType.BP_LOG_DB,messageLoader.MessageZj,messageCreator.Zj,messageCreator.Gate,common.timerScheduler,global.event.handler,SimpleHandler.AcceptEventAdapt,SimpleHandler.ClientCloseEventAdapt,SimpleHandler.ClientTimeoutEventAdapt,SimpleHandler.MessageSendFailEventAdapt,SimpleHandler.RecvSimpleMessageEventAdapt,SimpleHandler.SentSimpleMessageEventAdapt,SimpleHandler.ServerStartedEventAdapt,SimpleHandler.ServerStopEventAdapt,SimpleHandler.ModuleProfileEventAdapt,SimpleHandler.ReceiveMessageEventAdapt,SimpleHandler.SendMessageEventAdapt,SimpleEventHandler,ISocketServer,iohandler.SimpleIoHandler,iohandler.SimpleUdpIoHandler,jSocketListener.Dumy,JSocket,propertyConfigurer,dataSource,master.dbMonitor,transactionManager,org.springframework.aop.config.internalAutoProxyCreator,org.springframework.transaction.config.internalTransactionAdvisor,event.handle.readTask,event.handle.expAlarm,event.handle.log2Db,event.handle.updateRtu,asyncService,dao.initComRtu,initRtu,manageRtu,dao.initBizRtu,dao.refreshRtu,master.dbservice,dao.updateRtuCommInfo,app.init.rtu,messageCreator.Monitor,monitor.server,monitor.eventhandler.OnReceiveMonitorMessage,monitor.eventhandler.OnMonitorClientClose,monitor.event.handler,osMonitor,bp.msgqueue.cachequeue,bp.msgqueue,bp.event.handle.fe,bp.com.client,bp.feClientManage,bp.msg.processor,messageCreator.Web,bp.server.web,webserver.event.hook,bp.intf.client,bp.IntfClientManage,bp.timeCorrector.client,bp.TimeCorrectorClientManage,bp.rereadTask.client,bp.rereadTaskClientManage,bp.batchDao.insertTaskData,bp.batchDao.insertTaskDlsj01,bp.batchDao.insertTaskDlsj02,bp.batchDao.insertTaskDlsj03,bp.batchDao.insertTaskDlsj04,bp.batchDao.insertTaskDlsj05,bp.batchDao.insertTaskDlsj06,bp.batchDao.insertTaskDlsj07,bp.batchDao.insertTaskDlsj08,bp.batchDao.insertTaskDlsj09,bp.batchDao.insertTaskDlsj10,bp.batchDao.insertTaskDlsj11,bp.batchDao.insertTaskFhsj01,bp.batchDao.insertTaskFhsj02,bp.batchDao.insertTaskFhsj03,bp.batchDao.insertTaskFhsj04,bp.batchDao.insertTaskFhsj05,bp.batchDao.insertTaskFhsj06,bp.batchDao.insertTaskFhsj07,bp.batchDao.insertTaskFhsj08,bp.batchDao.insertTaskFhsj09,bp.batchDao.insertTaskFhsj10,bp.batchDao.insertTaskFhsj11,bp.batchDao.insertTaskDyhglsj01,bp.batchDao.insertTaskDyhglsj02,bp.batchDao.insertTaskDyhglsj03,bp.batchDao.insertTaskDyhglsj04,bp.batchDao.insertTaskDyhglsj05,bp.batchDao.insertTaskDyhglsj06,bp.batchDao.insertTaskDyhglsj07,bp.batchDao.insertTaskDyhglsj08,bp.batchDao.insertTaskDyhglsj09,bp.batchDao.insertTaskDyhglsj10,bp.batchDao.insertTaskDyhglsj11,bp.batchDao.insertTasksbdltjsj04,bp.batchDao.insertTasksbdltjsj10,bp.batchDao.insertTasksbgltjsj04,bp.batchDao.insertTasksbgltjsj10,bp.batchDao.insertTasksbxbdlsj10,bp.batchDao.insertTasksbxbdysj10,bp.batchDao.insertTaskJcDlsj01,bp.batchDao.insertTaskJcDlsj02,bp.batchDao.insertTaskJcDlsj03,bp.batchDao.insertTaskJcDlsj04,bp.batchDao.insertTaskJcDlsj05,bp.batchDao.insertTaskJcDlsj06,bp.batchDao.insertTaskJcDlsj07,bp.batchDao.insertTaskJcDlsj08,bp.batchDao.insertTaskJcDlsj09,bp.batchDao.insertTaskJcDlsj10,bp.batchDao.insertTaskJcDlsj11,bp.batchDao.insertAlarm01,bp.batchDao.insertAlarm02,bp.batchDao.insertAlarm03,bp.batchDao.insertAlarm04,bp.batchDao.insertAlarm05,bp.batchDao.insertAlarm06,bp.batchDao.insertAlarm07,bp.batchDao.insertAlarm08,bp.batchDao.insertAlarm09,bp.batchDao.insertAlarm10,bp.batchDao.insertAlarm11,bp.batchDao.insertUpErrLog,bp.event.handle.readTask,bp.event.handle.expAlarm,bp.batchDao.AddtiveParameter,bp.asyncService,fasSystem,job.showProfile,cronTrigger.showProfile,bp.refreshRtu,job.refreshRtu,cronTrigger.refreshRtuCache,org.springframework.scheduling.quartz.SchedulerFactoryBean#0]; root of factory hierarchy
+2010-02-19 11:14:13,341  INFO [GlobalEventPumpThread] GlobalEventHandler:198 - Global event handler thread running
+2010-02-19 11:14:13,644 ERROR [Prototyper] null:105 - Prototype
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:154)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.Prototyper.sweep(Prototyper.java:102)
+	at org.logicalcobwebs.proxool.PrototyperThread.run(PrototyperThread.java:44)
+2010-02-19 11:14:13,987  INFO [      main] SimpleThreadPool:258 - Job execution threads will use class loader of thread: main
+2010-02-19 11:14:14,002  INFO [      main] QuartzScheduler:209 - Quartz Scheduler v.1.6.0 created.
+2010-02-19 11:14:14,004  INFO [      main] RAMJobStore:141 - RAMJobStore initialized.
+2010-02-19 11:14:14,005  INFO [      main] StdSchedulerFactory:1208 - Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+2010-02-19 11:14:14,006  INFO [      main] StdSchedulerFactory:1212 - Quartz scheduler version: 1.6.0
+2010-02-19 11:14:14,009  INFO [      main] QuartzScheduler:2065 - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@c1a0eb
+2010-02-19 11:14:14,013  INFO [      main] SchedulerFactoryBean:890 - Starting Quartz Scheduler now
+2010-02-19 11:14:14,014  INFO [      main] QuartzScheduler:455 - Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+2010-02-19 11:14:14,020  INFO [      main] BPLatterProcessor:60 - 业务处理器后处理线程启动成功
+2010-02-19 11:14:14,024  INFO [web.EventHook.1] ThreadPool:200 - threadpool.work running:web.EventHook.1
+2010-02-19 11:14:14,024  INFO [web.EventHook.2] ThreadPool:200 - threadpool.work running:web.EventHook.2
+2010-02-19 11:14:14,124 DEBUG [      main] ThreadPool:80 - 线程池【web.EventHook】启动成功。,size=2
+2010-02-19 11:14:14,127  INFO [监控10006EH.3] ThreadPool:200 - threadpool.work running:监控10006EH.3
+2010-02-19 11:14:14,127  INFO [监控10006EH.4] ThreadPool:200 - threadpool.work running:监控10006EH.4
+2010-02-19 11:14:14,227 DEBUG [      main] ThreadPool:80 - 线程池【监控10006EH】启动成功。,size=2
+2010-02-19 11:14:14,254  INFO [TcpServer-7779-AcceptThread] TcpSocketServer:189 - server[7779]listen thread is running
+2010-02-19 11:14:14,282  INFO [      main] TcpSocketServer:104 - TCP服务启动成功【7779】
+2010-02-19 11:14:14,284  INFO [web.EventHook.2] ServerStartedEventAdapt:27 - server started event. server=A-TCP(7779)
+2010-02-19 11:14:14,291  INFO [batchService.5] ThreadPool:200 - threadpool.work running:batchService.5
+2010-02-19 11:14:14,291  INFO [batchService.6] ThreadPool:200 - threadpool.work running:batchService.6
+2010-02-19 11:14:14,293  INFO [batchService.8] ThreadPool:200 - threadpool.work running:batchService.8
+2010-02-19 11:14:14,291  INFO [batchService.7] ThreadPool:200 - threadpool.work running:batchService.7
+2010-02-19 11:14:14,391 DEBUG [      main] ThreadPool:80 - 线程池【batchService】启动成功。,size=4
+2010-02-19 11:14:14,397  INFO [      bp.1] BProcessor:183 - threadpool.work running:bp.1
+2010-02-19 11:14:14,399  INFO [      bp.2] BProcessor:183 - threadpool.work running:bp.2
+2010-02-19 11:14:14,400  INFO [      bp.3] BProcessor:183 - threadpool.work running:bp.3
+2010-02-19 11:14:14,401  INFO [      bp.4] BProcessor:183 - threadpool.work running:bp.4
+2010-02-19 11:14:14,403  INFO [      bp.5] BProcessor:183 - threadpool.work running:bp.5
+2010-02-19 11:14:14,499 DEBUG [      main] BProcessor:80 - 线程池【bp】启动成功。,size=5
+2010-02-19 11:14:14,510  INFO [TcpServer-10021-AcceptThread] TcpSocketServer:189 - server[10021]listen thread is running
+2010-02-19 11:14:14,517  INFO [      main] TcpSocketServer:104 - TCP服务启动成功【10021】
+2010-02-19 11:14:14,518  INFO [监控10006EH.4] ServerStartedEventAdapt:27 - server started event. server=A-TCP(10021)
+2010-02-19 11:14:14,518  INFO [      main] FasSystem:210 - startSystem successfully!
+2010-02-19 11:14:15,287 ERROR [sock-127.0.0.1@10010] JSocket:104 - 不能连接到:127.0.0.1@10010,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:15,497 ERROR [sock-127.0.0.1@10030] JSocket:104 - 不能连接到:127.0.0.1@10030,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:15,506 ERROR [sock-127.0.0.1@10045] JSocket:104 - 不能连接到:127.0.0.1@10045,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:15,509 ERROR [sock-127.0.0.1@10040] JSocket:104 - 不能连接到:127.0.0.1@10040,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:16,520 DEBUG [   Timer-0] OsSystemMonitor:146 - CPUMonitor stdout:[13]
+2010-02-19 11:14:16,550 DEBUG [   Timer-0] OsSystemMonitor:90 - cpu=13.0%;  freeDisk=7412M;  totalMemory=254M;  freeMemory=234M
+2010-02-19 11:14:19,511 ERROR [sock-127.0.0.1@10045] JSocket:104 - 不能连接到:127.0.0.1@10045,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:19,521 ERROR [sock-127.0.0.1@10040] JSocket:104 - 不能连接到:127.0.0.1@10040,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:20,301 ERROR [sock-127.0.0.1@10010] JSocket:104 - 不能连接到:127.0.0.1@10010,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:20,511 ERROR [sock-127.0.0.1@10030] JSocket:104 - 不能连接到:127.0.0.1@10030,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:27,529 ERROR [sock-127.0.0.1@10045] JSocket:104 - 不能连接到:127.0.0.1@10045,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:27,538 ERROR [sock-127.0.0.1@10040] JSocket:104 - 不能连接到:127.0.0.1@10040,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:28,308 ERROR [sock-127.0.0.1@10010] JSocket:104 - 不能连接到:127.0.0.1@10010,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:28,518 ERROR [sock-127.0.0.1@10030] JSocket:104 - 不能连接到:127.0.0.1@10030,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:43,490 ERROR [Prototyper] null:105 - Prototype
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:154)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.Prototyper.sweep(Prototyper.java:102)
+	at org.logicalcobwebs.proxool.PrototyperThread.run(PrototyperThread.java:44)
+2010-02-19 11:14:43,533 ERROR [sock-127.0.0.1@10045] JSocket:104 - 不能连接到:127.0.0.1@10045,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:43,547 ERROR [sock-127.0.0.1@10040] JSocket:104 - 不能连接到:127.0.0.1@10040,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:44,357 ERROR [sock-127.0.0.1@10010] JSocket:104 - 不能连接到:127.0.0.1@10010,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:14:44,527 ERROR [sock-127.0.0.1@10030] JSocket:104 - 不能连接到:127.0.0.1@10030,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:15:13,492 ERROR [Prototyper] null:105 - Prototype
+java.sql.SQLException: Io 异常: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:112)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:146)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:255)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:387)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:414)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:165)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:35)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:801)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:154)
+	at org.logicalcobwebs.proxool.DefaultConnectionBuilder.buildConnection(DefaultConnectionBuilder.java:39)
+	at org.logicalcobwebs.proxool.Prototyper.buildConnection(Prototyper.java:159)
+	at org.logicalcobwebs.proxool.Prototyper.sweep(Prototyper.java:102)
+	at org.logicalcobwebs.proxool.PrototyperThread.run(PrototyperThread.java:44)
+2010-02-19 11:15:15,549 ERROR [sock-127.0.0.1@10045] JSocket:104 - 不能连接到:127.0.0.1@10045,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:15:15,549 ERROR [sock-127.0.0.1@10040] JSocket:104 - 不能连接到:127.0.0.1@10040,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:15:16,173 DEBUG [   Timer-0] OsSystemMonitor:146 - CPUMonitor stdout:[8]
+2010-02-19 11:15:16,211 DEBUG [   Timer-0] OsSystemMonitor:90 - cpu=8.0%;  freeDisk=7411M;  totalMemory=254M;  freeMemory=244M
+2010-02-19 11:15:16,379 ERROR [sock-127.0.0.1@10010] JSocket:104 - 不能连接到:127.0.0.1@10010,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-19 11:15:16,549 ERROR [sock-127.0.0.1@10030] JSocket:104 - 不能连接到:127.0.0.1@10030,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(PlainSocketImpl.java:333)
+	at java.net.PlainSocketImpl.connectToAddress(PlainSocketImpl.java:195)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:182)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:366)
+	at java.net.Socket.connect(Socket.java:519)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)

@@ -1,0 +1,6 @@
+2010-02-19 10:53:49 [sock-10.137.253.8@8100] JSocket.java:96 - client socket is connecting to server :10.137.253.8:8100
+2010-02-19 10:53:49 [sock-10.137.253.8@8100]  - client socket cannot connected to server :10.137.253.8@8100
+2010-02-19 10:53:53 [sock-10.137.253.8@8100] JSocket.java:96 - client socket is connecting to server :10.137.253.8:8100
+2010-02-19 10:53:53 [sock-10.137.253.8@8100]  - client socket cannot connected to server :10.137.253.8@8100
+2010-02-19 10:54:01 [sock-10.137.253.8@8100] JSocket.java:96 - client socket is connecting to server :10.137.253.8:8100
+2010-02-19 10:54:01 [sock-10.137.253.8@8100]  - client socket cannot connected to server :10.137.253.8@8100
