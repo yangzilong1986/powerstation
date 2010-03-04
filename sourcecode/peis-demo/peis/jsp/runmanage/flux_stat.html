@@ -10,109 +10,119 @@
 <script type="text/javascript" src="../../js/frame/component.js"></script>
 <script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
 <script type="text/javascript" src="../../js/runmanage/fluxStat.js"></script>
-<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../js/frame/const.js"></script>
 </head>
 <body>
 <div id="body">
-  <div id="tab" class="tab">
-    <ul>
-      <li id="tab_1" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">流量统计</a></li>
-    </ul>
-    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
-  </div>
-  <div id="main">
-    <div id="tool">
-      <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
-      <table border="0" cellpadding="0" cellspacing="0">        
-        <tr>
-            <td colspan="4">
-                <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变
-                <input type="radio" name="objectType" value="2" class="dom" />配变/台区
-                <input type="radio" name="objectType" value="3" class="dom" />低压居民
-                <input type="radio" name="objectType" value="4" class="dom" />变电站
-            </td> 
-            <td colspan="2">
-                <input type="radio" name="checkType" value="1" checked="checked" class="dom" />通讯方式
-                <input type="radio" name="checkType" value="2" class="dom" />终端厂家
-            </td>
-            <td width="66" class="label" id="call">通讯方式：</td>
-            <td width="120" class="dom" id="callN">
-              <select id="callType" name="callType">
-                <option value="-1" selected="selected">所有</option>
-                <option value="1">GPRS</option>
-                <option value="2">CDMA</option>
-                <option value="3">230M</option>
-                <option value="4">232串口</option>
-              </select></td>
-            <td width="66" class="label" id="factry" style="display: none;">终端厂家：</td>
-            <td width="120" class="dom" id="factryN" style="display: none;">
-              <select id="deivecFactry" name="deivecFactry">
-                <option value="-1" selected="selected">所有厂家</option>
-                <option value="01">杭州百富电子</option>
-                <option value="02">万达信息</option>
-                <option value="03">长沙威胜信息技术有限公司</option>
-                <option value="04">上海华冠电子设备有限责任公司</option>
-                <option value="05">浙江电力高技术开发有限公司</option>
-                <option value="06">北京煜邦电力技术有限公司</option>
-                <option value="07">北京双电有限公司</option>
-                <option value="08">浙江华立电子技术有限公司</option>
-                <option value="09">天津光电有限公司</option>
-                <option value="10">南京瑞电有限公司</option>
-                <option value="11">北京中电飞华电子技术有限公司</option>
-                <option value="12">银川银光</option>
-                <option value="13">威斯顿</option>
-                <option value="14">广州科立</option>
-                <option value="15">科陆</option>             
-              </select></td>
-        </tr>
-        <tr>
-          <td width="66" class="label">供电单位：</td>         
-          <td width="120" class="dom" id="orgTar"> 
-          <td width="66" class="label">开始日期：</td>
-          <td class="dom_date">
-            <input type="text" id="date" name="date" value="2009-8-27">
-          </td>
-          <td width="66" class="label">结束日期：</td>
-          <td class="dom_date">
-            <input type="text" id="date" name="date" value="2009-8-27">
-          </td>                                           
-        </tr>                   
-      </table>
-      <div class="clear"></div>
-    </div>
-   <div class="content">
-      <div id="cont_1">
-        <div class="target">
-          <ul>
-            <li class="target_on"><a href="#">流量统计</a></li>
-            <li class="clear"></li>
-          </ul>
-        </div>
-        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 160));">
-          <!-- START Script Block for Chart-->
-          <div id="graphBlock" align="center"></div>
-          <!-- END Script Block for Chart> -->
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead><tr>
-                <th>&nbsp;</th>
-                <th>供电单位（<span id="name">通讯方式</span>）</th>
-                <th>总流量（kb）</th>
-                <th>上行流量（kb）</th>
-                <th>下行流量（kb）</th>
-                <th>上行短信条数</th>
-                <th>下行短信条数</th>
-                <th>终端数(台)</th>
-                <th>流量指标（kb）</th>
-            </tr></thead>
-            <tbody id="dtext">
-          </table>
-        </div>
-        <div class="pageContainer">
-          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="tab" class="tab2">
+<ul>
+  <li id="tab_2" class="tab_off"><a href="div_run_state.html" onClick="return true;" onFocus="blur()">设备运行统计</a></li>
+  <li id="tab_2" class="tab_off"><a href="div_err_stat.html" onclick="return true;" onfocus="blur()">设备故障统计</a></li>
+  <li id="tab_2" class="tab_off"><a href="equipment_exc_query.html" onclick="return true;" onfocus="blur()">设备故障查询</a></li>
+  <li id="tab_2" class="tab_off"><a href="div_online_stat.html" onclick="return true;" onfocus="blur()">设备在线统计</a></li>
+  <!--  <li id="tab_2" class="tab_off"><a href="equipment_exc_query.html" onclick="return true;" onfocus="blur()">安装覆盖率统计</a></li> -->
+  <li id="tab_2" class="tab_on"><a href="flux_stat.html" onclick="return false;" onfocus="blur()">设备流量查询</a></li>
+  <li id="tab_2" class="tab_off"><a href="comm_msg_query.html" onclick="return true;" onfocus="blur()">通讯源码查询</a></li>
+</ul>
+<h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+</div>
+<div id="main">
+<div id="tool">
+<div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="4"><input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变 <input
+      type="radio" name="objectType" value="2" class="dom" />配变/台区 <input type="radio" name="objectType" value="3"
+      class="dom" />低压居民 <input type="radio" name="objectType" value="4" class="dom" />变电站</td>
+    <td colspan="2"><input type="radio" name="checkType" value="1" checked="checked" class="dom" />通讯方式 <input
+      type="radio" name="checkType" value="2" class="dom" />终端厂家</td>
+    <td width="66" class="label" id="call">通讯方式：</td>
+    <td width="120" class="dom" id="callN"><select id="callType" name="callType">
+      <option value="-1" selected="selected">所有</option>
+      <option value="1">GPRS</option>
+      <option value="2">CDMA</option>
+      <option value="3">230M</option>
+      <option value="4">232串口</option>
+    </select></td>
+    <td width="66" class="label" id="factry" style="display: none;">终端厂家：</td>
+    <td width="120" class="dom" id="factryN" style="display: none;"><select id="deivecFactry" name="deivecFactry">
+      <option value="-1" selected="selected">所有厂家</option>
+      <option value="01">杭州百富电子</option>
+      <option value="02">万达信息</option>
+      <option value="03">长沙威胜信息技术有限公司</option>
+      <option value="04">上海华冠电子设备有限责任公司</option>
+      <option value="05">浙江电力高技术开发有限公司</option>
+      <option value="06">北京煜邦电力技术有限公司</option>
+      <option value="07">北京双电有限公司</option>
+      <option value="08">浙江华立电子技术有限公司</option>
+      <option value="09">天津光电有限公司</option>
+      <option value="10">南京瑞电有限公司</option>
+      <option value="11">北京中电飞华电子技术有限公司</option>
+      <option value="12">银川银光</option>
+      <option value="13">威斯顿</option>
+      <option value="14">广州科立</option>
+      <option value="15">科陆</option>
+    </select></td>
+  </tr>
+  <tr>
+    <td width="66" class="label">供电单位：</td>
+    <td width="120" class="dom" id="orgTar">
+    <td width="66" class="label">开始日期：</td>
+    <td class="dom_date"><input type="text" id="date" name="date" value="2009-8-27"></td>
+    <td width="66" class="label">结束日期：</td>
+    <td class="dom_date"><input type="text" id="date" name="date" value="2009-8-27"></td>
+  </tr>
+</table>
+<div class="clear"></div>
+</div>
+<div class="content">
+<div id="cont_1">
+<div class="target">
+<ul>
+  <li class="target_on"><a href="#">流量统计</a></li>
+  <li class="clear"></li>
+</ul>
+</div>
+<div class="graphContainer"
+  style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   160 ) );">
+<!-- START Script Block for Chart-->
+<div id="graphBlock" align="center"></div>
+<!-- END Script Block for Chart> -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>供电单位（<span id="name">通讯方式</span>）</th>
+      <th>总流量（kb）</th>
+      <th>上行流量（kb）</th>
+      <th>下行流量（kb）</th>
+      <th>上行短信条数</th>
+      <th>下行短信条数</th>
+      <th>终端数(台)</th>
+      <th>流量指标（kb）</th>
+    </tr>
+  </thead>
+  <tbody id="dtext">
+</table>
+</div>
+<div class="pageContainer"><a href="#"><img src="../../img/bt_excel.gif" width="16" height="16"
+  title="导出Excel" /></a> ┆ 共<span class="orange">20</span>条 显示行数：<select id="pageRows" name="pageRows" size="1">
+  <option value="10">10</option>
+  <option value="20" selected="selected">20</option>
+  <option value="30">30</option>
+  <option value="40">40</option>
+  <option value="50">50</option>
+  <option value="100">100</option>
+  <option value="200">200</option>
+  <option value="500">500</option>
+</select> 第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：<input type="text" id="page" name="page" value="1" />
+<img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a href="#"><img
+  src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img src="../../img/page_prew.gif"
+  class="pointer" title="上一页" /></a> <a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a> <a
+  href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
