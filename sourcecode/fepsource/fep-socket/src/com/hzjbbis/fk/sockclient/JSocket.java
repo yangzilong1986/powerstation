@@ -123,7 +123,6 @@ public class JSocket extends BaseClientChannel {
                 this.sendBuffer.clear();
                 if ((State.STOPPING == this._state) || (State.STOPPED == this._state)) {
                     this.reader = null;
-                    monitorexit;
                     return;
                 }
                 this._state = State.STARTING;
@@ -202,9 +201,7 @@ public class JSocket extends BaseClientChannel {
         //   20	107	114	finally
         //   109	111	114	finally
         //   114	116	114	finally }
-        public boolean sendMessage
-        (IMessage
-        msg){
+        public boolean sendMessage (IMessage msg){
             boolean ret = false;
             synchronized (this.sendLock) {
                 ret = _send(msg);
@@ -422,7 +419,6 @@ public class JSocket extends BaseClientChannel {
                 } catch (Exception e) {
                     JSocket.log.warn("消息对象读取数据异常:" + e.getLocalizedMessage(), e);
                     this.message = null;
-                    break label225:
                 }
                 if (!(down)) break;
                 try {
