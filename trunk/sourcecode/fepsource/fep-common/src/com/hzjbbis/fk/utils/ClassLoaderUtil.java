@@ -235,8 +235,9 @@ public class ClassLoaderUtil {
         if ((!(file.exists())) || (!(file.isDirectory()))) {
             return;
         }
+
         if (dir.equalsIgnoreCase(".")) {
-            classPath = null;
+           String classPath = null;
             try {
                 classPath = file.getCanonicalPath();
             } catch (Exception exp) {
@@ -282,7 +283,7 @@ public class ClassLoaderUtil {
         Pattern pattern = Pattern.compile(propFilePattern);
         FilenameFilter filter = new FilenameFilter(pattern) {
             public boolean accept(File dir, String name) {
-                return ClassLoaderUtil.this.matcher(name).matches();
+                return this.matcher(name).matches();
             }
         };
         searchPropertiesFile(curPath, filter);

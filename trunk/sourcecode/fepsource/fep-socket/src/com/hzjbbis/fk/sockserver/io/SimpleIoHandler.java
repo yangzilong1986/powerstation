@@ -43,7 +43,7 @@ public class SimpleIoHandler implements IClientIO {
                 }
                 bytesRead += n;
             } while (n != 0);
-            if (readBuf.hasRemaining()) break label228;
+            if (readBuf.hasRemaining()) 
             readBuf.flip();
 
             msgCount = processBuffer(readBuf, client, msgCount);
@@ -53,7 +53,6 @@ public class SimpleIoHandler implements IClientIO {
         return false;
 
         if (bytesRead == 0) {
-            label228:
             return true;
         }
         readBuf.flip();

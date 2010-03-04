@@ -48,9 +48,6 @@ public class SyncUdpServer extends BaseSocketServer implements IModule, ITimerFu
     }
 
     public boolean send(IMessage msg, UdpClient client) {
-        Object Ljava/lang / Object;
-        ;
-        monitorenter;
         try {
             SocketAddress sa = client.getSocketAddress();
             this.writeBuffer.clear();
@@ -62,7 +59,6 @@ public class SyncUdpServer extends BaseSocketServer implements IModule, ITimerFu
         } catch (Exception e) {
             log.error("UDP[" + this.port + "]发送报文异常:" + e.getLocalizedMessage(), e);
         } finally {
-            monitorexit;
         }
 
         return false;

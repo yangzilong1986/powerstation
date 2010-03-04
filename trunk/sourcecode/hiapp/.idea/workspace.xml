@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="80553e06-6331-4054-af9c-1f9bca269f92" name="Default" comment="" />
-    <ignored path=".idea/workspace.xml" />
     <ignored path="hiapp.iws" />
+    <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -119,8 +119,8 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Favorites" />
       <pane id="PackagesPane" />
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -291,18 +291,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/hiappconstant/src/com/hisun/constants/HiAppConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="26" selection-start="56" selection-end="56" vertical-scroll-proportion="0.045077104">
-          <folding />
-        </state>
+        <state line="2" column="26" selection-start="56" selection-end="56" vertical-scroll-proportion="0.045077104" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hiatmpatc/src/com/hisun/atmp/HiAtmpFit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="818" selection-end="818" vertical-scroll-proportion="0.092009686">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="26" column="13" selection-start="818" selection-end="818" vertical-scroll-proportion="0.092009686" />
       </provider>
     </entry>
   </component>
