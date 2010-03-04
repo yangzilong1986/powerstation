@@ -1,0 +1,58 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>电流极值明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />  
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"  src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js">
+</script><script type="text/javascript" src="../../js/frame/component.js"></script> 
+</head>
+<script type="text/javascript">
+ $(function(){
+ $.json2html("databody","../../jsp/elecmon/ecurExtremumDetail.xml",""); 
+ 
+    var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chatId", "850", "275", "0", "0");
+  chart_obj.setDataURL("ecurQx.xml");
+  chart_obj.render("graphBlock"); 
+});
+
+
+function viewDetail(){
+  showDialogBox("电流极值曲线", "../../jsp/elecmon/ecurExtremumQueryQx.html", 495, 800);
+}
+</script>
+<body>
+<div id="body">
+  <div class="graphContainer" style="100%;">
+    <div id="graphBlock" align="center"  class="block"></div>
+    <table border="0" cellpadding="0" cellspacing="0" width="200%">
+      <thead><tr>
+        <th width="2%">序号</th>
+        <th width="2%">操作</th>
+        <th width="4%">户号</th>
+        <th width="4%">户名</th>
+        <th width="4%">供电单位</th>
+        <th width="4%">供电线路</th>
+        <th width="5%">表号</th>
+        <th width="4%">测量点序号</th>
+        <th width="4%">数据时间</th>
+        <th width="4%">A相峰值</th>
+        <th width="6%">A相峰值发生时间</th>
+        <th width="4%">B相峰值</th>
+        <th width="6%">B相峰值发生时间</th>
+        <th width="4%">C相峰值</th>
+        <th width="6%">C相峰值发生时间</th>
+        <th width="4%">零序峰值</th>
+        <th width="6%">零序峰值发生时间</th>
+        <th width="4%">越限累计时间</th>
+      </tr></thead>
+      <tbody id="databody">
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

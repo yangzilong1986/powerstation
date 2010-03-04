@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data>
+         <td1>1</td1>
+         <td3>0000000112</td3>
+         <td4>2009-08-02</td4>
+         <td5>128093284</td5>
+         <td6>电费</td6>
+         <td7>80</td7>
+         <td8>待处理</td8>
+         <td9>成功</td9>
+    </data>
+    <data>
+         <td1>2</td1>
+         <td3>0000000113</td3>
+         <td4>2009-08-02</td4>
+         <td5>128093284</td5>
+         <td6>电量</td6>
+         <td7>80</td7>
+         <td8>已处理</td8>
+         <td9>失败</td9>
+    </data>
+</datas>

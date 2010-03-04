@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV园北Ⅰ线F05</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>                   
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV粤海线F08</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>12088064</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>757.92</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV河东Ⅰ线F01</td1>
+        <td2>5325</td2>
+        <td3>35453</td3>
+        <td4>5345</td4> 
+        <td5>543.21</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>215.4</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV河东Ⅱ线F02 </td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>343.2</td5> 
+        <td6>223423</td6> 
+        <td7>28152</td7> 
+        <td8>2154.32</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV华里线F03</td1>
+        <td2> 8658</td2>
+        <td3>67676</td3>
+        <td4>76768</td4> 
+        <td5>534.32</td5> 
+        <td6>22343</td6> 
+        <td7>28152</td7> 
+        <td8>215.84</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV备用线F08</td1>
+        <td2>98797</td2>
+        <td3>6789</td3>
+        <td4>98987</td4> 
+        <td5>323.12</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>321.43</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV备用线F20 </td1>
+        <td2>8897653</td2>
+        <td3>432342</td3>
+        <td4>432432</td4> 
+        <td5>342.335</td5> 
+        <td6>4234</td6> 
+        <td7>4324</td7> 
+        <td8>43.22</td8> 
+        <td9>&lt;a href="javascript:selectType(3)"&gt;曲线&lt;/a&gt;</td9>             
+    </data>     
+</datas>

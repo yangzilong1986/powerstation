@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>参数设置</title>
+    <link rel="stylesheet" type="text/css" href="../../css/window.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript"> 
+ 
+  function init() {
+      changeTab(1);
+  }
+   
+  function changeTab(index) {
+      var termId = $("#termId").val();
+      var logicAddr = $("#logicAddr").val();
+      var protocolNo = $("#protocolNo").val();
+      var str_url;
+      if(index == 1) {
+          $("#target_1").attr("class", "target_on");
+          $("#target_2").attr("class", "target_off");
+          str_url = "../../jsp/eparam/termParaList.html";
+          parapage.document.location = str_url;
+      }
+      else {
+          $("#target_1").attr("class", "target_off");
+          $("#target_2").attr("class", "target_on");
+          str_url = "../../jsp/eparam/gpParaList.html";
+          parapage.document.location = str_url;
+      }
+  }
+  
+  function setup(){
+      //设置按钮不可用
+      setButtonStatus(false);
+      parapage.setup();
+  }
+  
+  function readPara(){
+      //设置按钮不可用
+      setButtonStatus(false);
+      parapage.readPara();
+  }
+  
+  function rehandle(){
+      parapage.rehandle();
+  }
+  
+  //设置按钮状态(status=true: 按钮可用, status=false: 按钮不可用)
+  function setButtonStatus(status) {
+      document.all.setBt.disabled = !status;
+      document.all.rdBt.disabled = !status;
+      document.all.reBt.disabled = !status;
+  }
+  </script>
+  </head>
+  <body onload="init();" style="overflow: hidden;">
+    <input name="protocolNo" id="protocolNo" type=hidden value="106">
+    <input name="termId" id="termId" type=hidden value="101468">
+    <div id="body">
+      <div class="tab"><em>参数设置</em></div>
+      <div id="main">
+        <div id="tool">
+          <div class="opbutton1">
+            <input class="input1" type="button" id="setBt" value="设 置" onclick="setup();" />
+            <input class="input1" type="button" id="rdBt" value="读 取" onclick="readPara();" />
+            <input class="input2" type="button" id="reBt" value="失败重发" onclick="rehandle();" />
+          </div>
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="70" class="label">对象名称：</td>
+              <td width="120" class="dom">
+                <input name="objectName" id="objectName" type=text
+                  value="12080480">
+              </td>
+              <td width="70" class="label">终端地址：</td>
+              <td width="120" class="dom">
+                <input name="logicAddr" id="logicAddr" type=text
+                  value="45011113">
+              </td>
+              <td width="70" class="label"></td>
+              <td width="120" class="dom"></td>
+              <td width="70" class="label"></td>
+              <td width="120" class="dom"></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="content">
+          <div id="cont_1">
+            <div class="target3">
+              <ul>
+                <li id="target_1" class="target_on">
+                  <a href="#" onClick="changeTab(1);return false;">终端参数</a>
+                </li>
+                <li id="target_2" class="target_off">
+                  <a href="#" onClick="changeTab(2);return false;">测量点参数</a>
+                </li>
+                <li class="clear"></li>
+              </ul>
+            </div>
+            <div style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 122));">
+              <iframe name="parapage" width="100%" height="100%" frameborder="0" scrolling="no" src=""></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

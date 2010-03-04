@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='电压极值明细' yAxisMinValue="200" labelStep='1' anchorRadius='1' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+	<categories >
+		<category label='1日' />
+		<category label='2日' />
+		<category label='3日' />
+		<category label='4日' />
+		<category label='5日' />
+		<category label='6日' />
+		<category label='7日' />
+		
+	</categories>
+	<dataset seriesName='A相峰值' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+		<set value='235.4' />
+		<set value='236.7' />
+		<set value='239.6' />
+		<set value='242.1' />
+		<set value='237.3' />
+		<set value='239.8' />
+		<set value='235' />
+	</dataset>
+  <dataset seriesName='A相谷值' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='215.4' />
+		<set value='216.7' />
+		<set value='219.6' />
+		<set value='212.1' />
+		<set value='217.3' />
+		<set value='209.8' />
+		<set value='205' />
+		
+  </dataset>
+  <dataset seriesName='A相平均电压' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='225.4' />
+		<set value='226.7' />
+		<set value='229.6' />
+		<set value='222.1' />
+		<set value='227.3' />
+		<set value='229.8' />
+		<set value='225' />
+		
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

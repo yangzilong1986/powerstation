@@ -1,0 +1,144 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>漏点补召</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript"> 
+function detail(){
+    var str_url = "../../jsp/autorm/leakRepairDialog.html";
+    top.showDialogBox("漏点补召", str_url, 575, 900);
+}
+
+$(document).ready(function(){
+    $('input[type=radio][name=type]').click(dateModeChange);
+});
+
+function dateModeChange() {
+    var dateType = $('input[type=radio][name=type][checked=true]').val();
+    if (dateType == "2") {//月
+        $('#DATA_DAY').hide();
+        $('#DATA_MONTH').show();
+        $('#DATA_YEAR').show();
+    } else {
+        $('#DATA_DAY').show();
+        $('#DATA_YEAR').hide();
+        $('#DATA_MONTH').hide();
+    }
+}
+
+</script>
+</head>
+<body>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input2" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="120">
+            <input type="radio" name="type" value="1" checked="checked" onclick="">按日
+            <input type="radio" name="type" value="2" onclick="">按月
+          </td>
+          <td width="120" class="dom_date">
+            <span id="DATA_DAY" style="display:block;">
+              <input type="text" name="day" value="2009-9-20" id="day">
+            </span>
+            <span id="DATA_YEAR" style="display:none;">
+              <input type="text" name="year" value="2009" id="year" style="width:40px;">年
+            </span>
+            <span id="DATA_MONTH" style="display:none;">
+              <input type="text" name="month" value="8" id="month" style="width:40px;">月
+            </span>
+          </td>
+          <td colspan="7">&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="sys_object" value="0" checked="checked" onclick="">全部
+            <input type="radio" name="sys_object" value="1" onclick="">专变
+            <input type="radio" name="sys_object" value="2" onclick="">配变
+            <input type="radio" name="sys_object" value="3" onclick="">低压集抄
+            <input type="radio" name="sys_object" value="4" onclick="">变电站
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 64));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="20%">供电单位</th>
+                <th width="10%">日期</th>
+                <th width="18%">召测成功(%)</th>
+                <th colspan="3" width="20%">召测失败</th>
+              </tr>
+              <tr>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th width="18%">等等超时(%)</th>
+                <th width="18%">解析失败(%)</th>
+                <th width="16%">异常(%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr align="center">
+                <td>宁波市供电局</td>
+                <td>20090504</td>
+                <td>90</td>
+                <td><a href='javascript:detail();' onfocus="blur()">4</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">5</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">1</a></td>
+              </tr>
+              <tr align="center">
+                <td>杭州市供电局</td>
+                <td>20090504</td>
+                <td>78</td>
+                <td><a href='javascript:detail();' onfocus="blur()">10</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">6</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">6</a></td>
+              </tr>
+              <tr align="center">
+                <td>湖州市供电局</td>
+                <td>20090504</td>
+                <td>98</td>
+                <td><a href='javascript:detail();' onfocus="blur()">0</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">1</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">1</a></td>
+              </tr>
+              <tr align="center">
+                <td>嘉兴市供电局</td>
+                <td>20090504</td>
+                <td>94</td>
+                <td><a href='javascript:detail();' onfocus="blur()">2</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">1</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">3</a></td>
+              </tr>
+              <tr align="center">
+                <td>温州市供电局</td>
+                <td>20090504</td>
+                <td>96</td>
+                <td><a href='javascript:detail();' onfocus="blur()">2</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">0</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">2</a></td>
+              </tr>
+              <tr align="center">
+                <td>合计</td>
+                <td>&nbsp;</td>
+                <td>91.2</td>
+                <td><a href='javascript:detail();' onfocus="blur()">3.6</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">2.6</a></td>
+                <td><a href='javascript:detail();' onfocus="blur()">3.6</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

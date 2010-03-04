@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>用户及电表信息差异</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript">
+var tgNo=$.url.param("tgNo"); //台区号
+var tgName=$.url.param("tgName");//台区名
+var orgName=$.url.param("orgName");//供电单位
+var totalNum=$.url.param("totalNum");//总户数
+var curNum=$.url.param("curNum");//系统中户数
+var consisNum=$.url.param("consisNum");//一致户数
+var consisPer=$.url.param("consisPer");//一致性百分比
+$(document).ready( function() {
+   init();
+});
+
+//页面初始化
+function init(){
+  $('#tgNoDom').html(tgNo);
+  $('#tgNameDom').html(tgName);
+  $('#orgNameDom').html(orgName);
+  $('#numberDom').html("在本台区下，营销系统存在"+totalNum+"户，本系统中存在"+curNum+"户，定义一致"+consisNum+"户，一致性百分率"+consisPer);
+}
+
+//新增用户档案
+function newAchive(){
+  var url="../../jsp/archive/newLowCustInfo.html";
+  showDialogBox("新增用户档案",url, 495, 940);
+}
+
+//编辑用户档案
+function editAchive(){
+  var url="../../jsp/archive/editLowCustInfo.html";
+  showDialogBox("编辑用户档案",url, 495, 940);
+}
+
+//删除用户档案
+function delAchive(){
+
+}
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+       <td width="10%" class="label">台区编号：</td>
+       <td width="23%" class="dom" id="tgNoDom"></td>
+       <td width="10%" class="label">台区名称：</td>
+       <td width="23%" class="dom" id="tgNameDom"></td>
+       <td width="10%" class="label">供电单位：</td>
+       <td width="23%" class="dom" id="orgNameDom"></td>
+      </tr>
+      <tr>
+       <td colspan="6">
+          <span style="width:30"></span>
+          <span id="numberDom" class="label"></span>
+       </td>
+      </tr>
+     </table>
+    </div>
+    <div id="paramShow">
+      <div class="data2"><span style="width:230px">营销系统中存在，本系统中不存在用户</span></div>
+      <div class="data2_con">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <thead>
+          <tr>
+           <th>序号</th>
+           <th>户名</th>
+           <th>户号</th>
+           <th>表号</th>
+           <th>安装地点</th>
+           <th>台区编号</th>
+           <th>台区名称</th>
+           <th>操作</th>
+          </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>1</td>
+             <td>张超</td>
+             <td>080425321</td>
+             <td>080432455</td>
+             <td>&nbsp;</td>
+             <td>0804255330</td>
+             <td>金钱二公变95</td>
+             <td><a href="javascript:newAchive();">建档</a></td>
+           </tr>
+         </tbody>
+       </table>
+      </div>
+    </div>
+    <div id="paramShow">
+      <div class="data2"><span style="width:230px">本系统中存在，营销系统中不存在用户</span></div>
+      <div class="data2_con">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <thead>
+          <tr>
+           <th>序号</th>
+           <th>户名</th>
+           <th>户号</th>
+           <th>表号</th>
+           <th>集中器地址</th>
+           <th>台区编号</th>
+           <th>台区名称</th>
+           <th>操作</th>
+          </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>1</td>
+             <td>蔡芸</td>
+             <td>0804554875</td>
+             <td>0804345876</td>
+             <td>&nbsp;</td>
+             <td>0804255330</td>
+             <td>金钱二公变95</td>
+             <td><a href="javascript:editAchive();">编辑</a>/<a href="javascript:delAchive();">删除</a></td>
+           </tr>
+         </tbody>
+       </table>
+      </div>
+    </div>
+    <div id="paramShow">
+      <div class="data2"><span style="width:230px">定义不一致户</span></div>
+      <div class="data2_con">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+           <thead>
+            <tr>
+             <th>序号</th>
+             <th>户名</th>
+             <th>户号</th>
+             <th>营销表号</th>
+             <th>本系统表号</th>
+             <th>营销台区编号</th>
+             <th>本系统 台区编号</th>
+             <th>操作</th>
+            </tr>
+           </thead>
+           <tbody>
+           </tbody>
+         </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

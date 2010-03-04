@@ -1,0 +1,250 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>测量点模板</title>
+<link rel="stylesheet" type="text/css" href="../../css/dataframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript"> 
+var contextPath = "../..";
+function folder(objImg, vOrderId) {
+    var srcImg = $(objImg).attr("src");
+    if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+        $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+    }
+    else {
+        $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+    }
+    
+    for(var i = 0; i < 100; i++) {
+        if($("#otr" + vOrderId + "_" + i).length > 0) {
+            if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+                $("#otr" + vOrderId + "_" + i).attr("class", "styleShow");
+            }
+            else {
+                $("#otr" + vOrderId + "_" + i).attr("class", "styleHidden");
+            }
+        }
+        else {
+            break;
+        }
+    }
+}
+
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+</script>
+</head>
+<body>
+  <div>
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 35));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th width="5%"><input type="checkbox" name="selectAll" checked onclick="selectAllCB()"></th>
+          <th width="10%">参数类型</th>
+          <th width="30%">数据项名称</th>
+          <th width="10%">数据项编码</th>
+          <th width="35%">数据值</th>
+          <th width="10%">单位</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>
+              <img align="absmiddle" src="../../img/tree2/plus1.gif" style="cursor:pointer;" onclick="folder(this,'10040026');" />
+              <input type="checkbox" name="ItemID" value="10040026" checked />
+            </td>
+            <td>限值参数</td>
+            <td colspan="4" style="text-align:left;padding-left:5px;">测量点限值参数</td>
+          </tr>
+          <tr id="otr10040026_0" class="styleHidden">
+            <td colspan="2"></td>
+            <td style="text-align:right;padding-right:5px;">电压合格上限</td>
+            <td>DI_1004002601</td>
+            <td id="DI_1004002601" style="text-align:left;padding-left:5px;">
+              <input type="hidden" name="itemid_10040026" value="DI_1004002601" />
+              <input type="text" name="itemvalue_DI_1004002601" id="itemvalue_DI_1004002601" value="400.0" />
+            </td>
+            <td>V</td>
+          </tr>
+          <tr id="otr10040026_1" class="styleHidden">
+            <td colspan="2"></td>
+            <td style="text-align:right;padding-right:5px;">电压合格下限</td>
+            <td>DI_1004002602</td>
+            <td id="DI_1004002602" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002602" />
+            <input type="text" name="itemvalue_DI_1004002602" id="itemvalue_DI_1004002602" value="300.0" />
+          </td>
+          <td>V</td>
+        </tr>
+        <tr id="otr10040026_2" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align:right;padding-right:5px;">电压断相门限</td>
+          <td>DI_1004002603</td>
+          <td id="DI_1004002603" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002603" />
+            <input type="text" name="itemvalue_DI_1004002603" id="itemvalue_DI_1004002603" value="100.0" />
+          </td>
+          <td>V</td>
+        </tr>
+        <tr id="otr10040026_3" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align:right;padding-right:5px;">电压上上限（过压门限）</td>
+          <td>DI_1004002604</td>
+          <td id="DI_1004002604" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002604" />
+            <input type="text" name="itemvalue_DI_1004002604" id="itemvalue_DI_1004002604" value="500.0" />
+          </td>
+          <td>V</td>
+        </tr>
+        <tr id="otr10040026_4" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align:right;padding-right:5px;">电压下下限（欠压门限）</td>
+          <td>DI_1004002605</td>
+          <td id="DI_1004002605" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002605" />
+            <input type="text" name="itemvalue_DI_1004002605" id="itemvalue_DI_1004002605" value="200.0" />
+          </td>
+          <td>V</td>
+        </tr>
+        <tr id="otr10040026_5" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align:right;padding-right:5px;">相电流上上限（过流门限）</td>
+          <td>DI_1004002606</td>
+          <td id="DI_1004002606" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002606" />
+            <input type="text" name="itemvalue_DI_1004002606" id="itemvalue_DI_1004002606" value="60.00" />
+          </td>
+          <td>A</td>
+        </tr>
+        <tr id="otr10040026_6" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align:right;padding-right:5px;">相电流上限（额定电流门限）</td>
+          <td>DI_1004002607</td>
+          <td id="DI_1004002607" style="text-align:left;padding-left:5px;">
+            <input type="hidden" name="itemid_10040026" value="DI_1004002607" />
+            <input type="text" name="itemvalue_DI_1004002607" id="itemvalue_DI_1004002607" value="40.00" />
+          </td>
+          <td>A</td>
+        </tr>
+        <tr id="otr10040026_7" class="styleHidden">
+          <td colspan="2"></td>
+          <td style="text-align: right; padding-right: 5px;">
+            零序电流上限
+          </td>
+          <td>
+          DI_1004002608
+          </td>
+          <td id="DI_1004002608"
+            style="text-align: left; padding-left: 5px;">
+            <input type="hidden" name="itemid_10040026"
+                value="DI_1004002608" />
+            <input type="text" name="itemvalue_DI_1004002608"
+                id="itemvalue_DI_1004002608" value="20.00" />
+         </td>
+         <td>
+         A
+         </td>
+       </tr>
+
+       <tr id="otr10040026_8" class="styleHidden">
+         <td colspan="2"></td>
+         <td style="text-align:right;padding-right:5px;">视在功率上上限</td>
+         <td>DI_1004002609</td>
+         <td id="DI_1004002609" style="text-align:left;padding-left:5px;">
+           <input type="hidden" name="itemid_10040026" value="DI_1004002609" />
+           <input type="text" name="itemvalue_DI_1004002609" id="itemvalue_DI_1004002609" value="20.050" />
+         </td>
+         <td>kVA</td>
+       </tr>
+       <tr id="otr10040026_9" class="styleHidden">
+         <td colspan="2"></td>
+         <td style="text-align:right;padding-right:5px;">视在功率上限</td>
+         <td>DI_100400260A</td>
+         <td id="DI_100400260A" style="text-align:left;padding-left:5px;">
+           <input type="hidden" name="itemid_10040026" value="DI_100400260A" />
+           <input type="text" name="itemvalue_DI_100400260A" id="itemvalue_DI_100400260A" value="30.500" />
+         </td>
+         <td>kVA</td>
+       </tr>
+       <tr id="otr10040026_10" class="styleHidden">
+         <td colspan="2"></td>
+         <td style="text-align: right; padding-right: 5px;">
+           三相电压不平衡限值
+         </td>
+         <td>
+         DI_100400260B
+         </td>
+         <td id="DI_100400260B"
+             style="text-align: left; padding-left: 5px;">
+           <input type="hidden" name="itemid_10040026"
+               value="DI_100400260B" />
+           <input type="text" name="itemvalue_DI_100400260B"
+               id="itemvalue_DI_100400260B" value="80.0" />
+         </td>
+         <td>
+         %
+         </td>
+       </tr>
+       <tr id="otr10040026_11" class="styleHidden">
+         <td colspan="2"></td>
+         <td style="text-align:right;padding-right:5px;">三相电流不平衡限值</td>
+         <td>DI_100400260C</td>
+         <td id="DI_100400260C" style="text-align:left;padding-left:5px;">
+         <input type="hidden" name="itemid_10040026" value="DI_100400260C" />
+         <input type="text" name="itemvalue_DI_100400260C" id="itemvalue_DI_100400260C" value="75.0" />
+       </td>
+       <td>%</td>
+       </tr>
+       <tr id="otr10040026_12" class="styleHidden">
+         <td colspan="2"></td>
+         <td style="text-align:right;padding-right:5px;">连续失压时间限值</td>
+         <td>DI_100400260D</td>
+         <td id="DI_100400260D" style="text-align:left;padding-left:5px;">
+         <input type="hidden" name="itemid_10040026" value="DI_100400260D" />
+         <input type="text" name="itemvalue_DI_100400260D" id="itemvalue_DI_100400260D" value="5" />
+         </td>
+         <td>min</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+ <div class="nullContainer"></div>
+</div>
+</body>
+</html>
+

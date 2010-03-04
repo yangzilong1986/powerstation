@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>异常定制</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+</head>
+<body>
+
+<div class="tab"><em>通知方式</em></div>
+<div class="tab_con">
+  <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="50%"><input type="checkbox" name="systemNotice">系统内消息：</td>
+        <td width="50%"></td>
+      </tr>
+      <tr>
+        <td width="50%"><input type="checkbox" name="phoneNotice">手机消息：</td>
+        <td width="50%"></td>
+      </tr>
+      <tr>
+        <td width="50%">已定制号码：</td>
+        <td width="50%"></td>
+      </tr>
+      <tr>
+        <td width="50%"><input type="button" name="add" class="input1" value="增加">
+          <input type="button" name="delete" class="input1" value="删除"></td>
+        <td width="50%"></td>
+      </tr>
+      <tr>
+        <td>
+          <table border="1" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+               <th>序号</th>
+               <th>定制号码</th>
+               <th>姓名</th>
+               <th>供电单位</th>
+             </tr></thead>
+             <tbody id=""></tbody>
+          </table>
+        </td>
+        <td><input type="checkbox" name="send" checked>给客户负责人发送</td>
+      </tr>
+      <tr>
+        <td width="60%">范围：
+          <input type="radio" name="objectType" value="1"  class="dom" onclick = "setTarget(1);" checked="checked"/>专变用户
+          <input type="radio" name="objectType" value="2" class="dom" onclick = "setTarget(2);" />配变
+          <input type="radio" name="objectType" value="3" class="dom" onclick = "setTarget(3);" />变电站
+          <input type="radio" name="objectType" value="4" class="dom" onclick = "setTarget(4);"/>低压
+        </td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="data3"><span>其它说明</span></div>
+  <div class="data3_con">  
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td colspan="2">
+          <textarea name="textarea" cols="95" rows="9"></textarea>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <table  border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td width="50%"><input type="button" name="save" class="input1" value="保存">
+      <input type="button" name="cacel" class="input1" value="取消"></td>
+      <td></td>
+     </tr>
+   </table>
+</div>
+</body>
+</html>

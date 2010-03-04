@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='母线不平衡' numberSuffix='%' shownames='1' showvalues='1'>
+    <categories>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+        <category label='12'/>
+        <category label='13'/>
+        <category label='14'/>
+        <category label='15'/>
+        <category label='16'/>
+        <category label='17'/>
+        <category label='18'/>
+        <category label='19'/>
+        <category label='20'/>
+        <category label='21'/>
+        <category label='22'/>
+        <category label='23'/>
+        <category label='24'/>
+        <category label='25'/>
+        <category label='26'/>
+        <category label='27'/>
+        <category label='28'/>
+        <category label='29'/>
+        <category label='30'/>
+    </categories>    
+    <dataset seriesName='线损率' color='1D8BD1' showValues='0'>
+        <set value='6.50'/>
+        <set value='8.06'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+        <set value='8.06'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+        <set value='8.06'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+        <set value='9'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+        <set value='6.50'/>
+        <set value='9.06'/>
+        <set value='8.06'/>
+        <set value='8.06'/>
+        <set value='8.06'/>
+        <set value='8.06'/>
+        <set value='7.06'/>
+        <set value='8.06'/>
+        <set value='8.06'/>
+    </dataset>    
+     <trendlines>
+      <line startValue='7' color='91C728' displayValue='线损参考值' showOnTop='1'/>
+   </trendlines>
+</chart>
+
+

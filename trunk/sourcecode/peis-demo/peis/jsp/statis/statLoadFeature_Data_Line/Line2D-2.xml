@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='1号'/>
+        <category label='2号'/>
+        <category label='3号'/>
+        <category label='4号'/>
+        <category label='5号'/>
+        <category label='6号'/>
+        <category label='7号'/>
+        <category label='8号'/>
+        <category label='9号'/>
+        <category label='10号'/>
+        <category label='11号'/>
+        <category label='12号'/>
+        <category label='13号'/>
+        <category label='14号'/>
+        <category label='15号'/>
+        <category label='16号'/>
+        <category label='17号'/>
+        <category label='18号'/>
+        <category label='19号'/>
+        <category label='20号'/>
+        <category label='21号'/>
+        <category label='22号'/>
+        <category label='23号'/>
+        <category label='24号'/>
+        <category label='25号'/>
+        <category label='26号'/>
+        <category label='27号'/>
+        <category label='28号'/>
+        <category label='29号'/>
+        <category label='30号'/>
+        <category label='31号'/>        
+    </categories>    
+    <dataset seriesName='最大负荷' color='AFD8F8' showValues='0'>
+        <set value='86.50'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='97.22'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='86.50'/>
+        <set value='88.06'/>
+        <set value='100.00'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>        
+    </dataset> 
+    <dataset seriesName='最小负荷' color='00D8F8' showValues='0'>
+        <set value='26.50'/>
+        <set value='28.06'/>
+        <set value='24.81'/>
+        <set value='24.31'/>
+        <set value='26.56'/>
+        <set value='27.19'/>
+        <set value='28.06'/>
+        <set value='24.81'/>
+        <set value='24.31'/>
+        <set value='26.56'/>
+        <set value='27.19'/>
+        <set value='18.06'/>
+        <set value='14.81'/>
+        <set value='14.31'/>
+        <set value='26.56'/>
+        <set value='27.19'/>
+        <set value='21.00'/>
+        <set value='24.81'/>
+        <set value='24.31'/>
+        <set value='36.56'/>
+        <set value='17.19'/>
+        <set value='16.50'/>
+        <set value='28.06'/>
+        <set value='12.11'/>
+        <set value='12.31'/>
+        <set value='2.56'/>
+        <set value='22.19'/>
+        <set value='21.06'/>
+        <set value='21.81'/>
+        <set value='23.31'/>        
+    </dataset>    
+    <dataset seriesName='平均负荷' color='A99D008' showValues='0'>
+        <set value='46.50'/>
+        <set value='58.06'/>
+        <set value='44.81'/>
+        <set value='64.31'/>
+        <set value='46.56'/>
+        <set value='67.19'/>
+        <set value='58.06'/>
+        <set value='54.81'/>
+        <set value='55.31'/>
+        <set value='45.56'/>
+        <set value='65.19'/>
+        <set value='54.06'/>
+        <set value='45.81'/>
+        <set value='45.31'/>
+        <set value='54.56'/>
+        <set value='44.19'/>
+        <set value='54.00'/>
+        <set value='54.81'/>
+        <set value='54.31'/>
+        <set value='56.56'/>
+        <set value='57.19'/>
+        <set value='56.50'/>
+        <set value='48.06'/>
+        <set value='45.00'/>
+        <set value='54.31'/>
+        <set value='46.56'/>
+        <set value='47.19'/>
+        <set value='58.06'/>
+        <set value='54.81'/>
+        <set value='54.31'/>        
+    </dataset>       
+</chart>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  <chart caption='' subcaption='' xAxisName='有功功率' yAxisName='Sales' yAxisMinValue='15000'  numberPrefix='' showValues='0' alternateHGridColor='FCB541' alternateHGridAlpha='20' divLineColor='FCB541' divLineAlpha='50' canvasBorderColor='666666' baseFontColor='666666' lineColor='FCB541'>
+	<set label='1' value='13200' />
+	<set label='2' value='19340' />
+	<set label='3' value='21467' />
+	<set label='4' value='23800' />
+	<set label='5' value='29600' />
+	<set label='6' value='27432' />
+	<set label='7' value='31800' />
+	<set label='8' value='39430' />
+	<set label='9' value='37800' />
+	<set label='10' value='24340' />
+	<set label='11' value='32900' />
+	<set label='12' value='34400' />
+    <set label='13' value='34400' />
+    <set label='14' value='19320' />
+    <set label='15' value='21800' />
+    <set label='16' value='23240' />
+    <set label='17' value='29600' />
+    <set label='18' value='27623' />
+    <set label='19' value='31800' />
+    <set label='20' value='39700' />
+    <set label='21' value='37800' />
+    <set label='22' value='21430' />
+    <set label='23' value='32900' />
+    <set label='24' value='39800' />
+    <set label='25' value='17400' />
+    <set label='26' value='19800' />
+    <set label='27' value='21800' />
+    <set label='28' value='23800' />
+    <set label='29' value='29600' />
+    <set label='30' value='27600' />
+    <set label='31' value='31800' />
+    <set label='32' value='39700' />
+    <set label='33' value='37800' />
+    <set label='34' value='21900' />
+    <set label='35' value='32900' />
+    <set label='36' value='39800' />
+    <set label='37' value='17400' />
+    <set label='38' value='19800' />
+    <set label='39' value='21800' />
+    <set label='40' value='23800' />
+    <set label='41' value='29600' />
+    <set label='42' value='47600' />
+    <set label='43' value='31800' />
+    <set label='44' value='39700' />
+    <set label='45' value='37800' />
+    <set label='46' value='21456' />
+    <set label='47' value='32900' />
+    <set label='48' value='39456' />
+    <set label='49' value='27400' />
+    <set label='50' value='29800' />
+    <set label='51' value='26546' />
+    <set label='52' value='23800' />
+    <set label='53' value='24560' />
+    <set label='54' value='27600' />
+    <set label='55' value='31800' />
+    <set label='56' value='29645' />
+    <set label='57' value='27800' />
+    <set label='58' value='21900' />
+    <set label='59' value='22900' />
+    <set label='60' value='49656' />
+    <set label='61' value='17446' />
+    <set label='62' value='19656' />
+    <set label='63' value='21565' />
+    <set label='64' value='43656' />
+    <set label='65' value='26566' />
+    <set label='66' value='24650' />
+    <set label='67' value='31874' />
+    <set label='68' value='49700' />
+    <set label='69' value='37787' />
+    <set label='70' value='21670' />
+    <set label='71' value='32670' />
+    <set label='72' value='39680' />
+    <set label='73' value='27400' />
+    <set label='74' value='48700' />
+    <set label='75' value='21800' />
+    <set label='76' value='37870' />
+    <set label='77' value='29600' />
+    <set label='78' value='27680' />
+    <set label='79' value='31800' />
+    <set label='80' value='59760' />
+    <set label='81' value='37543' />
+    <set label='82' value='25900' />
+    <set label='83' value='32340' />
+    <set label='84' value='49435' />
+    <set label='85' value='17230' />
+    <set label='86' value='19660' />
+    <set label='87' value='31600' />
+    <set label='88' value='23800' />
+    <set label='89' value='29540' />
+    <set label='90' value='23460' />
+    <set label='91' value='11800' />
+    <set label='92' value='39400' />
+    <set label='93' value='17800' />
+    <set label='94' value='24900' />
+    <set label='95' value='12900' />
+    <set label='96' value='39200' />
+
+	<styles>
+		<definition>
+			<style name='Anim1' type='animation' param='_xscale' start='0' duration='1' />
+			<style name='Anim2' type='animation' param='_alpha' start='0' duration='0.6' />
+			<style name='DataShadow' type='Shadow' alpha='40'/>
+		</definition>
+		<application>
+			<apply toObject='DIVLINES' styles='Anim1' />
+			<apply toObject='HGRID' styles='Anim2' />
+			<apply toObject='DATALABELS' styles='DataShadow,Anim2' />
+	</application>	
+	</styles>
+</chart> -->
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='母线不平衡' numberSuffix='%' shownames='1' showvalues='1'>
+    <categories>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+    </categories>    
+    <dataset seriesName='线损率' color='1D8BD1' showValues='0'>
+        <set value='6.50'/>
+        <set value='8.06'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+        <set value='8.06'/>
+        <set value='4.81'/>
+        <set value='4.31'/>
+        <set value='6.56'/>
+        <set value='7.19'/>
+    </dataset>    
+     <trendlines>
+      <line startValue='7' color='91C728' displayValue='线损参考值' showOnTop='1'/>
+   </trendlines>
+</chart>
+
+

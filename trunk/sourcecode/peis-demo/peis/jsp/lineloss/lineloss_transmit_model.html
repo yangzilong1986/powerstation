@@ -1,0 +1,221 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/graybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model_data.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		//modelType
+		$("#modelType").val($.url.param('modelType'));
+		switch ($.url.param('modelType')) {
+		case 'substation':
+			$('#objectType').html('变电站：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			break;
+		case 'majorgrid':
+			$('#objectType').html('单位：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			break;
+		case 'voltage':
+			$('#objectType').html('电压等级：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			break;
+		case 'transformer':
+
+			if ($.url.param('objectId') == '-1') {
+				$('#objectType1').html('变压器：');
+				$('#objectName1').html(
+						'<select><option></option><option>专变1</option><option>专变2</option</select>');
+				$('#objectType').html('变电站：');
+				var objectNm = $.url.param('objectName');
+				$('#objectName').html(objectNm);
+			} else {
+				$('#objectType').html('变压器：');
+				var objectNm = $.url.param('objectName');
+				$('#objectName').html(objectNm);
+			}
+			break;
+		case 'bus':
+			$('#objectType').html('变电站：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			if ($.url.param('objectId') == '-1') {
+				$('#objectType1').html('电压等级：');
+				$('#objectName1').html(
+						'<select><option></option><option>220kv</option><option>110kv</option</select>');
+			}
+			break;
+		case 'tie_line':
+			$('#objectType').html('变电站：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			if ($.url.param('objectId') == '-1') {
+				$('#objectType1').html('联络线：');
+				$('#objectName1').html(
+						'<select><option></option><option>联络线2</option><option>联络线1</option</select>');
+			}
+			break;
+		case 'switchgear':
+			$('#objectType').html('台区：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+			$("#init").attr('disabled', 'true');
+			$("#edit").attr('disabled', 'true');
+			$("#delete").attr('disabled', 'true');
+
+			break;
+		case 'line':
+			$('#objectType').html('线路：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+
+			break;
+		case 'allgrid':
+			$('#objectType').html('供电单位：');
+			var objectNm = $.url.param('objectName');
+			$('#objectName').html(objectNm);
+
+			break;
+		default:
+			break;
+		}
+
+		$('#query').click(function() {
+			load_model();
+		});
+		$('#excel').click(function() {
+
+		});
+		$('#calculate').click(function() {
+			calculate_model();
+		});
+
+		$('#init').click(function() {
+			init_model();
+		});
+
+		$('#delete').click(function() {
+			delete_model();
+		});
+
+		$('#edit').click(function() {
+			edit_model();
+		});
+
+		load_model();
+
+		$("#selectall").click(function() {
+			if ($("#selectall").attr("checked")) {
+				$("input:enabled[type=checkbox][name='cb-item']").each(function() {
+					$(this).attr("checked", true);
+				});
+			} else {
+				$("input:enabled[type=checkbox][name='cb-item']").each(function() {
+					$(this).attr("checked", false);
+				});
+			}
+		});
+
+	});
+</script>
+</head>
+<body>
+<div id="main">
+  <div id="tool">
+    <div class="opbutton2">
+      <input type="hidden" id='modelType'>
+      <input class="input2" type="submit" id="init"
+  value="初始化模型" />
+      <input class="input2" type="submit" id="edit" value="编辑模型" />
+      <input class="input2" type="submit"
+  id="delete" value="删除模型" />
+      <input class="input2" type="submit" id="calculate" value="线损重算" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="submit" name="query" id="query" value="查 询" class="input1" />
+    </div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="66" class="label" id='objectType' ></td>
+        <td width="120" class="dom" id='objectName'></td>
+        <td width="66" class="label" id='objectType1'></td>
+        <td width="120" class="dom" id='objectName1'></td>
+      </tr>
+      <tr>
+        <td width="66">&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+  <div class="content">
+    <div id="cont_1">
+      <div class="target">
+        <ul>
+          <li class="target_on"><a href="#" onClick="return false;">数据列表</a></li>
+        </ul>
+        <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" " /> <a href="#">修改显示字段</a></h1>
+      </div>
+      <div class="tableContainer"
+  style="height: expression((( document.documentElement.clientHeight ||document.body.clientHeight) -122 ) );">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <!--编号，模型名称，参考线损，有效开始时间，有效结束时间，输入计量点数，输出计量点数 (如图－)  -->
+              <th nowrap="nowrap"><input type="checkbox" id="selectall" /></th>
+              <th nowrap="nowrap">序号</th>
+              <th nowrap="nowrap">模型名称</th>
+              <th nowrap="nowrap">参考线损(%)</th>
+              <th nowrap="nowrap">有效开始时间</th>
+              <th nowrap="nowrap">有效结束时间</th>
+              <th nowrap="nowrap">输入计量点数</th>
+              <th nowrap="nowrap">输出计量点数</th>
+            </tr>
+          </thead>
+          <colgroup>
+          <col id="col_00" />
+          <col id="col_01" />
+          <col id="col_02" />
+          <col id="col_03" />
+          <col id="col_04" />
+          <col id="col_05" />
+          <col id="col_06" />
+          <col id="col_07" />
+          </colgroup>
+          <tbody id="lineloss_transmit_model">
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer"><a href="#"><img src="../../img/bt_excel.gif" width="16" height="16"
+  title="导出Excel" /></a> ┆ 共<span class="orange">2</span>条 显示行数：
+        <select id="pageRows" name="pageRows" size="1">
+          <option value="10">10</option>
+          <option value="20" selected="selected">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+        </select>
+        第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：
+        <input type="text" id="page" name="page"
+  value="1" />
+        <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img
+  src="../../img/page_prew.gif" class="pointer" title="上一页" /></a> <a href="#"><img src="../../img/page_next.gif"
+  class="pointer" title="下一页" /></a> <a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

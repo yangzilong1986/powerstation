@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="id='12080825'" >
+         <check checked="true">12080825</check>
+         <td1>1</td1>
+         <td2>000001112</td2>
+         <td3 extend="align='left'">9897989898</td3>
+         <td4>767867</td4>
+         <td5>12080825</td5>
+         <td6>电费</td6>
+         <td7>100</td7>
+         <td8>2009-01-01</td8>
+         <td9>待处理</td9>
+         <td10>成功</td10>
+         <td11>1</td11>
+         <td12>2</td12>
+         <td13>&lt;a href="javascript:historyPower('9897989898','767867')"&gt;查看&lt;/a&gt;</td13>              
+         <td14>&lt;a href="javascript:controlStatus()"&gt;查看&lt;/a&gt;</td14>     
+    </data>
+    <data extend="id='12080826'" >        
+         <check checked="true">12080826</check>
+         <td1>2</td1>
+         <td2>000001113</td2>
+         <td3 extend="align='left'">湛江市金河湾物业服务有限公司</td3>
+         <td4>321435</td4>
+         <td5>12080826</td5>
+         <td6>电量</td6>
+         <td7>100</td7>
+         <td8>2009-01-01</td8>
+         <td9>已处理</td9>
+         <td10>失败</td10>
+         <td11>1</td11>
+         <td12>2</td12>
+         <td13>&lt;a href="javascript:historyPower('湛江市金河湾物业服务有限公司','321435')"&gt;查看&lt;/a&gt;</td13>              
+         <td14>&lt;a href="javascript:controlStatus()"&gt;查看&lt;/a&gt;</td14> 
+    </data>
+</datas>

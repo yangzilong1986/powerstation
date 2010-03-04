@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='电流极值明细' labelStep='1' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+	<categories >
+		<category label='1日' />
+		<category label='2日' />
+		<category label='3日' />
+		<category label='4日' />
+		<category label='5日' />
+		<category label='6日' />
+		<category label='7日' />
+	</categories>
+	<dataset seriesName='A相峰值' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+		<set value='0.54' />
+		<set value='0.67' />
+		<set value='0.96' />
+		<set value='1.02' />
+		<set value='0.64' />
+		<set value='0.8' />
+		<set value='0.35' />
+	</dataset>
+  <dataset seriesName='B相峰值' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='0.45' />
+		<set value='0.49' />
+		<set value='0.96' />
+		<set value='1.41' />
+		<set value='0.3' />
+		<set value='0.98' />
+		<set value='0.25' />
+  </dataset>
+  <dataset seriesName='C相峰值' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='0.40' />
+		<set value='0.70' />
+		<set value='0.60' />
+		<set value='0.91' />
+		<set value='0.73' />
+		<set value='0.38' />
+		<set value='0.25' />
+   </dataset>
+     <dataset seriesName='零序峰值' color='FF5904' anchorBorderColor='FF5904' anchorBgColor='FF5904'>
+        <set value='0.54' />
+		<set value='0.97' />
+		<set value='1.26' />
+		<set value='0.42' />
+		<set value='0.73' />
+		<set value='0.68' />
+		<set value='0.5' />
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

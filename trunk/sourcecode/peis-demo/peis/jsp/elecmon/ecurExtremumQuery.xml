@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>天津市西青区上辛口乡下辛口电镀厂</td2>
+        <td3>1403895003</td3>
+        <td4>杨柳青 </td4>
+        <td5>10kV备用线F08</td5>
+        <td6>12323124 </td6>
+        <td7>4</td7>
+        <td8>23</td8>
+        <td9>2009-07-09 00:00:00</td9>
+        <td10>24</td10>
+        <td11>2009-07-09 00:00:00</td11>
+        <td12>22</td12>
+        <td13>2009-07-09 00:00:00</td13>
+        <td14>21</td14>
+        <td15>2009-07-09 00:00:00 </td15>
+        <td16>210 </td16>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>天津百奥生物制品有限责任公司</td2>
+        <td3>1245553025</td3>
+        <td4>李七庄 </td4>
+        <td5>10kV华里线F03</td5>
+        <td6>L4F03100024621329 </td6>
+        <td7>1</td7>
+        <td8>23</td8>
+        <td9>2009-07-08 00:00:00</td9>
+        <td10>24</td10>
+        <td11>2009-07-08 00:00:00</td11>
+        <td12>22</td12>
+        <td13>2009-07-08 00:00:00</td13>
+        <td14>21</td14>
+        <td15>2009-07-08 00:00:00 </td15>
+        <td16>210 </td16>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>99960010005</td2>
+        <td3>99990010005</td3>
+        <td4>西青供电分公司 </td4>
+        <td5>10kV备用线F08</td5>
+        <td6>1212</td6>
+        <td7>4</td7>
+        <td8>23</td8>
+        <td9>2009-07-10 00:00:00</td9>
+        <td10>24</td10>
+        <td11>2009-07-10 00:00:00</td11>
+        <td12>22</td12>
+        <td13>2009-07-10 00:00:00</td13>
+        <td14>21</td14>
+        <td15>2009-07-10 00:00:00 </td15>
+        <td16>210 </td16>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+         <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>天津市兴业林产品公司</td2>
+        <td3>1204853001</td3>
+        <td4>杨柳青 </td4>
+        <td5>10kV华里线F03</td5>
+        <td6>L4B02800031621381 </td6>
+        <td7>4</td7>
+        <td8>23</td8>
+        <td9>2009-07-09 00:00:00</td9>
+        <td10>24</td10>
+        <td11>2009-07-09 00:00:00</td11>
+        <td12>22</td12>
+        <td13>2009-07-09 00:00:00</td13>
+        <td14>21</td14>
+        <td15>2009-07-09 00:00:00 </td15>
+        <td16>210 </td16>
+    </data>
+</datas>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>NT001</td2>     
+        <td3>莫烟楼公变</td3>
+        <td4>南三供电所</td4>
+        <td5>250</td5>
+        <td6>2%</td6>
+        <td7>王学武</td7>
+        <td8>29396305</td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>NT010</td2>     
+        <td3>沟尾公变</td3>
+        <td4>南三供电所</td4>
+        <td5>250</td5>
+        <td6>2%</td6>
+        <td7>高秀琪</td7>
+        <td8>87910574</td8>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+       <td2>XBC0224</td2>     
+        <td3>民享北箱变</td3>
+        <td4>南三供电所</td4>
+        <td5>500</td5>
+        <td6>2%</td6>
+        <td7>杜富强</td7>
+        <td8>27393295</td8>
+    </data>         
+</datas>
+<!--
+
+用户档案(配变)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>台区号</th>
+            <th>台区名</th>
+            <th>供电单位</th>
+            <th>容量</th>
+            <th>线损阈值</th>
+            <th>联系人</th>
+	        <th>联系电话</th>
+          </tr>
+        </thead>
+-->

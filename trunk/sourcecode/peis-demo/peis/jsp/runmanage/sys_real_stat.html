@@ -1,0 +1,71 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主站运行管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript" src="../../js/runmanage/sysRealStat.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab4">
+    <ul>
+      <li id="tab_2" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">系统实时监控</a></li>
+      <li id="tab_2" class="tab_off"><a href="sys_stat_history.html" onclick="return true;" onfocus="blur()">系统监控历史查询</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1> 
+  </div>
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">刷新间隔：</td>
+          <td width="120" class="dom">
+            <select name="interval" id="interval">
+              <option value="15">15秒</option>
+              <option value="30">30秒</option>
+              <option value="60">60秒</option>
+            </select>
+          </td>
+          <td width="88" class="label">最近刷新时间：</td>
+          <td width="120" class="dom"><input type="text" id="updateTime" name="updateTime" value="13:05:15" disabled="disabled"/></td>         
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#">服务器信息列表</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <!-- START Script Block for Chart-->          
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="groupByComOrFac">
+            <thead><tr>
+                <th>序号</th>
+                <th>服务器类型</th>
+                <th>服务器名称</th>
+                <th>运行状态</th>
+                <th>操作</th>
+            </tr></thead>
+            <tbody id="server_list"></tbody>
+          </table>          
+        </div>
+        <div class="nullContainer"></div>
+      </div>
+    </div> 
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<html>
+<head>
+<title>监测用户详细信息</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<!-- public css -->
+<link rel="stylesheet" type="text/css" href="../../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+$(document).ready(function(){
+    // query
+    $("#query").click(function (){      
+        $("#dbxx").show();
+        $("#zdxx").show();  
+        //$("#tjxx").show();
+        $("#hh").text("0007");
+        $("#hm").text("天坛区");
+        $("#gddw").text("省电力公司");
+        $("#hy").text("运行");            
+        $("#ydlb").text("长寿区政府");
+        $("#yxrl").text("900");
+        $("#cbqh").text("5555467");
+        $("#dz").text("奈何桥");
+        $("#lxr").text("无常");           
+        $("#lxdh").text("199969696969");
+        $("#bz").text("假");     
+    });
+});
+
+</script>
+<body>
+<div id="tool">
+  <div class="opbutton1">
+    <input class="input1" type="submit" id="query" value="查询">
+    <input class="input3" type="submit" id="advancequery" value="高级查询">
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td width="70" class="label">台区编号：</td>
+      <td width="120" class="dom"><input value="00001" size="12" name="custNo"></td>
+      <td width="70" class="label">台区名称：</td>
+      <td width="120" class="dom"><input value="test1" size="12" name="custName"></td>
+    </tr>
+  </table>
+</div><!-- 
+<div class="tab"><em id="em_1"><a href="javascript:return false;">数据查询</a></em></div> -->
+<div class="target">
+  <ul>
+     <li class="target_on"><a href="#">数据查询</a></li>
+  </ul>    
+</div>
+<div class="tab_con" id="con_em_1" >
+  <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
+      <tr>
+        <td width="66" class="label">台&nbsp;&nbsp;区&nbsp;&nbsp;号：</td>
+        <td width="120" class="dom"><label id="hh"></label></td>
+        <td width="66" class="label">台区名称：</td>
+        <td width="220" class="dom"><label id="hm"></label></td>
+        <td width="66" class="label">供电单位：</td>
+        <td width="120" class="dom"><label id="gddw"></label></td>
+        <td width="66" class="label">台区状态：</td>
+        <td width="120" class="dom"><label id="hy"></label></td>
+      </tr>
+      <tr>        
+        <td width="66" class="label">行&nbsp;&nbsp;政&nbsp;&nbsp;区：</td>
+        <td width="220" class="dom"><label id="ydlb"></label></td>
+        <td width="66" class="label">容&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量：</td>
+        <td width="120" class="dom"><label id="yxrl"></label></td>
+        <td width="66" class="label">联&nbsp;&nbsp;系&nbsp;&nbsp;人：</td>
+        <td width="120" class="dom"><label id="lxr"></label></td>
+        <td width="66" class="label">联系电话：</td>
+        <td width="220" class="dom"><label id="lxdh"></label></td>
+      </tr>
+      <tr>        
+        <td width="66" class="label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</td>
+        <td width="120" class="dom"><label id="dz"></label></td>
+        <td width="66" class="label">线损阈值：</td>
+        <td width="120" class="dom"><label id="cbqh"></label></td>
+        <td width="66" class="label">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</td>
+        <td width="120" class="dom" colspan="2"><label id="bz"></label></td>
+      </tr>   
+    </table>
+  </div>
+  <div class="data2"><span>总表信息</span></div>
+  <div class="data2_con">
+      <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 395));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>表号</th>
+              <th>测量点名称</th>
+              <th>测量点序号</th>
+              <th>CT</th>
+              <th>PT</th>
+              <th>表类型</th>
+              <th>生产厂家</th>
+              <th>通讯地址</th>
+              <th>关联终端</th>
+              <th>表规约</th>
+              <th>出厂编号</th>
+            </tr>
+          <thead>
+          <tbody id="dbxx" style="display: none;">
+            <tr>
+                <td>1</td>
+                <td>19454354</td>
+                <td>test1</td>
+                <td>1</td>
+                <td>500/1</td>
+                <td>700/1</td>
+                <td>未知</td>
+                <td>未知</td>
+                <td>通天塔</td>
+                <td>t</td>
+                <td>国网</td>
+                <td>1745664</td>
+              </tr>               
+          </tbody>
+        </table>
+      </div> 
+      <div class="pageContainer">
+          <a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+        </div>     
+  </div>
+  <div class="data3"><span>集中器信息</span></div>
+  <div class="data3_con">
+      <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 440));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>资产号</th>
+              <th>逻辑地址</th>
+              <th>终端类型</th>
+              <th>接线方式</th>
+              <th>安装日期</th>
+              <th>运行状态</th>
+              <th>通信模式</th>
+              <th>上级设备地址</th>
+            </tr>
+          </thead>
+          <tbody id="zdxx" style="display: none;">
+             <tr>
+                <td>1</td>
+                <td>34452</td>
+                <td>343432</td>
+                <td></td>
+                <td>3相4线</td>
+                <td>2009-10-1</td>
+                <td>运行</td>
+                <td>GPRS</td>
+                <td>795956</td>
+            </tr>                     
+          </tbody>
+        </table>
+      </div> 
+      <div class="pageContainer">
+          <a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+        </div> 
+      <div class="data2"><span>统计信息</span></div>
+  <div class="data2_con">
+    <table width="100%" class="tablestyle" border=0 cellpadding=0 cellspacing=0 align="center">
+        <tr class="trheadstyle">
+          <td>天堂小区接入电表数<a style="color: blue">15</a>，采集器<a style="color: blue">100</a>台，低压用户<a style="color: blue">500</a>户，重点用户<a style="color: blue">30</a>户，有用电异常<a style="color: blue">30</a>户。\n
+                天堂小区昨日抄表成功率<a style="color: blue">90%</a>，上月抄表成功率<a style="color: blue">95%</a>。
+            </td>
+        </tr>
+    </table>  
+  </div>
+  </div>
+  
+</div>
+</body>
+</html>

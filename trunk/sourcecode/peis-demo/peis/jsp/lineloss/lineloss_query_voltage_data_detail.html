@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/lineloss/lineloss.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="66" class="label">单      位：</td>
+      <td width="120" class="dom"> **供电局 </td>
+      <td width="66" class="label">时      间：</td>
+      <td width="120" class="dom" id='date'></td>
+      <td class="label"  width="66" >线损率：</td>
+      <td class="dom" width="120">6%</td>
+    </tr>
+  </table>
+  <div class="clear"></div>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target">
+      <ul>
+        <li class="target_off" id="lineloss_query_voltage_data_detail_supply"><a href="#" onClick="return false;">电量</a></li>
+        <!-- <li class="target_off" id="lineloss_query_voltage_data_detail_sale"><a href="#" onclick="return false;">售电量</a></li> -->
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 58));">
+      <iframe id='targetFrame' name='targetFrame' width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </div>
+</div>
+</body>
+</html>

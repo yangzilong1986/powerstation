@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>对象树</title>
+<link rel="stylesheet" type="text/css" href="../../css/treeframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/report/reportQuery.js"></script>
+<script type="text/javascript">
+var selBgColor = "#0A726A";
+var selColor = "FFFFFF";
+var unSelBgColor = "#FFFFFF";
+var unSelColor = "000000";
+
+var preObject = null;
+
+/**
+ * 选择对象
+ * @param {Object} obj
+ * @param {String} objectId   : 对象编号
+ */
+function select(obj, objectId) {
+    $(obj).css("background-color", selBgColor);
+    $(obj).css("color", selColor);
+    if(preObject != null && preObject != obj) {
+        $(preObject).css("background-color", unSelBgColor);
+        $(preObject).css("color", unSelColor);
+    }
+    preObject = obj;
+    parent.mainframe.nodeEvent(objectId);
+}
+</script>
+</head>
+<body>
+<div class="treeContainer">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="5" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 1);" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;损耗类报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+     <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 2);" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;变电站电量类报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+     <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 3);" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;电量类报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+     <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 4);" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;电能质量类报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+     <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 5);" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;设备统计报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+     <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownmiddle.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 6);" style="cursor:hand;" nowrap><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;指标报表</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

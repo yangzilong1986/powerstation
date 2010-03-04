@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>有序用电相关异常通知</td1>
+        <td2>王晓明</td2>
+        <td3>2009-09-22 12:23:12</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;编辑&lt;/a&gt;&lt;a href=""&gt;/删除&lt;/a&gt;</td4>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>窃电嫌疑相关异常通知</td1>
+        <td2>郭庆</td2>
+        <td3>2009-09-22 12:23:12</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;编辑&lt;/a&gt;&lt;a href=""&gt;/删除&lt;/a&gt;</td4>
+    </data>
+</datas>

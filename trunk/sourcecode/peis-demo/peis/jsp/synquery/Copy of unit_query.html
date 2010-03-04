@@ -1,0 +1,249 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>单位综合查询</title>
+<!-- public css -->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+var _type = 1;
+var _isQuery = false ;
+$(document).ready(function(){	
+	$.handelCombox('orgTar','orgNo');
+	$("#query").click(function(){			
+		_isQuery = true ;
+		chageTab(_type);//
+	});
+	$('select').change(function(){
+        var val = $(this).val();
+	});
+});
+//
+function loadDataAndPic(){
+	$.json2html("tdate","../../jsp/synquery/unit_query_iframe.xml","");//
+	var chart_obj = new FusionCharts("../../FusionCharts/MSColumn3D.swf", "chart_id", "800", "180", "0", "0");
+    chart_obj.setDataURL("unit_query_1_data.xml");
+	chart_obj.render("graphBlock1");	
+	
+	var chart_obj1 = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "800", "180", "0", "0");
+	chart_obj1.setDataURL("unit_query_2_data.xml");
+	chart_obj1.render("graphBlock2");	
+}
+// 
+function chageTab(ty){
+	_type = ty ;
+	$("li[class^='target_']").attr("class","target_off");	
+	$("#li_"+ty).attr("class","target_on");
+	if(_isQuery){
+		showTab(ty);//
+		loadDataAndPic();//
+	}
+}
+
+//
+function showTab(id){
+	if(id==2){
+		$("#li1").hide();
+        $("div[class='pageContainer']").hide();
+		$("#li3").hide();
+	}else if(id==3){
+		$("#li2").hide();
+		$("div[class='pageContainer']").hide();
+		$("#li1").hide();
+	}else{
+		$("#li2").hide();
+		$("#li3").hide();
+		$("div[class='pageContainer']").hide();	
+	}
+	$("#li"+id).show();
+    if(id==1){
+    	$("div[class='pageContainer']").shwo();   
+    }
+}
+
+function show(ty){
+	if(ty==9){
+        top.showDialogBox("", "../../jsp/autorm/gatherQualityManager.html", 600,1000);
+    }else{
+        top.showDialogBox("", "../../jsp/synquery/pop/unit_query.html?type="+ty, 575, 900);
+    }
+       return false;	   
+}
+
+//
+function popShow(wi){
+    if(wi==1){
+    	top.showDialogBox("", "../../jsp/lineloss/lineloss_query_allgrid.html", 600,1000);
+    }else{
+    	top.showDialogBox("", "../../jsp/statis/statLoadFeature.html", 600,1000);
+    }
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="./unit_query.html" onClick="return false;" onFocus="blur()">单位综合查询</a></li>
+      <li id="tab_2" class="tab_off"><a href="./line_query.html" onClick="return true;" onFocus="blur()">线路综合查询</a></li>
+      <li id="tab_3" class="tab_off"><a href="./transSubsta_query.html" onClick="return true;" onFocus="blur()">变电站综合查询</a></li>
+      <li id="tab_4" class="tab_off"><a href="./dmrd_query.html" onClick="return true;" onFocus="blur()">台区综合查询</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input" type="submit" id="query" value="查 询"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">供电单位：</td>
+          <td width="220" class="dom" id="orgTar"></td>
+          <td width="167"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li id="li_1" class="target_on"><a href="javascript:chageTab(1);">数据查询</a></li>
+            <li id="li_2" class="target_off"><a href="javascript:chageTab(2);">电量统计</a></li>
+            <li id="li_3" class="target_off"><a href="javascript:chageTab(3);">监测负荷</a></li>
+          </ul>
+        </div>
+        <div id="li1" class="graphContainer"
+    style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 180 ) );">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th rowspan="2">供电单位</th>
+                <th colspan="3">专变</th>
+                <th colspan="3">配变\台区</th>
+                <th colspan="3">低压</th>
+                <th colspan="3">变电站</th>
+              </tr>
+              <tr>
+                <th>用户数</th>
+                <th>终端数</th>
+                <th>抄表成功率</th>
+                <th>户数</th>
+                <th>终端数</th>
+                <th>抄表成功率</th>
+                <th>用户数</th>
+                <th>终端数</th>
+                <th>抄表成功率</th>
+                <th>厂站数</th>
+                <th>终端数</th>
+                <th>抄表成功率</th>
+              </tr>
+            </thead>
+            <tbody id="tdate">
+          </table>
+        </div>
+        <div class="pageContainer">
+            <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+        </div>
+        <div id="li2" class="graphContainer"
+    style="display: none; height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 120));">
+    <div><select id="li2_type">
+    	<option value="1">日</option>
+      <option value="2" selected>月</option>
+    </select></div>
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock1" align="center"></div>
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td></td>
+              <td>供电量(万千瓦)</td>
+              <td>售电量(万千瓦)</td>
+            </tr>
+            <tr>
+              <td>本期(上月)</td>
+              <td><a style="color:#03C;cursor:pointer;" onclick="show(10);">7434</a></td>
+              <td><a style="color:#03C;cursor:pointer;" onclick="show(11);">3436</a></td>
+            </tr>
+            <tr>
+              <td>上期</td>
+              <td>3445</td>
+              <td>5454</td>
+            </tr>
+            <tr>
+              <td>环比</td>
+              <td>10%</td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td>同期</td>
+              <td>11%</td>
+              <td>24%</td>
+            </tr>
+            <tr>
+              <td>同比</td>
+              <td>19%</td>
+              <td>13%</td>
+            </tr>
+            <tr>
+              <td>本年累计</td>
+              <td>2345654</td>
+              <td>1432545</td>
+            </tr>            
+          </table>          
+          <div class="clear">&nbsp;</div>
+          <div align="right"><input class="input" type="submit" id="jkfh" value="详 细" onClick="popShow(1);" /></div>
+        </div>
+        <div id="li3" class="graphContainer"
+    style="display: none; height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 120));">
+    <div><select id="li3_type">
+    	<option value="1" selected>日</option>
+      <option value="2">月</option><option value="3">年</option>
+    </select></div>
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock2" align="center"></div>
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">           
+            <tr>
+              <td>昨日最大负荷：</td>
+              <td>1000mw</td>
+            </tr>
+            <tr>
+              <td>发生时间：</td>
+              <td>12：00</td>
+            </tr>
+            <tr>
+              <td>昨日最小负荷：</td>
+              <td>10mw</td>
+            </tr>
+            <tr>
+              <td>发生时间：</td>
+              <td>22：00</td>
+            </tr>
+            <tr>
+              <td>平均负荷：</td>
+              <td>1000mw</td>
+            </tr>
+            <tr>
+              <td>负荷率：</td>
+              <td>75%</td>
+            </tr>            
+          </table>
+          <div class="clear">&nbsp;</div>
+          <div align="right"><input class="input" type="submit" id="jkfh" value="详 细"
+            onClick="popShow(2);" /></div>
+        </div>
+        <div class="nullContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

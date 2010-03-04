@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data extend="onclick='selectSingleRow(this);'">
+    <td2>火星供电站</td2>
+    <td3>3号核反应区</td3>
+    <td4>018884</td4>
+    <td5>203858</td5>
+    <td6>2009-10-01</td6>
+    <td7>2009-10-07</td7>
+    <td8>23435</td8>
+    <td9>19884</td9>
+    <td10>待处理</td10>
+    <td11 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="_go2coulomeAdd(1);"&gt;查询\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(2);"&gt;修改\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(this);"&gt;删除&lt;/a&gt;</td11>
+   </data>
+	<data extend="onclick='selectSingleRow(this);'">
+    <td2>土星供电站</td2>
+    <td3>7号核反应区</td3>
+    <td4>010884</td4>
+    <td5>209958</td5>
+    <td6>2009-10-01</td6>
+    <td7>2009-10-07</td7>
+    <td8>2335</td8>
+    <td9>1884</td9>
+    <td10>已处理</td10>
+    <td11 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="_go2coulomeAdd(1);"&gt;查询\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(2);"&gt;修改\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(this);"&gt;删除&lt;/a&gt;</td11>
+  </data>
+</datas>

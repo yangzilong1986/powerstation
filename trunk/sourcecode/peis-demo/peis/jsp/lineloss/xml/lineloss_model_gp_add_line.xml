@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <check>1</check>
+    <td1>**计量点1</td1>
+    <td2>考核表</td2>
+  </data>
+  <data>
+    <check>2</check>
+    <td1>**张三</td1>
+    <td2>大用户</td2>
+  </data>
+  <data>
+    <check>3</check>
+    <td1>**离散</td1>
+    <td2>大用户</td2>
+  </data>
+  <data>
+    <check>4</check>
+    <td1>**台区</td1>
+    <td2>台区</td2>
+  </data>
+  <data>
+    <check>5</check>
+    <td1>**配变</td1>
+    <td2>配变考核表</td2>
+  </data>
+</datas>

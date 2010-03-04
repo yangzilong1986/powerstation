@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>有序用电指标管理添加用户</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+
+$(document).ready( function() {
+  insertList();
+});
+
+function insertList(){ 
+  var index1 = -1; var index2 = -1;
+  var StrList = window.location;
+      StrList = StrList.toString();
+  if(StrList.indexOf("consumerName=") == -1){
+      index1 = StrList.indexOf("=");
+      index2 = StrList.indexOf(",");     
+      StrList.substring(index1+1,index2);
+      $("#userName").html(StrList.substring(index1+1,index2));
+      $("#nameList").html(StrList.substring(index1+1,index2));
+      StrList = StrList.substring(index2+1);
+      $("#nonceLoad").html(StrList.substring(0,StrList.indexOf(",")));
+      var nonceLoad = StrList.substring(0,StrList.indexOf(","));
+      StrList = StrList.substring(StrList.indexOf(",")+1);
+      $("#overstepLoad").html(nonceLoad-StrList.substring(0,StrList.indexOf(",")));
+  }else{
+      $("#nameList").html(StrList.substring(StrList.indexOf("=")+1));
+      $("#userName").html("(对应用户名)");
+      $("#nonceLoad").html("(对应当前负荷)");
+      $("#overstepLoad").html("(对应超标负荷)");
+  }
+}
+
+function sendDo(){
+  top.GB_hide();
+  top.window.setTimeout("alert('发送成功！');","1200");
+}
+
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">用户短信发送</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input1" type="button" id="send" value="发 送" onclick="sendDo();"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="310px">
+        <tr>
+          <td width="100%" colspan="3">
+                                    将要发送短信的用户列表：          </td>
+        </tr>
+        <tr>
+          <td width="5">&nbsp;</td>
+          <td width="600" style="border-top: 1px #84BFB3 solid" id="nameList">&nbsp;           
+          </td>
+          <td width="5">&nbsp;</td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">短信内容</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 185));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="nameList">          
+            <tr>
+              <td width="1" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;</td>
+              <td colspan="3" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:right">
+                                             尊敬的<span id="userName"></span>用户：
+              </td>
+              <td align="left" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left "></td>
+            </tr>
+            <tr>
+              <td colspan="4" align="left" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left "></td>
+              <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left ">
+                                           因用电紧张，你户当前负荷<span id="nonceLoad" style="color:#FF0000"></span>kW，
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" align="left" style="height=7; border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left ">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="2" align="left" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left "></td>
+              <td colspan="3" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left ">
+                                           已超出计划负荷（<span id="overstepLoad" style="color:#FF0000"></span>kW），   请自觉错峰限电，谢谢您的合作！
+              </td>
+            </tr>
+            <tr>
+              <td colspan="5" align="left" style="height=7; border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left ">&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan="4" align="left" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left "></td>
+              <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:right ">
+                                             楼兰供电分公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" align="left" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:left "></td>
+              <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF;text-align:right ">
+                 2009年10月30日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="nullContainer"></div>
+     </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

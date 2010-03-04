@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10001</td1>
+        <td2>钱江1变</td2>
+        <td3>A10001</td3>
+        <td4>站用1变</td4>
+        <td5>2132434</td5>
+        <td6>53534</td6>
+        <td7>23412341</td7>  
+        <td8>&lt;a href="javascript:showPage('2-1')"&gt;查看&lt;/a&gt;</td8>                
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10002</td1>
+        <td2>钱江2变</td2>
+        <td3>A10002</td3>
+        <td4>站用2变</td4>
+        <td5>54322</td5>
+        <td6>314</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-2')"&gt;查看&lt;/a&gt;</td8>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10003</td1>
+        <td2>钱江3变</td2>
+        <td3>A10003</td3>
+        <td4>站用3变</td4>
+        <td5>21219434</td5>
+        <td6>558</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-3')"&gt;查看&lt;/a&gt;</td8>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10004</td1>
+        <td2>钱江4变</td2>
+        <td3>A10004</td3>
+        <td4>站用4变</td4>
+        <td5>5342</td5>
+        <td6>1243</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-4')"&gt;查看&lt;/a&gt;</td8>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10005</td1>
+        <td2>钱江5变</td2>
+        <td3>A10005</td3>
+        <td4>站用5变</td4>
+        <td5>334</td5>
+        <td6>3534</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-5')"&gt;查看&lt;/a&gt;</td8>               
+    </data> 
+        <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10006</td1>
+        <td2>钱江6变</td2>
+        <td3>A10006</td3>
+        <td4>站用6变</td4>
+        <td5>98734</td5>
+        <td6>59834</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-6')"&gt;查看&lt;/a&gt;</td8>               
+    </data> 
+        <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10007</td1>
+        <td2>钱江7变</td2>
+        <td3>A10007</td3>
+        <td4>站用7变</td4>
+        <td5>29834</td5>
+        <td6>96894</td6>
+        <td7>23412341</td7> 
+        <td8>&lt;a href="javascript:showPage('2-7')"&gt;查看&lt;/a&gt;</td8>               
+    </data> 
+</datas>

@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>台区负载率明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+
+<script type="text/javascript">
+$(function (){
+    $.json2html("databody","../../jsp/elecmon/harmonicAnalysisDetail.xml","");
+    
+    var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chatId", "700", "275", "0", "0");
+    chart_obj.setDataURL("harmonicAnalysisDetailChat.xml");
+    chart_obj.render("graphBlock"); 
+});
+
+</script>
+<body> 
+<div id="body">
+  <div id="main">
+    <div id="tool">
+     <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">        
+        <tr>
+          <td width="100%">
+            <span>台区名称：鑫鑫小区
+            </span>
+            <span>变压器：1号变
+            </span>
+            <span>统计时间：
+              <input type="text" name="year" value="2009-9-23" id="year" style="width:80px;">
+            </span>
+          </td>  
+        </tr>                  
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 153));">
+        <!-- START Script Block for Chart-->
+        <div id="graphBlock" align="left"> </div>
+        <div class="clear"></div> <br />  
+        <!-- END Script Block for Chart> -->
+        <table border="0" cellpadding="0" cellspacing="0" width="220%">
+          <thead><tr>
+            <th width="2%">序号</th>
+            <th width="3%">时间</th>
+            <th width="4%">2次谐波(%)</th>
+            <th width="4%">3次谐波(%)</th>
+            <th width="4%">4次谐波(%)</th>
+            <th width="4%">5次谐波(%)</th>
+            <th width="4%">6次谐波(%)</th>
+            <th width="4%">7次谐波(%)</th>
+            <th width="4%">8次谐波(%)</th>
+            <th width="4%">9次谐波(%)</th>
+            <th width="4%">10次谐波(%)</th>
+            <th width="4%">11次谐波(%)</th>
+            <th width="4%">12次谐波(%)</th>
+            <th width="4%">13次谐波(%)</th>
+            <th width="4%">14次谐波(%)</th>
+            <th width="4%">15次谐波(%)</th>
+            <th width="4%">16次谐波(%)</th>
+            <th width="4%">17次谐波(%)</th>
+            <th width="4%">18次谐波(%)</th>
+            <th width="4%">19次谐波(%)</th>
+          </tr></thead>
+          <tbody id="databody">
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

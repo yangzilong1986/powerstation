@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+    $(function(){
+        // 供电单位。
+        $.handelCombox('ioTar', 'io');
+
+        $.handelCombox('directTar', 'direct');
+        
+        $("#save").click(function(){
+        $(this).attr('disabled','true');
+        $('#message').html('<font color=blue>编辑成功!</font>')
+            setTimeout(_hidepage,1500);
+        })
+    })
+    
+    _hidepage=function(){
+        parent.GB_hide()
+    }
+</script>
+</head>
+<body>
+<div class="data3"><span> 编辑计量点</span></div>
+<div class="data3_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" height="200px;">
+    <tr style="padding-left:100px;">
+      <td > 计量点名称：<span>**计量点1</span></td>
+    </tr>
+    <tr style="padding-left:100px;">
+      <td>输入/输出：<span id='ioTar'></span></td>
+    </tr>
+    <tr style="padding-left:100px;">
+      <td> 计量方向：<span id='directTar'></span></td>
+    </tr>
+    <tr style="padding-left:100px;">
+      <td ><span id="message" style="width:100px;"></span>
+        <input type="submit" value="确定" id="save" class="input1"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

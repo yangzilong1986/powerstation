@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='供电可靠性' labelStep='1' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+	<categories >
+		<category label='供电时间' />
+	</categories>
+	<dataset seriesName='' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+		<set value='91.15' />
+	</dataset>
+   <dataset seriesName='' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='71.15' />
+    </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

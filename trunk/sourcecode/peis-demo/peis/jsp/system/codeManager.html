@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>编码管理</title>
+    <link href="../../css/main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript">
+    var contextPath = "../..";  
+    function fresh() {
+        var sSelectedCodeCate = codeList.sSelectedCodeCate;
+        var codeType = codeList.codeForm.codeType.value;
+        codeManager.location.href = contextPath + '/system/codeAction.do?action=detail&codeCate=' + sSelectedCodeCate + '&codeType=' + codeType + '&random=' + Math.random();
+    }
+    </script>
+  </head>
+  
+  <body>    
+    <div id="body">
+      <div class="tab">
+        <ul>
+          <li class="tab_on">编码管理</li>
+          <li class="clear"></li>
+        </ul>
+        <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <div id="main2" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 42));"> 
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+          <tr>
+            <td width="390" valign="top" class="pad10" style="border-right:1px solid #5d90d7;">
+              <iframe width="100%" height="100%" frameborder="0" name="codeList" id="codeList" src="codeList.html" ></iframe>
+            </td>
+            <td valign="top" class="pad5">
+              <iframe width="100%" height="100%" frameborder="0" name="codeDetail" id="codeDetail" src="codeDetail.html"></iframe>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

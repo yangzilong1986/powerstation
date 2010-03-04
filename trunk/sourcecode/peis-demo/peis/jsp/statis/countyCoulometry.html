@@ -1,0 +1,245 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>区县供电量报表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+    <script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+    <script type="text/javascript">
+<!-- 
+
+$(document).ready(function(){  
+  $('#toquery').click(toquery);
+  $('#dateType').change(dateTypeDo);
+  //showChart();
+  //showData();    
+});
+
+function showChart(){
+ var TypeS = $("#dateType").val();
+ var chartUAL = "countyCoulometry_Data_Line/countyCoulometry_Line_1.xml";
+ if(TypeS == 3){
+ var chartUAL = "countyCoulometry_Data_Line/countyCoulometry_Line_2.xml";
+ }
+ var chart_obj = new FusionCharts("../../FusionCharts/ScrollStackedColumn2D.swf", "chart_id", "950", "250", "0", "0");
+ chart_obj.setDataURL(chartUAL);                                  
+ chart_obj.render("graphBlock");
+}
+
+function showData(){
+ var TypeS = $("#dateType").val();
+ if(TypeS == 2){
+   $('#loopContrast').show();
+   $.json2html("DATA_TBODY","../../jsp/statis/countyCoulometry_Data_Line/countyCoulometry_Data_1.xml","cb-item");   
+ }else if(TypeS == 3){
+   $('#loopContrast').hide();
+   $.json2html("DATA_TBODY","../../jsp/statis/countyCoulometry_Data_Line/countyCoulometry_Data_2.xml","cb-item");   
+ }
+}
+
+function dateTypeDo(){
+  var dateType = $('#dateType').val();
+  if(dateType == 2){
+    $('#DATA_YEAR').show();
+    $('#DATA_MONTH').show();    
+  }else if(dateType == 3){
+    $('#DATA_YEAR').show();
+    $('#DATA_MONTH').hide();   
+  }
+}
+
+function dateTypeDoDo(){
+  var dateType = $('#dateType').val();
+  if(dateType == 2){   
+    $('#loopContrast').show();
+  }else if(dateType == 3){
+    $('#loopContrast').hide();  
+  }
+}
+
+function toquery(){
+ dateTypeDoDo();
+ dateTypeDo();
+ showChart();
+ showData();
+ 
+}
+
+function clickShowChart(DwName){
+  var TypeS = $("#dateType").val();
+  var DateTyps = "日期";
+  var DwName = DATA_TBODY.rows(DwName).cells(0).innerHTML;
+  var chartXML = "";  
+  chartXML = "<chart palette='3' baseFontSize='12' baseFont='Courier New' caption='";
+  chartXML+= DwName;
+  chartXML+= "供电量' subCaption='' xAxisName='";
+  chartXML+= DateTyps;
+  chartXML+= "' ";  
+  chartXML+= "yAxisName='kWh' showBorder='1' borderColor='#FDCA1F' showLegend='1' legendPosition='#FDCA1F' useRoundEdges='1' showValues='0' showSum='1' captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' plotSpacePercent='100' chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' ";
+  chartXML+= " canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' legendBorderAlpha='0' formatNumber='1' formatNumberScale='0' showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据' showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'> <categories>";
+    
+  if(TypeS == 2){
+    for(var t=1;t<32;t++){
+     chartXML+= " <category label='";
+     chartXML+= t+"";
+     chartXML+= "' /> ";
+    }
+     chartXML+= " </categories> <dataset seriesName='供电量'> ";
+    for(var t=1;t<32;t++){
+     chartXML+= " <set value='";
+     chartXML+= Math.round(Math.random()*50000) +"";
+     chartXML+= "'/> ";
+    }
+  }else if(TypeS == 3){
+    DateTyps = "月份";
+    for(var t=1;t<13;t++){
+     chartXML+= " <category label='";
+     chartXML+= t+"";
+     chartXML+= "' /> ";
+    }
+     chartXML+= " </categories> <dataset seriesName='供电量'> ";
+    for(var t=1;t<13;t++){
+     chartXML+= " <set value='";
+     chartXML+= Math.round(Math.random()*100000) +"";
+     chartXML+= "'/> ";
+    }
+  }
+  chartXML += " </dataset> </chart>";   
+  //$("#dataNumber").html(chartXML);
+  var chart_obj = new FusionCharts("../../FusionCharts/ScrollStackedColumn2D.swf", "chart_id", "900", "300", "0", "0");
+  chart_obj.setDataXML(chartXML); 
+  chart_obj.render("graphBlock");
+}
+
+function showPage(){
+var sDateType = $('#dateType').val();
+var Rq = "月";
+if(sDateType == 3){
+  var Rq = "年";
+}
+top.showDialogBox(Rq+"电量明细列表", "../statis/countyCoulometry_iframe1.html?sDateType="+sDateType, 575, 960);
+}
+
+-->
+</script>
+  </head>
+  <body>
+    <div id="tool" style="">
+      <div class="opbutton1">
+        <input type="submit" name="query" id="toquery" value="查 询" class="input1" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">供电单位：</td>
+          <td width="140" class="dom" align="left">
+             <select id="orgNo" name="orgNo">
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td width="75" class="label" align="right">统计时间：</td>
+          <td width="120" class="dom" align="left">
+            <select name="dateType" id="dateType">
+              <option value="2" selected="selected">月电量</option>
+              <option value="3">年电量</option>
+            </select>
+          </td>
+          <td width="80" class="label" align="left">
+            <span id="DATA_YEAR" style="display: block;"> <select
+                name="DATA_YEAR" id="DATA_YEAR" style="">
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+              </select>年 </span>
+          </td>
+          <td width="70" align="left">
+            <span id="DATA_MONTH" style="display: block;"> <script
+                type="text/javascript">
+             document.write("<select name=\"DATA_YEAR\" id=\"DATA_YEAR\" style=\"width=40\">")
+             for(var i=1;i<13;i++){
+               if(i<10){
+                 document.write("<option value=\""+i+"\">0"+i+"</option>")
+               }else{
+                 document.write("<option value=\""+i+"\">"+i+"</option>")
+               }                    
+             }
+             document.write("</select>月")
+           </script> </span>
+          </td>
+          <td width="66" class="label"></td>
+          <td width="120" class="dom" id="dataNumber"></td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content" style="">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on">
+              <a href="#" onclick="return false;">区县供电量图标</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div class="graphContainer" style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight)-65));">
+          <div id="graphBlock" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>供电单位</th>
+                <th>线路数</th>
+                <th>供电量(kWh)</th>
+                <th>同比(%)</th>
+                <th id="loopContrast">环比(%)</th>
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+         <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

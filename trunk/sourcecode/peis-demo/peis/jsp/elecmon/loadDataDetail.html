@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负荷明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+
+<script type="text/javascript">
+ $.json2html("databody","../../jsp/elecmon/loadDataDetail.xml","");
+
+$(function (){
+    var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "800", "275", "0", "0");
+    chart_obj.setDataURL("loadDataChat.xml");
+    chart_obj.render("graphBlock");
+});
+
+
+</script>
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="label">户号：</td>
+          <td  class="dom_date">99960010001 
+          </td>
+          <td class="label">户名：</td>
+          <td  class="dom_date">99960010001 
+          </td>
+          <td class="label">供电单位：</td>
+          <td  class="dom_date">浙江省电力公司
+          </td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 153));">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="center"></div>
+         
+          <!--END Script Block for Chart-->
+          <table border="0" cellpadding="0" cellspacing="0" id="data">
+            <thead><tr>
+              <th width="2%">序号</th>
+              <th width="4%">时间</th>
+              <th width="3%">负荷</th>
+            </tr></thead>
+            <tbody id="databody">
+            </tbody>
+          </table>
+          
+        <div class="nullContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

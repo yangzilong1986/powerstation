@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>设备原始事件编辑</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript">
+function init() {
+    var sysObjects = "1,2,3,4";
+    if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length == "undefined") {
+        if(sysObjects.indexOf(document.all.sysObject.value) >= 0) {
+            document.all.sysObject.checked = "true";
+        }
+    }
+    else if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length != "undefined") {
+        for(var i = 0; i < document.all.sysObject.length; i++) {
+            if(sysObjects.indexOf(document.all.sysObject[i].value) >= 0) {
+                document.all.sysObject[i].checked = "true";
+            }
+        }
+    }
+    
+}
+
+function save() {
+	parent.GB_hide(); 
+}
+</script>
+</head>
+
+<body onload="init()" style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>设备原始事件编辑</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="label">分析项名称：</td>
+          <td width="25%" class="dom">
+            <input type="text" id="exCode" name="exCode" value="DEC0101" disabled="disabled" />
+          </td>
+          <td width="15%" class="label">名称：</td>
+          <td width="25%" class="dom"><input type="text" id="exName" name="exName" value="设备流量超阀值" disabled="disabled" /></td>
+        </tr>
+        <tr>
+          <td class="label" width="15%">分　类：</td>
+          <td class="dom" width="25%"> 
+            <select name="exCate" id="exCate" >
+              <option value="1">用电异常</option>
+              <option value="2">设备异常</option>
+              <option value="3">终端异常</option>
+            </select>
+          </td>
+          <td colspan="2"><input type="checkbox" checked/>产生工单：</td>
+        </tr>
+        <tr>
+          <td class="label">分析策略：</td>
+          <td colspan="3">
+            <input type="checkbox" name="exObject" value="1" checked/>定时自动
+            <input type="checkbox" name="exObject" value="2" checked/>实时手动
+          </td>
+        </tr>
+        <tr>
+          <td class="label">适用对象：</td>
+          <td colspan="3">
+            <input type="checkbox" name="sysObject" value="1"/>专变用户
+            <input type="checkbox" name="sysObject" value="2"/>配变/台区
+            <input type="checkbox" name="sysObject" value="3"/>低压用户
+            <input type="checkbox" name="sysObject" value="4"/>变电站
+          </td>
+        </tr>
+     </table>
+     <div class="tab"><em>自动分析参数</em></div>
+      <div class="tab_con">
+        <div class="main">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="50%" class="label">分析周期：</td>
+              <td width="50%" class="dom" id="code">按日 </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="center">序号</td>
+                    <td align="center">参数项</td>
+                    <td align="center">参数值</td>
+                  </tr>
+                  <tr>
+                    <td align="center">1</td>
+                    <td align="center">流量阀值(KB)</td>
+                    <td align="center">200</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+     <div class="tab"><em>关联设备事件</em></div>
+      <div class="tab_con">
+        <div class="main">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="70%">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="center">序号</td>
+                    <td align="center">事件名称</td>
+                  </tr>
+                  <tr>
+                    <td align="center">1</td>
+                    <td align="center">数据初始化</td>
+                  </tr>
+                </table>
+              </td>
+              <td width="20%"><input class="input1" id="exAdd()" value="增 加" type="button"/>&nbsp;&nbsp;&nbsp;&nbsp;<input class="input1" id="exdelete()" value="删 除" type="button"/></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="guidePanel">
+        <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+      </div>
+   </div>
+</body>
+</html>

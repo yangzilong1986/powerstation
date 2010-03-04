@@ -1,0 +1,108 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>指标管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script>
+<!-- 
+
+$(document).ready(function(){
+   $.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+   $.handelCombox('DATA_YEAR','Year','id="selectYear" name="selectYear"');
+   $('#query').click(showData);
+   showData(); 
+});
+
+function showData(){
+  $.json2html("DATA_TBODY","../../jsp/elecorder/guideLineManage/guideLineManage_Data_1.xml","cb-item");  
+}
+var arrayList = new Array();
+function showEdit(rows){
+  var year = $("#selectYear").val();
+  arrayList[0] = year;
+  for(var i=0;i<9;i++){
+    var DataList = DATA_TBODY.rows(rows).cells(i).innerHTML;
+    if(DataList == ""){
+      arrayList[i+1] = "EEEEEE";
+    }else{
+      arrayList[i+1] = DataList;
+    }
+  }
+  var listSubmit = arrayList.join(",");  
+  top.showDialogBox("有序用电指标编辑", "../elecorder/guideLineManage_iframe.html?listSubmit="+listSubmit, 575, 900);
+  arrayList.lenght = 0;
+}
+
+-->
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">指标管理</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="70" class="label">统计时间：</td>
+          <td width="120" id="DATA_YEAR"></td>
+          <td colspan="5"></td>
+        </tr>        
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">指标管理列表</a></li></ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tableName">
+            <thead>
+            <tr>
+              <th width="90">&nbsp;</th>
+              <th colspan="2">Ⅰ级</th>
+              <th colspan="2">Ⅱ级</th>
+              <th colspan="2">Ⅲ级</th>
+              <th colspan="2">Ⅳ级</th>
+              <th width="60">&nbsp;</th>
+            </tr>
+            <tr>
+              <th>供电单位</th>
+              <th>负荷指标(万千瓦)</th>
+              <th>电量指标(万千瓦时)</th>
+              <th>负荷指标(万千瓦)</th>
+              <th>电量指标(万千瓦时)</th>
+              <th>负荷指标(万千瓦)</th>
+              <th>电量指标(万千瓦时)</th>
+              <th>负荷指标(万千瓦)</th>
+              <th>电量指标(万千瓦时)</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="DATA_TBODY">              
+            </tbody>
+          </table>
+        </div>
+        <div class="nullContainer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

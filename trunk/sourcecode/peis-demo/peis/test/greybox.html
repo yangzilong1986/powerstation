@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>greybox</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../css/greybox.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+    $("a.greybox").click( function() {
+        var t = this.title || $(this).text() || this.href;
+        showDialogBox(t, this.href, 675, 900);
+        return false;
+    });
+});
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">无iframe</a></li>
+      <li id="tab_2" class="tab_off"><a href="templet02_aux1.html" onclick="return true;" onfocus="blur()">单iframe1</a></li>
+      <li id="tab_3" class="tab_off"><a href="templet02_aux2.html" onclick="return false;" onfocus="blur()">单iframe2</a></li>
+      <li id="tab_4" class="tab_off"><a href="templet02_aux3.html" onclick="return false;" onfocus="blur()">多iframe3</a></li>
+      <li class="clear"></li>
+    </ul>
+  </div>
+  <div id="main">
+    <ul>
+      <li><a href="../templet/templet04_right.html" title="弹出页面" class="greybox">弹出页面</a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

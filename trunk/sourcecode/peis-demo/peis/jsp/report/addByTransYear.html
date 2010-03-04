@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>报表生成</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/archiveCss.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//确认报表生成的信息
+function confirm(){
+    parent.GB_hide();
+    window.open('data/220KV变电站电量报表(金砂200903)蔡煜瑞_20090301.xls');
+}
+</script>
+</head>
+<body>
+  <div id="body">
+   <div id="main">
+    <div id="detail">
+      <div class="top">
+        <div class="main">请输入报表生成参数</div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    <div class="center" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 110));">
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="10%" class="label">报表编号：</td>
+          <td width="23%" class="dom"><input type="text" id="reportNo" name="reportNo" value="1001" disabled="disabled"/></td>
+          <td width="10%" class="label">报表名称：</td>
+          <td width="23%" class="dom"><input type="text" id="reportName" name="reportName" value="变电站线损统计表" disabled="disabled"/></td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td width="10%" class="label"><font color="red">* </font>变电站：</td>
+          <td width="23%" class="dom">
+            <select name="transformer" id="transformer">
+              <option value="1">意溪变电站</option>
+              <option value="2">金砂变电站</option>
+            </select>
+          </td>
+          <td width="10%" class="label"><font color="red">* </font>年份：</td>
+          <td width="23%" class="dom"><input type="text" id="year" name="year" value="2009"/></td>
+        </tr>
+     </table>
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          &nbsp;    
+        </tr>
+        <tr>
+          &nbsp;    
+        </tr>
+        <tr>
+          &nbsp;    
+        </tr>
+        <tr>
+          &nbsp;    
+        </tr>
+        <tr>
+          &nbsp;    
+        </tr>
+        <tr>
+           <td align="center">
+             <input class="input" type="button" id="confirm" value="确认" onclick="confirm();" />
+             <input class="input" type="button" id="cancel" value="取消" onclick="javascript:parent.GB_hide();" />
+           </td>
+        </tr>
+     </table>
+     </div>
+     <div class="bottom">
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data>
+        <td1>电压</td1>
+        <td2>正常</td2>
+        <td3>230</td3>
+        <td4>210</td4>
+        <td5>223</td5>      
+    </data>
+    <data>
+        <td1>电流</td1>
+        <td2>正常</td2>
+        <td3>20</td3>
+        <td4>无</td4>
+        <td5>12.23</td5>
+    </data>
+    <data>
+        <td1>用户功率因数</td1>
+        <td2>偏低</td2>
+        <td3>无</td3>
+        <td4>0.85</td4>
+        <td5>0.78</td5>
+    </data>
+     <data >
+        <td1>电流三相不平衡</td1>
+        <td2>正常</td2>
+        <td3>50%</td3>
+        <td4>无</td4>
+        <td5>23%</td5>
+    </data>
+      <data>
+        <td1>负载率</td1>
+        <td2>正常</td2>
+        <td3>100%</td3>
+        <td4>无</td4>
+        <td5>79%</td5>
+    </data>
+     <data>
+        <td1>尖峰电量占比</td1>
+        <td2>正常</td2>
+        <td3>50%</td3>
+        <td4>无</td4>
+        <td5>35%</td5>
+    </data>
+    
+</datas>

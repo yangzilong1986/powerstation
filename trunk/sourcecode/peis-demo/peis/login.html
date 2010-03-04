@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>计量自动化系统</title>
+<link rel="stylesheet" type="text/css" href="css/login.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+function isIE() {
+	if($.browser.msie && $.browser.version == '6.0') { return true; }
+    return false;
+}
+
+function correctPNG() {
+    for(var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var LW = img.width;
+        var LH = img.height;
+        var imgName = img.src.toUpperCase();
+        if(imgName.substring(imgName.length-3, imgName.length) == "PNG") { 
+            img.style.filter += "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + img.src + ", sizingmethod=scale);";
+            img.src = "img/blank.gif";
+            img.width = LW;
+            img.height = LH;
+        }
+    }
+}
+
+$(document).ready( function() {
+    if(isIE()) {
+    	correctPNG();
+    }
+
+    $(document).keydown( function(e) {
+    	var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+        if(keyCode == 13) {
+            if(checkUser()) {
+                $("#loginForm").submit();
+            }
+        }
+    });
+
+    $("#submit1").click( function() {
+    	if(checkUser()) {
+            $("#loginForm").submit();
+        }
+    });
+});
+
+function checkUser() {
+    var username = $("#username").val();
+    var password = $("#password").val();
+    if($.trim(username) == "") {
+        alert("请输入用户名！");
+        $("#username").focus();
+        return false;
+    }
+    if($.trim(password) == "") {
+        alert("请输入密码！");
+        $("#password").focus();
+        return false;
+    }
+        
+    if(username == "admin" && password == "admin") {
+        $("#loginForm").attr("action", "jsp/frame/top.html?index=admin");
+        return true;
+    }
+    else if(username == "base" && password == "base") {
+        $("#loginForm").attr("action", "jsp/frame/top.html?index=base");
+        return true;
+    }
+    else if(username == "advance" && password == "advance") {
+        $("#loginForm").attr("action", "jsp/frame/top.html?index=advance");
+        return true;
+    }
+    
+    alert("用户名或密码错误！");
+    $("#password").focus();
+    return false; 
+}
+
+
+</script>
+</head>
+<body>
+<form id="loginForm" name="loginForm" action="jsp/frame/index.html" onsubmit="return checkUser();" method="post">
+<div class="warp">
+  <div class="login_bg">
+    <div><a href="#"><img src="img/login_logo.png" width="302" height="100" /></a></div>
+    <div class="login_bglogin">
+      <div><a href="#"><img src="img/login_logo2.png" width="394" height="75" /></a></div>
+      <div class="login_login">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="19%" height="30" align="right" class="font14 b">用户名：</td>
+            <td width="81%" style="position:relative;"><input type="text" name="username" id="username" class="input1" style="width:180px;" /></td>
+          </tr>
+          <tr>
+            <td height="30" align="right" class="font14 b">密　码：</td>
+            <td style="position:relative;"><input type="password" name="password" id="password" class="input1" style="width:180px;" /></td>
+          </tr>
+          <tr>
+            <td height="60">&nbsp;</td>
+            <td style="position:relative;">
+              <a href="#"><img id="submit1" src="img/login_bt1.png" width="75" height="45" /></a>
+              <a href="#"><img id="modify1" src="img/login_bt2.png" width="75" height="45" class="mgl5" /></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tc">版权所有©　百富电力</div>
+  </div>
+</div>
+</form>
+</body>
+</html>

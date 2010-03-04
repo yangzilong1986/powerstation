@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>万文变电站</td2>
+        <td3>省网关口</td3>
+        <td4>535346</td4> 
+        <td5>反向</td5> 
+        <td6>5235</td6> 
+        <td7>31%</td7> 
+        <td8>12%</td8> 
+        <td9>&lt;a href="javascript:showPage('万文变电站','省网关口','反向')"&gt;详细&lt;/a&gt;</td9>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>卢变电站</td2>
+        <td3>上网计量点</td3>
+        <td4>5325</td4> 
+        <td5>反向</td5> 
+        <td6>44234</td6> 
+        <td7>24%</td7> 
+        <td8>87%</td8> 
+        <td9>&lt;a href="javascript:showPage('万文变电站','省网关口','反向')"&gt;详细&lt;/a&gt;</td9>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>文三变电站</td2>
+        <td3>旁路</td3>
+        <td4>83872</td4> 
+        <td5>反向</td5> 
+        <td6>4634</td6> 
+        <td7>11%</td7> 
+        <td8>9%</td8> 
+        <td9>&lt;a href="javascript:showPage('万文变电站','省网关口','反向')"&gt;详细&lt;/a&gt;</td9>           
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>#187变电站</td2>
+        <td3>旁路</td3>
+        <td4>342342</td4> 
+        <td5>反向</td5> 
+        <td6>313143</td6> 
+        <td7>8.8%</td7> 
+        <td8>5.98%</td8> 
+        <td9>&lt;a href="javascript:showPage('万文变电站','省网关口','反向')"&gt;详细&lt;/a&gt;</td9>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1><![CDATA[&nbsp;]]></td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3>
+        <td4><![CDATA[&nbsp;]]></td4> 
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6><![CDATA[&nbsp;]]></td6> 
+        <td7><![CDATA[&nbsp;]]></td7> 
+        <td8><![CDATA[&nbsp;]]></td8> 
+        <td9><![CDATA[&nbsp;]]></td9>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>合计：</td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3>计量点：5</td3>
+        <td4><![CDATA[&nbsp;]]></td4> 
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>838723</td6> 
+        <td7>21.21%</td7> 
+        <td8>11.67%</td8> 
+        <td9><![CDATA[&nbsp;]]></td9>           
+    </data>  
+</datas>

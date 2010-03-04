@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>省电力公司</td1>        
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='show(1)'">12</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='show(5)'">43</td3>
+        <td4 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td4>
+        <td5 extend="style='color: blue;cursor:pointer;' onclick='show(2)'">43</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='show(6)'">76</td6> 
+        <td7 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td7>
+        <td8 extend="style='color: blue;cursor:pointer;' onclick='show(3)'">12</td8>
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='show(7)'">43</td9>
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='show(4)'">43</td11>
+        <td12 extend="style='color: blue;cursor:pointer;' onclick='show(8)'">76</td12> 
+        <td13 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td13>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>广东供电局</td1>         
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='show(1)'">12</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='show(5)'">43</td3>
+        <td4 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td4>
+        <td5 extend="style='color: blue;cursor:pointer;' onclick='show(2)'">43</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='show(6)'">76</td6> 
+        <td7 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td7>
+        <td8 extend="style='color: blue;cursor:pointer;' onclick='show(3)'">12</td8>
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='show(7)'">43</td9>
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='show(4)'">43</td11>
+        <td12 extend="style='color: blue;cursor:pointer;' onclick='show(8)'">76</td12> 
+        <td13 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td13>
+
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >  
+        <td1>湛江供电局</td1>       
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='show(1)'">12</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='show(5)'">43</td3>
+        <td4 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td4>
+        <td5 extend="style='color: blue;cursor:pointer;' onclick='show(2)'">43</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='show(6)'">76</td6> 
+        <td7 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td7>
+        <td8 extend="style='color: blue;cursor:pointer;' onclick='show(3)'">12</td8>
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='show(7)'">43</td9>
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">80</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='show(4)'">43</td11>
+        <td12 extend="style='color: blue;cursor:pointer;' onclick='show(8)'">76</td12> 
+        <td13 extend="style='color: blue;cursor:pointer;' onclick='show(9)'">97</td13>
+    </data>         
+</datas>

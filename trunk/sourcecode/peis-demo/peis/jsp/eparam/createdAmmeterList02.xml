@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+    <data>
+        <check extend="checked='true';">100000000001</check>
+        <td1>10000001</td1>
+        <td2>刘一</td2>
+        <td3>100000000001</td3>
+        <td4 extend="id='cjqdz_100000000001'">A00000000001</td4>
+        <td5 extend="id='zdyh_100000000001'">是</td5>
+        <td6 extend="id='bxh_100000000001'">1/1201</td6>
+        <td7 extend="id='result_100000000001'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>是</td9>
+        <td10>485</td10>
+        <td11>1</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000002</check>
+        <td1>10000002</td1>
+        <td2>陈二</td2>
+        <td3>100000000002</td3>
+        <td4 extend="id='cjqdz_100000000002'">A00000000001</td4>
+        <td5 extend="id='zdyh_100000000002'">是</td5>
+        <td6 extend="id='bxh_100000000002'">2/1202</td6>
+        <td7 extend="id='result_100000000002'">&#160;</td7>
+        <td8>B相</td8>
+        <td9>是</td9>
+        <td10>485</td10>
+        <td11>1</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000003</check>
+        <td1>10000003</td1>
+        <td2>张三</td2>
+        <td3>100000000003</td3>
+        <td4 extend="id='cjqdz_100000000003'">A00000000001</td4>
+        <td5 extend="id='zdyh_100000000003'">否</td5>
+        <td6 extend="id='bxh_100000000003'">3</td6>
+        <td7 extend="id='result_100000000003'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>是</td9>
+        <td10>载波</td10>
+        <td11>5</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000004</check>
+        <td1>10000004</td1>
+        <td2>李四</td2>
+        <td3>100000000004</td3>
+        <td4 extend="id='cjqdz_100000000004'">A00000000001</td4>
+        <td5 extend="id='zdyh_100000000004'">否</td5>
+        <td6 extend="id='bxh_100000000004'">4</td6>
+        <td7 extend="id='result_100000000004'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>是</td9>
+        <td10>载波</td10>
+        <td11>5</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000005</check>
+        <td1>10000005</td1>
+        <td2>王五</td2>
+        <td3>100000000005</td3>
+        <td4 extend="id='cjqdz_100000000005'">A00000000001</td4>
+        <td5 extend="id='zdyh_100000000005'">否</td5>
+        <td6 extend="id='bxh_100000000005'">5</td6>
+        <td7 extend="id='result_100000000005'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>是</td9>
+        <td10>载波</td10>
+        <td11>5</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000006</check>
+        <td1>10000006</td1>
+        <td2>赵六</td2>
+        <td3>100000000006</td3>
+        <td4 extend="id='cjqdz_100000000006'">A00000000002</td4>
+        <td5 extend="id='zdyh_100000000006'">否</td5>
+        <td6 extend="id='bxh_100000000006'">6</td6>
+        <td7 extend="id='result_100000000006'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>否</td9>
+        <td10>载波</td10>
+        <td11>1</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000007</check>
+        <td1>10000007</td1>
+        <td2>孙七</td2>
+        <td3>100000000007</td3>
+        <td4 extend="id='cjqdz_100000000007'">A00000000002</td4>
+        <td5 extend="id='zdyh_100000000007'">是</td5>
+        <td6 extend="id='bxh_100000000007'">7/1203</td6>
+        <td7 extend="id='result_100000000007'">&#160;</td7>
+        <td8>B相</td8>
+        <td9>否</td9>
+        <td10>载波</td10>
+        <td11>1</td11>
+    </data>
+    <data>
+        <check extend="checked='true';">100000000008</check>
+        <td1>10000008</td1>
+        <td2>周八</td2>
+        <td3>100000000008</td3>
+        <td4 extend="id='cjqdz_100000000008'">A00000000002</td4>
+        <td5 extend="id='zdyh_100000000008'">是</td5>
+        <td6 extend="id='bxh_100000000008'">8/1204</td6>
+        <td7 extend="id='result_100000000008'">&#160;</td7>
+        <td8>A相</td8>
+        <td9>是</td9>
+        <td10>载波</td10>
+        <td11>1</td11>
+    </data>
+</datas>
+

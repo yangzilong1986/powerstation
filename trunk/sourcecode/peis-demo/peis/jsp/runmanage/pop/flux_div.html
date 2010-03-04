@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>终端台数</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.json2html("dtext","../../../jsp/runmanage/pop/flux_div_iframe.xml","");  
+    $("#query").click(function (){
+        //alert("1");
+    	$.json2html("dtext","../../../jsp/runmanage/pop/flux_div_iframe.xml","");  
+    });  
+});
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="label">只显示总流量超过
+        <input type="text" size="1" value="0"/>kb
+      </td>
+      <td><input class="input" type="submit" id="query" value="查 询"/></td>
+      <td><input class="input3" type="submit" id="excel" value="导出EXCEL"/></td>      
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 79));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th>序号</th>
+          <th>供电单位</th>
+          <th>终端逻辑地址</th>
+          <th>通讯方式</th>
+          <th>终端厂家</th>
+          <th>所属对象名称</th>
+          <th>总流量(kb)</th>
+          <th>上行流量(kb)</th>
+          <th>下行流量(kb)</th>
+          <th>上行短信条数</th>
+          <th>下行短信条数</th>
+        </tr></thead>
+        <tbody id="dtext">
+      </table>
+    </div>
+    <div class="pageContainer">
+      <input type="hidden" id="showType" name="showType" value="pag" /> 第1页 / 共1页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <font style="font-size: 14px; font-family: webdings">8</font> <font style="font-size: 14px; font-family: webdings">:</font>
+    </div>
+  </div>
+</div>
+</body>
+</html>

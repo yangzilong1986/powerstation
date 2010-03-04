@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img1' onclick='_myChange(1);' style='cursor:pointer' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>广州市电力公司</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6> 
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 通讯方式 -->    
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>GPRS</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>      
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>CDMA</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>230M</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>  
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>    
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>232串口</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 终端厂家 -->
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>杭州百富电子</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>长沙威胜</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>万达信息</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>上海华冠</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img10' onclick='_myChange(10);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>佛山市电力公司</td2>
+        <td3>700</td3>
+        <td4>630</td4>
+        <td5>170</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 通讯方式 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>GPRS</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>CDMA</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>230M</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>232串口</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 终端厂家 -->
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>杭州百富电子</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>长沙威胜</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>万达信息</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>上海华冠</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img19' onclick='_myChange(19);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>江门市电力公司</td2>
+        <td3>1800</td3>
+        <td4>530</td4>
+        <td5>1270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 通讯方式 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>GPRS</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>CDMA</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>230M</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>232串口</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <!-- 终端厂家 -->
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>杭州百富电子</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>长沙威胜</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>万达信息</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>上海华冠</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4875</td7>
+        <td8>90</td8> 
+        <td9 extend="style='color: blue;cursor:pointer;' onclick='showInfo(1)'">整点明细</td9>   
+        <td10 extend="style='color: blue;cursor:pointer;' onclick='showInfo(2)'">日平均明细</td10>
+    </data>    
+</datas>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV园北Ⅰ线F05</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>                                     
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV粤海线F08</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV河东Ⅰ线F01</td1>
+        <td2>5325</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV河东Ⅱ线F02 </td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV华里线F03</td1>
+        <td2> 8658</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV备用线F08</td1>
+        <td2>98797</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>10kV备用线F20 </td1>
+        <td2>8897653</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11> 
+        <td12>&lt;a href="javascript:selectType(3)"&gt;查看&lt;/a&gt;</td12>               
+    </data>     
+</datas>

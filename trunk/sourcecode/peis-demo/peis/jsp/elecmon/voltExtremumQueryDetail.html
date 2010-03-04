@@ -1,0 +1,64 @@
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>电压极值明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"  src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<script type="text/javascript">
+ $(function(){
+ $.json2html("voltData","../../jsp/elecmon/voltExtremumDetail.xml",""); 
+    var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chatId", "860", "280", "0", "0");
+  chart_obj.setDataURL("voltChat.xml");
+  chart_obj.render("graphBlock"); 
+});
+
+
+function viewDetail(){
+  showDialogBox("电压极值曲线", "../../jsp/elecmon/voltExtremumQueryCruv.html", 495, 800);
+}
+</script>
+
+<body>
+<div id="body">
+  <div class="graphContainer" style="height: 100%;">  
+  	<div id="graphBlock" align="left" class="block"></div>
+    <table border="0" cellpadding="0" cellspacing="0" width="320%">
+      <thead><tr>
+        <th width="2%">序号</th>
+        <th width="2%">操作</th>
+        <th width="3%">户号</th>
+        <th width="3%">户名</th>
+        <th width="4%">供电单位</th>
+        <th width="4%">供电线路</th>
+        <th width="3%">表号</th>
+        <th width="4%">测量点序号</th>
+        <th width="3%">数据时间</th>                    
+        <th width="4%">A相电压峰值</th>
+        <th width="6%">A相电压峰值发生时间</th>
+        <th width="4%">A相电压谷值</th>
+        <th width="6%">A相电压谷值发生时间</th>
+        <th width="4%">B相电压峰值</th>
+        <th width="6%">B相电压峰值发生时间</th>
+        <th width="4%">B相电压谷值</th>
+        <th width="6%">B相电压谷值发生时间</th>
+        <th width="4%">C相电压峰值</th>
+        <th width="6%">C相电压峰值发生时间</th>
+        <th width="4%">C相电压谷值</th>
+        <th width="6%">C相电压谷值发生时间</th>
+        <th width="4%">A相平均电压</th>
+        <th width="4%">B相平均电压</th>
+        <th width="4%">C相平均电压</th>
+      </tr></thead>
+      <tbody id="voltData">
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='3' 
+       baseFontSize='12' baseFont='Courier New' 
+       caption='采集成功率' subCaption='' xAxisName='供电单位' yAxisName='采集成功率(%)' 
+       showBorder='1' borderColor='#BBBBBB' 
+       showLegend='1' legendPosition='RIGHT' 
+       useRoundEdges='1' 
+       showValues='0' 
+       showSum='1' 
+       captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' 
+       plotSpacePercent='100' 
+       chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' 
+       canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' 
+       legendBorderAlpha='0' 
+       formatNumber='1' formatNumberScale='0' 
+       showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据'
+       showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'>
+    <categories>
+        <category label='广州市电力公司'/>
+        <category label='韶关市电力公司'/>
+        <category label='深圳市电力公司'/>
+        <category label='珠海市电力公司'/>
+        <category label='汕头市电力公司'/>
+        <category label='佛山市电力公司'/>
+        <category label='江门市电力公司'/>
+        <category label='茂名市电力公司'/>
+        <category label='肇庆市电力公司'/>
+        <category label='惠州市电力公司'/>
+        <category label='梅州市电力公司'/>
+        <category label='汕尾市电力公司'/>
+        <category label='河源市电力公司'/>
+        <category label='阳江市电力公司'/>
+        <category label='清远市电力公司'/>
+        <category label='东莞市电力公司'/>
+        <category label='中山市电力公司'/>
+        <category label='潮州市电力公司'/>
+        <category label='揭阳市电力公司'/>
+        <category label='云浮市电力公司'/>
+    </categories>
+    <dataset seriesName='终端'>
+        <set value='98.06'/>
+        <set value='94.81'/>
+        <set value='94.31'/>
+        <set value='96.56'/>
+        <set value='97.19'/>
+        <set value='98.06'/>
+        <set value='94.81'/>
+        <set value='94.31'/>
+        <set value='96.56'/>
+        <set value='97.19'/>
+        <set value='98.06'/>
+        <set value='94.81'/>
+        <set value='94.31'/>
+        <set value='96.56'/>
+        <set value='97.19'/>
+        <set value='98.06'/>
+        <set value='94.81'/>
+        <set value='94.31'/>
+        <set value='96.56'/>
+        <set value='97.19'/>
+    </dataset>
+    <dataset seriesName='集中器'>
+        <set value='86.50'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='87.19'/>
+        <set value='88.06'/>
+        <set value='84.81'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+    </dataset>
+    <dataset seriesName='模块表'>
+        <set value='76.50'/>
+        <set value='78.06'/>
+        <set value='74.81'/>
+        <set value='74.31'/>
+        <set value='76.56'/>
+        <set value='77.19'/>
+        <set value='78.06'/>
+        <set value='74.81'/>
+        <set value='74.31'/>
+        <set value='76.56'/>
+        <set value='77.19'/>
+        <set value='78.06'/>
+        <set value='74.81'/>
+        <set value='74.31'/>
+        <set value='76.56'/>
+        <set value='77.19'/>
+        <set value='78.06'/>
+        <set value='74.81'/>
+        <set value='74.31'/>
+        <set value='76.56'/>
+    </dataset>
+</chart>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-01</td1>
+        <td2>4234</td2>
+        <td3>34534</td3>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-02</td1>
+        <td2>432</td2>
+        <td3>5435</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-03</td1>
+        <td2>234</td2>
+        <td3>645645</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-04</td1>
+        <td2>5346</td2>
+        <td3>234234</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-05</td1>
+        <td2>534534</td2>
+        <td3>64645</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-06</td1>
+        <td2>2342</td2>
+        <td3>42342</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-07</td1>
+        <td2>42432</td2>
+        <td3>678</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-08</td1>
+        <td2>86786</td2>
+        <td3>678678</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-09</td1>
+        <td2>8678976</td2>
+        <td3>463765</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-10</td1>
+        <td2>6464</td2>
+        <td3>8979</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-11</td1>
+        <td2>6456</td2>
+        <td3>5345</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-12</td1>
+        <td2>5345</td2>
+        <td3>5435</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>2009-08-13</td1>
+        <td2>532552</td2>
+        <td3>34553</td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1><![CDATA[&nbsp;]]></td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>合计：</td1>
+        <td2>9766363345</td2>
+        <td3>868736346564</td3>               
+    </data>    
+</datas>

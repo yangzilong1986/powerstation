@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='35KV'/>
+        <category label='110KV'/>        
+    </categories>
+    <dataset seriesName='本期电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>        
+    </dataset>
+    <dataset seriesName='同期电量' color='A1D8F8' showValues='0'>
+        <set value='65'/>
+        <set value='84.81'/>        
+    </dataset>
+    <dataset seriesName='上期电量' color='AF18F8' showValues='0'>
+        <set value='34'/>
+        <set value='43'/>        
+    </dataset>
+</chart>

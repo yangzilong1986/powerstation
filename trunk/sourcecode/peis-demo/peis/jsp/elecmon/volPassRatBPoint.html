@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>电压监测考核点配置</title>   
+<link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+
+$.json2html("databody","../../jsp/elecmon/volPassRatPoint.xml","");  
+
+  function dataTypeChange(){
+  if(dateType == 2){
+      location.href="../../jsp/elecmon/volPassRatBPoint.html";
+    }else{
+     location.href="../../jsp/elecmon/volPassRatPoint.html"
+    }
+  }
+  
+   function addPoint(){
+    top.showDialogBox("", "../../jsp/elecmon/addBPoint.html", 600, 800); 
+  }
+</script>
+</head> 
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">考核点配置</a></li>
+      <li id="tab_2" class="tab_off"><a href="" onclick="return true;" onfocus="blur()">合格率汇总</a></li>
+      <li id="tab_3" class="tab_off"><a href="volPassRatDetail.html" onclick="return false;" onfocus="blur()">合格率明细</a></li>
+      <li class="clear"></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div>
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="66" class="label" align="right">提示：</td>
+            <td colspan="5" class="dom">从A,B,C,D四类监测点中选取典型考核点在此处配置的考核点会纳入汇总分析中进行统计
+            </td>
+          </tr> 
+          <tr>
+             <td width="106" class="label" align="right">监测点类型：</td>
+             <td width="60" class="dom"> 
+             <select name="dateType" id="dateType" onchange="dataTypeChange();">
+              <option value="1">A类</option>
+              <option value="2">B类</option>
+              <option value="3">C类</option>
+              <option value="4">D类</option>
+             </select>
+               <script type="text/javascript">$("#dateType").val("2");</script>
+             </td>
+             <td colspan="4">
+                <input class="input" type="submit" id="query" value="增加监测点" onclick="addPoint();"/> 
+                <input class="input" type="submit" id="query" value="删除监测点" onclick="deletePoint()"/> 
+                <input class="input" type="submit" id="query" value="查询"/> 
+                <input class="input" type="submit" id="query" value="导出Excel"/> 
+              </td>
+          </tr>  
+          </table>
+      </div>
+  </div>
+  <div class="content">
+    <div id="cont_2">
+      <div class="target">
+        <ul>
+          <li class="target_on"><a href="#" onclick="return false;">电压监测考核点配置</a></li>
+          <li class="clear"></li>
+        </ul>	
+      </div>
+      <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 152));">
+        <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>
+            <th>部门</th>
+            <th>线路</th>
+            <th>户名</th>
+            <th>户号</th>
+            <th>电压等级</th>
+            <th>表号</th>
+          </tr></thead>
+          <tbody id="databody">
+	      </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

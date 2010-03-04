@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img1' onclick='_myChange(1);' style='cursor:pointer' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>省电力公司</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(0);'">800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>80</td7>
+    </data>
+    <!-- 通讯方式 --> 
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(1);'">230串口</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(1);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>90</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(2);'">GPRS</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(2);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>98</td7>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(3);'">华隆</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(3);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>78</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(4);'">华立</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(4);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>98</td7>
+    </data> 
+    <!-- 故障类型 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>主站无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(5);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>78</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>表计无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(6);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>98</td7>
+    </data>       
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img8' onclick='_myChange(8);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>佛山市电力公司</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(7);'">400</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1500</td6>
+        <td7>68</td7>
+    </data>
+    <!-- 通讯方式 --> 
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(8);'">CDMA</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(8);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>77</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(9);'">GPRS</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(9);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>97</td7>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(10);'">华隆</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(10);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>81</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(11);'">华立</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(11);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>92</td7>
+    </data> 
+    <!-- 故障类型 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>主站无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(12);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>78</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>表计无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(13);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>98</td7>
+    </data>    
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img15' onclick='_myChange(15);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>江门市电力公司</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(14);'">400</td3>
+        <td4>330</td4>
+        <td5>100</td5>
+        <td6>1500</td6>
+        <td7>88</td7>
+    </data>
+    <!-- 通讯方式 --> 
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(15);'">230M</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(15);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>84</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showCall(16);'">GPRS</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(16);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>88</td7>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(17);'">华隆</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(17);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>77</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2 extend="style='color: blue;cursor:pointer;' onclick='showDivFactory(18);'">华立</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(18);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>67</td7>
+    </data>
+    <!-- 故障类型 -->  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>主站无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(19);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>78</td7>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>表计无通讯</td2>
+        <td3 extend="style='color: blue;cursor:pointer;' onclick='showDiv(20);'">300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>98</td7>
+    </data>    
+</datas>

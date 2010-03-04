@@ -1,0 +1,171 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model_data.js"></script>
+<script type="text/javascript">
+$( function() {
+    $("#modelType").val($.url.param('modelType'));
+    
+    $('#excel').click( function() {
+
+    });
+    $('#delete').click( function() {
+       delete_model_gp();
+    });
+    $('#edit').click( function() {
+       edit_model_gp();
+    });
+    $('#add').click( function() {
+       add_model_gp();
+    });
+    
+    $('#save').click(function(){
+     if(confirm('确认保存？')){
+        $("#add").attr('disabled','true');
+        $("#edit").attr('disabled','true');
+        $("#delete").attr('disabled','true');
+        $(this).attr('disabled','true');
+        $('#message').html('<font color=blue>保存成功!</font>')
+            setTimeout(_hidepage,1500);
+        }
+    })
+    
+    //模型名称
+	$('#modelName').html($.url.param('modelName'));
+	
+	load_model_gp();
+    
+    $("#selectall").click( function() {
+        if($("#selectall").attr("checked")) {
+            $("input:enabled[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", true);
+            });
+        }
+        else {
+            $("input:enabled[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", false);
+            });
+        }
+    });
+    
+	//没有结束时间
+    $("#chk_endtime").click(function(){
+      if($(this).attr('checked')){
+       $("#DATA_DAY_END").hide();
+      }else{
+        $("#DATA_DAY_END").show();
+      }
+    });
+});
+
+_hidepage=function(){
+        parent.GB_hide();
+    }
+</script>
+</head>
+<body>
+<div id="main">
+  <div id="tool">
+    <div class="opbutton3"> <span id="message"></span> <span style="width: 20px;"></span>
+      <input class="input1" type="submit" id="add" value="添加" />
+      <input class="input1" type="submit" id="edit" value="编辑" />
+      <input class="input1" type="submit" id="delete" value="删除" />
+      <span style="width: 24px;"></span>
+      <input type="checkbox" id="chk_endtime" />
+      结束时间不限
+      <input type="checkbox" id="chk_sysmanag" />
+      系统自动维护模型
+      <input class="input1" type="submit" id="save" value="保存" />
+    </div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td colspan="4"><input type="hidden" id="modelType">
+          模型名称： <span id='modelName'>**模型</span>
+          <input type="hidden" id="objectType">
+          对象名称： <span id='objectName'>***</span></td>
+        <td colspan="5"></td>
+      </tr>
+      <tr>
+        <td colspan="9" class="dom_date"><span id="DATA_DAY_START" >开始时间：
+          <input type="text" id="startTime" name="startTime" value="2009-9-01"
+                size="5" >
+          </span> <span id="DATA_DAY_END">~结束时间：
+          <input type="text" id="endTime" name="endTime" value="2009-9-10"
+                size="5" >
+          </span></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+  <div class="content">
+    <div id="cont_1">
+      <div class="target">
+        <ul>
+          <li class="target_on"> <a href="#" onClick="return false;">数据列表</a> </li>
+        </ul>
+        <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" " /> <a href="#">修改显示字段</a></h1>
+        <div class="tableContainer"
+          style="height: expression((( document.documentElement.clientHeight ||  document.body.clientHeight) -160 ) );">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <!--编号，计量点名称，计量点类型，输入/输出，计量方向  -->
+                <th nowrap="nowrap"> <input type="checkbox" id="selectall" />
+                </th>
+                <th nowrap="nowrap"> 序号 </th>
+                <th nowrap="nowrap"> 计量点名称 </th>
+                <th nowrap="nowrap"> 计量点类型 </th>
+                <th nowrap="nowrap"> 输入/输出 </th>
+                <th nowrap="nowrap"> 计量方向 </th>
+              </tr>
+            </thead>
+            <colgroup>
+            <col id="col_00" />
+            <col id="col_01" />
+            <col id="col_02" />
+            <col id="col_03" />
+            <col id="col_04" />
+            <col id="col_05" />
+            <col id="col_06" />
+            <col id="col_07" />
+            </colgroup>
+            <tbody id="lineloss_model_detail">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer"><a href="#"><img src="../../img/bt_excel.gif" width="16" height="16"
+  title="导出Excel" /></a> ┆ 共<span class="orange">8</span>条 显示行数：
+          <select id="pageRows" name="pageRows" size="1">
+            <option value="10">10</option>
+            <option value="20" selected="selected">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+          </select>
+          第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：
+          <input type="text" id="page" name="page"
+  value="1" />
+          <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img
+  src="../../img/page_prew.gif" class="pointer" title="上一页" /></a> <a href="#"><img src="../../img/page_next.gif"
+  class="pointer" title="下一页" /></a> <a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

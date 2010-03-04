@@ -1,0 +1,168 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>专线用户电量</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//$.json2html("DATA_TBODY","../../jsp/statis/SpecialTelephoneLineContrast_Data_Line/SpecialTelephoneLineContrast_Data_1.xml","cb-item");
+
+$(document).ready(function(){
+  $.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+  $('#dateType').change(dateTypeDo);
+  $('#toquery').click(toquery);
+  var dateType = $('#dateType').val();
+  fieldReplace(dateType);
+  //showChart(dateType);    
+});
+
+function dateTypeDo(){
+  var dateType = $('#dateType').val();
+  if(dateType == 2){
+    $('#DATA_YEAR').show();
+    $('#DATA_MONTH').show();
+  }else if(dateType == 3){
+    $('#DATA_YEAR').show();
+    $('#DATA_MONTH').hide();
+  }
+}
+
+function toquery(){
+  window.setTimeout("changeSelect();","1200");
+}
+
+function changeSelect(){
+  var dateType = $('#dateType').val();
+  showChart(dateType);
+  fieldReplace(dateType);
+  showData(dateType);
+}
+
+function showData(dateType){
+  if(dateType == 2){    
+   $.json2html("DATA_TBODY","../../jsp/statis/SpecialTelephoneLineContrast_Data_Line/SpecialTelephoneLineContrast_Data_1.xml","cb-item");
+  }else if(dateType == 3){
+   $.json2html("DATA_TBODY","../../jsp/statis/SpecialTelephoneLineContrast_Data_Line/SpecialTelephoneLineContrast_Data_2.xml","cb-item");
+  }
+}
+
+function showChart(dateType){
+ var chartUAL = "SpecialTelephoneLineContrast_Data_Line/SpecialTelephoneLineContrast_Line_1.xml";
+ if(dateType == 3){
+     chartUAL = "SpecialTelephoneLineContrast_Data_Line/SpecialTelephoneLineContrast_Line_2.xml";
+  }
+ var chart_obj = new FusionCharts("../../FusionCharts/ScrollStackedColumn2D.swf", "chart_id", "900", "300", "0", "0");
+ chart_obj.setDataURL(chartUAL);                                  
+ chart_obj.render("graphBlock");
+}
+
+function fieldReplace(dateType){
+  if(dateType == 3){
+    $("#dimension").hide();    
+  }
+}
+function showPage(num){
+var sDateType = $('#dateType').val();
+top.showDialogBox("电量明细列表", "../statis/SpecialTelephoneLineContrast_iframe.html?num="+num+"&dateType="+sDateType, 575, 900);
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">专线用户电量</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="toquery" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="70" class="label">统计时间：</td>
+          <td width="120" class="dom">
+            <select name="dateType" id="dateType">
+              <option value="2" selected="selected">月电量</option>
+              <option value="3">年电量</option>
+            </select>
+          </td>
+          <td width="80">
+            <span id="DATA_YEAR" style="display:block;">
+              <select name="DATA_YEAR" id="DATA_YEAR" style="width=55">
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>                    
+              </select>年
+
+            </span>
+          </td>
+          <td width="100">
+            <span id="DATA_MONTH" style="display:block;">
+              <script type="text/javascript">
+                document.write("<select name=\"DATA_YEAR\" id=\"DATA_YEAR\" style=\"width=40\">")
+                 for(var i=1;i<13;i++){
+                   if(i<10){
+                     document.write("<option value=\""+i+"\">0"+i+"</option>")
+                   }else{
+                     document.write("<option value=\""+i+"\">"+i+"</option>")
+                   }                    
+                 }
+                document.write("</select>月")
+              </script>
+            </span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target5">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">专线用户电量图表</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 110));">
+          <div id="graphBlock" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>供电单位</th>
+                <th>专线用户数</th>
+                <th>总售电量(kWh)</th>
+                <th>同比(%)</th>
+                <th id="dimension">环比(%)</th>           
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

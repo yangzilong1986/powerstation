@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>异常定制</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script>
+</head>
+<script type="text/javascript">
+function changeList(){
+if(exCate == 1){
+  parent.rightframe.location="../../jsp/elecmon/exCodeDetail.html";
+}else{
+  parent.rightframe.location="../../jsp/elecmon/exCodeDetailElec.html";
+}
+
+}
+
+$.json2html("test","../../jsp/elecmon/exCode.xml","");
+</script>
+     <script type="text/javascript">
+    function ath(obj){
+        var ngroup = document.getElementById('ngroup');
+        ngroup.innerHTML = obj.value;
+    }
+
+    function tr_att_handler(trs){
+        var chk_all = trs[0].cells[0].firstChild, chks = [];
+        for(var i=1; i<trs.length; i++){
+            trs[i].chk = trs[i].cells[0].firstChild;
+            trs[i].chk.par = trs[i];
+            chks.push(trs[i].chk);
+            trs[i].className = '';
+            trs[i].chk.onclick = function(){event.cancelBubble = true; this.checked? this.par.className = 'sel' : this.par.className = ''}
+            trs[i].onclick = function(){ if(this.chk.checked){ this.chk.checked = false ; this.className = ''} else{ this.chk.checked = true; this.className = 'sel'}}
+            trs[i].onmouseover = function() { this.className = this.className + ' on'}
+            trs[i].onmouseout  = function (){ this.className.indexOf('sel') == -1 ? this.className = '' : this.className = 'sel'}
+        }
+        
+        //全选状态
+        chk_all.onclick = function(){
+            if (this.checked)
+                for(var i=0; i<chks.length; i++) {
+                    chks[i].checked = true;
+                    chks[i].par.className = 'sel';
+                }
+            else
+                for(var i=0; i<chks.length; i++){
+                    chks[i].checked = false;
+                    chks[i].par.className = '';
+                }
+        }
+        
+    }
+    function g_add(src, dest){
+        
+        var trs = document.getElementById(src).rows, tem = document.getElementById(dest).rows, tbd = tem[tem.length-1].parentNode, ntrs = [];
+        for(var i=1; i<trs.length; i++)
+            if(trs[i].chk.checked) ntrs.push(trs[i]);
+        if(ntrs.length<1){ alert("请选择！"); return;}
+        for(var i=0; i<ntrs.length; i++)
+             tbd.appendChild(ntrs[i]);
+        
+        tr_att_handler(document.getElementById('source').rows);
+        tr_att_handler(document.getElementById('destination').rows);
+        trs[0].cells[0].firstChild.checked = false;
+    }
+    
+        function getRightTable(){
+    
+        var trs = document.getElementById("destination").rows,
+          tbd = trs[trs.length-1].parentNode, 
+          ntrs = [];
+        for(var i=1; i<trs.length; i++)
+        {
+            trs[i].chk.checked=true;
+        }
+        
+        
+    }
+    
+
+    window.onload = function(){
+        var source = document.getElementById('source');
+        tr_att_handler(source.rows);
+    }
+</script>
+<body >
+  <div id="body">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="label">定制项名称：</td>
+          <td class="dom"><input type="text" name="elecName" value="用序用电相关异常定制" size="20"/> </td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="data3"><span>异常信息</span></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td> 
+              <div class="group_add" align="center">
+                <div class="group_left">
+                  <div>
+                    <table cellpadding="0" cellspacing="0" id="source">
+                      <tr>
+                        <th style="width:5%;"><input type="checkbox" /> </th >
+                        <th style="width:45%;"></th>
+                      </tr>
+                      <tr>
+                        <th style="width:5%;"><input type="checkbox" /> </th >
+                        <th style="width:45%;"> 电压 </th>
+                      </tr>
+                      <tr>
+                        <th style="width:5%;"><input type="checkbox" /></th >
+                        <th style="width:45%;"> 电流 </th>         
+                      </tr>
+                    </table>
+                </div>
+            </div></td>
+            <td><input type="button" class="input1" value="增加>>" onclick="g_add('source','destination')"/><br/><input type="button" class="input1" value="&lt;&lt;删除" onclick="g_add('destination','source')"/></td>
+            <td>
+            <div class="group_right">
+              <span id="ngroup"></span>
+              <div>
+                <table cellpadding="0" cellspacing="0" id="destination">
+                  <tr>
+                      <th style="width:5%;"> <input type="checkbox" />
+                      </th >
+                      <th style="width:45%;">设备月流量超阀值</th>      
+                  </tr>
+                </table>
+             </div>
+            </div></td>
+            </tr>
+          </table>
+        </div>
+        <div style="display:none">
+          <table cellpadding="0" cellspacing="0" id="andy">
+              <tr>
+                  <th style="width:5%;"><input type="checkbox" /></th >
+                  <th style="width:45%;"></th>
+             </tr>
+          </table>
+        </div>
+        <div class="pageContainer">
+        </div>
+      </div>
+    </div>
+</body>
+</html>

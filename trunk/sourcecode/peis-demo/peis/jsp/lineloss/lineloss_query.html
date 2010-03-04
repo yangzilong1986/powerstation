@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+  $("#tab ul li").click(function(){
+  if($(this).attr('class')=='tab_off'){
+      $(this).siblings().removeClass('tab_on').addClass('tab_off')
+    $(this).attr('class','tab_on');
+  }else{
+    return true;
+  }
+    var file ="lineloss_query_"+$(this).attr('id')+'.html';
+    $('#targetFrame').attr('src',file);
+  })
+  $('#switchgear').click();
+})
+</script>
+</head>
+<body>
+    <div id="body">
+      <div id="tab" class="tab">
+        <ul>
+          <li id="switchgear" class="tab_off">
+            <a href="#">台区线损</a>
+          </li>
+          <li id="line" class="tab_off">
+            <a href="#">线路线损</a>
+          </li>
+          <li id="bus" class="tab_off">
+            <a href="#">母线平衡</a>
+          </li>
+          <li id="transformer" class="tab_off">
+            <a href="#">变损查询</a>
+          </li>
+          <li id="substation" class="tab_off">
+            <a href="#">站损查询</a>
+          </li>
+          <li id="voltage" class="tab_off">
+            <a href="#">分压线损</a>
+          </li>
+          <li id="majorgrid" class="tab_off">
+            <a href="#">主网网损</a>
+          </li>
+          <li id="allgrid" class="tab_off">
+            <a href="#">全网损耗</a>
+          </li>
+          <li class="clear"></li>
+        </ul>
+         <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <div id="main" style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 42));">
+        <iframe class="main" id="targetFrame" width="100%" height="100%" frameborder="0" scrolling="no" src=""></iframe>
+      </div>
+    </div>
+</body>
+</html>

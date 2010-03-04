@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="style='color:#FF0000'">
+        <check extend='checked="true"'>0</check>
+        <td1 extend="id='hhList' style='color:#FF0000'">960059876</td1>
+        <td2 extend="id='hmList' style='color:#FF0000'">木材加工</td2>
+        <td4 extend="style='color:#FF0000'">城北供电局</td4>
+        <td5 extend="style='color:#FF0000'">工业</td5>
+        <td6 extend="style='color:#FF0000'">北城#168线</td6>
+        <td7 extend="style='color:#FF0000'">是</td7>
+        <td8 extend="style='color:#FF0000'">万丰</td8>
+        <td9 extend="style='color:#FF0000'">13900876587</td9>
+        <td10 extend="style='color:#FF0000'">2000</td10>
+        <td11 extend="style='color:#FF0000'">2100</td11>
+        <td12 extend="style='color:#FF0000'">错峰</td12>
+        <td13>&lt;a href="javascript:showList(0)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(0)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+    <data extend="style='color:#009900'">
+        <check extend='checked="true"'>1</check>
+        <td1 extend="id='hhList' style='color:#FF0000'">960059876</td1>
+        <td2 extend="id='hhList' style='color:#FF0000'">三三药业</td2>
+        <td4 extend="style='color:#FF0000'">城北供电局</td4>
+        <td5 extend="style='color:#FF0000'">工业</td5>
+        <td6 extend="style='color:#FF0000'">北城#168线</td6>
+        <td7 extend="style='color:#FF0000'">是</td7>
+        <td8 extend="style='color:#FF0000'">李三德</td8>
+        <td9 extend="style='color:#FF0000'">15925647654</td9>
+        <td10 extend="style='color:#FF0000'">2000</td10>
+        <td11 extend="style='color:#FF0000'">2400</td11>
+        <td12 extend="style='color:#FF0000'">错峰</td12>
+        <td13>&lt;a href="javascript:showList(1)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(1)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+    <data>
+        <check extend='checked="true"'>2</check>
+        <td1 extend="id='hhList'">960059876</td1>
+        <td2 extend="id='hmList'">王氏钣金加工</td2>
+        <td4>城北供电局</td4>
+        <td5>工业</td5>
+        <td6>北城#168线</td6>
+        <td7>是</td7>
+        <td8>刘儒尔</td8>
+        <td9>13990000765</td9>
+        <td10>2000</td10>
+        <td11>1700</td11>
+        <td12>错峰</td12>
+        <td13>&lt;a href="javascript:showList(2)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(2)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+    <data extend="style='color:#009900'">
+        <check extend='checked="true"'>3</check>
+        <td1 extend="id='hhList' style='color:#FF0000'">960059876</td1>
+        <td2 extend="id='hhList' style='color:#FF0000'">王氏钣金加工</td2>
+        <td4 extend="style='color:#FF0000'">城北供电局</td4>
+        <td5 extend="style='color:#FF0000'">工业</td5>
+        <td6 extend="style='color:#FF0000'">北城#168线</td6>
+        <td7 extend="style='color:#FF0000'">是</td7>
+        <td8 extend="style='color:#FF0000'">张任版七</td8>
+        <td9 extend="style='color:#FF0000'">13945675854</td9>
+        <td10 extend="style='color:#FF0000'">1500</td10>
+        <td11 extend="style='color:#FF0000'">2100</td11>
+        <td12 extend="style='color:#FF0000'">错峰</td12>
+        <td13>&lt;a href="javascript:showList(3)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(3)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+    <data>
+        <check extend='checked="true"'>4</check>
+        <td1 extend="id='hhList'">960059876</td1>
+        <td2 extend="id='hmList'">王氏钣金加工</td2>
+        <td4>城北供电局</td4>
+        <td5>工业</td5>
+        <td6>北城#168线</td6>
+        <td7>是</td7>
+        <td8>金行</td8>
+        <td9>13992345656</td9>
+        <td10>2300</td10>
+        <td11>2100</td11>
+        <td12>错峰</td12>
+        <td13>&lt;a href="javascript:showList(4)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(4)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+    <data extend="style='color:#009900'">
+        <check extend='checked="true"'>5</check>
+        <td1 extend="id='hhList' style='color:#FF0000'">960059876</td1>
+        <td2 extend="id='hhList' style='color:#FF0000'">王氏钣金加工</td2>
+        <td4 extend="style='color:#FF0000'">城北供电局</td4>
+        <td5 extend="style='color:#FF0000'">工业</td5>
+        <td6 extend="style='color:#FF0000'">北城#168线</td6>
+        <td7 extend="style='color:#FF0000'">是</td7>
+        <td8 extend="style='color:#FF0000'">魏德</td8>
+        <td9 extend="style='color:#FF0000'">13994354356</td9>
+        <td10 extend="style='color:#FF0000'">2000</td10>
+        <td11 extend="style='color:#FF0000'">2100</td11>
+        <td12 extend="style='color:#FF0000'">错峰</td12>
+        <td13>&lt;a href="javascript:showList(5)"&gt;查看&lt;/a&gt;</td13>
+        <td14>&lt;a href="javascript:showPage(5)"&gt;查看&lt;/a&gt;</td14>
+    </data>
+</datas>

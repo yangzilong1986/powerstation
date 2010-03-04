@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?> 
+<graph caption='' xAxisName='' yAxisName='%' decimalPrecision='0' formatNumberScale='0'>
+    <set name='广东省电力公司' value='35' color='AFD8F8' />
+    <set name='湛江电力局' value='60' color='F6BD0F' />
+    <set name='潮州电力局' value='90' color='8BBA00' />
+</graph> 

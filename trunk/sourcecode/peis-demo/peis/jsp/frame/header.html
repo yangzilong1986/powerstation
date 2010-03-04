@@ -1,0 +1,188 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>header</title>
+<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+function changeFod(obj) {
+    var p = obj.parentNode.parentNode.parentNode;
+    var pd = obj.parentNode;
+    var d = pd.getElementsByTagName("div");
+    var infolist = p.getElementsByTagName("dd");
+    for(var i = 0; i < d.length; i++) {
+        try {
+            if(obj == d[i]) {
+                infolist[i].className = "dis";
+                d[i].className = "s";
+            }
+            else {
+                infolist[i].className = "undis";
+                d[i].className = "";                            
+            }
+        }
+        catch(e) {
+        }
+    }
+}
+
+function changeFod2(index) {
+	var d = $("#Fod div");
+    var infolist = $("#menu dl dd");
+    for(var i = 0; i < d.length; i++) {
+        try {
+            if(index == i) {
+                infolist[i].className = "dis";
+                d[i].className = "s";
+            }
+            else {
+                infolist[i].className = "undis";
+                d[i].className = "";                            
+            }
+        }
+        catch(e) {
+        }
+    }
+    top.hiddenList();
+}
+
+function isIE() {
+	if($.browser.msie && $.browser.version == '6.0') { return true; }
+    return false;
+}
+
+function correctPNG() {
+    for(var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var LW = img.width;
+        var LH = img.height;
+        var imgName = img.src.toUpperCase();
+        if(imgName.substring(imgName.length-3, imgName.length) == "PNG") { 
+            img.style.filter += "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + img.src + ", sizingmethod=scale);";
+            img.src = "../../img/blank.gif";
+            img.width = LW;
+            img.height = LH;
+        }
+    }
+}
+
+var prea = null;
+$(document).ready( function() {
+    if(isIE()) {
+        correctPNG();
+    }
+
+    /**
+     *
+     */
+    $("#menu dl>dd>div>a").each( function() {
+        $(this).click( function() {
+            if(prea != null) {
+            	$(prea).removeClass("on");
+            }
+        	$(this).addClass("on");
+        	prea = this;
+        });
+    });
+});
+</script>
+</head>
+<body>
+<div id="header">
+  <div class="bg_top">
+    <div id="logo"><img src="../../img/logo.png" width="174" height="65" /></div>
+    <div id="menu">
+      <dl>
+        <dt>
+          <div id="Fod">
+            <div onclick="changeFod(this)"><a href="#">数据采集</a></div>
+            <div onclick="changeFod(this)"><a href="#">控制执行</a></div>
+            <div onclick="changeFod(this)"><a href="#">用电分析</a></div>
+            <div onclick="changeFod(this)"><a href="#">用电监测</a></div>
+            <div onclick="changeFod(this)"><a href="#">电能质量</a></div>
+            <div onclick="changeFod(this)"><a href="#">四分线损</a></div>
+            <div onclick="changeFod(this)"><a href="#">综合查询</a></div>
+            <div onclick="changeFod(this)"><a href="#">运行管理</a></div>
+            <div onclick="changeFod(this)"><a href="#">系统管理</a></div>
+          </div>
+        </dt>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/autorm/realTimeManager.html" target="content">实时召测</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/autorm/taskManager.html" target="content">任务编制</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/autorm/taskSetManager.html" target="content">任务配置</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/autorm/dataQuery.html" target="content">数据检查</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/autorm/dataInputManager.html" target="content">数据录入</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/autorm/gatherQualityManager.html" target="content">采集质量</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/control/remoteControl.html" target="content">遥控</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/control/debaseControl.html" target="content">功率下浮控</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/control/businessControl.html" target="content">营业报停控</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/control/electricQuantityControl.html" target="content">月电量控</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/prepay/purchasePowerSheet.html" target="content">费控</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecorder/guideLineManage.html" target="content">有序用电</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/statis/burthenAnalyse_header.html" target="content">负荷分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/statElecQAnalysis_header.html" target="content">电量分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/powerSupplyQuantityAnalyse.html" target="content">电量统计</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/elecmon/equipment.html" target="content">事件查询</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/elecAnFrame.html" target="content">用电异常分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/elecTreatmentStat.html" target="content">异常处理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/FocusUserAnalysis.html" target="content">重点用户监测</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/transbiz/loadRateAnalysisFrame.html" target="content">负载率分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/transbiz/loadRateElecAnalysis.html" target="content">负荷率分析</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/elecmon/voltExtremumQuery.html" target="content">极值分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/volPassRatPoint.html" target="content">电压合格率</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/transbiz/elecThreePhaseAnalysisFrame.html" target="content">三相不平衡</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/harmonicAnalysis.html" target="content">谐波分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/ReliabilityOrgQuery.html" target="content">供电可靠性</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/lineloss/lineloss_transmit.html" target="content">线损模型</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/lineloss/lineloss_query.html" target="content">线损查询</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../synquery/archives_info_query.html?type=1" target="content">批量查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">单位综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">线路综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">台区综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">变电站综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/community_examine_query.html?type=1" target="content">台区考核表</a>&nbsp;┆&nbsp;
+          <a href="../synquery/usr_data_query_zb_1.html" target="content">单专变用户</a>&nbsp;┆&nbsp;
+          <a href="../synquery/pb/usr_data_query_pb_1.html" target="content">单配变</a>&nbsp;┆&nbsp;
+          <a href="../synquery/dy/usr_data_query_dy_1.html" target="content">单低压台区</a>&nbsp;┆&nbsp;
+          <a href="../synquery/bdz/usr_data_query_bdz_1.html" target="content">单变电站</a>&nbsp;┆&nbsp;
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/archive/archiveType.html" target="content">档案管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/eparam/paraManager.html" target="content">终端参数</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/div_run_state.html" target="content">设备运行管理</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/sys_real_stat.html" target="content">系统运行管理</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/instead_history.html" target="content">变更管理</a>&nbsp;┆&nbsp;
+          <a href="" target="content">日志查询</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/system/noticeManager.html" target="content">公告管理</a>&nbsp;┆&nbsp;
+          <a href="" target="content">增值服务</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/system/permissionManager.html" target="content">权限管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/system/deptManager.html" target="content">单位管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/system/codeManager.html" target="content">编码管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/exCodeManagerFrame.html" target="content">异常编码管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/system/configManager.html" target="content">配置管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/system/groupManager.html" target="content">群组管理</a>
+        </div></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="left pl25 white pt5"><img src="../../img/nav_bt1.gif" width="10" height="10" align="absmiddle" /> <a href="../../jsp/homepage/homepage.html" onclick="return true;" target="content">首页</a> <img src="../../img/nav_bt2.gif" width="10" height="10" align="absmiddle" class="mgl5" /> <a href="#" onclick="return false;" target="content">导航</a> <img src="../../img/nav_bt3.gif" width="10" height="10" align="absmiddle" class="mgl5" /> <a href="../../login.html" onclick="return true;" target="_top">注销</a></div>
+    <div class="right fl lh25 white"><marquee direction=left>公告：</marquee></div>
+  </div>
+</div>
+</body>
+</html>

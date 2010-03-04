@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <!-- 单位，电压等级，统计日期、输入电量、输出电量，线损率，环比，同比 -->
+    <td3 extend="align='right'">500</td3>
+    <td4 extend="align='center'">2009-09-01</td4>
+    <td1 extend="align='right'">23566.00</td1>
+    <td5 extend="align='right'">23456.00</td5>
+    <td6 extend="align='right'">100.00</td6>
+    <td2 extend="align='right'">3.00</td2>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+  </data>
+  <data>
+    <td3 extend="align='right'">500</td3>
+    <td4 extend="align='center'">2009-09-02</td4>
+    <td1 extend="align='right'">23566.00</td1>
+    <td5 extend="align='right'">23456.00</td5>
+    <td6 extend="align='right'">100.00</td6>
+    <td2 extend="align='right'">3.00</td2>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+  </data>
+</datas>

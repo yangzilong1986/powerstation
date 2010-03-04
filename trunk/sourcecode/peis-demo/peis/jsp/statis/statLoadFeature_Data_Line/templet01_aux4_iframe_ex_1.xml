@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >		
+		<td1 extend="align='center'">农、林、牧、渔业 </td1>
+		<td2 extend="align='center'">1129.4936</td2>
+		<td3 extend="align='center'">2006-09-05 11:15:00</td3>
+		<td4 extend="align='center'">12.1688</td4>
+		<td5 extend="align='center'">2006-09-05 00:00:00</td5>
+		<td6 extend="align='center'">104.5093</td6>
+		<td7 extend="align='center'">117.3248</td7>
+		<td8 extend="align='center'">78.00</td8>
+	</data>
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >    
+        <td1 extend="align='center'">制 造 业 </td1>
+        <td2 extend="align='center'">329.4936</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">82.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">电力、燃气及水的生产和供应业</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">建筑业</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">交通运输、仓储和邮政业 </td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">住宿和餐饮业 </td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">房地产业 </td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">科学研究、技术服务和地质勘查业</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">水利、环境和公共设施管理业</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">居民服务和其他服务业</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">教育</td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">公共管理和社会组织 </td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1 extend="align='center'">汇总 </td1>
+        <td2 extend="align='center'">1458.9872</td2>
+        <td3 extend="align='center'">2006-09-05 11:15:00</td3>
+        <td4 extend="align='center'">12.1688</td4>
+        <td5 extend="align='center'">2006-09-05 00:00:00</td5>
+        <td6 extend="align='center'">104.5093</td6>
+        <td7 extend="align='center'">117.3248</td7>
+        <td8 extend="align='center'">79.00</td8>
+    </data>
+</datas>

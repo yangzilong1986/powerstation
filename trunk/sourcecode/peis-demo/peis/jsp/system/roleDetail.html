@@ -1,0 +1,765 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>角色内容</title>  
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript" language="javascript">
+    var contextPath = "../..";
+    var errorRole = '请选择要编辑的角色';
+    var errorDelRole = '请选择要删除的角色';
+    var confirmDel = '确定要删除吗?';
+    //新增角色
+    function newRole() {
+        var str_url = "../../jsp/system/roleEdit.html";
+        //windowPopup(str_url, 650, 450);
+        top.showDialogBox("新增角色", str_url, 575, 900);
+    }
+    //编辑角色
+    function editRole() {
+        var roleId = parent.roleList.sSelectedRoleID;
+        if(roleId == "") {
+            alert(errorRole);
+            return;
+        }
+        var str_url = "../../jsp/system/roleEdit.html";
+        //windowPopup(str_url, 650, 450);
+        top.showDialogBox("新增角色", str_url, 575, 900);
+    }
+    
+    function viewRole() {
+        var roleId=parent.roleList.sSelectedRoleID;
+        if(roleId == "") {
+            alert(errorRole);
+            return;
+        }
+        var roleType=parent.roleList.roleForm.roleType.value;
+        var str_url = contextPath + "/system/roleAction.do?action=beforeEdit&roleId="+roleId+"&roleType="+roleType+"&isEdit=false&random=" + Math.random();
+        windowPopup(str_url, 650, 450);
+    }
+    //删除角色
+    function deleteRole() {
+        var roleId=parent.roleList.sSelectedRoleID;
+        if(roleId == "") {
+            alert(errorDelRole);
+            return;
+        }
+        if(confirm(confirmDel)){
+            parent.roleList.document.location = "../../jsp/system/roleList.html";
+        }
+    }
+    function fresh(Id){
+    }
+    </script>
+  </head>
+  
+  <body>
+  <div class="pad5">
+    <input type="button" id="new" class="input1" value='新增' onclick="newRole()"/>
+    <input type="button" id="edit" class="input1" value='编辑' onclick="editRole()"/>
+    <input type="button" id="delete" class="input1" value='删除' onclick="deleteRole()"/>
+  </div>
+  <div class="tab"><em>角色详细信息</em></div>
+  <div class="tab_con">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="dom">
+           角色说明:
+          </td>
+        </tr>
+        <tr>
+          <td width="25%" class="dom" >
+              管理员
+          </td>
+        </tr>
+        <tr>
+          <td width="15%" class="dom">
+            角色所拥有的成员:
+          </td>
+        </tr>
+        <tr>
+          <td width="25%" class="dom">
+           admin/系统管理员;dingzj/丁宗镌;liuyong/局级管理员;
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="data1"><span>角色所拥有的功能</span></div>
+    <div class="data1_con">
+      <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 234));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th> 
+            <th>功能编号</th>
+            <th>功能名称</th>
+            <th>功能说明</th>
+          </tr></thead>
+          
+          <tbody>
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 1</td>
+              <td> 10</td>
+              <td> 自动抄表</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 2</td>
+              <td> 20</td>
+              <td> 预付费管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 3</td>
+              <td> 21</td>
+              <td> 综合查询</td>
+              <td> 综合查询</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 4</td>
+              <td> 30</td>
+              <td> 负荷管理</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 5</td>
+              <td> 40</td>
+              <td> 用电监测</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 6</td>
+              <td> 50</td>
+              <td> 运行管理</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 7</td>
+              <td> 90</td>
+              <td> 线损分析</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 8</td>
+              <td> 110</td>
+              <td> 系统管理</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 9</td>
+              <td> 120</td>
+              <td> 报表</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 10</td>
+              <td> 920</td>
+              <td> 运行管理</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 11</td>
+              <td> 940</td>
+              <td> 统计分析</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 12</td>
+              <td> 1001</td>
+              <td> 采集任务编制</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 13</td>
+              <td> 1002</td>
+              <td> 任务配置</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 14</td>
+              <td> 1003</td>
+              <td> 实时召测</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 15</td>
+              <td> 1004</td>
+              <td> 数据检查补测</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 16</td>
+              <td> 1005</td>
+              <td> 采集质量分析</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 17</td>
+              <td> 1006</td>
+              <td> 数据查询</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 18</td>
+              <td> 1007</td>
+              <td> 数据手工录入</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 19</td>
+              <td> 2001</td>
+              <td> 预付费参数下发</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 20</td>
+              <td> 2002</td>
+              <td> 剩余电量(费)查询</td>
+              <td>&nbsp;</td>
+            </tr>
+   
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 21</td>
+              <td> 2003</td>
+              <td> 预付费情况统计</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 22</td>
+              <td> 2004</td>
+              <td> 催费控参数下发</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 23</td>
+              <td> 2005</td>
+              <td> 停复电控制管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 24</td>
+              <td> 2006</td>
+              <td> 预付费跳闸</td>
+              <td> 预付费跳闸</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 25</td>
+              <td> 2101</td>
+              <td> 单户数据查询</td>
+              <td> 单户数据查询</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 26</td>
+              <td> 2102</td>
+              <td> 档案资料查询</td>
+              <td> 档案资料查询</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 27</td>
+              <td> 2103</td>
+              <td> 表码数据查询</td>
+              <td> 表码数据查询</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 28</td>
+              <td> 2104</td>
+              <td> 负荷数据查询</td>
+              <td> 负荷数据查询</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 29</td>
+              <td> 2105</td>
+              <td> 电量数据查询</td>
+              <td> 电量数据查询</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 30</td>
+              <td> 3001</td>
+              <td> 遥控</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 31</td>
+              <td> 3002</td>
+              <td> 当前功率下浮控</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 32</td>
+              <td> 3003</td>
+              <td> 营业报停控</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 33</td>
+              <td> 3004</td>
+              <td> 时段控</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 34</td>
+              <td> 3005</td>
+              <td> 厂休控</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 35</td>
+              <td> 3006</td>
+              <td> 限电方案管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 36</td>
+              <td> 3007</td>
+              <td> 有序用电</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 37</td>
+              <td> 4003</td>
+              <td> 用电异常监测</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 38</td>
+              <td> 4004</td>
+              <td> 原始设备异常查询</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 39</td>
+              <td> 4005</td>
+              <td> 异常编码管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 40</td>
+              <td> 4006</td>
+              <td> 防窃电分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 41</td>
+              <td> 4007</td>
+              <td> 电压极值分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 42</td>
+              <td> 4008</td>
+              <td> 电流极值分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 43</td>
+              <td> 4009</td>
+              <td> 功率因数分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 44</td>
+              <td> 4010</td>
+              <td> 电压合格率</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 45</td>
+              <td> 5001</td>
+              <td> 档案管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 46</td>
+              <td> 5002</td>
+              <td> 参数管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 47</td>
+              <td> 5003</td>
+              <td> 线路档案</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 48</td>
+              <td> 5004</td>
+              <td> 日志管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 49</td>
+              <td> 5005</td>
+              <td> 安装覆盖率</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 50</td>
+              <td> 5006</td>
+              <td> 流量统计</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 51</td>
+              <td> 5007</td>
+              <td> 设备投运情况</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 52</td>
+              <td> 5010</td>
+              <td> 故障处理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 53</td>
+              <td> 5011</td>
+              <td> 实时在线率</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 54</td>
+              <td> 5012</td>
+              <td> 设备流量排名</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 55</td>
+              <td> 5014</td>
+              <td> 主站运行管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 56</td>
+              <td> 6001</td>
+              <td> 无功投切管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 57</td>
+              <td> 6002</td>
+              <td> 负载率管理</td>
+              <td>&nbsp;</td>
+              </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 58</td>
+              <td> 6003</td>
+              <td> 油温监测</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 59</td>
+              <td> 8001</td>
+              <td> 停/送电信息预报</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 60</td>
+              <td> 8002</td>
+              <td> 客户用电数据发布</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 61</td>
+              <td> 8003</td>
+              <td> 合理化用电建议</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 62</td>
+              <td> 8004</td>
+              <td> 电价信息服务</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 63</td>
+              <td> 8005</td>
+              <td> 快速购电</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 64</td>
+              <td> 9001</td>
+              <td> 分区线损</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 65</td>
+              <td> 9002</td>
+              <td> 分压线损</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 66</td>
+              <td> 9003</td>
+              <td> 分线线损</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 67</td>
+              <td> 9004</td>
+              <td> 分台区线损</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 68</td>
+              <td> 9005</td>
+              <td> 线损模型</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 69</td>
+              <td> 9006</td>
+              <td> 线损分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 70</td>
+              <td> 10001</td>
+              <td> 负荷分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 71</td>
+              <td> 10002</td>
+              <td> 电量分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 72</td>
+              <td> 10003</td>
+              <td> 电费电价分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 73</td>
+              <td> 10005</td>
+              <td> 能效分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 74</td>
+              <td> 11001</td>
+              <td> 单位管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 75</td>
+              <td> 11002</td>
+              <td> 权限管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 76</td>
+              <td> 11003</td>
+              <td> 编码管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 77</td>
+              <td> 11004</td>
+              <td> 配置管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 78</td>
+              <td> 11005</td>
+              <td> 公告管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 79</td>
+              <td> 11006</td>
+              <td> 群组管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 80</td>
+              <td> 11007</td>
+              <td> 终端刷新</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 81</td>
+              <td> 12001</td>
+              <td> test报表1</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 82</td>
+              <td> 12002</td>
+              <td> 报表管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 83</td>
+              <td> 12003</td>
+              <td> 台区线损明细报表</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 84</td>
+              <td> 12004</td>
+              <td> 台区综合情况统计表</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 85</td>
+              <td> 92001</td>
+              <td>  权限管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 86</td>
+              <td> 92002</td>
+              <td> 重点用户管理</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 87</td>
+              <td> 92003</td>
+              <td> 重点用户分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 88</td>
+              <td> 92004</td>
+              <td> 操作日志查询</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 89</td>
+              <td> 94001</td>
+              <td> 负荷特性分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 90</td>
+              <td> 94002</td>
+              <td> 负荷对比分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 91</td>
+              <td> 94003</td>
+              <td> 负荷分布分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 92</td>
+              <td> 94004</td>
+              <td> 电量分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 93</td>
+              <td> 94005</td>
+              <td> 电量分布分析</td>
+              <td>&nbsp;</td>
+            </tr>
+           
+            <tr align="center"  onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td> 94</td>
+              <td> 94006</td>
+              <td> 用电大户排行</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

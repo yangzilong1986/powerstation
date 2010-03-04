@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>指标管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script>
+<!-- 
+
+$(document).ready(function(){
+  geturl();
+});
+
+function geturl(){ 
+  var srcc = window.location; var tempIdex = -1; var tempStr = "";   
+  srcc = srcc.toString().substring(srcc.toString().indexOf("listSubmit=")+11)+",EEEEEE";    
+  for(var i=1;i<12;i++){
+    tempIdex = srcc.indexOf(",");
+    tempStr = srcc.substring(0,tempIdex);
+    if(i == 1){
+      $("#DATA_YEAR").html(tempStr);
+    }else if(i == 2){
+      $("#orgTar").html(tempStr);
+    }else{
+      $("#1-"+i).html("<input type='text' value='"+tempStr+"' id='8-"+i+"' style='width=100%; height=100%; text-align:center; border:0; background:none'/>");
+    }
+    srcc = srcc.substring(tempIdex+1);
+  }
+}
+ 
+
+-->
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">指标管理</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="保 存" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="66" class="label">年度：</td>
+          <td width="120" id="DATA_YEAR"></td>
+        </tr>        
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">指标管理列表</a></li></ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tableName">
+            <thead>
+              <tr>
+                <th>预警等级</th>
+                <th>负荷指标(万千瓦)</th>
+                <th>电量指标(万千瓦时)</th>  
+              </tr>             
+            </thead>
+            <tbody>  
+              <tr>
+                <td>Ⅰ级</td>
+                <td id="1-3"></td>
+                <td id="1-4"></td>
+              </tr>
+              <tr>
+                <td>Ⅱ级</td>
+                <td id="1-5"></td>
+                <td id="1-6"></td>
+              </tr>
+              <tr>
+                <td>Ⅲ级</td>
+                <td id="1-7"></td>
+                <td id="1-8"></td>
+              </tr>
+              <tr>
+                <td>Ⅳ级</td>
+                <td id="1-9"></td>
+                <td id="1-10"></td>
+              </tr>           
+            </tbody>
+          </table>
+        </div> 
+        <div class="nullContainer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../css/dataframe.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+    /**
+     * 
+     */
+    $("#selectall").click( function() {
+        if($("#selectall").attr("checked")) {
+            $("input[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", true);
+            });
+        }
+        else {
+            $("input[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", false);
+            });
+        }
+        //alert(getSelectedCheckboxsByName("cb-item"));
+        //alert(getSelectedCheckboxs());
+    });
+});
+</script>
+</head>
+<body>
+<div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 34));">
+  <table border="0" cellpadding="0" cellspacing="0" width="1800">
+    <thead><tr>
+      <th width="2%"><input type="checkbox" id="selectall" name="selectall" checked="checked" /></th>
+      <th width="4%">序号</th>
+      <th width="15%">供电单位</th>
+      <th width="10%">户号</th>
+      <th width="15%">户名</th>
+      <th width="14%">终端逻辑地址</th>
+      <th width="10%">当前状态</th>
+      <th width="10%">运行状态</th>
+      <th width="10%">通讯方式</th>
+      <th width="10%">操作结果</th>
+    </tr></thead>
+    <colgroup>
+      <col id="col_00" title="选择框" />
+      <col id="col_01" title="序号" />
+      <col id="col_02" title="供电单位" />
+      <col id="col_03" title="户号" />
+      <col id="col_04" title="户名" />
+      <col id="col_05" title="终端逻辑地址" />
+      <col id="col_06" title="当前状态" />
+      <col id="col_07" title="运行状态" />
+      <col id="col_08" title="通讯方式" />
+      <col id="col_09" title="操作结果" />
+    </colgroup>
+    <tbody>
+      <tr align="center">
+        <td><input type="checkbox" id="cb-id-1" name="cb-item" value="1" checked="checked" /></td>
+        <td>1</td>
+        <td>湛江市电力公司</td>
+        <td>1001</td>
+        <td>测试用户1001</td>
+        <td>44011001</td>
+        <td>运行</td>
+        <td>在线</td>
+        <td>GPRS</td>
+        <td>正在下发...</td>
+      </tr>
+      <tr align="center">
+        <td><input type="checkbox" id="cb-id-2" name="cb-item" value="2" checked="checked" /></td>
+        <td>2</td>
+        <td>湛江市电力公司</td>
+        <td>1002</td>
+        <td>测试用户1002</td>
+        <td>44011002</td>
+        <td>运行</td>
+        <td>在线</td>
+        <td>GPRS</td>
+        <td>正在下发...</td>
+      </tr>
+      <tr align="center">
+        <td><input type="checkbox" id="cb-id-3" name="cb-item" value="3" checked="checked" /></td>
+        <td>3</td>
+        <td>湛江市电力公司</td>
+        <td>1003</td>
+        <td>测试用户1003</td>
+        <td>44011003</td>
+        <td>运行</td>
+        <td>不在线</td>
+        <td>GPRS</td>
+        <td>正在下发...</td>
+      </tr>
+      <tr align="center">
+        <td><input type="checkbox" id="cb-id-4" name="cb-item" value="4" checked="checked" /></td>
+        <td>4</td>
+        <td>湛江市电力公司</td>
+        <td>1004</td>
+        <td>测试用户1004</td>
+        <td>44011004</td>
+        <td>运行</td>
+        <td>不在线</td>
+        <td>GPRS</td>
+        <td>下发成功...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pageContainer">
+  <a href="#"><img src="../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">4</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../img/page_end.gif" class="pointer" title="返回末页" /></a>
+</div>
+</body>
+</html>

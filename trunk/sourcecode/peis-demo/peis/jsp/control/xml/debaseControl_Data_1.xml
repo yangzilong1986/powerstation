@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data>
+         <check checked="true">1001</check>
+         <td1>1</td1>
+         <td2 extend="align='left'">100201</td2>
+         <td3 extend="align='left'">TEST100201</td3>
+         <td4>45011114</td4>
+         <td5>负荷控制终端</td5>
+         <td6>单路</td6>
+         <td7>500</td7>
+         <td8>100</td8>
+         <td9>100</td9>
+         <td10></td10>
+         <td11>100</td11>
+         <td13>&lt;a href="javascript:showLine('TEST100201','45011114')"&gt;查看&lt;/a&gt;</td13>                   
+    </data>
+    <data>        
+         <check checked="true">1001</check>
+         <td1>2</td1>
+         <td2 extend="align='left'">1405786022</td2>
+         <td3 extend="align='left'">市工农联盟华庄大队</td3>
+         <td4>12080825</td4>
+         <td5>负荷监测终端</td5>
+         <td6>单路</td6>
+         <td7>500</td7>
+         <td8>100</td8>
+         <td9>100</td9>
+         <td10></td10>
+         <td11>200</td11>
+         <td13>&lt;a href="javascript:showLine('市工农联盟华庄大队','12080825')"&gt;查看&lt;/a&gt;</td13>
+    </data>
+    <data>        
+       <td1 extend="colspan='2'">合计</td1>
+       <td2></td2>
+       <td3></td3>
+       <td4></td4>
+       <td5></td5>
+       <td6></td6>
+       <td7>1000</td7>
+       <td8>200</td8>
+       <td9>200</td9>
+       <td10></td10>
+       <td11>300</td11>
+       <td13>&lt;a href="javascript:showLine('45011114')"&gt;查看&lt;/a&gt;</td13>
+    </data>
+</datas>

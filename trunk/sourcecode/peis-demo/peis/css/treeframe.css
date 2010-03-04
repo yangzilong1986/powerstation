@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+body { 
+    font: 12px 'arial';
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    scrollbar-face-color: #c4ece7;
+    scrollbar-base-color:#f7f9fc;
+    scrollbar-highlight-color: #EEEEEE;
+    scrollbar-shadow-color:#EDF9F7;
+    scrollbar-3dlight-color: #EEEEEE;
+    scrollbar-arrow-color: #0A726A;
+    scrollbar-track-color: #F7F7F9;
+    scrollbar-darkshadow-color: #96DACF;
+}
+td { font: 12px 'arial'; }
+img { vertical-align: top; border: 0; }
+img.date { margin: 1px; }
+.clear { clear: both; }
+h1, h2, h3, h4, h5, p, ul, form { margin: 0; padding: 0; }
+
+td a:link { color: #000; text-decoration: underline; }
+td a:visited { color: #000; text-decoration: underline; }
+td a:hover { color: #F00; text-decoration: underline; }
+td a:active { color: #F00; text-decoration: underline; }
+
+.link_g a:link { color: #EBF1F0; text-decoration: none; }
+.link_g a:visited { color: #EBF1F0; text-decoration: none; }
+.link_g a:hover { color: #FFCC00; text-decoration: none; }
+.link_g a:active { color: #EBF1F0; text-decoration: none; }
+
+.link_g2 { color: #336666; }
+.link_g2 a:link { color: #336666; text-decoration: none; }
+.link_g2 a:visited { color: #336666; text-decoration: none; }
+.link_g2 a:hover { color: #FF6600; text-decoration: none; }
+.link_g2 a:active { color: #336666; text-decoration: none; }
+
+.link_b a:link { color: #EBF1F0; text-decoration: none; }
+.link_b a:visited { color: #EBF1F0; text-decoration: none; }
+.link_b a:hover { color: #FFCC00; text-decoration: none; }
+.link_b a:active { color: #EBF1F0; text-decoration: none; }
+
+.link_b2 a:link { color: #000; text-decoration: none; }
+.link_b2 a:visited { color: #000; text-decoration: none; }
+.link_b2 a:hover { color: #f60; text-decoration: none; }
+.link_b2 a:active { color: #000; text-decoration: none; }
+
+div.treeContainer { margin: 5px 0px; }
+  div.treeContainer table { font-size: 12px; font-family: Arial, Helvetica, sans-serif; background-color: #336666; }
+    div.treeContainer table tbody tr td { height: 20px; text-align: left; font-size: 12px; font-weight: normal; color: #000; background-color: #FFFFFF; }
+
+.styleShow { display: block; }
+.styleHidden { display: none; }

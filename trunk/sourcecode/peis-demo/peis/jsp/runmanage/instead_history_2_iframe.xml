@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>34443</td2>
+        <td3>城东主变</td3>
+        <td4>01</td4>
+        <td5>32355564</td5>
+        <td6>20938456</td6>  
+        <td7>500/1</td7>  
+        <td8>100/1</td8>   
+        <td9>550/1</td9>
+        <td10>200/1</td10>
+        <td11>待处理</td11>
+        <td12>2009-10-10</td12>
+        <td13>2009-8-1</td13>
+        <td14>&lt;a href="javascript:showText();" &gt;查看\修改&lt;/a&gt;</td14>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>test5</td2>
+        <td3>城区主变</td3>
+        <td4>01</td4>
+        <td5>32380564</td5>
+        <td6>2064456</td6>  
+        <td7>400/1</td7>  
+        <td8>120/1</td8>   
+        <td9>550/1</td9>
+        <td10>200/1</td10>
+        <td11>已处理</td11>
+        <td12>2009-10-10</td12>
+        <td13>2009-8-1</td13>
+        <td14>&lt;a href="javascript:showText();" &gt;查看\修改&lt;/a&gt;</td14>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>test5</td2>
+        <td3>江干主变</td3>
+        <td4>01</td4>
+        <td5>32763564</td5>
+        <td6>25657756</td6>  
+        <td7>700/1</td7>  
+        <td8>520/1</td8>   
+        <td9>550/1</td9>
+        <td10>200/1</td10>
+        <td11>待处理</td11>
+        <td12>2009-10-10</td12>
+        <td13>2009-8-1</td13>
+        <td14>&lt;a href="javascript:showText();" &gt;查看\修改&lt;/a&gt;</td14>
+    </data>
+</datas>

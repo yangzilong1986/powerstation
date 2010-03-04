@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>徐闻供电局</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423%</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>1</td9>
+        <td10>5</td10>
+        <td11>98675</td11>
+        <td12>1232</td12>
+        <td13>12112</td13>
+        <td14>1</td14>
+        <td15>5</td15>
+        <td16>2312</td16>
+        <td17>10</td17>    
+    </data> 
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>徐闻供电局</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>1</td9>
+        <td10>5</td10>
+        <td11>98675</td11>
+        <td12>1232</td12>
+        <td13>12112</td13>
+        <td14>1</td14>
+        <td15>5</td15>
+        <td16>2312</td16>
+        <td17>10</td17>    
+    </data>   
+     <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>徐闻供电局</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>1</td9>
+        <td10>5</td10>
+        <td11>98675</td11>
+        <td12>1232</td12>
+        <td13>12112</td13>
+        <td14>1</td14>
+        <td15>5</td15>
+        <td16>2312</td16>
+        <td17>10</td17>    
+    </data> 
+       <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>徐闻供电局</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>1</td9>
+        <td10>5</td10>
+        <td11>98675</td11>
+        <td12>1232</td12>
+        <td13>12112</td13>
+        <td14>1</td14>
+        <td15>5</td15>
+        <td16>2312</td16>
+        <td17>10</td17>    
+    </data> 
+       <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>徐闻供电局</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>22342</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+        <td9>1</td9>
+        <td10>5</td10>
+        <td11>98675</td11>
+        <td12>1232</td12>
+        <td13>12112</td13>
+        <td14>1</td14>
+        <td15>5</td15>
+        <td16>2312</td16>
+        <td17>10</td17>    
+    </data> 
+</datas>

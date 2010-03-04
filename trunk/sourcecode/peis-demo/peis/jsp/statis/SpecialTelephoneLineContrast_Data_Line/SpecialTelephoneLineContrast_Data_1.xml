@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="false">
+   <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>200906</td2>
+        <td3>&lt;a href="javascript:showPage(1)"&gt;3491234&lt;/a&gt;</td3>
+        <td4>21</td4> 
+        <td5>32</td5>                 
+    </data> 
+</datas>

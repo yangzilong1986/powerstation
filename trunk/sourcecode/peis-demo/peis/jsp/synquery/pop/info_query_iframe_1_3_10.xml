@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td1>99914922</td1>  
+		<td2>51104922</td2>  
+        <td3>南三供电所</td3>
+        <td4>0805297661</td4>
+        <td5>方华恩</td5>
+        <td6>集中器</td6>
+        <td7>三相四线</td7>
+        <td8>698规约</td8>
+        <td9>GPRS</td9>
+        <td10>杭州百富电子</td10>
+	    <td11>2009-05-02</td11>
+		<td12>05-045g</td12>
+		<td13>潭水塘村台区</td13>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>99914930</td1>  
+		<td2>51104930</td2>  
+        <td3>南三供电所</td3>
+        <td4>2700092565</td4>
+        <td5>西青区江勇五金制品厂</td5>
+        <td6>集中器</td6>
+        <td7>三相四线</td7>
+        <td8>698规约</td8>
+        <td9>CDMA</td9>
+        <td10>杭州百富电子</td10>
+	    <td11>2009-05-02</td11>
+		<td12>05-047g</td12>
+		<td13>庵里上村台区</td13>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>99914945</td1>  
+		<td2>51104945</td2>  
+        <td3>南三供电所</td3>
+        <td4>0805297664</td4>
+        <td5>李树嵩</td5>
+        <td6>集中器</td6>
+        <td7>三相四线</td7>
+        <td8>国网规约</td8>
+        <td9>GPRS</td9>
+        <td10>杭州百富电子</td10>
+	    <td11>2009-05-02</td11>
+		<td12>05-015g</td12>
+		<td13>那平村变台</td13>
+    </data>         
+</datas>
+<!--
+
+终端档案(低压)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>供电单位</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>终端类型</th>
+			<th>相线</th>
+			<th>设备规约</th>
+			<th>通讯方式</th>
+			<th>设备厂家</th>
+			<th>安装日期<th>
+			<th>台区编号</th>
+			<th>台区名称</th>
+          </tr>
+        </thead>
+-->

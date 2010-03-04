@@ -1,0 +1,712 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>采集完整率</title>
+<link rel="stylesheet" type="text/css" href="../../css/dataframe.css"/>
+<script type="text/javascript" language="javascript" src="../../js/autorm/calendar.js"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+<script type="text/javascript" language="javascript" src="../../FusionCharts/FusionCharts.js"></script>    
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+
+$(document).ready(function(){
+    //img的绑定事件
+    $('img').click(function(){
+        if($(this).attr("src").indexOf("plus1.gif")!=-1){
+            $(this).attr("src", contextPath + "/img/tree2/minus1.gif");
+            //alert("显示")
+            var trs = $(this).parent().parent().nextAll().each(function(i){
+                if($(this).attr("lastflag")){
+                    $(this).attr("class", "styleShow");
+                }
+                else return false; //跳出循环
+            });
+        }
+        else if($(this).attr("src").indexOf("minus1.gif")!=-1){
+            $(this).attr("src", contextPath + "/img/tree2/plus1.gif");
+            //alert("隐藏");
+            var trs = $(this).parent().parent().nextAll().each(function(){
+                if($(this).attr("lastflag")){
+                    $(this).attr("class", "styleHidden");
+                }
+                else return false; //跳出循环
+            });
+        }
+    });
+});
+    
+</script>
+</head>
+
+<body>
+<div class="graphContainer" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 34));">
+  <!-- START Script Block for Chart-->
+  <div id='chartDiv' align='center'>
+          Chart.
+  </div>
+  <script type='text/javascript'>
+    var chart_chart = new FusionCharts('../../FusionCharts/MSColumn3D.swf', 'chart', '800', '275', '0', '0');
+    // Provide entire XML data using dataXML method
+    chart_chart.setDataXML("<chart caption='抄表完整率' shownames='1' showvalues='0'><categories><category label='广州市电力公司'/><category label='深圳市电力公司'/><category label='湛江市电力公司'/></categories><dataset seriesName='抄表完整率' color='AFD8F8' showValues='0'><set value='0.4'/><set value='0.5'/><set value='0.6'/></dataset></chart>");
+    // Finally, render the chart.
+    chart_chart.render("chartDiv");
+  </script>
+  <!--END Script Block for Chart-->
+
+  <input type="hidden" name="mothed" value="detail">
+  <input type="hidden" name="sjmd" value="10">
+  <input type="hidden" name="sjlx" value="">
+  <input type="hidden" name="ckfs" value="">
+  <input type="hidden" name="tjsj" value="2009-9-20">
+  <input type="hidden" name="sqlcode" value="CBWZL0002">
+  <input type="hidden" name="org_no" value="4">       
+  <input type="hidden" name="year" value="2009">
+  <input type="hidden" name="month" value="8">
+  <input type="hidden" name="sblx" value="">
+  <input type="hidden" name="txfs" value="">
+  <div id="tableContainer" class="tableContainer" style="width: expression((document.documentElement.clientWidth||document.body.clientWidth)-22);">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+          <th colspan="5">应抄数据项数</th> 
+          <th colspan="5">实抄数据项数</th> 
+          <th colspan="5">缺项数</th>
+          <th colspan="5">完整率(%)</th>
+        </tr>
+        <tr>
+          <th width="3%">&nbsp;</th>
+          <th width="13%">电压等级(变电站)</th>
+          <th width="4%">总</th>
+          <th width="4%">GPRS</th>
+          <th width="4%">CDMA</th>
+          <th width="5%">有线网络</th>
+          <th width="4%">短信</th>
+          <th width="4%">总</th>
+          <th width="4%">GPRS</th>
+          <th width="4%">CDMA</th>
+          <th width="5%">有线网络</th>
+          <th width="4%">短信</th>
+          <th width="4%">总</th>
+          <th width="4%">GPRS</th>
+          <th width="4%">CDMA</th>
+          <th width="5%">有线网络</th>
+          <th width="4%">短信</th>
+          <th width="4%">总</th>
+          <th width="4%">GPRS</th>
+          <th width="4%">CDMA</th>
+          <th width="5%">有线网络</th>
+          <th width="4%">短信</th>
+        </tr>
+      </thead>
+      <tbody>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+                500kV
+           <td style="text-align: left;">
+              40.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              16.0
+           </td>
+           <td style="text-align: left;">
+              8.0
+           </td>
+           <td style="text-align: left;">
+              8.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              22.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+           &nbsp;&nbsp;&nbsp;&nbsp;变电站1
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              8
+           </td>
+           <td style="text-align: left;">
+              8
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;变电站2
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              8
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              8
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+              220kV
+           </td>
+           <td style="text-align: left;">
+              40.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              10.0
+           </td>
+           <td style="text-align: left;">
+              10.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              22.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;变电站1
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+              &nbsp;&nbsp;&nbsp;&nbsp;变电站2
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+              110kV
+           </td>
+           <td style="text-align: left;">
+              40.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              20.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              24.0
+           </td>
+           <td style="text-align: left;">
+              12.0
+           </td>
+           <td style="text-align: left;">
+              12.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              22.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              11.0
+           </td>
+           <td style="text-align: left;">
+              0.0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;变电站1
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              12
+           </td>
+           <td style="text-align: left;">
+              12
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+              &nbsp;&nbsp;&nbsp;&nbsp;变电站2
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              12
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              12
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              11
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              0
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+           <td style="text-align: left;">
+              0.00
+           </td>
+         </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="pageContainer">
+  <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+</div>
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+                <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+                <!-- <data></data>固定格式 -->
+                <data extend='name="2009-09-01"'>
+                                <td2>八一化工</td2>
+                                <td3>1233</td3>
+                                <td1>1231</td1>
+                                <td9>大用户</td9>
+                                <td4 extend="align='center'">2009-09-01</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data>
+        <data extend='name="2009-09-01"'>
+       <td2>大牛村</td2>
+                                <td3>1233</td3>
+                                <td1>1231</td1>
+                                <td9>台区</td9>
+                                <td4 extend="align='center'">2009-09-01</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data >
+        <data extend='name="2009-09-01"'>
+       <td2>清水村</td2>
+                                <td3>1223</td3>
+                                <td1>1231</td1>
+                                <td9>台区</td9>
+                                <td4 extend="align='center'">2009-09-01</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data>
+    <!-- <data></data>固定格式 -->
+                <data extend='name="2009-09-02"'>
+                                <td2>八一化工</td2>
+                                <td3>1233</td3>
+                                <td1>1231</td1>
+                                <td9>大用户</td9>
+                                <td4 extend="align='center'">2009-09-02</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data>
+        <data extend='name="2009-09-02"'>
+       <td2>大牛村</td2>
+                                <td3>1323</td3>
+                                <td1>1231</td1>
+                                <td9>台区</td9>
+                                <td4 extend="align='center'">2009-09-02</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data >
+        <data extend='name="2009-09-02"'>
+       <td2>清水村</td2>
+                                <td3>1243</td3>
+                                <td1>1231</td1>
+                                <td9>台区</td9>
+                                <td4 extend="align='center'">2009-09-02</td4>
+                                <td5 extend="align='right'">23456.00</td5>
+                                <td7 extend="align='right'">3.00</td7>
+                                <td8 extend="align='right'">0.20</td8>
+                                <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+    </data>
+      </datas>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>-->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>110kV</td1>
+        <td2>110kV石岭站</td2>
+		<td4>1</td4>
+		<td5>2009-09-19 12:23:09</td5>
+		<td6>2009-09-20 12:23:0</td6>
+		<td7>97652876</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>35kV</td1>
+        <td2>35kV营仔站</td2>
+		<td4>1</td4>
+		<td5>2009-09-19 14:21:02</td5>
+		<td6>2009-09-19 13:12:02</td6>
+		<td7>23898187</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+	<data js="onclick=selectSingleRow(this)" >
+        <td1>110kV</td1>
+        <td2>110kV龙门站</td2>
+		<td4>1</td4>
+		<td5>2009-09-19 14:21:02</td5>
+		<td6>2009-09-19 13:12:02</td6>
+		<td7>87692991</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+    
+</datas>

@@ -1,0 +1,535 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>遥控</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/control/control.js"></script>
+<script type="text/javascript">
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/control/xml/remoteControl_Data_1.xml","cb-item");
+}
+
+//打开负荷曲线
+function showLine(objectName,logic_addr) {
+    var params = {    
+                   "objectName":objectName,
+                   "logicAddr":logic_addr
+          };
+    var url="../../jsp/control/showLine.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    top.showDialogBox("负荷曲线",url, 575, 900);
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">遥 控</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input type="button" name="query" id="query" value="查 询" class="input1" onclick="query();" />
+        <input type="button" name="adquery" id="adquery" value="高级查询" class="input2" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" value="遥 控" class="input1" onclick="doSubmit('remote')" />
+        <input type="button" value="允许合闸" class="input2" onclick="doSubmit('cancleRemote')" />
+        <input type="button" value="其 他" class="input1" onclick="showButton()" />
+        <input type="button" id="startBt" value="小圈轮召" class="input2" onclick="startTurn()" />
+        <input type="button" id="stopBt" value="停止小圈轮召" class="input3" onclick="stopTurn()" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">限电方案：</td>
+          <td width="120" class="dom">
+            <select name="s_id" id="s_id">
+              <option value="0">---所有---</option>
+              <option value="241">应峰度夏C级2类</option>
+              <option value="261">D级别3类</option>
+            </select>
+            <script type="text/javascript">document.all.s_id.value="0";</script>
+          </td>
+          <td width="70" class="label">户　号：</td>
+          <td width="120" class="dom">
+            <input type="text" name="object_no" value="">
+          </td>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+    </div>
+    <!-- 其他按钮 -->
+    <div id="button_div" onmouseout="" style="position: absolute; background-color: #D0EEE5; width: 240px; height: 88px; display: none;">
+      <div id="main" style="border-top: 1px #5d90d7 solid;">
+        <div>
+         <div id="tool">
+          <div>
+           <table border="0" width="230">
+            <tr>
+             <td width="50%" align="left">
+              <input type="button" value=" 保 电 " class="input3"
+               onclick="doSubmit('keep')" />
+             </td>
+             <td width="50%" align="right">
+              <input type="button" value="保电解除" class="input3"
+               onclick="doSubmit('cancleKeep')" />
+             </td>
+            </tr>
+            <!-- <tr>
+                             <td width="50%" align="left"><input type="button" value="开通话" class="input3" onclick=""/></td>
+                             <td width="50%" align="right"><input type="button" value="关通话" class="input3" onclick=""/></td>
+                           </tr>
+                           <tr>
+                             <td width="50%" align="left"><input type="button" value="群开通话" class="input3" onclick=""/></td>
+                             <td width="50%" align="right"><input type="button" value="群关通话" class="input3" onclick=""/></td>
+                           </tr> -->
+            <tr>
+             <!--<td width="50%" align="left"><input type="button" value="按组地址控制" class="input3" onclick=""/></td>-->
+             <td width="50%" align="left">
+              <br>
+             </td>
+             <td width="50%" align="right">
+              <input type="button" value=" 关 闭 " class="input3" onclick="document.getElementById('button_div').style.display='none';" />
+             </td>
+            </tr>
+           </table>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+    <!-- 遥控参数设置 -->
+    <div id=remoteParam style="position: absolute; background-color: #D0EEE5; width: 610px; height: 100px; display: none;">
+      <div id="main" style="border-top: 1px #5d90d7 solid;">
+        <div>
+         <div id="tool">
+          <table border="0" cellpadding="0" cellspacing="0" width="600">
+           <tr>
+            <td class="label">
+             提示：
+            </td>
+            <td colspan="5">
+             遥控参数设置
+            </td>
+           </tr>
+           <tr>
+            <td width="80" class="label">
+             限电时间：
+            </td>
+            <td width="120" class="dom">
+             <select name="exp_select" id="exp_select">
+              <option value="0">紧急限电</option>
+              <option value="1">
+               0.5小时
+              </option>
+              <option value="2">
+               1.0小时
+              </option>
+              <option value="3">
+               1.5小时
+              </option>
+              <option value="4">
+               2.0小时
+              </option>
+              <option value="5">
+               2.5小时
+              </option>
+              <option value="6">
+               3.0小时
+              </option>
+              <option value="7">
+               3.5小时
+              </option>
+              <option value="8">
+               4.0小时
+              </option>
+              <option value="9">
+               4.5小时
+              </option>
+              <option value="10">
+               5.0小时
+              </option>
+              <option value="11">
+               5.5小时
+              </option>
+              <option value="12">
+               6.0小时
+              </option>
+              <option value="13">
+               6.5小时
+              </option>
+              <option value="14">
+               7.0小时
+              </option>
+              <option value="15">
+               7.5小时
+              </option>
+             </select>
+             <script type="text/javascript">document.all.exp_select.value="0";</script>
+            </td>
+            <td width="80" class="label">
+             开关轮次：
+            </td>
+            <td width="120" class="dom">
+             <select name="turn_select" id="turn_select">
+              <option value="1">
+               1
+              </option>
+              <option value="2">
+               2
+              </option>
+              <option value="3">
+               3
+              </option>
+              <option value="4">
+               4
+              </option>
+              <option value="5">
+               5
+              </option>
+              <option value="6">
+               6
+              </option>
+              <option value="7">
+               7
+              </option>
+              <option value="8">
+               8
+              </option>
+             </select>
+             <script type="text/javascript">document.all.turn_select.value="1";</script>
+            </td>
+            <td width="80" class="label">
+             告警延时：
+            </td>
+            <td width="120" class="dom">
+             <select name="lapse_select" id="lapse_select">
+              <option value="0">
+               立即跳闸
+              </option>
+              <option value="1">
+               1分钟
+              </option>
+              <option value="2">
+               2分钟
+              </option>
+              <option value="3">
+               3分钟
+              </option>
+              <option value="4">
+               4分钟
+              </option>
+              <option value="5">
+               5分钟
+              </option>
+              <option value="6">
+               6分钟
+              </option>
+              <option value="7">
+               7分钟
+              </option>
+              <option value="8">
+               8分钟
+              </option>
+              <option value="9">
+               9分钟
+              </option>
+              <option value="10">
+               10分钟
+              </option>
+              <option value="11">
+               11分钟
+              </option>
+              <option value="12">
+               12分钟
+              </option>
+              <option value="13">
+               13分钟
+              </option>
+              <option value="14">
+               14分钟
+              </option>
+              <option value="15">
+               15分钟
+              </option>
+             </select>
+             <script type="text/javascript">document.all.lapse_select.value="0";</script>
+            </td>
+           </tr>
+          </table>
+          <div class="t_botton">
+           <div class="t_center" align="center">
+            <input type="button" value="确 定" onclick="setParamAndSubmit()" class="input1" />
+            <input type="button" value="取 消" onclick="document.getElementById('remoteParam').style.display='none';" class="input1" />
+           </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+    <!-- 保电参数设置 -->
+    <div id=keepParam style="position: absolute; background-color: #D0EEE5; width: 310px; height: 105px; display: none;">
+      <div id="main" style="border-top: 1px #5d90d7 solid;">
+        <div>
+         <div id="tool">
+          <table border="0" cellpadding="0" cellspacing="0" width="300">
+           <tr>
+            <td class="label">
+             提示：
+            </td>
+            <td>
+             保电参数设置
+            </td>
+           </tr>
+           <tr>
+            <td width="100" class="label">
+             保电持续时间：
+            </td>
+            <td width="120" class="dom">
+             <select name="keepTime_select" id="keepTime_select">
+              <option value="0">
+               无限期保电
+              </option>
+              <option value="1">
+               0.5小时
+              </option>
+              <option value="2">
+               1.0小时
+              </option>
+              <option value="3">
+               1.5小时
+              </option>
+              <option value="4">
+               2.0小时
+              </option>
+              <option value="5">
+               2.5小时
+              </option>
+              <option value="6">
+               3.0小时
+              </option>
+              <option value="7">
+               3.5小时
+              </option>
+              <option value="8">
+               4.0小时
+              </option>
+              <option value="9">
+               4.5小时
+              </option>
+              <option value="10">
+               5.0小时
+              </option>
+              <option value="11">
+               5.5小时
+              </option>
+              <option value="12">
+               6.0小时
+              </option>
+              <option value="13">
+               6.5小时
+              </option>
+              <option value="14">
+               7.0小时
+              </option>
+              <option value="15">
+               7.5小时
+              </option>
+              <option value="16">
+               8.0小时
+              </option>
+              <option value="17">
+               8.5小时
+              </option>
+              <option value="18">
+               9.0小时
+              </option>
+              <option value="19">
+               9.5小时
+              </option>
+              <option value="20">
+               10.0小时
+              </option>
+              <option value="21">
+               10.5小时
+              </option>
+              <option value="22">
+               11.0小时
+              </option>
+              <option value="23">
+               11.5小时
+              </option>
+              <option value="24">
+               12.0小时
+              </option>
+              <option value="25">
+               12.5小时
+              </option>
+              <option value="26">
+               13.0小时
+              </option>
+              <option value="27">
+               13.5小时
+              </option>
+              <option value="28">
+               14.0小时
+              </option>
+              <option value="29">
+               14.5小时
+              </option>
+              <option value="30">
+               15.0小时
+              </option>
+              <option value="31">
+               15.5小时
+              </option>
+              <option value="32">
+               16.0小时
+              </option>
+              <option value="33">
+               16.5小时
+              </option>
+              <option value="34">
+               17.0小时
+              </option>
+              <option value="35">
+               17.5小时
+              </option>
+              <option value="36">
+               18.0小时
+              </option>
+              <option value="37">
+               18.5小时
+              </option>
+              <option value="38">
+               19.0小时
+              </option>
+              <option value="39">
+               19.5小时
+              </option>
+              <option value="40">
+               20.0小时
+              </option>
+              <option value="41">
+               20.5小时
+              </option>
+              <option value="42">
+               21.0小时
+              </option>
+              <option value="43">
+               21.5小时
+              </option>
+              <option value="44">
+               22.0小时
+              </option>
+              <option value="45">
+               22.5小时
+              </option>
+              <option value="46">
+               23.0小时
+              </option>
+              <option value="47">
+               23.5小时
+              </option>
+              <option value="48">
+               24.0小时
+              </option>
+             </select>
+             <script type="text/javascript">document.all.keepTime_select.value="0";</script>
+            </td>
+           </tr>
+          </table>
+          <div class="t_botton">
+           <div class="t_center" align="center">
+            <input type="button" value=" 确 定 "
+             onclick="setKeepParamAndSubmit()" class="input" />
+           </div>
+          </div>
+         </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on">
+              <a href="#" onclick="setTarget(1); return false;">对象信息</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div id="tableContainer" class="tableContainer" style="height:expression((( document.documentElement.clientHeight||document.body.clientHeight)-155));">
+          <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+              <th width="2%"><input type="checkbox" id="chooseAll" onclick="doClickAll()" /></th>
+              <th width="4%">序号</th>
+              <th width="8%">户号</th>
+              <th width="14%">户名</th>
+              <th width="10%">终端地址</th>
+              <th width="10%">终端类型</th>
+              <th width="6%">电源属性</th>
+              <th width="6%">保安容量</th>
+              <th width="6%">限前负荷</th>
+              <th width="6%">当前负荷</th>
+              <th width="8%">当前负荷时间</th>
+              <th width="6%">限下负荷</th>
+              <th width="5%">遥信</th>
+              <th width="7%">负荷曲线</th>
+            </tr></thead>
+            <tbody id="DATA_TBODY" align="center">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">16</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form name="remoteControlForm" method="post" action="/peis/do/control/remoteAction.do" style="display: none" target="control">
+  <input type="text" id="chooseValue" name="chooseValue" />
+  <input type="text" id="method" name="method" />
+  <input type="text" id="turn" name="turn" />
+  <input type="text" id="lapse" name="lapse" />
+  <input type="text" id="expTime" name="expTime" />
+  <input type="text" id="click_logic" name="click_logic" />
+  <input type="text" id="keepTime" name="keepTime" />
+</form>
+<div id=mytips style="position:absolute;background-color:#D0EEE5;width:240px;height:100px; display:none;">
+    <div id="main" style="border-top: 1px #5d90d7 solid;">
+       <div>
+        <div id="tool">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td class="label">提示：</td>
+            <td>权限验证</td>
+          </tr>
+          <tr>
+            <td width="66" class="label">密码：</td>
+            <td width="120" class="dom"><input type="password" id="password"/></td>
+          </tr>
+        </table>
+        <div class="t_botton">
+          <div class="t_center" align="center">
+              <input type="button" value="确 定" onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';" class="input1"/>
+              <input type="button" value="取 消" onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';" class="input1"/>
+          </div>
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

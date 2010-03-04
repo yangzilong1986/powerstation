@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>110kV樟铺站</td1>
+        <td2>110kV</td2>
+        <td5>12080101</td5>
+        <td6>1</td6>
+        <td7>2009-07-31 10:48:00.0</td7>
+        <td8>&lt;a href="javascript:view()"&gt;电表错接线&lt;/a&gt;</td8>
+        <td9>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td9>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>220kV雷州站</td1>
+        <td2>220kV</td2>
+        <td5>12080101</td5>
+        <td6>6</td6>
+        <td7>2009-07-31 10:50:00.0</td7>
+        <td8>&lt;a href="javascript:view()"&gt;电表错接线&lt;/a&gt;</td8>
+        <td9>查看</td9>
+        
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>35kV奋勇站</td1>
+        <td2>35kV</td2>
+        <td5>12080101</td5>
+        <td6>5</td6>
+        <td7>2009-07-31 12:28:00.0</td7>
+        <td8>&lt;a href="javascript:view()"&gt;电表错接线&lt;/a&gt;</td8>
+        <td9>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td9>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+         <td1>500kV港城站</td1>
+        <td2>500kV</td2>
+        <td5>12080101</td5>
+        <td6>5</td6>
+        <td7>2009-07-31 17:58:00.0</td7>
+        <td8>&lt;a href="javascript:view()"&gt;电表错接线&lt;/a&gt;</td8>
+        <td9>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td9>
+    </data>
+    
+</datas>

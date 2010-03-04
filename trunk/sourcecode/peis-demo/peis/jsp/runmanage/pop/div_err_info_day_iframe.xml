@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datas rowid="false">
+    <!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>01日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>02日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>03日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>04日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>05日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>06日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>07日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>08日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>09日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>10日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>11日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>12日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>13日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>14日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>15日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>16日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>17日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>18日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>19日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>20日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>21日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>22日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>23日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>24日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>25日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>26日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>27日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>28日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>29日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>30日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+     <data extend="onclick='selectSingleRow(this);'">
+        <td1>31日</td1>
+        <td2>867</td2>
+        <td3>212121</td3>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>90</td6>
+        <td7>87</td7>
+    </data>
+</datas>

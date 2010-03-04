@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+  <data>
+    <td2>**供电局</td2>
+    <td5 extend="align='right'">23456.00</td5>
+    <td6 extend="align='right'">23440.00</td6>
+    <td4 extend="align='right'">123.90</td4>
+    <td7 extend="align='right'">&#60;a
+      href=javascript:popTop(1,"损耗曲线","../../jsp/lineloss/lineloss_query_majorgrid_data_chart.html?dateType=4")&#62;3.00&#60;/a&#62;
+    </td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td9 extend="align='right'">0.20</td9>
+    <td10 extend="align='right'">5</td10>
+    <td11>&#60;a
+      href=javascript:popTop(1,"电量明细","../../jsp/lineloss/lineloss_query_majorgrid_data_detail.html?dateType=4")&#62;详细&#60;/a&#62;
+    </td11>
+  </data>
+  <data>
+    <td2>**供电所</td2>
+    <td5 extend="align='right'">23456.00</td5>
+    <td6 extend="align='right'">23440.00</td6>
+    <td4 extend="align='right'">123.90</td4>
+    <td7 extend="align='right'">&#60;a
+      href=javascript:popTop(1,"损耗曲线","../../jsp/lineloss/lineloss_query_majorgrid_data_chart.html?dateType=4")&#62;3.00&#60;/a&#62;
+    </td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td9 extend="align='right'">0.20</td9>
+    <td10 extend="align='right'">5</td10>
+    <td11>&#60;a
+      href=javascript:popTop(1,"电量明细",'../../jsp/lineloss/lineloss_query_majorgrid_data_detail.html?dateType=4')&#62;详细&#60;/a&#62;
+    </td11>
+  </data>
+  <total>
+    <td2></td2>
+    <td5 extend="align='right'">23456.00</td5>
+    <td6 extend="align='right'">23440.00</td6>
+    <td4 extend="align='right'">123.90</td4>
+    <td7 extend="align='right'">3.00</td7>
+    <td8></td8>
+    <td9></td9>
+    <td10></td10>
+    <td11></td11>
+  </total>
+</datas>

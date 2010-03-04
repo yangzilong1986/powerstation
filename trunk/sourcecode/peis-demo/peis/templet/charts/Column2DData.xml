@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='3' 
+       baseFontSize='12' baseFont='Courier New' 
+       caption='采集成功率' subCaption='' xAxisName='供电单位' yAxisName='%' 
+       showBorder='1' borderColor='#BBBBBB' 
+       showLegend='1' legendPosition='RIGHT' 
+       useRoundEdges='1' 
+       showValues='0' 
+       showSum='1' 
+       captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' 
+       plotSpacePercent='100' 
+       chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' 
+       canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' 
+       legendBorderAlpha='0' 
+       formatNumber='1' formatNumberScale='0' 
+       showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据'
+       showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'>
+    <set label="Jan" value="462" /> 
+    <set label="Feb" value="857" /> 
+    <set label="Mar" value="671" /> 
+    <set label="Apr" value="494" /> 
+    <set label="May" value="761" /> 
+    <set label="Jun" value="960" /> 
+</chart>

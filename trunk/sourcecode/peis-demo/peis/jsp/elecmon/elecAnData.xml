@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>民安供电所</td1>
+        <td2>1234573001</td2>
+        <td3>第十八塑料制品厂</td3>
+        <td4>2009-07-31 10:48:00</td4>
+        <td5>负荷超合同容量</td5>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>南调供电所</td1>
+        <td2>1401891008</td2>
+        <td3>耐久园艺工具厂</td3>
+        <td4>2009-07-31 10:48:00</td4>
+        <td5>电压缺相</td5>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>乾塘供电所</td1>
+        <td2>1405894039</td2>
+        <td3>六福针织有限公司</td3>
+        <td4>2009-07-31 10:48:00</td4>
+        <td5>电流缺相</td5>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>官渡供电所</td1>
+        <td2>2700168586</td2>
+        <td3>银成电子有限公司</td3>
+        <td4>2009-07-31 10:48:00</td4>
+        <td5>表码倒走</td5>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+    </data>
+</datas>

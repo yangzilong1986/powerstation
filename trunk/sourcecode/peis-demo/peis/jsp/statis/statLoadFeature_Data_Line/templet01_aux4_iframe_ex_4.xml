@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >		
+		<td1>&lt;50</td1>
+		<td2>1129.4936</td2>
+		<td3>2006-09-05 11:15:00</td3>
+		<td4>12.1688</td4>
+		<td5>2006-09-05 00:00:00</td5>
+		<td6>104.5093</td6>
+		<td7>117.3248</td7>
+		<td8>78.00</td8>
+	</data>
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >    
+        <td1>&gt;=50</td1>
+        <td2>329.4936</td2>
+        <td3>2006-09-05 11:15:00</td3>
+        <td4>12.1688</td4>
+        <td5>2006-09-05 00:00:00</td5>
+        <td6>104.5093</td6>
+        <td7>117.3248</td7>
+        <td8>82.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>&gt;=100</td1>
+        <td2>1458.9872</td2>
+        <td3>2006-09-05 11:15:00</td3>
+        <td4>12.1688</td4>
+        <td5>2006-09-05 00:00:00</td5>
+        <td6>104.5093</td6>
+        <td7>117.3248</td7>
+        <td8>79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>&gt;=315</td1>
+        <td2>1458.9872</td2>
+        <td3>2006-09-05 11:15:00</td3>
+        <td4>12.1688</td4>
+        <td5>2006-09-05 00:00:00</td5>
+        <td6>104.5093</td6>
+        <td7>117.3248</td7>
+        <td8>79.00</td8>
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>汇总</td1>
+        <td2>1458.9872</td2>
+        <td3>2006-09-05 11:15:00</td3>
+        <td4>12.1688</td4>
+        <td5>2006-09-05 00:00:00</td5>
+        <td6>104.5093</td6>
+        <td7>117.3248</td7>
+        <td8>79.00</td8>
+    </data>
+</datas>

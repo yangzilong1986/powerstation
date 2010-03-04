@@ -1,0 +1,240 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>电量对比分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+ 
+$(document).ready(function(){ 
+  $('#query').click(toquery);
+  $('#dateType').change(dateTypeDo);
+  dateTypeDo();  
+});
+
+function dateTypeDo(){
+  var dateType = $('#dateType').val();
+  if(dateType == 1){
+    $('#DATA_DAY').show();
+    $('#DATA_YEAR').hide();
+    $('#DATA_YEAR_1').hide();
+    $('#DATA_MONTH').hide();
+    $('#DATA_MONTH_1').hide();//DATA_RANDOM
+    $('#DATA_RANDOM').hide();
+  }else if(dateType == 2){
+    $('#DATA_DAY').hide();
+    $('#DATA_YEAR').show();
+    $('#DATA_YEAR_1').show();
+    $('#DATA_MONTH').show();
+    $('#DATA_MONTH_1').show();
+    $('#DATA_RANDOM').hide();
+  }else if(dateType == 3){
+    $('#DATA_DAY').show();
+    $('#DATA_YEAR').hide();
+    $('#DATA_YEAR_1').hide();
+    $('#DATA_MONTH').hide();
+    $('#DATA_MONTH_1').hide();
+    $('#DATA_RANDOM').show();
+  }
+}
+var getTar = new Array();
+function setTarget(number){
+  getTar[0] = number;
+}
+
+function inif(){//
+ $("#9-1").html("户号：");
+ $("#9-2").html("<input type=\"text\" name=\"czmc\" id=\"czmc\" value=\"请输入户号或户名\" onFocus=\"OnEnter(this)\" onBlur=\"OnExit(this)\"  style=\"color:#C5C5C5\"/>");
+ $("#1-3").html("户号");
+ $("#1-4").html("户名");
+}
+ 
+function OnEnter( field ) { 
+  if( field.value == field.defaultValue ) {
+     field.value = ""; 
+     //field.value = "钱江3变";
+     document.all.czmc.style.color="#000000";
+  } 
+}
+
+function OnExit( field ) { 
+  if( field.value == "" ) { 
+    field.value = field.defaultValue;
+    document.all.czmc.style.color="#C5C5C5"; 
+  } 
+}
+
+function toquery(){
+  var getStr = getTar.join("");
+  if(getStr == 1){
+     $("#9-1").html("户号：");
+     $("#9-2").html("<input type=\"text\" name=\"czmc\" id=\"czmc\" value=\"请输入户号或户名\" onFocus=\"OnEnter(this)\" onBlur=\"OnExit(this)\"  style=\"color:#C5C5C5\"/>");
+     $("#1-3").html("户号");
+     $("#1-4").html("户名");
+  }else{
+     $("#9-1").html("配变：");
+     $("#9-2").html("<input type=\"text\" name=\"czmc\" id=\"czmc\" value=\"请输入台区号或台区名\" onFocus=\"OnEnter(this)\" onBlur=\"OnExit(this)\"  style=\"color:#C5C5C5\"/>");
+     $("#1-3").html("台区名");
+     $("#1-4").html("台区号");
+  }
+ $.json2html("dataList","../../jsp/statis/coulometryContrast_Data_line/coulometryContrast_Data_1.xml","cb-item");   
+  getStr.length = 0;
+}
+
+</script>
+</head>
+<body onload="inif();">
+<div id="tool">
+  <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="6" > 
+        <input type="radio" name="objectType" value="1"  checked="checked" class="dom" onclick = "setTarget(1);"/>专变用户
+        <input type="radio" name="objectType" value="2" class="dom" onclick = "setTarget(2);"/>配变/台区
+        <input type="radio" name="objectType" value="3" class="dom" onclick = "setTarget(3);"/>低压集抄
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td width="70" class="label">供电单位：</td>
+      <td width="140" class="dom" align="left">
+         <select id="orgNo" name="orgNo">
+          <option value="44">广东省电力公司</option>
+          <option value="4401"> -- 广州市电力公司</option>
+          <option value="4402"> -- 韶关市电力公司</option>
+          <option value="4403"> -- 深圳市电力公司</option>
+          <option value="4404"> -- 珠海市电力公司</option>
+          <option value="4405"> -- 汕头市电力公司</option>
+          <option value="4406"> -- 佛山市电力公司</option>
+          <option value="4407"> -- 江门市电力公司</option>
+          <option value="4408"> -- 湛江市电力公司</option>
+          <option value="440806"> -- -- 遂溪供电局</option>
+          <option value="440807"> -- -- 徐闻供电局</option>
+          <option value="440808"> -- -- 吴川供电局</option>
+          <option value="440809"> -- -- 廉江供电局</option>
+          <option value="440810"> -- -- 雷州供电局</option>
+          <option value="4409"> -- 茂名市电力公司</option>
+          <option value="4412"> -- 肇庆市电力公司</option>
+          <option value="4413"> -- 惠州市电力公司</option>
+          <option value="4414"> -- 梅州市电力公司</option>
+          <option value="4415"> -- 汕尾市电力公司</option>
+          <option value="4416"> -- 河源市电力公司</option>
+          <option value="4417"> -- 阳江市电力公司</option>
+          <option value="4418"> -- 清远市电力公司</option>
+          <option value="4419"> -- 东莞市电力公司</option>
+          <option value="4420"> -- 中山市电力公司</option>
+          <option value="4421"> -- 潮州市电力公司</option>
+          <option value="4422"> -- 揭阳市电力公司</option>
+          <option value="4423"> -- 云浮市电力公司</option>
+        </select>
+        <script type="text/javascript">$("#orgNo").val("44");</script>
+      </td>
+      <td width="70" class="label" id="9-1"></td>
+      <td width="120" class="dom" id="9-2"></td>
+      <td width="70" class="label">对比时间：</td>
+      <td width="120" class="dom" align="left">
+        <select name="dateType" id="dateType">
+          <option value="1" selected="selected">日电量</option>
+          <option value="2">月电量</option>
+          <option value="3">任意时段</option>
+        </select>
+      </td>
+      <td class="dom_date" width="140">&nbsp;
+        <span id="DATA_DAY" style="display: block;">
+          <input type="text" name="date" size="5" value="2009-6-23" id="date">
+        </span>
+        <span id="DATA_YEAR" style="display: none;">
+          <select name="DATA_YEAR" id="DATA_YEAR" style="width=55">
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>                    
+          </select>年
+
+        </span>
+        <span id="DATA_MONTH" style="display: none;">
+          <script type="text/javascript">
+           document.write("<select name=\"DATA_YEAR\" id=\"DATA_YEAR\" style=\"width=40\">")
+           for(var i=1;i<13;i++){
+             if(i<10){
+               document.write("<option value=\""+i+"\">0"+i+"</option>")
+             }else{
+               document.write("<option value=\""+i+"\">"+i+"</option>")
+             }                    
+           }
+           document.write("</select>月")
+         </script>
+        </span>
+      </td>
+      <td class="dom_date">
+        <span id="DATA_RANDOM" style="display:block;">
+          <input type="text" name="date" size="5" value="2009-6-23" id="date">
+        </span>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  <div class="clear"></div>
+</div>
+ <div class="content">
+    <div id="cont_1">
+      <div class="target4">
+        <ul>
+          <li class="target_on"><a href="#" onclick="return false;">电量分析图表</a></li>
+          <li class="clear"></li>
+        </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+    </div>
+      <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 130));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+         <thead>
+           <tr>
+            <th colspan="6">基本信息</th>
+            <th colspan="5">终端电量(kWh)</th>
+            <th colspan="5">电表电量(kWh)</th>
+            <th colspan="2">电量对比</th>
+          </tr>
+          <tr>
+            <th>序号</th>
+            <th>供电单位</th>
+            <th id="1-3"></th>
+            <th id="1-4"></th>
+            <th>终端地址</th>
+            <th>表号</th>            
+            <th>电量</th>
+            <th>起码</th>
+            <th>止码</th>
+            <th>CT倍率</th>
+            <th>PT倍率</th>            
+            <th>电量</th>
+            <th>起码</th>
+            <th>止码</th>
+            <th>CT倍率</th>
+            <th>PT倍率</th>            
+            <th>对比值</th>
+            <th>对比率(%)</th>
+          </tr>
+        </thead>
+        <tbody id="dataList">
+        </tbody>
+      </table>
+    </div>
+     <div class="pageContainer">
+       <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+     </div>
+  </div>
+</div>
+</body>
+</html>

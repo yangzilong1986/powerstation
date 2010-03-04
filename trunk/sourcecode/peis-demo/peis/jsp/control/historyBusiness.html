@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>历史记录查询</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/control/control.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+})
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/control/xml/historyBusiness_Data_1.xml","cb-item");
+}
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1">
+    <input type="button" name="query" id="query" value="查 询" class="input1" onclick="query();" />
+    <input type="button" name="adquery" id="adquery" value="高级查询" class="input2" />
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="70" class="label">供电单位：</td>
+      <td width="120" class="dom" id="orgTar"></td>
+      <td width="70" class="label">报停类型：</td>
+      <td width="120" class="dom">
+        <select name="bs_type" id="bs_type">
+          <option value="1">暂停</option>
+          <option value="2">暂停恢复</option>
+          <option value="3">减容</option>
+          <option value="4">减容恢复</option>
+        </select>
+        <script type="text/javascript">document.all.bs_type.value="1";</script>
+      </td>
+      <td width="70" class="label">开始时间：</td>
+      <td width="120" class="dom_date"><input type="text" name="start_run_time" value="2008-9-22" /></td>
+      <td width="70" class="label">结束时间：</td>
+      <td width="120" class="dom_date"><input type="text" name="end_run_time" value="2009-9-22" /></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target3">
+      <ul>
+        <li class="target_on">
+          <a href="#" onclick="return false;">历史记录信息</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+    </div>
+    <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-92));">
+      <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+         <tr>
+          <th width="7%">工单编号</th>
+          <th width="7%">用户编号</th>
+          <th width="160">对象名称</th>
+          <th width="10%">供电单位</th>
+          <th width="8%">报停类型</th>
+          <th width="120">报停开始时间</th>
+          <th width="120">报停结束时间</th>
+          <th width="120">计划执行时间</th>
+          <th width="8%">投入状态</th>
+          <th width="120">计划投入时间</th>
+          <th width="10%">投入人</th>
+         </tr>
+        </thead>
+        <tbody id="DATA_TBODY" align="center">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">16</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

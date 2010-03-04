@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>前置机</td2>
+        <td3>湛江前置机1</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_start.gif" width="30" height="12" align="top" title="正常"&gt;</td4>
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;查看明细</td5>    
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>前置机</td2>
+        <td3>湛江前置机2</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_stop.gif" width="30" height="12" title="停止"&gt;</td4>
+        <td5></td5>   
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>应用服务器</td2>
+        <td3>湛江应用服务器1</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_start.gif" width="30" height="12" title="正常"&gt;</td4>
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;查看明细</td5>   
+    </data>
+        <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>应用服务器</td2>
+        <td3>湛江应用服务器2</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_start.gif" width="30" height="12" title="正常"&gt;</td4>
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;查看明细</td5>   
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>数据库</td2>
+        <td3>湛江数据库1</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_warn.gif" width="30" height="12" title="告警"&gt;</td4>
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;查看明细</td5>   
+    </data>
+        <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>数据库</td2>
+        <td3>湛江数据库2</td3>
+        <td4>&lt;input name="img" type="image" src="../../img/sys_start.gif" width="30" height="12" title="正常"&gt;</td4>
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;查看明细</td5>   
+    </data>          
+</datas>

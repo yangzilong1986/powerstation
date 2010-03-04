@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data>
+        <td1>广东省电力公司</td1>
+        <td2>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td2>
+        <td3>900</td3>
+        <td4>100</td4>
+        <td5>90%</td5>       
+        <td6>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td6>     
+    </data>  
+    <data>
+         <td1>湛江供电局</td1>
+        <td2>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td2>
+        <td3>900</td3>
+        <td4>100</td4>
+        <td5>90%</td5>       
+        <td6>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td6>         
+    </data>
+      <data>
+         <td1>潮州供电局</td1>
+        <td2>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td2>
+        <td3>900</td3>
+        <td4>100</td4>
+        <td5>90%</td5>       
+        <td6>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td6>         
+    </data>
+    
+  
+</datas>

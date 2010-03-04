@@ -1,0 +1,545 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>自定义报表</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+$(document).ready(function(){
+    var ty = $.url.param("type");
+    var sel = $.url.param("select");
+    var val = $.url.param("values");
+        //alert(ty+"|" +sel+"|"+val);
+    	$.json2html("dtext","../../../jsp/synquery/pop/info_query_iframe_"+ty+"_"+sel+"_"+val+".xml","");
+    	$("#query").click(function(){
+    		$.json2html("dtext","../../../jsp/synquery/pop/info_query_iframe_"+ty+"_"+sel+"_"+val+".xml","");
+    	});
+        $("#thead_"+ty+"_"+sel+"_"+val).show();
+
+   if(ty == 3)
+	   $("#thead_3_1_1").show();
+
+   if(ty == 4)
+	   $("#thead_4_1_1").show();
+});
+</script>
+</head>
+<body>
+<div class="content">
+<div id="cont_1">
+<div class="tableContainer"
+    style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   70 ) );">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+        <tr id="thead_1_1_1" style="display: none;">
+            <th width="50">序号</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>行业</th>
+            <th>电压等级</th>
+            <th>用电类别</th>
+            <th>合同容量</th>
+            <th>功率因数</th>
+            <th>联系电话</th>
+        </tr>
+        <tr id="thead_1_1_2" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>供电单位</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>安装日期
+            <th>
+        </tr>
+        <tr id="thead_1_1_3" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>供电单位</th>
+			<th>供电线路</th>
+			<th>CT</th>
+			<th>PT</th>
+			<th>表规约</th>
+			<th>表地址</th>
+			<th>设备厂家</th>
+			<th>波特率</th>
+			<th>翻转位数</th>
+        </tr>
+        <tr id="thead_1_1_4" style="display: none;">
+            <th width="50">序号</th>
+            <th>线路编号</th>
+            <th>线路名称</th>
+            <th>供电单位</th>
+            <th>所属变电站</th>
+            <th>电压等级</th>
+            <th>线损率阈值</th>
+        </tr>
+        <tr id="thead_1_2_5" style="display: none;">
+            <th width="50">序号</th>
+            <th>台区号</th>
+            <th>台区名</th>
+            <th>供电单位</th>
+            <th>容量</th>
+            <th>线损阈值</th>
+            <th>联系人</th>
+            <th>联系电话</th>
+        </tr>
+        <tr id="thead_1_2_6" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>供电单位</th>
+            <th>台区编号</th>
+            <th>台区名</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>安装日期
+            <th>
+        </tr>
+        <tr id="thead_1_2_7" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+            <th>台区编号</th>
+            <th>台区名称</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>表规约</th>
+            <th>表地址</th>
+            <th>设备厂家</th>
+            <th>波特率</th>
+            <th>翻转位数</th>
+        </tr>
+        <tr id="thead_1_2_8" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>管理单位</th>
+            <th>所属厂站</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>安装日期
+            <th>
+        </tr>
+        <tr id="thead_1_3_9" style="display: none;">
+            <th width="50">序号</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>表号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>抄表区</th>
+            <th>抄表段</th>
+            <th>抄表日</th>
+            <th>地址</th>
+        </tr>
+        <tr id="thead_1_3_10" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>供电单位</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>安装日期
+            <th>
+            <th>台区编号</th>
+            <th>台区名称</th>
+        </tr>
+        <tr id="thead_1_4_11" style="display: none;">
+            <th width="50">序号</th>
+            <th>变电站编号</th>
+            <th>变电站名称</th>
+            <th>管理单位</th>
+            <th>电压等级</th>
+            <th>联系电话</th>
+            <th>主变台数</th>
+        </tr>
+        <tr id="thead_1_4_12" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+            <th>表地址</th>
+            <th>表规约</th>
+            <th>电表状态</th>
+            <th>计量方式</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>设备厂家</th>
+            <th>波特率</th>
+            <th>翻转位数</th>
+            <th>是否专线</th>
+        </tr>
+        <tr id="thead_1_4_13" style="display: none;">
+            <th width="50">序号</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>管理单位</th>
+            <th>所属厂站</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>安装日期
+            <th>
+        </tr>
+        <tr id="thead_1_4_14" style="display: none;">
+            <th>资产编号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+            <th>表地址</th>
+            <th>电表用途</th>
+            <th>表状态</th>
+            <th>表规约</th>
+            <th>计量方式</th>
+            <th>CT变比</th>
+            <th>PT变比</th>
+        </tr>
+        <tr id="thead_1_4_15" style="display: none;">
+            <th>变压器编号</th>
+            <th>变压器名称</th>
+            <th>所属厂站</th>
+            <th>管理单位</th>
+            <th>低压侧电压等级</th>
+            <th>变压器类型</th>
+            <th>变压器型号</th>
+            <th>圈数</th>
+            <th>备注</th>
+        </tr>
+        <tr id="thead_1_4_16" style="display: none;">
+            <th>资产编号</th>
+            <th>终端逻辑地址</th>
+            <th>终端类型</th>
+            <th>相线</th>
+            <th>设备规约</th>
+            <th>通讯方式</th>
+            <th>设备厂家</th>
+            <th>型号</th>
+            <th>所属厂站</th>
+        </tr>
+        <tr id="thead_1_4_17" style="display: none;">
+            <th>母线编号</th>
+            <th>母线名称</th>
+            <th>所属厂站</th>
+            <th>管理单位</th>
+            <th>电压等级</th>
+            <th>不平衡率阈值</th>
+            <th>母线类型</th>
+        </tr>
+        <tr id="thead_1_4_18" style="display: none;">
+            <th>联络线代码</th>
+            <th>线路名称</th>
+            <th>电压等级</th>
+            <th>线损率阀值</th>
+            <th>供电单位</th>
+            <th>关联厂站1</th>
+            <th>关联厂站2</th>
+            <th>关联厂站3</th>
+            <th>线路状态</th>
+            <th>备注</th>
+        </tr>
+        <tr id="thead_2_1_1" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_1_2" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+            <th>反向有功总</th>
+        </tr>
+        <tr id="thead_2_1_3" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>本月正向有功峰</th>
+            <th>正向有功峰电量</th>
+            <th>上月正向有功平</th>
+            <th>本月正向有功平</th>
+            <th>正向有功平电量</th>
+        </tr>
+        <tr id="thead_2_1_4" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_2_1" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_2_2" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+            <th>反向有功总</th>
+        </tr>
+        <tr id="thead_2_2_3" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>本月正向有功峰</th>
+            <th>正向有功峰电量</th>
+            <th>上月正向有功平</th>
+            <th>本月正向有功平</th>
+            <th>正向有功平电量</th>
+        </tr>
+        <tr id="thead_2_2_4" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_3_1" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_3_2" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+            <th>反向有功总</th>
+        </tr>
+        <tr id="thead_2_3_3" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>本月正向有功峰</th>
+            <th>正向有功峰电量</th>
+            <th>上月正向有功平</th>
+            <th>本月正向有功平</th>
+            <th>正向有功平电量</th>
+        </tr>
+        <tr id="thead_2_3_4" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_4_1" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_4_2" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+            <th>反向有功总</th>
+        </tr>
+        <tr id="thead_2_4_3" style="display: none;">
+            <th>户名</th>
+            <th>户号</th>
+            <th>本月正向有功峰</th>
+            <th>正向有功峰电量</th>
+            <th>上月正向有功平</th>
+            <th>本月正向有功平</th>
+            <th>正向有功平电量</th>
+        </tr>
+        <tr id="thead_2_4_4" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_2_4_4" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>计量点名称</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+        </tr>
+        <tr id="thead_3_1_1" style="display: none;">
+            <th>计量点名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>有功功率</th>
+            <th>无功功率</th>
+            <th>总功率因数</th>
+            <th>A相有功功率</th>
+            <th>B相有功功率</th>
+            <th>C相有功功率</th>
+        </tr>
+        <tr id="thead_4_1_1" style="display: none;">
+            <th>户号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>行业</th>
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+        </tr>
+    </thead>
+    <tbody id="dtext">
+</table>
+</div>
+<div class="pageContainer"><a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16"
+    title="导出Excel" /></a> ┆ 共<span class="orange">20</span>条 显示行数：<select id="pageRows" name="pageRows" size="1">
+    <option value="10">10</option>
+    <option value="20" selected="selected">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="200">200</option>
+    <option value="500">500</option>
+</select> 第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：<input type="text" id="page" name="page" value="1" />
+<img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a
+    href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img
+    src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a> <a href="#"><img
+    src="../../../img/page_next.gif" class="pointer" title="下一页" /></a> <a href="#"><img
+    src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+</div>
+</div>
+</body>

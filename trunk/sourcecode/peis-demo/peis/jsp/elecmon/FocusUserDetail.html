@@ -1,0 +1,193 @@
+<html>
+<head>
+<title>用户详细信息</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript">
+function init() {
+    var sysObjects = "1,2,3,4";
+    if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length == "undefined") {
+        if(sysObjects.indexOf(document.all.sysObject.value) >= 0) {
+            document.all.sysObject.checked = "true";
+        }
+    }
+    else if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length != "undefined") {
+        for(var i = 0; i < document.all.sysObject.length; i++) {
+            if(sysObjects.indexOf(document.all.sysObject[i].value) >= 0) {
+                document.all.sysObject[i].checked = "true";
+            }
+        }
+    }
+    
+}
+
+function save() {
+	parent.GB_hide(); 
+}
+</script>
+</head>
+
+<body onload="init()" style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>基本资料</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="label">供电单位：</td>
+          <td width="25%" class="dom">
+            <input type="text" id="exCode" name="orgNo" value="广东省电力公司" disabled="disabled" />
+          </td>
+          <td width="15%" class="label">户  名：</td>
+          <td width="25%" class="dom"><input type="text" id="exName" name="exName" value="湛江供电局" disabled="disabled" /></td>
+          <td width="15%" class="label">户  号：</td>
+          <td width="25%" class="dom"><input type="text" id="exName" name="exName" value="湛江供电局" disabled="disabled" /></td>
+        </tr>
+        <tr>
+          <td class="label" width="15%">抄表区号：</td>
+          <td class="dom" width="25%"> <input type="text" id="cbqh" name="cbqh" value="8D1123" disabled="disabled" /></td>
+          <td class="label" width="15%">抄表日：</td>
+          <td width="25%" class="dom"><input type="text" id="exName" name="exName" value="5" disabled="disabled" /></td>
+           <td class="label" width="15%">地址：</td>
+          <td width="25%" class="dom"><input type="text" id="address" name="address" value="霞山区海宁路" disabled="disabled" /></td>
+        </tr>
+        <tr>
+          <td class="label" width="15%">联系人：</td>
+          <td class="dom" width="25%"><input type="text" id="Contact" name="Contact" value="张玲" disabled="disabled" /></td>
+          <td class="label" width="15%">联系电话：</td>
+          <td width="25%" class="dom"><input type="text" id="phone" name="phone" value="5280408" disabled="disabled" /></td>
+           <td class="label" width="15%">备注：</td>
+          <td width="25%" class="dom"><input type="text" id="Notes" name="Notes" value="5" disabled="disabled" /></td>
+        </tr>
+     </table>
+     <div class="tab"><em>电表信息</em></div>
+      <div class="tab_con">
+        <div class="main">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td colspan="2">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="center">序号</td>
+                    <td align="center">表号</td>
+                    <td align="center">测量点序号</td>
+                    <td align="center">CT</td>
+                    <td align="center">PT</td>
+                    <td align="center">表类型</td>
+                    <td align="center">生产厂家</td>
+                    <td align="center">表地址</td>
+                    <td align="center">关联终端</td>
+                    <td align="center">采集器地址</td>
+                    <td align="center">表规约</td>
+                    <td align="center">出厂编号</td>
+                  </tr>
+                  <tr>
+                    <td align="center">1</td>
+                    <td align="center">9995014560</td>
+                    <td align="center">1</td>
+                    <td align="center">1</td>
+                    <td align="center">1</td>
+                    <td align="center">单项电子表</td>
+                    <td align="center">杭州百富电子</td>
+                    <td align="center">Y5O04U00050049371</td>
+                    <td align="center">51104934</td>
+                    <td align="center">023</td>
+                    <td align="center">645规约</td>
+                    <td align="center">060467010627</td>
+                  </tr>
+                  <tr>
+                    <td align="center">2</td>
+                    <td align="center">9995014565</td>
+                    <td align="center">1</td>
+                    <td align="center">1</td>
+                    <td align="center">1</td>
+                    <td align="center">简易多功能表</td>
+                    <td align="center">杭州百富电子</td>
+                    <td align="center">N6Y06U00124441301</td>
+                    <td align="center">51104934</td>
+                    <td align="center">011</td>
+                    <td align="center">645规约</td>
+                    <td align="center">1100270</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+     <div class="tab"><em>终端信息</em></div>
+      <div class="tab_con">
+        <div class="main">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="70%">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="center">序号</td>
+                    <td align="center">资产号</td>
+                    <td align="center">终端地址</td>
+                    <td align="center">出厂编号</td>
+                    <td align="center">生产厂家</td>
+                    <td align="center">当前状态</td>
+                    <td align="center">通讯方式</td>
+                    <td align="center">电话号码</td>
+                    <td align="center">设备规约</td>
+                    <td align="center">型号</td>
+                    <td align="center">安装日期</td>
+                  </tr>
+                  <tr>
+                    <td align="center">1</td>
+                    <td align="center">99914928</td>
+                    <td align="center">51104928</td>
+                    <td align="center">2007-11-23</td>
+                    <td align="center">杭州百富电子</td>
+                    <td align="center">运行</td>
+                    <td align="center">GPRS</td>
+                    <td align="center">13116747844</td>
+                    <td align="center">国网规约</td>
+                    <td align="center">01-EF</td>
+                    <td align="center">2009-09-21</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+       <div class="tab"><em>设备运行信息</em></div>
+      <div class="tab_con">
+        <div class="main">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="70%">
+                <table border="1" cellpadding="0" cellspacing="0" width="100%" align="center">
+                  <tr>
+                    <td align="center">终端地址</td>
+                    <td align="center">运行状态</td>
+                    <td align="center">运行描述</td>
+                    <td align="center">持续天数</td>
+                    <td align="center">最近通讯时间</td>
+                    <td align="center">昨日在线率(%)</td>
+                    <td align="center">昨日总流量(KB)</td>
+                  </tr>
+                  <tr>
+                    <td align="center">1</td>
+                    <td align="center">51104928</td>
+                    <td align="center">在线</td>
+                    <td align="center">正常</td>
+                    <td align="center">2009-09-25 12:23:04</td>
+                    <td align="center">100</td>
+                    <td align="center">3</td>
+                  </tr>
+                </table>
+              </td>
+              
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);clickShowChart(0)' style='cursor:pointer;'" >        
+        <td1>遂溪供电局</td1>
+        <td2>2133</td2>
+        <td3>巫山水电站</td3>
+        <td4>34234</td4>
+        <td5>234234</td5> 
+        <td6>-12.89</td6>
+        <td7>&lt;a href="javascript:showPage('1')"&gt;查看&lt;/a&gt;</td7>                
+    </data> 
+    <data extend="onclick='selectSingleRow(this);clickShowChart(1)' style='cursor:pointer;'" >        
+        <td1>徐闻供电局</td1>
+        <td2>2323</td2>
+        <td3>水沟水电站</td3>
+        <td4>34234</td4>
+        <td5>234234</td5> 
+        <td6>-12.89</td6>
+        <td7>&lt;a href="javascript:showPage('1')"&gt;查看&lt;/a&gt;</td7>                 
+    </data> 
+</datas>

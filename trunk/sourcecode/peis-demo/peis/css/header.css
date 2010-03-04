@@ -1,0 +1,138 @@
+﻿@CHARSET "UTF-8";
+body {
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+    overflow: hidden;
+}
+table, td, div, h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    word-break: break-all; word-wrap: break-word;
+}
+    
+a:link { color: #333; text-decoration: none; }
+a:visited { color: #333; text-decoration: none; }
+a:active { color: #333; text-decoration: none; }
+a:hover { color: #333; text-decoration: underline; }
+
+/* share code */
+em { font-style: normal; }
+ul { margin: 0; padding: 0; }
+ul, li { list-style-type: none; }
+hr { height: 1px; color: #ccc; border: 0; border-top: #aaa 1px dotted; margin: 8px 0 8px 0; }
+img { border: 0; }
+form { margin: 0; padding: 0; }
+.botline { background: url(../img/botline.gif) repeat-x; height: 1px; }
+.ls { text-decoration: line-through; }
+
+/* font style */
+.font10 { font-size: 10px; }
+.font14 { font-size: 14px; }
+.font16 { font-size: 16px; }
+.font18 { font-size: 18px; }
+.font24 { font-size: 24px; }
+.font30 { font-size: 30px; }
+.b { font-weight: bold; }
+.i { font-style: italic; }
+.u { text-decoration: underline; }
+.delline { text-decoration: line-through; }
+
+/* color */
+.white { color: #fff; }
+.white a:link { color: #fff; text-decoration: none; }
+.white a:visited { color: #fff; text-decoration: none; }
+.white a:active { color: #fff; text-decoration: none; }
+.white a:hover { color: #fff; text-decoration: underline; }
+
+.orange { color: #ff7200; }
+.red { color: #ff0000; }
+
+/* padding margin text-align line-height */
+.tc { text-align: center; }
+.tr { text-align: right; }
+.tl { text-align: left; }
+.fl { float: left; }
+.fr { float: right; }
+
+.pad5 { padding: 5px; }
+.pad10 { padding: 10px; }
+.pad15 { padding: 15px; }
+.pad20 { padding: 20px; }
+.pad25 { padding: 25px; }
+.pad30 { padding: 30px; }
+.pl25 { padding-left: 25px; }
+.pt5 { padding-top: 5px; }
+
+.lh15 { line-height: 15px; }
+.lh16 { line-height: 16px; }
+.lh17 { line-height: 17px; }
+.lh18 { line-height: 18px; }
+.lh19 { line-height: 19px; }
+.lh20 { line-height: 20px; }
+.lh25 { line-height: 25px; }
+.lh30 { line-height: 30px; }
+
+.mgt5 { margin-top: 5px; }
+.mgt10 { margin-top: 10px; }
+.mgt15 { margin-top: 15px; }
+.mgt20 { margin-top: 20px; }
+.mgt25 { margin-top: 25px; }
+.mgt30 { margin-top: 30px; }
+.mgt50 { margin-top: 50px; }
+.mgl5 { margin-left: 5px; }
+.mgr10 { margin-right: 10px; }
+
+/* css hack */
+.cb { clear: both; }
+.autoh { height: 100%; overflow: auto; }
+.disinline { display: inline; }
+
+/* cut character string */
+.cut_char { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/*  */
+#header { min-width: 1004px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1004?"1004px":""); }
+.bg_top { background: url(../img/bg_menu.gif) repeat-x; height: 64px; padding-right: 10px; }
+#logo { background: url(../img/bg_logo.gif) no-repeat; width: 281px; height: 64px; float: left; }
+
+/*菜单CSS开始*/
+#menu { float: left; }
+#menu dl { overflow: hidden; margin: 0; }
+#menu dt { height: 37px; overflow: hidden; }
+#menu dd { color: #b4ff00; margin: 2px 0 0 0; height: 26px; line-height: 26px; }
+#menu dd a { color: #b4ff00; text-decoration: none; }
+#menu dd a:active { color: #ffcc00; text-decoration: none; }
+#menu dd a:hover { color: #ffcc00; text-decoration: none; }
+#menu dd a.on { color: #ffcc00; text-decoration: none; }
+#menu dd a.on:active { color: #ffcc00; text-decoration: none; }
+#menu dd a.on:hover { color: #ffcc00; text-decoration: none; }
+#menu #Fod { float: left; overflow: hidden; }
+#menu #Fod div { float: left; width: 70px; color: #fff; font-size: 14px; font-weight: bold; cursor: pointer; margin-right: 7px; line-height: 37px; text-align: center; }
+html>body #menu #Fod div { float: left; width: 70px; color: #fff; font-size: 14px; font-weight: bold; cursor: pointer; margin-right: 7px; line-height: 37px; text-align: center; }
+#menu #Fod div.s { background: url(../img/menu_on.png) no-repeat center bottom; }
+* html #menu #Fod div.s { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="../../img/menu_on.png"); background: none; }
+#menu #Fod a { color: #fff; text-decoration: none; height: 37px; line-height: 37px; }
+#menu #Fod a:hover { color: #fff; background: url(../img/menu_on.png) no-repeat center bottom; height: 37px; line-height: 37px; cursor: pointer; }
+* html #menu #Fod a:hover { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="../../img/menu_on.png"); background: none; cursor: pointer; }
+#menu #Fod div.s a { color: #fff; text-decoration: none; }
+#menu #Fod div.s a:hover { color: #fff; text-decoration: none; }
+.menu_more { float: right; padding-top: 8px; text-align: right; }
+.dis { display: block; }
+.undis { display: none; }
+.menu { text-align: left; margin: 0; line-height: 26px; }
+.menu1 { text-align: left; margin: 0; line-height: 26px; }
+.menu2 { padding-left: 100px; line-height: 26px; }
+.menu3 { padding-left: 200px; line-height: 26px; }
+.menu4 { padding-left: 300px; line-height: 26px; }
+.menu5 { padding-left: 400px; line-height: 26px; }
+.menu6 { text-align: right; line-height: 26px; }
+.menu7 { text-align: right; line-height: 26px; }
+.menu8 { text-align: right; line-height: 26px; }
+.menu9 { text-align: right; line-height: 26px; }
+/*菜单CSS结束*/
+
+.nav { position: absolute; float: left; top: 65px; left: 0; background: url(../img/bg_menu1.gif) repeat-x; height: 26px; width: 100%; color: #fff; }
+.nav .left { position: relative; float: left; top: 0; left: 0; }
+.nav .right { position: relative; float: left; top: 0; left: 160px; }

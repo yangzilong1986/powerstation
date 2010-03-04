@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>电流缺相</td1>
+        <td2>4386</td2>
+       
+    </data>
+    
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>电压断相</td1>
+        <td2>11528</td2>
+    </data>
+    
+</datas>

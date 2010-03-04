@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+	<data extend="onclick='selectSingleRow(this);'" >
+		<td2>1247555001</td2>
+		<td3>喷涂有限公司</td3>
+		<td4>广州市电力公司</td4>
+		<td5>11028779</td5>
+		<td6>与主站无通讯</td6>
+		<td7>3</td7><!--
+		<td8>已登记</td8>
+		<td9>2009-8-31</td9>
+		<td10>admin</td10>  -->
+	</data>
+	<data extend="onclick='selectSingleRow(this);'">
+        <td2>2700065942</td2>
+        <td3>亚昌金属表面处理厂</td3>
+        <td4>深圳市电力公司</td4>
+        <td5>11032779</td5>
+        <td6>时钟错误</td6>
+        <td7>3</td7><!--
+        <td8>已登记</td8>
+        <td9>2009-8-31</td9>
+        <td10>base</td10>  -->
+	</data>
+	<data extend="onclick='selectSingleRow(this);'">
+        <td2>2700065942</td2>
+        <td3>天津天聚带厂</td3>
+        <td4>广州市电力公司</td4>
+        <td5>2028779</td5>
+        <td6>终端事件过多</td6>
+        <td7>3</td7><!--
+        <td8>处理</td8>
+        <td9>2009-8-31</td9>
+        <td10>advance</td10>  -->
+	</data>
+	<data extend="onclick='selectSingleRow(this);'">
+        <td2>2700065942</td2>
+        <td3>喷涂有限公司</td3>
+        <td4>汕尾市电力公司</td4>
+        <td5>5028779</td5>
+        <td6>有通讯无任务配置</td6>
+        <td7>3</td7><!--
+        <td8>未处理</td8>
+        <td9>2009-8-31</td9>
+        <td10>advance</td10>  -->
+	</data>
+</datas>

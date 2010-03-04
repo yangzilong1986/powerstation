@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>异常处理(查看异常处理记录)</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>  
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<script type="text/javascript">
+$(function(){
+//$.json2html("databody","../../jsp/elecmon/ecurExtremumQuery.xml",""); 
+$.handelCombox('lineNo','lineNo');
+});
+
+
+function viewDetail(){
+   top.showDialogBox("", "../../jsp/elecmon/ecurExtremumQueryDetail.html", 600, 800);
+  } 
+  
+$(document).ready(function(){
+   $("#query").click(function (){
+    var checkedValue = $("input[type='radio'][name='objectType'][checked]").attr("value");
+        //alert(checkedValue) ;
+    if(checkedValue == 1 ){
+        $("#bdzData").hide();
+        $("#zbdata").show();
+        $.json2html("databody","../../jsp/elecmon/elecTreatmentStatData.xml","");
+        var chart_obj = new FusionCharts("../../FusionCharts/Column3D.swf", "chart_id", "800", "275", "0", "0");
+        chart_obj.setDataURL("elecTreatmentStatChat.xml");
+        chart_obj.render("graphBlock");
+    }else if(checkedValue == 2){
+        $("#data").hide();
+        $("#bdzData").show();
+        $.json2html("bdzbody","../../jsp/elecmon/elecTreatmentStatBdzData.xml","");
+         var chart_obj = new FusionCharts("../../FusionCharts/Column3D.swf", "chart_id", "800", "275", "0", "0");
+        chart_obj.setDataURL("elecTreatmentStatBdzChat.xml");
+        chart_obj.render("graphBlock");
+    }else if(checkedValue == 3){
+        $("#data").hide();
+        $("#bdzData").show();
+        $.json2html("bdzbody","../../jsp/elecmon/elecTreatmentStatBdzData.xml","");
+         var chart_obj = new FusionCharts("../../FusionCharts/Column3D.swf", "chart_id", "800", "275", "0", "0");
+        chart_obj.setDataURL("elecTreatmentStatBdzChat.xml");
+        chart_obj.render("graphBlock");
+    }else if(checkedValue == 4){
+        $("#data").hide();
+        $("#bdzData").show();
+        $.json2html("bdzbody","../../jsp/elecmon/elecTreatmentStatBdzData.xml","");
+         var chart_obj = new FusionCharts("../../FusionCharts/Column3D.swf", "chart_id", "800", "275", "0", "0");
+        chart_obj.setDataURL("elecTreatmentStatBdzChat.xml");
+        chart_obj.render("graphBlock");
+    }
+   });
+});
+</script>
+
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+	  <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+           <td width="66" class="label" align="right">户名：</td>
+          <td width="120" class="dom">杭州市百富电子
+          </td>
+          <td width="66" class="label" align="right">户号：</td>
+          <td width="80px" class="dom">111
+          </td>  
+          <td width="66" class="label" align="right">设备地址：</td>
+          <td width="80px" class="dom">D87231
+          </td>  
+          </tr>
+          <tr>
+          <td class="label">异常名称：</td>
+          <td class="dom">
+          </td>
+          <td class="label">发生时间：</td>
+          <td class="dom_date">2009-9-18
+          </td> 
+          <td class="label">恢复时间：</td>
+          <td class="dom_date">2009-9-19
+          </td> 
+        </tr>
+        <tr>
+          <td class="label">当前状态：</td>
+          <td class="dom_date">已归档</td>
+          <td class="label">责任人：</td>
+          <td class="dom_date">张三</td>
+        </tr>
+	  </table>
+    </div>
+	<div class="content">
+      <div id="tableContainer" class="tableContainer" style="height: expression((( document . documentElement . clientHeight || document . body . clientHeight) -   198 ) );">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" id="zbdata">
+          <thead><tr>
+            <th width="2%">序号</th>
+            <th width="4%">操作</th>    
+            <th width="4%">操作人</th>
+            <th width="4%">操作时间</th>
+            <th width="3%">意见</th>
+      	  </tr></thead>
+      	  <tbody id="databody">						
+          </tbody>
+        </table>          
+      </div>
+      <div class="pageContainer">
+        <input type="hidden" id="showType" name="showType" value="pag" />显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select> 　第1页 / 共7页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <a title="下一页" href='#'><font style="font-size: 14px; font-family: webdings">8</font></a> <a title="末页" href="#"><font style="font-size: 14px; font-family: webdings">:</font></a> 
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <td1>**联络线1</td1>
+    <td2>关口表</td2>
+    <td3>输入</td3>
+    <td4>反向</td4>
+  </data>
+  <data>
+    <td1>**联络线2</td1>
+    <td2>关口表</td2>
+    <td3>输入</td3>
+    <td4>反向</td4>
+  </data>
+  <data>
+    <td1>**联络线3</td1>
+    <td2>关口表</td2>
+    <td3>输入</td3>
+    <td4>反向</td4>
+  </data>
+  <data>
+    <td1>**联络线4</td1>
+    <td2>关口表</td2>
+    <td3>输入</td3>
+    <td4>反向</td4>
+  </data>
+</datas>

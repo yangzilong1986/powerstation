@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>广东省电力公司</td1>
+        <td2>A类</td2>
+        <td3>54</td3>
+        <td4>876</td4>
+        <td5>5</td5>
+        <td6>32</td6>
+        <td7>99.81%</td7>
+        <td8>98.97%</td8>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>湛江供电局</td1>
+        <td2>B类</td2>
+        <td3>69</td3>
+        <td4>976</td4>
+        <td5>13</td5>
+        <td6>32</td6>
+        <td7>95.81%</td7>
+        <td8>92.97%</td8>
+    </data>
+     <data js="onclick=selectSingleRow(this);" >
+        <td1>潮州供电局</td1>
+        <td2>C类</td2>
+        <td3>34</td3>
+        <td4>576</td4>
+        <td5>10</td5>
+        <td6>32</td6>
+        <td7>68.81%</td7>
+        <td8>98.97%</td8>
+    </data>
+     <data js="onclick=selectSingleRow(this);" >
+        <td1>揭阳供电局</td1>
+        <td2>D类</td2>
+        <td3>65</td3>
+        <td4>787</td4>
+        <td5>7</td5>
+        <td6>32</td6>
+        <td7>79.81%</td7>
+        <td8>98.97%</td8>
+    </data>
+    
+</datas>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>省电力公司</td2>
+        <td3>800</td3>
+        <td4>530</td4>
+        <td5>270</td5>
+        <td6>3000</td6>
+        <td7>4343</td7>
+        <td8>5435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>
+    <!-- 通讯方式 --> 
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img2' onclick='__myChangec(2);' style='cursor:pointer' src='../../img/tree2/minus1.gif'/&gt;</td1>
+        <td2>专变</td2>
+        <td3>&#160;</td3>
+        <td4>&#160;</td4>
+        <td5>&#160;</td5>
+        <td6>&#160;</td6>
+        <td7>&#160;</td7>
+        <td8>&#160;</td8>
+        <td9>&#160;</td9>
+        <td10>&#160;</td10>
+        <td11>&#160;</td11>
+        <td12>&#160;</td12>
+    </data>
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华隆</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华立</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>    
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img5' onclick='__myChangec(5);' style='cursor:pointer' src='../../img/tree2/minus1.gif'/&gt;</td1>
+        <td2>配变台区</td2>
+        <td3>&#160;</td3>
+        <td4>&#160;</td4>
+        <td5>&#160;</td5>
+        <td6>&#160;</td6>
+        <td7>&#160;</td7>
+        <td8>&#160;</td8>
+        <td9>&#160;</td9>
+        <td10>&#160;</td10>
+        <td11>&#160;</td11>
+        <td12>&#160;</td12>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华隆</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华立</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img8' onclick='__myChangec(8);' style='cursor:pointer' src='../../img/tree2/minus1.gif'/&gt;</td1>
+        <td2>低压居民</td2>
+        <td3>&#160;</td3>
+        <td4>&#160;</td4>
+        <td5>&#160;</td5>
+        <td6>&#160;</td6>
+        <td7>&#160;</td7>
+        <td8>&#160;</td8>
+        <td9>&#160;</td9>
+        <td10>&#160;</td10>
+        <td11>&#160;</td11>
+        <td12>&#160;</td12>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华隆</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华立</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img11' onclick='__myChangec(11);' style='cursor:pointer' src='../../img/tree2/minus1.gif'/&gt;</td1>
+        <td2>变电站</td2>
+        <td3>&#160;</td3>
+        <td4>&#160;</td4>
+        <td5>&#160;</td5>
+        <td6>&#160;</td6>
+        <td7>&#160;</td7>
+        <td8>&#160;</td8>
+        <td9>&#160;</td9>
+        <td10>&#160;</td10>
+        <td11>&#160;</td11>
+        <td12>&#160;</td12>
+    </data> 
+    <!-- 终端厂家 -->  
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华隆</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data>   
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&#160;</td1>
+        <td2>华立</td2>
+        <td3>300</td3>
+        <td4>230</td4>
+        <td5>170</td5>
+        <td6>1000</td6>
+        <td7>3343</td7>
+        <td8>1435</td8>
+        <td9>80</td9>
+        <td10>79</td10>
+        <td11>60</td11>
+        <td12>59</td12>
+    </data> 
+</datas>

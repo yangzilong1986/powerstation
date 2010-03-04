@@ -1,0 +1,416 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>功率下浮控</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/control/control.js"></script>
+<script type="text/javascript">
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/control/xml/debaseControl_Data_1.xml","cb-item");
+}
+   var objectUnChoose = '请先选择要操作的对象！';
+       var writing = '正在投入...';
+       var cancleing = '正在解除...';
+       var reading = '正在读取...';
+       var putSucc = '投入成功';
+       var putFail = '投入失败';
+       var cancleSucc = '解除成功';
+       var cancleFail = '解除失败';
+       var outTime = '等待超时';
+       var opeFail = '下发失败';
+ 
+//下浮控提交
+function debaseSubmit(obj) {
+    var chooseList = getChoose();
+    if (chooseList == "") {
+        alert(objectUnChoose);
+    } else {
+        document.getElementById("chooseValue").value = chooseList;
+        document.getElementById("method").value = obj;
+        var my_tips = document.getElementById("mytips");
+        my_tips.style.display = "";
+        my_tips.style.left = (screen.availWidth - 121) / 2;
+        my_tips.style.top = (screen.availHeight) / 4;
+    }
+}
+ 
+//权限验证
+function powerValidate() {
+    //var pas = document.getElementById("password").value;
+   // var method = document.getElementById("method").value;
+   // document.getElementById("password").value = "";
+    //document.getElementById("method").value = "";
+    //document.getElementById("mytips").style.display = "none";
+    //var str_url = contextPath + "/do/control/debaseAction.do";
+   // str_url = str_url + "?action=controlVali";
+   // str_url = str_url + "&password=" + pas + "&method=" + method;
+   // var callback = validateProcessAjaxResponse;
+   // executeXhr(callback, str_url);
+   document.getElementById('password').value='';document.getElementById('mytips').style.display='none';
+   alert("验证已通过，命令已下发");
+}
+ 
+//控制提交
+function debase(type) {
+    var actionUrl = contextPath + "/do/control/debaseAction.do?action=" + type;
+    document.forms[1].action = actionUrl;
+    document.forms[1].submit();
+}
+ 
+ 
+// 获得所有逻辑地址
+function getAllLogicAddrString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            sResult += "," + document.all.ItemID.value + "";
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                sResult += "," + document.all.ItemID[i].value + "";
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+    return sResult;
+}
+ 
+//设置Button状态
+function buttonDisable(obj) {
+    document.getElementById("query").disabled = obj;
+    document.getElementById("setParam").disabled = obj;
+    document.getElementById("putIn").disabled = obj;
+    document.getElementById("putOut").disabled = obj;
+    document.getElementById("start").disabled = obj;
+    document.getElementById("stop").disabled = obj;
+}
+ 
+ 
+function setDownParam() {
+   var url = "../../jsp/control/showParam.html";
+   top.showDialogBox("参数设置",url, 310, 500);
+}
+ 
+function queryByObject(logic_addrs) {
+   var url = contextPath+"/do/control/debaseAction.do?action=debaseQueryByAddr&logic_addrs="+logic_addrs;
+   window.location.href = url;
+}
+ 
+ 
+//小圈轮召启动后的应用ID
+var turnAppId1;
+var turnAppId2;
+ 
+//起动小圈轮召
+function startTurn(){
+    var info1 = '请先选择要操作的对象！';
+    var logic_addr = getChoose();
+    if(logic_addr != "") {
+        turnFlag = true;
+        var conRes = window.confirm("是否确定要启动小圈轮召!");
+        if(!conRes){
+            return;
+        }
+        //设置小圈轮召按钮不可用
+        document.getElementById("start").disabled = true;
+        logic_addr = logic_addr.substring(1);
+        var params = {"logic_addr": logic_addr
+                     };
+       // var url = contextPath + "/do/control/debaseAction.do?action=startTurnCycle&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+       // $.get(url, function(data) {
+         //   if(data == null) {
+                //设置小圈轮召按钮可用
+         //       document.getElementById("start").disabled = false;
+         //   }
+         //   var result = data.split(",");
+            //alert("result=" + result[0] + "," + result[1] + "," + result[2]);
+         //   if (result.length != 3) {
+                //alert("result.length != 3");
+                //设置小圈轮召按钮可用
+         //       document.getElementById("start").disabled = false;
+        //        return;
+         //   }
+          //  if ("success" == result[2]) {
+          //      turnAppId1 = result[0];
+          //     turnAppId2 = result[1];
+                //初始化信息
+            //    initAllText();
+            //    fetch(logic_addr);
+          //  }
+         //   else {
+                alert("小圈轮召启动失败!");
+                //设置小圈轮召按钮可用
+                document.getElementById("start").disabled = false;
+         //   }
+       // });
+   // }
+   // else {
+   //     alert(info1);
+    }
+}
+ 
+// 获得所有逻辑地址
+function getAllLogicAddrString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            sResult += "," + document.all.ItemID.value + "";
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                sResult += "," + document.all.ItemID[i].value + "";
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+    return sResult;
+}
+ 
+//设置负荷信息
+function setResultInfo(selectedItemList, rInfo) {
+    var vItem = selectedItemList.split(',');
+    for(var i = 0; i < vItem.length; i++) {
+        if(vItem[i].length > 0) {
+            document.getElementById(vItem[i] + "_before").innerHTML = rInfo;
+            document.getElementById(vItem[i] + "_now").innerHTML = rInfo;
+            document.getElementById(vItem[i] + "_time").innerHTML = rInfo;
+            document.getElementById(vItem[i] + "_down").innerHTML = rInfo;
+        }
+    }
+}
+ 
+//初始化所有当前读取的信息
+function initAllText(){
+    var allLogicAddr = getAllLogicAddrString();
+    setResultInfo(allLogicAddr, '');
+    document.getElementById("power_before").innerHTML = "0";
+    document.getElementById("power_now").innerHTML = "0";
+    document.getElementById("downPower").innerHTML = "0";
+}
+ 
+//停止小圈轮召
+function stopTurn(){
+    //设置小圈轮召标示为False, 停止刷新数据
+    turnFlag = false;
+    var logic_addr = getChoose();
+    if(logic_addr != "") {
+        logic_addr = logic_addr.substring(1);
+    }
+    
+    if (turnAppId1 == null || turnAppId1 == "" || turnAppId2 == null || turnAppId2 == "") {
+        alert("小圈轮召已经停止!");
+        return;
+    }
+    
+    var conRes = window.confirm("是否确定要停止小圈轮召!");
+    if(!conRes){
+        return;
+    }
+    //设置停止小圈轮召按钮不可用
+    document.getElementById("stop").disabled = true;
+    var params = {"turnAppId1": turnAppId1,
+                  "turnAppId2": turnAppId2,
+                  "logic_addr": logic_addr
+                 };
+    var url = contextPath + "/do/control/debaseAction.do?action=stopTurnCycle&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    $.get(url, function(data) {
+        turnAppId1 = null;
+        turnAppId2 = null;
+        //设置停止小圈轮召按钮可用
+        document.getElementById("stop").disabled = false;
+        //设置小圈轮召按钮可用
+        document.getElementById("start").disabled = false;
+    });
+}
+ 
+//推荐下浮变化处理
+function changeDown(){
+    var logic_addr = getChoose();
+    if(logic_addr == null || logic_addr == "") {
+        return;
+    }
+    if (logic_addr.indexOf(",") == 0){
+        logic_addr = logic_addr.substring(1);
+    }
+    var s_down = document.getElementById("s_down").value;
+    var params = {"s_down": s_down,
+                  "logic_addr": logic_addr
+                 };
+    var url = contextPath + "/do/control/debaseAction.do?action=changeDown&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    $.get(url, function(data) {
+        if (data != null) {
+            document.getElementById("down_power_value").innerHTML = data;
+        }
+    });
+}
+//打开负荷曲线
+function showLine(objectName,logic_addr) {
+    var params = {    
+                   "objectName":objectName,
+                   "logicAddr":logic_addr
+          };
+    var url="../../jsp/control/showLine.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    top.showDialogBox("负荷曲线",url, 575, 900);
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">功率下浮控</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton2">
+        <input type="button" name="query" id="query" value="查 询" class="input1" onclick="query()" />
+        <input type="button" name="adquery" id="adquery" value="高级查询" class="input2" />
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" id="setParam" value="下浮参数" class="input2" onclick="setDownParam()" />
+        <input type="button" id="putIn" value="投 入" class="input1" onclick="debaseSubmit('putIn')" />
+        <input type="button" id="putOut" value="解 除" class="input1" onclick="debaseSubmit('putOut')" />
+        <input type="button" id="start" value="小圈轮召" class="input2" onclick="startTurn()" />
+        <input type="button" id="stop" value="停止小圈轮召" class="input3" onclick="stopTurn()" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">限电方案：</td>
+          <td width="120" class="dom">
+            <select name="s_id" id="s_id">
+              <option value="0">---所有---</option>
+              <option value="241">应峰度夏C级2类</option>
+              <option value="261">D级别3类</option>
+            </select>
+          </td>
+          <td width="70" class="label">户　号：</td>
+          <td width="120" class="dom">
+            <input type="text" name="object_no" value="">
+          </td>
+          <td colspan="5"></td>
+        </tr>
+        <tr>
+          <td width="70" class="label">推荐下浮：</td>
+          <td width="120" class="dom">
+            <select name="s_down" id="s_down" onChange="changeDown()">
+             <option value="1">
+              10%
+             </option>
+             <option value="2">
+              20%
+             </option>
+             <option value="3">
+              30%
+             </option>
+             <option value="4">
+              40%
+             </option>
+             <option value="5">
+              50%
+             </option>
+             <option value="6">
+              60%
+             </option>
+             <option value="7">
+              70%
+             </option>
+             <option value="8">
+              80%
+             </option>
+            </select>
+          </td>
+         <td colspan="2" class="label">推荐百分比可限负荷：</td>
+         <td colspan="2" id="down_power_value" width="190">0kW</td>
+         <td colspan="3"></td>
+       </tr>
+     </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on">
+              <a href="#" onclick="setTarget(1); return false;">对象信息</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div id="tableContainer" class="tableContainer" style="height: expression((( document.documentElement.clientHeight||document.body.clientHeight)-185));">
+          <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+             <tr>
+              <th width="2%"><input type="checkbox" id="chooseAll" onclick="doClickAll()" /></th>
+              <th width="4%">序号</th>
+              <th width="9%">户号</th>
+              <th width="15%">户名</th>
+              <th width="10%">终端地址</th>
+              <th width="8%">终端类型</th>
+              <th width="7%">电源属性</th>
+              <th width="7%">保安容量</th>
+              <th width="7%">限前负荷</th>
+              <th width="7%">当前负荷</th>
+              <th width="8%">当前负荷时间</th>
+              <th width="7%">限下负荷</th>
+              <th width="7%">负荷曲线</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY" align="center">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">16</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+        </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</body>
+ <form name="debaseControlForm" method="post" action="/peis/do/control/debaseAction.do" style="display:none" target="control">
+        <input type="text" id="chooseValue" name="chooseValue"/>
+        <input type="text" id="method" name="method"/>
+  </form>
+  <iframe name="control" src="/peis/jsp/control/temp.jsp" style="display: none" ></iframe>
+  <div id=mytips style="position:absolute;background-color:#D0EEE5;width:240px;height:100px;display:none;">
+       <div id="main" style="border-top: 1px #5d90d7 solid;">
+           <div>
+            <div id="tool">
+               <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td class="label">提示：</td>
+                <td>权限验证</td>
+              </tr>
+              <tr>
+                <td width="66" class="label">密码：</td>
+                <td width="120" class="dom"><input type="password" id="password"/></td>
+              </tr>
+            </table>
+            <div class="t_botton">
+              <div class="t_center" align="center">
+                  <input type="button" value=" 确 定 " onclick="powerValidate()" class="input"/>
+                  <input type="button" value=" 取 消 " class="input" onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';"/>
+              </div>
+            </div>
+           </div>
+        </div>
+      </div>
+  </div>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>A相电流</td1>
+        <td2>1.1</td2>
+        <td3>A</td3>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>B相电流</td1>
+        <td2>0 </td2>
+        <td3>A</td3>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>B相电流</td1>
+        <td2>1.14 </td2>
+        <td3>A</td3>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>测量点序号</td1>
+        <td2>1</td2>
+        <td3></td3>
+    </data>
+</datas>

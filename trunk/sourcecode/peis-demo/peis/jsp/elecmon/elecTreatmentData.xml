@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>广东省电力公司</td1>
+        <td2>1201857028</td2>
+        <td3>天津市振霖五金制品厂</td3>
+        <td4>10kV钢厂线F18</td4>
+        <td5>8D230054</td5>
+        <td6>电压缺相</td6>
+        <td7>2009-9-20</td7>
+        <td8>2009-9-20</td8>
+        <td9>待处理</td9>
+        <td10>张三</td10>
+        <td11>&lt;a href="javascript:viewPgDetail()"&gt;派工/处理/查看处理记录&lt;/a&gt;</td11>
+        <td12>&lt;a href="javascript:view()"&gt;查看&lt;/a&gt;</td12>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>广东省电力公司</td1>
+        <td2>1201857028</td2>
+        <td3>天津市振霖五金制品厂</td3>
+        <td4>10kV钢厂线F18</td4>
+        <td5>8D230054</td5>
+        <td6>电压缺相</td6>
+        <td7>2009-9-20</td7>
+        <td8>2009-9-20</td8>
+        <td9>待处理</td9>
+        <td10>张三</td10>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;归档/查看处理记录&lt;/a&gt;</td11>
+        <td12>&lt;a href="javascript:view()"&gt;查看&lt;/a&gt;</td12>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>广东省电力公司</td1>
+        <td2>1201857028</td2>
+        <td3>天津市振霖五金制品厂</td3>
+        <td4>10kV钢厂线F18</td4>
+        <td5>8D230054</td5>
+        <td6>电压缺相</td6>
+        <td7>2009-9-20</td7>
+        <td8>2009-9-20</td8>
+        <td9>待处理</td9>
+        <td10>张三</td10>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;查看处理记录&lt;/a&gt;</td11>
+        <td12>&lt;a href="javascript:view()"&gt;查看&lt;/a&gt;</td12>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>广东省电力公司</td1>
+        <td2>1201857028</td2>
+        <td3>天津市振霖五金制品厂</td3>
+        <td4>10kV钢厂线F18</td4>
+        <td5>8D230054</td5>
+        <td6>电压缺相</td6>
+        <td7>2009-9-20</td7>
+        <td8>2009-9-20</td8>
+        <td9>待处理</td9>
+        <td10>张三</td10>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;处理中/查看处理记录&lt;/a&gt;</td11>
+        <td12>&lt;a href="javascript:view()"&gt;查看&lt;/a&gt;</td12>
+    </data>
+</datas>

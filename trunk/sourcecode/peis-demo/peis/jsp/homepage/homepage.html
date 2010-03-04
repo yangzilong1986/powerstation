@@ -1,0 +1,597 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>首页</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.scrollDiv.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript">
+/**
+ * Use this ScriptDoc file to manage the documentation for the corresponding namespace in your JavaScript library.
+ *
+ * @author guojie
+ */
+$(document).ready(function(){
+    $("#tab_Option").children("li").each(function(index){
+        var overDiv_id = index;
+        $(this).mouseover(function(){
+            $("#tab_Option > li").removeClass("curr");
+            $(this).addClass("curr");
+            $("#tab_Con").children("div").removeClass("default").css("display","none");
+            $("#tab_Con_" + overDiv_id).css("display","block");
+            $(".dataInfo").children("div:even").css("display","block");
+            $(".dataInfo").children("div:odd").css("display","none");
+        });
+    });
+    //tab onload
+    $("#tab_Option").children("li").each(function(index){
+        var li_content_arr = $(".dataInfo").children("div");
+        var li_index = index;
+        $(this).mouseover(function(){
+            //alert(li_index);li_content_arr[li_index];
+            $("#tab_Option > li").attr("class", "tab_off");
+            $(this).attr("class", "tab_on");
+            $(".dataInfo").children("div:odd").css("display","none");
+            $(li_content_arr).eq(li_index-1).hide();
+            $(li_content_arr).eq(li_index).show();
+        });
+    });
+    //tab option_2
+    $("#tab_Option_second").children("li").each(function(index){
+        var overDiv_id = index;
+        $(this).mouseover(function(){
+            $("#tab_Option_second > li").attr("class", "tab_off");
+            $(this).attr("class", "tab_on");
+            $("#tab1_Con_second").children("div").removeClass("default").css("display","none");
+            $("#tab1_Con_second_" + overDiv_id).css("display","block");
+        });
+    });
+    //up scroll
+    //$("#scrollDiv").Scroll({line:4,speed:800,timer:2000});
+});
+
+function selectSub(i, j, sum) {
+    for(var m = 0; m < sum; m++) {
+        if(m == j) {
+            $("#em_" + i + "_" + m).attr("class", "");
+            $("#tab_Con_" + i + "_" + m).css("display", "block");
+        }
+        else {
+            $("#em_" + i + "_" + m).attr("class", "off");
+            $("#tab_Con_" + i + "_" + m).css("display", "none");
+        }
+    }
+}
+</script>
+<style type="text/css">
+<!--
+/*scroll 样式*/
+#scrollDiv{width:176px;height:110px; overflow:hidden}
+#scrollDiv ul{overflow:hidden;}
+#scrollDiv ul li{background:url(../../img/left_li.gif) no-repeat; width:177px; height:21px; padding-left:10px; line-height:21px; margin-bottom:1px;}
+</style>
+</head>
+<body style="overflow: auto;">
+<div id="body" style="padding-left: 0px;">
+  <div id="main_1" class="autoh cb mgt10">
+    <div class="left">
+        <div class="left_top">待办区</div>
+        <div class="left_mid">
+            <ul>
+                <li>今日定制异常数：23</li>
+                <li>待处理异常工单：23</li>
+                <li>待处理预购电单：242</li>
+                <li>待处理停复电单：2313</li>
+                <li>待调试用户：21313</li>
+            </ul>
+        </div>
+        <div class="left_bom"><img src="../../img/blank.gif" width="1" height="9" /></div>
+        <div class="left_top mgt5"><span>最新异常</span><em><a href="#">更多&gt;&gt;</a></em></div>
+        <div class="left_mid">
+            <div id="scrollDiv">
+                <ul>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                    <li><span class="orange">90080002</span>：三项不平衡</li>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                    <li><span class="orange">90080002</span>：三项不平衡</li>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                    <li><span class="orange">90080002</span>：三项不平衡</li>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                    <li><span class="orange">90080002</span>：三项不平衡</li>
+                    <li><span class="orange">90080001</span>：失压/断相</li>
+                </ul>
+            </div>
+        </div>
+        <div class="left_bom"><img src="../../img/blank.gif" width="1" height="9" /></div>
+        <div class="left_top mgt5">超链接</div>
+        <div class="left_mid">
+            <ul>
+                <li><a href="#" target="_blank">营销系统</a></li>
+                <li><a href="#" target="_blank">OA门户系统</a></li>
+                <li><a href="#" target="_blank">电力网站</a></li>
+                <li><a href="#" target="_blank">中国南方电网</a></li>
+            </ul>
+        </div>
+        <div class="left_bom"><img src="../../img/blank.gif" width="1" height="9" /></div>
+    </div>
+    <div class="right">
+        <div class="tab">
+            <ul id="tab_Option">
+                <li class="tab_on">损耗情况</li>
+                <li class="tab_off">负荷情况</li>
+                <li class="tab_off">设备情况</li>
+            </ul>
+            <h1></h1>
+        </div>
+        <div class="tab_list" id="tab_Con">
+            <div class=default id=tab_Con_0>
+              <div class="tab"><em id="em_0_0" onclick="selectSub(0, 0, 3)">全区损耗</em><em class="off" id="em_0_1" onclick="selectSub(0, 1, 3)">主网损耗</em><em class="off" id="em_0_2" onclick="selectSub(0, 2, 3)">分压损耗</em></div>
+              <div class="tab_con" id="tab_Con_0_0" style="display: block;">
+                <div id="graphBlock1" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart01.xml");
+                chart_obj.render("graphBlock1");
+                </script>
+                <div class="data3"><span>详细信息</span></div>
+                <div class="data3_con">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td align="left" class="label">供电量：</td>
+                      <td class="dom">1024000000 MWh</td>
+                      <td align="left" class="label">售电量：</td>
+                      <td class="dom">960000000 MWh</td>
+                      <td align="left" class="label">损耗电量：</td>
+                      <td class="dom">64000000 MWh</td>
+                    </tr>
+                    <tr>
+                      <td align="left" class="label">线损率：</td>
+                      <td class="dom">6.25 %</td>
+                      <td align="left" class="label">同　比：</td>
+                      <td class="dom">1.50 %</td>
+                      <td align="left" class="label">环　比：</td>
+                      <td class="dom">-1.50 %</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="tab_con" id="tab_Con_0_1" style="display: none;">
+                <div id="graphBlock2" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart02.xml");
+                chart_obj.render("graphBlock2");
+                </script>
+                <div class="data3"><span>详细信息</span></div>
+                <div class="data3_con">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                      <td align="left" class="label">供电量：</td>
+                      <td class="dom">1024000000 MWh</td>
+                      <td align="left" class="label">售电量：</td>
+                      <td class="dom">960000000 MWh</td>
+                      <td align="left" class="label">损耗电量：</td>
+                      <td class="dom">64000000 MWh</td>
+                    </tr>
+                    <tr>
+                      <td align="left" class="label">线损率：</td>
+                      <td class="dom">6.25 %</td>
+                      <td align="left" class="label">同　比：</td>
+                      <td class="dom">1.50 %</td>
+                      <td align="left" class="label">环　比：</td>
+                      <td class="dom">-1.50 %</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div class="tab_con" id="tab_Con_0_2" style="display: none;">
+                <div class="mgt10">
+                  <div>
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field">
+                            <td width="14%">电压等级</td>
+                            <td width="14%">线损</td>
+                            <td width="14%">变损</td>
+                            <td width="14%">合计</td>
+                            <td width="14%">线损率(%)</td>
+                            <td width="15%">环比(%)</td>
+                            <td width="15%">同比(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">500kV</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">3000</td>
+                            <td class="td1">7.07</td>
+                            <td class="td1">-1.00</td>
+                            <td class="td1">-5.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">220kV</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">3000</td>
+                            <td class="td1">7.07</td>
+                            <td class="td1">-1.00</td>
+                            <td class="td1">-5.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">110kV</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">3000</td>
+                            <td class="td1">7.07</td>
+                            <td class="td1">-1.00</td>
+                            <td class="td1">-5.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">35kV</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">3000</td>
+                            <td class="td1">7.07</td>
+                            <td class="td1">-1.00</td>
+                            <td class="td1">-5.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">10kV</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">3000</td>
+                            <td class="td1">7.07</td>
+                            <td class="td1">-1.00</td>
+                            <td class="td1">-5.00</td>
+                        </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class=disNone id=tab_Con_1>
+              <div class="tab"><em id="em_1_0" onclick="selectSub(1, 0, 1)">负荷情况</em></div>
+              <div class="tab_con" id="tab_Con_1_0" style="display: block;">
+                <div id="graphBlock3" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart03.xml");
+                chart_obj.render("graphBlock3");
+                </script>
+                <div class="mgt10">
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field" style="height: 20px;">
+                            <td width="14%">月份</td>
+                            <td width="14%">最高负荷</td>
+                            <td width="14%">最低负荷</td>
+                            <td width="14%">平均负荷</td>
+                            <td width="14%">负荷率(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">2009年8月</td>
+                            <td class="td1">1024000</td>
+                            <td class="td1">512000</td>
+                            <td class="td1">800000</td>
+                            <td class="td1">90.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">2008年9月</td>
+                            <td class="td1">924000</td>
+                            <td class="td1">412000</td>
+                            <td class="td1">720000</td>
+                            <td class="td1">85.00</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+            <div class=disNone id=tab_Con_2>
+              <div class="tab"><em id="em_2_0" onclick="selectSub(2, 0, 4)">地网遥测</em><em class="off" id="em_2_1" onclick="selectSub(2, 1, 4)">负荷管理</em><em class="off" id="em_2_2" onclick="selectSub(2, 2, 4)">配变监测</em><em class="off" id="em_2_3" onclick="selectSub(2, 3, 4)">低压集抄</em></div>
+              <div class="tab_con" id="tab_Con_2_0" style="display: block;">
+                <div id="graphBlock20" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSColumn2D.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart20.xml");
+                chart_obj.render("graphBlock20");
+                </script>
+                <div class="mgt10">
+                  <label>图形显示：</label>
+                  <input type="radio" name="ImgShow1" checked="checked">完整率
+                  <input type="radio" name="ImgShow1">20点采集成功率
+                  <input type="radio" name="ImgShow1">月冻结采集成功率
+                </div>
+                <div class="mgt10">
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field">
+                            <td width="10%">电压等级</td>
+                            <td width="12%">监测变电站</td>
+                            <td width="12%">安装终端数</td>
+                            <td width="12%">监测电表</td>
+                            <td width="18%">采集完整率(%)</td>
+                            <td width="18%">20点采集成功率(%)</td>
+                            <td width="18%">月冻结采集成功率(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">500KV</td>
+                            <td class="td1">3</td>
+                            <td class="td1">3</td>
+                            <td class="td1">40</td>
+                            <td class="td1">93.00</td>
+                            <td class="td1">98.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">220KV</td>
+                            <td class="td1">7</td>
+                            <td class="td1">7</td>
+                            <td class="td1">90</td>
+                            <td class="td1">96.00</td>
+                            <td class="td1">99.00</td>
+                            <td class="td1">99.50</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">110KV</td>
+                            <td class="td1">20</td>
+                            <td class="td1">24</td>
+                            <td class="td1">770</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.50</td>
+                            <td class="td1">99.60</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">35KV</td>
+                            <td class="td1">20</td>
+                            <td class="td1">24</td>
+                            <td class="td1">770</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.50</td>
+                            <td class="td1">99.60</td>
+                        </tr>
+                        <tr>
+                            <td class="td1">10KV</td>
+                            <td class="td1">20</td>
+                            <td class="td1">24</td>
+                            <td class="td1">770</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.50</td>
+                            <td class="td1">99.60</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+              <div class="tab_con" id="tab_Con_2_1" style="display: none;">
+                <div id="graphBlock21" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSColumn2D.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart21.xml");
+                chart_obj.render("graphBlock21");
+                </script>
+                <div class="mgt10">
+                  <label>图形显示：</label>
+                  <input type="radio" name="ImgShow2" checked="checked">在线率
+                  <input type="radio" name="ImgShow2">采集完整率
+                  <input type="radio" name="ImgShow2">覆盖率
+                  <input type="radio" name="ImgShow2">月冻结采集成功率
+                </div>
+                <div class="mgt10">
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field">
+                            <td width="15%">供电单位</td>
+                            <td width="10%">计划户数</td>
+                            <td width="10%">已安装户数</td>
+                            <td width="12%">安装终端数</td>
+                            <td width="10%">在线率(%)</td>
+                            <td width="15%">采集完整率(%)</td>
+                            <td width="10%">覆盖率(%)</td>
+                            <td width="18%">月冻结采集成功率(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;">湛江供电局</td>
+                            <td class="td1">10000</td>
+                            <td class="td1">7770</td>
+                            <td class="td1">8000</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">77.70</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 霞山供电局</td>
+                            <td class="td1">3300</td>
+                            <td class="td1">2400</td>
+                            <td class="td1">2500</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">72.73</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 赤坎供电局</td>
+                            <td class="td1">3700</td>
+                            <td class="td1">3200</td>
+                            <td class="td1">3260</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">86.49</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 农电</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">600</td>
+                            <td class="td1">600</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">60.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 配营</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">1570</td>
+                            <td class="td1">1640</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">78.50</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+              <div class="tab_con" id="tab_Con_2_2" style="display: none;">
+                <div id="graphBlock22" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSColumn2D.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart22.xml");
+                chart_obj.render("graphBlock22");
+                </script>
+                <div class="mgt10">
+                  <label>图形显示：</label>
+                  <input type="radio" name="ImgShow3" checked="checked">在线率
+                  <input type="radio" name="ImgShow3">采集完整率
+                  <input type="radio" name="ImgShow3">覆盖率
+                  <input type="radio" name="ImgShow3">月冻结采集成功率
+                </div>
+                <div class="mgt10">
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field">
+                            <td width="15%">供电单位</td>
+                            <td width="10%">计划配变数</td>
+                            <td width="10%">已安装配变数</td>
+                            <td width="12%">安装终端数</td>
+                            <td width="10%">在线率(%)</td>
+                            <td width="15%">采集完整率(%)</td>
+                            <td width="10%">覆盖率(%)</td>
+                            <td width="18%">月冻结采集成功率(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;">湛江供电局</td>
+                            <td class="td1">10000</td>
+                            <td class="td1">7770</td>
+                            <td class="td1">8000</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">77.70</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 霞山供电局</td>
+                            <td class="td1">3300</td>
+                            <td class="td1">2400</td>
+                            <td class="td1">2500</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">72.73</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 赤坎供电局</td>
+                            <td class="td1">3700</td>
+                            <td class="td1">3200</td>
+                            <td class="td1">3260</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">86.49</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 农电</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">600</td>
+                            <td class="td1">600</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">60.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 配营</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">1570</td>
+                            <td class="td1">1640</td>
+                            <td class="td1">90.00</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">78.50</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+              <div class="tab_con" id="tab_Con_2_3" style="display: none;">
+                <div id="graphBlock23" align="left" class="block"></div>
+                <script type="text/javascript">
+                var chart_obj = new FusionCharts("../../FusionCharts/MSColumn2D.swf", "ChartId", "750", "300", "0", "0");
+                chart_obj.setDataURL("xml/homepage_chart23.xml");
+                chart_obj.render("graphBlock23");
+                </script>
+                <div class="mgt10">
+                  <label>图形显示：</label>
+                  <input type="radio" name="ImgShow4" checked="checked">0点电量采集成功率
+                  <input type="radio" name="ImgShow4">月冻结采集成功率
+                </div>
+                <div class="mgt10">
+                    <table width="98%" border="0" cellspacing="1" cellpadding="0" class="twidth1">
+                        <tr class="table-field">
+                            <td width="15%">供电单位</td>
+                            <td width="11%">计划台区数</td>
+                            <td width="12%">已安装台区数</td>
+                            <td width="12%">安装集中器数</td>
+                            <td width="10%">监测户数</td>
+                            <td width="20%">0点电量采集成功率(%)</td>
+                            <td width="20%">月冻结采集成功率(%)</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;">湛江供电局</td>
+                            <td class="td1">2000</td>
+                            <td class="td1">200</td>
+                            <td class="td1">240</td>
+                            <td class="td1">48000</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 霞山供电局</td>
+                            <td class="td1">800</td>
+                            <td class="td1">80</td>
+                            <td class="td1">100</td>
+                            <td class="td1">200000</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 赤坎供电局</td>
+                            <td class="td1">1000</td>
+                            <td class="td1">100</td>
+                            <td class="td1">120</td>
+                            <td class="td1">240000</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 农电</td>
+                            <td class="td1">100</td>
+                            <td class="td1">10</td>
+                            <td class="td1">10</td>
+                            <td class="td1">10000</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                        <tr>
+                            <td class="td1" style="text-align: left; padding-left: 5px;"> -- 配营</td>
+                            <td class="td1">100</td>
+                            <td class="td1">10</td>
+                            <td class="td1">10</td>
+                            <td class="td1">10000</td>
+                            <td class="td1">95.00</td>
+                            <td class="td1">99.00</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

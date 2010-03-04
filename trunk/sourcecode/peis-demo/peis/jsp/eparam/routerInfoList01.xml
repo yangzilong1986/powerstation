@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+    <data>
+        <check extend="checked='true';">1</check>
+        <td1>1</td1>
+        <td2>100000000001</td2>
+        <td3>123467646</td3>
+        <td4>张三</td4>
+        <td5 extend="id='type_1'">一级中继</td5>
+        <td6 extend="id='addr1_1'">1001</td6>
+        <td7 extend="id='addr2_1'">&#160;</td7>
+        <td8 extend="id='addr3_1'">&#160;</td8>
+        <td9 extend="id='addr4_1'">&#160;</td9>
+        <td10 extend="id='result_1'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">2</check>
+        <td1>2</td1>
+        <td2>100000000002</td2>
+        <td3>12343316</td3>
+        <td4>李四</td4>
+        <td5 extend="id='type_2'">一级中继</td5>
+        <td6 extend="id='addr1_2'">1002</td6>
+        <td7 extend="id='addr2_2'">&#160;</td7>
+        <td8 extend="id='addr3_2'">&#160;</td8>
+        <td9 extend="id='addr4_2'">&#160;</td9>
+        <td10 extend="id='result_2'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">3</check>
+        <td1>3</td1>
+        <td2>100000000003</td2>
+        <td3>23243316</td3>
+        <td4>王五</td4>
+        <td5 extend="id='type_3'">一级中继</td5>
+        <td6 extend="id='addr1_3'">1003</td6>
+        <td7 extend="id='addr2_3'">&#160;</td7>
+        <td8 extend="id='addr3_3'">&#160;</td8>
+        <td9 extend="id='addr4_3'">&#160;</td9>
+        <td10 extend="id='result_3'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">4</check>
+        <td1>4</td1>
+        <td2>100000000004</td2>
+        <td3>13232321</td3>
+        <td4>小明</td4>
+        <td5 extend="id='type_4'">一级中继</td5>
+        <td6 extend="id='addr1_4'">1004</td6>
+        <td7 extend="id='addr2_4'">&#160;</td7>
+        <td8 extend="id='addr3_4'">&#160;</td8>
+        <td9 extend="id='addr4_4'">&#160;</td9>
+        <td10 extend="id='result_4'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">5</check>
+        <td1>5</td1>
+        <td2>100000000005</td2>
+        <td3>33223321</td3>
+        <td4>佳桐</td4>
+        <td5 extend="id='type_5'">一级中继</td5>
+        <td6 extend="id='addr1_5'">1005</td6>
+        <td7 extend="id='addr2_5'">&#160;</td7>
+        <td8 extend="id='addr3_5'">&#160;</td8>
+        <td9 extend="id='addr4_5'">&#160;</td9>
+        <td10 extend="id='result_5'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">6</check>
+        <td1>6</td1>
+        <td2>100000000006</td2>
+        <td3>2324232</td3>
+        <td4>文杰</td4>
+        <td5 extend="id='type_6'">一级中继</td5>
+        <td6 extend="id='addr1_6'">1006</td6>
+        <td7 extend="id='addr2_6'">&#160;</td7>
+        <td8 extend="id='addr3_6'">&#160;</td8>
+        <td9 extend="id='addr4_6'">&#160;</td9>
+        <td10 extend="id='result_6'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">7</check>
+        <td1>7</td1>
+        <td2>100000000007</td2>
+        <td3>2324232</td3>
+        <td4>方源</td4>
+        <td5 extend="id='type_7'">一级中继</td5>
+        <td6 extend="id='addr1_7'">1007</td6>
+        <td7 extend="id='addr2_7'">&#160;</td7>
+        <td8 extend="id='addr3_7'">&#160;</td8>
+        <td9 extend="id='addr4_7'">&#160;</td9>
+        <td10 extend="id='result_7'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">8</check>
+        <td1>8</td1>
+        <td2>100000000008</td2>
+        <td3>4324232</td3>
+        <td4>徐也轩</td4>
+        <td5 extend="id='type_8'">一级中继</td5>
+        <td6 extend="id='addr1_8'">1008</td6>
+        <td7 extend="id='addr2_8'">&#160;</td7>
+        <td8 extend="id='addr3_8'">&#160;</td8>
+        <td9 extend="id='addr4_8'">&#160;</td9>
+        <td10 extend="id='result_8'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">9</check>
+        <td1>9</td1>
+        <td2>100000000009</td2>
+        <td3>46654654</td3>
+        <td4>徐平</td4>
+        <td5 extend="id='type_9'">一级中继</td5>
+        <td6 extend="id='addr1_9'">1009</td6>
+        <td7 extend="id='addr2_9'">&#160;</td7>
+        <td8 extend="id='addr3_9'">&#160;</td8>
+        <td9 extend="id='addr4_9'">&#160;</td9>
+        <td10 extend="id='result_9'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">10</check>
+        <td1>10</td1>
+        <td2>10000000000A</td2>
+        <td3>4324232</td3>
+        <td4>徐小玲</td4>
+        <td5 extend="id='type_10'">一级中继</td5>
+        <td6 extend="id='addr1_10'">100A</td6>
+        <td7 extend="id='addr2_10'">&#160;</td7>
+        <td8 extend="id='addr3_10'">&#160;</td8>
+        <td9 extend="id='addr4_10'">&#160;</td9>
+        <td10 extend="id='result_10'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">11</check>
+        <td1>11</td1>
+        <td2>10000000000B</td2>
+        <td3>43222232</td3>
+        <td4>李彬弘</td4>
+        <td5 extend="id='type_11'">二级中继</td5>
+        <td6 extend="id='addr1_11'">100B</td6>
+        <td7 extend="id='addr2_11'">2001</td7>
+        <td8 extend="id='addr3_11'">&#160;</td8>
+        <td9 extend="id='addr4_11'">&#160;</td9>
+        <td10 extend="id='result_11'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">12</check>
+        <td1>12</td1>
+        <td2>10000000000C</td2>
+        <td3>42242342</td3>
+        <td4>凌菲</td4>
+        <td5 extend="id='type_12'">二级中继</td5>
+        <td6 extend="id='addr1_12'">100C</td6>
+        <td7 extend="id='addr2_12'">2002</td7>
+        <td8 extend="id='addr3_12'">&#160;</td8>
+        <td9 extend="id='addr4_12'">&#160;</td9>
+        <td10 extend="id='result_12'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">13</check>
+        <td1>13</td1>
+        <td2>10000000000D</td2>
+        <td3>23321312</td3>
+        <td4>凌菲</td4>
+        <td5 extend="id='type_13'">二级中继</td5>
+        <td6 extend="id='addr1_13'">100D</td6>
+        <td7 extend="id='addr2_13'">2003</td7>
+        <td8 extend="id='addr3_13'">&#160;</td8>
+        <td9 extend="id='addr4_13'">&#160;</td9>
+        <td10 extend="id='result_13'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">14</check>
+        <td1>14</td1>
+        <td2>10000000000E</td2>
+        <td3>23321312</td3>
+        <td4>钟俞菲</td4>
+        <td5 extend="id='type_14'">二级中继</td5>
+        <td6 extend="id='addr1_14'">100E</td6>
+        <td7 extend="id='addr2_14'">2004</td7>
+        <td8 extend="id='addr3_14'">&#160;</td8>
+        <td9 extend="id='addr4_14'">&#160;</td9>
+        <td10 extend="id='result_14'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">15</check>
+        <td1>15</td1>
+        <td2>10000000000F</td2>
+        <td3>23321312</td3>
+        <td4>张清渊</td4>
+        <td5 extend="id='type_15'">二级中继</td5>
+        <td6 extend="id='addr1_15'">100F</td6>
+        <td7 extend="id='addr2_15'">2005</td7>
+        <td8 extend="id='addr3_15'">&#160;</td8>
+        <td9 extend="id='addr4_15'">&#160;</td9>
+        <td10 extend="id='result_15'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">16</check>
+        <td1>16</td1>
+        <td2>100000000010</td2>
+        <td3>342342432</td3>
+        <td4>林佳凝</td4>
+        <td5 extend="id='type_16'">二级中继</td5>
+        <td6 extend="id='addr1_16'">1010</td6>
+        <td7 extend="id='addr2_16'">2006</td7>
+        <td8 extend="id='addr3_16'">&#160;</td8>
+        <td9 extend="id='addr4_16'">&#160;</td9>
+        <td10 extend="id='result_16'">&#160;</td10>
+    </data>
+    
+    <data>
+        <check extend="checked='true';">17</check>
+        <td1>17</td1>
+        <td2>100000000011</td2>
+        <td3>42424342</td3>
+        <td4>薛正</td4>
+        <td5 extend="id='type_17'">三级中继</td5>
+        <td6 extend="id='addr1_17'">1011</td6>
+        <td7 extend="id='addr2_17'">2007</td7>
+        <td8 extend="id='addr3_17'">3001</td8>
+        <td9 extend="id='addr4_17'">&#160;</td9>
+        <td10 extend="id='result_17'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">18</check>
+        <td1>18</td1>
+        <td2>100000000012</td2>
+        <td3>34324233</td3>
+        <td4>张清渊</td4>
+        <td5 extend="id='type_18'">三级中继</td5>
+        <td6 extend="id='addr1_18'">1012</td6>
+        <td7 extend="id='addr2_18'">2008</td7>
+        <td8 extend="id='addr3_18'">3002</td8>
+        <td9 extend="id='addr4_18'">&#160;</td9>
+        <td10 extend="id='result_18'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">19</check>
+        <td1>19</td1>
+        <td2>100000000013</td2>
+        <td3>34234243</td3>
+        <td4>詹耀程</td4>
+        <td5 extend="id='type_19'">三级中继</td5>
+        <td6 extend="id='addr1_19'">1003</td6>
+        <td7 extend="id='addr2_19'">2009</td7>
+        <td8 extend="id='addr3_19'">3003</td8>
+        <td9 extend="id='addr4_19'">&#160;</td9>
+        <td10 extend="id='result_19'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">20</check>
+        <td1>20</td1>
+        <td2>100000000014</td2>
+        <td3>34242424</td3>
+        <td4>李小明</td4>
+        <td5 extend="id='type_20'">三级中继</td5>
+        <td6 extend="id='addr1_20'">1004</td6>
+        <td7 extend="id='addr2_20'">200A</td7>
+        <td8 extend="id='addr3_20'">3004</td8>
+        <td9 extend="id='addr4_20'">&#160;</td9>
+        <td10 extend="id='result_20'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">21</check>
+        <td1>21</td1>
+        <td2>100000000015</td2>
+        <td3>34234234</td3>
+        <td4>佳桐</td4>
+        <td5 extend="id='type_21'">三级中继</td5>
+        <td6 extend="id='addr1_21'">1005</td6>
+        <td7 extend="id='addr2_21'">200B</td7>
+        <td8 extend="id='addr3_21'">3005</td8>
+        <td9 extend="id='addr4_21'">&#160;</td9>
+        <td10 extend="id='result_21'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">22</check>
+        <td1>22</td1>
+        <td2>100000000016</td2>
+        <td3>3433333</td3>
+        <td4>文杰</td4>
+        <td5 extend="id='type_22'">三级中继</td5>
+        <td6 extend="id='addr1_22'">1006</td6>
+        <td7 extend="id='addr2_22'">200B</td7>
+        <td8 extend="id='addr3_22'">3006</td8>
+        <td9 extend="id='addr4_22'">&#160;</td9>
+        <td10 extend="id='result_22'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">23</check>
+        <td1>23</td1>
+        <td2>100000000017</td2>
+        <td3>434343434</td3>
+        <td4>王信诚</td4>
+        <td5 extend="id='type_23'">四级中继</td5>
+        <td6 extend="id='addr1_23'">1007</td6>
+        <td7 extend="id='addr2_23'">200B</td7>
+        <td8 extend="id='addr3_23'">3007</td8>
+        <td9 extend="id='addr4_23'">4001</td9>
+        <td10 extend="id='result_23'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">24</check>
+        <td1>24</td1>
+        <td2>100000000018</td2>
+        <td3>343243242</td3>
+        <td4>徐也轩</td4>
+        <td5 extend="id='type_24'">四级中继</td5>
+        <td6 extend="id='addr1_24'">1008</td6>
+        <td7 extend="id='addr2_24'">200C</td7>
+        <td8 extend="id='addr3_24'">3008</td8>
+        <td9 extend="id='addr4_24'">4002</td9>
+        <td10 extend="id='result_24'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">25</check>
+        <td1>25</td1>
+        <td2>100000000019</td2>
+        <td3>23434343</td3>
+        <td4>凌菲</td4>
+        <td5 extend="id='type_25'">四级中继</td5>
+        <td6 extend="id='addr1_25'">1009</td6>
+        <td7 extend="id='addr2_25'">200D</td7>
+        <td8 extend="id='addr3_25'">3009</td8>
+        <td9 extend="id='addr4_25'">4003</td9>
+        <td10 extend="id='result_25'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">26</check>
+        <td1>26</td1>
+        <td2>10000000001A</td2>
+        <td3>34324242</td3>
+        <td4>徐小玲</td4>
+        <td5 extend="id='type_26'">四级中继</td5>
+        <td6 extend="id='addr1_26'">100A</td6>
+        <td7 extend="id='addr2_26'">200E</td7>
+        <td8 extend="id='addr3_26'">300A</td8>
+        <td9 extend="id='addr4_26'">4004</td9>
+        <td10 extend="id='result_26'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">27</check>
+        <td1>27</td1>
+        <td2>10000000001B</td2>
+        <td3>5554444</td3>
+        <td4>李彬弘</td4>
+        <td5 extend="id='type_27'">四级中继</td5>
+        <td6 extend="id='addr1_27'">100B</td6>
+        <td7 extend="id='addr2_27'">200F</td7>
+        <td8 extend="id='addr3_27'">300B</td8>
+        <td9 extend="id='addr4_27'">4005</td9>
+        <td10 extend="id='result_27'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">28</check>
+        <td1>28</td1>
+        <td2>10000000001C</td2>
+        <td3>5565655</td3>
+        <td4>冉宗霖</td4>
+        <td5 extend="id='type_28'">自动中继</td5>
+        <td6 extend="id='addr1_28'">100C</td6>
+        <td7 extend="id='addr2_28'">2002</td7>
+        <td8 extend="id='addr3_28'">300C</td8>
+        <td9 extend="id='addr4_28'">4006</td9>
+        <td10 extend="id='result_28'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">29</check>
+        <td1>29</td1>
+        <td2>10000000001D</td2>
+        <td3>77986786</td3>
+        <td4>梁寓涵</td4>
+        <td5 extend="id='type_29'">自动中继</td5>
+        <td6 extend="id='addr1_29'">100D</td6>
+        <td7 extend="id='addr2_29'">2003</td7>
+        <td8 extend="id='addr3_29'">300D</td8>
+        <td9 extend="id='addr4_29'">4007</td9>
+        <td10 extend="id='result_29'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">30</check>
+        <td1>30</td1>
+        <td2>10000000001E</td2>
+        <td3>79797977</td3>
+        <td4>安怡泽</td4>
+        <td5 extend="id='type_30'">自动中继</td5>
+        <td6 extend="id='addr1_30'">100E</td6>
+        <td7 extend="id='addr2_30'">2004</td7>
+        <td8 extend="id='addr3_30'">300E</td8>
+        <td9 extend="id='addr4_30'">4008</td9>
+        <td10 extend="id='result_30'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">31</check>
+        <td1>31</td1>
+        <td2>10000000001F</td2>
+        <td3>98787776</td3>
+        <td4>耀程</td4>
+        <td5 extend="id='type_31'">自动中继</td5>
+        <td6 extend="id='addr1_31'">100F</td6>
+        <td7 extend="id='addr2_31'">2005</td7>
+        <td8 extend="id='addr3_31'">300F</td8>
+        <td9 extend="id='addr4_31'">4009</td9>
+        <td10 extend="id='result_31'">&#160;</td10>
+    </data>
+    <data>
+        <check extend="checked='true';">32</check>
+        <td1>32</td1>
+        <td2>100000000020</td2>
+        <td3>564646565</td3>
+        <td4>钟允</td4>
+        <td5 extend="id='type_32'">自动中继</td5>
+        <td6 extend="id='addr1_32'">1010</td6>
+        <td7 extend="id='addr2_32'">2006</td7>
+        <td8 extend="id='addr3_32'">3020</td8>
+        <td9 extend="id='addr4_32'">4010</td9>
+        <td10 extend="id='result_32'">&#160;</td10>
+    </data>
+</datas>
+

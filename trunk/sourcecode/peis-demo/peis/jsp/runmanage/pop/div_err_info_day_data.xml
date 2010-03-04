@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='在线率' xAxisName='日期' yAxisName='在线率(%)' numberPrefix='%' showValues='0'>
+    <set label='01' value='70' />
+    <set label='02' value='87' />
+    <set label='03' value='96' />
+    <set label='04' value='79' />
+    <set label='05' value='77' />
+    <set label='06' value='76' />
+    <set label='07' value='70' />
+    <set label='08' value='87' />
+    <set label='09' value='96' />
+    <set label='10' value='79' />
+    <set label='11' value='77' />
+    <set label='12' value='76' />
+    <set label='13' value='70' />
+    <set label='14' value='87' />
+    <set label='15' value='96' />
+    <set label='16' value='79' />
+    <set label='17' value='77' />
+    <set label='18' value='76' />
+    <set label='19' value='70' />
+    <set label='20' value='87' />
+    <set label='21' value='96' />
+    <set label='22' value='79' />
+    <set label='23' value='77' />
+    <set label='24' value='76' />
+    <set label='25' value='77' />
+    <set label='26' value='76' />
+    <set label='27' value='70' />
+    <set label='28' value='87' />
+    <set label='29' value='96' />
+    <set label='30' value='79' />
+    <set label='31' value='79' />
+</chart>

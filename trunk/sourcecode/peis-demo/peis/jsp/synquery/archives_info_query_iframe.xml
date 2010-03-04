@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>test_1</td2>
+        <td3>测试一报表</td3>
+        <td4>advance</td4>
+        <td5>2009-10-01</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='showText();'">浏览</td6> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>test_2</td2>
+        <td3>测试二报表</td3>
+        <td4>admin</td4>
+        <td5>2009-09-27</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='showText();'">浏览</td6>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>test_3</td2>
+        <td3>测试三报表</td3>
+        <td4>base</td4>
+        <td5>2009-09-29</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick='showText();'">浏览</td6>
+    </data>         
+</datas>

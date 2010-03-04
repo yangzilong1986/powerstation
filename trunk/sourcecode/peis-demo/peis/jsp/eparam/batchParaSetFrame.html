@@ -1,0 +1,1719 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>批量参数读设</title>
+    <link rel="stylesheet" type="text/css"  href="../../css/mainframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/autorm/common.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript"> 
+    var contextPath = "../..";
+     
+    //打开参数配置画面
+    function openParaset() {
+        var str_url = "../../jsp/eparam/paraView.html";
+        //windowPopup(str_url, 1000, 600);
+        top.showDialogBox("参数配置", str_url, 600, 900);
+    }
+    
+    //弹出式窗口
+    var opwindow = null;     //记录打开浏览窗口的对象
+    function windowPopup(url, wd, ht) {
+        if(opwindow != null) {
+            opwindow.close();
+        }
+        opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=yes');
+    }
+    
+    /**
+     * 全选checkbox
+     */
+    function selectAllCB() {
+        try {
+            if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+                if(document.all.selectAll.checked) {
+                    if(!document.all.ItemID.checked) {
+                        document.all.ItemID.click();
+                    }
+                }
+                else {
+                    if(document.all.ItemID.checked) {
+                        document.all.ItemID.click();
+                    }
+                }
+            }
+            else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+                if(document.all.selectAll.checked) {
+                    for(var i = 0; i < document.all.ItemID.length; i++) {
+                        if(!document.all.ItemID[i].checked) {
+                            document.all.ItemID[i].click();
+                        }
+                    }
+                }
+                else {
+                    for(var i = 0; i < document.all.ItemID.length; i++) {
+                        if(document.all.ItemID[i].checked) {
+                            document.all.ItemID[i].click();
+                        }
+                    }
+                }
+            }
+        }
+        catch(e) {
+        }
+    }
+    
+    //设置选择的终端的操作结果信息
+    function setResultInfo(vSelectedItemList, vInfo) {
+        var vItem = vSelectedItemList.split(',');
+        for(var i = 0; i < vItem.length; i++) {
+            if(vItem[i].length > 0) {
+                document.getElementById(vItem[i]).innerHTML = vInfo;
+            }
+        }
+    }
+    
+    //清除所有结果信息
+    function clearAllResult() {
+        var allLogicAddr = getAllLogicAddrString();
+        setResultInfo(allLogicAddr, '');
+    }
+    
+    // 获得所有的终端逻辑地址
+    function getAllLogicAddrString() {
+        var sResult = "";
+        try {
+            if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+                sResult += "," + document.all.ItemID.value + "";
+            }
+            else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    sResult += "," + document.all.ItemID[i].value + "";
+                }
+            }
+            if(sResult.indexOf(",") != -1) {
+                sResult = sResult.substring(1);
+            }
+        }
+        catch(e) {
+        }
+        return sResult;
+    }
+    
+    //取得选择的终端逻辑地址
+    function getSelectedLogicAddrs() {
+        var sResult = "";
+        try {
+            if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+                if(document.all.ItemID.checked) {
+                    sResult += "," + document.all.ItemID.value;
+                }
+            }
+            else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        sResult += "," + document.all.ItemID[i].value;
+                    }
+                }
+            }
+            if(sResult.indexOf(",") != -1) {
+                sResult = sResult.substring(1);
+            }
+        }
+        catch(e) {
+        }
+    
+        return sResult;
+    }
+    
+    //数组比较
+    Array.prototype.contains = function(obj) {   
+        var boo = false;   
+        for(var i=0;i<this.length;i++) {   
+            if(typeof obj == "object") {   
+                if(this[i].equals(obj)) {   
+                    boo = true;   
+                    break;   
+                }                          
+            }else {   
+                if(this[i] == obj)  {   
+                       boo = true;   
+                       break;                  
+                }   
+            }              
+        }   
+        return boo;   
+    }
+    
+    function filter(a1, a2) {   
+        var myAry = [];   
+        var fun = function(item,ary) {   
+            var boo = false;   
+            for(var i=0;i<ary.length;i++) {   
+                if(item==ary[i]) {   
+                      boo = true;   
+                      break;   
+                }   
+            }   
+            return boo;                                
+        }      
+        for(var i=0;i<a1.length;i++) {   
+            if(!a2.contains(a1[i]))   
+                myAry.push(a1[i]);                     
+        }              
+        return myAry;   
+    }
+    
+    //设置按钮状态(status=true: 按钮可用, status=false: 按钮不可用)
+    function setButtonStatus(status) {
+        document.all.setupBt.disabled = !status;
+        document.all.readBt.disabled = !status;
+        document.all.resetBt.disabled = !status;
+        document.all.groupBt.disabled = !status;
+        document.all.parasetBt.disabled = !status;
+        document.all.query.disabled = !status;
+    }
+    
+    //读取操作结束
+    function readFinished(){
+        //获得选择的终端地址
+        var logicAddrs = getSelectedLogicAddrs();
+        if (logicAddrs == null || logicAddrs == "") {
+            return;
+        }
+        //设置选择的终端的操作结果信息
+        setResultInfo(logicAddrs, '读取操作完成');
+    }
+    
+    //设置操作结束
+    function setFinished(){
+        //获得选择的终端地址
+        var logicAddrs = getSelectedLogicAddrs();
+        if (logicAddrs == null || logicAddrs == "") {
+            return;
+        }
+        //设置选择的终端的操作结果信息
+        setResultInfo(logicAddrs, '设置操作完成');
+    }
+    
+    function batchSetup(){
+        var logicAddrs = getSelectedLogicAddrs();
+        //alert("selectedLogicAddrs=" + logicAddrs);
+        if (logicAddrs == null || logicAddrs == "") {
+            alert("请先选择要下发的终端, 再设置!");
+            return;
+        }
+        
+        //设置按钮不可用
+        setButtonStatus(false);
+        //删除动态增加的行(动态增加行的ID以"otr_"开头)
+        deleteNewRow();
+        //隐藏所有父级的Img
+        setAllImgStatus(false);
+        //显示选择的父级Img
+        setImgStatus(logicAddrs, true);
+        //清除所有结果信息
+        clearAllResult();
+        //setResultInfo(logicAddrs, '正在设置...');
+        insertRow(1); //1:设置操作
+        
+        //设置selectedLogicAddrArr
+        selectedLogicAddrArr = [];
+        var logicAddrArr = logicAddrs.split(",");
+        var allOrderIdArr = allOrderIdList.split(",");
+        for(var i=0; i<logicAddrArr.length; i++){
+            for(var j=0; j<allOrderIdArr.length; j++){
+                selectedLogicAddrArr.push(logicAddrArr[i] + "_" + allOrderIdArr[j]);
+            }
+        }
+        setTimeout("getBatchSetupResult(5)", 3000);
+    }
+    
+    var json = {'data':[{'logicAddrCmdId':'45011114_10040001','result':'000000'},{'logicAddrCmdId':'14010002_10040001','result':'000001'},
+                        {'logicAddrCmdId':'14010003_10040001','result':'000001'},{'logicAddrCmdId':'14010004_10040001','result':'000001'},
+                        {'logicAddrCmdId':'14010005_10040001','result':'000001'},{'logicAddrCmdId':'14010006_10040001','result':'000001'},
+                        {'logicAddrCmdId':'14010007_10040001','result':'000001'},{'logicAddrCmdId':'14010008_10040001','result':'000001'},
+                        {'logicAddrCmdId':'14010009_10040001','result':'000001'},{'logicAddrCmdId':'14010010_10040001','result':'000001'}]};
+    function getBatchSetupResult(fetchCount){
+        
+        var retFlag = true;
+        for (var i=0; i < selectedLogicAddrArr.length; i++){
+           var logicAddrExist = false;
+           for (var j=0; j < json.data.length; j++){
+               if (selectedLogicAddrArr[i] == json.data[j].logicAddrCmdId){
+                   logicAddrExist = true;
+                   break;
+               }
+           }
+           if (logicAddrExist == false){
+                retFlag = false;
+                break;
+           }
+        }
+        // retFlag == true表示数据全部返回
+        if (retFlag == true){
+            for (var i=0; i < json.data.length; i++){
+                if (selectedLogicAddrArr.contains(json.data[i].logicAddrCmdId)) {
+                    if ("000000" == json.data[i].result) {
+                        document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置成功";
+                    }
+                    else {
+                        document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置失败";
+                    }
+                }
+            }
+            //设置操作结束
+            //setFinished();
+            //设置按钮可用
+            setButtonStatus(true);
+        }
+        else {
+            if (fetchCount > 1){
+                 for (var i=0; i < json.data.length; i++){
+                     if (selectedLogicAddrArr.contains(json.data[i].logicAddrCmdId)) {
+                         if ("000000" == json.data[i].result) {
+                             document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置成功";
+                         }
+                         else {
+                             document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置失败";
+                         }
+                     }
+                 }
+                 //再次调用批量设置返回结果
+                 setTimeout("getBatchSetupResult(" + (fetchCount-1) + ")", 3000);
+            }
+            else {
+                var arrLogicAddrs = [];
+                for (var i=0; i < json.data.length; i++){
+                    if (selectedLogicAddrArr.contains(json.data[i].logicAddrCmdId)) {
+                        if ("000000" == json.data[i].result) {
+                            document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置成功";
+                        }
+                        else {
+                            document.getElementById("result_"+json.data[i].logicAddrCmdId).innerHTML = "设置失败";
+                        }
+                        arrLogicAddrs.push(json.data[i].logicAddrCmdId);
+                    }
+                }
+                //没有返回的设置为超时
+                var backResult = filter(selectedLogicAddrArr, arrLogicAddrs);
+                for(var n=0; n < backResult.length; n++) {
+                    if ("正在设置..." == document.getElementById("result_"+backResult[n]).innerHTML) {
+                         document.getElementById("result_"+backResult[n]).innerHTML = "设置超时";
+                    }
+                }
+                //设置操作结束
+                //setFinished();
+                //设置按钮可用
+                setButtonStatus(true);
+            }
+        }
+    }
+    
+    //终端参数批量读取下发
+    function batchRead(){
+        //取得选择的终端逻辑地址
+        var logicAddrs = getSelectedLogicAddrs();
+        //alert("selectedLogicAddrs=" + logicAddrs);
+        if (logicAddrs == null || logicAddrs == "") {
+            alert("请先选择要下发的终端, 再读取!");
+            return;
+        }
+        
+        //设置按钮不可用
+        setButtonStatus(false);
+        //删除动态增加的行(动态增加行的ID以"otr_"开头)
+        deleteNewRow();
+        //隐藏所有父级的Img
+        setAllImgStatus(false);
+        //显示选择的父级Img
+        setImgStatus(logicAddrs, true);
+        //清除所有结果信息
+        clearAllResult();
+        //setResultInfo(logicAddrs, '正在读取...');
+        insertRow(2); //2:读取操作
+        
+        //设置selectedLogicAddrArr
+        //获取选择的逻辑地址与数据项组合的数组
+        selectedLogicAddrArr = getSelectedLogicAddrItemArr(logicAddrs);
+        setTimeout("getBatchReadResult(5)", 3000);
+    }
+    
+    //选择的逻辑地址与数据项组合的数组
+    var selectedLogicAddrArr = [];
+    
+    //获取数据项结果ID字符串
+    function getSelectedLogicAddrItemArr(logicAddrs){
+        var selectedLogicAddrArrTemp = [];
+        //var dataItems = document.all.dataItems.value;
+        var dataItems = allItemIdList;
+        if (logicAddrs != null || logicAddrs != "" || dataItems != null || dataItems != "") {
+            var logicAddrArr = logicAddrs.split(",");
+            var dataItemArr = dataItems.split(",");
+            for (var i = 0; i < logicAddrArr.length; i++) {
+                for (var j = 0; j < dataItemArr.length; j++) {
+                    selectedLogicAddrArrTemp.push(logicAddrArr[i] + "_" + dataItemArr[j]);
+                }
+            }
+        }
+        return selectedLogicAddrArrTemp;
+    }
+    
+    var jsonRd = {'data':[{'logicAddrItemId':'45011114_DI_1004000101','result':'10'},{'logicAddrItemId':'45011114_DI_1004000102','result':'5'},
+                          {'logicAddrItemId':'45011114_DI_1004000103','result':'4'},{'logicAddrItemId':'45011114_DI_1004000104','result':'10'},
+                          {'logicAddrItemId':'45011114_DI_1004000106','result':'0'},{'logicAddrItemId':'45011114_DI_1004000107','result':'1'},
+                          {'logicAddrItemId':'45011114_DI_1004000108','result':'30'}]};
+    //获取终端批量读取命令下发结果
+    function getBatchReadResult(fetchCount) {
+        var logicAddrItemIdArr = [];
+        for(var i=0; i<jsonRd.data.length; i++){
+            logicAddrItemIdArr.push(jsonRd.data[i].logicAddrItemId);
+        }
+        var retFlag = true;
+        var backResult = filter(selectedLogicAddrArr, logicAddrItemIdArr);
+        if (backResult != null && backResult.length > 0) {
+            retFlag = false;
+        }
+        // retFlag == true表示数据全部返回
+        if (retFlag == true){
+            for (var i=0; i < jsonRd.data.length; i++){
+                if (selectedLogicAddrArr.contains(jsonRd.data[i].logicAddrItemId)) {
+                    document.getElementById("result_" + jsonRd.data[i].logicAddrItemId).innerHTML = jsonRd.data[i].result;
+                }
+            }
+            //读取操作结束
+            //readFinished();
+            //设置按钮可用
+            setButtonStatus(true);
+        }
+        else {
+            if (fetchCount > 1){
+                for (var i=0; i < jsonRd.data.length; i++){
+                    if (selectedLogicAddrArr.contains(jsonRd.data[i].logicAddrItemId)) {
+                        document.getElementById("result_" + jsonRd.data[i].logicAddrItemId).innerHTML = jsonRd.data[i].result;
+                    }
+                }
+                //再次获取终端批量设置命令下发结果
+                setTimeout("getBatchReadResult(" + (fetchCount-1) + ")", 3000);
+            }
+            else {
+                for (var i=0; i < jsonRd.data.length; i++){
+                    if (selectedLogicAddrArr.contains(jsonRd.data[i].logicAddrItemId)) {
+                        document.getElementById("result_" + jsonRd.data[i].logicAddrItemId).innerHTML = jsonRd.data[i].result;
+                    }
+                }
+                //没有返回的设置为超时
+                for(var n=0; n < backResult.length; n++) {
+                    if ("正在读取..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                        document.getElementById("result_" + backResult[n]).innerHTML = "读取超时";
+                    }
+                }
+                //读取操作结束
+                //readFinished();
+                //设置按钮可用
+                setButtonStatus(true);
+            }
+        }
+    }
+    
+    //折叠的父Folder
+    function folder(objImg, vLogicAddr) {
+        var srcImg = $(objImg).attr("src");
+        if(srcImg.indexOf(contextPath + "/img/tree2/plus1.gif") >= 0) {
+            $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+        }
+        else {
+            $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+        }
+        for(var i = 0; i < 100; i++) {
+            if($("#otr_" + vLogicAddr + "_" + i).length > 0) {
+                if(srcImg.indexOf(contextPath + "/img/tree2/plus1.gif") >= 0) {
+                    $("#otr_" + vLogicAddr + "_" + i).attr("class", "styleShow");
+                }
+                else {
+                    $("#otr_" + vLogicAddr + "_" + i).attr("class", "styleHidden");
+                }
+            }
+            else {
+                break;
+            }
+        }
+        
+        //获得命令项
+        //var cmdItems = document.all.commandItems.value;
+        var cmdItems = "10040001";
+        if (cmdItems != null){
+            var cmdItemArr = cmdItems.split(",");
+            if(srcImg.indexOf(contextPath + "/img/tree2/plus1.gif") >= 0) {
+                //设置命令项下所有的数据项为原来状态
+                for(var i=0; i < cmdItemArr.length; i++){
+                    for(var j = 0; j < 100; j++) {
+                        //获得命令项图标SRC
+                        var subImgObj = document.getElementsByName("subimg_" + vLogicAddr + "_" + cmdItemArr[i]);
+                        var subImgSrc = $(subImgObj).attr("src");
+                        if (subImgSrc == contextPath + "/img/tree2/minus1.gif") {
+                            $("#otr_" + vLogicAddr + "_" + cmdItemArr[i] + "_" + j).attr("class", "styleShow");
+                        }
+                    }
+                }
+            } 
+            else {
+                //设置命令项下所有的数据项为隐藏状态
+                for(var i=0; i < cmdItemArr.length; i++){
+                    for(var j = 0; j < 100; j++) {
+                        $("#otr_" + vLogicAddr + "_" + cmdItemArr[i] + "_" + j).attr("class", "styleHidden");
+                    }
+                }
+            }
+        }
+    }
+    
+    //折叠的子Folder
+    function subFolder(objImg, vLogicOrderId) {
+        var srcImg = $(objImg).attr("src");
+        if(srcImg.indexOf(contextPath + "/img/tree2/plus1.gif") >= 0) {
+            $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+        }
+        else {
+            $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+        }
+        for(var i = 0; i < 100; i++) {
+            if($("#otr_" + vLogicOrderId + "_" + i).length > 0) {
+                if(srcImg.indexOf(contextPath + "/img/tree2/plus1.gif") >= 0) {
+                    $("#otr_" + vLogicOrderId + "_" + i).attr("class", "styleShow");
+                }
+                else {
+                    $("#otr_" + vLogicOrderId + "_" + i).attr("class", "styleHidden");
+                }
+            }
+            else {
+                break;
+            }
+        }
+    }
+    
+    //动态增加行(动态增加行的ID以"otr_"开头, type:1是设置操作,2是读取操作)
+    function insertRow(type){
+        var logicAddrs = getSelectedLogicAddrs();
+        var selectedLogicAddrArr = logicAddrs.split(",");
+        var rowId;
+        for(var i=0; i<selectedLogicAddrArr.length ; i++){
+            rowId = document.getElementById('tr_' + selectedLogicAddrArr[i]);
+            var addRow;
+            var cell1;
+            var cell2;
+            var cell3;
+            var cell4;
+            var cell5;
+            var cell6;
+            var cell7;
+            var rowSn = rowId.rowIndex+1;
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_' + selectedLogicAddrArr[i] + '_0';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 2;
+            cell1.innerHTML = "<img src='../../img/tree/linelastnode.gif' /><img id='subimg_" + selectedLogicAddrArr[i]+ "_10040001' src='../../img/tree2/plus1.gif' style='cursor:pointer;' onclick='subFolder(this, \""+ selectedLogicAddrArr[i] + "_10040001"+"\")'/>";
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '通信参数';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '终端通信参数设置';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '10040001';
+            cell5 = addRow.insertCell(4);
+            cell5.colSpan = 3;
+            cell5.innerHTML = '';
+            cell6 = addRow.insertCell(5);
+            cell6.id = 'result_'+selectedLogicAddrArr[i]+'_10040001';
+            if (type ==1) {
+                cell6.innerHTML = '正在设置...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_' + selectedLogicAddrArr[i] + '_10040001_0';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '终端数传机延时时间RTS';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000101\" />DI_1004000101';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '10';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = '20ms';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000101';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_1';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '终端作为启动站允许发送传输延时时间';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000102\" />DI_1004000102';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '5';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = 'min';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000102';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_2';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '终端等待从动站响应的重发次数';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000103\" />DI_1004000103';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '3';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = '次';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000103';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_3';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '终端等待从动站响应的超时时间';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000104\" />DI_1004000104';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '10';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = '秒';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000104';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_4';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '需要主站确认的通信服务（CON=1）的标志-主动上报一般事件记录';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000106\" />DI_1004000106';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '0';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = '';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000106';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_5';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '需要主站确认的通信服务（CON=1）的标志-主动上报重要事件记录';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000107\" />DI_1004000107';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '1';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = '';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000107';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+            addRow = document.getElementById('object_table').insertRow(rowSn++);
+            addRow.id = 'otr_'+selectedLogicAddrArr[i]+'_10040001_6';
+            $(addRow).attr('class', 'styleHidden');
+            $(addRow).attr('align', 'center');
+            cell1 = addRow.insertCell(0);
+            cell1.colSpan = 3;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = '心跳周期';
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = '<input type=\"hidden\" name=\"itemid_' + selectedLogicAddrArr[i] + '_10040001\" value=\"DI_1004000108\" />DI_1004000108';
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = '30';
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = 'min';
+            cell6 = addRow.insertCell(5);
+            cell7 = addRow.insertCell(6);
+            cell7.id = 'result_'+selectedLogicAddrArr[i]+'_DI_1004000108';
+            if (type == 2) {
+                cell7.innerHTML = '正在读取...';
+            }
+        }
+        setTableStyle();
+    }
+    
+    //删除动态增加的行(动态增加行的ID以"otr_"开头)
+    function deleteNewRow(){
+        var objTable = document.getElementById("object_table");
+        if (objTable.rows.length <= 0) {
+            return;
+        }
+        var i = 0;
+        var objRow;
+        while (i < objTable.rows.length){
+            objRow = objTable.rows[i];
+            if (objRow != null && objRow.id.indexOf("otr_") == 0) {
+                objTable.deleteRow(objRow.rowIndex);
+            }
+            else {
+                i++;
+            }
+        }
+    }
+    
+    //通过逻辑地址设置顶级Img显示与否(isShow=true: 显示, isShow=false: 不显示)
+    function setImgStatus(logicAddrs, isShow){
+        if (logicAddrs != null && logicAddrs.length > 0){
+            var logicAddrArr = logicAddrs.split(",");
+            var strStyle = isShow ? "cursor:pointer;display:inline-block" : "display:none";
+            for (var i=0; i < logicAddrArr.length; i++){
+                $("#img_" + logicAddrArr[i]).attr("style", strStyle);
+                $("#img_" + logicAddrArr[i]).attr("src", contextPath + "/img/tree2/plus1.gif");
+            }
+        }
+    }
+    
+    //设置所有父级的Img显示与否(isShow=true: 显示, isShow=false: 不显示)
+    function setAllImgStatus(isShow){
+        //取得所有的终端逻辑地址
+        var logicAddrs = getAllLogicAddrString();
+        setImgStatus(logicAddrs, isShow);
+    }
+    
+    var allOrderIdList = "10040001";
+    var allItemIdList = "DI_1004000101,DI_1004000102,DI_1004000103,DI_1004000104,DI_1004000106,DI_1004000107,DI_1004000108";
+    //得到失败重发类型(0:没失败, 1:设置失败, 2:读取失败)
+    function getHandleType(){
+        var logicAddrs = getAllLogicAddrString();
+        var result;
+        if (logicAddrs != null && logicAddrs.length > 0) {
+            var logicAddrArr = logicAddrs.split(",");
+            for (var i=0; i < logicAddrArr.length; i++){
+                var allOrderIdArr = allOrderIdList.split(",");
+                for (var j=0; j < allOrderIdArr.length; j++){
+                    result = document.getElementById("result_" + logicAddrArr[i] + "_" + allOrderIdArr[j]);
+                    if (result != null && (result.innerHTML == "设置失败" || result.innerHTML == "设置超时")){
+                        return 1;
+                    }
+                    else {
+                        //var itemIdArr = allItemIdList.split(",");
+                        var itemIdArr = document.getElementsByName("itemid_" + logicAddrArr[i] + "_" + allOrderIdArr[j]);
+                        for(var k=0; k < itemIdArr.length; k++){
+                            result = document.getElementById("result_" + logicAddrArr[i] + "_" + itemIdArr[k].value);
+                            if (result != null && (result.innerHTML == "读取失败" || result.innerHTML == "读取超时")){
+                                return 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return 0;
+    }
+    
+    //根据失败类型得到下发失败命令项
+    function getFailItemsByType(type){
+        var logicAddrs = getAllLogicAddrString();
+        var failItemArrTemp = [];
+        var result;
+        if (logicAddrs != null && logicAddrs.length > 0) {
+            var logicAddrArr = logicAddrs.split(",");
+            if (type == 1){
+                for (var i=0; i < logicAddrArr.length; i++){
+                    var allOrderIdArr = allOrderIdList.split(",");
+                    for (var j=0; j < allOrderIdArr.length; j++){
+                        result = document.getElementById("result_" + logicAddrArr[i] + "_" + allOrderIdArr[j]);
+                        if (result != null && (result.innerHTML == "设置失败" || result.innerHTML == "设置超时")){
+                            failItemArrTemp.push(logicAddrArr[i] + "_" + allOrderIdArr[j]);
+                        }
+                    }
+                }
+            }
+            else if (type == 2){
+                for (var i=0; i < logicAddrArr.length; i++){
+                    var allOrderIdArr = allOrderIdList.split(",");
+                    for (var j=0; j < allOrderIdArr.length; j++){
+                        //var itemIdArr = allItemIdList.split(",");
+                        var itemIdArr = document.getElementsByName("itemid_" + logicAddrArr[i] + "_" + allOrderIdArr[j]);
+                        for(var k=0; k < itemIdArr.length; k++){
+                            result = document.getElementById("result_" + logicAddrArr[i] + "_" + itemIdArr[k].value);
+                            if (result != null && (result.innerHTML == "读取失败" || result.innerHTML == "读取超时")){
+                                failItemArrTemp.push(logicAddrArr[i] + "_" + itemIdArr[k].value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            return null;
+        }
+        
+        return failItemArrTemp;
+    }
+    
+    // 根据失败类型初始化失败重发内容
+    function initTextByType(type){
+        if (type == 1) {
+            for (var i=0; i < failItemArr.length; i++){
+                document.getElementById("result_" + failItemArr[i]).innerHTML = "正在设置...";
+            }
+        }
+        else if (type == 2) {
+            for (var i=0; i < failItemArr.length; i++){
+                document.getElementById("result_" + failItemArr[i]).innerHTML = "正在读取...";
+            }
+        }
+    }
+    
+    var failItemArr;
+    //失败重发
+    function rehandle(){
+        var handleType = getHandleType();
+        if (handleType == 0) {
+            alert("没有失败的命令项!");
+            return;
+        }
+        failItemArr = getFailItemsByType(handleType);
+        //alert(failItemArr);
+        if (failItemArr != null && failItemArr.length > 0){
+            //设置按钮不可用
+            setButtonStatus(false);
+            //根据失败类型初始化失败重发内容
+            initTextByType(handleType);
+            setTimeout("getHandleResult(" + handleType + ", 2)", 3000);
+        }
+    }
+    
+    //获得失败重发结果
+    function getHandleResult(handleType, fetchCount){
+        selectedLogicAddrArr = failItemArr;
+        if (handleType == 1){
+            getBatchSetupResult(fetchCount);
+        }
+        else if (handleType == 2){
+            getBatchReadResult(fetchCount);
+        }
+    }
+    </script>
+  </head>
+
+  <body>
+    <input type="hidden" name="action" value="getQuery">
+    <input type="hidden" name="pageType" value="page">
+    <input type="hidden" name="sqlcode" value="AL_PARASET_0012">
+    <input type="hidden" name="commandItems" value="">
+    <input type="hidden" name="dataItems" value="">
+    <div>
+      <div id="tool">
+        <div class="opbutton2">
+          <input type="submit" value="查 询" id="query" class="input1">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="button" name="setupBt" value='设 置' class="input1" onclick="batchSetup();" />
+          <input type="button" name="readBt" value='读 取' class="input1" onclick="batchRead();" />
+          <input type="button" name="resetBt" value='失败重设' class="input2" onclick="rehandle();" />
+          <input type="button" name="groupBt" value='失败加入群组' class="input4" />
+          <input type="button" name="parasetBt" value='参数配置' class="input2" onclick="openParaset();" />
+        </div>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="70" class="label">供电单位：</td>
+            <td width="120" class="dom">
+              <select id="orgNo" name="orgNo">
+                <option value="44">
+                  广东省电力公司
+                </option>
+                <option value="4401">
+                  -- 广州市电力公司
+                </option>
+                <option value="4402">
+                  -- 韶关市电力公司
+                </option>
+                <option value="4403">
+                  -- 深圳市电力公司
+                </option>
+                <option value="4404">
+                  -- 珠海市电力公司
+                </option>
+                <option value="4405">
+                  -- 汕头市电力公司
+                </option>
+                <option value="4406">
+                  -- 佛山市电力公司
+                </option>
+                <option value="4407">
+                  -- 江门市电力公司
+                </option>
+                <option value="4408">
+                  -- 湛江市电力公司
+                </option>
+                <option value="440806">
+                  -- -- 遂溪供电局
+                </option>
+                <option value="440807">
+                  -- -- 徐闻供电局
+                </option>
+                <option value="440808">
+                  -- -- 吴川供电局
+                </option>
+                <option value="440809">
+                  -- -- 廉江供电局
+                </option>
+                <option value="440810">
+                  -- -- 雷州供电局
+                </option>
+                <option value="4409">
+                  -- 茂名市电力公司
+                </option>
+                <option value="4412">
+                  -- 肇庆市电力公司
+                </option>
+                <option value="4413">
+                  -- 惠州市电力公司
+                </option>
+                <option value="4414">
+                  -- 梅州市电力公司
+                </option>
+                <option value="4415">
+                  -- 汕尾市电力公司
+                </option>
+                <option value="4416">
+                  -- 河源市电力公司
+                </option>
+                <option value="4417">
+                  -- 阳江市电力公司
+                </option>
+                <option value="4418">
+                  -- 清远市电力公司
+                </option>
+                <option value="4419">
+                  -- 东莞市电力公司
+                </option>
+                <option value="4420">
+                  -- 中山市电力公司
+                </option>
+                <option value="4421">
+                  -- 潮州市电力公司
+                </option>
+                <option value="4422">
+                  -- 揭阳市电力公司
+                </option>
+                <option value="4423">
+                  -- 云浮市电力公司
+                </option>
+              </select>
+              <script type="text/javascript">$("#orgNo").val("44");</script>
+            </td>
+            <td width="70" class="label">当前状态：</td>
+            <td width="120" class="dom">
+              <select name="curStatus" id="curStatus">
+                <option value="1">
+                  运行
+                </option>
+                <option value="2">
+                  待调
+                </option>
+                <option value="6">
+                  故障
+                </option>
+                <option value="7">
+                  停运
+                </option>
+              </select>
+              <script type="text/javascript">document.all.curStatus.value="1";</script>
+            </td>
+            <td width="70" class="label">通信方式：</td>
+            <td width="120" class="dom">
+              <select name="commMode" id="commMode">
+                <option value="1">
+                  GPRS
+                </option>
+                <option value="2">
+                  CDMA
+                </option>
+                <option value="3">
+                  230M
+                </option>
+                <option value="4">
+                  232串口
+                </option>
+                <option value="5">
+                  有线网络
+                </option>
+                <option value="6">
+                  短信
+                </option>
+                <option value="7">
+                  电力专线
+                </option>
+              </select>
+              <script type="text/javascript">document.all.commMode.value="1";</script>
+            </td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td width="70" class="label">终端规约：</td>
+            <td width="120" class="dom">
+              <select name="proNo" id="proNo">
+                <option value="106">
+                  国网规约
+                </option>
+              </select>
+              <script type="text/javascript">document.all.proNo.value="106";</script>
+            </td>
+            <td width="70" class="label">终端类型：</td>
+            <td width="120" class="dom">
+              <select name="termType" id="termType">
+                <option value="01">
+                  负荷控制终端
+                </option>
+                <option value="02">
+                  负荷监测终端2
+                </option>
+                <option value="07">
+                  采集模块表
+                </option>
+              </select>
+              <script type="text/javascript">document.all.termType.value="01";</script>
+            </td>
+            <td colspan="5"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="content">
+        <div id="cont_1">
+          <div class="target">
+            <ul>
+              <li class="target_on">
+                <a href="#" onclick="return false;">终端信息</a>
+              </li>
+              <li class="clear"></li>
+            </ul>
+            <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+          </div>
+          <div class="tableContainer"
+            style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 122));">
+            <table id="object_table" border="0" cellpadding="0"
+              cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th width="7%">
+                    <input type="checkbox" id="selectAll"
+                      onclick="selectAllCB()" checked />
+                  </th>
+                  <th width="7%">
+                    序号
+                  </th>
+                  <th width="12%">
+                    对象编号
+                  </th>
+                  <th width="10%">
+                    对象类型
+                  </th>
+                  <th width="13%">
+                    供电单位
+                  </th>
+                  <th width="13%">
+                    终端逻辑地址
+                  </th>
+                  <th width="10%">
+                    终端类型
+                  </th>
+                  <th width="10%">
+                      通信方式
+                  </th>
+                  <th width="18%">
+                    操作结果
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="tr_45011114" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_45011114"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '45011114');" />
+                    <input type="checkbox" name="ItemID"
+                      value="45011114" checked />
+                  </td>
+                  <td>1</td>
+                  <td>10100201</td>
+                  <td>专变用户</td>
+                  <td>广州市电力公司</td>
+                  <td>45011114</td>
+                  <td>负荷控制终端</td>
+                  <td>GPRS</td>
+                  <td id="45011114"></td>
+                </tr>
+
+                <tr id="tr_14010002" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010002"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010002');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010002" checked />
+                  </td>
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    10100202
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010002
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010002"></td>
+                </tr>
+
+                <tr id="tr_14010003" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010003"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010003');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010003" checked />
+                  </td>
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    10100203
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010003
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010003"></td>
+                </tr>
+
+                <tr id="tr_14010004" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010004"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010004');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010004" checked />
+                  </td>
+                  <td>
+                    4
+                  </td>
+                  <td>
+                    10100204
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010004
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010004"></td>
+                </tr>
+
+                <tr id="tr_14010005" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010005"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010005');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010005" checked />
+                  </td>
+                  <td>
+                    5
+                  </td>
+                  <td>
+                    10100205
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010005
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010005"></td>
+                </tr>
+
+                <tr id="tr_14010006" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010006"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010006');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010006" checked />
+                  </td>
+                  <td>
+                    6
+                  </td>
+                  <td>
+                    10100206
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010006
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010006"></td>
+                </tr>
+
+                <tr id="tr_14010007" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010007"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010007');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010007" checked />
+                  </td>
+                  <td>
+                    7
+                  </td>
+                  <td>
+                    10100207
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010007
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010007"></td>
+                </tr>
+
+                <tr id="tr_14010008" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010008"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010008');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010008" checked />
+                  </td>
+                  <td>
+                    8
+                  </td>
+                  <td>
+                    10100208
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010008
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010008"></td>
+                </tr>
+
+                <tr id="tr_14010009" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010009"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010009');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010009" checked />
+                  </td>
+                  <td>
+                    9
+                  </td>
+                  <td>
+                   10100209
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010009
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010009"></td>
+                </tr>
+
+                <tr id="tr_14010010" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_14010010"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '14010010');" />
+                    <input type="checkbox" name="ItemID"
+                      value="14010010" checked />
+                  </td>
+                  <td>
+                    10
+                  </td>
+                  <td>
+                    10100210
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    14010010
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="14010010"></td>
+                </tr>
+                <tr id="tr_24010001" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010001"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010001');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010001" checked />
+                  </td>
+                  <td>
+                    11
+                  </td>
+                  <td>
+                    20100201
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010001
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010001"></td>
+                </tr>
+
+                <tr id="tr_24010002" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010002"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010002');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010002" checked />
+                  </td>
+                  <td>
+                    12
+                  </td>
+                  <td>
+                    20100202
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010002
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010002"></td>
+                </tr>
+
+                <tr id="tr_24010003" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010003"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010003');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010003" checked />
+                  </td>
+                  <td>
+                    13
+                  </td>
+                  <td>
+                    20100203
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010003
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010003"></td>
+                </tr>
+
+                <tr id="tr_24010004" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010004"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010004');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010004" checked />
+                  </td>
+                  <td>
+                    14
+                  </td>
+                  <td>
+                    20100204
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010004
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010004"></td>
+                </tr>
+
+                <tr id="tr_24010005" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010005"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010005');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010005" checked />
+                  </td>
+                  <td>
+                    15
+                  </td>
+                  <td>
+                    20100205
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010005
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010005"></td>
+                </tr>
+
+                <tr id="tr_24010006" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010006"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010006');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010006" checked />
+                  </td>
+                  <td>
+                    16
+                  </td>
+                  <td>
+                    20100206
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010006
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010006"></td>
+                </tr>
+
+                <tr id="tr_24010007" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010007"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010007');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010007" checked />
+                  </td>
+                  <td>
+                    17
+                  </td>
+                  <td>
+                    20100207
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010007
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010007"></td>
+                </tr>
+
+                <tr id="tr_24010008" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010008"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010008');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010008" checked />
+                  </td>
+                  <td>
+                    18
+                  </td>
+                  <td>
+                    20100208
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010008
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010008"></td>
+                </tr>
+
+                <tr id="tr_24010009" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010009"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010009');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010009" checked />
+                  </td>
+                  <td>
+                    19
+                  </td>
+                  <td>
+                   20100209
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010009
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010009"></td>
+                </tr>
+
+                <tr id="tr_24010010" align="center" class="trmainstyle">
+                  <td>
+                    <img align="absmiddle" id="img_24010010"
+                      src="../../img/tree2/plus1.gif"
+                      style="display: none"
+                      onclick="folder(this, '24010010');" />
+                    <input type="checkbox" name="ItemID"
+                      value="24010010" checked />
+                  </td>
+                  <td>
+                    20
+                  </td>
+                  <td>
+                    20100210
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    24010010
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td id="24010010"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageContainer">
+            <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

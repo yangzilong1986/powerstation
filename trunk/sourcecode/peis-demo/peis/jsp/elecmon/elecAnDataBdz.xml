@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)">
+    <td1>民安供电所</td1>
+    <td2>110kV洋青站</td2>
+    <td3>110kV</td3>
+    <td4>51104934</td4>
+    <td5>1</td5>
+    <td6>110kV冠豪线F27（主）</td6>
+    <td7>错接线</td7>
+    <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>     
+  </data>
+  <data js="onclick=selectSingleRow(this);" >
+    <td1>南调供电所</td1>
+    <td2>35kV南昌站</td2>
+    <td3>35kV</td3>
+    <td4>51104924</td4>
+    <td5>3</td5>
+    <td6>35kV南昌站站用变</td6>
+    <td7>错接线</td7>
+    <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+  </data>
+  <data js="onclick=selectSingleRow(this);">
+    <td1>乾塘供电所</td1>
+    <td2>110kV海安站</td2>
+    <td3>110kV</td3>
+    <td4>51124934</td4>
+    <td5>1</td5>
+    <td6>110kV坪飞线 1150(副）</td6>
+    <td7>错接线</td7>
+    <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+  </data>
+  <data js="onclick=selectSingleRow(this);">
+        <td1>官渡供电所</td1>
+        <td2>500kV港城站</td2>
+        <td3>500kV</td3>
+        <td4>51104937</td4>
+        <td5>2</td5>
+        <td6>110kV赤沙甲线 1127</td6>
+        <td7>错接线</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+   </data>
+</datas>
+
+<!-- 
+<th>序号</th>  
+           <th>供电单位</th>
+           <th>变电站名称</th>
+           <th>电压等级</th>
+           <th>设备地址</th>
+           <th>测量点序号</th>
+           <th>测量点名称</th>
+           <th>事件内容</th>
+           <th>数据明细</th>  
+ -->

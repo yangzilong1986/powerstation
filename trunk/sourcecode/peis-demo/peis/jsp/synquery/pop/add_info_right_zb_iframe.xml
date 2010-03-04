@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>户号</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>户名</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>供电单位</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>供电线路</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>行业</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>电压等级</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>用电类别</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>行政区号</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>抄表区号</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>合同容量</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>运行容量</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>安保容量</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>生产班次</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>负荷性质</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>厂休日</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3> 高能耗类别</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>   
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3> 功率因数</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>联系人</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>联系电话</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>备注</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>   
+</datas>

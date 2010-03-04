@@ -1,0 +1,220 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据项选择</title>
+<link href="../../css/window.css" rel="stylesheet"type="text/css">
+<script type="text/javascript" language="javascript" src="../../js/autorm/task.js"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+var choosedItems = "";
+choosedItems = top.getMainFrameObj().taskoperate.dataItems;
+</script>
+</head>
+
+<body onload="dataItemInit()">
+  <div id="body">
+    <div class="tab"><em>高级任务读设</em></div>
+    <div id="main" style="width: expression(((document.documentElement.clientWidth || document.body.clientWidth) - 18));">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="70" class="label">规约类型：</td>
+            <td width="150" class="dom">
+              <select name="protocol_type" id="protocol_type">
+                <option value="100-1">698规约-专变用户</option>
+                <option value="146-1">广东变电站规约-专变用户</option>
+                <option value="122-1">广东大用户规约-专变用户</option>
+                <option value="123-1">广东大用户规约（第二版）-专变用户</option>
+                <option value="126-1">广东集抄规约-专变用户</option>
+                <option value="124-1">广东配变规约-专变用户</option>
+                <option value="106-1">国网规约-专变用户</option>
+                <option value="125-1">江西配变规约-专变用户</option>
+                <option value="120-1">浙江规约-专变用户</option>
+                <option value="121-1">浙江增补规约-专变用户</option>
+                <option value="129-1">浙江自定义规约-专变用户</option>
+              </select>
+              <script type="text/javascript">document.all.protocol_type.value="106-1";</script>
+            </td>
+            <td width="70" class="label">数据类型：</td>
+            <td width="120" class="dom">
+              <select name="dataType" id="dataType" >
+                <option value="106000">当前数据</option>
+                <option value="106010">小时冻结数据</option>
+                <option value="106100">日冻结数据</option>
+                <option value="106110">抄表日冻结数据</option>
+                <option value="106200">月冻结数据</option>
+                <option value="106300">曲线数据</option>
+              </select>
+              <script type="text/javascript">document.all.dataType.value="106200";</script>
+            </td>
+            <td colspan="4"></td>
+            <td class="functionLabe2" width="150" align="right">
+              <input type="button" class="input2" onclick="setDataItem()" value=" 确 定 "/>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="content">
+        <div id="cont_1">
+          <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 122));">
+            <table id="dataItems" border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th width="5%" style="border-left: 1px solid #85C0B4;">序号</th>
+                  <th width="20%">数据项代码</th>
+                  <th width="70%">数据项名称</th>
+                  <th width="5%"><input type="checkbox" name="chooseAllItem" onclick="chooseAll()"/></th>
+                </tr>
+              </thead>
+              <tbody align="center">
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">1</td>
+                  <td>100D0017</td>
+                  <td>正向有/无功电能示值、一/四象限无功电能示值（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">2</td>
+                  <td>100D0018</td>
+                  <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">3</td>
+                  <td>100D0019</td>
+                  <td>正向有/无功最大需量及发生时间（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">4</td>
+                  <td>100D0020</td>
+                  <td>反向有/无功最大需量及发生时间（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">5</td>
+                  <td>100D0021</td>
+                  <td>正向有功电能量（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">6</td>
+                  <td>100D0022</td>
+                  <td>正向无功电能量（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">7</td>
+                  <td>100D0023</td>
+                  <td>反向有功电能量（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">8</td>
+                  <td>100D0024</td>
+                  <td>反向无功电能量（总、费率1~M）</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">9</td>
+                  <td>100D0033</td>
+                  <td>月总及分相最大有功功率及发生时间、有功功率为零时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">10</td>
+                  <td>100D0034</td>
+                  <td>月总及分相有功最大需量及发生时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">11</td>
+                  <td>100D0035</td>
+                  <td>月电压统计数据</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">12</td>
+                  <td>100D0036</td>
+                  <td>月不平衡度越限累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">13</td>
+                  <td>100D0037</td>
+                  <td>月电流越限统计</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">14</td>
+                  <td>100D0038</td>
+                  <td>月视在功率越限累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">15</td>
+                  <td>100D0044</td>
+                  <td>月功率因数区段累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">11</td>
+                  <td>100D0035</td>
+                  <td>月电压统计数据</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">12</td>
+                  <td>100D0036</td>
+                  <td>月不平衡度越限累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">13</td>
+                  <td>100D0037</td>
+                  <td>月电流越限统计</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">14</td>
+                  <td>100D0038</td>
+                  <td>月视在功率越限累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+                
+                <tr>
+                  <td style="border-left: 1px solid #85C0B4;">15</td>
+                  <td>100D0044</td>
+                  <td>月功率因数区段累计时间</td>
+                  <td><input type="checkbox" name="choose"/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

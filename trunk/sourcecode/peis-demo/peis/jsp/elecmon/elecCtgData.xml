@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>-->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>太平供电所</td1>
+        <td2>0800309816</td2>
+		<td3>张石海</td3>
+		<td4>1</td4>
+		<td5>2009-09-19 12:23:09</td5>
+		<td6>2009-09-20 12:23:0</td6>
+		<td7>A相电压断相</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>民安供电所</td1>
+        <td2>0800309796</td2>
+		<td3>黄玉</td3>
+		<td4>1</td4>
+		<td5>2009-09-19 14:21:02</td5>
+		<td6>2009-09-19 13:12:02</td6>
+		<td7>C相电压断相</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+	<data js="onclick=selectSingleRow(this)" >
+        <td1>南调供电所</td1>
+        <td2>0800309610</td2>
+		<td3>黄秋路</td3>
+		<td4>1</td4>
+		<td5>2009-09-19 14:21:02</td5>
+		<td6>2009-09-19 13:12:02</td6>
+		<td7>C相电压断相</td7>
+		<td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+    
+</datas>

@@ -1,0 +1,157 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电表参数管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+function setTarget(i) {
+    if(i == 1) {
+        $("#cont_1").css("display", "block");
+        $("#cont_2").css("display", "none");
+        $("#readBt").css("display", "inline-block");
+        $("#addOrModBt").css("display", "inline-block");
+        $("#deleteBt").css("display", "none");
+    }
+    else if(i == 2) {
+        $("#cont_1").css("display", "none");
+        $("#cont_2").css("display", "block");
+        $("#readBt").css("display", "none");
+        $("#addOrModBt").css("display", "none");
+        $("#deleteBt").css("display", "inline-block");
+    }
+}
+
+$(document).ready( function() {
+    /**
+     * 
+     */
+    $("#selectall_1").click( function() {
+        if($("#selectall_1").attr("checked")) {
+            $("input[type=checkbox][name='itemid1']").each( function() {
+                $(this).attr("checked", true);
+            });
+        }
+        else {
+            $("input[type=checkbox][name='itemid1']").each( function() {
+                $(this).attr("checked", false);
+            });
+        }
+        //alert(getSelectedCheckboxsByName("itemid1"));
+    });
+
+    /**
+      * 
+      */
+    $("#selectall_2").click( function() {
+        if($("#selectall_2").attr("checked")) {
+            $("input[type=checkbox][name='itemid2']").each( function() {
+                $(this).attr("checked", true);
+            });
+        }
+        else {
+            $("input[type=checkbox][name='itemid2']").each( function() {
+                $(this).attr("checked", false);
+            });
+        }
+        //alert(getSelectedCheckboxsByName("itemid2"));
+    });
+});
+
+function query(){
+    createdpage.query();
+    uncreatedpage.deleteData();
+}
+
+function readInfo(){
+    createdpage.read();
+    uncreatedpage.deleteData();
+}
+
+function addOrModInfo(){
+    createdpage.addOrMod();
+}
+
+//设置按钮状态(status=true: 按钮可用, status=false: 按钮不可用)
+function setButtonStatus(status){
+    document.all.queryBt.disabled = !status;
+    document.all.readBt.disabled = !status;
+    document.all.addOrModBt.disabled = !status;
+    document.all.deleteBt.disabled = !status;
+    document.all.resetBt.disabled = !status;
+}
+
+function rehandle() {
+    var cont1 = $("#cont_1").css("display");
+    if ('block' == cont1) {
+        createdpage.rehandle();
+    }
+    else {
+        uncreatedpage.rehandle();
+    }
+}
+
+function deleteInfo(){
+    uncreatedpage.deleteInfo();
+}
+
+function exportData(){
+}
+</script>
+</head>
+
+<body>
+  <div>
+    <div id="tool">
+      <div class="opbutton1">
+        <input type="button" class="input1" id="queryBt" value="查 询" onclick="query();">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" class="input3" id="readBt" value="读电表信息" onclick="readInfo();">
+        <input type="button" class="input4" id="addOrModBt" value="增加修改电表信息" onclick="addOrModInfo();">
+        <input type="button" class="input4" id="deleteBt" value="删除电表信息" onclick="deleteInfo();" style="display: none;">
+        <input type="button" class="input2" id="resetBt" value="失败重设" onclick="rehandle();">
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="86" class="label">集中器地址：</td>
+          <td width="120" class="dom">
+            <input type="text" name="powerAddr" size="6">
+          </td>
+          <td colspan="7">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="setTarget(1); return false;">已建档电表信息</a></li>
+            <li class="target_off"><a href="#" onclick="setTarget(2); return false;">未建档电表信息</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 57));">
+          <iframe name="createdpage" frameborder="0" width="100%" height="100%" scrolling="no" src="createdAmmeterList.html"></iframe>
+        </div>
+      </div>
+      <div id="cont_2" style="display: none;">
+        <div class="target4">
+          <ul>
+            <li class="target_off"><a href="#" onclick="setTarget(1); return false;">已建档电表信息</a></li>
+            <li class="target_on"><a href="#" onclick="setTarget(2); return false;">未建档电表信息</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 57));">
+          <iframe name="uncreatedpage" frameborder="0" width="100%" height="100%" scrolling="no" src="uncreatedAmmeterList.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

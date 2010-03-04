@@ -1,0 +1,142 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>换表</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../../js/frame/const.js"></script> 
+<!-- private js -->
+<script type="text/javascript" src="../../../js/runmanage/insteadCPT.js"></script>
+</head>
+<body>
+<div id="body">
+  
+  <div id="main">
+  <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 335));">
+    <div id="detail">
+      <div class="top">
+        <div class="main">老表信息</div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+      <div class="center">
+        <table border="0" cellpadding="0" cellspacing="0" width="95%">
+          <tr>
+            <td >表号：</td>
+            <td><input id="ammeNumb" type="text" value="" /></td>
+            <td><input class="input1" type="submit" id="query" value="查 询"/></td>
+            <td>所属对象：</td>
+            <td><input type="text" value="杭州百富" disabled="disabled"/></td>
+            <td>CT变比：</td>
+            <td><input type="text" value="500/5" disabled="disabled"/></td>
+            <td>PT变比：</td>
+            <td><input type="text" value="1000/5" disabled="disabled"/></td>
+          </tr> 
+          <tr>
+            <td colspan="3"></td>
+            <td>电 表厂家：</td>
+            <td><input type="text" value="杭州百富" disabled="disabled"/></td>
+            <td>电表型号：</td>
+            <td><input type="text" value="GTS_15" disabled="disabled"/></td>
+            <td>通讯地址：</td>
+            <td><input type="text" value="343257777" disabled="disabled"/></td>
+          </tr>            
+        </table>   
+      </div>
+      <div class="bottom">
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    <div id="detail">
+      <div class="top">
+        <div class="main">新表信息</div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+      <div class="center">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td class="label" width="66">CT变比：</td>
+            <td><input type="text" id="ct" value="" /></td>
+            <td>PT变比：</td>
+            <td><input type="text" id="pt" value="" /></td>
+            <td>变更时间：</td>
+            <td>
+              <input type="text" value="2009-10-01" size="6">
+                <select id="zxbh_hh">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                </select>时
+                <select id="zxbh_mi">
+                  <option value="0">0</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                  <option value="55">55</option>
+                </select>分
+             </td>  
+          </tr> 
+          <tr>
+            <td class="label" width="66">备注：</td>
+            <td colspan="5">
+                <textarea rows="5" cols="80"></textarea>
+            </td>
+          </tr>                
+        </table>   
+      </div>
+      <div class="bottom">
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+    </div>
+    </div>
+    <div>
+      <table align="center">
+        <tr>
+          <td><input class="input1" type="button" id="new" value="新 建" style="display:none;"/></td>
+          <td><input class="input1" type="button" value="删 除" style="display:none;"/></td>
+          <td><input class="input1" type="button" id="save" value="保 存"/></td>
+        </tr>
+      </table>      
+    </div>
+  </div>
+</div>
+</body>
+</html>

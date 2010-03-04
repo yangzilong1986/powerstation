@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;1401891037&lt;/a&gt;</td4>
+        <td5>110</td5>
+        <td6>80</td6>
+        <td7>30</td7>
+        <td8>91.15%</td8>
+        <td9>77%</td9>
+        <td10>66%</td10>  
+        <td11>60%</td11>  
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;1401891037&lt;/a&gt;</td4>
+        <td5>110</td5>
+        <td6>80</td6>
+        <td7>30</td7>
+        <td8>91.15%</td8>
+        <td9>77%</td9>
+        <td10>66%</td10>  
+        <td11>60%</td11>  
+    </data>
+   
+</datas>

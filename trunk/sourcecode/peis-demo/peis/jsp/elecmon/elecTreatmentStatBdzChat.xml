@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?> 
+<chart caption='' xAxisName='电压等级' yAxisName='处理率' numberPrefix='%' showValues='0'>
+   <set label='' value='99' />
+   <set label='' value='99' />
+</chart>  
+

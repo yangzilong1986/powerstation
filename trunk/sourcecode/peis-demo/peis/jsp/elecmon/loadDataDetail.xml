@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>00：00</td1>
+        <td2>66</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>01：00</td1>
+        <td2>53</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>02：00</td1>
+        <td2>65</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>03：00</td1>
+        <td2>78</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>04：00</td1>
+        <td2>43</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>05：00</td1>
+        <td2>32</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>06：00</td1>
+        <td2>57</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>07：00</td1>
+        <td2>13</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>08：00</td1>
+        <td2>90</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>09：00</td1>
+        <td2>67</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>10：00</td1>
+        <td2>69</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>11：00</td1>
+        <td2>70</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>12：00</td1>
+        <td2>66</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>13：00</td1>
+        <td2>23</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>14：00</td1>
+        <td2>24</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>15：00</td1>
+        <td2>45</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>16：00</td1>
+        <td2>9</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>17：00</td1>
+        <td2>8</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>18：00</td1>
+        <td2>23</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>19：00</td1>
+        <td2>33</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>20：00</td1>
+        <td2>55</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>21：00</td1>
+        <td2>23</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>22：00</td1>
+        <td2>13</td2>      
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>23：00</td1>
+        <td2>43</td2>
+    </data>
+    
+</datas>

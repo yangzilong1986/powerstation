@@ -1,0 +1,282 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>参数模板管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"> 
+function init() {
+    changeTab(1);
+    document.all.changeType.value = "1";
+}
+ 
+function changeTab(index) {
+    var proNo = document.all.proNo.value;
+    var termTpType = document.all.termTpType.value;
+    document.all.changeType.value = index;
+    
+    if(index == "1") {
+        $("#target_1").removeClass();
+        $("#target_2").removeClass();
+        $("#target_1").addClass("target_on");
+        $("#target_2").addClass("target_off");
+        loadPara(index, proNo, termTpType);
+        //parapage.document.location = "../../jsp/eparam/termTpList.html";
+    }
+    else {
+        $("#target_1").removeClass();
+        $("#target_2").removeClass();
+        $("#target_1").addClass("target_off");
+        $("#target_2").addClass("target_on");
+        loadPara(index, proNo, termTpType);
+        //parapage.document.location = "../../jsp/eparam/gpTpList.html";
+    }
+}
+
+function paraTpQuery(){
+    var index = document.all.changeType.value;
+    var proNo = document.all.proNo.value;
+    var termTpType = document.all.termTpType.value;
+    
+    loadPara(index, proNo, termTpType);
+}
+
+function loadPara(index, proNo, termTpType){
+    if(index == "1") {
+        if(proNo == "100" || proNo == "106"){
+            parapage.document.location = "../../jsp/eparam/termTpList.html";
+        }
+        else {
+            parapage.document.location = "../../jsp/eparam/termTpList_01.html";
+        }
+    }
+    else {
+        if(proNo == "100" || proNo == "106"){
+            parapage.document.location = "../../jsp/eparam/gpTpList.html";
+        }
+        else {
+            parapage.document.location = "../../jsp/eparam/gpTpList_01.html";
+        }
+    }
+}
+
+function updateValue() {
+    parapage.updateParaTp();
+}
+ 
+function recoverDefault() {
+    
+}
+
+/**
+ * 得到已选择队列
+ * type:0-不加引号，1-加引号
+ */
+function getSelectedIdString(type) {
+    var sResult = "";
+    try {
+        if(type == 1) {
+            if(typeof parapage.document.all.ItemID != "undefined" && typeof parapage.document.all.ItemID.length == "undefined") {
+                 if(parapage.document.all.ItemID.checked) {
+                     sResult += ",'" + parapage.document.all.ItemID.value + "'";
+                 }
+            }
+            else if(typeof parapage.document.all.ItemID != "undefined" && typeof parapage.document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < parapage.document.all.ItemID.length; i++) {
+                    if(parapage.document.all.ItemID[i].checked) {
+                        sResult += ",'" + parapage.document.all.ItemID[i].value + "'";
+                    }
+                }
+            }
+        }
+        else {
+            if(typeof parapage.document.all.ItemID != "undefined" && typeof parapage.document.all.ItemID.length == "undefined") {
+                 if(parapage.document.all.ItemID.checked) {
+                     sResult += "," + parapage.document.all.ItemID.value;
+                 }
+            }
+            else if(typeof parapage.document.all.ItemID != "undefined" && typeof parapage.document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < parapage.document.all.ItemID.length; i++) {
+                    if(parapage.document.all.ItemID[i].checked) {
+                        sResult += "," + parapage.document.all.ItemID[i].value;
+                    }
+                }
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+function checkDataItem(){
+    var selectedOrderIdList = getSelectedIdString(0);
+    var selectedOrderIdArr = selectedOrderIdList.split(",");
+    var itemArr;
+    var itemValue;
+    var itemFormat;
+    for(var i=0; i<selectedOrderIdArr.length; i++){
+        itemArr = parapage.document.getElementsByName("itemid_" + selectedOrderIdArr[i]);
+        for(var j=0; j<itemArr.length; j++){
+            itemValue = parapage.document.getElementById("itemvalue_" + itemArr[j].value).value;
+            itemFormat = parapage.document.getElementById("itemformat_" + itemArr[j].value);
+            if(itemFormat==null || itemFormat.value==null || itemFormat.value == ""){
+                continue;
+            }
+            if(itemFormat.value == "xxx.xxx.xxx.xxx:xxxxx"){
+                if(!checkIPAndPort(itemValue)){
+                    alert("数据项 "+itemArr[j].value+" 验证不通过!");
+                    return false;
+                }
+            }
+            else if(itemFormat.value == "x" || itemFormat.value == "xx" || itemFormat.value == "xxx"){
+                if(!checkNumber(itemValue, itemFormat.value.length)){
+                    alert("数据项 "+itemArr[j].value+" 验证不通过!");
+                    return false;
+                }
+            }
+            else if(itemFormat.value == "ASCII"){
+                if(!checkASCII(itemValue)){
+                    alert("数据项 "+itemArr[j].value+" 验证不通过!");
+                    return false;
+                }
+            }
+            else if(itemFormat.value == "HH:mm"){
+                if(!checkTime(itemValue)){
+                    alert("数据项 "+itemArr[j].value+" 验证不通过!");
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+function checkNumber(itemValue, digit){
+    if(itemValue == null || itemValue == ""){
+        return false;
+    }
+    var reg = /^[0-9]+$/g;
+    if(digit == 1){
+        reg = /^[0-9]$/g;
+    }
+    else if(digit == 2){
+        reg = /^[1-9][0-9]{1}$/g;
+    }
+    else if(digit == 3){
+        reg = /^[1-9][0-9]{2}$/g;
+    }
+    if(reg.test(itemValue)){
+        return true;
+    }
+    return false;
+}
+
+function checkIPAndPort(itemValue){
+    if(itemValue == null || itemValue == ""){
+        return false;
+    }
+    var reg = /^(\d+)\.(\d+)\.(\d+)\.(\d+)\:(\d+)$/g;
+    if(reg.test(itemValue)){
+        if(RegExp.$1<256 && RegExp.$2<256 && RegExp.$3<256 && RegExp.$4<256 && RegExp.$5<65536){
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkASCII(itemValue){
+    if(itemValue == null || itemValue == ""){
+        return false;
+    }
+    if(itemValue.match(/^[0-9A-Za-z]+$/) == null){
+        return false;
+    }
+    return true;
+}
+
+function checkTime(itemValue){
+    if(itemValue == null || itemValue == ""){
+        return false;
+    }
+    var reg = /^(\d+)\:(\d+)$/g;
+    if(reg.test(itemValue)){
+        if(RegExp.$1<24 && RegExp.$2<60){
+            return true;
+        }
+    }
+    return false;
+}
+
+</script>
+</head>
+<body onload="init()">
+  <input type="hidden" name="changeType" value="">
+  <div>
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input4" type="button" name="save" value='保存当前参数' onclick="updateValue();">
+        <input class="input4" type="button" name="load" value='载入默认参数' onclick="recoverDefault();">
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">终端规约：</td>
+          <td width="120" class="dom">
+            <select name="proNo" id="proNo"  onChange="paraTpQuery();">
+              <option value="100">698规约</option>
+              <option value="106">国网规约</option>
+              <option value="107">天津模块表规约</option>
+              <option value="120">浙江规约</option>
+              <option value="122">广东大用户规约</option>
+              <option value="124">广东配变规约</option>
+              <option value="125">江西配变规约</option>
+              <option value="126">广东集抄规约</option>
+              <option value="129">浙江自定义规约</option>
+              <option value="140">广东变电站规约</option>
+            </select>
+          </td>
+          <td width="70" class="label">设备类型：</td>
+          <td width="120" class="dom">
+            <select name="termTpType" id="termTpType"  onChange="paraTpQuery();">
+              <option value="1">公网专变终端</option>
+              <option value="2">公网配变终端</option>
+              <option value="3">公网集中器</option>
+              <option value="4">公网远传表</option>
+              <option value="5">230M专变终端</option>
+              <option value="6">有线专变终端</option>
+              <option value="7">有线配变终端</option>
+              <option value="8">有线集中器</option>
+              <option value="9">有线远传表</option>
+            </select>
+          </td>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li id="target_1" class="target_on">
+              <a href="#" onClick="changeTab(1);return false;">终端参数</a>
+            </li>
+            <li id="target_2" class="target_off">
+              <a href="#" onClick="changeTab(2);return false;">测量点参数</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 57));">
+          <iframe name="parapage" frameborder="0" width="100%" height="100%" scrolling="no" src=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,191 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>电流三相不平衡分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+var msgText='请输入户号或户名';
+$(document).ready( function() {
+ //供电单位
+ $.handelCombox('orgNoTar','orgNo');
+ //线路
+ $.handelCombox('lineNoTar','lineNo');
+ 
+ $('[name="objectType"]:radio').click(function(){
+      var objectType=$('[name="objectType"][checked=true]:radio').val();
+      if(objectType==1){
+         $("#objectNameLable").html("用　户：");
+         msgText='请输入户号或户名';
+      }else if(objectType==2){
+         $("#objectNameLable").html("配　变：");
+         msgText='请输入台区号或台区名';
+      }
+      $('#tgName').val(msgText);
+  })
+  inpuTextStyle();
+});
+
+//查询
+function query(){
+  var objectType=$('[name="objectType"][checked=true]:radio').val();
+  if(objectType==1){
+    switchTheadElecThree(objectType);
+    $.json2html("DATA_TBODY","../../jsp/transbiz/xml/elecThreePhaseAnalysis_Data_1.xml","cb-item");
+  }else if(objectType==2){
+    switchTheadElecThree(objectType);
+    $.json2html("DATA_TBODY","../../jsp/transbiz/xml/elecThreePhaseAnalysis_Data_2.xml","cb-item");
+  }
+}
+//数据时间切换
+function switchDataTime(){
+  var dateType=$("#dateType").val();
+  if(dateType==1){
+     $("#DATA_DAY").show();
+     $("#DATA_YEAR").hide();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").hide();
+  }else if(dateType==2){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").show();
+     $("#DATA_QUARTER").hide();
+  }else if(dateType==3){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").show();
+  }else if(dateType==4){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").hide();
+  }
+}
+//明细查询
+function openLoadDetail(objectNo,objectName,assetNo){
+   var dataTime=$("#dataTime").val();
+   var dateType=$("#dateType").val();
+   var objectType=$('[name="objectType"][checked=true]:radio').val();
+   var params = {    
+                   "objectNo":objectNo,
+                   "objectName":objectName,
+                   "assetNo":assetNo,
+                   "dataTime":dataTime,
+                   "objectType":objectType
+                };
+   var url="../../jsp/transbiz/elecThreePhaseDetail.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   top.showDialogBox("电流明细",url, 575, 900);
+}
+//输入框文字效果
+function inpuTextStyle(){
+  $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+  $('#tgName').blur(function(){
+    if(this.value==''){
+      this.value=msgText;
+      $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+    }
+  });
+  $('#tgName').focus(function(){
+    if(this.value==msgText){
+       this.value='';
+       $('#tgName').attr({style: "color:black;width:140px;"});
+     }
+  });
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton3"><input type="submit" name="query" onClick="query();" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" height="92">
+        <tr>
+          <td colspan="8">
+             <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变用户
+             <input type="radio" name="objectType" value="2" class="dom" />配变/台区
+          </td>
+        </tr>
+        <tr> 
+          <td width="66" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgNoTar"></td>
+          <td width="66" class="label">线　路：</td>
+          <td width="120" class="dom" id="lineNoTar"></td>
+          <td width="66" class="label" id="objectNameLable">用　户：</td>
+          <td width="150" class="dom"> 
+            <input type="text" id="tgName" name="tgName" value="请输入户号或户名" />
+          </td>
+          <td colspan="4"></td>
+        </tr>
+        <tr>
+          <td width="66" class="label">开始时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+          </td>
+          <td width="66" class="label">结束时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+          </td>
+          <td width="66" class="label">累计时间：</td>
+          <td width="140" class="dom_date">
+            <select id="symbol" name="symbol">
+              <option value=""><</option>
+              <option value=""><=</option>
+              <option value="">=</option>
+              <option value="">>=</option>
+              <option value="">></option>
+            </select>
+            <input type="text" id="loadRate" name="loadRate" value="300" style="width:60px;"/>分
+          </td>
+          <td colspan="4" align="right" width="39%">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on"><a href="#" onclick="setTarget(1); return false;">电流不平衡明细</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 170));">
+          <table border="0" cellpadding="0" cellspacing="0" width="120%">
+            <thead id="DATA_THEAD">
+             <tr>
+              <th>序号</th>
+              <th>电流明细</th>
+              <th>供电单位</th>
+              <th>户号</th>
+              <th>户名</th>
+              <th>变压器号</th>
+              <th>变压器名</th>
+              <th>表号</th>
+              <th>不平衡累计时间(分)</th>
+              <th>不平衡次数</th>
+              <th>最大不平衡率(%)</th>
+              <th>平均不平衡率(%)</th>
+              <th>最小不平衡率(%)</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <input type="hidden" id="showType" name="showType" value="pag" />显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select> 　第1页 / 共1页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <font style="font-size: 14px; font-family: webdings">8</font> <font style="font-size: 14px; font-family: webdings">:</font>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

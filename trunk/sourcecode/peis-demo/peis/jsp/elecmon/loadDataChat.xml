@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='' labelStep='1' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='0'>
+	<categories >
+		<category label='0:00' />
+		<category label='1:00' />
+		<category label='2:00' />
+		<category label='3:00' />
+		<category label='4:00' />
+		<category label='5:00' />
+		<category label='6:00' />
+		<category label='7:00' />
+		<category label='8:00' />
+		<category label='9:00' />
+		<category label='10:00' />
+		<category label='11:00' />
+		<category label='12:00' />
+		<category label='13:00' />
+		<category label='14:00' />
+		<category label='15:00' />
+		<category label='16:00' />
+		<category label='17:00' />
+		<category label='18:00' />
+		<category label='19:00' />
+		<category label='20:00' />
+		<category label='21:00' />
+		<category label='22:00' />
+		<category label='23:00' />
+	</categories>
+
+  <dataset seriesName='' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='66' />
+        <set value='53' />
+        <set value='65' />
+        <set value='78' />
+        <set value='43' />
+        <set value='32' />
+        <set value='57' />
+        <set value='13' />
+        <set value='90' />
+        <set value='67' />
+        <set value='69' />
+        <set value='70' />
+        <set value='66' />
+        <set value='23' />
+        <set value='24' />        
+        <set value='45' />
+        <set value='9' />
+        <set value='8' />
+        <set value='23' />
+        <set value='33' />
+        <set value='55' />
+        <set value='23' />
+        <set value='13' />
+        <set value='43' />
+  </dataset>
+  <dataset seriesName='' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='26' />
+        <set value='33' />
+        <set value='45' />
+        <set value='58' />
+        <set value='63' />
+        <set value='56' />
+        <set value='47' />
+        <set value='67' />
+        <set value='48' />
+        <set value='69' />
+        <set value='62' />
+        <set value='43' />
+        <set value='66' />
+        <set value='34' />
+        <set value='40' />        
+        <set value='23' />
+        <set value='27' />
+        <set value='29' />
+        <set value='43' />
+        <set value='41' />
+        <set value='33' />
+        <set value='21' />
+        <set value='25' />
+        <set value='32' />
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

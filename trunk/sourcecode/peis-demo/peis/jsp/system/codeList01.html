@@ -1,0 +1,852 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>编码列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript">
+    var contextPath = "../..";      
+    var sSelectedCodeCate = "";   
+    function selectRow(sCodeCate, oRow) {
+        sSelectedCodeCate = sCodeCate;
+        selectSingleRow(oRow);
+    }
+ 
+    //列表变更
+    function changeList(type) {
+        if("1" == type){
+           parent.codeList.location.href = "codeList.html";
+           parent.codeDetail.location.href = "codeDetail.html";
+        }
+        else {
+           parent.codeList.location.href = "codeList01.html";
+           parent.codeDetail.location.href = "codeDetail01.html";
+        }
+    }
+  
+    function init(){
+        var len = document.getElementsByTagName("tr");
+        var obj = len[2];
+        obj.onclick();
+    }
+    </script>
+  </head>
+ 
+  <body onload="init();">
+    <div id="body">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="66" class="label">
+              编码类别：
+            </td>
+            <td width="120" class="dom">
+              <form name="codeForm" method="post" action="../../system/codeAction.do">
+                <input type="hidden" name="action" value="getQuery" />
+                <select name="codeType" onchange="changeList(this.options[this.options.selectedIndex].value)">
+                  <option value="0" selected="selected">系统编码</option>
+                  <option value="1">用户编码</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+        </table>
+        <div class="clear"></div>
+      </div>
+      <div class="content">
+        <div id="cont_1">
+          <div id="tableContainer" class="tableContainer"
+            style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 64));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th width="10%">
+                    序号
+                  </th>
+                  <th width="40%">
+                    编码类别
+                  </th>
+                  <th width="50%">
+                    编码类别说明
+                  </th>
+                </tr>
+              </thead>
+              <tbody>  
+                <tr align="center" class="trmainstyle" onclick="selectRow('ALARM_GRADE', this)" style="cursor: pointer;">
+                  <td>
+                    1
+                  </td>
+                  <td>
+                    ALARM_GRADE
+                  </td>
+                  <td>
+                    预警等级
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('AN_CYCLE', this)" style="cursor: pointer;">
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    AN_CYCLE
+                  </td>
+                  <td>
+                    分析周期
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('AN_TACTICS', this)" style="cursor: pointer;">
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    AN_TACTICS
+                  </td>
+                  <td>
+                    分析策略
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('BS_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    4
+                  </td>
+                  <td>
+                    BS_TYPE
+                  </td>
+                  <td>
+                    报停类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('BTL', this)" style="cursor: pointer;">
+                  <td>
+                    5
+                  </td>
+                  <td>
+                    BTL
+                  </td>
+                  <td>
+                    波特率
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CHANNEL_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    6
+                  </td>
+                  <td>
+                    CHANNEL_TYPE
+                  </td>
+                  <td>
+                    通道类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('COMM_MODE', this)" style="cursor: pointer;">
+                  <td>
+                    7
+                  </td>
+                  <td>
+                    COMM_MODE
+                  </td>
+                  <td>
+                    通讯方式
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUR_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    8
+                  </td>
+                  <td>
+                    CUR_STATUS
+                  </td>
+                  <td>
+                    当前状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_CURVE_DATA', this)" style="cursor: pointer;">
+                  <td>
+                    9
+                  </td>
+                  <td>
+                    CUST_CURVE_DATA
+                  </td>
+                  <td>
+                    自定义报表--曲线数据项
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_DATA_DENS', this)" style="cursor: pointer;">
+                  <td>
+                    10
+                  </td>
+                  <td>
+                    CUST_DATA_DENS
+                  </td>
+                  <td>
+                    自定义报表-数据密度
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_DATA_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    11
+                  </td>
+                  <td>
+                    CUST_DATA_TYPE
+                  </td>
+                  <td>
+                    自定义报表--数据项类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_PHASE_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    12
+                  </td>
+                  <td>
+                    CUST_PHASE_TYPE
+                  </td>
+                  <td>
+                    自定义报表--相线
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    13
+                  </td>
+                  <td>
+                    CUST_STATUS
+                  </td>
+                  <td>
+                    用户状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('CUST_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    14
+                  </td>
+                  <td>
+                    CUST_TYPE
+                  </td>
+                  <td>
+                    用户分类
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DATAGROUP_TASK_100', this)" style="cursor: pointer;">
+                  <td>
+                    15
+                  </td>
+                  <td>
+                    DATAGROUP_TASK_100
+                  </td>
+                  <td>
+                    698规约数据类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DATAGROUP_TASK_106', this)" style="cursor: pointer;">
+                  <td>
+                    16
+                  </td>
+                  <td>
+                    DATAGROUP_TASK_106
+                  </td>
+                  <td>
+                    国网规约数据类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DATAGROUP_TASK_120', this)" style="cursor: pointer;">
+                  <td>
+                    17
+                  </td>
+                  <td>
+                    DATAGROUP_TASK_120
+                  </td>
+                  <td>
+                    浙江规约-类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DC_CHK_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    18
+                  </td>
+                  <td>
+                    DC_CHK_TYPE
+                  </td>
+                  <td>
+                    数据检查类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DC_DATA_DENS', this)" style="cursor: pointer;">
+                  <td>
+                    19
+                  </td>
+                  <td>
+                    DC_DATA_DENS
+                  </td>
+                  <td>
+                    数据检查-数据密度
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DC_DATA_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    20
+                  </td>
+                  <td>
+                    DC_DATA_TYPE
+                  </td>
+                  <td>
+                    数据检查-数据类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DEAL_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    21
+                  </td>
+                  <td>
+                    DEAL_STATUS
+                  </td>
+                  <td>
+                    工单处理状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DI_DATA_DENS', this)" style="cursor: pointer;">
+                  <td>
+                    22
+                  </td>
+                  <td>
+                    DI_DATA_DENS
+                  </td>
+                  <td>
+                    数据录入-数据密度
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DQ_DATA_DENS', this)" style="cursor: pointer;">
+                  <td>
+                    23
+                  </td>
+                  <td>
+                    DQ_DATA_DENS
+                  </td>
+                  <td>
+                    数据质量-数据密度
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('DQ_DATA_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    24
+                  </td>
+                  <td>
+                    DQ_DATA_TYPE
+                  </td>
+                  <td>
+                    数据质量-数据类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('ELEC_APP_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    25
+                  </td>
+                  <td>
+                    ELEC_APP_TYPE
+                  </td>
+                  <td>
+                    用电类别
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EQ_DATA_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    26
+                  </td>
+                  <td>
+                    EQ_DATA_TYPE
+                  </td>
+                  <td>
+                    电量数据-数据类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EX_ATTR', this)" style="cursor: pointer;">
+                  <td>
+                    27
+                  </td>
+                  <td>
+                    EX_ATTR
+                  </td>
+                  <td>
+                    异常属性
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EX_CATE', this)" style="cursor: pointer;">
+                  <td>
+                    28
+                  </td>
+                  <td>
+                    EX_CATE
+                  </td>
+                  <td>
+                    异常类别
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EX_CHAR', this)" style="cursor: pointer;">
+                  <td>
+                    29
+                  </td>
+                  <td>
+                    EX_CHAR
+                  </td>
+                  <td>
+                    异常性质
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EX_LARGE', this)" style="cursor: pointer;">
+                  <td>
+                    30
+                  </td>
+                  <td>
+                    EX_LARGE
+                  </td>
+                  <td>
+                    异常大类
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('EX_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    31
+                  </td>
+                  <td>
+                    EX_TYPE
+                  </td>
+                  <td>
+                    异常类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('FAULT_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    32
+                  </td>
+                  <td>
+                    FAULT_TYPE
+                  </td>
+                  <td>
+                    设备故障类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GM_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    33
+                  </td>
+                  <td>
+                    GM_STATUS
+                  </td>
+                  <td>
+                    采集器状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GP_CHAR', this)" style="cursor: pointer;">
+                  <td>
+                    34
+                  </td>
+                  <td>
+                    GP_CHAR
+                  </td>
+                  <td>
+                    测量点性质
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GP_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    35
+                  </td>
+                  <td>
+                    GP_STATUS
+                  </td>
+                  <td>
+                    测量点状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GP_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    36
+                  </td>
+                  <td>
+                    GP_TYPE
+                  </td>
+                  <td>
+                    测量点类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GROSS_SN', this)" style="cursor: pointer;">
+                  <td>
+                    37
+                  </td>
+                  <td>
+                    GROSS_SN
+                  </td>
+                  <td>
+                    总加组号
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GROUP_PROPERTY', this)" style="cursor: pointer;">
+                  <td>
+                    38
+                  </td>
+                  <td>
+                    GROUP_PROPERTY
+                  </td>
+                  <td>
+                    群组属性
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('GROUP_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    39
+                  </td>
+                  <td>
+                    GROUP_TYPE
+                  </td>
+                  <td>
+                    群组类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('H_POWER_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    40
+                  </td>
+                  <td>
+                    H_POWER_TYPE
+                  </td>
+                  <td>
+                    高能耗类别
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('INSTAL_CHAR', this)" style="cursor: pointer;">
+                  <td>
+                    41
+                  </td>
+                  <td>
+                    INSTAL_CHAR
+                  </td>
+                  <td>
+                    安装点性质
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('IS_MUL_LINE', this)" style="cursor: pointer;">
+                  <td>
+                    42
+                  </td>
+                  <td>
+                    IS_MUL_LINE
+                  </td>
+                  <td>
+                    供电电源
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('LAT_MODE', this)" style="cursor: pointer;">
+                  <td>
+                    43
+                  </td>
+                  <td>
+                    LAT_MODE
+                  </td>
+                  <td>
+                    纬度类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('LINE_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    44
+                  </td>
+                  <td>
+                    LINE_STATUS
+                  </td>
+                  <td>
+                    线路状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('LOAD_CHAR', this)" style="cursor: pointer;">
+                  <td>
+                    45
+                  </td>
+                  <td>
+                    LOAD_CHAR
+                  </td>
+                  <td>
+                    负荷性质
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('LOG_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    46
+                  </td>
+                  <td>
+                    LOG_TYPE
+                  </td>
+                  <td>
+                    日志类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MEAS_MODE', this)" style="cursor: pointer;">
+                  <td>
+                    47
+                  </td>
+                  <td>
+                    MEAS_MODE
+                  </td>
+                  <td>
+                    计量方式
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('METER_DIGITS', this)" style="cursor: pointer;">
+                  <td>
+                    48
+                  </td>
+                  <td>
+                    METER_DIGITS
+                  </td>
+                  <td>
+                    翻转位数
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('METER_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    49
+                  </td>
+                  <td>
+                    METER_STATUS
+                  </td>
+                  <td>
+                    电表状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('METER_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    50
+                  </td>
+                  <td>
+                    METER_TYPE
+                  </td>
+                  <td>
+                    表类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('ML_STATUS', this)" style="cursor: pointer;">
+                  <td>
+                    51
+                  </td>
+                  <td>
+                    ML_STATUS
+                  </td>
+                  <td>
+                    母线状态
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('ML_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    52
+                  </td>
+                  <td>
+                    ML_TYPE
+                  </td>
+                  <td>
+                    母线类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MODEL_CODE', this)" style="cursor: pointer;">
+                  <td>
+                    53
+                  </td>
+                  <td>
+                    MODEL_CODE
+                  </td>
+                  <td>
+                    终端型号
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MONITOR_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    54
+                  </td>
+                  <td>
+                    MONITOR_TYPE
+                  </td>
+                  <td>
+                    监测点类型110KV、35KV专线供电的客户110KV、35KV专线供电的客户110KV、35KV专线供电的客户110KV,35KV专线供电客户
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MONITOR_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    55
+                  </td>
+                  <td>
+                    MONITOR_TYPE
+                  </td>
+                  <td>
+                    监测点类型35KV非专线供电用户和10KV供电用户
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MONITOR_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    56
+                  </td>
+                  <td>
+                    MONITOR_TYPE
+                  </td>
+                  <td>
+                    监测点类型380/220V低压网络和用户
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MONITOR_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    57
+                  </td>
+                  <td>
+                    MONITOR_TYPE
+                  </td>
+                  <td>
+                    监测点类型6~10KV母线电压
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MP_USEAGE', this)" style="cursor: pointer;">
+                  <td>
+                    58
+                  </td>
+                  <td>
+                    MP_USEAGE
+                  </td>
+                  <td>
+                    计量点用途
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('OBJECT_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    59
+                  </td>
+                  <td>
+                    OBJECT_TYPE
+                  </td>
+                  <td>
+                    对象类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('ORG_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    60
+                  </td>
+                  <td>
+                    ORG_TYPE
+                  </td>
+                  <td>
+                    部门类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('PAGE_CNT', this)" style="cursor: pointer;">
+                  <td>
+                    61
+                  </td>
+                  <td>
+                    PAGE_CNT
+                  </td>
+                  <td>
+                    每页行数
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('PARA_CATE', this)" style="cursor: pointer;">
+                  <td>
+                    62
+                  </td>
+                  <td>
+                    PARA_CATE
+                  </td>
+                  <td>
+                    参数类别
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('PARA_TYPE', this)" style="cursor: pointer;">
+                  <td>
+                    63
+                  </td>
+                  <td>
+                    PARA_TYPE
+                  </td>
+                  <td>
+                    参数类型
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('PLUSE_CONSTANT', this)" style="cursor: pointer;">
+                  <td>
+                    64
+                  </td>
+                  <td>
+                    PLUSE_CONSTANT
+                  </td>
+                  <td>
+                    脉冲属性
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="nullContainer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

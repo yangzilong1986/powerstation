@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/lineloss/lineloss.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="70" class="label"><input type=hidden id=dateType>
+        供电单位：</td>
+      <td width="120" class="dom"> **供电局 </td>
+      <td width="70" class="label">线     路：</td>
+      <td width="120" class="dom">**线路</td>
+      <td width="70" class="label">台     区：</td>
+      <td width="120" class="dom">**台区</td>
+      <td width="70" class="label">台区号：</td>
+      <td width="120" class="dom">123123</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="label">时      间：</td>
+      <td class="dom" id='date'></td>
+      <td class="label">参考线损：</td>
+      <td class="dom">7% </td>
+    </tr>
+  </table>
+  <div class="clear"></div>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target">
+      <ul>
+        <li class="target_off" id="lineloss_query_switchgear_data_chart_chart"><a href="#" onClick="return false;">曲线图</a></li>
+        <li class="target_off" id="lineloss_query_switchgear_data_chart_data"><a href="#" onClick="return false;">数据列表</a></li>
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 88));">
+      <iframe id='targetFrame' name='targetFrame' width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>对象树</title>
+<link rel="stylesheet" type="text/css" href="../css/treeframe.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript">
+var selBgColor = "#0A726A";
+var selColor = "FFFFFF";
+var unSelBgColor = "#FFFFFF";
+var unSelColor = "000000";
+
+var preObject = null;
+
+/**
+ * 选择对象
+ * @param {Object} obj
+ * @param {int} objectType    : 对象类型
+ * @param {String} objectId   : 对象编号
+ * @param {String} objectName : 对象名称
+ * @param {String} orgType    : 部门类型
+ */
+function select(obj, objectType, objectId, objectName, orgType) {
+    $(obj).css("background-color", selBgColor);
+    $(obj).css("color", selColor);
+    if(preObject != null && preObject != obj) {
+        $(preObject).css("background-color", unSelBgColor);
+        $(preObject).css("color", unSelColor);
+    }
+    preObject = obj;
+    parent.nodeEvent(objectType, objectId, objectName, orgType);
+}
+</script>
+</head>
+<body>
+<div class="treeContainer">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../img/tree/handledownlast.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '44', '广东省电力公司', '02');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;广东省电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579414'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td  onclick="select(this, 13, '4401', '广州市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;广州市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579415'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4402', '韶关市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;韶关市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579216'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4403', '深圳市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;深圳市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579317'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4404', '珠海市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;珠海市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579516'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4405', '汕头市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;汕头市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579616'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4406', '佛山市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;佛山市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579716'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4407', '江门市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;江门市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579916'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handledownmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4408', '湛江市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;湛江市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.4226345484093218'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/handledownmiddle.gif" alt="" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '440806', '遂溪供电局', '04');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;遂溪供电局</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linemiddlenode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="1" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 1, '1001', '测试用户1001', 'null');" style="cursor:hand;" nowrap><img src="../img/tree/object_hvcust.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;测试用户1001</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.9547472770209127'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linelastnode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="1" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 1, '1002', '测试用户1002', 'null');" style="cursor:hand;" nowrap><img src="../img/tree/object_hvcust.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;测试用户1002</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.4226345484093221'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/handlerightmiddle.gif" alt="" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '440807', '徐闻供电局', '04');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;徐闻供电局</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.4226345484093222'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/handlerightmiddle.gif" alt="" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '440808', '吴川供电局', '04');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;吴川供电局</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.4226345484093223'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/handlerightmiddle.gif" alt="" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '440809', '廉江供电局', '04');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;廉江供电局</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.4226345484093224'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../img/tree/handlerightlast.gif" alt="" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '440810', '雷州供电局', '04');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;雷州供电局</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579816'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4409', '茂名市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;茂名市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579417'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4412', '肇庆市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;肇庆市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579418'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4413', '惠州市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;惠州市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579419'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4414', '梅州市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;梅州市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579426'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4415', '汕尾市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;汕尾市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579436'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4416', '河源市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;河源市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579446'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4417', '阳江市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;阳江市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579456'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4418', '清远市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;清远市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579466'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4419', '东莞市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;东莞市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579476'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4420', '中山市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;中山市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579477'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4421', '潮州市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;潮州市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579478'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightmiddle.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4422', '揭阳市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;揭阳市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579479'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../img/tree/handlerightlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '4423', '云浮市电力公司', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;云浮市电力公司</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

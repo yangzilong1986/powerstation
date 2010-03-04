@@ -1,0 +1,360 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>预付费单下发</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/prepay/prepayComm.js"></script>
+<script type="text/javascript">
+var downing = '正在下发...';
+
+//初始化加载
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+
+inpuTextStyle();
+})
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/prepay/xml/purchasePowerSheet_Data_1.xml","cb-item");
+}
+
+//历史剩余电量
+function historyPower(custName,custNo) {
+    var params = {    
+                   "custName":custName,
+                   "custNo":custNo
+          };
+    var url="../../jsp/prepay/historyPower.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    top.showDialogBox("历史剩余电量",url, 575, 900);
+}
+//单据下发
+function docSetdown() {
+    var selectedList = getSelectedCheckboxs();
+    if(selectedList == "" || selectedList == null) {
+        alert("请选择单据");
+        return;
+    }
+    //清空结果内容
+    setText(selectedList, '',12);
+    //结果内容正在读取
+    setText(selectedList, "参数下发中...",12);
+    selectedLogicAddrArr = selectedList.split(",");
+    
+    disabledButton();
+    setTimeout("getResult(5)", 3000);
+}
+//剩余电量（费）
+function readSydlData() {
+  var selectedList = getSelectedCheckboxs();
+    if(selectedList == "" || selectedList == null) {
+        alert("请选择单据");
+        return;
+    }
+    //清空结果内容
+    setText(selectedList, '',11);
+    //结果内容正在读取
+    setText(selectedList, "正在发送...",11);
+    selectedLogicAddrArr = selectedList.split(",");
+    disabledButton();
+    setText(selectedList, "0",11);
+    //setTimeout("getResult(5)", 3000);
+    enabledButton();
+}
+
+//获取参数下发结果
+function getResult(fetchCount){
+    var retFlag = true;
+    for (var i=0; i < selectedLogicAddrArr.length; i++){
+        var logicAddrExist = false;
+        for (var j=0; j < sendResult.data.length; j++){
+            if (selectedLogicAddrArr[i] == sendResult.data[j].logicalAddr){
+                logicAddrExist = true;
+                break;
+            }
+        }
+        if (logicAddrExist == false){
+            retFlag = false;
+            break;
+        }
+    }
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < sendResult.data.length; i++){
+            if (selectedLogicAddrArr.contains(sendResult.data[i].logicalAddr)) {
+                setResultText(sendResult.data[i]);
+            }
+        }
+        //设置按钮可用
+        enabledButton();
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < sendResult.data.length; i++){
+                if (selectedLogicAddrArr.contains(sendResult.data[i].logicalAddr)) {
+                    setResultText(sendResult.data[i]);
+                }
+            }
+            //再次调用设置下发返回结果
+            setTimeout("getResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            var logicalAddrArr = [];
+            for (var i=0; i < sendResult.data.length; i++){
+                if (selectedLogicAddrArr.contains(sendResult.data[i].logicalAddr)) {
+                    setResultText(sendResult.data[i]);
+                    logicalAddrArr.push(sendResult.data[i].logicalAddr);
+                }
+            }
+            //没有返回的设置为超时
+            var backResult = filter(selectedLogicAddrArr, logicalAddrArr);
+            //for(var n=0; n < backResult.length; n++) {
+            //  alert(backResult[n]);
+            //    if ($(getJqueryId(backResult[n],12).html()).indexOf(downing) >= 0) {
+           //       $(getJqueryId(backResult[n],12)).html("发送超时");
+           //     }
+          //  }
+            var selectedList = getSelectedCheckboxs();
+            setText(selectedList, "参数下发失败");
+            //设置按钮可用
+            enabledButton();
+        }
+    }
+}
+//设置返回后信息
+function setResultText(resultObj){
+    var logicalAddr = resultObj.logicalAddr;
+    var success = resultObj.success;
+    var fail = resultObj.fail;
+    var all = resultObj.all;
+    var message = '';
+    if(success != null && success != '') {
+        message +=  "参数 " + success + "下发成功";
+    }
+    if(fail != null && fail != '') {
+        message +=  "参数 " + fail + "下发失败";
+    }
+    var noreturn = getNoReturnTask(resultObj);
+    if(noreturn != null && noreturn != '') {
+        message += "参数 " + noreturn + "下发超时";
+    }
+    $(getJqueryId(resultObj.logicalAddr,12)).html(message);
+    
+}
+//其他控制显示
+function showButton() {
+    var butt_div = document.getElementById("button_div");
+    butt_div.style.display = "block";
+    butt_div.style.left = event.clientX-210;
+    butt_div.style.top = event.clientY+7;
+}
+//控制状态
+function controlStatus(){
+   var url="../../jsp/prepay/controlStatus.html";
+   top.showDialogBox("控制状态",url, 310, 500);
+}
+//输入框文字效果
+function inpuTextStyle(){
+  $('#custNo').attr({style: "color:#aaaaaa;"});
+  $('#custNo').blur(function(){
+    if(this.value==''){
+      this.value="请输入户号或户名";
+      $('#custNo').attr({style: "color:#aaaaaa;"});
+    }
+  });
+  $('#custNo').focus(function(){
+    if(this.value=="请输入户号或户名"){
+       this.value='';
+       $('#custNo').attr({style: "color:black;"});
+     }
+  });
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">预付费单下发</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+   <div id="main">
+    <div id="tool">
+     <div class="opbutton1">
+       <input type="button" name="query" id="query" onclick="query();" value="查 询" class="input1" />
+       <input type="button" value="高级查询" id="adquery" class="input2">
+     </div>
+     <div class="opbutton2">
+       <input type="button" name="queryPower" id="queryPower" onclick="readSydlData();" value="读取剩余电量" class="input4" />
+       <input type="button" name="docDown" id="docDown" onclick="docSetdown();" value="单据下发" class="input2" />
+       <input type="button" name="otherControl" id="otherControl" onclick="showButton();" value="其他控制" class="input2" />
+     </div>
+     <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+       <td width="70" class="label">供电单位：</td>
+       <td width="120" class="dom" id="orgTar"></td>
+       <td width="70" class="label">购电单号：</td>
+       <td width="120" class="dom">
+         <input type="text" name="bgId" id="bgId"/>
+       </td>
+       <td width="70" class="label">用　户：</td>
+       <td width="120" class="dom">
+         <input type="text" name="custNo" id="custNo" value="请输入户号或户名"/>
+       </td>
+       <td colspan="4"></td>
+      </tr>
+      <tr>
+       <td width="70" class="label">处理状态：</td>
+       <td width="120" class="dom">
+        <select name="bpStatus" id="bpStatus">
+         <option value="-1">所有</option>
+         <option value="0">待处理</option>
+         <option value="1">已处理</option>
+        </select>
+       </td>
+       <td width="70" class="label">开始时间：</td>
+       <td width="120" class="dom_date">
+        <input type="text" name="bpDate" value="2009-09-01">
+       </td>
+       <td width="66" class="label">结束时间：</td>
+       <td width="120" class="dom_date">
+        <input type="text" name="bpDate" value="2009-09-11">
+       </td>
+       <td colspan="2"></td>
+       <td colspan="2" width="38%" align="right"></td>
+      </tr>
+     </table>
+    </div>
+    <div class="content">
+     <div id="cont_1">
+      <div class="target4">
+       <ul>
+         <li class="target_on">
+          <a href="#" onclick="return false;">预付费参数下发</a>
+         </li>
+         <li class="clear"></li>
+       </ul>
+       <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+      </div>
+      <div id="tableContainer" class="tableContainer" style="height: expression((document.documentElement.clientHeight||document.body.clientHeight)-185);">
+       <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="1400">
+        <thead>
+          <tr>
+            <th width="2%"><input type="checkbox" id="chooseAll" onclick="doClickAll()" /></th>
+            <th width="3%">序号</th>
+            <th width="5%">单号</th>
+            <th width="16%">户名</th>
+            <th width="8%">户号</th>
+            <th width="8%">终端地址</th>
+            <th width="6%">购电类别</th>
+            <th width="6%">购电值</th>
+            <th width="6%">购电日期</th>
+            <th width="7%">处理状态</th>
+            <th width="7%">投入状态</th>
+            <th width="7%">剩余电量</th>
+            <th width="7%">操作提示</th>
+            <th width="7%">历史剩余电量</th>
+            <th width="5%">控制状态</th>
+          </tr>
+        </thead>
+        <tbody id="DATA_TBODY" align="center">
+        </tbody>
+       </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">2</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- 其他按钮 -->
+<div id="button_div" onmouseout="" style="position: absolute; background-color: #D0EEE5; width: 240px; height: 100px; border: 0px solid gray; display: none;">
+  <div id="main">
+    <div>
+      <div id="tool">
+        <div>
+          <table border="0" width="230">
+            <tr>
+              <td width="50%" colspan="2">
+                <input type="button" value="购电控投入" class="input3"/>
+              </td>
+              <td width="50%" colspan="2">
+                <input type="button" value="购电控解除" class="input3" />
+              </td>
+            </tr>
+            <tr>
+              <td width="50%" colspan="2">
+                <input type="button" value="保电投入" class="input3"/>
+              </td>
+              <td width="50%" colspan="2">
+                <input type="button" value="保电解除" class="input3" />
+              </td>
+            </tr>
+            <!-- <tr>
+              <td width="50%" colspan="2" align="left"><input type="button" value="开通话" class="input3" onclick=""/></td>
+              <td width="50%" colspan="2" align="right"><input type="button" value="关通话" class="input3" onclick=""/></td>
+            </tr>
+            <tr>
+              <td width="50%" colspan="2" align="left"><input type="button" value="群开通话" class="input3" onclick=""/></td>
+              <td width="50%" colspan="2" align="right"><input type="button" value="群关通话" class="input3" onclick=""/></td>
+            </tr>
+            <tr>
+              <td width="50%" colspan="2" align="left"><input type="button" value="按组地址控制" class="input3" onclick=""/></td>
+              <td width="50%" colspan="2" align="right"></td>
+            </tr> -->
+            <tr>
+              <td width="50%" colspan="2"></td>
+              <td width="50%">
+                <input type="button" value="关 闭 " class="input3" onclick="document.getElementById('button_div').style.display='none';" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form name="remoteControlForm" method="post" action="/peis/do/control/remoteAction.do" style="display: none" target="control">
+  <input type="text" id="chooseValue" name="chooseValue" />
+  <input type="text" id="method" name="method" />
+  <input type="text" id="turn" name="turn" />
+  <input type="text" id="lapse" name="lapse" />
+  <input type="text" id="expTime" name="expTime" />
+  <input type="text" id="click_logic" name="click_logic" />
+  <input type="text" id="keepTime" name="keepTime" />
+</form>
+<div id=mytips style="position:absolute;background-color:#D0EEE5;width:240px;height:100px;border:2px   solid   gray;display:none;">
+  <div id="main">
+    <div>
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td class="label">提示：</td>
+            <td>权限验证</td>
+          </tr>
+          <tr>
+            <td width="70" class="label">密码：</td>
+            <td width="120" class="dom"><input type="password" id="password"/></td>
+          </tr>
+        </table>
+        <div class="t_botton">
+          <div class="t_center" align="center">
+             <input type="button" value=" 确 定 " onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';" class="input1" />
+             <input type="button" value=" 取 消 " onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';" class="input1" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

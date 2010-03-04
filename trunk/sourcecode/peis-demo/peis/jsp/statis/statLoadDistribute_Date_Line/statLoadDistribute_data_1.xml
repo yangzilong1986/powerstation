@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >		
+		<td1>农、林、牧、渔业 </td1>
+		<td2>1129.4936</td2>
+		<td3>78.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+	</data>
+	<data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >    
+        <td1>制 造 业 </td1>
+        <td2>329.4936</td2>
+        <td3>82.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>电力、燃气及水的生产和供应业</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>建筑业</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>交通运输、仓储和邮政业 </td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>住宿和餐饮业 </td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>房地产业 </td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>科学研究、技术服务和地质勘查业</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>水利、环境和公共设施管理业</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>居民服务和其他服务业</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>教育</td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>公共管理和社会组织 </td1>
+        <td2>1458.9872</td2>
+        <td3>79.00</td3>        
+        <td4>6</td4>
+        <td5>5</td5>
+        <td6>4</td6>
+        <td7>3</td7>  
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>汇总 </td1>
+        <td2>1458.9872</td2>
+        <td3>100.00</td3>        
+        <td4>100.00</td4>
+        <td5>100.00</td5>
+        <td6>100.00</td6>
+        <td7>100.00</td7>  
+    </data>
+</datas>

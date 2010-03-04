@@ -1,0 +1,251 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负载率分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+var msgText='请输入户号或户名';
+$(document).ready( function() {
+ //供电单位
+ $.handelCombox('orgNoTar','orgNo');
+ //线路
+ $.handelCombox('lineNoTar','lineNo');
+ 
+ $('[name="objectType"]:radio').click(function(){
+      var objectType=$('[name="objectType"][checked=true]:radio').val();
+      if(objectType==1){
+         $("#objectNameLable").html("用　户：");
+         msgText='请输入户号或户名';
+      }else if(objectType==2){
+         $("#objectNameLable").html("配　变：");
+         msgText='请输入台区号或台区名';
+      }
+      $('#tgName').val(msgText);
+  })
+  inpuTextStyle();
+});
+
+//查询
+function query(){
+  var objectType=$('[name="objectType"][checked=true]:radio').val();
+  if(objectType==1){
+    switchThead(objectType);
+    $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadRateAnalysis_Data_1.xml","cb-item");
+  }else if(objectType==2){
+    switchThead(objectType);
+    $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadRateAnalysis_Data_2.xml","cb-item");
+  }
+}
+//数据时间切换
+function switchDataTime(){
+  var dateType=$("#dateType").val();
+  if(dateType==1){
+     $("#DATA_DAY").show();
+     $("#DATA_YEAR").hide();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").hide();
+  }else if(dateType==2){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").show();
+     $("#DATA_QUARTER").hide();
+  }else if(dateType==3){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").show();
+  }else if(dateType==4){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").hide();
+     $("#DATA_QUARTER").hide();
+  }
+}
+//明细查询
+function openLoadDetail(objectNo,objectName,assetNo){
+   var dataTime=$("#dataTime").val();
+   var dateType=$("#dateType").val();
+   var objectType=$('[name="objectType"][checked=true]:radio').val();
+   var params = {    
+                   "objectNo":objectNo,
+                   "objectName":objectName,
+                   "assetNo":assetNo,
+                   "dataTime":dataTime,
+                   "objectType":objectType
+                };
+   var url="";
+   if(dateType==1){//日
+     url="../../jsp/transbiz/loadRateAnalysisDay.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   }else if(dateType==4){//年
+     url="../../jsp/transbiz/loadRateAnalysisYear.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   }else{//月，季
+     url="../../jsp/transbiz/loadRateAnalysisMonth.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   }
+   top.showDialogBox("负载率明细",url, 575, 900);
+}
+//输入框文字效果
+function inpuTextStyle(){
+  $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+  $('#tgName').blur(function(){
+    if(this.value==''){
+      this.value=msgText;
+      $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+    }
+  });
+  $('#tgName').focus(function(){
+    if(this.value==msgText){
+       this.value='';
+       $('#tgName').attr({style: "color:black;width:140px;"});
+     }
+  });
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton3">
+        <input type="submit" name="query" id="query" onClick="query();" value="查 询" class="input1" />
+        <input type="submit" name="query" id="query" value="高级查询" class="input1" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" height="92">
+        <tr>
+          <td colspan="8">
+             <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变用户
+             <input type="radio" name="objectType" value="2" class="dom" />配变/台区
+          </td>
+        </tr>
+        <tr> 
+          <td width="66" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgNoTar"></td>
+          <td width="66" class="label">线　路：</td>
+          <td width="120" class="dom" id="lineNoTar"></td>
+          <td width="66" class="label" id="objectNameLable">用　户：</td>
+          <td width="150" class="dom"> 
+            <input type="text" id="tgName" name="tgName" value="请输入户号或户名" />
+          </td>
+          <td colspan="4"></td>
+        </tr>
+        <tr>
+          <td width="66" class="label">数据时间：</td>
+          <td width="200" class="dom_date">
+            <select id="dateType" name="dateType" onChange="switchDataTime();">
+              <option value="1">日</option>
+              <option value="2">月</option>
+              <option value="3">季</option>
+              <option value="4">年</option>
+            </select>
+            <!-- 日 -->
+            <span id="DATA_DAY"> 
+            <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+            </span>
+            <!-- 年 -->
+            <span id="DATA_YEAR" style="display:none;">
+               <select name="year" id="year">
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008" selected="selected">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+               </select>年
+            </span>
+            <!-- 月 -->
+            <span id="DATA_MONTH" style="display:none;">
+               <select name="month" id="month">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8" selected="selected">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+               </select>月
+            </span>
+            <!-- 季 -->
+            <span id="DATA_QUARTER" style="display:none;">
+                                 第<select name="quarter" id="quarter">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected="selected">3</option>
+                  <option value="4">4</option>
+               </select>季
+            </span>
+          </td>
+          <td width="80" class="label">平均负载率：</td>
+          <td width="150" class="dom_date">
+            <select id="symbol" name="symbol">
+              <option value=""><</option>
+              <option value=""><=</option>
+              <option value="">=</option>
+              <option value="">>=</option>
+              <option value="">></option>
+            </select>
+            <input type="text" id="loadRate" name="loadRate" value="110" style="width:60px;"/>%
+          </td>
+          <td colspan="2"></td>
+          <td colspan="4" align="right" width="29%">
+             
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" onclick="setTarget(1); return false;">负载率分析</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 160));">
+          <table border="0" cellpadding="0" cellspacing="0" width="120%">
+            <thead id="DATA_THEAD">
+             <tr>
+              <th>序号</th>
+              <th>供电单位</th>
+              <th>户号</th>
+              <th>户名</th>
+              <th>变压器号</th>
+              <th>变压器名</th>
+              <th>表号</th>
+              <th>变压器容量(kVA)</th>
+              <th>最大负荷</th>
+              <th>最大负荷时间</th>
+              <th>最大负载率(%)</th>
+              <th>平均负荷(kW)</th>
+              <th>平均负载率(%)</th>
+              <th>明细</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+	        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">2</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?> 
+<graph caption='流量统计' xAxisName='单位' yAxisName='流量（kb）' decimalPrecision='0' formatNumberScale='0'>
+    <set name='广东省电力公司' value='462' color='AFD8F8' />
+    <set name='广州市电力公司' value='857' color='F6BD0F' />
+    <set name='韶关市电力公司' value='671' color='8BBA00' />
+    <set name='深圳市电力公司' value='494' color='FF8E46'/>
+    <set name='江门市电力公司' value='761' color='008E8E'/>
+    <set name='茂名市电力公司' value='960' color='D64646'/>
+    <set name='揭阳市电力公司' value='629' color='8E468E'/>
+    <set name='云浮市电力公司' value='622' color='588526'/>
+    <set name='汕尾市电力公司' value='376' color='B3AA00'/>
+    <set name='潮州市电力公司' value='494' color='008ED6'/>
+    <set name='梅州市电力公司' value='761' color='9D080D'/>
+    <set name='肇庆市电力公司' value='960' color='A186BE'/>
+</graph> 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='3' 
+       baseFontSize='12' baseFont='Courier New' 
+       caption='遂溪供电局供电量' subCaption='' xAxisName='日期' yAxisName='kWh' 
+       showBorder='1' borderColor='#FDCA1F' 
+       showLegend='1' legendPosition='#FDCA1F' 
+       useRoundEdges='1' 
+       showValues='0' 
+       showSum='1' 
+       captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' 
+       plotSpacePercent='100' 
+       chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' 
+       canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' 
+       legendBorderAlpha='0' 
+       formatNumber='1' formatNumberScale='0' 
+       showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据'
+       showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'>
+<categories>
+    <category label='1' />
+    <category label='2' />
+    <category label='3' />
+    <category label='4' />
+    <category label='5' />
+    <category label='6' />
+    <category label='7' />
+    <category label='8' />
+    <category label='9' />
+    <category label='10' />
+    <category label='11' />
+    <category label='12' />
+    <category label='13' />
+    <category label='14' />
+    <category label='15' />
+    <category label='16' />
+    <category label='17' />
+    <category label='18' />
+    <category label='19' />
+    <category label='20' />
+    <category label='21' />
+    <category label='22' />
+    <category label='23' />
+    <category label='24' />
+    <category label='25' />
+    <category label='26' />
+    <category label='27' />
+    <category label='28' />
+    <category label='29' />
+    <category label='30' />
+    <category label='31' />
+</categories>
+
+<dataset seriesName='供电量'>
+    <set value='57000' />
+    <set value='58995' />
+    <set value='61119' />
+    <set value='63502' />
+    <set value='57000' />
+    <set value='58995' />
+    <set value='61119' />
+    <set value='63502' />
+    <set value='65662' />
+    <set value='68157' />
+    <set value='69997' />
+    <set value='72797' />
+    <set value='75272' />
+    <set value='77455' />
+    <set value='79546' />
+    <set value='80739' />
+    <set value='82273' />
+    <set value='84001' />
+    <set value='85849' />
+    <set value='85868' />
+    <set value='87843' />
+    <set value='90039' />
+    <set value='61452' />
+    <set value='64463' />
+    <set value='65945' />
+    <set value='68056' />
+    <set value='70914' />
+    <set value='73467' />
+    <set value='76332' />
+    <set value='78927' />
+    <set value='81927' />
+</dataset>
+</chart>

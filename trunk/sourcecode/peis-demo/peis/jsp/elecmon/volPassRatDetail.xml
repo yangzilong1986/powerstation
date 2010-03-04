@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>1401891037</td4>
+        <td5>天津市鑫城地毯有限公司</td5>
+        <td6>&lt;a href="javascript:viewDetail()"&gt;N7L06H000194413E9&lt;/a&gt;</td6>
+        <td7>20090708</td7>
+        <td8>678</td8>
+        <td9>30</td9>
+        <td10>30</td10>
+        <td11>91.15%</td11>
+        <td12>77%</td12>
+        <td13>66%</td13>
+        <td14>55%</td14>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>1401891037</td4>
+        <td5>天津市鑫城地毯有限公司</td5>
+        <td6>&lt;a href="javascript:viewDetail()"&gt;N7L06H000194413E9&lt;/a&gt;</td6>
+        <td7>20090709</td7>
+        <td8>678</td8>
+        <td9></td9>
+        <td10></td10>
+        <td11></td11>
+        <td12>77%</td12>
+        <td13>13%</td13>
+        <td14>55%</td14>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>1401891037</td4>
+        <td5>天津市鑫城地毯有限公司</td5>
+        <td6>&lt;a href="javascript:viewDetail()"&gt;N7L06H000194413E9&lt;/a&gt;</td6>
+        <td7>20090710</td7>
+        <td8>367</td8>
+        <td9>30</td9>
+        <td10>30</td10>
+        <td11>83.65%</td11>
+        <td12>77%</td12>
+        <td13>66%</td13>
+        <td14>55%</td14>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>杨柳青</td1>
+        <td2></td2>
+        <td3>35KV</td3>
+        <td4>1401891037</td4>
+        <td5>天津市鑫城地毯有限公司</td5>
+        <td6>N7L06H000194413E9</td6>
+        <td7>20090711</td7>
+        <td8>468</td8>
+        <td9>30</td9>
+        <td10>30</td10>
+        <td11>87.18%</td11>
+        <td12>77%</td12>
+        <td13>34%</td13>
+        <td14>55%</td14>
+    </data>
+</datas>

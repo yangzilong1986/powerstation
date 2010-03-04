@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data >
+        <td1>2009-9-1</td1>
+        <td2>1440</td2>
+        <td3>3.8</td3>
+        <td4>1 </td4>
+        <td5>99.02%</td5>      
+    </data>
+    
+      <data>
+        <td1>2009-9-8</td1>
+        <td2>1446</td2>
+        <td3>1.6</td3>
+        <td4>1</td4>
+        <td5>99.82%</td5>      
+    </data>
+    
+</datas>

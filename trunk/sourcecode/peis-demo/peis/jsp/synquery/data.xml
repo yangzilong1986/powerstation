@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='广州市电力公司'/>
+        <category label='韶关市电力公司'/>
+        <category label='深圳市电力公司'/>
+        <category label='珠海市电力公司'/>
+        <category label='汕头市电力公司'/>
+        <category label='佛山市电力公司'/>
+        <category label='江门市电力公司'/>
+    </categories>
+    <dataset seriesName='本期电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>        
+    </dataset>
+    </chart>

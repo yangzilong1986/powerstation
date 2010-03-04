@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>事件分类</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" /> 
+<script type="text/javascript" src="../../js/jquery.js"></script>   
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+  
+<script type="text/javascript">
+$.json2html("elecCtgPbData","../../jsp/elecmon/elecCtgPbData.xml",""); 
+</script>
+<script type="text/javascript">
+function viewDetail(){
+top.showDialogBox("事件数据明细", "../../jsp/elecmon/elecDetail.html", 400, 500);
+  }
+</script>
+
+<body>
+  <div class="content">
+    <div id="cont_zb">
+     <div id="tableContainer" class="tableContainer" style="width:100%;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 43));">
+       <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+         <thead><tr>
+           <th>序号</th>  
+           <th>供电单位</th>
+           <th>配变名称</th>
+           <th>表序号</th>
+           <th>发生时间</th>     
+           <th>恢复时间</th>     
+           <th>事件内容</th>     
+           <th>明细</th>     
+         </tr></thead>
+         <tbody id="elecCtgPbData">
+         </tbody>
+       </table>
+     </div>
+   </div>
+       
+  <div class="content" >
+    <div id="cont_pb" style="display: none;">
+      <div id="tableContainer" class="tableContainer" style="width:100%;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 43));">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>  
+            <th>供电单位</th>
+            <th>局号</th>
+            <th>名称</th>
+            <th>设备地址</th>
+            <th>测量点序号</th>  
+            <th>异常分析时间</th>     
+            <th>明细</th>     
+          </tr></thead>
+          <tbody id="elecAnData">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content" >
+    <div id="cont_dyyh" style="display: none;">
+      <div id="tableContainer" class="tableContainer" style="width:100%;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 43));">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>  
+            <th>供电单位</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>设备地址</th>
+            <th>台区名称</th>
+            <th>集中器地址</th>  
+            <th>表地址</th> 
+            <th>异常分析时间</th>     
+            <th>明细</th>     
+          </tr></thead>
+          <tbody id="elecAnData">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+       
+  <div class="content" >
+    <div id="cont_bdz" style="display: none;">
+      <div id="tableContainer" class="tableContainer" style="width:100%;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 43));">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>  
+            <th>供电单位</th>
+            <th>变电站名称</th>
+            <th>电压等级</th>
+            <th>设备地址</th>
+            <th>测量点序号</th>  
+            <th>测量点名称</th>  
+            <th>异常分析时间</th>     
+            <th>明细</th>     
+          </tr></thead>
+          <tbody id="elecAnData">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="pageContainer">
+      <input type="hidden" id="showType" name="showType" value="pag" />显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select> 　第1页 / 共7页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <a title="下一页" href='#'><font style="font-size: 14px; font-family: webdings">8</font></a> <a title="末页" href="#"><font style="font-size: 14px; font-family: webdings">:</font></a> 
+    </div>
+  </div>
+</div>
+</body>
+</html>

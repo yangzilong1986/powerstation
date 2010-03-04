@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>自定义报表</title>
+<link rel="stylesheet" type="text/css" href="../../../css/main.css"/>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+function showSelect(){
+  showDialogBox("高级查询", "./advance_query_pop.html", 500, 900);   
+}
+</script>
+</head>
+<body>
+<form name="pram">
+<div id="body">
+  <div id="main" style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 10));">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+      <tr>
+        <td width="25%" style="display: block; border-right: 1px solid #085952;"><iframe id="object" name="object"  width="100%" height="100%" frameborder="0" scrolling="auto" src="./add_info_query_left.html"></iframe></td>
+        <td width="40%" style="display: block; border-right: 1px solid #085952;"><iframe id="type"  name="type" width="100%" height="100%" frameborder="0" scrolling="auto" src="./add_info_query_center.html"></iframe></td>
+        <td width="35%" style="display: block; border-right: 1px solid #085952;"><iframe name="field" id="field" width="100%" height="100%" frameborder="0" scrolling="no" src="./add_info_query_right.html"></iframe></td>
+      </tr>
+    </table>
+  </div>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='4' decimals='0' enableSmartLabels='1' enableRotation='0' bgColor='FFFFFF,FFFFFF' bgAlpha='40,100' bgRatio='0,100' bgAngle='360' showBorder='1' startingAngle='70' >
+        <set label='&lt;50' value='21' isSliced='1'/>
+        <set label='&gt;=50' value='21' isSliced='1'/>
+        <set label='&gt;=100 ' value='21' isSliced='1'/>
+        <set label='&gt;=315' value='21' isSliced='1'/>
+        <set label='汇总'/>
+</chart>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='0'/>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+        <category label='12'/>
+        <category label='13'/>
+        <category label='14'/>
+        <category label='15'/>
+        <category label='16'/>
+        <category label='17'/>
+        <category label='18'/>
+        <category label='19'/>
+        <category label='20'/>
+        <category label='21'/>
+        <category label='22'/>
+        <category label='23'/>
+    </categories>
+    <dataset seriesName='整点' color='AFD818' showValues='0'>
+        <set value='80'/>
+        <set value='80'/>
+        <set value='81'/>
+        <set value='81'/>
+        <set value='81'/>
+        <set value='81'/>
+        <set value='120'/>
+        <set value='200'/>
+        <set value='280'/>
+        <set value='320'/>
+        <set value='390'/>
+        <set value='360'/>
+        <set value='360'/>
+        <set value='340'/>
+        <set value='336'/>
+        <set value='344'/>
+        <set value='332'/>
+        <set value='320'/>
+        <set value='280'/>
+        <set value='160'/>
+        <set value='148'/>
+        <set value='140'/>
+        <set value='120'/>
+        <set value='100'/>
+    </dataset>
+</chart>

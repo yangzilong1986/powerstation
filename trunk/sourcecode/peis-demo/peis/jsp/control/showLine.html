@@ -1,0 +1,81 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负荷曲线</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript">
+var objectName=$.url.param("objectName");
+var logicAddr=$.url.param("logicAddr");
+$(document).ready( function(){
+  init();
+});
+
+//页面初始化
+function init(){
+  $("#objectName").val(objectName);
+  $("#logicAddr").val(logicAddr);
+}
+
+
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main">
+  <div id="tool">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="70" class="label">对象名称：</td>
+        <td width="120" class="dom"><input type="text" id="objectName" name="objectName" value="" disabled="disabled" /></td>
+        <td width="70" class="label">逻辑地址：</td>
+        <td width="120" class="dom"><input type="text" id="logicAddr" name="logicAddr" value="" disabled="disabled" /></td>
+        <td colspan="5"></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table border="0" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td width="69%">
+         <div class="graphContainer" style="height:expression((document.documentElement.clientHeight||document.body.clientHeight)-85);">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" class="block" align="center"></div>
+           <script type="text/javascript">
+              var chart_chart = new FusionCharts('../../FusionCharts/MSLine.swf', 'chart', '600', '400', '0', '1');
+              // Provide entire XML data using dataXML method
+              chart_chart.setDataXML("<chart palette='3' baseFontSize='12' baseFont='Courier New' showBorder='1' borderColor='#BBBBBB' showLegend='0' legendPosition='BOTTOM' caption='负荷曲线' anchorRadius='0' animation='0' lineThickness='0' showRealTimeValue='1' numDisplaySets='20' showValues='0' showLabels='0'><categories ><category label='' /></categories><dataset seriesName='负荷' color='1D8BD1' anchorBorderColor='1D8BD1' anchorBgColor='1D8BD1'><set value='0' /></dataset><styles><definition><style name='CaptionFont' type='font' size='12' /></definition><application><apply toObject='CAPTION' styles='CaptionFont' /><apply toObject='SUBCAPTION' styles='CaptionFont' /></application></styles></chart>");
+              // Finally, render the chart.
+              chart_chart.render("graphBlock");
+           </script>
+          <!--END Script Block for Chart-->
+         </div>
+         <div class="nullContainer"></div>
+        </td>
+        <td width="1%"></td>
+        <td width="30%">
+         <div class="tableContainer" style="height:expression((document.documentElement.clientHeight||document.body.clientHeight)-85);">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+             <tr>
+              <th>序号</th>
+              <th>时间</th>
+              <th>负荷(kW)</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY" align="center">
+            </tbody>
+           </table>
+         </div>
+         <div class="nullContainer"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>设备运行统计</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<!-- private js -->
+<script type="text/javascript" src="../../js/runmanage/divRun.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="" onClick="return false;" onFocus="blur()">设备运行统计</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="9">
+            <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变
+            <input type="radio" name="objectType" value="2" class="dom" />配变/台区
+            <input type="radio" name="objectType" value="3" class="dom" />低压居民
+            <input type="radio" name="objectType" value="4" class="dom" />变电站
+            <input type="radio" name="objectType" value="5" class="dom" />全部
+          </td>
+        </tr>
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="70" class="label">统计日期：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="date" name="date" value="2009-8-27">
+          </td>
+          <td colspan="5">
+            <input type="radio" name="queryType" value="1" checked="checked" class="dom" />按通讯方式
+            <input type="radio" name="queryType" value="2" class="dom" />按终端厂家
+            <input type="radio" name="queryType" value="3" class="dom" />按厂家、通讯方式
+          </td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+   <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on"><a href="#">设备运行统计</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><div id="myCommMode"></div><div id="myDivFactory" style="display: none;"></div></h1>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 175));">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="center"></div>
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="groupByComOrFac">
+            <thead><tr>
+              <th>&nbsp;</th>
+              <th>供电单位(<span id="calName">通讯方式</span>)</th>
+              <th>已装终端数</th>
+              <th>投运终端数</th>
+              <th>停运终端数</th>
+              <th>上线终端数</th>
+              <th>应抄电表数</th>
+              <th>实抄电表数</th>
+              <th>投运率(%)</th>
+              <th>上线率(%)</th>
+              <th>抄表成功率(%)</th>
+              <th>停电终端数 </th>
+            </tr></thead>
+            <tbody id="coftext"></tbody>
+          </table>          
+          <table border="0" cellpadding="0" cellspacing="0" width="400%" id="comAndFactory" style="display: none;">
+            <thead><tr>
+                <th rowspan="2">&nbsp;</th>
+                <th rowspan="2">供电单位(终端厂家)</th>
+                <th colspan="7">已装终端数</th>
+                <th colspan="7">投运终端数</th>
+                <th colspan="7">停运终端数</th>
+                <th colspan="7">上线终端数</th>
+                <th colspan="7">应抄电表数</th>
+                <th colspan="7">实抄电表数</th>
+                <th colspan="7">投运率(%)</th>
+                <th colspan="7">上线率(%)</th>
+                <th colspan="7">抄表成功率(%)</th>
+                <th colspan="7">停电终端数 </th>
+            </tr><tr>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+                <th>230M</th><th>有线网络</th><th>电力专线</th><th>CDMA</th>
+                <th>232串口</th><th>GPRS</th><th>短信</th>
+            </tr></thead>
+            <tbody id="caftext"></tbody>
+          </table>
+        </div>
+        
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

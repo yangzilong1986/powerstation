@@ -1,0 +1,371 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>路由配置信息</title>
+<link rel="stylesheet" type="text/css"  href="../../css/dataframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+
+/**
+ * 得到已选择队列
+ * type:0-不加引号，1-加引号
+
+ */
+function getSelectedIdString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+             if(document.all.ItemID.checked) {
+                 sResult += "," + document.all.ItemID.value;
+             }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                if(document.all.ItemID[i].checked) {
+                    sResult += "," + document.all.ItemID[i].value;
+                }
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+/**
+ * 得到所有队列
+ * type:0-不加引号，1-加引号
+
+ */
+function getAllIdString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            sResult += "," + document.all.ItemID.value;
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                sResult += "," + document.all.ItemID[i].value;
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+//数组比较
+Array.prototype.contains = function(obj) {   
+    var boo = false;   
+    for(var i=0;i<this.length;i++) {   
+        if(typeof obj == "object") {   
+            if(this[i].equals(obj)) {   
+                boo = true;   
+                break;   
+            }                   
+        }else {
+            if(this[i] == obj)  {   
+                   boo = true;   
+                   break;                  
+            }
+        }
+    }   
+    return boo;   
+}
+
+function filter(a1, a2) {   
+    var myAry = [];   
+    for(var i=0;i<a1.length;i++) {   
+        if(!a2.contains(a1[i]))   
+            myAry.push(a1[i]);                     
+    }              
+    return myAry;   
+}
+
+function setText(itemIdList, text){
+    if(itemIdList == null || itemIdList == ""){
+        return;
+    }
+    var itemIdArr = itemIdList.split(",");
+    for(var i=0; i<itemIdArr.length; i++){
+        document.getElementById("result_" + itemIdArr[i]).innerHTML = text;
+    }
+}
+
+function insertData(uncreatedAmmeterArr){
+    if(uncreatedAmmeterArr == null || uncreatedAmmeterArr.length <= 0){
+        return;
+    }
+    var addRow;
+    var cell1;
+    var cell2;
+    var cell3;
+    var cell4;
+    var cell5;
+    var cell6;
+    var cell7;
+    var cell8;
+    var bxhInfo;
+    for(var i=0; i < uncreatedAmmeterArr.length; i++) {
+        addRow = document.getElementById('ammeterlist').insertRow(i);
+        addRow.setAttribute("backgroundcolor", "#ebf8f4");
+        cell1 = addRow.insertCell(0);
+        cell1.setAttribute("backgroundcolor", "#ebf8f4");
+        cell1.innerHTML = "<input type='checkbox' name='ItemID' value='" + uncreatedAmmeterArr[i].itemId + "' checked />";
+        cell2 = addRow.insertCell(1);
+        cell2.innerHTML = i+1;
+        cell3 = addRow.insertCell(2);
+        cell3.innerHTML = uncreatedAmmeterArr[i].itemId;
+        cell4 = addRow.insertCell(3);
+        cell4.innerHTML = uncreatedAmmeterArr[i].result.logicAddr;
+        cell5 = addRow.insertCell(4);
+        bxhInfo = uncreatedAmmeterArr[i].result.bxh;
+        if(bxhInfo.indexOf('1201') >= 0 || bxhInfo.indexOf('1202') >= 0 || bxhInfo.indexOf('1203') >= 0 ||
+           bxhInfo.indexOf('1204') >= 0 || bxhInfo.indexOf('1205') >= 0 || bxhInfo.indexOf('1206') >= 0){
+            cell5.innerHTML = "是";
+        }
+        else {
+            cell5.innerHTML = "否";
+        }
+        cell6 = addRow.insertCell(5);
+        cell6.innerHTML = uncreatedAmmeterArr[i].result.bxh;
+        cell7 = addRow.insertCell(6);
+        cell7.id = "result_" + uncreatedAmmeterArr[i].itemId;
+        cell7.innerHTML = "";
+        cell8 = addRow.insertCell(7);
+        cell8.innerHTML = "<a href='#' onclick='return false;'>建档</a>";
+    }
+    setTableStyle();
+}
+
+function setTableStyle(){
+    /**
+     * even/odd rows
+     */
+    setRows($(".tableContainer table>tbody>tr:odd"));
+    
+    /**
+     * mouseover/mouseout event
+     */
+    $(".tableContainer table>tbody>tr").each( function() {
+        $(this).mouseover( function() {
+            $(this).addClass("mouseover");
+        });
+        $(this).mouseout( function() {
+            $(this).removeClass("mouseover");
+        });
+    });
+}
+
+function deleteData(){
+    var objTable = document.getElementById("ammeterlist");
+    if (objTable.rows.length <= 0) {
+        return;
+    }
+    while (objTable.rows.length > 0){
+        objTable.deleteRow(0);
+    }
+}
+
+var selectedIdArr;
+function deleteInfo(){
+    var selectedIdList = getSelectedIdString();
+    if(selectedIdList == null || selectedIdList == ""){
+        alert("请选择对象，再发命令!");
+        return;
+    }
+    var allIdList = getAllIdString();
+    //清除原来信息
+    setText(allIdList, "");
+    //设置读取信息
+    setText(selectedIdList, "正在设置...");
+    selectedIdArr = selectedIdList.split(",");
+    //设置按钮可用
+    parent.setButtonStatus(false);
+    jsonDel = {'data':[{'itemId':'100000000010','result':'000000'},
+                       {'itemId':'100000000011','result':'000001'}]};
+    setTimeout("getDelResult(2)", 3000);
+}
+
+var jsonDel = {'data':[{'itemId':'100000000010','result':'000000'},
+                       {'itemId':'100000000011','result':'000001'}]};
+function getDelResult(fetchCount){
+    var retFlag = true;
+    var retItemIdArr = [];
+    for (var i=0; i < jsonDel.data.length; i++){
+        retItemIdArr.push(jsonDel.data[i].itemId);
+    }
+    var backResult = filter(selectedIdArr, retItemIdArr);
+    if (backResult != null && backResult.length > 0) {
+        retFlag = false;
+    }
+    
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < jsonDel.data.length; i++){
+            if (selectedIdArr.contains(jsonDel.data[i].itemId)) {
+                if ('000000' == jsonDel.data[i].result){
+                    document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置成功';
+                }
+                else {
+                    document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置失败';
+                }
+            }
+        }
+        //设置按钮可用
+        parent.setButtonStatus(true);
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < jsonDel.data.length; i++){
+                if (selectedIdArr.contains(jsonDel.data[i].itemId)) {
+                    if ('000000' == jsonDel.data[i].result){
+                        document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置成功';
+                    }
+                    else {
+                        document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置失败';
+                    }
+                }
+            }
+            //再次调用读取下发返回结果
+            setTimeout("getAddOrModResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            for (var i=0; i < jsonDel.data.length; i++){
+                if (selectedIdArr.contains(jsonDel.data[i].itemId)) {
+                    if ('000000' == jsonDel.data[i].result){
+                        document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置成功';
+                    }
+                    else {
+                        document.getElementById("result_" + jsonDel.data[i].itemId).innerHTML = '设置失败';
+                    }
+                }
+            }
+            //没有返回的设置为超时
+            for(var n=0; n < backResult.length; n++) {
+                if ("正在设置..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                    document.getElementById("result_" + backResult[n]).innerHTML = "设置超时";
+                }
+            }
+            //设置按钮可用
+            parent.setButtonStatus(true);
+        }
+    }
+}
+
+function getFailItems(){
+    var allIdList = getAllIdString();
+    if(allIdList == null || allIdList == ""){
+        return null;
+    }
+    var allIdArr = allIdList.split(",");
+    var failItems = "";
+    var resultInfo;
+    for (var i=0; i<allIdArr.length; i++){
+        resultInfo = document.getElementById("result_" + allIdArr[i]).innerHTML;
+        if ("设置超时" == resultInfo || "设置失败" == resultInfo){
+            failItems += ",";
+            failItems += allIdArr[i];
+        }
+    }
+    if(failItems.indexOf(",") != -1){
+        failItems = failItems.substring(1);
+    }
+    return failItems;
+}
+
+function rehandle() {
+    var failItemList = getFailItems();
+    if(failItemList == null || failItemList == ""){
+        alert("没有失败的对象!");
+        return;
+    }
+    //设置读取信息
+    setText(failItemList, "正在设置...");
+    selectedIdArr = failItemList.split(",");
+    //设置按钮可用
+    parent.setButtonStatus(false);
+    jsonDel = {'data':[{'itemId':'100000000010','result':'000000'},
+                       {'itemId':'100000000011','result':'000000'}]};
+    setTimeout("getDelResult(2)", 3000);
+}
+</script>
+</head>
+<body>
+  <div>
+    <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 35));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="3%">
+              <input type="checkbox" name="selectAll" checked onclick="selectAllCB()">
+            </th>
+            <th width="7%">序号</th>
+            <th width="15%">表地址</th>
+            <th width="15%">采集器地址</th>
+            <th width="12%">重点用户</th>
+            <th width="12%">表序号</th>
+            <th width="24%">操作结果</th>
+            <th width="12%">操作</th>
+          </tr>
+        </thead>
+        <tbody id="ammeterlist" align="center">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+    </div>
+  </div>
+</body>
+</html>
+

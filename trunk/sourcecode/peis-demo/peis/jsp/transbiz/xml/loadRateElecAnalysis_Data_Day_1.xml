@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+        <td2 extend="align='center'">2009-08-06 00:00:00</td2>
+        <td4 extend="align='right'">80</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >      
+        <td2 extend="align='center'">2009-08-06 01:00:00</td2>
+        <td4 extend="align='right'">80</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 02:00:00</td2>
+        <td4 extend="align='right'">81</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 03:00:00</td2>
+        <td4 extend="align='right'">81</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >   
+        <td2 extend="align='center'">2009-08-06 04:00:00</td2>
+        <td4 extend="align='right'">81</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >    
+        <td2 extend="align='center'">2009-08-06 05:00:00</td2>
+        <td4 extend="align='right'">81</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" > 
+        <td2 extend="align='center'">2009-08-06 06:00:00</td2>
+        <td4 extend="align='right'">120</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >   
+        <td2 extend="align='center'">2009-08-06 07:00:00</td2>
+        <td4 extend="align='right'">200</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >   
+        <td2 extend="align='center'">2009-08-06 08:00:00</td2>
+        <td4 extend="align='right'">280</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" > 
+        <td2 extend="align='center'">2009-08-06 09:00:00</td2>
+        <td4 extend="align='right'">320</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >    
+        <td2 extend="align='center'">2009-08-06 10:00:00</td2>
+        <td4 extend="align='right'">390</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" > 
+        <td2 extend="align='center'">2009-08-06 11:00:00</td2>
+        <td4 extend="align='right'">360</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 12:00:00</td2>
+        <td4 extend="align='right'">360</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 13:00:00</td2>
+        <td4 extend="align='right'">340</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >    
+        <td2 extend="align='center'">2009-08-06 14:00:00</td2>
+        <td4 extend="align='right'">336</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" > 
+        <td2 extend="align='center'">2009-08-06 15:00:00</td2>
+        <td4 extend="align='right'">344</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" > 
+        <td2 extend="align='center'">2009-08-06 16:00:00</td2>
+        <td4 extend="align='right'">332</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >      
+        <td2 extend="align='center'">2009-08-06 17:00:00</td2>
+        <td4 extend="align='right'">320</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >    
+        <td2 extend="align='center'">2009-08-06 18:00:00</td2>
+        <td4 extend="align='right'">280</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 19:00:00</td2>
+        <td4 extend="align='right'">160</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >   
+        <td2 extend="align='center'">2009-08-06 20:00:00</td2>
+        <td4 extend="align='right'">148</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >  
+        <td2 extend="align='center'">2009-08-06 21:00:00</td2>
+        <td4 extend="align='right'">140</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >      
+        <td2 extend="align='center'">2009-08-06 22:00:00</td2>
+        <td4 extend="align='right'">120</td4>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >     
+        <td2 extend="align='center'">2009-08-06 23:00:00</td2>
+        <td4 extend="align='right'">100</td4>
+    </data>
+</datas>

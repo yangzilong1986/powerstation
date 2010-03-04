@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data extend='name="a_2009-09-01"'>
+    <td2>**变高侧</td2>
+    <td3>123124</td3>
+    <td1 extend="align='center'">2009-09-01</td1>
+    <td5 extend="align='right'">23486.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">23456.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="b_2009-09-01"'>
+    <td2>**变中侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-01</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="c_2009-09-01"'>
+    <td2>**变低侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-01</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="a_2009-09-02"'>
+    <td2>**变高侧</td2>
+    <td3 extend="align='right'">1231243.00</td3>
+    <td1 extend="align='center'">2009-09-02</td1>
+    <td5 extend="align='right'">23486.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">23456.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="b_2009-09-02"'>
+    <td2>**变中侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-02</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="c_2009-09-02"'>
+    <td2>**变低侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-02</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="a_2009-09-03"'>
+    <td2>**变高侧</td2>
+    <td3 extend="align='right'">1231243.00</td3>
+    <td1 extend="align='center'">2009-09-03</td1>
+    <td5 extend="align='right'">23486.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">23456.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="b_2009-09-03"'>
+    <td2>**变中侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-03</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+  <data extend='name="c_2009-09-03"'>
+    <td2>**变低侧</td2>
+    <td3>1231244</td3>
+    <td1 extend="align='center'">2009-09-03</td1>
+    <td5 extend="align='right'">34123.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td6 extend="align='right'">34550.00</td6>
+    <td9 extend="align='right'">3.00</td9>
+    <td10 extend="align='right'">0.20</td10>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a href='javascript:alert(1)'&#62;明细&#60;/a&#62;</td12>
+  </data>
+</datas>

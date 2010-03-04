@@ -1,0 +1,87 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>专线用户定位</title>
+  <link rel="stylesheet" type="text/css" href="../../css/window.css" />
+  <script type="text/javascript" src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+  <script type="text/javascript" src="../../js/frame/component.js"></script>
+  <script type="text/javascript">
+  function finish(){
+    var spCust=$(".selected td:eq(0)").html();  //取到选中行的专线用户
+    //alert(logicAddr);
+    //window.close();
+    parent.GB_hide();
+  } 
+  </script>
+ </head>
+ <body>
+  <div id="tool">
+   <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+     <td width="100" class="label">用户：</td>
+     <td width="120" class="dom">
+       <input type="text" id="cust" name="cust"/>
+     </td>
+     <td align="center">
+        <input class="input" type="button" id="query" value="查 询" />
+        <input class="input" type="button" id="save" value="选定用户" onclick="finish();" />
+     </td>
+    </tr>
+   </table>
+  </div>
+  <div class="content">
+   <div id="cont_1">
+    <div class="tableContainer" style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -  60) );">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+         <tr>
+          <th>序号</th>
+          <th>户号</th>
+          <th>户名</th>
+          <th>供电单位</th>
+          <th>行业</th>
+          <th>状态</th>
+         </tr>
+        </thead>
+        <tbody>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'> 
+            <td>1</td>
+            <td>0801059529</td>
+            <td>湛江市金河湾物业服务有限公司</td>
+            <td>城内供电所</td>
+            <td>工业</td>
+            <td>正常</td>
+          </tr>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>2</td>
+            <td>0801059500</td>
+            <td>湛江市金河湾物业</td>
+            <td>城内供电所</td>
+            <td>工业</td>
+            <td>正常</td>
+          </tr>
+           <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>3</td>
+            <td>0801050</td>
+            <td>万仁义</td>
+            <td>城内供电所</td>
+            <td>工业</td>
+            <td>正常</td>
+          </tr>
+        </tbody>
+       </table>
+    </div>
+    <div class="pageContainer">
+     <input type="hidden" id="showType" name="showType" value="pag" />第1页 / 共1页 转到：
+     <input type="text" id="page" name="page" value="1" />
+     <img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" />
+     <font style="font-size: 14px; font-family: webdings">9</font>
+     <font style="font-size: 14px; font-family: webdings">7</font>
+     <font style="font-size: 14px; font-family: webdings">8</font>
+     <font style="font-size: 14px; font-family: webdings">:</font>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>

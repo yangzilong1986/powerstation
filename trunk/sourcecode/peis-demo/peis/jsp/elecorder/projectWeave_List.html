@@ -1,0 +1,146 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>有序用电指标管理方案明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<style type="text/css">
+.tabels{ border-bottom:none; border-left:none; border-right:none; border-top:none}
+.tabels td{ border-bottom:none; border-left:none; border-right:none; border-top:none}
+</style>
+<script type="text/javascript">
+
+$(document).ready( function() {
+    insertList();
+});
+
+function insertList(){ 
+  var indexHH = -1; var indexHM = -1; var indexZXFS = -1;
+  var StrList = window.location;
+      StrList = StrList.toString();
+  indexHM = StrList.indexOf("hm="); 
+  indexHH = StrList.indexOf("&hh=");
+  indexZXFS = StrList.indexOf("&zxfs=");    
+  $("#hm").html(StrList.substring(indexHM+3,indexHH));
+  $("#hh").html(StrList.substring(indexHH+4,indexZXFS));
+  $("#zxfs").val(StrList.substring(indexZXFS+6));
+}
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">方案明细</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">户名：</td>
+          <td width="120" class="dom" id="hm"></td>
+          <td width="70" class="label">户号：</td>
+          <td width="120" class="dom" id="hh"></td>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">明细信息</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <div id="ChartS" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom:none; border-left:none; border-right:none; border-top:none ">
+            <thead>
+              <tr><td width="100px" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;</td></tr>
+              <tr>
+                <td>
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom:none; border-left:none; border-right:none; border-top:none ">
+                    <tr>
+                      <td align="right" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">限电执行日：</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="1" checked/>周日</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="2"/>周一</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="3" checked/>周二</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="4"/>周三</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="5" checked/>周四</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="6" checked/>周五</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF "><input type="checkbox" id="cb-item" name="cb-item" value="7"/>周六</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr><td width="100px" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;</td></tr>
+              <tr>
+                <td>
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">
+                    <tr>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="10%" align="right">时段信息：</td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="30%" align="left">
+                                                                  早峰 <input type="text" value="06:00" style="width=40"> ~ <input type="text" value="10:00" style="width=40">
+                      </td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="20%">
+                                                                  下浮比例 <input type="text" value="10" style="width=40">%
+                      </td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="30%">
+                                                                    计划负荷(kW) <input type="text" value="100" style="width=40">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="10%"></td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="30%">
+                                                                 晚峰 <input type="text" value="06:00" style="width=40"> ~ <input type="text" value="10:00" style="width=40">
+                      </td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="20%">
+                                                                下浮比例 <input type="text" value="10" style="width=40">%
+                      </td>
+                      <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " width="30%">
+                                                                计划负荷(kW) <input type="text" value="100" style="width=40">
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr><td width="100px" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;</td></tr>
+              <tr>
+                <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                               有序用电执行方式：
+                  <select name="zxfs" id="zxfs" >
+                    <option value="1" selected="selected">主站</option>
+                    <option value="2">终端</option>
+                  </select>  
+                </td>
+              </tr>
+              <tr><td width="300" style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF ">&nbsp;</td></tr>
+              <tr>
+                <td style="border-bottom:none; border-left:none; border-right:none; border-top:none; background-color:#FFFFFF " align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <input  class="input1" type="button" value="确 定" onclick="top.GB_hide();">                            
+                </td>
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

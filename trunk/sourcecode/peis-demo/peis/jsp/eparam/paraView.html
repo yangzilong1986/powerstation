@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>批量参数配置</title>
+    <link rel="stylesheet" type="text/css" href="../../css/window.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"> 
+function setPara(){
+    parent.GB_hide();
+}
+</script>
+  </head>
+  <body style="overflow: hidden;">
+    <input name="protocolNo" id="protocolNo" type=hidden value="106">
+    <input name="termId" id="termId" type=hidden value="101468">
+    <div id="body">
+      <div class="tab"><em>参数配置</em></div>
+      <div id="main">
+        <div id="tool">
+          <div class="t_botton">
+            <div class="t_left">
+            </div>
+            <div class="t_right">
+              <input class="input1" type="button" id="okBt" value="确 定" onclick="setPara();" />
+              <input class="input1" type="button" id="cancelBt" value="取 消" onclick="javascript:parent.GB_hide();" />
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="content">
+          <div id="cont_1">
+            <div class="target">
+              <ul>
+                <li id="target_1" class="target_on">
+                  <a href="#" onClick="changeTab(1);return false;">参数信息</a>
+                </li>
+                <li class="clear"></li>
+              </ul>
+            </div>
+            <div
+              style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 175));">
+              <iframe name="parapage" width="100%" height="100%"
+                frameborder="0" scrolling="no" src="../../jsp/eparam/termParaView.html"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

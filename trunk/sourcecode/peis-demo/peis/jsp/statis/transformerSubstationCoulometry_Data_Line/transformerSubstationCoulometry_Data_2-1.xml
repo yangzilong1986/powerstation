@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>10003</td1>
+        <td2>钱江3变</td2>
+        <td3>A10003</td3>
+        <td4>站用3变</td4>
+        <td5>21219434</td5>
+        <td6>558</td6>
+        <td7 extend="style='color:#FF0000'">31.12</td7> 
+        <td8>&lt;a href="javascript:showPage('2-3')"&gt;查看&lt;/a&gt;</td8>            
+    </data> 
+</datas>

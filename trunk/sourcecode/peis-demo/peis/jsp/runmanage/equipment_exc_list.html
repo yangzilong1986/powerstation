@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>设备故障处理单</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="./equipment_exc_stat.html" onclick="return true;" onfocus="blur()">故障统计</a></li>
+      <li id="tab_2" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">故障处理单</a></li>
+      <li id="tab_3" class="tab_off"><a href="./equipment_list_query.html" onclick="return true;" onfocus="blur()">处理查询</a></li>
+    </ul>
+  </div>
+  <div id="main">
+  <div>
+    <div class="t_botton">
+      <div class="t_left">
+          &nbsp;&nbsp;&nbsp;&nbsp; 
+        <input class="input" type="button" value="登 记"/>&nbsp;&nbsp;&nbsp;&nbsp;  
+        <input class="input" type="button" value="派 工"/>&nbsp;&nbsp;&nbsp;&nbsp;  
+        <input class="input" type="button" value="处 理"/>&nbsp;&nbsp;&nbsp;&nbsp;  
+        <input class="input" type="button" value="归 档"/>&nbsp;&nbsp;&nbsp;&nbsp;  
+        <input class="input3" type="button" value="上传营销接口"/>
+      </div>
+    </div>
+  </div>
+    <div id="detail">
+      <div class="top">
+        <div class="main">故障处理信息</div>
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="66" class="label">故障编号：</td>
+          <td width="100" class="dom"><input type="text" id="errId" value="1"/></td>
+          <td width="40" class="label">户号：</td>
+          <td width="100" class="dom"><input type="text" id="uId" value="1001" disabled="disabled"/></td>
+          <td width="40" class="label">户名：</td>
+          <td width="100" class="dom"><input type="text" id="uName" value="杭州百富" disabled="disabled"/></td>
+          <td width="60" class="label">终端地址：</td>
+          <td width="100" class="dom"><input type="text" id="addre" value="1234567777" disabled="disabled"/></td>
+        </tr>
+        <tr>
+          <td width="66" class="label">故障类型：</td>
+          <td width="100" class="dom"><input type="text" id="errType" value="主站无通讯" disabled="disabled"/></td>
+        </tr>
+        <tr>
+          <td width="66" class="label">故障描述：</td>
+          <td width="100" colspan="7">
+            <textarea rows="5" cols="90"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td width="66" class="label">处 理 人：</td>
+          <td width="100" class="dom">
+            <select id="manType" name="manType">
+              <option value="01" selected="selected">管理员</option>
+              <option value="02">抄表员</option>
+              <option value="03">系统管理员</option>
+              <option value="04">报表查看员</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td width="66" class="label">处理意见：</td>
+          <td width="100" colspan="7">
+            <textarea rows="5" cols="90"></textarea>
+          </td>
+        </tr>
+      </table>
+    </div>    
+  </div>
+</div>
+</body>
+</html>

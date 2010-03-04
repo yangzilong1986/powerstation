@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>越限时该相9次谐波电压含有率（%）/电流有效值</td1>
+        <td2>300.0</td2>
+        <td3></td3>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>谐波越限标志</td1>
+        <td2>0000111100000000 </td2>
+        <td3></td3>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>越限时总畸变电压含有率（%）/电流有效值</td1>
+        <td2>0.0 </td2>
+        <td3></td3>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>越限时该相2次谐波电压含有率（%）/电流有效值</td1>
+        <td2>500.2</td2>
+        <td3></td3>
+    </data>
+</datas>

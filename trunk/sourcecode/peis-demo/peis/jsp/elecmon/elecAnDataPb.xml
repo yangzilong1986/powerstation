@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+  <data js="onclick=selectSingleRow(this)">
+    <td1>民安供电所</td1>
+    <td2>05-005g</td2>
+    <td3>溪头坡村变台</td3>
+    <td4>51104934</td4>
+    <td5>1</td5>
+    <td6>电压缺相</td6>
+    <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+       
+  </data>
+  <data js="onclick=selectSingleRow(this);" >
+    <td1>南调供电所</td1>
+    <td2>05-027g</td2>
+    <td3>北岭村台区</td3>
+    <td4>51104924</td4>
+    <td5>3</td5>
+    <td6>电压缺相</td6>
+    <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+  </data>
+  <data js="onclick=selectSingleRow(this);">
+    <td1>乾塘供电所</td1>
+    <td2>10-0002</td2>
+    <td3>陈芝山台区</td3>
+    <td4>51124934</td4>
+    <td5>1</td5>
+    <td6>电流缺相</td6>
+    <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+  </data>
+  <data js="onclick=selectSingleRow(this);">
+        <td1>官渡供电所</td1>
+        <td2>10-00273</td2>
+        <td3>瑶下村台区</td3>
+        <td4>51104937</td4>
+        <td5>2</td5>
+        <td6>电流缺相</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td7>
+   </data>
+</datas>
+
+<!-- 
+		   <th>序号</th>  
+           <th>供电单位</th>
+           <th>局号</th>
+           <th>名称</th>
+           <th>设备地址</th>
+           <th>测量点序号</th>
+           <th>数据明细</th>   
+ -->

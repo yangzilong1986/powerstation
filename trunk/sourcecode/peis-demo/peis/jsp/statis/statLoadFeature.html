@@ -1,0 +1,449 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>负荷特性分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script>
+<!--  
+/** 项目路径 */
+var contextPath = "";
+
+/** 默认选中的第一列 */
+var defLatNo = null;
+var selectAtrade;
+var selectALine;
+$(document).ready(function(){
+    //$.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+    selectAtrade = $('#aTradeId');      //行业选择框
+
+    selectALine = $('#aLineNo');        //线路选择框
+
+    selectorTableTd(7);
+    dateTypeModeChange();
+    //toquery();
+    
+    $('#dateType').change(dateTypeModeChange);
+    
+    /** 针对 不同条件的选择的处理*/
+    $('#toquery').click(toquery);
+    
+    //$('#exprotexcel').click(exprotexcel);   
+        
+    $("#progress").ajaxStart(function(){
+        $(this).show();
+    });
+    $("#progress").ajaxStop(function(){
+        $('#query').attr("disabled",false);
+        $(this).hide();
+    });
+
+
+    /** 行业、线路相关处理  begin */
+    /** 先隐藏所有select框 */
+    selectAtrade.hide();
+    selectALine.hide();
+
+    /** 处理选择的维度编号 */
+    $('#isLatMode').click(dealSpecId);
+    $('#latMode').change(dealSpecId);
+    dealSpecId();
+    /** 行业、线路相关处理  end */
+    
+
+    selectAtrade.change(function(){
+        $('input[name=specId]').val($(this).val());
+    })
+    selectALine.change(function(){
+        $('input[name=specId]').val($(this).val());
+    })
+
+    fieldReplace();//表格字段替换
+    
+    var tlen = $('#DATA_TBODY tr').length;
+    $('#DATA_TBODY tr').each(function(i){
+        if(i==0){
+            defLatNo = $('td:eq(0)',$(this)).attr("latNo");
+        }
+        if(i!=0 && i==tlen-1){
+            $('td:eq(0)',$(this)).html("汇总");
+        }
+    })
+    
+    
+    $('#DATA_TBODY tr').click(function(){
+        if($('td:eq(0)',$(this)).html() == "汇总")
+            getChartAjax($('td:eq(0)',$(this)).attr("latNo"),true,false);
+        else
+            getChartAjax($('td:eq(0)',$(this)).attr("latNo"),false,false);
+    })
+    
+    
+    if(defLatNo && defLatNo != undefined)
+        getChartAjax(defLatNo,false,true);
+
+
+    /** 第一次访问提交表单 */
+    if(window.location.href.indexOf('init')!=-1){
+        $("form")[0].submit();
+    }
+});
+
+
+/** 处理选择的维度编号 */
+function dealSpecId(){
+    var isLatMode=$("#isLatMode").attr("checked");
+    if(isLatMode==true){
+        $('#latMode').attr('disabled',false);
+        var latMode = $('#latMode').val();
+        if(latMode == "22"){//行业
+            $('input[name=specId]').val(selectAtrade.val());
+            selectAtrade.show();
+            selectALine.hide();
+        }
+        else if(latMode == "23"){//线路
+            $('input[name=specId]').val(selectALine.val());
+            selectAtrade.hide();
+            selectALine.show();
+        }else{
+            selectAtrade.hide();
+            selectALine.hide();
+        }
+    }
+    else{
+        $('#latMode').attr('disabled',true);
+        $('input[name=specId]').val("-1");
+        selectAtrade.hide();
+        selectALine.hide();
+    }
+}
+/** 根据查询日期类型的改变而显示不同的日期控件*/
+function dateTypeModeChange() {
+    var dateType = $('#dateType').val();
+    if (dateType == "1") {//日dimg1
+        $('#DATA_DAY').show();
+        $('#dimg1').show();
+        $('#DATA_YEAR').hide();
+        $('#DATA_MONTH').hide();
+    } else if (dateType == "2") {//月
+
+        $('#dimg1').hide();
+        $('#DATA_DAY').hide();
+        $('#DATA_MONTH').show();
+        $('#DATA_YEAR').show();
+    } else if (dateType == "3") {//年
+
+        $('#dimg1').hide();
+        $('#DATA_DAY').hide();
+        $('#DATA_YEAR').show();
+        $('#DATA_MONTH').hide();
+    }
+}
+
+function getChartAjax(latNo,falg,init){
+    var latNoTotal = "";    
+    var orgNo = $('#orgNo').val();
+    var date = $('#date').val();
+    var year = $('#year').val();
+    var month = $('#month').val();
+    var dateType = $('#dateType').val();
+    var latMode = $('#latMode').val();
+    var isLatMode = $('#isLatMode').attr('checked')?"true":"";
+    var specId = $('input[name=specId]').val();
+    
+    /** 赋值汇总行 */
+    var tlen = $('#DATA_TBODY tr').length;
+    $('#DATA_TBODY tr').each(function(i){
+        if(i!=0 && i==tlen-1){
+            latNoTotal = $('td:eq(0)',$(this)).attr("latNo");
+        }
+    })
+    
+    if(init){        
+        if(specId=='-1'){            
+            latMode = 21;
+            latNo = latNoTotal;
+        }
+    }
+    
+    /** 点击了汇总信息  */
+    if(falg){
+        latMode = 21;
+    }
+
+    /** 按单位排序 */
+    if(isLatMode==""){
+        //赋值单位信息
+
+
+
+
+
+
+        orgNo = latNo;
+    }
+    
+    var params = {"orgNo":orgNo,"dateType":dateType,"date":date,"year":year,"month":month,"latMode":latMode,
+                  "isLatMode":isLatMode,"specId":specId,"latNo":latNo};
+}
+
+function fieldReplace(){
+    var latVal=$("#latMode option:selected").val();
+    var isLatMode=$("#isLatMode").attr("checked");
+    if(isLatMode==false){
+       $("#dimension").html("供电公司");
+    }else{
+       if(latVal=="22"){
+          $("#dimension").html("行业");
+       }else if(latVal=="23"){
+          $("#dimension").html("线路");
+       }else if(latVal=="24"){
+          $("#dimension").html("电压等级");
+       }else if(latVal=="25"){
+          $("#dimension").html("容量等级");
+       }
+    }
+    
+}
+
+function exprotexcel(){
+  var url = contextPath+"/statLoadFeature.do?action=exportExcel&" 
+           + $("form input[name!=action]").serialize() + '&' 
+           + $("form select").serialize()+ "&xmlId=test1" 
+           + "&r=" + parseInt(Math.random() * 1000);
+           //alert(url);
+    //window.location.href = url;
+}
+
+function selectorTableTd(n){
+    $("#DATA_TBODY td").each(function(i){
+        if(i%8 == n){
+            $(this).html(_to_percentage($(this).html()));
+        }
+    });
+}
+ 
+/** 数字转百分数 */
+function _to_percentage(n){
+    return (n*100).toFixed(2)+"%"
+}
+
+/** 针对 不同条件的选择的处理*/
+function toquery(){
+  window.setTimeout("changeChar();","1200");
+}
+
+
+function changeChar(){
+  var isLatMode=$("#isLatMode").attr("checked");
+  selectCharShow("Line2D.xml");
+  fieldReplace();
+  if(isLatMode == true){
+    var ListMode = $("#latMode").val();
+    if(ListMode == 22){
+       $.json2html("DATA_TBODY","../../jsp/statis/statLoadFeature_Data_Line/templet01_aux4_iframe_ex_1.xml","cb-item");
+    }else if(ListMode == 23){
+       $.json2html("DATA_TBODY","../../jsp/statis/statLoadFeature_Data_Line/templet01_aux4_iframe_ex_2.xml","cb-item");  
+    }else if(ListMode == 24){
+       $.json2html("DATA_TBODY","../../jsp/statis/statLoadFeature_Data_Line/templet01_aux4_iframe_ex_3.xml","cb-item");  
+    }else if(ListMode == 25){ 
+       $.json2html("DATA_TBODY","../../jsp/statis/statLoadFeature_Data_Line/templet01_aux4_iframe_ex_4.xml","cb-item");  
+    }
+  }else{
+    $.json2html("DATA_TBODY","../../jsp/statis/statLoadFeature_Data_Line/templet01_aux4_iframe_ex.xml","cb-item"); 
+  } 
+}
+
+
+function selectCharShow(rows){
+  var dateType = $('#dateType').val();
+  var CharUrl = "";
+  if(dateType == 1){
+    CharUrl = "statLoadFeature_Data_Line/Line2D.xml";
+  }else if(dateType == 2){
+    CharUrl = "statLoadFeature_Data_Line/Line2D-2.xml";
+  }
+  else if(dateType == 3){
+    CharUrl = "statLoadFeature_Data_Line/Line2D-3.xml";
+  }
+  var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "900", "300", "0", "0");
+  chart_obj.setDataURL(CharUrl);
+  chart_obj.render("graphBlock");
+}
+
+-->
+</script>
+</head>
+<body>
+  <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="toquery" value="查 询" class="input1" /></div> 
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="70" class="label" align="right">供电单位：</td>
+            <td width="140" class="dom" align="left">
+               <select id="orgNo" name="orgNo">
+                <option value="44">广东省电力公司</option>
+                <option value="4401"> -- 广州市电力公司</option>
+                <option value="4402"> -- 韶关市电力公司</option>
+                <option value="4403"> -- 深圳市电力公司</option>
+                <option value="4404"> -- 珠海市电力公司</option>
+                <option value="4405"> -- 汕头市电力公司</option>
+                <option value="4406"> -- 佛山市电力公司</option>
+                <option value="4407"> -- 江门市电力公司</option>
+                <option value="4408"> -- 湛江市电力公司</option>
+                <option value="440806"> -- -- 遂溪供电局</option>
+                <option value="440807"> -- -- 徐闻供电局</option>
+                <option value="440808"> -- -- 吴川供电局</option>
+                <option value="440809"> -- -- 廉江供电局</option>
+                <option value="440810"> -- -- 雷州供电局</option>
+                <option value="4409"> -- 茂名市电力公司</option>
+                <option value="4412"> -- 肇庆市电力公司</option>
+                <option value="4413"> -- 惠州市电力公司</option>
+                <option value="4414"> -- 梅州市电力公司</option>
+                <option value="4415"> -- 汕尾市电力公司</option>
+                <option value="4416"> -- 河源市电力公司</option>
+                <option value="4417"> -- 阳江市电力公司</option>
+                <option value="4418"> -- 清远市电力公司</option>
+                <option value="4419"> -- 东莞市电力公司</option>
+                <option value="4420"> -- 中山市电力公司</option>
+                <option value="4421"> -- 潮州市电力公司</option>
+                <option value="4422"> -- 揭阳市电力公司</option>
+                <option value="4423"> -- 云浮市电力公司</option>
+              </select>
+              <script type="text/javascript">$("#orgNo").val("44");</script>
+            </td>
+            <td width="90" align="left" valign="bottom">&nbsp;&nbsp;
+              <input type="checkbox" name="isLatMode" value="true" id="isLatMode">二级维度：</td>
+           <td width="70" align="left" valign="bottom">
+              <select name="latMode" id="latMode" >
+                <option value="22">行业</option>
+                <option value="23">线路</option>
+                <option value="24">电压等级</option>
+                <option value="25">容量等级</option>
+              </select>
+            </td>
+            <td width="70" align="left" valign="bottom">
+              <!-- 2级维度指定的编号 -->
+              <input type="hidden" name="specId" value="-1">
+              <select name="aTradeId" id="aTradeId" style="width=80">
+                <option value="-1">所有行业</option>
+                <option value="A">农、林、牧、渔业</option>
+                <option value="B">采 矿 业</option>
+                <option value="C">制 造 业</option>
+                <option value="D">电力、燃气及水的生产和供应业</option>
+                <option value="E">建筑业</option>
+                <option value="F">交通运输、仓储和邮政业</option>
+                <option value="G">信息传输、计算机服务和软件业</option>
+                <option value="H">批发和零售业</option>
+                <option value="I">住宿和餐饮业</option>
+                <option value="J">金融业</option>
+                <option value="K">房地产业</option>
+                <option value="L">租赁和商务服务业</option>
+                <option value="M">科学研究、技术服务和地质勘查业</option>
+                <option value="N">水利、环境和公共设施管理业</option>
+                <option value="O">居民服务和其他服务业</option>
+                <option value="P">教育</option>
+                <option value="Q">卫生、社会保障和社会福利业</option>
+                <option value="R">文化、体育和娱乐业</option>
+                <option value="S">公共管理和社会组织</option>
+                <option value="T">国际组织</option>
+              </select>
+              <script type="text/javascript">document.all.aTradeId.value="-1";</script>
+              <select name="aLineNo" id="aLineNo" style="width=80">
+                <option value="-1">所有线路</option>
+                <option value="178">10kV闻北线F02</option>
+                <option value="18">10kV镇西线F04</option>
+                <option value="180">10kV城西线F04</option>
+                <option value="181">10kV五星线F05</option>
+                <option value="182">10kV粤铁线F06</option>
+                <option value="183">10kV闻西线F07</option>
+                <option value="184">10kV头铺线F08</option>
+                <option value="185">10kV备用线F09</option>
+                <option value="186">10kV备用线F10</option>
+                <option value="19">10kV镇东线F05</option>
+                <option value="192">10kV徐龙线 F01</option>
+                <option value="194">10kV徐东线F03</option>
+                <option value="195">10kV广场线F09</option>
+                <option value="196">10kV备用线F10</option>
+                <option value="197">10kV城南线F04</option>
+                <option value="198">10kV徐南线F05</option>
+                <option value="199">10kV大塘线F06</option>
+                <option value="2">10kV志满线F08</option>
+                <option value="20">10kV民安线</option>
+              </select>
+              <script type="text/javascript">document.all.aLineNo.value="-1";</script>
+            </td>
+            <td>&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;</td> 
+            <td>&nbsp;&nbsp;</td> 
+            <td>&nbsp;&nbsp;</td>          
+          </tr>
+          <tr>
+            <td class="label">统计时间：</td>
+            <td class="dom">
+              <select name="dateType" id="dateType" style="width:120px;">
+                <option value="1" selected="selected">日负荷</option>
+                <option value="2">月负荷</option>
+                <option value="3">年负荷</option>
+              </select>
+            </td>
+            <td class="dom_date"  width="90"> 
+                <input type="text" id="DATA_DAY" name="DATA_DAY" value="2006-09-05">
+                <span id="DATA_YEAR" style="display:none;">
+                  <input type="text" name="year" value="2009" id="year" style="width:40px;">年
+
+                </span>
+                <span id="DATA_MONTH" style="display:none;">
+                  <input type="text" name="month" value="8" id="month" style="width:40px;">月
+                </span>
+            </td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;</td>
+              <td>&nbsp;&nbsp;</td>
+            </tr>
+          </table>
+     </div>
+     <div class="content">
+       <div id="cont_1">
+          <div class="target4">
+            <ul>
+              <li class="target_on"><a href="#" onclick="return false;">负荷特性分析图表</a></li>
+              <li class="clear"></li>
+            </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+        </div>
+          <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-130));">
+            <div id="graphBlock" class="block" align="center"></div>
+            <table border="0" cellpadding="2" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th id="dimension"></th>
+                  <th>最大负荷</th>
+                  <th>最大负荷发生时间</th>
+                  <th>最小负荷</th>
+                  <th>最小负荷发生时间</th>
+                  <th>平均负荷</th>
+                  <th>峰谷差</th>
+                  <th>负荷率(%)</th>
+                </tr>
+              </thead>
+              <tbody id="DATA_TBODY">                        
+              </tbody>
+            </table>
+          </div>
+          <div class="pageContainer"></div>
+        </div>
+      </div>
+</body>
+</html>

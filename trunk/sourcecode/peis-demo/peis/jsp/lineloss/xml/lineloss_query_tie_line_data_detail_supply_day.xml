@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="name=a_2009-09-01">
+        <td2>**联络线计量点1</td2>
+        <td3>12310</td3>
+        <td1 extend="align='center'">2009-09-01</td1>
+        <td4 extend="align='right'">23458.00</td4>
+        <td7 extend="align='right'">3.00</td7>
+        <td8 extend="align='right'">0.20</td8>
+        <td5 extend="align='right'">23456.00</td5>
+        <td17 extend="align='right'">3.00</td17>
+        <td18 extend="align='right'">0.20</td18>
+        <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+   
+    </data>
+        <data extend="name=a_2009-09-02">
+   <td2>**联络线计量点1</td2>
+        <td3>12310</td3>
+        <td1 extend="align='center'">2009-09-02</td1>
+         <td4 extend="align='right'">23458.00</td4>
+        <td7 extend="align='right'">3.00</td7>
+        <td8 extend="align='right'">0.20</td8>
+        <td5 extend="align='right'">23456.00</td5>
+        <td17 extend="align='right'">3.00</td17>
+        <td18 extend="align='right'">0.20</td18>
+        <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;</td11>
+</data>
+</datas>

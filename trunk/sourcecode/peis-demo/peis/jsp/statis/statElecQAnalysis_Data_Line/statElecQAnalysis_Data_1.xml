@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>广东省电力公司</td1>
+        <td2>21576944</td2>
+        <td3>786546</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>23.22</td6> 
+        <td7>4234</td7> 
+        <td8>321</td8> 
+                
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--云浮市电力公司</td1>
+        <td2>5325</td2>
+        <td3>35453</td3>
+        <td4>5345</td4> 
+        <td5>53.21</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>215.4</td8> 
+           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--韶关市电力公司</td1>
+        <td2>5325</td2>
+        <td3>35453</td3>
+        <td4>5345</td4> 
+        <td5>53.21</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>215.4</td8> 
+           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--深圳市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>33.2</td5> 
+        <td6>223423</td6> 
+        <td7>28152</td7> 
+        <td8>2154.32</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--汕头市电力公司</td1>
+        <td2> 8658</td2>
+        <td3>67676</td3>
+        <td4>76768</td4> 
+        <td5>54.32</td5> 
+        <td6>22343</td6> 
+        <td7>28152</td7> 
+        <td8>215.84</td8> 
+           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--广州市电力公司</td1>
+        <td2>98797</td2>
+        <td3>6789</td3>
+        <td4>98987</td4> 
+        <td5>33.12</td5> 
+        <td6>223.22</td6> 
+        <td7>28152</td7> 
+        <td8>321.43</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--揭阳市电力公司</td1>
+        <td2>8897653</td2>
+        <td3>432342</td3>
+        <td4>432432</td4> 
+        <td5>32.335</td5> 
+        <td6>4234</td6> 
+        <td7>4324</td7> 
+        <td8>43.22</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--潮州市电力公司</td1>
+        <td2>42344</td2>
+        <td3>4433</td3>
+        <td4>42343</td4> 
+        <td5>42.90</td5> 
+        <td6>223432</td6> 
+        <td7>28152</td7> 
+        <td8>215.32</td8> 
+           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--中山市电力公司</td1>
+        <td2>808086</td2>
+        <td3>3423</td3>
+        <td4>134432</td4> 
+        <td5>20.32</td5> 
+        <td6>22334</td6> 
+        <td7>28152</td7> 
+        <td8>215.93</td8> 
+         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--东莞市电力公司</td1>
+        <td2>423442</td2>
+        <td3>7865432</td3>
+        <td4>123324</td4> 
+        <td5>34.324</td5> 
+        <td6>42353</td6> 
+        <td7>28152</td7> 
+        <td8>21.83</td8> 
+         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--清远市电力公司</td1>
+        <td2>576944</td2>
+        <td3>786546</td3>
+        <td4>32331</td4> 
+        <td5>20.88</td5> 
+        <td6>2233</td6> 
+        <td7>28152</td7> 
+        <td8>21.32</td8> 
+           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--阳江市电力公司</td1>
+        <td2>76944</td2>
+        <td3>53246</td3>
+        <td4>23331</td4> 
+        <td5>33.21</td5> 
+        <td6>22392</td6> 
+        <td7>28152</td7> 
+        <td8>21.98</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--河源市电力公司</td1>
+        <td2>43342</td2>
+        <td3>354</td3>
+        <td4>453</td4> 
+        <td5>4.01</td5> 
+        <td6>2243</td6> 
+        <td7>4343</td7> 
+        <td8>343</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--汕尾市电力公司</td1>
+        <td2>343</td2>
+        <td3>3424</td3>
+        <td4>12343</td4> 
+        <td5>9.65</td5> 
+        <td6>22398</td6> 
+        <td7>28152</td7> 
+        <td8>261</td8> 
+         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--梅州市电力公司</td1>
+        <td2>4322</td2>
+        <td3>786</td3>
+        <td4>29781</td4> 
+        <td5>12.98</td5> 
+        <td6>2233</td6> 
+        <td7>28132</td7> 
+        <td8>876.32</td8> 
+        
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--惠州市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>23.12</td5> 
+        <td6>22321</td6> 
+        <td7>28152</td7> 
+        <td8>432.3</td8> 
+          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--肇庆市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>64.98</td5> 
+        <td6>22321</td6> 
+        <td7>28152</td7> 
+        <td8>23.83</td8> 
+        
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--茂名市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>198.87</td5> 
+        <td6>223213</td6> 
+        <td7>28152</td7> 
+        <td8>232.63</td8> 
+         
+    </data> 
+    <data>        
+        <td1>--江门市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>234</td5> 
+        <td6>22383</td6> 
+        <td7>28152</td7> 
+        <td8>872.76</td8> 
+    
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--佛山市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>786546</td3>
+        <td4>12323331</td4> 
+        <td5>2312</td5> 
+        <td6>22323</td6> 
+        <td7>28152</td7> 
+        <td8>763.12</td8> 
+    
+    </data>      
+</datas>

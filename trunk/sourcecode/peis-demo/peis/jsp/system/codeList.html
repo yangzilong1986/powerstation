@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>编码列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript">
+    var contextPath = "../..";      
+    var sSelectedCodeCate = "";   
+    function selectRow(sCodeCate, oRow) {
+        sSelectedCodeCate = sCodeCate;
+        selectSingleRow(oRow);
+    }
+ 
+    //列表变更
+    function changeList(type) {
+        if("1" == type){
+           parent.codeList.location.href = "codeList.html";
+           parent.codeDetail.location.href = "codeDetail.html";
+        }
+        else {
+           parent.codeList.location.href = "codeList01.html";
+           parent.codeDetail.location.href = "codeDetail01.html";
+        }
+    }
+  
+    function init(){
+        var len = document.getElementsByTagName("tr");
+        var obj = len[2];
+        obj.onclick();
+    }
+    </script>
+  </head>
+ 
+  <body onload="init();">
+    <div id="body">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="66" class="label">
+              编码类别：
+            </td>
+            <td width="120" class="dom">
+              <form name="codeForm" method="post" action="../../system/codeAction.do">
+                <input type="hidden" name="action" value="getQuery" />
+                <select name="codeType" onchange="changeList(this.options[this.options.selectedIndex].value)">
+                  <option value="0">系统编码</option>
+                  <option value="1" selected="selected">用户编码</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+        </table>
+        <div class="clear"></div>
+      </div>
+      <div class="content">
+        <div id="cont_1">
+          <div id="tableContainer" class="tableContainer"
+            style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 64));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>
+                    序号
+                  </th>
+                  <th>
+                    编码类别
+                  </th>
+                  <th>
+                    编码类别说明
+                  </th>
+                </tr>
+              </thead>
+              <tbody>  
+                <tr align="center" class="trmainstyle" onclick="selectRow('CT_RATIO', this)" style="cursor: pointer;">
+                  <td>
+                    1
+                  </td>
+                  <td>
+                    CT_RATIO
+                  </td>
+                  <td>
+                    CT变比
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('MADE_FAC', this)" style="cursor: pointer;">
+                  <td>
+                    2
+                  </td>
+                  <td>
+                    MADE_FAC
+                  </td>
+                  <td>
+                    制造厂家
+                  </td>
+                </tr>
+              
+                <tr align="center" class="trmainstyle" onclick="selectRow('PT_RATIO', this)" style="cursor: pointer;">
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    PT_RATIO
+                  </td>
+                  <td>
+                    PT变比
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="nullContainer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>广东省电力公司</td1>
+        <td2> 21655144</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>                
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>云浮市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>韶关市电力公司</td1>
+        <td2>5325</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>深圳市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>汕头市电力公司</td1>
+        <td2> 8658</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>广州市电力公司</td1>
+        <td2>98797</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>揭阳市电力公司</td1>
+        <td2>8897653</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>潮州市电力公司</td1>
+        <td2>42344</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>中山市电力公司</td1>
+        <td2>808086</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>东莞市电力公司</td1>
+        <td2>423442</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>清远市电力公司</td1>
+        <td2>576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>                  
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>阳江市电力公司</td1>
+        <td2>76944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>河源市电力公司</td1>
+        <td2>43342</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>汕尾市电力公司</td1>
+        <td2>343</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>梅州市电力公司</td1>
+        <td2>4322</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>惠州市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>         
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>肇庆市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>茂名市电力公司</td1>
+        <td2> 21576944</td2>
+       <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>           
+    </data> 
+    <data>        
+        <td1>江门市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>    
+    </data>
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>佛山市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>100.00</td3>
+        <td4>423443</td4> 
+        <td5>423</td5> 
+        <td6>5413786</td6> 
+        <td7>100.00</td7> 
+        <td8>5413786</td8> 
+        <td9>100.00</td9>
+        <td10>5413786</td10>
+        <td11>100.00</td11>      
+    </data>      
+</datas>

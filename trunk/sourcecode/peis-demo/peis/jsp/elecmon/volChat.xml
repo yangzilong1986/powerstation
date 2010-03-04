@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='电压合格率' labelStep='1' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+	<categories >
+		<category label='07/08' />
+		<category label='07/09' />
+		<category label='07/10' />
+		<category label='07/11' />
+		<category label='07/12' />
+		<category label='07/13' />
+		<category label='07/14' />
+	</categories>
+	<dataset seriesName='电压合格率' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+		<set value='91.15' />
+		<set value='' />
+		<set value='' />
+		<set value='83.65' />
+		<set value='87.18' />
+		<set value='' />
+		<set value='' />
+	</dataset>
+   <dataset seriesName='A相合格率' color='0088FF' anchorBorderColor='0088FF' anchorBgColor='0088FF'>
+        <set value='77' />
+        <set value='77' />
+        <set value='77' />
+        <set value='77' />
+        <set value='77' />
+        <set value='77' />
+        <set value='77' />
+   </dataset>
+  <dataset seriesName='B相合格率' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='66' />
+        <set value='13' />
+        <set value='55' />
+        <set value='65' />
+        <set value='34' />
+        <set value='97.8' />
+        <set value='24' />
+  </dataset>
+  <dataset seriesName='C相合格率' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='55' />
+        <set value='55' />
+        <set value='55' />
+        <set value='55' />
+        <set value='55' />
+        <set value='55' />
+        <set value='55' />
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

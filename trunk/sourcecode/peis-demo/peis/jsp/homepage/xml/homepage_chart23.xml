@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='3' 
+       baseFontSize='12' baseFont='Courier New' 
+       caption='低压集抄' subCaption='' xAxisName='供电单位' yAxisName='%' 
+       showBorder='1' borderColor='#BBBBBB' 
+       showLegend='0' legendPosition='RIGHT' 
+       useRoundEdges='1' 
+       showValues='0' 
+       showSum='1' 
+       captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' 
+       plotSpacePercent='100' 
+       chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' 
+       canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' 
+       legendBorderAlpha='0' 
+       formatNumber='1' formatNumberScale='0' 
+       showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据'
+       showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'>
+    <categories>
+        <category label='霞山供电局'/>
+        <category label='赤坎供电局'/>
+        <category label='农电'/>
+        <category label='配营'/>
+    </categories>
+    <dataset seriesName='0点电量采集成功率'>
+        <set value='90.00'/>
+        <set value='90.00'/>
+        <set value='90.00'/>
+        <set value='90.00'/>
+    </dataset>
+</chart>

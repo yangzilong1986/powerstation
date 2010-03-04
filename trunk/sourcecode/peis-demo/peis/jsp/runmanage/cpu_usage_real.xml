@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='CPU使用率' numberSuffix='' shownames='1' showvalues='1' yAxisName='%'>
+    <categories>
+        <category label='13:04:15'/>
+        <category label='13:04:30'/>
+        <category label='13:04:45'/>
+        <category label='13:05:00'/>
+        <category label='13:05:15'/>        
+    </categories>
+    <dataset seriesName='湛江前置机1' color='AFD818' showValues='0'>
+        <set value='20'/>
+        <set value='20'/>
+        <set value='30'/>
+        <set value='30'/>
+        <set value='40'/>                                       
+    </dataset>
+</chart>

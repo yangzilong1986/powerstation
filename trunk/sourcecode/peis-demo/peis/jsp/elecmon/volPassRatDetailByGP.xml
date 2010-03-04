@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data>
+        <td1>20090708</td1>
+        <td2>678</td2>
+        <td3>30</td3>
+        <td4>30</td4>
+        <td5>91.15%</td5>
+        <td6>77%</td6>
+        <td7>66%</td7>
+        <td8>55%</td8>
+    </data>
+    <data>
+        <td1>20090711</td1>
+        <td2></td2>
+        <td3>30</td3>
+        <td4>30</td4>
+        <td5></td5>
+        <td6>77%</td6>
+        <td7>13%</td7>
+        <td8>55%</td8>
+    </data>
+    <data>
+        <td1>20090712</td1>
+        <td2>367</td2>
+        <td3>30</td3>
+        <td4>30</td4>
+        <td5>83.65%</td5>
+        <td6>77%</td6>
+        <td7>65%</td7>
+        <td8>55%</td8>
+    </data>
+    <data>
+       <td1>20090713</td1>
+        <td2>678</td2>
+        <td3>30</td3>
+        <td4>30</td4>
+        <td5>87.18%</td5>
+        <td6>77%</td6>
+        <td7>34%</td7>
+        <td8>52%</td8>
+    </data>
+</datas>

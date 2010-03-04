@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>操作&amp;数据</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/const.js"></script>
+     <script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+    <!-- private js -->
+    <script type="text/javascript" src="../../js/lineloss/lineloss.js"></script>
+  </head>
+  <body>
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">
+            供电单位：
+          </td>
+          <td width="120" class="dom" id="orgTar">
+          </td>
+          <td width="66" class="label">
+           线   路：
+          </td>
+          <td width="120" class="dom" id="lineTar">
+          </td>
+          <td width="66" class="label">
+            线损率：
+          </td>
+          <td width="10" class="dom" id="equalTar"></td>
+          <td>
+            <input type="text" id="percent" name="percent" value="8" maxlength="3" size="1" />
+            %
+          </td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="label">
+            统计类型：
+          </td>
+          <td class="dom" id="dataAllTar">
+          </td>
+          <td colspan="6">
+            <span id="DATA_DAY_START" style="display: none;"> <input type="text" id="startTime" name="startTime"
+                value="2009-9-1" size="5"> <a onclick="event.cancelBubble=true;"
+              href="javascript:showCalendar('dimg1',false,'startTime',null)"> <img name="dimg1"
+                  src="../../img/calendar/calendar.gif" width="34" height="21" align="middle" border="0" alt="" />
+            </a></span>
+            <span id="DATA_DAY_END" style="display: none;">~<input type="text" id="endTime" name="endTime"
+                value="2009-9-10" size="5"> <a onclick="event.cancelBubble=true;"
+              href="javascript:showCalendar('dimg2',false,'endTime',null)"> <img name="dimg2"
+                  src="../../img/calendar/calendar.gif" width="34" height="21" align="middle" border="0" alt="" />
+            </a> </span>
+            <span id="DATA_YEAR" style="display: none;"> <input type="text" name="year" id="year" size="1" value="2009"
+                maxlength="4">年 </span>
+            <span id="DATA_MONTH" style="display: none;"> <input type="text" name="month" id="month" size="1" value="9"
+                maxlength="2">月 </span>
+          </td>
+          <td>
+           <input class="input" type="button" id="query" value="查 询" />
+           <input class="input" type="button" id="exprotexcel" value="导出excel" />
+          </td>
+        </tr>
+      </table>
+        <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on">
+              <a href="#" onclick="return false;">数据列表</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div
+          style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   98 ) );">
+          <iframe name='targetFrame' id="targetFrame" width="100%" height="100%" frameborder="0" scrolling="no" src="lineloss_query_tie_line_data.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

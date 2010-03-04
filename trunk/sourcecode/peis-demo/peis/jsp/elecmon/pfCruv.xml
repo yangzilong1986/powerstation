@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='合格率' labelStep='' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+	<categories >
+		<category label='2009-1' />
+		<category label='2009-2' />
+		<category label='2009-3' />
+	</categories>
+	<dataset seriesName='数据时间(月份)' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+		<set value='91' />
+		<set value='79' />
+		<set value='87' />
+	</dataset>
+  <dataset seriesName='' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='85' />
+        <set value='78' />
+        <set value='90' />
+  </dataset>
+  <dataset seriesName='' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='90' />
+        <set value='85' />
+        <set value='75' />
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

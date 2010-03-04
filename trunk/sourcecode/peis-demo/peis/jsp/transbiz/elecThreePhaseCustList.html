@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>不平衡率不合格用户清单</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+
+var objectType=$.url.param("objectType");
+var orgName=$.url.param("orgName"); 
+var dataTime=$.url.param("dataTime");
+var elecAppType=$.url.param("elecAppType");
+$(document).ready( function(){
+   init();
+   switchTheadElecThree(objectType);
+   if(objectType==1){
+     $.json2html("DATA_TBODY","../../jsp/transbiz/xml/elecThreePhaseAnalysis_Data_1.xml","cb-item");
+   }else if(objectType==2){
+     $.json2html("DATA_TBODY","../../jsp/transbiz/xml/elecThreePhaseAnalysis_Data_2.xml","cb-item");
+   }
+});
+
+//页面初始化
+function init(){
+  $("#orgNameLable").html(orgName);
+  $("#dateTime").val(dataTime);
+  // 数据初始化单选框
+  $('[name="objectType"]:radio').each(function() {
+      if (this.value == objectType)  
+      {  
+          this.checked = true;  
+      }      
+   });
+   
+   dealSpecId(objectType);
+}
+
+/** 处理选择的维度编号 */
+function dealSpecId(objectType){
+    var isLatMode=$("#isLatMode").attr("checked");
+    if(objectType==2){
+        $('#latMode').attr('disabled',true);
+        $('#isLatModeLable').attr('disabled',true);
+        $('#elecAppType').hide();
+    }else{
+        $('#latMode').attr('disabled',true);
+        $('#isLatModeLable').attr('disabled',true);
+        $('#elecAppType').attr('disabled',true);
+        $('#elecAppType').val(elecAppType);
+    }
+}
+//明细查询
+function openLoadDetail(objectNo,objectName,assetNo){
+   var dateType=$("#dateType").val();
+   var params = {    
+                   "objectNo":objectNo,
+                   "objectName":objectName,
+                   "assetNo":assetNo,
+                   "dataTime":dataTime,
+                   "objectType":objectType
+                };
+   var url="../../jsp/transbiz/elecThreePhaseDetail.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   showDialogBox("电流明细",url, 495, 800);
+}
+
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1"><input type="submit" name="query" onClick="query();" id="query" value="查 询" class="input1" /></div>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td colspan="2" class="label" disabled="true">
+         <input type="radio" name="objectType" value="1" class="dom" disabled="true"/>专变用户
+         <input type="radio" name="objectType" value="2" class="dom" disabled="true"/>配变/台区
+      </td>
+      <td class="label">供电单位：</td>
+      <td class="dom" id="orgNameLable"></td>
+      <td class="label">数据时间：</td>
+      <td class="dom_date" id="dateLable">
+        <input type="text" name="dateTime" id="dateTime"/>
+      </td>
+      <td width="5%" align="right">
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 79));">
+      <table border="0" cellpadding="0" cellspacing="0" width="140%">
+        <thead>
+         <tr id="DATA_THEAD">
+         </tr>
+        </thead>
+        <tbody id="DATA_TBODY">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+	        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">3</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+	  </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?> 
+
+<chart caption='' labelStep='' anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>
+    <categories >
+        <category label='00：00' />
+        <category label='01：00' />
+        <category label='02：00' />
+        <category label='03：00' />
+        <category label='04：00' />
+        <category label='05：00' />
+        <category label='06：00' />
+    </categories>
+    <dataset seriesName='数据时间(小时)' color='0000FF' anchorBorderColor='0000FF' anchorBgColor='0000FF'>
+        <set value='45.67' />
+        <set value='23.67' />
+        <set value='65.67' />
+        <set value='35.67' />
+        <set value='25.67' />
+        <set value='85.67' />
+        <set value='15.67' />
+    </dataset>
+  <dataset seriesName='' color='669966' anchorBorderColor='669966' anchorBgColor='669966'>
+        <set value='15.67' />
+        <set value='23.67' />
+        <set value='65.67' />
+        <set value='15.67' />
+        <set value='65.67' />
+        <set value='25.67' />
+        <set value='55.67' />
+  </dataset>
+  <dataset seriesName='' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='65.67' />
+        <set value='43.67' />
+        <set value='25.67' />
+        <set value='25.67' />
+        <set value='55.67' />
+        <set value='25.67' />
+        <set value='75.67' />
+   </dataset>
+    <dataset seriesName='' color='550066' anchorBorderColor='550066' anchorBgColor='550066'>
+        <set value='15.67' />
+        <set value='33.67' />
+        <set value='15.67' />
+        <set value='75.67' />
+        <set value='15.67' />
+        <set value='45.67' />
+        <set value='25.67' />
+   </dataset>
+   <styles>
+        <definition>
+            <style name='CaptionFont' type='font' size='12' />
+        </definition>
+        <application>
+          <apply toObject='CAPTION' styles='CaptionFont' />
+           <apply toObject='SUBCAPTION' styles='CaptionFont' />
+        </application>
+   </styles>
+</chart>

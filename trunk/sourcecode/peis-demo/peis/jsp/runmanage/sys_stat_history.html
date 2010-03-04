@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>系统监控历史查询</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<!-- private js -->
+<script type="text/javascript" src="../../js/runmanage/sysStatHistory.js"></script> 
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab4">
+    <ul>
+      <li id="tab_2" class="tab_off"><a href="sys_real_stat.html" onclick="return true;" onfocus="blur()">系统实时监控</a></li>
+      <li id="tab_2" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">系统监控历史查询</a></li>
+    </ul>  
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1> 
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">        
+        <tr>
+          <td width="80" class="label">服务器类型：</td>
+          <td width="120" class="dom">
+            <select name="serverType" id="serverType">
+              <option value="1">前置机</option>
+              <option value="2">应用服务器</option>
+              <option value="3">数据库</option>
+            </select>
+          </td>         
+          <td width="80" class="label">服务器名称：</td>    
+          <td width="120" class="dom">     
+            <select name="serverName" id="serverName">
+              <option value="1">湛江前置机1</option>
+              <option value="2">湛江前置机2</option>
+              <option value="3">湛江应用服务器1</option>
+              <option value="4">湛江应用服务器2</option>
+              <option value="5">湛江数据库1</option>
+              <option value="6">湛江数据库2</option>
+            </select>
+          </td>
+          <td width="80" class="label">服务器资源：</td>    
+          <td width="120" class="dom">     
+            <select name="serverRes" id="serverRes">
+              <option value="1">CPU</option>
+              <option value="2">内存</option>
+              <option value="3">磁盘</option>
+              <option value="4">数据库表空间</option>
+            </select>
+          </td>
+           <td colspan="3"></td>     
+        </tr>
+        <tr>
+          <td width="80" class="label"><font color="red">* </font>开始时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="startDate" name="startDate" value="2009-9-21">
+          </td>
+          <td width="80" class="label"><font color="red">* </font>结束时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="endDate" name="endDate" value="2009-9-25">
+          </td>
+          <td colspan="5"></td>     
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <div id="sys_stat" class="block" align="center"></div>
+        </div>
+        <div class="nullContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

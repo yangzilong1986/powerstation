@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img1' onclick='_myChange(1);' style='cursor:pointer' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>广东省电力公司</td2>
+        <td3>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td3>
+        <td4>&lt;a href="javascript:detail()"&gt;900&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:detail()"&gt;100&lt;/a&gt;</td5>
+        <td6>90%</td6>       
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>       
+    </data>  
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+        <td2>大工业</td2>
+        <td3 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;800&lt;/a&gt;</td3>
+        <td4 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;200&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:detail()"&gt;600&lt;/a&gt;</td5>
+        <td6>60%</td6>        
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>        
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'">
+        <td1>&#160;</td1>
+         <td2>中小化肥</td2>
+        <td3 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;1600&lt;/a&gt;</td3>
+        <td4 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;1300&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:detail()"&gt;300&lt;/a&gt;</td5>
+        <td6>88%</td6>        
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7> 
+    </data>
+    
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img10' onclick='_myChange(10);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>湛江供电局</td2>
+        <td3>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td3>
+        <td4>900</td4>
+        <td5>100</td5>
+        <td6>90%</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>居民生活用电</td2>
+        <td3>&lt;a href="javascript:detail()"&gt;900&lt;/a&gt;</td3>
+        <td4>810</td4>
+        <td5>90</td5>
+        <td6>90%</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>农业生产用电</td2>
+        <td3 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td3>
+        <td4 extend="style='color: blue;'">900</td4>
+        <td5>100</td5>
+        <td6>900</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data>
+    
+    
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td1>&lt;img id='img19' onclick='_myChange(19);' src='../../img/tree2/plus1.gif'/&gt;</td1>
+        <td2>潮州供电局</td2>
+        <td3>&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td3>
+        <td4>900</td4>
+        <td5>100</td5>
+        <td6>90%</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>其它</td2>
+        <td3 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;200&lt;/a&gt;0</td3>
+        <td4 extend="style='color: blue;'">160</td4>
+        <td5>40</td5>
+        <td6>80%</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='display: none;'" >
+        <td1>&#160;</td1>
+        <td2>大工业</td2>
+        <td3 extend="style='color: blue;'">&lt;a href="javascript:detail()"&gt;1000&lt;/a&gt;</td3>
+        <td4 extend="style='color: blue;'">900</td4>
+        <td5>100</td5>
+        <td6>90%</td6>
+        <td7>&lt;a href="javascript:viewDetail()"&gt;历史明细&lt;/a&gt;</td7>
+    </data>
+  
+</datas>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>杨柳青</td1>
+        <td2>天津太仓机械工业有限公司</td2>
+        <td3>2700147491</td3>
+        <td4>10kV粤海线F08</td4>
+        <td5>100</td5>
+        <td6>0.9</td6>       
+        <td7>0.85</td7>       
+        <td8>0.98</td8>       
+        <td9>2006-09-09 08:15:00</td9>       
+        <td10>0.21</td10>       
+        <td11>2006-09-09 13:45:00</td11>       
+        <td12>0.77</td12>       
+    </data>  
+    <data js="onclick=selectSingleRow(this)">
+        <td1>李七庄</td1>
+        <td2>天津市隆晟车厢有限公司</td2>
+        <td3>2700174219</td3>
+        <td4>10kV河东Ⅰ线F01</td4>
+        <td5>100</td5>
+        <td6>0.9</td6>       
+        <td7>0.85</td7>       
+        <td8>0.98</td8>       
+        <td9>2006-09-09 08:15:00</td9>       
+        <td10>0.21</td10>       
+        <td11>2006-09-09 13:45:00</td11>       
+        <td12>0.77</td12>          
+    </data>
+    <data js="onclick=selectSingleRow(this)">
+        <td1>杨柳青</td1>
+        <td2>天津市世纪佳华工贸有限公司</td2>
+        <td3>2700193305</td3>
+        <td4>10kV华里线F03</td4>
+        <td5>100</td5>
+        <td6>0.9</td6>       
+        <td7>0.85</td7>       
+        <td8>0.98</td8>       
+        <td9>2006-09-09 08:15:00</td9>       
+        <td10>0.21</td10>       
+        <td11>2006-09-09 13:45:00</td11>       
+        <td12>0.77</td12>   
+    </data>
+    
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>杨柳青</td1>
+        <td2>天津市西青区李七庄乡于台村民委员会</td2>
+        <td3>2700160883</td3>
+        <td4>10kV园北Ⅰ线F05</td4>
+        <td5>100</td5>
+        <td6>0.9</td6>       
+        <td7>0.85</td7>       
+        <td8>0.98</td8>       
+        <td9>2006-09-09 08:15:00</td9>       
+        <td10>0.21</td10>       
+        <td11>2006-09-09 13:45:00</td11>       
+        <td12>0.77</td12>  
+    </data>
+  
+</datas>

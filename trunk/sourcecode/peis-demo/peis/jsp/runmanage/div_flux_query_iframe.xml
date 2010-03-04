@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td2>13888888888</td2>
+        <td3>27374774</td3>
+        <td4>威胜</td4>
+        <td5>CDMA</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick=''">test1</td6>
+        <td7>80</td7>
+        <td8>78</td8>
+        <td9>65</td9>
+        <td10>74</td10>
+        <td11>57</td11>
+        <td12>96</td12>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td2>15888888888</td2>
+        <td3>27454774</td3>
+        <td4>三星</td4>
+        <td5>CDMA</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick=''">test2</td6>
+        <td7>50</td7>
+        <td8>73</td8>
+        <td9>60</td9>
+        <td10>54</td10>
+        <td11>97</td11>
+        <td12>76</td12>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >
+        <td2>13777777777</td2>
+        <td3>27393774</td3>
+        <td4>百富</td4>
+        <td5>GPRS</td5>
+        <td6 extend="style='color: blue;cursor:pointer;' onclick=''">test3</td6>
+        <td7>83</td7>
+        <td8>76</td8>
+        <td9>67</td9>
+        <td10>74</td10>
+        <td11>37</td11>
+        <td12>46</td12>
+    </data>
+</datas>
