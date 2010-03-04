@@ -1,9 +1,13 @@
 @CHARSET "UTF-8";
+html {
+	background-color: #006766;
+}
 body {
     margin: 0 auto;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     color: #333;
+	background-color: #006766;
     overflow: auto;
     scrollbar-3dlight-color: #8cb6e7;
     scrollbar-arrow-color: #46617f;

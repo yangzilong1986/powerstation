@@ -90,7 +90,7 @@ $(document).ready( function() {
 <body>
 <div id="header">
   <div class="bg_top">
-    <div id="logo"><img src="../../img/logo.png" width="174" height="65" /></div>
+    <div id="logo"></div>
     <div id="menu">
       <dl>
         <dt>
@@ -149,9 +149,9 @@ $(document).ready( function() {
         <dd class="undis"><div class="menu">
           <a href="../synquery/archives_info_query.html?type=1" target="content">批量查询</a>&nbsp;┆&nbsp;
           <a href="../synquery/unit_query.html" target="content">单位综合</a>&nbsp;┆&nbsp;
-          <a href="../synquery/line_query.html" target="content">线路综合</a>&nbsp;┆&nbsp;
-          <a href="../synquery/dmrd_query.html" target="content">台区综合</a>&nbsp;┆&nbsp;
-          <a href="../synquery/transSubsta_query.html" target="content">变电站综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">线路综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">台区综合</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">变电站综合</a>&nbsp;┆&nbsp;
           <a href="../synquery/community_examine_query.html?type=1" target="content">台区考核表</a>&nbsp;┆&nbsp;
           <a href="../synquery/usr_data_query_zb_1.html" target="content">单专变用户</a>&nbsp;┆&nbsp;
           <a href="../synquery/pb/usr_data_query_pb_1.html" target="content">单配变</a>&nbsp;┆&nbsp;
@@ -179,9 +179,15 @@ $(document).ready( function() {
       </dl>
     </div>
   </div>
-  <div class="nav">
-    <div class="left pl25 white pt5"><img src="../../img/nav_bt1.gif" width="10" height="10" align="absmiddle" /> <a href="../../jsp/homepage/homepage.html" onclick="return true;" target="content">首页</a> <img src="../../img/nav_bt2.gif" width="10" height="10" align="absmiddle" class="mgl5" /> <a href="#" onclick="return false;" target="content">导航</a> <img src="../../img/nav_bt3.gif" width="10" height="10" align="absmiddle" class="mgl5" /> <a href="../../login.html" onclick="return true;" target="_top">注销</a></div>
-    <div class="right fl lh25 white"><marquee direction=left>公告：</marquee></div>
+  <div id="right">
+    <dl>
+      <dt>
+        <div>用电信息采集系统</div>
+	  </dt>
+	  <dd>
+	    <div></div>
+	  </dd>
+	</dl>
   </div>
 </div>
 </body>
