@@ -11,24 +11,15 @@
   function changeTab(index){
       var tab1 = document.getElementById("tab_1");
       var tab2 = document.getElementById("tab_2");
-      var tab3 = document.getElementById("tab_3");
       if(index == "1") {       //采集成功率
           tab1.className = 'tab_on';
           tab2.className = 'tab_off';
-          tab3.className = 'tab_off';
           gatherframe.document.location  = "../../jsp/autorm/gatherSuccessRateFrame.html";
       }
       else if(index == "2") {  //采集完整率
           tab1.className = 'tab_off';
           tab2.className = 'tab_on';
-          tab3.className = 'tab_off';
           gatherframe.document.location  = "../../jsp/autorm/gatherCompleteRateFrame.html";
-      }
-      else if(index == "3") {  //采集准确率
-          tab1.className = 'tab_off';
-          tab2.className = 'tab_off';
-          tab3.className = 'tab_on';
-          gatherframe.document.location  = "../../jsp/autorm/gatherExactRateFrame.html";
       }
   }
   </script>
@@ -40,7 +31,6 @@
         <ul>
           <li id="tab_1" class="tab_on"><a href="javascript:changeTab(1);" onfocus="blur()">采集成功率</a></li>
           <li id="tab_2" class="tab_off"><a href="javascript:changeTab(2);" onfocus="blur()">采集完整率</a></li>
-          <li id="tab_3" class="tab_off"><a href="javascript:changeTab(3);" onfocus="blur()">采集准确率</a></li>
           <li class="clear"></li>
         </ul>
         <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
