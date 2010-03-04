@@ -95,7 +95,7 @@ form { margin: 0; padding: 0; }
 /*  */
 #header { min-width: 1004px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1004?"1004px":""); }
 .bg_top { background: url(../img/bg_menu.gif) repeat-x; height: 64px; padding-right: 10px; }
-#logo { background: url(../img/bg_logo.gif) no-repeat; width: 281px; height: 64px; float: left; }
+#logo { width: 20px; height: 64px; float: left; }
 
 /*菜单CSS开始*/
 #menu { float: left; }
@@ -132,6 +132,8 @@ html>body #menu #Fod div { float: left; width: 70px; color: #fff; font-size: 14p
 .menu8 { text-align: right; line-height: 26px; }
 .menu9 { text-align: right; line-height: 26px; }
 /*菜单CSS结束*/
+
+#right { width: 200px; height: 64px; float: right; position: absolute; top: 0; right: 10px; font-size: 36px; }
 
 .nav { position: absolute; float: left; top: 65px; left: 0; background: url(../img/bg_menu1.gif) repeat-x; height: 26px; width: 100%; color: #fff; }
 .nav .left { position: relative; float: left; top: 0; left: 0; }
