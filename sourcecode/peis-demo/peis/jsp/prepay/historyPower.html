@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负荷曲线</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript">
+$.json2html("DATA_TBODY","../../jsp/prepay/xml/remainingPower_Data_1.xml","cb-item");
+
+var custName = $.url.param("custName");
+var custNo = $.url.param("custNo");
+
+$(document).ready( function(){
+    init();
+});
+
+//页面初始化
+function init(){
+    $("#custNo").val(custNo);
+    $("#custName").val(custName);
+}
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main">
+  <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="70" class="label">户　号：</td>
+        <td width="120" class="dom"><input type="text" id="custNo" name="custNo" value="" disabled="disabled"></td>
+        <td width="70" class="label">户　名：</td>
+        <td width="120" class="dom"><input type="text" id="custName" name="custName" value="" disabled="disabled"></td>
+        <td width="70" class="label">开始时间：</td>
+        <td width="120" class="dom_date"><input type="text" name="bpDate" value="2009-09-01"></td>
+        <td width="70" class="label">结束时间：</td>
+        <td width="120" class="dom_date"><input type="text" name="bpDate" value="2009-09-11"></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <table border="0" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td width="69%">
+         <div class="graphContainer" style="height:expression((document.documentElement.clientHeight||document.body.clientHeight)-85);">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" class="block" align="center"></div>
+             <script type="text/javascript">
+             var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "600", "400", "0", "0");
+             chart_obj.setDataURL("xml/remainingPower_Line_1.xml");
+             chart_obj.render("graphBlock");
+             </script>
+          <!--END Script Block for Chart-->
+         </div>
+         <div class="nullContainer"></div>
+        </td>
+        <td width="1%"></td>
+        <td width="30%">
+         <div class="tableContainer" style="height:expression((document.documentElement.clientHeight||document.body.clientHeight)-85);">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+             <tr>
+              <th width="20%">序号</th>
+              <th width="40%">数据时间</th>
+              <th width="40%">剩余电量(费)</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY" align="center">
+            </tbody>
+          </table>
+         </div>
+         <div class="nullContainer"></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

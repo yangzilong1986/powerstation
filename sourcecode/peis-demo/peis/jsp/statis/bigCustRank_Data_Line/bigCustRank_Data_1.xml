@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>1</td1>
+        <td2> 李七庄</td2>
+        <td3>1209759037</td3>
+        <td4>水利站</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>21896</td6> 
+        <td7>5474</td7> 
+        <td8>5474</td8> 
+        <td9>5474</td9>
+        <td10>5474</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>                   
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>2</td1>
+        <td2>  李七庄 </td2>
+        <td3>2700029117</td3>
+        <td4>广州市峰源金属制品有限公司</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>3</td1>
+        <td2>杨柳青</td2>
+        <td3>141614616</td3>
+        <td4>广州市李彬电镀有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>4</td1>
+        <td2>李七庄</td2>
+        <td3>2700060227</td3>
+        <td4>广州市国华橡塑制品厂</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>5</td1>
+        <td2> 李七庄</td2>
+        <td3>2700049157</td3>
+        <td4>广州市西青区裕祥五金加工厂</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>6</td1>
+        <td2> 杨柳青</td2>
+        <td3>1401783006</td3>
+        <td4>乐高刮水器制造有限公司 </td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>7</td1>
+        <td2>李七庄</td2>
+        <td3>2700058235</td3>
+        <td4>天津润森塑业有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>8</td1>
+        <td2>杨柳青</td2>
+        <td3>1403893036</td3>
+        <td4>广州市宏顺纸制品有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>9</td1>
+        <td2> 杨柳青 </td2>
+        <td3>1403893098</td3>
+        <td4> 广州市中奥沥青有限公司</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>10</td1>
+        <td2>杨柳青</td2>
+        <td3>1403893032</td3>
+        <td4>广州市森洁卫生用品有限公司 </td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>11</td1>
+        <td2>李七庄</td2>
+        <td3>2700029117</td3>
+        <td4>天津博金精细化工有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>12</td1>
+        <td2> 大户（西青）</td2>
+        <td3>1223593014</td3>
+        <td4>蓝星石化有限公司天津石油化工厂</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>3128</td6> 
+        <td7>12512</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>13</td1>
+        <td2>李七庄</td2>
+        <td3>1223593012</td3>
+        <td4>天津公安警官职业学院</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>3128</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>14 </td1>
+        <td2>李七庄</td2>
+        <td3>2700026996</td3>
+        <td4>天津浩博服饰有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>15</td1>
+        <td2>  杨柳青</td2>
+        <td3>0900022892</td3>
+        <td4>广州市西青区杨柳青景区管理所◆换表◆</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>           
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>16</td1>
+        <td2>杨柳青</td2>
+        <td3>1405849030</td3>
+        <td4>广州市西青区杨柳青第二中学◆换表◆</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>17</td1>
+        <td2>李七庄</td2>
+        <td3>0900010398</td3>
+        <td4>大南河村</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>18</td1>
+        <td2>大户（西青）</td2>
+        <td3>2700058596</td3>
+        <td4>天津创业环保股份有限公司纪庄子污水处理厂</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data>
+    <data>        
+        <td1>19</td1>
+        <td2> 杨柳青 </td2>
+        <td3>2700011930</td3>
+        <td4>广州市西青区国家税务局</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>       
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>20</td1>
+        <td2> 杨柳青</td2>
+        <td3>2700066497</td3>
+        <td4> 广州职业学院</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>       
+    </data>      
+</datas>

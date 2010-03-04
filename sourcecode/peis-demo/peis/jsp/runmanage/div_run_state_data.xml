@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='广州市电力公司'/>
+        <category label='韶关市电力公司'/>
+        <category label='深圳市电力公司'/>
+    </categories>
+    <dataset seriesName='投运率' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+    </dataset>
+    <dataset seriesName='上线率' color='A1D8F8' showValues='0'>
+        <set value='65'/>
+        <set value='84.81'/>
+        <set value='77'/>
+    </dataset>
+    <dataset seriesName='抄表成功率' color='AF18F8' showValues='0'>
+        <set value='34'/>
+        <set value='43'/>
+        <set value='54'/>    </dataset>
+</chart>

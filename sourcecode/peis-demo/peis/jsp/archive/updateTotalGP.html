@@ -1,0 +1,115 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>专变用户档案(总加组)</title>
+  <link rel="stylesheet" type="text/css" href="../../css/window.css" />
+  <script type="text/javascript" src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+  <script type="text/javascript" src="../../js/frame/component.js"></script>
+  <script type="text/javascript">
+  </script>
+ </head>
+ <body style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>总加组信息</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+       <td width="22"></td>
+       <td>终端逻辑地址：
+         <span><input type="text" id="logicalAddr" name="logicalAddr" value="8D013979" disabled="true"/></span>
+         <span>总加组序号：
+           <select name="aGId" id="aGId">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+           </select>
+         </span>
+       </td>
+      </tr>
+     </table>
+     <div id="totalGPShow">
+        <div class="data2"><span>总加组信息</span></div>
+        <div class="data2_con">
+         <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+         <tr>
+          <th width="25%">测量点序号</th>
+          <th width="25%">运算符标识</th>
+          <th width="25%">正反向标识</th>
+          <th width="25%">选中</th>
+         </tr>
+        </thead>
+        <tbody>
+         <tr onmouseover="this.style.cursor='hand';">
+          <td>1</td>
+          <td>
+           <select name="ysf" id="ysf1">
+            <option value="1">+</option>
+            <option value="-1">-</option>
+           </select>
+          </td>
+          <td>
+           <select name="zfx" id="zfx1">
+            <option value="1">正向</option>
+            <option value="-1">反向</option>
+           </select>
+          </td>
+          <td>
+           <input type="checkbox" name="ItemID" value="1" checked/>
+          </td>
+         </tr>
+         <tr onmouseover="this.style.cursor='hand';">
+          <td>2</td>
+          <td>
+           <select name="ysf" id="ysf2">
+            <option value="1">+</option>
+            <option value="-1">-</option>
+           </select>
+          </td>
+          <td>
+           <select name="zfx" id="zfx2">
+            <option value="1">正向</option>
+            <option value="-1">反向</option>
+           </select>
+          </td>
+          <td>
+           <input type="checkbox" name="ItemID" value="2" checked/>
+          </td>
+         </tr>
+         <tr onmouseover="this.style.cursor='hand';">
+          <td>3</td>
+          <td>
+           <select name="ysf" id="ysf2">
+            <option value="1">+</option>
+            <option value="-1">-</option>
+           </select>
+          </td>
+          <td>
+           <select name="zfx" id="zfx2">
+            <option value="1">正向</option>
+            <option value="-1">反向</option>
+           </select>
+          </td>
+          <td>
+           <input type="checkbox" name="ItemID" value="2" checked/>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  <div class="guidePanel">
+    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >
+         <check checked="true">1001</check>
+         <td1>1</td1>
+         <td2>1405786022</td2>
+         <td3>市工农联盟华庄大队</td3>
+         <td4>广东省电力局</td4>
+         <td5>12080825</td5>
+         <td6>暂停</td6>
+         <td7>2009-07-24 01:01:01</td7>
+         <td8>2009-07-24 11:01:01</td8>
+         <td9></td9>
+         <td10>未处理</td10>
+         <td11></td11>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+         <check checked="true">1001</check>
+         <td1>2</td1>
+         <td2>2700160880</td2>
+         <td3>广州市大丰流量仪表厂</td3>
+         <td4>广东省电力局</td4>
+         <td5>45011114</td5>
+         <td6>暂停</td6>
+         <td7>2009-07-24 04:01:01</td7>
+         <td8>2009-07-24 04:01:01</td8>
+         <td9></td9>
+         <td10>未处理</td10>
+         <td11></td11>
+    </data>
+</datas>

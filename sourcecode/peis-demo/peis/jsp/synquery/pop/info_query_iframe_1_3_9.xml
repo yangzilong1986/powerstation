@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>0800309816</td2>     
+        <td3>张石海</td3>
+		<td>9995014560</td>
+        <td4>南三供电所</td4>
+        <td5>10kV平坦线F05</td5>
+        <td6>教师村公变</td6>
+        <td7>01A1</td7>
+        <td8>003</td8>
+        <td9>23</td9>
+        <td10>大德二路123号</td10>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>0800309818</td2>     
+        <td3>叶国胜</td3>
+		<td>9995014560</td>
+        <td4>南三供电所</td4>
+        <td5>10kV平坦线F05</td5>
+        <td6>教师村公变</td6>
+        <td7>01A1</td7>
+        <td8>033</td8>
+        <td9>23</td9>
+        <td10>大德二路111号</td10>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>0800309785</td2>     
+        <td3>潘锦英</td3>
+		<td>9995014560</td>
+        <td4>南三供电所</td4>
+        <td5>10kV平坦线F05</td5>
+        <td6>教师村公变</td6>
+        <td7>01A1</td7>
+        <td8>013</td8>
+        <td9>23</td9>
+        <td10>大德二横路115号</td10>
+    </data>         
+</datas>
+<!--
+
+用户档案(低压)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>户号</th>
+            <th>户名</th>
+			<th>表号</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>抄表区</th>
+			<th>抄表段</th>
+			<th>抄表日</th>
+			<th>地址</th>
+          </tr>
+        </thead>
+-->

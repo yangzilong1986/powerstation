@@ -1,0 +1,275 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>台区综合查询</title>
+<!-- public css -->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+var _type = 1;
+var _isQuery = false ;
+$(document).ready(function(){   
+	$.handelCombox('orgTar','orgNo');
+    $("#query").click(function(){  
+        chageTab(_type);//
+    });
+    
+});
+
+//
+function loadDataAndPic(){
+   $.json2html("tdate","../../jsp/synquery/unit_query_iframe.xml","");//
+	var chart_obj = new FusionCharts("../../FusionCharts/MSColumn3D.swf", "chart_id", "700", "300", "0", "0");
+    chart_obj.setDataURL("unit_query_1_data.xml");
+	chart_obj.render("graphBlock1");	
+	
+	var chart_obj1 = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "700", "300", "0", "0");
+	chart_obj1.setDataURL("unit_query_2_data.xml");
+	chart_obj1.render("graphBlock2");  
+}
+
+//
+function chageTab(ty){
+    _type = ty ;
+    //$("li[class^='target_']").attr("class","target_off"); 
+    //$("#li_"+ty).attr("class","target_on");
+    for(var i = 1; i <= 3; i++) {
+        if(i == ty) {
+            $("#em_" + i).attr("class", "");
+        }
+        else {
+            $("#em_" + i).attr("class", "off");
+        }
+    }
+    //if(_isQuery){
+        showTab(ty);//
+        loadDataAndPic();//
+    //}
+    _chageTabCss(_type);
+}
+
+var it = ["1","2","3"];
+function showTab(id){
+    for(var i in it) {
+        if(id != it[i]) {
+            $("#con_em_" + it[i]).hide();
+        }
+        else {
+            $("#con_em_" + it[i]).show();
+        }
+    }
+}
+
+function show(ty){
+    if(ty==9){
+        top.showDialogBox("", "../../jsp/autorm/gatherQualityManager.html", 600,1000);
+    }else{
+        top.showDialogBox("", "../../jsp/synquery/pop/unit_query.html?type="+ty, 575, 900);
+    }
+       return false;       
+}
+
+//
+function popShow(wi){
+    if(wi==1){
+        top.showDialogBox("", "../../jsp/lineloss/lineloss_query_allgrid.html", 600,1000);
+    }else{
+        top.showDialogBox("", "../../jsp/statis/statLoadFeature.html", 600,1000);
+    }
+}
+
+// 
+function _chageTabCss(type){
+	$("li[class^='target_o']").attr("class","target_off");
+	$("#ty_css_" + type).attr("class","target_on");
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="./unit_query.html" onClick="return true;" onFocus="blur()">单位综合查询</a></li>
+      <li id="tab_2" class="tab_off"><a href="./line_query.html" onClick="return true;" onFocus="blur()">线路综合查询</a></li>
+      <li id="tab_3" class="tab_off"><a href="./transSubsta_query.html" onClick="return true;" onFocus="blur()">变电站综合查询</a></li>
+      <li id="tab_4" class="tab_off"><a href="./dmrd_query.html" onClick="return true;" onFocus="blur()">台区综合查询</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input type="submit" name="query" id="query" value="查 询" class="input1" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" >
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td colspan="7"></td>
+        </tr>
+      </table>
+    </div>
+    <!--  div class="tab"><em id="em_1"><a href="javascript:chageTab(1);">数据查询</a></em><em id="em_2" class="off"><a href="javascript:chageTab(2);">电量统计</a></em><em id="em_3" class="off"><a href="javascript:chageTab(3);">监测负荷</a></em></div>-->
+    <div class="target">
+      <ul>
+        <li class="target_on" id="ty_css_1"><a href="javascript:chageTab(1);">数据查询</a></li>
+        <li class="target_off" id="ty_css_2"><a href="javascript:chageTab(2);">电量统计</a></li>
+        <li class="target_off" id="ty_css_3"><a href="javascript:chageTab(3);">监测负荷</a></li>
+	  </ul>    
+    </div>
+    <div class="tab_con" id="con_em_1">
+      <div class="tableContainer" style="width:expression(((document.documentElement.clientWidth||document.body.clientWidth)-52)); height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-155));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th></th>
+              <th colspan="3">专变</th>
+              <th colspan="3">配变\台区</th>
+              <th colspan="3">低压</th>
+              <th colspan="3">变电站</th>
+            </tr>
+            <tr>
+              <th>供电单位</th>
+              <th>用户数</th>
+              <th>终端数</th>
+              <th>抄表成功率(%)</th>
+              <th>户数</th>
+              <th>终端数</th>
+              <th>抄表成功率(%)</th>
+              <th>用户数</th>
+              <th>终端数</th>
+              <th>抄表成功率(%)</th>
+              <th>厂站数</th>
+              <th>终端数</th>
+              <th>抄表成功率(%)</th>
+            </tr>
+          </thead>
+          <tbody id="tdate">
+        </table>
+      </div>
+      <div class="pageContainer"> <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：        <select id="pageRows" name="pageRows" size="1">
+          <option value="10">10</option>
+          <option value="20" selected="selected">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+        </select>
+        第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：
+        <input type="text" id="page" name="page" value="1" />
+        <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> </div>
+    </div>
+    <div class="tab_con" id="con_em_2" style="display: none; height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 117));">
+      <div class="main">
+        <div>
+          <select id="li2_type">
+            <option value="1">日</option>
+            <option value="2" selected>月</option>
+          </select>
+        </div>
+        <div id="graphBlock1" style="float:left;"></div>
+        <div style="float: left;">
+          <div class="data2_con" style="border: 0;">
+            <div class="main">
+              <table border="0" cellpadding="0" cellspacing="0" width="90%" align="center" style="border-top: 1px #5d90d7 solid; border-left: 1px #5d90d7 solid;">
+                <thead><tr>
+                  <th width="200"></th>
+                  <th width="100">供电量(MWh)</th>
+                  <th width="100">售电量(MWh)</th>
+                </tr></thead>
+                <tbody>
+                  <tr align="center">
+                    <td>本期(上月)</td>
+                    <td><a style="color:#03C;cursor:pointer;" onClick="show(10);">210</a></td>
+                    <td><a style="color:#03C;cursor:pointer;" onClick="show(11);">120</a></td>
+                  </tr>
+                  <tr>
+                    <td>上期</td>
+                    <td>200</td>
+                    <td>110</td>
+                  </tr>
+                    <tr>
+                        <td>环比</td>
+                        <td>5%</td>
+                        <td>8%</td>
+                    </tr>
+                    <tr>
+                        <td>同期</td>
+                        <td>5%</td>
+                        <td>8%</td>
+                    </tr>
+                    <tr>
+                        <td>同比</td>
+                        <td>4%</td>
+                        <td>8%</td>
+                    </tr>
+                    <tr>
+                        <td>本年累计</td>
+                        <td>45654</td>
+                        <td>32545</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+            <div align="center"><input class="input1" type="submit" id="jkfh" value="详 细" onClick="popShow(1);" /></div>
+          </div>
+        </div>        
+      </div>
+    </div>
+    <div class="tab_con" id="con_em_3" style="display: none; height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 117));">
+      <div class="main">
+        <div><select id="li3_type">
+        <option value="1" selected>日</option>
+        <option value="2">月</option>
+        <option value="3">年</option>
+        </select></div>
+        <div id="graphBlock2" style="float:left;"></div>
+        <div style="float: left;">
+          <div class="data2_con" style="border: 0;">
+            <div class="main">
+              <table border="0" cellpadding="0" cellspacing="0" width="90%" align="center" style="border-top: 1px #5d90d7 solid; border-left: 1px #5d90d7 solid;">
+                <tr>
+                      <td>昨日最大负荷：</td>
+                      <td>54mw</td>
+                    </tr>
+                    <tr>
+                      <td>发生时间：</td>
+                      <td>13：00</td>
+                    </tr>
+                    <tr>
+                      <td>昨日最小负荷：</td>
+                      <td>32mw</td>
+                    </tr>
+                    <tr>
+                      <td>发生时间：</td>
+                      <td>14：00</td>
+                    </tr>
+                    <tr>
+                      <td>平均负荷：</td>
+                      <td>42mw</td>
+                    </tr>
+                    <tr>
+                      <td>负荷率：</td>
+                      <td>75%</td>
+                    </tr>
+              </table>
+            </div>
+            <div align="center"><input class="input1" type="submit" id="jkfh" value="详 细" onClick="popShow(2);" /></div>
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

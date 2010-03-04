@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?> 
+<chart caption='供电可靠性' xAxisName='供电单位' yAxisName='' numberPrefix='' showValues='0'>
+   <set label='' value='98.2' />
+   <set label='' value='98.89' />
+   <set label='' value='87.89' />
+</chart>  
+

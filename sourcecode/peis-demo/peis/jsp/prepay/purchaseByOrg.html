@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/prepay/prepayComm.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+})
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/prepay/xml/purchaseByOrg_Data_1.xml","cb-item");
+}
+
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1">
+    <input type="button" name="query" id="query" onclick="query();" value="查 询" class="input1" />
+    <input type="button" value="高级查询" id="adquery" class="input2">
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+     <td width="70" class="label">供电单位：</td>
+     <td width="120" class="dom" id="orgTar"></td>
+     <td width="70" class="label">统计时间：</td>
+     <td width="500" class="dom_date" colspan="5">
+       <select id="dateType" name="dateType" onChange="switchDataTime();">
+         <option value="1">日</option>
+         <option value="2">月</option>
+         <option value="5">任意时间段</option>
+       </select>
+       <!-- 日 -->
+       <span id="DATA_DAY"> 
+        <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+       </span>
+       <!-- 年 -->
+       <span id="DATA_YEAR" style="display:none;">
+          <select name="year" id="year">
+             <option value="2005">2005</option>
+             <option value="2006">2006</option>
+             <option value="2007">2007</option>
+             <option value="2008">2008</option>
+             <option value="2009">2009</option>
+             <option value="2010">2010</option>
+             <option value="2011">2011</option>
+             <option value="2012">2012</option>
+             <option value="2013">2013</option>
+             <option value="2014">2014</option>
+             <option value="2015">2015</option>
+          </select>年
+       </span>
+       <!-- 月 -->
+       <span id="DATA_MONTH" style="display:none;">
+          <select name="month" id="month">
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+             <option value="5">5</option>
+             <option value="6">6</option>
+             <option value="7">7</option>
+             <option value="8">8</option>
+             <option value="9">9</option>
+             <option value="10">10</option>
+             <option value="11">11</option>
+             <option value="12">12</option>
+          </select>月
+       </span>
+       <!-- 任意时间段 -->
+       <span id="DATA_ANYTIME" style="display:none;">
+        <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+        &nbsp;至&nbsp;
+        <input type="text" id="dataTime" name="dataTime" value="2009-08-09" />
+       </span>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target4">
+      <ul>
+        <li class="target_on">
+          <a href="#" onclick="return false;">按供电单位统计</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+    </div>
+    <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-92));">
+      <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="3%"></th>
+            <th width="12%">供电单位</th>
+            <th width="8%">总户数</th>
+            <th width="8%">购电量</th>
+            <th width="8%">购电金额</th>
+            <th width="8%x">消费电量</th>
+            <th width="8%">消费金额</th>
+            <th width="8%">剩余电量</th>
+            <th width="8%">剩余金额</th>
+          </tr>
+        </thead>
+        <tbody id="DATA_TBODY" align="center">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>1</td1>
+        <td2>大户（西青）</td2>
+        <td3>100720</td3>
+        <td4>TEST100720</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>21896</td6> 
+        <td7>5474</td7> 
+        <td8>5474</td8> 
+        <td9>5474</td9>
+        <td10>5474</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>                   
+    </data> 
+        <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>2</td1>
+        <td2>  李七庄 </td2>
+        <td3>2700029117</td3>
+        <td4>广州市峰源金属制品有限公司</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>3</td1>
+        <td2>杨柳青</td2>
+        <td3>141614616</td3>
+        <td4>广州市李彬电镀有限公司</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>4</td1>
+        <td2>李七庄</td2>
+        <td3>2700060227</td3>
+        <td4>广州市国华橡塑制品厂</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>5</td1>
+        <td2>大户（西青）</td2>
+        <td3>100785</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>6</td1>
+        <td2>大户（西青）</td2>
+        <td3>100756</td3>
+        <td4>TEST100720 </td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>100720</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>7</td1>
+        <td2>大户（西青）</td2>
+        <td3>100745</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>8</td1>
+        <td2>大户（西青）</td2>
+        <td3>100787</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>9</td1>
+        <td2>大户（西青） </td2>
+        <td3>100786</td3>
+        <td4>TEST100720</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>10</td1>
+        <td2>大户（西青）</td2>
+        <td3>100776</td3>
+        <td4>TEST100720 </td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>11</td1>
+        <td2>大户（西青）</td2>
+        <td3>100754</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>15640</td6> 
+        <td7>3910</td7> 
+        <td8>3910</td8> 
+        <td9>3910</td9> 
+        <td10>3910</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>12</td1>
+        <td2>大户（西青）</td2>
+        <td3>100754</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>3128</td6> 
+        <td7>12512</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>13</td1>
+        <td2>大户（西青）</td2>
+        <td3>100734</td3>
+        <td4>TEST100720</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>3128</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>14 </td1>
+        <td2>大户（西青）</td2>
+        <td3>100723</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>15</td1>
+        <td2>大户（西青）</td2>
+        <td3>100733</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>           
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>16</td1>
+        <td2>大户（西青）</td2>
+        <td3>100776</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>              
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>17</td1>
+        <td2>大户（西青）</td2>
+        <td3>100765</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>18</td1>
+        <td2>大户（西青）</td2>
+        <td3>100754</td3>
+        <td4>TEST100720</td4>
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6>12515</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10>
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>             
+    </data>
+    <data>        
+        <td1>19</td1>
+        <td2>大户（西青） </td2>
+        <td3>100743</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12514</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>       
+    </data>
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>20</td1>
+        <td2>大户（西青）</td2>
+        <td3>100712</td3>
+        <td4>TEST100720</td4> 
+        <td5><![CDATA[&nbsp;]]></td5>
+        <td6>12512</td6> 
+        <td7>3128</td7> 
+        <td8>3128</td8> 
+        <td9>3128</td9> 
+        <td10>3128</td10> 
+        <td11>&lt;a href="javascript:selectType(1)"&gt;查看 &lt;/a&gt;</td11>       
+    </data>      
+</datas>

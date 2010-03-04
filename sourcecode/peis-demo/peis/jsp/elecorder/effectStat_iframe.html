@@ -1,0 +1,88 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>有序用电效果统计</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+
+$(document).ready( function() {
+  showData();
+  $('#query').click(showData);
+});
+
+function showData(){
+  $.json2html("DATA_TBODY","../../jsp/elecorder/effectStat_Data_Line/intendance_Data_iframe_1.xml","cb-item"); 
+}
+
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab4">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">有序用电效果统计</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input1" type="button" id="query" value="查 询"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">湛江市供电分公司</td>
+          <td width="70" class="label">数据时间：</td>
+          <td width="120" class="dom">2009-07-01</td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">有序用电效果统计</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>户号</th>
+                <th>户名</th>
+                <th>供电单位</th>
+                <th>行业</th>
+                <th>线路</th>
+                <th>方案类型</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+                <th>地址</th>
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">3</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

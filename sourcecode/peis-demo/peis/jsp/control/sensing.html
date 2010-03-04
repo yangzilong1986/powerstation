@@ -1,0 +1,189 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>遥信状态</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main">
+  <div id="tool">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="70" class="label">对象名称：</td>
+        <td width="120" class="dom"><input type="text" value="天津市大丰流量仪表厂" disabled="disabled" /></td>
+        <td width="70" class="label">逻辑地址：</td>
+        <td width="120" class="dom"><input type="text" id="logic_addr" value="45011114" disabled="disabled" /></td>
+        <td colspan="5"></td>
+      </tr>
+      <tr>
+        <td width="70" class="label">限电时间：</td>
+        <td width="120" class="dom">
+         <select name="exp" id="exp" disabled="disabled">
+          <option value="0">紧急限电</option>
+          <option value="1">
+           0.5小时
+          </option>
+          <option value="2">
+           1.0小时
+          </option>
+          <option value="3">
+           1.5小时
+          </option>
+          <option value="4">
+           2.0小时
+          </option>
+          <option value="5">
+           2.5小时
+          </option>
+          <option value="6">
+           3.0小时
+          </option>
+          <option value="7">
+           3.5小时
+          </option>
+          <option value="8">
+           4.0小时
+          </option>
+          <option value="9">
+           4.5小时
+          </option>
+          <option value="10">
+           5.0小时
+          </option>
+          <option value="11">
+           5.5小时
+          </option>
+          <option value="12">
+           6.0小时
+          </option>
+          <option value="13">
+           6.5小时
+          </option>
+          <option value="14">
+           7.0小时
+          </option>
+          <option value="15">
+           7.5小时
+          </option>
+         </select>
+         <script type="text/javascript">document.all.exp.value="0";</script>
+        </td>
+        <td width="70" class="label">告警延时：</td>
+        <td width="120" class="dom">
+          <select name="lapse" id="lapse" disabled="disabled">
+          <option value="0">立即跳闸</option>
+          <option value="1">
+           1分钟
+          </option>
+          <option value="2">
+           2分钟
+          </option>
+          <option value="3">
+           3分钟
+          </option>
+          <option value="4">
+           4分钟
+          </option>
+          <option value="5">
+           5分钟
+          </option>
+          <option value="6">
+           6分钟
+          </option>
+          <option value="7">
+           7分钟
+          </option>
+          <option value="8">
+           8分钟
+          </option>
+          <option value="9">
+           9分钟
+          </option>
+          <option value="10">
+           10分钟
+          </option>
+          <option value="11">
+           11分钟
+          </option>
+          <option value="12">
+           12分钟
+          </option>
+          <option value="13">
+           13分钟
+          </option>
+          <option value="14">
+           14分钟
+          </option>
+          <option value="15">
+           15分钟
+          </option>
+         </select>
+         <script type="text/javascript">document.all.lapse.value="0";</script>
+        </td>
+        <td width="70" class="label">轮　次：</td>
+        <td width="120" class="dom">
+         <select name="turn" id="turn" disabled="disabled">
+          <option value="1">
+           1
+          </option>
+          <option value="2">
+           2
+          </option>
+          <option value="3">
+           3
+          </option>
+          <option value="4">
+           4
+          </option>
+          <option value="5">
+           5
+          </option>
+          <option value="6">
+           6
+          </option>
+          <option value="7">
+           7
+          </option>
+          <option value="8">
+           8
+          </option>
+         </select>
+         <script type="text/javascript">document.all.turn.value="1";</script>
+        </td>
+        <td colspan="3"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="content">
+    <div id="cont_1">
+      <div class="tableContainer" style="height: expression((document.documentElement.clientHeight||document.body.clientHeight)-115);">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>
+            <th>开关编号</th>
+            <th>开关名称</th>
+            <th>轮次</th>
+            <th>容量</th>
+            <th>状态</th>
+          </tr></thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">0</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>电能质量类报表</td1>
+        <td2>4001</td2>
+        <td3>变电站功率因数月统计表</td3>
+        <td4>月</td4>
+        <td5>&lt;input class="input" type="button" value="生成" onclick="addByTransMonth();"/&gt; &lt;input class="input" type="button" value="上传" onclick="fileBtn.click()"/&gt; &lt;input class="input" type="button" id="browse" value="浏览" onclick="reportBrowse();"/&gt;</td5>    
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>电能质量类报表</td1>
+        <td2>4002</td2>
+        <td3>110KV变电站电压监测点数据表</td3>
+        <td4>年</td4>
+        <td5>&lt;input class="input" type="button" value="生成" onclick="addByTransYear();"/&gt; &lt;input class="input" type="button" value="上传" onclick="fileBtn.click()"/&gt; &lt;input class="input" type="button" id="browse" value="浏览" onclick="reportBrowse();"/&gt;</td5>    
+    </data>   
+</datas>

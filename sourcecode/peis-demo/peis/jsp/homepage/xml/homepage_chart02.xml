@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='3' 
+       baseFontSize='12' baseFont='Courier New' 
+       caption='损耗率' subCaption='' xAxisName='月份' yAxisName='%' 
+       showBorder='1' borderColor='#BBBBBB' 
+       showLegend='0' legendPosition='RIGHT' 
+       useRoundEdges='1' 
+       showValues='0' 
+       showSum='1' 
+       captionPadding='5' xAxisNamePadding='0' yAxisNamePadding='0' yAxisValuesPadding='5' labelPadding='5' valuePadding='5' legendPadding='5' 
+       plotSpacePercent='100' 
+       chartLeftMargin='5' chartRightMargin='5' chartTopMargin='5' chartBottomMargin='5' 
+       canvasLeftMargin='5' canvasRightMargin='5' canvasTopMargin='5' canvasBottomMargin='5' 
+       legendBorderAlpha='0' 
+       formatNumber='1' formatNumberScale='0' 
+       showExportDataMenuItem='1' exportDataMenuItemLabel='拷贝图形数据'
+       showAboutMenuItem='1' aboutMenuItemLabel='百富电力' aboutMenuItemLink='http://www.paxhz.cn'>
+    <categories>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+        <category label='12'/>
+    </categories>
+    <dataset seriesName='损耗率'>
+        <set value='3.06'/>
+        <set value='4.81'/>
+        <set value='5.31'/>
+        <set value='6.56'/>
+        <set value='5.19'/>
+        <set value='6.06'/>
+        <set value='5.81'/>
+        <set value='2.31'/>
+        <set value='1.56'/>
+        <set value='6.19'/>
+        <set value='5.06'/>
+        <set value='3.81'/>
+    </dataset>
+</chart>

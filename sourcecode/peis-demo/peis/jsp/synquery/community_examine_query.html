@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>台区考核表查询</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript" src="../../js/synquery/communityExamineQuery.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="community_examine_query.html?type=1" onClick="return true ;" onFocus="blur()">档案资料</a></li>
+      <li id="tab_2" class="tab_off"><a href="community_examine_query.html?type=2" onClick="return true ;" onFocus="blur()">日表码</a></li>
+      <li id="tab_3" class="tab_off"><a href="community_examine_query.html?type=3"onClick="return true ;" onFocus="blur()">月表码</a></li>
+      <li id="tab_4" class="tab_off"><a href="community_examine_query.html?type=4" onClick="return true ;" onFocus="blur()">日电量</a></li>
+      <li id="tab_5" class="tab_off"><a href="community_examine_query.html?type=5" onClick="return true ;" onFocus="blur()">月电量</a></li>
+      <li id="tab_6" class="tab_off"><a href="community_examine_query.html?type=6" onClick="return true ;" onFocus="blur()">负荷数据</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input3" type="submit" id="addquery" value="新增查询"/>
+        <input class="input3" type="submit" id="chanquery" value="修改查询"/>
+        <input class="input3" type="submit" id="delquery" value="删除查询"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+           <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on">台区考核</li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1> 
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 200));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="5%">序号</th>
+                <th width="10%">报表名称</th>
+                <th width="15%">备注</th>
+                <th width="10%">创建人</th>
+                <th width="10%">创建时间</th>
+                <th width="10%">浏览</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              	<td>1</td>
+                <td>test-1</td>
+                <td>资料查询</td>
+                <td>admin</td>
+                <td>2009-10-1</td>
+                <td style="color: blue;cursor:pointer;" onclick="showText();">浏览</td>
+              </tr>
+              <tr>
+              	<td>2</td>
+                <td>test-2</td>
+                <td>自定义的信息</td>
+                <td>advance</td>
+                <td>2009-10-10</td>
+                <td style="color: blue;cursor:pointer;" onclick="showText();">浏览</td>
+              </tr>
+              <tr>
+              	<td>3</td>
+                <td>test-3</td>
+                <td>重要信息</td>
+                <td>base</td>
+                <td>2009-09-10</td>
+                <td style="color: blue;cursor:pointer;" onclick="showText();">浏览</td>
+              </tr>
+            </tbody>            
+          </table>
+        </div>
+        <div class="pageContainer">
+          <input type="hidden" id="showType" name="showType" value="pag" />
+          显示行数：
+          <select id="pageRows" name="pageRows" size="1">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+          </select>
+          第1页 / 共1页　转到：
+          <input type="text" id="page" name="page" value="1" />
+          <img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <font style="font-size: 14px; font-family: webdings">8</font> <font style="font-size: 14px; font-family: webdings">:</font> </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

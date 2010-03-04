@@ -1,0 +1,109 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负载率明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+
+var objectType=$.url.param("objectType");
+var orgName=$.url.param("orgName");
+var dataTime=$.url.param("dataTime");
+var elecAppType=$.url.param("elecAppType");
+$(document).ready( function(){
+   init();
+   switchThead(objectType);
+   if(objectType==1){
+     $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadRateAnalysis_Data_1.xml","cb-item");
+   }else if(objectType==2){
+     $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadRateAnalysis_Data_2.xml","cb-item");
+   }
+});
+
+//页面初始化
+function init(){
+  $("#orgName").val(orgName);
+  $("#dateTime").val(dataTime);
+  // 数据初始化单选框
+  $('[name="objectType"]:radio').each(function() {
+      if (this.value == objectType)  
+      {  
+          this.checked = true;  
+      }      
+   });
+   
+   dealSpecId(objectType);
+}
+
+/** 处理选择的维度编号 */
+function dealSpecId(objectType){
+    if(objectType==2){
+        $('#elecAppType').hide();
+    }else{
+        $('#elecAppType').attr('disabled',true);
+        $('#elecAppType').val(elecAppType);
+    }
+}
+
+//明细查询
+function openLoadDetail(objectNo,objectName,assetNo){
+   var params = {    
+                   "objectNo":objectNo,
+                   "objectName":objectName,
+                   "assetNo":assetNo,
+                   "dataTime":dataTime,
+                   "objectType":objectType
+                };
+   var url="../../jsp/transbiz/loadRateAnalysisDay.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   showDialogBox("负载率明细",url, 495, 800);
+}
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main">
+  <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="query" onClick="query();" value="查 询" class="input1" /></div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="160">
+           <input type="radio" name="objectType" value="1" class="dom" disabled="disabled"/>专变用户
+           <input type="radio" name="objectType" value="2" class="dom" disabled="disabled"/>配变/台区
+        </td>
+        <td width="70" class="label">供电单位：</td>
+        <td width="120" class="dom"><input type="text" id="orgName" name="orgName" value="" disabled="disabled"></td>
+        <!--  
+        <td class="label">数据时间：</td>
+        <td class="dom_date" id="dateLable">
+          <input type="text" name="dateTime" id="dateTime"/>
+        </td>-->
+        <td></td>
+      </tr>
+    </table>
+  </div>
+  <div class="content">
+    <div id="cont_1">
+      <div class="tableContainer" style="width:expression((document.documentElement.clientWidth||document.body.clientWidth)-22); height:expression((document.documentElement.clientHeight||document.body.clientHeight)-85);">
+        <table border="0" cellpadding="0" cellspacing="0" width="130%">
+          <thead>
+           <tr id="DATA_THEAD">
+           </tr>
+          </thead>
+          <tbody id="DATA_TBODY">
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">3</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

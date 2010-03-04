@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >
+        <td1 extend="align='left'">湛江市电力公司</td1>
+        <td2 extend="align='right'">3345</td2>
+        <td3 extend="align='right'">3216</td3>
+        <td4 extend="align='right'">129</td4>
+        <td5 extend="align='right'">96.14</td5> 
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;display: block;'" >
+        <td1 extend="align='left'">遂溪供电局</td1>
+        <td2 extend="align='right'">1500</td2>
+        <td3 extend="align='right'">1450</td3>
+        <td4 extend="align='right'">50</td4>
+        <td5 extend="align='right'">96.67</td5> 
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;display: block;'" >     
+        <td1 extend="align='left'">徐闻供电局</td1>
+        <td2 extend="align='right'">1300</td2>
+        <td3 extend="align='right'">1280</td3>
+        <td4 extend="align='right'">20</td4>
+        <td5 extend="align='right'">98.46</td5> 
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;display: block;'" >   
+        <td1 extend="align='left'">吴川供电局</td1>
+        <td2 extend="align='right'">350</td2>
+        <td3 extend="align='right'">300</td3>
+        <td4 extend="align='right'">50</td4>
+        <td5 extend="align='right'">85.71</td5> 
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;display: block;'" >  
+        <td1 extend="align='left'">雷州供电局</td1>
+        <td2 extend="align='right'">195</td2>
+        <td3 extend="align='right'">180</td3>
+        <td4 extend="align='right'">15</td4>
+        <td5 extend="align='right'">92.31</td5> 
+    </data>
+</datas>

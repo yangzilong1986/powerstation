@@ -1,0 +1,272 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>旁路管理</title>
+<link rel="stylesheet" type="text/css" href="../../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../../js/frame/component.js"></script> 
+<!-- private js -->
+<script type="text/javascript" src="../../../js/runmanage/bypassManage.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">旁路管理</a></li>
+      <!-- <li id="tab_1" class="tab_off"><a href="./bypass_manage_history.html" onclick="return true;" onfocus="blur()">历史纪录</a></li> -->
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="90" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>  
+          <td width="90" class="label">厂站名称：</td>
+          <td width="120" class="dom">
+            <select id="factName">
+              <option value="0" selected="selected">潮州站</option>
+              <option value="1">城北站</option>
+              <option value="2">城区站</option>
+              <option value="3">大华站</option>
+            </select>
+          </td>      
+          <td width="90" class="label">旁路测量点：</td>
+          <td width="120" class="dom">
+            <select id="bypassPinte">
+              <option value="0" selected="selected">101212\1127707</option>
+              <option value="1" selected="selected">101213\1127708</option>
+              <option value="2" selected="selected">101214\1127709</option>
+            </select>
+          </td>  
+          <td width="90" class="label">被旁测量点：</td>
+          <td width="120" class="dom">
+            <select id="oldPinte">
+              <option value="0" selected="selected">105612\1477707</option>
+              <option value="1" selected="selected">105613\1577708</option>
+              <option value="2" selected="selected">105614\1477709</option>
+            </select>
+          </td>         
+        </tr>   
+        <tr>
+          <td width="90" class="label">旁路计量方向：</td>
+          <td width="120" class="dom">
+            <select id="bypassPinte">
+              <option value="0" selected="selected">正向</option>
+              <option value="0">反向</option>
+            </select>
+          </td>  
+          <td width="90" class="label">被旁计量方向：</td>
+          <td width="120" class="dom">
+            <select id="oldPinte">
+              <option value="0" selected="selected">反向</option>
+              <option value="0">正向</option>
+            </select>
+          </td> 
+          <td width="90" class="label">旁路总倍率：</td>  
+          <td width="120" class="dom"><input type="text" disabled="disabled" value="100000"/></td>      
+        </tr>  
+        <tr>
+          <td width="90" class="label">旁路闭合时间：</td>
+          <td colspan="3">
+            <input type="text" value="2009-10-01" size="6">
+            <select id="bh_hh">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>时
+            <select id="bh_mi">
+                <option value="0">0</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>分
+          </td>
+          <td width="90" class="label">旁路断开时间：</td>
+          <td colspan="3">
+            <input type="text" value="2009-10-01" size="6">
+            <select id="dk_hh">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>时
+            <select id="dk_mi">
+                <option value="0">0</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>分
+          </td>
+        </tr>   
+        <tr>
+          <td width="90" class="label">主线闭合时间：</td>
+          <td colspan="3">
+            <input type="text" value="2009-10-01" size="6">
+            <select id="zxbh_hh">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>时
+            <select id="zxbh_mi">
+                <option value="0">0</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>分
+          </td>
+          <td width="90" class="label">主线断开时间：</td>
+          <td colspan="3">
+            <input type="text" value="2009-10-01" size="6">
+            <select id="zxdk_hh">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+            </select>时
+            <select id="zxdk_mi">
+                <option value="0">0</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>分
+          </td>
+        </tr>  
+        <tr>
+          <td width="90" class="label">旁路正向起码：</td>
+          <td width="120" class="dom"><input type="text" value="2700"/></td>  
+          <td width="90" class="label">旁路正向止码：</td>
+          <td width="120" class="dom"><input type="text" value="2868"/></td>
+          <td width="90" class="label">旁路反向起码：</td>  
+          <td width="120" class="dom"><input type="text" value="245"/></td>  
+          <td width="90" class="label">旁路反向止码：</td>  
+          <td width="120" class="dom"><input type="text" value="645"/></td>        
+        </tr>
+        <tr>
+            <td colspan="8" align="center">
+                <input class="input1" type="submit" id="save" onclick="close();" value="保 存"/>
+            </td>
+        </tr>
+      </table>
+    </div>    
+  </div>
+</div>
+</body>
+</html>

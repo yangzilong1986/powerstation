@@ -1,0 +1,170 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>供电可靠性</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>  
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+
+<script type="text/javascript">
+$.json2html("databody","../../jsp/elecmon/reliabilityLineData.xml","");  
+
+$(function(){
+$.handelCombox('lineNo','lineNo');
+});
+
+/** 根据查询日期类型的改变而显示不同的日期控件*/
+function dateTypeChange() {
+    var dateType_date = $('#dateType_date').val();
+    if (dateType_date == "1") {//日
+
+        $('#DATA_DAY').show();
+        $('#DATA_YEAR').hide();
+        $('#DATA_MONTH').hide();
+    } else if (dateType_date == "2") {//月
+
+        $('#DATA_DAY').hide();
+        $('#DATA_MONTH').show();
+        $('#DATA_YEAR').show();
+    } else if (dateType_date == "3") {//年
+
+        $('#DATA_DAY').hide();
+        $('#DATA_YEAR').show();
+        $('#DATA_MONTH').hide();
+    }
+}
+
+function viewDetail(){
+  top.showDialogBox("供电可靠性明细", "../../jsp/elecmon/reliabilityLineDetail.html", 600, 900);
+}
+</script>
+
+<body>
+<div id="body">
+  <div class="tab">
+  <ul>
+      <li id="tab_1" class="tab_off"><a href="ReliabilityOrgQuery.html" onfocus="blur()">按单位</a></li>
+      <li id="tab_2" class="tab_on"><a href="#" onclick="return true;" onfocus="blur()">按线路</a></li>
+      <li id="tab_3" class="tab_off"><a href="ReliabilityCustQuery.html"  onfocus="blur()">按户</a></li>
+      <li class="clear"></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+     <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label" align="right">供电单位：</td>
+          <td width="120" class="dom">
+            <select id="orgNo" name="orgNo">
+            <option value="44">广东省电力公司</option>
+            <option value="4401"> -- 广州市电力公司</option>
+            <option value="4402"> -- 韶关市电力公司</option>
+            <option value="4403"> -- 深圳市电力公司</option>
+            <option value="4404"> -- 珠海市电力公司</option>
+            <option value="4405"> -- 汕头市电力公司</option>
+            <option value="4406"> -- 佛山市电力公司</option>
+            <option value="4407"> -- 江门市电力公司</option>
+            <option value="4408"> -- 湛江市电力公司</option>
+            <option value="440806"> -- -- 遂溪供电局</option>
+            <option value="440807"> -- -- 徐闻供电局</option>
+            <option value="440808"> -- -- 吴川供电局</option>
+            <option value="440809"> -- -- 廉江供电局</option>
+            <option value="440810"> -- -- 雷州供电局</option>
+            <option value="4409"> -- 茂名市电力公司</option>
+            <option value="4412"> -- 肇庆市电力公司</option>
+            <option value="4413"> -- 惠州市电力公司</option>
+            <option value="4414"> -- 梅州市电力公司</option>
+            <option value="4415"> -- 汕尾市电力公司</option>
+            <option value="4416"> -- 河源市电力公司</option>
+            <option value="4417"> -- 阳江市电力公司</option>
+            <option value="4418"> -- 清远市电力公司</option>
+            <option value="4419"> -- 东莞市电力公司</option>
+            <option value="4420"> -- 中山市电力公司</option>
+            <option value="4421"> -- 潮州市电力公司</option>
+            <option value="4422"> -- 揭阳市电力公司</option>
+            <option value="4423"> -- 云浮市电力公司</option>
+          </select>
+          <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td width="70" class="label" align="right">供电线路：</td>
+          <td width="120" class="dom" id="lineNo"> </td>   
+          <td width="70" class="label" align="right">可靠率：</td>
+          <td width="120">
+            <select name="dateType" id="dateType">
+            <option value=">=">&gt;=</option>
+            <option value=">=">&lt;=</option>
+            </select>
+            <input type="text" name="passRat" size="2" value="98">%   
+          </td>
+        </tr>
+        <tr>   
+          <td width="70" class="label" align="right">停电次数：</td>
+          <td>
+            <select name="dateType" id="dateType">
+            <option value=">=">&gt;</option>
+            <option value=">=">&lt;</option>
+            </select>
+            <input type="text" name="number" size="2" value="3">   
+          </td>
+           <td class="label" width="70">统计类型：</td>
+          <td class="dom" width="120">
+            <select name="dateType_date" id="dateType_date" style="width:60px;" onChange="dateTypeChange();">
+              <option value="1" selected="selected">日</option>
+              <option value="2">月</option>
+              <option value="3">年</option>
+            </select>
+          </td>
+          <td class="label" width="70">统计时间：</td>
+          <td class="dom_date" width="120">
+              <span id="DATA_DAY">          
+              <input type="text" id="date" name="date" value="2006-09-05">
+               </span>
+               <span id="DATA_YEAR" style="display:none;">
+                  <input type="text" name="year" value="2009" id="year" style="width:40px;">年</span>
+                <span id="DATA_MONTH" style="display:none;">
+                  <input type="text" name="month" value="8" id="month" style="width:20px;">月
+                </span>
+          </td>           
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on">
+            <a href="#" onclick="return false;">供电可靠性</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div id="tableContainer" class="tableContainer" style="height: expression((( document . documentElement . clientHeight || document . body . clientHeight) -   178 ) );">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+              <th width="2%">序号</th>
+              <th width="3%">单位</th>
+              <th width="6%">线路</th>
+              <th width="6%">总供电时间</th>
+              <th width="5%">户均停电时间</th>
+              <th width="7%">户均停电次数</th>
+              <th width="5%">总户数</th>
+              <th width="4%">供电可靠率</th>
+            </tr></thead>
+            <tbody id="databody">                       
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

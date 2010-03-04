@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="false">
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>湛江市电力公司</td1>
+        <td2>2009</td2>
+        <td3>&lt;a href="javascript:showPage(1)"&gt;33491234&lt;/a&gt;</td3>
+        <td4>56</td4> 
+        <td5>32</td5> 
+        <td6>&lt;a href="javascript:showPage(2)"&gt;21678765&lt;/a&gt;</td6> 
+        <td7>22</td7> 
+        <td8>22</td8> 
+        <td9>&lt;a href="javascript:showPage(3)"&gt;11812469&lt;/a&gt;</td9>
+        <td10>22</td10> 
+        <td11>32</td11> 
+        <td12>&lt;a href="javascript:showPage(4)"&gt;11712469&lt;/a&gt;</td12>
+        <td13>22</td13> 
+        <td14>32</td14>                  
+    </data>     
+</datas>

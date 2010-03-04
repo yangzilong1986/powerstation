@@ -1,0 +1,177 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>终端对时</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+
+function getCurTime() {
+    if(!document.layers && !document.all) {
+        return;
+    }
+    var timer = new Date();
+    var year = timer.getFullYear();
+    var month = timer.getMonth()+1;
+    var day = timer.getUTCDate();
+    var hours = timer.getHours();
+    var minutes = timer.getMinutes();
+    var seconds = timer.getSeconds();
+    
+    if(minutes <= 9) {
+        minutes = "0" + minutes;
+    }
+    if(seconds <= 9) {
+        seconds = "0" + seconds;
+    }
+    
+    myclock = "<font size='4' face='Arial' color=blue>"+year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds+"</b></font>";
+    if(document.layers) {
+        document.layers.position.document.write(myclock);
+        document.layers.position.document.close();
+    }
+    else if(document.all) {
+        position.innerHTML = myclock;
+        setTimeout("getCurTime()",1000);
+    }
+}
+
+function dsgz(){
+    var str_url = "../../jsp/eparam/termTimeRule.html";
+    top.showDialogBox("校时策略设定", str_url, 575, 900);
+}
+
+function readTime(){
+}
+</script>
+</head>
+  
+<body onload="getCurTime()">
+  <div>
+    <div id="tool">
+      <div class="opbutton2">
+          <input type="submit" value="查 询" id="query" class="input1">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="button" value="校时策略" class="input2" onclick="dsgz();"/>
+          <input type="button" value="读取终端时间" class="input3" onclick="readTime();"/>
+          <input type="button" value="终端对时" class="input2" />
+          <input type="button" value="指定自动校时终端" class="input4" />
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+              <select id="orgNo" name="orgNo">
+                <option value="44">
+                  广东省电力公司
+                </option>
+                <option value="4401">
+                  -- 广州市电力公司
+                </option>
+                <option value="4402">
+                  -- 韶关市电力公司
+                </option>
+                <option value="4403">
+                  -- 深圳市电力公司
+                </option>
+                <option value="4404">
+                  -- 珠海市电力公司
+                </option>
+                <option value="4405">
+                  -- 汕头市电力公司
+                </option>
+                <option value="4406">
+                  -- 佛山市电力公司
+                </option>
+                <option value="4407">
+                  -- 江门市电力公司
+                </option>
+                <option value="4408">
+                  -- 湛江市电力公司
+                </option>
+                <option value="440806">
+                  -- -- 遂溪供电局
+                </option>
+                <option value="440807">
+                  -- -- 徐闻供电局
+                </option>
+                <option value="440808">
+                  -- -- 吴川供电局
+                </option>
+                <option value="440809">
+                  -- -- 廉江供电局
+                </option>
+                <option value="440810">
+                  -- -- 雷州供电局
+                </option>
+                <option value="4409">
+                  -- 茂名市电力公司
+                </option>
+                <option value="4412">
+                  -- 肇庆市电力公司
+                </option>
+                <option value="4413">
+                  -- 惠州市电力公司
+                </option>
+                <option value="4414">
+                  -- 梅州市电力公司
+                </option>
+                <option value="4415">
+                  -- 汕尾市电力公司
+                </option>
+                <option value="4416">
+                  -- 河源市电力公司
+                </option>
+                <option value="4417">
+                  -- 阳江市电力公司
+                </option>
+                <option value="4418">
+                  -- 清远市电力公司
+                </option>
+                <option value="4419">
+                  -- 东莞市电力公司
+                </option>
+                <option value="4420">
+                  -- 中山市电力公司
+                </option>
+                <option value="4421">
+                  -- 潮州市电力公司
+                </option>
+                <option value="4422">
+                  -- 揭阳市电力公司
+                </option>
+                <option value="4423">
+                  -- 云浮市电力公司
+                </option>
+              </select>
+              <script type="text/javascript">$("#orgNo").val("44");</script></td>
+          <td width="70" class="label">终端地址：</td>
+          <td width="120" class="dom"><input type="text" name="logicAddr"></td>
+          <td width="70" class="label">GPS时间：</td>
+          <td width="200" class="dom" id="position"></td>
+          <td colspan="3">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="9"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">终端对时信息列表</a></li>
+            <li class="clear"></li>
+          </ul> 
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 78));">
+          <iframe name="timepage" width="100%" height="100%" frameborder="0" scrolling="no" src="../../jsp/eparam/termTimeSynchList.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>设备原始事件编辑</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript">
+function init() {
+    var sysObjects = "1,2,3,4";
+    if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length == "undefined") {
+        if(sysObjects.indexOf(document.all.sysObject.value) >= 0) {
+            document.all.sysObject.checked = "true";
+        }
+    }
+    else if(typeof document.all.sysObject != "undefined" && typeof document.all.sysObject.length != "undefined") {
+        for(var i = 0; i < document.all.sysObject.length; i++) {
+            if(sysObjects.indexOf(document.all.sysObject[i].value) >= 0) {
+                document.all.sysObject[i].checked = "true";
+            }
+        }
+    }
+}
+
+function save() {
+	parent.GB_hide(); 
+}
+</script>
+</head>
+
+<body onload="init()" style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>设备原始事件编辑</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="label">事件编码：</td>
+          <td width="25%" class="dom">
+            <input type="text" id="exCode" name="exCode" value="DEC0101" disabled="disabled" />
+          </td>
+          <td width="15%" class="label">事件名称：</td>
+          <td width="25%" class="dom">
+            <input type="text" id="exName" name="exName" value="数据初始化" disabled="disabled" />
+          </td>
+        </tr>
+        <tr>
+          <td class="label">分　类：</td>
+          <td class="dom">
+            <select name="exCate" id="exCate" >
+              <option value="1">用电异常</option>
+              <option value="2">设备异常</option>
+              <option value="3">终端异常</option>
+            </select>
+          </td>
+          <td class="label">类　型：</td>
+          <td class="dom">
+            <select name="lx" id="lx" >
+              <option value="1">CT异常</option>
+              <option value="2">预购电异常</option>
+              <option value="3">功率异常</option>
+              <option value="4">停送电异常</option>
+              <option value="5">门节点异常</option>
+              <option value="6">电能表异常</option>
+              <option value="7">其它异常</option>
+              <option value="8">终端异常</option>
+              <option value="8">模块表异常</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">算法说明：</td>
+          <td colspan="3" class="dom2">
+            <textarea style="width: 572px; height: 300px;">某相的有功功率为负（即电压与电流的夹角超出了一定范围），且这个负功率的绝对值大于一定的阀值，并且这种状态持续了一段时间，终端就上送“电流反极性”报警。若有功功率为正，这个正功率的绝对值大于一定的阀值且该状态持续了一段时间，终端就上送“电流反极性恢复”报警</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">适用对象：</td>
+          <td colspan="3">
+            <input type="checkbox" name="sysObject" value="1"/>专变用户
+            <input type="checkbox" name="sysObject" value="2"/>配变/台区
+            <input type="checkbox" name="sysObject" value="3"/>低压用户
+            <input type="checkbox" name="sysObject" value="4"/>变电站
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="guidePanel">
+    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+  </div>
+</div>
+</body>
+
+</html>

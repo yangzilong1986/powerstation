@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>城北供电分公司</td2>
+        <td3>10245</td3>
+        <td4>10200</td4>
+        <td5>45</td5>
+        <td6>99.56</td6>  
+        <td7>2009-04-17</td7>     
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>城东供电分公司</td2>
+        <td3>27138</td3>
+        <td4>27130</td4>
+        <td5>8</td5>
+        <td6>99.97</td6>  
+        <td7>2009-04-17</td7>     
+    </data>
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>城西供电分公司</td2>
+        <td3>8430</td3>
+        <td4>8130</td4>
+        <td5>300</td5>
+        <td6>96.44</td6>  
+        <td7>2009-04-17</td7>     
+    </data>       
+</datas>

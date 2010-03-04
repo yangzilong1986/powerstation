@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>通讯流量_厂家</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../../FusionCharts/FusionCharts.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+$(document).ready(function(){   
+	var ty = $.url.param("type");
+    //alert(ty);
+    // 数据区加载。
+    $.json2html("dtext",ty==1?"../../../jsp/runmanage/pop/div_err_info_time_iframe.xml":"../../../jsp/runmanage/pop/div_err_info_day_iframe.xml","");  
+    // 图形的生成。
+    var chart_obj = new FusionCharts("../../../FusionCharts/Line.swf", "chart_id", "800", "275", "0", "0");
+    chart_obj.setDataURL(ty==1?"div_err_info_time_data.xml":"div_err_info_day_data.xml");
+    chart_obj.render("graphBlock");  
+});
+
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="label"><span id=tit></span></td>
+      <td><input class="input3" type="submit" id="excel" value="导出EXCEL"/></td>  
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 153));">
+    <!-- START Script Block for Chart-->
+    <div id="graphBlock" align="center"></div>
+    <!-- END Script Block for Chart> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead><tr>
+          <th>时间</th>
+          <th>在线终端数</th>
+          <th>掉线终端数</th>
+          <th>投运终端数</th>
+          <th>停电终端数</th>
+          <th>停运终端数</th>
+          <th>在线率(%)</th>
+      </tr></thead>
+      <tbody id="dtext"></tbody>
+     </table>
+    </div>
+    <div class="nullContainer"></div>
+  </div>
+</div>
+</body>
+</html>

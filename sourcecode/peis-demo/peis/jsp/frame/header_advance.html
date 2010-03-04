@@ -1,0 +1,190 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>header</title>
+<link rel="stylesheet" type="text/css" href="../../css/header.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+function changeFod(obj) {
+    var p = obj.parentNode.parentNode.parentNode;
+    var pd = obj.parentNode;
+    var d = pd.getElementsByTagName("div");
+    var infolist = p.getElementsByTagName("dd");
+    for(var i = 0; i < d.length; i++) {
+        try {
+            if(obj == d[i]) {
+                infolist[i].className = "dis";
+                d[i].className = "s";
+            }
+            else {
+                infolist[i].className = "undis";
+                d[i].className = "";                            
+            }
+        }
+        catch(e) {
+        }
+    }
+}
+
+function changeFod2(index) {
+    var d = $("#Fod div");
+    var infolist = $("#menu dl dd");
+    for(var i = 0; i < d.length; i++) {
+        try {
+            if(index == i) {
+                infolist[i].className = "dis";
+                d[i].className = "s";
+            }
+            else {
+                infolist[i].className = "undis";
+                d[i].className = "";                            
+            }
+        }
+        catch(e) {
+        }
+    }
+    top.hiddenList();
+}
+
+function isIE() {
+    if($.browser.msie && $.browser.version == '6.0') { return true; }
+    return false;
+}
+
+function correctPNG() {
+    for(var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var LW = img.width;
+        var LH = img.height;
+        var imgName = img.src.toUpperCase();
+        if(imgName.substring(imgName.length-3, imgName.length) == "PNG") { 
+            img.style.filter += "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + img.src + ", sizingmethod=scale);";
+            img.src = "../../img/blank.gif";
+            img.width = LW;
+            img.height = LH;
+        }
+    }
+}
+
+var prea = null;
+$(document).ready( function() {
+    if(isIE()) {
+        correctPNG();
+    }
+
+    /**
+     *
+     */
+    $("#menu dl>dd>div>a").each( function() {
+        $(this).click( function() {
+            if(prea != null) {
+                $(prea).removeClass("on");
+            }
+            $(this).addClass("on");
+            prea = this;
+        });
+    });
+});
+</script>
+</head>
+<body>
+<div id="header">
+  <div class="bg_top">
+    <div id="logo"><img src="../../img/logo.png" width="174" height="65" /></div>
+    <div id="menu">
+      <dl>
+        <dt>
+          <div id="Fod">
+            <div onclick="changeFod(this)"><a href="#">界面DEMO</a></div>
+            <div onclick="changeFod(this)"><a href="#">综合查询</a></div>
+            <div onclick="changeFod(this)"><a href="#">用电监测</a></div>
+            <div onclick="changeFod(this)"><a href="#">电能质量</a></div>          
+            <div onclick="changeFod(this)"><a href="#">统计分析</a></div>
+            <div onclick="changeFod(this)"><a href="#">线损分析</a></div>
+            <div onclick="changeFod(this)"><a href="#">运行管理</a></div>
+            <div onclick="changeFod(this)"><a href="#">节能评估</a></div>
+            <div onclick="changeFod(this)"><a href="#">报表管理</a></div>
+          </div>
+        </dt>
+        <dd class="undis"><div class="menu">
+          <a href="../../templet/templet01.html" target="content">操作&amp;数据</a>&nbsp;┆&nbsp;
+          <a href="../../templet/templet02.html" target="content">操作&amp;图形&amp;数据</a>&nbsp;┆&nbsp;
+          <a href="../../templet/templet03.html" target="content">树&amp;操作&amp;数据</a>&nbsp;┆&nbsp;
+          <a href="../../templet/templet04.html" target="content">列表&amp;内容</a>&nbsp;┆&nbsp;
+          <a href="../../templet/templet05.html" target="content">列表&amp;列表</a>&nbsp;┆&nbsp;
+          <a href="../../templet/templet06.html" target="content">档案向导模式</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../synquery/archives_info_query.html?type=1" target="content">批量查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/unit_query.html" target="content">综合查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/community_examine_query.html?type=1" target="content">台区考核表查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/usr_data_query_zb_1.html" target="content">单专变数据查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/pb/usr_data_query_pb_1.html" target="content">单配变数据查询</a>&nbsp;┆&nbsp; 
+          <a href="../synquery/dy/usr_data_query_dy_1.html" target="content">单低压数据查询</a>&nbsp;┆&nbsp;
+          <a href="../synquery/bdz/usr_data_query_bdz_1.html" target="content">单变电站数据查询</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/elecmon/exCodeManagerFrame.html" target="content">异常编码管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/equipment.html" target="content">设备原始事件</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/elecAnFrame.html" target="content">用电异常查询</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/elecTreatmentStat.html" target="content">异常处理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/elecNotice.html" target="content">异常通知</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/FocusUserAnalysis.html" target="content">重点用户监测</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/elecmon/voltExtremumQuery.html" target="content">电压极值分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/ecurExtremumQuery.html" target="content">电流极值分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/pfExtremumQuery.html" target="content">功率因数分析</a>&nbsp;┆&nbsp;
+           <a href="../../jsp/elecmon/volPassRatPoint.html" target="content">电压合格率分析</a>&nbsp;┆&nbsp;
+           <a href="../../jsp/elecmon/ReliabilityOrgQuery.html" target="content">供电可靠性分析</a>&nbsp;┆&nbsp;
+            <a href="../../jsp/elecmon/harmonicAnalysis.html" target="content">谐波分析</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/statis/burthenAnalyse_header.html" target="content">负荷分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/statElecQAnalysis_header.html" target="content">电量分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/powerSupplyQuantityAnalyse.html" target="content">供电量分析</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/SpecialTelephoneLineContrast.html" target="content">专线用户电量</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/transformerSubstationCoulometry.html" target="content">站用变电量</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/bigCustRank.html" target="content">用电大户排行</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/statis/smallWaterPowerInspect_header.html" target="content">小水电监测</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/lineloss/lineloss_transmit.html" target="content">线损模型管理</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/lineloss/lineloss_query.html" target="content">线损查询</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../runmanage/div_run_state.html" target="content">设备运行统计</a>&nbsp;┆&nbsp;
+          <!-- <a href="../runmanage/equipment_exc_query.html" target="content">设备故障查询</a>&nbsp;┆&nbsp; -->
+          <a href="../runmanage/div_err_stat.html" target="content">设备故障统计</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/div_online_stat.html" target="content">终端在线统计</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/set_cover_percent.html" target="content">安装覆盖统计</a>&nbsp;┆&nbsp;
+          <!--<a href="../runmanage/flux_stat.html" target="content">流量统计</a>&nbsp;┆&nbsp;  -->
+          <a href="../runmanage/div_flux_query.html" target="content">设备流量查询</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/comm_msg_query.html" target="content">通讯源码查询</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/sys_real_stat.html" target="content">系统运行管理</a>&nbsp;┆&nbsp;
+          <!-- 
+          <a href="../runmanage/sys_real_stat.html" target="content">系统实时监控</a>&nbsp;┆&nbsp; 
+          <a href="../runmanage/sys_stat_history.html" target="content">系统监控历史查询</a>&nbsp;┆&nbsp;-->
+          <!-- <a href="../runmanage/check_time.html" target="content">校时成功率统计</a>&nbsp;┆&nbsp; -->
+          <a href="../runmanage/instead_history.html" target="content">变更管理</a><!-- &nbsp;┆&nbsp; -->
+          <!-- <a href="../runmanage/instead_history.html" target="content">换表换互感器</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/bypass_manage_history.html" target="content">旁路管理</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/replace_watch.html" target="content">主备表替换</a>&nbsp;┆&nbsp;
+          <a href="../runmanage/coulome_add.html" target="content">电量追加</a> -->
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../../jsp/elecmon/energyAssessment.html" target="content">客户节能评估</a>&nbsp;┆&nbsp;
+          <a href="../../jsp/elecmon/energyEffectsAssessment.html" target="content">节能效果评估</a>
+        </div></dd>
+        <dd class="undis"><div class="menu">
+          <a href="../report/reportQueryFrame.html" target="content">报表查询</a> 
+        </div></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="pl25 white pt5"><img src="../../img/nav_bt1.gif" width="10" height="10" align="middle" /> <a href="../../jsp/homepage/homepage.html" onclick="return true;" target="content">首页</a> <img src="../../img/nav_bt2.gif" width="10" height="10" align="middle" class="mgl5" /> <a href="#" onclick="return false;" target="content">导航</a> <img src="../../img/nav_bt3.gif" width="10" height="10" align="middle" class="mgl5" /> <a href="../../login.html" onclick="return true;" target="_top">注销</a></div>
+  </div>
+</div>
+</body>
+</html>

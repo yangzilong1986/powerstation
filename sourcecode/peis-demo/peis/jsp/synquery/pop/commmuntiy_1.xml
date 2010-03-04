@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+	<!-- <data></data>固定格式 -->
+	<data extend="onclick='selectSingleRow(this);'">
+		<td1>001</td1>
+		<td2>32432</td2>
+		<td3>01</td3>
+		<td4>天堂路</td4>
+		<td5>GR/</td5>
+		<td6>省电力公司</td6>
+		<td7>3#</td7>
+		<td8>099737</td8>
+		<td9>沙岗区</td9>
+		<td10>500</td10>
+		<td11>700</td11>
+		<td12>34</td12>
+		<td13>国网</td13>
+		<td14>华隆</td14>
+		<td15>098837</td15>
+		<td16>757</td16>
+		<td17>3#套</td17>
+		<td18>435</td18>
+		<td19>498</td19>
+		<td20>3相4象</td20>
+		<td21>终端</td21>
+		<td22>8808</td22>
+		<td23>44</td23>
+		<td24>加</td24>
+		<td25>2009-10-01</td25>
+	</data>
+	<data extend="onclick='selectSingleRow(this);'">
+		<td1>002</td1>
+		<td2>33432</td2>
+		<td3>01</td3>
+		<td4>警方路</td4>
+		<td5>GR/</td5>
+		<td6>广东电力公司</td6>
+		<td7>3#</td7>
+		<td8>099737</td8>
+		<td9>沙区</td9>
+		<td10>500</td10>
+		<td11>700</td11>
+		<td12>34</td12>
+		<td13>国网</td13>
+		<td14>华隆</td14>
+		<td15>095837</td15>
+		<td16>727</td16>
+		<td17>3#套</td17>
+		<td18>455</td18>
+		<td19>298</td19>
+		<td20>3相4象</td20>
+		<td21>终端</td21>
+		<td22>8808</td22>
+		<td23>44</td23>
+		<td24>加</td24>
+		<td25>2009-10-11</td25>
+	</data>
+</datas>

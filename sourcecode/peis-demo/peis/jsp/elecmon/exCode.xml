@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick=selectSingleRow(this) align=center style='cursor:pointer;'" >
+        <td1>DEC0101</td1>
+        <td2>数据初始化</td2>
+    </data>
+    <data extend="onclick=selectSingleRow(this); align=center style='cursor:pointer;'" >
+        <td1>DEC0102</td1>
+        <td2>终端版本变更 </td2>
+    </data>
+    <data extend="onclick=selectSingleRow(this); align=center style='cursor:pointer;'">
+        <td1>DEC0201</td1>
+        <td2>终端参数丢失 </td2>
+    </data>
+    <data extend="onclick=selectSingleRow(this); align=center style='cursor:pointer;'">
+        <td1>DEC0202</td1>
+        <td2>测量点参数丢失 </td2>
+    </data>
+</datas>

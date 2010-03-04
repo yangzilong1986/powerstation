@@ -1,0 +1,189 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>列表</title>
+<link rel="stylesheet" type="text/css" href="../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../css/greybox.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../js/frame/component.js"></script>
+<script type="text/javascript">
+function popup() {
+	showDialogBox("列表2222", "templet04_right.html", 500, 800);
+}
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="70" class="label">规约类型：</td>
+      <td width="120" class="dom">
+        <select name="protocol_type" id="protocol_type" >
+          <option value="100-1">698规约-专变用户</option>
+          <option value="100-2">698规约-配变</option>
+          <option value="100-3">698规约-低压用户</option>
+          <option value="100-4">698规约-变电站</option>
+          <option value="106-1">国网规约-专变用户</option>
+          <option value="106-2">国网规约-配变</option>
+          <option value="106-3">国网规约-低压用户</option>
+          <option value="106-4">国网规约-变电站</option>
+          <option value="120-1">浙江规约-专变用户</option>
+          <option value="120-2">浙江规约-配变</option>
+          <option value="120-3">浙江规约-低压用户</option>
+          <option value="120-4">浙江规约-变电站</option>
+        </select>
+        <script language="javascript">document.all.protocol_type.value="100-1";</script>
+      </td>
+      <td width="70" class="label">任务类型：</td>
+      <td width="120" class="dom">
+        <select name="task_type" id="task_type" onchange="popup()">
+          <option value="1">自动上送</option>
+          <option value="2">主站轮召</option>
+        </select>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 64));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th width="10%">序号</th>
+          <th width="15%">任务号</th>
+          <th width="55%">任务名称</th>
+          <th width="20%">数据类型</th>
+        </tr></thead>
+        <tbody>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>1</td>
+            <td>1001</td>
+            <td>当前数据1</td>
+            <td>当前数据</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>1002</td>
+            <td>小时冻结数据2</td>
+            <td>小时冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>3</td>
+            <td>1003</td>
+            <td>日冻结数据3</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>4</td>
+            <td>1004</td>
+            <td>抄表日冻结数据4</td>
+            <td>抄表日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>5</td>
+            <td>1005</td>
+            <td>月冻结数据5</td>
+            <td>月冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>6</td>
+            <td>1006</td>
+            <td>曲线数据6</td>
+            <td>曲线数据</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>7</td>
+            <td>1007</td>
+            <td>日冻结数据7</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>8</td>
+            <td>1008</td>
+            <td>日冻结数据8</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>9</td>
+            <td>1009</td>
+            <td>日冻结数据9</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>10</td>
+            <td>1010</td>
+            <td>日冻结数据10</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>11</td>
+            <td>1011</td>
+            <td>日冻结数据11</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>12</td>
+            <td>1012</td>
+            <td>日冻结数据12</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>13</td>
+            <td>1013</td>
+            <td>日冻结数据13</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>14</td>
+            <td>1014</td>
+            <td>日冻结数据14</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>15</td>
+            <td>1015</td>
+            <td>日冻结数据15</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>16</td>
+            <td>1016</td>
+            <td>日冻结数据16</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>17</td>
+            <td>1017</td>
+            <td>日冻结数据17</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>18</td>
+            <td>1018</td>
+            <td>日冻结数据18</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>19</td>
+            <td>1019</td>
+            <td>日冻结数据19</td>
+            <td>日冻结</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>20</td>
+            <td>1020</td>
+            <td>日冻结数据20</td>
+            <td>日冻结</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      &nbsp;第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../img/page_end.gif" class="pointer" title="返回末页" /></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

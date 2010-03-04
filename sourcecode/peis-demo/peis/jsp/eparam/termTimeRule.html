@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>校时策略设定</title>
+    <link rel="stylesheet" type="text/css" href="../../css/window.css" />
+  </head>
+<script type="text/javascript" language="javascript">
+function updateTimeRule() {
+    parent.GB_hide();
+}
+
+</script>
+  
+<body>
+  <div id="body">
+    <div class="tab3">
+      <ul>
+        <li id="tab_1" class="tab_on">
+          <a href="#" onClick="return false;" onFocus="blur()">校时策略参数</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div id="main" style="width:expression(((document.documentElement.clientWidth||document.body.clientWidth) - 18));">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="96" class="label">对时方法：</td>
+            <td width="120" class="dom">
+              <select name="dsff">
+                <option value="1">只校不对</option>
+                <option value="2">先校后对</option>
+                <option value="3">快速对时</option>
+              </select>
+            </td>
+            <td width="66" class="label">对时方式：</td>
+            <td width="120" class="dom">
+              <select name="dsfs">
+                <option value="1">普通对时</option>
+                <option value="2">精确对时</option>
+              </select>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="96" class="label">时钟超差阈值：</td>
+            <td width="120" class="dom">
+              <select name="szccyz">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </td>
+            <td width="66" class="label">对时间隔：</td>
+            <td width="120" class="dom">
+              <select name="dsjg">
+                <option value="1">月</option>
+                <option value="2">日</option>
+              </select>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="96" class="label">对时时间：</td>
+            <td class="dom" colspan="3">
+              <select name="day">
+                <option value="1"></option>
+                <option value="2"></option>
+              </select>日
+              <select name="hour">
+                <option value="1"></option>
+                <option value="2"></option>
+              </select>时
+              <select name="minute">
+                <option value="1"></option>
+                <option value="2"></option>
+              </select>分
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td width="96" class="label">对时次数：</td>
+            <td width="120" class="dom">
+              <select name="dscs">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+            <td width="66" class="label">终端来源：</td>
+            <td width="120" class="dom">
+              <select name="dscs">
+                <option value="1">所有终端</option>
+                <option value="2">指定终端</option>
+              </select>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+        <div class="t_botton">
+          <div class="t_left">
+          </div>
+          <div class="t_right" align="center">
+            <input type="button" class="input1" id="saveBt" value="保 存" onclick="updateTimeRule();">
+            <input type="button" class="input1" id="cancelBt" value="取 消" onclick="javascript:parent.GB_hide();">
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

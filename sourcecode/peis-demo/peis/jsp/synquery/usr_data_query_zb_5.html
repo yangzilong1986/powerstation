@@ -1,0 +1,171 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>单用户数据查询-专变</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<!-- private js -->
+<script type="text/javascript">
+var _type = 1; // 记录tab
+var _isQuery = false ;
+$(document).ready(function(){	
+	$("#query").click(function(){
+		loadDataAndPic($("#sjlx").val());		
+		_isQuery = true;
+	});	
+	// select
+    $("#sjlx").change(function(){
+        if($("#sjlx").val() == 2){
+            $("#kssj").val("2008-10");
+            $("#kssj").attr("maxlength","7");
+            $("#jssj").val("2009-10");
+            $("#jssj").attr("maxlength","7");
+        }else {
+            $("#kssj").val("2009-10-01");
+            $("#kssj").attr("maxlength","10");
+            $("#jssj").val("2009-10-10");
+            $("#jssj").attr("maxlength","10");
+        }
+    }); 												 												 
+});
+
+function loadDataAndPic(datatype){
+	var pric_url = "usr_data_query_zb_5_data.xml";
+	var data_url = "../../jsp/synquery/usr_data_query_zb_5_iframe.xml" ;	
+	// 数据。
+	$.json2html("dtext",data_url,"");
+	// 图形。
+	var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "800", "275", "0", "0");
+	chart_obj.setDataURL(pric_url);
+	chart_obj.render("graphBlock");
+}
+
+function showText(sy){
+    top.showDialogBox("明细", "../../jsp/synquery/pop/usr_data_query.html", 800, 900);
+    return false;  
+}
+
+function chageTab(type){
+    _type = type ;
+    $("li[class^='target_']").attr("class","target_off");
+    $("#li_"+type).attr("class","target_on");
+    if(type == 1){
+        $("span").text("A");
+    }else if(type ==2){
+    	$("span").text("B");
+    }else{
+    	$("span").text("c");
+    }
+    
+    if(_isQuery) 
+    loadDataAndPic(_type,$("#sjlx").val()); 
+}
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="./usr_data_query_zb_1.html" onClick="return true;" onFocus="blur()">基本信息</a></li>
+      <li id="tab_2" class="tab_off"><a href="./usr_data_query_zb_2.html" onClick="return true;" onFocus="blur()">表码数据</a></li>
+      <li id="tab_3" class="tab_off"><a href="./usr_data_query_zb_3.html" onClick="return true;" onFocus="blur()">功率数据</a></li>
+      <li id="tab_4" class="tab_off"><a href="./usr_data_query_zb_4.html" onClick="return true;" onFocus="blur()">电压数据</a></li>
+      <li id="tab_5" class="tab_on"><a href="./usr_data_query_zb_5.html" onClick="return false;" onFocus="blur()">电流数据</a></li>
+      <li id="tab_6" class="tab_off"><a href="../elecmon/harmonicAnalysis.html?type=1" onClick="return true;" onFocus="blur()">谐波数据</a></li>
+      <li id="tab_7" class="tab_off"><a href="./usr_data_query_zb_7.html" onClick="return true;" onFocus="blur()">电量数据</a></li>
+      <li id="tab_8" class="tab_off"><a href="./usr_data_query_zb_8.html" onClick="return true;" onFocus="blur()">事件数据</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton2">
+        <input class="input1" type="submit" id="query" value="查 询"/>
+        <input class="input3" type="submit" id="advanceQuery" value="高级查询"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>          
+          <td width="66" class="label">户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
+          <td width="120" class="dom"><input type="text" value="000001"></td>
+          <td width="66" class="label">户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</td>
+          <td width="120" class="dom"><input type="text" value="test1"></td>
+          <td width="66" class="label">数据类型：</td>
+          <td width="120" class="dom">
+          	<select id="sjlx">
+              <option value="1" selected>日数据</option>
+              <option value="2">月数据</option>
+            </select>
+          </td>
+        </tr>  
+        <tr>
+        	<td width="66" class="label">开始时间：</td>
+          <td width="120" class="dom"><input id="kssj" type="text" value="2008-10-01"></td>
+          <td width="66" class="label">结束时间：</td>
+          <td width="120" class="dom"><input id="jssj" type="text" value="2008-10-10"></td>
+          <td width="66" class="label">计 量 点：</td>
+          <td width="120" class="dom"><select id="jld">
+            	<option value="1" selected>2/info</option>
+              <option value="2">1/info</option>
+              <option value="3">0/info</option>
+            </select></td>          
+        </tr>      
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li id="li_1" class="target_on" value="1"><a href="javascript:chageTab(1);">A相数据</a></li>
+            <li id="li_2" class="target_off" value="2"><a href="javascript:chageTab(2);">B相数据</a></li>
+            <li id="li_3" class="target_off" value="3"><a href="javascript:chageTab(3);">C相数据</a></li>
+          </ul>          
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 180));">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="center"></div>
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>日期</th>
+                <th>计量点</th>
+                <th><span>A</span>相峰值</th>
+                <th>发生时间</th>
+                <th><span>A</span>相谷值</th>
+                <th>发生时间</th>
+                <th>越上限时间</th>
+                <th>查看</th>
+              </tr>
+            </thead>
+            <tbody id="dtext">
+          </table>
+        </div>
+        <div class="pageContainer"> <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：
+        <select id="pageRows" name="pageRows" size="1">
+          <option value="10">10</option>
+          <option value="20" selected="selected">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+        </select>
+        第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：
+        <input type="text" id="page" name="page" value="1" />
+        <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> </div>
+      
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

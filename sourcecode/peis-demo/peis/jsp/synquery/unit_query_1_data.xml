@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='1月'/>
+        <category label='2月'/>
+        <category label='3月'/>
+        <category label='4月'/>
+        <category label='5月'/>
+        <category label='6月'/>
+        <category label='7月'/>
+        <category label='8月'/>
+        <category label='9月'/>
+        <category label='10月'/>
+        <category label='11月'/>
+        <category label='12月'/>
+    </categories>
+    <dataset seriesName='电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>  
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+    </dataset>
+    </chart>

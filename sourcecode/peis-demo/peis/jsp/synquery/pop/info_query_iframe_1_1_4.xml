@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>2757</td2>     
+        <td3>10kV杨柑线</td3>
+        <td4>南三供电所</td4>
+        <td5>110kV东简站</td5>
+        <td6>80</td6>
+        <td7>3%</td7>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>BHF19</td2>     
+        <td3>10kV华景线F19</td3>
+        <td4>南三供电所</td4>
+        <td5>110kV东简站</td5>
+        <td6>80</td6>
+        <td7>3%</td7>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>BHF05</td2>     
+        <td3>10kV水专线F05</td3>
+        <td4>南三供电所</td4>
+        <td5>110kV东简站</td5>
+        <td6>80</td6>
+        <td7>3%</td7>
+    </data>         
+</datas>
+<!--
+
+线路档案(专变)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>线路编号</th>
+            <th>线路名称</th>
+            <th>供电单位</th>
+			<th>所属变电站</th>
+			<th>电压等级</th>
+			<th>线损率阈值</th>
+          </tr>
+        </thead>
+-->

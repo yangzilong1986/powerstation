@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事件数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>  
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<script type="text/javascript">
+$(function(){
+//$.json2html("databody","../../jsp/elecmon/FocusUserAnalysisData.xml",""); 
+});
+
+
+function viewDetail(){
+   top.showDialogBox("", "../../jsp/elecmon/FocusUserAnalysisDetail.html", 600, 800);
+  } 
+  
+
+</script>
+
+<body>
+<div id="body">
+  <div class="tab">
+    <ul>
+	  <li id="tab_1" class="tab_off"><a href="FocusUserAnalysisDetail.html" onfocus="blur()">负荷数据</a></li>
+      <li id="tab_2" class="tab_off"><a href="powerData.html" onfocus="blur()">电量数据</a></li>
+      <li id="tab_3" class="tab_on"><a href="#" onfocus="blur()">事件数据</a></li>
+      <li id="tab_4" class="tab_off"><a href="elecAnomalyData.html" onfocus="blur()">用电异常</a></li>
+	  <li class="clear"></li>
+	</ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+	  <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="label" width="70">开始时间：</td>
+          <td class="dom_date" width="120">
+            <input type="text" id="beginDate" name="beginDate" value="2009-9-3">
+          </td>
+          <td class="label" width="70">结束时间：</td>
+          <td class="dom_date" width="120">
+            <input type="text" id="endDate" name="endDate" value="2009-9-3">
+          </td>        
+        </tr>
+	  </table>
+    </div>
+	<div class="content">
+	  <div id="cont_1">
+		<div id="tableContainer" class="tableContainer" style="height: expression((( document . documentElement . clientHeight || document . body . clientHeight) -   178 ) );">
+		  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+		    <thead><tr>
+        	  <th width="2%">序号</th>
+        	  <th width="3%">供电单位</th>
+        	  <th width="3%">供电线路</th>
+              <th width="4%">户名</th>
+              <th width="3%">户号</th>
+        	  <th width="3%">设备地址</th>
+        	  <th width="3%">测量点序号</th>
+              <th width="4%">事件发生时间</th>
+        	  <th width="3%">事件内容</th>
+        	  <th width="2%">明细</th>
+			</tr></thead>
+			<tbody id="databody">						
+		    </tbody>
+		  </table>
+	    </div>
+	  </div>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+    </div>
+  </div>
+</div>
+</body>
+</html>

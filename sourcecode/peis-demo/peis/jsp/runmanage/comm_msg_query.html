@@ -1,0 +1,117 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>通讯源码查询</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript" src="../../js/runmanage/commMsg.js"></script>
+<script type="text/javascript">
+function detailQuery(){
+    top.showDialogBox("源码明细查询","../../jsp/runmanage/comm_msg_list_query.html", 575, 900);
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">通讯源码查询</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+     <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="5">
+              <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变
+              <input type="radio" name="objectType" value="2" class="dom" />配变/台区
+              <input type="radio" name="objectType" value="3" class="dom" />低压居民
+              <input type="radio" name="objectType" value="4" class="dom" />变电站
+              <input type="checkbox" name="tranSrc" id="tranSrc" value="1" checked="checked"/>翻译源码             
+          </td>
+        </tr>
+ 
+        <tr>
+          <td width="66" class="label">逻辑地址：</td>
+          <td width="120" class="dom"><input type="text" id="logicAddress" name="logicAddress" value="5028779" /></td>  
+          <td width="66" class="label">通讯日期：</td>
+          <td class="dom_date">
+            <input type="text" id="date" name="date" value="2009-9-14">
+
+          </td>
+          <td width="66" class="label">开始时间：</td>
+          <td width="120" class="dom"><input type="text" id="startTime" name="startTime" value="12:00:00" /></td>  
+          <td width="66" class="label">结束时间：</td>
+          <td width="120" class="dom"><input type="text" id="endTime" name="endTime" value="18:00:00" /></td>        
+          <td colspan="1"></td>      
+        </tr>       
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#">下行</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 246)/2);">
+          <!-- START Script Block for Chart-->          
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="groupByComOrFac">
+            <thead><tr>
+                <th>序号</th>
+                <th>来源地址</th>
+                <th>发送时间</th>
+                <th>通讯内容</th>
+                <th>查看</th>
+            </tr></thead>
+            <tbody id="recv_text"></tbody>
+          </table>          
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+        </div>
+      </div>
+    </div> 
+    <div class="content">
+      <div id="cont_2">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#">上行</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 246)/2);">
+          <!-- START Script Block for Chart-->          
+          <!-- END Script Block for Chart> -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="groupByComOrFac">
+            <thead><tr>
+                <th>序号</th>
+                <th>目标地址</th>
+                <th>接收时间</th>
+                <th>通讯内容</th>
+                <th>查看</th>
+            </tr></thead>
+            <tbody id="send_text"></tbody>
+          </table>          
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>高级查询</title>
+<link rel="stylesheet" type="text/css" href="../../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+var count = 1 ;
+// 新增。
+function addHtml(){	
+	var lj = "<td onClick=\"selectSingleRow(this);\"><select><option value=\"0\" selected></option><option value=\"1\">或者</option>"+
+            "<option value=\"2\">并且</option></select></td>";
+	var gx_left = "<td><select><option value=\"0\" selected></option><option value=\"1\">(</option>"+
+							"<option value=\"2\">((</option><option value=\"3\">(((</option></select></td>"
+	var gx_right = "<td><select><option value=\"0\" selected></option><option value=\"1\">)</option>"+
+							"<option value=\"2\">))</option><option value=\"3\">)))</option></select></td>"
+	var zdm = "<td><select><option value=\"0\" selected></option><option value=\"1\">供电单位</option>"+
+							"<option value=\"2\">线路名称</option><option value=\"3\">终端类型</option></select></td>"
+  var gx = "<td><select><option value=\"0\" selected></option><option value=\"1\">等于</option>"+
+							"<option value=\"2\">大于</option><option value=\"3\">小于</option></select></td>" ;
+	var zdz = "<td><input type=\"text\"></input></td>" ;
+	
+	var ht = "<tr id='tr_"+count+"'><td>"+count+"</td>"+lj+gx_left+zdm+gx+zdz+gx_right+"</tr>";
+	$("#text").append(ht);	
+	count++ ;
+}
+
+// 清除。
+function delAll(){
+	$("#text").empty();
+	count = 1;
+}
+
+// 清除一行
+function delLast(){
+	var _id = "tr_"+count ;
+	$("#"+ _id).remove();
+	count-- ;
+}
+// 关闭窗口。
+function closed(){
+	parent.object._build();
+	parent.$("#GB_window, #GB_overlay").hide();
+	}
+</script>
+</head>
+<body>
+
+  <div id="tool">
+      <div class="opbutton1">
+        <input class="input1" type="button" onClick="addHtml()" value="添 加"/>
+        <input class="input1" type="button" onClick="addHtml()" value="插 入"/>
+        <input class="input1" type="button" onClick="delLast()" value="删 除"/>
+        <input class="input1" type="button" onClick="delAll()" value="清 除"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>    
+           <td>
+           </td>  
+        </tr>
+      </table>
+  </div>
+    
+
+<div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 100));">
+      <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+        <thead><tr align="center">
+          <th width="6%">序号</th>
+          <th width="10%">逻辑</th>
+          <th width="11%">(--</th>
+          <th width="18%">字段名</th>
+          <th width="14%">关系</th>
+          <th width="30%">数据值</th>
+          <th width="11%">--)</th>
+        </tr></thead>
+        <tbody id="text">
+        </tbody>
+      </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>变电站综合查询</title>
+<!-- public css -->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+var _type = 1;
+var _isQuery = false ;
+$(document).ready(function(){	
+	$.handelCombox('orgTar','orgNo');
+	$("#query").click(function(){			
+		_isQuery = true ;
+		chageTab(_type);//
+	});
+	var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "750", "300", "0", "0");
+  	chart_obj.setDataURL("transSubsta_query_1_data.xml");
+	chart_obj.render("graphBlock1");	
+
+});
+//
+function loadDataAndPic(){
+	$.json2html("li2_data","../../jsp/synquery/transSubsta_query_1_ifram.xml","");//
+	$.json2html("li3_data","../../jsp/synquery/transSubsta_query_2_ifram.xml","");//		
+}
+// 
+function chageTab(ty){
+	_type = ty ;
+	$("li[class^='target_']").attr("class","target_off");	
+	$("#li_"+ty).attr("class","target_on");
+	if(_isQuery){
+		showTab(ty);//
+		loadDataAndPic();//
+	}
+}
+
+//
+function showTab(id){
+	if(id==2){
+		$("#li1").hide();
+		$("#li3").hide();
+	}else if(id==3){
+		$("#li2").hide();
+		$("#li1").hide();
+	}else{
+		$("#li2").hide();
+		$("#li3").hide();	
+	}
+	$("#li"+id).show();
+}
+
+//
+function popShow(ty){
+    if(ty == 1){
+    	top.showDialogBox("线损","../../jsp/lineloss/lineloss_query_transformer.html", 575,900);  
+    }
+}
+
+function showList(ty){
+	top.showDialogBox("修改报表",
+            "../../jsp/synquery/pop/transSubsta_query.html?type="+ty, 575,
+            900);    
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="./unit_query.html" onClick="return true;" onFocus="blur()">单位综合查询</a></li>
+      <li id="tab_2" class="tab_off"><a href="./line_query.html" onClick="return true;" onFocus="blur()">线路综合查询</a></li>
+      <li id="tab_3" class="tab_on"><a href="./transSubsta_query.html" onClick="return false;" onFocus="blur()">变电站综合查询</a></li>
+      <li id="tab_4" class="tab_off"><a href="./dmrd_query.html" onClick="return true;" onFocus="blur()">台区综合查询</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="66" class="label">供电单位：</td>
+          <td width="220" class="dom" id="orgTar"></td>
+          <td width="167"><input class="input" type="submit" id="query" value="查 询" /></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li id="li_1" class="target_on"><a href="javascript:chageTab(1);">统计信息/站损统计</a></li>
+            <li id="li_2" class="target_off"><a href="javascript:chageTab(2);">变损统计</a></li>
+            <li id="li_3" class="target_off"><a href="javascript:chageTab(3);">不平衡统计</a></li>
+          </ul>
+        </div>
+        <div id="li1">
+        <div id="tool">
+          <table border="0" cellpadding="0" cellspacing="0" style="width:expression((( document.documentElement.clientWidth || document.body.clientWidth) - 45 ) );">
+            <tr>
+              <td style="text-align:left;">主变台数：2，站用变考核电量：100kWh。</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">上月站用电量210kWh，接入电表<a style="color:#03C;cursor:pointer;" onclick="showList(1);">20</a>块，专线用户<a style="color:#03C;cursor:pointer;"  onclick="showList(2);">10</a>户，上月专线用户用电量2010kWh，220kV线路<a style="color:#03C;cursor:pointer;"  onclick="showList(3);">10</a>条，110kV线路<a style="color:#03C;cursor:pointer;"  onclick="showList(3);">110</a>条，35kV线路<a style="color:#03C;cursor:pointer;"  onclick="showList(3);">20</a>条</td>
+            </tr>
+          </table>
+        </div>
+        <div id="tool">
+        	<div><select>
+          	<option value="1">日</option>
+            <option value="2">月</option>
+          </select></div>
+          <div id="graphBlock1" style="float:left;"></div>
+          <div style="width:200; height:300;">
+            <table border="0" cellpadding="0" cellspacing="0" >
+              <tr>
+                <td>昨日供电量：</td>
+                <td>7434MWH</td>
+              </tr>
+              <tr>
+                <td>昨日售电量：</td>
+                <td>7034MWH</td>
+              </tr>
+              <tr>
+                <td>综合线损电量：</td>
+                <td>34MWH</td>
+              </tr>
+              <tr>
+                <td>综合线损率：</td>
+                <td>60%</td>
+              </tr>
+              <tr>
+              	<td colspan="2" align="right">
+                	 <input class="input" type="submit" onclick="popShow(1);" value="详 细"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="nullContainer"></div>
+      </div></div>
+      <div id="li2" class="graphContainer"
+    style="display: none; height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 120));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <th>序号</th>
+			<th>变压器名称</th>
+			<th>容器</th>
+			<th>输入电量</th>
+			<th>输出电量</th>
+			<th>损耗电量</th>
+			<th>变损率</th>
+			<th>变损阈值</th>
+			<th>历史数据</th>
+          </tr>
+          <tbody id="li2_data"></tbody>
+        </table>
+      </div>
+      <div id="li3" class="graphContainer"
+    style="display: none; height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 120));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <th>序号</th>
+			<th>母线名称</th>
+			<th>电压等级</th>
+			<th>管理单位</th>
+			<th>输入电量</th>
+			<th>输出电量</th>
+			<th>损耗电量</th>
+			<th>不平衡率</th>
+			<th>不平衡阈值</th>
+			<th>历史数据</th>
+          </tr>   
+          <tbody id="li3_data"></tbody>       
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

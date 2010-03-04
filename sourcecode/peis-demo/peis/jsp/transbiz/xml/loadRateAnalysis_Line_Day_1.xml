@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='0'/>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+        <category label='12'/>
+        <category label='13'/>
+        <category label='14'/>
+        <category label='15'/>
+        <category label='16'/>
+        <category label='17'/>
+        <category label='18'/>
+        <category label='19'/>
+        <category label='20'/>
+        <category label='21'/>
+        <category label='22'/>
+        <category label='23'/>
+    </categories>
+    <dataset seriesName='整点' color='AFD818' showValues='0'>
+        <set value='20'/>
+        <set value='20'/>
+        <set value='21'/>
+        <set value='21'/>
+        <set value='21'/>
+        <set value='21'/>
+        <set value='30'/>
+        <set value='50'/>
+        <set value='70'/>
+        <set value='80'/>
+        <set value='97.5'/>
+        <set value='90'/>
+        <set value='90'/>
+        <set value='85'/>
+        <set value='84'/>
+        <set value='86'/>
+        <set value='83'/>
+        <set value='80'/>
+        <set value='70'/>
+        <set value='40'/>
+        <set value='37'/>
+        <set value='35'/>
+        <set value='30'/>
+        <set value='25'/>
+    </dataset>
+</chart>

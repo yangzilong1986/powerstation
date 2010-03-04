@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>0800309816</td2>     
+        <td3>大成建设房地产有限公司</td3>
+        <td4>南三供电所</td4>
+        <td5>10kV平坦线F05</td5>
+        <td6>房地产业</td6>
+        <td7>220V</td7>
+        <td8>一般工商业</td8>
+        <td9>200</td9>
+        <td10>0.9</td10>
+	    <td11>27940771</td11>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>0800309818</td2>     
+        <td3>同兴金属包装有限公司</td3>
+        <td4>南三供电所</td4>
+        <td5>10kV土港线F02</td5>
+        <td6>金属工艺品制造</td6>
+        <td7>380V</td7>
+        <td8>一般工商业</td8>
+        <td9>160</td9>
+        <td10>0.85</td10>
+	    <td11>27715495</td11>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>2700112578</td2>     
+        <td3>蓝达汽车摩托车配件厂</td3>
+        <td4>东简供电所</td4>
+        <td5>10kV建新东线F05</td5>
+        <td6>摩托车及零配件零售</td6>
+        <td7>220V</td7>
+        <td8>一般工商业</td8>
+        <td9>400</td9>
+        <td10>0.9</td10>
+	    <td11>13521460042</td11>
+    </data>         
+</datas>
+<!--
+
+用户档案(专变)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>行业</th>
+            <th>电压等级</th>
+	    <th>用电类别</th>
+	    <th>合同容量</th>
+	    <th>功率因数</th>
+	    <th>联系电话</th>
+          </tr>
+        </thead>
+-->

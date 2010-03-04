@@ -1,0 +1,159 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>电压合格率</title>   
+<link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+function meterDTChange() {
+  var dateType = $('#dateType').val();
+  if (dateType == "1") {//日
+      $('#DATA_DAY').attr("style","display:block;");
+      $('#DATA_YEAR').attr("style","display:none;");
+      $('#DATA_MONTH').attr("style","display:none;");
+  } else if (dateType == "2") {//月
+      $('#DATA_DAY').attr("style","display:none;");
+      $('#DATA_YEAR').attr("style","display:block;");
+      $('#DATA_MONTH').attr("style","display:block;");
+  } else if(dateType == "3"){
+      $('#DATA_DAY').attr("style","display:none;");
+      $('#DATA_YEAR').attr("style","display:block;");
+      $('#DATA_MONTH').attr("style","display:none;");
+  }
+}
+$.json2html("databody","../../jsp/elecmon/volPassRatDetail.xml","");  
+
+function viewDetail(){
+  top.showDialogBox("", "../../jsp/elecmon/volPassRatDetailByGP.html", 600, 800);
+  }  
+  
+function dataTypeChange(){
+  if(dateType == 1){
+      location.href="../../jsp/elecmon/volPassRatDetail.html";
+    }else{
+     location.href="../../jsp/elecmon/volPassRatBDetail.html"
+    }
+}
+</script>
+</head> 
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="volPassRatPoint.html" onfocus="blur()">考核点配置</a></li>
+      <li id="tab_2" class="tab_off"><a href="volPassRatQuery.html"  onfocus="blur()">合格率汇总</a></li>
+      <li id="tab_3" class="tab_on"><a href="#" onfocus="blur()">合格率明细</a></li>
+      <li class="clear"></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div>
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+          <td width="86" class="label">监测点类型：</td>
+              <td width="100" class="dom">
+                <select id="dateType" name="dateType" onchange="dataTypeChange();">
+                  <option value="1">A类</option>
+                  <option value="2">B类</option>
+                  <option value="3">C类</option>
+                  <option value="4">D类</option>
+                </select>
+                <script type="text/javascript">$("#orgNo").val("2");</script>
+              </td>
+              <td width="70" class="label" align="right">变电站：</td>
+              <td width="120" class="dom">
+                <select id="bdzmc" name="bdzmc">
+                  <option value="1">110kV海康变电站</option>
+                  <option value="2">110kV海安站</option>
+                  <option value="3">220kV霞山站</option>
+                  <option value="4">220kV坡头站</option>
+               </select></td>
+            <td width="70" class="label">统计类型：</td>
+            <td width="120" class="dom">
+              <select name="dateType" id="dateType" onChange="meterDTChange()">
+                <option value="1">日</option>
+                <option value="2">月</option>
+                <option value="3">年</option>
+              </select>
+            </td>
+            <td width="70" class="label">统计时间： </td>
+            <td width="120" class="dom_date">
+             <span id="DATA_DAY" style="display: block;">
+             <input type="text" id="startTime" name="sjsj" value="2009-8-27" size="5">
+             </span>
+            </td>
+            <td>
+             <span id="DATA_YEAR" style="display: none;">
+             <input type="text" name="year" id="year" size = "4">年
+             </span>
+            </td>
+            <td>
+             <span id="DATA_MONTH" style="display: none;">
+             <input type="text" name="month" id="month" size="2">月
+             </span>
+            </td>
+             <td>
+             <span id="DATA_YEAR" style="display: none;">
+             <input type="text" name="year" id="year" size="4">年
+             </span>
+            </td>
+            </tr> 
+            <tr>
+              <td width="70" class="label" align="right">户号：</td>
+              <td width="120" class="dom"><input type="text" name="objectNo" size="18"></td>
+              <td width="70" class="label">合格率：</td>
+              <td width="120">
+                <select name="dateType" id="dateType" onChange="changeList()">
+                  <option value=">=">&gt;=</option>
+                  <option value=">=">&lt;=</option>
+                  <option value=">=">&gt;</option>
+                  <option value=">=">&lt;</option>
+                  <option value=">=">=</option>
+                </select>
+                <input type="text" name="passRat" size="1">%
+              </td>
+            </tr>  
+          </table>
+      </div>
+  <div class="content">
+    <div id="cont_2">
+      <div class="target">
+        <ul>
+          <li class="target_on"><a href="#" onclick="return false;">电压合格率</a></li>
+          <li class="clear"></li>
+        </ul>   
+      </div>
+      <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 152));">
+        <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th>序号</th>
+            <th>供电单位</th>
+            <th>线路名称</th>
+            <th>电压等级</th>
+            <th>户号</th>
+            <th>户名</th>
+            <th>表号</th>
+            <th>日期</th>
+            <th>总监测时间(分)</th>
+            <th>越上限时间(分)</th>
+            <th>越下限时间(分)</th>
+            <th>电压合格率</th>
+            <th>A相合格率</th>
+            <th>B相合格率</th>
+            <th>C相合格率</th>
+          </tr></thead>
+          <tbody id="databody">
+          </tbody>
+        </table> 
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

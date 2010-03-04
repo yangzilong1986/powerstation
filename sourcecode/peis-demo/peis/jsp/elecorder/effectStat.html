@@ -1,0 +1,112 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>有序用电效果统计</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+var radioStr = -1;
+$(document).ready( function() {  
+  $.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+  $('#query').click(showData);
+  showData();
+});
+
+function selectedRadio(values){
+  radioStr = values;
+}
+
+function showData(){
+  if(radioStr == -1 || radioStr == 1){ 
+    $("#insertText").html("供电单位"); 
+    $.json2html("DATA_TBODY","../../jsp/elecorder/effectStat_Data_Line/intendance_Data_1.xml","cb-item"); 
+  }else{
+    $("#insertText").html("线路"); 
+    $.json2html("DATA_TBODY","../../jsp/elecorder/effectStat_Data_Line/intendance_Data_2.xml","cb-item"); 
+  } 
+}
+
+function showList(rows){
+  top.showDialogBox("有序用电效果统计", "../elecorder/effectStat_iframe.html", 575, 900);
+}
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab4">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">有序用电效果统计</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton2">
+        <input class="input1" type="button" id="query" value="查 询"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="9">
+            <input type="radio" name="radiobutton" value="1" checked onclick="selectedRadio(1);">按单位            <input type="radio" name="radiobutton" value="2" onclick="selectedRadio(2);">按线路  
+          </td>
+        </tr>
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="70" class="label">数据时间：</td>
+          <td width="120" class="dom_date">
+            <span id="DATA_DAY" style="display: block;">
+             <input type="text" name="date" value="2009-6-23" id="date">
+            </span>
+          </td>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">有序用电效果统计</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 185));">
+          <div id="ChartS" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th id="insertText"></th>
+                <th>错峰户数</th>
+                <th>最大错峰负荷(kW)</th>
+                <th>避峰户数</th>
+                <th>最大避峰负荷(kW)</th>
+                <th>负控限电户数</th>
+                <th>负控限电负荷(kW)</th>
+                <th>转移电量(kWh)</th>
+                <th>损失电量(kWh)</th>
+                <th>自觉错峰户数</th>
+                <th>不自觉错峰户数</th>
+                <th>自觉错峰率(%)</th>
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="nullContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

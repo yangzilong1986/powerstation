@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->   
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&lt;50KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&gt;=50KVA,&lt;100KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&gt;=100KVA,&lt;315KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&gt;=315KVA,&lt;500KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&gt;=500KVA,&lt;800KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+    <data extend="onclick='selectSingleRow(this);'">
+        <td1>&#160;</td1>
+        <td2>&gt;=800KVA</td2>
+        <td3>543</td3>
+        <td4>530</td4>
+        <td5>557</td5>
+        <td6>357</td6>
+        <td7>89</td7>
+    </data>
+</datas>

@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>计量自动化系统</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<style type="text/css">
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+iframe { border: 0; margin: 0; padding: 0; overflow: hidden; }
+
+#menu_list {
+    position: absolute;
+    background: #4094c6;
+    padding-top: 3px;
+    font-weight: bold;
+    font-size: 12px;
+    right: 10px;
+    top: 40px;
+    width: 100px;
+    color: #fff;
+    text-align: center;
+}
+</style>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+    var index = getParameter("index");
+    if(index == "base") {
+        $("#topframe").attr("src", "index_base.html");
+    }
+    else if(index == "advance") {
+        $("#topframe").attr("src", "index_advance.html");
+    }
+    else {
+        $("#topframe").attr("src", "index.html");
+    }
+});
+
+var locationUrl = String(window.document.location.href);
+function getParameter(str) {   
+    var rs = new RegExp("(^|)"+str+"=([^\&]*)(\&|$)","gi").exec(locationUrl), tmp;
+   
+    if(tmp = rs){   
+        return tmp[2];   
+    }   
+    // parameter cannot be found
+    return "";
+}
+
+function getMainFrameObj() {
+    return topframe.content;
+}
+
+function showList() {
+    if($("#menu_list").css("display") == 'block') {
+        $("#menu_list").css("display", "none");
+    }
+    else {
+        var menuList = topframe.header.$("#Fod div a").map( function() { return $(this).html(); });
+        if(menuList.length > 0) {
+        	$("#menu_list").html("");
+        	$("#menu_list").append("<ul style='margin:0; padding:0; list-style:none; float:left;'>");
+            for(var i = 0; i < menuList.length; i++) {
+                //alert(menuList[i]);
+                $("#menu_list").append("<li style='float:left; border-bottom:1px #fff dotted; width:100px; height:30px; line-height:30px; color:#fff;'><a style='color: #fff;' href='#' onclick='topframe.header.changeFod2(" + i + ");' rel='nofollow'>" + menuList[i] + "</a></li>");
+            }
+            $("#menu_list").append("</ul>");
+        }
+        $("#menu_list").css("display", "block");
+    }
+}
+
+function hiddenList() {
+	$("#menu_list").css("display", "none");
+}
+</script>
+</head>
+<body>
+<iframe id="topframe" name="topframe" width="100%" height="100%" frameborder="0" scrolling="no" src="index.html"></iframe>
+</body>
+</html>

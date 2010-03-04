@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='4' decimals='0' enableSmartLabels='1' enableRotation='0' bgColor='FFFFFF,FFFFFF' bgAlpha='40,100' bgRatio='0,100' bgAngle='360' showBorder='1' startingAngle='70' >
+   <set label='韶关市电力公司' value='12' />
+   <set label='深圳市电力公司' value='18' />
+   <set label='珠海市电力公司' value='8' isSliced='1'/>
+   <set label='汕头市电力公司' value='10' isSliced='1'/>
+   <set label='佛山市电力公司' value='16' isSliced='1'/>
+   <set label='茂名市电力公司' value='11' />
+   <set label='江门市电力公司' value='12' />
+   <set label='肇庆市电力公司' value='8' />
+   <set label='惠州市电力公司' value='10' />
+   <set label='梅州市电力公司' value='19'/>
+   <set label='汕尾市电力公司' value='15'/>
+   <set label='河源市电力公司' value='17' />
+   <set label='阳江市电力公司' value='17' />
+   <set label='清远市电力公司' value='17' />
+   <set label='东莞市电力公司' value='17' />
+   <set label='中山市电力公司' value='17' />
+   <set label='潮州市电力公司' value='17' />
+   <set label='揭阳市电力公司' value='17' />
+   <set label='云浮市电力公司' value='17' />
+</chart>

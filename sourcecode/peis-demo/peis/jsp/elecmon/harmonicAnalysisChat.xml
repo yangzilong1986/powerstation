@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?> 
+<chart caption='' xAxisName='各次谐波' yAxisName='含有率越限累计时间' numberPrefix='' showValues='0'>
+   <set label='' value='249' />
+   <set label='' value='64.34' />
+   <set label='' value='112.87' />
+</chart>  

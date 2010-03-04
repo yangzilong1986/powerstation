@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?> 
+<graph caption='安装覆盖率' xAxisName='单位' yAxisName='覆盖率（%）' decimalPrecision='0' formatNumberScale='0'>
+    <set name='广州市电力公司' value='80' color='AFD8F8' />
+    <set name='深圳市电力公司' value='90' color='F6BD0F' />
+    <set name='江门市电力公司' value='87' color='8BBA00' />
+</graph> 

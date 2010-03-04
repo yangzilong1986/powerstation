@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+                <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+                <!-- <data></data>固定格式 -->
+                <data>
+                                <td1 extend="align='center'">2009-09-01</td1>
+                                <td2 extend="align='right'">23456.00</td2>
+                                <td3 extend="align='right'">1231243.00</td3>
+                                <td4 extend="align='right'">1231234.00</td4>
+                                <td5 extend="align='right'">3.00</td5>
+                                <td6 extend="align='right'">0.20</td6>
+                                <td7 extend="align='right'">0.31</td7>
+                                        <td8>&#60;a href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_transformer_data_detail.html?dateType=1&amp;date=2009-09-01",860,530)'&#62;详细&#60;/a&#62;</td8>
+                                
+    </data>
+        <data>
+                                <td1 extend="align='center'">2009-09-02</td1>
+                                <td2 extend="align='right'">23456.00</td2>
+                                <td3 extend="align='right'">1231243.00</td3>
+                                <td4 extend="align='right'">1231234.00</td4>
+                                <td5 extend="align='right'">3.00</td5>
+                                <td6 extend="align='right'">0.20</td6>
+                                <td7 extend="align='right'">0.31</td7>
+                                        <td8>&#60;a href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_transformer_data_detail.html?dateType=1&amp;date=2009-09-02",860,530)'&#62;详细&#60;/a&#62;</td8>
+                                
+    </data>
+            <data>
+                                <td1 extend="align='center'">2009-09-03</td1>
+                                <td2 extend="align='right'">23456.00</td2>
+                                <td3 extend="align='right'">1231243.00</td3>
+                                <td4 extend="align='right'">1231234.00</td4>
+                                <td5 extend="align='right'">3.00</td5>
+                                <td6 extend="align='right'">0.20</td6>
+                                <td7 extend="align='right'">0.31</td7>
+                                        <td8>&#60;a href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_transformer_data_detail.html?dateType=1&amp;date=2009-09-03",860,530)'&#62;详细&#60;/a&#62;</td8>
+                                
+    </data>
+                <data>
+                                <td1 extend="align='center'">2009-09-04</td1>
+                                <td2 extend="align='right'">23456.00</td2>
+                                <td3 extend="align='right'">1231243.00</td3>
+                                <td4 extend="align='right'">1231234.00</td4>
+                                <td5 extend="align='right'">3.00</td5>
+                                <td6 extend="align='right'">0.20</td6>
+                                <td7 extend="align='right'">0.31</td7>
+                                        <td8>&#60;a href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_transformer_data_detail.html?dateType=1&amp;date=2009-09-04",860,530)'&#62;详细&#60;/a&#62;</td8>
+                                
+    </data>
+    
+</datas>

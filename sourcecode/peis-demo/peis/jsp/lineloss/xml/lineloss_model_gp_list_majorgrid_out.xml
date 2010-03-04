@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <td1>**计量点1</td1>
+    <td2>线路考核表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点2</td1>
+    <td2>专线表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点3</td1>
+    <td2>线路考核表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点4</td1>
+    <td2>站用变</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点5</td1>
+    <td2>线路考核表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点6</td1>
+    <td2>线路考核表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**计量点7</td1>
+    <td2>线路考核表</td2>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+</datas>

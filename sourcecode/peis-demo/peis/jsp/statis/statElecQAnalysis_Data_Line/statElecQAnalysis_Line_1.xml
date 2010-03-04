@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='广州市电力公司'/>
+        <category label='韶关市电力公司'/>
+        <category label='深圳市电力公司'/>
+        <category label='珠海市电力公司'/>
+        <category label='汕头市电力公司'/>
+        <category label='佛山市电力公司'/>
+        <category label='江门市电力公司'/>
+        <category label='茂名市电力公司'/>
+        <category label='肇庆市电力公司'/>
+        <category label='惠州市电力公司'/>
+        <category label='梅州市电力公司'/>
+        <category label='汕尾市电力公司'/>
+        <category label='河源市电力公司'/>
+        <category label='阳江市电力公司'/>
+        <category label='清远市电力公司'/>
+        <category label='东莞市电力公司'/>
+        <category label='中山市电力公司'/>
+        <category label='潮州市电力公司'/>
+        <category label='揭阳市电力公司'/>
+        <category label='云浮市电力公司'/>
+    </categories>
+    <dataset seriesName='本期电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>
+        <set value='44'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='94.31'/>
+        <set value='53'/>
+        <set value='97.19'/>
+        <set value='45'/>
+        <set value='54'/>
+        <set value='94.31'/>
+        <set value='65'/>
+        <set value='97.19'/>
+        <set value='76'/>
+    </dataset>
+    <dataset seriesName='同期电量' color='A1D8F8' showValues='0'>
+        <set value='65'/>
+        <set value='84.81'/>
+        <set value='77'/>
+        <set value='86.56'/>
+        <set value='65'/>
+        <set value='88.06'/>
+        <set value='56'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='54'/>
+        <set value='44'/>
+        <set value='84.81'/>
+        <set value='22'/>
+        <set value='86.56'/>
+        <set value='33'/>
+        <set value='88.06'/>
+        <set value='22'/>
+        <set value='84.31'/>
+        <set value='12'/>
+        <set value='23'/>
+        <set value='43'/>
+    </dataset>
+    <dataset seriesName='上期电量' color='AF18F8' showValues='0'>
+        <set value='34'/>
+        <set value='43'/>
+        <set value='54'/>
+        <set value='45'/>
+        <set value='87'/>
+        <set value='64'/>
+        <set value='64'/>
+        <set value='35'/>
+        <set value='34'/>
+        <set value='22'/>
+        <set value='32'/>
+        <set value='21'/>
+        <set value='23'/>
+        <set value='34'/>
+        <set value='65'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='73.31'/>
+        <set value='73.56'/>
+        <set value='74.19'/>
+        <set value='48.06'/>
+    </dataset>
+</chart>

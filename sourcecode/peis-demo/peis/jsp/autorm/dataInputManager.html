@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据手工录入</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"> 
+
+function changeTab(index){
+    if(index == "1") {       //数据录入
+        $("#target_1").css("display", "block");
+        $("#target_2").css("display", "none");
+    }
+    else if(index == "2") {  //录入查询
+        $("#target_1").css("display", "none");
+        $("#target_2").css("display", "block");
+    }
+}
+
+function init(){
+    inputpage.document.location  = "../../jsp/autorm/dataInput.html";
+    recordpage.document.location  = "../../jsp/autorm/dataRecordList.html";
+}
+
+var method = "add";
+var assetObj = {assetNo:'111',custNo:'12028550',custName:'广州医药有限公司',installAddr:'广州市广州大道北121号',ct:'1',pt:'2'};
+var dayDataObj = {P_ACT_TOTAL:'',P_ACT_SHARP:'',P_ACT_PEAK:'',P_ACT_LEVEL:'',P_ACT_VALLEY:'',
+                  I_ACT_TOTAL:'',I_ACT_SHARP:'',I_ACT_PEAK:'',I_ACT_LEVEL:'',I_ACT_VALLEY:'',
+                  P_REACT_TOTAL:'',I_REACT_TOTAL:'',IS_EXIST:false};
+var monDataObj = {P_ACT_TOTAL:'',P_ACT_SHARP:'',P_ACT_PEAK:'',P_ACT_LEVEL:'',P_ACT_VALLEY:'',
+                  I_ACT_TOTAL:'',I_ACT_SHARP:'',I_ACT_PEAK:'',I_ACT_LEVEL:'',I_ACT_VALLEY:'',
+                  P_REACT_TOTAL:'',I_REACT_TOTAL:'',IS_EXIST:false};
+</script>
+</head>
+<body onload="init()">
+  <div id="body">
+    <div id="target_1">
+      <div id="nav_area" class="tab2">
+        <ul id="nav_ul">
+          <li class="tab_on"><a href="javascript:changeTab(1);" onfocus="blur()">数据录入</a></li>
+          <li class="tab_off"><a href="javascript:changeTab(2);" onfocus="blur()">录入查询</a></li>
+          <li class="clear"></li>
+        </ul>
+        <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <div id="main" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 44));"> 
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+          <tr>
+            <td>
+              <iframe name="inputpage" frameborder="0" width="100%" height="100%" scrolling="no" src=""></iframe>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <div id="target_2" style="display: none;">
+      <div id="nav_area" class="tab2">
+        <ul id="nav_ul">
+          <li class="tab_off"><a href="javascript:changeTab(1);" onfocus="blur()">数据录入</a></li>
+          <li class="tab_on"><a href="javascript:changeTab(2);" onfocus="blur()">录入查询</a></li>
+          <li class="clear"></li>
+        </ul>
+        <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <div id="main" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 44));"> 
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+          <tr>
+            <td>
+              <iframe name="recordpage" frameborder="0" width="100%" height="100%" scrolling="no" src=""></iframe>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

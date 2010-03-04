@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>异常通知</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>  
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+<script type="text/javascript">
+$(function(){
+$.json2html("databody","../../jsp/elecmon/elecNotice.xml",""); 
+});
+
+
+function viewDetail(){
+   top.showDialogBox("异常定制", "../../jsp/elecmon/elecCustomFrame.html", 600, 1024);
+  } 
+  
+function add(){
+  top.showDialogBox("异常定制", "../../jsp/elecmon/elecCustomFrame.html", 600, 1024);
+}
+
+</script>
+
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="volPassRatPoint.html" onfocus="blur()">异常通知</a></li>     
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+     <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="query" id="query" value="异常定制" class="input2" onclick="add();"/></div>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td></td>
+          </tr>
+        </table>
+     </div>
+	<div id="tableContainer" class="tableContainer" style="height: expression((( document . documentElement . clientHeight || document . body . clientHeight) -   142 ) );">
+	  <table border="0" cellpadding="0" cellspacing="0" width="100%" id="zbdata">
+	    <thead><tr>
+      	  <th width="2%">序号</th>
+      	  <th width="4%">定制项名称</th>    
+            <th width="5%">定制人</th>
+      	  <th width="5%">定制时间</th>
+      	  <th width="2%">操作</th>
+		</tr></thead>
+		<tbody id="databody">						
+	    </tbody>
+	  </table>    
+    </div>
+    <div class="pageContainer">
+      <input type="hidden" id="showType" name="showType" value="pag" />显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected>20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select> 　第1页 / 共7页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <a title="下一页" href='#'><font style="font-size: 14px; font-family: webdings">8</font></a> <a title="末页" href="#"><font style="font-size: 14px; font-family: webdings">:</font></a> 
+   </div>
+ </div>
+</div>
+</body>
+</html>

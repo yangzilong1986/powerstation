@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="false">
+    <data>
+     <td1>回中线</td1>
+     <td2>&lt;a href="javascript:showList(0)"&gt;561&lt;/a&gt;</td2>
+     <td3>10000</td3>
+     <td4>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td4>
+     <td5>8000</td5>
+     <td6>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td6>
+     <td7>7900</td7>
+     <td8>2000</td8>
+     <td9>1800</td9>
+     <td10>&lt;a href="javascript:showList(0)"&gt;90&lt;/a&gt;</td10>
+     <td11>&lt;a href="javascript:showList(0)"&gt;10&lt;/a&gt;</td11>
+     <td12>90</td12>
+    </data>
+    <data>
+     <td1>前景线</td1>
+     <td2>&lt;a href="javascript:showList(0)"&gt;561&lt;/a&gt;</td2>
+     <td3>200</td3>
+     <td4>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td4>
+     <td5>3000</td5>
+     <td6>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td6>
+     <td7>3900</td7>
+     <td8>1000</td8>
+     <td9>800</td9>
+     <td10>&lt;a href="javascript:showList(0)"&gt;90&lt;/a&gt;</td10>
+     <td11>&lt;a href="javascript:showList(0)"&gt;10&lt;/a&gt;</td11>
+     <td12>90</td12>
+    </data>
+    <data>
+     <td1>华东线</td1>
+     <td2>&lt;a href="javascript:showList(0)"&gt;561&lt;/a&gt;</td2>
+     <td3>10000</td3>
+     <td4>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td4>
+     <td5>8000</td5>
+     <td6>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td6>
+     <td7>7900</td7>
+     <td8>2000</td8>
+     <td9>1800</td9>
+     <td10>&lt;a href="javascript:showList(0)"&gt;90&lt;/a&gt;</td10>
+     <td11>&lt;a href="javascript:showList(0)"&gt;10&lt;/a&gt;</td11>
+     <td12>90</td12>
+    </data>
+    <data>
+     <td1>埃门线</td1>
+     <td2>&lt;a href="javascript:showList(0)"&gt;561&lt;/a&gt;</td2>
+     <td3>10000</td3>
+     <td4>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td4>
+     <td5>8000</td5>
+     <td6>&lt;a href="javascript:showList(0)"&gt;100&lt;/a&gt;</td6>
+     <td7>7900</td7>
+     <td8>2000</td8>
+     <td9>1800</td9>
+     <td10>&lt;a href="javascript:showList(0)"&gt;90&lt;/a&gt;</td10>
+     <td11>&lt;a href="javascript:showList(0)"&gt;10&lt;/a&gt;</td11>
+     <td12>90</td12>
+    </data>
+</datas>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='&lt;50'/>
+        <category label='&gt;=50'/>
+        <category label='&gt;=100 '/>
+        <category label='&gt;=315'/>
+        <category label='汇总'/>
+    </categories>
+    <dataset seriesName='本期电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+    </dataset>
+    <dataset seriesName='同期电量' color='A1D8F8' showValues='0'>
+        <set value='44'/>
+        <set value='33'/>
+        <set value='88.06'/>
+        <set value='22'/>
+        <set value='84.31'/>
+    </dataset>
+    <dataset seriesName='上期电量' color='AF18F8' showValues='0'>
+        <set value='43'/>
+        <set value='73.31'/>
+        <set value='73.56'/>
+        <set value='74.19'/>
+        <set value='48.06'/>
+    </dataset>
+</chart>

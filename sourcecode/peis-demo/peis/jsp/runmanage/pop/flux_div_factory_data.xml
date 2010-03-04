@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="GBK"?> 
+<graph caption='流量统计' xAxisName='单位' yAxisName='流量（kb）' decimalPrecision='0' formatNumberScale='0'>
+    <set name='GPRS' value='3333' color='AFD8F8' />
+    <set name='CDMA' value='7776' color='F6BD0F' />
+</graph> 

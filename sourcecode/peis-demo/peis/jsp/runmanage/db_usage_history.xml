@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='数据库表空间情况' numberSuffix='' shownames='1' showvalues='1' yAxisName='%'>
+    <categories>
+        <category label='2009/09/21'/>
+        <category label='2009/09/22'/>
+        <category label='2009/09/23'/>
+        <category label='2009/09/24'/>
+        <category label='2009/09/25'/>        
+    </categories>
+    <dataset seriesName='已使用空间' color='FF0033' showValues='0'>
+        <set value='10'/>
+        <set value='20'/>
+        <set value='50'/>
+        <set value='30'/>
+        <set value='20'/>                                       
+    </dataset>
+    <dataset seriesName='剩余空间' color='FFFF00' showValues='0'>
+        <set value='90'/>
+        <set value='80'/>
+        <set value='50'/>
+        <set value='70'/>
+        <set value='80'/>                                       
+    </dataset>
+</chart>

@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/graybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model.js"></script>
+<script type="text/javascript" src="../../js/lineloss/model_data.js"></script>
+<script type="text/javascript">
+$(function(){
+    load_model_gp();
+})
+</script>
+</head>
+<body>
+<div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 42));">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr id='common'>
+        <!-- 编号，计量点名称，计量点类型，输入/输出，计量方向 -->
+        <th nowrap="nowrap">序号</th>
+        <th nowrap="nowrap" >计量点名称</th>
+        <th nowrap="nowrap" >计量点类型</th>
+        <th nowrap="nowrap">输入/输出</th>
+        <th nowrap="nowrap">计量方向</th>
+      </tr>
+      <tr id='tg' style='display:none'>
+        <!-- 编号，计量点名称，计量点类型，输入/输出，计量方向 -->
+        <th nowrap="nowrap">序号</th>
+        <th nowrap="nowrap" id='name'>户名</th>
+        <th nowrap="nowrap" id='num'>户号</th>
+        <th nowrap="nowrap" id='data'>装表日</th>
+        <th nowrap="nowrap">输入/输出</th>
+        <th nowrap="nowrap">计量方向</th>
+      </tr>
+    </thead>
+    <colgroup>
+    <col id="col_00" />
+    <col id="col_01" />
+    <col id="col_02" />
+    <col id="col_03" />
+    <col id="col_04" />
+    <col id="col_05" />
+    </colgroup>
+    <tbody id="lineloss_model_gp_list">
+    </tbody>
+  </table>
+</div>
+<div class="pageContainer"><a href="#"><img src="../../img/bt_excel.gif" width="16" height="16"
+  title="导出Excel" /></a> ┆ 共<span class="orange">6</span>条 显示行数：
+  <select id="pageRows" name="pageRows" size="1">
+    <option value="10">10</option>
+    <option value="20" selected="selected">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="200">200</option>
+    <option value="500">500</option>
+  </select>
+  第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：
+  <input type="text" id="page" name="page"
+  value="1" />
+  <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img
+  src="../../img/page_prew.gif" class="pointer" title="上一页" /></a> <a href="#"><img src="../../img/page_next.gif"
+  class="pointer" title="下一页" /></a> <a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+</body>
+</html>

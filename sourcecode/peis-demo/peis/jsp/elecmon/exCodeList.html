@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>异常编码管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+</head>
+<script type="text/javascript">
+function changeList(){
+    var exCate = $("#exCate").val();
+    if(exCate == 1) {
+        parent.rightframe.location = "../../jsp/elecmon/exCodeDetail.html";
+    }
+    else {
+        parent.rightframe.location = "../../jsp/elecmon/exCodeDetailElec.html";
+    }
+}
+
+$.json2html("test", "../../jsp/elecmon/exCode.xml", "");
+</script>
+
+<body >
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="70" class="label">编码类型： </td>
+      <td width="120" class="dom">
+        <select name="exCate" id="exCate" onchange="changeList()">
+          <option value="1">设备异常</option>
+          <option value="2">用电异常</option>
+        </select>
+        <script type="text/javascript">$("#exCate").val("1");</script>
+      </td>
+    </tr>
+  </table>
+  <div class="clear"></div>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div id="tableContainer" class="tableContainer" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 64));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th>序号</th>
+          <th>编码类别</th>
+          <th>编码类别</th>
+        </tr></thead>
+        <tbody id="test">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      &nbsp;第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

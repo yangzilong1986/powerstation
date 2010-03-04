@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?> 
+<chart caption='电压合格率' xAxisName='' yAxisName='%' numberPrefix='' showValues='0'>
+   <set label='广东省电力公司' value='99.81' />
+   <set label='湛江供电局' value='95.81' />
+   <set label='潮州供电局' value='68.81' />
+   <set label='揭阳供电局' value='79.81' />
+</chart>  

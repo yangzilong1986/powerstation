@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='8/1'/>
+        <category label='8/2'/>
+        <category label='8/3'/>
+        <category label='8/4'/>
+        <category label='8/5'/>
+        <category label='8/6'/>
+        <category label='8/7'/>
+        <category label='8/8'/>
+        <category label='8/9'/>
+        <category label='8/10'/>
+        <category label='8/11'/>
+        <category label='8/12'/>
+        <category label='8/13'/>
+        <category label='8/14'/>
+        <category label='8/15'/>
+        <category label='8/16'/>
+        <category label='8/17'/>
+        <category label='8/18'/>
+        <category label='8/19'/>
+        <category label='8/20'/>
+        <category label='8/21'/>
+        <category label='8/22'/>
+        <category label='8/23'/>
+        <category label='8/24'/>
+        <category label='8/25'/>
+        <category label='8/26'/>
+        <category label='8/27'/>
+        <category label='8/28'/>
+        <category label='8/29'/>
+        <category label='8/30'/>
+        <category label='8/31'/>
+    </categories>
+    <dataset seriesName='日负荷率' color='AFD818' showValues='0'>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='39.5'/>
+        <set value='38.25'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='35'/>
+        <set value='30'/>
+        <set value='35'/>
+        <set value='35.15'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='39.5'/>
+        <set value='35.15'/>
+        <set value='38.25'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='35'/>
+        <set value='30'/>
+        <set value='35'/>
+        <set value='35.15'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='35'/>
+        <set value='30'/>
+        <set value='35'/>
+        <set value='35.15'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='35'/>
+        <set value='30'/>
+    </dataset>
+</chart>

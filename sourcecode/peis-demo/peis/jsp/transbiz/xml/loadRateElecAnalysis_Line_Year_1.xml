@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='1'/>
+        <category label='2'/>
+        <category label='3'/>
+        <category label='4'/>
+        <category label='5'/>
+        <category label='6'/>
+        <category label='7'/>
+        <category label='8'/>
+        <category label='9'/>
+        <category label='10'/>
+        <category label='11'/>
+        <category label='12'/>
+    </categories>
+    <dataset seriesName='月负荷率' color='AFD818' showValues='0'>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='39.5'/>
+        <set value='38.25'/>
+        <set value='40'/>
+        <set value='37.5'/>
+        <set value='35'/>
+        <set value='30'/>
+        <set value='35'/>
+        <set value='35.15'/>
+        <set value='40'/>
+        <set value='37.5'/>
+    </dataset>
+</chart>

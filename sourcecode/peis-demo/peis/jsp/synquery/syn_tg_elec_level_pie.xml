@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='4' decimals='1' formatNumber='1' formatNumberScale='0'  enableSmartLabels='1' enableRotation='1' bgColor='FFFFFF,FFFFFF' bgAlpha='40,100' bgRatio='0,100' bgAngle='360' showBorder='1' startingAngle='70' >
+        <set label='0-100kWh' value='1800' isSliced='1'/>
+        <set label='100-200kWh' value='2000' isSliced='0'/>
+		<set label='200kWh以上' value='1200' isSliced='0'/>                
+</chart>

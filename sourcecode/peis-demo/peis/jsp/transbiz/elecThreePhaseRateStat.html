@@ -1,0 +1,218 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>不平衡率合格率统计</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+var objectType;
+$(document).ready( function() {
+ //供电单位
+ $.handelCombox('orgNoTar','orgNo');
+ 
+ $('[name="objectType"]:radio').click(function(){
+      objectType=$('[name="objectType"][checked=true]:radio').val();
+      if(objectType==1){
+        $('#isElecTypeLabel').attr("disabled","");
+      }else if(objectType==2){
+        $('#isElecTypeLabel').attr("disabled","true");
+      }
+  })
+});
+
+//查询
+function query(){
+  objectType=$('[name="objectType"][checked=true]:radio').val();
+  var dateType=$('#dateType').val();
+  switchTheadLoadPass(objectType,dateType);
+  if(objectType==1){//专变
+    if(dateType==1){      
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_3.xml","cb-item");
+      }else{
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_4.xml","cb-item");
+      }
+   /*if($('#isElecType').attr("checked")==true){ //按用电类别选中
+      if(dateType==1){
+        switchTheadLoadPass(dateType);
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_3.xml","cb-item");
+      }else{
+        switchTheadLoadPass(dateType);
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_4.xml","cb-item");
+      }
+   }else{
+      if(dateType==1){
+        switchTheadLoadPass(dateType);
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_1.xml","cb-item");
+      }else{
+        switchTheadLoadPass(dateType);
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_2.xml","cb-item");
+      }
+   }*/
+  }else{//台区
+    if(dateType==1){
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_1.xml","cb-item");
+    }else{
+        $.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadPassRateAnalysis_Data_2.xml","cb-item");
+     }
+  }
+}
+//数据时间切换
+function switchDataTime(){
+  var dateType=$("#dateType").val();
+  if(dateType==1){
+     $("#DATA_DAY").show();
+     $("#DATA_YEAR").hide();
+     $("#DATA_MONTH").hide();
+     $("#DATA_ANYTIME").hide();
+  }else if(dateType==2){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").show();
+     $("#DATA_ANYTIME").hide();
+  }else if(dateType==5){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").hide();
+     $("#DATA_MONTH").hide();
+     $("#DATA_ANYTIME").show();
+  }else if(dateType==4){
+     $("#DATA_DAY").hide();
+     $("#DATA_YEAR").show();
+     $("#DATA_MONTH").hide();
+     $("#DATA_ANYTIME").hide();
+  }
+}
+//明细查询
+function openDetail(orgName,isQualified,elecAppType){
+   var title="";
+   if(isQualified=="P"){
+     title="不平衡率合格用户清单";
+   }else if(isQualified=="N"){
+     title="不平衡率不合格用户清单";
+   }
+   objectType=$('[name="objectType"][checked=true]:radio').val();
+   var dataTime=$("#dataTime").val();
+   var params = {    
+                   "objectType":objectType,
+                   "orgName":orgName,
+                   "dataTime":dataTime,
+                   "elecAppType":elecAppType
+                };
+   url="../../jsp/transbiz/elecThreePhaseCustList.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+   top.showDialogBox(title,url, 575, 900);
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton2"><input type="submit" name="query" onClick="query();" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td colspan="8">
+             <input type="radio" name="objectType" value="1" checked="checked" class="dom" />专变用户
+             <input type="radio" name="objectType" value="2" class="dom" />配变/台区
+          </td>
+        </tr>
+        <tr> 
+          <td width="66" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgNoTar"></td>
+          <td width="66" class="label">数据时间：</td>
+          <td width="400" class="dom_date" colspan="4">
+            <select id="dateType" name="dateType" onChange="switchDataTime();">
+              <option value="1">日</option>
+              <option value="2">月</option>
+              <option value="4">年</option>
+              <option value="5">任意时间段</option>
+            </select>
+            <!-- 日 -->
+            <span id="DATA_DAY"> 
+             <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+            </span>
+            <!-- 年 -->
+            <span id="DATA_YEAR" style="display:none;">
+               <select name="year" id="year">
+                  <option value="2005">2005</option>
+                  <option value="2006">2006</option>
+                  <option value="2007">2007</option>
+                  <option value="2008">2008</option>
+                  <option value="2009">2009</option>
+                  <option value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
+               </select>年
+            </span>
+            <!-- 月 -->
+            <span id="DATA_MONTH" style="display:none;">
+               <select name="month" id="month">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+               </select>月
+            </span>
+            <!-- 任意时间段 -->
+            <span id="DATA_ANYTIME" style="display:none;">
+             <input type="text" id="dataTime" name="dataTime" value="2009-08-06" />
+                                  至
+             <input type="text" id="dataTime" name="dataTime" value="2009-08-09" />
+            </span>
+          </td>
+          <td width="100" class="label" align="right" id="isElecTypeLabel">
+            <!--  <input type="checkbox" name="isElecType" value="true" id="isElecType">按用电类别-->
+          </td>
+          <td align="right" width="20%">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="">电流不平衡合格率</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 130));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead id="DATA_THEAD">
+             <tr>
+              <th>序号</th>
+              <th>供电单位</th>
+              <th>参与统计户数</th>
+              <th>合格户数</th>
+              <th>不合格户数</th>
+              <th>合格率(%)</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+	        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">3</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

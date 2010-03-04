@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+		<data>        
+        <td1>220KV变电站电量报表(金砂200903)蔡煜瑞_20090301.xls</td1>
+        <td2>蔡煜瑞</td2>        
+        <td3>2009/03/01 13:10:01</td3>
+        <td4>蔡煜瑞</td4>
+        <td5>2009/03/01 13:10:01</td5>
+        <td6>&lt;input class="input" type="button" id="download" value="下载" onclick="window.open('data/220KV变电站电量报表(金砂200903)蔡煜瑞_20090301.xls')"/&gt;</td6>    
+    </data> 
+</datas>

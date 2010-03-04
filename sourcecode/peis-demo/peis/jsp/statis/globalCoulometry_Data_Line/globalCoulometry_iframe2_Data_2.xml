@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>200905</td1>
+        <td2>1003</td2>
+        <td3>2033</td3> 
+        <td4>10000</td4> 
+        <td5>2341</td5> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>200906</td1>
+        <td2>2034</td2>
+        <td3>3422</td3> 
+        <td4>10000</td4> 
+        <td5>2332</td5> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>200907</td1>
+        <td2>3422</td2>
+        <td3>4322</td3> 
+        <td4>10000</td4> 
+        <td5>3452</td5> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>200908</td1>
+        <td2>4322</td2>
+        <td3>5643</td3> 
+        <td4>10000</td4> 
+        <td5>2341</td5> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1><![CDATA[&nbsp;]]></td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3> 
+        <td4><![CDATA[&nbsp;]]></td4> 
+        <td5><![CDATA[&nbsp;]]></td5> 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>合计</td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3> 
+        <td4><![CDATA[&nbsp;]]></td4> 
+        <td5>335300</td5> 
+    </data> 
+</datas>

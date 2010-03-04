@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title></title>
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" language="javascript">
+function showData() {
+    document.all.divData.style.display = "";
+    document.all.divEvent.style.display = "none";
+}
+function showEvent() {
+    document.all.divData.style.display = "none";
+    document.all.divEvent.style.display = "";
+}
+
+</script>
+
+ <script type="text/javascript">
+     $.json2html("mxsj","../../jsp/elecmon/elecMxsj.xml","");
+     $.json2html("glsj","../../jsp/elecmon/elecGlsj.xml","");
+  </script>
+</head>
+
+<body>
+<table width="98%" border=0 cellpadding=0 cellspacing=0 align=center class="e_detail_t">
+  <tr align="center">
+    <td class="contentLeft"></td>
+    <td>
+      <table width="98%" align="center" border="0" cellpadding="0"cellspacing="1" >
+   	    <tr>
+          <td colspan="4" class="topmargin"></td>
+    	</tr>
+    	<tr>
+       	  <td align="center">分析项名称： 电流缺相 </td>
+    	</tr>
+		<tr height="220" valign="top">
+       	<td width="100%" class="tbltitle">
+       	<div id="divData" style="position: absolute;">
+        <div class="tab2">
+          <ul>
+            <li id="tab_1" class="tab_on"><a href="javascript:showData();" onfocus="blur()">明细数据</a></li>
+            <li id="tab_2" class="tab_off"><a href="javascript:showEvent();" onfocus="blur()">关联事件</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+       	  <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 159));">
+       	    <table id="myTable" border="0" cellpadding="0" cellspacing="0" width="100%">
+       		  <thead><tr>	
+       		    <th>序号</th>
+       		    <th>数据项名称</th>
+       		    <th>数据值</th>
+       		    <th>数据单位</th>
+       		  </tr></thead>
+       		  <tbody id="mxsj">
+       		  </tbody>
+       		</table>
+       	  </div>
+       	</div>
+        
+       	<div id="divEvent" style="display: none;position: absolute;">
+          <div class="tab2">
+            <ul>
+               <li id="tab_1" class="tab_off"><a href="javascript:showData();" onfocus="blur()">明细数据</a></li>
+              <li id="tab_2" class="tab_on"><a href="javascript:showEvent();" onfocus="blur()">关联事件</a></li>
+            </ul>
+          </div>
+       	  <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 159));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+       		  <thead><tr>	
+       		    <th>序号</th>
+       		    <th>发生时间</th>
+       		    <th>事件内容</th>
+       		  </tr></thead>
+       		  <tbody id="glsj">
+       		  </tbody>
+       		</table>
+       	  </div>
+       	</div>
+        </td>
+       	</tr>
+     </table>
+   </td>
+ </tr>
+<iframe name="hideframe" src="" scrolling="no" width="0" height="0" frameborder="0"> </iframe>
+</body>
+
+</html>

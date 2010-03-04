@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>2009-10-01</td2>     
+        <td3>01/343545</td3>
+        <td4>900</td4>
+        <td5>98979</td5>
+        <td6>66667</td6>
+        <td7>343</td7>
+        <td8>343</td8>
+        <td9>3333</td9>
+        <td10>6657</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='showText(3);'">查看</td11>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>2009-10-02</td2>     
+        <td3>01/343535</td3>
+        <td4>900</td4>
+        <td5>9979</td5>
+        <td6>77667</td6>
+        <td7>383</td7>
+        <td8>973</td8>
+        <td9>9033</td9>
+        <td10>6657</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='showText(3);'">查看</td11>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>2009-10-03</td2>     
+        <td3>01/3445</td3>
+        <td4>700</td4>
+        <td5>8979</td5>
+        <td6>87667</td6>
+        <td7>883</td7>
+        <td8>1073</td8>
+        <td9>10033</td9>
+        <td10>6657</td10>
+        <td11 extend="style='color: blue;cursor:pointer;' onclick='showText(3);'">查看</td11>
+    </data>         
+</datas>

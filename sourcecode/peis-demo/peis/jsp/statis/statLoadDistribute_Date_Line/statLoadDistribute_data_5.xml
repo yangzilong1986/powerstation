@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>广东省电力公司</td1>
+        <td2> 21655144</td2>
+        <td3>100.00 </td3>
+        <td4>100.00 </td4>
+        <td5>100.00 </td5>
+        <td6>100.00 </td6>
+        <td7>100.00 </td7>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--云浮市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>12.00 </td3>
+        <td4>6 </td4>
+        <td5>5 </td5>
+        <td6>4 </td6>
+        <td7>3 </td7>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--韶关市电力公司</td1>
+        <td2>5325</td2>
+        <td3>31 </td3>
+        <td4>45 </td4>
+        <td5>43 </td5>
+        <td6>2 </td6>
+        <td7>1 </td7>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--深圳市电力公司</td1>
+        <td2> 21576944</td2>
+        <td3>32 </td3>
+        <td4>12 </td4>
+        <td5>32 </td5>
+        <td6>11 </td6>
+        <td7>12 </td7>        
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--汕头市电力公司</td1>
+        <td2> 8658</td2>
+        <td3>4 </td3>
+        <td4>43 </td4>
+        <td5>12 </td5>
+        <td6>32 </td6>
+        <td7>45 </td7>          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--广州市电力公司</td1>
+        <td2>98797</td2>
+        <td3>3 </td3>
+        <td4>34 </td4>
+        <td5>21 </td5>
+        <td6>21 </td6>
+        <td7>54 </td7>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--揭阳市电力公司</td1>
+        <td2>8897653</td2>
+        <td3>5 </td3>
+        <td4>34 </td4>
+        <td5>45 </td5>
+        <td6>43 </td6>
+        <td7>32 </td7>     
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--潮州市电力公司</td1>
+        <td2>42344</td2>
+        <td3>6 </td3> 
+        <td4>34 </td4>
+        <td5>76 </td5>
+        <td6>43 </td6>
+        <td7>12 </td7>            
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>--中山市电力公司</td1>
+        <td2>808086</td2>
+        <td3>9.80 </td3> 
+        <td4>21 </td4>
+        <td5>43 </td5>
+        <td6>32 </td6>
+        <td7>12.00 </td7>            
+    </data> 
+</datas>

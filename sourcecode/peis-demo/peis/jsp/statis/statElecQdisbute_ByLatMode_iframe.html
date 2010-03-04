@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>电量分布分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+$.json2html("DATA_TBODY","../../jsp/statis/statElecQdistribute_Data_Line/statElecQdistribute_Data_iframe.xml","cb-item");
+</script>
+</head>
+<body>
+  <div id="body">
+    <div class="content">
+      <div id="cont_1">
+        <div class="target5">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">电量分布分析图表</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 20));">
+        <div id="graphBlock" align="center"></div>
+        <script type="text/javascript">
+          var chart_obj = new FusionCharts("../../FusionCharts/Pie3D.swf", "chart_id", "595", "250", "0", "0");
+          chart_obj.setDataURL("statElecQdistribute_Data_Line/statElecQdistribute_ByTime_Line_iframe.xml");
+          chart_obj.render("graphBlock");
+        </script>
+        <table border="0" cellpadding="0" cellspacing="0" width="595px">
+          <thead>
+            <tr>
+              <th width="5%">用电类型</th>
+              <th width="5%">电量</th>
+              <th width="5%">比重 </th>
+            </tr>
+          </thead>
+          <tbody id="DATA_TBODY">
+          </tbody>
+        </table> 
+      </div>
+    </div>
+  </div>
+</div>
+</html>
+

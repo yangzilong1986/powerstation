@@ -1,0 +1,1622 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>终端参数设置</title>
+<link rel="stylesheet" type="text/css" href="../../css/dataframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript"> 
+var contextPath = "../..";
+function folder(objImg, vOrderId) {
+    var srcImg = $(objImg).attr("src");
+    if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+        $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+    }
+    else {
+        $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+    }
+    
+    for(var i = 0; i < 100; i++) {
+        if($("#otr" + vOrderId + "_" + i).length > 0) {
+            if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+                $("#otr" + vOrderId + "_" + i).attr("class", "styleShow");
+            }
+            else {
+                $("#otr" + vOrderId + "_" + i).attr("class", "styleHidden");
+            }
+        }
+        else {
+            break;
+        }
+    }
+}
+
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+</script>
+</head>
+
+  <body>
+    <input type="hidden" id="action" name="action" value="setupPara" />
+    <input name="termId" id="termId" type=hidden value="101468">
+    <input name="orderid_list" id="orderid_list" type=hidden value="">
+    <input name="paraType" id="paraType" type=hidden value="">
+    <input name="opType" id="opType" type=hidden value="">
+    <div>
+      <div class="tableContainer"
+        style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 35));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th width="10%" style="word-break: break-all;">
+                <input type="checkbox" name="selectAll" checked
+                  onclick="selectAllCB()">
+              </th>
+              <th width="10%">
+                参数类型
+              </th>
+              <th width="25%">
+                数据项名称
+              </th>
+              <th width="15%">
+                数据项编码
+              </th>
+              <th width="30%">
+                待设值
+              </th>
+              <th width="10%">
+                单位
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040001');" />
+                <input type="checkbox" name="ItemID" value="10040001"
+                  checked />
+              </td>
+              <td>
+                通信参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端通信参数设置
+              </td>
+              <td id="result_10040001"></td>
+            </tr>
+            <tr id="otr10040001_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端数传机延时时间RTS
+              </td>
+              <td>
+                DI_1004000101
+              </td>
+              <td id="10040001_DI_1004000101"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000101" />
+                <input type="hidden" name="paravalue_DI_1004000101"
+                  id="paravalue_DI_1004000101" value="10" />
+                10
+              </td>
+              <td>
+                20ms
+              </td>
+            </tr>
+
+            <tr id="otr10040001_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端作为启动站允许发送传输延时时间
+              </td>
+              <td>
+                DI_1004000102
+              </td>
+              <td id="10040001_DI_1004000102"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000102" />
+                <input type="hidden" name="paravalue_DI_1004000102"
+                  id="paravalue_DI_1004000102" value="5" />
+                5
+              </td>
+              <td>
+                min
+              </td>
+            </tr>
+            
+            <tr id="otr10040001_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端等待从动站响应的重发次数
+              </td>
+              <td>
+                DI_1004000103
+              </td>
+              <td id="10040001_DI_1004000103"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000103" />
+                <input type="hidden" name="paravalue_DI_1004000103"
+                  id="paravalue_DI_1004000103" value="3" />
+                3
+              </td>
+              <td>
+                次
+              </td>
+            </tr>
+
+            <tr id="otr10040001_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端等待从动站响应的超时时间
+              </td>
+              <td>
+                DI_1004000104
+              </td>
+              <td id="10040001_DI_1004000104"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000104" />
+                <input type="hidden" name="paravalue_DI_1004000104"
+                  id="paravalue_DI_1004000104" value="10" />
+                10
+              </td>
+              <td>
+                秒
+              </td>
+            </tr>
+
+            <tr id="otr10040001_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                需要主站确认的通信服务（CON=1）的标志-主动上报一般事件记录
+              </td>
+              <td>
+                DI_1004000106
+              </td>
+              <td id="10040001_DI_1004000106"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000106" />
+                <input type="hidden" name="paravalue_DI_1004000106"
+                  id="paravalue_DI_1004000106" value="0" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000106" />
+                <select name="itemvalue_DI_1004000106"
+                  id="itemvalue_DI_1004000106">
+                  <option value="1">
+                    需要确认
+                  </option>
+                  <option value="0">
+                    不需要确认
+                  </option>
+                </select>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040001_5" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                需要主站确认的通信服务（CON=1）的标志-主动上报重要事件记录
+              </td>
+              <td>
+                DI_1004000107
+              </td>
+              <td id="10040001_DI_1004000107"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000107" />
+                <input type="hidden" name="paravalue_DI_1004000107"
+                  id="paravalue_DI_1004000107" value="1" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000107" />
+                <select name="itemvalue_DI_1004000107"
+                  id="itemvalue_DI_1004000107">
+                  <option value="1">
+                    需要确认
+                  </option>
+                  <option value="0">
+                    不需要确认
+                  </option>
+                </select>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040001_6" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                心跳周期
+              </td>
+              <td>
+                DI_1004000108
+              </td>
+              <td id="10040001_DI_1004000108"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040001"
+                  value="DI_1004000108" />
+                <input type="hidden" name="paravalue_DI_1004000108"
+                  id="paravalue_DI_1004000108" value="30" />
+                30
+              </td>
+              <td>
+                min
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040003');" />
+                <input type="checkbox" name="ItemID" value="10040003"
+                  checked />
+              </td>
+              <td>
+                通信参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                主站IP地址和端口
+              </td>
+              <td id="result_10040003"></td>
+            </tr>
+
+            <tr id="otr10040003_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                主用IP地址和端口
+              </td>
+              <td>
+                DI_1004000301
+              </td>
+              <td id="10040003_DI_1004000301"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040003"
+                  value="DI_1004000301" />
+                <input type="hidden" name="paravalue_DI_1004000301"
+                  id="paravalue_DI_1004000301" value="10.10.1.19:1122" />
+                10.10.1.19:1122
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040003_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                备用IP地址和端口
+              </td>
+              <td>
+                DI_1004000302
+              </td>
+              <td id="10040003_DI_1004000302"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040003"
+                  value="DI_1004000302" />
+                <input type="hidden" name="paravalue_DI_1004000302"
+                  id="paravalue_DI_1004000302" value="10.10.1.19:1122" />
+                10.10.1.19:1122
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040003_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                网关地址和端口
+              </td>
+              <td>
+                DI_1004000303
+              </td>
+              <td id="10040003_DI_1004000303"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040003"
+                  value="DI_1004000303" />
+                <input type="hidden" name="paravalue_DI_1004000303"
+                  id="paravalue_DI_1004000303" value="10.10.1.1:1122" />
+                10.10.1.1:1122
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040003_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                代理服务器地址和端口
+              </td>
+              <td>
+                DI_1004000304
+              </td>
+              <td id="10040003_DI_1004000304"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040003"
+                  value="DI_1004000304" />
+                <input type="hidden" name="paravalue_DI_1004000304"
+                  id="paravalue_DI_1004000304" value="10.10.1.10:1122" />
+                10.10.1.10:1122
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040003_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                APN
+              </td>
+              <td>
+                DI_1004000305
+              </td>
+              <td id="10040003_DI_1004000305"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040003"
+                  value="DI_1004000305" />
+                <input type="hidden" name="paravalue_DI_1004000305"
+                  id="paravalue_DI_1004000305" value="0123456789ABCDEF" />
+                0123456789ABCDEF
+              </td>
+              <td></td>
+            </tr>
+            
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040004');" />
+                <input type="checkbox" name="ItemID" value="10040004"
+                  checked />
+              </td>
+              <td>
+                通信参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                主站电话号码和短信中心号码
+              </td>
+              <td id="result_10040004"></td>
+            </tr>
+            <tr id="otr10040004_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                主站电话号码或主站手机号码
+              </td>
+              <td>
+                DI_1004000401
+              </td>
+              <td id="10040004_DI_1004000401"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040004"
+                  value="DI_1004000401" />
+                <input type="hidden" name="paravalue_DI_1004000401"
+                  id="paravalue_DI_1004000401" value="13812341234" />
+                13812341234
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040004_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                短信中心号码
+              </td>
+              <td>
+                DI_1004000402
+              </td>
+              <td id="10040004_DI_1004000402"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040004"
+                  value="DI_1004000402" />
+                <input type="hidden" name="paravalue_DI_1004000402"
+                  id="paravalue_DI_1004000402" value="13800571500" />
+                13800571500
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040016');" />
+                <input type="checkbox" name="ItemID" value="10040016"
+                  checked />
+              </td>
+              <td>
+                通信参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                虚拟专网用户名、密码
+              </td>
+              <td id="result_10040016"></td>
+            </tr>
+
+            <tr id="otr10040016_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                虚拟专网用户名
+              </td>
+              <td>
+                DI_1004001601
+              </td>
+              <td id="10040016_DI_1004001601"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040016"
+                  value="DI_1004001601" />
+                <input type="hidden" name="paravalue_DI_1004001601"
+                  id="paravalue_DI_1004001601" value="admin" />
+                admin
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040016_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                虚拟专网密码
+              </td>
+              <td>
+                DI_1004001602
+              </td>
+              <td id="10040016_DI_1004001602"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040016"
+                  value="DI_1004001602" />
+                <input type="hidden" name="paravalue_DI_1004001602"
+                  id="paravalue_DI_1004001602" value="666666" />
+                666666
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040062');" />
+                <input type="checkbox" name="ItemID" value="10040062"
+                  checked />
+              </td>
+              <td>
+                通信参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                虚拟专网工作方式
+              </td>
+              <td id="result_10040062"></td>
+            </tr>
+
+            <tr id="otr10040062_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                公网通讯模块（GPRS或CDMA）工作模式
+              </td>
+              <td>
+                DI_1004006201
+              </td>
+              <td id="10040062_DI_1004006201"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040062"
+                  value="DI_1004006201" />
+                <input type="hidden" name="paravalue_DI_1004006201"
+                  id="paravalue_DI_1004006201" value="1" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004006201" />
+                <select name="itemvalue_DI_1004006201"
+                  id="itemvalue_DI_1004006201">
+                  <option value="1">
+                    永久在线模式
+                  </option>
+                  <option value="2">
+                    被动激活模式
+                  </option>
+                  <option value="3">
+                    时段在线模式
+                  </option>
+                </select>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040062_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                永久在线模式重拨间隔
+              </td>
+              <td>
+                DI_1004006202
+              </td>
+              <td id="10040062_DI_1004006202"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040062"
+                  value="DI_1004006202" />
+                <input type="hidden" name="paravalue_DI_1004006202"
+                  id="paravalue_DI_1004006202" value="100" />
+                100
+              </td>
+              <td>
+                s
+              </td>
+            </tr>
+
+            <tr id="otr10040062_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                被动激活模式重拨次数
+              </td>
+              <td>
+                DI_1004006203
+              </td>
+              <td id="10040062_DI_1004006203"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040062"
+                  value="DI_1004006203" />
+                <input type="hidden" name="paravalue_DI_1004006203"
+                  id="paravalue_DI_1004006203" value="10" />
+                10
+              </td>
+              <td>
+                次
+              </td>
+            </tr>
+
+            <tr id="otr10040062_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                被动激活模式连续无通信自动断线时间
+              </td>
+              <td>
+                DI_1004006204
+              </td>
+              <td id="10040062_DI_1004006204"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040062"
+                  value="DI_1004006204" />
+                <input type="hidden" name="paravalue_DI_1004006204"
+                  id="paravalue_DI_1004006204" value="60" />
+                60
+              </td>
+              <td>
+                min
+              </td>
+            </tr>
+            
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040007');" />
+                <input type="checkbox" name="ItemID" value="10040007"
+                  checked />
+              </td>
+              <td>
+                抄表参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端抄表日设置
+              </td>
+              <td id="result_10040007"></td>
+            </tr>
+
+            <tr id="otr10040007_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端抄表日期
+              </td>
+              <td>
+                DI_1004000701
+              </td>
+              <td id="10040007_DI_1004000701"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040007"
+                  value="DI_1004000701" />
+                <input type="hidden" name="paravalue_DI_1004000701"
+                  id="paravalue_DI_1004000701"
+                  value="0000000000000000000000000001000" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000701" />
+                &nbsp; 1日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 2日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 3日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 4日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                &nbsp; 5日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 6日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 7日
+                <input type="checkbox" name="item_DI_1004000701">
+                &nbsp; 8日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                &nbsp; 9日
+                <input type="checkbox" name="item_DI_1004000701">
+                10日
+                <input type="checkbox" name="item_DI_1004000701">
+                11日
+                <input type="checkbox" name="item_DI_1004000701">
+                12日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                13日
+                <input type="checkbox" name="item_DI_1004000701">
+                14日
+                <input type="checkbox" name="item_DI_1004000701">
+                15日
+                <input type="checkbox" name="item_DI_1004000701">
+                16日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                17日
+                <input type="checkbox" name="item_DI_1004000701">
+                18日
+                <input type="checkbox" name="item_DI_1004000701">
+                19日
+                <input type="checkbox" name="item_DI_1004000701">
+                20日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                21日
+                <input type="checkbox" name="item_DI_1004000701">
+                22日
+                <input type="checkbox" name="item_DI_1004000701">
+                23日
+                <input type="checkbox" name="item_DI_1004000701">
+                24日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                25日
+                <input type="checkbox" name="item_DI_1004000701">
+                26日
+                <input type="checkbox" name="item_DI_1004000701">
+                27日
+                <input type="checkbox" name="item_DI_1004000701">
+                28日
+                <input type="checkbox" name="item_DI_1004000701">
+                <br>
+                29日
+                <input type="checkbox" name="item_DI_1004000701">
+                30日
+                <input type="checkbox" name="item_DI_1004000701">
+                31日
+                <input type="checkbox" name="item_DI_1004000701">
+                <input type="hidden" name="itemvalue_DI_1004000701"
+                  id="itemvalue_DI_1004000701" />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040007_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端抄表时间
+              </td>
+              <td>
+                DI_1004000702
+              </td>
+              <td id="10040007_DI_1004000702"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040007"
+                  value="DI_1004000702" />
+                <input type="hidden" name="paravalue_DI_1004000702"
+                  id="paravalue_DI_1004000702" value="00:00" />
+                00:00
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040021');" />
+                <input type="checkbox" name="ItemID" value="10040021"
+                  checked />
+              </td>
+              <td>
+                抄表参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端电能量费率时段和费率数
+              </td>
+              <td id="result_10040021"></td>
+            </tr>
+
+            <tr id="otr10040021_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量费率时段
+              </td>
+              <td>
+                DI_1004002101
+              </td>
+              <td id="10040021_DI_1004002101"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040021"
+                  value="DI_1004002101" />
+                <input type="hidden" name="paravalue_DI_1004002101"
+                  id="paravalue_DI_1004002101" value="1" />
+                1
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040021_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                费率数
+              </td>
+              <td>
+                DI_1004002102
+              </td>
+              <td id="10040021_DI_1004002102"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040021"
+                  value="DI_1004002102" />
+                <input type="hidden" name="paravalue_DI_1004002102"
+                  id="paravalue_DI_1004002102" value="5" />
+                5
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040022');" />
+                <input type="checkbox" name="ItemID" value="10040022"
+                  checked />
+              </td>
+              <td>
+                抄表参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端电能量费率
+              </td>
+              <td id="result_10040022"></td>
+            </tr>
+
+            <tr id="otr10040022_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第1费率
+              </td>
+              <td>
+                DI_1004002201
+              </td>
+              <td id="10040022_DI_1004002201"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002201" />
+                <input type="hidden" name="paravalue_DI_1004002201"
+                  id="paravalue_DI_1004002201" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第2费率
+              </td>
+              <td>
+                DI_1004002202
+              </td>
+              <td id="10040022_DI_1004002202"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002202" />
+                <input type="hidden" name="paravalue_DI_1004002202"
+                  id="paravalue_DI_1004002202" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第3费率
+              </td>
+              <td>
+                DI_1004002203
+              </td>
+              <td id="10040022_DI_1004002203"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002203" />
+                <input type="hidden" name="paravalue_DI_1004002203"
+                  id="paravalue_DI_1004002203" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第4费率
+              </td>
+              <td>
+                DI_1004002204
+              </td>
+              <td id="10040022_DI_1004002204"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002204" />
+                <input type="hidden" name="paravalue_DI_1004002204"
+                  id="paravalue_DI_1004002204" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第5费率
+              </td>
+              <td>
+                DI_1004002205
+              </td>
+              <td id="10040022_DI_1004002205"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002205" />
+                <input type="hidden" name="paravalue_DI_1004002205"
+                  id="paravalue_DI_1004002205" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_5" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第6费率
+              </td>
+              <td>
+                DI_1004002206
+              </td>
+              <td id="10040022_DI_1004002206"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002206" />
+                <input type="hidden" name="paravalue_DI_1004002206"
+                  id="paravalue_DI_1004002206" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_6" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第7费率
+              </td>
+              <td>
+                DI_1004002207
+              </td>
+              <td id="10040022_DI_1004002207"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002207" />
+                <input type="hidden" name="paravalue_DI_1004002207"
+                  id="paravalue_DI_1004002207" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_7" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第8费率
+              </td>
+              <td>
+                DI_1004002208
+              </td>
+              <td id="10040022_DI_1004002208"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002208" />
+                <input type="hidden" name="paravalue_DI_1004002208"
+                  id="paravalue_DI_1004002208" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_8" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第9费率
+              </td>
+              <td>
+                DI_1004002209
+              </td>
+              <td id="10040022_DI_1004002209"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_1004002209" />
+                <input type="hidden" name="paravalue_DI_1004002209"
+                  id="paravalue_DI_1004002209" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_9" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第10费率
+              </td>
+              <td>
+                DI_100400220B
+              </td>
+              <td id="10040022_DI_100400220B"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_100400220B" />
+                <input type="hidden" name="paravalue_DI_100400220B"
+                  id="paravalue_DI_100400220B" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_10" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第11费率
+              </td>
+              <td>
+                DI_100400220C
+              </td>
+              <td id="10040022_DI_100400220C"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_100400220C" />
+                <input type="hidden" name="paravalue_DI_100400220C"
+                  id="paravalue_DI_100400220C" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_11" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第12费率
+              </td>
+              <td>
+                DI_100400220D
+              </td>
+              <td id="10040022_DI_100400220D"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_100400220D" />
+                <input type="hidden" name="paravalue_DI_100400220D"
+                  id="paravalue_DI_100400220D" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_12" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第13费率
+              </td>
+              <td>
+                DI_100400220E
+              </td>
+              <td id="10040022_DI_100400220E"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_100400220E" />
+                <input type="hidden" name="paravalue_DI_100400220E"
+                  id="paravalue_DI_100400220E" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr id="otr10040022_13" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端电能量第14费率
+              </td>
+              <td>
+                DI_100400220F
+              </td>
+              <td id="10040022_DI_100400220F"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040022"
+                  value="DI_100400220F" />
+                <input type="hidden" name="paravalue_DI_100400220F"
+                  id="paravalue_DI_100400220F" value="" />
+              </td>
+              <td>
+                厘
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040024');" />
+                <input type="checkbox" name="ItemID" value="10040024"
+                  checked />
+              </td>
+              <td>
+                抄表参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端抄表间隔设置
+              </td>
+              <td id="result_10040024"></td>
+            </tr>
+
+            <tr id="otr10040024_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                终端抄表间隔时间
+              </td>
+              <td>
+                DI_1004002401
+              </td>
+              <td id="10040024_DI_1004002401"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040024"
+                  value="DI_1004002401" />
+                <input type="hidden" name="paravalue_DI_1004002401"
+                  id="paravalue_DI_1004002401" value="5" />
+                5
+              </td>
+              <td>
+                min
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040008');" />
+                <input type="checkbox" name="ItemID" value="10040008"
+                  checked />
+              </td>
+              <td>
+                事件参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端事件记录配置设置
+              </td>
+              <td id="result_10040008"></td>
+            </tr>
+
+            <tr id="otr10040008_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                事件记录有效标志位
+              </td>
+              <td>
+                DI_1004000801
+              </td>
+              <td id="10040008_DI_1004000801"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040008"
+                  value="DI_1004000801" />
+                <input type="hidden" name="paravalue_DI_1004000801"
+                  id="paravalue_DI_1004000801"
+                  value="10000000000000000000001000000" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000801" />
+                <input type="checkbox" name="item_DI_1004000801">
+                数据初始化和版本变更记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                参数丢失记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                参数变更记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                状态量变位记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                遥控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                功控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能表参数变更
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电流回路异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电压回路异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                相序异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能表时间超差
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电表故障信息
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                终端停/上电事件
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                谐波越限告警
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                直流模拟量越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电压/电流不平衡越限
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电容器投切自锁记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                购电参数设置记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                密码错误记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                终端故障记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                有功总电能量差动越限事件记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电压越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电流越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                视在功率越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能表示度下降
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能量超差
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能表飞走
+                <br />
+                <input type="checkbox" name="item_DI_1004000801">
+                电能表停走
+                <br />
+                <input type="hidden" name="itemvalue_DI_1004000801"
+                  id="itemvalue_DI_1004000801" />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040008_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                事件重要性等级标志位
+              </td>
+              <td>
+                DI_1004000802
+              </td>
+              <td id="10040008_DI_1004000802"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040008"
+                  value="DI_1004000802" />
+                <input type="hidden" name="paravalue_DI_1004000802"
+                  id="paravalue_DI_1004000802"
+                  value="00000000000000000000000000001" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000802" />
+                <input type="checkbox" name="item_DI_1004000802">
+                数据初始化和版本变更记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                参数丢失记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                参数变更记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                状态量变位记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                遥控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                功控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电控跳闸记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能表参数变更
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电流回路异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电压回路异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                相序异常
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能表时间超差
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电表故障信息
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                终端停/上电事件
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                谐波越限告警
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                直流模拟量越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电压/电流不平衡越限
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电容器投切自锁记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                购电参数设置记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                密码错误记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                终端故障记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                有功总电能量差动越限事件记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电压越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电流越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                视在功率越限记录
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能表示度下降
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能量超差
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能表飞走
+                <br />
+                <input type="checkbox" name="item_DI_1004000802">
+                电能表停走
+                <br />
+                <input type="hidden" name="itemvalue_DI_1004000802"
+                  id="itemvalue_DI_1004000802" />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040059');" />
+                <input type="checkbox" name="ItemID" value="10040059"
+                  checked />
+              </td>
+              <td>
+                事件参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                电能表异常判别阈值设定
+              </td>
+              <td id="result_10040059"></td>
+            </tr>
+
+            <tr id="otr10040059_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电能量超差阈值
+              </td>
+              <td>
+                DI_1004005901
+              </td>
+              <td id="10040059_DI_1004005901"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040059"
+                  value="DI_1004005901" />
+                <input type="hidden" name="paravalue_DI_1004005901"
+                  id="paravalue_DI_1004005901" value="" />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040059_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电能表飞走阈值
+              </td>
+              <td>
+                DI_1004005902
+              </td>
+              <td id="10040059_DI_1004005902"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040059"
+                  value="DI_1004005902" />
+                <input type="hidden" name="paravalue_DI_1004005902"
+                  id="paravalue_DI_1004005902" value="" />
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040059_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电能表停走阈值
+              </td>
+              <td>
+                DI_1004005903
+              </td>
+              <td id="10040059_DI_1004005903"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040059"
+                  value="DI_1004005903" />
+                <input type="hidden" name="paravalue_DI_1004005903"
+                  id="paravalue_DI_1004005903" value="" />
+              </td>
+              <td>
+                15min
+              </td>
+            </tr>
+
+            <tr id="otr10040059_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电能表校时阈值
+              </td>
+              <td>
+                DI_1004005904
+              </td>
+              <td id="10040059_DI_1004005904"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040059"
+                  value="DI_1004005904" />
+                <input type="hidden" name="paravalue_DI_1004005904"
+                  id="paravalue_DI_1004005904" value="" />
+              </td>
+              <td>
+                min
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040002');" />
+                <input type="checkbox" name="ItemID" value="10040002"
+                  checked />
+              </td>
+              <td>
+                其他参数
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端上行通信口无线中继转发设置
+              </td>
+              <td id="result_10040002"></td>
+            </tr>
+
+            <tr id="otr10040002_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                允许或禁止终端转发
+              </td>
+              <td>
+                DI_1004000201
+              </td>
+              <td id="10040002_DI_1004000201"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040002"
+                  value="DI_1004000201" />
+                <input type="hidden" name="paravalue_DI_1004000201"
+                  id="paravalue_DI_1004000201" value="1" />
+                <input type="hidden" name="show_html_items"
+                  value="DI_1004000201" />
+                <select name="itemvalue_DI_1004000201"
+                  id="itemvalue_DI_1004000201">
+                  <option value="1">
+                    允许
+                  </option>
+                  <option value="0">
+                    禁止
+                  </option>
+                </select>
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040002_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                被转发的终端地址数n
+              </td>
+              <td>
+                DI_1004000202
+              </td>
+              <td id="10040002_DI_1004000202"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040002"
+                  value="DI_1004000202" />
+                <input type="hidden" name="paravalue_DI_1004000202"
+                  id="paravalue_DI_1004000202" value="1" />
+                1
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040002_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                被转发终端地址
+              </td>
+              <td>
+                DI_10040002030001
+              </td>
+              <td id="10040002_DI_10040002030001"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040002"
+                  value="DI_10040002030001" />
+                <input type="hidden" name="paravalue_DI_10040002030001"
+                  id="paravalue_DI_10040002030001" value="AAAA" />
+                AAAA
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="folder(this, '10040005');" />
+                <input type="checkbox" name="ItemID" value="10040005"
+                  checked />
+              </td>
+              <td>
+                终端属性
+              </td>
+              <td colspan="3"
+                style="text-align: left; padding-left: 5px;">
+                终端消息认证参数（密码）设置
+              </td>
+              <td id="result_10040005"></td>
+            </tr>
+            <tr id="otr10040005_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                密码算法编号
+              </td>
+              <td>
+                DI_1004000501
+              </td>
+              <td id="10040005_DI_1004000501"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040005"
+                  value="DI_1004000501" />
+                <input type="hidden" name="paravalue_DI_1004000501"
+                  id="paravalue_DI_1004000501" value="1" />
+                1
+              </td>
+              <td></td>
+            </tr>
+
+            <tr id="otr10040005_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                密钥
+              </td>
+              <td>
+                DI_1004000502
+              </td>
+              <td id="10040005_DI_1004000502"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040005"
+                  value="DI_1004000502" />
+                <input type="hidden" name="paravalue_DI_1004000502"
+                  id="paravalue_DI_1004000502" value="1111" />
+                1111
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="nullContainer"></div>
+    </div>
+  </body>
+</html>

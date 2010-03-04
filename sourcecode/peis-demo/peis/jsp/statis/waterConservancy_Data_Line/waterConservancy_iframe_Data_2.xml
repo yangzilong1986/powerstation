@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-01</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                      
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-02</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-03</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-04</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                 
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-05</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                 
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-06</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                  
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-07</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-08</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                  
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>23145</td1>
+        <td2>1000</td2>
+        <td3>2009-09</td3> 
+        <td4>64563</td4>
+        <td5>3663</td5>
+        <td6>56346</td6>
+        <td7>6745</td7>
+        <td8>74757</td8>                 
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1></td1>
+        <td2></td2>
+        <td3></td3> 
+        <td4></td4>
+        <td5></td5>
+        <td6></td6>
+        <td7></td7>
+        <td8></td8>                 
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>合计：</td1>
+        <td2></td2>
+        <td3></td3>
+        <td4>5624346</td4>
+        <td5>367563</td5>
+        <td6>5624346</td6>
+        <td7>679745</td7>
+        <td8>7544757</td8>                 
+    </data>
+    
+</datas>

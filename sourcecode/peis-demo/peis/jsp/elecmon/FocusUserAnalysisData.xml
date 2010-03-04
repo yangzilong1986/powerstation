@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>东山供电所</td1>
+        <td2>10kV后塘线F04</td2>
+        <td3>当城大队果园</td3>
+        <td4>1403895003 </td4>
+        <td5>12323124</td5>
+        <td6>100 </td6>
+        <td7>张玲</td7>
+        <td8>83998618</td8>
+        <td9>西青区王稳庄村</td9>
+        <check>1</check>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td11>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>东山供电所</td1>
+        <td2>10kV后塘线F04</td2>
+        <td3>第六埠农业育苗厂</td3>
+        <td4>1403895003 </td4>
+        <td5>12323124</td5>
+        <td6>100 </td6>
+        <td7>张玲</td7>
+        <td8>83998618</td8>
+        <td9>西青区104国道东（杨）</td9>
+        <check>1</check>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td11>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+      <td1>太平供电所</td1>
+        <td2>10kV备用线F08</td2>
+        <td3>第六埠埠阳大酒楼</td3>
+        <td4> 1405894033</td4>
+        <td5>12323124</td5>
+        <td6>100 </td6>
+        <td7>沈敏</td7>
+        <td8>87910619</td8>
+        <td9>湖南邵阳</td9>
+        <check>1</check>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td11>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+       <td1>太平供电所</td1>
+        <td2>10kV圩区线F02</td2>
+        <td3>水高庄村扬水场</td3>
+        <td4>1401891007 </td4>
+        <td5>12323124</td5>
+        <td6>100 </td6>
+        <td7>沈敏</td7>
+        <td8>87910619</td8>
+        <td9>水高庄村</td9>
+        <check>1</check>
+        <td11>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td11>
+    </data>
+</datas>

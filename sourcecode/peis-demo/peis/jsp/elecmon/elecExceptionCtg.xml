@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>用电异常</td1>
+        <td2>120</td2>
+    </data>
+    
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>终端异常</td1>
+        <td2>100</td2>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>电表异常</td1>
+        <td2>160</td2>
+    </data>
+</datas>
+
+<!--
+  异常分类  事件数量
+-->
+

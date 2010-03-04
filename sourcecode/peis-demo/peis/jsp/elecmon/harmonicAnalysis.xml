@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>湛江供电局</td2>
+        <td3>3345</td3>
+        <td4>得力小区</td4>
+        <td5>D11334</td5>
+        <td6>67.54 </td6>
+        <td7>249</td7>
+        <td8>24.34</td8>
+        <td9>212.87</td9>
+        <td10>340.98</td10>
+        <td11>219</td11>
+        <td12>312</td12>
+        <td13>230.12</td13>
+        <td14>45.53 </td14>
+        <td15>204.2 </td15>
+        <td16>209.12 </td16>
+        <td17>13.25 </td17>
+        <td18>120.12 </td18>
+        <td19>221</td19>
+        <td20>217.57 </td20>
+        <td21>221.17</td21>
+		<td22>300.17</td22>
+		<td23>345.17</td23>   
+		<td24>221.17</td24>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>湛江供电局</td2>
+        <td3>3346</td3>
+        <td4>翠园1区</td4>
+        <td5>D11334</td5>
+        <td6>67.54 </td6>
+        <td7>249</td7>
+        <td8>24.34</td8>
+        <td9>212.87</td9>
+        <td10>340.98</td10>
+        <td11>219</td11>
+        <td12>312</td12>
+        <td13>230.12</td13>
+        <td14>45.53 </td14>
+        <td15>204.2 </td15>
+        <td16>209.12 </td16>
+        <td17>13.25 </td17>
+        <td18>120.12 </td18>
+        <td19>221</td19>
+        <td20>217.57 </td20>
+        <td21>221.17</td21>
+		<td21>300.17</td21>
+		<td21>221.17</td21>
+		<td22>300.17</td22>
+		<td23>345.17</td23>   
+		<td24>221.17</td24>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td1>
+        <td2>湛江供电局</td2>
+        <td3>3348</td3>
+        <td4>古荡湾小区</td4>
+        <td5>D11334</td5>
+        <td6>67.54 </td6>
+        <td7>249</td7>
+        <td8>24.34</td8>
+        <td9>212.87</td9>
+        <td10>340.98</td10>
+        <td11>219</td11>
+        <td12>312</td12>
+        <td13>230.12</td13>
+        <td14>45.53 </td14>
+        <td15>204.2 </td15>
+        <td16>209.12 </td16>
+        <td17>13.25 </td17>
+        <td18>120.12 </td18>
+        <td19>221</td19>
+        <td20>217.57 </td20>
+        <td21>221.17</td21>
+		<td22>300.17</td22>
+		<td23>345.17</td23>   
+		<td24>221.17</td24>
+    </data>
+</datas>

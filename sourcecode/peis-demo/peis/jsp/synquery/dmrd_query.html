@@ -1,0 +1,253 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>台区综合查询</title>
+<!-- public css -->
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<!-- private js -->
+<script type="text/javascript">
+var _type = 1;
+var _isQuery = false ;
+$(document).ready(function(){	
+	$.handelCombox('tgTar','tg');
+	$("#query").click(function(){			
+		//_isQuery = true ;
+		chageTab(_type);//
+	});
+	
+});
+
+//
+function loadDataAndPic(){
+	$.json2html("tdate","../../jsp/synquery/unit_query_iframe.xml","");//
+	var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "760", "330", "0", "0");
+    chart_obj.setDataURL("data.xml");
+	chart_obj.render("graphBlock1");	
+	
+	var chart_obj1 = new FusionCharts("../../FusionCharts/Pie3D.swf", "chart_id", "760", "365", "0", "0");
+	chart_obj1.setDataURL("syn_tg_elec_level_pie.xml");
+	chart_obj1.render("graphBlock2");	
+}
+
+//
+function chageTab(ty){
+	_type = ty ;
+	//$("li[class^='target_']").attr("class","target_off");	
+	//$("#li_"+ty).attr("class","target_on");
+    for(var i = 1; i <= 3; i++) {
+        if(i == ty) {
+            $("#em_" + i).attr("class", "");
+        }
+        else {
+            $("#em_" + i).attr("class", "off");
+        }
+    }
+	//if(_isQuery){
+		showTab(ty);//
+		loadDataAndPic();//
+	//}
+	_chageTabCss(_type);
+}
+
+var it = ["1","2","3"];
+function showTab(id){
+	for(var i in it) {
+		if(id != it[i]) {
+			$("#con_em_" + it[i]).hide();
+		}
+        else {
+            $("#con_em_" + it[i]).show();
+		}
+	}
+}
+
+//
+function popShow(id){
+	if("1"==id){
+		top.showDialogBox("", "../../jsp/elecmon/powerData.html", 600, 920);
+	}else if("2"==id){
+		top.showDialogBox("", "../../jsp/lineloss/lineloss_query_switchgear.html", 575, 900);
+    }else if("3"==id){
+    	top.showDialogBox("", "../../jsp/elecmon/powerData.html", 575, 900);
+    } 
+}
+
+//
+function _chageTabCss(type){
+	$("li[class^='target_o']").attr("class","target_off");
+	$("#ty_css_" + type).attr("class","target_on");
+}
+</script>
+</head>
+<body>
+<div id="body">
+<div id="tab" class="tab3">
+<ul>
+  <li id="tab_1" class="tab_off"><a href="./unit_query.html" onClick="return true;" onFocus="blur()">单位综合查询</a></li>
+  <li id="tab_2" class="tab_off"><a href="./line_query.html" onClick="return true;" onFocus="blur()">台区综合查询</a></li>
+  <li id="tab_3" class="tab_off"><a href="./transSubsta_query.html" onClick="return true;" onFocus="blur()">变电站综合查询</a></li>
+  <li id="tab_4" class="tab_on"><a href="./dmrd_query.html" onClick="return true;" onFocus="blur()">台区综合查询</a></li>
+</ul>
+<h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+</div>
+<div id="main">
+<div id="tool">
+<div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+<table border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="70" class="label">台区名称：</td>
+    <td width="120" class="dom" id="tgTar"></td>
+    <td colspan="7"></td>
+  </tr>
+</table>
+</div><!--  
+<div class="tab"><em id="em_1"><a href="javascript:chageTab(1);">基本信息</a></em><em id="em_2" class="off"><a
+  href="javascript:chageTab(2);">线损统计</a></em><em id="em_3" class="off"><a href="javascript:chageTab(3);">上月用电水平统计</a></em></div>-->
+  <div class="target">
+      <ul>
+        <li class="target_on" id="ty_css_1"><a href="javascript:chageTab(1);">基本信息</a></li>
+        <li class="target_off" id="ty_css_2"><a href="javascript:chageTab(2);">线损统计</a></li>
+        <li class="target_off" id="ty_css_3"><a href="javascript:chageTab(3);">上月用电</a></li>
+	  </ul>    
+    </div>
+<div class="tab_con" id="con_em_1"
+  style="display: block; height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   117 ) );">
+<div class="main">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
+  <tr style="padding-left: 10px;">
+    <td width="25%">台区编号：<span>083645</span></td>
+    <td width="25%">台区名称：<span>东信台区</span></td>
+    <td width="25%">容 量：<span>10kVA</span></td>
+    <td width="25%">供电单位：<span>**市局</span></td>
+  </tr>
+  <tr style="padding-left: 10px;">
+    <td>联 系 人：<span>以王五</span></td>
+    <td>联系电话： <span> 1388888888 </span></td>
+    <td>行 政 区：<span></span></td>
+    <td>线损率阈值：<span>5%</span></td>
+  </tr>
+  <tr style="padding-left: 10px;">
+    <td colspan="4">备 注：<span></span></td>
+  </tr>
+</table>
+</div>
+<div class="data3"><span>接入信息</span></div>
+<div class="data3_con">
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+  <tr style="padding-left: 10px;">
+    <td width="25%">终 端 数：<span>12</span> 台</td>
+    <td width="25%">采 集 器：<span>34</span> 台</td>
+    <td width="25%">低压用户：<span>888</span> 户</td>
+    <td width="25%">重点用户：<span>23</span> 户</td>
+  </tr>
+  <tr style="padding-left: 10px;">
+    <td>用电异常：<span>12</span> 户</td>
+    <td nowrap="nowrap">昨日抄表成功率：<span>98</span> %</td>
+    <td nowrap="nowrap">上月抄表成功率：<span>99</span> %</td>
+  </tr>
+</table>
+</div>
+<div class="data3"><span>重点用户</span></div>
+<div class="data3_con">
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+  <tr style="padding-left: 10px;">
+    <td width="25%">时 间：<span>昨天</span></td>
+    <td width="25%">重点用户总电量：<span>55555kWh</span></td>
+    <td width="25%">占全区总电量比例：<span>30%</span></td>
+    <td rowspan="2"><input class="input1" type="submit" id="jkfh2" value="详 细" onclick="popShow(1);" /></td>
+  </tr>
+  <tr style="padding-left: 10px;">
+    <td width="25%">时 间：<span>上月</span></td>
+    <td width="25%">重点用户总电量：<span>655555kWh</span></td>
+    <td width="25%">占全区总电量比例：<span>30%</span></td>
+  </tr>
+</table>
+</div>
+</div>
+<div class="tab_con" id="con_em_2"
+  style="display: none; height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   117 ) );">
+<div class="main">
+<div><select id="li2_type">
+  <option value="1">日</option>
+  <option value="2" selected>月</option>
+</select></div>
+<div id="graphBlock1" style="float: left;"></div>
+<div style="float: left;">
+<table border="0" cellpadding="0" cellspacing="0" width="90%" align="center">
+  <tr style="padding-left: 20px;">
+    <td>昨日供电量：<span>10000MWh</span></td>
+  </tr>
+  <tr style="padding-left: 20px;">
+    <td>昨日售电量：<span>9990MWh</span></td>
+  </tr>
+  <tr style="padding-left: 20px;">
+    <td>线损电量：<span>10MWh</span></td>
+  </tr>
+  <tr style="padding-left: 20px;">
+    <td>线损率：<span>1%</span></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center"><input class="input1" type="submit" id="jkfh" value="详 细" onclick="popShow(2);" /></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+<div class="tab_con" id="con_em_3"
+  style="display: none; height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   117 ) );">
+<div class="main">
+<div id="graphBlock2" align="center" style="float: left"></div>
+<div style="float: left;">
+<div class="data2_con" style="border: 0;">
+<div class="main">
+<table border="0" cellpadding="0" cellspacing="0" width="90%" align="center"
+  style="border-top: 1px #5d90d7 solid; border-left: 1px #5d90d7 solid;">
+  <thead>
+    <tr>
+      <th width="200">用电等级</th>
+      <th width="100">数量</th>
+      <th width="100">比例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr align="left">
+      <td>总体</td>
+      <td>4000</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>0-100kWh</td>
+      <td>1800</td>
+      <td>36%</td>
+    </tr>
+    <tr>
+      <td>100-200kWh</td>
+      <td>2000</td>
+      <td>40%</td>
+    </tr>
+    <tr>
+      <td>200kWh以上</td>
+      <td>1200</td>
+      <td>24%</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

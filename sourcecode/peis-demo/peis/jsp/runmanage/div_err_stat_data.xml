@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GBK"?> 
+<graph caption='故障率' xAxisName='单位' yAxisName='（%）' decimalPrecision='0' formatNumberScale='0'>
+    <set name='省电力公司' value='97' color='AFD8F8' />
+    <set name='佛山市电力公司' value='88' color='F6BD0F' />
+    <set name='江门市电力公司' value='79' color='8BBA00' />
+</graph> 

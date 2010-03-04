@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>民安供电所</td1>
+        <td2>溪头坡村变台</td2>
+        <td3>1234573001</td3>
+        <td4>侯丽军</td4>
+        <td5>52104937</td5>
+        <td6>电能表飞走</td6>
+        <td7>D03001956C</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>南调供电所</td1>
+        <td2>北岭村台区</td2>
+        <td3>1401891008</td3>
+        <td4>吕子麟</td4>
+        <td5>51104937</td5>
+        <td6>电能表飞走</td6>
+        <td7>D03021956A</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>乾塘供电所</td1>
+        <td2>陈芝山台区</td2>
+        <td3>1405894039</td3>
+        <td4>陈景民</td4>
+        <td5>51103937</td5>
+        <td6>连续未用电</td6>
+        <td7>D03001956B</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>官渡供电所</td1>
+        <td2>瑶下村台区</td2>
+        <td3>2700168586</td3>
+        <td4>许康河</td4>
+        <td5>51204937</td5>
+        <td6>表码倒走</td6>
+        <td7>D03001956A</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>
+    </data>
+</datas>
+
+<!-- 
+<th>序号</th>  
+<th>供电单位</th>
+<th>台区名称</th>
+<th>户号</th>
+<th>户名</th>
+<th>集中器地址</th>
+<th>电表地址</th>
+<th>事件内容</th>
+<th>数据明细</th>   
+ -->

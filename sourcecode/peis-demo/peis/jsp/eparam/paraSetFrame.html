@@ -1,0 +1,850 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>单个参数读设</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript"> 
+var contextPath = "../..";
+
+function openParaSetup(termId) {
+    var str_url = "../../jsp/eparam/paraSetupFrame.html";
+    //windowPopup(str_url, 900, 675);
+    top.showDialogBox("单个参数读设", str_url, 575, 960);
+}
+
+//弹出式窗口
+var opwindow = null;     //记录打开浏览窗口的对象
+function windowPopup(url, wd, ht) {
+    if(opwindow != null) {
+        opwindow.close();
+    }
+    opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=yes');
+}
+</script>
+</head>
+
+<body>
+  <div>
+    <div id="tool">
+      <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+            <select id="orgNo" name="orgNo">
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td width="70" class="label">当前状态：</td>
+          <td width="120" class="dom">
+            <select name="curStatus" id="curStatus">
+              <option value="1">
+                 运行
+              </option>
+              <option value="2">
+                 待调
+              </option>
+              <option value="6">
+                         故障
+              </option>
+              <option value="7">
+                 停运
+              </option>
+            </select>
+            <script type="text/javascript">document.all.curStatus.value="1";</script>
+          </td>
+          <td width="70" class="label">通讯方式：</td>
+          <td width="120" class="dom">
+            <select name="commMode" id="commMode">
+              <option value="-1">
+                          全部
+              </option>
+              <option value="1">
+              GPRS
+              </option>
+              <option value="2">
+              CDMA
+              </option>
+              <option value="3">
+              230M
+              </option>
+              <option value="4">
+              232串口
+              </option>
+              <option value="5">
+                有线网络
+              </option>
+              <option value="6">
+                            短信
+              </option>
+              <option value="7">
+                电力专线
+              </option>
+            </select>
+            <script type="text/javascript">document.all.commMode.value="-1";</script>
+          </td>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td width="70"  class="label">对象编号：</td>
+          <td width="120"  class="dom">
+            <input name="objectNo" id="objectNo" type=text value="">
+          </td>
+          <td  width="70" class="label">终端地址：</td>
+          <td  width="120" class="dom">
+            <input name="logicAddr" id="logicAddr" type=text
+                  value="">
+          </td>
+          <td colspan="5">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on">
+              <a href="#" onclick="return false;">终端信息列表</a>
+            </li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) -  122));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th width="5%">
+                                序号
+                </th>
+                <th width="10%">
+                  对象编号
+                </th>
+                <th width="15%">
+                   对象名称
+                </th>
+                <th width="10%">
+                   对象类型
+                </th>
+                <th width="14%">
+                   供电单位
+                </th>
+                <th width="10%">
+                   终端地址
+                </th>
+                <th width="10%">
+                   终端规约
+                </th>
+                <th width="10%">
+                   终端类型
+                </th>
+                <th width="10%">
+                   通讯方式
+                </th>
+                <th width="6%">
+                   操作
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr align="center" class="trmainstyle">
+                <td>
+                 1
+                </td>
+                <td>
+                 123467646
+                </td>
+                <td>
+                 广州医药有限公司
+                </td>
+                <td>
+                  专变用户
+                </td>
+                <td>
+                   广州市电力公司
+                </td>
+                <td>
+                 0000001
+                </td>
+                <td>
+                   国网规约
+                </td>
+                <td>
+                   负荷监测终端
+                </td>
+                <td>
+                 232串口
+                </td>
+                <td>
+                  <a href="javascript:openParaSetup('101469');">设置</a>
+                </td>
+              </tr>
+              <tr align="center" class="trmainstyle">
+                <td>
+                  2
+                </td>
+                <td>
+                  23443432
+                </td>
+                <td>
+                  广州市永友工贸有限公司
+                </td>
+                <td>
+                  配变
+                </td>
+                <td>
+                  广州市电力公司
+                </td>
+                <td>
+                  08000081
+                </td>
+                <td>
+                  国网规约
+                </td>
+                <td>
+                  低压集中器
+                </td>
+                <td>
+                  GPRS
+                </td>
+                <td>
+                  <a href="javascript:openParaSetup('31804');">设置</a>
+                </td>
+              </tr>
+
+              <tr align="center" class="trmainstyle">
+                  <td>
+                    3
+                  </td>
+                  <td>
+                    22341122
+                  </td>
+                  <td>
+                    广州万宝集团有限公司
+                  </td>
+                  <td>
+                    配变
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    11223344
+                  </td>
+                  <td>
+                    698规约
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('110302');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    4
+                  </td>
+                  <td>
+                    123467646
+                  </td>
+                  <td>
+                    广州市天河双龙电子有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12000002
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('101486');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    5
+                  </td>
+                  <td>
+                    12001111
+                  </td>
+                  <td>
+                    广州装修公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12001115
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('101464');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    6
+                  </td>
+                  <td>
+                    1234567890
+                  </td>
+                  <td>
+                    广州市凯龙机电设备有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12010998
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷控制终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('110183');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    7
+                  </td>
+                  <td>
+                    53535321
+                  </td>
+                  <td>
+                    贾庄子村
+                  </td>
+                  <td>
+                    配变
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12014568
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('101463');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    8
+                  </td>
+                  <td>
+                    44535322
+                  </td>
+                  <td>
+                    测试终端
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12034682
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('101476');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    9
+                  </td>
+                  <td>
+                    2700029117
+                  </td>
+                  <td>
+                    广州博金精细化工有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080101
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100147');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    10
+                  </td>
+                  <td>
+                    2700029064
+                  </td>
+                  <td>
+                    广州万宝集团有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080102
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100177');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    11
+                  </td>
+                  <td>
+                    2700100024
+                  </td>
+                  <td>
+                    广州市广顺饲料经贸部
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080103
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100575');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    12
+                  </td>
+                  <td>
+                    2700049742
+                  </td>
+                  <td>
+                    广州市玉桥焊材辅料厂
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080104
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100160');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    13
+                  </td>
+                  <td>
+                    1209759019
+                  </td>
+                  <td>
+                    广州市福盛金属制品有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080105
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100596');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    14
+                  </td>
+                  <td>
+                    2700122302
+                  </td>
+                  <td>
+                    广州市南开区晓霞五金弹簧厂
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080106
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100196');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    15
+                  </td>
+                  <td>
+                    1209759027
+                  </td>
+                  <td>
+                    广州市长城化工厂
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080107
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100594');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    16
+                  </td>
+                  <td>
+                    1210755098
+                  </td>
+                  <td>
+                    西流城染料化工厂
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080108
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100595');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    17
+                  </td>
+                  <td>
+                    2700193297
+                  </td>
+                  <td>
+                    广州市电缆总厂线缆分厂
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080109
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100375');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    18
+                  </td>
+                  <td>
+                    2700047659
+                  </td>
+                  <td>
+                    广州市永友工贸有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080110
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    GPRS
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100145');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    19
+                  </td>
+                  <td>
+                    2700058092
+                  </td>
+                  <td>
+                    广州远洋运输公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080111
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100326');">设置</a>
+                  </td>
+                </tr>
+
+                <tr align="center" class="trmainstyle">
+                  <td>
+                    20
+                  </td>
+                  <td>
+                    1241575064
+                  </td>
+                  <td>
+                    广州医药有限公司
+                  </td>
+                  <td>
+                    专变用户
+                  </td>
+                  <td>
+                    广州市电力公司
+                  </td>
+                  <td>
+                    12080112
+                  </td>
+                  <td>
+                    国网规约
+                  </td>
+                  <td>
+                    负荷监测终端
+                  </td>
+                  <td>
+                    232串口
+                  </td>
+                  <td>
+                    <a href="javascript:openParaSetup('100557');">设置</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pageContainer">
+            <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

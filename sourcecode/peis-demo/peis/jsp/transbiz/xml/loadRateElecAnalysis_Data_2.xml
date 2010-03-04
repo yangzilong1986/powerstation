@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255330</td3>
+        <td4 extend="align='left'">金钱二公变95</td4>
+        <td5 extend="align='left'">0804255</td5> 
+        <td6 extend="align='left'">金钱2</td6> 
+        <td8 extend="align='left'">D06000029F</td8> 
+        <td10 extend="align='center'">2009-8-6 10:00:00</td10>
+        <td11 extend="align='right'">780</td11>
+        <td12 extend="align='right'">350</td12>
+        <td13 extend="align='right'">43.75</td13>
+        <td14>&lt;a href="javascript:openLoadDetail('0804255330','金钱二公变95','D06000029F')"&gt;查看&lt;/a&gt;</td14>                   
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255416</td3>
+        <td4 extend="align='left'">金钱二公变97</td4>
+        <td5 extend="align='left'">0804258</td5> 
+        <td6 extend="align='left'">金钱5</td6> 
+        <td8 extend="align='left'">D06000031F</td8> 
+        <td10 extend="align='center'">2009-8-6 15:00:00</td10>
+        <td11 extend="align='right'">980</td11>
+        <td12 extend="align='right'">600</td12>
+        <td13 extend="align='right'">75</td13>
+        <td14>&lt;a href="javascript:openLoadDetail('0804255416','金钱二公变97','D06000031F')"&gt;查看&lt;/a&gt;</td14>                   
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255528</td3>
+        <td4 extend="align='left'">金钱二公变98</td4>
+        <td5 extend="align='left'">0804276</td5> 
+        <td6 extend="align='left'">金钱6</td6> 
+        <td8 extend="align='left'">D06000032F</td8> 
+        <td10 extend="align='center'">2009-8-6 11:00:00</td10>
+        <td11 extend="align='right'">1000</td11>
+        <td12 extend="align='right'">812</td12>
+        <td13 extend="align='right'">43.75</td13>
+        <td14>&lt;a href="javascript:openLoadDetail('0804255528','金钱二公变98','D06000032F')"&gt;查看&lt;/a&gt;</td14>                   
+    </data> 
+</datas>

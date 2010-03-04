@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+    <data extend="onclick='selectSingleRow(this);clickShowChart(0)' style='cursor:pointer;'" >        
+        <td1>遂溪供电局</td1>
+        <td2>213</td2>
+        <td3>&lt;a href="javascript:showPage('1')"&gt;1209759037&lt;/a&gt;</td3>
+        <td4>62%</td4>
+        <td5>22%</td5>                 
+    </data> 
+    <data extend="onclick='selectSingleRow(this);clickShowChart(1)' style='cursor:pointer;'" >        
+        <td1>徐闻供电局</td1>
+        <td2>187</td2>
+        <td3>&lt;a href="javascript:showPage()"&gt;6547&lt;/a&gt;</td3>
+        <td4>94%</td4>
+        <td5>12%</td5>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this);clickShowChart(2)' style='cursor:pointer;'" >        
+        <td1>吴川供电局</td1>
+        <td2>78</td2>
+        <td3>&lt;a href="javascript:showPage()"&gt;78564&lt;/a&gt;</td3>
+        <td4>32%</td4> 
+        <td5>12%</td5>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this);clickShowChart(3)' style='cursor:pointer;'" >        
+        <td1>廉江供电局</td1>
+        <td2>76</td2>
+        <td3>&lt;a href="javascript:showPage()"&gt;23432&lt;/a&gt;</td3>
+        <td4>65%</td4>
+        <td5>12%</td5>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);clickShowChart(4)' style='cursor:pointer;'" >        
+        <td1>雷州供电局</td1>
+        <td2>32</td2>
+        <td3>&lt;a href="javascript:showPage()"&gt;74474&lt;/a&gt;</td3>
+        <td4>87%</td4> 
+        <td5>11%</td5>             
+    </data> 
+</datas>

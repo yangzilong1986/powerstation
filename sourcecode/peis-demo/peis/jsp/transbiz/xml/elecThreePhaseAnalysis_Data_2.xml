@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >   
+        <td1 extend="align='center'">&lt;a href="javascript:openLoadDetail('0804255330','金钱二公变95','D06000029F')"&gt;查看&lt;/a&gt;</td1>                    
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255330</td3>
+        <td4 extend="align='left'">金钱二公变95</td4>
+        <td5 extend="align='left'">0804255</td5> 
+        <td6 extend="align='left'">金钱2</td6> 
+        <td7 extend="align='left'">D06000029F</td7> 
+        <td8 extend="align='center'">2009-08-06</td8> 
+        <td9 extend="align='right'">120</td9>
+        <td10 extend="align='right'">2</td10>
+        <td11 extend="align='right'">67.54</td11>
+        <td12 extend="align='right'">45.34</td12>
+        <td13 extend="align='right'">37.5</td13>
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >      
+        <td1 extend="align='center'">&lt;a href="javascript:openLoadDetail('0804255416','金钱二公变97','D06000031F')"&gt;查看&lt;/a&gt;</td1>
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255416</td3>
+        <td4 extend="align='left'">金钱二公变97</td4>
+        <td5 extend="align='left'">0804258</td5> 
+        <td6 extend="align='left'">金钱5</td6> 
+        <td7 extend="align='left'">D06000031F</td7> 
+        <td8 extend="align='center'">2009-08-06</td8> 
+        <td9 extend="align='right'">300</td9>
+        <td10 extend="align='right'">1</td10>
+        <td11 extend="align='right'">87.44</td11>
+        <td12 extend="align='right'">63.34</td12>
+        <td13 extend="align='right'">45</td13>                         
+    </data>
+    <data extend="onclick='selectSingleRow(this)' style='cursor:pointer;'" >        
+        <td1 extend="align='center'">&lt;a href="javascript:openLoadDetail('0804255528','金钱二公变98','D06000032F')"&gt;查看&lt;/a&gt;</td1>
+        <td2 extend="align='left'">城内供电所</td2>
+        <td3 extend="align='left'">0804255528</td3>
+        <td4 extend="align='left'">金钱二公变98</td4>
+        <td5 extend="align='left'">0804276</td5> 
+        <td6 extend="align='left'">金钱6</td6> 
+        <td7 extend="align='left'">D06000032F</td7> 
+        <td8 extend="align='center'">2009-08-06</td8> 
+        <td9 extend="align='right'">290</td9>
+        <td10 extend="align='right'">1</td10>
+        <td11 extend="align='right'">45.64</td11>
+        <td12 extend="align='right'">39.56</td12>
+        <td13 extend="align='right'">34.89</td13>                         
+    </data> 
+</datas>

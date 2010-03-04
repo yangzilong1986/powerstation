@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>总电量</td1>
+        <td2> 21655144</td2>
+        <td3>100.00%</td3>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>尖电量</td1>
+        <td2> 5413786</td2>
+        <td3>25.00%</td3>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>峰电量</td1>
+        <td2>5413786</td2>
+        <td3>25.00%</td3>          
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>平电量</td1>
+        <td2> 5413786</td2>
+        <td3>25.00%</td3>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>谷电量</td1>
+        <td2> 5413786</td2>
+        <td3>25.00%</td3>           
+    </data> 
+</datas>

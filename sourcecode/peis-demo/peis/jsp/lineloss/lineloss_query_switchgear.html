@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<!-- private js -->
+<script type="text/javascript" src="../../js/lineloss/lineloss.js"></script>
+</head>
+<body>
+<div id="main">
+  <div id="tool">
+    <div class="opbutton2">
+      <input type="submit" name="query" id="query" value="查 询" class="input1" />
+    </div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="label"> 供电单位： </td>
+        <td width="120" class="dom" id="orgTar"></td>
+        <td width="100" class="label"> 台区号/台区名： </td>
+        <td width="120" class="dom"><input type="text" id="custNo" name="custNo" value="" /></td>
+        <td width="66" class="label"> 线损率： </td>
+        <td width="10" class="dom" id="equalTar"></td>
+        <td><input type="text" id="percent" name="percent" value="8" maxlength="3" size="1" />
+          % </td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td class="label"> 统计类型： </td>
+        <td class="dom" id="dataAllTar"></td>
+        <td colspan="6" class="dom_date"><span id="DATA_DAY_START" style="display: none;">
+          <input type="text" id="startTime" name="startTime"
+                value="2009-9-01" size="5">
+          </span> <span id="DATA_DAY_END" style="display: none;">~
+          <input type="text" id="endTime" name="endTime"
+                value="2009-9-10" size="5">
+          </span> <span id="DATA_YEAR" style="display: none;"> 年 </span> <span id="DATA_MONTH" style="display: none;"> 月 </span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="content">
+    <div id="cont_1">
+      <div class="target">
+        <ul>
+          <li class="target_on"> <a href="#" onClick="return false;">数据列表</a> </li>
+        </ul>
+        <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" " /> <a href="#">修改显示字段</a></h1>
+      </div>
+      <div style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   80 ) );">
+        <iframe name='targetFrame' id="targetFrame" width="100%" height="100%" frameborder="0" scrolling="no" src="lineloss_query_switchgear_data.html"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

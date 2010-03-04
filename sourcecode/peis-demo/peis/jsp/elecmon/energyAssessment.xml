@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>湛江供电局</td1>
+        <td2>鑫鑫小区</td2>
+        <td3>3345</td3>
+        <td4>002</td4>
+        <td5>正常</td5>
+        <td6>正常</td6>
+        <td7>正常</td7>
+        <td8>正常</td8>
+        <td9>正常</td9>
+        <td10>正常</td10>
+        <td11>无</td11>
+        <td12>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td12>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>杭州供电局</td1>
+        <td2>紫桂花园</td2>
+        <td3>5567</td3>
+        <td4>003</td4>
+        <td5>偏低</td5>
+        <td6>正常</td6>
+        <td7>正常</td7>
+        <td8>正常</td8>
+        <td9>正常</td9>
+        <td10>正常</td10>
+        <td11>加强电压监测情况</td11>
+        <td12>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td12>
+    </data>
+    
+</datas>

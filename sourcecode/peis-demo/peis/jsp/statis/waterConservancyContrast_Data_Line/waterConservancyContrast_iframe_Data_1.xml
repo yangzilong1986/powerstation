@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>                   
+    </data> 
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>        
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>         
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>#3523</td1>
+        <td2>1000</td2>
+        <td3>2009-08-01</td3> 
+        <td4>64563</td4>
+        <td5>&lt;a href="javascript:showPage()"&gt;查看&lt;/a&gt;</td5>               
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1></td1>
+        <td2></td2>
+        <td3></td3> 
+        <td4></td4>
+        <td5></td5>
+    </data>
+    <data extend="onclick='selectSingleRow(this);' style='cursor:pointer;'" >        
+        <td1>合计：</td1>
+        <td2></td2>
+        <td3></td3>
+        <td4>5624346</td4>
+        <td5></td5>
+             
+    </data>
+    
+</datas>

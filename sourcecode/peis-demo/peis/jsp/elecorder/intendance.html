@@ -1,0 +1,173 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>有序用电监控</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+   $.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+     $("#selectall").click( function() {
+        if($("#selectall").attr("checked")) {
+            $("input:enabled[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", true);
+            });
+        }
+        else {
+            $("input:enabled[type=checkbox][name='cb-item']").each( function() {
+                $(this).attr("checked", false);
+            });
+        }
+    });
+   $('#query').click(showData);
+   $('#sendMessage').click(selectListMessage);
+   showData();
+});
+
+function showData(){
+  $.json2html("DATA_TBODY","../../jsp/elecorder/intendance_Data_Line/intendance_Data_1.xml","cb-item");  
+}
+
+function selectListMessage(){
+  var rows = -1;
+  var MessageList = getSelectedCheckboxs();
+  if(MessageList == ""){
+    alert("请选择需要发送短信的用户！");
+  }else if(MessageList.indexOf(",") == -1){
+         rows = numberConversion(MessageList);
+     var consumerName = DATA_TBODY.rows(rows).cells(8).innerHTML;
+     var programLoad = DATA_TBODY.rows(rows).cells(10).innerHTML;
+     var nonceLoad = DATA_TBODY.rows(rows).cells(11).innerHTML;
+     var listStr = consumerName+","+nonceLoad+","+programLoad+",";
+     top.showDialogBox("用户短信发送", "../elecorder/intendance_MessageList.htm?listStr="+listStr, 370, 580); 
+  }else{
+     MessageList = MessageList+","; var consumerName = "";
+     var indexTemp = MessageList.indexOf(",");
+     while(indexTemp != -1){
+       rows = numberConversion(MessageList.substring(0,indexTemp));  
+       consumerName += DATA_TBODY.rows(rows).cells(8).innerHTML+"&nbsp;&nbsp;&nbsp;";
+       MessageList = MessageList.substring(indexTemp+1);
+       indexTemp = MessageList.indexOf(",");
+     } 
+     top.showDialogBox("用户短信发送", "../elecorder/intendance_MessageList.htm?consumerName="+consumerName, 575, 900);  
+  }
+}
+
+function numberConversion(MessageList){
+  var rows = -1
+  if(MessageList == 0){rows = 0;}else
+  if(MessageList == 1){rows = 1;}else
+  if(MessageList == 2){rows = 2;}else
+  if(MessageList == 3){rows = 3;}else
+  if(MessageList == 4){rows = 4;}else
+  if(MessageList == 5){rows = 5;} 
+  return rows;
+}
+
+function showList(rows){
+     var hm = DATA_TBODY.rows(rows).cells(3).innerHTML;
+     var hh = DATA_TBODY.rows(rows).cells(2).innerHTML;
+     var zxfs = 1;
+     var StrList = "?hm="+hm+"&hh="+hh+"&zxfs="+zxfs; 
+     top.showDialogBox("有序用电指标管理方案明细", "../elecorder/projectWeave_List.html"+StrList, 575, 900);
+}
+
+function showPage(){
+}
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">有序用电监控</a></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1">
+        <input class="input1" type="button" id="query" value="查 询"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="input1" type="button" id="telecontrol" value="遥 控"/>
+        <input class="input4" type="button" id="sendMessage" value="发送短信通知"/>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar"></td>
+          <td width="70" class="label">分类：</td>
+          <td width="120" class="dom">
+            <select name="intendanceSort" id="intendanceSort" style="width=90">
+                <option value="1" selected="selected">不自觉错峰</option>
+                <option value="2">自觉错缝</option>
+                <option value="3">全部</option>
+            </select>  
+          </td>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target3">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">有序用电监控</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+          <div id="ChartS" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tableList">
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="selectall" name="selectall" value="1" checked /></th>
+                <th>序号</th>
+                <th>户号</th>
+                <th>户名</th>
+                <th>供电单位</th>
+                <th>行业</th>
+                <th>线路</th>
+                <th>是否允许跳闸</th>
+                <th>联系人</th>
+                <th>联系电话</th>
+                <th>计划负荷(kW)</th>
+                <th>当前负荷(kW)</th>
+                <th>方案类型</th>
+                <th>方案明细</th>
+                <th>负荷曲线</th>
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+              <tr>
+                <td colspan="2">合计</td>
+                <td>户数</td>
+                <td colspan="4">6</td>
+                <td colspan="3">负荷</td>
+                <td>11800</td>
+                <td>12500</td>
+                <td colspan="3"></td>
+              </tr>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">3</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>太平供电所</td1>
+        <td2>莫烟楼公变</td2>
+        <td3>12080101</td3>
+        <td4>1</td4>
+        <td5>2009-07-31 10:48:00</td5>
+        <td8>&lt;a href="javascript:view()"&gt;电流缺相&lt;/a&gt;</td8>
+        <td9>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td9>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>太平供电所</td1>
+        <td2>教师村公变</td2>
+        <td3>12080102</td3>
+        <td4>1</td4>
+        <td5>2009-07-31 10:58:00</td5>
+        <td8>&lt;a href="javascript:view()"&gt;电流缺相&lt;/a&gt;</td8>
+        <td9>查看</td9>
+        
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>南调供电所</td1>
+        <td2>宋皇中下马村公变</td2>
+        <td3>12080103</td3>
+        <td4>2</td4>
+        <td5>2009-07-31 10:28:00</td5>
+        <td8>&lt;a href="javascript:view()"&gt;电流缺相&lt;/a&gt;</td8>
+        <td9>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td9>      
+    </data>
+    
+</datas>

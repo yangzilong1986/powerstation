@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart palette='4' decimals='0' enableSmartLabels='1' enableRotation='0' bgColor='FFFFFF,FFFFFF' bgAlpha='40,100' bgRatio='0,100' bgAngle='360' showBorder='1' startingAngle='70' >
+        <set label='10kV园北Ⅰ线F05' value='54' isSliced='1'/>
+        <set label='10kV粤海线F08' value='23' isSliced='1'/>
+        <set label='10kV河东Ⅰ线F01' value='4' isSliced='1'/>
+        <set label='10kV河东Ⅱ线F02' value='221'/>
+        <set label='10kV华里线F03' value='233'/>
+        <set label='10kV备用线F08' value='31'/>
+        <set label='10kV备用线F20 ' value='61'/>
+</chart>

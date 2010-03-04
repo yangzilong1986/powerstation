@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负荷分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+function changeTab(index){
+    var tab1 = document.getElementById("tab_1");
+    var tab2 = document.getElementById("tab_2");
+    var tab3 = document.getElementById("tab_3");
+    if(index == "1") { 
+        tab1.className = 'tab_on';
+        tab2.className = 'tab_off';
+        workpage.document.location  = "globalCoulometry.html";
+    }else if(index == "2") {
+        tab1.className = 'tab_off';
+        tab2.className = 'tab_on';
+        workpage.document.location = "countyCoulometry.html";
+    }
+}
+
+function init(){
+    changeTab(1);
+}
+</script>
+</head>
+<body onload="init();">
+<div id="body">
+  <div id="tab" class="tab2">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="javascript:changeTab(1);" onclick="return true;" onfocus="blur()">全局供电量 </a></li>
+      <li id="tab_2" class="tab_off"><a href="javascript:changeTab(2);" onclick="return true;" onfocus="blur()">区县供电量</a></li> 
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 30));">
+    <iframe class="main" name="workpage" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>
+</body>
+</html>

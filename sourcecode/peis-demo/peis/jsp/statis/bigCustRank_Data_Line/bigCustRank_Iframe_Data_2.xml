@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>200906</td1>
+        <td2>52335</td2>
+        <td3>2342</td3>
+        <td4>5433</td4>
+        <td5>3234</td5> 
+        <td6>5332</td6>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>200907</td1>
+        <td2>34562</td2>
+        <td3>2234</td3>
+        <td4>6465</td4>
+        <td5>3456</td5> 
+        <td6>6345</td6>                
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>200908</td1>
+        <td2>23568</td2>
+        <td3>3456</td3>
+        <td4>6757</td4>
+        <td5>7576</td5> 
+        <td6>7567</td6>           
+    </data> 
+    <data extend="onclick='selectSingleRow(this);selectCharShow(this)'" >        
+        <td1>200909</td1>
+        <td2>31442</td2>
+        <td3>4324</td3>
+        <td4>5474</td4>
+        <td5>5474</td5> 
+        <td6>5474</td6>            
+    </data>     
+</datas>

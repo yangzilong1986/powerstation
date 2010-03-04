@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <check>1</check>
+    <td1>**全网模型</td1>
+    <td2 extend="align='right'">5</td2>
+    <td3 extend="align='center'">2009-09-01</td3>
+    <td4 extend="align='center'">2009-09-11</td4>
+    <td5 extend="align='right'">&#60;a href='javascript:popTop(1, "模型组成",
+      "../../jsp/lineloss/lineloss_model_gp_list.html?modelType=allgrid&amp;io=in", 900, 575)'&#62;6&#60;/a&#62;</td5>
+    <td6 extend="align='right'">&#60;a href='javascript:popTop(1, "模型组成",
+      "../../jsp/lineloss/lineloss_model_gp_list.html?modelType=allgrid&amp;io=out", 900, 575)'&#62;7&#60;/a&#62;</td6>
+  </data>
+  <data>
+    <check>2</check>
+    <td1>**全网模型</td1>
+    <td2 extend="align='right'">5</td2>
+    <td3 extend="align='center'">2009-09-12</td3>
+    <td4 extend="align='center'">&#160;</td4>
+    <td5 extend="align='right'">&#60;a href='javascript:popTop(1, "模型组成",
+      "../../jsp/lineloss/lineloss_model_gp_list.html?modelType=allgrid&amp;io=in", 900, 575)'&#62;6&#60;/a&#62;</td5>
+    <td6 extend="align='right'">&#60;a href='javascript:popTop(1, "模型组成",
+      "../../jsp/lineloss/lineloss_model_gp_list.html?modelType=allgrid&amp;io=out", 900, 575)'&#62;7&#60;/a&#62;</td6>
+  </data>
+</datas>

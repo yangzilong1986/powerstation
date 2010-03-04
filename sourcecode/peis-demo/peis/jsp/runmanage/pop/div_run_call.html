@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>终端台数</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $.json2html("dtext","../../../jsp/runmanage/pop/div_run_call_iframe.xml","");      
+});
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="label">供电单位：省电网公司 通讯方式：230M </td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 100));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+            <th>通讯方式(<span id="calName">终端厂家</span>)</th>
+            <th>已装终端数</th>
+            <th>投运终端数</th>
+            <th>停运终端数</th>
+            <th>上线终端数</th>
+            <th>应抄电表数</th>
+            <th>实抄电表数</th>
+            <th>投运率(%)</th>
+            <th>上线率(%)</th>
+            <th>抄表成功率(%)</th>
+            <th>停电终端数 </th>
+        </tr></thead>
+        <tbody id="dtext">
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+    </div>
+  </div>
+</div>
+</body>
+</html>

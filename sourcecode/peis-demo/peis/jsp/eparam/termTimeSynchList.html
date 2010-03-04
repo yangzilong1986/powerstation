@@ -1,0 +1,360 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>终端复位信息列表</title>
+<link rel="stylesheet" type="text/css" href="../../css/dataframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript"> 
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+</script>
+</head>
+  
+<body>
+  <input type="hidden" name="action" value="getQuery">
+  <input type="hidden" name="logicAddr" value="">
+  <input type="hidden" name="orgNo" value="4">
+  <input type="hidden" name="reType" value="10010003">
+  <input type="hidden" name="pageType" value="page">
+  <input type="hidden" name="changeValue" value="">
+  <div>
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 45));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th width="3%"><input type="checkbox" id="selectAll" onclick="selectAllCB()" checked /></th>
+          <th width="4%">序号</th>
+          <th width="10%">对象编号</th>
+          <th width="16%">对象名称</th>
+          <th width="10%">供电单位</th>
+          <th width="10%">终端地址</th>
+          <th width="8%">终端类型</th>
+          <th width="8%">通信方式</th>
+          <th width="8%">时钟差(s)</th>
+          <th width="8%">时间差</th>
+          <th width="15%">操作结果</th>
+        </tr></thead>
+        <tbody>
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="12080938"></td>
+            <td>1</td>
+            <td>0000002867</td>
+            <td>广州市凯龙机电设备有限公司</td>
+            <td>麻章供电所</td>
+            <td>12080938</td>
+            <td>负荷监测终端</td>
+            <td>232串口</td>
+            <td></td>
+            <td></td>
+            <td id="12080938"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270229"></td>
+            <td>2</td>
+            <td>00014591</td>
+            <td>教办公变</td>
+            <td>麻章供电所</td>
+            <td>8D270229</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270229"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270232"></td>
+            <td>3</td>
+            <td>00014592</td>
+            <td>亿泰公变</td>
+            <td>麻章供电所</td>
+            <td>8D270232</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270232"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270374"></td>
+            <td>4</td>
+            <td>00203037</td>
+            <td>新北村台区</td>
+            <td>东山供电所</td>
+            <td>8D270374</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270374"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270044"></td>
+            <td>5</td>
+            <td>00203074</td>
+            <td>谭息村</td>
+            <td>东山供电所</td>
+            <td>8D270044</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270044"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270043"></td>
+            <td>6</td>
+            <td>00203078</td>
+            <td>鱼弄村台区</td>
+            <td>东山供电所</td>
+            <td>8D270043</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270043"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270452"></td>
+            <td>7</td>
+            <td>00203082</td>
+            <td>黄山村台区</td>
+            <td>东山供电所</td>
+            <td>8D270452</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270452"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270563"></td>
+            <td>8</td>
+            <td>00203213</td>
+            <td>什足村2#台区</td>
+            <td>东山供电所</td>
+            <td>8D270563</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270563"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270363"></td>
+            <td>9</td>
+            <td>00218058</td>
+            <td>坑里村台区</td>
+            <td>东简供电所</td>
+            <td>8D270363</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270363"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270141"></td>
+            <td>10</td>
+            <td>00234335</td>
+            <td>湖光场志满村公变</td>
+            <td>志满供电所</td>
+            <td>8D270141</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270141"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D230124"></td>
+            <td>11</td>
+            <td>00682658</td>
+            <td>果菜公变</td>
+            <td>麻章供电所</td>
+            <td>8D230124</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D230124"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270237"></td>
+            <td>12</td>
+            <td>01-0661</td>
+            <td>十二昌村</td>
+            <td>东山供电所</td>
+            <td>8D270237</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270237"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270240"></td>
+            <td>13</td>
+            <td>01-0681</td>
+            <td>十二昌村</td>
+            <td>东山供电所</td>
+            <td>8D270240</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270240"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270373"></td>
+            <td>14</td>
+            <td>01-0792</td>
+            <td>调文下落村台区</td>
+            <td>东山供电所</td>
+            <td>8D270373</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270373"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270376"></td>
+            <td>15</td>
+            <td>01-0801</td>
+            <td>调文中南村台区</td>
+            <td>东山供电所</td>
+            <td>8D270376</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270376"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270562"></td>
+            <td>16</td>
+            <td>01-090</td>
+            <td>南山村</td>
+            <td>东山供电所</td>
+            <td>8D270562</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270562"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270694"></td>
+            <td>17</td>
+            <td>01-0971</td>
+            <td>调市坡尾村</td>
+            <td>东山供电所</td>
+            <td>8D270694</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270694"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270375"></td>
+            <td>18</td>
+            <td>01-0991</td>
+            <td>调市屋仔村</td>
+            <td>东山供电所</td>
+            <td>8D270375</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270375"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270450"></td>
+            <td>19</td>
+            <td>01-1011</td>
+            <td>十石村</td>
+            <td>东山供电所</td>
+            <td>8D270450</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270450"></td>
+          </tr>
+          
+          <tr align="center" class="trmainstyle">
+            <td><input type=checkbox name="ItemID" checked value="8D270298"></td>
+            <td>20</td>
+            <td>01-1061</td>
+            <td>北下村1#台区</td>
+            <td>东山供电所</td>
+            <td>8D270298</td>
+            <td>负荷监测终端</td>
+            <td>GPRS</td>
+            <td></td>
+            <td></td>
+            <td id="8D270298"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+    </div>
+  </div>
+</body>
+</html>

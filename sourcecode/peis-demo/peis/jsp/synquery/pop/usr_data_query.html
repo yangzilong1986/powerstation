@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>明细</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){    
+    // 图形的生成。
+    var chart_obj = new FusionCharts("../../../FusionCharts/MSLine.swf", "chart_id", "800", "275", "0", "0");
+    chart_obj.setDataURL("usr_data_query.xml");
+    chart_obj.render("graphBlock");  
+});
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="label">计量点：01\0023 2009-10-01</td>  
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 300));">
+    <!-- START Script Block for Chart-->
+    <div id="graphBlock" align="center"></div>
+    <!-- END Script Block for Chart> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead><tr>
+          <th>时间</th>
+          <th>正向有功总</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+            <td>00:00</td>
+            <td>435325</td>
+        </tr>
+        <tr>
+            <td>01:00</td>
+            <td>5656325</td>
+        </tr>
+        <tr>
+            <td>02:00</td>
+            <td>635325</td>
+        </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="pageContainer"><a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16"
+    title="导出Excel" /></a> ┆ 共<span class="orange">20</span>条 显示行数：<select id="pageRows" name="pageRows" size="1">
+    <option value="10">10</option>
+    <option value="20" selected="selected">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="200">200</option>
+    <option value="500">500</option>
+</select> 第<span class="orange">1</span>页 / 共<span class="orange">1</span>页 转到：<input type="text" id="page" name="page" value="1" />
+<img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" /> <a
+    href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a> <a href="#"><img
+    src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a> <a href="#"><img
+    src="../../../img/page_next.gif" class="pointer" title="下一页" /></a> <a href="#"><img
+    src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a></div>
+</div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>小水电供售电量</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $.handelCombox('DATA_MONTH','Month','id="subsNo" name="subsNo"');
+  $.handelCombox('DATA_YEAR','Year','id="subsNo" name="subsNo"');
+  HtmlText(); showData(); HideRq(); insertText();
+  $('#toquery').click(showData);
+});
+
+function geturl(){ 
+  var srcc = window.location;  var start = -1;    
+  srcc = srcc.toString();    
+  start = srcc.indexOf("=");
+  srcc = srcc.substring(start+1,start+4);  
+  return srcc;
+}  
+
+function getDataType(num){
+ var index = -1; var numbers = "";
+ index = num.indexOf("-");
+ numbers = num.substring(0,index);
+ return numbers;
+}
+
+function getDataRight(num){
+ var index = -1; var numbers = "";
+ index = num.indexOf("-");
+ numbers = num.substring(index+1);
+ return numbers;
+}
+
+function insertText(){
+  var data=getDataRight(geturl());
+  $("#gddw").val("厂站"+data+"");
+  $("#czjh").val("A1000"+data);
+  document.all.gddw.readOnly=true;
+  document.all.czjh.readOnly=true;
+ 
+}
+
+function HtmlText(){
+  var dataType=getDataType(geturl());
+  if(dataType == 1){
+    $("#MonthYear").html("日期");
+  }else{
+    $("#MonthYear").html("月份");
+  }
+}
+
+function showData(){
+ var dataType=getDataType(geturl());
+ if(dataType == 1){
+     $.json2html("DATA_TBODY","../../jsp/statis/waterConservancy_Data_Line/waterConservancy_iframe_Data_1.xml","cb-item");   
+ }else if(dataType == 2){
+     $.json2html("DATA_TBODY","../../jsp/statis/waterConservancy_Data_Line/waterConservancy_iframe_Data_2.xml","cb-item");   
+ }
+}
+
+function HideRq(){
+  var dataType=getDataType(geturl());
+  if(dataType == 1){
+    $('#DATA_YEAR').show();
+    $('#DATA_YEAR_TEXT').show();
+    $('#DATA_MONTH').show(); 
+     $('#DATA_MONTH_TEXT').show();     
+  }else if(dataType == 2){
+    $('#DATA_YEAR').show();
+    $('#DATA_YEAR_TEXT').show();
+    $('#DATA_MONTH').hide(); 
+    $('#DATA_MONTH_TEXT').hide();   
+  }
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab4">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">供售电量明细</a></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+    <div class="opbutton1"><input type="submit" name="query" id="toquery" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="110" class="label" align="left">小水电名：</td>
+          <td width="100" class="dom" align="left">
+            <input type="text" name="gddw" id="gddw" style="color:#C5C5C5"/>
+          </td>
+          <td width="120" class="label" align="right">计量点名称：</td>
+          <td width="100" class="dom">              
+            <input type="text" name="czjh" id="czjh" style="color:#C5C5C5"/>             
+          </td>
+          <td width="110" class="label">统计时间：</td>
+          <td width="25" class="label" align="left" id="DATA_YEAR" style="display:block;"></td>
+          <td width="10" id="DATA_YEAR_TEXT">年</td>
+          <td width="30" class="label" align="left" id="DATA_MONTH" style="display:block;"></td>
+          <td width="10" id="DATA_MONTH_TEXT">月</td>
+          <td width="110" align="center"></td>
+          <td width="110" align="center"></td>
+          <td width="110" align="center"></td>
+          <td width="100" class="label"></td>          
+        </tr>          
+      </table>
+      <div class="clear"></div>
+    </div>
+    </div>
+    <div class="target5">
+        <ul>
+          <li class="target_on"><a href="#" onclick="return false;">供售电量明细列表</a></li>
+          <li class="clear"></li>
+        </ul>
+        <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+    </div>
+      <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 155));">
+        <div id="graphBlock" align="center"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>电表局号</th>
+                <th>倍率</th>
+                <th id="MonthYear"></th>
+                <th>总电量(kWh)</th> 
+                <th>尖电量(kWh)</th> 
+                <th>峰电量(kWh)</th>
+                <th>平电量(kWh)</th>
+                <th>谷电量(kWh)</th>     
+              </tr>
+            </thead>
+            <tbody id="DATA_TBODY">
+            </tbody>
+         </table>
+       </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+      </div>
+     </div>
+</body>
+</html>
+

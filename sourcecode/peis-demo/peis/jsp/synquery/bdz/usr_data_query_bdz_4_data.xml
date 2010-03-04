@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+	<categories>
+		<category label='0' />
+		<category label='1' />
+		<category label='2' />
+		<category label='3' />
+		<category label='4' />
+		<category label='5' />
+		<category label='6' />
+		<category label='7' />
+		<category label='8' />
+		<category label='9' />
+		<category label='10' />
+		<category label='11' />
+		<category label='12' />
+		<category label='13' />
+		<category label='14' />
+		<category label='15' />
+		<category label='16' />
+		<category label='17' />
+		<category label='18' />
+		<category label='19' />
+		<category label='20' />
+		<category label='21' />
+		<category label='22' />
+		<category label='23' />
+	</categories>
+	<dataset seriesName='A相电压' color='AFD8Ff' showValues='0'>
+		<set value='86.50' />
+		<set value='88.06' />
+		<set value='84.81' />
+		<set value='84.31' />
+		<set value='86.56' />
+		<set value='87.19' />
+		<set value='88.06' />
+		<set value='84.81' />
+		<set value='84.31' />
+		<set value='86.56' />
+		<set value='87.19' />
+		<set value='88.06' />
+		<set value='86.50' />
+		<set value='88.06' />
+		<set value='84.81' />
+		<set value='84.31' />
+		<set value='86.56' />
+		<set value='87.19' />
+		<set value='88.06' />
+		<set value='84.81' />
+		<set value='84.31' />
+		<set value='86.56' />
+		<set value='87.19' />
+		<set value='88.06' />
+	</dataset>
+	<dataset seriesName='B相电压' color='0f0008' showValues='0'>
+		<set value='26.50' />
+		<set value='28.06' />
+		<set value='74.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='78.06' />
+		<set value='94.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='18.06' />
+		<set value='26.50' />
+		<set value='28.06' />
+		<set value='54.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='47.19' />
+		<set value='28.06' />
+		<set value='24.81' />
+		<set value='34.31' />
+		<set value='26.56' />
+		<set value='87.19' />
+		<set value='98.06' />
+	</dataset>
+	<dataset seriesName='C相电压' color='330088' showValues='0'>
+		<set value='26.50' />
+		<set value='28.06' />
+		<set value='24.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='28.06' />
+		<set value='24.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='18.06' />
+		<set value='26.50' />
+		<set value='28.06' />
+		<set value='24.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='28.06' />
+		<set value='24.81' />
+		<set value='24.31' />
+		<set value='26.56' />
+		<set value='27.19' />
+		<set value='18.06' />
+	</dataset>
+</chart>

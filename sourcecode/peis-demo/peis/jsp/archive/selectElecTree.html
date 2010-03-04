@@ -1,0 +1,171 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>对象树</title>
+<link rel="stylesheet" type="text/css" href="../../css/treeframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+var selBgColor = "#0A726A";
+var selColor = "FFFFFF";
+var unSelBgColor = "#FFFFFF";
+var unSelColor = "000000";
+
+var preObject = null;
+
+/**
+ * 选择对象
+ * @param {Object} obj
+ * @param {int} objectType    : 对象类型
+ * @param {String} objectId   : 对象编号
+ * @param {String} objectName : 对象名称
+ * @param {String} orgType    : 部门类型
+ */
+function select(obj, objectType, objectId, objectName, orgType) {
+    $(obj).css("background-color", selBgColor);
+    $(obj).css("color", selColor);
+    if(preObject != null && preObject != obj) {
+        $(preObject).css("background-color", unSelBgColor);
+        $(preObject).css("color", unSelColor);
+    }
+    preObject = obj;
+    parent.nodeEvent(objectType, objectId, objectName, orgType);
+}
+</script>
+</head>
+<body>
+<div class="treeContainer">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="5" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onClick="select(this, 2, '44', '220kV霞山站', '02');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_tran.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;220kV霞山站</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579414'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;终端</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linelastnode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 6, '1001', '002C', 'null');" style="cursor:hand;" nowrap><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">002C</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579414'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_tg.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;变压器</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579414'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/linevertical.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td  onclick="select(this, 4, '4401', '220kV霞山变1#', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_tg.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;220kV霞山变1#</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linevertical.gif" alt="" border="0" width="16" height="22"></td>
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579414'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linelastnode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 7, '1001', '电表A080613', 'null');" style="cursor:hand;" nowrap><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;电表A080613</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+     <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579317'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_line.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;母线</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 5, '1001', '110KV-110KV', 'null');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_line.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;110KV-110KV</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579516'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linevertical.gif" alt="expand node" border="0" width="16" height="22"></td>      
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linelastnode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="2" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 7, '4405', '电表', '03');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;电表A080614</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579317'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a name='0.7969896755579317'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="expand node" border="0" width="16" height="22"></a></td>
+      <td colspan="4" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 5, '1001', '110KV-110KV', 'null');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_line.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;10KV_10KV</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><a name='0.7093978125384423'>&nbsp;</a></td>
+      <td width="16" style="padding-left:1px;"><img src="../../img/tree/linelastnode.gif" alt="expand node" border="0" width="16" height="22"></td>
+      <td colspan="3" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 7, '1001', '古翠线', 'null');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;古翠线</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

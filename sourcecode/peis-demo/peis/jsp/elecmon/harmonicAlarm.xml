@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td2>杭州市供电局</td2>
+        <td3>3345</td3>
+        <td4>得力小区</td4>
+        <td5>D11334</td5>
+        <td6>91018890</td6>
+        <td7>A相谐波电压越限</td7>
+        <td8>2009-09-05 01:04:03</td8>
+		<td9>&lt;a href="javascript:viewDetail()"&gt;谐波数据&lt;/a&gt;</td9>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td2>杭州市供电局</td2>
+        <td3>3346</td3>
+        <td4>翠园1区</td4>
+        <td5>D11334</td5>
+        <td6>91018890</td6>
+        <td7>A相谐波电流越限</td7>
+        <td8>2009-09-05 01:04:03</td8>
+		<td9>&lt;a href="javascript:viewDetail()"&gt;谐波数据&lt;/a&gt;</td9>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td2>杭州市供电局</td2>
+        <td3>3348</td3>
+        <td4>古荡湾小区</td4>
+        <td5>D11334</td5>
+        <td6>91018890</td6>
+        <td7>B相谐波电压越限</td7>
+        <td8>2009-09-05 01:04:03</td8>
+		<td9>&lt;a href="javascript:viewDetail()"&gt;谐波数据&lt;/a&gt;</td9>
+    </data>
+</datas>

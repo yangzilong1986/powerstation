@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>太平供电所</td1>
+        <td2>04861384</td2>
+        <td3>刘东源</td3>
+        <td4>51104936</td4>
+        <td5>70Y01E001675355C0</td5>
+        <td6>2009-07-31 10:48:00</td6>
+        <td7>&lt;a href="javascript:view()"&gt;继电器变位&lt;/a&gt;</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>     
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+        <td1>太平供电所</td1>
+        <td2>04861241</td2>
+        <td3>叶军荣</td3>
+        <td4>51104937</td4>
+        <td5>70Y01E001675345C0</td5>
+        <td6>2009-07-31 10:58:00</td6>
+        <td7>&lt;a href="javascript:view()"&gt;抄表失败&lt;/a&gt;</td7>
+        <td8>查看</td8>       
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td1>南调供电所</td1>
+        <td2>04861275</td2>
+        <td3>李冬梅</td3>
+        <td4>51104938</td4>
+        <td5>136028013064164J0</td5>
+        <td6>2009-07-31 10:28:00</td6>
+        <td7>&lt;a href="javascript:view()"&gt;电流反极性&lt;/a&gt;</td7>
+        <td8>&lt;a href="javascript:viewDetail()"&gt;查看&lt;/a&gt;</td8>      
+    </data>    
+</datas>

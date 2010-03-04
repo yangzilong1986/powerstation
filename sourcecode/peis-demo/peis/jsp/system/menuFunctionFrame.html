@@ -1,0 +1,278 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>tree view</title>
+<link href="../../css/treeFrame.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript" src="../../js/system/treeview/ua.js"></script>
+<script type="text/javascript" language="javascript" src="../../js/system/treeview/ftiens4.js"></script>
+<script type="text/javascript" language="javascript" src="../../js/system/treeview/treeviewEx.js"></script>
+<script type="text/javascript" language="javascript"> 
+function selectCheckBox(id) {
+    if(document.getElementById(id).checked == true) {
+        if(id == "ALL") {
+            for(var i = 0; i < checkboxCount; i++) {
+                if(document.getElementById(checkboxIDArray[i]).checked == false) {
+                    document.getElementById(checkboxIDArray[i]).checked = true;
+                }
+            }
+        }
+        else if(id != null && id.length > 3 && id.substring(0, 3) == "BOX") {
+            var parentId = getParentId(id);
+            var idLength = id.length;
+ 
+            //判断根结点
+            if(document.getElementById("ALL").checked == false) {
+                document.getElementById("ALL").checked = true;
+            }
+ 
+            //判断上级结点
+            if(parentId != "ALL") {
+                if(document.getElementById(parentId).checked == false) {
+                    document.getElementById(parentId).checked = true;
+                }
+                while(getParentId(parentId) != "ALL") {
+                    parentId = getParentId(parentId);
+                    if(document.getElementById(parentId).checked == false) {
+                        document.getElementById(parentId).checked = true;
+                    }
+                }
+            }
+ 
+            for(var i = 0; i < checkboxCount; i++) {
+                //判断下级结点
+                if(checkboxIDArray[i].length > idLength + 1 && checkboxIDArray[i].indexOf(id + "_") != -1) {
+                    if(document.getElementById(checkboxIDArray[i]).checked == false) {
+                        document.getElementById(checkboxIDArray[i]).checked = true;
+                    }
+                }
+            }
+        }
+    }
+    else {
+        if(id == "ALL") {
+            for(var i = 0; i < checkboxCount; i++) {
+                if(document.getElementById(checkboxIDArray[i]).checked == true) {
+                    document.getElementById(checkboxIDArray[i]).checked = false;
+                }
+            }
+        }
+        else if(id != null && id.length > 3 && id.substring(0, 3) == "BOX") {
+            var parentId = getParentId(id);
+            var idLength = id.length;
+            var idLevel = getItemLevel(id);
+ 
+            var allFalseFlag = true;   // true: 全为false ; false: 不全为false
+            for(var i = 0; i < checkboxCount; i++) {
+                //判断同级结点是否全为false (allFalseFlag == true)
+                if(allFalseFlag == true
+                    && getItemLevel(checkboxIDArray[i]) == idLevel
+                    && getParentId(checkboxIDArray[i]) == parentId
+                    && document.getElementById(checkboxIDArray[i]).checked == true) {
+                    allFalseFlag = false;
+                }
+ 
+                //判断下级结点
+                if(checkboxIDArray[i].length > idLength + 1 && checkboxIDArray[i].indexOf(id + "_") != -1) {
+                    if(document.getElementById(checkboxIDArray[i]).checked == true) {
+                        document.getElementById(checkboxIDArray[i]).checked = false;
+                    }
+                }
+            }
+ 
+            if(allFalseFlag == true) {
+                if(document.getElementById(parentId).checked == true) {
+                    document.getElementById(parentId).checked = false;
+                    selectCheckBox(parentId);
+                }
+            }
+        }
+    }
+}
+</script>
+</head>
+ 
+<body>
+<script type="text/javascript" language="javascript"> 
+USETEXTLINKS = 1; 
+STARTALLOPEN = 0; 
+HIGHLIGHT = 0; 
+PRESERVESTATE = 1; 
+USEICONS = 1; 
+BUILDALL = 1; 
+var ICONPATH = "../../img/tree2/";  
+/////////////////////////////////////// 
+var checkboxIDArray = new Array('BOX1','BOX1_1','BOX1_2','BOX1_3','BOX1_4','BOX1_5','BOX1_6','BOX1_7','BOX2','BOX2_1','BOX2_2','BOX2_3','BOX2_4','BOX2_5','BOX2_6','BOX3','BOX3_1','BOX3_2','BOX3_3','BOX3_4','BOX3_5','BOX4','BOX4_1','BOX4_2','BOX4_3','BOX4_4','BOX4_5','BOX4_6','BOX4_7','BOX5','BOX5_1','BOX5_2','BOX5_3','BOX5_4','BOX5_5','BOX5_6','BOX5_7','BOX5_8','BOX5_9','BOX5_10','BOX6','BOX6_1','BOX6_2','BOX6_3','BOX6_4','BOX6_5','BOX6_6','BOX6_7','BOX6_8','BOX6_9','BOX6_10','BOX6_11','BOX6_12','BOX6_13','BOX6_14','BOX7','BOX7_1','BOX7_2','BOX7_3','BOX8','BOX8_1','BOX8_2','BOX8_3','BOX8_4','BOX8_5','BOX9','BOX9_1','BOX9_2','BOX9_3','BOX9_4','BOX9_5','BOX9_6','BOX9_7','BOX9_8','BOX10','BOX10_1','BOX10_2','BOX10_3','BOX10_4','BOX11','BOX11_1','BOX11_2','BOX11_3','BOX11_4','BOX11_5','BOX11_6','BOX11_7','BOX12','BOX12_1','BOX12_2','BOX12_3','BOX13','BOX13_1','BOX13_2','BOX13_3','BOX13_4','BOX13_5','BOX13_6','BOX13_7','BOX13_8','BOX13_9','BOX14','BOX14_1','BOX14_2','BOX14_3','BOX14_4','BOX15','BOX16','BOX16_1','BOX16_2','BOX16_3','BOX16_4','BOX16_5','BOX16_6'); 
+var checkboxCount = 114; 
+/////////////////////////////////////// 
+function getSelectedString1() { 
+    var selectedString = ""; 
+    for(var i = 0; i < checkboxCount; i++) { 
+        if(document.getElementById(checkboxIDArray[i]).checked == true) { 
+            selectedString += "," + document.getElementById(checkboxIDArray[i]).value; 
+        } 
+    } 
+    if(selectedString.length > 0) { 
+        selectedString = selectedString.substring(1); 
+    } 
+    return selectedString; 
+} 
+ 
+function getSelectedString2() { 
+    var selectedString = ""; 
+    for(var i = 0; i < checkboxCount; i++) { 
+        if(document.getElementById(checkboxIDArray[i]).checked == true) { 
+            selectedString += "," + "'" + document.getElementById(checkboxIDArray[i]).value + "'"; 
+        } 
+    } 
+    if(selectedString.length > 0) { 
+        selectedString = selectedString.substring(1); 
+    } 
+    return selectedString; 
+} 
+/////////////////////////////////////// 
+var allChecked = false; 
+foldersTree = setFolderEx(1, "菜单名称", null); 
+foldersTree.treeID = "roleManage"; 
+var sTrailHTML = "<td align=right valign=middle class=paddingRight5><input id=ALL type=checkbox onclick=\"selectCheckBox('ALL')\""; 
+if(allChecked) { 
+    sTrailHTML += " checked"; 
+} 
+sTrailHTML += "></td>"; 
+foldersTree.trailHTML = sTrailHTML; 
+ 
+var fld1 = createFolderCheckBoxTrail(foldersTree, "自动抄表", "BOX1", "10", false); 
+  createItemCheckBoxTrail(fld1, "采集任务编制", "BOX1_1", "1001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "任务配置", "BOX1_2", "1002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "实时召测", "BOX1_3", "1003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "数据检查补测", "BOX1_4", "1004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "采集质量分析", "BOX1_5", "1005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "数据查询", "BOX1_6", "1006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld1, "数据手工录入", "BOX1_7", "1007", false, "ftv2doc.gif"); 
+var fld2 = createFolderCheckBoxTrail(foldersTree, "预付费管理", "BOX2", "20", false); 
+  createItemCheckBoxTrail(fld2, "预付费参数下发", "BOX2_1", "2001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld2, "剩余电量(费)查询", "BOX2_2", "2002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld2, "预付费情况统计", "BOX2_3", "2003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld2, "催费控参数下发", "BOX2_4", "2004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld2, "停复电控制管理", "BOX2_5", "2005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld2, "预付费跳闸", "BOX2_6", "2006", false, "ftv2doc.gif"); 
+var fld3 = createFolderCheckBoxTrail(foldersTree, "综合查询", "BOX3", "21", false); 
+  createItemCheckBoxTrail(fld3, "单户数据查询", "BOX3_1", "2101", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld3, "档案资料查询", "BOX3_2", "2102", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld3, "表码数据查询", "BOX3_3", "2103", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld3, "负荷数据查询", "BOX3_4", "2104", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld3, "电量数据查询", "BOX3_5", "2105", false, "ftv2doc.gif"); 
+var fld4 = createFolderCheckBoxTrail(foldersTree, "负荷管理", "BOX4", "30", false); 
+  createItemCheckBoxTrail(fld4, "遥控", "BOX4_1", "3001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "当前功率下浮控", "BOX4_2", "3002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "营业报停控", "BOX4_3", "3003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "时段控", "BOX4_4", "3004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "厂休控", "BOX4_5", "3005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "限电方案管理", "BOX4_6", "3006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld4, "有序用电", "BOX4_7", "3007", false, "ftv2doc.gif"); 
+var fld5 = createFolderCheckBoxTrail(foldersTree, "用电监测", "BOX5", "40", false); 
+  createItemCheckBoxTrail(fld5, "电能质量监测", "BOX5_1", "4001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "重点用户监测", "BOX5_2", "4002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "用电异常监测", "BOX5_3", "4003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "原始设备异常查询", "BOX5_4", "4004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "异常编码管理", "BOX5_5", "4005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "防窃电分析", "BOX5_6", "4006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "电压极值分析", "BOX5_7", "4007", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "电流极值分析", "BOX5_8", "4008", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "功率因数分析", "BOX5_9", "4009", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld5, "电压合格率", "BOX5_10", "4010", false, "ftv2doc.gif"); 
+var fld6 = createFolderCheckBoxTrail(foldersTree, "运行管理", "BOX6", "50", false); 
+  createItemCheckBoxTrail(fld6, "档案管理", "BOX6_1", "5001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "参数管理", "BOX6_2", "5002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "线路档案", "BOX6_3", "5003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "日志管理", "BOX6_4", "5004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "安装覆盖率", "BOX6_5", "5005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "流量统计", "BOX6_6", "5006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "设备投运情况", "BOX6_7", "5007", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "校时成功率", "BOX6_8", "5008", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "集抄自动换表", "BOX6_9", "5009", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "故障处理", "BOX6_10", "5010", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "实时在线率", "BOX6_11", "5011", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "设备流量排名", "BOX6_12", "5012", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "换表换互感器", "BOX6_13", "5013", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld6, "主站运行管理", "BOX6_14", "5014", false, "ftv2doc.gif"); 
+var fld7 = createFolderCheckBoxTrail(foldersTree, "生产安全管理", "BOX7", "60", false); 
+  createItemCheckBoxTrail(fld7, "无功投切管理", "BOX7_1", "6001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld7, "负载率管理", "BOX7_2", "6002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld7, "油温监测", "BOX7_3", "6003", false, "ftv2doc.gif"); 
+var fld8 = createFolderCheckBoxTrail(foldersTree, "客户优质服务", "BOX8", "80", false); 
+  createItemCheckBoxTrail(fld8, "停/送电信息预报", "BOX8_1", "8001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld8, "客户用电数据发布", "BOX8_2", "8002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld8, "合理化用电建议", "BOX8_3", "8003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld8, "电价信息服务", "BOX8_4", "8004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld8, "快速购电", "BOX8_5", "8005", false, "ftv2doc.gif"); 
+var fld9 = createFolderCheckBoxTrail(foldersTree, "线损分析", "BOX9", "90", false); 
+  createItemCheckBoxTrail(fld9, "分区线损", "BOX9_1", "9001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "分压线损", "BOX9_2", "9002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "分线线损", "BOX9_3", "9003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "分台区线损", "BOX9_4", "9004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "线损模型", "BOX9_5", "9005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "线损分析", "BOX9_6", "9006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "台区线损明细报表", "BOX9_7", "12003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld9, "台区综合情况统计表", "BOX9_8", "12004", false, "ftv2doc.gif"); 
+var fld10 = createFolderCheckBoxTrail(foldersTree, "需求侧分析", "BOX10", "100", false); 
+  createItemCheckBoxTrail(fld10, "负荷分析", "BOX10_1", "10001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld10, "电量分析", "BOX10_2", "10002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld10, "电费电价分析", "BOX10_3", "10003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld10, "能效分析", "BOX10_4", "10005", false, "ftv2doc.gif"); 
+var fld11 = createFolderCheckBoxTrail(foldersTree, "系统管理", "BOX11", "110", false); 
+  createItemCheckBoxTrail(fld11, "单位管理", "BOX11_1", "11001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "权限管理", "BOX11_2", "11002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "编码管理", "BOX11_3", "11003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "配置管理", "BOX11_4", "11004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "公告管理", "BOX11_5", "11005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "群组管理", "BOX11_6", "11006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld11, "终端刷新", "BOX11_7", "11007", false, "ftv2doc.gif"); 
+var fld12 = createFolderCheckBoxTrail(foldersTree, "报表", "BOX12", "120", false); 
+  createItemCheckBoxTrail(fld12, "test报表1", "BOX12_1", "12001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld12, "报表管理", "BOX12_2", "12002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld12, "test报表2", "BOX12_3", "12010", false, "ftv2doc.gif"); 
+var fld13 = createFolderCheckBoxTrail(foldersTree, "远程监测", "BOX13", "910", false); 
+  createItemCheckBoxTrail(fld13, "主站运行状态", "BOX13_1", "91001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "终端在线", "BOX13_2", "91002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "采集成功率", "BOX13_3", "91003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "终端安装", "BOX13_4", "91004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "异常处理", "BOX13_5", "91005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "全局负荷", "BOX13_6", "91006", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "全局电量", "BOX13_7", "91007", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "实时负荷", "BOX13_8", "91008", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld13, "重点用户", "BOX13_9", "91009", false, "ftv2doc.gif"); 
+var fld14 = createFolderCheckBoxTrail(foldersTree, "运行管理", "BOX14", "920", false); 
+  createItemCheckBoxTrail(fld14, "权限管理", "BOX14_1", "92001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld14, "重点用户管理", "BOX14_2", "92002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld14, "重点用户分析", "BOX14_3", "92003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld14, "操作日志查询", "BOX14_4", "92004", false, "ftv2doc.gif"); 
+createItemCheckBoxTrail(foldersTree, "报表管理", "BOX15", "930", false, "ftv2doc.gif"); 
+var fld16 = createFolderCheckBoxTrail(foldersTree, "统计分析", "BOX16", "940", false); 
+  createItemCheckBoxTrail(fld16, "负荷特性分析", "BOX16_1", "94001", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld16, "负荷对比分析", "BOX16_2", "94002", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld16, "负荷分布分析", "BOX16_3", "94003", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld16, "电量分析", "BOX16_4", "94004", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld16, "电量分布分析", "BOX16_5", "94005", false, "ftv2doc.gif"); 
+  createItemCheckBoxTrail(fld16, "用电大户排行", "BOX16_6", "94006", false, "ftv2doc.gif"); 
+</script> 
+ 
+<div style="display: none; position: absolute; top: 0; left: 0;"> 
+<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
+  <tr> 
+    <td><a href="http://www.treemenu.net/" target="_blank"></a></td> 
+  </tr> 
+</table> 
+</div> 
+ 
+<div style="position: absolute; top: 5; left: 5;"> 
+<script type="text/javascript" language="javascript">initializeDocument();</script> 
+<noscript> 
+A tree for site navigation will open here if you enable JavaScript in your browser. 
+</noscript> 
+</div> 
+ 
+<script type="text/javascript" language="javascript"> 
+var bTreeviewLoaded = true;
+</script>
+</body>
+</html>

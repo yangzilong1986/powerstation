@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="false">
+   <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>广东省电力公司</td1>
+        <td2>3456435</td2>
+        <td3>542</td3>
+        <td4>6346</td4> 
+        <td5>456</td5> 
+        <td6>5345</td6> 
+        <td7>4536</td7> 
+        <td8>6435</td8> 
+        <td9>36346</td9>
+        <td10>&lt;a href="javascript:showEdit(0)"&gt;修改&lt;/a&gt;</td10>                   
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>云浮市电力公司</td1>
+        <td2>3563</td2>
+        <td3>6345</td3>
+        <td4>536</td4> 
+        <td5>6345</td5> 
+        <td6>6347</td6> 
+        <td7>64536</td7> 
+        <td8>5634</td8> 
+        <td9>6453676</td9>
+        <td10>&lt;a href="javascript:showEdit(1)"&gt;修改&lt;/a&gt;</td10>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1 extend="id='2-0'">韶关市电力公司</td1>
+        <td2>23452</td2>
+        <td3>3645</td3>
+        <td4>87688</td4> 
+        <td5>7567</td5> 
+        <td6>456</td6> 
+        <td7>4365</td7> 
+        <td8>7657476</td8> 
+        <td9>524325</td9>
+        <td10>&lt;a href="javascript:showEdit(2)"&gt;修改&lt;/a&gt;</td10>               
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1 extend="id='3-0'">深圳市电力公司</td1>
+        <td2>2452</td2>
+        <td3>52665</td3>
+        <td4>6346</td4> 
+        <td5>5252</td5> 
+        <td6>34525</td6> 
+        <td7>54635</td7> 
+        <td8>64366</td8> 
+        <td9>43523</td9>
+        <td10>&lt;a href="javascript:showEdit(3)"&gt;修改&lt;/a&gt;</td10>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1 extend="id='4-0'">汕头市电力公司</td1>
+        <td2>2342</td2>
+        <td3>5345</td3>
+        <td4>645645</td4> 
+        <td5>54353</td5> 
+        <td6>5342</td6> 
+        <td7>567457</td7> 
+        <td8>345637</td8> 
+        <td9>45243</td9>
+        <td10>&lt;a href="javascript:showEdit(4)"&gt;修改&lt;/a&gt;</td10>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1 extend="id='5-0'">广州市电力公司</td1>
+        <td2>64634</td2>
+        <td3>4563</td3>
+        <td4>253245</td4> 
+        <td5>654745</td5> 
+        <td6>234523</td6> 
+        <td7>52345</td7> 
+        <td8>634</td8> 
+        <td9>5236526</td9>
+        <td10>&lt;a href="javascript:showEdit(5)"&gt;修改&lt;/a&gt;</td10>              
+    </data> 
+    <data extend="onclick='selectSingleRow(this)'" >        
+        <td1>揭阳市电力公司</td1>
+        <td2>525645</td2>
+        <td3>524352</td3>
+        <td4>45365</td4> 
+        <td5>74584</td5> 
+        <td6>6747</td6> 
+        <td7>6536</td7> 
+        <td8>5436</td8> 
+        <td9>6345</td9>
+        <td10>&lt;a href="javascript:showEdit(6)"&gt;修改&lt;/a&gt;</td10>              
+    </data> 
+</datas>

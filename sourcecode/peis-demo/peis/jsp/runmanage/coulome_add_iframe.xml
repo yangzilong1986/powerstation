@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data extend="onclick='selectSingleRow(this);'">
+    <td2>infoM科技</td2>
+    <td3>0001827</td3>
+    <td4>01</td4>
+    <td5>203858</td5>
+    <td6>234452</td6>
+    <td7>2009-10-01</td7>
+    <td8>日电量</td8>
+    <td9>1435</td9>
+    <td10>343</td10>
+    <td11>4345</td11>
+    <td12>67</td12>
+    <td13>待处理</td13>
+		<td14>admin</td14>
+		<td15 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="_go2coulomeAdd(1);"&gt;查询\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(2);"&gt;修改\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(this);"&gt;删除&lt;/a&gt;</td15>
+  </data>
+	<data extend="onclick='selectSingleRow(this);'">
+    <td2>宝伦国际</td2>
+    <td3>0001877</td3>
+    <td4>01</td4>
+    <td5>263858</td5>
+    <td6>874452</td6>
+    <td7>2009-10-01</td7>
+    <td8>月电量</td8>
+    <td9>7735</td9>
+    <td10>343</td10>
+    <td11>345</td11>
+    <td12>467</td12>
+    <td13>已处理</td13>
+		<td14>advance</td14>
+		<td15 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="_go2coulomeAdd(1);"&gt;查询\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(2);"&gt;修改\&lt;/a&gt;&lt;a onclick="_go2coulomeAdd(this);"&gt;删除&lt;/a&gt;</td15>
+  </data>
+</datas>

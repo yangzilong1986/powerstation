@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>对象选择</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+</head>
+
+<script type="text/javascript">
+$(function(){
+$.handelCombox('orgTar','orgNo');
+$.handelCombox('lineNo','lineNo');
+});
+</script>
+<body>
+
+<div id="detail">
+  <div class="top">
+    <div class="main">对象选择</div>
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td width="15%" class="label">提示：</td>
+      <td width="25%" class="dom" colspan="5">新增B类监测点(110KV,35KV专线供电的客户计量点)
+      </td>
+    </tr>
+    <tr>
+       <td width="15%" class="label">部门：</td>
+       <td width="15%" class="label" id="orgNo">
+       
+       </td>
+       <td width="15%" class="label">线路：</td>
+       <td width="15%" class="label" id="lineNo"></td>
+       <td colspan="2"  class="label"><input class="input" type="submit" id="query" value="查询"/>
+       <input class="input" type="submit" id="query" value="导出Excel"/></td>
+    </tr>
+  </table>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td colspan="4" class="topmargin"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td colspan="2" class="tblcontent">
+        <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 284));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+              <th>序号</th>
+              <th>部门</th>
+              <th>线路</th>
+              <th>户号</th>
+              <th>户名</th>
+              <th>电压</th>
+              <th>表号</th>
+            </tr></thead>
+            <tbody id="">
+            </tbody>
+          </table>
+        </div>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  <div class="bottom">
+    <div class="main"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+</div>
+</body>
+</html>

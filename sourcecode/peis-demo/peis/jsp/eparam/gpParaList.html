@@ -1,0 +1,2261 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>测量点参数设置</title>
+    <link rel="stylesheet" type="text/css" href="../../css/dataframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript"> 
+var contextPath = "../..";
+//测量点项Folder
+function folder(objImg, vGpSn) {
+    var srcImg = $(objImg).attr("src");
+    if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+        $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+    }
+    else {
+        $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+    }
+    
+    for(var i = 0; i < 100; i++) {
+        if($("#otr_" + vGpSn + "_" + i).length > 0) {
+            if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+                $("#otr_" + vGpSn + "_" + i).attr("class", "styleShow");
+            }
+            else {
+                $("#otr_" + vGpSn + "_" + i).attr("class", "styleHidden");
+            }
+        }
+        else {
+            break;
+        }
+    }
+    
+    //获得测量点序号下所有的命令项
+    var orderIds = document.getElementsByName("GpSn_" + vGpSn + "_OrderId");
+    if (orderIds != null){
+        if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+            //设置测量点下所有命令项下所有的数据项为原来状态
+            for(var i=0; i < orderIds.length; i++){
+                for(var j = 0; j < 100; j++) {
+                    //获得命令项图标SRC
+                    var subImgObj = document.getElementsByName("subimg_" + vGpSn + "_" + orderIds[i].value);
+                    var subImgSrc = $(subImgObj).attr("src");
+                    if (subImgSrc == contextPath + "/img/tree2/minus1.gif") {
+                        $("#otr_" + vGpSn + "_" + orderIds[i].value + "_" + j).attr("class", "styleShow");
+                    }
+                }
+            }
+        } 
+        else {
+            //设置测量点下所有命令项下所有的数据项为隐藏状态
+            for(var i=0; i < orderIds.length; i++){
+                for(var j = 0; j < 100; j++) {
+                    $("#otr_" + vGpSn + "_" + orderIds[i].value + "_" + j).attr("class", "styleHidden");
+                }
+            }
+        }
+    }
+}
+ 
+//命令项Folder
+function subFolder(objImg, vGpSn, vOrderId) {
+    var srcImg = $(objImg).attr("src");
+    if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+        $(objImg).attr("src", contextPath + "/img/tree2/minus1.gif");
+    }
+    else {
+        $(objImg).attr("src", contextPath + "/img/tree2/plus1.gif");
+    }
+    
+    for(var i = 0; i < 100; i++) {
+        if($("#otr_" + vGpSn + "_" + vOrderId + "_" + i).length > 0) {
+            if(srcImg == contextPath + "/img/tree2/plus1.gif") {
+                $("#otr_" + vGpSn + "_" + vOrderId + "_" + i).attr("class", "styleShow");
+            }
+            else {
+                $("#otr_" + vGpSn + "_" + vOrderId + "_" + i).attr("class", "styleHidden");
+            }
+        }
+        else {
+            break;
+        }
+    }
+}
+ 
+//选择所有的测量点
+function selectAllGpSn() {
+    try {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.GpSn.checked) {
+                    document.all.GpSn.click();
+                }
+            }
+            else {
+                if(document.all.GpSn.checked) {
+                    document.all.GpSn.click();
+                }
+            }
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.GpSn.length; i++) {
+                    if(!document.all.GpSn[i].checked) {
+                        document.all.GpSn[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.GpSn.length; i++) {
+                    if(document.all.GpSn[i].checked) {
+                        document.all.GpSn[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+ 
+//处理selectAll CheckBox
+function dealSelectAllCB() {
+    try {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.GpSn.checked) {
+                document.all.selectAll.checked = true;
+            }
+            else {
+                document.all.selectAll.checked = false;
+            }
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            var checkFlag = false;
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                if(document.all.GpSn[i].checked) {
+                    checkFlag = true;
+                    break;
+                }
+            }
+            if(checkFlag == true) {
+                document.all.selectAll.checked = true;
+            }
+            else {
+                document.all.selectAll.checked = false;
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+ 
+//点击某个测量点CheckBox操作动作
+function selectOrderIdByGpSn(cbObj, vGpSn) {
+    var orderIds = document.getElementsByName("GpSn_" + vGpSn + "_OrderId");
+    //处理测量点下所有的命令项CheckBox
+    if(orderIds != null) {
+        if(cbObj.checked){
+            for(var i = 0; i < orderIds.length; i++) {
+                orderIds[i].checked = true;
+            }
+        }
+        else {
+            for(var i = 0; i < orderIds.length; i++) {
+                orderIds[i].checked = false;
+            }
+        }
+    }
+    //处理selectAll CheckBox
+    dealSelectAllCB();
+}
+ 
+//点击某个命令项CheckBox操作动作
+function selectGpSn(vGpSn) {
+    //获得测量点下所有的命令项ID
+    var orderIds = document.getElementsByName("GpSn_" + vGpSn + "_OrderId");
+    if(orderIds != null) {
+        var flag = false;
+        for(var i = 0; i < orderIds.length; i++) {
+            if(orderIds[i].checked){
+                flag = true;
+                break;
+            }
+        }
+        //处理命令项所属的测量点CheckBox
+        clickGpSnByFlag(vGpSn, flag);
+        //处理selectAll CheckBox
+        dealSelectAllCB();
+    }
+}
+ 
+//通过测量点序号和标志设置相应的测量点CheckBox状态
+function clickGpSnByFlag(vGpSn, flag) {
+    if(flag == true) {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.GpSn.value == vGpSn && !document.all.GpSn.checked) {
+                document.all.GpSn.checked = true;
+            }
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                if(document.all.GpSn[i].value == vGpSn && !document.all.GpSn[i].checked) {
+                    document.all.GpSn[i].checked = true;
+                }
+            }
+        }
+    }
+    else {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.GpSn.value == vGpSn && document.all.GpSn.checked) {
+                document.all.GpSn.checked = false;
+            }
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                if(document.all.GpSn[i].value == vGpSn && document.all.GpSn[i].checked) {
+                    document.all.GpSn[i].checked = false;
+                }
+            }
+        }
+    }
+}
+ 
+//获得选择的测量点序号和命令项ID
+function getSelectedGpSnIdString(){
+    var sResult = "";
+    var selectedOrderIds = null;
+    try {
+        //测量点为单个
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.GpSn.checked) {
+                selectedOrderIds = getOrderIdsByGpSn(document.all.GpSn.value);
+                if (selectedOrderIds != null && selectedOrderIds.length > 0) {
+                    sResult += document.all.GpSn.value;
+                    sResult += selectedOrderIds;
+                }
+            }
+        }
+        //测量点为多个
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                if(document.all.GpSn[i].checked) {
+                    selectedOrderIds = getOrderIdsByGpSn(document.all.GpSn[i].value);
+                    if (selectedOrderIds != null && selectedOrderIds.length > 0) {
+                        sResult += ";";
+                        sResult += document.all.GpSn[i].value;
+                        sResult += selectedOrderIds;
+                    }
+                }
+            }
+            if(sResult.indexOf(";") != -1) {
+                sResult = sResult.substring(1);
+            }
+        }
+    } catch(e) {
+    }
+    return sResult; 
+}
+ 
+//通过测量点序号获得该测量点下选择的命令项ID
+function getOrderIdsByGpSn(vGpSn){
+    var orderIds = "";
+    var orderIdsTemp = document.getElementsByName("GpSn_" + vGpSn + "_OrderId");
+    if (orderIdsTemp != null){
+        for (var i = 0; i < orderIdsTemp.length; i++){
+            if (orderIdsTemp[i].checked) {
+                orderIds += ",";
+                orderIds += orderIdsTemp[i].value;
+            }
+        }
+    }
+    return orderIds;
+}
+ 
+//通过测量点序号获得该测量点下所有的命令项ID
+function getAllOrderIdsByGpSn(vGpSn){
+    var orderIds = "";
+    var orderIdsTemp = document.getElementsByName("GpSn_" + vGpSn + "_OrderId");
+    if (orderIdsTemp != null){
+        for (var i = 0; i < orderIdsTemp.length; i++){
+            orderIds += ",";
+            orderIds += orderIdsTemp[i].value;
+        }
+    }
+    if (orderIds.indexOf(",") != -1) {
+        orderIds = orderIds.substring(1);
+    }
+    return orderIds;
+}
+ 
+//获取具有ShowHtml的数据项
+function getShowHtmlItems(){
+    var items = document.getElementsByName("show_html_items");
+    var showHtmlItems = [];
+    for(var i = 0; i < items.length; i++) {
+        showHtmlItems.push(items[i].value);
+    }
+    return showHtmlItems;
+}
+ 
+// 获得选择测量点序号
+function getSelectdGpSnString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            if(document.all.GpSn.checked) {
+                sResult += "," + document.all.GpSn.value + "";
+            }
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                if(document.all.GpSn[i].checked) {
+                    sResult += "," + document.all.GpSn[i].value + "";
+                }
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+    return sResult;
+}
+
+// 获得所有测量点序号
+function getAllGpSnString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length == "undefined") {
+            sResult += "," + document.all.GpSn.value + "";
+        }
+        else if(typeof document.all.GpSn != "undefined" && typeof document.all.GpSn.length != "undefined") {
+            for(var i = 0; i < document.all.GpSn.length; i++) {
+                sResult += "," + document.all.GpSn[i].value + "";
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+    return sResult;
+}
+
+//数组比较
+Array.prototype.contains = function(obj) {   
+    var boo = false;   
+    for(var i=0;i<this.length;i++) {   
+        if(typeof obj == "object") {   
+            if(this[i].equals(obj)) {   
+                boo = true;   
+                break;   
+            }                          
+        }else {   
+            if(this[i] == obj)  {   
+                   boo = true;   
+                   break;                  
+            }   
+        }              
+    }   
+    return boo;   
+}
+
+function filter(a1, a2) {   
+    var myAry = [];   
+    var fun = function(item,ary) {   
+        var boo = false;   
+        for(var i=0;i<ary.length;i++) {   
+            if(item==ary[i]) {   
+                  boo = true;   
+                  break;   
+            }   
+        }   
+        return boo;                                
+    }      
+    for(var i=0;i<a1.length;i++) {   
+        if(!a2.contains(a1[i]))   
+            myAry.push(a1[i]);                     
+    }              
+    return myAry;   
+}
+
+// 清空结果内容
+function clearText(){
+    var allGpSnList = getAllGpSnString();
+    //alert("in clear allGpSnList=" + allGpSnList);
+    if (allGpSnList != null) {
+        var allGpSns = allGpSnList.split(",");
+        for (var i=0; i < allGpSns.length; i++){
+            var orderIds = getAllOrderIdsByGpSn(allGpSns[i]);
+            var orderIdArr = orderIds.split(",");
+            for (var j = 0; j < orderIdArr.length; j++){
+                //清空命令项结果内容
+                document.getElementById("result_" + allGpSns[i] + "_" + orderIdArr[j]).innerHTML = "";
+                var itemIds = document.getElementsByName("itemid_" + orderIdArr[j] + "_" + allGpSns[i]);
+                for(var k = 0; k < itemIds.length; k++){
+                    //清空数据项结果内容
+                    document.getElementById("result_" + allGpSns[i] + "_"  + orderIdArr[j] + "_" + itemIds[k].value).innerHTML = "";
+                }
+            }
+        }
+    }
+}
+
+// 初始化测量点读取内容
+function initReadGpText(vGpSn){
+    var selectedOrderIdList = getOrderIdsByGpSn(vGpSn);
+    if (selectedOrderIdList != null && selectedOrderIdList.indexOf(",") != -1) {
+        selectedOrderIdList = selectedOrderIdList.substring(1);
+        var selectedIdArr = selectedOrderIdList.split(",");
+        for (var i = 0; i < selectedIdArr.length; i++){
+            var itemIds = document.getElementsByName("itemid_" + selectedIdArr[i] + "_" + vGpSn);
+            for(var j = 0; j < itemIds.length; j++){
+                document.getElementById("result_" + vGpSn + "_"  + selectedIdArr[i] + "_" + itemIds[j].value).innerHTML = "正在读取...";
+            }
+        }
+    }
+}
+
+// 初始化测量点设置内容
+function initSetupGpText(vGpSn){
+    var selectedOrderIdList = getOrderIdsByGpSn(vGpSn);
+    if (selectedOrderIdList != null && selectedOrderIdList.indexOf(",") != -1) {
+        selectedOrderIdList = selectedOrderIdList.substring(1);
+        var selectedIdArr = selectedOrderIdList.split(",");
+        for (var i=0; i < selectedIdArr.length; i++){
+            document.getElementById("result_" + vGpSn + "_" + selectedIdArr[i]).innerHTML = "正在设置...";
+        }
+    }
+}
+
+//初始化
+function init(){
+    var allgpSnList = getAllGpSnString();
+    if (allgpSnList == null || allgpSnList.length <= 0) {
+        return;
+    }
+    //alert("allgpSnList=" + allgpSnList);
+    var allgpSnArr = allgpSnList.split(",");
+    for (var i=0; i < allgpSnArr.length; i++){
+        var allOrderIdList = getAllOrderIdsByGpSn(allgpSnArr[i]);
+        var allOrderIdArr = allOrderIdList.split(",");
+        //alert("allOrderIdList=" + allOrderIdList);
+        for (var j=0; j < allOrderIdArr.length; j++){
+            var itemIdArr = document.getElementsByName("itemid_" + allOrderIdArr[j] + "_" + allgpSnArr[i]);
+            //alert("itemIdArr.length=" + itemIdArr.length);
+            for(var k=0; k < itemIdArr.length; k++){
+                var paraValue = document.getElementById("paravalue_" + itemIdArr[k].value + "_" + allgpSnArr[i]);
+                var lastValue = document.getElementById("lastvalue_" + itemIdArr[k].value + "_" + allgpSnArr[i]);
+                //alert("paraValue.value=" + paraValue.value + ", lastValue.value=" + lastValue.value);
+                if (paraValue.value != lastValue.value) {
+                    $("#" + allgpSnArr[i] + "_" + allOrderIdArr[j] + "_" + itemIdArr[k].value).attr("class", "redStyle");
+                }
+            }
+        }
+    }
+}
+
+// 测量点参数设置下发
+function setup(){
+    var termId = parent.document.getElementById("termId").value;
+    var gpSnOrderIdList = getSelectedGpSnIdString();
+    //alert("SelectedGpSnIdString=" + gpSnOrderIdList);
+    if (gpSnOrderIdList == null || gpSnOrderIdList.length <= 0) {
+        alert("请先选择要下发的命令项, 再设置!");
+        //设置按钮可用
+        parent.setButtonStatus(true);
+        return;
+    }
+    // 清空结果内容
+    clearText();
+    gpSnArr = getSelectdGpSnString().split(",");
+    for (var i = 0; i < gpSnArr.length; i++){
+        // 初始化测量点设置内容
+        initSetupGpText(gpSnArr[i]);
+    }
+    setSelectedGpSnOrderId(gpSnArr);
+    setTimeout("getSetupGpResult(5)", 3000);
+}
+
+function setSelectedGpSnOrderId(gpSnArr){
+    selectedGpSnOrderIdArr = [];
+    var orderIds;
+    //var gpSnArr = getSelectdGpSnString().split(",");
+    for (var i = 0; i < gpSnArr.length; i++){
+        //把测量点序号和该测量点下选择的命令项ID组合加入selectedGpSnOrderIdArr
+        orderIds = getOrderIdsByGpSn(gpSnArr[i]);
+        if (orderIds != null && orderIds.indexOf(",") != -1) {
+            orderIds = orderIds.substring(1);
+            var orderIdArr = orderIds.split(",");
+            for (var j = 0; j < orderIdArr.length; j++){
+                selectedGpSnOrderIdArr.push(gpSnArr[i] + "_" + orderIdArr[j]);
+            }
+        }
+    }
+}
+
+var selectedGpSnOrderIdArr;
+var json = {'data':[{'gpSnOrderId':'1_10040025','result':'000000'},{'gpSnOrderId':'1_10040026','result':'000000'}]};
+// 获取测量点参数设置下发返回结果
+function getSetupGpResult(fetchCount) {
+    var retFlag = true;
+    //判断结果是否全部返回
+    for (var i=0; i < selectedGpSnOrderIdArr.length; i++){
+        var idExist = false;
+        for (var j=0; j < json.data.length; j++){
+            if (selectedGpSnOrderIdArr[i] == json.data[j].gpSnOrderId){
+                idExist = true;
+                break;
+            }
+        }
+        if (idExist == false){
+            retFlag = false;
+            break;
+        }
+    }
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < json.data.length; i++){
+            if (selectedGpSnOrderIdArr.contains(json.data[i].gpSnOrderId)) {
+                if ("000000" == json.data[i].result) {
+                    document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置成功";
+                }
+                else {
+                    document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置失败";
+                }
+            }
+        }
+        //设置按钮可用
+        parent.setButtonStatus(true);
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < json.data.length; i++){
+                if (selectedGpSnOrderIdArr.contains(json.data[i].gpSnOrderId)) {
+                    if ("000000" == json.data[i].result) {
+                        document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置成功";
+                    }
+                    else {
+                        document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置失败";
+                    }
+                }
+            }
+            //再次调用设置下发返回结果
+            setTimeout("getSetupGpResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            var returnIdArr = [];
+            for (var i=0; i < json.data.length; i++){
+                if (selectedGpSnOrderIdArr.contains(json.data[i].gpSnOrderId)) {
+                    if ("000000" == json.data[i].result) {
+                        document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置成功";
+                    }
+                    else {
+                        document.getElementById("result_" + json.data[i].gpSnOrderId).innerHTML = "设置失败";
+                    }
+                    returnIdArr.push(json.data[i].gpSnOrderId);
+                }
+            }
+            //没有返回的设置为超时
+            var backResult = filter(selectedGpSnOrderIdArr, returnIdArr);
+            for(var n=0; n < backResult.length; n++) {
+                if ("正在设置..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                    document.getElementById("result_" + backResult[n]).innerHTML = "设置超时";
+                }
+            }
+            //设置按钮可用
+            parent.setButtonStatus(true);
+        }
+    }
+}
+
+// 测量点参数读取下发
+function readPara(){
+    var gpSnOrderIdList = getSelectedGpSnIdString();
+    //alert("SelectedGpSnIdString=" + gpSnOrderIdList);
+    if (gpSnOrderIdList == null || gpSnOrderIdList.length <= 0) {
+        alert("请先选择要下发的命令项, 再读取!");
+        //设置按钮可用
+        parent.setButtonStatus(true);
+        return;
+    }
+    
+    // 清空结果内容
+    clearText();
+    var gpSnArr = getSelectdGpSnString().split(",");
+    for (var i = 0; i < gpSnArr.length; i++){
+        // 初始化测量点设置内容
+        initReadGpText(gpSnArr[i]);
+    }
+    setSelectedGpSnOrderId(gpSnArr);
+    setTimeout("getReadGpResult(5)", 3000);
+}
+
+var jsonRd = {'data':[{'itemId':'1_10040025_DI_1004002501','result':'2'},{'itemId':'1_10040025_DI_1004002505','result':'2'}]};
+// 获取测量点参数读取下发返回结果
+function getReadGpResult(fetchCount) {
+    var selectedItemIdArr = [];
+    var gpsnOrderIdArr;
+    for (var i = 0; i < selectedGpSnOrderIdArr.length; i++){
+        gpsnOrderIdArr = selectedGpSnOrderIdArr[i].split("_");
+        var itemIdArr = document.getElementsByName("itemid_" + gpsnOrderIdArr[1] + "_" + gpsnOrderIdArr[0]);
+        //把测量点序号,该测量点下选择的命令项ID和数据项ID组合加入selectedItemIdArr
+        for(var j = 0; j < itemIdArr.length; j++){
+            selectedItemIdArr.push(selectedGpSnOrderIdArr[i] + "_" + itemIdArr[j].value);
+        }
+    }
+    //alert(selectedItemIdArr);
+    var retFlag = true;
+    //判断结果是否全部返回
+    for (var i=0; i < selectedItemIdArr.length; i++){
+        var idExist = false;
+        for (var j=0; j < jsonRd.data.length; j++){
+            if (selectedItemIdArr[i] == jsonRd.data[j].itemId){
+                idExist = true;
+                break;
+            }
+        }
+        if (idExist == false){
+            retFlag = false;
+            break;
+        }
+    }
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < jsonRd.data.length; i++){
+            if (selectedItemIdArr.contains(jsonRd.data[i].itemId)) {
+                setReadResultValue(jsonRd.data[i].itemId, jsonRd.data[i].result);
+            }
+        }
+        //设置按钮可用
+        parent.setButtonStatus(true);
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < jsonRd.data.length; i++){
+                if (selectedItemIdArr.contains(jsonRd.data[i].itemId)) {
+                    setReadResultValue(jsonRd.data[i].itemId, jsonRd.data[i].result);
+                }
+            }
+            //再次调用读取下发返回结果
+            setTimeout("getReadGpResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            var returnIdArr = [];
+            for (var i=0; i < jsonRd.data.length; i++){
+                if (selectedItemIdArr.contains(jsonRd.data[i].itemId)) {
+                    setReadResultValue(jsonRd.data[i].itemId, jsonRd.data[i].result);
+                    returnIdArr.push(jsonRd.data[i].itemId);
+                }
+            }
+            //没有返回的设置为读取超时
+            var backResult = filter(selectedItemIdArr, returnIdArr);
+            for(var n=0; n < backResult.length; n++) {
+                if ("正在读取..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                    document.getElementById("result_" + backResult[n]).innerHTML = "读取超时";
+                }
+            }
+            //设置按钮可用
+            parent.setButtonStatus(true);
+        }
+    }
+}
+
+//设置读取结果值
+function setReadResultValue(gpsnOrderItemId, itemvalue){
+    if (gpsnOrderItemId == null) {
+        return;
+    }
+    //数据格式出错
+    var gpsn, orderid, itemid;
+    var gpsnOrderItemArr = gpsnOrderItemId.split("_");
+    if (gpsnOrderItemArr.length != 4){
+        return;
+    }
+    gpsn = gpsnOrderItemArr[0];
+    orderid = gpsnOrderItemArr[1];
+    itemid = gpsnOrderItemArr[2] + "_" + gpsnOrderItemArr[3];
+    //获取具有ShowHtml的数据项
+    var showHtmlItems = getShowHtmlItems();
+    if (!showHtmlItems.contains(gpsnOrderItemId)){
+        document.getElementById("result_" + gpsnOrderItemId).innerHTML = itemvalue;
+        return;
+    }
+    var innerhtml = document.getElementById(gpsnOrderItemId).innerHTML;
+    document.getElementById("result_" + gpsnOrderItemId).innerHTML = innerhtml;
+    
+    document.getElementsByName("itemvalue_" + gpsn + "_" + itemid)[2].value = itemvalue;
+    document.getElementsByName("itemvalue_" + gpsn + "_" + itemid)[2].disabled = true;
+}
+
+//得到失败重发类型(0:没失败, 1:设置失败, 2:读取失败)
+function getHandleType(){
+    var allgpSnList = getAllGpSnString();
+    var result;
+    if (allgpSnList != null && allgpSnList.length > 0) {
+        var allgpSnArr = allgpSnList.split(",");
+        for (var i=0; i < allgpSnArr.length; i++){
+            var allOrderIdList = getAllOrderIdsByGpSn(allgpSnArr[i]);
+            var allOrderIdArr = allOrderIdList.split(",");
+            for (var j=0; j < allOrderIdArr.length; j++){
+                result = document.getElementById("result_" + allgpSnArr[i] + "_" + allOrderIdArr[j]).innerHTML;
+                if (result == "设置失败" || result == "设置超时"){
+                    return 1;
+                }
+                else {
+                    var itemIdArr = document.getElementsByName("itemid_" + allOrderIdArr[j] + "_" + allgpSnArr[i]);
+                    for(var k=0; k < itemIdArr.length; k++){
+                        result = document.getElementById("result_" + allgpSnArr[i] + "_"  + allOrderIdArr[j] + "_" + itemIdArr[k].value).innerHTML;
+                        if (result == "读取失败" || result == "读取超时"){
+                            return 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return 0;
+}
+
+//根据失败类型得到下发失败命令项
+function getCmdItemsByType(type){
+    var allgpSnList = getAllGpSnString();
+    var cmdItemArr = [];
+    var result;
+    if (allgpSnList != null && allgpSnList.length > 0) {
+        var allgpSnArr = allgpSnList.split(",");
+        if (type == 1){
+            for (var i=0; i < allgpSnArr.length; i++){
+                var allOrderIdList = getAllOrderIdsByGpSn(allgpSnArr[i]);
+                var allOrderIdArr = allOrderIdList.split(",");
+                for (var j=0; j < allOrderIdArr.length; j++){
+                    result = document.getElementById("result_" + allgpSnArr[i] + "_" + allOrderIdArr[j]).innerHTML;
+                    if (result == "设置失败" || result == "设置超时"){
+                        cmdItemArr.push(allgpSnArr[i] + "_" + allOrderIdArr[j]);
+                    }
+                }
+            }
+        }
+        else if (type == 2){
+            for (var i=0; i < allgpSnArr.length; i++){
+                var allOrderIdList = getAllOrderIdsByGpSn(allgpSnArr[i]);
+                var allOrderIdArr = allOrderIdList.split(",");
+                for (var j=0; j < allOrderIdArr.length; j++){
+                    var itemIdArr = document.getElementsByName("itemid_" + allOrderIdArr[j] + "_" + allgpSnArr[i]);
+                    for(var k=0; k < itemIdArr.length; k++){
+                        result = document.getElementById("result_" + allgpSnArr[i] + "_"  + allOrderIdArr[j] + "_" + itemIdArr[k].value).innerHTML;
+                        if (result == "读取失败" || result == "读取超时"){
+                            cmdItemArr.push(allgpSnArr[i] + "_" + allOrderIdArr[j]);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    else {
+        return null;
+    }
+    
+    return cmdItemArr;
+}
+
+
+var cmdItemArr;
+//失败重发
+function rehandle(){
+    var handleType = getHandleType();
+    if (handleType == 0) {
+        alert("没有失败的命令项!");
+        return;
+    }
+    cmdItemArr = getCmdItemsByType(handleType);
+    //alert(cmdItemArr);
+    if (cmdItemArr != null && cmdItemArr.length > 0){
+        //设置按钮不可用
+        parent.setButtonStatus(false);
+        //根据失败类型初始化失败重发内容
+        initTextByType(handleType);
+        setTimeout("getHandleResult(" + handleType + ", 2)", 3000);
+    }
+}
+
+//获得失败重发结果
+function getHandleResult(handleType, fetchCount){
+    selectedOrderIdArr = cmdItemArr;
+    if (handleType == 1){
+        getSetupGpResult(fetchCount);
+    }
+    else if (handleType == 2){
+        getReadGpResult(fetchCount);
+    }
+}
+
+// 根据失败类型初始化失败重发内容
+function initTextByType(type){
+    if (type == 1) {
+        for (var i=0; i < cmdItemArr.length; i++){
+            document.getElementById("result_" + cmdItemArr[i]).innerHTML = "正在设置...";
+        }
+    }
+    else if (type == 2) {
+        for (var i=0; i < cmdItemArr.length; i++){
+            var gpsnCmd = cmdItemArr[i].split("_");
+            var itemIdArr = document.getElementsByName("itemid_" + gpsnCmd[1] + "_" + gpsnCmd[0]);
+            for(var j=0; j < itemIdArr.length; j++){
+                result = document.getElementById("result_" + cmdItemArr[i] + "_" + itemIdArr[j].value).innerHTML = "正在读取...";
+            }
+        }
+    }
+}
+
+</script>
+  </head>
+
+  <body onload="init()">
+    <input type="hidden" id="action" name="action" value="setupGpPara" />
+    <input name="termId" id="termId" type=hidden value="101468">
+    <input name="gpsn_orderid_list" id="gpsn_orderid_list" type=hidden value="">
+    <input name="paraType" id="paraType" type=hidden value="">
+    <input name="opType" id="opType" type=hidden value="">
+
+    <div>
+      <div class="tableContainer"
+        style="height: expression((( document . documentElement . clientHeight || document . body . clientHeight) - 35));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th width="5%">
+                <input type="checkbox" name="selectAll" checked
+                  onclick="selectAllGpSn()">
+              </th>
+              <th width="9%">
+                参数类型
+              </th>
+              <th width="20%">
+                数据项名称
+              </th>
+              <th width="13%">
+                数据项编码
+              </th>
+              <th width="8%">
+                测量点序号
+              </th>
+              <th width="12%">
+                待设值
+              </th>
+              <th width="12%">
+                上次设置值
+              </th>
+              <th width="7%">
+                单位
+              </th>
+              <th width="12%">
+                操作结果
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;" onclick="folder(this, '1');" />
+                <input type="checkbox" name="GpSn"
+                  onclick="selectOrderIdByGpSn(this, '1');" value="1"
+                  checked />
+              </td>
+              <td>
+                45555
+              </td>
+              <td colspan="6"
+                style="text-align: left; padding-left: 5px;">
+                1
+              </td>
+              <td id="result_gpsn_1"></td>
+            </tr>
+            <tr id="otr_1_0" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_1_10040025"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '1', '10040025');" />
+                <input type="checkbox" name="GpSn_1_OrderId"
+                  onclick="selectGpSn('1');" value="10040025" checked />
+              </td>
+              <td>
+                电表配置
+              </td>
+              <td>
+                测量点基本参数
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040025
+              </td>
+              <td id="result_1_10040025"></td>
+            </tr>
+            <tr id="otr_1_10040025_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压互感器倍率
+              </td>
+              <td>
+                DI_1004002501
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040025_DI_1004002501"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_1"
+                  value="DI_1004002501" />
+                <input type="hidden" name="paravalue_DI_1004002501_1"
+                  id="paravalue_DI_1004002501_1" value="1" />
+                1
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002501_1"
+                  id="lastvalue_DI_1004002501_1" value="" />
+              </td>
+              <td></td>
+              <td id="result_1_10040025_DI_1004002501"></td>
+            </tr>
+            <tr id="otr_1_10040025_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电流互感器倍率
+              </td>
+              <td>
+                DI_1004002502
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040025_DI_1004002502"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_1"
+                  value="DI_1004002502" />
+                <input type="hidden" name="paravalue_DI_1004002502_1"
+                  id="paravalue_DI_1004002502_1" value="1" />
+                1
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002502_1"
+                  id="lastvalue_DI_1004002502_1" value="" />
+              </td>
+              <td></td>
+              <td id="result_1_10040025_DI_1004002502"></td>
+            </tr>
+
+            <tr id="otr_1_10040025_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                额定电压
+              </td>
+              <td>
+                DI_1004002503
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040025_DI_1004002503"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_1"
+                  value="DI_1004002503" />
+                <input type="hidden" name="paravalue_DI_1004002503_1"
+                  id="paravalue_DI_1004002503_1" value="220" />
+                220
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002503_1"
+                  id="lastvalue_DI_1004002503_1" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040025_DI_1004002503"></td>
+            </tr>
+
+            <tr id="otr_1_10040025_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                最大电流
+              </td>
+              <td>
+                DI_1004002504
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040025_DI_1004002504"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_1"
+                  value="DI_1004002504" />
+                <input type="hidden" name="paravalue_DI_1004002504_1"
+                  id="paravalue_DI_1004002504_1" value="1.0" />
+                1.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002504_1"
+                  id="lastvalue_DI_1004002504_1" value="" />
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_1_10040025_DI_1004002504"></td>
+            </tr>
+
+            <tr id="otr_1_10040025_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电源接线方式
+              </td>
+              <td>
+                DI_1004002505
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040025_DI_1004002505"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_1"
+                  value="DI_1004002505" />
+                <input type="hidden" name="paravalue_DI_1004002505_1"
+                  id="paravalue_DI_1004002505_1" value="3" />
+                <input type="hidden" name="show_html_items"
+                  value="1_10040025_DI_1004002505" />
+                <select name="itemvalue_1_DI_1004002505"
+                  id="itemvalue_1_DI_1004002505">
+                  <option value="1">
+                    三相三线
+                  </option>
+                  <option value="2">
+                    三相四线
+                  </option>
+                  <option value="3">
+                    单相表
+                  </option>
+                </select>
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <!--  -->
+                <input type="hidden" name="lastvalue_DI_1004002505_1"
+                  id="lastvalue_DI_1004002505_1" value="" />
+
+
+                <select name="itemvalue_1_DI_1004002505"
+                  id="itemvalue_1_DI_1004002505">
+                  <option value="1">
+                    三相三线
+                  </option>
+                  <option value="2">
+                    三相四线
+                  </option>
+                  <option value="3">
+                    单相表
+                  </option>
+                </select>
+              </td>
+              <td></td>
+              <td id="result_1_10040025_DI_1004002505"></td>
+            </tr>
+            <tr id="otr_1_1" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_1_10040026"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '1', '10040026');" />
+                <input type="checkbox" name="GpSn_1_OrderId"
+                  onclick="selectGpSn('1');" value="10040026" checked />
+              </td>
+              <td>
+                限值参数
+              </td>
+              <td>
+                测量点限值参数
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040026
+              </td>
+              <td id="result_1_10040026"></td>
+            </tr>
+            <tr id="otr_1_10040026_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压合格上限
+              </td>
+              <td>
+                DI_1004002601
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002601"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002601" />
+                <input type="hidden" name="paravalue_DI_1004002601_1"
+                  id="paravalue_DI_1004002601_1" value="400.0" />
+                400.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002601_1"
+                  id="lastvalue_DI_1004002601_1" value="400.0" />
+                400.0
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040026_DI_1004002601"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压合格下限
+              </td>
+              <td>
+                DI_1004002602
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002602"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002602" />
+                <input type="hidden" name="paravalue_DI_1004002602_1"
+                  id="paravalue_DI_1004002602_1" value="300.0" />
+                300.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002602_1"
+                  id="lastvalue_DI_1004002602_1" value="300.0" />
+                300.0
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040026_DI_1004002602"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压断相门限
+              </td>
+              <td>
+                DI_1004002603
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002603"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002603" />
+                <input type="hidden" name="paravalue_DI_1004002603_1"
+                  id="paravalue_DI_1004002603_1" value="100.0" />
+                100.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002603_1"
+                  id="lastvalue_DI_1004002603_1" value="100.0" />
+                100.0
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040026_DI_1004002603"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压上上限（过压门限）
+              </td>
+              <td>
+                DI_1004002604
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002604"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002604" />
+                <input type="hidden" name="paravalue_DI_1004002604_1"
+                  id="paravalue_DI_1004002604_1" value="500.0" />
+                500.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002604_1"
+                  id="lastvalue_DI_1004002604_1" value="500.0" />
+                500.0
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040026_DI_1004002604"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压下下限（欠压门限）
+              </td>
+              <td>
+                DI_1004002605
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002605"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002605" />
+                <input type="hidden" name="paravalue_DI_1004002605_1"
+                  id="paravalue_DI_1004002605_1" value="200.0" />
+                200.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002605_1"
+                  id="lastvalue_DI_1004002605_1" value="200.0" />
+                200.0
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_1_10040026_DI_1004002605"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_5" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                相电流上上限（过流门限）
+              </td>
+              <td>
+                DI_1004002606
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002606"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002606" />
+                <input type="hidden" name="paravalue_DI_1004002606_1"
+                  id="paravalue_DI_1004002606_1" value="60.00" />
+                60.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002606_1"
+                  id="lastvalue_DI_1004002606_1" value="60.00" />
+                60.00
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_1_10040026_DI_1004002606"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_6" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                相电流上限（额定电流门限）
+              </td>
+              <td>
+                DI_1004002607
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002607"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002607" />
+                <input type="hidden" name="paravalue_DI_1004002607_1"
+                  id="paravalue_DI_1004002607_1" value="40.00" />
+                40.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002607_1"
+                  id="lastvalue_DI_1004002607_1" value="40.00" />
+                40.00
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_1_10040026_DI_1004002607"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_7" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                零序电流上限
+              </td>
+              <td>
+                DI_1004002608
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002608"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002608" />
+                <input type="hidden" name="paravalue_DI_1004002608_1"
+                  id="paravalue_DI_1004002608_1" value="20.00" />
+                20.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002608_1"
+                  id="lastvalue_DI_1004002608_1" value="20.00" />
+                20.00
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_1_10040026_DI_1004002608"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_8" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                视在功率上上限
+              </td>
+              <td>
+                DI_1004002609
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_1004002609"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_1004002609" />
+                <input type="hidden" name="paravalue_DI_1004002609_1"
+                  id="paravalue_DI_1004002609_1" value="20.050" />
+                20.050
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002609_1"
+                  id="lastvalue_DI_1004002609_1" value="20.050" />
+                20.050
+              </td>
+              <td>
+                kVA
+              </td>
+              <td id="result_1_10040026_DI_1004002609"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_9" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                视在功率上限
+              </td>
+              <td>
+                DI_100400260A
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_100400260A"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_100400260A" />
+                <input type="hidden" name="paravalue_DI_100400260A_1"
+                  id="paravalue_DI_100400260A_1" value="30.500" />
+                30.500
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260A_1"
+                  id="lastvalue_DI_100400260A_1" value="30.500" />
+                30.500
+              </td>
+              <td>
+                kVA
+              </td>
+              <td id="result_1_10040026_DI_100400260A"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_10" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                三相电压不平衡限值
+              </td>
+              <td>
+                DI_100400260B
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_100400260B"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_100400260B" />
+                <input type="hidden" name="paravalue_DI_100400260B_1"
+                  id="paravalue_DI_100400260B_1" value="80.0" />
+                80.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260B_1"
+                  id="lastvalue_DI_100400260B_1" value="80.0" />
+                80.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_1_10040026_DI_100400260B"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_11" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                三相电流不平衡限值
+              </td>
+              <td>
+                DI_100400260C
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_100400260C"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_100400260C" />
+                <input type="hidden" name="paravalue_DI_100400260C_1"
+                  id="paravalue_DI_100400260C_1" value="75.0" />
+                75.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260C_1"
+                  id="lastvalue_DI_100400260C_1" value="75.0" />
+                75.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_1_10040026_DI_100400260C"></td>
+            </tr>
+
+            <tr id="otr_1_10040026_12" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                连续失压时间限值
+              </td>
+              <td>
+                DI_100400260D
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040026_DI_100400260D"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_1"
+                  value="DI_100400260D" />
+                <input type="hidden" name="paravalue_DI_100400260D_1"
+                  id="paravalue_DI_100400260D_1" value="5" />
+                5
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260D_1"
+                  id="lastvalue_DI_100400260D_1" value="5" />
+                5
+              </td>
+              <td>
+                min
+              </td>
+              <td id="result_1_10040026_DI_100400260D"></td>
+            </tr>
+
+            <tr id="otr_1_2" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_1_10040028"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '1', '10040028');" />
+                <input type="checkbox" name="GpSn_1_OrderId"
+                  onclick="selectGpSn('1');" value="10040028" checked />
+              </td>
+              <td>
+                限值参数
+              </td>
+              <td>
+                测量点功率因数分段限值
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040028
+              </td>
+              <td id="result_1_10040028"></td>
+            </tr>
+
+            <tr id="otr_1_10040028_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                功率因数分段限值1
+              </td>
+              <td>
+                DI_1004002801
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040028_DI_1004002801"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040028_1"
+                  value="DI_1004002801" />
+                <input type="hidden" name="paravalue_DI_1004002801_1"
+                  id="paravalue_DI_1004002801_1" value="150.0" />
+                150.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002801_1"
+                  id="lastvalue_DI_1004002801_1" value="150.0" />
+                150.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_1_10040028_DI_1004002801"></td>
+            </tr>
+
+            <tr id="otr_1_10040028_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                功率因数分段限值2
+              </td>
+              <td>
+                DI_1004002802
+              </td>
+              <td>
+                1
+              </td>
+              <td id="1_10040028_DI_1004002802"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040028_1"
+                  value="DI_1004002802" />
+                <input type="hidden" name="paravalue_DI_1004002802_1"
+                  id="paravalue_DI_1004002802_1" value="60.0" />
+                60.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002802_1"
+                  id="lastvalue_DI_1004002802_1" value="60.0" />
+                60.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_1_10040028_DI_1004002802"></td>
+            </tr>
+
+            <tr>
+              <td>
+                <img align="absmiddle" src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;" onclick="folder(this, '3');" />
+                <input type="checkbox" name="GpSn"
+                  onclick="selectOrderIdByGpSn(this, '3');" value="3"
+                  checked />
+              </td>
+              <td>
+                45555
+              </td>
+              <td colspan="6"
+                style="text-align: left; padding-left: 5px;">
+                3
+              </td>
+              <td id="result_gpsn_3"></td>
+            </tr>
+
+            <tr id="otr_3_0" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_3_10040025"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '3', '10040025');" />
+                <input type="checkbox" name="GpSn_3_OrderId"
+                  onclick="selectGpSn('3');" value="10040025" checked />
+              </td>
+              <td>
+                电表配置
+              </td>
+              <td>
+                测量点基本参数
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040025
+              </td>
+              <td id="result_3_10040025"></td>
+            </tr>
+
+            <tr id="otr_3_10040025_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压互感器倍率
+              </td>
+              <td>
+                DI_1004002501
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040025_DI_1004002501"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_3"
+                  value="DI_1004002501" />
+                <input type="hidden" name="paravalue_DI_1004002501_3"
+                  id="paravalue_DI_1004002501_3" value="1" />
+                1
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002501_3"
+                  id="lastvalue_DI_1004002501_3" value="" />
+              </td>
+              <td></td>
+              <td id="result_3_10040025_DI_1004002501"></td>
+            </tr>
+
+            <tr id="otr_3_10040025_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电流互感器倍率
+              </td>
+              <td>
+                DI_1004002502
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040025_DI_1004002502"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_3"
+                  value="DI_1004002502" />
+                <input type="hidden" name="paravalue_DI_1004002502_3"
+                  id="paravalue_DI_1004002502_3" value="1" />
+                1
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002502_3"
+                  id="lastvalue_DI_1004002502_3" value="" />
+              </td>
+              <td></td>
+              <td id="result_3_10040025_DI_1004002502"></td>
+            </tr>
+
+            <tr id="otr_3_10040025_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                额定电压
+              </td>
+              <td>
+                DI_1004002503
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040025_DI_1004002503"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_3"
+                  value="DI_1004002503" />
+                <input type="hidden" name="paravalue_DI_1004002503_3"
+                  id="paravalue_DI_1004002503_3" value="220" />
+                220
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002503_3"
+                  id="lastvalue_DI_1004002503_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040025_DI_1004002503"></td>
+            </tr>
+
+            <tr id="otr_3_10040025_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                最大电流
+              </td>
+              <td>
+                DI_1004002504
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040025_DI_1004002504"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_3"
+                  value="DI_1004002504" />
+                <input type="hidden" name="paravalue_DI_1004002504_3"
+                  id="paravalue_DI_1004002504_3" value="1.0" />
+                1.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002504_3"
+                  id="lastvalue_DI_1004002504_3" value="" />
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_3_10040025_DI_1004002504"></td>
+            </tr>
+
+            <tr id="otr_3_10040025_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电源接线方式
+              </td>
+              <td>
+                DI_1004002505
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040025_DI_1004002505"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040025_3"
+                  value="DI_1004002505" />
+                <input type="hidden" name="paravalue_DI_1004002505_3"
+                  id="paravalue_DI_1004002505_3" value="3" />
+                <input type="hidden" name="show_html_items"
+                  value="3_10040025_DI_1004002505" />
+                <select name="itemvalue_3_DI_1004002505"
+                  id="itemvalue_3_DI_1004002505">
+                  <option value="1">
+                    三相三线
+                  </option>
+                  <option value="2">
+                    三相四线
+                  </option>
+                  <option value="3">
+                    单相表
+                  </option>
+                </select>
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002505_3"
+                  id="lastvalue_DI_1004002505_3" value="" />
+                <select name="itemvalue_3_DI_1004002505"
+                  id="itemvalue_3_DI_1004002505">
+                  <option value="1">
+                    三相三线
+                  </option>
+                  <option value="2">
+                    三相四线
+                  </option>
+                  <option value="3">
+                    单相表
+                  </option>
+                </select>
+              </td>
+              <td></td>
+              <td id="result_3_10040025_DI_1004002505"></td>
+            </tr>
+
+            <tr id="otr_3_1" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_3_10040026"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '3', '10040026');" />
+                <input type="checkbox" name="GpSn_3_OrderId"
+                  onclick="selectGpSn('3');" value="10040026" checked />
+              </td>
+              <td>
+                限值参数
+              </td>
+              <td>
+                测量点限值参数
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040026
+              </td>
+              <td id="result_3_10040026"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压合格上限
+              </td>
+              <td>
+                DI_1004002601
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002601"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002601" />
+                <input type="hidden" name="paravalue_DI_1004002601_3"
+                  id="paravalue_DI_1004002601_3" value="400.0" />
+                400.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002601_3"
+                  id="lastvalue_DI_1004002601_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040026_DI_1004002601"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压合格下限
+              </td>
+              <td>
+                DI_1004002602
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002602"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002602" />
+                <input type="hidden" name="paravalue_DI_1004002602_3"
+                  id="paravalue_DI_1004002602_3" value="300.0" />
+                300.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002602_3"
+                  id="lastvalue_DI_1004002602_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040026_DI_1004002602"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_2" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压断相门限
+              </td>
+              <td>
+                DI_1004002603
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002603"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002603" />
+                <input type="hidden" name="paravalue_DI_1004002603_3"
+                  id="paravalue_DI_1004002603_3" value="100.0" />
+                100.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002603_3"
+                  id="lastvalue_DI_1004002603_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040026_DI_1004002603"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_3" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压上上限（过压门限）
+              </td>
+              <td>
+                DI_1004002604
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002604"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002604" />
+                <input type="hidden" name="paravalue_DI_1004002604_3"
+                  id="paravalue_DI_1004002604_3" value="500.0" />
+                500.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002604_3"
+                  id="lastvalue_DI_1004002604_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040026_DI_1004002604"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_4" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                电压下下限（欠压门限）
+              </td>
+              <td>
+                DI_1004002605
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002605"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002605" />
+                <input type="hidden" name="paravalue_DI_1004002605_3"
+                  id="paravalue_DI_1004002605_3" value="200.0" />
+                200.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002605_3"
+                  id="lastvalue_DI_1004002605_3" value="" />
+              </td>
+              <td>
+                V
+              </td>
+              <td id="result_3_10040026_DI_1004002605"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_5" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                相电流上上限（过流门限）
+              </td>
+              <td>
+                DI_1004002606
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002606"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002606" />
+                <input type="hidden" name="paravalue_DI_1004002606_3"
+                  id="paravalue_DI_1004002606_3" value="60.00" />
+                60.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002606_3"
+                  id="lastvalue_DI_1004002606_3" value="" />
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_3_10040026_DI_1004002606"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_6" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                相电流上限（额定电流门限）
+              </td>
+              <td>
+                DI_1004002607
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002607"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002607" />
+                <input type="hidden" name="paravalue_DI_1004002607_3"
+                  id="paravalue_DI_1004002607_3" value="40.00" />
+                40.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002607_3"
+                  id="lastvalue_DI_1004002607_3" value="" />
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_3_10040026_DI_1004002607"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_7" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                零序电流上限
+              </td>
+              <td>
+                DI_1004002608
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002608"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002608" />
+                <input type="hidden" name="paravalue_DI_1004002608_3"
+                  id="paravalue_DI_1004002608_3" value="20.00" />
+                20.00
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002608_3"
+                  id="lastvalue_DI_1004002608_3" value="" />
+              </td>
+              <td>
+                A
+              </td>
+              <td id="result_3_10040026_DI_1004002608"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_8" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                视在功率上上限
+              </td>
+              <td>
+                DI_1004002609
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_1004002609"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_1004002609" />
+                <input type="hidden" name="paravalue_DI_1004002609_3"
+                  id="paravalue_DI_1004002609_3" value="20.050" />
+                20.050
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002609_3"
+                  id="lastvalue_DI_1004002609_3" value="" />
+              </td>
+              <td>
+                kVA
+              </td>
+              <td id="result_3_10040026_DI_1004002609"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_9" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                视在功率上限
+              </td>
+              <td>
+                DI_100400260A
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_100400260A"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_100400260A" />
+                <input type="hidden" name="paravalue_DI_100400260A_3"
+                  id="paravalue_DI_100400260A_3" value="30.500" />
+                30.500
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260A_3"
+                  id="lastvalue_DI_100400260A_3" value="" />
+              </td>
+              <td>
+                kVA
+              </td>
+              <td id="result_3_10040026_DI_100400260A"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_10" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                三相电压不平衡限值
+              </td>
+              <td>
+                DI_100400260B
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_100400260B"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_100400260B" />
+                <input type="hidden" name="paravalue_DI_100400260B_3"
+                  id="paravalue_DI_100400260B_3" value="80.0" />
+                80.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260B_3"
+                  id="lastvalue_DI_100400260B_3" value="" />
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_3_10040026_DI_100400260B"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_11" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                三相电流不平衡限值
+              </td>
+              <td>
+                DI_100400260C
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_100400260C"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_100400260C" />
+                <input type="hidden" name="paravalue_DI_100400260C_3"
+                  id="paravalue_DI_100400260C_3" value="75.0" />
+                75.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260C_3"
+                  id="lastvalue_DI_100400260C_3" value="" />
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_3_10040026_DI_100400260C"></td>
+            </tr>
+
+            <tr id="otr_3_10040026_12" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                连续失压时间限值
+              </td>
+              <td>
+                DI_100400260D
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040026_DI_100400260D"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040026_3"
+                  value="DI_100400260D" />
+                <input type="hidden" name="paravalue_DI_100400260D_3"
+                  id="paravalue_DI_100400260D_3" value="5" />
+                5
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_100400260D_3"
+                  id="lastvalue_DI_100400260D_3" value="" />
+              </td>
+              <td>
+                min
+              </td>
+              <td id="result_3_10040026_DI_100400260D"></td>
+            </tr>
+
+            <tr id="otr_3_2" class="styleHidden">
+              <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <img align="absmiddle" src="../../img/tree/linelastnode.gif" />
+                <img align="absmiddle" id="subimg_3_10040028"
+                  src="../../img/tree2/plus1.gif"
+                  style="cursor: pointer;"
+                  onclick="subFolder(this, '3', '10040028');" />
+                <input type="checkbox" name="GpSn_3_OrderId"
+                  onclick="selectGpSn('3');" value="10040028" checked />
+              </td>
+              <td>
+                限值参数
+              </td>
+              <td>
+                测量点功率因数分段限值
+              </td>
+              <td colspan="5"
+                style="text-align: left; padding-left: 5px;">
+                10040028
+              </td>
+              <td id="result_3_10040028"></td>
+            </tr>
+
+            <tr id="otr_3_10040028_0" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                功率因数分段限值1
+              </td>
+              <td>
+                DI_1004002801
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040028_DI_1004002801"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040028_3"
+                  value="DI_1004002801" />
+                <input type="hidden" name="paravalue_DI_1004002801_3"
+                  id="paravalue_DI_1004002801_3" value="150.0" />
+                150.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002801_3"
+                  id="lastvalue_DI_1004002801_3" value="150.0" />
+                150.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_3_10040028_DI_1004002801"></td>
+            </tr>
+
+            <tr id="otr_3_10040028_1" class="styleHidden">
+              <td colspan="2"></td>
+              <td style="text-align: right; padding-right: 5px;">
+                功率因数分段限值2
+              </td>
+              <td>
+                DI_1004002802
+              </td>
+              <td>
+                3
+              </td>
+              <td id="3_10040028_DI_1004002802"
+                style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="itemid_10040028_3"
+                  value="DI_1004002802" />
+                <input type="hidden" name="paravalue_DI_1004002802_3"
+                  id="paravalue_DI_1004002802_3" value="60.0" />
+                60.0
+              </td>
+              <td style="text-align: left; padding-left: 5px;">
+                <input type="hidden" name="lastvalue_DI_1004002802_3"
+                  id="lastvalue_DI_1004002802_3" value="60.0" />
+                60.0
+              </td>
+              <td>
+                %
+              </td>
+              <td id="result_3_10040028_DI_1004002802"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="nullContainer"></div>
+    </div>
+  </body>
+</html>

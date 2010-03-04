@@ -1,0 +1,154 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>通讯流量_通讯方式</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript"
+	src="../../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var ty = $.url.param("type");
+	$("#type_" + ty).show();
+	$.json2html("dtext", "../../../jsp/synquery/pop/commmuntiy_"+ ty + ".xml", "");
+});
+</script>
+</head>
+<body>
+<div class="content">
+  <div id="cont_1">
+    <div class="graphContainer"
+	style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -   153 ) );">
+      <!-- START Script Block for Chart-->
+      <div id="graphBlock" align="center"></div>
+      <!-- END Script Block for Chart> -->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr id="type_1" style="display:none;">
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+            <th>表地址</th>
+            <th>表类型</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区编号</th>
+            <th>台区名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>波特率</th>
+            <th>表规约</th>
+            <th>电表厂家</th>
+            <th>出厂编号</th>
+            <th>关联终端</th>
+            <th>所属变压器</th>
+            <th>额定电流</th>
+            <th>额定电压</th>
+            <th>相线</th>
+            <th>表计型号</th>
+            <th>端口号</th>
+            <th>位数</th>
+            <th>计量方式</th>
+            <th>安装日期</th>
+          </tr>
+          <tr id="type_2" style="display:none;">
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+          </tr>
+          <tr id="type_3" style="display:none;">
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>正向有功总</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+          </tr>
+          <tr id="type_4" style="display:none;">
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>数据时间</th>
+            <th>上日总表码</th>
+            <th>本日总表码</th>
+            <th>正向有功总电量</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+          </tr>
+          <tr id="type_5" style="display:none;">
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>台区名称</th>
+            <th>数据时间</th>
+            <th>上日总表码</th>
+            <th>本日总表码</th>
+            <th>正向有功总电量</th>
+            <th>正向有功尖</th>
+            <th>正向有功峰</th>
+            <th>正向有功平</th>
+            <th>正向有功谷</th>
+          </tr>
+          <tr id="type_6" style="display:none;">
+            <th>供电单位</th>
+            <th>供电线路</th>
+            <th>表号</th>
+            <th>计量点名称</th>
+            <th>台区名称</th>
+            <th>CT</th>
+            <th>PT</th>
+            <th>总倍率</th>
+            <th>数据时间</th>
+            <th>接收时间</th>
+            <th>有功功率</th>
+            <th>无功功率</th>
+            <th>A相有功功率</th>
+            <th>B相有功功率</th>
+            <th>C相有功功率</th>
+            <th>A相无功功率</th>
+            <th>B相无功功率</th>
+            <th>C相无功功率</th>
+          </tr>
+        </thead>
+        <tbody id="dtext">
+        </tbody>
+      </table>      
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+    </div>      
+  </div>
+</div>
+</body>
+</html>

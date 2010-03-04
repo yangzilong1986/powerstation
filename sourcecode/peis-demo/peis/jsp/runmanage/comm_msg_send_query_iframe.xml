@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>2028779</td2>
+        <td3>2009/09/14 16:11:01</td3>
+        <td4>0000007213891090009123422211900012345622129000786578231390002871962414900012783626</td4>  
+        <td5 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;源码明细</td5>    
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>2028779</td2>
+        <td4>2009/09/14 15:12:02</td4>
+        <td5>0000007213891090009123422211900012345622129000786578231390002871962414900012783626</td5>  
+        <td6 extend="style='color: blue;cursor:pointer;'">&lt;a onclick="detailQuery();"&gt;源码明细</td6>   
+    </data>          
+</datas>

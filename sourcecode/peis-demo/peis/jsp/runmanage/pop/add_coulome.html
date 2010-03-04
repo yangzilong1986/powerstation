@@ -1,0 +1,106 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>旁路管理</title>
+<!--<link rel="stylesheet" type="text/css" href="../../../css/main.css" />-->
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<!-- private js 弹出页面的-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var ty = $.url.param("type");
+		//alert(ty);
+		if(ty == 2){
+			$("#save").show();
+		} 
+		$("#save").click(function(){
+			top.GB_hide();
+		});												 
+	});
+</script>
+</head>
+<body>
+<div id="body">  
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="label">表号：</td>
+          <td class="dom"><input type="text" id="coulomeWatch"/></td>  
+          <td><input class="input1" type="submit" id="ok" value="确 定"/></td>  
+          <td class="label">CT变比：</td>
+          <td class="dom"><input type="text" value="1000/1" disabled/></td>
+          <td class="label">PT变比：</td>
+          <td class="dom"><input type="text" value="700/1" disabled/></td>          
+        </tr>  
+        <tr>
+          <td class="label">所属对象名称：</td>
+          <td class="dom" colspan="2"><input type="text" value="3#线路" disabled/></td>  
+          <td class="label">终端地址：</td>
+          <td class="dom"><input type="text" value="32456" disabled/></td>          
+        </tr>
+        <tr>
+        	<td></td>
+          <td colspan="2"><input name="ty" type="radio" checked/>日电量
+          <input name="ty" type="radio"/>月电量</td> 
+          <td class="label">追加时间：</td>
+          <td class="dom_date">
+            <input type="text" id="date" name="date" value="2009-8-27">
+          </td>          
+        </tr>
+        <tr>
+         	<td colspan="8">
+          	<table>
+            	<tr>
+                <td class="label">正向有功总：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向有功总：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">正向无功总：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向无功总：</td>
+                <td class="dom"><input type="text" value=""/></td>   
+              </tr>
+              <tr>
+                <td class="label">正向有功尖：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向有功尖：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">正向有功峰：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向有功峰：</td>
+                <td class="dom"><input type="text" value=""/></td>   
+              </tr>
+              <tr>
+                <td class="label">正向有功平：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向有功平：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">正向有功谷：</td>
+                <td class="dom"><input type="text" value=""/></td>  
+                <td class="label">反向有功谷：</td>
+                <td class="dom"><input type="text" value=""/></td>   
+              </tr>
+              <tr>
+              	<td class="label">追加原因：</td>
+                <td colspan="7">
+                    <textarea rows="5" cols="80"></textarea>
+                </td> 
+              </tr>
+            </table>
+          </td>
+           
+        <tr>
+            <td colspan="8" align="center">
+                <input class="input1" type="submit" id="save" value="保 存" style="display:none;"/>
+            </td>
+        </tr>
+      </table>
+    </div>    
+  </div>
+</div>
+</body>
+</html>

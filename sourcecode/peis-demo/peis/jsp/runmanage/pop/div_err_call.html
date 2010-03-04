@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>通讯和厂家</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+   if($.url.param("type")==1){
+        $("#factory").show();
+        $("#call").hide(); 
+        $("#tt").text("终端厂家(通讯方式)") ;
+   }else{
+	   $("#call").show();
+       $("#factory").hide();
+       $("#tt").text("通讯方式(终端厂家)") ;
+   }
+   $("#titles").text($.url.param("title"));
+});
+</script>
+</head>
+<body>
+<div id="tool">
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="label">故障终端列表 (<span id="titles"></span> )</td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 153));">
+    <!-- START Script Block for Chart-->
+    <div id="graphBlock" align="center"></div>
+    <!-- END Script Block for Chart> -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead><tr>
+          <th><span id="tt"></span></th>
+          <th>故障终端数</th>          
+          <th>投运终端数</th>
+          <th>故障率(%)</th>
+      </tr></thead>
+      <tbody id="call">
+      <tr>
+        <td style="text-align: left;">杭州百富</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">GPRS</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">230M</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">CDMA</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">230</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      </tbody>
+      <tbody id="factory">
+      <tr>
+        <td style="text-align: left;">CDMA</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">华隆</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">华立</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">威盛</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">高科</td>
+        <td>600</td>
+        <td>700</td>
+        <td>80</td>
+      </tr>
+      </tbody>      
+     </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../../img/page_end.gif" class="pointer" title="返回末页" /></a>         
+    </div>
+  </div>
+</div>
+</body>
+</html>

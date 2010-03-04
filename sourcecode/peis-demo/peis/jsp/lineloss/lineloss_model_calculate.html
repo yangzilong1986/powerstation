@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../css/graybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#save").click(function(){
+        $(this).attr('disabled','true');
+        $('#message').html('<font color=blue>重算成功!</font>')
+            setTimeout(_hidepage,1000);
+        })
+    })
+    
+    _hidepage=function(){
+        parent.GB_hide()
+    }
+</script>
+</head>
+<body>
+<div class="data3"><span> 选择时间</span></div>
+<div class="data3_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" height="200px;">
+    <tr style="padding-left:50px;">
+      <td class="dom_date"> 开始时间：
+        <input type="text" id="startTime" name="startTime" value="2009-9-01" size="5"/></td>
+    </tr>
+    <tr style="padding-left:50px;">
+      <td class='dom_date'> 结束时间：
+        <input type="text" id="endTime" name="endTime" value="2009-9-10" size="5"/>
+      </td>
+    </tr>
+    <tr style="padding-left:50px;">
+      <td ><span id="message" style="width:100px;"></span>
+        <input type="submit" value="确定" id="save" class="input1">
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

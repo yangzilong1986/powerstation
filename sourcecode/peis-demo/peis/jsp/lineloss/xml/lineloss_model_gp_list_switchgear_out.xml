@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <td1>**张三</td1>
+    <td2>1231</td2>
+    <td extend="align='center'">2009-09-01</td>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**里斯</td1>
+    <td2>1232</td2>
+    <td extend="align='center'">2009-09-01</td>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+  <data>
+    <td1>**王五</td1>
+    <td2>1233</td2>
+    <td extend="align='center'">2009-09-01</td>
+    <td3>输出</td3>
+    <td4>正向</td4>
+  </data>
+</datas>

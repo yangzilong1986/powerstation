@@ -1,0 +1,232 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>内容</title>
+<link rel="stylesheet" type="text/css" href="../css/mainframe.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/frame/component.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input.input").click( function() {
+        top.showDialogBox("列表", "../../templet/templet04_left.html", 575, 900);
+        return false;
+    });
+});
+</script>
+</head>
+<body>
+<div class="pad5">
+  <input type="button" id="button1" value="新 建" class="input1" />
+  <input type="button" id="button2" value="修 改" class="input1" disabled="disabled" />
+  <input type="button" id="button3" value="保 存" class="input1" disabled="disabled" />
+  <input type="button" id="button4" value="删 除" class="input1" />
+  <input type="button" id="button5" value="复 制" class="input1" />
+</div>
+<div class="tab"><em>任务信息</em></div>
+<div class="tab_con">
+  <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="15%" class="label">规约类型：</td>
+        <td width="25%" class="dom">
+          <select id="protocolType" name="protocolType">
+            <option value="100-1">698规约-专变用户</option>
+            <option value="100-2">698规约-配变</option>
+            <option value="100-3">698规约-低压用户</option>
+            <option value="100-4">698规约-变电站</option>
+            <option value="106-1">国网规约-专变用户</option>
+            <option value="106-2">国网规约-配变</option>
+            <option value="106-3">国网规约-低压用户</option>
+            <option value="106-4">国网规约-变电站</option>
+            <option value="120-1">浙江规约-专变用户</option>
+            <option value="120-2">浙江规约-配变</option>
+            <option value="120-3">浙江规约-低压用户</option>
+            <option value="120-4">浙江规约-变电站</option>
+          </select>
+          <script type="text/javascript">$("#protocolType").val("106-1");</script>
+        </td>
+        <td width="15%" class="label">任务类型：</td>
+        <td width="25%">
+          <input type="radio" id="taskType1" name="taskType" value="1" onclick="changeTaskType()" checked="checked">自动上送
+          <input type="radio" id="taskType2" name="taskType" value="2" onclick="changeTaskType()">主站轮召
+        </td>
+      </tr>
+      <tr>
+        <td width="15%" class="label">任 务 号：</td>
+        <td width="25%" class="dom"><input type="text" id="taskId" name="taskId" value="2"></td>
+        <td width="15%" class="label">任务名称：</td>
+        <td width="25%" class="dom"><input type="text" name="taskName" value="" id="taskName"></td>
+      </tr>
+      <tr>
+        <td width="15%" class="label">上送周期：</td>
+        <td width="25%">
+          <input type="text" id="sendupCycleGw" name="sendupCycleGw" value="1" onkeyup="this.value=this.value.replace(/\D/gi,'')" style="border: 1px #7f9db9 solid; background: #fff; width: 82px; height: 21px; font-size: 12px; color: #4a5c8f;">
+          <select id="sendupUnitGw" name="sendupUnitGw" style="border: 1px #7f9db9 solid; background: #fff; width: 55px; height: 21px; font-size: 12px; color: #4a5c8f;">
+            <option value="0">分</option>
+            <option value="1">时</option>
+            <option value="2">日</option>
+            <option value="3">月</option>
+          </select>
+          <script type="text/javascript">$("#sendupUnitGw").val("2");</script>
+        </td>
+        <td width="15%" class="label">是否审计：</td>
+        <td width="25%">
+          <input type="radio" id="auditFlag1" name="auditFlag" value="1" checked="checked">审计
+          <input type="radio" id="auditFlag0" name="auditFlag" value="0">不审计
+        </td>
+      </tr>
+      <tr>
+        <td width="15%" class="label">计量类型：</td>
+        <td width="25%" class="dom">
+          <select id="infoPointType" name="infoPointType">
+            <option value="6">终端信息点</option>
+            <option value="1">测量点</option>
+            <option value="3">总加组</option>
+          </select>
+          <script type="text/javascript">$("#infoPointType").val("1");</script>
+        </td>
+        <td width="15%" class="label">数据类型：</td>
+        <td width="25%" class="dom">
+          <select id="dataType" name="dataType" onchange="changeDataType()">
+            <option value="106000">当前数据</option>
+            <option value="106010">小时冻结数据</option>
+            <option value="106100">日冻结数据</option>
+            <option value="106110">抄表日冻结数据</option>
+            <option value="106200">月冻结数据</option>
+            <option value="106300">曲线数据</option>
+          </select>
+          <script type="text/javascript">$("#dataType").val("106100");</script>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" align="right"><input type="button" class="input3 mgr10" value="高级设置"/></td>
+      </tr>
+    </table>
+  </div>
+  <div class="data1"><span>数据项列表</span><h1><input type="button" value="选择数据项" class="input3" /></h1></div>
+  <div class="data1_con">
+    <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 264));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th>序号</th>
+          <th>数据项代码</th>
+          <th>数据项名称</th>
+        </tr></thead>
+        <tbody>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>1</td>
+            <td>100D0001</td>
+            <td>正向有/无功电能示值、一/四象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+          <tr align="center" onclick="selectSingleRow(this);" style="cursor:pointer;">
+            <td>2</td>
+            <td>100D0002</td>
+            <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

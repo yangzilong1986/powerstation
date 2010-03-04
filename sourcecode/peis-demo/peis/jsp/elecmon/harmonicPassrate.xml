@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td2>杭州市供电局</td2>
+        <td3>3345</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;3000&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:viewDetail()"&gt;345&lt;/a&gt;</td5>
+        <td6>89.7</td6>
+    </data>
+    <data js="onclick=selectSingleRow(this)" >
+        <td2>城西供电所</td2>
+        <td3>589</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;500&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:viewDetail()"&gt;89&lt;/a&gt;</td5>
+        <td6>84.9</td6>
+    </data>
+    <data js="onclick=selectSingleRow(this);">
+        <td2>城北供电所</td2>
+        <td3>765</td3>
+        <td4>&lt;a href="javascript:viewDetail()"&gt;700&lt;/a&gt;</td4>
+        <td5>&lt;a href="javascript:viewDetail()"&gt;65&lt;/a&gt;</td5>
+        <td6>91.5</td6>
+    </data>
+</datas>

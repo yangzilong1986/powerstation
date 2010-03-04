@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>重点用户分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+</head>
+
+<script type="text/javascript">
+ $.json2html("databody","../../jsp/elecmon/DyLoadData.xml","");
+
+$(function (){
+    var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "850", "275", "0", "0");
+    chart_obj.setDataURL("loadDataChat.xml");
+    chart_obj.render("graphBlock");
+});
+
+function viewDetail(){
+     top.showDialogBox("", "../../jsp/elecmon/loadDataDetail.html", 600, 800); 
+}
+
+</script>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+     <ul>
+      <li id="tab_1" class="tab_on"><a href="DypowerData.html" onfocus="blur()">电量数据</a></li>
+      <li id="tab_2" class="tab_off"><a href="DyMatterData.html" onfocus="blur()">事件数据</a></li>
+      <li id="tab_3" class="tab_off"><a href="DyelecAnomalyData.html" onfocus="blur()">用电异常</a></li>
+      <li class="clear"></li>
+    </ul>
+  </div>
+  <div id="main">
+    <div id="tool">
+    <div class="opbutton2"><input type="submit" name="query" id="query" value="查 询" class="input1" />&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <table border="0" cellpadding="0" cellspacing="0">
+       <tr>
+          <td colspan="2">
+            <input type="radio" name="powerType" value="1" checked="checked" class="dom" />日电量
+            <input type="radio" name="powerType" value="2" class="dom" />月电量
+          </td>
+        </tr>
+        <tr>
+          <td class="label">统计时间：</td>
+          <td  class="dom_date">      
+            <input type="text" id="date" name="date" value="2006-09-05">
+          </td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="graphContainer" style="100%">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="left"></div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="data">
+            <thead><tr>
+              <th width="2%">序号</th>
+              <th width="3%">供电单位</th>
+              <th width="3%">台区名称</th>
+              <th width="3%">户号</th>
+              <th width="5%">户名</th>
+              <th width="3%">总电量</th>
+              <th width="3%">台区总电量</th>
+              <th width="3%">占台区比重</th>
+              <th width="3%">峰电量</th>
+              <th width="3%">谷电量</th>
+              <th width="3%">查看</th>
+            </tr></thead>
+            <tbody id="databody">
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

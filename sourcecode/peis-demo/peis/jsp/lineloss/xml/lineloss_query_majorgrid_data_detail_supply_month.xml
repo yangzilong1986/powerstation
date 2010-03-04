@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+  <!-- <data></data>固定格式 -->
+  <data>
+    <td2>**关口表</td2>
+    <td3>123124</td3>
+    <td4>关口表</td4>
+    <td1 extend="align='center'">200909</td1>
+    <td5 extend="align='right'">23456.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a
+      href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_majorgrid_data_detail_supply.html?dateType=1&amp;date=a",860,530)'&#62;电量明细&#60;/a&#62;
+    </td12>
+  </data>
+  <data>
+    <td2>**上网计量表</td2>
+    <td3>123123</td3>
+    <td4>上网计量表</td4>
+    <td1 extend="align='center'">200909</td1>
+    <td5 extend="align='right'">23456.00</td5>
+    <td7 extend="align='right'">3.00</td7>
+    <td8 extend="align='right'">0.20</td8>
+    <td11>&#60;a href='javascript:alert(1)'&#62;补电量&#60;/a&#62;/&#60;a href='javascript:alert(1)'&#62;修正&#60;/a&#62;
+    </td11>
+    <td12>&#60;a
+      href='javascript:pop(1,"电量明细","../../jsp/lineloss/lineloss_query_majorgrid_data_detail_supply.html?dateType=1&amp;date=b",860,530)'&#62;电量明细&#60;/a&#62;
+    </td12>
+  </data>
+</datas>

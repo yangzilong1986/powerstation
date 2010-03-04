@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='00:00'/>
+        <category label='01:00'/>
+        <category label='02:00'/>
+        <category label='03:00'/>
+        <category label='04:00'/>
+        <category label='05:00'/>
+        <category label='06:00'/>
+        <category label='07:00'/>
+        <category label='08:00'/>
+        <category label='09:00'/>
+        <category label='10:00'/>        
+        <category label='11:00'/>
+        <category label='12:00'/>
+        <category label='13:00'/>
+        <category label='14:00'/>
+        <category label='15:00'/>
+        <category label='16:00'/>
+        <category label='17:00'/>
+        <category label='18:00'/>
+        <category label='19:00'/>
+        <category label='20:00'/>
+        <category label='21:00'/>
+        <category label='22:00'/>
+        <category label='23:00'/>
+    </categories>
+    <dataset seriesName='负荷' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>   
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/> 
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>   
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>    
+    </dataset>
+    </chart>

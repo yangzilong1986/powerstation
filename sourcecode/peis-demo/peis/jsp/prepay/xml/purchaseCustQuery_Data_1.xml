@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data>
+         <td1>1</td1>
+         <td3 extend="align='left'">9897989898</td3>
+         <td4>767867</td4>
+         <td5>广东省电力公司</td5>
+         <td6>正常</td6>
+         <td7>2009-01-01 10:00:00</td7>
+         <td8>电费</td8>
+         <td9>50</td9>
+         <td10></td10>
+         <td11></td11>
+         <td13>&lt;a href="javascript:historyPower('9897989898','767867')"&gt;历史剩余电量&lt;/a&gt;</td13>
+         <td14>&lt;a href="javascript:purchaseRec('9897989898','767867')"&gt;购电记录&lt;/a&gt;</td14>
+    </data>
+    <data>
+         <td1>2</td1>
+         <td3 extend="align='left'">5624654664</td3>
+         <td4>342535</td4>
+         <td5>广东省电力公司</td5>
+         <td6>报警</td6>
+         <td7>2009-01-01 10:00:00</td7>
+         <td8>电量</td8>
+         <td9>200</td9>
+         <td10></td10>
+         <td11></td11>
+         <td13>&lt;a href="javascript:historyPower('5624654664','342535')"&gt;历史剩余电量&lt;/a&gt;</td13>
+         <td14>&lt;a href="javascript:purchaseRec('5624654664','342535')"&gt;购电记录&lt;/a&gt;</td14>                   
+    </data>
+</datas>

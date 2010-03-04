@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datas rowid="false">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>线路编号</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>线路名称</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>供电单位</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>所属变电站</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>线路类型</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>电压等级</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>线损率阈值</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data> 
+		<data extend="onclick='selectSingleRow(this);'" >        
+        <td2>&lt;input name='input_check' type='checkbox'&gt;</td2>
+        <td3>备注</td3>
+        <td4>&lt;input name='input_check' type='checkbox' disabled="true" &gt;</td4>
+    </data>       
+</datas>

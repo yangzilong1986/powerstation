@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>停复电控制</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript"> 
+//停复电控制显示方式
+function changeType(type) {
+    var show1 = document.getElementById("show1");
+    var show2 = document.getElementById("show2");
+    if(type == "1") {
+        $('#show1').attr("class","tab_on");
+        $('#show2').attr("class","tab_off");
+        $('#contentArea').attr("src","../../jsp/prepay/resetPowerByMarket.html");
+    }
+    else {
+        $('#show1').attr("class","tab_off");
+        $('#show2').attr("class","tab_on");
+        $('#contentArea').attr("src","../../jsp/prepay/resetPowerByDirect.html");
+    }
+}
+
+</script>
+</head>
+<body>
+<div id="body">
+  <div class="tab">
+    <ul>
+      <li id="show1" class="tab_on"><a href="javascript:changeType('1');" onfocus="blur()">营销单据</a></li>
+      <li id="show2" class="tab_off"><a href="javascript:changeType('2');" onfocus="blur()">直接控制</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main" style="height:expression((document.documentElement.clientHeight||document.body.clientHeight)-42);"> 
+    <iframe class="main" id="contentArea" src="../../jsp/prepay/resetPowerByMarket.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>
+</body>
+</html>

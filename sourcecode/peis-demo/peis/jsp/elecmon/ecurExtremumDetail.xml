@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>&lt;a href="javascript:viewDetail()"&gt;电流曲线&lt;/a&gt;</td1>
+        <td2>2700169742</td2>
+        <td3>天津市益佰商贸有限公司</td3>
+        <td4>揭阳供电局 </td4>
+        <td5>10kV备用线F19</td5>
+        <td6>Q5Q04600106346399</td6>
+        <td7>2</td7>
+        <td8>2009-09-01</td8>
+        <td9>22</td9>
+        <td10>2009-09-08 11:02:59</td10>
+        <td11>20</td11>
+        <td12>2009-07-14 10:41:53</td12>
+        <td13>16</td13>
+        <td14>2009-07-14 11:02:59</td14>
+        <td15>18</td15>
+        <td16>2009-07-14 11:02:59</td16>
+        <td17>30</td17>
+    </data>
+    
+</datas>

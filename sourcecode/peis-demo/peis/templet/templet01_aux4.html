@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>操作&amp;数据</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/frame/const.js"></script>
+</head>
+  <script type="text/javascript">
+
+$(function(){
+$("#query").click(function(){
+ frame_1._load();
+ 
+})
+//部门
+$.handelCombox('orgTar','orgNo','id="subsNo" name="subsNo"');
+//当前状态
+$.handelCombox('curStatusTar','curStatus');
+//通讯方式
+$.handelCombox('commModeTar','commMode');
+})
+ var UserList = [
+{"UserID":'DEC0101', "Name":{"FirstName":"Truly","LastName":"Zhu"}, "Email":"zhuleipro◎hotmail.com"},
+{"UserID":'DEC0102', "Name":{"FirstName":"Jeffrey","LastName":"Richter"}, "Email":"xxx◎xxx.com"},
+{"UserID":'DEC0103', "Name":{"FirstName":"Scott","LastName":"Gu"}, "Email":"xxx2◎xxx2.com"}
+];
+for(i in UserList){
+ if(UserList[i].UserID=='DEC0103'){
+ break;
+ }
+}
+
+//$.each(UserList,function(i,item)){});
+</script>
+<body>
+<div id="body">
+  <div id="tab" class="tab">
+    <ul>
+      <li id="tab_1" class="tab_off"><a href="templet01.html" onclick="return true;" onfocus="blur()">无iframe</a></li>
+      <li id="tab_2" class="tab_off"><a href="templet01_aux1.html" onclick="return true;" onfocus="blur()">单iframe1</a></li>
+      <li id="tab_3" class="tab_off"><a href="templet01_aux1.html" onclick="return true;" onfocus="blur()">单iframe2</a></li>
+      <li id="tab_4" class="tab_off"><a href="templet01_aux3.html" onclick="return true;" onfocus="blur()">多iframe3</a></li>
+      <li id="tab_5" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">jsonDemo</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgTar">
+            <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td width="70" class="label">户　号：</td>
+          <td width="120" class="dom"><input type="text" id="custNo" name="custNo" value="" /></td>
+          <td width="70" class="label">户　名：</td>
+          <td width="120" class="dom"><input type="text" id="custName" name="custName" value="" /></td>
+          <td width="70" class="label">终端地址：</td>
+          <td width="120" class="dom"><input type="text" id="logicalAddr" name="logicalAddr" value="" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="label">当前状态：</td>
+          <td class="dom" id="curStatusTar">
+            <script type="text/javascript">$("#curStatus").val("2");</script>
+          </td>
+          <td class="label">通讯方式：</td>
+          <td class="dom" id="commModeTar">
+            <script type="text/javascript">$("#commMode").val("-1");</script>
+          </td>
+          <td class="label">日　期：</td>
+          <td class="dom_date"><input type="text" id="date" name="date" value="2009-8-27"></td>
+          <td colspan="3"></td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target2">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">数据列表1</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 151));">
+          <iframe id="frame_1" name="frame_1" width="100%" height="100%" frameborder="0" scrolling="no" src="templet01_aux4_iframe.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

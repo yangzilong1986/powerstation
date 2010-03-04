@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>负载率明细</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript">
+
+$.json2html("DATA_TBODY","../../jsp/transbiz/xml/loadRateAnalysis_Data_Day_1.xml","cb-item");
+
+var objectNo=$.url.param("objectNo");
+var objectName=$.url.param("objectName");
+var assetNo=$.url.param("assetNo");
+var dataTime=$.url.param("dataTime");
+var objectType=$.url.param("objectType");
+$(document).ready( function(){
+  init();
+});
+
+//页面初始化
+function init(){
+  $("#objectNameDom").html(objectName);
+  $("#objectNoDom").html(objectNo);
+  $("#assetNoDom").html(assetNo);
+  $("#dateTime").val(dataTime);
+  if(objectType==1){
+    $("#objectNameLable").html("户　名：");
+    $("#objectNoLable").html("户　号：");
+  }else if(objectType==2){
+    $("#objectNameLable").html("台区名：");
+    $("#objectNoLable").html("台区号：");
+  }
+}
+
+
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1"><input type="submit" name="query" id="query" onClick="query();" value="查 询" class="input1" /></div>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td class="label" id="objectNameLable">户　名：</td>
+      <td class="dom" id="objectNameDom"></td>
+      <td class="label" id="objectNoLable">户　号：</td>
+      <td class="dom" id="objectNoDom"></td>
+      <td class="label">表　号：</td>
+      <td class="dom" id="assetNoDom"></td>
+      <td class="label">数据时间：</td>
+      <td class="dom_date" id="dateLable">
+        <input type="text" name="dateTime" id="dateTime"/>
+      </td>
+      <td width="5%" align="right">
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 43));">
+         <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="center"></div>
+          <script type="text/javascript">
+          var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "750", "275", "0", "0");
+          chart_obj.setDataURL("xml/loadRateAnalysis_Line_Day_1.xml");
+          chart_obj.render("graphBlock");
+          </script>
+          <!--END Script Block for Chart-->
+          <div>&nbsp;
+          </div>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+		        <thead>
+		         <tr>
+		          <th>序号</th>
+		          <th>时间</th>
+		          <th>变压器容量(kVA)</th>
+		          <th>负荷(kW)</th>
+		          <th>负载率(%)</th>
+		         </tr>
+		        </thead>
+		        <tbody id="DATA_TBODY">
+		        </tbody>
+		      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

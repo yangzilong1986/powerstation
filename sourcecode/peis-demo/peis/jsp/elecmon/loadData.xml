@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data js="onclick=selectSingleRow(this)" >
+        <td1>东简供电所</td1>
+        <td2>10kV备用线F08</td2>
+        <td3>99960010001</td3>
+        <td4>津西华龙标准件厂</td4>
+        <td5>80</td5>
+        <td6>2009-9-23</td6>
+        <td7>40</td7>
+        <td8>2009-9-30</td8>
+        <td9>60</td9>
+        <td10>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td10>
+       
+    </data>
+    <data js="onclick=selectSingleRow(this);" >
+         <td1>南调供电所</td1>
+        <td2>10kV备用线F08</td2>
+        <td3>99960010001</td3>
+        <td4>大华轮胎有限公司</td4>
+        <td5>80</td5>
+        <td6>2009-9-23</td6>
+        <td7>40</td7>
+        <td8>2009-9-30</td8>
+        <td9>60</td9>
+        <td10>&lt;a href="javascript:viewDetail()"&gt;明细&lt;/a&gt;</td10>
+    </data>
+    
+</datas>

@@ -1,0 +1,126 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>中间条件</title>
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/component.js"></script>
+<script type="text/javascript">
+	$(document).ready(function (){
+		// 保存按钮。
+		$("#save").click(function(){
+			top.GB_hide();
+		});					
+		// checkbox 改变事件。
+		$("input[type='checkbox'][name='checkOne']").click(function(){
+			 var thisval = $(this).val();
+			 $("input[type='checkbox'][name='checkOne'][value !="+thisval+"]").attr("checked",false);	
+			 thisval = $(this).attr("checked")==true?thisval:77;
+			 parent.field._buildData(thisval);			 
+		});
+		// change 事件。
+		$("#cldxz").change(function (){
+			if($("input[type='checkbox'][name='checkOne'][checked]").val()==3){
+				parent.field._buildData(3);	
+			}														 
+		});
+		// change 事件。
+		$("#sjx").change(function (){
+			if($("input[type='checkbox'][name='checkOne'][checked]").val()==4){
+				parent.field._buildData(4);	
+			}														 
+		});
+	});
+</script>
+</head>
+<body>
+<div>
+  <div class="opbutton1">
+      <input class="input1" type="button" id="save" value="保 存"/>
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>    
+       <td>
+       </td>  
+    </tr>
+  </table>
+</div>
+<div class="tab"><em>可选项</em></div>
+<div class="tab_con">
+  <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+          <td width="39%" rowspan="8">档案(参数)信息</td>
+          <td width="3%"><input type="checkbox"  name="checkOne" value="0"></input></td>
+          <td width="16%">线路</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="checkOne" value="1"></input></td>
+          <td>专变</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="checkOne" value="2"></input></td>
+          <td>终端</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" name="checkOne" value="3"></input></td>
+          <td>测量点性质</td>
+          <td colspan="2"><select id="cldxz">
+            <option value="0" selected>485</option>
+            <option value="1">脉冲</option>
+            <option value="2">总加组</option>
+            <option value="3">模拟量</option>
+            <option value="4">任务号</option>
+            <option value="5">任务信息点</option>
+            <option value="6">控制轮次</option>
+            <option value="7">直流模拟量点号</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td rowspan="4"><input type="checkbox" name="checkOne" value="4"></input></td>
+          <td rowspan="4">数据信息</td>
+        </tr>
+        <tr>
+          <td width="20%">数据项：</td>
+          <td width="22%"><select id="sjx">
+            <option value="0" selected>电量</option>
+            <option value="1">负荷</option>
+            <option value="2">表码</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>数据类型：</td>
+          <td><select id="sjlx">
+            <option value="0" selected>小时数据</option>
+            <option value="1">日数据</option>
+            <option value="2">月数据</option>
+            <option value="3">抄表日数据</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td>数据时间：</td>
+          <td><input type="text" id="time" value="2009-10-01" size="6"></input></td>
+        </tr>
+        <tr>
+          <td>报表对象：</td>
+          <td colspan="3"><select id="bbdx">
+            <option value="0" selected>专变用户</option>
+            <option value="1">配变用户</option>
+            <option value="2">低压用户</option>
+            <option value="3">变电站</option>
+          </select>
+          </td>
+        </tr>
+        <tr>
+          <td>报表名称：</td>
+          <td colspan="3"><input type="text" id="bbName" /></input></td>
+        </tr>
+        <tr>
+          <td>报表备注：</td>
+          <td colspan="3"><input type="text" id="bz"></input></td>
+        </tr>      
+    </table>
+  </div>
+</div>
+</body>
+</html>

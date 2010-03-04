@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GBK"?> 
+<chart caption='' xAxisName='' yAxisName='处理率' numberPrefix='' showValues='0'>
+   <set label='湛江供电局' value='78' />
+   <set label='潮州供电局' value='92' />
+   <set label='揭阳供电局' value='85' />
+</chart>  
+

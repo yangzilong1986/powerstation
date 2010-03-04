@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='CPU平均使用率' numberSuffix='' shownames='1' showvalues='1' yAxisName='%'>
+    <categories>
+        <category label='2009/09/21'/>
+        <category label='2009/09/22'/>
+        <category label='2009/09/23'/>
+        <category label='2009/09/24'/>
+        <category label='2009/09/25'/>        
+    </categories>
+    <dataset seriesName='湛江前置机1' color='AFD818' showValues='0'>
+        <set value='25'/>
+        <set value='45'/>
+        <set value='51'/>
+        <set value='40'/>
+        <set value='22'/>                                       
+    </dataset>
+</chart>

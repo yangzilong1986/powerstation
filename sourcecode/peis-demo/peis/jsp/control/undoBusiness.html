@@ -1,0 +1,392 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>待办工单</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/control/control.js"></script>
+<script type="text/javascript">
+var contextPath = "/peis";
+var objectUnChoose = '请先选择要操作的对象！';
+var writing = '正在下发...';
+var opeFail = '下发失败';
+var downSucc = '投入成功';
+var downFail = '投入失败';
+var cancleSucc = '解除成功';
+var cancleFail = '解除失败';
+var outTime = '等待超时';
+var opSucc = '处理成功';
+
+//初始化加载
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+})
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/control/xml/uodoBusiness_Data_1.xml","cb-item");
+}
+
+//初始化Text
+function initText() {
+    var items = document.getElementsByName("ItemID");
+    var tableObj = document.getElementById("item_table");
+    for (i = 0; i < items.length; i++) {
+        if(items[i].checked) {
+            tableObj.rows[i+1].cells[10].innerHTML = writing;
+        }
+        else {
+            tableObj.rows[i+1].cells[10].innerHTML = "";
+        }
+    }
+}
+ 
+//权限验证
+function powerValidate() {
+   doControl();
+}
+ 
+//提交
+function doSubmit(){
+    var chooseNum = addAllItems();
+    if(chooseNum == 0) {
+        alert(objectUnChoose);
+        return;
+    }
+    var my_tips = document.getElementById("mytips");
+    my_tips.style.display = "";
+    my_tips.style.left = (screen.availWidth - 121) / 2;
+    my_tips.style.top = (screen.availHeight) / 4;
+}
+ 
+//命令下发
+function doControl() {
+    //初始化Text
+    initText();
+    
+    //设置Button状态为true
+    //buttonDisable(true);
+    //document.getElementById("bsType").value = document.getElementById("bs_type").value;
+    //document.getElementById("bsPara").value = getBusinessPara();
+    
+   // var actionUrl = contextPath+"/do/control/businessAction.do?action=write";
+   // document.forms[1].action = actionUrl;
+   // document.forms[1].submit();
+   document.getElementById('password').value='';document.getElementById('mytips').style.display='none';
+   alert("下发成功!");
+   buttonDisable(false);
+}
+ 
+//获取营业报停控参数
+function getBusinessPara(){
+    var selectedLogicAddrList = document.getElementById("chooseValue").value;
+    if (selectedLogicAddrList.indexOf(",") == 0) {
+        selectedLogicAddrList = selectedLogicAddrList.substring(1);
+    }
+    var selectedLogicAddrArr = selectedLogicAddrList.split(",");
+    var bsPara = "";
+    for(var i = 0; i < selectedLogicAddrArr.length; i++){
+        bsPara += ";";
+        bsPara += document.getElementById("START_" + selectedLogicAddrArr[i]).innerHTML;
+        bsPara += ",";
+        bsPara += document.getElementById("END_" + selectedLogicAddrArr[i]).innerHTML;
+        bsPara += ",";
+        bsPara += document.getElementById("POWER_" + selectedLogicAddrArr[i]).innerHTML;
+    }
+    if (bsPara.indexOf(";") == 0) {
+        bsPara = bsPara.substring(1);
+    }
+    return bsPara;
+}
+ 
+//设置Button状态
+function buttonDisable(obj) {
+    document.getElementById("write").disabled = obj;
+    document.getElementById("query").disabled = obj;
+}
+ 
+//显示调用结果
+function showResult(appId, fetchCount) {
+    if (fetchCount == null)
+        fetchCount = 5;
+    if (appId == "") {
+        //设置按钮可用
+        buttonDisable(false);
+        return false;
+    } else {
+        //获取报停控结果
+        var succText;
+        var failText;
+        var bsType = document.getElementById("bs_type");
+        if ("1" == bsType.value || "3" == bsType.value) {
+            succText = downSucc;
+            failText = downFail;
+        }
+        else {
+            succText = cancleSucc;
+            failText = cancleFail;
+        }
+        getControlResult(appId, fetchCount, succText, failText);
+    }
+}
+ 
+ 
+//获取报停控结果
+function getControlResult(appId, fetchCount, succText, failText) {
+    //alert(appId + "," + fetchCount + "," + succText + "," + failText);
+    var selectedLogicAddrList = document.getElementById("chooseValue").value;
+    if (selectedLogicAddrList.indexOf(",") == 0) {
+        selectedLogicAddrList = selectedLogicAddrList.substring(1);
+    }
+    var selectedLogicAddrArr = selectedLogicAddrList.split(",");
+    
+    var params = {"appId": appId
+                 };
+    var url = contextPath+"/do/control/businessAction.do?action=getControlResult&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    $.get(url, function(data){
+        //alert("data=" + data);
+        var retLogicAddrValues = [];
+        if (data != null && data.length > 0) {
+            retLogicAddrValues = data.split(";");
+        }
+        var retFlag = true;
+        for (var i=0; i < selectedLogicAddrArr.length; i++){
+            var logicAddrExist = false;
+            for (var j=0; j < retLogicAddrValues.length; j++){
+                var logicAddrValue = retLogicAddrValues[j].split(",");
+                if (selectedLogicAddrArr[i] == logicAddrValue[0]){
+                    logicAddrExist = true;
+                    break;
+                }
+            }
+            if (logicAddrExist == false){
+                retFlag = false;
+                break;
+            }
+        }
+        // retFlag == true表示数据全部返回
+        if (retFlag == true){
+            for (var i=0; i < retLogicAddrValues.length; i++){
+                var logicAddrValue = retLogicAddrValues[i].split(",");
+                if (selectedLogicAddrArr.contains(logicAddrValue[0])) {
+                    if ("000000" == logicAddrValue[1]) {
+                        document.getElementById(logicAddrValue[0]).innerHTML = succText;
+                        document.getElementById("OP_" + logicAddrValue[0]).innerHTML = opSucc;
+                    }
+                    else {
+                        document.getElementById(logicAddrValue[0]).innerHTML = failText;
+                    }
+                }
+            }
+            //保存操作LOG
+            saveOperateLog(succText, failText);
+            //设置按钮可用
+            buttonDisable(false);
+        }
+        else {
+            if (fetchCount > 1){
+                for (var i=0; i < retLogicAddrValues.length; i++){
+                    var logicAddrValue = retLogicAddrValues[i].split(",");
+                    if (selectedLogicAddrArr.contains(logicAddrValue[0])) {
+                        if ("000000" == logicAddrValue[1]) {
+                            document.getElementById(logicAddrValue[0]).innerHTML = succText;
+                            document.getElementById("OP_" + logicAddrValue[0]).innerHTML = opSucc;
+                        }
+                        else {
+                            document.getElementById(logicAddrValue[0]).innerHTML = failText;
+                        }
+                    }
+                }
+                //再次调用返回结果
+                setTimeout("getControlResult(" + appId + ", " + (fetchCount-1) + ", '" + succText + "', '" + failText + "')", 3000);
+            }
+            else {
+                var arrLogicAddrs = [];
+                for (var i=0; i < retLogicAddrValues.length; i++){
+                    var logicAddrValue = retLogicAddrValues[i].split(",");
+                    if (selectedLogicAddrArr.contains(logicAddrValue[0])) {
+                        if ("000000" == logicAddrValue[1]) {
+                            document.getElementById(logicAddrValue[0]).innerHTML = succText;
+                            document.getElementById("OP_" + logicAddrValue[0]).innerHTML = opSucc;
+                        }
+                        else {
+                            document.getElementById(logicAddrValue[0]).innerHTML = failText;
+                        }
+                        arrLogicAddrs.push(logicAddrValue[0]);
+                    }
+                }
+                //没有返回的设置为超时
+                var backResult = filter(selectedLogicAddrArr, arrLogicAddrs);
+                for(var n=0; n < backResult.length; n++) {
+                    if (writing == document.getElementById(backResult[n]).innerHTML) {
+                        document.getElementById(backResult[n]).innerHTML = outTime;
+                    }
+                }
+                //保存操作LOG
+                saveOperateLog(succText, failText);
+                //设置按钮可用
+                buttonDisable(false);
+            }
+        }
+    });
+}
+ 
+ 
+//保存操作LOG并且更新C_BUSINESS_STOP--OP_STATUS状态
+function saveOperateLog(succText, failText){
+    var logicAddrList = document.getElementById("chooseValue").value;
+    if (logicAddrList == null || logicAddrList == "") {
+        return;
+    }
+    if (logicAddrList.indexOf(",") == 0) {
+        logicAddrList = logicAddrList.substring(1);
+    }
+    var logicAddrs = logicAddrList.split(",");
+    var resultList = "";
+    for(i = 0; i < logicAddrs.length; i++) {
+       var item = logicAddrs[i];
+       resultList += ",";
+       //1: success, 0: fail
+       if (succText == document.getElementById(item).innerHTML) {
+           resultList += "1";
+       }
+       else {
+           resultList += "0";
+       }
+    }
+    if (resultList.indexOf(",") >= 0) {
+        resultList = resultList.substring(1);
+    }
+    
+    var bsType = document.getElementById("bs_type").value;
+    var params = {"logicAddrList" : logicAddrList,
+                  "resultList" : resultList,
+                  "bsType" : bsType
+                 };
+    var url = contextPath+"/do/control/businessAction.do?action=saveOperateLog&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    $.get(url, function(data){
+        
+    });
+}
+ 
+//调用接口失败
+function invokeFail() {
+    var logicAddrList = document.getElementById("chooseValue").value;
+    if (logicAddrList.indexOf(",") == 0) {
+        logicAddrList = logicAddrList.substring(1);
+    }
+    var logicAddrs = logicAddrList.split(",");
+    for(i = 0; i < logicAddrs.length; i++) {
+       var item = logicAddrs[i];
+       if(item != "") {
+           document.getElementById(item).innerHTML = opeFail;
+       }
+    }
+    //设置按钮可用
+    buttonDisable(false);
+}
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1">
+    <input type="button" name="query" id="query" value="查 询" class="input1" onclick="query();" />
+    <input type="button" name="adquery" id="adquery" value="高级查询" class="input2" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" id="write" value="下 发" class="input1" onclick="doSubmit()" />
+  </div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="70" class="label">供电单位：</td>
+      <td width="120" class="dom" id="orgTar"></td>
+      <td width="70" class="label">报停类型：</td>
+      <td width="120" class="dom">
+        <select name="bs_type" id="bs_type">
+          <option value="1">暂停</option>
+          <option value="2">暂停恢复</option>
+          <option value="3">减容</option>
+          <option value="4">减容恢复</option>
+        </select>
+        <script type="text/javascript">document.all.bs_type.value="1";</script>
+      </td>
+      <td width="70" class="label">开始时间：</td>
+      <td width="120" class="dom_date"><input type="text" name="start_run_time" value="2008-9-22" /></td>
+      <td width="70" class="label">结束时间：</td>
+      <td width="120" class="dom_date"><input type="text" name="end_run_time" value="2009-9-22"></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target">
+      <ul>
+        <li class="target_on">
+          <a href="#" onclick="setTarget(1); return false;">待办工单</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+    </div>
+    <div id="tableContainer" class="tableContainer" style="height:expression((( document.documentElement.clientHeight||document.body.clientHeight)- 92));">
+      <table id="object_table" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+         <tr>
+          <th width="2%"><input type="checkbox" id="chooseAll" onclick="doClickAll()" /></th>
+          <th width="4%">序号</th>
+          <th width="10%">户号</th>
+          <th width="16%">户名</th>
+          <th width="10%">供电单位</th>
+          <th width="8%">逻辑地址</th>
+          <th width="8%">报停类型</th>
+          <th width="10%">报停开始时间</th>
+          <th width="10%">报停结束时间</th>
+          <th width="7%">功率定值</th>
+          <th width="7%">处理状态</th>
+          <th width="10%">执行结果</th>
+         </tr>
+        </thead>
+        <tbody id="DATA_TBODY" align="center">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">2</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+    </div>
+  </div>
+</div>
+<form name="businessControlForm" method="post" action="/peis/do/control/businessAction.do" style="display:none" target="control">
+    <input type="text" id="chooseValue" name="chooseValue"/>
+    <input type="text" id="bsType" name="bsType"/>
+    <input type="text" id="bsPara" name="bsPara"/>
+</form>
+<iframe name="control" src="/peis/jsp/control/temp.jsp" style="display: none" ></iframe>
+<div id=mytips style="position:absolute;background-color:#D0EEE5;width:240px;height:100px;display:none;border: 1px #5d90d7 solid;">
+   <div id="main">
+        <div id="tool">
+           <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td class="label">提示：</td>
+            <td>权限验证</td>
+          </tr>
+          <tr>
+            <td width="66" class="label">密码：</td>
+            <td width="120" class="dom"><input type="password" id="password"/></td>
+          </tr>
+        </table>
+        <div class="t_botton">
+          <div class="t_center" align="center">
+            <input type="button" value=" 确 定 " onclick="powerValidate()" class="input1"/>
+            <input type="button" value=" 取 消 " class="input1" onclick="document.getElementById('password').value='';document.getElementById('mytips').style.display='none';"/>
+          </div>
+        </div>
+       </div>
+  </div>
+</div>
+</body>
+</html>

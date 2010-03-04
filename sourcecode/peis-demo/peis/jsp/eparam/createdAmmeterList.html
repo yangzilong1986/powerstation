@@ -1,0 +1,478 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>路由配置信息</title>
+<link rel="stylesheet" type="text/css"  href="../../css/dataframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+
+/**
+ * 得到已选择队列
+ * type:0-不加引号，1-加引号
+
+ */
+function getSelectedIdString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+             if(document.all.ItemID.checked) {
+                 sResult += "," + document.all.ItemID.value;
+             }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                if(document.all.ItemID[i].checked) {
+                    sResult += "," + document.all.ItemID[i].value;
+                }
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+/**
+ * 得到所有队列
+ * type:0-不加引号，1-加引号
+
+ */
+function getAllIdString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            sResult += "," + document.all.ItemID.value;
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                sResult += "," + document.all.ItemID[i].value;
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+//数组比较
+Array.prototype.contains = function(obj) {   
+    var boo = false;   
+    for(var i=0;i<this.length;i++) {   
+        if(typeof obj == "object") {   
+            if(this[i].equals(obj)) {   
+                boo = true;   
+                break;   
+            }                   
+        }else {
+            if(this[i] == obj)  {   
+                   boo = true;   
+                   break;                  
+            }
+        }
+    }   
+    return boo;   
+}
+
+function filter(a1, a2) {   
+    var myAry = [];   
+    for(var i=0;i<a1.length;i++) {   
+        if(!a2.contains(a1[i]))   
+            myAry.push(a1[i]);                     
+    }              
+    return myAry;   
+}
+
+function setText(itemIdList, text){
+    if(itemIdList == null || itemIdList == ""){
+        return;
+    }
+    var itemIdArr = itemIdList.split(",");
+    for(var i=0; i<itemIdArr.length; i++){
+        document.getElementById("result_" + itemIdArr[i]).innerHTML = text;
+    }
+}
+
+function read(){
+    var selectedIdList = getSelectedIdString();
+    if(selectedIdList == null || selectedIdList == ""){
+        alert("请选择对象，再读取!");
+        return;
+    }
+    var allIdList = getAllIdString();
+    //清除原来信息
+    setText(allIdList, "");
+    //设置读取信息
+    setText(selectedIdList, "正在读取...");
+    selectedIdArr = selectedIdList.split(",");
+    uncreatedAmmeterArr = [];
+    uncreatedAmmeterItemIdArr = [];
+    //设置按钮可用
+    parent.setButtonStatus(false);
+    setTimeout("getReadResult(2)", 3000);
+}
+
+var selectedIdArr;
+var uncreatedAmmeterArr;
+var uncreatedAmmeterItemIdArr;
+var jsonRd = {'data':[{'itemId':'100000000001','result':{logicAddr:'A00000000001',bxh:'1/1201'}},
+                      {'itemId':'100000000002','result':{logicAddr:'A00000000002',bxh:'2/1202'}},
+                      {'itemId':'100000000003','result':{logicAddr:'A00000000001',bxh:'32'}},
+                      {'itemId':'100000000004','result':{logicAddr:'A00000000002',bxh:'42'}},
+                      {'itemId':'100000000010','result':{logicAddr:'A00000000001',bxh:'10/1205'}},
+                      {'itemId':'100000000011','result':{logicAddr:'A00000000001',bxh:'11/1206'}},
+                      {'itemId':'100000000012','result':{logicAddr:'A00000000001',bxh:'12'}},
+                      {'itemId':'100000000013','result':{logicAddr:'A00000000001',bxh:'13'}},
+                      {'itemId':'100000000014','result':{logicAddr:'A00000000002',bxh:'14'}},
+                      {'itemId':'100000000015','result':{logicAddr:'A00000000002',bxh:'15'}},
+                      {'itemId':'100000000016','result':{logicAddr:'A00000000002',bxh:'16'}},
+                      {'itemId':'100000000017','result':{logicAddr:'A00000000002',bxh:'17'}},
+                      {'itemId':'100000000018','result':{logicAddr:'A00000000002',bxh:'18'}}]};
+function getReadResult(fetchCount){
+    var retFlag = true;
+    var retItemIdArr = [];
+    for (var i=0; i < jsonRd.data.length; i++){
+        retItemIdArr.push(jsonRd.data[i].itemId);
+    }
+    var backResult = filter(selectedIdArr, retItemIdArr);
+    if (backResult != null && backResult.length > 0) {
+        retFlag = false;
+    }
+    
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < jsonRd.data.length; i++){
+            if (selectedIdArr.contains(jsonRd.data[i].itemId)) {
+                setResultInfo(jsonRd.data[i]);
+            }
+            else {
+                if (!uncreatedAmmeterItemIdArr.contains(jsonRd.data[i].itemId)){
+                    uncreatedAmmeterItemIdArr.push(jsonRd.data[i].itemId);
+                    uncreatedAmmeterArr.push(jsonRd.data[i]);
+                }
+            }
+        }
+            //设置未建档电表信息
+            parent.uncreatedpage.insertData(uncreatedAmmeterArr);
+        //设置按钮可用
+        parent.setButtonStatus(true);
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < jsonRd.data.length; i++){
+                if (selectedIdArr.contains(jsonRd.data[i].itemId)) {
+                    setResultInfo(jsonRd.data[i]);
+                }
+                else {
+                    if (!uncreatedAmmeterItemIdArr.contains(jsonRd.data[i].itemId)){
+                        uncreatedAmmeterItemIdArr.push(jsonRd.data[i].itemId);
+                        uncreatedAmmeterArr.push(jsonRd.data[i]);
+                    }
+                }
+            }
+            //再次调用读取下发返回结果
+            setTimeout("getReadResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            for (var i=0; i < jsonRd.data.length; i++){
+                if (selectedIdArr.contains(jsonRd.data[i].itemId)) {
+                    setResultInfo(jsonRd.data[i]);
+                }
+                else {
+                    if (!uncreatedAmmeterItemIdArr.contains(jsonRd.data[i].itemId)){
+                        uncreatedAmmeterItemIdArr.push(jsonRd.data[i].itemId);
+                        uncreatedAmmeterArr.push(jsonRd.data[i]);
+                    }
+                }
+            }
+            //没有返回的设置为超时
+            for(var n=0; n < backResult.length; n++) {
+                if ("正在读取..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                    document.getElementById("result_" + backResult[n]).innerHTML = "<font color='red'>无该电表信息</font>";
+                }
+            }
+            //设置未建档电表信息
+            parent.uncreatedpage.insertData(uncreatedAmmeterArr);
+            //设置按钮可用
+            parent.setButtonStatus(true);
+        }
+    }
+}
+
+function setResultInfo(dataInfo){
+    var logicAddrInfo = document.getElementById("cjqdz_" + dataInfo.itemId).innerHTML;
+    var bxhInfo = document.getElementById("bxh_" + dataInfo.itemId).innerHTML;
+    var resultInfo = "采集器地址：";
+    if (logicAddrInfo == dataInfo.result.logicAddr){
+        resultInfo += dataInfo.result.logicAddr;
+    }
+    else {
+        resultInfo += "<font color='red'>" + dataInfo.result.logicAddr + "</font>";
+    }
+    resultInfo += ",&nbsp;&nbsp;表序号：";
+    if (bxhInfo == dataInfo.result.bxh){
+        resultInfo += dataInfo.result.bxh;
+    }
+    else {
+        resultInfo += "<font color='red'>" + dataInfo.result.bxh + "</font>";
+    }
+    document.getElementById("result_" + dataInfo.itemId).innerHTML = resultInfo;
+}
+
+function query(){
+    var powerAddr = parent.document.all.powerAddr.value;
+    if (powerAddr == "8D0A0001"){
+        $.json2html("ammeterlist","../../jsp/eparam/createdAmmeterList01.xml","ItemID");
+    }
+    else if (powerAddr == "8D0A0002"){
+        $.json2html("ammeterlist","../../jsp/eparam/createdAmmeterList02.xml","ItemID");
+    }
+    else if (powerAddr == "8D0A0003"){
+        $.json2html("ammeterlist","../../jsp/eparam/createdAmmeterList03.xml","ItemID");
+    }
+    else {
+        $.json2html("ammeterlist","../../jsp/eparam/createdAmmeterList01.xml","ItemID");
+    }
+}
+function getDifferIdList(selectedIdList){
+    if(selectedIdList == null || selectedIdList == ""){
+        return null;
+    }
+    var differIdList = "";
+    var selectedIdArr = selectedIdList.split(",");
+    var resultInfo;
+    for(var i=0; i<selectedIdArr.length; i++){
+        resultInfo = document.getElementById("result_" + selectedIdArr[i]).innerHTML;
+        if(resultInfo.indexOf("</FONT>") >= 0){
+            differIdList += ",";
+            differIdList += selectedIdArr[i];
+        }
+    }
+    if(differIdList.indexOf(",") != -1){
+        differIdList = differIdList.substring(1);
+    }
+    return differIdList;
+}
+
+function addOrMod(){
+    var selectedIdList = getSelectedIdString();
+    if(selectedIdList == null || selectedIdList == ""){
+        alert("请选择对象，再发命令!");
+        return;
+    }
+    var differIdList = getDifferIdList(selectedIdList);
+    if(differIdList == null || differIdList == ""){
+        alert("没有不一致电表信息!");
+        return;
+    }
+    var allIdList = getAllIdString();
+    //清除原来信息
+    setText(allIdList, "");
+    //设置读取信息
+    setText(differIdList, "正在设置...");
+    selectedIdArr = differIdList.split(",");
+    //设置按钮可用
+    parent.setButtonStatus(false);
+    jsonAdd = {'data':[{'itemId':'100000000001','result':'000000'},
+                       {'itemId':'100000000002','result':'000000'},
+                       {'itemId':'100000000003','result':'000001'},
+                       {'itemId':'100000000004','result':'000000'},
+                       {'itemId':'100000000010','result':'000000'},
+                       {'itemId':'100000000011','result':'000000'}]};
+    setTimeout("getAddOrModResult(2)", 3000);
+}
+
+var jsonAdd = {'data':[{'itemId':'100000000001','result':'000000'},
+                       {'itemId':'100000000002','result':'000000'},
+                       {'itemId':'100000000003','result':'000001'},
+                       {'itemId':'100000000004','result':'000000'},
+                       {'itemId':'100000000010','result':'000000'},
+                       {'itemId':'100000000011','result':'000000'}]};
+function getAddOrModResult(fetchCount){
+    var retFlag = true;
+    var retItemIdArr = [];
+    for (var i=0; i < jsonAdd.data.length; i++){
+        retItemIdArr.push(jsonAdd.data[i].itemId);
+    }
+    var backResult = filter(selectedIdArr, retItemIdArr);
+    if (backResult != null && backResult.length > 0) {
+        retFlag = false;
+    }
+    
+    // retFlag == true表示数据全部返回
+    if (retFlag == true){
+        for (var i=0; i < jsonAdd.data.length; i++){
+            if (selectedIdArr.contains(jsonAdd.data[i].itemId)) {
+                if ('000000' == jsonAdd.data[i].result){
+                    document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置成功';
+                }
+                else {
+                    document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置失败';
+                }
+            }
+        }
+        //设置按钮可用
+        parent.setButtonStatus(true);
+    }
+    else {
+        if (fetchCount > 1){
+            for (var i=0; i < jsonAdd.data.length; i++){
+                if (selectedIdArr.contains(jsonAdd.data[i].itemId)) {
+                    if ('000000' == jsonAdd.data[i].result){
+                        document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置成功';
+                    }
+                    else {
+                        document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置失败';
+                    }
+                }
+            }
+            //再次调用读取下发返回结果
+            setTimeout("getAddOrModResult(" + (fetchCount-1) + ")", 3000);
+        }
+        else {
+            for (var i=0; i < jsonAdd.data.length; i++){
+                if (selectedIdArr.contains(jsonAdd.data[i].itemId)) {
+                    if ('000000' == jsonAdd.data[i].result){
+                        document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置成功';
+                    }
+                    else {
+                        document.getElementById("result_" + jsonAdd.data[i].itemId).innerHTML = '设置失败';
+                    }
+                }
+            }
+            //没有返回的设置为超时
+            for(var n=0; n < backResult.length; n++) {
+                if ("正在设置..." == document.getElementById("result_" + backResult[n]).innerHTML) {
+                    document.getElementById("result_" + backResult[n]).innerHTML = "设置超时";
+                }
+            }
+            //设置按钮可用
+            parent.setButtonStatus(true);
+        }
+    }
+}
+
+function getFailItems(){
+    var allIdList = getAllIdString();
+    if(allIdList == null || allIdList == ""){
+        return null;
+    }
+    var allIdArr = allIdList.split(",");
+    var failItems = "";
+    var resultInfo;
+    for (var i=0; i<allIdArr.length; i++){
+        resultInfo = document.getElementById("result_" + allIdArr[i]).innerHTML;
+        if ("设置超时" == resultInfo || "设置失败" == resultInfo){
+            failItems += ",";
+            failItems += allIdArr[i];
+        }
+    }
+    if(failItems.indexOf(",") != -1){
+        failItems = failItems.substring(1);
+    }
+    return failItems;
+}
+
+function rehandle() {
+    var failItemList = getFailItems();
+    if(failItemList == null || failItemList == ""){
+        alert("没有失败的对象!");
+        return;
+    }
+    //设置读取信息
+    setText(failItemList, "正在设置...");
+    selectedIdArr = failItemList.split(",");
+    //设置按钮可用
+    parent.setButtonStatus(false);
+    jsonAdd = {'data':[{'itemId':'100000000001','result':'000000'},
+                       {'itemId':'100000000002','result':'000000'},
+                       {'itemId':'100000000003','result':'000000'},
+                       {'itemId':'100000000004','result':'000000'},
+                       {'itemId':'100000000008','result':'000000'},
+                       {'itemId':'100000000009','result':'000000'}]};
+    setTimeout("getAddOrModResult(2)", 3000);
+}
+</script>
+</head>
+<body>
+  <div>
+    <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight) - 35));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th width="2%">
+              <input type="checkbox" name="selectAll" checked onclick="selectAllCB()">
+            </th>
+            <th width="3%">序号</th>
+            <th width="8%">户号</th>
+            <th width="8%">户名</th>
+            <th width="10%">表地址</th>
+            <th width="10%">采集器地址</th>
+            <th width="6%">重点用户</th>
+            <th width="8%">表序号</th>
+            <th width="20%">操作结果</th>
+            <th width="6%">初抄相位</th>
+            <th width="6%">远控</th>
+            <th width="6%">通讯方式</th>
+            <th width="6%">CT倍率</th>
+          </tr>
+        </thead>
+        <tbody id="ammeterlist" align="center">
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+    </div>
+  </div>
+</body>
+</html>
+

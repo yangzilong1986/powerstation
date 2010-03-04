@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data extend="onclick='selectSingleRow(this);'" >   
+        <td2>9995014567</td2>     
+        <td3>10kV青平站用变F92</td3>
+		<td3>1</td3>
+		<td9>A06047897A</td9>
+		<td8>645规约</td8>
+		<td3>运行</td3>
+		<td3>高供高计</td3>
+        <td4>1</td4>
+        <td5>1</td5>            
+        <td10>杭州百富电子</td10>
+	    <td10>1200</td10>
+		<td10>6</td10>
+		<td10>否</td10>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>9995014567</td2>     
+        <td3>110kV东简站用变</td3>
+		<td3>1</td3>
+		<td9>A06047897A</td9>
+		<td8>645规约</td8>
+		<td3>运行</td3>
+		<td3>高供高计</td3>
+        <td4>1</td4>
+        <td5>1</td5>            
+        <td10>杭州百富电子</td10>
+	    <td10>1200</td10>
+		<td10>6</td10>
+		<td10>否</td10>
+    </data>  
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td2>9995014567</td2>     
+        <td3>110kV河唇站用变</td3>
+		<td3>1</td3>
+		<td9>A06047897A</td9>
+		<td8>645规约</td8>
+		<td3>运行</td3>
+		<td3>高供高计</td3>
+        <td4>1</td4>
+        <td5>1</td5>            
+        <td10>杭州百富电子</td10>
+	    <td10>1200</td10>
+		<td10>6</td10>
+		<td10>否</td10>
+    </data>         
+</datas>
+<!--
+
+电表档案(变电站)：
+	<thead>
+          <tr>
+            <th width="50">序号</th>
+            <th>资产号</th>
+            <th>计量点名称</th>
+            <th>表序号</th>
+			<th>表地址</th>
+			<th>表规约</th>
+            <th>电表状态</th>
+            <th>计量方式</th>
+			<th>CT</th>
+			<th>PT</th>
+			<th>设备厂家</th>
+			<th>波特率</th>
+			<th>翻转位数</th>
+			<th>是否专线</th>
+          </tr>
+        </thead>
+-->

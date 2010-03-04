@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+	<data js="onclick=selectSingleRow(this)" >
+		<check checked="true" disabled="true">1001</check>
+		<td1 style="text-align: left;color: red">&quot;湛江市电力公司&quot;</td1>
+		<td2>1001</td2>
+		<td3>&lt;a href="javascript:alert(this)"&gt;测试&amp;用户1001&lt;/a&gt;</td3>
+		<td4 style="color: red">44011001</td4>
+		<td5>运行</td5>
+		<td6 js="onclick=$('#test_table_tr_2').toggle('slow')">&lt;img src='../img/button_bg.gif'/&gt;</td6>
+		<td7>GPRS</td7>
+		<td8>正在下发...</td8>
+	</data>
+	<data js="onclick=selectSingleRow(this)" style="display:none;">
+		<check checked="false" disabled="false">1002</check>
+		<td1 style="color: blue">湛江市电力公司#</td1>
+		<td2>1002</td2>
+		<td3>测试用户1002</td3>
+		<td4>44011002</td4>
+		<td5>运行</td5>
+		<td6>在线</td6>
+		<td7>GPRS</td7>
+		<td8>正在下发...</td8>
+	</data>
+	<data>
+		<check checked="false" disabled="true">1003</check>
+		<td1 style="text-align: left;color: blue">湛江市电力公司%</td1>
+		<td2>1003</td2>
+		<td3>测试用户1003</td3>
+		<td4>44011003</td4>
+		<td5>运行</td5>
+		<td6>在线</td6>
+		<td7>GPRS</td7>
+		<td8>正在下发...</td8>
+	</data>
+	<data>
+		<check checked="false" disabled="false">1004</check>
+		<td1 style="text-align: left;color: blue">湛江市电力公司^</td1>
+		<td2>1004</td2>
+		<td3>测试用户1004</td3>
+		<td4>44011004</td4>
+		<td5>运行</td5>
+		<td6>在线</td6>
+		<td7>GPRS</td7>
+		<td8>正在下发...</td8>
+	</data>
+</datas>

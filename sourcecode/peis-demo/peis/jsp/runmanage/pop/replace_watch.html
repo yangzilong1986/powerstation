@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主备表替换</title>
+<!--<link rel="stylesheet" type="text/css" href="../../../css/main.css" />-->
+<link rel="stylesheet" type="text/css" href="../../../css/mainframe.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/greybox.css" />
+<!-- public js -->
+<script type="text/javascript" src="../../../js/jquery.js"></script>
+<script type="text/javascript" src="../../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../../js/frame/const.js"></script>
+<!-- private js 弹出页面的-->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.handelCombox('orgTar','orgNo');	
+		var ty = $.url.param("type");
+		if(ty == 2){
+			$("#save").show();
+		} else(
+			$("#save").hide();
+		)
+		$("#save").click(function(){
+			top.GB_hide();
+		});										 
+	});
+</script>
+</head>
+<body>
+<div id="body">  
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="label">管理单位：</td>
+          <td class="dom" id="orgTar">              
+          <td class="label">厂站名称：</td>
+          <td class="dom"><select name="factory" id="factory">
+            <option value="0">3#电站</option>
+            <option value="1">长电站</option>
+            <option value="2">光荣站</option>
+            <option value="3">揭示站</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="label">主表测量点：</td>
+          <td class="dom"><select name="select">
+            <option value="0">01/884895</option>
+            <option value="1">02/774895</option>
+          </select></td>
+          <td class="label">备表测量点：</td>
+          <td class="dom"><select name="select">
+            <option value="0">01/884895</option>
+            <option value="1">02/774895</option>
+          </select></td>
+          <td class="label">备表总倍率：</td>
+          <td class="dom"><input type="text" value="1000" disabled/></td>
+        </tr>
+        <tr>
+          <td class="label">替换开始时间：</td>
+          <td colspan="3"><input type="text" value="2008-10-01"/>
+          <select>
+          	<option value="1">1</option>
+          </select>时<select>
+          	<option value="1">1</option>
+          </select>分
+          </td>
+          <td class="label">替换结束时间：</td>
+          <td colspan="3"><input type="text" value="2008-10-01"/>
+          <select>
+          	<option value="1">1</option>
+          </select>时<select>
+          	<option value="1">1</option>
+          </select>分</td>
+        </tr>
+        <tr>
+          <td class="label">备表正向起码：</td>
+          <td class="dom"><input type="text" value="2008-10-01"/></td>
+          <td class="label">备表正向止码：</td>
+          <td class="dom"><input type="text" value="1000" /></td>
+          <td class="label">备表反向起码：</td>
+          <td class="dom"><input type="text" value="2008-10-01"/></td>
+          <td class="label">备表反向止码：</td>
+          <td class="dom"><input type="text" value="1000" /></td>
+        </tr>
+        <tr>
+          <td colspan="8" align="center"><input class="input1" type="submit" id="save" value="保 存"/></td>
+        </tr>
+      </table>
+    </div>    
+  </div>
+</div>
+</body>
+</html>

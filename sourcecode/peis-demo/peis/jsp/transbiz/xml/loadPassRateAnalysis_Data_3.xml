@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="false">
+    <data>
+        <td0>&lt;img id='img1' onclick='_myChange(1,9);' style='cursor:pointer' src='../../img/tree2/plus1.gif'/&gt;</td0>      
+        <td1 extend="align='left'">湛江市电力公司</td1>
+        <td2 extend="align='right'">3345</td2> 
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','-1');"&gt;3216&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','-1');"&gt;129&lt;/a&gt;</td4>
+        <td5 extend="align='right'">96.14</td5> 
+    </data>
+    <data extend="style='display: none;'">
+        <td0></td0>       
+        <td1 extend="align='left'">大工业</td1>
+        <td2 extend="align='right'">2585</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','100');"&gt;2579&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','100');"&gt;6&lt;/a&gt;</td4>
+        <td5 extend="align='right'">99.76</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">中小化肥</td1>
+        <td2 extend="align='right'">200</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','101');"&gt;180&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','101');"&gt;20&lt;/a&gt;</td4>
+        <td5 extend="align='right'">90</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">居民生活用电</td1>
+        <td2 extend="align='right'">100</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','200');"&gt;60&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','200');"&gt;40&lt;/a&gt;</td4>
+        <td5 extend="align='right'">60</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">农业生活用电</td1>
+        <td2 extend="align='right'">40</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','300');"&gt;35&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','300');"&gt;5&lt;/a&gt;</td4>
+        <td5 extend="align='right'">87.5</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">贫困县农业排灌用电</td1>
+        <td2 extend="align='right'">200</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','301');"&gt;180&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','301');"&gt;20&lt;/a&gt;</td4>
+        <td5 extend="align='right'">90</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">一般工商业</td1>
+        <td2 extend="align='right'">150</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','400');"&gt;120&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','400');"&gt;30&lt;/a&gt;</td4>
+        <td5 extend="align='right'">90</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">趸售</td1>
+        <td2 extend="align='right'">20</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','500');"&gt;17&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','500');"&gt;3&lt;/a&gt;</td4>
+        <td5 extend="align='right'">85</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">其他</td1>
+        <td2 extend="align='right'">50</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','P','900');"&gt;45&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('湛江市电力公司','N','900');"&gt;5&lt;/a&gt;</td4>
+        <td5 extend="align='right'">90</td5> 
+    </data>
+    <data>
+        <td0>&lt;img id='img10' onclick='_myChange(10,16);' style='cursor:pointer' src='../../img/tree2/plus1.gif'/&gt;</td0>      
+        <td1 extend="align='left'">遂溪供电局</td1>
+        <td2 extend="align='right'">1500</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','-1');"&gt;1450&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','-1');"&gt;50&lt;/a&gt;</td4>
+        <td5 extend="align='right'">96.67</td5> 
+    </data>
+    <data extend="style='display: none;'">
+        <td0></td0>       
+        <td1 extend="align='left'">大工业</td1>
+        <td2 extend="align='right'">1100</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','100');"&gt;1100&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','100');"&gt;0&lt;/a&gt;</td4>
+        <td5 extend="align='right'">100</td5> 
+    </data>
+    <data extend="style='display: none;'" >        
+        <td0></td0>
+        <td1 extend="align='left'">中小化肥</td1>
+        <td2 extend="align='right'">140</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','101');"&gt;136&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','101');"&gt;4&lt;/a&gt;</td4>
+        <td5 extend="align='right'">97.14</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">居民生活用电</td1>
+        <td2 extend="align='right'">70</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','200');"&gt;65&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','200');"&gt;5&lt;/a&gt;</td4>
+        <td5 extend="align='right'">92.86</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">农业生活用电</td1>
+        <td2 extend="align='right'">10</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','300');"&gt;7&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','300');"&gt;3&lt;/a&gt;</td4>
+        <td5 extend="align='right'">87.5</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">贫困县农业排灌用电</td1>
+        <td2 extend="align='right'">120</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','301');"&gt;118&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','301');"&gt;2&lt;/a&gt;</td4>
+        <td5 extend="align='right'">98.33</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">一般工商业</td1>
+        <td2 extend="align='right'">10</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','400');"&gt;8&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','400');"&gt;2&lt;/a&gt;</td4>
+        <td5 extend="align='right'">80</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">趸售</td1>
+        <td2 extend="align='right'">20</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','500');"&gt;17&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','500');"&gt;3&lt;/a&gt;</td4>
+        <td5 extend="align='right'">85</td5> 
+    </data>
+    <data extend="style='display: none;'">        
+        <td0></td0>
+        <td1 extend="align='left'">其他</td1>
+        <td2 extend="align='right'">30</td2>
+        <td3 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','P','900');"&gt;28&lt;/a&gt;</td3>
+        <td4 extend="align='right'">&lt;a href="javascript:openDetail('遂溪供电局','N','900');"&gt;2&lt;/a&gt;</td4>
+        <td5 extend="align='right'">93.33</td5> 
+    </data>
+</datas>

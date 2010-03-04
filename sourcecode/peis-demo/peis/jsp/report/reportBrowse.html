@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>报表浏览</title>
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/report/reportQuery.js"></script>
+</head>
+<body>
+<div id="body">
+  <div id="main">
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="66" class="label">报表分类：</td>
+          <td width="100" class="dom"><input type="text" id="reportType" value="变电站电量类报表" disabled="disabled"/></td>
+          <td width="66" class="label">报表编号：</td>
+          <td width="100" class="dom"><input type="text" id="reportNum" value="2001" disabled="disabled"/></td>
+          <td width="66" class="label">报表名称：</td>
+          <td width="100" class="dom"><input type="text" id="reportName" value="220KV变电站电量报表" disabled="disabled"/></td>
+          <td width="66" class="label">出表周期：</td>
+          <td width="100" class="dom"><input type="text" id="reportCyc" value="月" disabled="disabled"/></td>      
+        </tr>
+        <tr>
+          <td width="66" class="label">开始日期：</td>
+          <td class="dom_date">
+            <input type="text" id="startDate" name="startDate" value="2009/01/01">
+            <a onclick="event.cancelBubble=true;" href="javascript: showCalendar('dimg1',false,'date',null)">
+              <img class="date" alt="" id="dimg1" name="dimg1" src="../../img/calendar/calendar.gif" width="34" height="21" />
+            </a>
+          </td>
+          <td width="66" class="label">结束日期：</td>
+          <td class="dom_date">
+            <input type="text" id="endDate" name="endDate" value="2009/12/31">
+            <a onclick="event.cancelBubble=true;" href="javascript: showCalendar('dimg1',false,'date',null)">
+              <img class="date" alt="" id="dimg1" name="dimg1" src="../../img/calendar/calendar.gif" width="34" height="21" />
+            </a>
+          </td>
+          <td width="66" class="label">制表人：</td>
+          <td width="100" class="dom"><input type="text" id="createPeople" value="蔡煜瑞"/></td>
+          <td><input class="input" type="submit" id="query" value="查 询"/></td>          
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 140));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead><tr>
+                <th width="25%">报表文件名</th>
+                <th width="10%">制表人</th>
+                <th width="20%">生成时间</th>
+                <th width="10%">更新人</th>
+                <th width="20%">最近更新时间</th>
+                <th width="10%">操作</th>
+              </tr></thead>
+              <tbody id="report_list_rec">
+            </table>
+        </div>
+        <div class="pageContainer">
+          <input type="hidden" id="showType" name="showType" value="pag" />显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10" selected>10</option><option value="20">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select> 　第1页 / 共1页　转到：<input type="text" id="page" name="page" value="1" /><img align="middle" src="../../img/paging/btn_go.gif" width="20" height="20" border="0" style="cursor: pointer;" /> <font style="font-size: 14px; font-family: webdings">9</font> <font style="font-size: 14px; font-family: webdings">7</font> <font style="font-size: 14px; font-family: webdings">8</font> <font style="font-size: 14px; font-family: webdings">:</font>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+</body>
+
+</html>

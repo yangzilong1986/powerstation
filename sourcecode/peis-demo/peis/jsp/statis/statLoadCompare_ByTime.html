@@ -1,0 +1,327 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>负荷特性分析-时间比较 </title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    dateTypeModeChange();
+    /** 按钮绑定 */
+    $('#query').click(changeChar);
+    $('#dateType').change(dateTypeModeChange);
+    $('select[name=valIndex]').change(getDataByAjax);
+    
+    $("#progress").ajaxStart(function(){
+        $(this).show();
+    });
+    $("#progress").ajaxStop(function(){
+        //btn_total.attr("disabled",false);
+        $(this).hide();
+    });
+});
+
+function dateTypeModeChange() {
+    var dateType = $('#dateType').val();
+    if (dateType == "1") {//日
+
+        $("#DATA_DAY1").show();$("#DATA_DAY2").show();
+        $("#DATA_YEAR1").hide();$("#DATA_YEAR2").hide();
+        $("#DATA_MONTH1").hide();$("#DATA_MONTH2").hide();
+        $("#TIME_DELAY").hide();
+    } else if (dateType == "2") {//月
+
+        $("#DATA_DAY1").hide();$("#DATA_DAY2").hide();
+        $("#DATA_YEAR1").show();$("#DATA_YEAR2").show();
+        $("#DATA_MONTH1").show();$("#DATA_MONTH2").show();
+        $("#TIME_DELAY").hide();
+    } else if (dateType == "3") {//年
+
+        $("#DATA_DAY1").hide();$("#DATA_DAY2").hide();
+        $("#DATA_YEAR1").show();$("#DATA_YEAR2").show();
+        $("#DATA_MONTH1").hide();$("#DATA_MONTH2").hide();
+        $("#TIME_DELAY").hide();
+
+    }else{
+        $("#DATA_DAY1").show();$("#DATA_DAY2").show();
+        $("#DATA_YEAR1").hide();$("#DATA_YEAR2").hide();
+        $("#DATA_MONTH1").hide();$("#DATA_MONTH2").hide();
+        $("#TIME_DELAY").show();
+    }
+}
+
+
+/** 取对象编号 */
+function queryObject(){
+    var objectNo        =   $('#objectNo').val();
+    var objectName      =   encodeURI($('#objectName').val(),"utf-8");
+    var logicAddress    =   $('#logicAddress').val();
+    
+    if(objectNo=="" && objectName=="" && logicAddress==""){
+        alert("请输入户名、户号、逻辑地址任一信息!!!");
+        return;
+    }
+    
+    /** 对象信息 */
+    var objectInfo = {};
+    var params = {"objectNo":objectNo,"objectName":objectName,"logicAddress":logicAddress};
+    var url = contextPath+"/statis/statLoadCompareByTime.do?action=queryObjectJSON&" + jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    $.getJSON(url,function(json){
+        objectInfo.orgName = (!json['orgName']?"":json['orgName'])
+        objectInfo.objectNo = (!json['objectNo']?"":json['objectNo'])
+        objectInfo.objectName = (!json['objectName']?"":json['objectName'])
+        objectInfo.logicAddress = (!json['logicAddress']?"":json['logicAddress'])
+        /** 填充对象信息 */
+        if(objectInfo.orgName=="" && objectInfo.objectNo=="" && objectInfo.objectName=="" && objectInfo.logicAddress=="" ){
+            alert("找不到相关信息!无法统计,请从新输入查询条件");
+            
+            /** 置空查询条件 */
+            $('#objectNo').val("");
+            $('#objectName').val("");
+            $('#logicAddress').val("");
+            
+            $('#objectNo').focus();
+            /** 清空查询信息 */
+            _fillObjectInfoTable(null);
+            return;
+        }
+        //btn_total.attr({"disabled":false});
+        _fillObjectInfoTable(objectInfo);
+    })
+}
+
+
+function _fillObjectInfoTable(obj){
+    if(obj==null){
+        $('#DATA_BODY0').html("");
+        return;
+    }
+    $('#objectNo').val(obj.objectNo);
+    var html='<tr>';
+    html+='<td rowspan=2  nowrap="nowrap">'+obj.orgName+'</td>';
+    html+='<td rowspan=2  nowrap="nowrap">'+obj.objectNo+'</td>';
+    html+='<td rowspan=2  nowrap="nowrap">'+obj.objectName+'</td>';
+    html+='<td rowspan=2  nowrap="nowrap">'+obj.logicAddress+'</td></tr>';
+   $('#DATA_BODY0').html(html);
+}
+
+
+/** 取数据和图形的AJAX调用 */
+function getDataByAjax(){
+    //btn_total.attr({"disabled":true});
+    var valIndex = $('select[name=valIndex]').val();
+    var url = contextPath+"/statis/statLoadCompareByTime.do?action=getDateByTime&" + $("form").serialize() +"&valIndex=" + valIndex + "&r=" + parseInt(Math.random() * 1000);
+    $.ajax({
+       url: url,
+       cache: false,
+       dateType:'script',
+       success: function(data){
+         eval(data);
+         if(myrequest.thhtml!=null)
+            $('#DATA_THEAD').html(myrequest.thhtml);
+         if(myrequest.trhtml!=null)
+            $('#DATA_BODY').html(myrequest.trhtml);
+         var url = contextPath+"/statis/statLoadCompareByTime.do?action=getChartByAjax&" + $("form").serialize() +"&valIndex=" + valIndex + "&r=" + parseInt(Math.random() * 1000);
+         $.get(url, function(data){
+             $('#CHART_DIV').html(data);
+         });     
+       }
+    });
+}
+
+function selectCharShow(rows){
+  var dateType = $('#dateType').val();
+  var CharUrl = "";
+  if(dateType == 1 || dateType == 4){
+    CharUrl = "statLoadCompare_Data_Line/statLoadCompare_ByTime_Line_1.xml";
+  }else if(dateType == 2){
+    CharUrl = "statLoadCompare_Data_Line/statLoadCompare_ByTime_Line_2.xml";
+  }
+  else if(dateType == 3){
+    CharUrl = "statLoadCompare_Data_Line/statLoadCompare_ByTime_Line_3.xml";
+  }
+  var chart_obj = new FusionCharts("../../FusionCharts/MSLine.swf", "chart_id", "900", "300", "0", "0");
+  chart_obj.setDataURL(CharUrl);
+  chart_obj.render("graphBlock");
+}
+
+function changeChar(){
+  var dateType=$("#dateType").val();
+  if(dateType == 1){
+   $("#date").show();$("#month").hide();$("#year").hide();
+   $.json2html("DATA_BODY_2","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_2.xml","cb-item");
+   //$.json2html("DATA_BODY_1","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_1.xml","cb-item");
+   selectCharShow(dateType);
+  }else if(dateType == 2){
+   $("#date").hide();$("#month").show();$("#year").hide();
+   $.json2html("DATA_BODY_2","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_3.xml","cb-item");
+   //$.json2html("DATA_BODY_1","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_1.xml","cb-item");
+   selectCharShow(dateType);
+  }else if(dateType == 3){
+   $("#date").hide();$("#month").hide();$("#year").show();
+   $.json2html("DATA_BODY_2","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_4.xml","cb-item");
+   //$.json2html("DATA_BODY_1","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_1.xml","cb-item");
+   selectCharShow(dateType);
+  }else if(dateType == 4){
+   $("#date").show();$("#month").hide();$("#year").hide();
+   $.json2html("DATA_BODY_2","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_2.xml","cb-item");
+   //$.json2html("DATA_BODY_1","../../jsp/statis/statLoadCompare_Data_Line/statLoadCompare_ByTime_Data_1.xml","cb-item");
+   selectCharShow(dateType);
+  }    
+}
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+     <tr>
+       <td width="70" class="label" align="right">户号：</td>
+       <td width="120" class="dom" align="left">
+         <input type="text" name="objectNo" value="1211003393" id="objectNo" >
+       </td>
+       <td width="70" class="label" align="right">户名：</td>
+       <td width="120" class="dom" align="left">
+           <input type="text" name="objectName" value="" id="objectName">
+       </td>
+       <td width="70" class="label" align="right">逻辑地址：</td>
+       <td width="120" class="dom" align="left">
+         <input type="text" name="logicAddress" value="" id="logicAddress">
+       </td>
+       <td width="70" class="label" align="right">&nbsp;</td>
+       <td width="120" class="dom" align="left">&nbsp;</td>
+       <td width="70" class="label" align="right">&nbsp;</td>
+     </tr>
+     <tr>
+       <td width="70" class="label" align="right">查看方式：</td>
+       <td width="120" class="dom" align="left">
+         <select name="dateType" id="dateType"><option value="1">日负荷</option>
+           <option value="2">月负荷</option>
+           <option value="3">年负荷</option>
+           <option value="4">自定义时间段</option>
+         </select>
+       </td>
+       <td width="70" class="label" align="right">比较时段：</td>
+       <td width="140" class="dom_date" align="left">
+         <span id="DATA_DAY1" style="display: block;">
+         <input type="text" id="DATA_DAY" name="DATA_DAY" value="2006-09-05">
+         </span>
+         <span id="DATA_YEAR1" style="display: none;">
+           <select name="DATA_YEAR" id="DATA_YEAR" style="width=55">
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>                    
+           </select>年
+
+         </span>
+         <span id="DATA_MONTH1" style="display: none;">
+           <script type="text/javascript">
+           document.write("<select name=\"DATA_YEAR\" id=\"DATA_YEAR\" style=\"width=40\">")
+           for(var i=1;i<13;i++){
+             if(i<10){
+               document.write("<option value=\""+i+"\">0"+i+"</option>")
+             }else{
+               document.write("<option value=\""+i+"\">"+i+"</option>")
+             }                    
+           }
+           document.write("</select>月")
+         </script>
+       </span>
+     </td>
+     <td width="70" class="label" align="right">比较时段：</td>
+     <td width="140" class="dom_date" align="left">
+       <span id="DATA_DAY2" style="display: block;">
+         <input type="text" id="DATA_DAY" name="DATA_DAY" value="2006-09-05">
+       </span>
+       <span id="DATA_YEAR2" style="display: none;">
+         <select name="DATA_YEAR" id="DATA_YEAR" style="width=55">
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>                    
+         </select>年
+
+       </span>
+       <span id="DATA_MONTH2" style="display: none;">
+         <script type="text/javascript">
+           document.write("<select name=\"DATA_YEAR\" id=\"DATA_YEAR\" style=\"width=40\">")
+           for(var i=1;i<13;i++){
+             if(i<10){
+               document.write("<option value=\""+i+"\">0"+i+"</option>")
+             }else{
+               document.write("<option value=\""+i+"\">"+i+"</option>")
+             }                    
+           }
+           document.write("</select>月")
+         </script>
+       </span>
+     </td>
+     <td  width="140" class="dom" align="left">
+       <span id="TIME_DELAY" style="display: none;">
+                                       自定义时间长度：<input type="text" name="delay" style="width=30" value="10" id="delay">
+       </span>
+     </td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+   </tr>
+ </table>
+</div>
+<div class="content">
+   <div id="cont_1">
+   <div class="target5">
+     <ul>
+       <li class="target_on"><a href="#" onclick="return false;">负荷特性时间比较图表</a></li>
+       <li class="clear"></li>
+     </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle" /> <a href="#">修改显示字段</a></h1>
+    </div>
+   <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 95));">
+   <div id="graphBlock" align="center"></div>        
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead id="DATA_THEAD">
+          <tr id="date" style="display:;">
+            <th width="90px">时间</th>
+            <th width="70px">0点</th><th width="70px">1点</th><th width="70px">2点</th><th width="70px">3点</th><th width="70px">4点</th><th width="70px">5点</th>
+            <th width="70px">6点</th><th width="70px">7点</th><th width="70px">8点</th><th width="70px">9点</th><th width="70px">10点</th><th width="70px">11点</th>
+            <th width="70px">12点</th><th width="70px">13点</th><th width="70px">14点</th><th width="70px">15点</th><th width="70px">16点</th><th width="70px">17点</th>
+            <th width="70px">18点</th><th width="70px">19点</th><th width="70px">20点</th><th width="70px">21点</th><th width="70px">22点</th><th width="70px">23点</th>
+           </tr>
+           <tr id="month" style="display:none;">
+            <th width="65px">日期</th>
+            <th width="70px">1号</th><th width="70px">2号</th><th width="70px">3号</th><th width="70px">4号</th><th width="70px">5号</th>
+            <th width="70px">6号</th><th width="70px">7号</th><th width="70px">8号</th><th width="70px">9号</th><th width="70px">10号</th><th width="70px">11号</th>
+            <th width="70px">12号</th><th width="70px">13号</th><th width="70px">14号</th><th width="70px">15号</th><th width="70px">16号</th><th width="70px">17号</th>
+            <th width="70px">18号</th><th width="70px">19号</th><th width="70px">20号</th><th width="70px">21号</th><th width="70px">22号</th><th width="70px">23号</th>
+            <th width="70px">19号</th><th width="70px">20号</th><th width="70px">21号</th><th width="70px">22号</th><th width="70px">23号</th><th width="70px">24号</th>
+            <th width="70px">25号</th><th width="70px">26号</th><th width="70px">27号</th><th width="70px">28号</th><th width="70px">29号</th><th width="70px">30号</th>
+            <th width="70px">31号</th>
+           </tr>
+           <tr id="year" style="display:none;">
+            <th width="65px">月份</th>
+            <th width="70px">1月</th><th width="70px">2月</th><th width="70px">3月</th><th width="70px">4月</th><th width="70px">5月</th>
+            <th width="70px">6月</th><th width="70px">7月</th><th width="70px">8月</th><th width="70px">9月</th><th width="70px">10月</th><th width="70px">11月</th>
+            <th width="70px">12月</th>
+           </tr>
+         </thead >
+         <tbody id="DATA_BODY_2">
+         </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--rowid用来表示是否显示列号,true显示，false或者不填均是不用列号  -->
+<datas rowid="true">
+<!-- <data></data>固定格式 -->
+    <data>
+        <check extend="checked='true';">12080938</check>
+        <td1>00002867</td1>
+        <td2>广州万宝集团有限公司</td2>
+        <td3>广州市供电所</td3>
+        <td4>12080938</td4>
+        <td5>负荷监测终端</td5>
+        <td6>232串口</td6>
+        <td7 extend="id='12080938'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D270229</check>
+        <td1>00014591</td1>
+        <td2>广州市天河双龙电子有限公司</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D270229</td4>
+        <td5>负荷监测终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D270229'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D270374</check>
+        <td1>00203037</td1>
+        <td2>新北村台区</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D270374</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D270374'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D270044</check>
+        <td1>00203074</td1>
+        <td2>广州装修公司</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D270044</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D270044'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">32323232</check>
+        <td1>23002867</td1>
+        <td2>白水坡</td2>
+        <td3>广州市供电所</td3>
+        <td4>32323232</td4>
+        <td5>负荷监测终端</td5>
+        <td6>232串口</td6>
+        <td7 extend="id='32323232'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280001</check>
+        <td1>11014521</td1>
+        <td2>上塘村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280001</td4>
+        <td5>负荷监测终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280001'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280002</check>
+        <td1>11203037</td1>
+        <td2>新和村公变</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280002</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280002'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280003</check>
+        <td1>11203074</td1>
+        <td2>米稔下村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280003</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280003'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280004</check>
+        <td1>12002867</td1>
+        <td2>关草村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280004</td4>
+        <td5>负荷监测终端</td5>
+        <td6>232串口</td6>
+        <td7 extend="id='8D280004'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280005</check>
+        <td1>12014521</td1>
+        <td2>北马村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280005</td4>
+        <td5>负荷监测终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280005'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280006</check>
+        <td1>12203037</td1>
+        <td2>啤头村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280006</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280006'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280007</check>
+        <td1>12203074</td1>
+        <td2>山咀村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280007</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280007'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280008</check>
+        <td1>13014521</td1>
+        <td2>黄羌村</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280008</td4>
+        <td5>负荷监测终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280008'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280009</check>
+        <td1>13203037</td1>
+        <td2>方兴东公变</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280009</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280009'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280010</check>
+        <td1>13203074</td1>
+        <td2>田头圩台区总表</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280010</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280010'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280011</check>
+        <td1>13002867</td1>
+        <td2>陈李锦</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280011</td4>
+        <td5>负荷监测终端</td5>
+        <td6>232串口</td6>
+        <td7 extend="id='8D280011'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280012</check>
+        <td1>13014521</td1>
+        <td2>吴月媚</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280012</td4>
+        <td5>负荷监测终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280012'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280013</check>
+        <td1>13203037</td1>
+        <td2>何建强</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280013</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280013'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280014</check>
+        <td1>13303072</td1>
+        <td2>曹绮云</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280014</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280014'">&#160;</td7>
+    </data>
+    <data>
+        <check extend="checked='true';">8D280015</check>
+        <td1>15303322</td1>
+        <td2>林尊从</td2>
+        <td3>广州市供电所</td3>
+        <td4>8D280015</td4>
+        <td5>配变监控终端</td5>
+        <td6>GPRS</td6>
+        <td7 extend="id='8D280015'">&#160;</td7>
+    </data>
+</datas>
+

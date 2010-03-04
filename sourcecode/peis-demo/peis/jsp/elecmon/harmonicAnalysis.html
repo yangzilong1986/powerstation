@@ -1,0 +1,223 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>谐波分析</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../FusionCharts/FusionCharts.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript" src="../../js/frame/json2html.js"></script> 
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script> 
+</head>
+<script type="text/javascript">
+$(function (){
+$.json2html("databody","../../jsp/elecmon/harmonicAnalysis.xml",""); 
+
+$.handelCombox('lineNo','lineNo');
+    var chart_obj = new FusionCharts("../../FusionCharts/Column3D.swf", "chart_id", "850", "245", "0", "0");
+    chart_obj.setDataURL("harmonicAnalysisChat.xml");
+    chart_obj.render("graphBlock");
+});
+
+function viewDetail(){
+  top.showDialogBox("谐波数据明细", "../../jsp/elecmon/harmonicAnalysisDetail.html", 600, 800); 
+}
+
+$(document).ready(function(){
+    // 单用户查询中的谐波分析公用。
+    var type = $.url.param("type");
+    if(type == 1){
+        $("#last").hide();
+        $("#tab").attr("class","tab");
+        $("#type_1").show()
+    } else if(type == 2){
+    	$("#last").hide();
+    	$("#tab").attr("class","tab");
+        $("#type_2").show()
+    } else if(type == 4){
+        $("#last").hide();
+        $("#tab").attr("class","tab");
+        $("#type_4").show()
+    } else{
+    	$("#tab").attr("class","tab3");
+    }
+});
+</script>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul id="last">
+      <li id="tab_1" class="tab_on"><a href="#" onfocus="blur()">谐波越限数据</a></li>
+      <li id="tab_1" class="tab_off"><a href="harmonicExtremal.html" onfocus="blur()">谐波极值数据</a></li>
+      <li id="tab_1" class="tab_off"><a href="harmonicAlarm.html" onfocus="blur()">谐波告警数据</a></li>
+      <li id="tab_1" class="tab_off"><a href="harmonicPassrate.html" onfocus="blur()">谐波合格率统计</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+
+    <!-- 单用户查询中的谐波分析公用。 state -->
+    <ul id="type_1" style="display: none;">
+      <li id="tab_1" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_1.html" onClick="return true;" onFocus="blur()">基本信息</a></li>
+      <li id="tab_2" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_2.html" onClick="return true;" onFocus="blur()">表码数据</a></li>
+      <li id="tab_3" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_3.html" onClick="return true;" onFocus="blur()">功率数据</a></li>
+      <li id="tab_4" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_4.html" onClick="return true;" onFocus="blur()">电压数据</a></li>
+      <li id="tab_5" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_5.html" onClick="return true;" onFocus="blur()">电流数据</a></li>
+      <li id="tab_6" class="tab_on"><a href="" onClick="return false;" onFocus="blur()">谐波数据</a></li>
+      <li id="tab_7" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_7.html" onClick="return true;" onFocus="blur()">电量数据</a></li>
+      <li id="tab_8" class="tab_off"><a href="../../jsp/synquery/usr_data_query_zb_8.html" onClick="return true;" onFocus="blur()">事件数据</a></li>
+    </ul>
+    <ul id="type_2" style="display: none;">
+      <li id="tab_1" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_1.html" onclick="return true;" onfocus="blur()">基本信息</a></li>
+      <li id="tab_2" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_2.html" onclick="return true;" onfocus="blur()">表码数据</a></li>
+      <li id="tab_3" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_3.html" onclick="return true;" onfocus="blur()">功率数据</a></li>
+      <li id="tab_4" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_4.html" onclick="return true;" onfocus="blur()">电压数据</a></li>
+      <li id="tab_5" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_5.html" onclick="return true;" onfocus="blur()">电流数据</a></li>
+      <li id="tab_6" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">谐波数据</a></li>
+      <li id="tab_7" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_7.html" onclick="return true;" onfocus="blur()">电量数据</a></li>
+      <li id="tab_8" class="tab_off"><a href="../../jsp/synquery/pb/usr_data_query_pb_8.html" onclick="return true;" onfocus="blur()">事件数据</a></li>
+    </ul>
+    <ul id="type_4" style="display: none;">
+      <li id="tab_1" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_1.html" onclick="return true;" onfocus="blur()">基本信息</a></li>
+      <li id="tab_2" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_2.html" onclick="return true;" onfocus="blur()">表码数据</a></li>
+      <li id="tab_3" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_3.html" onclick="return true;" onfocus="blur()">功率数据</a></li>
+      <li id="tab_4" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_4.html" onclick="return true;" onfocus="blur()">电压数据</a></li>
+      <li id="tab_5" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_5.html" onclick="return true;" onfocus="blur()">电流数据</a></li>
+      <li id="tab_6" class="tab_on"><a href="" onclick="return false;" onfocus="blur()">谐波数据</a></li>
+      <li id="tab_7" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_7.html" onclick="return true;" onfocus="blur()">电量数据</a></li>
+      <li id="tab_8" class="tab_off"><a href="../../jsp/synquery/bdz/usr_data_query_bdz_8.html" onclick="return true;" onfocus="blur()">事件数据</a></li>
+    </ul>
+    <!-- end -->
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div id="tool">
+     <div class="opbutton3"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+       <tr>
+        <td colspan="6">
+          <input type="radio" name="objectType" value="1"  class="dom" />专变用户
+          <input type="radio" name="objectType" value="2" class="dom" checked="checked"/>配变
+        </td>
+       </tr>
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+            <select id="orgNo" name="orgNo">
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td class="label" width="70">供电线路：</td>
+          <td width="120" class="dom" id="lineNo"></td>
+          <td class="label"  width="70">统计时间：</td>
+          <td class="dom_date" width="120">     
+            <input type="text" id="date" name="date" value="2006-09-05">
+          </td>
+       </tr>
+       <tr>
+       <td class="label" width="70">类型：</td>
+       <td width="120" class="dom">
+         <select id="tjlx" name="tjlx">
+           <option value="1">电压谐波</option>
+           <option value="2">电压谐波</option>
+           <option value="3">电压谐波</option>
+           <option value="4">电压谐波</option>
+         </select>
+       </td>
+       <td class="label"  width="70">相序：</td>
+       <td width="120" class="dom">
+         <select id="xx" name="xx">
+           <option value="1">A相</option>
+           <option value="2">B相</option>
+           <option value="3">C相</option>
+         </select>
+       </td>
+       <td class="label" width="70">台区：</td>
+       <td class="dom" width="120"><input type="text" name="objectNo" size="13"></td>
+      </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" >谐波分析</a></li>
+            <li class="clear"></li>
+          </ul>
+        </div>
+        <div class="graphContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 203));">
+          <!-- START Script Block for Chart-->
+          <div id="graphBlock" align="left" class="block"></div>
+         
+          <!--END Script Block for Chart-->
+          <table border="0" cellpadding="0" cellspacing="0" width="220%" id="data">
+            <thead><tr>
+              <th width="2%">序号</th>
+              <th width="2%">明细</th>
+              <th width="3%">供电单位</th>
+              <th width="3%">台区号</th>
+              <th width="3%">台区名</th>
+              <th width="3%">计量点</th>
+              <th width="6%">总含有率越限日累计时间</th>
+              <th width="4%">2次越限累计时间</th>
+              <th width="4%">3次越限累计时间</th>
+              <th width="4%">4次越限累计时间</th>
+              <th width="4%">5次越限累计时间</th>
+              <th width="4%">6次越限累计时间</th>
+              <th width="4%">7次越限累计时间</th>
+              <th width="4%">8次越限累计时间</th>
+              <th width="4%">9次越限累计时间</th>
+              <th width="4%">10次越限累计时间</th>
+              <th width="4%">11次越限累计时间</th>
+              <th width="4%">12次越限累计时间</th>
+              <th width="5%">13次越限累计时间</th>
+              <th width="5%">14次越限累计时间</th>
+              <th width="5%">15次越限累计时间</th>
+              <th width="5%">16次越限累计时间</th>
+              <th width="5%">17次越限累计时间</th>
+              <th width="5%">18次越限累计时间</th>
+              <th width="5%">19次越限累计时间</th>
+            </tr></thead>
+            <tbody id="databody">
+            </tbody>
+          </table>    
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

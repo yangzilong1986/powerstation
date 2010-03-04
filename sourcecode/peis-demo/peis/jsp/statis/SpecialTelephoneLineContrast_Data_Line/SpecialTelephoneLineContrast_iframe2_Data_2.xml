@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="true">
+   <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>B#KI09178</td1>
+        <td2>10000</td2>
+        <td3>2009-07</td3> 
+        <td4>45423</td4> 
+        <td5>245234</td5> 
+        <td6>435346</td6>
+        <td7>534645</td7>
+        <td8>546453</td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>B#KI09178</td1>
+        <td2>10000</td2>
+        <td3>2009-08</td3> 
+        <td4>45423</td4> 
+        <td5>245234</td5> 
+        <td6>435346</td6>
+        <td7>534645</td7>
+        <td8>546453</td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>B#KI09178</td1>
+        <td2>10000</td2>
+        <td3>2009-10</td3> 
+        <td4>45423</td4> 
+        <td5>245234</td5> 
+        <td6>435346</td6>
+        <td7>534645</td7>
+        <td8>546453</td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>B#KI09178</td1>
+        <td2>10000</td2>
+        <td3>2009-11</td3> 
+        <td4>45423</td4> 
+        <td5>245234</td5> 
+        <td6>435346</td6>
+        <td7>534645</td7>
+        <td8>546453</td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1><![CDATA[&nbsp;]]></td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3> 
+        <td4><![CDATA[&nbsp;]]></td4> 
+        <td5><![CDATA[&nbsp;]]></td5> 
+        <td6><![CDATA[&nbsp;]]></td6>
+        <td7><![CDATA[&nbsp;]]></td7>
+        <td8><![CDATA[&nbsp;]]></td8>
+    </data> 
+    <data extend="onclick='selectSingleRow(this);'" >        
+        <td1>合计</td1>
+        <td2><![CDATA[&nbsp;]]></td2>
+        <td3><![CDATA[&nbsp;]]></td3> 
+        <td4>45423</td4> 
+        <td5>245234</td5> 
+        <td6>435346</td6>
+        <td7>534645</td7>
+        <td8>546453</td8>
+    </data> 
+</datas>

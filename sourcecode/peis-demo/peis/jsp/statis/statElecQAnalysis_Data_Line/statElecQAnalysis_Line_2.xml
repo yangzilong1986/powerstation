@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="GBK"?>
+<chart caption='' numberSuffix='' shownames='1' showvalues='1'>
+    <categories>
+        <category label='居民服务和其他服务业 '/>
+        <category label='交通运输、仓储和邮政业'/>
+        <category label='卫生、社会保障和社会福利业 '/>
+        <category label='住宿和餐饮业'/>
+        <category label='制 造 业'/>
+        <category label='金融业'/>
+        <category label='房地产业'/>
+        <category label='采 矿 业'/>
+        <category label='文化、体育和娱乐业'/>
+        <category label='科学研究、技术服务和地质勘查业'/>
+        <category label='电力、燃气及水的生产和供应业'/>
+        <category label='水利、环境和公共设施管理业'/>
+        <category label='教育'/>
+        <category label='建筑业'/>
+        <category label='公共管理和社会组织'/>
+        <category label='农、林、牧、渔业'/>
+        <category label='信息传输、计算机服务和软件业'/>
+    </categories>
+    <dataset seriesName='本期电量' color='AFD818' showValues='0'>
+        <set value='32'/>
+        <set value='36'/>
+        <set value='54'/>
+        <set value='54'/>
+        <set value='34'/>
+        <set value='34'/>
+        <set value='54'/>
+        <set value='44'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='45'/>
+        <set value='54'/>
+        <set value='94.31'/>
+        <set value='65'/>
+        <set value='97.19'/>
+        <set value='76'/>
+    </dataset>
+    <dataset seriesName='同期电量' color='A1D8F8' showValues='0'>
+        <set value='65'/>
+        <set value='84.81'/>
+        <set value='77'/>
+        <set value='86.56'/>
+        <set value='65'/>
+        <set value='88.06'/>
+        <set value='56'/>
+        <set value='84.31'/>
+        <set value='86.56'/>
+        <set value='54'/>
+        <set value='44'/>
+        <set value='33'/>
+        <set value='88.06'/>
+        <set value='22'/>
+        <set value='84.31'/>
+        <set value='12'/>
+        <set value='23'/>
+        <set value='43'/>
+    </dataset>
+    <dataset seriesName='上期电量' color='AF18F8' showValues='0'>
+        <set value='34'/>
+        <set value='43'/>
+        <set value='54'/>
+        <set value='45'/>
+        <set value='87'/>
+        <set value='64'/>
+        <set value='64'/>
+        <set value='35'/>
+        <set value='34'/>
+        <set value='22'/>
+        <set value='32'/>
+        <set value='21'/>
+        <set value='43'/>
+        <set value='43'/>
+        <set value='73.31'/>
+        <set value='73.56'/>
+        <set value='74.19'/>
+        <set value='48.06'/>
+    </dataset>
+</chart>
