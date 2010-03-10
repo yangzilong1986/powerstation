@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pie>
+  <slice title="First" color="#7EB7D9">358</slice>
+  <slice title="Second" pattern="patterns/diagonal.swf" color="#7EB7D9">358</slice>
+  <slice title="Third" color="#BBE579">258</slice>
+  <slice title="Fourth" color="#BBE579" pattern_color="#FFEE2E" pattern="patterns/diagonal.swf">120</slice>
+</pie>

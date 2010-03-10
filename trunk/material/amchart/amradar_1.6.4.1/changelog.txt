@@ -1,0 +1,52 @@
+********************************************************************************
+*** 1.6.4.0 ********************************************************************
+FEATURE ADDED
+amReturnParam function also returns the param name:
+amReturnParam(chart_id, value, param);
+*** 1.6.3.2 ********************************************************************
+FIX: <graph><balloon_alpha> setting was ignored
+*** 1.6.3.1 ********************************************************************
+The graphs kept animating if the sequenced_grow was set to true and the legend
+<y> position wan't set. 
+*** 1.6.3.0 ********************************************************************
+FEATURE ADDED:
+New settings <scientific_min> and <scientific_max> added. If absolute value of 
+your number is equal or bigger then scientific_max or equal or less then 
+scientific_min, this number will be formatted using scientific notation, for
+example:
+
+15000000000000000 -> 1.5e16
+0.0000023 -> 2.3e-6
+*** 1.6.1.3 ********************************************************************
+FEATURE ADDED:
+a new setting, <js_enabled> was added. It allows disabling all javascript-html
+communication. Id you set this to false, then the chart won't listen and won't
+call any JavaScript functions. This will also disable the security warning
+message when opening the chart from your hard drive or CD.
+*** 1.6.1.2 ********************************************************************
+FIX: The chart didn't accept new JS functions if error, such as no data occureed
+*** 1.6.1.0 ********************************************************************
+FEATURE ADDED: JavaScript functions are cued now - previously you could call one
+JS function at a time and call another only after the chart finished the
+previous process. Now, you can call several functions one after another, without
+waiting for the chart to finish doing something. The functions are cued and all
+of them will be executed.
+
+
+FEATURE ADDED: New JavaScript function amProcessCompleted(chart_id, process) 
+This function is called after some process initialized by some JS function is
+finished. For example, if you make the chart to reload data by calling reloadData
+function, after the data is reloaded, the chart will call amProcessCompleted 
+function and the "process" parameter will be "reloadData" - the same as the 
+function name you called. Check examples/javascript_control example to see this
+in action.
+
+NEW JAVASCRIPT FUNCTIONS ADDED:
+amClickedOnBullet(chart_id, graph_index, value, axis, url, description)
+amRolledOverBullet(chart_id, graph_index, value, axis, url, description)
+Will help you to register clicks and rollovers on bullets.
+
+FIX: <values><enabled> setting was ignored (the values were always visible) 
+
+FIX: chart_id was lost after the use of setSettings JS function.
+********************************************************************************

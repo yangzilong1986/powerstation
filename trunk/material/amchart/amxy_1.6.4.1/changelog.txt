@@ -1,0 +1,266 @@
+*** CHANGE LOG *****************************************************************
+*** 1.6.4.0 ********************************************************************
+FEATURE ADDED
+New settings added to the <graph>:
+<fill_color> - sets the fill color of the graph. Note, the fill will work
+differently then in Line chart - it won't fill the area between graph and axis,
+but rather fill the shape of the graph.
+<fill_alpha>  - sets fill opacity.
+<min_max> - you can tell the chart that it shouldn't include graphs values
+when calculating min and max of the chart. 
+
+The settings above allows you to simulate guides, draw colored areas on your 
+chart. Check bulls_eye example to see this in action.
+
+FEATURE ADDED
+amReturnParam function also returns the param name:
+amReturnParam(chart_id, value, param);
+*** 1.6.3.2 ********************************************************************
+FEATURE ADDED: XY chart can display error bars now. Two new bullet types were
+added: y_error and x_error. Error bars use "value" to show the error range. 
+Unlike other bullets these bullets use y or x axis scale. Check error_bars
+example from examples folder to see this in action. 
+
+FIX: setZoom function could be called only once.
+*** 1.6.3.1 ********************************************************************
+FIX: the date formats with years or years and months (no days) were parsed 
+incorrectly.
+*** 1.6.3.0 ********************************************************************
+FEATURE ADDED:
+New settings <scientific_min> and <scientific_max> added. If absolute value of 
+your number is equal or bigger then scientific_max or equal or less then 
+scientific_min, this number will be formatted using scientific notation, for
+example:
+
+15000000000000000 -> 1.5e16
+0.0000023 -> 2.3e-6
+*** 1.6.2.1 ********************************************************************
+FIX: if x axis type was "date", and the min and max values of y axis were set,
+the chart used to broke (this bug appeared in 1.6.2.0)
+*** 1.6.2.0 ********************************************************************
+FEATURE ADDED: You can set min and max values of axis even the value type is 
+"date"
+
+FEATURE ADDED: You can make the zoom to be only vertical or horizontal: 
+a new setting <zoom><disable_axis></disable_axis></zoom> was added. Set "x" to
+disable horizontal and "y" to disable vertical zoom
+
+FIX: a problem with daylight saving time was solved
+*** 1.6.1.7 ********************************************************************
+FEATURE ADDED:
+a new setting, <js_enabled> was added. It allows disabling all javascript-html
+communication. Id you set this to false, then the chart won't listen and won't
+call any JavaScript functions. This will also disable the security warning
+message when opening the chart from your hard drive or CD.
+*** 1.6.1.6 ********************************************************************
+FIX: when the axis type was date, and only one value was set, the axis values
+and the data point wasn't displayed.
+*** 1.6.1.5 ********************************************************************
+FIX export as image didn't work after the chart was zoomed-in
+*** 1.6.1.4 ********************************************************************
+FEATURE ADDED: Margins can be set in percents now
+FIX: amGetZoom was called when resizing window (if the redraw was set to true)
+FIX: if the redraw was set to true, the zoom area could flicker when zooming
+after the window was resized.
+*** 1.6.1.3 ********************************************************************
+New settings <max_size> and <min_size> were added to the <bullets> setting group.
+The graph settings <bullet_max_size> and <bullet_min_size> now inherits these
+settings, so you don't need to set these values for each graph.
+
+FIX: The size of a bubbles was calculated using max value of one graph, not the
+max value of all graphs, as it should. 
+FIX: value indicator plug-in was not working properly with logarithmic scale
+axis.
+*** 1.6.1.2 ********************************************************************
+FIX: The chart didn't accept new JS functions if error, such as no data occureed
+*** 1.6.1.1 ********************************************************************
+FIX: url attribute wasn't working in v 1.6.1.0
+*** 1.6.1.0 ********************************************************************
+
+FEATURE ADDED: JavaScript functions are cued now - previously you could call one
+JS function at a time and call another only after the chart finished the
+previous process. Now, you can call several functions one after another, without
+waiting for the chart to finish doing something. The functions are cued and all
+of them will be executed.
+
+
+FEATURE ADDED: New JavaScript function amProcessCompleted(chart_id, process) 
+This function is called after some process initialized by some JS function is
+finished. For example, if you make the chart to reload data by calling reloadData
+function, after the data is reloaded, the chart will call amProcessCompleted 
+function and the "process" parameter will be "reloadData" - the same as the 
+function name you called. Check examples/javascript_control example to see this
+in action.
+
+NEW JAVASCRIPT FUNCTIONS ADDED:
+amClickedOnBullet(chart_id, graph_index, value, x, y, url, description)
+amRolledOverBullet(chart_id, graph_index, value, x, y, url, description)
+Will help you to register clicks and rollovers on bullets.
+
+
+FIX: chart_id was lost after the use of setSettings JS function.
+
+*** 1.6.0.1 ********************************************************************
+
+BUG FIX: problem with reversed axes fixed
+
+*** 1.6.0.0 ********************************************************************
+
+FEATURE ADDED: ZOOMING and SCROLLING
+
+The chart has zoom and scroll (on both axes) now!
+The scroller is controlled in the <zoom> section. Settings for this section:
+
+  <zoom>
+    <enabled></enabled>                         
+    <max_factor></max_factor>                   
+    <border_color></border_color>               
+    <border_alpha></border_alpha>               
+    <bg_color></bg_color>                       
+    <bg_alpha></bg_alpha>
+    <target></target>  
+  </zoom>
+  
+Scrollers, which appear when the chart is zoomed, are controlled here:
+
+  <scroller>
+    <enabled></enabled>  
+    <color></color>      
+    <alpha></alpha>      
+    <bg_color></bg_color>
+    <bg_alpha></bg_alpha>
+    <height></height>    
+  </scroller>  
+
+Atention! It is strongly not recommended to use dashed gridlines if the zoom is
+turned on. This might cause your script run slowly or even stop the script.  
+
+  
+FEATURE ADDED: HELP
+You can display help icon and text, like in line chart (you can explain for the
+users how zooming works). Help settings:
+
+  <help>                                   
+    <button>                             
+      <x></x>                            
+      <y></y>                            
+      <color></color>                    
+      <alpha></alpha>                    
+      <text_color></text_color>          
+      <text_color_hover></text_color_hover>    
+      <text_size></text_size>              
+      <text></text>                                                         
+    </button>    
+    <balloon>                              
+      <color></color>                      
+      <alpha></alpha>                      
+      <width></width>               
+      <text_color></text_color>     
+      <text_size></text_size>       
+      <text><![CDATA[]]></text>
+    </balloon>    
+  </help>   
+  
+FEATURE ADDED: MORE SETTINGS FOR THE BALLOON
+
+New balloon settings allows you to have balloon border and rounded corners:
+
+   <balloon>
+     <corner_radius></corner_radius>
+     <border_width></border_width>  
+     <border_alpha></border_alpha>  
+     <border_color></border_color>      
+   </balloon> 
+
+FEATURE ADDED: ANIMATED BULLETS (BUBBLES)
+
+You can animate bubbles using 3 different effects. Animation can be sequenced. 
+This is controlled in a new group of settings:
+
+  <bullets>
+    <hover_brightness></hover_brightness>                  
+    <grow_time></grow_time>                                
+    <sequenced_grow></sequenced_grow>                        
+    <grow_effect></grow_effect>                               
+  </bullets>  
+
+FEATURE ADDED: AUTO-FITTING OF THE LEGEND and X AXIS VALUES
+
+The legend now automatically adjusts bottom margin to fit to the flash object's 
+area. If your X axis values are rotated, the legend position is adjusted not to
+overlap the values. In order this to work, you have to leave <legend><y> setting
+empty.
+
+
+FEATURE ADDED: NEW BULLET TYPES
+
+New bullet types are: bubble (3D circle), square_outline, round_outline, x, 
+romb, triangle_up, triangle_down
+
+
+FEATURE ADDED: POSSIBILITY TO SET ARRAY OF COLORS
+
+Using <colors></colors> setting, you can set an array fo colors, which will
+be used if the graph's color is not set.
+
+
+FEATURE ADDED: CHANGE MULTIPLE SETTINGS WITH JAVASCRIPT
+
+Using new function, flashMovie.setSettings(settings, rebuild) You can control
+multiple settings.  It is recommended to use this new function even for one 
+setting, instead of setParam() function. The "rebuild" option might be "true" 
+or "false" (the default is "true"). If you set it to "false", then the settings
+will not be applied until you call another new JS function: flashMovie.rebuild()
+or pass another set of settings with the "rebuild" set to "true". 
+
+A new function flashMovie.getSettings() will return the full settings 
+XML by calling amReturnSettings(chart_id, settings) function. 
+
+
+FEATURE ADDED: IMAGE DATA IS PASSED TO JAVASCRIPT
+
+When exporting chart as an image, the chart passes image data to JavaScript 
+function: amReturnImageData(chart_id, data) 
+
+
+FEATURE ADDED: FONT COLOR AND SIZE OF A LABEL TEXT
+
+<labels> Can accept  font color and font size HTML tags now, for example:
+<text><![CDATA[Source: <font color="#CC0000" size="14">amCharts</font>]]></text>
+
+CHANGE OF THE DEFAULT SETTINGS:
+<context_menu><default_items><zoom> default value was changed to "false"
+
+
+FIXES:
+
+When adding some settings using additional_chart_settings variable, you don't 
+need to set all the <graph> or <label> settings anymore. When 
+changing some <label> property using additional_chart_settings, in order to
+identify <label>, the labels id (lid) must be added, for example: <label lid="0">
+
+
+
+********************************************************************************
+1.5.2.0
+
+New features:
+
+JavaScript function amError(error_message) is called when one of the known
+errors occurs.
+
+
+
+********************************************************************************
+1.5.1.0
+
+New feature: the area between every second axis grid can be filled with
+color. The color is defined at: <grid><y><fill_color>. Fill alpha can be
+defined at <grid><y><fill_alpha>
+
+Bug fix: When reloading settings with reloadSettings() function, if settings
+file contained data, the data wasn't refreshed. This is fixed in this version.
+
+
+
+********************************************************************************

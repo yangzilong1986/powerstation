@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart>
+	<graphs>
+	  <!-- this graph draws green rectangle -->
+		<graph gid="0" min_max="false" color="#000000" fill_color="#00CC00" fill_alpha="20">
+			<point x="0" y="0"></point>
+			<point x="0" y="1000"></point>
+			<point x="1000" y="1000"></point>
+			<point x="1000" y="0"></point>
+      <point x="0" y="0"></point>	
+		</graph>
+		<!-- this graph draws red rectangle -->
+		<graph gid="0" min_max="false" color="#000000" fill_color="#CC0000" fill_alpha="20">
+			<point x="0" y="0"></point>
+			<point x="0" y="-1000"></point>
+			<point x="-1000" y="-1000"></point>
+			<point x="-1000" y="0"></point>
+      <point x="0" y="0"></point>	
+		</graph>
+		
+		<graph gid="0" alpha="0" bullet="bubble" color="#CC0000" balloon_text="{value}">
+			<point x="200" y="20" value="50"></point>
+			<point x="134" y="400" value="30"></point>
+			<point x="543" y="234" value="10"></point>
+			<point x="-342" y="-564" value="70"></point>
+      <point x="-80" y="-45" value="53"></point>	
+      <point x="-580" y="-20" value="15"></point>	
+		</graph>
+	</graphs>
+</chart>

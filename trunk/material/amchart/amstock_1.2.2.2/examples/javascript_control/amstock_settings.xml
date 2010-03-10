@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the settings with values not equal to defaults are in this file. If you want to see the
+full list of available settings, check the amstock_settings.xml file in the amstock folder. -->
+<settings>
+  <margins>0</margins>                                                   
+  <text_size>10</text_size>                                               
+
+  <number_format>  
+    <letters>
+       <letter number="1000">K</letter>
+       <letter number="1000000">M</letter>
+       <letter number="1000000000">B</letter>
+    </letters>      
+  </number_format>
+
+  <data_sets> 
+    <data_set did="0">
+       <title>First Company</title>
+       <short>1C</short>
+       <file_name>data1.csv</file_name>
+       <main_drop_down selected="true"></main_drop_down> 	    	  
+       <compare_list_box selected="false"></compare_list_box>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set>
+    
+    <data_set did="1">
+       <title>Second Company</title>
+       <short>2C</short>
+       <file_name>data2.csv</file_name>
+       <compare_list_box selected="true"></compare_list_box>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>          
+         </columns>
+       </csv>
+    </data_set>
+        
+    <data_set did="2">
+       <title>Third Company</title>
+       <short>3C</short>
+       <file_name>data3.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>        
+         </columns>
+       </csv>
+    </data_set> 
+
+    <data_set did="3">
+       <title>Fourth Company</title>
+       <short>4C</short>
+       <file_name>data4.csv</file_name>
+       <compare_list_box selected="false"></compare_list_box>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>            
+         </columns>
+       </csv>
+    </data_set> 
+    <data_set did="4">
+       <title>Fifth Company</title>
+       <short>5C</short>
+       <description><![CDATA[]]></description> 
+       <file_name>data5.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set>
+    
+    <data_set did="5">
+       <title>Sixth Company</title>
+       <short>6C</short>
+       <file_name>data6.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set> 
+    
+    <data_set did="6">
+       <title>Seventh Company</title>
+       <short>7C</short>
+       <file_name>data7.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set>   
+
+    <data_set did="7">
+       <title>Eight Company</title>
+       <short>8C</short>
+       <file_name>data8.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set>                          
+  </data_sets>
+
+  <charts>
+  	<chart cid="0">
+  		<bg_color>f5f5f5,ffffff</bg_color>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>100</border_alpha>
+     
+      <grid>
+        <x>
+          <dashed>true</dashed>    
+        </x>
+        
+       
+        <y_right>
+          <color>cccccc</color>
+          <alpha>100</alpha>
+          <dashed>true</dashed>    
+        </y_right>    
+      </grid>	
+
+      <legend>
+        <show_date>true</show_date>
+      </legend>
+
+  		<graphs>
+  			<graph gid="0">
+  			  <axis>right</axis>
+  				<type>line</type>
+  				<data_sources>
+  				  <close>close</close>
+          </data_sources>
+          
+          <compare_source>close</compare_source>
+
+  		    <legend>
+            <date key="true" title="true"><![CDATA[<b>{close}</b>]]></date>
+            <period key="true" title="true"><![CDATA[open:<b>{open}</b> low:<b>{low}</b> high:<b>{high}</b> close:<b>{close}</b>]]></period>
+            <date_comparing key="true" title="true"><![CDATA[{close.percents}]]></date_comparing>
+            <period_comparing key="true" title="true"><![CDATA[{close.percents}]]></period_comparing>
+          </legend>         
+  			</graph>  			
+  		</graphs>
+  	</chart>
+  </charts>
+  
+  
+  <data_set_selector>
+    <width>130</width>
+    <max_comparing_count>3</max_comparing_count>
+ 		<main_drop_down_title>Select:</main_drop_down_title> 		
+ 		<compare_list_box_title>Compare to:</compare_list_box_title>
+  </data_set_selector>
+  
+  <period_selector>
+    <button>
+      <bg_color_hover>b81d1b</bg_color_hover>
+      <bg_color_selected>b81d1b</bg_color_selected>
+      <text_color_hover>ffffff</text_color_hover>
+      <text_color_selected>ffffff</text_color_selected>
+    </button>
+  
+		<periods>		
+      <period type="DD" count="10">10D</period>
+    	<period type="MM" count="1">1M</period>
+    	<period selected="true" type="MM" count="3">3M</period>
+    	<period type="YYYY" count="1">1Y</period>
+    	<period type="YYYY" count="3">3Y</period>
+    	<period type="YTD" count="0">YTD</period>
+    	<period type="MAX">MAX</period>
+		</periods>
+		
+		<periods_title>Zoom:</periods_title>
+		<custom_period_title>Custom period:</custom_period_title> 
+  </period_selector>
+
+  <header>
+    <enabled></enabled>
+    <text><![CDATA[<b>{title}</b> ({short}) {description}]]></text>
+    <text_size>12</text_size>
+  </header>
+
+  <plot_area>
+    <border_color>cccccc</border_color>
+  </plot_area>
+
+  <scroller>
+    <enabled>true</enabled>
+    <height>50</height>    
+    <graph_data_source>close</graph_data_source>
+    <bg_color>f5f5f5,ffffff</bg_color>
+    <resize_button_color>b81d1b</resize_button_color>
+  </scroller>
+
+</settings>
