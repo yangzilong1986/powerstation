@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart>
+	<graphs>
+		<graph gid="0">
+			<point x="154" y="45" value="112"></point>
+			<point x="187" y="85" value="155"></point>
+			<point x="198" y="32" value="160"></point>
+      <point x="224" y="12" value="95"></point>
+      <point x="244" y="19" value="78"></point>
+      <point x="268" y="88" value="53"></point>			
+		</graph>
+		<graph gid="1">
+			<point x="132" y="40" value="102"></point>
+			<point x="44" y="80" value="50"></point>
+			<point x="57" y="30" value="10"></point>
+      <point x="185" y="112" value="115"></point>
+      <point x="196" y="119" value="18"></point>
+      <point x="20" y="82" value="73"></point>			
+		</graph>		
+	</graphs>
+</chart>

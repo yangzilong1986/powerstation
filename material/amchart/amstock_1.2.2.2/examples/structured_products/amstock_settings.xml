@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the settings with values not equal to defaults are in this file. If you want to see the
+full list of available settings, check the amstock_settings.xml file in the amstock folder. -->
+<settings>
+  <margins>0</margins>                                                   
+  <text_size>10</text_size>                                               
+
+  <number_format>  
+    <letters>
+       <letter number="1000">K</letter>
+       <letter number="1000000">M</letter>
+       <letter number="1000000000">B</letter>
+    </letters>      
+  </number_format>
+
+  <data_sets> 
+    <data_set did="0">
+       <title>First Product</title>
+       <short>1C</short>
+       <color>FEA700</color>
+       <file_name>data1.csv</file_name>
+       <events_file_name>events.xml</events_file_name>
+       <main_drop_down selected="true"></main_drop_down> 	    	  
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>  
+         </columns>
+       </csv>
+    </data_set>
+    
+    <data_set did="1">
+       <title>Second Product</title>
+       <short>2C</short>
+       <color>6A9A3F</color>
+       <file_name>data2.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>          
+         </columns>
+       </csv>
+    </data_set>
+        
+    <data_set did="2">
+       <title>Third Product</title>
+       <short>3C</short>
+       <color>213575</color>
+       <file_name>data3.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>close</column>        
+         </columns>
+       </csv>
+    </data_set>        
+  </data_sets>
+
+  <charts>
+  	<chart cid="0">
+  		<bg_color>E9D7A1,ffffff</bg_color>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>100</border_alpha>
+     
+      <grid>
+        <x>          
+          <alpha>5</alpha>
+        </x>       
+        <y_right>
+          <alpha>5</alpha>
+        </y_right>    
+      </grid>	
+
+      <legend>
+        <show_date>true</show_date>
+        <graph_on_off>false</graph_on_off>
+        <fade_others_to>10</fade_others_to>
+      </legend>
+
+      <comparing>
+        <base_date>2007-01-03</base_date>
+      </comparing>
+
+  		<graphs>
+  			<graph gid="0">
+  			  <axis>right</axis>
+  				<type>line</type>
+  				<data_sources>
+  				  <close>close</close>
+          </data_sources>
+          
+          <compare_source>close</compare_source>
+
+  		    <legend>
+            <date key="true" title="true"><![CDATA[<b>{close}</b>]]></date>
+            <period key="true" title="true"><![CDATA[open:<b>{open}</b> low:<b>{low}</b> high:<b>{high}</b> close:<b>{close}</b>]]></period>
+            <date_comparing key="true" title="true"><![CDATA[{close.percents}]]></date_comparing>
+            <period_comparing key="true" title="true"><![CDATA[{close.percents}]]></period_comparing>
+          </legend>         
+  			</graph>  			
+  		</graphs>
+  	</chart>
+  </charts>
+  
+  
+  <data_set_selector>
+    <width>130</width>
+    <max_comparing_count>3</max_comparing_count>
+ 		<main_drop_down_title>Select:</main_drop_down_title> 		
+ 		<compare_list_box_title>Compare to:</compare_list_box_title>
+  </data_set_selector>
+  
+  <period_selector>
+    <button>
+      <bg_color_hover>b81d1b</bg_color_hover>
+      <bg_color_selected>b81d1b</bg_color_selected>
+      <text_color_hover>ffffff</text_color_hover>
+      <text_color_selected>ffffff</text_color_selected>
+    </button>
+  
+		<periods>		
+      <period type="DD" count="10">10D</period>
+    	<period type="MM" count="1">1M</period>
+    	<period type="MM" count="3">3M</period>
+    	<period type="YYYY" count="1">1Y</period>
+    	<period type="YYYY" count="3" selected="true">3Y</period>
+    	<period type="YTD" count="0">YTD</period>
+    	<period type="MAX">MAX</period>
+    	<period type="DD" count="500">Since Observation</period>    	
+		</periods>
+		
+		<periods_title>Zoom:</periods_title>
+		<custom_period_title>Custom period:</custom_period_title> 
+  </period_selector>
+
+  <header>
+    <enabled></enabled>
+    <text><![CDATA[<b>{title}</b> ({short}) {description}]]></text>
+    <text_size>12</text_size>
+  </header>
+
+  <plot_area>
+    <border_color>cccccc</border_color>
+  </plot_area>
+
+  <scroller>
+    <enabled>true</enabled>
+    <height>50</height>    
+    <graph_data_source>close</graph_data_source>
+    <bg_color>f5f5f5,ffffff</bg_color>
+    <resize_button_style>dragger</resize_button_style>
+  </scroller>
+
+</settings>

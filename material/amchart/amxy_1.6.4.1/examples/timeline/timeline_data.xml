@@ -1,0 +1,818 @@
+<!--
+NOTE: data presented in this map is completely fictional.
+It was generated randomly for feature presentation purposes.
+Do not use it for research or any other purposes for that matter.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<timeline swf_file="../../amxy/amxy.swf" 
+  settings_file="amxy_settings.xml"
+  slider_x="60" 
+  slider_y="!35"
+  slider_width="680"
+  font="Arial"  
+  text_color="#000000"
+  text_size="11"
+  max_date_count="12"
+  date_text_color="#dddddd"
+  date_x="80%"
+  date_y="72%"
+  date_text_size="70"
+  delay="0.1"
+	loop="true"
+	autoplay="true">
+  
+<data_set date="1950">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="154" y="45" value="112" bullet_color="FF6600"></point>
+        <point x="187" y="85" value="155" bullet_color="FCD202"></point>
+        <point x="198" y="32" value="160" bullet_color="B0DE09"></point>
+        <point x="224" y="12" value="95" bullet_color="0D8ECF"></point>
+        <point x="244" y="19" value="78" bullet_color="2A0CD0"></point>
+
+        <point x="268" y="88" value="53" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1951">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="158" y="43" value="115" bullet_color="FF6600"></point>
+
+        <point x="191" y="83" value="141" bullet_color="FCD202"></point>
+        <point x="204" y="32" value="159" bullet_color="B0DE09"></point>
+        <point x="232" y="11" value="87" bullet_color="0D8ECF"></point>
+        <point x="252" y="19" value="80" bullet_color="2A0CD0"></point>
+        <point x="257" y="92" value="58" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1952">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="162" y="41" value="118" bullet_color="FF6600"></point>
+        <point x="195" y="81" value="127" bullet_color="FCD202"></point>
+        <point x="210" y="32" value="158" bullet_color="B0DE09"></point>
+        <point x="240" y="10" value="79" bullet_color="0D8ECF"></point>
+        <point x="260" y="19" value="82" bullet_color="2A0CD0"></point>
+
+        <point x="246" y="96" value="63" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1953">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="166" y="39" value="121" bullet_color="FF6600"></point>
+
+        <point x="199" y="79" value="113" bullet_color="FCD202"></point>
+        <point x="216" y="32" value="157" bullet_color="B0DE09"></point>
+        <point x="248" y="9" value="71" bullet_color="0D8ECF"></point>
+        <point x="268" y="19" value="84" bullet_color="2A0CD0"></point>
+        <point x="235" y="100" value="68" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1954">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="170" y="37" value="124" bullet_color="FF6600"></point>
+        <point x="203" y="77" value="99" bullet_color="FCD202"></point>
+        <point x="222" y="32" value="156" bullet_color="B0DE09"></point>
+        <point x="256" y="8" value="63" bullet_color="0D8ECF"></point>
+        <point x="276" y="19" value="86" bullet_color="2A0CD0"></point>
+
+        <point x="224" y="104" value="73" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1955">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="174" y="35" value="127" bullet_color="FF6600"></point>
+
+        <point x="207" y="75" value="85" bullet_color="FCD202"></point>
+        <point x="228" y="32" value="155" bullet_color="B0DE09"></point>
+        <point x="264" y="7" value="55" bullet_color="0D8ECF"></point>
+        <point x="284" y="19" value="88" bullet_color="2A0CD0"></point>
+        <point x="213" y="108" value="78" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1956">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="178" y="33" value="130" bullet_color="FF6600"></point>
+        <point x="211" y="73" value="71" bullet_color="FCD202"></point>
+        <point x="234" y="32" value="154" bullet_color="B0DE09"></point>
+        <point x="272" y="6" value="47" bullet_color="0D8ECF"></point>
+        <point x="292" y="19" value="90" bullet_color="2A0CD0"></point>
+
+        <point x="202" y="112" value="83" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1957">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="182" y="31" value="133" bullet_color="FF6600"></point>
+
+        <point x="215" y="71" value="57" bullet_color="FCD202"></point>
+        <point x="240" y="32" value="153" bullet_color="B0DE09"></point>
+        <point x="280" y="5" value="39" bullet_color="0D8ECF"></point>
+        <point x="300" y="19" value="92" bullet_color="2A0CD0"></point>
+        <point x="191" y="116" value="88" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1958">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="186" y="29" value="136" bullet_color="FF6600"></point>
+        <point x="219" y="69" value="43" bullet_color="FCD202"></point>
+        <point x="246" y="32" value="152" bullet_color="B0DE09"></point>
+        <point x="288" y="4" value="31" bullet_color="0D8ECF"></point>
+        <point x="308" y="19" value="94" bullet_color="2A0CD0"></point>
+
+        <point x="180" y="120" value="93" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1959">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="190" y="27" value="139" bullet_color="FF6600"></point>
+
+        <point x="223" y="67" value="29" bullet_color="FCD202"></point>
+        <point x="252" y="32" value="151" bullet_color="B0DE09"></point>
+        <point x="296" y="3" value="23" bullet_color="0D8ECF"></point>
+        <point x="316" y="19" value="96" bullet_color="2A0CD0"></point>
+        <point x="169" y="124" value="98" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1960">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="194" y="25" value="142" bullet_color="FF6600"></point>
+        <point x="227" y="65" value="15" bullet_color="FCD202"></point>
+        <point x="258" y="32" value="150" bullet_color="B0DE09"></point>
+        <point x="304" y="2" value="15" bullet_color="0D8ECF"></point>
+        <point x="324" y="19" value="98" bullet_color="2A0CD0"></point>
+
+        <point x="158" y="128" value="103" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1961">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="198" y="23" value="145" bullet_color="FF6600"></point>
+
+        <point x="231" y="63" value="1" bullet_color="FCD202"></point>
+        <point x="264" y="32" value="149" bullet_color="B0DE09"></point>
+        <point x="312" y="1" value="7" bullet_color="0D8ECF"></point>
+        <point x="332" y="19" value="100" bullet_color="2A0CD0"></point>
+        <point x="147" y="132" value="108" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1962">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="202" y="21" value="148" bullet_color="FF6600"></point>
+        <point x="235" y="61" value="-13" bullet_color="FCD202"></point>
+        <point x="270" y="32" value="148" bullet_color="B0DE09"></point>
+        <point x="320" y="0" value="-1" bullet_color="0D8ECF"></point>
+        <point x="340" y="19" value="102" bullet_color="2A0CD0"></point>
+
+        <point x="136" y="136" value="113" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1963">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="206" y="19" value="151" bullet_color="FF6600"></point>
+
+        <point x="239" y="59" value="-27" bullet_color="FCD202"></point>
+        <point x="276" y="32" value="147" bullet_color="B0DE09"></point>
+        <point x="328" y="-1" value="-9" bullet_color="0D8ECF"></point>
+        <point x="348" y="19" value="104" bullet_color="2A0CD0"></point>
+        <point x="125" y="140" value="118" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1964">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="210" y="17" value="154" bullet_color="FF6600"></point>
+        <point x="243" y="57" value="-41" bullet_color="FCD202"></point>
+        <point x="282" y="32" value="146" bullet_color="B0DE09"></point>
+        <point x="336" y="-2" value="-17" bullet_color="0D8ECF"></point>
+        <point x="356" y="19" value="106" bullet_color="2A0CD0"></point>
+
+        <point x="114" y="144" value="123" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1965">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="214" y="15" value="157" bullet_color="FF6600"></point>
+
+        <point x="247" y="55" value="-55" bullet_color="FCD202"></point>
+        <point x="288" y="32" value="145" bullet_color="B0DE09"></point>
+        <point x="344" y="-3" value="-25" bullet_color="0D8ECF"></point>
+        <point x="364" y="19" value="108" bullet_color="2A0CD0"></point>
+        <point x="103" y="148" value="128" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1966">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="218" y="13" value="160" bullet_color="FF6600"></point>
+        <point x="251" y="53" value="-69" bullet_color="FCD202"></point>
+        <point x="294" y="32" value="144" bullet_color="B0DE09"></point>
+        <point x="352" y="-4" value="-33" bullet_color="0D8ECF"></point>
+        <point x="372" y="19" value="110" bullet_color="2A0CD0"></point>
+
+        <point x="92" y="152" value="133" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1967">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="222" y="11" value="163" bullet_color="FF6600"></point>
+
+        <point x="255" y="51" value="-83" bullet_color="FCD202"></point>
+        <point x="300" y="32" value="143" bullet_color="B0DE09"></point>
+        <point x="360" y="-5" value="-41" bullet_color="0D8ECF"></point>
+        <point x="380" y="19" value="112" bullet_color="2A0CD0"></point>
+        <point x="81" y="156" value="138" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1968">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="226" y="9" value="166" bullet_color="FF6600"></point>
+        <point x="259" y="49" value="-97" bullet_color="FCD202"></point>
+        <point x="306" y="32" value="142" bullet_color="B0DE09"></point>
+        <point x="368" y="-6" value="-49" bullet_color="0D8ECF"></point>
+        <point x="388" y="19" value="114" bullet_color="2A0CD0"></point>
+
+        <point x="70" y="160" value="143" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1969">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="230" y="7" value="169" bullet_color="FF6600"></point>
+
+        <point x="263" y="47" value="-111" bullet_color="FCD202"></point>
+        <point x="312" y="32" value="141" bullet_color="B0DE09"></point>
+        <point x="376" y="-7" value="-57" bullet_color="0D8ECF"></point>
+        <point x="396" y="19" value="116" bullet_color="2A0CD0"></point>
+        <point x="59" y="164" value="148" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1970">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="234" y="5" value="172" bullet_color="FF6600"></point>
+        <point x="267" y="45" value="-125" bullet_color="FCD202"></point>
+        <point x="318" y="32" value="140" bullet_color="B0DE09"></point>
+        <point x="384" y="-8" value="-65" bullet_color="0D8ECF"></point>
+        <point x="404" y="19" value="118" bullet_color="2A0CD0"></point>
+
+        <point x="48" y="168" value="153" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1971">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="238" y="3" value="175" bullet_color="FF6600"></point>
+
+        <point x="271" y="43" value="-139" bullet_color="FCD202"></point>
+        <point x="324" y="32" value="139" bullet_color="B0DE09"></point>
+        <point x="392" y="-9" value="-73" bullet_color="0D8ECF"></point>
+        <point x="412" y="19" value="120" bullet_color="2A0CD0"></point>
+        <point x="37" y="172" value="158" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1972">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="242" y="1" value="178" bullet_color="FF6600"></point>
+        <point x="275" y="41" value="-153" bullet_color="FCD202"></point>
+        <point x="330" y="32" value="138" bullet_color="B0DE09"></point>
+        <point x="400" y="-10" value="-81" bullet_color="0D8ECF"></point>
+        <point x="420" y="19" value="122" bullet_color="2A0CD0"></point>
+
+        <point x="26" y="176" value="163" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1973">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="246" y="-1" value="181" bullet_color="FF6600"></point>
+
+        <point x="279" y="39" value="-167" bullet_color="FCD202"></point>
+        <point x="336" y="32" value="137" bullet_color="B0DE09"></point>
+        <point x="408" y="-11" value="-89" bullet_color="0D8ECF"></point>
+        <point x="428" y="19" value="124" bullet_color="2A0CD0"></point>
+        <point x="15" y="180" value="168" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1974">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="250" y="-3" value="184" bullet_color="FF6600"></point>
+        <point x="283" y="37" value="-181" bullet_color="FCD202"></point>
+        <point x="342" y="32" value="136" bullet_color="B0DE09"></point>
+        <point x="416" y="-12" value="-97" bullet_color="0D8ECF"></point>
+        <point x="436" y="19" value="126" bullet_color="2A0CD0"></point>
+
+        <point x="4" y="184" value="173" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1975">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="254" y="-5" value="187" bullet_color="FF6600"></point>
+
+        <point x="287" y="35" value="-195" bullet_color="FCD202"></point>
+        <point x="348" y="32" value="135" bullet_color="B0DE09"></point>
+        <point x="424" y="-13" value="-105" bullet_color="0D8ECF"></point>
+        <point x="444" y="19" value="128" bullet_color="2A0CD0"></point>
+        <point x="-7" y="188" value="178" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1976">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="258" y="-7" value="190" bullet_color="FF6600"></point>
+        <point x="291" y="33" value="-209" bullet_color="FCD202"></point>
+        <point x="354" y="32" value="134" bullet_color="B0DE09"></point>
+        <point x="432" y="-14" value="-113" bullet_color="0D8ECF"></point>
+        <point x="452" y="19" value="130" bullet_color="2A0CD0"></point>
+
+        <point x="-18" y="192" value="183" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1977">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="262" y="-9" value="193" bullet_color="FF6600"></point>
+
+        <point x="295" y="31" value="-223" bullet_color="FCD202"></point>
+        <point x="360" y="32" value="133" bullet_color="B0DE09"></point>
+        <point x="440" y="-15" value="-121" bullet_color="0D8ECF"></point>
+        <point x="460" y="19" value="132" bullet_color="2A0CD0"></point>
+        <point x="-29" y="196" value="188" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1978">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="266" y="-11" value="196" bullet_color="FF6600"></point>
+        <point x="299" y="29" value="-237" bullet_color="FCD202"></point>
+        <point x="366" y="32" value="132" bullet_color="B0DE09"></point>
+        <point x="448" y="-16" value="-129" bullet_color="0D8ECF"></point>
+        <point x="468" y="19" value="134" bullet_color="2A0CD0"></point>
+
+        <point x="-40" y="200" value="193" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1979">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="270" y="-13" value="199" bullet_color="FF6600"></point>
+
+        <point x="303" y="27" value="-251" bullet_color="FCD202"></point>
+        <point x="372" y="32" value="131" bullet_color="B0DE09"></point>
+        <point x="456" y="-17" value="-137" bullet_color="0D8ECF"></point>
+        <point x="476" y="19" value="136" bullet_color="2A0CD0"></point>
+        <point x="-51" y="204" value="198" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1980">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="274" y="-15" value="202" bullet_color="FF6600"></point>
+        <point x="307" y="25" value="-265" bullet_color="FCD202"></point>
+        <point x="378" y="32" value="130" bullet_color="B0DE09"></point>
+        <point x="464" y="-18" value="-145" bullet_color="0D8ECF"></point>
+        <point x="484" y="19" value="138" bullet_color="2A0CD0"></point>
+
+        <point x="-62" y="208" value="203" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1981">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="278" y="-17" value="205" bullet_color="FF6600"></point>
+
+        <point x="311" y="23" value="-279" bullet_color="FCD202"></point>
+        <point x="384" y="32" value="129" bullet_color="B0DE09"></point>
+        <point x="472" y="-19" value="-153" bullet_color="0D8ECF"></point>
+        <point x="492" y="19" value="140" bullet_color="2A0CD0"></point>
+        <point x="-73" y="212" value="208" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1982">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="282" y="-19" value="208" bullet_color="FF6600"></point>
+        <point x="315" y="21" value="-293" bullet_color="FCD202"></point>
+        <point x="390" y="32" value="128" bullet_color="B0DE09"></point>
+        <point x="480" y="-20" value="-161" bullet_color="0D8ECF"></point>
+        <point x="500" y="19" value="142" bullet_color="2A0CD0"></point>
+
+        <point x="-84" y="216" value="213" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1983">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="286" y="-21" value="211" bullet_color="FF6600"></point>
+
+        <point x="319" y="19" value="-307" bullet_color="FCD202"></point>
+        <point x="396" y="32" value="127" bullet_color="B0DE09"></point>
+        <point x="488" y="-21" value="-169" bullet_color="0D8ECF"></point>
+        <point x="508" y="19" value="144" bullet_color="2A0CD0"></point>
+        <point x="-95" y="220" value="218" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1984">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="290" y="-23" value="214" bullet_color="FF6600"></point>
+        <point x="323" y="17" value="-321" bullet_color="FCD202"></point>
+        <point x="402" y="32" value="126" bullet_color="B0DE09"></point>
+        <point x="496" y="-22" value="-177" bullet_color="0D8ECF"></point>
+        <point x="516" y="19" value="146" bullet_color="2A0CD0"></point>
+
+        <point x="-106" y="224" value="223" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1985">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="294" y="-25" value="217" bullet_color="FF6600"></point>
+
+        <point x="327" y="15" value="-335" bullet_color="FCD202"></point>
+        <point x="408" y="32" value="125" bullet_color="B0DE09"></point>
+        <point x="504" y="-23" value="-185" bullet_color="0D8ECF"></point>
+        <point x="524" y="19" value="148" bullet_color="2A0CD0"></point>
+        <point x="-117" y="228" value="228" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1986">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="298" y="-27" value="220" bullet_color="FF6600"></point>
+        <point x="331" y="13" value="-349" bullet_color="FCD202"></point>
+        <point x="414" y="32" value="124" bullet_color="B0DE09"></point>
+        <point x="512" y="-24" value="-193" bullet_color="0D8ECF"></point>
+        <point x="532" y="19" value="150" bullet_color="2A0CD0"></point>
+
+        <point x="-128" y="232" value="233" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1987">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="302" y="-29" value="223" bullet_color="FF6600"></point>
+
+        <point x="335" y="11" value="-363" bullet_color="FCD202"></point>
+        <point x="420" y="32" value="123" bullet_color="B0DE09"></point>
+        <point x="520" y="-25" value="-201" bullet_color="0D8ECF"></point>
+        <point x="540" y="19" value="152" bullet_color="2A0CD0"></point>
+        <point x="-139" y="236" value="238" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1988">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="306" y="-31" value="226" bullet_color="FF6600"></point>
+        <point x="339" y="9" value="-377" bullet_color="FCD202"></point>
+        <point x="426" y="32" value="122" bullet_color="B0DE09"></point>
+        <point x="528" y="-26" value="-209" bullet_color="0D8ECF"></point>
+        <point x="548" y="19" value="154" bullet_color="2A0CD0"></point>
+
+        <point x="-150" y="240" value="243" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1989">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="310" y="-33" value="229" bullet_color="FF6600"></point>
+
+        <point x="343" y="7" value="-391" bullet_color="FCD202"></point>
+        <point x="432" y="32" value="121" bullet_color="B0DE09"></point>
+        <point x="536" y="-27" value="-217" bullet_color="0D8ECF"></point>
+        <point x="556" y="19" value="156" bullet_color="2A0CD0"></point>
+        <point x="-161" y="244" value="248" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1990">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="314" y="-35" value="232" bullet_color="FF6600"></point>
+        <point x="347" y="5" value="-405" bullet_color="FCD202"></point>
+        <point x="438" y="32" value="120" bullet_color="B0DE09"></point>
+        <point x="544" y="-28" value="-225" bullet_color="0D8ECF"></point>
+        <point x="564" y="19" value="158" bullet_color="2A0CD0"></point>
+
+        <point x="-172" y="248" value="253" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1991">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="318" y="-37" value="235" bullet_color="FF6600"></point>
+
+        <point x="351" y="3" value="-419" bullet_color="FCD202"></point>
+        <point x="444" y="32" value="119" bullet_color="B0DE09"></point>
+        <point x="552" y="-29" value="-233" bullet_color="0D8ECF"></point>
+        <point x="572" y="19" value="160" bullet_color="2A0CD0"></point>
+        <point x="-183" y="252" value="258" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1992">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="322" y="-39" value="238" bullet_color="FF6600"></point>
+        <point x="355" y="1" value="-433" bullet_color="FCD202"></point>
+        <point x="450" y="32" value="118" bullet_color="B0DE09"></point>
+        <point x="560" y="-30" value="-241" bullet_color="0D8ECF"></point>
+        <point x="580" y="19" value="162" bullet_color="2A0CD0"></point>
+
+        <point x="-194" y="256" value="263" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1993">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="326" y="-41" value="241" bullet_color="FF6600"></point>
+
+        <point x="359" y="-1" value="-447" bullet_color="FCD202"></point>
+        <point x="456" y="32" value="117" bullet_color="B0DE09"></point>
+        <point x="568" y="-31" value="-249" bullet_color="0D8ECF"></point>
+        <point x="588" y="19" value="164" bullet_color="2A0CD0"></point>
+        <point x="-205" y="260" value="268" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1994">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="330" y="-43" value="244" bullet_color="FF6600"></point>
+        <point x="363" y="-3" value="-461" bullet_color="FCD202"></point>
+        <point x="462" y="32" value="116" bullet_color="B0DE09"></point>
+        <point x="576" y="-32" value="-257" bullet_color="0D8ECF"></point>
+        <point x="596" y="19" value="166" bullet_color="2A0CD0"></point>
+
+        <point x="-216" y="264" value="273" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1995">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="334" y="-45" value="247" bullet_color="FF6600"></point>
+
+        <point x="367" y="-5" value="-475" bullet_color="FCD202"></point>
+        <point x="468" y="32" value="115" bullet_color="B0DE09"></point>
+        <point x="584" y="-33" value="-265" bullet_color="0D8ECF"></point>
+        <point x="604" y="19" value="168" bullet_color="2A0CD0"></point>
+        <point x="-227" y="268" value="278" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1996">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="338" y="-47" value="250" bullet_color="FF6600"></point>
+        <point x="371" y="-7" value="-489" bullet_color="FCD202"></point>
+        <point x="474" y="32" value="114" bullet_color="B0DE09"></point>
+        <point x="592" y="-34" value="-273" bullet_color="0D8ECF"></point>
+        <point x="612" y="19" value="170" bullet_color="2A0CD0"></point>
+
+        <point x="-238" y="272" value="283" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1997">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="342" y="-49" value="253" bullet_color="FF6600"></point>
+
+        <point x="375" y="-9" value="-503" bullet_color="FCD202"></point>
+        <point x="480" y="32" value="113" bullet_color="B0DE09"></point>
+        <point x="600" y="-35" value="-281" bullet_color="0D8ECF"></point>
+        <point x="620" y="19" value="172" bullet_color="2A0CD0"></point>
+        <point x="-249" y="276" value="288" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="1998">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="346" y="-51" value="256" bullet_color="FF6600"></point>
+        <point x="379" y="-11" value="-517" bullet_color="FCD202"></point>
+        <point x="486" y="32" value="112" bullet_color="B0DE09"></point>
+        <point x="608" y="-36" value="-289" bullet_color="0D8ECF"></point>
+        <point x="628" y="19" value="174" bullet_color="2A0CD0"></point>
+
+        <point x="-260" y="280" value="293" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+<data_set date="1999">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="350" y="-53" value="259" bullet_color="FF6600"></point>
+
+        <point x="383" y="-13" value="-531" bullet_color="FCD202"></point>
+        <point x="492" y="32" value="111" bullet_color="B0DE09"></point>
+        <point x="616" y="-37" value="-297" bullet_color="0D8ECF"></point>
+        <point x="636" y="19" value="176" bullet_color="2A0CD0"></point>
+        <point x="-271" y="284" value="298" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+<data_set date="2000">
+  <chart>
+    <graphs>
+      <graph gid="0">
+        <point x="354" y="-55" value="262" bullet_color="FF6600"></point>
+        <point x="387" y="-15" value="-545" bullet_color="FCD202"></point>
+        <point x="498" y="32" value="110" bullet_color="B0DE09"></point>
+        <point x="624" y="-38" value="-305" bullet_color="0D8ECF"></point>
+        <point x="644" y="19" value="178" bullet_color="2A0CD0"></point>
+
+        <point x="-282" y="288" value="303" bullet_color="CD0D74"></point>
+      </graph>
+    </graphs>
+  </chart>
+</data_set>
+
+
+
+
+</timeline>

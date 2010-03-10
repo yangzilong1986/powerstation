@@ -1,0 +1,607 @@
+*** 1.2.2.2 **************************************************************************
+Memory management improved
+*** 1.2.2.1 **************************************************************************
+FEATURE ADDED:
+A new setting, <hide_longer_periods> was added to  <period_selector>. The default 
+value is "true". If you set it to false, all predefined periods will allways be 
+visible.
+
+BUG FIX:
+If the balloon was enabled for data set selector, the "compare to" list could show 
+balloon with other data set's info.
+*** 1.2.2.0 **************************************************************************
+FEATURES ADDED:
+*
+A new setting <balloon_text> was added to <data_set_selector> group. Sometimes data set
+title doesn't fit in the drop-down. If you set a value like {title} here, the roll-over
+balloon will display full title so users could read it. You can also display {short} 
+title and a {description} in this balloon.
+
+*
+A new setting, <disable_custom_cursors> was added. If you set it to true, custom hand
+and resize arrow cursors will be disabled.
+
+*
+A new setting, <chart><events><show_date> was added. If you set it to false, the date
+will not be displayed in the balloon (when you roll-over the event bullet)
+
+*
+When user clicks on a predefined period button, this JavaScript function is called:
+amPeriodSelected(chart_id, type, count, id);
+
+*
+You can select predefined period with this JavaScript function:
+
+flashMovie.selectPeriod(id);
+
+id is the pid attribute: <period type="DD" count="10" pid="p1">10D</period>
+Or order number of your period if you don't have pid attribute.
+
+*
+amClickedOn and amRolledOver JavaScript functions now return Array of objects 
+containing data set title, short title, id and values of a clicked date:
+
+amClickedOn(chart_id, date, period, data_object)
+
+data_object's structure:
+
+a) when data is not grouped into longer periods:
+  
+    values:
+      volume:
+        close: 21010110
+    id: 0
+    short: ES
+    title: East Stock
+  
+b) when data is grouped into longer periods:
+    values:
+      volume:
+        close: 16344710
+        high: 21587410
+        low: 16344710
+        sum: 90934150
+        open: 16509710
+    id: 1
+    short: ES
+    title: East Stock
+         
+*
+FIX:
+In some cases event bullets were incorrectly placed above the graph.
+
+*** 1.2.1.0 **************************************************************************
+FEATURES ADDED:
+
+A new setting, <update_on_release_only> was added to <scroller> settings group. If
+you set it to true, the chart will not update while dragging or resizing scrollbar,
+but do this only when you release mouse button. This is useful if you work with large
+data sets and want to make your chart work faster. 
+
+Stripping unnecessary symbols from your data
+A new setting, <strip_symbols> was added to <csv> settings group. For example:
+<data_sets>
+   <data_set>
+      <csv>
+         <strip_symbols>",</strip_symbols>
+         
+Means the data parser will strip all " and , from your data before parsing.
+
+
+The chart can be scrolled with mouse wheel. Note, the chart must have focus (click
+once on the chart) in order this feature to work. This feature will not work if
+wmode is set to transparent or opaque (in your HTML).
+*** 1.2.0.0 **************************************************************************
+FEATURES ADDED:
+
+Columns can have rounded corners - a new setting for <graph> added: <corner_radius>
+You can set corner radius in pixels or in percents. For example, 100%. (However
+from usability side we don't recommend doing this).
+
+The chart can display balloon with data set's title when user rolls-over
+the legend item. This is comfortable when you have short data set name in the legend
+and want to see the full name on roll-over. To enable this feature, set 
+<chart><legend><show_balloon> to true. 
+
+Possibility to set <bg_alpha> (background opacity) for period_selecto buttons.
+
+An additional parameter is passed to  amGetZoom function - period. It tells which 
+period is currently used (if the chart groupes data). So now the the chart calls
+this function and passes: amGetZoom(chart_id, from, to, period).
+
+amReturnParam function also returns the param name:
+amReturnParam(chart_id, value, param);
+*** 1.1.9.4 ***************************************************************************
+FIX: The chart didn't work well if the year was less then 1000.
+*** 1.1.9.3 ***************************************************************************
+FIX: In case hour format was set to 12, clicking on a custom period input fields and
+then clicking away resulted "check date format" message. 
+FIX: Smoothed line when equal spacing is set to false was smoothed incorrectly
+*** 1.1.9.2 ***************************************************************************
+FIX: YTD predefined period could select plus one day
+*** 1.1.9.1 ***************************************************************************
+FIX: graph stacking problem with missing values fixed
+*** 1.1.9.0 ***************************************************************************
+NEW BULLETS for events: triangle_left, triangle_right, arrow_down and arrow_up.
+The latter two can display text from <letter>;
+
+NEW SETTINGS:
+<column_width> for a <graph> - you can set a fixed width for your columns
+<bullet_alpha> for a <graph> - you can set opacity of bullets
+<bullet_color> for a <graph> - you can set the color of bullets
+
+FIX: the date formats with years or years and months (no days) were parsed incorrectly.
+FIX: If you hide the main dataset's graph, the comparing graphs didn't display tracing
+bullet
+FIX: when <connect> was set to false, <smoothed> set to true, and there was a data
+point with gaps on both sides, the chart was drawn incorrectly
+*** 1.1.8.0 ***************************************************************************
+FEATURE ADDED:
+Stock chart can support milliseconds now, check examples/milliseconds/ folder
+
+FEATURE ADDED:
+you can exclude the graph when calculating min and max values if you set 
+<min_max>false</min_max> for this graph.
+
+FIX: when all graphs of an axis are hidden, the grid lines and values of the axis
+dissapear.
+*** 1.1.7.2 ***************************************************************************
+FEATURE ADDED:
+You can synchronize right axis values with left axis. for example, if you set
+<values>
+  <y_right>
+    <min>left*0.1</min> 
+
+your right axis' min and max values will always be 10 times less then left axis' values.
+
+FIX: If min or max value of the axis was set, and all the graphs of this axis were hidden,
+the chart stoped working.
+
+*** 1.1.7.1 ***************************************************************************
+FEATURE ADDED:
+New settings <scientific_min> and <scientific_max> added to the <number_format> group.
+If absolute value of your number is equal or bigger then scientific_max or equal or less 
+then scientific_min, this number will be formatted using scientific notation, for
+example:
+
+15000000000000000 -> 1.5e16
+0.0000023 -> 2.3e-6
+
+FEATURE ADDED:
+scrollers' graph can now be "step" or "line". New setting <graph_type> was added to the
+<scroller> group. The default type is "line". 
+
+FIX: if start_on_axis was set to false and equal_spacing was set to true, the last
+grid line wasn't displayed.
+
+***************************************************************************************
+1.1.7.0
+<strict_min_max> setting was added. This setting goes to:
+<charts><chart><values><y_left> (or <y_right>). If this is set to true, the axis will stay 
+between Min and Max values even if there are graph points beyond those values. The parts
+of the graph that do not fit will be cropped. If this is set to false, the Min and Max 
+values will be extended to fit the graph. The default value is false.
+
+<frequency> for scroller graph. If your data set has a lot of values the scroller might
+significantly slow down the whole chart. (Provided you have some graph in the scroller). 
+This new setting can help solve the problem. I.e. if you set 
+<scroller><frequency>5</frequency></scroller>, the graph in the scroller will take only 
+every 5th data point. Other values will be skipped.
+
+<fade_others_to> setting was added. It goes to:
+<charts><chart><legend>. When the user rolls-over a legend entry key, the other graphs 
+will fade to this setting so that the rolled over graph would stand out from the rest. 
+Recommended setting is 10-20. Most likely you should set <graphs_on_off> to false if 
+you use this setting. 
+
+New JavaScript function, setEvents(events, remove_old) was added. It allows adding events 
+at a runtime. Use default event XML syntax: <events><event>....</event></events>. If 
+you set the remove_old to true, the old events will be removed. Default value is "false".
+
+FIXES:
+When <equal_spacing> was set to false cursor was not always snaping to the nearest bullet.
+
+Selected predefined period button lost selected color after the chart was resized or 
+a data set for comparing was changed.
+
+Now if you do not specify value for the events that are not assigned to any graph they 
+will be displayed directly on axis.
+
+"Parsing data" progress bar fixed.
+***************************************************************************************
+1.1.6.1
+FIX: a problem with daylight saving fixed (appeared if you use <equal_spacing> set to 
+false and your dates were set with hours).
+***************************************************************************************
+1.1.6.0
+FEATURE ADDED: you can set custom date format for the period selector date input fields.
+This can be done using this setting: <period_selector><date_format>. Note, you can't use 
+"month" here - only "MM".
+
+FEATURE ADDED: Custom background image can be loaded - the new setting, 
+<background><file> was added. The file should be placed in the "path" folder.
+
+FEATURE ADDED: JavaScript functions for getting and setting current status of a chart
+If you call flashMovie.getStatus() function, the chart will return the current status
+of a chart in a query string, for example: 
+
+from=2008-01-01&to=2008-03-05&main=4&comparing=6,3
+
+As you see, it returns the selected period, the id of the main data set and the ids of
+data sets selected for comparing. 
+
+To set this or some other status, you should call:
+
+flashMovie.setStatus("from=2008-01-01&to=2008-03-05&main=4&comparing=6,3");
+
+This is very comfortable when user navigates away from the page and you want 
+to keep the same status when the user comes back.
+
+FEATURE ADDED: new JavaScript functions for finding which data sets were selected
+amSelectDataSet(chart_id, did) - called when main data set was changed
+amCompareDataSet(chart_id, did) - called when data set for comparing was selected
+amUncompareDataSet(chart_id, did) - called when comparing data set was unselected
+***************************************************************************************
+1.1.5.0
+FEATURE ADDED: Vertical legend
+A new setting <legend_position> was added. The default value is "top", the other 
+available - "left" and "right". In case you use "left" or "right", you can control the
+width of the legend with the <legend_width> setting. The default value is 150. Chec
+vertical_legend example to see this in action.
+
+FEATURE ADDED: The items in the legend can arranged in the reverse order. To do this,
+set <reverse_order>true</reverse_order> in the chart's legend settings.
+
+FEATURE ADDED: The graph can be hidden when the chart is initialized. This can be 
+controled with the <graph><hidden> setting. The default value is "false".
+***************************************************************************************
+1.1.4.2
+Changes in the settings:
+New settings format for months and days:
+
+ 	  <months>
+    	<jan>Jan</jan>
+    	<feb>Feb</feb>
+    	<mar>Mar</mar>
+    	<apr>Apr</apr>
+    	<may>May</may>
+    	<jun>Jun</jun>
+    	<jul>Jul</jul>
+    	<aug>Aug</aug>
+    	<sep>Sep</sep>
+    	<oct>Oct</oct>
+    	<nov>Nov</nov>
+    	<dec>Dec</dec>    
+  	</months>
+  	
+  	<weekdays>
+  	   <sun>Sun</sun>
+  	   <mon>Mon</mon>
+  	   <tue>Tue</tue>
+  	   <wed>Wed</wed>
+  	   <thu>Thu</thu>
+  	   <fri>Fri</fri>
+  	   <sat>Sat</sat>
+  	</weekdays>
+    
+The previous format will also work.
+***************************************************************************************
+1.1.4.1
+FEATURE ADDED:
+Stock chart can accept encrypted data and decrypt it. You can create your own encryption
+algorythms. Check encrypted_data example and online documentation:
+http://www.amcharts.com/docs/v.1/stock/how_to/make_the_chart_accept_encrypted_data
+
+FIX: amClickedOn function is not called anymore if the chart was dragged.
+***************************************************************************************
+1.1.4.0
+FEATURE ADDED:Y axis values can be formatted as duration. To do this, you have to
+tell the duration unit of your data. For example, if your data represents seconds,
+you have to set: <values><y_left><duration>ss</duration></y_left></values>
+The units of the duration can be changed in the <strings><duration_units> section.
+
+FIX: Events can be added with setSettings() JavaScript function.
+***************************************************************************************
+1.1.3.2
+FIX: when data was missing, step line chart connected data points incorrectly
+FIX: when <show_preloader> was set to false, the "processing data" text was still 
+displayed while setting data with setData function   
+***************************************************************************************
+1.1.3.1 
+FIX: If the data set, chart or graph was removed with JS function, and setSettings()
+was called after, the objects reapeared (they were not removed from settings XML)
+
+FIX: THe events were not hided if the graph was hidden.
+***************************************************************************************
+1.1.3.0
+
+Stacking supported for "line" type graphs. You can stack one graph to another if you set
+<stack_to>[gid]</stack_to> for the graph, where gid is the id of a graph to which you
+want to stack the graph. Graphs can not be smoothed. The graph to which you are stacking
+must be described above the graph which you are stacking.
+
+Hide/show the graphs feature added.
+You can show or hide the graphs by clicking on the legend keys. This feature is enabled
+by default, if you want to disable it, set <graph_on_off>false</graph_on_off> in the
+<chart><legend> settings. 
+
+New JavaScript functions added:
+
+flashMovie.removeDataSet(did);
+flashMovie.removeChart(cid);
+flashMovie.removeGraph(cid, gid);
+flashMovie.showGraph(cid, gid);
+flashMovie.hideGraph(cid, gid);
+
+When you hide or show some graph the following functions are called from the flash: 
+
+amGraphShow(chart_id, cid, gid);
+amGraphHide(chart_id, cid, gid);
+***************************************************************************************
+1.1.2.4
+FIX: if only one event was added directly in the settings file, this event wasn't 
+displayed
+FIX: step_no_risers graph type wasn't displayed
+FIX: if the month name had "mm" letters inside it, these letters were replaced with
+numbers
+***************************************************************************************
+1.1.2.3
+FIX: javascript functions were not accepted if "no data" error occurred.
+***************************************************************************************
+1.1.2.2
+FIX: if the "rebuild" param in setSettings(settings, rebuild) was set to false, the 
+chart wasn't rebuilding after this param was set to true or the rebuild() function
+was called.
+***************************************************************************************
+1.1.2.1
+FIX: if the event date was formatted using new setting, the event date was incorrect.
+***************************************************************************************
+1.1.2.0
+
+FEATURES ADDED:
+
+** New settings, <bg_color> and <bg_alpha> for <y_left> and <y_right> of the <values> 
+allows showing a color rectangle under y axis values. This might improve readability.
+
+** New settings, <unit> and <unit_position> for <y_left> and <y_right> of the <values> 
+allows showing units near y axis values. 
+
+** a new group of settings:
+
+<digits_after_decimal>
+  <data></data>
+  <percents></percents>
+</digits_after_decimal>
+
+was added in two places:
+
+1) <charts><chart><values><y_left> and <charts><chart><values><y_right>. This allows 
+controlling of the number of decimals for the axis values.
+
+2) <charts><chart><graphs><graph><legend>. This allows controlling of the number of
+decimals for the legend values.
+
+
+** <events> was added to <date_formats>, so you could format how the date in the event
+balloon should look like. 
+
+
+** <connect> settng for the <graph> allows displaying  gaps in the line and step graphs
+types, when data is missing. 
+
+
+** <connect> setting is also added for the <scroller>
+
+
+** JavaScript functions are cued now - previously you could call one JS function at a 
+time and call another only after the chart finished the previous process. Now, you can
+call several functions one after another, without waiting for the chart to finish 
+doing something. The functions are cued and all of them will be executed.
+
+
+** New JavaScript function amProcessCompleted(chart_id, process) added
+This function is called after some process initialized by some JS function is finished.
+For example, if you make the chart to reload data by calling reloadData function, after
+the data is reloaded, the chart will call amProcessCompleted function and the "process"
+parameter will be "reloadData" - the same as the function name you called.  
+
+
+FIXES:
+
+** The first data set was always selected as main, even the 
+<main_drop_down selected="true"></main_drop_down> was set for some other data set.  
+
+
+** events, hidden with javascript appeared again after scrolling.
+
+
+** when the empty data was passed with setData(data) JS function, the chart didn't
+display the "no data" message.
+
+***************************************************************************************
+1.1.1.0
+
+FEATURES ADDED:
+
+** from and to dates
+You can set custom "from" and "to" dates now in:
+<period_selector>
+  ...
+  <from></from>
+  <to></to>
+
+** dashed horizontal and vertical lines can be used with events
+
+** border_alpha setting for events added
+
+  
+FIXES:
+** The scrollbar graph dropped to 0 if the values were missing, now it connects the points 
+as the main graph does.
+
+** If settings were passed directly from HTML, context menu settings were ignored.
+
+** resize_pointer_color was ignored.
+
+** chart_id wasn't passed to JS functions after setSettings function was used. 
+
+***************************************************************************************
+1.1.0.0
+
+FEATURES ADDED:
+
+**Events in the settings file
+Events can be added directly to the settings file, within <events></events> in the 
+<data_set> section. This will allow you to have all the data in one file only.
+
+**Horizontal and vertical lines (guides)
+The events were extended so that the chart can display horizontal and vertical guides 
+(barriers). Check the new structured_products example to see how this is done. 
+
+**Base date of recalculation
+Previously, when comparing the data sets, the values were recalculated from the 
+selected period first date or from the first date of the data set. Now you can set any 
+base date.  Value of a base date will be used as a base for recalculation. This might be
+useful for structured financial products. You can set the base using <base_data> 
+setting in the <comparing> settings. Check the structured_products example to see how
+this is done. 
+
+**Show / hide events with JavaScript
+You can show/hide events with a new JS functions: flashMovie.showEvents(); and
+flashMovie.hideEvents(); 
+
+**12 or 24 hour format in the legend and axis
+12 hour time format can be displayed in the legend and axis values. To do this, you
+should set <hour_format>12</hour_format> in the date_formats settings. Hours in the 
+data file must always be in 24 hour format. 
+
+**Show comparing legend entries only 
+You can make the legend to display entries of comparing data sets only and not to 
+display the legend entry of a graph by setting <comparing_only> in the graphs's legend
+settings. 
+
+**Hide date in the legend when mouse is away from plot area
+The date in the legend can be hidden when the mouse is not over the plot area. This 
+might help you to avoid overlapping of date and legend entries, as the date takes more 
+space when displaying period instead of single date. To hide the date, set:
+<hide_date_on_period>true</hide_date_on_period> in the chart's legend settings. 
+
+**Disabling interactivity
+You can disable all the interactivity of a chart by setting 
+<interactive>false</interactive> 
+
+**Error messages
+A new group of settings - <error_messages> was added. You can disable error messages,
+set colors and opacity. 
+
+**Keeping selected data sets after setSettings() function
+Previously, after you use setSettings() JavaScript function, the data sets selected by
+user were reset to the initial state. Now the chart keeps the selections. A new 
+parameter to the setSettings function added, in order you don't want to keep the
+selections: setSettings(settings, rebuild, reset_selected) 
+
+BUG FIXES: 
+
+flashMovie.print() and flashMovie.printAsBitmap() functions where not work properly in 
+some cases.
+
+JS functions amClickedOn(chart_id, date, period) and amRolledOver(chart_id, date, period)
+were returning not full date and undefined period in some cases.
+
+JS function on error, amError(chart_id, message) wasn't called when the error occurred.
+
+***************************************************************************************
+
+1.0.2.3
+Bug fix: the first <letter> from <number_format> was ignored. Fixed.
+
+***************************************************************************************
+1.0.2.2
+Bug fix: Events became visible only after scrolling or change of interval. Fixed.
+
+***************************************************************************************
+1.0.2.1
+
+Feature added:
+When comparing the graphs, you could set that the graph's values must be recalculated
+to percents. With a new setting, <recalculate_from_start>, you can set that the first 
+value of a graph would be used as "base" value for the recalculation. Previously only
+the first value of a selected period could be used.  
+
+Improvement: Now, if the data source doesn't have column which should be used as 
+graph's <close> data source, the graph will not have legend entry in the legend. The
+same is with comparing graphs - if the selected for comparing data set doesn't have
+the column which must be used for comparing graph, This data set will not have entry
+in the legend.
+
+Bug fix: <digits_after_decimal><data> setting only added required number of zeros, 
+not rounded the numbers when the data was grouped to a longer periods. 
+
+Bug fix: If the chart had graphs both on left and right axes and also had events,
+the events were displayed for two times instead of one.
+
+***************************************************************************************
+1.0.2.0
+
+Feature added:
+Smoothed lines feature added. Set <smoothed>true</smoothed> in graph's settings to 
+make lines smooth.
+
+"%" is added to Y axis values when charts are compared.
+
+Bug fix: when <equal_spacing> was set to "false" and there were multiple graphs with
+type "column", the columns were displaced incorrectly.
+
+***************************************************************************************
+1.0.1.1
+
+Bug fixes:
+When the <equal_spacing> was set to false, amGetZoom returned wrong "to" value.
+
+JS functions: amRolledOver, amClickedOn, amRolledOverEvent and amClickedOnEvent
+Used not to return chart_id variable. This is fixed now. Note, if you were using these 
+functions before, you should add chart_id variable in front of the others, otherwise your
+script will not work. 
+
+Features added:
+
+New javascript function setSettings(settings, rebuild) allows you to set 
+multiple settings at once.
+
+You can get chart settings using getSettings() JavaScript function.
+
+When the chart finishes exporting it to the image, amReturnImageData(chart_id, data)
+function is called.
+
+***************************************************************************************
+
+1.0.1.0
+
+features added:
+
+* graphs, also comparing graphs can be dashed
+* new legend key type - "line"
+* names of weekdays can be displayed in the legend
+* scrollers selected graph fill color can be defined separately from the graph color
+* uncompareAll() JS function added - deselects all data sets selected for comparing
+
+bugs fixed:
+
+* if user rolled over the event bullet many times, the chart slowed down
+* date input field width was not adjusting if the dates used longer format
+* "to" in the custom period field now shows the last available date of the period
+
+***************************************************************************************
+1.0.0.3
+* bug fix: period selector "from" field didn't accept text color
+* bug fix: x axis values didn't accept text color and size
+***************************************************************************************
+1.0.0.2
+* {average} and {sum} in the legend now displayes average and sum of a selected period
+* Fixed bug with showAll() JavaScript function
+* setZoom() JavaScript function now also deselects the period button
+* if no data was found in the data file, "no_data" error message is displayed
+***************************************************************************************
+1.0.0.1
+* Fixed a bug with events
+***************************************************************************************

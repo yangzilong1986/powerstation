@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings> 
+  <!-- chart config --> 
+  <data_type>csv</data_type>             
+  <skip_rows>1</skip_rows>             
+  <redraw>true</redraw>
+  <legend>                             
+    <enabled>false</enabled>           
+  </legend>
+  <graphs>                             
+    <graph gid="0">                    
+      <color>B92F2F</color>
+      <bullet>round_outlined</bullet>            
+    </graph>
+  </graphs>
+  
+  
+   <!-- plugin config -->   
+   <plugins>
+    <!-- value indicator plugin is suitable for line chart, column chart & xy chart -->
+    <plugin file="../amxy/plugins/value_indicator.swf" position="above">          <!-- file should be located in "path" folder. position can be "behind" or "above". "behind" means that the plugin will be loaded behind graphs -->
+      <chart_type>xy</chart_type>                                                 <!-- [line] (line / column / xy) this plugin can be used with line or with column chart -->
+      <axis>x</axis>                                                              <!-- [left] (left / right / x / y) if used with line chat use left or right, if used with xy chart, use x or y -->
+      <line_color>#000000</line_color>                                            <!-- [#BBBB00] (hex color code) -->
+      <line_alpha></line_alpha>                                                   <!-- [100] (0 - 100) -->
+      <text_color>#000000</text_color>                                            <!-- [settings.text_color] -->
+      <text_size>15</text_size>                                                   <!-- [settings.tex_size] -->
+      <precision>1</precision>                                                    <!-- [0] (Number) how many numbers after comma should be shown -->
+    </plugin>
+    <!-- one more time for y axis -->
+    <plugin file="../amxy/plugins/value_indicator.swf" position="above">    
+      <chart_type>xy</chart_type>                                           
+      <axis>y</axis>                                                        
+      <line_color>#000000</line_color>                                      
+      <line_alpha></line_alpha>                                             
+      <text_color>#000000</text_color>                                      
+      <text_size>15</text_size>                                             
+      <precision>0</precision>                                              
+    </plugin>    
+  </plugins>  
+            
+</settings>

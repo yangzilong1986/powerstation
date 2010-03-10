@@ -1,0 +1,532 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JavaScript control</title>
+</head>
+<style>
+  body{
+  	background-color: #FFFFFF;
+  	font-family: Arial;
+  	font-size: 12px;
+  }
+</style>
+<body>
+<b><font color="red">Attention! Because of security restrictions in most cases this example will work only if you upload files to your web server.</font></b><br><br>
+<!-- saved from url=(0013)about:internet -->
+<!-- amstock script-->
+<script type="text/javascript" src="../../amstock/swfobject.js"></script>
+<div id="flashcontent">
+  <strong>You need to upgrade your Flash Player</strong>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[		
+var so = new SWFObject("../../amstock/amstock.swf", "stock_chart", "800", "600", "8", "#FFFFFF");
+so.addVariable("path", "");
+so.addVariable("chart_id", "stock_chart");
+so.addVariable("settings_file", encodeURIComponent("amstock_settings.xml"));
+so.write("flashcontent");
+// ]]>
+</script>
+<!-- end of amstock script -->
+  
+<script type="text/javascript">
+  
+//////////////////////////////////////////////////////////////////////////////////////////
+// Functions that control the chart //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// SET DATA //////////////////////////////////////////////////////////////////////////////
+// flashMovie.setData(data)
+// This function can be used for setting the chart's data on the fly. Note, that this will 
+// work properly if you do not compare data sets, as only currently selected data set will 
+// receive this data.
+function setData() {
+  // gets data from the text area with id "data"
+  var data = document.getElementById("data").value;
+  // sets data
+  flashMovie.setData(data);
+}
+
+// APPEND DATA ///////////////////////////////////////////////////////////////////////////
+// flashMovie.appendData(data[, remove_count])
+// This function can be used to append new data to the currently selected dataset. 
+// The remove_count variable is optional and sets the number of data points
+// that should be removed from the beginning of dataset.
+function appendData() {
+  // gets data from the text area with id "data"
+  var data = document.getElementById("data").value;
+  // appends data
+  flashMovie.appendData(data, 0);
+}
+
+  
+// SET SETTINGS //////////////////////////////////////////////////////////////////////////
+// flashMove.setSettings(settings[, rebuild][,reset_selected][,reset_previous])
+// This function can be used to set some part or all the settings. The settings should be
+// in XML format, inside <settings></settings>. The "rebuild" parameter is optional and 
+// can be "true" or "false". "false" means that the new settings will not be applied right
+// after this function is called. They will can be applied using flashMovie.rebuild()
+// function or by adding some more setings with the "rebuild" set to "true". The default
+// value of "rebuild" is "true". the "reset_selected" parameter tells the chart whether 
+// to keep the selections (comparing data sets and the main data set) or to bring them
+// back to the initial stage. the default value is "false". The "reset_previous" parameter
+// tells the chart whether to clear previously set settings. The default value is "false" 
+function setSettings() {
+  var settings = document.getElementById("settings").value;
+  flashMovie.setSettings(settings, true);
+}   
+
+// REBUILD CHART /////////////////////////////////////////////////////////////////////////
+// flashMovie.rebuild();
+// This function might be used to rebuild the chart after several portions of settings were
+// set using setSettings(settings, rebuild) function, with the rebuild set to false
+function rebuild() {
+  flashMovie.rebuild();
+}
+
+// RELOAD DATA ///////////////////////////////////////////////////////////////////////////
+// flashMove.reloadData([])
+// This function will reload the data. 
+function reloadData() {
+  flashMovie.reloadData(); 
+}  
+
+// RELOAD SETTINGS ///////////////////////////////////////////////////////////////////////
+// flashMovie.reloadSettings([file_name])
+// This function will reload the settings. The file_name variable is optional, if you do
+// not set it here, settings from the original file will be reloaded. 
+function reloadSettings() {
+  flashMovie.reloadSettings();
+}
+
+// SET EVENTS ////////////////////////////////////////////////////////////////////////////
+// flashMovie.setEvents(events, remove_old);
+// allows adding events at a runtime. Use default event XML syntax: 
+// <events><event>....</event></events>. If you set the remove_old to true, the old events 
+// will be removed. Default value is "false".
+function setEvents(){
+  var events = "<events><event><date>2008-04-24</date><letter>A</letter><description><![CDATA[Price of Antarctica had a headache]]></description></event><event><date>2008-03-24</date><letter>B</letter><description><![CDATA[It was the hottest day of Spring]]></description></event></events>";
+  flashMovie.setEvents(events, false);
+}
+
+
+// SET PARAM /////////////////////////////////////////////////////////////////////////////
+// flashMovie.setParam(param, value)
+// This function lets you change a single setting. The parameter names are formed using 
+// the section name and the parameter name, separated with a period. For example: 
+// background.alpha or labels.label[1].text 
+function setParam() {
+  // gets param name from a field with id "param"
+  var param = document.getElementById("param").value;
+  // gets param value from a field with id "value"
+  var value = document.getElementById("value").value;
+  // sets param
+  flashMovie.setParam(param, value);
+}
+      
+// GET PARAM /////////////////////////////////////////////////////////////////////////////
+// flashMovie.getParam(param)
+// This function will ask Flash to return the value of a setting. The parameter name is
+// formed in the same way as the setParam function (described above). When you call this
+// function to return the setting value, Flash will return the value by calling the 
+// amReturnParam(chart_id, param_value, param_name) function
+function getParam() {
+  // get the param name from a field with id "getparam"
+  var param = document.getElementById("getparam").value;            
+  flashMovie.getParam(param);
+} 
+
+// GET DATA //////////////////////////////////////////////////////////////////////////////
+// flashMovie.getData()
+// This function will ask Flash to return the whole data. When you call this function to
+// return the data, Flash will call the amReturnData(chart_id, data) function.
+function getData() {
+  flashMovie.getData();
+}   
+      
+// GET SETTINGS //////////////////////////////////////////////////////////////////////////
+// flashMovie.getSettings()
+// This function will ask Flash to return the whole settings XML. When you call this 
+// function to return the settings, Flash will call the 
+// amReturnSettings(chart_id, settings) function. 
+function getSettings() {
+  flashMovie.getSettings();
+}   
+      
+// EXPORT AS IMAGE ///////////////////////////////////////////////////////////////////////
+// flashMovie.exportImage([file_name]) 
+// This function will start the process of exporting the chart as an image. The file_name
+// is a name of a file to which image data will be posted (files provided in the download 
+// package are export.php and export.aspx). The file_name is optional and can be set in 
+// the <export_as_image><file> setting.
+function exportImage() {
+  flashMovie.exportImage('../../amstock/export.php');  
+}
+
+// PRINT /////////////////////////////////////////////////////////////////////////////////
+// flashMovie.print()
+// This function will print the chart. Use this print function if you don't have any
+// values rotated by 90 degrees, also if you don't have a custom bitmap background.
+function print(){
+  flashMovie.print();
+}
+      
+// PRINT AS BITMAP ///////////////////////////////////////////////////////////////////////
+// flashMovie.printAsBitmap()
+// Use it if you have values rotated by 90 degrees and/or a custom bitmap background.
+function printAsBitmap(){
+  flashMovie.printAsBitmap();
+}
+
+// SET ZOOM //////////////////////////////////////////////////////////////////////////////
+// flashMovie.setZoom(from, to)
+// This function will change currently selected date range
+function setZoom(from, to){
+  var from = document.getElementById("from").value;
+  var to = document.getElementById("to").value;
+  flashMovie.setZoom(from, to);
+}
+    
+// SHOW ALL //////////////////////////////////////////////////////////////////////////////
+// flashMovie.showAll();
+// this function will select all available period
+function showAll(){
+  flashMovie.showAll(); 
+}  
+ 
+// SELECT PERIOD ////////////////////////////////////////////////////////////////////////
+// flashMovie.selectPeriod(id)
+// this function will select one of your predefined periods. id is the pid attribute: 
+// <period type="DD" count="10" pid="p1">10D</period> Or the order number of your period 
+// (if you don't have pid attribute). 
+
+function selectPeriod(){
+  var period = document.getElementById("period").value;
+  flashMovie.selectPeriod(period);
+}
+  
+// SELECT DATA SET ///////////////////////////////////////////////////////////////////////
+// flashMovie.selectDataSet(id)
+// this function will select a data set as main. The id here is the did attribute of
+// the data set
+function selectDataSet(){
+   var id = document.getElementById("data_set_id").value;
+   flashMovie.selectDataSet(id);
+}     
+
+// COMPARE DATA SET //////////////////////////////////////////////////////////////////////
+// flashMovie.compareDataSet(id)
+// this function will select a data set for comparing. The id here is the did attribute of
+// the data set
+function compareDataSet(){
+  var id = document.getElementById("data_set_id").value;
+  flashMovie.compareDataSet(id);
+}     
+  
+// UNCOMPARE DATA SET ////////////////////////////////////////////////////////////////////
+// flashMovie.uncompareDataSet(id)
+// This function will unselect data set selected for comparing. The id here is the did
+// attribute of the data set
+function uncompareDataSet(){
+  var id = document.getElementById("data_set_id").value;
+  flashMovie.uncompareDataSet(id);
+} 
+  
+// UNCOMPARE ALL /////////////////////////////////////////////////////////////////////////
+// flashMovie.uncompareAll()
+// This function will unselect all data sets selected for comparing
+function uncompareAll(){     
+  flashMovie.uncompareAll();
+}
+
+// HIDE EVENTS  //////////////////////////////////////////////////////////////////////////
+// flashMovie.hideEvents()
+// This function will hide event bullets
+function hideEvents(){     
+  flashMovie.hideEvents();
+}
+
+// SHOW EVENTS  //////////////////////////////////////////////////////////////////////////
+// flashMovie.showEvents()
+// This function will show event bullets
+function showEvents(){     
+  flashMovie.showEvents();
+}
+
+// REMOVE DATASET ////////////////////////////////////////////////////////////////////////
+// flashMovie.removeDataSet(did)
+// this function will remove the data set
+function removeDataSet(){
+  var id = document.getElementById("data_set_id").value;
+  flashMovie.removeDataSet(id);
+}
+
+// REMOVE DATASET ////////////////////////////////////////////////////////////////////////
+// flashMovie.removeChart(cid)
+// this function will remove the chart
+function removeChart(){
+  flashMovie.removeChart(cid);
+}
+
+// REMOVE GRAPH //////////////////////////////////////////////////////////////////////////
+// flashMovie.removeGraph(cid, gid)
+// this function will remove the graph from the chart
+function removeGraph(){  
+  flashMovie.removeGraph(cid, gid);
+}
+
+// HIDE GRAPH ////////////////////////////////////////////////////////////////////////////
+// flashMovie.hideGraph(cid, gid)
+// this function will hide graph
+function hideGraph(){  
+  flashMovie.hideGraph(cid, gid);
+}
+
+// SHOW GRAPH ////////////////////////////////////////////////////////////////////////////
+// flashMovie.showGraph(cid, gid)
+// this function will show the hidden graph
+function showGraph(){  
+  flashMovie.showGraph(cid, gid);
+}
+
+// GET STATUS ////////////////////////////////////////////////////////////////////////////
+// flashMovie.getStatus();
+// This function will ask chart to return the statsus (selected period, main and comparing
+// data sets). The chart will call amGetStatus(chart_id, status) function.
+function getStatus(){
+  flashMovie.getStatus();
+}
+
+// SET STATUS ////////////////////////////////////////////////////////////////////////////
+// flashMovie.setStatus(status)
+// this function will set the status (selected period, main and comparing data sets). 
+// status example: from=2008-01-01&to=2008-03-05&main=4&comparing=6,3 
+function setStatus(){
+  var status = document.getElementById("status").value;
+  flashMovie.setStatus(status);
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Functions that are called by the chart ////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+      
+// CHART INITED //////////////////////////////////////////////////////////////////////////    
+// amChartInited(chart_id)
+// This function is called when the chart is fully loaded and initialized.
+function amChartInited(chart_id){
+  // get the flash object into "flashMovie" variable   
+  flashMovie = document.getElementById(chart_id);
+  // tell the field with id "chartfinished" that this chart was initialized
+  document.getElementById("chartfinished").value = chart_id;           
+}
+
+// PROCESS COMPLETED //////////////////////////////////////////////////////////////////////////    
+// amProcessCompleted(chart_id, process_name)
+// This function is called when the chart finishes doing some task triggered by another 
+// JavaScript function 
+function amProcessCompleted(chart_id, process_name){
+  document.getElementById("processcompleted").value = process_name;           
+}
+      
+// RETURN DATA ///////////////////////////////////////////////////////////////////////////
+// amReturnData(chart_id, data)
+// This function is called when you request data from a chart 
+//  by calling the flashMove.getData() function.
+function amReturnData(chart_id, data){
+  document.getElementById("data").value = unescape(data);
+}
+
+// RETURN PARAM //////////////////////////////////////////////////////////////////////////
+// amReturnParam(chart_id, value, param_name)
+// This function is called when you request a setting from a chart  
+// by calling the flashMovie.getParam(param) function.
+function amReturnParam(chart_id, value, param_name){
+  document.getElementById("returnedparam").value = unescape(value);
+}
+
+// RETURN SETTINGS ///////////////////////////////////////////////////////////////////////
+// amReturnSettings(chart_id, settings)
+// This function is called when you request settings from a chart 
+// by calling flashMovie.getSettings() function.  
+function amReturnSettings(chart_id, settings){
+  document.getElementById("settings").value = unescape(settings);
+}
+
+// RETURN IMAGE DATA /////////////////////////////////////////////////////////////////////
+// amReturnImageData(chart_id, data)
+// This function is called when the export to image process is finished and might be used
+// as alternative way to get image data (instead of posting it to some file)
+function amReturnImageData(chart_id, data){
+  // your own functions here
+}      
+
+// ERROR /////////////////////////////////////////////////////////////////////////////////
+// amError(chart_id, message)
+// This function is called when an error occurs, such as no data, or file not found.
+function amError(chart_id, message){
+  alert(message);
+}      
+
+// ROLLED OVER ///////////////////////////////////////////////////////////////////////////
+// amRolledOver(chart_id, date, period, data_object)
+// this function is called when indicator position changes           
+function amRolledOver(chart_id, date, period, data_object){
+  document.getElementById("hover").value = date;
+}
+         
+// CLICKED ON ////////////////////////////////////////////////////////////////////////////
+// amClickedOn(chart_id, date, period, data_object)
+// this function is called when user clicks on plot area
+// data_array is an Array of objects containing data set title, short title, id and values
+// of a clicked date. 
+function amClickedOn(chart_id, date, period, data_array){
+  document.getElementById("clicked").value = date;   
+}
+    
+// ROLLED OVER EVENT /////////////////////////////////////////////////////////////////////
+// amRolledOverEvent(chart_id, date, description, id, url)
+// this function is called when user roll-overs some event           
+function amRolledOverEvent(chart_id, date, description, id, url){
+   // your functions here
+}
+
+// CLICKED ON AN EVENT ///////////////////////////////////////////////////////////////////
+// amClickedOnEvent(chart_id, date, description, id, url)
+// this function is called when user clicks on some event             
+function amClickedOnEvent(chart_id, date, description, id, url){
+  // your functions here
+}    
+  
+// GET ZOOM /////////////////////////////////////////////////////////////////////////////
+// amGetZoom(chart_id, from, to, period)
+// this function is called every time then the selected period is changed
+function amGetZoom(chart_id, from, to, period){     
+  document.getElementById("from").value = from;
+  document.getElementById("to").value = to;      
+}   
+
+// PREDEFINED PERIOD WAS SELECTED ///////////////////////////////////////////////////////
+// amPeriodSelected(chart_id, type, count, id)
+// this function is called every time then the predefined period is selected
+function amPeriodSelected(chart_id, type, count, id){     
+  document.getElementById("period").value = id;  
+}   
+
+
+
+
+// GRAPH WAS HIDDEN /////////////////////////////////////////////////////////////////////
+// amGraphHide(chart_id, cid, gid)
+// this function is called when the user hides graph (not working with comparing graphs)
+function amGraphHide(chart_id, cid, gid){     
+       
+} 
+
+// GRAPH WAS SHOWN /////////////////////////////////////////////////////////////////////
+// amGraphShow(chart_id, cid, gid)
+// this function is called when the user shows graph (not working with comparing graphs)
+function amGraphShow(chart_id, cid, gid){     
+   
+}  
+
+// MAIN DATA SET WAS CHANGED ////////////////////////////////////////////////////////////
+// amSelectDataSet(chart_id, did)
+// this function is called when the user changes main data set
+function amSelectDataSet(chart_id, did){     
+   
+}  
+
+// DATA SET FOR COMPARING WAS SELECTED //////////////////////////////////////////////////
+// amCompareDataSet(chart_id, did)
+// this function is called when the user selectes a data set for comparing
+function amCompareDataSet(chart_id, did){     
+   
+} 
+
+// COMPARING DATA SET WAS UNSELECTED //////////////////////////////////////////////////
+// amUncompareDataSet(chart_id, did)
+// this function is called when the user deselectes a data set selected for comparing
+function amUncompareDataSet(chart_id, did){     
+   
+}  
+
+// GET STATUS //////////////////////////////////////////////////////////////////////////
+// amGetStatus(chart_id, status)
+// this function is called every time then the selected period is changed
+function amGetStatus(chart_id, status){     
+  document.getElementById("status").value = status;  
+}
+
+
+</script>
+  
+
+<form>
+  <hr noshade size="1">
+  Chart initialized: <input type="text" id="chartfinished">
+  Process completed: <input type="text" id="processcompleted">
+  <hr noshade size="1">
+  
+  <input type="button" value="export image" onclick="exportImage();" />            	    
+  <input type="button" value="print" onclick="print();" />
+  <input type="button" value="print as bitmap" onclick="printAsBitmap();" />
+  <input type="button" value="hideEvents" onclick="hideEvents();" />
+  <input type="button" value="showEvents" onclick="showEvents();" />
+  <input type="button" value="setEvents" onclick="setEvents();" />
+  <hr noshade size="1">
+  
+  <input type="button" value="reload Data" onclick="reloadData();" />
+	<input type="button" value="reload Settings" onclick="reloadSettings();" />
+  <hr noshade size="1">
+  
+  Over: <input type="text" id="hover"/>Clicked: <input type="text" id="clicked"/>
+  <hr noshade size="1">
+
+  Status: <input type="text" id="status"/>
+  <input type="button" value="get status" onclick="getStatus();"/>
+  <input type="button" value="set status" onclick="setStatus();"/>         
+  <hr noshade size="1">       
+  Zoom from: <input type="text" id="from"/> to: <input type="text" id="to"/>
+  <input type="button" value="set zoom" onclick="setZoom();" />
+  <input type="button" value="show all" onclick="showAll();" />
+  Select period: <input type="text" id="period"/>
+  <input type="button" value="select period" onclick="selectPeriod();" />  
+  <hr noshade size="1">
+  
+  select: <input type="text" id="data_set_id" value="3" size="4"/>
+  <input type="button" value="select data set" onclick="selectDataSet();" />
+  <input type="button" value="compare data set" onclick="compareDataSet();" />
+  <input type="button" value="uncompare data set" onclick="uncompareDataSet();" />
+  <input type="button" value="remove data set" onclick="removeDataSet();" />
+  <input type="button" value="uncompare All" onclick="uncompareAll();" />
+	<hr noshade size="1">	
+  
+  <textarea id="data" rows="6" cols="62"></textarea><br>
+  <input type="button" value="Get data" onclick="getData();" />
+  <input type="button" value="Set Data" onclick="setData();" />
+  <input type="button" value="Append Data" onclick="appendData();" />  
+	<hr noshade size="1">   
+  
+  Param: <input type="text" id="getparam" value="data_set_selector.enabled">   		
+	Value: <input type="text" id="returnedparam" />
+	<input type="button" value="get param" onclick="getParam();" />
+	
+  <hr noshade size="1">   
+  Param: <input type="text" id="param" value="data_set_selector.enabled"/>
+  Value: <input type="text" id="value" value="false"/>
+  <input type="button" value="set param" onclick="setParam();" />
+	<hr noshade size="1">   
+  
+  <textarea id="settings" rows="6" cols="62"></textarea><br>
+  <input type="button" value="Get settings" onclick="getSettings();" />
+  <input type="button" value="Set settings" onclick="setSettings();" />
+  <input type="button" value="Rebuild" onclick="rebuild();" />  
+  <hr noshade size="1">	    
+         
+</form>
+</body>
+</html>

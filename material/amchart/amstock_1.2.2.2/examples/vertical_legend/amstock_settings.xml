@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the settings with values not equal to defaults are in this file. If you want to see the
+full list of available settings, check the amstock_settings.xml file in the amstock folder. -->
+<settings>
+  <margins>0</margins>  
+  <legend_position>left</legend_position>
+  <legend_width>150</legend_width>  
+                                              
+  <number_format>  
+    <letters>
+       <letter number="1000">K</letter>
+       <letter number="1000000">M</letter>
+       <letter number="1000000000">B</letter>
+    </letters>      
+  </number_format>
+  
+  <data_sets> 
+    <data_set did="0">
+       <color>317dc9</color>
+         <file_name>data.csv</file_name>
+       <csv>
+         <reverse>true</reverse>
+         <separator>,</separator>
+         <date_format>YYYY-MM-DD</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>c0</column>
+           <column>c1</column>
+           <column>c2</column>
+           <column>c3</column>
+         </columns>
+       </csv>
+    </data_set>
+  </data_sets>
+
+  <charts>
+  	<chart cid="0">
+  		<bg_color>F5F5F5</bg_color>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>100</border_alpha>
+      
+      <grid>
+        <x>
+          <color>FFFFFF</color>
+          <alpha>70</alpha>
+        </x>
+        <y_left>
+          <color>FFFFFF</color>
+          <alpha>70</alpha>
+        </y_left>        
+      </grid>
+  
+      <values>
+        <x>
+          <enabled>true</enabled>
+        </x>
+      </values>
+      
+      <legend>
+        <show_date>true</show_date>
+      </legend>
+      
+      <column_width>70</column_width>
+
+  		<graphs>
+  			<graph gid="0">  			
+  				<type>line</type>
+  				<title>First</title>
+  				<color>CC0000</color>
+  				<data_sources>
+  				  <close>c0</close>
+          </data_sources>
+  		    <legend>
+            <date key="true" title="true">{close}</date>
+            <period key="true" title="true">{close}</period>
+          </legend>
+          <hidden>false</hidden>         
+  			</graph>  
+  			<graph gid="1">
+  				<type>line</type>
+  				<title>Second</title>
+  				<color>00CC00</color>
+  				<data_sources>
+  				  <close>c1</close>
+          </data_sources>
+  		    <legend>
+            <date key="true" title="true">{close}</date>
+            <period key="true" title="true">{close}</period>
+          </legend>         
+          <hidden>true</hidden>
+  			</graph>  
+  			<graph gid="2">  			
+  				<type>line</type>
+  				<title>Third</title>
+  				<color>FFAE00</color>
+  				<data_sources>
+  				  <close>c2</close>
+          </data_sources>
+  		    <legend>
+            <date key="true" title="true">{close}</date>
+            <period key="true" title="true">{close}</period>
+          </legend>   
+          <hidden>false</hidden>      
+  			</graph>  
+  			<graph gid="3">
+  				<type>line</type>
+  				<title>Fourth</title>
+  				<color>0000CC</color>
+  				<data_sources>
+  				  <close>c3</close>
+          </data_sources>
+  		    <legend>
+            <date key="true" title="true">{close}</date>
+            <period key="true" title="true">{close}</period>
+          </legend>   
+          <hidden>true</hidden>      
+  			</graph>                          			
+  		</graphs>
+  	</chart>  
+
+
+  </charts>
+  
+  <data_set_selector>
+    <enabled>false</enabled>
+  </data_set_selector>
+  
+  <period_selector>
+      <custom_period_enabled>false</custom_period_enabled>
+     <button>
+      <bg_color_hover>c70003</bg_color_hover>
+      <bg_color_selected>317dc9</bg_color_selected>
+	    <text_color_hover>ffffff</text_color_hover>
+      <text_color_selected>ffffff</text_color_selected>
+    </button>
+  
+		<periods>		
+      <period type="DD" count="10">10D</period>
+    	<period type="MM" count="1">1M</period>
+    	<period selected="true" type="MM" count="3">3M</period>
+    	<period type="YYYY" count="1">1Y</period>
+    	<period type="YYYY" count="3">3Y</period>
+    	<period type="YTD" count="0">YTD</period>
+    	<period  type="MAX">MAX</period>
+		</periods>
+		
+		<periods_title>Zoom:</periods_title>
+		<custom_period_title>Custom period:</custom_period_title> 
+  </period_selector>
+
+  <header>
+    <enabled>false</enabled>
+  </header>
+
+  <background>    
+    <color>ffffff</color>
+    <alpha>100</alpha>      
+  </background>    
+
+  <plot_area>
+    <margins>10</margins>
+    <bg_color>ffffff</bg_color>
+    <bg_alpha>100</bg_alpha>
+    <border_alpha>70</border_alpha>
+    <border_color>ffffff</border_color>
+    <border_width></border_width>
+    <corner_radius>8</corner_radius>
+  </plot_area>
+
+  <scroller>
+    <enabled>true</enabled>
+    <height>40</height>    
+    <graph_data_source>c0</graph_data_source>
+    <bg_color>f5f5f5</bg_color>
+    <selected_color>daf0fd</selected_color>
+    <resize_button_color>317dc9</resize_button_color>
+    <resize_button_style>dragger</resize_button_style>
+  </scroller>
+  
+  <date_formats>
+     <legend>
+        <days><![CDATA[<b>month DD, YYYY</b>]]></days>
+       <weeks><![CDATA[<b>month DD, YYYY</b>]]></weeks>
+       <months><![CDATA[<b>month YYYY</b>]]></months>
+       <years><![CDATA[<b>YYYY</b>]]></years>
+     </legend>
+  </date_formats>    
+
+</settings>

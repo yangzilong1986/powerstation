@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the settings with values not equal to defaults are in this file. If you want to see the
+full list of available settings, check the amstock_settings.xml file in the amstock folder. -->
+
+<settings>
+  <margins>0</margins>                                                   
+  <max_series>20000</max_series>
+  <max_grid_count>20</max_grid_count>
+  <redraw>true</redraw>
+  <equal_spacing>false</equal_spacing>
+  <data_sets> 
+    <data_set did="0">
+       <title>data set</title>
+       <short>ds</short>
+       <color>555555</color>
+       <file_name>data.csv</file_name>
+       <csv>
+         <separator>;</separator>
+         <date_format>YYYY-MM-DD hh:mm:ss:fff</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>value</column>
+         </columns>
+       </csv>
+    </data_set>
+  </data_sets>
+
+  <charts>
+  
+  	
+  	<chart cid="1">
+  		<height>30</height>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>0</border_alpha>
+      <title>Value</title>
+      <values>
+        <y_left>
+          <bg_alpha>70</bg_alpha>
+          <bg_color>000000</bg_color>
+          <text_color>FFFFFF</text_color>
+        </y_left>
+      </values>	      
+
+      <legend>
+        <show_date>true</show_date>
+        <positive_color>7f8da9</positive_color>
+        <negative_color>db4c3c</negative_color>        
+      </legend>
+
+      <column_width>0</column_width>
+
+  		<graphs>
+  			<graph gid="0">
+  				<type></type>
+  				<data_sources>
+  				  <close>value</close>
+          </data_sources>
+          <period_value>average</period_value>
+  				<cursor_color>002b6d</cursor_color>
+  				<positive_color>7f8da9</positive_color>
+          <negative_color>db4c3c</negative_color>
+  				<fill_alpha>10</fill_alpha>
+  		    <legend>
+            <date key="false" title="false"><![CDATA[{close}]]></date>
+            <period key="false" title="false"><![CDATA[total:{sum}]]></period>
+          </legend>         
+  			</graph>  			
+  		</graphs>
+  	</chart>    	
+  </charts>
+  
+
+  <data_set_selector>
+    <enabled>false</enabled>
+  </data_set_selector>
+  
+  <period_selector>
+    <date_format>mm:ss.fff</date_format>
+    <button>
+      <bg_color_hover>FEC514</bg_color_hover>
+      <bg_color_selected>DB4C3C</bg_color_selected>
+      <text_color_selected>FFFFFF</text_color_selected>
+    </button>
+  
+		<periods>		
+      <period type="ss" count="5" selected="true">5 s</period>
+    	<period type="ss" count="10">10 s</period>
+    	<period type="mm" count="1">1 min</period>
+    	<period type="MAX">MAX</period>
+		</periods>
+		
+		<periods_title>Zoom:</periods_title>
+		<custom_period_title>Custom period:</custom_period_title> 
+  </period_selector>
+
+
+  <date_formats>
+    <!-- [24] (12 / 24) The time in the legend and x axis might be displayed using 12 or 24 hour format -->
+    <hour_format></hour_format>        
+     <legend>
+      <milliseconds>mm:ss:fff</milliseconds>
+      <seconds>mm:ss</seconds>
+      <minutes>mm:ss</minutes>       
+     </legend>
+     
+     <x_axis>
+      <seconds>mm:ss</seconds>
+      <minutes>mm:ss</minutes>       
+     </x_axis>   
+     
+  </date_formats>  
+
+  <header>
+    <enabled>false</enabled>
+  </header>
+
+  <plot_area>
+    <border_color>b6bece</border_color>
+  </plot_area>
+
+  <scroller>
+    <height>30</height>
+    <frequency>10</frequency>
+    <graph_data_source>value</graph_data_source>
+    <graph_selected_fill_alpha>100</graph_selected_fill_alpha>
+    <resize_button_color>000000</resize_button_color>
+    
+    <playback>
+      <enabled>true</enabled>
+      <color>000000</color>
+      <color_hover>db4c3c</color_hover>
+      <speed>3</speed>
+      <max_speed>10</max_speed>
+      <speed_indicator>
+        <color>000000</color>
+      </speed_indicator>
+    </playback>
+  </scroller>
+</settings>

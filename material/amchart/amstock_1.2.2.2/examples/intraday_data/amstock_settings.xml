@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the settings with values not equal to defaults are in this file. If you want to see the
+full list of available settings, check the amstock_settings.xml file in the amstock folder. -->
+
+<settings>
+  <margins>0</margins>                                                   
+  <max_series>0</max_series>
+  <redraw>true</redraw>
+  <max_grid_count>30</max_grid_count>
+  <data_sets> 
+    <data_set did="0">
+       <title>East Stock</title>
+       <short>ES</short>
+       <color>7f8da9</color>
+       <file_name>data.csv</file_name>
+       <csv>
+         <separator>,</separator>
+         <date_format>MM/DD/YYYY hh:mm</date_format>
+         <decimal_separator>.</decimal_separator>
+         <columns>
+           <column>date</column>
+           <column>open</column>
+           <column>high</column>
+           <column>low</column>
+           <column>close</column>
+           <column>volume</column>           
+         </columns>
+       </csv>
+    </data_set>
+  </data_sets>
+
+  <charts>
+  	<chart cid="0">
+  		<height>60</height>
+  		<title>Value</title>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>0</border_alpha>
+     
+     
+      <values>
+        <y_left>
+          <bg_alpha>70</bg_alpha>
+          <bg_color>000000</bg_color>
+          <text_color>FFFFFF</text_color>
+        </y_left>
+      </values>	      
+
+      <legend>
+        <show_date>true</show_date>
+        <positive_color>7f8da9</positive_color>
+        <negative_color>db4c3c</negative_color>        
+      </legend>
+
+      <column_width>70</column_width>
+
+  		<graphs>
+  			<graph gid="0">
+  				<type>line</type>
+  				<data_sources>
+  				  <open>open</open>
+  				  <high>high</high>
+  				  <low>low</low>
+  				  <close>close</close>
+          </data_sources>
+  				<cursor_color>002b6d</cursor_color>
+  				<positive_color>7f8da9</positive_color>
+          <negative_color>db4c3c</negative_color>
+  				<fill_alpha></fill_alpha>
+  		    <legend>
+            <date key="false" title="false"><![CDATA[open:<b>{open}</b> low:<b>{low}</b> high:<b>{high}</b> close:<b>{close}</b>]]></date>
+            <period key="false" title="false"><![CDATA[open:<b>{open}</b> low:<b>{low}</b> high:<b>{high}</b> close:<b>{close}</b>]]></period>
+          </legend>         
+  			</graph>  			
+  		</graphs>
+  	</chart>  
+  	
+  	<chart cid="1">
+  		<height>30</height>
+      <border_color>#CCCCCC</border_color>
+      <border_alpha>0</border_alpha>
+      <title>Volume</title>
+      <values>
+        <y_left>
+          <bg_alpha>70</bg_alpha>
+          <bg_color>000000</bg_color>
+          <text_color>FFFFFF</text_color>
+        </y_left>
+      </values>	      
+
+      <legend>
+        <show_date>true</show_date>
+        <positive_color>7f8da9</positive_color>
+        <negative_color>db4c3c</negative_color>        
+      </legend>
+
+      <column_width>0</column_width>
+
+  		<graphs>
+  			<graph gid="0">
+  				<type>column</type>
+  				<data_sources>
+  				  <close>volume</close>
+          </data_sources>
+  				<cursor_color>002b6d</cursor_color>
+  				<positive_color>7f8da9</positive_color>
+          <negative_color>db4c3c</negative_color>
+  				<fill_alpha>100</fill_alpha>
+  		    <legend>
+            <date key="false" title="false"><![CDATA[{close}]]></date>
+            <period key="false" title="false"><![CDATA[total:{sum}]]></period>
+          </legend>         
+  			</graph>  			
+  		</graphs>
+  	</chart>    	
+  </charts>
+  
+
+  <data_set_selector>
+    <enabled>false</enabled>
+  </data_set_selector>
+  
+  <period_selector>
+    
+    <button>
+      <bg_color_hover>FEC514</bg_color_hover>
+      <bg_color_selected>DB4C3C</bg_color_selected>
+      <text_color_selected>FFFFFF</text_color_selected>
+    </button>
+  
+		<periods>		
+      <period type="hh" count="12">12h</period>
+    	<period type="DD" count="1" selected="true">1D</period>
+    	<period type="DD" count="3">2D</period>
+    	<period type="DD" count="4">3D</period>
+    	<period type="DD" count="5">4D</period>
+    	<period type="DD" count="6">5D</period>
+    	<period type="MAX">MAX</period>
+		</periods>
+		
+		<periods_title>Zoom:</periods_title>
+		<custom_period_title>Custom period:</custom_period_title> 
+  </period_selector>
+
+
+  <date_formats>
+    <!-- [24] (12 / 24) The time in the legend and x axis might be displayed using 12 or 24 hour format -->
+    <hour_format></hour_format>        
+     <legend>
+       <minutes>DD month, YYYY hh:mm</minutes>
+       <hours>DD month, YYYY hh:mm</hours>
+       <days>DD month, YYYY hh:mm</days>
+       <months>DD month, YYYY hh:mm</months>
+       <years>DD month, YYYY hh:mm</years>
+     </legend>
+  </date_formats>  
+
+  <header>
+    <enabled>false</enabled>
+  </header>
+
+  <plot_area>
+    <border_color>b6bece</border_color>
+  </plot_area>
+
+  <scroller>
+    <graph_data_source>close</graph_data_source>
+    <graph_selected_fill_alpha>100</graph_selected_fill_alpha>
+    <resize_button_color>002b6d</resize_button_color>
+    
+    <playback>
+      <enabled>true</enabled>
+      <color>002b6d</color>
+      <color_hover>db4c3c</color_hover>
+      <speed>3</speed>
+      <max_speed>10</max_speed>
+      <speed_indicator>
+        <color>002b6d</color>
+      </speed_indicator>
+    </playback>
+  </scroller>
+</settings>

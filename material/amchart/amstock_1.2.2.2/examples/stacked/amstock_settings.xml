@@ -1,0 +1,162 @@
+<settings>
+  <number_format>
+    <letters>
+      <letter number="1000">K</letter>
+      <letter number="1000000">M</letter>
+      <letter number="1000000000">B</letter>
+    </letters>
+  </number_format>
+  <data_sets>
+    <data_set did="0">
+      <title>East Stock</title>
+      <short>ES</short>
+      <file_name>data.csv</file_name>
+      <main_drop_down selected="1"/>
+      <csv>
+        <separator>,</separator>
+        <columns>
+          <column>date</column>
+          <column>col1</column>
+          <column>col2</column>
+          <column>col3</column>
+          <column>col4</column>
+          <column>col5</column>
+        </columns>
+      </csv>
+    </data_set>
+  </data_sets>
+  <charts>
+    <chart cid="0">
+      <title>Value</title>
+      <height>60</height>
+      <grid/>
+      <legend>
+        <show_date>1</show_date>
+      </legend>
+      <comparing>
+        <recalculate_from_start>0</recalculate_from_start>
+      </comparing>
+      <events>
+        <use_hand_cursor>1</use_hand_cursor>
+      </events>
+      <graphs>
+        <graph gid="1">
+          <title>1st</title>
+          <color>0033CC</color>
+          <fill_alpha>60</fill_alpha>
+          <width>2</width>
+          <data_sources>
+            <close>col1</close>
+          </data_sources>
+          <compare_source>close</compare_source>
+          <legend>
+            <date>{close}</date>
+            <period>{close}</period>
+          </legend>
+        </graph>
+        <graph gid="2">
+          <title>2nd</title>
+          <stack_to>1</stack_to>
+          <color>0099CC</color>
+          <fill_alpha>60</fill_alpha>
+          <width>2</width>
+          <data_sources>
+            <close>col2</close>
+          </data_sources>
+          <compare_source>close</compare_source>
+          <legend>
+            <date>{close}</date>
+            <period>{close}</period>
+          </legend>
+        </graph>
+        <graph gid="3">
+          <title>3rd</title>
+          <stack_to>2</stack_to>
+          <color>00CC99</color>
+          <fill_alpha>60</fill_alpha>
+          <width>2</width>
+          <data_sources>
+            <close>col3</close>
+          </data_sources>
+          <compare_source>close</compare_source>
+          <legend>
+            <date>{close}</date>
+            <period>{close}</period>
+          </legend>
+        </graph>
+        <graph gid="4">
+          <title>4th</title>
+          <stack_to>3</stack_to>
+          <color>00CC33</color>
+          <fill_alpha>60</fill_alpha>
+          <width>2</width>
+          <data_sources>
+            <close>col4</close>
+          </data_sources>
+          <compare_source>close</compare_source>
+          <legend>
+            <date>{close}</date>
+            <period>{close}</period>
+          </legend>
+        </graph>
+        <graph gid="5">
+          <title>5th</title>
+          <stack_to>4</stack_to>
+          <color>CC9900</color>
+          <fill_alpha>60</fill_alpha>
+          <width>2</width>
+          <data_sources>
+            <close>col5</close>
+          </data_sources>
+          <compare_source>close</compare_source>
+          <legend>
+            <date>{close}</date>
+            <period>{close}</period>
+          </legend>
+        </graph>
+      </graphs>
+    </chart>
+  </charts>
+  <date_formats>
+    <legend>
+      <days>month DD, YYYY</days>
+    </legend>
+  </date_formats>
+  <data_set_selector>
+    <enabled>0</enabled>
+    <compare_list_box_title>Compare to:</compare_list_box_title>
+    <drop_down>
+      <scroller_color>C7C7C7</scroller_color>
+    </drop_down>
+  </data_set_selector>
+  <period_selector>
+    <periods_title>Zoom:</periods_title>
+    <custom_period_title>Custom period:</custom_period_title>
+    <periods>
+      <period pid="0" type="DD" count="10">10D</period>
+      <period pid="1" type="MM" count="1">1M</period>
+      <period pid="2" type="MM" count="3">3M</period>
+      <period pid="3" type="YYYY" count="1" selected="1">1Y</period>
+      <period pid="4" type="YYYY" count="3">3Y</period>
+      <period pid="5" type="YTD" count="0">YTD</period>
+      <period pid="6" type="MAX" count="0">MAX</period>
+    </periods>
+  </period_selector>
+  <header>
+    <enabled>0</enabled>
+    <text><![CDATA[<b>{title}</b> ({short}) {description}]]></text>
+    <text_size>13</text_size>
+  </header>
+  <balloon>
+    <border_color>B81D1B</border_color>
+  </balloon>
+  <scroller>
+    <height>30</height>
+    <playback>
+      <speed>1</speed>
+    </playback>
+  </scroller>
+  <context_menu>
+    <menu function_name="printChart" title="Print chart"/>
+  </context_menu>
+</settings>

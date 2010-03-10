@@ -1,0 +1,30 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>amStock chart</title>
+</head>
+<body>
+<!-- saved from url=(0013)about:internet -->
+<!-- amstock script-->
+  <script type="text/javascript" src="amstock/swfobject.js"></script>
+	<div id="flashcontent">
+		<strong>You need to upgrade your Flash Player</strong>
+	</div>
+
+	<script type="text/javascript">
+		// <![CDATA[		
+		var so = new SWFObject("amstock/amstock.swf", "amstock", "800", "500", "8", "#FFFFFF");
+		so.addVariable("path", "amstock/");
+		so.addVariable("settings_file", encodeURIComponent("amstock/amstock_settings.xml"));
+		so.addVariable("preloader_color", "#999999");
+//  so.addVariable("chart_settings", "");
+//  so.addVariable("additional_chart_settings", "");
+//  so.addVariable("loading_settings", "Loading settings");
+//  so.addVariable("error_loading_file", "ERROR LOADING FILE: ");
+		
+		so.write("flashcontent");
+		// ]]>
+	</script>
+<!-- end of amstock script -->
+</body>
+</html>
