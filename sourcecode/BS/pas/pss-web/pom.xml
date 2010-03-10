@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>parent</artifactId>
+		<groupId>com.pubertersoft.pss</groupId>
+		<version>1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.pubertersoft.pss.web</groupId>
+
+	<artifactId>pss-web</artifactId>
+
+	<packaging>war</packaging>
+
+	<name>pss-web Maven Webapp</name>
+
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.pubertersoft.pss.model</groupId>
+			<artifactId>pss-model</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pubertersoft.pss.persist</groupId>
+			<artifactId>pss-persist</artifactId>
+			<version>${version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.pubertersoft.pss.core</groupId>
+			<artifactId>pss-core</artifactId>
+			<version>${version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>pss-web</finalName>
+	</build>
+</project>
