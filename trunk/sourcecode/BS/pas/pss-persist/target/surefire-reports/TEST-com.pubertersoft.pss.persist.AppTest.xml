@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" skipped="0" tests="1" time="0.016" failures="0" name="com.pubertersoft.pss.persist.AppTest">
+  <properties>
+    <property value="Java(TM) 2 Runtime Environment, Standard Edition" name="java.runtime.name"/>
+    <property value="D:\Java\jdk1.5\jdk\jre\bin" name="sun.boot.library.path"/>
+    <property value="1.5.0_09-b03" name="java.vm.version"/>
+    <property value="Sun Microsystems Inc." name="java.vm.vendor"/>
+    <property value="http://java.sun.com/" name="java.vendor.url"/>
+    <property value=";" name="path.separator"/>
+    <property value="Java HotSpot(TM) Client VM" name="java.vm.name"/>
+    <property value="sun.io" name="file.encoding.pkg"/>
+    <property value="CN" name="user.country"/>
+    <property value="" name="sun.os.patch.level"/>
+    <property value="Java Virtual Machine Specification" name="java.vm.specification.name"/>
+    <property value="D:\workspace\powerstation\sourcecode\BS\pas\pss-persist" name="user.dir"/>
+    <property value="1.5.0_09-b03" name="java.runtime.version"/>
+    <property value="sun.awt.Win32GraphicsEnvironment" name="java.awt.graphicsenv"/>
+    <property value="D:\workspace\powerstation\sourcecode\BS\pas\pss-persist" name="basedir"/>
+    <property value="D:\Java\jdk1.5\jdk\jre\lib\endorsed" name="java.endorsed.dirs"/>
+    <property value="x86" name="os.arch"/>
+    <property value="C:\Users\Baocj\AppData\Local\Temp\surefirebooter11570.jar" name="surefire.real.class.path"/>
+    <property value="C:\Users\Baocj\AppData\Local\Temp\" name="java.io.tmpdir"/>
+    <property value="
+" name="line.separator"/>
+    <property value="Sun Microsystems Inc." name="java.vm.specification.vendor"/>
+    <property value="" name="user.variant"/>
+    <property value="Windows NT (unknown)" name="os.name"/>
+    <property value="GBK" name="sun.jnu.encoding"/>
+    <property value="D:\Java\jdk1.5\jdk\jre\bin;.;C:\Windows\system32;C:\Windows;f:\oracle\product\10.2.0\db_1\bin;D:\apache-maven-2.2.1\bin;D:\apache-ant-1.8.0\bin;D:\Java\jdk1.5\jdk\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin" name="java.library.path"/>
+    <property value="D:\workspace\powerstation\sourcecode\BS\pas\pss-persist\target\test-classes;D:\workspace\powerstation\sourcecode\BS\pas\pss-persist\target\classes;C:\Users\Baocj\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;" name="surefire.test.class.path"/>
+    <property value="Java Platform API Specification" name="java.specification.name"/>
+    <property value="49.0" name="java.class.version"/>
+    <property value="HotSpot Client Compiler" name="sun.management.compiler"/>
+    <property value="6.1" name="os.version"/>
+    <property value="C:\Users\Baocj" name="user.home"/>
+    <property value="" name="user.timezone"/>
+    <property value="sun.awt.windows.WPrinterJob" name="java.awt.printerjob"/>
+    <property value="GBK" name="file.encoding"/>
+    <property value="1.5" name="java.specification.version"/>
+    <property value="Baocj" name="user.name"/>
+    <property value="D:\workspace\powerstation\sourcecode\BS\pas\pss-persist\target\test-classes;D:\workspace\powerstation\sourcecode\BS\pas\pss-persist\target\classes;C:\Users\Baocj\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;" name="java.class.path"/>
+    <property value="1.0" name="java.vm.specification.version"/>
+    <property value="32" name="sun.arch.data.model"/>
+    <property value="D:\Java\jdk1.5\jdk\jre" name="java.home"/>
+    <property value="Sun Microsystems Inc." name="java.specification.vendor"/>
+    <property value="zh" name="user.language"/>
+    <property value="sun.awt.windows.WToolkit" name="awt.toolkit"/>
+    <property value="mixed mode" name="java.vm.info"/>
+    <property value="1.5.0_09" name="java.version"/>
+    <property value="D:\Java\jdk1.5\jdk\jre\lib\ext" name="java.ext.dirs"/>
+    <property value="D:\Java\jdk1.5\jdk\jre\lib\rt.jar;D:\Java\jdk1.5\jdk\jre\lib\i18n.jar;D:\Java\jdk1.5\jdk\jre\lib\sunrsasign.jar;D:\Java\jdk1.5\jdk\jre\lib\jsse.jar;D:\Java\jdk1.5\jdk\jre\lib\jce.jar;D:\Java\jdk1.5\jdk\jre\lib\charsets.jar;D:\Java\jdk1.5\jdk\jre\classes" name="sun.boot.class.path"/>
+    <property value="Sun Microsystems Inc." name="java.vendor"/>
+    <property value="C:\Users\Baocj\.m2\repository" name="localRepository"/>
+    <property value="\" name="file.separator"/>
+    <property value="http://java.sun.com/cgi-bin/bugreport.cgi" name="java.vendor.url.bug"/>
+    <property value="little" name="sun.cpu.endian"/>
+    <property value="UnicodeLittle" name="sun.io.unicode.encoding"/>
+    <property value="windows" name="sun.desktop"/>
+    <property value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86" name="sun.cpu.isalist"/>
+  </properties>
+  <testcase classname="com.pubertersoft.pss.persist.AppTest" time="0" name="testApp"/>
+</testsuite>
