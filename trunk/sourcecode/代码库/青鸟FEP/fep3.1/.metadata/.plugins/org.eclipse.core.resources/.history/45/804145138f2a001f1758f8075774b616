@@ -1,0 +1,5 @@
+package com.cw.plm.updatertu;
+
+public interface LoadUpdatingRtuDao {
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;bpClient&apos; in &apos;com.cw.plm.updatertu.UpdateRtuModule&apos; to &apos;feClient&apos;&#x0D;&#x0A;- Original project: &apos;FEP_FillLeak&apos;&#x0D;&#x0A;- Original element: &apos;com.cw.plm.updatertu.UpdateRtuModule.bpClient&apos;&#x0D;&#x0A;- Renamed element: &apos;com.cw.plm.updatertu.UpdateRtuModule.feClient&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;bpClient&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.cw.plm.updatertu{UpdateRtuModule.java[UpdateRtuModule^bpClient" name="feClient" references="true" setter="false" stamp="1266589984703" textual="false" version="1.0"/>
+</session>
