@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.0
-Created-By: 11.0-b15 (Sun Microsystems Inc.)
-Built-By: Administrator
-IBS-Integrator-Module: hihandlers
-IBS-Integrator-Module-Version: 1.0.0.27
-IBS-Integrator-Module-Compile-Time: 2009-10-22 17:25:13
-
