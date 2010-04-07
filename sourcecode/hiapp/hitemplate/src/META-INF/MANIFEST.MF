@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.7.0
-Created-By: 2.3 (IBM Corporation)
-Built-By: Administrator
-IBS-Integrator-Module: hitemplate
-IBS-Integrator-Module-Version: 1.0.0.2
-IBS-Integrator-Module-Compile-Time: 2009-06-01 15:16:24
-
