@@ -1,0 +1,80 @@
+2010-02-06 17:20:30,312  INFO [evhandler.1] ThreadPool:200 - threadpool.work running:evhandler.1
+2010-02-06 17:20:30,312  INFO [evhandler.2] ThreadPool:200 - threadpool.work running:evhandler.2
+2010-02-06 17:20:30,437 DEBUG [      main] ThreadPool:80 - 线程池【evhandler】启动成功。,size=2
+2010-02-06 17:20:31,437 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:20:36,359 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:20:45,312 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:21:02,312 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:21:34,296 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:22:39,265 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)
+2010-02-06 17:24:48,234 ERROR [sock-127.0.0.1@10002] JSocket:104 - 不能连接到:127.0.0.1@10002,reason=Connection refused: connect
+java.net.ConnectException: Connection refused: connect
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.PlainSocketImpl.doConnect(Unknown Source)
+	at java.net.PlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at com.hzjbbis.fk.sockclient.JSocket._connect(JSocket.java:101)
+	at com.hzjbbis.fk.sockclient.JSocket.access$7(JSocket.java:94)
+	at com.hzjbbis.fk.sockclient.JSocket$ReadThread.run(JSocket.java:229)

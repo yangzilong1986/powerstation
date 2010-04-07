@@ -1,0 +1,118 @@
+package com.cw.plm.updatertu;
+
+import java.nio.ByteBuffer;
+
+import com.hzjbbis.fk.message.MessageConst;
+import com.hzjbbis.fk.message.gw.MessageGw;
+
+public class RtuStatus {
+	private String batchId = null;		//主站升级的批次号
+	private int rtua;
+	private ByteBuffer buffer;
+	private int iPacket = 0;	//第几段
+	private int total = 0;		//总段数
+	private long lastTime = System.currentTimeMillis();
+	private int resendCount = 0;
+	
+	private int getPacketLength(){
+		return UpdateRtuModule.getInstance().getPacketLength();
+	}
+	
+	public RtuStatus(String bNo,int rtu, ByteBuffer buf){
+		batchId = bNo;
+		this.rtua = rtu;
+		buffer = buf;
+		total = buf.remaining() / getPacketLength();
+		if( buf.remaining() % getPacketLength() != 0 )
+			total++;
+	}
+	
+	public String getBatchId(){
+		return batchId;
+	}
+	
+	public int getRtua(){
+		return rtua;
+	}
+	
+	public int getCurPacket(){
+		return iPacket;
+	}
+	
+	public void setCurPacket(int iPacket) {
+		this.iPacket = iPacket;
+	}
+
+	public int getTotalPacket(){
+		return total;
+	}
+	
+	public boolean isLastPacket(){
+		return (iPacket+1) == total;
+	}
+	
+	public long getLastTime(){
+		return lastTime;
+	}
+	
+	public void setLastTime(long time){
+		lastTime = time;
+	}
+	
+	public void move(){		//如果收到上次下行的确认帧，那么前进1步
+		iPacket++;
+	}
+	
+	public MessageGw nextPacket(){
+		int fl = getPacketLength();
+		if( (iPacket+1) == total ){	//最后一段
+			if( buffer.remaining() % getPacketLength() !=0 )
+				fl = buffer.remaining() % getPacketLength();
+		}
+		//4字节数据单元标识 ＋ 数据单元
+		ByteBuffer data = ByteBuffer.allocate(4+11+fl);
+		byte czero = 0, cone = 1;
+		data.put(czero); data.put(czero);
+		data.put(cone);
+		data.put(czero);
+		data.put(cone);		//文件标识
+		if( (iPacket+1) == total )	//结束帧
+			data.put(cone);
+		else
+			data.put(czero);
+		data.put(czero);		//文件指令
+		//总段数
+		byte c;
+		c = (byte)(total & 0x00FF) ;
+		data.put(c);
+		c = (byte)( (total>>8) & 0x00FF );
+		data.put(c);
+		//第i段标识
+		c = (byte)(iPacket & 0x00FF) ;
+		data.put(c);
+		c = (byte)( (iPacket>>8) & 0x00FF );
+		data.put(c);
+		c = (byte)( (iPacket>>16) & 0x00FF );
+		data.put(c);
+		c = (byte)( (iPacket>>24) & 0x00FF );
+		data.put(c);
+		//第i段数据长度Lf
+		c = (byte)(fl & 0x00FF) ;
+		data.put(c);
+		c = (byte)( (fl>>8) & 0x00FF );
+		data.put(c);
+		//文件数据
+		int offset = iPacket * getPacketLength();
+		for(int i=0; i<fl; i++ ){
+			data.put(buffer.get(offset+i));
+		}
+		data.flip();
+		MessageGw msg = new MessageGw();
+		msg.data = data;
+		msg.head.rtua = rtua;
+		msg.setAFN(MessageConst.GW_FUNC_FILE);
+		msg.setSEQ((byte)(iPacket+1));
+		msg.needConfirm(true);
+		return msg;
+	}
+}

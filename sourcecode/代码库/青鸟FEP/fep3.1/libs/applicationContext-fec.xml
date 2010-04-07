@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for ...
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- ========================= 通信前置机对象定义 ========================= -->
+	<import resource="applicationContext-ums.xml"/>
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>application.properties</value>
+				<value>jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= 通信前置机的消息队列 ========================= -->
+	<bean id="fe.msgqueue.cachequeue" class="com.hzjbbis.fk.common.queue.CacheQueue">
+		<property name="maxSize" value="20480"/>
+		<property name="minSize" value="10240"/>
+		<property name="maxFileSize" value="100"/>
+		<property name="key" value="fe.msgqueue"/>
+		<property name="messageLoader" ref="messageLoader.MessageZj"/>
+	</bean>
+	
+	<!-- ==== 通信前置机在漏点补召完成之前，提供任务报文缓存队列。漏点补召完成后，允许取消 ====== -->
+	<bean id="fe.msgqueue.taskCacheQueue" class="com.hzjbbis.fk.common.queue.CacheQueue">
+		<property name="maxSize" value="500"/>
+		<property name="minSize" value="2"/>
+		<property name="maxFileSize" value="100"/>
+		<property name="fileCount" value="20"/>
+		<property name="key" value="fe.taskcache"/>
+		<property name="messageLoader" ref="messageLoader.MessageZj"/>
+	</bean>
+
+	<bean id="fe.msgqueue" class="com.hzjbbis.fk.fe.msgqueue.FEMessageQueue">
+		<property name="cacheQueue" ref="fe.msgqueue.cachequeue"/>
+		<property name="manageRtu" ref="manageRtu"/>
+		<!-- 下面属性临时使用，缓存任务报文 -->
+		<property name="taskCacheQueue" ref="fe.msgqueue.taskCacheQueue"/>
+		<property name="rtuHeartbeatInterval" value="${rtu.heartbeat.interval}"/>
+	</bean>
+
+	<!-- ========================= 厂家解析模块消息队列 ========================= -->
+	<bean id="fe.udefQueue" class="com.hzjbbis.fk.fe.userdefine.UserDefineMessageQueue" factory-method="getInstance"/>
+
+	<!-- ========================= 网关客户端收发消息事件处理器 ========================= -->
+	<bean id="fe.event.handle.gprs" class="com.hzjbbis.fk.fe.gprs.GateMessageEventHandler">
+		<property name="msgQueue" ref="fe.msgqueue"/>
+		<property name="udefQueue" ref="fe.udefQueue"/>
+		<property name="asyncDbService" ref="fe.asyncService"/>		
+	</bean>
+
+	<!-- ========================= 网关客户端对象 ========================= -->
+
+	<!-- ========================= UMS客户端收发消息事件处理器 ========================= -->
+	<bean id="fe.event.handle.ums" class="com.hzjbbis.fk.fe.ums.SmsMessageEventHandler">
+		<property name="msgQueue" ref="fe.msgqueue"/>
+		<property name="udefQueue" ref="fe.udefQueue"/>
+		<property name="asyncDbService" ref="fe.asyncService"/>
+	</bean>
+
+	<!-- ========================= UMS网关客户端对象,参照定义多个对象 ========================= -->
+
+	<!-- ============= 通信前置机的GPRS客户端、UMS客户端管理器 =============== -->
+	<bean id="fe.gateclient.manage" class="com.hzjbbis.fk.fe.GateClientManage"
+		factory-method="getInstance">
+		<property name="gprsGateClients">
+			<list>
+			</list>
+		</property>
+		<property name="umsClients">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="fe.channel.manage" class="com.hzjbbis.fk.fe.ChannelManage"
+		factory-method="getInstance">
+		<property name="rtuHeartbeatInterval" value="${rtu.heartbeat.interval}"/>
+		<property name="rtuTransferInterval" value="${rtu.transfer.interval}"/>
+	</bean>
+	
+	<!-- ============= UMS客户端采用纤程调度 =============== -->
+	<bean id="fiberManage" class="com.hzjbbis.fk.fe.fiber.FiberManage"
+		factory-method="getInstance">
+		<property name="minThreadSize" value="2"/>
+		<property name="maxThreadSize" value="10"/>
+		<property name="fibers">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========================= 业务处理器服务器对象 ========================= -->
+
+	<bean id="bpserver.event.hook"
+		class="com.hzjbbis.fk.fe.bpserver.BPServerEventHandler"
+		parent="SimpleEventHandler" >
+		<property name="name" value="Bp.EventHook" />
+		<property name="msgQueue" ref="fe.msgqueue"/>
+		<property name="timeoutAlarm"><value>1</value></property>
+		<property name="minSize"><value>4</value></property>
+		<property name="maxSize"><value>4</value></property>
+		<property name="dispatchRandom" value="true"/>
+	</bean>
+
+	<bean id="misparamRtu.manage" class="com.hzjbbis.fk.fe.filecache.MisparamRtuManage"
+		factory-method="getInstance">
+		<!-- 需要增加Dao接口以便保存到数据库 -->
+		<property name="batchDao" ref="dao.updateRtuCommInfo" />
+	</bean>
+	<bean id="heartBeat.manage" class="com.hzjbbis.fk.fe.filecache.HeartbeatPersist"
+		factory-method="getInstance">
+		<!-- 每天凌晨00:00:10执行任务 -->
+		<!-- <property name="batchDao" ref="dao.updateRtuCommInfo" /> -->
+	</bean>	
+	<bean id="fe.initialize" class="com.hzjbbis.fk.fe.init.Initialize"
+		init-method="initRtus">
+		<property name="rtuDao" ref="dao.initComRtu" />
+		<property name="bpClusterTest" value="false"/>
+	</bean>
+
+	<bean id="fe.bpCitysAssigner" class="com.hzjbbis.fk.fe.msgqueue.MessageDispatch2Bp"
+		factory-method="getInstance">
+	</bean>
+	
+	<bean id="fe.webServiceServer" class="com.hzjbbis.ws.WebServiceServer">
+		<property name="wsPort" value="${webservice.port}"/>
+	</bean>
+	
+	<!-- 上行原始报文插入 -->
+	<bean id="fe.batchDao.insertUpLog" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="5000"/>
+		<property name="batchSize"><value>2000</value></property>
+		<property name="delaySecond"><value>10</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO RZ_SXTXJL( ZDLJDZ,QYM,KZM,LYDZ,MBDZ,TXFS,TXSJ,BWDX,TXNR)
+								VALUES( :logicAddress,:qym,:kzm,:srcAddr,:destAddr,:txfs,:time,:size,:body)
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 下行原始报文插入 -->	
+	<bean id="fe.batchDao.insertDownLog" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="5001"/>
+		<property name="batchSize"><value>2000</value></property>
+		<property name="delaySecond"><value>10</value></property>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				INSERT INTO RZ_XXTXJL( ZDLJDZ,QYM,KZM,LYDZ,MBDZ,TXFS,TXSJ,BWDX,TXNR,CLJG)
+								VALUES( :logicAddress,:qym,:kzm,:srcAddr,:destAddr,:txfs,:time,:size,:body,:result)
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="fe.event.handle.log2Db" class="com.hzjbbis.fk.fe.rawmsg2db.RawMessage2DbHandler">
+		<property name="key" value="2"/>
+	</bean>	
+	
+	<bean id="fe.asyncService" class="com.hzjbbis.db.batch.AsyncService">
+		<property name="daoList">
+			<list>
+				<ref bean="fe.batchDao.insertUpLog" />
+				<ref bean="fe.batchDao.insertDownLog" />					
+			</list>
+		</property>
+		<property name="bpHandlerMap">
+			<map>
+				<entry>
+					<key><ref bean="EventType.BP_LOG_DB" /></key>
+					<ref bean="fe.event.handle.log2Db" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="fasSystem" class="com.hzjbbis.fk.FasSystem" factory-method="getFasSystem"
+		init-method="initialize">
+		<!-- 对于简化方式配置模块，下面属性列表可以不定义或者列表为空。 -->
+		<property name="eventHooks">
+			<list>
+			</list>
+		</property>
+		<!-- 对于简化方式配置模块，下面属性列表可以不定义或者列表为空。 -->
+		<property name="modules">
+			<list>
+			</list>
+		</property>
+		<!-- 特殊的Module，不被监控管理组件管理，但是有FasSystem进行启动和停止 -->
+		<property name="unMonitoredModules">
+			<list>
+				<ref bean="fe.asyncService" />	
+				<ref bean="fe.webServiceServer" />
+			</list>
+		</property>
+		<!-- 用于存放全局对象，以便main函数加载FasSystem对象之后，Spring自动加载下列对象 -->
+		<property name="globalObjects">
+			<list>
+				<ref bean="fe.gateclient.manage" />
+			</list>
+		</property>
+		<!-- 处理Module、EventHook之外，需要监控profile的对象 -->
+		<property name="profileObjects">
+			<list>
+				<ref bean="fe.msgqueue" />
+				<ref bean="fe.bpCitysAssigner" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="applicationPropertiesConfig" class="com.hzjbbis.fk.fe.config.ApplicationPropertiesConfig"
+		factory-method="getInstance">
+		<!-- GPRS clients 客户端定义 -->
+		<property name="requestNum"><value>${fe.gprs.channel.requestNum}</value></property>
+		<property name="gprsGateClients"><value>${fe.gprs.clients}</value></property>
+
+		<!-- UMS clients 客户端定义 -->
+		<property name="umsServerAddr"><value>${fe.ums.server}</value></property>
+		<property name="umsSendSpeed"><value>${fe.ums.channel.umsSendSpeed}</value></property>
+		<property name="sendUserLimit"><value>${fe.ums.channel.sendUserLimit}</value></property>
+		<property name="sendRtuLimit"><value>${fe.ums.channel.sendRtuLimit}</value></property>
+		<property name="retrieveMsgLimit"><value>${fe.ums.channel.retrieveMsgLimit}</value></property>
+		<property name="noUpLogAlertTime"><value>${fe.ums.channel.noUpLogAlertTime}</value></property>
+		<property name="noUpAlertMobiles"><value>${fe.ums.channel.noUpAlertMobiles}</value></property>
+		<property name="noUpAlertContent"><value>${fe.ums.channel.noUpAlertContent}</value></property>
+		<property name="sleepInterval"><value>${fe.ums.channel.sleepInterval}</value></property>
+		<property name="smsGateClients"><value>${fe.sms.clients}</value></property>
+		
+		<property name="bpServer"><value>${bp.server}</value></property>
+		<property name="monitorServer"><value>${monitor.server.port}</value></property>
+		<property name="bpMessageEventHandler" ref="bpserver.event.hook"/>
+		<property name="monitorEventHandler" ref="monitor.event.handler"/>
+	</bean>
+
+	<!-- 定义定时Job -->
+	<bean id="job.showProfile" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="fasSystem" />
+		<property name="targetMethod" value="showProfile" />
+	</bean>
+	<bean id="cronTrigger.showProfile" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.showProfile" />
+		<property name="cronExpression"><value>${sys.showprofile.cronExpression}</value></property>
+	</bean>
+	
+	<bean id="job.saveRtuStatus2Db" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="misparamRtu.manage" />
+		<property name="targetMethod" value="saveRtuStatus2Db" />
+	</bean>
+	<bean id="cronTrigger.saveRtuStatus2Db" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.saveRtuStatus2Db" />
+		<property name="cronExpression"><value>${fe.updatertu2db.cronExpression}</value></property>
+	</bean>
+	<bean id="job.saveRtuStatus2DbPerDay" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="misparamRtu.manage" />
+		<property name="targetMethod" value="saveRtuStatus2DbPerDay" />
+	</bean>
+	<bean id="cronTrigger.saveRtuStatus2DbPerDay" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.saveRtuStatus2DbPerDay" />
+		<property name="cronExpression"><value>${fe.updatertu2dbPerDay.cronExpression}</value></property>
+	</bean>
+	<!--
+	<bean id="rtuStatus.update2Cache" class="com.hzjbbis.fk.fe.rtustatus.RtuStatusUpdate2Cache"></bean>
+	<bean id="job.updateRtuStatus2Cache" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="rtuStatus.update2Cache" />
+		<property name="targetMethod" value="update2Cache" />
+	</bean>
+	<bean id="cronTrigger.updateRtuStatus2Cache" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.updateRtuStatus2Cache" />
+		<property name="cronExpression"><value>${fe.updatertu2file.cronExpression}</value></property>
+	</bean>
+	-->
+	<bean id="job.heartBeatInitPerDay" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="heartBeat.manage" />
+		<property name="targetMethod" value="initPerDay" />
+	</bean>
+	<bean id="cronTrigger.heartBeatInitPerDay" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="job.heartBeatInitPerDay" />
+		<property name="cronExpression"><value>${fe.heartBeatInitPerDay.cronExpression}</value></property>
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger.showProfile" />
+				<ref bean="cronTrigger.saveRtuStatus2Db" />
+				<ref bean="cronTrigger.saveRtuStatus2DbPerDay" />
+				<!-- <ref bean="cronTrigger.updateRtuStatus2Cache" /> -->
+				<ref bean="cronTrigger.heartBeatInitPerDay"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>

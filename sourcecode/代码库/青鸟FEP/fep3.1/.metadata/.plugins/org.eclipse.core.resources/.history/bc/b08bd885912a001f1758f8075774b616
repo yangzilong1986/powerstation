@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Application context definition for ...
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- ========================= 通信前置机对象定义 ========================= -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>application.properties</value>
+				<value>jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ========前置机客户端（/漏点补召服务端）收发消息事件处理器 ========================= -->
+	<bean id="plm.fl.flEventHandler" class="com.cw.plm.bpserver.FillLeakEventHandler"
+		parent="SimpleEventHandler">
+		<property name="maxRequests" value="5000"/>
+	</bean>
+
+	<!-- ========================= 终端升级模块 ========================= -->
+	<bean id="plm.fl.module.updatertu" class="com.cw.plm.updatertu.UpdateRtuModule"
+		factory-method="getInstance">
+		<property name="updateFile"><value>${rtu.update.updateFile}</value></property>
+		<property name="rtuaListFile"><value>${rtu.update.rtuaListFile}</value></property>
+		<property name="monitePath"><value>${rtu.update.monitePath}</value></property>
+		<property name="packetLength"><value>${rtu.update.packetLength}</value></property>
+		<property name="hostIp"><value>${rtu.update.fe.ip}</value></property>
+		<property name="hostPort"><value>${rtu.update.fe.port}</value></property>
+		<property name="updateTimeout"><value>${rtu.update.updateTimeout}</value></property>
+		<property name="eventHandler" ref="plm.fl.flEventHandler"/>
+		<property name="dbService" ref="plm.fl.dbService"/>
+		<property name="daoKey" value="1"/>
+	</bean>
+
+	<!-- 终端升级状态更新 -->
+	<bean id="plm.fl.dao.updateRtuUpdateState" class="com.hzjbbis.db.batch.dao.jdbc.JdbcBatchDao">
+		<property name="key" value="1"/>
+		<property name="batchSize" value="50"/>
+		<property name="delaySecond" value="10"/>
+		<property name="dataSource" ref="dataSource"/>
+		<property name="sql">
+			<value>
+				<![CDATA[
+				update ZD_SJ set ZT=:state,TOTAL=:total,CUR=:cur where ZDLJDZ=:rtuaHex and PC=:batchId,
+				]]>
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="plm.fl.dbService" class="com.hzjbbis.db.batch.AsyncService">
+		<property name="minThreadSize" value="1"/>
+		<property name="maxThreadSize" value="2"/>
+		<property name="daoList">
+			<list>
+				<ref bean="plm.fl.dao.updateRtuUpdateState" />
+			</list>
+		</property>
+		<property name="bpHandlerMap">
+			<map></map>
+		</property>
+	</bean>
+
+	<bean id="fasSystem" class="com.hzjbbis.fk.FasSystem" factory-method="getFasSystem"
+		init-method="initialize">
+		<!-- 对于简化方式配置模块，下面属性列表可以不定义或者列表为空。 -->
+		<property name="eventHooks">
+			<list>
+				<ref bean="plm.fl.flEventHandler" />
+			</list>
+		</property>
+		<!-- 对于简化方式配置模块，下面属性列表可以不定义或者列表为空。 -->
+		<property name="modules">
+			<list>
+				<ref bean="plm.fl.module.updatertu" />	
+				<ref bean="plm.fl.dbService" />
+			</list>
+		</property>
+		<!-- 特殊的Module，不被监控管理组件管理，但是有FasSystem进行启动和停止 -->
+		<property name="unMonitoredModules">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+</beans>

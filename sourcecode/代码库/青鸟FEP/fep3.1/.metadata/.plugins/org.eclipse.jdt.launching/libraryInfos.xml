@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraryInfos>
+<libraryInfo home="D:\devsoft\jdk1.5.0_12" version="1.5.0_12">
+<bootpath>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\rt.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\i18n.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\sunrsasign.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\jsse.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\jce.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\charsets.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\devsoft\jdk1.5.0_12\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="D:\devsoft\jdk1.5.0_12\jre1.5.0_12" version="1.5.0_12">
+<bootpath>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\rt.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\i18n.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\sunrsasign.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\jsse.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\jce.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\charsets.jar"/>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\devsoft\jdk1.5.0_12\jre1.5.0_12\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

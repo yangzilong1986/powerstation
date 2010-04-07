@@ -1,0 +1,19 @@
+package com.cw.plm.updatertu;
+
+import java.nio.ByteBuffer;
+
+public class RtuStatusData {
+	public String batchId;
+	public int rtua;
+	public ByteBuffer buffer;
+	public int iPacket;
+	public int total;
+	public long lastTime;
+
+	public RtuStatusData(String batchId, int iPacket, int total, long lastTime) {
+		this.batchId = batchId;
+		this.iPacket = iPacket;
+		this.total = total;
+		this.lastTime = lastTime;
+	}
+}
