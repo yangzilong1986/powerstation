@@ -14,6 +14,15 @@
 	<version>1.0.0</version>
 	<name>pssframework-core</name>
 	<dependencies>
+		<!-- springside -->
+		<dependency>
+			<groupId>org.springside</groupId>
+			<artifactId>springside3-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springside</groupId>
+			<artifactId>springside3-extension</artifactId>
+		</dependency>
 		<!-- logging begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -44,5 +53,30 @@
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		<!-- utils end -->
+		
+		<!-- testing begin -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymockclassextension</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.unitils</groupId>
+			<artifactId>unitils-core</artifactId>
+			<version>3.1</version>
+		</dependency>
+		<!-- testing end -->
 	</dependencies>
 </project>
