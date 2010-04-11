@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.pssframework</groupId>
-  <artifactId>pssframework-parent</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0</version>
-  <name>pssframework-parent</name>
-  
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.pssframework</groupId>
+	<artifactId>pssframework-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<name>pssframework-parent</name>
+
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
 		<springside.version>3.3.0</springside.version>
@@ -21,7 +21,7 @@
 		<h2.version>1.2.132</h2.version>
 		<selenium.version>2.0a2</selenium.version>
 
-		<!-- Plugin的属性定义  -->
+		<!-- Plugin的属性定义 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -90,7 +90,7 @@
 		</pluginRepository>
 	</pluginRepositories>
 
-	<!-- 设定团队持续集成发布包服务器  -->
+	<!-- 设定团队持续集成发布包服务器 -->
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -198,7 +198,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-			<!-- optional datasource-->
+			<!-- optional datasource -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
@@ -349,7 +349,7 @@
 			</dependency>
 			<!-- webservice end -->
 
-			<!--  rest begin -->
+			<!-- rest begin -->
 			<dependency>
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-server</artifactId>
@@ -429,7 +429,7 @@
 				<version>1.7.3</version>
 			</dependency>
 
-			<!-- logging begin-->
+			<!-- logging begin -->
 			<!-- slf4j -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -484,7 +484,7 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- logging end-->
+			<!-- logging end -->
 
 			<!-- email begin -->
 			<dependency>
@@ -523,7 +523,7 @@
 				<artifactId>xercesImpl</artifactId>
 				<version>2.9.1</version>
 			</dependency>
-			<!-- xml  end -->
+			<!-- xml end -->
 
 			<!-- excel begin -->
 			<dependency>
@@ -650,7 +650,7 @@
 				<version>${spring.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- jetty -->
 			<dependency>
 				<groupId>org.mortbay.jetty</groupId>
@@ -787,21 +787,21 @@
 					</configuration>
 				</plugin>
 
-				<!-- clean插件-->
+				<!-- clean插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
 
-				<!-- install插件-->
+				<!-- install插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>2.3</version>
 				</plugin>
 
-				<!-- deploy插件-->
+				<!-- deploy插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
@@ -821,7 +821,7 @@
 					</configuration>
 				</plugin>
 
-				<!-- war插件-->
+				<!-- war插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
