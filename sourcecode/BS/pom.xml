@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>Pssframwork</name>
+	<groupId>com.pssframwork</groupId>
+	<artifactId>pssframwork</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<description>
+	pssframwork is a basic but useful application that sets up a
+	dashboard of project information from Maven, Archiva and
+	Continuum.
+	</description>
+
+  <modules>
+	<module>org.pssframework.parent</module>
+    <module>org.pssframework.core</module>
+    <module>org.pssframework.web</module>
+    <module>org.pssframework.model</module>
+    <module>org.pssframework.persist</module>
+  </modules>
+</project>
