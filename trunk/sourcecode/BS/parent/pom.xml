@@ -1,45 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.pssframework.web</groupId>
-	<artifactId>org.pssframework.web-parent</artifactId>
+	<groupId>org.pssframework</groupId>
+	<artifactId>pssframework-parent</artifactId>
 	<packaging>pom</packaging>
-	<name>Springside3's Parent pom.xml</name>
-	<version>1.0-SNAPSHOT</version>
-	<organization>
-		<name>SpringSide</name>
-		<url>http://www.springside.org.cn</url>
-	</organization>
+	<name>pssframework's Parent pom.xml</name>
+	<version>1.0.0</version>
+	
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<springside.version>3.2.2</springside.version>
-		<spring.version>2.5.6</spring.version>
+		<springside.version>3.3.0</springside.version>
+		<spring.version>3.0.1.RELEASE</spring.version>
 		<hibernate.version>3.3.2.GA</hibernate.version>
-		<struts2.version>2.1.8</struts2.version>
-		<cxf.version>2.2.5</cxf.version>
-		<spring-security.version>2.0.5.RELEASE</spring-security.version>
+		<struts2.version>2.1.8.1</struts2.version>
+		<cxf.version>2.2.7</cxf.version>
+		<jersey.version>1.1.5.1</jersey.version>
+		<spring-security.version>3.0.2.RELEASE</spring-security.version>
+		<activemq.version>5.3.1</activemq.version>
+		<jetty.version>6.1.23</jetty.version>
+		<h2.version>1.2.132</h2.version>
+		<selenium.version>2.0a2</selenium.version>
 
-		<!--  Plugin的属性定义  -->
+		<!-- Plugin的属性定义  -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<!-- 设定除中央仓库(repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找. -->
 	<repositories>
-
 		<repository>
 			<id>nexus</id>
-			<name>local nexus server</name>
+			<name>Team Nexus Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
 		</repository>
 
 		<repository>
 			<id>offical</id>
-			<name>Maven Offical Repository</name>
+			<name>Maven Official Repository</name>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
@@ -48,16 +46,35 @@
 
 		<repository>
 			<id>springside</id>
-			<name>SpringSide Addtional Repository</name>
+			<name>SpringSide Additional Repository</name>
 			<url>http://springside.googlecode.com/svn/repository</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 		<repository>
 			<id>jboss</id>
-			<name>jboss repository</name>
+			<name>Jboss Repository</name>
 			<url>http://repository.jboss.com/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>java.net</id>
+			<name>Java.net Repository</name>
+			<url>http://download.java.net/maven/2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>seleniumhq</id>
+			<name>Seleniumhq Repository</name>
+			<url>http://nexus.openqa.org/content/repositories/releases/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -67,13 +84,28 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>nexus</id>
-			<name>local nexus server</name>
+			<name>Team Nexus Repository</name>
 			<url>http://localhost:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+	<!-- 设定团队持续集成发布包服务器  -->
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Release Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>Team Nexus Snapshot Repository</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
 	<dependencyManagement>
@@ -102,6 +134,17 @@
 				<artifactId>spring-beans</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- only for jdk5.0 -->
+			<dependency>
+				<groupId>org.apache.geronimo.specs</groupId>
+				<artifactId>geronimo-annotation_1.0_spec</artifactId>
+				<version>1.1.1</version>
+			</dependency>
 
 			<!-- spring aop -->
 			<dependency>
@@ -112,22 +155,16 @@
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
-				<version>1.6.6</version>
+				<version>1.6.8</version>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
 				<version>2.2</version>
 			</dependency>
-			<!-- only for jdk5.0 -->
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>jsr250-api</artifactId>
-				<version>1.0</version>
-			</dependency>
 			<!-- spring end -->
 
-			<!-- orm begin -->
+			<!-- database access begin -->
 			<!-- hibernate -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -163,7 +200,7 @@
 				<version>${spring.version}</version>
 			</dependency>
 
-			<!-- optional  datasource-->
+			<!-- optional datasource-->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
@@ -173,15 +210,9 @@
 			<dependency>
 				<groupId>commons-dbcp</groupId>
 				<artifactId>commons-dbcp</artifactId>
-				<version>1.2.2</version>
-			</dependency>
-
-			<dependency>
-				<groupId>p6spy</groupId>
-				<artifactId>p6spy</artifactId>
 				<version>1.3</version>
 			</dependency>
-			<!-- orm end -->
+			<!-- database access end -->
 
 			<!-- web begin -->
 			<!-- struts2 -->
@@ -227,15 +258,25 @@
 			<!-- json -->
 			<dependency>
 				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>1.5.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.4.0</version>
+				<version>1.5.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>1.5.0</version>
 			</dependency>
 
 			<!-- j2ee web spec -->
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
-				<version>2.4</version>
+				<version>2.5</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
@@ -245,13 +286,13 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
-				<groupId>taglibs</groupId>
-				<artifactId>standard</artifactId>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
 				<version>1.1.2</version>
 			</dependency>
 			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>jstl</artifactId>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
 				<version>1.1.2</version>
 			</dependency>
 
@@ -270,11 +311,6 @@
 				<artifactId>cxf-rt-core</artifactId>
 				<version>${cxf.version}</version>
 				<exclusions>
-					<!-- use javax.annotation.jsr250-api instead -->
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
-					</exclusion>
 					<!-- use javax.mail.mail instead -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
@@ -295,10 +331,6 @@
 					<!-- see above -->
 					<exclusion>
 						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
 						<artifactId>geronimo-javamail_1.4_spec</artifactId>
 					</exclusion>
 					<exclusion>
@@ -316,63 +348,55 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-ws-security</artifactId>
 				<version>${cxf.version}</version>
+			</dependency>
+			<!-- webservice end -->
+
+			<!--  rest begin -->
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-server</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-client</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.jersey.contribs</groupId>
+				<artifactId>jersey-spring</artifactId>
+				<version>${jersey.version}</version>
 				<exclusions>
-					<!-- see above -->
 					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-annotation_1.0_spec</artifactId>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- webservice end -->
+			<!-- rest end -->
 
 			<!-- security begin -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-core-tiger</artifactId>
+				<artifactId>spring-security-core</artifactId>
 				<version>${spring-security.version}</version>
-				<exclusions>
-					<!-- wrong spring version -->
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-core</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-context</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-support</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-aop</artifactId>
-					</exclusion>
-				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring-security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring-security.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring-security.version}</version>
-				<exclusions>
-					<!-- see above -->
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-web</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.springframework</groupId>
-						<artifactId>spring-jdbc</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
-			<dependency>
-				<groupId>com.octo.captcha</groupId>
-				<artifactId>jcaptcha-api</artifactId>
-				<version>1.0</version>
-			</dependency>
 			<dependency>
 				<groupId>com.octo.captcha</groupId>
 				<artifactId>jcaptcha</artifactId>
@@ -390,7 +414,7 @@
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-core</artifactId>
-				<version>5.3.0</version>
+				<version>${activemq.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.apache.camel</groupId>
@@ -398,38 +422,13 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-pool</artifactId>
-				<version>5.3.0</version>
-				<exclusions>
-					<!-- use javax.transaction.jta instead -->
-					<exclusion>
-						<groupId>org.apache.geronimo.specs</groupId>
-						<artifactId>geronimo-jta_1.0.1B_spec</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.xbean</groupId>
-				<artifactId>xbean-spring</artifactId>
-				<version>3.6</version>
-			</dependency>
 			<!-- jms end -->
-
-			<!-- hessian begin -->
-			<dependency>
-				<groupId>com.caucho</groupId>
-				<artifactId>hessian</artifactId>
-				<version>3.1.5</version>
-			</dependency>
-			<!-- hessian end -->
 
 			<!-- quartz -->
 			<dependency>
-				<groupId>org.opensymphony.quartz</groupId>
+				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
-				<version>1.6.6</version>
+				<version>1.7.3</version>
 			</dependency>
 
 			<!-- logging begin-->
@@ -437,21 +436,21 @@
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>1.5.10</version>
+				<version>1.5.11</version>
 			</dependency>
 
 			<!-- slf4j-log4j绑定 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.5.10</version>
+				<version>1.5.11</version>
 			</dependency>
 
 			<!-- slf4j没有log4j的情形 -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
-				<version>1.5.10</version>
+				<version>1.5.11</version>
 			</dependency>
 
 			<dependency>
@@ -493,20 +492,20 @@
 			<dependency>
 				<groupId>javax.mail</groupId>
 				<artifactId>mail</artifactId>
-				<version>1.4.1</version>
+				<version>1.4.3</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.activation</groupId>
 				<artifactId>activation</artifactId>
-				<version>1.1</version>
+				<version>1.1.1</version>
 			</dependency>
 			<!-- email end -->
 
-			<!-- xml  begin -->
+			<!-- xml begin -->
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-impl</artifactId>
-				<version>2.1.12</version>
+				<version>2.2</version>
 			</dependency>
 
 			<dependency>
@@ -528,13 +527,13 @@
 			</dependency>
 			<!-- xml  end -->
 
-			<!-- poi begin -->
+			<!-- excel begin -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 				<version>3.6</version>
 			</dependency>
-			<!-- poi end -->
+			<!-- excel end -->
 
 			<!-- utils begin -->
 			<dependency>
@@ -545,7 +544,7 @@
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
-				<version>2.4</version>
+				<version>2.5</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-collections</groupId>
@@ -564,6 +563,11 @@
 			</dependency>
 
 			<dependency>
+				<groupId>com.google.collections</groupId>
+				<artifactId>google-collections</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>1.6</version>
@@ -581,12 +585,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>asm</groupId>
-				<artifactId>asm</artifactId>
-				<version>3.2</version>
-			</dependency>
-
-			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
 				<version>2.7.3</version>
@@ -599,10 +597,11 @@
 				</exclusions>
 			</dependency>
 
+			<!-- template engine -->
 			<dependency>
-				<groupId>javax.transaction</groupId>
-				<artifactId>jta</artifactId>
-				<version>1.1</version>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.6.3</version>
 			</dependency>
 
 			<!-- cache (usually for orm) -->
@@ -611,17 +610,18 @@
 				<artifactId>ehcache</artifactId>
 				<version>1.6.2</version>
 			</dependency>
-			<dependency>
-				<groupId>net.sf.ehcache</groupId>
-				<artifactId>ehcache-jgroupsreplication</artifactId>
-				<version>1.3</version>
-			</dependency>
 
-			<!-- object copy (usually for webservice) -->
+			<!-- pojo copy (usually for webservice) -->
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
 				<artifactId>dozer</artifactId>
-				<version>5.1</version>
+				<version>5.2.0</version>
+			</dependency>
+
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>3.2</version>
 			</dependency>
 			<!-- utils end -->
 
@@ -629,7 +629,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.4</version>
+				<version>4.8.1</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -642,7 +642,7 @@
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymockclassextension</artifactId>
-				<version>2.4</version>
+				<version>2.5.2</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -652,28 +652,71 @@
 				<version>${spring.version}</version>
 				<scope>test</scope>
 			</dependency>
-
+			
+			<!-- jetty -->
 			<dependency>
-				<groupId>org.seleniumhq.selenium.client-drivers</groupId>
-				<artifactId>selenium-java-client-driver</artifactId>
-				<version>1.0.1</version>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty</artifactId>
+				<version>${jetty.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jsp-2.0</artifactId>
+				<version>${jetty.version}</version>
+				<type>pom</type>
 				<scope>test</scope>
 				<exclusions>
 					<exclusion>
-						<groupId>org.seleniumhq.selenium.server</groupId>
-						<artifactId>selenium-server</artifactId>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-simple</artifactId>
 					</exclusion>
 					<exclusion>
-						<groupId>org.seleniumhq.selenium.core</groupId>
-						<artifactId>selenium-core</artifactId>
+						<groupId>org.slf4j</groupId>
+						<artifactId>jcl104-over-slf4j</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
 
+			<!-- selenium 2.0 -->
 			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-core</artifactId>
-				<version>3.1</version>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-htmlunit-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-firefox-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-ie-driver</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-remote-client</artifactId>
+				<version>${selenium.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>2.4.7</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- test end -->
@@ -683,7 +726,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-tools</artifactId>
-				<version>3.2.4.GA</version>
+				<version>3.2.3.GA</version>
 				<scope>provided</scope>
 				<exclusions>
 					<exclusion>
@@ -700,50 +743,38 @@
 				<version>2.4.2</version>
 				<scope>provided</scope>
 			</dependency>
+
+			<dependency>
+				<groupId>ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.7.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<!-- 插件配置 -->
 	<build>
-		<!-- 命令行输入mvn时，默认执行mvn package  -->
-		<defaultGoal>package</defaultGoal>
-
-		<!-- 设定Web应用中编译结果输出到WEB-INF/classes 中,与使用Eclipse时相同  -->
-		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
-
 		<pluginManagement>
 			<plugins>
-				<!-- war插件, 设定webapp目录为/webapp -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.1-beta-1</version>
-					<configuration>
-						<warSourceDirectory>webapp</warSourceDirectory>
-					</configuration>
-				</plugin>
-
-				<!-- compiler插件, 设定JDK版本与编码 -->
+				<!-- compiler插件, 设定JDK版本 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.0.2</version>
+					<version>2.2</version>
 					<configuration>
 						<source>1.5</source>
 						<target>1.5</target>
-						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 
-				<!-- surefire插件, 设定单元测试时只执行unit目录下的用例, 增加执行测试的内存.-->
+				<!-- test插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.4.3</version>
+					<version>2.5</version>
 					<configuration>
-						<argLine>-Xmx256M</argLine>
 						<includes>
-							<include>**/unit/**/*Test.java</include>
+							<include>**/*Test.java</include>
 						</includes>
 					</configuration>
 				</plugin>
@@ -752,10 +783,94 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.4.1</version>
+					<version>2.4.2</version>
 					<configuration>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
+				</plugin>
+
+				<!-- clean插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+
+				<!-- install插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+
+				<!-- deploy插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
+				<!-- eclipse插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.8</version>
+					<configuration>
+						<sourceExcludes>
+							<sourceExclude>**/.svn/</sourceExclude>
+						</sourceExcludes>
+						<downloadSources>true</downloadSources>
+					</configuration>
+				</plugin>
+
+				<!-- war插件-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1-beta-1</version>
+					<configuration>
+						<warName>${project.artifactId}</warName>
+					</configuration>
+				</plugin>
+
+				<!-- jetty插件 -->
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>${jetty.version}</version>
+					<configuration>
+						<scanIntervalSeconds>5</scanIntervalSeconds>
+						<connectors>
+							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+								<port>8080</port>
+							</connector>
+						</connectors>
+					</configuration>
+				</plugin>
+
+				<!-- jar插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.3</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>1.3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1.1</version>
 				</plugin>
 
 				<!-- dependency插件 -->
@@ -765,6 +880,13 @@
 					<version>2.1</version>
 				</plugin>
 
+				<!-- ant插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.3</version>
+				</plugin>
+
 				<!-- archetype插件 -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -772,297 +894,20 @@
 					<version>2.0-alpha-4</version>
 				</plugin>
 
-				<!-- jetty插件 -->
+				<!-- assembly插件 -->
 				<plugin>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>maven-jetty-plugin</artifactId>
-					<version>6.1.22</version>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2-beta-5</version>
 				</plugin>
 
-				<!-- selenium插件 -->
+				<!-- cobertura插件 -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>selenium-maven-plugin</artifactId>
-					<version>1.0</version>
-				</plugin>
-
-				<!-- dbunit插件 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>dbunit-maven-plugin</artifactId>
-					<version>1.0-beta-3</version>
-					<configuration>
-						<driver>${jdbc.driver}</driver>
-						<url>${jdbc.url}</url>
-						<username>${jdbc.user}</username>
-						<password>${jdbc.password}</password>
-						<schema>${jdbc.schema}</schema>
-						<type>CLEAN_INSERT</type>
-						<src>src/test/resources/test-data.xml</src>
-						<dest>src/test/resources/test-data.xml</dest>
-						<format>${dbunit.format}</format>
-						<transaction>true</transaction>
-						<encoding>${project.build.sourceEncoding}</encoding>
-						<dataTypeFactoryName>${dbunit.datatype}</dataTypeFactoryName>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>${jdbc.driver.groupId}</groupId>
-							<artifactId>${jdbc.driver.artifactId}</artifactId>
-							<version>${jdbc.driver.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-
-				<!-- sql插件 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>sql-maven-plugin</artifactId>
-					<version>1.3</version>
-					<configuration>
-						<driver>${jdbc.driver}</driver>
-						<url>${jdbc.url}</url>
-						<username>${jdbc.user}</username>
-						<password>${jdbc.password}</password>
-						<onError>continue</onError>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>${jdbc.driver.groupId}</groupId>
-							<artifactId>${jdbc.driver.artifactId}</artifactId>
-							<version>${jdbc.driver.version}</version>
-						</dependency>
-					</dependencies>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>2.3</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<profiles>
-		<!-- 以cluster模式打包war文件和运行jetty的profile,以-Dcluster.nodename=xxx 激活 -->
-		<profile>
-			<id>cluster</id>
-			<activation>
-				<property>
-					<name>cluster.nodename</name>
-				</property>
-			</activation>
-
-			<build>
-				<!-- war插件,指定打包war文件时加入节点特定的配置文件 -->
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<filters>
-								<filter>src/cluster/nodes/${cluster.nodename}.properties</filter>
-							</filters>
-
-							<webResources>
-								<resource>
-									<filtering>true</filtering>
-									<directory>src/cluster/webapp-override</directory>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>
-
-					<!-- jetty插件,指定不同节点不同的work目录 -->
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>maven-jetty-plugin</artifactId>
-						<configuration>
-							<webAppConfig>
-								<contextPath>/${artifactId}</contextPath>
-								<tempDirectory>${project.build.directory}/work-${cluster.nodename}
-								</tempDirectory>
-							</webAppConfig>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- 在test阶段执行集成测试的profile, 以-Pintegration激活 -->
-		<profile>
-			<id>integration</id>
-			<build>
-				<plugins>
-					<!-- dbunit插件初始化测试数据 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init-integration-data</id>
-								<phase>test-compile</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- junit插件执行integration目录的用例 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>integration-test</id>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<phase>test</phase>
-								<configuration>
-									<includes>
-										<include>**/integration/**/*Test.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- 在integration-test阶段执行功能测试的profile, 以-Pfunctional激活 -->
-		<profile>
-			<id>functional</id>
-			<build>
-				<plugins>
-					<!-- dbunit插件初始化测试数据 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init-functional-data</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- selenium插件启动与关闭selenium服务器 -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>selenium-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>start-selenium</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>start-server</goal>
-								</goals>
-								<configuration>
-									<background>true</background>
-								</configuration>
-							</execution>
-							<execution>
-								<id>stop-selenium</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop-server</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- jetty插件启动与关闭应用 -->
-					<plugin>
-						<groupId>org.mortbay.jetty</groupId>
-						<artifactId>maven-jetty-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>start-jetty</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>deploy-war</goal>
-								</goals>
-								<configuration>
-									<daemon>true</daemon>
-								</configuration>
-							</execution>
-							<execution>
-								<id>stop-jetty</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>stop</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- surefire插件执行functional目录的用例 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>functional-test</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<includes>
-										<include>**/functional/**/*Test.java</include>
-									</includes>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!--初始化数据库Schema及测试数据的profile, 以-Pinitdb激活-->
-		<profile>
-			<id>initdb</id>
-			<build>
-				<plugins>
-					<!-- sql 插件创建Schema -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>sql-maven-plugin</artifactId>
-
-						<executions>
-							<execution>
-								<id>create database</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<configuration>
-									<srcFiles>
-										<srcFile>${dbunit.schema.file}</srcFile>
-									</srcFiles>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- dbunit 插件初始化数据-->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>dbunit-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>init data</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>operation</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

@@ -5,7 +5,7 @@
 		<artifactId>org.pssframework.web-parent</artifactId>
 		<groupId>org.pssframework.web</groupId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>pom-parent.xml</relativePath>
+		<relativePath>../pom-parent.xml</relativePath>
 	</parent>
 	<groupId>org.pssframework.web</groupId>
 	<artifactId>org.pssframework.web</artifactId>

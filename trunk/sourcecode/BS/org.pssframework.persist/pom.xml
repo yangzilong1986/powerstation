@@ -5,7 +5,7 @@
 		<artifactId>org.pssframework.persist-parent</artifactId>
 		<groupId>org.pssframework.persist</groupId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>pom-parent.xml</relativePath>
+		<relativePath>../pom-parent.xml</relativePath>
 	</parent>
 	<groupId>org.pssframework.persist</groupId>
 	<artifactId>org.pssframework.persist</artifactId>
