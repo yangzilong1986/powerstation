@@ -16,15 +16,20 @@ public class PmPacket {
     private ControlCode controlCode;
     private Address address;
     private Seq seq;
+    private EventCountor eventCountor;
     private byte protocolVersion;
     private byte afn;
     private byte[] data;
+    private byte[] authorizeData;
 
     public PmPacket(){
         super();
         controlCode = new ControlCode();
         address = new Address();
         seq = new Seq();
+        eventCountor = new EventCountor();
+        data = new byte[0];
+        authorizeData = new byte[0];
     }
 
     public ControlCode getControlCode(){
@@ -37,6 +42,10 @@ public class PmPacket {
 
     public Seq getSeq(){
         return seq;
+    }
+
+    public EventCountor getEC(){
+        return this.eventCountor;
     }
 
     public byte getProtocolVersion(){
@@ -69,8 +78,24 @@ public class PmPacket {
         return this;
     }
 
+    public byte[] getAuthorizeData(){
+        return this.authorizeData;
+    }
+
+    public PmPacket setAuthorizeData(byte[] authorizeData){
+        if ((authorizeData.length==16)||(authorizeData.length==0))
+            this.authorizeData=authorizeData;
+
+        return this;
+    }
+
     public byte[] getValue(){
-        int len = 1+5+2+data.length;
+        int len = 1+5+2+data.length; //controlcode,address,afn,seq
+        if (!this.controlCode.getIsUpDirect())
+            len = len+this.authorizeData.length;
+        else if ((this.controlCode.getIsUpDirect()) && (this.controlCode.getUpDirectIsAppealCall()))
+            len = len+2;
+
         int lenfield = (len<<2)+(protocolVersion & 0x0003);
 
         byte[] result = new byte[len+8];
@@ -86,6 +111,11 @@ public class PmPacket {
         buff.put((byte)afn);
         buff.put(this.seq.getValue());
         buff.put(data);
+        if ((!this.controlCode.getIsUpDirect()) && (this.authorizeData.length!=0))
+            buff.put(this.authorizeData);
+        if ((this.controlCode.getIsUpDirect()) && (this.controlCode.getUpDirectIsAppealCall()))
+            buff.put(this.eventCountor.getValue());
+
         buff.put(calcCs(result,6,len+6));
         buff.put((byte)0x16);
 
