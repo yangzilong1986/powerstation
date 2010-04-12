@@ -10,7 +10,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import pep.codec.utils.TestUtils;
 import static org.junit.Assert.*;
 
 /**
@@ -73,5 +72,11 @@ public class bcdutilsTest {
 
         String Str = "011234561A";
         assertEquals(BcdUtils.binArrayToString(expResult),Str);
+    }
+
+    @Test
+    public void testBcdToInt(){
+        assertEquals(BcdUtils.bcdToInt((byte)0x11),11);
+        assertEquals(BcdUtils.intToBcd((byte)16),0x16);
     }
 }

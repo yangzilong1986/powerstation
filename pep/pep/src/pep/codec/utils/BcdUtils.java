@@ -43,6 +43,14 @@ public class BcdUtils {
         return (byte) (charToByte(str.charAt(0))*0x10+charToByte(str.charAt(1)));
     }
 
+    public static byte bcdToInt(byte bcd){
+        return (byte)((bcd>>4)*10+(bcd &0x0f));
+    }
+
+    public static byte intToBcd(byte decimal){
+        return (byte)((decimal / 10)*0x10+(decimal % 10));
+    }
+
     private static char byteToChar(int b){
         char ch = (b<0xA)? (char) ('0' + b) : (char) ('A'+b-10);
         return ch;
