@@ -40,30 +40,16 @@ public class PmPacketTest {
     }
 
     /**
-     * Test of getProtocolVersion method, of class PmPacket.
-     */
-    @Test
-    public void testGetProtocolVersion() {
-        System.out.println("getProtocolVersion");
-        PmPacket instance = new PmPacket();
-        instance.setProtocolVersion((byte)1);
-        byte expResult = 1;
-        byte result = instance.getProtocolVersion();
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getValue method, of class PmPacket.
      */
     @Test
     public void testGetValue() {
         System.out.println("getValue");
-        PmPacket instance = new PmPacket();
+        PmPacket376 instance = new PmPacket376();
         byte[] expResult = BcdUtils.stringToByteArray("68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 00, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 61, 16");
         instance.getControlCode().setIsUpDirect(false).setIsOrgniger(true).setIsDownDirectFrameCountAvaliable(false);
         instance.getControlCode().setFunctionKey((byte)11);
         instance.getAddress().setRtua("05740009").setIsGroupAddress(false).setMastStationId((byte)1);
-        instance.setProtocolVersion((byte)2);
         instance.setAfn((byte)0x0A);
         instance.getSeq().setIsTpvAvalibe(false).setIsFirstFrame(true).setIsFinishFrame(true).setIsNeedCountersign(false);
         instance.getSeq().setSeq((byte)14);
@@ -77,9 +63,9 @@ public class PmPacketTest {
     @Test
     public void testGetPacket(){
         byte[] msg = BcdUtils.stringToByteArray("68, 42, 00, 42, 00, 68, 68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 00, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 61, 16");
-        int head = PmPacket.getMsgHeadOffset(msg);
+        int head = PmPacket376.getMsgHeadOffset(msg);
         assertEquals(head,6);
-        PmPacket pack = new PmPacket();
+        PmPacket376 pack = new PmPacket376();
         pack.setValue(msg);
         assertTrue(!pack.getControlCode().getIsUpDirect());
         assertTrue(pack.getControlCode().getIsOrgniger());
