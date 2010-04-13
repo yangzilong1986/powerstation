@@ -54,15 +54,19 @@ public class Address {
         return value;
     }
 
-    public Address setValue(byte[] value) {
-        if (value.length==5) {
-            for (int i=0; i<5; i++) this.value[i] = value[i];
+    public Address setValue(byte[] value, int firstIndex) {
+        if ((value.length-firstIndex)>=5) {
+            for (int i=0; i<5; i++) this.value[i] = value[firstIndex+i];
         }
         else {
             throw new IllegalArgumentException();
         }
 
         return this;
+    }
+
+    public Address setValue(byte[] value) {
+        return this.setValue(value, 0);
     }
 
     public String getRtua(){

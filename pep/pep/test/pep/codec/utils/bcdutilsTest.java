@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -78,5 +80,26 @@ public class bcdutilsTest {
     public void testBcdToInt(){
         assertEquals(BcdUtils.bcdToInt((byte)0x11),11);
         assertEquals(BcdUtils.intToBcd((byte)16),0x16);
+        byte[] bytes = {0x16,0x00};
+        assertEquals(BcdUtils.bcdToInt(bytes, 0, 2),16);
+        assertTrue(TestUtils.byteArrayEquals(BcdUtils.intTobcd(16, 2), bytes));
+    }
+
+    @Test
+    public void testBcdToDate(){
+        byte[] bcds = {0x10,0x01,0x01,0x01,0x59,0x50};
+        Date result = BcdUtils.bcdToDate(bcds, "YYMMDDHHMISS");
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(GregorianCalendar.YEAR, 2010);
+        calendar.set(GregorianCalendar.MONTH, 0);
+        calendar.set(GregorianCalendar.DAY_OF_MONTH, 1);
+        calendar.set(GregorianCalendar.HOUR_OF_DAY, 1);
+        calendar.set(GregorianCalendar.MINUTE, 59);
+        calendar.set(GregorianCalendar.SECOND, 50);
+        calendar.set(GregorianCalendar.MILLISECOND, 0);
+        assertEquals(calendar.getTime(),result);
+
+        byte[] bcsdate = BcdUtils.dateToBcd(result, "YYMMDDHHMISS");
+        assertTrue(TestUtils.byteArrayEquals(bcsdate,bcds));
     }
 }

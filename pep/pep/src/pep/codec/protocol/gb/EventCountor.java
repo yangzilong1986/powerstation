@@ -41,13 +41,21 @@ public class EventCountor {
         return result;
     }
 
-    public EventCountor setValue(byte[] value){
-        if (value.length==2) {
-            ec1 = value[0];
-            ec2 = value[1];
+    public EventCountor setValue(byte[] value, int firstIndex){
+        if ((value.length-firstIndex)>=2) {
+            ec1 = value[firstIndex];
+            ec2 = value[firstIndex+1];
+        }
+        else {
+            throw new IllegalArgumentException();
         }
         return this;
     }
+
+    public EventCountor setValue(byte[] value){
+        return this.setValue(value, 0);
+    }
+
 
     @Override
     public String toString(){
