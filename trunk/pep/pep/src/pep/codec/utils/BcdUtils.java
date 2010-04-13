@@ -20,8 +20,8 @@ public class BcdUtils {
         for (Byte b : bin) {
           int low = b & 0x0F;
           int high = (b >> 4) & 0x0F;
-          sb.append(byteToChar(high));
-          sb.append(byteToChar(low));
+          sb.append(BcdUtils.byteToChar(high));
+          sb.append(BcdUtils.byteToChar(low));
         }
         return sb.toString();
     }
@@ -31,20 +31,20 @@ public class BcdUtils {
         byte bin[] = new byte[standStr.length()/2];
 
         for (int i=0; i<bin.length; i++){
-            bin[i] = (byte) ((charToByte(standStr.charAt(i*2))<<4)+charToByte(standStr.charAt(i*2+1)));
+            bin[i] = (byte) ((BcdUtils.charToByte(standStr.charAt(i*2))<<4)+BcdUtils.charToByte(standStr.charAt(i*2+1)));
         }
         return bin;
     }
 
     public static String byteToString(byte b){
         StringBuffer buff = new StringBuffer(2);
-        buff.append(byteToChar((b >> 4) & 0x0F)).append(byteToChar(b & 0x0F));
+        buff.append(BcdUtils.byteToChar((b >> 4) & 0x0F)).append(BcdUtils.byteToChar(b & 0x0F));
 
         return buff.toString();
     }
 
     public static byte stringToByte(String str){
-        return (byte) (charToByte(str.charAt(0))*0x10+charToByte(str.charAt(1)));
+        return (byte) (BcdUtils.charToByte(str.charAt(0))*0x10+BcdUtils.charToByte(str.charAt(1)));
     }
 
     public static byte bcdToInt(byte bcd){
@@ -176,7 +176,7 @@ public class BcdUtils {
 
     private static int findFirstTokenPosition(String str, int initPos){
         for (int i=initPos; i<str.length(); i++){
-            if (isHexChar(str.charAt(i))) return i;
+            if (BcdUtils.isHexChar(str.charAt(i))) return i;
         }
         return -1;
     }
@@ -184,7 +184,7 @@ public class BcdUtils {
     //返回Token的结束字符位置，initPos是有效的第一个字符位置
     private static int findEndTokenPosition(String str, int initPos){
         for (int i=initPos; (i<initPos+2)&&(i<str.length()); i++){
-           if (!isHexChar(str.charAt(i))) return i-1;
+           if (!BcdUtils.isHexChar(str.charAt(i))) return i-1;
            else if (i==initPos+1) return i;
         }
         return initPos;
