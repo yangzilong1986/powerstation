@@ -74,4 +74,30 @@ public class PmPacketTest {
         assertTrue(TestUtils.byteArrayEquals(expResult, result));
    }
 
+    @Test
+    public void testGetPacket(){
+        byte[] msg = BcdUtils.stringToByteArray("68, 42, 00, 42, 00, 68, 68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 00, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 61, 16");
+        int head = PmPacket.getMsgHeadOffset(msg);
+        assertEquals(head,6);
+        PmPacket pack = new PmPacket();
+        pack.setValue(msg);
+        assertTrue(!pack.getControlCode().getIsUpDirect());
+        assertTrue(pack.getControlCode().getIsOrgniger());
+        assertTrue(!pack.getControlCode().getIsDownDirectFrameCountAvaliable());
+        assertEquals(pack.getControlCode().getFunctionKey(),11);
+        assertEquals(pack.getAddress().getRtua(),"05740009");
+        assertTrue(!pack.getAddress().getIsGoupAddress());
+        assertEquals(pack.getAddress().getMastStationId(),1);
+
+        //instance.setProtocolVersion((byte)2);
+        assertEquals(pack.getAfn(),0x0a);
+        assertTrue(!pack.getSeq().getIsTpvAvalibe());
+        assertTrue(pack.getSeq().getIsFirstFrame());
+        assertTrue(pack.getSeq().getIsFinishFrame());
+        assertTrue(!pack.getSeq().getIsNeedCountersign());
+        assertEquals(pack.getSeq().getSeq(),14);
+        assertTrue(TestUtils.byteArrayEquals(pack.getData(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
+
+    }
+
 }
