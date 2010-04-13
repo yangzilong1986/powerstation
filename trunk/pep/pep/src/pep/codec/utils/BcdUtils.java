@@ -9,6 +9,10 @@ package pep.codec.utils;
  *
  * @author luxiaochung
  */
+
+import java.util.GregorianCalendar;
+import java.util.Date;
+
 public class BcdUtils {
 
     public static String binArrayToString(byte bin[]){
@@ -47,10 +51,100 @@ public class BcdUtils {
         return (byte)((bcd>>4)*10+(bcd &0x0f));
     }
 
+    public static int bcdToInt(byte[] bcds, int beginIndex, int length){
+        int result = 0;
+        int base = 1;
+        for (int i=0; i<length;i++){
+            result += ((bcds[beginIndex+i]>>4)*10+(bcds[beginIndex+i] &0x0f))*base;
+            base *= 100;
+        }
+        return result;
+    }
+
+    public static byte[] intTobcd(int value, int length){
+        byte result[] = new byte[length];
+        for (int i=0; i<length;i++){
+           result[i] = BcdUtils.intToBcd((byte) (value % 100));
+           value = value / 100;
+        }
+        return result;
+    }
+
     public static byte intToBcd(byte decimal){
         return (byte)((decimal / 10)*0x10+(decimal % 10));
     }
 
+    public static Date bcdToDate(byte[] bcdArray, String format){
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        calendar.set(GregorianCalendar.MILLISECOND, 0);
+        calendar.set(GregorianCalendar.SECOND, 0);
+        calendar.set(GregorianCalendar.MINUTE, 0);
+        calendar.set(GregorianCalendar.HOUR_OF_DAY, 0);
+
+        String uformat = format.toUpperCase();
+        int yyyyidx = uformat.indexOf("YYYY");
+        if (yyyyidx!=-1) calendar.set(GregorianCalendar.YEAR, BcdUtils.bcdToInt(bcdArray, yyyyidx/2, 2));
+        else {
+            int yyindex = uformat.indexOf("YY");
+            if (yyindex!=-1) calendar.set(GregorianCalendar.YEAR, 
+                    (calendar.get(GregorianCalendar.YEAR)/100)*100+
+                    BcdUtils.bcdToInt(bcdArray[yyindex/2]));
+        }
+        
+        int mmindex = uformat.indexOf("MM");
+        if (mmindex!=-1) calendar.set(GregorianCalendar.MONTH, BcdUtils.bcdToInt(bcdArray[mmindex/2])-1);
+
+        int ddindex = uformat.indexOf("DD");
+        if (ddindex!=-1) calendar.set(GregorianCalendar.DAY_OF_MONTH, BcdUtils.bcdToInt(bcdArray[ddindex/2]));
+        
+        int hhindex = uformat.indexOf("HH");
+        if (hhindex!=-1) calendar.set(GregorianCalendar.HOUR_OF_DAY, BcdUtils.bcdToInt(bcdArray[hhindex/2]));
+        
+        int miindex = uformat.indexOf("MI");
+        if (miindex!=-1) calendar.set(GregorianCalendar.MINUTE, BcdUtils.bcdToInt(bcdArray[miindex/2]));
+        
+        int ssindex = uformat.indexOf("SS");
+        if (ssindex!=-1) calendar.set(GregorianCalendar.SECOND, BcdUtils.bcdToInt(bcdArray[ssindex/2]));
+        
+        return calendar.getTime();
+    }
+
+    public static byte[] dateToBcd(Date date, String format){
+        byte[] result = new byte[format.length()/2];
+        String uformat = format.toUpperCase();
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        
+        int yyyyidx = uformat.indexOf("YYYY");
+        if (yyyyidx!=-1){
+            byte[] years = BcdUtils.intTobcd(calendar.get(GregorianCalendar.YEAR),2);
+            result[yyyyidx/2] = years[0];
+            result[yyyyidx/2+1] = years[1];
+        }
+        else {
+            int yyindex = uformat.indexOf("YY");
+            if (yyindex!=-1) 
+                result[yyindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.YEAR)%100));
+        }
+        
+        int mmindex = uformat.indexOf("MM");
+        if (mmindex!=-1) result[mmindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.MONTH)+1));
+
+        int ddindex = uformat.indexOf("DD");
+        if (ddindex!=-1) result[ddindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.DAY_OF_MONTH)));
+        
+        int hhindex = uformat.indexOf("HH");
+        if (hhindex!=-1) result[hhindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.HOUR_OF_DAY)));
+        
+        int miindex = uformat.indexOf("MI");
+        if (miindex!=-1) result[miindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.MINUTE)));
+        
+        int ssindex = uformat.indexOf("SS");
+        if (ssindex!=-1) result[ssindex/2] = BcdUtils.intToBcd((byte)(calendar.get(GregorianCalendar.SECOND)));
+
+        return result;
+    }
     private static char byteToChar(int b){
         char ch = (b<0xA)? (char) ('0' + b) : (char) ('A'+b-10);
         return ch;

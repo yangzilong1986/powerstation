@@ -10,6 +10,9 @@ package pep.codec.protocol.gb;
  * @author luxiaochung
  */
 public class ControlCode {
+
+    private byte value;
+
     public ControlCode(){
         super();
     }
@@ -117,6 +120,4 @@ public class ControlCode {
         
         return buff.toString();
     }
-
-    private byte value;
 }
