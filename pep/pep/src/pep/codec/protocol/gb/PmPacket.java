@@ -13,11 +13,10 @@ package pep.codec.protocol.gb;
 import java.nio.ByteBuffer;
 import pep.codec.utils.BcdUtils;
 
-public class PmPacket {
+abstract public class PmPacket {
     private ControlCode controlCode;
     private Address address;
     private Seq seq;
-    private byte protocolVersion;
     private byte afn;
     private byte[] data;
     private EventCountor eventCountor;
@@ -51,15 +50,7 @@ public class PmPacket {
         return this.eventCountor;
     }
 
-    public byte getProtocolVersion(){
-        return protocolVersion;
-    }
-
-    public PmPacket setProtocolVersion(byte version){
-        protocolVersion = version;
-
-        return this;
-    }
+    abstract protected byte getProtocolVersion();
 
     public byte[] getData(){
         return data;
@@ -109,7 +100,7 @@ public class PmPacket {
 
         if (seq.getIsTpvAvalibe()) len += 6;
 
-        int lenfield = (len<<2)+(protocolVersion & 0x0003);
+        int lenfield = (len<<2)+(this.getProtocolVersion() & 0x0003);
 
         byte[] result = new byte[len+8];
         ByteBuffer buff = ByteBuffer.wrap(result); //0
@@ -138,7 +129,7 @@ public class PmPacket {
     }
 
     public PmPacket setValue(byte[] msg){
-        int head = PmPacket.getMsgHeadOffset(msg);
+        int head = PmPacket.getMsgHeadOffset(msg,getProtocolVersion());
         if (head!=-1) {
             int len = (msg[head+1]+msg[head+2]*0x10)>>2;
             controlCode.setValue(msg[head+6]);
@@ -204,10 +195,10 @@ public class PmPacket {
         return buff.toString();
     }
 
-    public static int getMsgHeadOffset(byte[] msg){
+    protected static int getMsgHeadOffset(byte[] msg, byte protocolVersion){
         int headOffset =-1;
 
-        int head = PmPacket.getHeadOffset(msg, 0);
+        int head = PmPacket.getHeadOffset(msg, 0,protocolVersion);
         while (head!=-1){
             int len = (msg[head+1] + msg[head+2]*0x0100)>>2;
 
@@ -218,17 +209,18 @@ public class PmPacket {
                 }
             }
 
-            head = PmPacket.getHeadOffset(msg, head+1);
+            head = PmPacket.getHeadOffset(msg, head+1,protocolVersion);
         }
 
         return headOffset;
     }
 
-    private static int getHeadOffset(byte[] msg, int beginIndex){
+    private static int getHeadOffset(byte[] msg, int beginIndex, byte protocolVersion){
         int head = -1;
 
         for (int i=beginIndex; i<msg.length-(1+2+2+1+1+5+1+1+1+1); i++){//68 L L L L 68 C R R R R R A S C 16 最短
-            if ((msg[i]==0x68) && (msg[i+1]==msg[i+3]) && (msg[i+2]==msg[i+4]) && (msg[i+5]==0x68)){
+            if ((msg[i]==0x68) && (msg[i+1]==msg[i+3]) && (msg[i+2]==msg[i+4]) && 
+                (msg[i+5]==0x68) && ((msg[i+1]&0x03)==protocolVersion)){
                 head = i;
                 break;
             }
