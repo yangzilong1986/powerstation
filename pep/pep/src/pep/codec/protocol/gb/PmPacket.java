@@ -128,8 +128,8 @@ abstract public class PmPacket {
         return result;
     }
 
-    public PmPacket setValue(byte[] msg){
-        int head = PmPacket.getMsgHeadOffset(msg,getProtocolVersion());
+    public PmPacket setValue(byte[] msg, int firstIndex){
+        int head = PmPacket.getMsgHeadOffset(msg,getProtocolVersion(),firstIndex);
         if (head!=-1) {
             int len = (msg[head+1]+msg[head+2]*0x10)>>2;
             controlCode.setValue(msg[head+6]);
@@ -195,10 +195,10 @@ abstract public class PmPacket {
         return buff.toString();
     }
 
-    protected static int getMsgHeadOffset(byte[] msg, byte protocolVersion){
+    protected static int getMsgHeadOffset(byte[] msg, byte protocolVersion, int firstIndex){
         int headOffset =-1;
 
-        int head = PmPacket.getHeadOffset(msg, 0,protocolVersion);
+        int head = PmPacket.getHeadOffset(msg,firstIndex,protocolVersion);
         while (head!=-1){
             int len = (msg[head+1] + msg[head+2]*0x0100)>>2;
 
@@ -208,8 +208,8 @@ abstract public class PmPacket {
                     break;
                 }
             }
-
-            head = PmPacket.getHeadOffset(msg, head+1,protocolVersion);
+            firstIndex++;
+            head = PmPacket.getHeadOffset(msg,firstIndex,protocolVersion);
         }
 
         return headOffset;

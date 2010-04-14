@@ -17,7 +17,7 @@ public class PmPacket376 extends PmPacket {
         return PmPacket376.protocolVersion;
     }
     
-    public static int getMsgHeadOffset(byte[] msg){
-        return PmPacket.getMsgHeadOffset(msg, PmPacket376.protocolVersion);
+    public static int getMsgHeadOffset(byte[] msg, int firstIndex){
+        return PmPacket.getMsgHeadOffset(msg, PmPacket376.protocolVersion, firstIndex);
     }
 }

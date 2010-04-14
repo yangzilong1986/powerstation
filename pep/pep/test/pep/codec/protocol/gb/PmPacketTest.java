@@ -63,10 +63,10 @@ public class PmPacketTest {
     @Test
     public void testGetPacket(){
         byte[] msg = BcdUtils.stringToByteArray("68, 42, 00, 42, 00, 68, 68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 00, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 61, 16");
-        int head = PmPacket376.getMsgHeadOffset(msg);
+        int head = PmPacket376.getMsgHeadOffset(msg,0);
         assertEquals(head,6);
         PmPacket376 pack = new PmPacket376();
-        pack.setValue(msg);
+        pack.setValue(msg,0);
         assertTrue(!pack.getControlCode().getIsUpDirect());
         assertTrue(pack.getControlCode().getIsOrgniger());
         assertTrue(!pack.getControlCode().getIsDownDirectFrameCountAvaliable());
