@@ -1,13 +1,12 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javacommon.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
-import javacommon.xsqlbuilder.safesql.EscapeBackslashAndSingleQuotesSafeSqlProcesser;
-import javacommon.xsqlbuilder.safesql.EscapeSingleQuotesSafeSqlProcesser;
-
 import org.hibernate.dialect.Dialect;
+import org.pssframework.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
+import org.pssframework.xsqlbuilder.safesql.EscapeBackslashAndSingleQuotesSafeSqlProcesser;
+import org.pssframework.xsqlbuilder.safesql.EscapeSingleQuotesSafeSqlProcesser;
 /**
  * 工厂方法,提供不同数据库的SafeSqlProcesser实例生成工厂
  * @author badqiu

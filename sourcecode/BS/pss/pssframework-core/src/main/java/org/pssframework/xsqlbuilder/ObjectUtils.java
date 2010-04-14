@@ -1,8 +1,8 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 
 import java.util.Map;
 
-import javacommon.xsqlbuilder.MapAndObject.FastPropertyUtils;
+import org.pssframework.xsqlbuilder.MapAndObject.FastPropertyUtils;
 
 
 class ObjectUtils {
