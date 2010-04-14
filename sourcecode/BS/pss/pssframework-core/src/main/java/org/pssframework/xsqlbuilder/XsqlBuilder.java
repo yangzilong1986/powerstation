@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 PSS Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     PSS Corporation - initial API and implementation
+ *******************************************************************************/
 package org.pssframework.xsqlbuilder;
 
 import java.lang.reflect.InvocationTargetException;
@@ -26,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 	<br/>
 	
 	Map filters = new HashMap();
-	filters.put("username", "badqiu");
+	filters.put("username", "PPT");
 	filters.put("age", "12");
 	filters.put("sex", "");
 	
@@ -42,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
 	<br/>
 	Map acceptedFilters = result.getAcceptedFilters();
 	会等于:
-	{username=badqiu}
+	{username=PPT}
 	
 	<br/>
 	相关符号介绍:
@@ -57,7 +67,7 @@ import org.apache.commons.logging.LogFactory;
  * 将会将Map filters中key=age的值转换为int类型
  * </pre>
  * 
- * @author badqiu
+ * @author PSS
  *
  */
 public class XsqlBuilder {
