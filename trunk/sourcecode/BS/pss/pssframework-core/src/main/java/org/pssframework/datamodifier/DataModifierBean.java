@@ -1,24 +1,10 @@
-package javacommon.datamodifier;
+package org.pssframework.datamodifier;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javacommon.datamodifier.modifier.BigDecimalDataModifier;
-import javacommon.datamodifier.modifier.BigIntegerDataModifier;
-import javacommon.datamodifier.modifier.BooleanDataModifier;
-import javacommon.datamodifier.modifier.ByteDataModifier;
-import javacommon.datamodifier.modifier.DateDataModifier;
-import javacommon.datamodifier.modifier.DefaultDataModifier;
-import javacommon.datamodifier.modifier.DoubleDataModifier;
-import javacommon.datamodifier.modifier.FloatDataModifier;
-import javacommon.datamodifier.modifier.IntegerDataModifier;
-import javacommon.datamodifier.modifier.LongDataModifier;
-import javacommon.datamodifier.modifier.ShortDataModifier;
-import javacommon.datamodifier.modifier.SqlDateDataModifier;
-import javacommon.datamodifier.modifier.SqlTimeDataModifier;
-import javacommon.datamodifier.modifier.StringDataModifier;
-import javacommon.datamodifier.modifier.TimestampDataModifier;
+
 
 /**
  * 数据类型修饰工具类,可以将一种类型的数据修饰为另一种类型的数据
@@ -26,7 +12,7 @@ import javacommon.datamodifier.modifier.TimestampDataModifier;
  * 例1：将String转为Integer, 表达式为var?int
  * 例2：使用多个修饰，表达式为var?string?int
  * 例3: 为修饰传递参数,表达式为var?date(yyyy-MM-dd)
- * @author badqiu
+ * @author PSS
  */
 public class DataModifierBean {
 	
