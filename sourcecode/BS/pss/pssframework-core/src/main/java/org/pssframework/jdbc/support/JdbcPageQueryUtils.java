@@ -13,6 +13,7 @@ import cn.org.rapid_framework.jdbc.support.OffsetLimitResultSetExtractor;
 
 public class JdbcPageQueryUtils {
 
+	@SuppressWarnings("unchecked")
 	public static List pageQuery(NamedParameterJdbcTemplate jdbcTemplate,Dialect dialect,SqlOffsetLimit sqlOffsetLimit, final Map paramMap,final RowMapper rowMapper) {
 		sqlOffsetLimit = toLimitSql(dialect, sqlOffsetLimit, paramMap);
 		return (List)jdbcTemplate.query(sqlOffsetLimit.sql, paramMap, new OffsetLimitResultSetExtractor(sqlOffsetLimit.offset,sqlOffsetLimit.limit,rowMapper));
