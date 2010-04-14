@@ -21,7 +21,10 @@ import org.springframework.util.MethodInvoker;
  * 用于jmx 断开连接后的自动重连的拦截器
  *
  */
+@SuppressWarnings("unchecked")
 public class MBeanServerConnectionInterceptor implements MethodInterceptor,FactoryBean{
+	
+	
 	private static Log log = LogFactory.getLog(MBeanServerConnectionInterceptor.class);
 	
 	private MBeanServerConnection connection;
