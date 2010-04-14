@@ -1,4 +1,4 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

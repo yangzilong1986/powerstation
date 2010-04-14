@@ -1,4 +1,4 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 /**
  * sql字符串安全处理接口,防止sql注入攻击
  * @author badqiu

@@ -1,6 +1,6 @@
-package javacommon.xsqlbuilder.safesql;
+package org.pssframework.xsqlbuilder.safesql;
 
-import javacommon.xsqlbuilder.SafeSqlProcesser;
+import org.pssframework.xsqlbuilder.SafeSqlProcesser;
 /**
  * 过滤单个单引号为双引号的SafeSqlFilter<p>
  * 适用数据库(MS SqlServer,Oracle,DB2)

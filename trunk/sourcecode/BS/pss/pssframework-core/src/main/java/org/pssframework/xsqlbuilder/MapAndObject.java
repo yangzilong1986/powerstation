@@ -1,4 +1,4 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 
 import java.awt.Image;
 import java.beans.BeanDescriptor;

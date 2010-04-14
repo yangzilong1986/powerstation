@@ -1,4 +1,4 @@
-package javacommon.xsqlbuilder;
+package org.pssframework.xsqlbuilder;
 
 /**
  * 支持Ibatis类似的语法
