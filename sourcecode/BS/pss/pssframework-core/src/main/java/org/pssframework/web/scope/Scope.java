@@ -21,7 +21,7 @@ import cn.org.rapid_framework.web.util.CookieUtils;
 /**
  *
  * @author play-framework
- * @author badqiu
+ * @author PSS
  *
  */
 // TODO 完善scope Flash
