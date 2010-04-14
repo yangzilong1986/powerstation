@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
  * /userinfo/{id}   DELETE  => delete()  
  * /userinfo        DELETE  => batchDelete()  
  * </pre>
- * @author badqiu
+ * @author PSS
  * @param <T> 实体对象,如Blog
  */
 public class BaseRestSpringController<Entity,PK> extends BaseSpringController{
