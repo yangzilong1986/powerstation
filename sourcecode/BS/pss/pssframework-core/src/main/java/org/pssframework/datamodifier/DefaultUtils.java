@@ -1,10 +1,8 @@
-package javacommon.datamodifier;
+package org.pssframework.datamodifier;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-/**
- * @author badqiu
- */
+
 public class DefaultUtils {
 	public static DateFormat defaultDateFormat(String dateFormat,String defaultDateFormat) {
 		DateFormat df = new SimpleDateFormat(defaultString(dateFormat, defaultDateFormat));

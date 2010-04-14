@@ -1,7 +1,7 @@
-package javacommon.datamodifier;
+package org.pssframework.datamodifier;
 /**
  * 
- * @author badqiu
+ * @author PSS
  *
  */
 public class DataModifierException extends RuntimeException{

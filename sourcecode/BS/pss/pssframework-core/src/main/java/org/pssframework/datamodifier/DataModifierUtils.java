@@ -1,21 +1,21 @@
-package javacommon.datamodifier;
+package org.pssframework.datamodifier;
 import java.util.Map;
 
-import javacommon.datamodifier.modifier.BigDecimalDataModifier;
-import javacommon.datamodifier.modifier.BigIntegerDataModifier;
-import javacommon.datamodifier.modifier.BooleanDataModifier;
-import javacommon.datamodifier.modifier.ByteDataModifier;
-import javacommon.datamodifier.modifier.DateDataModifier;
-import javacommon.datamodifier.modifier.DefaultDataModifier;
-import javacommon.datamodifier.modifier.DoubleDataModifier;
-import javacommon.datamodifier.modifier.FloatDataModifier;
-import javacommon.datamodifier.modifier.IntegerDataModifier;
-import javacommon.datamodifier.modifier.LongDataModifier;
-import javacommon.datamodifier.modifier.ShortDataModifier;
-import javacommon.datamodifier.modifier.SqlDateDataModifier;
-import javacommon.datamodifier.modifier.SqlTimeDataModifier;
-import javacommon.datamodifier.modifier.StringDataModifier;
-import javacommon.datamodifier.modifier.TimestampDataModifier;
+import org.pssframework.datamodifier.modifier.BigDecimalDataModifier;
+import org.pssframework.datamodifier.modifier.BigIntegerDataModifier;
+import org.pssframework.datamodifier.modifier.BooleanDataModifier;
+import org.pssframework.datamodifier.modifier.ByteDataModifier;
+import org.pssframework.datamodifier.modifier.DateDataModifier;
+import org.pssframework.datamodifier.modifier.DefaultDataModifier;
+import org.pssframework.datamodifier.modifier.DoubleDataModifier;
+import org.pssframework.datamodifier.modifier.FloatDataModifier;
+import org.pssframework.datamodifier.modifier.IntegerDataModifier;
+import org.pssframework.datamodifier.modifier.LongDataModifier;
+import org.pssframework.datamodifier.modifier.ShortDataModifier;
+import org.pssframework.datamodifier.modifier.SqlDateDataModifier;
+import org.pssframework.datamodifier.modifier.SqlTimeDataModifier;
+import org.pssframework.datamodifier.modifier.StringDataModifier;
+import org.pssframework.datamodifier.modifier.TimestampDataModifier;
 
 /**
  * 工具类,将DataModifierBean的相关方法static化,并注册默认的修饰符
@@ -36,7 +36,7 @@ import javacommon.datamodifier.modifier.TimestampDataModifier;
 		sqltime = new SqlTimeDataModifier()
 		timestamp = new TimestampDataModifier()
  * </pre>
- * @author badqiu
+ * @author PSS
  *
  */
 public class DataModifierUtils {
