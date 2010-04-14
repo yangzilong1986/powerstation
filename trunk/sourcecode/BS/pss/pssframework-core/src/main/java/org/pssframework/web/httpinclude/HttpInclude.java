@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * $httpInclude.include("/head.htm");
  * </pre>
  * 
- * @author badqiu
+ * @author PSS
  *
  */
 public class HttpInclude {
