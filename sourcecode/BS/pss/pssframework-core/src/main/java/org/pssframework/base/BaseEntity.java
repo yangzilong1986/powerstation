@@ -3,7 +3,7 @@ package org.pssframework.base;
 import cn.org.rapid_framework.util.DateConvertUtils;
 
 /**
- * @author badqiu
+ * @author PSS
  */
 public class BaseEntity implements java.io.Serializable {
 

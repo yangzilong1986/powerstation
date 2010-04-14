@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @author badqiu
+ * @author PSS
  */
 @Transactional
 public abstract class BaseManager<E, PK extends Serializable> {

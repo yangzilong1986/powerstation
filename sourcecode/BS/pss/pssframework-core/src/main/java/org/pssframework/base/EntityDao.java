@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @author badqiu
+ * @author PSS
  */
 public interface EntityDao<E, PK extends Serializable> {
 
