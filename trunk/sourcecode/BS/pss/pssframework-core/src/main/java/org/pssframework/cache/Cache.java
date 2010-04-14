@@ -124,6 +124,7 @@ public abstract class Cache {
      */
     public static void replace(String key, Object value) {
         checkSerializable(value);
+        
         cacheImpl.replace(key, value, parseDuration(null));
     }
 
