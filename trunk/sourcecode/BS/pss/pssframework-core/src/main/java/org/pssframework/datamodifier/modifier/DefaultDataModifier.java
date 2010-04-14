@@ -15,7 +15,7 @@ import org.pssframework.datamodifier.DataModifier;
 import org.pssframework.datamodifier.DefaultUtils;
 
 /**
- * @author badqiu
+ * @author PSS
  */
 public class DefaultDataModifier implements DataModifier {
 	private static final String DEFAULT_STRING = "";
