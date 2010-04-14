@@ -1,17 +1,16 @@
 package org.pssframework.dao;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.pssframework.base.EntityDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.util.Assert;
 
@@ -19,12 +18,13 @@ import cn.org.rapid_framework.beanutils.BeanUtils;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
-/**
- * @author badqiu
- * @version 1.0
- */
+
 public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSupport implements EntityDao<E,PK> {
-    protected final Log log = LogFactory.getLog(getClass());
+   
+	/**
+	 * log
+	 */
+	protected final Logger log = LoggerFactory.getLogger(getClass());
     
     private SqlSessionFactory sqlSessionFactory;
     private SqlSessionTemplate sqlSessionTemplate;
@@ -93,6 +93,7 @@ public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSuppo
 		return getEntityClass().getSimpleName() +".count";
 	}
     
+	@SuppressWarnings("unchecked")
 	protected Page pageQuery(String statementName, PageRequest pageRequest) {
 		
 		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(),pageRequest.getFilters());
@@ -122,6 +123,7 @@ public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSuppo
 		return page;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List findAll() {
 		throw new UnsupportedOperationException();
 	}

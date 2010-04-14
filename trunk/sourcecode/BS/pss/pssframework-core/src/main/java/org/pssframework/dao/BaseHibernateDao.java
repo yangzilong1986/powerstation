@@ -20,8 +20,6 @@ import javacommon.xsqlbuilder.XsqlBuilder.XsqlFilterResult;
 import javacommon.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -32,6 +30,8 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.impl.SessionFactoryImpl;
 import org.pssframework.base.EntityDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -44,13 +44,17 @@ import cn.org.rapid_framework.page.PageRequest;
 import cn.org.rapid_framework.util.CollectionHelper;
 
 /**
- * @author badqiu
+ * 
+ * @author Baocj
+ *
+ * @param <E>
+ * @param <PK>
  */
 public abstract class BaseHibernateDao<E,PK extends Serializable> extends HibernateDaoSupport implements EntityDao<E,PK>{
 	/**
 	 * Logger for subclass
 	 */
-	protected Log log = LogFactory.getLog(getClass());
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	
 	public long queryForLong(final String queryString) {
 		return queryForLong(queryString,new Object[]{});
@@ -71,6 +75,7 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 	 * @param pageRequest
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Page findAll(final PageRequest pageRequest) {
 		return (Page)getHibernateTemplate().executeFind(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
@@ -120,6 +125,7 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 		return builder;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Page pageQuery(final PageRequest pageRequest, final XsqlFilterResult queryXsqlResult, final XsqlFilterResult countQueryXsqlResult) {
 		return (Page)getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
@@ -132,6 +138,7 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 		});
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Object executeQueryForPage(final PageRequest pageRequest,Query query, Query countQuery) {
 		Page page = new Page(pageRequest,((Number)countQuery.uniqueResult()).intValue());
 		if(page.getTotalCount() == 0) {
