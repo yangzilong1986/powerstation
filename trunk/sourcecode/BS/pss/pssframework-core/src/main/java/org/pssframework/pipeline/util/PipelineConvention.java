@@ -13,7 +13,7 @@ import flex.messaging.io.ArrayList;
  * <br/>
  * 如path = /user/blog/index.flt </br>
  * 将生成这样一个管道列表: /user/blog/_layout.flt | /user/_layout.flt | /_layout.flt <br/>
- * @author badqiu
+ * @author PSS
  *
  */
 public class PipelineConvention {
