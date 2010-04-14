@@ -42,7 +42,7 @@ import cn.org.rapid_framework.util.ObjectUtils;
 import cn.org.rapid_framework.util.SqlRemoveUtils;
 /**
  * Spring的JDBC基类
- * @author badqiu
+ * @author PSS
  *
  */
 public abstract class BaseSpringJdbcDao<E,PK extends Serializable> extends JdbcDaoSupport implements EntityDao<E,PK>{
