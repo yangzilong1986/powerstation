@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 PSS Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     PSS Corporation - initial API and implementation
+ *******************************************************************************/
 package org.pssframework.util;
 
 import java.math.BigDecimal;
@@ -24,7 +34,7 @@ import cn.org.rapid_framework.beanutils.converter.StringConverter;
 /**
  * 用于注册Converter,可以修改此处代码以添加新的Converter
  * 用于Bean.copyProperties()方法中的class类型转换;
- * @author badqiu
+ * @author PSS
  */
 public class ConvertRegisterHelper {
 

@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2010 PSS Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     PSS Corporation - initial API and implementation
+ *******************************************************************************/
 package org.pssframework.util;
 
 import java.io.File;
@@ -25,7 +35,7 @@ import org.springframework.util.ResourceUtils;
 
 /**
  * 数据库测试有用的类,用于装载Dbunit测试数据,恢复测试数据
- * @author badqiu1
+ * @author PSS1
  *
  */
 public class DBUnitUtils {
