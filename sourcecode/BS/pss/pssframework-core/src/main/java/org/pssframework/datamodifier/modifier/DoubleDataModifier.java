@@ -14,7 +14,7 @@ package org.pssframework.datamodifier.modifier;
 import org.pssframework.datamodifier.DataModifier;
 
 /**
- * @author badqiu
+ * @author PSS
  */
 public class DoubleDataModifier implements DataModifier{
 	public Object modify(Object value, String modifierArgument) {
