@@ -17,11 +17,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javacommon.datamodifier.DataModifierUtils;
-import javacommon.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pssframework.datamodifier.DataModifierUtils;
+import org.pssframework.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
 
 /**
  * 用于动态构造sql语句,与SafeSqlProcesser集成提供防止sql注入攻击,与DataModifier集成完成数据类型的转换
