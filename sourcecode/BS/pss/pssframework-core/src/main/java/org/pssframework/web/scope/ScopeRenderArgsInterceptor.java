@@ -13,11 +13,9 @@ package org.pssframework.web.scope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.pssframework.web.scope.Scope.RenderArgs;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import cn.org.rapid_framework.web.scope.Scope;
-import cn.org.rapid_framework.web.scope.Scope.RenderArgs;
 
 public class ScopeRenderArgsInterceptor extends HandlerInterceptorAdapter{
 
