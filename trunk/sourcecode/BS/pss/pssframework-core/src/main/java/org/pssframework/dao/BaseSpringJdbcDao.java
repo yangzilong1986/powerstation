@@ -16,14 +16,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javacommon.xsqlbuilder.XsqlBuilder;
-import javacommon.xsqlbuilder.XsqlBuilder.XsqlFilterResult;
-import javacommon.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pssframework.base.EntityDao;
+import org.pssframework.xsqlbuilder.XsqlBuilder;
+import org.pssframework.xsqlbuilder.XsqlBuilder.XsqlFilterResult;
+import org.pssframework.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
