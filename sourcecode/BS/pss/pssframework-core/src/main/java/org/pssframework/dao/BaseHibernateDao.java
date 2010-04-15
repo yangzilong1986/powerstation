@@ -23,12 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javacommon.xsqlbuilder.SafeSqlProcesser;
-import javacommon.xsqlbuilder.SafeSqlProcesserFactory;
-import javacommon.xsqlbuilder.XsqlBuilder;
-import javacommon.xsqlbuilder.XsqlBuilder.XsqlFilterResult;
-import javacommon.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
-
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -40,6 +34,11 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.impl.SessionFactoryImpl;
 import org.pssframework.base.EntityDao;
+import org.pssframework.xsqlbuilder.SafeSqlProcesser;
+import org.pssframework.xsqlbuilder.SafeSqlProcesserFactory;
+import org.pssframework.xsqlbuilder.XsqlBuilder;
+import org.pssframework.xsqlbuilder.XsqlBuilder.XsqlFilterResult;
+import org.pssframework.xsqlbuilder.safesql.DirectReturnSafeSqlProcesser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.ObjectRetrievalFailureException;
