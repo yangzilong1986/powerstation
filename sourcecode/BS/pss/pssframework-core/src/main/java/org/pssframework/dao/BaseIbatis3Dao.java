@@ -38,6 +38,7 @@ public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSuppo
     
     private SqlSessionFactory sqlSessionFactory;
     private SqlSessionTemplate sqlSessionTemplate;
+    
 	protected void checkDaoConfig() throws IllegalArgumentException {
 		Assert.notNull("sqlSessionFactory must be not null");
 	}
@@ -51,7 +52,7 @@ public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSuppo
 		this.sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
 	}
 
-	public abstract Class getEntityClass();
+	public abstract Class<?> getEntityClass();
     
     public SqlSessionTemplate getSqlSessionTemplate() {
     	return sqlSessionTemplate;
@@ -172,8 +173,8 @@ public abstract class BaseIbatis3Dao<E,PK extends Serializable> extends DaoSuppo
 			});
 		}
 		
-		public List selectList(final String statement,final Object parameter,final int offset,final int limit) {
-			return (List)execute(new SqlSessionCallback() {
+		public List<?> selectList(final String statement,final Object parameter,final int offset,final int limit) {
+			return (List<?>)execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
 					return session.selectList(statement, parameter, new RowBounds(offset,limit));
 				}
