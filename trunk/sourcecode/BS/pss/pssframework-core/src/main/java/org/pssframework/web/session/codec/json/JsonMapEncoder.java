@@ -17,8 +17,7 @@ import java.util.Map;
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
-
-import cn.org.rapid_framework.web.session.codec.MapEncoder;
+import org.pssframework.web.session.codec.MapEncoder;
 
 public class JsonMapEncoder implements MapEncoder{
 
