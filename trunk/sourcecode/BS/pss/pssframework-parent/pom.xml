@@ -250,7 +250,37 @@
         <artifactId>spring-webmvc</artifactId>
         <version>${spring.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!-- amf -->
+      <dependency>
+        <groupId>amf</groupId>
+        <artifactId>flex-messaging-common</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>amf</groupId>
+        <artifactId>flex-messaging-core</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>amf</groupId>
+        <artifactId>flex-messaging-opt</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>amf</groupId>
+        <artifactId>flex-messaging-proxy</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>amf</groupId>
+        <artifactId>flex-messaging-remoting</artifactId>
+        <version>1.0</version>
+      </dependency>
       <!-- json -->
       <dependency>
         <groupId>org.codehaus.jackson</groupId>
@@ -298,6 +328,19 @@
         <artifactId>urlrewritefilter</artifactId>
         <version>3.1.0</version>
       </dependency>
+
+      <!-- extremecomponents -->
+      <dependency>
+        <groupId>org.extremecomponents</groupId>
+        <artifactId>extremecomponents</artifactId>
+        <version>1.0.1-M4</version>
+      </dependency>
+      <dependency>
+        <groupId>net.spy.memcached</groupId>
+        <artifactId>memcached</artifactId>
+        <version>2.3</version>
+      </dependency>
+
       <!-- web end -->
 
       <!-- webservice begin -->
