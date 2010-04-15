@@ -5,8 +5,6 @@ import org.springframework.stereotype.Component;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
-
-@SuppressWarnings("unchecked")
 @Component
 public class UserInfoDao extends BaseIbatis3Dao<UserInfo,java.lang.Long>{
 
