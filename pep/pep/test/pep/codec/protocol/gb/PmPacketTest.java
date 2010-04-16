@@ -45,7 +45,7 @@ public class PmPacketTest {
     @Test
     public void testGetValue() {
         System.out.println("getValue");
-        PmPacket376 instance = new PmPacket376();
+        PmPacket instance = new PmPacket376();
         byte[] expResult = BcdUtils.stringToByteArray("68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 00, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 61, 16");
         instance.getControlCode().setIsUpDirect(false).setIsOrgniger(true).setIsDownDirectFrameCountAvaliable(false);
         instance.getControlCode().setFunctionKey((byte)11);
@@ -66,7 +66,7 @@ public class PmPacketTest {
                 "68, 42, 00, 42, 00, 68, 68, 42, 00, 42, 00, 68, 4B, 74, 05, 09, 01, 02, 0A, 6E, 00, 00, 02, 01, 01, 00, 16, 00, 62, 16");
         int head = PmPacket376.getMsgHeadOffset(msg,0);
         assertEquals(head,6);
-        PmPacket376 pack = new PmPacket376();
+        PmPacket pack = new PmPacket376();
         pack.setValue(msg,0);
         assertTrue(!pack.getControlCode().getIsUpDirect());
         assertTrue(pack.getControlCode().getIsOrgniger());
@@ -83,7 +83,7 @@ public class PmPacketTest {
         assertEquals(pack.getSeq().getSeq(),14);
         assertTrue(TestUtils.byteArrayEquals(pack.getData(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
 
-        PmPacket376 pack2 = new PmPacket376();
+        PmPacket pack2 = new PmPacket376();
         pack2.setValue(msg, head+pack.length());
         assertTrue(!pack2.getControlCode().getIsUpDirect());
         assertTrue(pack2.getControlCode().getIsOrgniger());

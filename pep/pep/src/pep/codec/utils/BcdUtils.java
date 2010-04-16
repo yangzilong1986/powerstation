@@ -145,6 +145,19 @@ public class BcdUtils {
 
         return result;
     }
+
+    public static int bitSetOfByte(byte b){
+        if (b==1) return 1;
+        else if (b==2) return 2;
+        else if (b==4) return 3;
+        else if (b==8) return 4;
+        else if (b==0x10) return 5;
+        else if (b==0x20) return 6;
+        else if (b==0x40) return 7;
+        else if (b==0x80) return 8;
+        else throw  new IllegalArgumentException();
+    }
+
     private static char byteToChar(int b){
         char ch = (b<0xA)? (char) ('0' + b) : (char) ('A'+b-10);
         return ch;
