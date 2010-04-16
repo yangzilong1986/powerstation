@@ -40,7 +40,7 @@ public class PmPacket376DT {
     public PmPacket376DT setFn(int fn){
         if (fn>0){
             value[0] = (byte)(1 << ((fn-1)%8));
-            value[1] = (byte)(fn/8 +1);
+            value[1] = (byte)(fn/8);
         }
         else throw  new IllegalArgumentException();
         return this;
@@ -56,5 +56,4 @@ public class PmPacket376DT {
         buff.append("fn=").append(this.getFn());
         return buff.toString();
     }
-
 }

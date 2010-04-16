@@ -7,24 +7,23 @@ package pep.mina.protocolcodec.gb;
 
 import java.util.Map;
 import java.util.TreeMap;
-import org.apache.mina.core.session.IoSession;
 
 /**
  *
  * @author luxiaochung
  */
 public class RtuMap {
-    private Map<String,IoSession> rtuSessionMap;
+    private Map<String,RtuCommunicationInfo> rtuSessionMap;
 
     public RtuMap(){
-        rtuSessionMap = new TreeMap<String,IoSession> ();
+        rtuSessionMap = new TreeMap<String,RtuCommunicationInfo> ();
     }
 
-    public synchronized void putRtuSession(String rtua, IoSession session){
-        rtuSessionMap.put(rtua, session);
+    public synchronized void putRtuSession(String rtua, RtuCommunicationInfo rtuInfo){
+        rtuSessionMap.put(rtua, rtuInfo);
     }
 
-    public synchronized IoSession getRtuSession(String rtua){
+    public synchronized RtuCommunicationInfo getRtuSession(String rtua){
         return rtuSessionMap.get(rtua);
     }
 
