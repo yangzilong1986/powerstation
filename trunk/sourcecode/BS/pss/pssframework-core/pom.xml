@@ -71,6 +71,28 @@
       <artifactId>spring-webmvc</artifactId>
     </dependency>
 
+    <!-- amf -->
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-opt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-proxy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>amf</groupId>
+      <artifactId>flex-messaging-remoting</artifactId>
+    </dependency>
+
     <!-- json -->
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
@@ -138,6 +160,10 @@
       <artifactId>commons-beanutils</artifactId>
     </dependency>
     <!-- utils end -->
+    <dependency>
+      <groupId>org.extremecomponents</groupId>
+      <artifactId>extremecomponents</artifactId>
+    </dependency>
 
     <!-- testing begin -->
     <dependency>
