@@ -21,12 +21,19 @@ public class PmPacketData{
         dataBuff.setAutoExpand(true);
     }
 
+    /**
+     * 清除原来的数据
+     */
     public PmPacketData clear(){
         dataBuff.clear();
         dataBuff.limit(dataBuff.position());
         return this;
     }
 
+    /**
+     * 回绕到开头，当一系列put或setValue后要读取时需要回绕到开头
+     * @return
+     */
     public PmPacketData rewind(){
         dataBuff.rewind();
         return this;
