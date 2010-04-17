@@ -11,6 +11,7 @@ package pep.codec.protocol.gb;
  */
 
 import java.nio.ByteBuffer;
+//import org.apache.mina.core.buffer.IoBuffer;
 import pep.codec.utils.BcdUtils;
 
 abstract public class PmPacket {
@@ -18,7 +19,7 @@ abstract public class PmPacket {
     private Address address;
     private Seq seq;
     private byte afn;
-    private byte[] data;
+    private PmPacketData dataBuff;
     private EventCountor eventCountor;
     private Authorize authorize;
     private TimeProtectValue tpv;
@@ -29,7 +30,7 @@ abstract public class PmPacket {
         address = new Address();
         seq = new Seq();
         eventCountor = new EventCountor();
-        data = new byte[0];
+        dataBuff = new PmPacketData();
         authorize = new Authorize();
         tpv = new TimeProtectValue();
     }
@@ -52,8 +53,12 @@ abstract public class PmPacket {
 
     abstract protected byte getProtocolVersion();
 
+    public PmPacketData getDataBuffer(){
+        return dataBuff;
+    }
+
     public byte[] getData(){
-        return data;
+        return dataBuff.array();
     }
 
     public byte getAfn(){
@@ -67,7 +72,7 @@ abstract public class PmPacket {
     }
 
     public PmPacket setData(byte[] data){
-        this.data = data;
+        dataBuff.wrap(data);
 
         return this;
     }
@@ -92,6 +97,7 @@ abstract public class PmPacket {
     }
     
     public byte[] getValue(){
+        byte[] data = dataBuff.array();
         int len = 1+5+2+data.length; //controlcode,address,afn,seq
         if ((!controlCode.getIsUpDirect())&&(PmPacket.isNeedAuthorize(afn)))
             len = len+authorize.getValue().length;
@@ -142,8 +148,8 @@ abstract public class PmPacket {
             if ((!controlCode.getIsUpDirect())&&(PmPacket.isNeedAuthorize(afn)))
                 len -= Authorize.length();
             if (seq.getIsTpvAvalibe()) len -= 6;
-            data = new byte[len];
-            for (int i=0; i<len; i++) data[i] = msg[head+14+i];
+            dataBuff.allocate(len);
+            for (int i=0; i<len; i++) dataBuff.put(msg[head+14+i]);
 
             if (controlCode.getIsUpDirect()&&controlCode.getUpDirectIsAppealCall())
                 eventCountor.setValue(msg, 14+len);
@@ -185,7 +191,7 @@ abstract public class PmPacket {
         StringBuffer buff = new StringBuffer();
         buff.append("控制域: ").append(controlCode.toString()).append("\n");
         buff.append("地址域: ").append(address.toString()).append("\n");
-        buff.append("数据域: ").append(BcdUtils.binArrayToString(data)).append("\n");
+        buff.append("数据域: ").append(dataBuff.toString()).append("\n");
         if ((!controlCode.getIsUpDirect()) && PmPacket.isNeedAuthorize(afn))
             buff.append("认证信息: ").append(authorize.toString()).append("\n");
         if (controlCode.getIsUpDirect()&&(seq.getIsNeedCountersign()))

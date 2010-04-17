@@ -11,7 +11,7 @@ import pep.codec.utils.BcdUtils;
  *
  * @author luxiaochung
  */
-public class PmPacket376DT {
+public class PmPacket376DT implements PmPacketDT {
     private byte[] value;
 
     public PmPacket376DT(byte[] value){

@@ -9,7 +9,7 @@ import pep.codec.utils.BcdUtils;
 /**
  * @author luxiaochung
  */
-public class PmPacket376DA {
+public class PmPacket376DA implements PmPacketDA{
     private byte[] value;
     
     public PmPacket376DA(byte[] value){
