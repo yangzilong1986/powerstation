@@ -11,8 +11,6 @@ package pep.codec.protocol.gb;
  */
 
 import java.nio.ByteBuffer;
-//import org.apache.mina.core.buffer.IoBuffer;
-import pep.codec.utils.BcdUtils;
 
 abstract public class PmPacket {
     private ControlCode controlCode;
