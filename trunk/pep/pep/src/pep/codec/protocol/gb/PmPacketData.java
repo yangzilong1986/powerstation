@@ -1,6 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * 注意用法，put和setValue会将当前位置后移，而读取get总是从当前位置开始的。
+ * rewind方法，将当前位置设置到最前面。
+ * getValue方法返回整个序列，而不是从开始到当前位置的值。
  */
 
 package pep.codec.protocol.gb;
@@ -31,7 +32,7 @@ public class PmPacketData{
     }
 
     /**
-     * 回绕到开头，当一系列put或setValue后要读取时需要回绕到开头
+     * 回绕到开头，当一系列put或setValue后要从头读取时需要回绕到开头
      * @return
      */
     public PmPacketData rewind(){
