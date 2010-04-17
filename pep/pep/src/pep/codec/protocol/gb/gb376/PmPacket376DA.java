@@ -2,8 +2,9 @@
  * 376里的DA没有成组出现的地方，每个DA只能表示一个测量点
  */
 
-package pep.codec.protocol.gb;
+package pep.codec.protocol.gb.gb376;
 
+import pep.codec.protocol.gb.PmPacketDA;
 import pep.codec.utils.BcdUtils;
 
 /**

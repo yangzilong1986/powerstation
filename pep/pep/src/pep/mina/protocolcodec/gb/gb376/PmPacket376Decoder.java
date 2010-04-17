@@ -3,13 +3,13 @@
  * and open the template in the editor.
  */
 
-package pep.mina.protocolcodec.gb;
+package pep.mina.protocolcodec.gb.gb376;
 
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
-import pep.codec.protocol.gb.PmPacket376;
+import pep.codec.protocol.gb.gb376.PmPacket376;
 
 /**
  *
