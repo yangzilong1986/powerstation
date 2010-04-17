@@ -100,5 +100,4 @@ public class PmPacketTest {
         assertEquals(pack2.getSeq().getSeq(),14);
         assertTrue(TestUtils.byteArrayEquals(pack2.getData(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
     }
-
 }
