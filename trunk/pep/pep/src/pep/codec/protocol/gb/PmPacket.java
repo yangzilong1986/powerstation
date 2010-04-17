@@ -55,22 +55,12 @@ abstract public class PmPacket {
         return dataBuff;
     }
 
-    public byte[] getData(){
-        return dataBuff.array();
-    }
-
     public byte getAfn(){
         return afn;
     }
 
     public PmPacket setAfn(byte afn){
         this.afn = afn;
-
-        return this;
-    }
-
-    public PmPacket setData(byte[] data){
-        dataBuff.wrap(data);
 
         return this;
     }
@@ -95,7 +85,7 @@ abstract public class PmPacket {
     }
     
     public byte[] getValue(){
-        byte[] data = dataBuff.array();
+        byte[] data = dataBuff.getValue();
         int len = 1+5+2+data.length; //controlcode,address,afn,seq
         if ((!controlCode.getIsUpDirect())&&(PmPacket.isNeedAuthorize(afn)))
             len = len+authorize.getValue().length;
@@ -146,7 +136,7 @@ abstract public class PmPacket {
             if ((!controlCode.getIsUpDirect())&&(PmPacket.isNeedAuthorize(afn)))
                 len -= Authorize.length();
             if (seq.getIsTpvAvalibe()) len -= 6;
-            dataBuff.allocate(len);
+            dataBuff.clear();
             for (int i=0; i<len; i++) dataBuff.put(msg[head+14+i]);
 
             if (controlCode.getIsUpDirect()&&controlCode.getUpDirectIsAppealCall())

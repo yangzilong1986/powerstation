@@ -54,7 +54,7 @@ public class PmPacketTest {
         instance.setAfn((byte)0x0A);
         instance.getSeq().setIsTpvAvalibe(false).setIsFirstFrame(true).setIsFinishFrame(true).setIsNeedCountersign(false);
         instance.getSeq().setSeq((byte)14);
-        instance.setData(BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00"));
+        instance.getDataBuffer().setValue(BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00"));
         byte[] result = instance.getValue();
         System.out.println(BcdUtils.binArrayToString(expResult));
         System.out.println(BcdUtils.binArrayToString(result));
@@ -82,7 +82,7 @@ public class PmPacketTest {
         assertTrue(pack.getSeq().getIsFinishFrame());
         assertTrue(!pack.getSeq().getIsNeedCountersign());
         assertEquals(pack.getSeq().getSeq(),14);
-        assertTrue(TestUtils.byteArrayEquals(pack.getData(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
+        assertTrue(TestUtils.byteArrayEquals(pack.getDataBuffer().getValue(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
 
         PmPacket pack2 = new PmPacket376();
         pack2.setValue(msg, head+pack.length());
@@ -99,6 +99,6 @@ public class PmPacketTest {
         assertTrue(pack2.getSeq().getIsFinishFrame());
         assertTrue(!pack2.getSeq().getIsNeedCountersign());
         assertEquals(pack2.getSeq().getSeq(),14);
-        assertTrue(TestUtils.byteArrayEquals(pack2.getData(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
+        assertTrue(TestUtils.byteArrayEquals(pack2.getDataBuffer().getValue(),BcdUtils.stringToByteArray("00, 00, 02, 01, 01, 00, 16, 00")));
     }
 }
