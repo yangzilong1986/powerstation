@@ -3,7 +3,9 @@
  * and open the template in the editor.
  */
 
-package pep.codec.protocol.gb;
+package pep.codec.protocol.gb.gb376;
+
+import pep.codec.protocol.gb.PmPacket;
 
 /**
  *

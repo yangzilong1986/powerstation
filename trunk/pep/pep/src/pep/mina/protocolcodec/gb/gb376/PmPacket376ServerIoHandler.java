@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package pep.mina.protocolcodec.gb;
+package pep.mina.protocolcodec.gb.gb376;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
