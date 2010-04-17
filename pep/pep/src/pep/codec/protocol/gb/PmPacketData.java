@@ -17,26 +17,40 @@ public class PmPacketData{
 
     public PmPacketData(){
         super();
-        dataBuff = IoBuffer.allocate(0, false);
+        dataBuff = IoBuffer.allocate(20, false);
         dataBuff.setAutoExpand(true);
     }
 
-    public byte[] array(){
-        return dataBuff.array();
-    }
-
-    public PmPacketData wrap(byte[] byteArray){
-        dataBuff = IoBuffer.wrap(byteArray);
+    public PmPacketData clear(){
+        dataBuff.clear();
+        dataBuff.limit(dataBuff.position());
         return this;
     }
 
-    public PmPacketData allocate(int len){
-        dataBuff = IoBuffer.allocate(len, false);
+    public PmPacketData rewind(){
+        dataBuff.rewind();
+        return this;
+    }
+
+    public byte[] getValue(){
+        byte[] rslt = new byte[dataBuff.limit()];
+        dataBuff.rewind().get(rslt);
+        return rslt;
+    }
+
+    public PmPacketData setValue(byte[] bytes){
+        dataBuff.clear().put(bytes);
+        dataBuff.limit(dataBuff.position());
         return this;
     }
 
     public PmPacketData put(byte b){
         dataBuff.put(b);
+        return this;
+    }
+
+    public PmPacketData put(byte[] bytes){
+        dataBuff.put(bytes);
         return this;
     }
 
