@@ -25,7 +25,11 @@ public class PmPacket376DA implements PmPacketDA{
         value = new byte[2];
         this.setPn(pn);
     }
-    
+
+    public PmPacket376DA(){
+        this(0);
+    }
+
     public PmPacket376DA setValue(byte[] value){
         if (value.length==2) this.value = value;
         else throw  new IllegalArgumentException();
