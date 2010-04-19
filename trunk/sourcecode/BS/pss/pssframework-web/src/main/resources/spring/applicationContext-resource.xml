@@ -61,7 +61,7 @@
 	<!-- 以AspectJ方式 定义 AOP -->
 	<aop:config proxy-target-class="true">
 		<aop:advisor pointcut="execution(* org.pssframework.base.BaseManager.*(..))" advice-ref="txAdvice"/>
-		<aop:advisor pointcut="execution(* org.pssframework.*..*.service.*Manager.*(..))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="execution(* org.*.service.*Manager.*(..))" advice-ref="txAdvice"/>
 	</aop:config>
 
 	<!-- 基本事务定义,使用transactionManager作事务管理,默认get* find*方法的事务为readonly,其余方法按默认设置.
