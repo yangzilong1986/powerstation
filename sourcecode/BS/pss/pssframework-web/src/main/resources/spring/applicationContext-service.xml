@@ -7,5 +7,5 @@
 
   <!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
   <!-- 默认值如果适合，该项可以不用修改 -->
-  <context:component-scan base-package="org.pssframework.**.service" />
+  <context:component-scan base-package="org.*.service" />
 </beans>
