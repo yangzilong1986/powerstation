@@ -67,10 +67,11 @@ public class PmPacketData{
         return this;
     }
 
-    public void getDA(PmPacketDA da){
+    public PmPacketData getDA(PmPacketDA da){
         byte[] bytes = new byte[2];
         dataBuff.get(bytes);
         da.setValue(bytes);
+        return this;
     }
     
     public PmPacketData putDT(PmPacketDT dt){
@@ -78,10 +79,11 @@ public class PmPacketData{
         return this;
     }
     
-    public void getDT(PmPacketDT dt){
+    public PmPacketData getDT(PmPacketDT dt){
         byte[] bytes = new byte[2];
         dataBuff.get(bytes);
         dt.setValue(bytes);
+        return this;
     }
 
     @Override

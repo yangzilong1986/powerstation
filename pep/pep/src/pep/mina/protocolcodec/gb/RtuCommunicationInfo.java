@@ -34,10 +34,19 @@ public class RtuCommunicationInfo {
         idle = true;
         unsendPacket = new ConcurrentLinkedQueue<PmPacket>();
     }
+    
+    public RtuCommunicationInfo(String rtua, IoSession session){
+        this(rtua);
+        this.session = session;
+    }
 
     public RtuCommunicationInfo setMaxRetryTimes(byte maxRetryTimes){
         this.maxRetryTimes = maxRetryTimes;
         return this;
+    }
+
+    public IoSession getSession(){
+        return this.session;
     }
 
     public RtuCommunicationInfo setReceivePacketQueue(Queue<PmPacket> receivePacketQueue){
@@ -51,6 +60,10 @@ public class RtuCommunicationInfo {
 
     public void disconnected(){
         this.session = null;
+    }
+
+    public void receiveRtuUploadPacket(PmPacket packet){
+
     }
 
     public void sendPacket(PmPacket packet){

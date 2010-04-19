@@ -28,6 +28,10 @@ public class PmPacket376DT implements PmPacketDT {
         this.setFn(fn);
     }
 
+    public PmPacket376DT(){
+        this(1);
+    }
+    
     public PmPacket376DT setValue(byte[] value){
         if (value.length==2) this.value = value;
         else throw  new IllegalArgumentException();
