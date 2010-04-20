@@ -130,6 +130,12 @@
       <artifactId>ibatis-sqlmap</artifactId>
     </dependency>
 
+      <!-- extremecomponents -->
+      <dependency>
+        <groupId>org.extremecomponents</groupId>
+        <artifactId>extremecomponents</artifactId>
+      </dependency>
+      
     <!-- logging begin -->
     <dependency>
       <groupId>org.slf4j</groupId>
