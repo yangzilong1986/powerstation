@@ -83,7 +83,8 @@
     <maven-assembly-plugin.version>2.2-beta-5</maven-assembly-plugin.version>
     <cobertura-maven-plugin.verison>2.3</cobertura-maven-plugin.verison>
     <geronimo-annotation_1.0_spec.version>1.1.1</geronimo-annotation_1.0_spec.version>
-<cglib.version>2.2</cglib.version>
+    <cglib.version>2.2</cglib.version>
+    <javassist.version>3.11.0.GA</javassist.version>
 
     <!-- Plugin的属性定义 -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -251,7 +252,7 @@
       <dependency>
         <groupId>javassist</groupId>
         <artifactId>javassist</artifactId>
-        <version>3.11.0.GA</version>
+        <version>${javassist.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.ibatis</groupId>
