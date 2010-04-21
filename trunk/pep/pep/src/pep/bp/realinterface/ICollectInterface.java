@@ -12,7 +12,7 @@ public interface ICollectInterface {
     /**
      * 参数设置
      * @param MTO 消息传输对象
-     * @return 回执码
+     * @return 回执码(-1:表示失败)
      * @throws Exception
      */
     public long writeEquipmentParameters(MessageTranObject MTO)throws Exception;
@@ -20,7 +20,7 @@ public interface ICollectInterface {
     /**
      * 参数读取
      * @param MTO 消息传输对象
-     * @return 回执码
+     * @return 回执码（-1:表示失败）
      * @throws Exception
      */
     public long readEquipmentParameters(MessageTranObject MTO)throws Exception;
@@ -28,7 +28,7 @@ public interface ICollectInterface {
     /**
      * 下发复位命令
      * @param MTO
-     * @return
+     * @return 回执码（-1:表示失败）
      * @throws Exception
      */
     public long writeResetCommands(MessageTranObject MTO)throws Exception;
@@ -36,10 +36,25 @@ public interface ICollectInterface {
     /**
      * 下发控制命令
      * @param MTO
-     * @return
+     * @return 回执码（-1:表示失败）
      * @throws Exception
      */
     public long writeControlCommands(MessageTranObject MTO)throws Exception;
 
-    
+    /**
+     * 实时召测
+     * @param MTO
+     * @return
+     * @throws Exception
+     */
+    public long readRealtimeData(MessageTranObject MTO)throws Exception;
+
+
+    /**
+     * 透明转发
+     * @param MTO
+     * @return
+     * @throws Exception
+     */
+    public long transmitMsg(MessageTranObject MTO)throws Exception;
 }
