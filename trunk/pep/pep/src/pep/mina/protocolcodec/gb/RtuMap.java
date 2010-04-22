@@ -4,25 +4,30 @@
  */
 package pep.mina.protocolcodec.gb;
 
+import pep.mina.common.RtuAutoUploadPacketQueue;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.mina.core.session.IoSession;
 import pep.codec.protocol.gb.PmPacket;
+import pep.mina.common.PepCommunicatorInterface;
 import pep.mina.common.RtuConnectEventHandler;
 import pep.mina.common.RtuConnectListener;
+import pep.mina.common.RtuRespPacketQueue;
 
 /**
  *
  * @author luxiaochung
  */
-public class RtuMap {
+public class RtuMap implements PepCommunicatorInterface {
 
     private Map<String, RtuCommunicationInfo> rtuSessionMap;
     private RtuConnectEventHandler rtuConnectEventHandler;
+    private RtuAutoUploadPacketQueue autoUploadPacketQueue;  //接收到的报文或不在线/超时错误返回报文
 
     public RtuMap() {
         rtuSessionMap = new TreeMap<String, RtuCommunicationInfo>();
         rtuConnectEventHandler = new RtuConnectEventHandler();
+        autoUploadPacketQueue = RtuAutoUploadPacketQueue.instance();
     }
 
     public void addRtuConnectListener(RtuConnectListener listener) {
@@ -33,6 +38,23 @@ public class RtuMap {
         rtuConnectEventHandler.removeRtuConnectListener(listener);
     }
 
+    public RtuAutoUploadPacketQueue getRtuAutoUploadPacketQueueInstance(){
+        return this.autoUploadPacketQueue;
+    }
+
+    public RtuRespPacketQueue getRtuRespPacketQueueInstance(){
+        return RtuRespPacketQueue.instance();
+    }
+
+    public void SendPacket(int sequence, PmPacket packet){
+        String rtua = packet.getAddress().getRtua();
+        RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
+        if (rtu==null){
+            rtu = new RtuCommunicationInfo(rtua);
+        }
+        rtu.sendPacket(sequence, packet);
+    }
+    
     private synchronized void putRtuCommunicationInfo(String rtua, RtuCommunicationInfo rtuInfo) {
         rtuSessionMap.put(rtua, rtuInfo);
     }
@@ -74,11 +96,14 @@ public class RtuMap {
         if (rtu.getSession() == null) {
             rtu.setSession(session);
         }
-        if (pack.getAfn() != (byte) 2) {
+
+        if (!pack.getControlCode().getIsOrgniger()) {
             rtu.receiveRtuUploadPacket(pack);
         }
+        else if (pack.getAfn()!=2) //主动上送
+            autoUploadPacketQueue.addPacket(pack);
 
-        if (pack.getControlCode().getUpDirectIsAppealCall()) {//要求访问
+        if ((pack.getControlCode().getIsUpDirect()) &&(pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
             rtu.callRtuEventRecord(pack.getEC());
         }
     }

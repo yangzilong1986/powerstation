@@ -26,7 +26,6 @@ public class RtuCommunicationInfo {
     private byte currentSendTimes;
     private Date currentSendTicket;
     private PmPacket currentPacket;
-    private Queue<PmPacket> receivePacketQueue;  //接收到的报文或不在线/超时错误返回报文
     
     public RtuCommunicationInfo(String rtua){
         super();
@@ -43,26 +42,21 @@ public class RtuCommunicationInfo {
         this.session = session;
     }
 
-    public RtuCommunicationInfo setMaxRetryTimes(byte maxRetryTimes){
+    public synchronized RtuCommunicationInfo setMaxRetryTimes(byte maxRetryTimes){
         this.maxRetryTimes = maxRetryTimes;
         return this;
     }
 
-    public IoSession getSession(){
+    public synchronized IoSession getSession(){
         return this.session;
     }
 
-    public RtuCommunicationInfo setSession(IoSession session){
+    public synchronized RtuCommunicationInfo setSession(IoSession session){
         this.session = session;
         return this;
     }
 
-    public RtuCommunicationInfo setReceivePacketQueue(Queue<PmPacket> receivePacketQueue){
-        this.receivePacketQueue = receivePacketQueue;
-        return this;
-    }
-
-    public void connectted(IoSession session){
+    public synchronized void connectted(IoSession session){
         this.session = session;
     }
 
@@ -71,7 +65,6 @@ public class RtuCommunicationInfo {
     }
 
     public synchronized void receiveRtuUploadPacket(PmPacket packet){
-
     }
 
     public synchronized void callRtuEventRecord(EventCountor ec){
