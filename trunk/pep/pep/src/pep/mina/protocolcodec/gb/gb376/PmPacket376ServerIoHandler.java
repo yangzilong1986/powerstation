@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376Factroy;
 import pep.codec.utils.BcdUtils;
-import pep.mina.protocolcodec.gb.RtuMap;
+import pep.mina.protocolcodec.gb.PepGbCommunicator;
 
 /**
  *
@@ -20,11 +20,11 @@ import pep.mina.protocolcodec.gb.RtuMap;
  */
 public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
-    private RtuMap rtuMap;
-    private static final String SESSION_RTUS = PmPacket376ServerIoHandler.class.getName() + ".rtus";
+    private PepGbCommunicator rtuMap;
+    private final static String SESSION_RTUS = PmPacket376ServerIoHandler.class.getName() + ".rtus";
     private final static Logger LOGGER = LoggerFactory.getLogger(PmPacket376ServerIoHandler.class);
 
-    public void setRtuMap(RtuMap rtuMap) {
+    public void setRtuMap(PepGbCommunicator rtuMap) {
         this.rtuMap = rtuMap;
     }
 
@@ -54,7 +54,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
             session.write(respPack);
         }
         
-        rtuMap.rtuReceivePacket(rtua, session, pack);
+        rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
     }
 
     private void registRtua(IoSession session, String rtua) {

@@ -4,6 +4,7 @@
  */
 package pep.mina.protocolcodec.gb;
 
+import java.util.Date;
 import pep.mina.common.RtuAutoUploadPacketQueue;
 import java.util.Map;
 import java.util.TreeMap;
@@ -18,13 +19,13 @@ import pep.mina.common.RtuRespPacketQueue;
  *
  * @author luxiaochung
  */
-public class RtuMap implements PepCommunicatorInterface {
+public class PepGbCommunicator implements PepCommunicatorInterface {
 
     private Map<String, RtuCommunicationInfo> rtuSessionMap;
     private RtuConnectEventHandler rtuConnectEventHandler;
     private RtuAutoUploadPacketQueue autoUploadPacketQueue;  //接收到的报文或不在线/超时错误返回报文
 
-    public RtuMap() {
+    public PepGbCommunicator() {
         rtuSessionMap = new TreeMap<String, RtuCommunicationInfo>();
         rtuConnectEventHandler = new RtuConnectEventHandler();
         autoUploadPacketQueue = RtuAutoUploadPacketQueue.instance();
@@ -38,23 +39,31 @@ public class RtuMap implements PepCommunicatorInterface {
         rtuConnectEventHandler.removeRtuConnectListener(listener);
     }
 
-    public RtuAutoUploadPacketQueue getRtuAutoUploadPacketQueueInstance(){
+    public RtuAutoUploadPacketQueue getRtuAutoUploadPacketQueueInstance() {
         return this.autoUploadPacketQueue;
     }
 
-    public RtuRespPacketQueue getRtuRespPacketQueueInstance(){
+    public RtuRespPacketQueue getRtuRespPacketQueueInstance() {
         return RtuRespPacketQueue.instance();
     }
 
-    public void SendPacket(int sequence, PmPacket packet){
+    public void SendPacket(int sequence, PmPacket packet) {
         String rtua = packet.getAddress().getRtua();
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
-        if (rtu==null){
+        if (rtu == null) {
             rtu = new RtuCommunicationInfo(rtua);
         }
         rtu.sendPacket(sequence, packet);
     }
-    
+
+    public synchronized void checkUndespPackets() {
+        Date checkTime;
+        checkTime = new Date();
+        for (RtuCommunicationInfo rtu : rtuSessionMap.values()){
+            rtu.checkNotResponed(checkTime);
+        }
+    }
+
     private synchronized void putRtuCommunicationInfo(String rtua, RtuCommunicationInfo rtuInfo) {
         rtuSessionMap.put(rtua, rtuInfo);
     }
@@ -86,7 +95,7 @@ public class RtuMap implements PepCommunicatorInterface {
         return rtu;
     }
 
-    public void rtuReceivePacket(String rtua, IoSession session, PmPacket pack) {
+    public void rtuReceiveTcpPacket(String rtua, IoSession session, PmPacket pack) {
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
             rtu = new RtuCommunicationInfo(rtua, session);
@@ -94,16 +103,17 @@ public class RtuMap implements PepCommunicatorInterface {
         }
 
         if (rtu.getSession() == null) {
-            rtu.setSession(session);
+            rtu.setTcpSession(session);
         }
 
         if (!pack.getControlCode().getIsOrgniger()) {
             rtu.receiveRtuUploadPacket(pack);
-        }
-        else if (pack.getAfn()!=2) //主动上送
+        } else if (pack.getAfn() != 2) //主动上送
+        {
             autoUploadPacketQueue.addPacket(pack);
+        }
 
-        if ((pack.getControlCode().getIsUpDirect()) &&(pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
+        if ((pack.getControlCode().getIsUpDirect()) && (pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
             rtu.callRtuEventRecord(pack.getEC());
         }
     }

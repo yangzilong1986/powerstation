@@ -12,7 +12,7 @@ import pep.codec.protocol.gb.PmPacket;
  * @author luxiaochung
  */
 public class SequencedPmPacket {
-    public enum Status{SUSSESS,TIME_OUT,NO_ONLINE};
+    public enum Status{SUSSESS,TO_BE_CONTINUE,TIME_OUT,NOT_ONLINE;};
     public int sequence;
     public PmPacket pack;
     public Status status;
