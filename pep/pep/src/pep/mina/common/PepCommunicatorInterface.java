@@ -29,8 +29,11 @@ public interface PepCommunicatorInterface {
     public RtuAutoUploadPacketQueue getRtuAutoUploadPacketQueueInstance();
 
     /**
-     * 由SendPacket引发的终端上送放入RtuRespPacketQueue队列
+     * 由SendPacket引发的终端上送报文帧放入RtuRespPacketQueue队列,
+     * 如果是超时或者不在线，返回的PmPacket是发送的报文帧
      * @return
      */
     public RtuRespPacketQueue getRtuRespPacketQueueInstance();
+
+    public void checkUndespPackets();
 }
