@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-4-30 16:32:30                           */
+/* Created on:     2010-4-30 21:33:34                           */
 /*==============================================================*/
 
 
@@ -41,8 +41,8 @@ drop table G_TRAN cascade constraints;
 create table G_LINE  (
    LINE_ID              NUMBER(16)                      not null,
    LINE_NO              VARCHAR2(16),
-   LINE_NAME            VARCHAR2(256),
-   ORG_NO               VARCHAR2(16),
+   LINE_NAME            VARCHAR2(256)                   not null,
+   ORG_NO               VARCHAR2(16)                    not null,
    VOLT_CODE            VARCHAR2(8),
    SUBLINE_FLAG         VARCHAR2(8),
    RUN_STATUS_CODE      VARCHAR2(8),
@@ -200,9 +200,9 @@ create index G_LINE_SUBS_LINE_RELA_FK on G_SUBS_LINE_RELA (
 /*==============================================================*/
 create table G_TG  (
    TG_ID                NUMBER(16)                      not null,
-   ORG_NO               VARCHAR2(16),
-   TG_NO                VARCHAR2(16),
-   TG_NAME              VARCHAR2(256),
+   ORG_NO               VARCHAR2(16)                    not null,
+   TG_NO                VARCHAR2(16)                    not null,
+   TG_NAME              VARCHAR2(256)                   not null,
    TG_CAP               NUMBER(16,6),
    INST_ADDR            VARCHAR2(256),
    CHG_DATE             DATE,
