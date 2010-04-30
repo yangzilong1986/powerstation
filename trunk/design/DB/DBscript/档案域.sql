@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-4-30 16:31:32                           */
+/* Created on:     2010-4-30 21:34:07                           */
 /*==============================================================*/
 
 
@@ -46,13 +46,8 @@ drop table C_TERMINAL cascade constraints;
 /*==============================================================*/
 create table C_CONS  (
    CONS_ID              NUMBER(16)                      not null,
-   VAT_ID               NUMBER(16),
-   CUST_ID              NUMBER(16)                      not null,
-   CONS_NO              VARCHAR2(16),
-   CONS_NAME            VARCHAR2(256),
-   CUST_QUERY_NO        VARCHAR2(32),
-   TMP_PAY_RELA_NO      VARCHAR2(16),
-   ORGN_CONS_NO         VARCHAR2(16),
+   CONS_NO              VARCHAR2(16)                    not null,
+   CONS_NAME            VARCHAR2(256)                   not null,
    CONS_SORT_CODE       VARCHAR2(8),
    ELEC_ADDR            VARCHAR2(256)                   not null,
    TRADE_CODE           VARCHAR2(8),
@@ -68,21 +63,14 @@ create table C_CONS  (
    PS_DATE              DATE,
    CANCEL_DATE          DATE,
    DUE_DATE             DATE,
-   NOTIFY_MODE          VARCHAR2(8),
-   SETTLE_MODE          VARCHAR2(8),
    STATUS_CODE          VARCHAR2(8),
    ORG_NO               VARCHAR2(16),
    RRIO_CODE            VARCHAR2(8),
    CHK_CYCLE            NUMBER(5),
-   LAST_CHK_DATE        DATE,
-   CHECKER_NO           VARCHAR2(16),
    POWEROFF_CODE        VARCHAR2(8),
-   TRANSFER_CODE        VARCHAR2(8),
    MR_SECT_NO           VARCHAR2(16)                    not null,
-   NOTE_TYPE_CODE       VARCHAR2(8),
-   TMP_FLAG             VARCHAR2(8),
-   TMP_DATE             DATE,
-   LASTTIME_STAMP       DATE                           default SYSDATE
+   LASTTIME_STAMP       DATE                           default SYSDATE,
+   constraint PK_C_CONS primary key (CONS_ID)
 )
 tablespace TABS_ARCHIVE;
 
@@ -96,27 +84,12 @@ comment on table C_CONS is
 comment on column C_CONS.CONS_ID is
 '本实体记录的唯一标识，产生规则为流水号';
 
-comment on column C_CONS.VAT_ID is
-'本实体记录的唯一标识，产生规则为流水号';
-
-comment on column C_CONS.CUST_ID is
-'本实体记录的唯一标识，产生规则为流水号';
-
 comment on column C_CONS.CONS_NO is
 '用电客户的外部标识
 引用国家电网公司营销管理代码类集:5110.1  用电客户编号规则';
 
 comment on column C_CONS.CONS_NAME is
 '用户的名称，一般等于客户实体中的客户名称，但也允许附加上一些非自然的信息。如 XXX（东城），便于通过用户名称直接识别。';
-
-comment on column C_CONS.CUST_QUERY_NO is
-'存储客户提供的自己熟悉的一串标识码，客户通过各种服务渠道可以通过这个查询号来查询自己用电的信息，如客户有多个用电地址，可提供不同的查询号';
-
-comment on column C_CONS.TMP_PAY_RELA_NO is
-'方便收费操作，用户间建立的松散的缴费关系的标识，可根据此编号缴费，系统显示该编号的所有客户欠费记录，但用户间不能互相共用余额';
-
-comment on column C_CONS.ORGN_CONS_NO is
-'原用户编号，用于系统升级的时候用户编号重新编号可以在一段时间内继续使用原用户编号查询用户信息';
 
 comment on column C_CONS.CONS_SORT_CODE is
 '用户一种常用的分类方式，方便用户的管理
@@ -176,16 +149,6 @@ comment on column C_CONS.CANCEL_DATE is
 comment on column C_CONS.DUE_DATE is
 '临时用电客户约定的用电到期日期';
 
-comment on column C_CONS.NOTIFY_MODE is
-'用户每月电费的通知方式
-引用国家电网公司营销管理代码类集:5110.57催费方式分类与代码
-短信，通知单，电话，传真，E-MAIL等
-';
-
-comment on column C_CONS.SETTLE_MODE is
-'用于区分是否分期结算
-01 分期结算，02 抄表结算';
-
 comment on column C_CONS.STATUS_CODE is
 '用电客户的状态说明，说明客户是否处于业扩变更中或已销户
 引用国家电网公司营销管理代码类集:5110.9 客户状态标志代码
@@ -201,36 +164,11 @@ comment on column C_CONS.RRIO_CODE is
 comment on column C_CONS.CHK_CYCLE is
 '检查周期(单位：月)：用于存放客户检查周期信息，便于周期检查计划制定时，获取参数。';
 
-comment on column C_CONS.LAST_CHK_DATE is
-'上次检查日期：用于存放客户上次检查日期，默认为客户的开户日期。';
-
-comment on column C_CONS.CHECKER_NO is
-'人员编号：分管检查人员的人员编号。';
-
 comment on column C_CONS.POWEROFF_CODE is
 '停电标志：01 已停电  02 未停电，反映客户当前是否处于停电状态';
 
-comment on column C_CONS.TRANSFER_CODE is
-'标识客户是否是转供相关客户，如果涉及转供，是属于转供户还是被转供户
-引用国家电网公司营销管理代码类集:5110.35 转供标志分类与代码
-无转供，转供户，被转供户
-';
-
 comment on column C_CONS.MR_SECT_NO is
 '抄表段标识,用于表示用电客户所属的抄表段';
-
-comment on column C_CONS.NOTE_TYPE_CODE is
-'用电客户每月电费默认打印的票据类型
-引用国家电网公司营销管理代码类集:5110.107票据类型
-普通发票，增殖税发票，收据，无
-';
-
-comment on column C_CONS.TMP_FLAG is
-'表示是否是临时用电的用电客户，且属于哪种临时用电
-01 装表临时用电，02 无表临时用电，03 非临时用电';
-
-comment on column C_CONS.TMP_DATE is
-'临时用电用户临时用电的到期日期';
 
 comment on column C_CONS.LASTTIME_STAMP is
 '最后表结构修改时间戳';
@@ -240,7 +178,7 @@ comment on column C_CONS.LASTTIME_STAMP is
 /*==============================================================*/
 create table C_GP  (
    GP_ID                NUMBER                          not null,
-   OBJECT_ID            NUMBER,
+   OBJECT_ID            NUMBER                          not null,
    TERM_ID              NUMBER,
    MP_ID                NUMBER,
    GM_ID                NUMBER,
@@ -366,7 +304,8 @@ comment on column C_METER.通讯方式 is
 create table C_METER_MP_RELA  (
    METER_MP_ID          NUMBER(16)                      not null,
    METER_ID             NUMBER(16)                      not null,
-   MP_ID                NUMBER(16)
+   MP_ID                NUMBER(16),
+   constraint PK_C_METER_MP_RELA primary key (METER_MP_ID)
 )
 tablespace TABS_ARCHIVE;
 
@@ -413,7 +352,8 @@ create table C_MP  (
    STATUS_CODE          VARCHAR2(8),
    LC_FLAG              VARCHAR2(8),
    CONS_ID              NUMBER(16),
-   LASTTIME_STAMP       DATE                           default SYSDATE
+   LASTTIME_STAMP       DATE                           default SYSDATE,
+   constraint PK_C_MP primary key (MP_ID)
 )
 tablespace TABS_ARCHIVE;
 
@@ -542,6 +482,7 @@ create table C_PS  (
    OFF_DELAY_GEAR       VARCHAR2(5),
    OFF_DELAY_VALUE      VARCHAR2(5),
    FUNCTION_CODE        VARCHAR2(5),
+   PS_TYPE              VARCHAR2(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_C_PS primary key (PS_ID)
 )
@@ -576,6 +517,9 @@ comment on column C_PS.OFF_DELAY_GEAR is
 
 comment on column C_PS.OFF_DELAY_VALUE is
 '见编码OFF_DELAY_VALUE';
+
+comment on column C_PS.PS_TYPE is
+'1：总保；2：二级保';
 
 comment on column C_PS.LASTTIME_STAMP is
 '最后表结构修改时间戳';

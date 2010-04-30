@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-4-30 16:33:03                           */
+/* Created on:     2010-4-30 21:32:44                           */
 /*==============================================================*/
 
 
@@ -109,7 +109,7 @@ comment on column O_ORG.LASTTIME_STAMP is
 /*==============================================================*/
 create table O_ROLE  (
    ROLE_ID              NUMBER                          not null,
-   ROLE_NAME            VARCHAR2(50),
+   ROLE_NAME            VARCHAR2(50)                    not null,
    ROLE_REMARK          VARCHAR2(256),
    ROLE_TYPE            VARCHAR2(5),
    CREATOR              VARCHAR2(20),
