@@ -14,6 +14,7 @@ public class UserInfoDao extends BaseIbatis3Dao<UserInfo, java.lang.Long> {
 		return UserInfo.class;
 	}
 
+	@Override
 	public void saveOrUpdate(UserInfo entity) {
 		this.log.info("saveOrUpdate");
 		if (entity.getUserId() == null) {
