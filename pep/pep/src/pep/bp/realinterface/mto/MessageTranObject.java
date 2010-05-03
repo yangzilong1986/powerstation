@@ -20,4 +20,6 @@ public abstract class MessageTranObject implements IRealMessage{
     }
 
     public abstract String toJson();
+
+    public abstract MTOType getType();
 }

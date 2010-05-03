@@ -12,6 +12,10 @@ import net.sf.json.*;
 public class MTO_376 extends MessageTranObject{
     private List<CollectObject> CollectObjects;
 
+    public List<CollectObject> getCollectObjects(){
+       return this.CollectObjects;
+    }
+
     public void addCollectObject(CollectObject collectObject){
         if (null == CollectObjects)
             CollectObjects = new ArrayList<CollectObject>();
@@ -24,6 +28,10 @@ public class MTO_376 extends MessageTranObject{
         map.put("CollectObjects", this.CollectObjects);
         JSONObject jsonObject = JSONObject.fromObject(map);
         return jsonObject.toString();
+    }
+    
+    public  MTOType getType(){
+        return MTOType.GW_376;
     }
 
 }
