@@ -25,7 +25,7 @@ public class DataTypeA16 {
         this.setDay(day).setHour(hour).setMinute(minute).setSecond(second);
     }
 
-    public byte getSecond(){
+    public int getSecond(){
         return BcdUtils.bcdToInt(value[0]);
     }
 
@@ -34,7 +34,7 @@ public class DataTypeA16 {
         return this;
     }
 
-    public byte getMinute(){
+    public int getMinute(){
         return BcdUtils.bcdToInt(value[1]);
     }
 
@@ -43,7 +43,7 @@ public class DataTypeA16 {
         return this;
     }
 
-    public byte getHour(){
+    public int getHour(){
         return BcdUtils.bcdToInt(value[2]);
     }
 
@@ -52,7 +52,7 @@ public class DataTypeA16 {
         return this;
     }
 
-    public byte getDay(){
+    public int getDay(){
         return BcdUtils.bcdToInt(value[3]);
     }
 
@@ -61,11 +61,11 @@ public class DataTypeA16 {
         return this;
     }
 
-    public byte[] getValue(){
+    public byte[] getArray(){
         return this.value;
     }
 
-    public DataTypeA16 setValue(byte[] value, int firstIndex){
+    public DataTypeA16 setArray(byte[] value, int firstIndex){
         if ((value.length-firstIndex)>=4){
             for (int i=0; i<4; i++) this.value[i]=value[i+firstIndex];
         }
@@ -75,8 +75,8 @@ public class DataTypeA16 {
         return this;
     }
 
-    public DataTypeA16 setValue(byte[] value){
-        return this.setValue(value, 0);
+    public DataTypeA16 setArray(byte[] value){
+        return this.setArray(value, 0);
     }
 
     @Override
