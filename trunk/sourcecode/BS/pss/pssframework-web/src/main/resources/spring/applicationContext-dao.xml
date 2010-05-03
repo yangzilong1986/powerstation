@@ -11,14 +11,43 @@
   </bean>
 
   <!-- Transaction manager for a single JDBC DataSource -->
-  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-    <property name="dataSource" ref="dataSource" />
-  </bean>
+  <!--
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property
+    name="dataSource" ref="dataSource" /> </bean>
+  -->
   <bean id="sqlSessionFactory" class="org.pssframework.dao.SqlSessionFactoryFactoryBean">
-    <property name="configLocation" value="classpath:configuration.xml" />
+    <property name="configLocation" value="classpath:configuration-ibatis.xml" />
     <property name="mapperLocations" value="classpath*:/org/*/model/*/*Mapper.xml" />
     <property name="dataSource" ref="dataSource" />
   </bean>
+
+
+  <!--Hibernate Annotation SessionFatory-->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <!--<property name="mappingLocations" value="classpath*:com/creawor/demo/model/*.hbm.xml"/>-->
+
+    <!-- packagesToScan可以自动搜索某个package的全部标记@Entity class -->
+    <property name="packagesToScan">
+      <list>
+        <value>org.*.model</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <!--常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect -->
+        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+      </props>
+    </property>
+  </bean>
+
+  <!--Hibernate TransactionManager-->
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
 
   <!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
   <context:component-scan base-package="org.*.dao" />

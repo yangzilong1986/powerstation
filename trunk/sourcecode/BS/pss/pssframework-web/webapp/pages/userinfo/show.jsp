@@ -1,4 +1,4 @@
-<%@page import="com.company.project.model.*" %>
+<%@page import="org.pssframework.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
 <%

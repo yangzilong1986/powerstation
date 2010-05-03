@@ -23,14 +23,14 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 
 @Controller
-@RequestMapping("/userinfo")
+@RequestMapping("/userinfo1")
 public class UserInfoController extends BaseRestSpringController<UserInfo,java.lang.Long>{
 	//默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null; 
 	
 	private UserInfoManager userInfoManager;
 	
-	private final String LIST_ACTION = "redirect:/userinfo";
+	private final String LIST_ACTION = "redirect:/userinfo1";
 		
 	/** 
 	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性

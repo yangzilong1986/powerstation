@@ -20,14 +20,14 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-io-1.4.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-lang-2.5.jar" sourcepath="C:/Users/Baocj/.m2/repository/commons-lang/commons-lang/2.5/commons-lang-2.5-sources.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-pool-1.5.4.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/dbunit-2.4.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ehcache-1.6.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ehcache-jgroupsreplication-1.3.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ejb3-persistence-1.0.2.GA.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ejb3-persistence-1.0.2.GA.jar" sourcepath="C:/Users/Baocj/.m2/repository/org/hibernate/ejb3-persistence/1.0.2.GA/ejb3-persistence-1.0.2.GA-sources.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/extremecomponents-1.0.4.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/extremecomponentsEXT.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/freemarker-2.3.16.jar"/>
@@ -59,12 +59,7 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/org.springframework.oxm-3.0.3.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/oscache-2.3.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/poi-2.5.1.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/rapid-framework.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/selenium-java-client-driver-1.0.1.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-api-1.5.2.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-log4j12-1.5.11.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-log4j12-1.5.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-aop-3.0.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-asm-3.0.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/spring-beans-3.0.2.RELEASE.jar"/>
@@ -101,5 +96,8 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/xwork-core-2.1.6.jar"/>
 	<classpathentry kind="con" path="org.jboss.ide.eclipse.as.classpath.core.j2ee-1.4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/pssframework-core"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/slf4j-log4j12-1.5.11.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/rapid-framework"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
