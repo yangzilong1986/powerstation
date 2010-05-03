@@ -47,30 +47,30 @@ public class BcdUtils {
         return (byte) (BcdUtils.charToByte(str.charAt(0))*0x10+BcdUtils.charToByte(str.charAt(1)));
     }
 
-    public static byte bcdToInt(byte bcd){
-        return (byte)((bcd>>4)*10+(bcd &0x0f));
+    public static int bcdToInt(int bcd){
+        return ((bcd & 0xf0)>>4)*10+(bcd &0x0f);
     }
 
     public static int bcdToInt(byte[] bcds, int beginIndex, int length){
         int result = 0;
         int base = 1;
         for (int i=0; i<length;i++){
-            result += ((bcds[beginIndex+i]>>4)*10+(bcds[beginIndex+i] &0x0f))*base;
+            result += (((bcds[beginIndex+i]&0xf0)>>4)*10+(bcds[beginIndex+i] &0x0f))*base;
             base *= 100;
         }
         return result;
     }
 
-    public static byte[] intTobcd(int value, int length){
+    public static byte[] intTobcd(long value, int length){
         byte result[] = new byte[length];
         for (int i=0; i<length;i++){
-           result[i] = BcdUtils.intToBcd((byte) (value % 100));
+           result[i] = (byte)BcdUtils.intToBcd((int)(value % 100));
            value = value / 100;
         }
         return result;
     }
 
-    public static byte intToBcd(byte decimal){
+    public static byte intToBcd(int decimal){
         return (byte)((decimal / 10)*0x10+(decimal % 10));
     }
 

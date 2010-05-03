@@ -107,6 +107,7 @@ public class RtuCommunicationInfo {
                         packet, SequencedPmPacket.Status.TO_BE_CONTINUE));
                 this.currentRespSeq++;
                 this.currentRespSeq &= 0x0F;
+                this.currentSendTicket = new Date();
             }
         }
     }

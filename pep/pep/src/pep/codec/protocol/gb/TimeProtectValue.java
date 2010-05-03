@@ -59,14 +59,14 @@ public class TimeProtectValue {
     public byte[] getValue(){
         byte[] result = new byte[6];
         ByteBuffer buff = ByteBuffer.wrap(result);
-        buff.put(this.pfc).put(this.baseTime.getValue()).put(this.limit);
+        buff.put(this.pfc).put(this.baseTime.getArray()).put(this.limit);
         return result;
     }
 
     public TimeProtectValue setValue(byte[] value, int firstIndex){
         if (value.length-firstIndex>=6){
             this.pfc = value[firstIndex];
-            this.baseTime.setValue(value,firstIndex+1);
+            this.baseTime.setArray(value,firstIndex+1);
             this.limit = value[firstIndex+5];
         }
         else {
