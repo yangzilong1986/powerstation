@@ -14,6 +14,10 @@ import pep.codec.utils.BcdUtils;
 public class DataTypeA9A25Base {
     protected long value;
     
+    protected DataTypeA9A25Base(){
+        
+    }
+    
     public void setArray(byte[] array){
         setArray(array,0);
     }

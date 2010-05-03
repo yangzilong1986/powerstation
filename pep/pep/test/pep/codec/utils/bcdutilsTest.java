@@ -88,7 +88,7 @@ public class bcdutilsTest {
     @Test
     public void testBcdToDate(){
         byte[] bcds = {0x10,0x01,0x01,0x01,0x59,0x50};
-        Date result = BcdUtils.bcdToDate(bcds, "YYMMDDHHMISS");
+        Date result = BcdUtils.bcdToDate(bcds, "YYMMDDHHMISS",0);
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.set(GregorianCalendar.YEAR, 2010);
         calendar.set(GregorianCalendar.MONTH, 0);

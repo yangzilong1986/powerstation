@@ -14,7 +14,7 @@ import pep.codec.utils.BcdUtils;
 public abstract class DataTypeA5A6Base {
     protected int value;
 
-    public DataTypeA5A6Base() {
+    protected DataTypeA5A6Base() {
     }
 
     public byte[] getArray() {

@@ -14,6 +14,10 @@ import pep.codec.utils.BcdUtils;
 public class DataTypeA7A8Base {
     protected int value;
 
+    protected DataTypeA7A8Base(){
+
+    }
+    
     public void setArray(byte[] array){
         setArray(array,0);
     }

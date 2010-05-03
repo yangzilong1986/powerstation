@@ -74,7 +74,7 @@ public class BcdUtils {
         return (byte)((decimal / 10)*0x10+(decimal % 10));
     }
 
-    public static Date bcdToDate(byte[] bcdArray, String format){
+    public static Date bcdToDate(byte[] bcdArray, String format, int beginPosition){
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         calendar.set(GregorianCalendar.MILLISECOND, 0);
@@ -84,28 +84,28 @@ public class BcdUtils {
 
         String uformat = format.toUpperCase();
         int yyyyidx = uformat.indexOf("YYYY");
-        if (yyyyidx!=-1) calendar.set(GregorianCalendar.YEAR, BcdUtils.bcdToInt(bcdArray, yyyyidx/2, 2));
+        if (yyyyidx!=-1) calendar.set(GregorianCalendar.YEAR, BcdUtils.bcdToInt(bcdArray, beginPosition+yyyyidx/2, 2));
         else {
             int yyindex = uformat.indexOf("YY");
             if (yyindex!=-1) calendar.set(GregorianCalendar.YEAR, 
                     (calendar.get(GregorianCalendar.YEAR)/100)*100+
-                    BcdUtils.bcdToInt(bcdArray[yyindex/2]));
+                    BcdUtils.bcdToInt(bcdArray[beginPosition+yyindex/2]));
         }
         
         int mmindex = uformat.indexOf("MM");
-        if (mmindex!=-1) calendar.set(GregorianCalendar.MONTH, BcdUtils.bcdToInt(bcdArray[mmindex/2])-1);
+        if (mmindex!=-1) calendar.set(GregorianCalendar.MONTH, BcdUtils.bcdToInt(bcdArray[beginPosition+mmindex/2])-1);
 
         int ddindex = uformat.indexOf("DD");
-        if (ddindex!=-1) calendar.set(GregorianCalendar.DAY_OF_MONTH, BcdUtils.bcdToInt(bcdArray[ddindex/2]));
+        if (ddindex!=-1) calendar.set(GregorianCalendar.DAY_OF_MONTH, BcdUtils.bcdToInt(bcdArray[beginPosition+ddindex/2]));
         
         int hhindex = uformat.indexOf("HH");
-        if (hhindex!=-1) calendar.set(GregorianCalendar.HOUR_OF_DAY, BcdUtils.bcdToInt(bcdArray[hhindex/2]));
+        if (hhindex!=-1) calendar.set(GregorianCalendar.HOUR_OF_DAY, BcdUtils.bcdToInt(bcdArray[beginPosition+hhindex/2]));
         
         int miindex = uformat.indexOf("MI");
-        if (miindex!=-1) calendar.set(GregorianCalendar.MINUTE, BcdUtils.bcdToInt(bcdArray[miindex/2]));
+        if (miindex!=-1) calendar.set(GregorianCalendar.MINUTE, BcdUtils.bcdToInt(bcdArray[beginPosition+miindex/2]));
         
         int ssindex = uformat.indexOf("SS");
-        if (ssindex!=-1) calendar.set(GregorianCalendar.SECOND, BcdUtils.bcdToInt(bcdArray[ssindex/2]));
+        if (ssindex!=-1) calendar.set(GregorianCalendar.SECOND, BcdUtils.bcdToInt(bcdArray[beginPosition+ssindex/2]));
         
         return calendar.getTime();
     }

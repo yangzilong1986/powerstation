@@ -5,19 +5,16 @@
 
 package pep.codec.protocol.gb;
 
+import java.util.Date;
+
 /**
  *
  * @author luxiaochung
  */
-import pep.codec.utils.BcdUtils;
 
-public class DataTypeA16 {
-    private byte[] value;
-
+public class DataTypeA16 extends DataTypeDateBase{
     public DataTypeA16(){
         super();
-        value = new byte[4];
-        value[3] = 1;
     }
 
     public DataTypeA16(byte day, byte hour, byte minute, byte second){
@@ -25,58 +22,67 @@ public class DataTypeA16 {
         this.setDay(day).setHour(hour).setMinute(minute).setSecond(second);
     }
 
+    @Override
     public int getSecond(){
-        return BcdUtils.bcdToInt(value[0]);
+        return super.getSecond();
     }
 
+    @Override
     public DataTypeA16 setSecond(byte second){
-        value[0] = BcdUtils.intToBcd(second);
+        super.setSecond(second);
         return this;
     }
 
+    @Override
     public int getMinute(){
-        return BcdUtils.bcdToInt(value[1]);
+        return super.getMinute();
     }
 
+    @Override
     public DataTypeA16 setMinute(byte minute){
-        value[1] = BcdUtils.intToBcd(minute);
+        super.setMinute(minute);
         return this;
     }
 
+    @Override
     public int getHour(){
-        return BcdUtils.bcdToInt(value[2]);
+        return super.getHour();
     }
 
+    @Override
     public DataTypeA16 setHour(byte hour){
-        value[2] = BcdUtils.intToBcd(hour);
+        super.setHour(hour);
         return this;
     }
 
+    @Override
     public int getDay(){
-        return BcdUtils.bcdToInt(value[3]);
+        return super.getDay();
     }
 
+    @Override
     public DataTypeA16 setDay(byte day){
-        value[3] = BcdUtils.intToBcd(day);
+        super.setDay(day);
         return this;
     }
 
     public byte[] getArray(){
-        return this.value;
+        return getArray("SSMIHHDD");
     }
 
-    public DataTypeA16 setArray(byte[] value, int firstIndex){
-        if ((value.length-firstIndex)>=4){
-            for (int i=0; i<4; i++) this.value[i]=value[i+firstIndex];
-        }
-        else {
-            throw new IllegalArgumentException();
-        }
+    public DataTypeA16 setArray(byte[] array, int beginPosition){
+        setArray(array,beginPosition,"SSMIHHDD");
         return this;
     }
 
     public DataTypeA16 setArray(byte[] value){
         return this.setArray(value, 0);
+    }
+
+    public Date getDate(byte year, byte month){
+        super.setYear(year);
+        super.setMonth(month);
+        return super.getDate();
     }
 
     @Override
