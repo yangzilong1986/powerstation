@@ -3,6 +3,7 @@
  */
 
 package pep.bp.realinterface;
+import java.util.*;
 import pep.bp.realinterface.mto.*;
 /**
  *
@@ -57,4 +58,61 @@ public interface ICollectInterface {
      * @throws Exception
      */
     public long transmitMsg(MessageTranObject MTO)throws Exception;
+
+    /**
+     * 获取参数设置结果
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
+     * @throws Exception
+     */
+    public Map<String, String> getReturnByWEP(long appId) throws Exception;
+    
+    /**
+     * 获取参数设置结果
+     * @param appId
+     * @return 返回JSon格式结果
+     * @throws Exception
+     */
+    public  String getReturnByWEP_Json(long appId) throws Exception;
+    
+    /**
+     * 获取参数读取结果
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem", <"dataitem", "datavalue">>
+     * @throws Exception
+     */
+    public Map<String, Map<String, String>> getReturnByREP(long appId) throws Exception;
+
+    /**
+     * 获取参数读取结果
+     * @param appId
+     * @return 返回JSon格式结果
+     * @throws Exception
+     */
+    public String getReturnByREP_Json(long appId) throws Exception;
+
+
+    /**
+     * 获取复位操作结果
+     * @param appId
+     * @return
+     * @throws Exception
+     */
+    public Map<String, String> getReturnByWRC(long appId) throws Exception;
+
+    /**
+     * 获取下发控制命令返回结果
+     * @param appId
+     * @return
+     * @throws Exception
+     */
+    public Map<String, String> getReturnByWCC(long appId) throws Exception;
+
+    /**
+     * 获取实时召测返回结果
+     * @param appId
+     * @return
+     * @throws Exception
+     */
+    public Map<String, Map<String, String>> getReturnByRRD(long appId) throws Exception;
 }
