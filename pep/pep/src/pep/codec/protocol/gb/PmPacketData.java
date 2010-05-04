@@ -57,6 +57,10 @@ public class PmPacketData{
         return this;
     }
 
+    public byte get(){
+        return dataBuff.get();
+    }
+
     public PmPacketData put(byte[] bytes){
         dataBuff.put(bytes);
         return this;
@@ -84,6 +88,15 @@ public class PmPacketData{
         dataBuff.get(bytes);
         dt.setValue(bytes);
         return this;
+    }
+
+    public void putWord(int value){
+        dataBuff.put((byte)(value % 0x100));
+        dataBuff.put((byte)(value / 0x100));
+    }
+
+    public int getWord(int value){
+        return dataBuff.getUnsignedShort();
     }
 
     @Override
