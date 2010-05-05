@@ -22,6 +22,11 @@ public class DataTypeA16 extends DataTypeDateBase{
         this.setDay(day).setHour(hour).setMinute(minute).setSecond(second);
     }
 
+    public DataTypeA16(byte[] array){
+        this();
+        setArray(array);
+    }
+
     @Override
     public int getSecond(){
         return super.getSecond();
