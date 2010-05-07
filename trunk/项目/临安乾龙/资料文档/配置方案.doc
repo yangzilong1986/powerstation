@@ -1,0 +1,947 @@
+{\rtf1\adeflang1025\ansi\ansicpg936\uc2\adeff0\deff0\stshfdbch13\stshfloch37\stshfhich37\stshfbi0\deflang1033\deflangfe2052{\fonttbl{\f0\froman\fcharset0\fprq2{\*\panose 02020603050405020304}Times New Roman;}{\f1\fswiss\fcharset0\fprq2{\*\panose 020b0604020202020204}Arial;}
+{\f13\fnil\fcharset134\fprq2{\*\panose 02010600030101010101}\'cb\'ce\'cc\'e5{\*\falt SimSun};}{\f37\fswiss\fcharset0\fprq2{\*\panose 020f0502020204030204}Calibri;}{\f41\fnil\fcharset134\fprq2{\*\panose 02010600030101010101}@\'cb\'ce\'cc\'e5;}
+{\f44\froman\fcharset0\fprq0{\*\panose 00000000000000000000}??{\*\falt Times New Roman};}{\f236\froman\fcharset238\fprq2 Times New Roman CE;}{\f237\froman\fcharset204\fprq2 Times New Roman Cyr;}{\f239\froman\fcharset161\fprq2 Times New Roman Greek;}
+{\f240\froman\fcharset162\fprq2 Times New Roman Tur;}{\f241\fbidi \froman\fcharset177\fprq2 Times New Roman (Hebrew);}{\f242\fbidi \froman\fcharset178\fprq2 Times New Roman (Arabic);}{\f243\froman\fcharset186\fprq2 Times New Roman Baltic;}
+{\f244\froman\fcharset163\fprq2 Times New Roman (Vietnamese);}{\f246\fswiss\fcharset238\fprq2 Arial CE;}{\f247\fswiss\fcharset204\fprq2 Arial Cyr;}{\f249\fswiss\fcharset161\fprq2 Arial Greek;}{\f250\fswiss\fcharset162\fprq2 Arial Tur;}
+{\f251\fbidi \fswiss\fcharset177\fprq2 Arial (Hebrew);}{\f252\fbidi \fswiss\fcharset178\fprq2 Arial (Arabic);}{\f253\fswiss\fcharset186\fprq2 Arial Baltic;}{\f254\fswiss\fcharset163\fprq2 Arial (Vietnamese);}
+{\f368\fnil\fcharset0\fprq2 SimSun Western{\*\falt SimSun};}{\f606\fswiss\fcharset238\fprq2 Calibri CE;}{\f607\fswiss\fcharset204\fprq2 Calibri Cyr;}{\f609\fswiss\fcharset161\fprq2 Calibri Greek;}{\f610\fswiss\fcharset162\fprq2 Calibri Tur;}
+{\f613\fswiss\fcharset186\fprq2 Calibri Baltic;}{\f648\fnil\fcharset0\fprq2 @\'cb\'ce\'cc\'e5 Western;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;
+\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;\red8\green81\blue158;
+\red255\green102\blue0;\red51\green51\blue51;}{\stylesheet{\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs22\alang1025 \ltrch\fcs0 
+\fs21\lang1033\langfe2052\kerning2\loch\f37\hich\af37\dbch\af13\cgrid\langnp1033\langfenp2052 \snext0 \styrsid10888494 Normal;}{
+\s2\ql \li0\ri0\sb100\sa100\sbauto1\saauto1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \ab\af13\afs36\alang1025 \ltrch\fcs0 
+\b\fs36\lang1033\langfe2052\loch\f13\hich\af13\dbch\af13\cgrid\langnp1033\langfenp2052 \sbasedon0 \snext2 \slink18 \styrsid8329021 heading 2;}{\*\cs10 \additive \ssemihidden Default Paragraph Font;}{\*
+\ts11\tsrowd\trftsWidthB3\trpaddl108\trpaddr108\trpaddfl3\trpaddft3\trpaddfb3\trpaddfr3\tblind0\tblindtype3\tscellwidthfts0\tsvertalt\tsbrdrt\tsbrdrl\tsbrdrb\tsbrdrr\tsbrdrdgl\tsbrdrdgr\tsbrdrh\tsbrdrv 
+\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs20 \ltrch\fcs0 \fs20\lang1024\langfe1024\loch\f37\hich\af37\dbch\af13\cgrid\langnp1024\langfenp1024 \snext11 \ssemihidden Normal Table;}{\*\cs15 
+\additive \rtlch\fcs1 \af0 \ltrch\fcs0 \ulnone\cf17\animtext0 \sbasedon10 \styrsid8329021 Hyperlink;}{\s16\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs18\alang1025 \ltrch\fcs0 
+\fs18\lang1033\langfe2052\kerning2\loch\f37\hich\af37\dbch\af13\cgrid\langnp1033\langfenp2052 \sbasedon0 \snext16 \slink17 \ssemihidden \styrsid8329021 Balloon Text;}{\*\cs17 \additive \rtlch\fcs1 \af0\afs18 \ltrch\fcs0 \fs18 
+\sbasedon10 \slink16 \slocked \ssemihidden \styrsid8329021 Balloon Text Char;}{\*\cs18 \additive \rtlch\fcs1 \ab\af13\afs36 \ltrch\fcs0 \b\fs36\kerning0\loch\f13\hich\af13\dbch\af13 \sbasedon10 \slink2 \slocked \styrsid8329021 Heading 2 Char;}{\*\cs19 
+\additive \rtlch\fcs1 \af0 \ltrch\fcs0 \cf18 \sbasedon10 \styrsid8329021 yellow1;}{\*\cs20 \additive \rtlch\fcs1 \af0 \ltrch\fcs0 \sbasedon10 \styrsid8329021 black2;}{
+\s21\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs18\alang1025 \ltrch\fcs0 \fs18\lang1033\langfe2052\kerning2\loch\f13\hich\af37\dbch\af13\cgrid\langnp1033\langfenp2052 
+\sbasedon0 \snext21 \slink22 \ssemihidden \styrsid8329021 Document Map;}{\*\cs22 \additive \rtlch\fcs1 \af0\afs18 \ltrch\fcs0 \fs18\loch\f13\dbch\af13 \sbasedon10 \slink21 \slocked \ssemihidden \styrsid8329021 Document Map Char;}}
+{\*\latentstyles\lsdstimax156\lsdlockeddef0{\lsdlockedexcept Normal;heading 1;heading 2;heading 3;heading 4;heading 5;heading 6;heading 7;heading 8;heading 9;toc 1;toc 2;toc 3;toc 4;toc 5;toc 6;toc 7;toc 8;toc 9;caption;Title;Default Paragraph Font;Subtitle;Strong;Emphasis;Table Grid;}}
+{\*\pgptbl {\pgp\ipgp12\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp0\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp24\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp21\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}
+{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp24\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp1\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp0\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp2\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6
+\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp14\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp11\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp16\itap0\li0\ri0
+\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp22\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp6\itap0\li0\ri0\sb0\sa0}}{\*\rsidtbl \rsid2562985\rsid3019237\rsid6648742\rsid7563333\rsid8329021\rsid10888494\rsid14639214\rsid15084678}{\*\generator Microsoft Word 1
+1.0.0000;}{\info{\title \'b5\'cd\'c5\'e4\'b7\'bd\'b0\'b8}{\author luxiaochung}{\operator \'c0\'ee\'bf\'a1}{\creatim\yr2010\mo5\dy7\hr15\min1}{\revtim\yr2010\mo5\dy7\hr15\min1}{\version2}{\edmins0}{\nofpages3}{\nofwords577}{\nofchars3290}{\nofcharsws3860}
+{\vern24615}{\*\password 00000000}}{\*\xmlnstbl {\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}}\paperw11906\paperh16838\margl1800\margr1800\margt1440\margb1440\gutter0\ltrsect 
+\deftab420\ftnbj\aenddoc\donotembedsysfont1\donotembedlingdata0\grfdocevents0\validatexml1\showplaceholdtext0\ignoremixedcontent0\saveinvalidxml0\showxmlerrors1\formshade\horzdoc\dgmargin\dghspace180\dgvspace156\dghorigin1800\dgvorigin1440\dghshow0
+\dgvshow2\jcompress\ksulang2052\lnongrid\viewkind1\viewscale100\splytwnine\ftnlytwnine\htmautsp\useltbaln\alntblind\lytcalctblwd\lyttblrtgr\lnbrkrule\nobrkwrptbl\snaptogridincell\allowfieldendsel\wrppunct\asianbrkrule\rsidroot8329021\newtblstyruls
+\nogrowautofit {\upr{\*\fchars 
+!%),.:\'3b>?]\'7d\'a1\'e9\'a1\'a7\'a1\'e3\'a1\'a4\'a1\'a6\'a1\'a5\'a8\'44\'a1\'ac\'a1\'af\'a1\'b1\'a1\'ad\'a1\'eb\'a1\'e4\'a1\'e5?\'a1\'e6\'a1\'c3\'a1\'a2\'a1\'a3\'a1\'a8\'a1\'b5\'a1\'b7\'a1\'b9\'a1\'bb\'a1\'bf\'a1\'b3\'a1\'bd\'a8\'95\'a6\'e1\'a6\'e3\'a6\'e7\'a6\'e5\'a6\'eb\'a9\'77\'a9\'79\'a9\'7b\'a3\'a1\'a3\'a2\'a3\'a5\'a3\'a7\'a3\'a9\'a3\'ac\'a3\'ae\'a3\'ba\'a3\'bb\'a3\'bf\'a3\'dd\'a3\'e0\'a3\'fc\'a3\'fd\'a1\'ab\'a1\'e9
+}{\*\ud\uc0{\*\fchars 
+!%),.:\'3b>?]\'7d{\uc2\u162 \'a1\'e9\'a1\'a7\'a1\'e3\'a1\'a4\'a1\'a6\'a1\'a5\'a8D\'a1\'ac\'a1\'af\'a1\'b1\'a1\'ad\'a1\'eb\'a1\'e4\'a1\'e5}{\uc1\u8250 ?\'a1\'e6\'a1\'c3\'a1\'a2\'a1\'a3\'a1\'a8\'a1\'b5\'a1\'b7\'a1\'b9\'a1\'bb\'a1\'bf\'a1\'b3\'a1\'bd\'a8\'95\'a6\'e1\'a6\'e3\'a6\'e7\'a6\'e5\'a6\'eb\'a9w\'a9y\'a9\'7b\'a3\'a1\'a3\'a2\'a3\'a5\'a3\'a7\'a3\'a9\'a3\'ac\'a3\'ae\'a3\'ba\'a3\'bb\'a3\'bf\'a3\'dd\'a3\'e0\'a3\'fc\'a3\'fd\'a1\'ab\'a1\'e9}
+}}}{\upr{\*\lchars $([\'7b\'a1\'ea\'a3\'a4\'a1\'a4\'a1\'ae\'a1\'b0\'a1\'b4\'a1\'b6\'a1\'b8\'a1\'ba\'a1\'be\'a1\'b2\'a1\'bc\'a8\'94\'a9\'76\'a9\'78\'a9\'7a\'a1\'e7\'a3\'a8\'a3\'ae\'a3\'db\'a3\'fb\'a1\'ea\'a3\'a4}{\*\ud\uc0{\*\lchars 
+$([\'7b{\uc2\u163 \'a1\'ea\u165 \'a3\'a4\'a1\'a4\'a1\'ae\'a1\'b0\'a1\'b4\'a1\'b6\'a1\'b8\'a1\'ba\'a1\'be\'a1\'b2\'a1\'bc\'a8\'94\'a9v\'a9x\'a9z\'a1\'e7\'a3\'a8\'a3\'ae\'a3\'db\'a3\'fb\'a1\'ea\'a3\'a4}}}}\fet0{\*\wgrffmtfilter 2450}\ilfomacatclnup0\ltrpar 
+\sectd \ltrsect\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\pntxta \dbch .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang {\pntxta \dbch .}}
+{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang {\pntxta \dbch .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang {\pntxta \dbch )}}{\*\pnseclvl5\pndec\pnstart1\pnindent720\pnhang {\pntxtb \dbch (}{\pntxta \dbch )}}{\*\pnseclvl6
+\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb \dbch (}{\pntxta \dbch )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb \dbch (}{\pntxta \dbch )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb \dbch (}{\pntxta \dbch )}}{\*\pnseclvl9
+\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb \dbch (}{\pntxta \dbch )}}\pard\plain \ltrpar\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs22\alang1025 \ltrch\fcs0 
+\fs21\lang1033\langfe2052\kerning2\loch\af37\hich\af37\dbch\af13\cgrid\langnp1033\langfenp2052 {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b5\'cd\'c5\'e4\'b7\'bd\'b0\'b8}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+
+\par 
+\par }{\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 HYPERLINK "http://www.beargoo.com.cn/detail.php?smallid=605&productid=131457"}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9c00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f00640065007400610069006c002e007000680070003f0073006d0061006c00
+6c00690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af0 \ltrch\fcs0 \cs15\cf17\insrsid2562985\charrsid15084678 
+\hich\af37\dbch\af13\loch\f37 http://www.beargoo.com.cn/detail.php?smallid=605&productid=131457}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+
+\par 
+\par }\pard \ltrpar\ql \li0\ri0\sb100\sa100\sbauto1\saauto1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\outlinelevel1\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \ab\af13\afs36 \ltrch\fcs0 \b\f44\fs36\cf19\kerning0\insrsid2562985\charrsid8329021 
+\hich\af44\dbch\af13\loch\f44 IBM System x3650 M2
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'c0\'e0\'b1\'f0
+\'a3\'ba}{\field{\*\fldinst {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44  HYPERLINK "http://www.beargoo.com.cn/search.php?smallid=605" }{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 
+\f44\fs18\cf19\kerning0\insrsid7563333\charrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b7a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f007300650061007200630068002e007000680070003f0073006d0061006c00
+6c00690064003d003600300035000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'b7\'fe\'ce\'f1\'c6\'f7}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'a1\'a1\'a1\'a1\'c6\'b7\'c5\'c6
+\'a3\'ba}{\field{\*\fldinst {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44  HYPERLINK "http://www.beargoo.com.cn/search.php?smallid=605&param_0=102164" }{\rtlch\fcs1 \af13\afs18 
+\ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid7563333\charrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9800000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f007300650061007200630068002e007000680070003f0073006d0061006c00
+6c00690064003d00360030003500260070006100720061006d005f0030003d003100300032003100360034000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\hich\af44\dbch\af13\loch\f44 IBM}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'b2\'ce\'bf\'bc\'bc\'db\'b8\'f1\'a3\'ba}{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 
+\f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/price.php?smallid=605&productid=131457"}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f00700072006900630065002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \ab\af13 \ltrch\fcs0 \b\f44\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\hich\af44\dbch\af13\loch\f44 14833.33}{\rtlch\fcs1 \ab\af13 \ltrch\fcs0 \b\f44\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'d4\'aa}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \ab\af13\afs18 \ltrch\fcs0 \b\f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44  }{\rtlch\fcs1 \af13\afs18 
+\ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'a1\'a1}{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44 [}{\rtlch\fcs1 \af13\afs18 
+\ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'b1\'b1\'be\'a9}{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44 ]
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'c9\'cc\'bc\'d2
+\'b1\'a8\'bc\'db\'a3\'ba}{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf18\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'a3\'a4}{
+\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf18\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44 14833.33}{\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44 -}{\rtlch\fcs1 
+\af13 \ltrch\fcs0 \f44\fs18\cf18\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'a3\'a4}{\rtlch\fcs1 \af13 \ltrch\fcs0 \f44\fs18\cf18\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44 14833.33}{\rtlch\fcs1 
+\af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af44\dbch\af13\loch\f44  }{\rtlch\fcs1 \af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af44\hich\af44\dbch\f13 \'a1\'a1}{\rtlch\fcs1 
+\af13\afs18 \ltrch\fcs0 \f44\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d4\'da\'b4\'cb\'bb\'f9\'b4\'a1\'c9\'cf\'a3\'ac\'d4\'f6\'bc\'d3}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 2}{\rtlch\fcs1 \af0 \ltrch\fcs0 
+\insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b8\'f6}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 146G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d3\'b2\'c5\'cc\'a3\'ac\'ca\'b9\'d3\'c3}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 Raid 5.
+\par 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c6\'b7\'c5\'c6}{
+\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 IBM
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1195" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'c9\'e8\'b1\'b8\'c0\'e0\'d0\'cd\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003100390035000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'c9\'e8\'b1\'b8\'c0\'e0\'d0\'cd}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c6\'f3\'d2\'b5
+\'bc\'b6\'b7\'fe\'ce\'f1\'c6\'f7}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'cd\'e2\'b9\'db
+\'bd\'e1\'b9\'b9}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bb\'fa\'bc\'dc
+\'ca\'bd}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1197" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b9\'e2\'c5\'cc\'c7\'fd\'b6\'af\'c6\'f7\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5
+\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003100390037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b9\'e2\'c5\'cc\'c7\'fd\'b6\'af\'c6\'f7}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bf\'c9\'d1\'a1}
+{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1198" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'d6\'f7\'b0\'e5\'c0\'a9\'d5\'b9\'b2\'e5\'b2\'db\'a3\'a8\'b8\'f6\'a3\'a9
+\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003100390038000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d6\'f7\'b0\'e5\'c0\'a9\'d5\'b9\'b2\'e5\'b2\'db\'a3\'a8\'b8\'f6\'a3\'a9}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 4}{\rtlch\fcs1 
+\af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b8\'f6}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  PCI-Expre
+\hich\af1\dbch\af13\loch\f1 ss(4x8)}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b5\'da\'b6\'fe\'b4\'fa\'b2\'e5\'b2\'db}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ;2x8 }{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c8\'ab\'b3\'a4\'a1\'a2\'c8\'ab\'b8\'df}{
+\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ;1x8 }{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b0\'eb
+\'b3\'a4\'a1\'a2\'c8\'ab\'b8\'df}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ;1x8 }{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d0\'a1\'d0\'cd}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 4x8 }{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'cd\'a8\'b9\'fd\'bf\'c9\'d1\'a1\'b5\'c4\'c0\'a9\'d5\'b9\'bf\'a8\'bf\'c9\'d7\'aa\'bb\'bb\'ce\'aa}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  2x16;}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c1\'ed\'cd\'e2}{\rtlch\fcs1 \af1\afs18 
+\ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ,}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'cd\'a8\'b9\'fd\'bf\'c9\'d1\'a1\'b5\'c4
+\'c0\'a9\'d5\'b9\'bf\'a8\'bf\'c9\'cc\'e1\'b9\'a9}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b8\'f6}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  PCI-X
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1199" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'d6\'a7\'b3\'d6\'b2\'d9\'d7\'f7\'cf\'b5\'cd\'b3\'b5\'c4\'b2\'ce\'ca\'fd
+\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003100390039000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d6\'a7\'b3\'d6\'b2\'d9\'d7\'f7\'cf\'b5\'cd\'b3}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 
+MicrosoftWindows Server 2003}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'a1\'a2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\hich\af1\dbch\af13\loch\f1 Red Hat EnterpriseLinux}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'a1\'a2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 SUSE Linux E\hich\af1\dbch\af13\loch\f1 nterprise Server}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'a1\'a2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 TurboLinux Enterprise Server}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'a1\'a2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 Novell Netware }{\rtlch\fcs1 \af1\afs18 
+\ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'ba\'cd}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  VMware ESXi 3.5}{\rtlch\fcs1 
+\af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c7\'b6\'c8\'eb\'ca\'bd\'d0\'e9\'c4\'e2\'bb\'fa\'b9\'dc\'c0\'ed\'b3\'cc\'d0\'f2}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1201" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b1\'ea\'b3\'c6\'d6\'f7\'c6\'b5\'a3\'a8}{\rtlch\fcs1 \af0 \ltrch\fcs0 
+\insrsid2562985 \hich\af37\dbch\af13\loch\f37 MHz}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'a3\'a9\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300031000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b1\'ea\'b3\'c6\'d6\'f7\'c6\'b5\'a3\'a8}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 MHz}{\rtlch\fcs1 \af1 \ltrch\fcs0 
+\f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'a3\'a9}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 2000
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b4\'a6\'c0\'ed
+\'c6\'f7\'b9\'e6\'b8\'f1}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37  \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1025{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 1}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1200" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b4\'a6\'c0\'ed\'c6\'f7\'c0\'e0\'d0\'cd\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5
+\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300030000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b4\'a6\'c0\'ed\'c6\'f7\'c0\'e0\'d0\'cd}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 Intel Xeon E5504
+
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1202" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+CPU}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'ba\'cb\'d0\'c4\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 
+\insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300032000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\hich\af1\dbch\af13\loch\f1 CPU}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'ba\'cb\'d0\'c4}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 Gainestown(}{
+\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'cb\'c4\'ba\'cb\'d0\'c4}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\hich\af1\dbch\af13\loch\f1 )
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1203" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b1\'ea\'c5\'e4\'b4\'a6\'c0\'ed\'c6\'f7\'ca\'fd\'c1\'bf\'b5\'c4\'b2\'ce
+\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300033000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b1\'ea\'c5\'e4\'b4\'a6\'c0\'ed\'c6\'f7\'ca\'fd\'c1\'bf}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 1
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1204" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'d7\'ee\'b4\'f3\'b4\'a6\'c0\'ed\'c6\'f7\'ca\'fd\'c1\'bf\'b5\'c4\'b2\'ce
+\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300034000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d7\'ee\'b4\'f3\'b4\'a6\'c0\'ed\'c6\'f7\'ca\'fd\'c1\'bf}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 2
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1205" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b4\'a6\'c0\'ed\'c6\'f7\'bb\'ba\'b4\'e6\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5
+\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300035000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b4\'a6\'c0\'ed\'c6\'f7\'bb\'ba\'b4\'e6}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 4MB
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1206" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b4\'a6\'c0\'ed\'c6\'f7\'cd\'e2\'c6\'b5\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5
+\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300036000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b4\'a6\'c0\'ed\'c6\'f7\'cd\'e2\'c6\'b5}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 200MHz
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'c4\'da\'b4\'e6
+\'b9\'e6\'b8\'f1}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37  \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1026{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 2}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1207" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'c4\'da\'b4\'e6\'c0\'e0\'d0\'cd\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'c4\'da\'b4\'e6\'c0\'e0\'d0\'cd}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ECC DDR3
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1208" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b1\'ea\'d7\'bc\'c4\'da\'b4\'e6\'c8\'dd\'c1\'bf\'b5\'c4\'b2\'ce\'ca\'fd
+\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300038000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b1\'ea\'d7\'bc\'c4\'da\'b4\'e6\'c8\'dd\'c1\'bf}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 2GB*
+\hich\af1\dbch\af13\loch\f1 2
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1209" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'d7\'ee\'b4\'f3\'c4\'da\'b4\'e6\'c8\'dd\'c1\'bf\'b5\'c4\'b2\'ce\'ca\'fd
+\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200300039000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d7\'ee\'b4\'f3\'c4\'da\'b4\'e6\'c8\'dd\'c1\'bf}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 128GB
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b4\'e6\'b4\'a2
+\'d0\'d4\'c4\'dc}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+ HYPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1027{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 3}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1210" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'d3\'b2\'c5\'cc\'c0\'e0\'d0\'cd\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310030000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'d3\'b2\'c5\'cc\'c0\'e0\'d0\'cd}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 SAS
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1211" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'cb\'e6\'bb\'fa\'d3\'b2\'c5\'cc\'c8\'dd\'c1\'bf\'a3\'a8}{\rtlch\fcs1 \af0 
+\ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 GB}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'a3\'a9\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310031000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'cb\'e6\'bb\'fa\'d3\'b2\'c5\'cc\'c8\'dd\'c1\'bf\'a3\'a8}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 GB}{\rtlch\fcs1 \af1 \ltrch\fcs0 
+\f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'a3\'a9}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 146GB
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1212" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'c8\'c8\'b2\'e5\'b0\'ce\'d3\'b2\'c5\'cc\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5
+\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310032000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'c8\'c8\'b2\'e5\'b0\'ce\'d3\'b2\'c5\'cc}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'d7\'ee\'b6\'e0}
+{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 12}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b8\'f6}{
+\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 2.5}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'d3\'a2\'b4\'e7
+\'c8\'c8\'b2\'e5\'b0\'ce}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  SAS/SATA }{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'bb\'f2\'b9\'cc\'cc\'ac\'d3\'b2\'c5\'cc\'c7\'fd\'b6\'af\'c6\'f7}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1213" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+SCSI}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'bf\'d8\'d6\'c6\'c6\'f7\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 
+\insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310033000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\hich\af1\dbch\af13\loch\f1 SCSI}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bf\'d8\'d6\'c6\'c6\'f7}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 SAS }{
+\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bf\'d8\'d6\'c6\'c6\'f7}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1214" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+IDE}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'bf\'d8\'d6\'c6\'c6\'f7\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 
+\insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310034000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\hich\af1\dbch\af13\loch\f1 IDE}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bf\'d8\'d6\'c6\'c6\'f7}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 ATA 100
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'cd\'f8\'c2\'e7
+\'b2\'ce\'ca\'fd}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37  H\hich\af37\dbch\af13\loch\f37 
+YPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1028{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 4}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_explain.php?pid=1215" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'cd\'f8\'bf\'a8\'c0\'e0\'d0\'cd}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\hich\af37\dbch\af13\loch\f37 /}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'ca\'fd\'c1\'bf\'b5\'c4\'b2\'ce\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{
+\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310035000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'cd\'f8\'bf\'a8\'c0\'e0\'d0\'cd}{\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 /}{\rtlch\fcs1 \af1 \ltrch\fcs0 
+\f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'ca\'fd\'c1\'bf}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bc\'af\'b3\'c9
+\'b5\'c4\'cb\'ab\'c7\'a7\'d5\'d7\'d2\'d4\'cc\'ab\'cd\'f8}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b5\'e7\'d4\'b4
+\'b9\'e6\'b8\'f1}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+ HYPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1029{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 5}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+HYPERLINK "http://www.beargoo.com.cn/param_exp\hich\af37\dbch\af13\loch\f37 lain.php?pid=1216" \\t "_blank" \\o "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'e4\'af\'c0\'c0\'b5\'e7\'d4\'b4\'c0\'e0\'d0\'cd\'b5\'c4\'b2\'ce
+\'ca\'fd\'cb\'b5\'c3\'f7}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 "}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+10d0c9ea79f9bace118c8200aa004ba90b0200000083000000070000005f0062006c0061006e006b000000e0c9ea79f9bace118c8200aa004ba90b8200000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d005f00
+6500780070006c00610069006e002e007000680070003f007000690064003d0031003200310036000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1 \ltrch\fcs0 \f1\fs18\cf17\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'b5\'e7\'d4\'b4\'c0\'e0\'d0\'cd}}}\sectd \linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b5\'e7\'d4\'b4}
+{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b5\'e7\'d4\'b4
+\'ca\'fd\'c1\'bf}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 1
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b6\'ee\'b6\'a8
+\'b9\'a6\'c2\'ca\'a3\'a8}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 W}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\loch\af1\hich\af1\dbch\f13 \'a3\'a9}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 675
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'bb\'b7\'be\'b3
+\'b2\'ce\'ca\'fd}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\field{\*\fldinst {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 
+ HYPERLINK "http://www.beargoo.com.cn/param.php?smallid=605&productid=131457" }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid7563333 {\*\datafield 
+00d0c9ea79f9bace118c8200aa004ba90b0200000003000000e0c9ea79f9bace118c8200aa004ba90b9a00000068007400740070003a002f002f007700770077002e00620065006100720067006f006f002e0063006f006d002e0063006e002f0070006100720061006d002e007000680070003f0073006d0061006c006c00
+690064003d003600300035002600700072006f006400750063007400690064003d003100330031003400350037000000795881f43b1d7f48af2c825dc485276300000000a5ab0000}}}{\fldrslt {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 
+\f1\fs18\cf17\lang1024\langfe1024\kerning0\noproof\insrsid2562985\charrsid3019237 {\*\shppict{\pict{\*\picprop\shplid1030{\sp{\sn shapeType}{\sv 75}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}{\sp{\sn fRotateText}{\sv 1}}{\sp{\sn pictureGray}{\sv 0}}
+{\sp{\sn pictureBiLevel}{\sv 0}}{\sp{\sn fFilled}{\sv 0}}{\sp{\sn fNoFillHitTest}{\sv 1}}{\sp{\sn fLine}{\sv 0}}{\sp{\sn wzName}{\sv \'cd\'bc\'c6\'ac 6}}{\sp{\sn wzDescription}{\sv http://www.beargoo.com.cn/style/img/param1.gif}}{\sp{\sn pihlShape}{\sv 
+{\*\hl{\hlfr http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}{\hlsrc http://www.beargoo.com.cn/param.php?smallid=605&productid=13145}}}}{\sp{\sn fLayoutInCell}{\sv 1}}{\sp{\sn fIsButton}{\sv 1}}{\sp{\sn fHidden}{\sv 0}}
+{\sp{\sn fLayoutInCell}{\sv 1}}}\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\pngblip\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+89504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfeeaf0f5fbfcffe8eff4e9eff5fcfd
+fff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9fcffe9f0f6f2f7fbe7eef5e6eef4
+f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b845cb2aaa0a8903b99a5a8b59a51b2
+9040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4ae9d75ebf0f5e8ecf1b9ae9bf8bf
+0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce5051000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e600000001624b47440088051d480000000c636d
+50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befffff9482a4e4baafbda9104502101f
+e253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a9324a348210adc328b3a10f0584d4c6
+15b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f081104249a14eb04377bf03a0869
+8d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be9abe8c14141171e7a19f2c8ab974
+15891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce41052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44ae426082}}{\nonshppict
+{\pict\picscalex100\picscaley100\piccropl0\piccropr0\piccropt0\piccropb0\picw1799\pich503\picwgoal1020\pichgoal285\wmetafile8\bliptag-1267858662{\*\blipuid b46e031acf2e37c20fec4502c3bd8da8}
+010009000003d409000000004606000000004606000026060f00820c574d46430100000000000100f4f30000000001000000600c000000000000600c00000100
+00006c000000000000000000000043000000120000000000000000000000a3060000da01000020454d4600000100600c00000c00000001000000000000000000
+000000000000000500002003000040010000c800000000000000000000000000000000e20400400d0300460000002c00000020000000454d462b014001001c00
+0000100000000210c0db010000006000000060000000460000001404000008040000454d462b224004000c000000000000001e4009000c000000000000002440
+01000c000000000000003040020010000000040000000000803f214007000c000000000000000840000560030000540300000210c0db01000000000000000000
+000000000000000000000100000089504e470d0a1a0a0000000d49484452000000440000001308030000001e465bcf00000180504c5445338ab594cdedfafcfe
+eaf0f5fbfcffe8eff4e9eff5fcfdfff9fbfdf8fafdf5f8fbf2f6faedf2f7eef3f897ceedebf1f6f1f5f9f0f4f8f7f9fcf4f7fac3e3f5ebf1f7e8eff5f5f9fdf9
+fcffe9f0f6f2f7fbe7eef5e6eef4f4f8fceef4f9f7fbfef8fbffeff5faecf2f8f1f6faedf3f8f6fafdc2c6cdf5c536c79c2cecedeedcdbd9e0e5e9a492719b84
+5cb2aaa0a8903b99a5a8b59a51b29040ecb95efada74ecf1f6fce26db5b8b6e7d1c0e0d8dce9e6ddf1eaa4c23232e6b33cb4aca0bc9c50e1bc72f0f3f6e1a3a4
+ae9d75ebf0f5e8ecf1b9ae9bf8bf0ddedbd3e3e7ece7d9cfcfa2a7d1c4a5dad8d3e6ebefe9eef2a19287cd777bdfe4e9dadee1dad9d6b0b3b7ce505100000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000167b65e60000000162
+4b47440088051d480000000c636d50504a436d703037313200000003480073bc0000014c49444154384fad54c776c3300c63b79bc68edd66efd9bdf7de7befff
+ff9482a4e4baafbda9104502101fe253281bf43922c852501c714431a0a039e88826421afd8e6820a4e7fd02791e4a1ac91124867955a78790c2a8c1cee7a932
+4a348210adc328b3a10f0584d4c615b3932ffb3cc9c2527120b874c2b16b103584945382f7b3bde53ba52932130cf4cf922ddd2b23a433c17898df5cda62127f
+081104249a14eb04377bf03a08698d01d70beb2b8b4c00e2428bd9b7d237bd315a08a98761b8bb3a757488c92029b9a6933188091a2e53e9401d21dd283a39be
+9abe8c14141171e7a19f2c8ab97415891b7511d2f6fddbb5837b3f0122df4749e3291cc37a3070186cb711924b5f3c6fcfa47f824835f6d070948925b6996ce4
+1052cacc7dbcbdde3c3e9d6f6418f20bc240e3a68698f6dabd1242f2038ec823a432ec880a42aa438ea806f41fff6c5fbd10300c2ec8ff510000000049454e44
+ae42608200000840010824000000180000000210c0db01000000030000000000000000000000000000001b400000400000003400000001000000020000000000
+00bf000000bf000088420000984103000000000000b3000000b3ffff8742000000b3000000b3ffff97412100000008000000620000000c000000010000001500
+00000c00000004000000150000000c0000000400000051000000e806000000000000000000004300000012000000000000000000000000000000000000004400
+000013000000500000008c010000dc0100000c050000000000002000cc0044000000130000002800000044000000130000000100080000000000000000000000
+000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfaf600fdfb
+f900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9da00759d
+ae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074dafa00519a
+b500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009baeb900f8f2
+ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3b000e1de
+da00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe8000203040404040404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404030203575858585858585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585703035556565656
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565655030353
+54545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+53030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d0d0d0d0d
+494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d0d43430d
+4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d3d3d3d0d
+3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d3636360d0d360d
+3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d2f0d0d2f
+0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d28282828
+0d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d210d21210d
+21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a0d0d1a1a
+0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d14140d0d
+0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f0f0f0d0f
+0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0d0c
+0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a09030307080808080808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808070303050606060606060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060503020304040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403024c00
+00006400000000000000000000004300000012000000000000000000000044000000130000002900aa0000000000000000000000803f00000000000000000000
+803f0000000000000000000000000000000000000000000000000000000000000000220000000c000000ffffffff460000001c00000010000000454d462b0240
+00000c000000000000000e000000140000000000000010000000140000000400000003010800050000000b0200000000050000000c0213004400030000001e00
+0400000007010400040000000701040059030000410b2000cc001300440000000000130044000000000028000000440000001300000001000800000000000000
+00000000000000000000590000000000000000000000ffffff00f5e3c300edce9700edcd9400fffcf900fffdfc00fffbf800fffcfb00fefbf700fefcfa00fdfa
+f600fdfbf900b58a3300fdf9f500fdfaf800dcd8e0005150ce00a4a3e100fcf8f400fcf9f700d9dbdc00cdc6c2007b77cd003232c200fbf7f200fbf8f500d6d9
+da00759dae00a4eaf100a8a59900a7a2cf00faf6f100faf7f400d3d8da007192a4006de2fc003b90a800b6b8b500faf5ef00faf6f200d3dbde005c849b0074da
+fa00519ab500a0aab200f9f4ee00f9f5f100dde6e9004090b20036c5f500509cbc00a0acb400f8f3ed00f8f4f000f6f3f00072bce1000dbff8002c9cc7009bae
+b900f8f2ec00f8f3ee00cfd9e7005eb9ec003cb3e600a5c4d100f7f1eb00f7f2ed00f1ece8008792a100c0d1e700eeedec00f6f0e900f6f1eb00e9e5e000b7b3
+b000e1deda00e9e4df00ece7e300efebe600f2eee900f5f0eb00f6f1ec00f5efe800f5f0ea00f5eee700f5efe900f4eee600f4efe80002030404040404040404
+04040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040302035758585858
+58585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585858585857030355
+56565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656565656
+55030353545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454545454
+5454545453030348494a4b4c4d4e4f50515249494949490d0d0d0d0d4949494949490d0d4949490d0d4949490d494949494949494949490d4949490d4949490d
+0d0d0d0d494949494803034243444546474343434343434343434343434343430d0d4343434343430d0d0d43430d430d43430d0d0d4343434343430d4343430d
+0d43430d4343430d434343434203033c3d3d3e3f40413d3d3d3d3d3d3d3d3d3d3d3d0d0d3d3d0d3d3d3d3d0d3d3d0d3d3d3d0d3d3d3d3d3d3d0d0d3d3d3d3d0d
+3d3d3d0d3d0d3d0d0d0d0d0d3d3d3d3d3c03033536363738393a3b363636363636360d360d0d36360d36360d0d360d0d0d0d0d0d36360d3636360d0d0d363636
+0d0d360d3636360d3636360d3636360d363636363503032e2f2f2f30313233342f2f2f2f2f2f2f0d2f2f0d2f2f2f0d2f2f2f2f2f0d2f2f2f2f0d2f0d2f2f2f0d
+2f0d0d2f0d2f0d0d2f2f0d0d0d0d2f0d0d0d0d0d2f2f2f2f2e03032728282828292a2b2c2d282828282828280d28280d280d282828280d28280d280d280d280d
+282828280d2828280d28280d2828280d2828282828282828282828282703032021212121212223242526212121210d0d0d0d0d0d0d0d0d0d0d21210d210d0d21
+0d21210d21210d0d0d2121210d21210d21210d0d0d210d0d0d0d0d0d0d212121200303191a1a1a1a1a1a1b1c1d1e1f1a1a1a1a1a1a1a0d1a1a1a1a1a1a1a1a1a
+0d0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a0d1a1a1a1a1a0d1a0d1a1a1a1a1a190303131414141414141415161718141414140d0d0d0d0d0d0d0d0d
+14140d0d0d0d0d0d140d0d0d0d14140d14140d140d14140d1414140d0d140d0d0d0d0d0d0d1414141303030e0f0f0f0f0f0f0f0f1011120f0f0f0f0f0f0d0f0f
+0f0f0d0f0f0f0f0d0f0d0d0f0f0d0f0f0f0f0f0f0d0f0f0f0d0f0f0d0f0f0f0d0f0f0f0f0d0f0d0f0f0f0f0f0e03030b0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c
+0c0c0d0c0c0d0c0c0c0c0d0c0c0d0c0d0c0d0c0c0c0c0c0c0d0c0c0c0c0c0c0d0c0c0c0d0c0c0c0c0d0c0d0c0c0c0c0c0b0303090a0a0a0a0a0a0a0a0a0a0a0a
+0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a090303070808080808080808
+08080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080808080703030506060606
+06060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060605030203
+0404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040403020c00000040092900aa000000000000001300440000000000040000002701ffff030000000000}}}}}\sectd 
+\linex0\headery851\footery992\colsx425\endnhere\sectlinegrid312\sectspecifyl\sectrsid10888494\sftnbj {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b9\'a4\'d7\'f7
+\'ca\'aa\'b6\'c8}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 8% }{\rtlch\fcs1 
+\af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'d6\'c1}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  85%
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'b4\'e6\'b4\'a2
+\'ca\'aa\'b6\'c8}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 
+\par }\pard \ltrpar\ql \li720\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\pararsid8329021 {\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1 5% }{\rtlch\fcs1 
+\af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \loch\af1\hich\af1\dbch\f13 \'d6\'c1}{\rtlch\fcs1 \af1\afs18 \ltrch\fcs0 \f1\fs18\cf19\kerning0\insrsid2562985\charrsid8329021 \hich\af1\dbch\af13\loch\f1  95%
+\par }\pard \ltrpar\qj \li0\ri0\nowidctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 {\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\par 
+\par 
+\par 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d6\'d0\'c5\'e4\'b7\'bd\'b0\'b8}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d4\'da\'b5\'cd\'c5\'e4\'b7\'bd\'b0\'b8\'b5\'c4\'bb\'f9\'b4\'a1\'c9\'cf\'d4\'f6\'bc\'d3\'c4\'da\'b4\'e6\'b5\'bd}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\hich\af37\dbch\af13\loch\f37 16G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b5\'bd}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 32G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\loch\af37\hich\af37\dbch\f13 \'a3\'ac\'d3\'b2\'c5\'cc\'bf\'c9\'d2\'d4\'cf\'c8\'c0\'a9\'b5\'bd}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 6}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 
+\'b8\'f6\'d3\'b2\'c5\'cc\'a3\'ac\'c8\'e7\'b9\'fb\'d3\'d0}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 250G
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d3\'b2\'c5\'cc\'a3\'ac\'bf\'c9\'d2\'d4\'bf\'bc\'c2\'c7\'ca\'b9\'d3\'c3}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 3*25
+\hich\af37\dbch\af13\loch\f37 0G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'a1\'a3}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\par 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b8\'df\'c5\'e4\'b7\'bd\'b0\'b8}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985\charrsid8329021 
+\par }{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'d4\'f6\'bc\'d3\'c7\'b0\'d6\'c3\'bb\'fa\'b7\'fe\'ce\'f1\'c6\'f7\'ba\'cd}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 web}{\rtlch\fcs1 \af0 
+\ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b7\'fe\'ce\'f1\'c6\'f7\'a1\'a3\'c4\'da\'b4\'e6}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 4G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 
+\loch\af37\hich\af37\dbch\f13 \'a3\'ac\'d3\'b2\'c5\'cc}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 1*145G}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'a3\'ac\'ca\'b9\'d3\'c3}{\rtlch\fcs1 
+\af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 1U}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'b5\'c4}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985 \hich\af37\dbch\af13\loch\f37 X3220}{\rtlch\fcs1 \af0 
+\ltrch\fcs0 \insrsid2562985 \loch\af37\hich\af37\dbch\f13 \'be\'cd\'bf\'c9\'d2\'d4\'c1\'cb\'a1\'a3}{\rtlch\fcs1 \af0 \ltrch\fcs0 \insrsid2562985\charrsid8329021 
+\par }}
