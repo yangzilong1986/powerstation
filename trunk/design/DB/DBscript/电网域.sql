@@ -1,39 +1,169 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-4-30 21:33:34                           */
+/* Created on:     2010-5-7 15:56:22                            */
 /*==============================================================*/
 
 
+
+-- Type package declaration
+create or replace package PDTypes  
+as
+    TYPE ref_cursor IS REF CURSOR;
+end;
+
+-- Integrity package declaration
+create or replace package IntegrityPackage AS
+ procedure InitNestLevel;
+ function GetNestLevel return number;
+ procedure NextNestLevel;
+ procedure PreviousNestLevel;
+ end IntegrityPackage;
+/
+
+-- Integrity package definition
+create or replace package body IntegrityPackage AS
+ NestLevel number;
+
+-- Procedure to initialize the trigger nest level
+ procedure InitNestLevel is
+ begin
+ NestLevel := 0;
+ end;
+
+
+-- Function to return the trigger nest level
+ function GetNestLevel return number is
+ begin
+ if NestLevel is null then
+     NestLevel := 0;
+ end if;
+ return(NestLevel);
+ end;
+
+-- Procedure to increase the trigger nest level
+ procedure NextNestLevel is
+ begin
+ if NestLevel is null then
+     NestLevel := 0;
+ end if;
+ NestLevel := NestLevel + 1;
+ end;
+
+-- Procedure to decrease the trigger nest level
+ procedure PreviousNestLevel is
+ begin
+ NestLevel := NestLevel - 1;
+ end;
+
+ end IntegrityPackage;
+/
+
+
+drop trigger "tib_g_line"
+/
+
+drop trigger "tib_g_line_rela"
+/
+
+drop trigger "tib_g_line_tg_rela"
+/
+
+drop trigger "tib_g_subs_line_rela"
+/
+
+drop trigger "tib_g_tg"
+/
+
+drop trigger "tib_g_tran"
+/
+
 alter table G_LINE_RELA
-   drop constraint FK_G_LINE_R_G_LINE_LI_G_LINE;
+   drop constraint FK_G_LINE_R_G_LINE_LI_G_LINE
+/
 
 alter table G_LINE_TG_RELA
-   drop constraint FK_G_LINE_T_G_LINE_TG_G_LINE;
+   drop constraint FK_G_LINE_T_G_LINE_TG_G_LINE
+/
 
 alter table G_LINE_TG_RELA
-   drop constraint FK_G_LINE_T_G_TG_LINE_G_TG;
+   drop constraint FK_G_LINE_T_G_TG_LINE_G_TG
+/
 
 alter table G_SUBS_LINE_RELA
-   drop constraint FK_G_SUBS_L_G_LINE_SU_G_LINE;
+   drop constraint FK_G_SUBS_L_G_LINE_SU_G_LINE
+/
 
 alter table G_SUBS_LINE_RELA
-   drop constraint FK_G_SUBS_L_G_SUBS_LI_G_TRAN;
+   drop constraint FK_G_SUBS_L_G_SUBS_LI_G_TRAN
+/
 
-drop table G_LINE cascade constraints;
+drop table G_LINE cascade constraints
+/
 
-drop table G_LINE_RELA cascade constraints;
+drop table G_LINE_RELA cascade constraints
+/
 
-drop table G_LINE_TG_RELA cascade constraints;
+drop table G_LINE_TG_RELA cascade constraints
+/
 
-drop index G_LINE_SUBS_LINE_RELA_FK;
+drop index G_LINE_SUBS_LINE_RELA_FK
+/
 
-drop index G_SUBS_LINE_SUB_FK;
+drop index G_SUBS_LINE_SUB_FK
+/
 
-drop table G_SUBS_LINE_RELA cascade constraints;
+drop table G_SUBS_LINE_RELA cascade constraints
+/
 
-drop table G_TG cascade constraints;
+drop table G_TG cascade constraints
+/
 
-drop table G_TRAN cascade constraints;
+drop table G_TRAN cascade constraints
+/
+
+drop sequence SEQ_G_LINE
+/
+
+drop sequence SEQ_G_TG
+/
+
+drop sequence SEQ_G_TRAN
+/
+
+drop sequence SEQ_LINE_RELA
+/
+
+create sequence SEQ_G_LINE
+increment by 1
+start with 1
+ maxvalue 99999999
+ minvalue 1
+ cache 20
+/
+
+create sequence SEQ_G_TG
+increment by 1
+start with 1
+ maxvalue 99999999
+ minvalue 1
+ cache 20
+/
+
+create sequence SEQ_G_TRAN
+increment by 1
+start with 1
+ maxvalue 99999999
+ minvalue 1
+ cache 20
+/
+
+create sequence SEQ_LINE_RELA
+increment by 1
+start with 1
+ maxvalue 99999999
+ minvalue 1
+ cache 20
+/
 
 /*==============================================================*/
 /* Table: G_LINE                                                */
@@ -50,33 +180,42 @@ create table G_LINE  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_LINE primary key (LINE_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_LINE is
 '1) 描述线路基本信息，主要属性包括线路编码、线路名称、线损计算方式、单位长度线路电阻、单位长度线路电抗
 2) 线损基础信息管理业务中录入产生，或通过与生产系统接口过程产生。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。'
+/
 
 comment on column G_LINE.LINE_ID is
-'线路的系统内部唯一标识';
+'线路的系统内部唯一标识'
+/
 
 comment on column G_LINE.LINE_NO is
-'线路的编码';
+'线路的编码'
+/
 
 comment on column G_LINE.ORG_NO is
-'线路管理单位';
+'线路管理单位'
+/
 
 comment on column G_LINE.SUBLINE_FLAG is
-'标识是否支线：：是、 否 ';
+'标识是否支线：：是、 否 '
+/
 
 comment on column G_LINE.RUN_STATUS_CODE is
-'标识线路当前状态：运行、停用、 拆除';
+'标识线路当前状态：运行、停用、 拆除'
+/
 
 comment on column G_LINE.CONS_ID is
-'用电客户的内部唯一标识';
+'用电客户的内部唯一标识'
+/
 
 comment on column G_LINE.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 /*==============================================================*/
 /* Table: G_LINE_RELA                                           */
@@ -89,27 +228,34 @@ create table G_LINE_RELA  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_LINE_RELA primary key (LINE_RELA_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_LINE_RELA is
 '1) 描述了线路与线路的多对多关系，但当前生效的只有一个，主要属性：当前线路关系标志
 2) 通过线损基础信息管理业务中录入产生记录，或通过与生产系统接口过程产生记录。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。'
+/
 
 comment on column G_LINE_RELA.LINE_RELA_ID is
-'系统内部标识';
+'系统内部标识'
+/
 
 comment on column G_LINE_RELA.LINE_ID is
-'线路的系统内部唯一标识';
+'线路的系统内部唯一标识'
+/
 
 comment on column G_LINE_RELA.LINK_LINE_ID is
-'相关线路的标识';
+'相关线路的标识'
+/
 
 comment on column G_LINE_RELA.CASCADE_FLAG is
-'标明当前生效的线路级联关系 ,0. 是， 1. 否';
+'标明当前生效的线路级联关系 ,0. 是， 1. 否'
+/
 
 comment on column G_LINE_RELA.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 /*==============================================================*/
 /* Table: G_LINE_TG_RELA                                        */
@@ -122,27 +268,34 @@ create table G_LINE_TG_RELA  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_LINE_TG_RELA primary key (LINE_TQ_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_LINE_TG_RELA is
 '1) 当前线路与台区间是多对多关系，此实体是多对多关系的转化，但当前生效的只有一个，主要属性：当前线路台区关系标志
 2) 通过线损基础信息管理业务中录入产生记录，或通过与生产系统接口过程产生记录。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。'
+/
 
 comment on column G_LINE_TG_RELA.LINE_TQ_ID is
-'线路台区关系内部标识';
+'线路台区关系内部标识'
+/
 
 comment on column G_LINE_TG_RELA.TG_ID is
-'台区标识';
+'台区标识'
+/
 
 comment on column G_LINE_TG_RELA.LINE_ID is
-'线路的系统内部唯一标识';
+'线路的系统内部唯一标识'
+/
 
 comment on column G_LINE_TG_RELA.RELA_FLAG is
-'当前线路与台区间是多对多关系， 但当前生效的只有一个 ,0. 否， 1. 是 ';
+'当前线路与台区间是多对多关系， 但当前生效的只有一个 ,0. 否， 1. 是 '
+/
 
 comment on column G_LINE_TG_RELA.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 /*==============================================================*/
 /* Table: G_SUBS_LINE_RELA                                      */
@@ -156,44 +309,54 @@ create table G_SUBS_LINE_RELA  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_SUBS_LINE_RELA primary key (RELA_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_SUBS_LINE_RELA is
 '1) 描述了变电站与线路的多对多关系,是变电站与线路多对多关系转化的实体，但当前生效的只有一个
 2) 线损基础信息管理业务中录入产生，或通过与生产系统接口过程产生。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用。'
+/
 
 comment on column G_SUBS_LINE_RELA.RELA_ID is
-'变电站线路关系标识';
+'变电站线路关系标识'
+/
 
 comment on column G_SUBS_LINE_RELA.EQUIP_ID is
-'设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识';
+'设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识'
+/
 
 comment on column G_SUBS_LINE_RELA.LINE_ID is
-'线路的系统内部唯一标识';
+'线路的系统内部唯一标识'
+/
 
 comment on column G_SUBS_LINE_RELA.SUBS_ID is
-'变电站系统内部标识';
+'变电站系统内部标识'
+/
 
 comment on column G_SUBS_LINE_RELA.RELA_FLAG is
-'标志当前生效的变电站线路关系';
+'标志当前生效的变电站线路关系'
+/
 
 comment on column G_SUBS_LINE_RELA.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 /*==============================================================*/
 /* Index: G_SUBS_LINE_SUB_FK                                    */
 /*==============================================================*/
 create index G_SUBS_LINE_SUB_FK on G_SUBS_LINE_RELA (
    SUBS_ID ASC
-);
+)
+/
 
 /*==============================================================*/
 /* Index: G_LINE_SUBS_LINE_RELA_FK                              */
 /*==============================================================*/
 create index G_LINE_SUBS_LINE_RELA_FK on G_SUBS_LINE_RELA (
    LINE_ID ASC
-);
+)
+/
 
 /*==============================================================*/
 /* Table: G_TG                                                  */
@@ -211,39 +374,50 @@ create table G_TG  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_TG primary key (TG_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_TG is
 '1) 描述台区基本信息,专变也做为台区管理，包括台区编码、台区名称、台区地址、公专变标志等信息
 2) 通过线损基础信息管理业务中录入产生，或通过新装增容与变更用电归档过程产生；或通过与生产系统接口过程产生。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。'
+/
 
 comment on column G_TG.TG_ID is
-'台区标识';
+'台区标识'
+/
 
 comment on column G_TG.ORG_NO is
-'管理单位编号';
+'管理单位编号'
+/
 
 comment on column G_TG.TG_NO is
-'台区编码';
+'台区编码'
+/
 
 comment on column G_TG.TG_NAME is
-'台区名称';
+'台区名称'
+/
 
 comment on column G_TG.TG_CAP is
-'台区容量 , 为可并列运行的变压器容量之和 ';
+'台区容量 , 为可并列运行的变压器容量之和 '
+/
 
 comment on column G_TG.CHG_DATE is
-'台区新装、 拆除、 变更的时间';
+'台区新装、 拆除、 变更的时间'
+/
 
 comment on column G_TG.PUB_PRIV_FLAG is
-'台区是 0. 公变或者 1. 专变 ';
+'台区是 0. 公变或者 1. 专变 '
+/
 
 comment on column G_TG.RUN_STATUS_CODE is
-'台区运行状态';
+'台区运行状态'
+/
 
 comment on column G_TG.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 /*==============================================================*/
 /* Table: G_TRAN                                                */
@@ -275,93 +449,247 @@ create table G_TRAN  (
    LASTTIME_STAMP       DATE                           default SYSDATE,
    constraint PK_G_TRAN primary key (EQUIP_ID)
 )
-tablespace TABS_ARCHIVE;
+tablespace TABS_ARCHIVE
+/
 
 comment on table G_TRAN is
 '1) 描述变压器的运行信息及铭牌参数，包括变压器编码、变压器型号、变压器铭牌容量、当前状态等信息
 2) 通过线损基础信息管理业务中录入产生，或新装增容与变更用电归档过程产生；或通过与生产系统接口过程产生。
-3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。';
+3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。'
+/
 
 comment on column G_TRAN.EQUIP_ID is
-'设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识';
+'设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识'
+/
 
 comment on column G_TRAN.TG_ID is
-'台区标识 ';
+'台区标识 '
+/
 
 comment on column G_TRAN.CONS_ID is
-'用电客户的内部唯一标识';
+'用电客户的内部唯一标识'
+/
 
 comment on column G_TRAN.TYPE_CODE is
-'区分是变压器还是高压电动';
+'区分是变压器还是高压电动'
+/
 
 comment on column G_TRAN.TRAN_NAME is
-'设备的名称';
+'设备的名称'
+/
 
 comment on column G_TRAN.INST_DATE is
-'设备的安装日期';
+'设备的安装日期'
+/
 
 comment on column G_TRAN.PLATE_CAP is
-'设备铭牌上登记的容量';
+'设备铭牌上登记的容量'
+/
 
 comment on column G_TRAN.MS_FLAG is
-'引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码';
+'引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码'
+/
 
 comment on column G_TRAN.RUN_STATUS_CODE is
-'本次变更前的运行状态 01 运行、 02 停用、 03 拆除 ';
+'本次变更前的运行状态 01 运行、 02 停用、 03 拆除 '
+/
 
 comment on column G_TRAN.PROTECT_MODE is
-'受电设备的保护方式， 引用代码“变压器保护方式分类”';
+'受电设备的保护方式， 引用代码“变压器保护方式分类”'
+/
 
 comment on column G_TRAN.FRSTSIDE_VOLT_CODE is
-'设备的一侧电压 ';
+'设备的一侧电压 '
+/
 
 comment on column G_TRAN.SNDSIDE_VOLT_CODE is
-'设备的二侧电压';
+'设备的二侧电压'
+/
 
 comment on column G_TRAN.MODEL_NO is
-'设备的型号';
+'设备的型号'
+/
 
 comment on column G_TRAN.RV_HV is
-'额定电压 _ 高压';
+'额定电压 _ 高压'
+/
 
 comment on column G_TRAN.RC_HV is
-'额定电流 _ 高压';
+'额定电流 _ 高压'
+/
 
 comment on column G_TRAN.RV_MV is
-'额定电压 _ 中压';
+'额定电压 _ 中压'
+/
 
 comment on column G_TRAN.RC_MV is
-'额定电流 _ 中压';
+'额定电流 _ 中压'
+/
 
 comment on column G_TRAN.RV_LV is
-'额定电压 _ 低压';
+'额定电压 _ 低压'
+/
 
 comment on column G_TRAN.RC_LV is
-'额定电流 _ 低压';
+'额定电流 _ 低压'
+/
 
 comment on column G_TRAN.PR_CODE is
-'设备的产权说明 01 局属、 02 用户';
+'设备的产权说明 01 局属、 02 用户'
+/
 
 comment on column G_TRAN.LASTTIME_STAMP is
-'最后表结构修改时间戳';
+'最后表结构修改时间戳'
+/
 
 alter table G_LINE_RELA
    add constraint FK_G_LINE_R_G_LINE_LI_G_LINE foreign key (LINE_ID)
-      references G_LINE (LINE_ID);
+      references G_LINE (LINE_ID)
+/
 
 alter table G_LINE_TG_RELA
    add constraint FK_G_LINE_T_G_LINE_TG_G_LINE foreign key (LINE_ID)
-      references G_LINE (LINE_ID);
+      references G_LINE (LINE_ID)
+/
 
 alter table G_LINE_TG_RELA
    add constraint FK_G_LINE_T_G_TG_LINE_G_TG foreign key (TG_ID)
-      references G_TG (TG_ID);
+      references G_TG (TG_ID)
+/
 
 alter table G_SUBS_LINE_RELA
    add constraint FK_G_SUBS_L_G_LINE_SU_G_LINE foreign key (LINE_ID)
-      references G_LINE (LINE_ID);
+      references G_LINE (LINE_ID)
+/
 
 alter table G_SUBS_LINE_RELA
    add constraint FK_G_SUBS_L_G_SUBS_LI_G_TRAN foreign key (EQUIP_ID)
-      references G_TRAN (EQUIP_ID);
+      references G_TRAN (EQUIP_ID)
+/
+
+
+create trigger "tib_g_line" before insert
+on G_LINE for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "LINE_ID" uses sequence SEQ_G_LINE
+    select SEQ_G_LINE.NEXTVAL INTO :new.LINE_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+create trigger "tib_g_line_rela" before insert
+on G_LINE_RELA for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "LINE_RELA_ID" uses sequence SEQ_LINE_RELA
+    select SEQ_LINE_RELA.NEXTVAL INTO :new.LINE_RELA_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+create trigger "tib_g_line_tg_rela" before insert
+on G_LINE_TG_RELA for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "LINE_TQ_ID" uses sequence SEQ_LINE_RELA
+    select SEQ_LINE_RELA.NEXTVAL INTO :new.LINE_TQ_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+create trigger "tib_g_subs_line_rela" before insert
+on G_SUBS_LINE_RELA for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "RELA_ID" uses sequence SEQ_LINE_RELA
+    select SEQ_LINE_RELA.NEXTVAL INTO :new.RELA_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+create trigger "tib_g_tg" before insert
+on G_TG for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "TG_ID" uses sequence SEQ_G_TG
+    select SEQ_G_TG.NEXTVAL INTO :new.TG_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+
+
+create trigger "tib_g_tran" before insert
+on G_TRAN for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "EQUIP_ID" uses sequence SEQ_G_TRAN
+    select SEQ_G_TRAN.NEXTVAL INTO :new.EQUIP_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
 
