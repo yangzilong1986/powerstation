@@ -9,6 +9,10 @@ import java.lang.*;
  * @author Thinkpad
  */
 public class RealTimeTaskProcessor implements Runnable{
+
+    public RealTimeTaskProcessor() {
+        
+    }
     public void run(){
 
     }
