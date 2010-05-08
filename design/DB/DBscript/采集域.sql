@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-5-7 15:57:23                            */
+/* Created on:     2010-5-8 1:08:43                             */
 /*==============================================================*/
 
 
@@ -141,7 +141,8 @@ comment on column R_COMMANDITEM.OBJECT_FLAG_SUBS is
 create table R_REALTIME_TASK  (
    TASK_ID              NUMBER                          not null,
    SEQUENCE_CODE        NUMBER                          not null,
-   MSN                  VARCHAR2(512),
+   SEND_MSG             VARCHAR2(512),
+   RECV_MSG             VARCHAR2(512),
    POST_TIME            DATE                           default SYSDATE,
    TASK_STATUS          VARCHAR2(5)                    default '0',
    constraint PK_R_REALTIME_TASK primary key (TASK_ID)
