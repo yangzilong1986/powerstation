@@ -14,11 +14,14 @@
       </list>
     </property>
   </bean>
-
-
-<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basename" value= "i18n/messages"/>  
-</bean>
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>i18n/messages</value>
+        <value>i18n/tree</value>
+      </list>
+    </property>
+  </bean>
 
   <!-- 数据源定义,使用Apache DBCP 连接池 -->
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
