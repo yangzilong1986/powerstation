@@ -44,11 +44,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:spring/*.xml</param-value>
   </context-param>
-  <!-- 默认i18n资源文件 -->
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>i18n/messages</param-value>
-  </context-param>
+
   <!-- ExtremeTable 表格标签的Properties文件 -->
   <context-param>
     <param-name>extremecomponentsPreferencesLocation</param-name>
@@ -159,4 +155,7 @@
     <filter-name>HiddenHttpMethodFilter</filter-name>
     <servlet-name>springmvc</servlet-name>
   </filter-mapping>
+  <welcome-file-list>
+  login.jsp
+  </welcome-file-list>
 </web-app>
