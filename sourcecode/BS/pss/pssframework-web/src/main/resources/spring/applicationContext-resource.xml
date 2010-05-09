@@ -15,6 +15,11 @@
     </property>
   </bean>
 
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value= "i18n/messages"/>  
+</bean>
+
   <!-- 数据源定义,使用Apache DBCP 连接池 -->
   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="${jdbc.driver}" />
