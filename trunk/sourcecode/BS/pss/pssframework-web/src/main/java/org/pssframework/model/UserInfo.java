@@ -12,7 +12,6 @@ import org.pssframework.base.BaseEntity;
  * @since 1.0
  */
 
-
 public class UserInfo extends BaseEntity {
 	
 	//alias
