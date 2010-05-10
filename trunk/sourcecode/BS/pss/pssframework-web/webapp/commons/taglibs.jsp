@@ -9,3 +9,13 @@
 <%@ taglib uri="/WEB-INF/tld/extremecomponents.tld" prefix="ec" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<link type='text/css' rel='stylesheet' href='${ctx}/e3/commons/ext/resources/css/ext-all.css' />
+
+<script type="text/javascript">
+<!--
+if ( typeof(Ext) == "undefined" || typeof(Ext.DomHelper) == "undefined" ){
+  document.write('<script src="${ctx}/e3/commons/ext/adapter/ext/ext-base.js"></script>');
+  document.write('<script src="${ctx}/e3/commons/ext/ext-all.js"></script>');
+  }
+//-->
+</script>
