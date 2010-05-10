@@ -1,12 +1,12 @@
 package org.pssframework.dao;
 
 import org.pssframework.model.UserInfo;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
-@Component
+@Repository
 public class UserInfoDao extends BaseIbatis3Dao<UserInfo, java.lang.Long> {
 
 	@Override
