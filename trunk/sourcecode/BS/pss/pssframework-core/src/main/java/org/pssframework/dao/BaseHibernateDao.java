@@ -59,26 +59,27 @@ import cn.org.rapid_framework.util.CollectionHelper;
  * @param <E>
  * @param <PK>
  */
-public abstract class BaseHibernateDao<E,PK extends Serializable> extends HibernateDaoSupport implements EntityDao<E,PK>{
+public abstract class BaseHibernateDao<E, PK extends Serializable> extends HibernateDaoSupport implements
+		EntityDao<E, PK> {
 	/**
 	 * Logger for subclass
 	 */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-	
+
 	public long queryForLong(final String queryString) {
-		return queryForLong(queryString,new Object[]{});
+		return queryForLong(queryString, new Object[] {});
 	}
-	
-	public long queryForLong(final String queryString,Object value) {
-		return queryForLong(queryString,new Object[]{value});
+
+	public long queryForLong(final String queryString, Object value) {
+		return queryForLong(queryString, new Object[] { value });
 	}
-	
-	public long queryForLong(final String queryString,Object[] values) {
+
+	public long queryForLong(final String queryString, Object[] values) {
 		List list = getHibernateTemplate().find(queryString, values);
-		Number n = (Number)CollectionHelper.findSingleObject(list);
+		Number n = (Number) CollectionHelper.findSingleObject(list);
 		return n.longValue();
 	}
-	
+
 	/**
 	 * 得到全部数据,但执行分页
 	 * @param pageRequest
@@ -86,86 +87,92 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 	 */
 	@SuppressWarnings("unchecked")
 	public Page findAll(final PageRequest pageRequest) {
-		return (Page)getHibernateTemplate().executeFind(new HibernateCallback() {
+		return (Page) getHibernateTemplate().executeFind(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				
+
 				StringBuffer queryString = new StringBuffer(" FROM ").append(getEntityClass().getSimpleName());
 				String countQueryString = "SELECT count(*) " + queryString.toString();
-				if(StringUtils.hasText(pageRequest.getSortColumns())) {
-					queryString.append(" ORDER BY "+pageRequest.getSortColumns());
+				if (StringUtils.hasText(pageRequest.getSortColumns())) {
+					queryString.append(" ORDER BY " + pageRequest.getSortColumns());
 				}
-				
+
 				Query query = session.createQuery(queryString.toString());
 				Query countQuery = session.createQuery(countQueryString);
 				return executeQueryForPage(pageRequest, query, countQuery);
 			}
 		});
 	}
-	
-	public Page pageQuery(final String query,final PageRequest pageRequest) {
+
+	public Page pageQuery(final String query, final PageRequest pageRequest) {
 		final String countQuery = "select count(*) " + removeSelect(removeFetchKeyword((query)));
-		return pageQuery(query,countQuery,pageRequest);
+		return pageQuery(query, countQuery, pageRequest);
 	}
 
-	public Page pageQuery(final String query,String countQuery,final PageRequest pageRequest) {
+	public Page pageQuery(final String query, String countQuery, final PageRequest pageRequest) {
 		Map otherFilters = new HashMap(1);
 		otherFilters.put("sortColumns", pageRequest.getSortColumns());
-		
+
 		XsqlBuilder builder = getXsqlBuilder();
-		
+
 		//混合使用otherFilters与pageRequest.getFilters()为一个filters使用
-		XsqlFilterResult queryXsqlResult = builder.generateHql(query,otherFilters,pageRequest.getFilters());
-		XsqlFilterResult countQueryXsqlResult = builder.generateHql(countQuery,otherFilters,pageRequest.getFilters());
-		
-		return pageQuery(pageRequest,queryXsqlResult,countQueryXsqlResult);
+		XsqlFilterResult queryXsqlResult = builder.generateHql(query, otherFilters, pageRequest.getFilters());
+		XsqlFilterResult countQueryXsqlResult = builder.generateHql(countQuery, otherFilters, pageRequest.getFilters());
+
+		return pageQuery(pageRequest, queryXsqlResult, countQueryXsqlResult);
 	}
-	
+
 	protected XsqlBuilder getXsqlBuilder() {
-		SessionFactoryImpl sf = (SessionFactoryImpl)(getSessionFactory());
+		SessionFactoryImpl sf = (SessionFactoryImpl) (getSessionFactory());
 		Dialect dialect = sf.getDialect();
-		
+
 		//or SafeSqlProcesserFactory.getMysql();
-		SafeSqlProcesser safeSqlProcesser = SafeSqlProcesserFactory.getFromCacheByHibernateDialect(dialect); 
+		SafeSqlProcesser safeSqlProcesser = SafeSqlProcesserFactory.getFromCacheByHibernateDialect(dialect);
 		XsqlBuilder builder = new XsqlBuilder(safeSqlProcesser);
-		
-		if(builder.getSafeSqlProcesser().getClass() == DirectReturnSafeSqlProcesser.class) {
-			System.err.println(BaseHibernateDao.class.getSimpleName()+".getXsqlBuilder(): 故意报错,你未开启Sql安全过滤,单引号等转义字符在拼接sql时需要转义,不然会导致Sql注入攻击的安全问题，请修改源码使用new XsqlBuilder(SafeSqlProcesserFactory.getDataBaseName())开启安全过滤");
+
+		if (builder.getSafeSqlProcesser().getClass() == DirectReturnSafeSqlProcesser.class) {
+			System.err
+					.println(BaseHibernateDao.class.getSimpleName()
+							+ ".getXsqlBuilder(): 故意报错,你未开启Sql安全过滤,单引号等转义字符在拼接sql时需要转义,不然会导致Sql注入攻击的安全问题，请修改源码使用new XsqlBuilder(SafeSqlProcesserFactory.getDataBaseName())开启安全过滤");
 		}
 		return builder;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private Page pageQuery(final PageRequest pageRequest, final XsqlFilterResult queryXsqlResult, final XsqlFilterResult countQueryXsqlResult) {
-		return (Page)getHibernateTemplate().execute(new HibernateCallback() {
+	private Page pageQuery(final PageRequest pageRequest, final XsqlFilterResult queryXsqlResult,
+			final XsqlFilterResult countQueryXsqlResult) {
+		return (Page) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				
-				Query query = setQueryParameters(session.createQuery(queryXsqlResult.getXsql()),queryXsqlResult.getAcceptedFilters());
-				Query countQuery = setQueryParameters(session.createQuery(removeOrders(countQueryXsqlResult.getXsql())),countQueryXsqlResult.getAcceptedFilters());
-				
+
+				Query query = setQueryParameters(session.createQuery(queryXsqlResult.getXsql()), queryXsqlResult
+						.getAcceptedFilters());
+				Query countQuery = setQueryParameters(
+						session.createQuery(removeOrders(countQueryXsqlResult.getXsql())), countQueryXsqlResult
+								.getAcceptedFilters());
+
 				return executeQueryForPage(pageRequest, query, countQuery);
 			}
 		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private Object executeQueryForPage(final PageRequest pageRequest,Query query, Query countQuery) {
-		Page page = new Page(pageRequest,((Number)countQuery.uniqueResult()).intValue());
-		if(page.getTotalCount() == 0) {
+	private Object executeQueryForPage(final PageRequest pageRequest, Query query, Query countQuery) {
+		Page page = new Page(pageRequest, ((Number) countQuery.uniqueResult()).intValue());
+		if (page.getTotalCount() == 0) {
 			page.setResult(new ArrayList(0));
-		}else {
+		} else {
 			page.setResult(query.setFirstResult(page.getFirstResult()).setMaxResults(page.getPageSize()).list());
 		}
 		return page;
 	}
 
-	public static Query setQueryParameters(Query q,Map params) {
-		for(Iterator it = params.entrySet().iterator(); it.hasNext();) {
-			Map.Entry entry = (Map.Entry)it.next();
-			q.setParameter((String)entry.getKey(),entry.getValue());
+	public static Query setQueryParameters(Query q, Map params) {
+		for (Iterator it = params.entrySet().iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry) it.next();
+			q.setParameter((String) entry.getKey(), entry.getValue());
 		}
 		return q;
 	}
-	 
+
 	public void save(E entity) {
 		getHibernateTemplate().save(entity);
 	}
@@ -175,21 +182,21 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 	}
 
 	public E getById(PK id) {
-		return (E)getHibernateTemplate().get(getEntityClass(),id);
+		return (E) getHibernateTemplate().get(getEntityClass(), id);
 	}
 
 	public void delete(Object entity) {
 		getHibernateTemplate().delete(entity);
 	}
-	
+
 	public void delete(Serializable entity) {
 		getHibernateTemplate().delete(entity);
 	}
-	
+
 	public void deleteById(PK id) {
 		Object entity = getById(id);
-		if(entity == null) {
-			throw new ObjectRetrievalFailureException(getEntityClass(),id);
+		if (entity == null) {
+			throw new ObjectRetrievalFailureException(getEntityClass(), id);
 		}
 		getHibernateTemplate().delete(entity);
 	}
@@ -215,7 +222,7 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 	}
 
 	public void saveAll(Collection<E> entities) {
-		for(Iterator<E> it = entities.iterator(); it.hasNext();) {
+		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
 			save(it.next());
 		}
 	}
@@ -224,28 +231,24 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 		getHibernateTemplate().deleteAll(entities);
 	}
 
-    public E findByProperty(final String propertyName, final Object value){
-    	
-        return (E)getHibernateTemplate().execute(new HibernateCallback() {
-			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				return session.createCriteria(getEntityClass())
-					.add(Expression.eq(propertyName,value))
-					.uniqueResult();
-			}
-        });
-    }
+	public E findByProperty(final String propertyName, final Object value) {
 
-    public List<E> findAllBy(final String propertyName, final Object value) {
-        return getHibernateTemplate().executeFind(new HibernateCallback() {
+		return (E) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				return session.createCriteria(getEntityClass())
-					.add(Expression.eq(propertyName,value))
-					.list();
+				return session.createCriteria(getEntityClass()).add(Expression.eq(propertyName, value)).uniqueResult();
 			}
-        });
-    }
+		});
+	}
 
-    /**
+	public List<E> findAllBy(final String propertyName, final Object value) {
+		return getHibernateTemplate().executeFind(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				return session.createCriteria(getEntityClass()).add(Expression.eq(propertyName, value)).list();
+			}
+		});
+	}
+
+	/**
 	 * 判断对象某些属性的值在数据库中是否唯一.
 	 *
 	 * @param uniquePropertyNames 在POJO里不能重复的属性列表,以逗号分割 如"name,loginid,password"
@@ -263,10 +266,10 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 			// 以下代码为了如果是update的情况,排除entity自身.
 
 			String idName = getSessionFactory().getClassMetadata(entity.getClass()).getIdentifierPropertyName();
-			if(idName != null) {
+			if (idName != null) {
 				// 取得entity的主键值
-				Serializable id =  (Serializable)PropertyUtils.getProperty(entity, idName);
-	
+				Serializable id = (Serializable) PropertyUtils.getProperty(entity, idName);
+
 				// 如果id!=null,说明对象已存在,该操作为update,加入排除自身的判断
 				if (id != null)
 					criteria.add(Restrictions.not(Restrictions.eq(idName, id)));
@@ -276,7 +279,7 @@ public abstract class BaseHibernateDao<E,PK extends Serializable> extends Hibern
 		}
 		return ((Number) criteria.uniqueResult()).intValue() == 0;
 	}
-	
-    public abstract Class getEntityClass();
+
+	public abstract Class getEntityClass();
 
 }
