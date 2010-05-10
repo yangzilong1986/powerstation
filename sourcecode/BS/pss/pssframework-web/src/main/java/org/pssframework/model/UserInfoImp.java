@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +25,7 @@ import org.pssframework.base.BaseEntity;
 
 @Entity
 @Table(name = "user_info")
+@SequenceGenerator(sequenceName = "SEQ_USER_ID", name = "TOP_SEQ_USER_ID")
 public class UserInfoImp extends BaseEntity {
 
 	/**
@@ -46,8 +48,8 @@ public class UserInfoImp extends BaseEntity {
 	//columns START
 	@Column(name = "user_id", unique = true)
 	@Id
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TOP_SEQ_USER_ID")
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	@Column(name = "username", length = 50)
 	private String username;
