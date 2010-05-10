@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<script src="${ctx}/scripts/rest.js" ></script>
-	<title><%=UserInfo.TABLE_ALIAS%> 维护</title>
+	<title><fmt:message key="entity.deleted" /><fmt:message key="tree.org" /><spring:message code="entity.deleted"></spring:message> 维护</title>
 </head>
 
 <body>
