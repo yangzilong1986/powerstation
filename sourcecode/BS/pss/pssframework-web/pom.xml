@@ -179,6 +179,12 @@
       <artifactId>log4j</artifactId>
     </dependency>
     <!-- logging end -->
+    
+          <!-- template engine -->
+      <dependency>
+        <groupId>org.apache.velocity</groupId>
+        <artifactId>velocity</artifactId>
+      </dependency>
 
     <!-- utils begin-->
     <dependency>
