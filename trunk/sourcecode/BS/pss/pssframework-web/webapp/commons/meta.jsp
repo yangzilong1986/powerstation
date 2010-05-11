@@ -4,6 +4,17 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
 
+<link type='text/css' rel='stylesheet' href='${ctx}/e3/commons/ext/resources/css/ext-all.css' />
+
+<script type="text/javascript">
+<!--
+if ( typeof(Ext) == "undefined" || typeof(Ext.DomHelper) == "undefined" ){
+  document.write('<script src="${ctx}/e3/commons/ext/adapter/ext/ext-base.js"></script>');
+  document.write('<script src="${ctx}/e3/commons/ext/ext-all.js"></script>');
+  }
+//-->
+</script>
+
 <!-- optional javascript: effects.js,jquery.js -->
 	<link href="<c:url value="/styles/global.css"/>" type="text/css" rel="stylesheet">
 
