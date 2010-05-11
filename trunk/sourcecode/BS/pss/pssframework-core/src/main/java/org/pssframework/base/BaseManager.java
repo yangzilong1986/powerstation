@@ -53,6 +53,10 @@ public abstract class BaseManager<E, PK extends Serializable> {
 		getEntityDao().update(entity);
 	}
 
+	public void batchDelete(E entity){
+		//getEntityDao().
+	}
+	
 	@Transactional(readOnly = true)
 	public boolean isUnique(E entity, String uniquePropertyNames) {
 		return getEntityDao().isUnique(entity, uniquePropertyNames);
