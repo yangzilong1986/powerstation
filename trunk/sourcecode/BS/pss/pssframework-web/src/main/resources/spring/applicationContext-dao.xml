@@ -16,7 +16,7 @@
     name="dataSource" ref="dataSource" /> </bean>
   -->
   <bean id="sqlSessionFactory" class="org.pssframework.dao.SqlSessionFactoryFactoryBean">
-    <property name="configLocation" value="classpath:configuration-ibatis.xml" />
+    <property name="configLocation" value="classpath:ibatis/configuration-ibatis.xml" />
     <property name="mapperLocations" value="classpath*:/model/**/*Mapper.xml" />
     <property name="dataSource" ref="dataSource" />
   </bean>
