@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-5-8 1:08:43                             */
+/* Created on:     2010-5-11 9:24:02                            */
 /*==============================================================*/
 
 
@@ -62,10 +62,17 @@ create or replace package body IntegrityPackage AS
 drop trigger "tib_r_realtime_task"
 /
 
+alter table R_REALTIME_TASK_RECV
+   drop constraint FK_R_REALTI_R_TASK_RE_R_REALTI
+/
+
 drop table R_COMMANDITEM cascade constraints
 /
 
 drop table R_REALTIME_TASK cascade constraints
+/
+
+drop table R_REALTIME_TASK_RECV cascade constraints
 /
 
 drop sequence SEQ_R_TASK
@@ -152,6 +159,22 @@ tablespace TABS_INTERACTION
 
 comment on column R_REALTIME_TASK.TASK_STATUS is
 '任务状态：0：未处理；1：处理中；2：执行成功；3：执行失败'
+/
+
+/*==============================================================*/
+/* Table: R_REALTIME_TASK_RECV                                  */
+/*==============================================================*/
+create table R_REALTIME_TASK_RECV  (
+   TASK_ID              NUMBER,
+   SEQUENCE_CODE        NUMBER                          not null,
+   RECV_MSG             VARCHAR2(512),
+   RECV_TIME            DATE                           default SYSDATE
+)
+/
+
+alter table R_REALTIME_TASK_RECV
+   add constraint FK_R_REALTI_R_TASK_RE_R_REALTI foreign key (TASK_ID)
+      references R_REALTIME_TASK (TASK_ID)
 /
 
 
