@@ -104,7 +104,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Page pageQuery(String statementName, PageRequest pageRequest) {
+	  protected Page pageQuery(String statementName, PageRequest pageRequest) {
 
 		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(), pageRequest.getFilters());
 		if (totalCount == null || totalCount.intValue() <= 0) {
