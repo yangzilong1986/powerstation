@@ -26,7 +26,7 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 public class PageRequestFactory {
 
-	static int DEFAULT_PAGE_SIZE = 10;
+	static int DEFAULT_PAGE_SIZE = 20;
 	static int MAX_PAGE_SIZE = 500;
 
 	static {
