@@ -1,0 +1,16 @@
+     .e3table {width:100%; FONT: 9pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     .e3table .caption{ background-color:#FFFFFF;text-align: center; FONT: 10pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     /*background-color确定表格边的颜色.*/
+     .e3table table.listPage {width:100%;background-color:#0080C0; FONT: 10pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     .e3table table.listPage tr.navigation {text-align: left;background-color: #FFFFCC; height:22px} 
+     .e3table table.listPage tr.head {text-align: center;background-color: #eeeeee;height:20px}
+     .e3table table.listPage tr.row {text-align: center; background-color:#FFFFFF;height:20px} 
+     /* 页面字体链接样式*/
+     .e3table tr.navigation  A {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.navigation  A:visited {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.navigation  A:hover {COLOR: #000000;  TEXT-DECORATION: underline}
+     .e3table tr.head  A {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.head  A:visited {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.head  A:hover {COLOR: #000000;  TEXT-DECORATION: underline}
+     
+     .e3table .disabledText {COLOR: gray;}     
