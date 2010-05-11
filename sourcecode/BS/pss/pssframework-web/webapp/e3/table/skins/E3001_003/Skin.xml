@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2010 PSS Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        PSS Corporation - initial API and implementation
+ -->
+
+<skin name="E3001_003" extends="E3001">
+	<!-- 导航条颜色 -->
+	<constant name="navColor" value="#eee"/>
+	<!-- 禁用颜色 -->
+	<constant name="disabledColor" value="gray"/>
+	<!--行颜色总数,如果只有一种颜色为1,如果有2种为2,依次类推 -->
+	<constant name="colorNum" value="8"/>
+	
+	<!-- 行颜色 -->
+	<constant name="row0BGColor" value="#F8F8F8"/>
+	<constant name="row1BGColor" value="#EEEEEE"/>
+	<constant name="row2BGColor" value="#E8E8E8"/>
+	<constant name="row3BGColor" value="#DDDDDD"/>
+	<constant name="row4BGColor" value="#E8E8E8"/>
+	<constant name="row5BGColor" value="#E8E8E8"/>
+	<constant name="row6BGColor" value="#EEEEEE"/>
+	<constant name="row7BGColor" value="#F8F8F8"/>
+	
+	<constant name="row0Color" value="#222222"/>
+	<constant name="row1Color" value="#222222"/>
+	<constant name="row2Color" value="#222222"/>
+	<constant name="row3Color" value="#222222"/>
+	<constant name="row4Color" value="#222222"/>
+	<constant name="row5Color" value="#222222"/>
+	<constant name="row6Color" value="#222222"/>
+	<constant name="row7Color" value="#222222"/>
+	
+	<path name="imagesPath" url="/img"/>
+	<element name="firstOnImg"  path="imagesPath" url="/FirstOn.gif"/>	
+	<element name="firstOffImg" path="imagesPath" url="/FirstOff.gif"/>
+	<constant name="firstOn"    dynamic="true">
+	  <value><![CDATA[<img alt="${messageResource.getMessage("e3.table.firstText")}" src="${res_firstOffImg}" border='0'>]]></value>
+	</constant> 
+
+	<constant name="firstOff"   dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.firstText")}' src='${res_firstOffImg}' border='0'/>]]></value>
+	</constant>
+	
+	<element name="lastOnImg"  path="imagesPath" url="/LastOn.gif"/>	
+	<element name="lastOffImg" path="imagesPath" url="/LastOff.gif"/>
+	<constant name="lastOn"    dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.lastText")}' src='${res_lastOnImg}' border='0'/>]]></value>
+	</constant>
+	<constant name="lastOff"    dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.lastText")}' src='${res_lastOffImg}' border='0'/>]]></value>
+	</constant>
+
+	<element name="prevOnImg"  path="imagesPath" url="/PrevOn.gif"/>	
+	<element name="prevOffImg" path="imagesPath" url="/PrevOff.gif"/>
+	<constant name="prevOn"    dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.prevText")}' src='${res_prevOnImg}' border='0'/>]]></value>
+	</constant>
+	
+	<constant name="prevOff"   dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.prevText")}' src='${res_prevOffImg}' border='0'/>]]></value>
+	</constant>
+
+	<element name="nextOnImg"  path="imagesPath" url="/NextOn.gif"/>	
+	<element name="nextOffImg" path="imagesPath" url="/NextOff.gif"/>
+	<constant name="nextOn"   dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.nextText")}' src='${res_nextOnImg}' border='0'/>]]></value>
+	</constant>
+
+	<constant name="nextOff"   dynamic="true" >
+	  <value><![CDATA[<img alt='${messageResource.getMessage("e3.table.nextText")}' src='${res_nextOffImg}' border='0'/>]]></value>
+	</constant>
+
+	
+	
+	
+</skin>
