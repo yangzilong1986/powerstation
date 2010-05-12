@@ -5,7 +5,7 @@ package org.pssframework.dao;
 
 import java.io.Serializable;
 
-import org.pssframework.model.Leaf;
+import org.pssframework.model.LeafInfo;
 import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
@@ -16,7 +16,7 @@ import cn.org.rapid_framework.page.PageRequest;
  *
  */
 @Repository
-public class TreeInfoDao extends BaseIbatis3Dao<Leaf, Serializable> {
+public class LeafInfoDao extends BaseIbatis3Dao<LeafInfo, Serializable> {
 
 	@Override
 	public Class<?> getEntityClass() {
@@ -25,14 +25,13 @@ public class TreeInfoDao extends BaseIbatis3Dao<Leaf, Serializable> {
 	}
 
 
-	public void saveOrUpdate(final Leaf entity) {
+	public void saveOrUpdate(final LeafInfo entity) {
 		// TODO Auto-generated method stub
 
 	}
 
 	public Page findByPageRequest(PageRequest pageRequest) {
 		this.log.info("findByPageRequest");
-		return pageQuery("UserInfo.pageSelect", pageRequest);
+		return pageQuery("Leaf.infos", pageRequest);
 	}
-
 }

@@ -23,10 +23,10 @@ import net.jcreate.e3.tree.support.DefaultTreeModel;
 import net.jcreate.e3.tree.support.RequestUtil;
 import net.jcreate.e3.tree.support.WebTreeBuilder;
 
-import org.pssframework.model.Leaf;
-import org.pssframework.model.TreeInfo;
-import org.pssframework.service.TreeInfoManager;
+import org.pssframework.model.LeafInfo;
+import org.pssframework.service.LeafInfoManager;
 import org.pssframework.support.WebTreeDynamicNode;
+import org.pssframework.util.PageRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,62 +41,70 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 @Controller
 @RequestMapping("/tree")
-public class TreeController extends BaseRestSpringController<TreeInfo, java.lang.Long> {
+public class LeafController extends BaseRestSpringController<LeafInfo, java.lang.Long> {
 
 	//默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
-	private TreeInfoManager treeInfoManager;
+	private LeafInfoManager leafInfoManager;
 
 	private final String LIST_ACTION = "redirect:/tree";
+
+	private final String PARENT_ID = "parentId";
+	private final String PARENT_TYPE = "parentType";
 
 	/** 
 	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
 	 **/
-	public void setTreeInfoManager(TreeInfoManager manager) {
-		this.treeInfoManager = manager;
+	public void setLeafInfoManager(LeafInfoManager manager) {
+		this.leafInfoManager = manager;
 	}
 
 	/** 列表 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TreeInfo treeInfo) {
-		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, LeafInfo leafInfo) {
+
+		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS, PageRequestFactory.ALL_PAGE_SIZE);
 		//pageRequest.getFilters(); //add custom filters
 
-		Page page = new Page<TreeInfo>(pageRequest, 0);
+		Map fiterMap = pageRequest.getFilters();
+		fiterMap.put(PARENT_ID, request.getParameter(PARENT_ID));
+		fiterMap.put(PARENT_TYPE, request.getParameter(PARENT_TYPE));
 
+		Page page = this.leafInfoManager.findByPageRequest(pageRequest);
 		ModelAndView result = toModelAndView(page, pageRequest);
-		result.addObject("treeInfo", this.showExtLoadTree(request, response));
+		result.addObject("leafInfo", this.showExtLoadTree(request, response));
 		result.setViewName("/tree/complex");
 		return result;
 	}
 
 	/** 进入新增 */
 	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TreeInfo treeInfo)
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, LeafInfo leafInfo)
 			throws Exception {
-		return new ModelAndView("/tree/new", "treeInfo", treeInfo);
+		return new ModelAndView("/tree/new", "leafInfo", leafInfo);
 	}
 
 	/** 显示 */
 	@Override
 	public ModelAndView show(@PathVariable java.lang.Long id) throws Exception {
-		TreeInfo treeInfo = (TreeInfo) treeInfoManager.getById(id);
-		return new ModelAndView("/tree/show", "treeInfo", treeInfo);
+		LeafInfo leafInfo = (LeafInfo) leafInfoManager.getById(id);
+		return new ModelAndView("/tree/show", "leafInfo", leafInfo);
 	}
 
 	/** 编辑 */
 	@Override
 	public ModelAndView edit(@PathVariable java.lang.Long id) throws Exception {
-		TreeInfo treeInfo = (TreeInfo) treeInfoManager.getById(id);
-		return new ModelAndView("/tree/edit", "treeInfo", treeInfo);
+		LeafInfo leafInfo = (LeafInfo) leafInfoManager.getById(id);
+		return new ModelAndView("/tree/edit", "leafInfo", leafInfo);
 	}
 
 	/** 保存新增 */
 	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TreeInfo treeInfo)
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, LeafInfo leafInfo)
 			throws Exception {
-		treeInfoManager.save(treeInfo);
+		leafInfoManager.save(leafInfo);
 		return new ModelAndView(LIST_ACTION);
 	}
 
@@ -104,16 +112,16 @@ public class TreeController extends BaseRestSpringController<TreeInfo, java.lang
 	@Override
 	public ModelAndView update(@PathVariable java.lang.Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		TreeInfo treeInfo = (TreeInfo) treeInfoManager.getById(id);
-		bind(request, treeInfo);
-		treeInfoManager.update(treeInfo);
+		LeafInfo leafInfo = (LeafInfo) leafInfoManager.getById(id);
+		bind(request, leafInfo);
+		leafInfoManager.update(leafInfo);
 		return new ModelAndView(LIST_ACTION);
 	}
 
 	/** 删除 */
 	@Override
 	public ModelAndView delete(@PathVariable java.lang.Long id) {
-		treeInfoManager.removeById(id);
+		leafInfoManager.removeById(id);
 		return new ModelAndView(LIST_ACTION);
 	}
 
@@ -121,7 +129,7 @@ public class TreeController extends BaseRestSpringController<TreeInfo, java.lang
 	@Override
 	public ModelAndView batchDelete(java.lang.Long[] items) {
 		for (int i = 0; i < items.length; i++) {
-			treeInfoManager.removeById(items[i]);
+			leafInfoManager.removeById(items[i]);
 		}
 		return new ModelAndView(LIST_ACTION);
 	}
@@ -148,12 +156,12 @@ public class TreeController extends BaseRestSpringController<TreeInfo, java.lang
 		PageRequest<Map> pageRequest = newPageRequest(pRequest, DEFAULT_SORT_COLUMNS);
 
 		//pageRequest.getFilters(); //add custom filters
-		Page nodesPages = treeInfoManager.findByPageRequest(pageRequest);
+		Page nodesPages = leafInfoManager.findByPageRequest(pageRequest);
 
 		AbstractWebTreeModelCreator treeModelCreator = new AbstractWebTreeModelCreator() {
 			@Override
 			protected Node createNode(Object pUserData, UserDataUncoder pUncoder) {
-				Leaf leaf = (Leaf) pUserData;
+				LeafInfo leaf = (LeafInfo) pUserData;
 				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "org" + leaf.getLeafId());
 				result.setSubTreeURL(getUrl("/servlet/xtreeServlet?_actionType=" + "loadExtSubOrgs&parentId="
 						+ leaf.getLeafId()));
@@ -168,12 +176,12 @@ public class TreeController extends BaseRestSpringController<TreeInfo, java.lang
 
 			public Object getParentID(Object arg) throws UncodeException {
 				// TODO Auto-generated method stub
-				return ((Leaf) arg).getLeafId();
+				return ((LeafInfo) arg).getLeafId();
 			}
 
 			public Object getID(Object arg) throws UncodeException {
 				// TODO Auto-generated method stub
-				return ((Leaf) arg).getLeafParentId();
+				return ((LeafInfo) arg).getLeafParentId();
 			}
 		});
 

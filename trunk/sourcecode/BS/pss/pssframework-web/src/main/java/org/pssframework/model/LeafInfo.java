@@ -9,7 +9,7 @@ import org.pssframework.base.BaseEntity;
  * @author Baocj
  *
  */
-public class Leaf extends BaseEntity {
+public class LeafInfo extends BaseEntity {
 
 	/**
 	 * 

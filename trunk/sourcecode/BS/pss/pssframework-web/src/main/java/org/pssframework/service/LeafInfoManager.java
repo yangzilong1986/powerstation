@@ -8,9 +8,8 @@ import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
-import org.pssframework.dao.TreeInfoDao;
-import org.pssframework.model.Leaf;
-import org.pssframework.model.TreeInfo;
+import org.pssframework.dao.LeafInfoDao;
+import org.pssframework.model.LeafInfo;
 import org.springframework.stereotype.Service;
 
 import cn.org.rapid_framework.page.Page;
@@ -21,28 +20,28 @@ import cn.org.rapid_framework.page.PageRequest;
  *
  */
 @Service
-public class TreeInfoManager extends BaseManager<Leaf, Serializable> {
+public class LeafInfoManager extends BaseManager<LeafInfo, Serializable> {
 
-	private TreeInfoDao treeInfoDao;
+	private LeafInfoDao leafInfoDao;
 
 	/**
-	 * @param treeInfoDao the treeInfoDao to set
+	 * @param leafInfoDao the leafInfoDao to set
 	 */
-	public void setTreeInfoDao(TreeInfoDao treeInfoDao) {
-		this.treeInfoDao = treeInfoDao;
+	public void setLeafInfoDao(LeafInfoDao leafInfoDao) {
+		this.leafInfoDao = leafInfoDao;
 	}
 
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
+		return leafInfoDao.findByPageRequest(pageRequest);
+	}
+
+	public LeafInfo getById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public TreeInfo getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void update(TreeInfo userInfo) {
+	@Override
+	public void update(LeafInfo treeInfo) {
 		// TODO Auto-generated method stub
 
 	}
@@ -52,7 +51,8 @@ public class TreeInfoManager extends BaseManager<Leaf, Serializable> {
 
 	}
 
-	public void save(TreeInfo treeInfo) {
+	@Override
+	public void save(LeafInfo leafInfo) {
 		// TODO Auto-generated method stub
 
 	}
@@ -60,7 +60,7 @@ public class TreeInfoManager extends BaseManager<Leaf, Serializable> {
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return this.treeInfoDao;
+		return this.leafInfoDao;
 	}
 
 }
