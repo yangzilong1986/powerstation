@@ -26,8 +26,9 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 public class PageRequestFactory {
 
-	static int DEFAULT_PAGE_SIZE = 20;
-	static int MAX_PAGE_SIZE = 500;
+	public final static int DEFAULT_PAGE_SIZE = 20;
+	public final static int MAX_PAGE_SIZE = 500;
+	public final static int ALL_PAGE_SIZE = Integer.MAX_VALUE;
 
 	static {
 		System.out.println("PageRequestFactory.DEFAULT_PAGE_SIZE=" + DEFAULT_PAGE_SIZE);
@@ -48,8 +49,8 @@ public class PageRequestFactory {
 
 	@SuppressWarnings("unchecked")
 	public static PageRequest newPageRequest(HttpServletRequest request, String defaultSortColumns, int defaultPageSize) {
-		PageRequest<Map> result = ExtremeTablePageRequestFactory.createFromLimit(
-				ExtremeTablePage.getLimit(request,defaultPageSize), defaultSortColumns);
+		PageRequest<Map> result = ExtremeTablePageRequestFactory.createFromLimit(ExtremeTablePage.getLimit(request,
+				defaultPageSize), defaultSortColumns);
 
 		Map autoIncludeFilters = WebUtils.getParametersStartingWith(request, "s_");
 		result.getFilters().putAll(autoIncludeFilters);
