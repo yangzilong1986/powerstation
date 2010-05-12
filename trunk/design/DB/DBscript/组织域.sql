@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-5-7 15:55:42                            */
+/* Created on:     2010-5-12 22:13:26                           */
 /*==============================================================*/
 
 
@@ -59,6 +59,9 @@ create or replace package body IntegrityPackage AS
 /
 
 
+drop trigger "tib_o_org"
+/
+
 drop trigger "tib_o_role"
 /
 
@@ -99,6 +102,9 @@ drop table O_STAFF cascade constraints
 drop table O_USER_ROLE cascade constraints
 /
 
+drop sequence SEQ_O_ORG
+/
+
 drop sequence SEQ_O_ROLE
 /
 
@@ -106,6 +112,14 @@ drop sequence SEQ_O_STAFF
 /
 
 drop sequence SEQ_O_USER_ROLE
+/
+
+create sequence SEQ_O_ORG
+increment by 1
+start with 1
+ maxvalue 99999999
+ minvalue 1
+ cache 20
 /
 
 create sequence SEQ_O_ROLE
@@ -139,7 +153,7 @@ nocycle
 /*==============================================================*/
 create table O_DEPT  (
    DEPT_NO              VARCHAR2(16)                    not null,
-   ORG_NO               VARCHAR2(16)                    not null,
+   ORG_ID               NUMBER,
    ABBR                 VARCHAR2(256),
    NAME                 VARCHAR2(256),
    TYPE_CODE            VARCHAR2(8),
@@ -159,10 +173,6 @@ comment on table O_DEPT is
 
 comment on column O_DEPT.DEPT_NO is
 '本实体记录的唯一标识，创建部门的唯一编码。'
-/
-
-comment on column O_DEPT.ORG_NO is
-'本实体记录的唯一标识，创建供电单位的唯一编码。'
 /
 
 comment on column O_DEPT.ABBR is
@@ -189,13 +199,14 @@ comment on column O_DEPT.DISP_SN is
 /* Table: O_ORG                                                 */
 /*==============================================================*/
 create table O_ORG  (
+   ORG_ID               NUMBER                          not null,
    ORG_NO               VARCHAR2(16)                    not null,
    ORG_NAME             VARCHAR2(256),
    P_ORG_NO             VARCHAR2(16),
    ORG_TYPE             VARCHAR2(8),
    SORT_NO              NUMBER(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
-   constraint PK_O_ORG primary key (ORG_NO)
+   constraint PK_O_ORG primary key (ORG_ID)
 )
 tablespace TABS_ARCHIVE
 /
@@ -371,8 +382,8 @@ comment on column O_USER_ROLE.LASTTIME_STAMP is
 /
 
 alter table O_DEPT
-   add constraint FK_O_DEPT_OG_COMPAN_O_ORG foreign key (ORG_NO)
-      references O_ORG (ORG_NO)
+   add constraint FK_O_DEPT_OG_COMPAN_O_ORG foreign key (ORG_ID)
+      references O_ORG (ORG_ID)
 /
 
 alter table O_STAFF
@@ -388,6 +399,27 @@ alter table O_USER_ROLE
 alter table O_USER_ROLE
    add constraint FK_O_USER_R_OR_EMP_RO_O_STAFF foreign key (EMP_NO)
       references O_STAFF (EMP_NO)
+/
+
+
+create trigger "tib_o_org" before insert
+on O_ORG for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "ORG_ID" uses sequence SEQ_O_ORG
+    select SEQ_O_ORG.NEXTVAL INTO :new.ORG_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
 /
 
 

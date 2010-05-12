@@ -38,3 +38,21 @@ Fatal NI connect error 12560, connecting to:
 
     nt secondary err code: 65
     nt OS err code: 0
+
+
+***********************************************************************
+Fatal NI connect error 12514, connecting to:
+ (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=127.0.0.1)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=pss.cn)(CID=(PROGRAM=d:\Program Files\Sybase\PowerDesigner 15\pdshell15.exe)(HOST=LIJUN)(USER=Thinkpad))))
+
+  VERSION INFORMATION:
+	TNS for 32-bit Windows: Version 10.2.0.1.0 - Production
+	Windows NT TCP/IP NT Protocol Adapter for 32-bit Windows: Version 10.2.0.1.0 - Production
+  Time: 12-5ÔÂ -2010 22:15:13
+  Tracing not turned on.
+  Tns error struct:
+    ns main err code: 12564
+    TNS-12564: TNS: ¾Ü¾øÁ¬½Ó
+    ns secondary err code: 0
+    nt main err code: 0
+    nt secondary err code: 0
+    nt OS err code: 0
