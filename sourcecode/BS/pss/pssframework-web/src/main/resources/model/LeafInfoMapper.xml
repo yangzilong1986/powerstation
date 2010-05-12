@@ -10,7 +10,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   <sql id="LeafInfoColumns">
 	    <![CDATA[
         	user_id as leafId,
-        	username as leafname,
+        	username as leafName,
         	password as password,
         	birth_date as birthDate,
         	sex as sex,
@@ -71,6 +71,29 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		        user_id = #{id} 
 	    ]]>
   </select>
+  
+  <!-- 查询节点 -->
+  <select id="infos" parameterType="java.util.Map" resultMap="LeafInfoResult">
+   <![CDATA[
+  select o.org_no as leafId, o.org_name as leafName, 'ORG' as leafType
+    from o_org o
+    where o.p_org_no = '#{parentId}'
+    and 'ORG' = '${parentType}'
+  union
+  select to_char(l.line_id) as leafId,l.line_name as leafName,'LINE' as leafType
+  from g_line l, g_line_tg_rela r, g_tg t
+ where t.org_no = '#{parentId}'
+   and r.tg_id = t.tg_id
+   and r.line_id = l.line_id
+   and ('ORG' = '${parentType}' or 'LINE' = '${parentType}')
+  union
+  select t.tg_id as leafId, t.tg_name as leafName, 'TG' as leafType
+    from g_tg
+  where t.org_no = '#{parentId}'
+    and ('ORG' = '${parentType}' or 'LINE' = '${parentType}')
+  ]]>
+  </select>
+  
   <sql id="LeafInfoDynamicWhere">
     <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
     <where>
@@ -96,4 +119,5 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <include refid="LeafInfoDynamicWhere" />
     <if test="sortColumns != null and sortColumns.length() != 0"> ORDER BY ${sortColumns}</if>
   </select>
+  
 </mapper>
