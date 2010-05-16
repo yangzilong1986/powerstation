@@ -6,18 +6,20 @@
 package pep.bp.model;
 
 import java.util.Date;
+import pep.codec.protocol.gb.PmPacket;
 
 /**
  *
  * @author Thinkpad
  */
 public class RealTimeTask {
-    private long taskId;
-    private long sequenceCode;
+    private int taskId;
+    private int sequenceCode;
     private String sendMsg;
     private String recvMsg;
     private Date postTime;
     private String taskStatus;
+    
 
     public void setSendmsg(String sendMsg) {
         this.sendMsg = sendMsg;
@@ -31,7 +33,7 @@ public class RealTimeTask {
         this.postTime = postTime;
     }
 
-    public void setSequencecode(long sequenceCode) {
+    public void setSequencecode(int sequenceCode) {
         this.sequenceCode = sequenceCode;
     }
 
@@ -39,7 +41,7 @@ public class RealTimeTask {
         this.taskStatus = taskStatus;
     }
 
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 
@@ -55,7 +57,7 @@ public class RealTimeTask {
         return postTime;
     }
 
-    public long getSequencecode() {
+    public int getSequencecode() {
         return sequenceCode;
     }
 

@@ -1,0 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package pep.bp.model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+
+/**
+ *
+ * @author Thinkpad
+ */
+public class TaskRowMapper implements RowMapper {
+    public Object mapRow(ResultSet rs, int index) throws SQLException{
+        RealTimeTask task = new RealTimeTask();
+        task.setTaskId(rs.getInt("TASK_ID"));
+        task.setSequencecode(rs.getInt("SEQUENCE_CODE"));
+        task.setSendmsg(rs.getString("SEND_MSG"));
+        task.setStatestatus(rs.getString("TASK_STATUS"));
+        return task;
+    }
+
+}
