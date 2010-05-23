@@ -19,6 +19,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.pssframework.base.EntityDao;
+import org.pssframework.util.PageRequestFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
@@ -38,6 +39,9 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	private SqlSessionFactory sqlSessionFactory;
 	private SqlSessionTemplate sqlSessionTemplate;
 
+	/**
+	 * 
+	 */
 	protected void checkDaoConfig() throws IllegalArgumentException {
 		Assert.notNull("sqlSessionFactory must be not null");
 	}
@@ -46,13 +50,25 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		return sqlSessionFactory;
 	}
 
+	/**
+	 * 
+	 * @param sqlSessionFactory
+	 */
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 		this.sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
 	}
 
-	public abstract Class<?> getEntityClass();
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract String getPrefix();
 
+	/**
+	 * 
+	 * @return
+	 */
 	public SqlSessionTemplate getSqlSessionTemplate() {
 		return sqlSessionTemplate;
 	}
@@ -62,15 +78,24 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		return object;
 	}
 
+	/**
+	 * 删除
+	 */
 	public void deleteById(PK id) {
 		getSqlSessionTemplate().delete(getDeleteQuery(), id);
 	}
 
+	/**
+	 * 保存
+	 */
 	public void save(E entity) {
 		prepareObjectForSaveOrUpdate(entity);
 		Object primaryKey = getSqlSessionTemplate().insert(getInsertQuery(), entity);
 	}
 
+	/**
+	 * 更新
+	 */
 	public void update(E entity) {
 		prepareObjectForSaveOrUpdate(entity);
 		Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
@@ -84,35 +109,73 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	public String getFindByPrimaryKeyQuery() {
-		return getEntityClass().getSimpleName() + ".getById";
+		return getPrefix() + ".getById";
 	}
 
 	public String getInsertQuery() {
-		return getEntityClass().getSimpleName() + ".insert";
+		return getPrefix() + ".insert";
 	}
 
 	public String getUpdateQuery() {
-		return getEntityClass().getSimpleName() + ".update";
+		return getPrefix() + ".update";
 	}
 
 	public String getDeleteQuery() {
-		return getEntityClass().getSimpleName() + ".delete";
+		return getPrefix() + ".delete";
 	}
 
 	public String getCountQuery() {
-		return getEntityClass().getSimpleName() + ".count";
+		return getPrefix() + ".count";
 	}
 
+	/**
+	 * 
+	 * @param statementName
+	 * @param pageRequest
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	  protected Page pageQuery(String statementName, PageRequest pageRequest) {
+	protected Page pageQuery(final String statementName, PageRequest pageRequest) {
 
-		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(), pageRequest.getFilters());
-		if (totalCount == null || totalCount.intValue() <= 0) {
-			return new Page(pageRequest, 0);
+		Page page = new Page(pageRequest, 0);
+		Map filters = creatFilters(pageRequest, page);
+
+		//全部查询
+		if (pageRequest.getPageSize() == PageRequestFactory.ALL_PAGE_SIZE) {
+			page = new Page(pageRequest, PageRequestFactory.ALL_PAGE_SIZE);
+			return queryPage(statementName, filters, page);
 		}
 
-		Page page = new Page(pageRequest, totalCount.intValue());
+		Number totalCount = countQuery(statementName, filters);
+		// 获取总条数
+		if (totalCount == null || totalCount.intValue() <= 0) {
+			return page;
+		}
 
+		page = new Page(pageRequest, totalCount.intValue());
+
+		return queryPage(statementName, filters, page);
+	}
+
+	private Number countQuery(final String statementName, final Map filters) {
+		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(statementName), filters);
+
+		return totalCount;
+	}
+
+	protected String getCountQuery(String statementName) {
+		Assert.isNull(statementName);
+		return statementName + ".count";
+	}
+
+	/**
+	 * 创建条件
+	 * @param pageRequest
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Map creatFilters(final PageRequest pageRequest, final Page page) {
 		//其它分页参数,用于不喜欢或是因为兼容性而不使用方言(Dialect)的分页用户使用. 与getSqlMapClientTemplate().queryForList(statementName, parameterObject)配合使用
 		Map filters = new HashMap();
 		filters.put("offset", page.getFirstResult());
@@ -128,6 +191,18 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 			filters.putAll(parameterObject);
 		}
 
+		return filters;
+	}
+
+	/**
+	 * 
+	 * @param statementName
+	 * @param filters
+	 * @param page
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private Page queryPage(final String statementName, final Map filters, Page page) {
 		List list = getSqlSessionTemplate().selectList(statementName, filters, page.getFirstResult(),
 				page.getPageSize());
 		page.setResult(list);
