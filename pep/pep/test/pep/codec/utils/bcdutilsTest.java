@@ -102,4 +102,11 @@ public class bcdutilsTest {
         byte[] bcsdate = BcdUtils.dateToBcd(result, "YYMMDDHHMISS");
         assertTrue(TestUtils.byteArrayEquals(bcsdate,bcds));
     }
+
+     @Test
+    public void testbyteToString(){
+        byte value = 5;
+        String result = BcdUtils.byteToString(value);
+        assertEquals(result,"05");
+    }
 }
