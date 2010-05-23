@@ -85,7 +85,11 @@ public class BaseSpringController extends MultiActionController {
 	}
 
 	public PageRequest newPageRequest(HttpServletRequest request, String defaultSortColumns) {
-		return PageRequestFactory.newPageRequest(request, defaultSortColumns);
+		return newPageRequest(request, defaultSortColumns, PageRequestFactory.DEFAULT_PAGE_SIZE);
+	}
+
+	public PageRequest newPageRequest(HttpServletRequest request, String defaultSortColumns, int defaultPageSize) {
+		return PageRequestFactory.newPageRequest(request, defaultSortColumns, defaultPageSize);
 	}
 
 	/**
