@@ -30,7 +30,7 @@ public class RTTaskServiceIMP implements RTTaskService {
 
     public void insertTask(RealTimeTask task) {
         try {
-            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)",
+            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?)",
                     new Object[]{task.getSequencecode(), task.getSendmsg()});
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());

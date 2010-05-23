@@ -18,7 +18,7 @@ public class RealTimeTask {
     private String sendMsg;
     private String recvMsg;
     private Date postTime;
-    private String taskStatus;
+    private String taskStatus = "0"; //默认未处理
     
 
     public void setSendmsg(String sendMsg) {

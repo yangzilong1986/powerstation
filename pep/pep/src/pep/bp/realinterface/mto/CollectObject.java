@@ -19,6 +19,7 @@ public class CollectObject {
 
     private List<CommandItem> CommandItems; //命令项列表
     public CollectObject() {
+        CommandItems = new ArrayList<CommandItem>();
     }
 
     public String getLogicalAddr() {
