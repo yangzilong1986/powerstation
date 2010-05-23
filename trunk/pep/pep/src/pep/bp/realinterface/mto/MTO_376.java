@@ -10,7 +10,7 @@ import net.sf.json.*;
  * @author Thinkpad
  */
 public class MTO_376 extends MessageTranObject{
-    private List<CollectObject> CollectObjects;
+    private List<CollectObject> CollectObjects = new ArrayList<CollectObject>();
 
     public List<CollectObject> getCollectObjects(){
        return this.CollectObjects;

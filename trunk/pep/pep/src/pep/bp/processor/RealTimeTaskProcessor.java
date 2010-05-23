@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.RTTaskService;
 import pep.bp.db.RTTaskServiceIMP;
 import pep.bp.model.RealTimeTask;
@@ -30,27 +32,31 @@ public class RealTimeTaskProcessor implements Runnable {
     private RtuRespPacketQueue respQueue;//返回报文队列
 
     public RealTimeTaskProcessor() {
-        taskService = new RTTaskServiceIMP();
+        ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
+        taskService = (RTTaskService) cxt.getBean("taskService");
         pepCommunicator = new PepGbCommunicator();
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
 
     }
 
     public void run() {
-        //做发送操作
-        List<RealTimeTask> tasks = taskService.getTasks();
-        for (RealTimeTask task : tasks) {
-            PmPacket packet = new PmPacket376();
-            packet.setValue(task.getSendmsg().getBytes(), 0);
-            pepCommunicator.SendPacket(task.getSequencecode(), packet);
+        while (true) {
+            //做发送操作
+            List<RealTimeTask> tasks = taskService.getTasks();
+            for (RealTimeTask task : tasks) {
+                PmPacket packet = new PmPacket376();
+                packet.setValue(task.getSendmsg().getBytes(), 0);
+                pepCommunicator.SendPacket(task.getSequencecode(), packet);
+            }
+
+            //检查返回
+            try {
+                SequencedPmPacket packet = respQueue.PollPacket();
+                taskService.insertRecvMsg(packet.sequence, packet.pack.toString());
+            } catch (InterruptedException ex) {
+                log.error(ex.getMessage());
+            }
         }
 
-        //检查返回
-        try {
-            SequencedPmPacket packet = respQueue.PollPacket();
-            taskService.insertRecvMsg(packet.sequence, packet.pack.toString());
-        } catch (InterruptedException ex) {
-            log.error(ex.getMessage());
-        }
     }
 }
