@@ -55,7 +55,7 @@ public class PageRequestFactory {
 		Map autoIncludeFilters = WebUtils.getParametersStartingWith(request, "s_");
 		result.getFilters().putAll(autoIncludeFilters);
 
-		if (result.getPageSize() > MAX_PAGE_SIZE) {
+		if (result.getPageSize() > MAX_PAGE_SIZE && result.getPageSize() != ALL_PAGE_SIZE) {
 			result.setPageSize(MAX_PAGE_SIZE);
 		}
 		return result;
