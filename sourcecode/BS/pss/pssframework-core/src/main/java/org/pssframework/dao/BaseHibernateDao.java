@@ -209,6 +209,21 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		getHibernateTemplate().saveOrUpdate(entity);
 	}
 
+	public void batchDelete(List<E> list) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void batchUpdate(List<E> list) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void batchInsert(List<E> list) {
+		// TODO Auto-generated method stub
+
+	}
+
 	public void refresh(Object entity) {
 		getHibernateTemplate().refresh(entity);
 	}
