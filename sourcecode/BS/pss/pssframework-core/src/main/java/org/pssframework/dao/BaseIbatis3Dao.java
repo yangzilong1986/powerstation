@@ -15,9 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.executor.BatchExecutor;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.statement.SimpleStatementHandler;
+import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.transaction.Transaction;
 import org.pssframework.base.EntityDao;
 import org.pssframework.util.PageRequestFactory;
 import org.slf4j.Logger;
@@ -103,7 +109,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	
 	
 	public void batchDelete(List<E> list) {
-		// TODO Auto-generated method stub
+				
 		
 	}
 	
