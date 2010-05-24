@@ -224,7 +224,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	protected String getCountQuery(String statementName) {
-		Assert.isNull(statementName);
+		Assert.notNull(statementName);
 		return statementName.concat(".count");
 	}
 
