@@ -298,6 +298,22 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 		return getSimpleJdbcTemplate().query(sql, ParameterizedBeanPropertyRowMapper.newInstance(getEntityClass()));
 	}
 
+	
+	public void batchDelete(List<E> list) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void batchUpdate(List<E> list) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void batchInsert(List<E> list) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * 得到生成增删改查的sql生成工具
 	 * @return

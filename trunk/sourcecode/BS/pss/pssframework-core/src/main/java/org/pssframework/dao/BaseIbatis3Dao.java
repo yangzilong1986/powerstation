@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.executor.BatchExecutor;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,6 +24,7 @@ import org.pssframework.util.PageRequestFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
+import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.util.Assert;
 
 import cn.org.rapid_framework.beanutils.BeanUtils;
@@ -99,6 +101,64 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	public void update(E entity) {
 		prepareObjectForSaveOrUpdate(entity);
 		Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
+	}
+	
+	
+	public void batchDelete(List<E> list) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void batchUpdate(List<E> list) {
+		// TODO Auto-generated method stub
+//		
+//		try { 
+//
+//	           if (list != null) { 
+//
+//	              this.getSqlSessionTemplate().execute(new SqlMapClientCallback() { 
+//
+//	                  public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException { 
+//
+//	                     executor.startBatch(); 
+//
+//	                     for (int i = 0, n = list.size(); i < n; i++) { 
+//
+//	                         executor.update(statementName, list.get(i)); 
+//
+//	                     } 
+//
+//	                     executor.executeBatch(); 
+//
+//	                     return null; 
+//
+//	                  } 
+//
+//	              }); 
+//
+//	           } 
+//
+//	       } catch (Exception e) { 
+//
+//	           if (log.isDebugEnabled()) { 
+//
+//	              e.printStackTrace(); 
+//
+//	              log.debug("batchUpdate error: id [" + statementName + "], parameterObject ["+ list + "].  Cause: "+ e.getMessage()); 
+//
+//	           } 
+//
+//	       } 
+//
+//	  
+
+
+		
+	}
+	
+	public void batchInsert(List<E> list) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -273,6 +333,19 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 			});
 		}
 
+		
+		
+		public int batchUpdate(final String statement, final List parameters) {
+			return (Integer) execute(new SqlSessionCallback() {
+				public Object doInSession(SqlSession session) {
+					for(Object o:parameters){
+						session.update(statement, 0);
+					}
+					return null;
+				}
+			});
+		}
+		
 		public int insert(final String statement, final Object parameter) {
 			return (Integer) execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
