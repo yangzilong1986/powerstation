@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.executor.BatchExecutor;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,7 +23,6 @@ import org.pssframework.util.PageRequestFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
-import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.util.Assert;
 
 import cn.org.rapid_framework.beanutils.BeanUtils;
