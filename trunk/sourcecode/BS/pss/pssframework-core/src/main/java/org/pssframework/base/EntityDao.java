@@ -33,5 +33,11 @@ public interface EntityDao<E, PK extends Serializable> {
 	public void flush();
 
 	public List<E> findAll();
-
+	
+	public void batchInsert(List<E> list);
+	
+	public void batchUpdate(List<E> list);
+	
+	public void batchDelete(List<E> list);
+	
 }
