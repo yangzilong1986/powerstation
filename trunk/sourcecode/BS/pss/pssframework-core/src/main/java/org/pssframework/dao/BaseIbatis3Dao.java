@@ -106,63 +106,59 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		prepareObjectForSaveOrUpdate(entity);
 		Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
 	}
-	
-	
+
 	public void batchDelete(List<E> list) {
-				
-		
+
 	}
-	
+
 	public void batchUpdate(List<E> list) {
 		// TODO Auto-generated method stub
-//		
-//		try { 
-//
-//	           if (list != null) { 
-//
-//	              this.getSqlSessionTemplate().execute(new SqlMapClientCallback() { 
-//
-//	                  public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException { 
-//
-//	                     executor.startBatch(); 
-//
-//	                     for (int i = 0, n = list.size(); i < n; i++) { 
-//
-//	                         executor.update(statementName, list.get(i)); 
-//
-//	                     } 
-//
-//	                     executor.executeBatch(); 
-//
-//	                     return null; 
-//
-//	                  } 
-//
-//	              }); 
-//
-//	           } 
-//
-//	       } catch (Exception e) { 
-//
-//	           if (log.isDebugEnabled()) { 
-//
-//	              e.printStackTrace(); 
-//
-//	              log.debug("batchUpdate error: id [" + statementName + "], parameterObject ["+ list + "].  Cause: "+ e.getMessage()); 
-//
-//	           } 
-//
-//	       } 
-//
-//	  
+		//		
+		//		try { 
+		//
+		//	           if (list != null) { 
+		//
+		//	              this.getSqlSessionTemplate().execute(new SqlMapClientCallback() { 
+		//
+		//	                  public Object doInSqlMapClient(SqlMapExecutor executor) throws SQLException { 
+		//
+		//	                     executor.startBatch(); 
+		//
+		//	                     for (int i = 0, n = list.size(); i < n; i++) { 
+		//
+		//	                         executor.update(statementName, list.get(i)); 
+		//
+		//	                     } 
+		//
+		//	                     executor.executeBatch(); 
+		//
+		//	                     return null; 
+		//
+		//	                  } 
+		//
+		//	              }); 
+		//
+		//	           } 
+		//
+		//	       } catch (Exception e) { 
+		//
+		//	           if (log.isDebugEnabled()) { 
+		//
+		//	              e.printStackTrace(); 
+		//
+		//	              log.debug("batchUpdate error: id [" + statementName + "], parameterObject ["+ list + "].  Cause: "+ e.getMessage()); 
+		//
+		//	           } 
+		//
+		//	       } 
+		//
+		//	  
 
-
-		
 	}
-	
+
 	public void batchInsert(List<E> list) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -173,23 +169,23 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	public String getFindByPrimaryKeyQuery() {
-		return getPrefix() + ".getById";
+		return getPrefix().concat(".getById");
 	}
 
 	public String getInsertQuery() {
-		return getPrefix() + ".insert";
+		return getPrefix().concat(".insert");
 	}
 
 	public String getUpdateQuery() {
-		return getPrefix() + ".update";
+		return getPrefix().concat(".update");
 	}
 
 	public String getDeleteQuery() {
-		return getPrefix() + ".delete";
+		return getPrefix().concat(".delete");
 	}
 
 	public String getCountQuery() {
-		return getPrefix() + ".count";
+		return getPrefix().concat(".count");
 	}
 
 	/**
@@ -229,7 +225,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 
 	protected String getCountQuery(String statementName) {
 		Assert.isNull(statementName);
-		return statementName + ".count";
+		return statementName.concat(".count");
 	}
 
 	/**
@@ -337,19 +333,17 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 			});
 		}
 
-		
-		
 		public int batchUpdate(final String statement, final List parameters) {
 			return (Integer) execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
-					for(Object o:parameters){
+					for (Object o : parameters) {
 						session.update(statement, 0);
 					}
 					return null;
 				}
 			});
 		}
-		
+
 		public int insert(final String statement, final Object parameter) {
 			return (Integer) execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
