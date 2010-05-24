@@ -13,31 +13,36 @@ package org.pssframework.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 /**
  * @author PSS
  */
 public interface EntityDao<E, PK extends Serializable> {
 
-	public Object getById(PK id);
+	public Object getById(PK id) throws DataAccessException;
 
-	public void deleteById(PK id);
+	public void deleteById(PK id) throws DataAccessException;
 
-	public void save(E entity);
+	/** 插入数据 */
+	public void save(E entity) throws DataAccessException;
 
-	public void update(E entity);
+	/** 更新数据 */
+	public void update(E entity) throws DataAccessException;
 
-	public void saveOrUpdate(E entity);
+	/** 根据id检查是否插入或是更新数据 */
+	public void saveOrUpdate(E entity) throws DataAccessException;
 
-	public boolean isUnique(E entity, String uniquePropertyNames);
+	public boolean isUnique(E entity, String uniquePropertyNames) throws DataAccessException;
 
-	public void flush();
+	public void flush() throws DataAccessException;
 
-	public List<E> findAll();
-	
-	public void batchInsert(List<E> list);
-	
-	public void batchUpdate(List<E> list);
-	
-	public void batchDelete(List<E> list);
-	
+	public List<E> findAll() throws DataAccessException;
+
+	public void batchInsert(List<E> list) throws DataAccessException;;
+
+	public void batchUpdate(List<E> list) throws DataAccessException;
+
+	public void batchDelete(List<E> list) throws DataAccessException;
+
 }
