@@ -15,17 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.executor.BatchExecutor;
-import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.executor.statement.SimpleStatementHandler;
-import org.apache.ibatis.executor.statement.StatementHandler;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.transaction.Transaction;
 import org.pssframework.base.EntityDao;
-import org.pssframework.util.PageRequestFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
@@ -188,6 +181,11 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		return getPrefix().concat(".count");
 	}
 
+	public String getQuery(String statementName) {
+		Assert.notNull(statementName);
+		return getPrefix().concat(".").concat(statementName);
+	}
+
 	/**
 	 * 
 	 * @param statementName
@@ -196,17 +194,19 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	@SuppressWarnings("unchecked")
 	protected Page pageQuery(final String statementName, PageRequest pageRequest) {
+		
+		Assert.notNull(statementName);
 
 		Page page = new Page(pageRequest, 0);
 		Map filters = creatFilters(pageRequest, page);
 
-		//全部查询
-		if (pageRequest.getPageSize() == PageRequestFactory.ALL_PAGE_SIZE) {
-			page = new Page(pageRequest, PageRequestFactory.ALL_PAGE_SIZE);
-			return queryPage(statementName, filters, page);
-		}
+		//		//全部查询
+		//		if (pageRequest.getPageSize() == PageRequestFactory.ALL_PAGE_SIZE) {
+		//			page = new Page(pageRequest, PageRequestFactory.ALL_PAGE_SIZE);
+		//			return queryPage(statementName, filters, page);
+		//		}
 
-		Number totalCount = countQuery(statementName, filters);
+		Number totalCount = countQuery(filters);
 		// 获取总条数
 		if (totalCount == null || totalCount.intValue() <= 0) {
 			return page;
@@ -217,15 +217,15 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		return queryPage(statementName, filters, page);
 	}
 
-	private Number countQuery(final String statementName, final Map filters) {
-		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(statementName), filters);
+	/**
+	 * 产生过滤
+	 * @param filters
+	 * @return
+	 */
+	private Number countQuery(final Map filters) {
+		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(), filters);
 
 		return totalCount;
-	}
-
-	protected String getCountQuery(String statementName) {
-		Assert.notNull(statementName);
-		return statementName.concat(".count");
 	}
 
 	/**
@@ -263,7 +263,8 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	@SuppressWarnings("unchecked")
 	private Page queryPage(final String statementName, final Map filters, Page page) {
-		List list = getSqlSessionTemplate().selectList(statementName, filters, page.getFirstResult(),
+		
+		List list = getSqlSessionTemplate().selectList(getQuery(statementName), filters, page.getFirstResult(),
 				page.getPageSize());
 		page.setResult(list);
 		return page;
