@@ -1,0 +1,122 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>公变主页面</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+})
+//新增线路
+function newLine(){
+  var url="../../jsp/archive/addLine.html";
+  top.showDialogBox("新增线路",url, 450, 800);
+}
+//编辑线路 
+function editLine(){
+  var lineNo=$(".selected td:eq(1)").html();  //取到选中行线路编号
+  if(lineNo==null){
+    alert("请选中一条线路！");
+  }else{
+    var url="../../jsp/archive/updateLine.html";
+    top.showDialogBox("编辑线路",url, 450, 800);
+  }
+}
+//删除线路
+function delLine(){
+  var lineNo=$(".selected td:eq(1)").html();  //取到选中行线路编号
+  if(lineNo==null){
+    alert("请选中一条线路！");
+  }else{
+    if(confirm("是否删除该条线路")==true){
+     alert("删除成功！");
+    }
+  }
+}
+</script>
+</head>
+<body>
+<div class="tab"><em>台区信息</em></div>
+<div class="tab_con">
+  <div class="main">
+   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="13%" class="label"><font color="red">* </font>台 区 号：</td>
+        <td width="20%" class="dom"><input type="text" id="tgNo" name="tgNo" value="0804255330" /></td>
+        <td width="13%" class="label"><font color="red">* </font>台 区 名：</td>
+        <td width="20%" class="dom"><input type="text" id="tgName" name="tgName" value="金钱二公变95" /></td>
+        <td width="13%" class="label"><input type="checkbox" name="isExam" value="0" checked="checked"/></td>
+        <td width="20%" class="dom">投入考核</td>
+      </tr>
+      <tr>
+        <td width="13%" class="label"><font color="red">* </font>供电单位：</td>
+        <td width="20%" class="dom" id="orgTar">
+        <!-- 供电单位 -->
+        </td>
+        <td width="13%" class="label">容　量：</td>
+        <td width="20%" class="dom"><input type="text" id="tgCapa" name="tgCapa" value="400" style="width:110"/>kVA</td>
+        <td width="13%" class="label">线损阈值：</td>
+        <td width="20%" class="dom"><input type="text" id="tgThreshold" name="tgThreshold" value="3.2" style="width:130"/>%</td>
+      </tr>
+      <tr>
+        <td width="13%" class="label">行 政 区：</td>
+        <td width="20%" class="dom">
+          <select name="sar" id="sar">
+           <option value="1">西湖区</option>
+           <option value="2">上城区</option>
+           <option value="3">下城区</option>
+           <option value="4">拱墅区</option>
+           <option value="5">滨江区</option>
+           <option value="6">萧山区</option>
+          </select>
+        </td>
+        <td width="13%" class="label">地　域：</td>
+        <td width="20%" class="dom">
+          <select name="area" id="area">
+           <option value="1">城市</option>
+           <option value="2">农村</option>
+          </select>
+        </td>
+        <td width="13%" class="label">台区状态：</td>
+        <td width="20%" class="dom">
+          <select name="tgStatus" id="tgStatus">
+           <option value="1">运行</option>
+           <option value="2">停运</option>
+           <option value="3">拆除</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td width="13%" class="label">联 系 人：</td>
+        <td width="20%" class="dom">
+         <input type="text" name="contact" id="contact" value="张三">
+        </td>
+        <td width="13%" class="label">联系电话：</td>
+        <td width="20%" class="dom">
+         <input type="text" name="phone" id="phone" value="134555567">
+        </td>
+        <td width="13%" class="label">地　址：</td>
+        <td width="20%" class="dom">
+         <input type="text" name="address" id="address">
+        </td>
+     </tr>
+     <tr>
+      <td rowspan="3" class="label">备　注：</td>
+      <td class="dom" colspan="4">
+        <textarea class="input_textarea3" name="remark" style="width:500;height:80"></textarea>
+      </td>
+     </tr>
+     <tr>
+        <td colspan="6" align="right"><input type="button" class="input3 mgr10" value="删除台区"/></td>
+     </tr>
+   </table>
+  </div>
+</div>
+</body>
+</html>

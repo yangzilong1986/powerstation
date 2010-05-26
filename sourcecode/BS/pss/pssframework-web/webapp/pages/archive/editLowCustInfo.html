@@ -1,0 +1,551 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>低压用户信息</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/archiveCss.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.url.js"></script>
+<script type="text/javascript">
+var protocolNo1=$.url.param("protocolNo");
+
+
+//初始化加载
+$(function(){
+ //厂家
+ $.handelCombox('madeFacTar','divFactory1');
+ 
+ //中继类型初始化
+ $("#repeatTypeLable").hide();
+ $("#repeatTypeDom").hide();
+ 
+ //重点表序号初始化
+ $("#meterSnLable").hide();
+ $("#meterSnDom").hide();
+ 
+ $('#isSupCust').click(function(){
+      if($('#isSupCust').attr("checked")==true){
+          if(protocolNo1==122){
+            $("#meterSnLable").show();
+            $("#meterSnDom").show();
+          }else{
+            $("#meterSnLable").hide();
+            $("#meterSnDom").hide();
+          }
+      }else{
+          $("#meterSnLable").hide();
+          $("#meterSnDom").hide();
+      }
+  })
+ 
+})
+//保存低压用户信息
+function save(){
+   parent.GB_hide();
+}
+//当通讯方式为载波信息表，显示中继类型
+function showRepeat(){
+  if($("#commMode").val()==2){
+     $("#repeatTypeLable").show();
+     $("#repeatTypeDom").show();
+  }else{
+     $("#repeatTypeLable").hide();
+     $("#repeatTypeDom").hide();
+  }
+}
+//打开中继器页面
+function openRepeat(){
+   var url="../../jsp/archive/addRepeat.html";
+   showDialogBox("中继器类型维护",url, 400,600);
+}
+
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>用户信息</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div>
+      <div class="data3"><span>基本信息</span></div>
+      <div class="data3_con">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td width="10%" class="label"><font color="red">* </font>户　号：</td>
+              <td width="17%" class="dom"><input type="text" id="custNo" name="custNo" value="0804554875" /></td>
+              <td width="10%" class="label"><font color="red">* </font>户　名：</td>
+              <td width="17%" class="dom"><input type="text" id="custName" name="custName" value="蔡芸" /></td>
+              <td width="10%" class="label">台区名称：</td>
+              <td width="20%" class="dom">
+               <input type="text" id="tgName" name="tgName" value="金钱二公变95" />
+               <input type="button" id="addTerminal" value="..." style="width:20px"/>
+              </td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td width="10%" class="label">用电类别：</td>
+              <td width="17%" class="dom">
+                <select name="elecAppType" id="elecAppType">
+                    <option value="100">大工业</option>
+                    <option value="101">中小化肥</option>
+                    <option value="200">居民生活用电</option>
+                    <option value="300">农业生产用电</option>
+                    <option value="301">贫困县农业排灌用电</option>
+                    <option value="400">一般工商业</option>
+                    <option value="500">趸售</option>
+                    <option value="900">其他</option>
+                </select>
+              </td>
+              <td width="10%" class="label">用户状态：</td>
+              <td width="17%" class="dom">
+                <select name="custStatus" id="custStatus">
+                   <option value="1">正常</option>
+                   <option value="2">变更中</option>
+                   <option value="3">已销户</option>
+                </select>
+              </td>
+              <td colspan="2" align="center">
+                <input type="checkbox" name="isSupCust" id="isSupCust"/>重点用户
+              </td>
+              <td width="10%" class="label" id="meterSnLable">重点表序号：</td>
+              <td width="17%" class="dom" id="meterSnDom">
+                 <select name="meterSn" id="meterSn">
+                    <option value="1201">1201</option>
+                    <option value="1202">1202</option>
+                    <option value="1203">1203</option>
+                    <option value="1204">1204</option>
+                    <option value="1205">1205</option>
+                    <option value="1206">1206</option>
+                 </select>
+              </td>
+            </tr>
+            <tr>
+              <td width="10%" class="label">抄 表 日：</td>
+              <td width="17%" class="dom">
+                 <input type="text" name="rmDay" id="rmDay">
+              </td>
+              <td width="10%" class="label">抄表区号：</td>
+              <td width="17%" class="dom">
+                  <input type="text" name="rmSectNo" id="rmSectNo">
+              </td>
+              <td width="10%" class="label">抄表顺序号：</td>
+              <td width="17%" class="dom">
+                  <input type="text" name="rmSn" id="rmSn" style="width: 80px">
+              </td>
+              <td width="10%" class="label">表 箱 号：</td>
+              <td width="17%" class="dom">
+                  <input type="text" name="rmSn" id="rmSn" style="width: 80px">
+              </td>
+            </tr>
+            <tr>
+              <td width="10%" class="label">联 系 人：</td>
+              <td width="17%" class="dom">
+                  <input type="text" name="contact" id="contact">
+              </td>
+              <td width="10%" class="label">联系电话：</td>
+              <td width="17%" class="dom">
+                  <input type="text" name="phone" id="phone">
+              </td>
+              <td width="10%" class="label">地　址：</td>
+              <td colspan="3" class="dom">
+                  <input type="text" name="address" id="address" style="width: 378px;"/>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">备　注：</td>
+              <td colspan="5" class="dom">
+                  <textarea class="input_textarea3" name="remark" style="width: 373px;"></textarea>
+              </td>
+            </tr>
+          </table>
+      </div>
+    </div>
+      <div class="data3"><span>电表信息</span></div>
+      <div class="data3_con">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+             <tr>
+              <td width="10%" class="label">
+               <font color="red">* </font>表 号：
+              </td>
+              <td width="23%" class="dom">
+               <input type="text" id="assetNo" name="assetNo" value="" />
+              </td>
+              <td width="10%" class="label">
+               表 类 型：
+              </td>
+              <td width="23%" class="dom">
+               <select name="meterType" id="meterType">
+                <option value="7">
+                 简易多功能表
+                </option>
+                <option value="6">
+                 机械表
+                </option>
+                <option value="5">
+                 单项电子表
+                </option>
+                <option value="4">
+                 多功能电子表
+                </option>
+                <option value="3">
+                 卡表
+                </option>
+                <option value="2">
+                 预付费表
+                </option>
+                <option value="1">
+                 远传表
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               <font color="red">* </font>表 序 号：
+              </td>
+              <td width="23%" class="dom">
+               <input type="text" id="mpSn" name="mpSn" value="" />
+              </td>
+             </tr>
+             <tr>
+              <td width="10%" class="label">
+               <font color="red">* </font>表 地 址：
+              </td>
+              <td width="23%" class="dom">
+               <input type="text" id="mpAddr" name="mpAddr" value="" />
+              </td>
+              <td width="10%" class="label">
+               CT变比：
+              </td>
+              <td width="23%" class="dom">
+               <select name="ctRatio" id="ctRatio">
+                <option value="100">
+                 100/10
+                </option>
+                <option value="110">
+                 11000/100
+                </option>
+                <option value="120">
+                 1200/1000
+                </option>
+                <option value="1234">
+                 100/5
+                </option>
+                <option value="123456">
+                 1100/10
+                </option>
+                <option value="135">
+                 100/1
+                </option>
+                <option value="220">
+                 2200/100
+                </option>
+                <option value="2200">
+                 22000/100
+                </option>
+                <option value="245">
+                 100/10
+                </option>
+                <option value="25">
+                 1000/400
+                </option>
+                <option value="30">
+                 3000/100
+                </option>
+                <option value="33">
+                 3300/100
+                </option>
+                <option value="34">
+                 455
+                </option>
+                <option value="350">
+                 35000/100
+                </option>
+                <option value="40">
+                 200/5
+                </option>
+                <option value="5">
+                 500/10
+                </option>
+                <option value="5432">
+                 100/10
+                </option>
+                <option value="600">
+                 600/100
+                </option>
+                <option value="66">
+                 660/100
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               PT变比：
+              </td>
+              <td width="23%" class="dom">
+               <select name="ptRatio" id="ptRatio">
+                <option value="10">
+                 50/5
+                </option>
+                <option value="100">
+                 10000/100
+                </option>
+                <option value="1100">
+                 110000/100
+                </option>
+                <option value="12">
+                 60/5
+                </option>
+                <option value="120">
+                 12000/100
+                </option>
+                <option value="2">
+                 220/220
+                </option>
+                <option value="20">
+                 100/5
+                </option>
+                <option value="222">
+                 40/1
+                </option>
+                <option value="224">
+                 20/1
+                </option>
+                <option value="25">
+                 10000/400
+                </option>
+                <option value="30">
+                 3000/100
+                </option>
+                <option value="33">
+                 3300/100
+                </option>
+                <option value="350">
+                 35000/100
+                </option>
+                <option value="40">
+                 200/5
+                </option>
+                <option value="5">
+                 500/100
+                </option>
+                <option value="60">
+                 6000/10
+                </option>
+                <option value="600">
+                 60000/100
+                </option>
+                <option value="66">
+                 6600/10
+                </option>
+               </select>
+              </td>
+             </tr>
+             <tr>
+              <td width="10%" class="label">
+               波 特 率：
+              </td>
+              <td width="23%" class="dom">
+               <select name="btl" id="btl">
+                <option value="0">
+                 300
+                </option>
+                <option value="1">
+                 600
+                </option>
+                <option value="2">
+                 1200
+                </option>
+                <option value="3">
+                 2400
+                </option>
+                <option value="4">
+                 4800
+                </option>
+                <option value="5">
+                 7200
+                </option>
+                <option value="6">
+                 9600
+                </option>
+                <option value="7">
+                 19200
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               表 规 约：
+              </td>
+              <td width="23%" class="dom">
+               <select name="proNo" id="proNo">
+                <option value="10">
+                 全国DLT645规约
+                </option>
+                <option value="11">
+                 新版645规约
+                </option>
+                <option value="20">
+                 浙江电表规约A
+                </option>
+                <option value="21">
+                 浙江电表规约B
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               通讯方式：
+              </td>
+              <td width="23%" class="dom">
+               <select name="commMode" id="commMode"
+                onChange="showRepeat();">
+                <option value="1">
+                 485方式
+                </option>
+                <option value="2">
+                 载波通信表
+                </option>
+                <option value="3">
+                 其他
+                </option>
+               </select>
+              </td>
+             </tr>
+             <tr>
+              <td width="10%" class="label">
+               电表厂家：
+              </td>
+              <td width="23%" class="dom" id="madeFacTar"></td>
+              <td width="10%" class="label">
+               拉闸功能：
+              </td>
+              <td width="23%" class="dom">
+               <select name="" id="">
+                <option value="0">
+                 不带拉闸
+                </option>
+                <option value="1">
+                 带拉闸
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               初抄相位：
+              </td>
+              <td width="23%" class="dom">
+               <select name="" id="">
+                <option value="1">
+                 A相
+                </option>
+                <option value="2">
+                 B相
+                </option>
+                <option value="3">
+                 C相
+                </option>
+                <option value="5">
+                 不确定
+                </option>
+               </select>
+              </td>
+             </tr>
+             <tr>
+              <td width="10%" class="label">
+               表 位 数：
+              </td>
+              <td width="23%" class="dom">
+               <input type="text" id="meterDigits" name="meterDigits"
+                value="6" />
+              </td>
+              <td width="10%" class="label">
+               是否预付费：
+              </td>
+              <td width="23%" class="dom">
+               <select name="" id="">
+                <option value="0">
+                 是
+                </option>
+                <option value="1">
+                 否
+                </option>
+               </select>
+              </td>
+              <td width="10%" class="label">
+               装表日期：
+              </td>
+              <td width="23%" class="dom_date">
+               <input type="text" name="installDate" id="installDate"
+                value="2009-01-01" />
+              </td>
+             </tr>
+             <tr>
+              <td width="10%" class="label" id="repeatTypeLable">
+               中继类型：
+              </td>
+              <td width="23%" class="dom_date" id="repeatTypeDom">
+               <select name="" id="">
+                <option value="-1">
+                 无中继
+                </option>
+                <option value="1">
+                 一级
+                </option>
+                <option value="2">
+                 二级
+                </option>
+                <option value="3">
+                 三级
+                </option>
+                <option value="4">
+                 四级
+                </option>
+                <option value="7">
+                 自动中继
+                </option>
+               </select>
+               <input type="button" id="addRepeat" value="..."
+                onclick="openRepeat();" style="width: 20px" />
+              </td>
+             </tr>
+            </table>
+      </div>
+    <div id="relatedShow">
+      <div class="data3"><span>关联信息</span></div>
+      <div class="data3_con">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+           <tr>
+             <td width="10%" class="label">集 中 器：</td>
+             <td width="17%" class="dom_date">
+                <select name="mtNo" id="mtNo">
+                   <option value="122345">122345</option>
+                </select>
+                <input type="button" id="addTerminal" value="..." onclick="addTerminal();" style="width:20px"/>
+             </td>
+             <td width="10%" class="label">采 集 器：</td>
+             <td width="17%" class="dom">
+                <select name="gmNo" id="gmNo">
+                   <option value="122345">122345</option>
+                </select>
+             </td>
+             <td width="17%" class="label"><font color="red">注：两层式无采集器</font></td>
+             <td>&nbsp;</td>
+           </tr>
+           <tr>
+             <td width="10%" class="label">变 压 器：</td>
+             <td width="17%" class="dom">
+                <select name="tranNo" id="tranNo">
+                   <option value="">丰台变</option>
+                </select>
+             </td>
+           </tr>
+         </table>
+      </div>
+    </div>
+  </div>
+  <div class="guidePanel">
+    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+  </div>
+</div>
+</body>
+</html>

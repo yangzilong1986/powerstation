@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>对象树</title>
+<link rel="stylesheet" type="text/css" href="../../css/treeframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+var selBgColor = "#0A726A";
+var selColor = "FFFFFF";
+var unSelBgColor = "#FFFFFF";
+var unSelColor = "000000";
+
+var preObject = null;
+
+/**
+ * 选择对象
+ * @param {Object} obj
+ * @param {int} objectType    : 对象类型
+ * @param {String} objectId   : 对象编号
+ * @param {String} objectName : 对象名称
+ * @param {String} orgType    : 部门类型
+ */
+function select(obj, objectType, objectId, objectName, orgType) {
+    $(obj).css("background-color", selBgColor);
+    $(obj).css("color", selColor);
+    if(preObject != null && preObject != obj) {
+        $(preObject).css("background-color", unSelBgColor);
+        $(preObject).css("color", unSelColor);
+    }
+    preObject = obj;
+    parent.nodeEvent(objectType, objectId, objectName, orgType);
+}
+</script>
+</head>
+<body>
+<div class="treeContainer">
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr valign="middle">
+      
+    </tr>
+    <tr valign="middle">
+      <td width="16" style="padding-left:1px;"><a name='0.3301204558412191'></a><a href="#" onclick="return false;"><img src="../../img/tree/handledownlast.gif" alt="close node" border="0" width="16" height="22"></a></td>
+      <td colspan="5" width="99%" style="padding-left:1px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td onclick="select(this, 13, '44', '徐闻站', '02');" style="cursor:hand;" nowrap="nowrap"><img src="../../img/tree/object_org.gif" alt="" border="0" width="15" height="15" align="bottom">&nbsp;徐闻站</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

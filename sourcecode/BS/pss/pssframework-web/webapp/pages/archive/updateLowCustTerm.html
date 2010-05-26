@@ -1,0 +1,356 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>配变/台区用户档案编辑第三步</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  //厂家
+  $.handelCombox('madeFacTar','divFactory1');
+  $("#divFactory").val(1);
+  //当前状态
+  $.handelCombox('curStatusTar','curStatus1');
+  //通讯方式
+  $.handelCombox('commModeTar','commMode1');
+
+  $('#isac').click(function(){
+        if($('#isac').attr("checked")==true){
+            $('#ACShow').show();
+        }else{
+            $('#ACShow').hide();
+        }
+    })
+  $('#isTotalGP').click(function(){
+        if($('#isTotalGP').attr("checked")==true){
+            $('#totalGPShow').show();
+        }else{
+            $('#totalGPShow').hide();
+        }
+    })
+});
+//上一步
+function lastStep(){
+  window.location.href="../../jsp/archive/selectLowCustTerm.html";
+}
+//完成
+function finish(){
+   if(terminalCheck()){
+     if(confirm("是否继续编辑")==true){
+        window.location.href="../../jsp/archive/selectLowCustTerm.html";
+     }else{
+        window.location.href="../../jsp/archive/lowVoltCustTypeUpdate.html"; 
+     }
+   }
+}
+//接入终端
+function addTerminal(){
+   var url="../../jsp/archive/locateTerminal.html";
+   top.showDialogBox("终端定位",url, 450, 750);
+}
+//显示上级设备
+function showDevice(){
+  if($("#commPattern").val()==1){
+     $("#deviceLable").html("下级设备：");
+  }
+  if($("#commPattern").val()==2){
+     $("#deviceLable").html("上级设备：");
+  }
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">档案维护第三步</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div class="tab"><em>终端信息</em></div>
+    <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 123));">
+      <div class="main">
+        <table border="0" cellpadding="0" cellspacing="0" width="900" align="center">
+          <tr>
+           <td width="10%" class="label"><font color="red">* </font>资产编号：</td>
+           <td width="23%" class="dom"><input type="text" name="assetNo" id="assetNo" value="123345"/></td>
+           <td width="10%" class="label"><font color="red">* </font>逻辑地址：</td>
+           <td width="23%" class="dom"><input type="text" name="logicalAddr" id="logicalAddr" value="8D271188"/></td>
+           <td width="10%" class="label">所属台区：</td>
+           <td width="23%" class="dom">
+             <input type="text" name="isTG" id="isTG" value="金钱二公变95"/>
+             <input type="button" id="addTerminal" value="..." style="width:20px"/>
+           </td>
+          </tr>
+          <tr>
+           <td width="10%" class="label">当前状态：</td>
+           <td width="23%" class="dom" id="curStatusTar"></td>
+           <td width="10%" class="label">设备规约：</td>
+           <td width="23%" class="dom">
+            <select name="protocolNo" id="protocolNo">
+             <option value="100">698规约</option>
+             <option value="106">国网规约</option>
+             <option value="120">浙江规约</option>
+             <option value="121">浙江增补规约</option>
+             <option value="122">广东大用户规约</option>
+             <option value="123">广东大用户规约（第二版）</option>
+             <option value="124">广东配变规约</option>
+             <option value="125">江西配变规约</option>
+             <option value="126">广东集抄规约</option>
+             <option value="129">浙江自定义规约</option>
+             <option value="146">广东变电站规约</option>
+            </select>
+            <script type="text/javascript">
+              $("#protocolNo").val("122");
+            </script>
+           </td>
+           <td width="10%" class="label">通讯方式：</td>
+           <td width="24%" class="dom" id="commModeTar"></td>
+          </tr>
+          <tr>
+           <td width="10%" class="label">相　线：</td>
+           <td width="23%" class="dom">
+            <select name="wiringMode" id="wiringMode">
+             <option value="1">单相</option>
+             <option value="3">三相三线</option>
+             <option value="4">三相四线</option>
+            </select>
+            <script type="text/javascript">
+              $("#wiringMode").val("3");
+            </script>
+           </td>
+           <td width="10%" class="label">设备厂家：</td>
+           <td width="23%" class="dom" id="madeFacTar"></td>
+           <td width="10%" class="label">终端类型：</td>
+           <td width="24%" class="dom">
+           <select name="termType" id="termType">
+             <option value="01">配变终端</option>
+             <option value="02">配变监控终端</option>
+            </select>
+           </td>
+          </tr>
+          <tr>
+           <td width="10%" class="label">变 压 器：</td>
+           <td width="23%" class="dom">
+             <select name="tranNo" id="tranNo">
+             <option value=""></option>
+            </select>
+           </td>
+           <td width="10%" class="label">抄表方式：</td>
+           <td width="23%" class="dom">
+             <select name="rmMode" id="rmMode">
+              <option value="1">载波</option>
+              <option value="2">小无线</option>
+              <option value="3">485</option>
+             </select>
+           </td>
+           <td width="10%" class="label">产　权：</td>
+           <td width="24%" class="dom">
+            <select name="pr" id="pr">
+             <option value="1">局方</option>
+             <option value="2">用户</option>
+            </select>
+           </td>
+          </tr>
+          <tr>
+           <td width="10%" class="label">安装日期：</td>
+           <td width="23%" class="dom_date">
+            <input type="text" id="installDate" name="installDate"
+             value="2009-09-01" />
+           </td>
+           <td width="10%" class="label">安装单位：</td>
+           <td width="23%" class="dom">
+            <input type="text" id="installAddr" name="installAddr" />
+           </td>
+           <td width="10%" class="label">安装地址：</td>
+           <td width="23%" class="dom">
+            <input type="text" id="installAddr" name="installAddr" />
+           </td>
+          </tr>
+          <tr>
+           <td width="10%" colspan="2" align="center">
+            <input type="checkbox" name="isac" id="isac" value="1" checked>接交采
+           </td>
+           <td width="10%" class="label">终端型号：</td>
+           <td width="23%" class="dom">
+            <select name="modelCode" id="modelCode">
+             <option value="1">BF001</option>
+             <option value="2">BF002</option>
+            </select>
+           </td>
+           <td width="10%" class="label">入库日期：</td>
+           <td width="23%" class="dom_date">
+            <input type="text" name="storageDate" id="storageDate" value="2009-01-01"/>
+           </td>
+          </tr>
+         </table>
+      </div>
+       <div id="ACShow">
+        <div class="data3"><span>交采信息</span></div>
+        <div class="data3_con">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+           <tr>
+            <td width="10%" class="label">计量点序号：</td>
+            <td width="18%" class="dom">
+              <input type="text" id="gpSnAC" name="gpSnAC" value="2"/>
+            </td>
+            <td width="10%" class="label">供电线路：</td>
+            <td width="18%" class="dom">
+             <select name="lineNo" id="lineNo">
+              <option value="1">白沙主干线</option>
+              <option value="2">合兴主干线路</option>
+              <option value="3">调罗线</option>
+              <option value="4">康港线</option>
+              <option value="5">里港线</option>
+              <option value="6">城内北门线</option>
+             </select>
+            </td>
+            <td width="28%"  colspan="2" align="center">
+             <input type="checkbox" id="isPowerCumulative" name="isPowerCumulative" checked/>功率累计&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <input type="checkbox" id="isElecCumulative" name="isElecCumulative" checked/>电量累计
+            </td>
+           </tr>
+           <tr>
+            <td width="10%" class="label">CT变比：</td>
+            <td width="18%" class="dom">
+             <select name="ctRatio" id="ctRatio">
+               <option value="100">100/10</option>
+               <option value="110">11000/100</option>
+               <option value="120">1200/1000</option>
+               <option value="1234">100/5</option>
+               <option value="123456">1100/10</option>
+               <option value="135">100/1</option>
+               <option value="220">2200/100</option>
+               <option value="2200">22000/100</option>
+               <option value="245">100/10</option>
+               <option value="25">1000/400</option>
+               <option value="30">3000/100</option>
+               <option value="33">3300/100</option>
+               <option value="34">455</option>
+               <option value="350">35000/100</option>
+               <option value="40">200/5</option>
+               <option value="5">500/10</option>
+               <option value="5432">100/10</option>
+               <option value="600">600/100</option>
+               <option value="66">660/100</option>
+             </select>
+            </td>
+            <td width="10%" class="label">PT变比：</td>
+            <td width="18%" class="dom">
+             <select name="ptRatio" id="ptRatio">
+               <option value="10">50/5</option>
+               <option value="100">10000/100</option>
+               <option value="1100">110000/100</option>
+               <option value="12">60/5</option>
+               <option value="120">12000/100</option>
+               <option value="2">220/220</option>
+               <option value="20">100/5</option>
+               <option value="222">40/1</option>
+               <option value="224">20/1</option>
+               <option value="25">10000/400</option>
+               <option value="30">3000/100</option>
+               <option value="33">3300/100</option>
+               <option value="350">35000/100</option>
+               <option value="40">200/5</option>
+               <option value="5">500/100</option>
+               <option value="60">6000/10</option>
+               <option value="600">60000/100</option>
+               <option value="66">6600/10</option>
+             </select>
+            </td>
+            <td width="10%" class="label">端 口 号：</td>
+            <td width="18%" class="dom_date">
+             <input type="text" id="port" name="port" style="width: 46px"/>
+            </td>
+           </tr>
+          </table>
+        </div>
+      </div>
+      <div class="data3"><span>级联信息</span></div>
+      <div class="data3_con">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="10%" class="label">通信模式：</td>
+            <td width="20%" class="dom">
+              <select name="commPattern" id="commPattern" onChange="showDevice();">
+                <option value="1">主</option>
+                <option value="2">从</option>
+              </select>
+            </td>
+            <td width="10%" class="label" id="deviceLable">下级设备：</td>
+            <td width="37%" class="dom" id="deviceDom">
+              <select name="superDevice" id="superDevice">
+                <option value=""></option>
+              </select>
+              <input type="button" id="addTerminal" value="..." onclick="addTerminal();" style="width:20px"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="assInfoShow">
+        <div class="data3"><span>关联信息</span></div>
+        <div class="data3_con">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+           <tr>
+            <td align="right" class="lable">电表：</td>
+            <td>
+             <input type="checkbox" id="assetNo" name="assetNo" checked/>A080613 / 电表1
+            </td>
+            <td>
+             <input type="checkbox" id="assetNo" name="assetNo" />A080614 / 电表2
+            </td>
+            <td></td>
+           </tr>
+           <tr>
+            <td align="right" class="lable">开关：</td>
+            <td>
+            </td>
+            <td>
+            </td>
+           </tr>
+          </table>
+        </div>
+      </div>
+      <div id="paramShow">
+        <div class="data2"><span>终端参数</span></div>
+        <div class="data2_con">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+           <thead>
+             <tr>
+              <th>序号</th>
+              <th>终端参数</th>
+              <th>参数值</th>
+             </tr>
+            </thead>
+            <tbody>
+              <tr>
+               <td align="center">1</td>
+               <td>密码算法编号</td>
+               <td><input type="text" id="" name="" value="101" style="width: 200px; height: 21px;"/></td>
+              </tr>
+              <tr>
+               <td align="center">2</td>
+               <td>密钥</td>
+               <td><input type="password" id="" name="" value="6666" style="width: 200px; height: 21px;"/></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="guidePanel">
+      <input type="button" id="last" value="上一步" class="input1" onclick="lastStep();" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" id="finish" value="完 成" class="input1" onclick="finish();" />
+    </div>
+  </div>
+</div>
+</body>
+</html>
