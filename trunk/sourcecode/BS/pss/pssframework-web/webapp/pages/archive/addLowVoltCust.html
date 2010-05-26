@@ -1,0 +1,131 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>低压集抄档案录入第二步</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//初始化加载(下拉框)
+$(function(){
+//供电单位
+$.handelCombox('orgTar','orgNo');
+})
+//上一步
+function lastStep(){
+  window.location.href="../../jsp/archive/lowVoltCustType.html";
+}
+//下一步
+function nextStep(){
+  if(tgCheck()){
+      window.location.href="../../jsp/archive/addLowCustRelevance.html";
+  }
+}
+//完成
+function finish(){
+   if(confirm("是否继续新增台区")==true){
+        window.location.href="../../jsp/archive/addLowVoltCust.html";
+     }else{
+        window.location.href="../../jsp/archive/lowVoltCustType.html"; 
+     }
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">档案录入第二步</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main">
+    <div class="tab"><em>台区基本信息</em></div>
+    <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 123));">
+      <div class="main">
+        <table border="0" cellpadding="0" cellspacing="0" width="900" align="center">
+          <tr>
+            <td width="13%" class="label"><font color="red">* </font>台区号：</td>
+            <td width="20%" class="dom"><input type="text" id="tgNo" name="tgNo" value="" /></td>
+            <td width="13%" class="label"><font color="red">* </font>台区名：</td>
+            <td width="20%" class="dom"><input type="text" id="tgName" name="tgName" value="" /></td>
+            <td width="13%" class="label"><input type="checkbox" name="isExam" value="0"/></td>
+            <td width="21%" class="dom">投入考核</td>
+          </tr>
+          <tr>
+            <td class="label"><font color="red">* </font>供电单位：</td>
+            <td class="dom" id="orgTar">
+            <!-- 供电单位 -->
+            </td>
+            <td class="label">容　量：</td>
+            <td class="dom"><input type="text" id="tgCapa" name="tgCapa" value="" style="width: 115px;"/> kVA</td>
+            <td class="label">线损阈值：</td>
+            <td class="dom"><input type="text" id="tgThreshold" name="tgThreshold" value="" style="width: 125px;"/> %</td>
+          </tr>
+          <tr>
+            <td class="label">行 政 区：</td>
+            <td class="dom">
+              <select name="sar" id="sar">
+               <option value="1">西湖区</option>
+               <option value="2">上城区</option>
+               <option value="3">下城区</option>
+               <option value="4">拱墅区</option>
+               <option value="5">滨江区</option>
+               <option value="6">萧山区</option>
+              </select>
+            </td>
+            <td class="label">地　域：</td>
+            <td class="dom">
+              <select name="area" id="area">
+               <option value="1">城市</option>
+               <option value="2">农村</option>
+              </select>
+            </td>
+            <td class="label">台区状态：</td>
+            <td class="dom">
+              <select name="tgStatus" id="tgStatus">
+               <option value="1">运行</option>
+               <option value="2">停运</option>
+               <option value="3">拆除</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">联系人：</td>
+            <td class="dom">
+             <input type="text" name="contact" id="contact">
+            </td>
+            <td class="label">联系电话：</td>
+            <td class="dom">
+             <input type="text" name="phone" id="phone">
+            </td>
+            <td class="label">地　址：</td>
+            <td class="dom">
+             <input type="text" name="address" id="address">
+            </td>
+         </tr>
+         <tr>
+          <td rowspan="3" class="label">备　注：</td>
+          <td class="dom" colspan="5">
+            <textarea class="input_textarea3" name="remark" style="width: 734px; height: 80px;"></textarea>
+          </td>
+         </tr> 
+       </table>
+      </div>
+    </div>
+    <div class="guidePanel">
+      <input type="button" id="last" value="上一步" class="input1" onclick="lastStep();" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" id="next" value="下一步" class="input1" onclick="nextStep();" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" id="finish" value="完 成" class="input1" onclick="finish();" />
+    </div>
+  </div>
+</div>
+</body>
+</html>

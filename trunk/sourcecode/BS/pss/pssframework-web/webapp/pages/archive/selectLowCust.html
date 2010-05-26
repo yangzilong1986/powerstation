@@ -1,0 +1,143 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>低压集抄档案编辑第二步</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+inpuTextStyle();
+})
+//上一步
+function lastStep(){
+  window.location.href="../../jsp/archive/lowVoltCustTypeUpdate.html";
+}
+//下一步
+function nextStep(){
+   var custNo=$(".selected td:eq(2)").html();  //取到选中户号
+   if(custNo==null){
+     alert("请选中一个用户！");
+   }else{
+     window.location.href="../../jsp/archive/updateLowCustInfoSecond.html";
+   }
+}
+//删除用户
+function deleteCust(){
+   if(confirm("是否删除该用户")==true){
+     alert("删除成功！");
+   }
+}
+//输入框文字效果
+function inpuTextStyle(){
+  $('#custNo').attr({style: "color:#aaaaaa;"});
+  $('#custNo').blur(function(){
+    if(this.value==''){
+      this.value="请输入户号或户名";
+      $('#custNo').attr({style: "color:#aaaaaa;"});
+    }
+  });
+  $('#custNo').focus(function(){
+    if(this.value=="请输入户号或户名"){
+       this.value='';
+       $('#custNo').attr({style: "color:black;"});
+     }
+  });
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">档案维护第二步</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+   <div id="main">
+    <div id="tool">
+     <div class="opbutton1">
+       <input type="submit" name="query" id="query" onclick="query();" value="查 询" class="input1" />
+       <input type="submit" name="query" id="query" onclick="query();" value="高级查询" class="input2" />
+     </div>
+     <table border="0" cellpadding="0" cellspacing="0" width="80%">
+        <tr>
+          <td width="10%" class="label">用　户：</td>
+          <td width="23%">
+             <input type="text" name="custNo" id="custNo" value="请输入户号或户名"/>
+          </td>
+          <td width="10%" class="label" align="center">表地址/表号：</td>
+          <td width="23%" class="dom"><input type="text" id="custNo" name="custNo" value="" /></td>
+          <td colspan="4"></td>
+        </tr>
+       </table>
+    </div>
+    <div class="content">
+     <div id="cont_1">
+      <div id="tableContainer" class="tableContainer"
+       style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 160 ) );">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+          <tr>
+            <th>序号</th>
+            <th>户名</th>
+            <th>户号</th>
+            <th>表号</th>
+            <th>联系人</th>
+            <th>联系电话</th>
+            <th>所属集中器</th>
+            <th>表序号</th>
+            <th>表地址</th>
+            <th>台区名称</th>
+            <th>操作</th>
+          </tr></thead>
+          <tbody>
+            <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+              <td>1</td>
+              <td>陈学军</td>
+              <td>0301143962</td>
+              <td>000000054088</td>
+              <td>陈学军</td>
+              <td>&nbsp;</td>
+              <td>8D480740</td>
+              <td>1</td>
+              <td>000000054088</td>
+              <td>金钱二公变95</td>
+              <td><a href="javascript:deleteCust();">删除</a></td>
+            </tr>
+            <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+              <td>2</td>
+              <td>陈玉金</td>
+              <td>0301144532</td>
+              <td>000000053840</td>
+              <td>陈玉金</td>
+              <td>&nbsp;</td>
+              <td>8D480740</td>
+              <td>2</td>
+              <td>000000053840</td>
+              <td>金钱二公变95</td>
+              <td><a href="javascript:deleteCust();">删除</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">2</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+      </div>
+     </div>
+     <div class="guidePanel">
+      <input type="button" id="last" value="上一步" class="input1" onclick="lastStep();" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="button" id="next" value="下一步" class="input1" onclick="nextStep();" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    </div>
+   </div>
+  </div>
+</body>
+</html>

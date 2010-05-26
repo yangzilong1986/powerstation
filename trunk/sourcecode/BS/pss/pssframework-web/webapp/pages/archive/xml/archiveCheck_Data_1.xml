@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datas rowid="">
+   <data>        
+        <td1>1</td1>
+        <td2>0804255330</td2>
+        <td3>金钱二公变95</td3>
+        <td4>1</td4>
+        <td5>1</td5> 
+        <td6>0</td6> 
+        <td7>164</td7> 
+        <td8>164</td8> 
+        <td9>165</td9>
+        <td10>164</td10>
+        <td11>99.39</td11>
+        <td12>&lt;a href="javascript:openDetail('0804255330','金钱二公变95','165','164','164','99.39')"&gt;查看&lt;/a&gt;</td12>                   
+    </data>
+    <data>        
+        <td1>2</td1>
+        <td2>0804255416</td2>
+        <td3>金钱五公变97</td3>
+        <td4>1</td4>
+        <td5>1</td5> 
+        <td6>0</td6> 
+        <td7>117</td7> 
+        <td8>117</td8> 
+        <td9>117</td9>
+        <td10>117</td10>
+        <td11>100</td11>
+        <td12>&lt;a href="javascript:openDetail('0804255416','金钱五公变97','117','117','117','100')"&gt;查看&lt;/a&gt;</td12>                   
+    </data>
+</datas>
