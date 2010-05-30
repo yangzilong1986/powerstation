@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>menu</title>
-<link type="text/css" rel="stylesheet" href="<layout:path type="bgcolor"/>/css/container.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 </head>
 <body>
 <div id="menu">
