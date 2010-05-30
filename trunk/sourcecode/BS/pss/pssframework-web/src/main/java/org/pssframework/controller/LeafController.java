@@ -23,10 +23,10 @@ import net.jcreate.e3.tree.support.DefaultTreeModel;
 import net.jcreate.e3.tree.support.RequestUtil;
 import net.jcreate.e3.tree.support.WebTreeBuilder;
 
+import org.apache.commons.lang.StringUtils;
 import org.pssframework.model.LeafInfo;
 import org.pssframework.service.LeafInfoManager;
 import org.pssframework.support.WebTreeDynamicNode;
-import org.pssframework.util.PageRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,17 +65,35 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, LeafInfo leafInfo) {
 
-		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS, PageRequestFactory.ALL_PAGE_SIZE);
+		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
 		//pageRequest.getFilters(); //add custom filters
 
 		Map fiterMap = pageRequest.getFilters();
-		fiterMap.put(PARENT_ID, request.getParameter(PARENT_ID));
-		fiterMap.put(PARENT_TYPE, request.getParameter(PARENT_TYPE));
+
+		String parentType = "ORG";
+
+		String parentId = "-1";
+
+		if (StringUtils.isNotEmpty(request.getParameter(PARENT_ID))) {
+			parentId = request.getParameter(PARENT_ID);
+		}
+
+		if (StringUtils.isNotEmpty(request.getParameter(PARENT_TYPE))) {
+			parentType = request.getParameter(PARENT_TYPE);
+		}
+
+		fiterMap.put(PARENT_ID, parentId);
+
+		fiterMap.put(PARENT_TYPE, parentType);
 
 		Page page = this.leafInfoManager.findByPageRequest(pageRequest);
+
 		ModelAndView result = toModelAndView(page, pageRequest);
+
 		result.addObject("leafInfo", this.showExtLoadTree(request, response));
+
 		result.setViewName("/tree/complex");
+
 		return result;
 	}
 
