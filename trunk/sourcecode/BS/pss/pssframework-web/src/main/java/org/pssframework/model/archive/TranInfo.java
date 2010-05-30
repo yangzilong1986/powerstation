@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,11 +32,12 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "g_tran")
+@SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN")
 public class TranInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -3795917072464107754L;
 
-	@Column(name = "TG_ID", unique = true, nullable = false)
+	@Column(name = "EQUIP_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
 	//EQUIP_ID           NUMBER(16) not null, 设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识

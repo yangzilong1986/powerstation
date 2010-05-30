@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +28,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "G_SUBS_LINE_RELA")
+@SequenceGenerator(sequenceName = "SEQ_G_SUBS_LINE_RELA", name = "SEQ_G_SUBS_LINE_RELA")
 public class SubsLineRelaInfo extends BaseEntity {
 	/**
 	 * 
