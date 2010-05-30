@@ -7,6 +7,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="/WEB-INF/tld/extremecomponents.tld" prefix="ec" %>
+<%@ taglib uri="/WEB-INF/tld/pss.tld" prefix="pss" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
