@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Up and Down Panel</title>
-<link type="text/css" rel="stylesheet" href="<layout:path type="bgcolor"/>/css/container.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 </head>
 <body>
 <div class="panel_upanddown">
-  <p><a href="#"><img src="<layout:path type="bgcolor"/>/img/up_panel_bot.gif" width="116" height="4" /></a></p>
+  <p><a href="#"><img src="<pss:path type="bgcolor"/>/img/up_panel_bot.gif" width="116" height="4" /></a></p>
 </div>
 </body>
 </html>

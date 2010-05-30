@@ -7,12 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>border bottom</title>
-<link type="text/css" rel="stylesheet" href="<layout:path type="bgcolor"/>/css/container.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 </head>
 <body>
 <div id="border_bot" class="cb">
-  <div id="border_bot_l"><img src="<layout:path type="bgcolor"/>/img/blank.gif" width="1" height="8" /></div>
-  <div id="border_bot_r"><img src="<layout:path type="bgcolor"/>/img/blank.gif" width="1" height="8" /></div>
+  <div id="border_bot_l"><img src="<pss:path type="bgcolor"/>/img/blank.gif" width="1" height="8" /></div>
+  <div id="border_bot_r"><img src="<pss:path type="bgcolor"/>/img/blank.gif" width="1" height="8" /></div>
 </div>
 </body>
 </html>
