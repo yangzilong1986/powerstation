@@ -18,13 +18,6 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class LeafInfoDao extends BaseIbatis3Dao<LeafInfo, Serializable> {
 
-	@Override
-	public Class<?> getEntityClass() {
-		// TODO Auto-generated method stub
-		return getClass();
-	}
-
-
 	public void saveOrUpdate(final LeafInfo entity) {
 		// TODO Auto-generated method stub
 
@@ -32,6 +25,12 @@ public class LeafInfoDao extends BaseIbatis3Dao<LeafInfo, Serializable> {
 
 	public Page findByPageRequest(PageRequest pageRequest) {
 		this.log.info("findByPageRequest");
-		return pageQuery("Leaf.infos", pageRequest);
+		return pageQuery("infos", pageRequest);
+	}
+
+	@Override
+	public String getPrefix() {
+		// TODO Auto-generated method stub
+		return "LeafInfo";
 	}
 }

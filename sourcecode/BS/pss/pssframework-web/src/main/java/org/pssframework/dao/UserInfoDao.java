@@ -9,10 +9,6 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class UserInfoDao extends BaseIbatis3Dao<UserInfo, java.lang.Long> {
 
-	@Override
-	public Class<?> getEntityClass() {
-		return UserInfo.class;
-	}
 
 	public void saveOrUpdate(UserInfo entity) {
 		this.log.info("saveOrUpdate");
@@ -27,7 +23,13 @@ public class UserInfoDao extends BaseIbatis3Dao<UserInfo, java.lang.Long> {
 
 	public Page findByPageRequest(PageRequest pageRequest) {
 		this.log.info("findByPageRequest");
-		return pageQuery("UserInfo.pageSelect", pageRequest);
+		return pageQuery("pageSelect", pageRequest);
+	}
+
+	@Override
+	public String getPrefix() {
+		// TODO Auto-generated method stub
+		return "UserInfo";
 	}
 
 }
