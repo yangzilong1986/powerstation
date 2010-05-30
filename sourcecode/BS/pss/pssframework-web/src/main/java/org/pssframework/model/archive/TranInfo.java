@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -413,6 +415,7 @@ public class TranInfo extends BaseEntity {
 	public void setRcMv(String rcMv) {
 		this.rcMv = rcMv;
 	}
+
 	/**
 	 * @param runStatusCode the runStatusCode to set
 	 */
@@ -469,4 +472,13 @@ public class TranInfo extends BaseEntity {
 		this.typeCode = typeCode;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 }
