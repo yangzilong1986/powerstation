@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+* { margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+ul { margin: 0; padding: 0; }
+ul, li { list-style-type: none; }
+a { text-decoration: none; }
+img { border: 0; }
+.disNone { display: none; }
+.cb { clear: both; }
+
+.bg_panel_left { background: url(../img/bg_panel_left.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
+.bg_panel_right { background: url(../img/bg_panel_right.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
+
+#border_bot { height: 8px; background: url(../img/cexpandbtn_top_bg.gif) repeat-x; }
+#border_bot_l { float: left; width: 8px; height: 8px; background: url(../img/border_l_b.gif) no-repeat; }
+#border_bot_r { float: right; width: 8px; height: 8px; background: url(../img/border_r_b.gif) no-repeat; }
+
+.panel_upanddown { background: url(../img/cexpandbtn_top_bg.gif) repeat-x; clear: both; height: 8px; }
+.panel_upanddown p { text-align: center; padding-top: 2px; }
+
+.bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 14px; }
+#logo { float: left; width: 473px; padding-top: 13px; }
+#top_r { float: right; width: 465px; padding-top: 6px; }
+#top_r_t { height: 55px; }
+#top_r_t ul { overflow: hidden; }
+#top_r_t ul li { float: left; width: 65px; height: 55px; text-align: center; font-family: "宋体"; font-size: 14px; font-weight: bold; margin-left: 25px; }
+#top_r_t ul li a { color: #fff; display: block; margin-top: 5px; line-height: 15px; }
+#top_r_t ul li a:hover { text-decoration: underline; }
+#top_menu { clear: both; height: 16px; padding-right: 12px; }
+#top_menu ul { overflow: hidden; }
+#top_menu ul li { float: right; margin-left: 8px; width: 16px; }
+
+/*菜单CSS开始*/
+#menu { height: 26px; background: url(../img/bg_menu.gif) repeat-x; }
+#menu dl { overflow: hidden; margin: 0; width: 100%; }
+#menu dt { height: 26px; overflow: hidden; }
+#menu dd { margin: 0; padding: 0; z-index: 99; }
+#menu dd a { background: url(../img/fod_menu.gif) no-repeat bottom; display: block; width: 84px; padding-left: 18px; height: 29px; line-height: 29px; text-decoration: none; color: #333; }
+#menu dd a:active { background: url(../img/fod_menu.gif) no-repeat bottom #9fd5cf; text-decoration: none; color: #333; }
+#menu dd a:hover { background: url(../img/fod_menu.gif) no-repeat bottom #9fd5cf; text-decoration: none; color: #333; }
+#menu #Fod { float: left; overflow: hidden; }
+#menu #Fod div { float: left; font-family: "宋体"; line-height: 26px; width: 100px; text-align: center; }
+#menu #Fod div.s { background: url(../img/nav_bg02.gif) repeat-x; width: 100px; height: 26px; }
+#menu #Fod a { color: #d3fcfc; text-decoration: none; }
+#menu #Fod a:hover { color: #d3fcfc; }
+#menu #Fod div.s a { color: #d3fcfc; text-decoration: none; }
+#menu #Fod div.s a:hover { color: #d3fcfc; text-decoration: none; }
+.dis { display: block; }
+.undis { display: none; }
+.menu1 {z-index: 99; position: absolute; left: 0; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu2 {z-index: 99; position: absolute; left: 97px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu3 {z-index: 99; position: absolute; left: 197px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu4 {z-index: 99; position: absolute; left: 297px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu5 {z-index: 99; position: absolute; left: 397px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu6 {z-index: 99; position: absolute; left: 497px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu7 {z-index: 99; position: absolute; left: 597px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu8 {z-index: 99; position: absolute; left: 697px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu9 {z-index: 99; position: absolute; left: 797px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+/*菜单CSS结束*/
