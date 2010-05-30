@@ -30,7 +30,7 @@ import org.pssframework.base.BaseEntity;
  * @since 1.0.0
  */
 @Entity
-@Table(name = "g_tg")
+@Table(name = "g_tran")
 public class TranInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -3795917072464107754L;
