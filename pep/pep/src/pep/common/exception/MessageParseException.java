@@ -6,7 +6,7 @@
 package pep.common.exception;
 import java.nio.ByteBuffer;
 
-import pep.codec.utils.HexDump;
+
 /**
  *
  * @author xiekeli
@@ -39,7 +39,7 @@ public class MessageParseException extends Exception{
 
 		if (buffer != null) {
 			return message + ((message.length() > 0) ? " " : "") + "(Hexdump: "
-					+ HexDump.hexDump(buffer) + ')';
+					+ ')';
 		} else {
 			return message;
 		}
