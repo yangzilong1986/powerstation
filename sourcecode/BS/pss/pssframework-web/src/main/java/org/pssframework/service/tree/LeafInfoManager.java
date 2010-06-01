@@ -1,15 +1,15 @@
 /**
  * 
  */
-package org.pssframework.service;
+package org.pssframework.service.tree;
 
 import java.io.Serializable;
 import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
-import org.pssframework.dao.LeafInfoDao;
-import org.pssframework.model.LeafInfo;
+import org.pssframework.dao.tree.LeafInfoDao;
+import org.pssframework.model.tree.LeafInfo;
 import org.springframework.stereotype.Service;
 
 import cn.org.rapid_framework.page.Page;

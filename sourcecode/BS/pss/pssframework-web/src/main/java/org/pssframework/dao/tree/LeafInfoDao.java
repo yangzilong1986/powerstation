@@ -1,11 +1,12 @@
 /**
  * 
  */
-package org.pssframework.dao;
+package org.pssframework.dao.tree;
 
 import java.io.Serializable;
 
-import org.pssframework.model.LeafInfo;
+import org.pssframework.dao.BaseIbatis3Dao;
+import org.pssframework.model.tree.LeafInfo;
 import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
