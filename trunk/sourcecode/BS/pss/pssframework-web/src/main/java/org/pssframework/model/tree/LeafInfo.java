@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.pssframework.model;
+package org.pssframework.model.tree;
 
 import org.pssframework.base.BaseEntity;
 
