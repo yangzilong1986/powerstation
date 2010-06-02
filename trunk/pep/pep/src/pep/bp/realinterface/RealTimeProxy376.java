@@ -26,7 +26,8 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     private static int ID;
     private final int FAILCODE = -1;
-    private final byte AFN_SETPARA = 4; //AFN：设置参数
+    private final byte AFN_SETPARA = 0x04; //AFN：设置参数
+    private final byte AFN_GETPARA = 0x0A; //AFN：设置参数
     private final byte FUNCODE_DOWM_1 = 1;//PRM =1 功能码：1 （发送/确认）
     private final static Logger log = LoggerFactory.getLogger(RealTimeProxy376.class);
     private RTTaskService taskService;
@@ -150,7 +151,51 @@ public class RealTimeProxy376 implements ICollectInterface {
      * @throws Exception
      */
     public long readEquipmentParameters(MessageTranObject MTO) throws Exception {
-        return getID();
+        try {
+            if ((null == MTO) || (MTO.getType() != MTOType.GW_376)) {
+                return FAILCODE;
+            } else {
+                int sequenceCode = getID();
+                MTO_376 mto = (MTO_376) MTO;
+                for (CollectObject obj : mto.getCollectObjects()) {
+                    PmPacket376 packet = new PmPacket376();
+                    packet.setAfn(AFN_GETPARA);//AFN
+                    packet.getAddress().setRtua(obj.getLogicalAddr()); //逻辑地址
+                    packet.getControlCode().setIsUpDirect(false);
+                    packet.getControlCode().setIsOrgniger(true);
+                    packet.getControlCode().setFunctionKey(FUNCODE_DOWM_1);
+                    packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+                    packet.getControlCode().setDownDirectFrameCount((byte) 0);
+                    int[] MpSn = obj.getMpSn();
+                    StringBuffer DataBuffer = new StringBuffer();
+                    PmPacket376DT dt = null;
+                    for (int i = 0; i <= MpSn.length - 1; i++) {
+                        PmPacket376DA da = new PmPacket376DA();
+                        da.setPn(MpSn[i]);
+                        List<CommandItem> CommandItems = obj.getCommandItems();
+                        for (CommandItem commandItem : CommandItems) {
+                            dt = new PmPacket376DT();
+                            int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+                            dt.setFn(fn);
+                            packet.getDataBuffer().putDA(da);
+                            packet.getDataBuffer().putDT(dt);
+                        }
+                        RealTimeTask task = new RealTimeTask();
+                        task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
+                        task.setSequencecode(sequenceCode);
+                        this.taskService.insertTask(task);
+                    }
+                }
+                return sequenceCode;
+            }
+        } catch (NumberFormatException numberFormatException) {
+            log.error(numberFormatException.getMessage());
+            return -1;
+        }
+        catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return -1;
+        }
     }
 
     /**
