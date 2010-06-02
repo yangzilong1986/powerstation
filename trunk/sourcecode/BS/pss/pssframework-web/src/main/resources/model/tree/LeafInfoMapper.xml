@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="LeafInfo">
+  <resultMap id="LeafInfoResult" type="org.pssframework.model.tree.LeafInfo">
+  </resultMap>
+
+  <!-- 用于select查询公用抽取的列 -->
+  <sql id="LeafInfoColumns">
+	    <![CDATA[
+        	user_id as leafId,
+        	username as leafName,
+        	password as password,
+        	birth_date as birthDate,
+        	sex as sex,
+        	age as age
+	    ]]>
+  </sql>
+
+  <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+  <insert id="insert" parameterType="org.pssframework.model.LeafInfo" useGeneratedKeys="true" keyProperty="userId">
+    <![CDATA[
+        INSERT INTO
+        user_info (
+        	user_id ,
+        	username ,
+        	password ,
+        	birth_date ,
+        	sex ,
+        	age 
+        ) VALUES (
+        	#{userId,jdbcType=BIGINT} ,
+        	#{username,jdbcType=VARCHAR} ,
+        	#{password,jdbcType=VARCHAR} ,
+        	#{birthDate,jdbcType=DATE} ,
+        	#{sex,jdbcType=TINYINT} ,
+        	#{age,jdbcType=INTEGER} 
+        )
+    ]]>
+    <!--
+      oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL DB2: order="BEFORE"" values nextval for
+      sequenceName <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId"> SELECT
+      sequenceName.nextval AS ID FROM DUAL </selectKey>
+    -->
+  </insert>
+  <update id="update" parameterType="org.pssframework.model.LeafInfo">
+    <![CDATA[
+        UPDATE user_info SET
+	        username = #{username,jdbcType=VARCHAR} ,
+	        password = #{password,jdbcType=VARCHAR} ,
+	        birth_date = #{birthDate,jdbcType=DATE} ,
+	        sex = #{sex,jdbcType=TINYINT} ,
+	        age = #{age,jdbcType=INTEGER} 
+        WHERE 
+	        user_id = #{userId} 
+    ]]>
+  </update>
+  <delete id="delete" parameterType="java.lang.Long">
+    <![CDATA[
+        delete from user_info where
+        user_id = #{id} 
+    ]]>
+  </delete>
+  <select id="getById" parameterType="java.lang.Long" resultMap="LeafInfoResult">
+    select
+    <include refid="LeafInfoColumns" />
+	    <![CDATA[
+		    from user_info 
+	        where 
+		        user_id = #{id} 
+	    ]]>
+  </select>
+  
+  <!-- 查询节点 -->
+  <select id="infos" parameterType="java.util.Map" resultMap="LeafInfoResult">
+    <include refid="LeafInfoDynamic"/>
+  </select>
+  
+  <sql id="LeafInfoDynamic">
+   <![CDATA[
+  select o.org_no as leafId, o.org_name as leafName, 'ORG' as leafType
+    from o_org o
+    where o.p_org_no = #{parentId} and 'ORG' = #{parentType}
+    union
+  select to_char(l.line_id) as leafId,l.line_name as leafName,'LINE' as leafType
+  from g_line l, g_line_tg_rela r, g_tg t
+ where t.org_no = #{parentId}
+   and r.tg_id = t.tg_id
+   and r.line_id = l.line_id
+   and 'ORG' = #{parentType}
+   union
+   select to_char(t.tg_id) as leafId, t.tg_name as leafName, 'TG' as leafType
+    from g_tg t
+  where t.org_no = #{parentId} and ('ORG' = #{parentType} or 'LINE' = #{parentType})
+  ]]>
+  </sql>
+  <select id="count" resultType="long">
+  select count(1) from(
+  <include refid="LeafInfoDynamic"/>
+  )
+  </select>
+
+</mapper>
