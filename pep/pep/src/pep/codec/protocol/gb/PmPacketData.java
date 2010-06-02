@@ -396,6 +396,30 @@ public class PmPacketData{
         return new DataTypeA27(array);
     }
 
+    public PmPacketData putBS8(String bs8){
+        return this;
+    }
+
+    public int getBS8(){
+        return 0;
+    }
+
+    public PmPacketData putBS24(String bs8){
+        return this;
+    }
+
+    public int getBS24(){
+        return 0;
+    }
+
+    public PmPacketData putBS64(String bs8){
+        return this;
+    }
+
+    public int getBS64(){
+        return 0;
+    }
+
     @Override
     public String toString(){
         return BcdUtils.binArrayToString(dataBuff.array());

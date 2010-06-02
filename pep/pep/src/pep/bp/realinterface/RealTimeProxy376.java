@@ -11,7 +11,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import pep.bp.db.RTTaskService;
 import pep.bp.model.RealTimeTask;
+import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.mto.*;
+import pep.codec.protocol.gb.DataTypeA1;
+import pep.codec.protocol.gb.DataTypeA2;
 import pep.codec.protocol.gb.gb376.*;
 import pep.codec.utils.BcdUtils;
 
@@ -34,34 +37,46 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     private void InjectDataIteam(PmPacket376 packet,CommandItem commandItem,byte AFN)
     {
-        StringBuffer DataBuf = new StringBuffer();
+
+        ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String,String> datacellParam = commandItem.getDatacellParam();
-        int FN = Integer.parseInt(commandItem.getIdentifier().substring(4,7 ));
-        if (AFN == AFN_SETPARA) //设置参数
-        {
-            switch(FN)
-            {
-                //终端上行通信口通信参数设置
-                case 1:{
-                    Iterator iterator = datacellParam.keySet().iterator();
-                    while (iterator.hasNext()) {
-                        String key = (String) iterator.next();
-                        if(key=="1004000106" || key=="1004000107")//需要主站确认的通信服务（CON=1）的标志
-                            ;
-                        else
-                            packet.getDataBuffer().put(datacellParam.get(key).getBytes());
-                            
-                    }
-                }
-                //主站IP地址和端口
-                case 3:{
-
-                }
-                //主站电话号码和短信中心号码
-                case 4:{
-
-                }
-            }
+        Iterator iterator = datacellParam.keySet().iterator();
+        while (iterator.hasNext()) {
+            String DataItemCode = (String) iterator.next();
+            String DataItemValue = datacellParam.get(DataItemCode);
+            String Format = config.getFormat(DataItemCode);
+            if(Format=="BIN") packet.getDataBuffer().put(DataItemValue.getBytes());
+            else if (Format=="BS8") packet.getDataBuffer().putBS8(DataItemValue);
+            else if (Format=="BS24") packet.getDataBuffer().putBS24(DataItemValue);
+            else if (Format=="BS64") packet.getDataBuffer().putBS64(DataItemValue);
+            else if(Format=="ASCII");
+            else if(Format=="A1") packet.getDataBuffer().putA1(new DataTypeA1(DataItemValue.getBytes()));
+            else if(Format=="A2") packet.getDataBuffer().putA2(new DataTypeA2(DataItemValue.getBytes()));
+            else if(Format=="A3");
+            else if(Format=="A4");
+            else if(Format=="A5");
+            else if(Format=="A6");
+            else if(Format=="A7");
+            else if(Format=="A8");
+            else if(Format=="A9");
+            else if(Format=="A10");
+            else if(Format=="A11");
+            else if(Format=="A12");
+            else if(Format=="A13");
+            else if(Format=="A14");
+            else if(Format=="A15");
+            else if(Format=="A16");
+            else if(Format=="A17");
+            else if(Format=="A18");
+            else if(Format=="A19");
+            else if(Format=="A20");
+            else if(Format=="A21");
+            else if(Format=="A22");
+            else if(Format=="A23");
+            else if(Format=="A24");
+            else if(Format=="A25");
+            else if(Format=="A26");
+            else if(Format=="A27");
 
         }
     }
@@ -108,11 +123,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                             packet.getDataBuffer().putDA(da);
                             packet.getDataBuffer().putDT(dt);
                             //注入设置的值
-
                             InjectDataIteam(packet,commandItem,AFN_SETPARA);
-                        }
-                        
-                        
+                        }                  
                         RealTimeTask task = new RealTimeTask();
                         task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
                         task.setSequencecode(sequenceCode);
