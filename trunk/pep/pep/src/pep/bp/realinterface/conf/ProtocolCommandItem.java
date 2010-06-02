@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pep.bp.realinterface.conf;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,15 +14,18 @@ import java.util.Map;
  * @author Thinkpad
  */
 public class ProtocolCommandItem {
-    private String CommandCode;
-    private Map<String,ProtocolDataItem> DataItems;
 
-    public ProtocolCommandItem(){
-        DataItems = new HashMap<String,ProtocolDataItem>();
+    private String CommandCode;
+    private List<ProtocolDataItem> DataItems;
+    private Map<String, ProtocolDataItem> DataItemMap;
+
+    public ProtocolCommandItem() {
+        DataItems = new ArrayList<ProtocolDataItem>();
+        DataItemMap = new HashMap<String, ProtocolDataItem>();
     }
 
-    public void AddDataItem(ProtocolDataItem dataItem){
-        this.DataItems.put(dataItem.getDataItemCode(), dataItem);
+    public void AddDataItem(ProtocolDataItem dataItem) {
+        DataItems.add(dataItem);
     }
 
     /**
@@ -41,14 +45,26 @@ public class ProtocolCommandItem {
     /**
      * @return the DataItems
      */
-    public Map<String, ProtocolDataItem> getDataItems() {
+    public List<ProtocolDataItem> getDataItems() {
         return DataItems;
     }
 
     /**
      * @param DataItems the DataItems to set
      */
-    public void setDataItems(Map<String, ProtocolDataItem> DataItems) {
+    public void setDataItems(List<ProtocolDataItem> DataItems) {
         this.DataItems = DataItems;
+    }
+
+    public Map<String, ProtocolDataItem> getDataItemMap() {
+        return DataItemMap;
+    }
+
+    public void FillMap() {
+        if (DataItemMap.size() == 0) {
+            for (ProtocolDataItem dataItem : DataItems) {
+                this.DataItemMap.put(dataItem.getDataItemCode(), dataItem);
+            }
+        }
     }
 }

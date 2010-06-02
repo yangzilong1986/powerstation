@@ -11,17 +11,19 @@ public class ProtocolDataItem {
     private String Format;//编码格式
 
     private String GroupCode;//
+    private String Description;
 
     public ProtocolDataItem(){
         super();
     }
     
-    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode){
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description){
         super();
         this.DataItemCode = DataItemCode;
         this.Length = Length;
         this.Format = Format;
         this.GroupCode = GroupCode;
+        this.Description = Description;
     }
     /**
      * @return the DataItemCode
@@ -77,5 +79,19 @@ public class ProtocolDataItem {
      */
     public void setGroupCode(String GroupCode) {
         this.GroupCode = GroupCode;
+    }
+
+    /**
+     * @return the Description
+     */
+    public String getDescription() {
+        return Description;
+    }
+
+    /**
+     * @param Description the Description to set
+     */
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 }
