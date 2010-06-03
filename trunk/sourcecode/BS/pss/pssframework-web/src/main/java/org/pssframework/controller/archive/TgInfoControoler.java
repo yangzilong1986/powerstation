@@ -13,6 +13,7 @@ import org.pssframework.model.archive.TgInfo;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,42 +32,25 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 	//默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
+	@Autowired
 	private TgInfoManager tgInfoManager;
 
-	private final String LIST_ACTION = "redirect:/archive/tginfo.do";
-
-	/** 
-	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
-	 **/
-	public void setTgInfoManager(TgInfoManager manager) {
-		this.tgInfoManager = manager;
-	}
-
+	@Autowired
 	private OrgInfoManager orgInfoManager;
 
-	/**
-	 * @param orgInfoManager the orgInfoManager to set
-	 */
-	public void setOrgInfoManager(OrgInfoManager orgInfoManager) {
-		this.orgInfoManager = orgInfoManager;
-	}
-
+	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	/**
-	 * @param orgInfoManager the orgInfoManager to set
-	 */
-	public void setCodeInfoManager(CodeInfoManager codeInfoManager) {
-		this.codeInfoManager = codeInfoManager;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
 
 		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
 		//pageRequest.getFilters(); //add custom filters
 
-		Map fiterMap = pageRequest.getFilters();
+		pageRequest.getFilters().put("tgid", model.getTgId());
+		pageRequest.getFilters().put("orgno", model.getOrgNo());
+		pageRequest.getFilters().put("status", model.getStatusCode());
 
 		TgInfo tginfo = this.tgInfoManager.getById(model.getTgId());
 
@@ -76,9 +60,14 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 		result.setViewName("/archive/addTgRelevance");
 
+		result.addObject("orglist", getOrgOptions(pageRequest).getResult());
+
+		//result.addObject("statuslist", getStatusOptions(pageRequest).getResult());
+
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Page getOrgOptions(PageRequest<Map> pageRequest) {
 		return orgInfoManager.findByPageRequest(pageRequest);
 	}
