@@ -48,11 +48,15 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
 		//pageRequest.getFilters(); //add custom filters
 
-		pageRequest.getFilters().put("tgid", model.getTgId());
-		pageRequest.getFilters().put("orgno", model.getOrgNo());
+		Long tgid = 0L;
+		if (model.getTgId() != null) {
+			tgid = model.getTgId();
+		}
+		pageRequest.getFilters().put("tgid", tgid);
+		pageRequest.getFilters().put("orgid", model.getOrgId());
 		pageRequest.getFilters().put("status", model.getStatusCode());
 
-		TgInfo tginfo = this.tgInfoManager.getById(model.getTgId());
+		TgInfo tginfo = this.tgInfoManager.getById(tgid);
 
 		ModelAndView result = new ModelAndView();
 
