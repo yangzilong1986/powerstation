@@ -24,18 +24,28 @@ import org.pssframework.base.BaseEntity;
 @SequenceGenerator(sequenceName = "SEQ_S_CODE", name = "SEQ_S_CODE")
 public class CodeInfo extends BaseEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3125450081674249228L;
+
 	@Column(name = "CODE_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_S_CODE")
 	private Long codeId; // 标准代码实体联合主键
+
 	@Column(name = "CODE_CATE")
 	private String codeCate; // 代码类别
+
 	@Column(name = "CODE")
 	private String code; // 代码值
+
 	@Column(name = "NAME")
 	private String name; // 标准代码名称
+
 	@Column(name = "REMARK")
 	private String remark; // 备注
+
 	@Column(name = "CODE_TYPE")
 	private String codeType; // 代码类型 : 0 – 系统编码 1 – 用户编码
 
