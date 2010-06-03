@@ -22,13 +22,16 @@ import cn.org.rapid_framework.page.PageRequest;
 @Service
 public class CodeInfoManager extends BaseManager<CodeInfo, Long> {
 
-	@Autowired
-	private CodeInfoDao entitydao;
+	@Autowired(required = true)
+	private CodeInfoDao codeInfoDao;
+
+	public void setCodeInfoDao(CodeInfoDao codeInfoDao) {
+		this.codeInfoDao = codeInfoDao;
+	}
 
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
-		return this.entitydao;
+		return this.codeInfoDao;
 	}
 
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {

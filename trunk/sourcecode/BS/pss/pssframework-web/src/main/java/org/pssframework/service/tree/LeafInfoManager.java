@@ -10,6 +10,7 @@ import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.tree.LeafInfoDao;
 import org.pssframework.model.tree.LeafInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.org.rapid_framework.page.Page;
@@ -21,16 +22,10 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 @Service
 public class LeafInfoManager extends BaseManager<LeafInfo, Serializable> {
-
+	@Autowired
 	private LeafInfoDao leafInfoDao;
 
-	/**
-	 * @param leafInfoDao the leafInfoDao to set
-	 */
-	public void setLeafInfoDao(LeafInfoDao leafInfoDao) {
-		this.leafInfoDao = leafInfoDao;
-	}
-
+	@SuppressWarnings("unchecked")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
 		return leafInfoDao.findByPageRequest(pageRequest);
 	}

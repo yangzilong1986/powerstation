@@ -8,7 +8,7 @@ import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.TgInfoDao;
 import org.pssframework.model.archive.TgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -17,6 +17,7 @@ import cn.org.rapid_framework.page.PageRequest;
  * @author Administrator
  *
  */
+@Service
 public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
 	@Autowired
@@ -28,15 +29,14 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 		return this.tgInfoDao;
 	}
 
-	@Override
-	public TgInfo getById(Long id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return super.getById(id);
-	}
 
 	public Page findByPageRequest(PageRequest pageRequest) {
 		// TODO Auto-generated method stub
-		return null;
+		return tgInfoDao.findByPageRequest(pageRequest);
 	}
 
+	@Override
+	public TgInfo getById(Long id) {
+		return tgInfoDao.getByTgId(id);
+	}
 }
