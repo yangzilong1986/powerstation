@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.archive.TgInfo;
+import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -15,6 +16,7 @@ import cn.org.rapid_framework.page.PageRequest;
  * @author Administrator
  *
  */
+@Repository
 public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 
 	@Override
