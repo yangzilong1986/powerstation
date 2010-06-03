@@ -10,11 +10,14 @@
  *******************************************************************************/
 package org.pssframework.base;
 
+import javax.persistence.Entity;
+
 import cn.org.rapid_framework.util.DateConvertUtils;
 
 /**
  * @author PSS
  */
+@Entity
 public class BaseEntity implements java.io.Serializable {
 
 	/**
