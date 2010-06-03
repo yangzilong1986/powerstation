@@ -40,9 +40,9 @@ public class TgInfo extends BaseEntity {
 	// TG_ID           NUMBER(16) not null,
 	private Long tgId;
 
-	@Column(name = "ORG_NO", length = 16, nullable = false)
-	// ORG_NO          VARCHAR2(16) not null,
-	private String orgNo;
+	@Column(name = "ORG_ID", length = 8, nullable = false)
+	// ORG_ID          NUMBER(16) not null,
+	private Long orgId;
 
 	@Column(name = "TG_NO", length = 16, nullable = false)
 	//TG_NO           VARCHAR2(16) not null,
@@ -90,13 +90,6 @@ public class TgInfo extends BaseEntity {
 	 */
 	public Date getLasttimeStamp() {
 		return lasttimeStamp;
-	}
-
-	/**
-	 * @return the orgNo
-	 */
-	public String getOrgNo() {
-		return orgNo;
 	}
 
 	/**
@@ -153,13 +146,6 @@ public class TgInfo extends BaseEntity {
 	 */
 	public void setLasttimeStamp(Date lasttimeStamp) {
 		this.lasttimeStamp = lasttimeStamp;
-	}
-
-	/**
-	 * @param orgNo the orgNo to set
-	 */
-	public void setOrgNo(String orgNo) {
-		this.orgNo = orgNo;
 	}
 
 	/**
@@ -226,6 +212,20 @@ public class TgInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
 	}
 
 }

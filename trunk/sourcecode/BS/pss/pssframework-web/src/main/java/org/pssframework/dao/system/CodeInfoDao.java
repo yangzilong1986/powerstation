@@ -3,6 +3,8 @@
  */
 package org.pssframework.dao.system;
 
+import javax.persistence.Table;
+
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.CodeInfo;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
+@Table(name = "a_code")
 public class CodeInfoDao extends BaseHibernateDao<CodeInfo, Long> {
 
 	@Override

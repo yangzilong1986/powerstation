@@ -51,9 +51,9 @@ public class LineInfo extends BaseEntity {
 	//LINE_NAME            VARCHAR2(256)                   not null,
 	private String LineName;
 
-	@Column(name = "ORG_NO", length = 16, nullable = false)
-	// ORG_NO          VARCHAR2(16) not null,
-	private String orgNo;
+	@Column(name = "ORG_ID", length = 16, nullable = false)
+	// ORG_ID          VARCHAR2(16) not null,
+	private Long orgId;
 
 	@Column(name = "VOLT_CODE", length = 8)
 	//VOLT_CODE            VARCHAR2(8),
@@ -174,19 +174,6 @@ public class LineInfo extends BaseEntity {
 		this.voltCode = voltCode;
 	}
 
-	/**
-	 * @param orgNo the orgNo to set
-	 */
-	public void setOrgNo(String orgNo) {
-		this.orgNo = orgNo;
-	}
-
-	/**
-	 * @return the orgNo
-	 */
-	public String getOrgNo() {
-		return orgNo;
-	}
 
 	/**
 	 * @param lasttimeStamp the lasttimeStamp to set
@@ -210,6 +197,20 @@ public class LineInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
 	}
 
 }

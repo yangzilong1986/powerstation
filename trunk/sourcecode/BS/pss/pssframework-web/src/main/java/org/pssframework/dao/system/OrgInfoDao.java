@@ -19,7 +19,7 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 
-	private static final String OrgList = "SELECT t.orgid,t.orgname FROM orgInfo t WHERE t.orgno LIKE (SELECT a.orgno FROM orgInfo a WHERE a.orgid =:orgid) || '%' ORDER BY t.orgno";
+	private static final String OrgList = "SELECT t.orgId,t.orgName FROM OrgInfo t WHERE t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId ='[orgid]') || '%' ORDER BY t.orgNo";
 
 	@Override
 	public Class<?> getEntityClass() {
