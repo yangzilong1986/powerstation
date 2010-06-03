@@ -77,6 +77,7 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 		this.dialect = d;
 	}
 
+	@Override
 	protected void checkDaoConfig() {
 		super.checkDaoConfig();
 		if (dialect == null)
@@ -168,9 +169,8 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 
 	private Page pageQuery(String sql, Map paramMap, final int totalCount, int pageSize, int pageNumber,
 			RowMapper rowMapper) {
-		if (totalCount <= 0) {
+		if (totalCount <= 0)
 			return new Page(pageNumber, pageSize, 0);
-		}
 		Page page = new Page(pageNumber, pageSize, totalCount);
 		List list = pageQuery(sql, paramMap, page.getFirstResult(), pageSize, rowMapper);
 		page.setResult(list);
@@ -260,10 +260,9 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 		} else if (getSqlGenerator().getTable().getPrimaryKeyCount() == 1) {
 			list = getSimpleJdbcTemplate().query(getSqlGenerator().getSelectByPkSql(),
 					ParameterizedBeanPropertyRowMapper.newInstance(getEntityClass()), id);
-		} else {
+		} else
 			throw new IllegalStateException("not found primary key on table:"
 					+ getSqlGenerator().getTable().getTableName());
-		}
 		return (E) CollectionHelper.findSingleObject(list);
 	}
 
@@ -273,10 +272,9 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 					new BeanPropertySqlParameterSource(id));
 		} else if (getSqlGenerator().getTable().getPrimaryKeyCount() == 1) {
 			getSimpleJdbcTemplate().update(getSqlGenerator().getDeleteByPkSql(), id);
-		} else {
+		} else
 			throw new IllegalStateException("not found primary key on table:"
 					+ getSqlGenerator().getTable().getTableName());
-		}
 	}
 
 	public void saveOrUpdate(E entity) {
@@ -299,22 +297,21 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 		return getSimpleJdbcTemplate().query(sql, ParameterizedBeanPropertyRowMapper.newInstance(getEntityClass()));
 	}
 
-	
 	public void batchDelete(Collection<E> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public void batchUpdate(Collection<E> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public void batchInsert(Collection<E> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	/**
 	 * 得到生成增删改查的sql生成工具
 	 * @return
@@ -325,10 +322,9 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 
 	public String getIdentifierPropertyName() {
 		List<Column> primaryKeyColumns = getSqlGenerator().getTable().getPrimaryKeyColumns();
-		if (primaryKeyColumns.isEmpty()) {
+		if (primaryKeyColumns.isEmpty())
 			throw new IllegalStateException("not found primary key on table:"
 					+ getSqlGenerator().getTable().getTableName());
-		}
 		return primaryKeyColumns.get(0).getPropertyName();
 	}
 

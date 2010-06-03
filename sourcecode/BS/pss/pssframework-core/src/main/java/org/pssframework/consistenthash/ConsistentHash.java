@@ -11,9 +11,9 @@
 package org.pssframework.consistenthash;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
 /**
  * 一致性哈希
  * 
@@ -36,10 +36,12 @@ public class ConsistentHash<T> {
 	private final HashFunction hashFunction; //计算hash的接口,可以拥有不同实现,主要由于默认的Object.hashCode() hash不均匀
 	private final int numberOfReplicas; //节点副本数,主要用于创建虚拟节点,以便解决在节点数少时,hash分布不均匀的问题
 	final SortedMap<Integer, T> circle = new TreeMap<Integer, T>(); //hash 环
-	
-	public ConsistentHash(HashFunction hashFunction, int numberOfReplicas,Collection<T> nodes) {
-		if(numberOfReplicas <= 0) throw new IllegalArgumentException("numberOfReplicas must be great than zero");
-		if(hashFunction == null) throw new IllegalArgumentException("hashFunction must be not null");
+
+	public ConsistentHash(HashFunction hashFunction, int numberOfReplicas, Collection<T> nodes) {
+		if (numberOfReplicas <= 0)
+			throw new IllegalArgumentException("numberOfReplicas must be great than zero");
+		if (hashFunction == null)
+			throw new IllegalArgumentException("hashFunction must be not null");
 		this.hashFunction = hashFunction;
 		this.numberOfReplicas = numberOfReplicas;
 
@@ -61,9 +63,8 @@ public class ConsistentHash<T> {
 	}
 
 	public T get(Object key) {
-		if (circle.isEmpty()) {
+		if (circle.isEmpty())
 			return null;
-		}
 		int hash = hashFunction.hash(key);
 		if (!circle.containsKey(hash)) {
 			SortedMap<Integer, T> tailMap = circle.tailMap(hash);

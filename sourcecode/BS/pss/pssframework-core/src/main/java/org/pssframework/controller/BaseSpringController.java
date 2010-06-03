@@ -51,6 +51,7 @@ public class BaseSpringController extends MultiActionController {
 	 *
 	 * @see MultiActionController#createBinder(HttpServletRequest,Object)
 	 */
+	@Override
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
 		binder.registerCustomEditor(Short.class, new CustomNumberEditor(Short.class, true));
 		binder.registerCustomEditor(Integer.class, new CustomNumberEditor(Integer.class, true));

@@ -17,23 +17,25 @@ import java.util.Date;
 import org.pssframework.datamodifier.DataModifier;
 import org.pssframework.datamodifier.DefaultUtils;
 
+public class DateDataModifier implements DataModifier {
 
-public class DateDataModifier implements DataModifier{
-	
 	private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	
+
 	private String dateFormat = DEFAULT_DATE_FORMAT;
-	
-	public DateDataModifier(){}
-	
+
+	public DateDataModifier() {
+	}
+
 	public DateDataModifier(String dateFormat) {
 		this.dateFormat = dateFormat;
 	}
-	
-	public Object modify(Object value, String modifierArgument)throws Exception {
-		if(value == null) return null;
-		if(value instanceof Date) return value;
-		DateFormat df = DefaultUtils.defaultDateFormat(modifierArgument,dateFormat);
+
+	public Object modify(Object value, String modifierArgument) throws Exception {
+		if (value == null)
+			return null;
+		if (value instanceof Date)
+			return value;
+		DateFormat df = DefaultUtils.defaultDateFormat(modifierArgument, dateFormat);
 		return df.parse(value.toString());
 	}
 }

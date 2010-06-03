@@ -9,6 +9,7 @@
  *     PSS Corporation - initial API and implementation
  *******************************************************************************/
 package org.pssframework.datamodifier;
+
 import java.util.Map;
 
 import org.pssframework.datamodifier.modifier.BigDecimalDataModifier;
@@ -50,34 +51,34 @@ import org.pssframework.datamodifier.modifier.TimestampDataModifier;
  *
  */
 public class DataModifierUtils {
-	
+
 	private static DataModifierBean delegate = new DataModifierBean();
-	
-	static{
+
+	static {
 		registerDefaultDataModifiers(delegate);
 	}
-	
-	private DataModifierUtils(){
+
+	private DataModifierUtils() {
 	}
-	
+
 	public static void registerDefaultDataModifiers(DataModifierBean bean) {
-		bean.registerDataModifier("default",new DefaultDataModifier());
-		bean.registerDataModifier("boolean",new BooleanDataModifier());
-		bean.registerDataModifier("string",new StringDataModifier());
-		bean.registerDataModifier("byte",new ByteDataModifier());
-		bean.registerDataModifier("short",new ShortDataModifier());
-		bean.registerDataModifier("int",new IntegerDataModifier());
-		bean.registerDataModifier("long",new LongDataModifier());
-		bean.registerDataModifier("float",new FloatDataModifier());
-		bean.registerDataModifier("double",new DoubleDataModifier());
-		bean.registerDataModifier("BigInteger",new BigIntegerDataModifier());
-		bean.registerDataModifier("BigDecimal",new BigDecimalDataModifier());
-		bean.registerDataModifier("date",new DateDataModifier());
-		bean.registerDataModifier("sqldate",new SqlDateDataModifier());
-		bean.registerDataModifier("sqltime",new SqlTimeDataModifier());
-		bean.registerDataModifier("timestamp",new TimestampDataModifier());
+		bean.registerDataModifier("default", new DefaultDataModifier());
+		bean.registerDataModifier("boolean", new BooleanDataModifier());
+		bean.registerDataModifier("string", new StringDataModifier());
+		bean.registerDataModifier("byte", new ByteDataModifier());
+		bean.registerDataModifier("short", new ShortDataModifier());
+		bean.registerDataModifier("int", new IntegerDataModifier());
+		bean.registerDataModifier("long", new LongDataModifier());
+		bean.registerDataModifier("float", new FloatDataModifier());
+		bean.registerDataModifier("double", new DoubleDataModifier());
+		bean.registerDataModifier("BigInteger", new BigIntegerDataModifier());
+		bean.registerDataModifier("BigDecimal", new BigDecimalDataModifier());
+		bean.registerDataModifier("date", new DateDataModifier());
+		bean.registerDataModifier("sqldate", new SqlDateDataModifier());
+		bean.registerDataModifier("sqltime", new SqlTimeDataModifier());
+		bean.registerDataModifier("timestamp", new TimestampDataModifier());
 	}
-	
+
 	public static void deregisterDataModifier(String modifierName) {
 		delegate.deregisterDataModifier(modifierName);
 	}
@@ -85,7 +86,7 @@ public class DataModifierUtils {
 	public static void registerDataModifier(String modifierName, DataModifier modifier) {
 		delegate.registerDataModifier(modifierName, modifier);
 	}
-	
+
 	public Map getAvailableDataModifiers() {
 		return delegate.getAvailableDataModifiers();
 	}
@@ -101,5 +102,5 @@ public class DataModifierUtils {
 	public static String getModifyVariable(String completeExpression) {
 		return DataModifierBean.getModifyVariable(completeExpression);
 	}
-	
+
 }

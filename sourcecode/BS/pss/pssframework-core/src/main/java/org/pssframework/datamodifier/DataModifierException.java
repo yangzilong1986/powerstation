@@ -9,12 +9,13 @@
  *     PSS Corporation - initial API and implementation
  *******************************************************************************/
 package org.pssframework.datamodifier;
+
 /**
  * 
  * @author PSS
  *
  */
-public class DataModifierException extends RuntimeException{
+public class DataModifierException extends RuntimeException {
 
 	public DataModifierException() {
 		super();

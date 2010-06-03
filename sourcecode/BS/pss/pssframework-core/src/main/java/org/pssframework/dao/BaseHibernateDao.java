@@ -194,9 +194,8 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 
 	public void deleteById(PK id) {
 		Object entity = getById(id);
-		if (entity == null) {
+		if (entity == null)
 			throw new ObjectRetrievalFailureException(getEntityClass(), id);
-		}
 		getHibernateTemplate().delete(entity);
 	}
 
@@ -214,15 +213,15 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 	}
 
 	public void batchUpdate(Collection<E> entities) {
-		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
-			saveOrUpdate(it.next());
+		for (E e : entities) {
+			saveOrUpdate(e);
 		}
 
 	}
 
 	public void batchInsert(Collection<E> entities) {
-		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
-			save(it.next());
+		for (E e : entities) {
+			save(e);
 		}
 	}
 
@@ -267,8 +266,8 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		String[] nameList = uniquePropertyNames.split(",");
 		try {
 			// 循环加入唯一列
-			for (int i = 0; i < nameList.length; i++) {
-				criteria.add(Restrictions.eq(nameList[i], PropertyUtils.getProperty(entity, nameList[i])));
+			for (String element : nameList) {
+				criteria.add(Restrictions.eq(element, PropertyUtils.getProperty(entity, element)));
 			}
 
 			// 以下代码为了如果是update的情况,排除entity自身.
@@ -279,8 +278,9 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 				Serializable id = (Serializable) PropertyUtils.getProperty(entity, idName);
 
 				// 如果id!=null,说明对象已存在,该操作为update,加入排除自身的判断
-				if (id != null)
+				if (id != null) {
 					criteria.add(Restrictions.not(Restrictions.eq(idName, id)));
+				}
 			}
 		} catch (Exception e) {
 			ReflectionUtils.handleReflectionException(e);

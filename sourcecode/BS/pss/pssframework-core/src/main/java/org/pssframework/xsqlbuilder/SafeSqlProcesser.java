@@ -9,6 +9,7 @@
  *     PSS Corporation - initial API and implementation
  *******************************************************************************/
 package org.pssframework.xsqlbuilder;
+
 /**
  * sql字符串安全处理接口,防止sql注入攻击
  * @author PSS
@@ -16,5 +17,5 @@ package org.pssframework.xsqlbuilder;
 public interface SafeSqlProcesser {
 
 	public String process(String value);
-	
+
 }

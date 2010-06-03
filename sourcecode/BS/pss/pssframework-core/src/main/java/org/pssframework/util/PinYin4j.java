@@ -67,7 +67,7 @@ public class PinYin4j {
 					} catch (BadHanyuPinyinOutputFormatCombination e) {
 						e.printStackTrace();
 					}
-				} else if (((int) c >= 65 && (int) c <= 90) || ((int) c >= 97 && (int) c <= 122)) {
+				} else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
 					temp[i] = new String[] { String.valueOf(srcChar[i]) };
 				} else {
 					temp[i] = new String[] { "" };
@@ -75,8 +75,8 @@ public class PinYin4j {
 			}
 			String[] pingyinArray = Exchange(temp);
 			Set<String> pinyinSet = new HashSet<String>();
-			for (int i = 0; i < pingyinArray.length; i++) {
-				pinyinSet.add(pingyinArray[i]);
+			for (String element : pingyinArray) {
+				pinyinSet.add(element);
 			}
 			return pinyinSet;
 		}
@@ -120,9 +120,8 @@ public class PinYin4j {
 			}
 			newArray[0] = temp;
 			return DoExchange(newArray);
-		} else {
+		} else
 			return strJaggedArray;
-		}
 	}
 
 	/** 
@@ -132,5 +131,5 @@ public class PinYin4j {
 		String str = "中华人民共和国";
 		System.out.println(makeStringByStringSet(getPinyin(str)));
 
-	}	
+	}
 }
