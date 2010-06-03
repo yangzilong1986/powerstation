@@ -208,19 +208,22 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		getHibernateTemplate().saveOrUpdate(entity);
 	}
 
-	public void batchDelete(List<E> list) {
-		// TODO Auto-generated method stub
+	public void batchDelete(Collection<E> entities) {
+		getHibernateTemplate().deleteAll(entities);
 
 	}
 
-	public void batchUpdate(List<E> list) {
-		// TODO Auto-generated method stub
+	public void batchUpdate(Collection<E> entities) {
+		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
+			saveOrUpdate(it.next());
+		}
 
 	}
 
-	public void batchInsert(List<E> list) {
-		// TODO Auto-generated method stub
-
+	public void batchInsert(Collection<E> entities) {
+		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
+			save(it.next());
+		}
 	}
 
 	public void refresh(Object entity) {
@@ -235,21 +238,12 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		getHibernateTemplate().evict(entity);
 	}
 
-	public void saveAll(Collection<E> entities) {
-		for (Iterator<E> it = entities.iterator(); it.hasNext();) {
-			save(it.next());
-		}
-	}
-
-	public void deleteAll(Collection entities) {
-		getHibernateTemplate().deleteAll(entities);
-	}
-
 	public E findByProperty(final String propertyName, final Object value) {
 
 		return (E) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				return session.createCriteria(getEntityClass()).add(Restrictions.eq(propertyName, value)).uniqueResult();
+				return session.createCriteria(getEntityClass()).add(Restrictions.eq(propertyName, value))
+						.uniqueResult();
 			}
 		});
 	}

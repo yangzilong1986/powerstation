@@ -11,6 +11,7 @@
 package org.pssframework.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -299,17 +300,17 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 	}
 
 	
-	public void batchDelete(List<E> list) {
+	public void batchDelete(Collection<E> entities) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void batchUpdate(List<E> list) {
+	public void batchUpdate(Collection<E> entities) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void batchInsert(List<E> list) {
+	public void batchInsert(Collection<E> entities) {
 		// TODO Auto-generated method stub
 		
 	}

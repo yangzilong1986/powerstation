@@ -11,6 +11,7 @@
 package org.pssframework.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,11 +101,11 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
 	}
 
-	public void batchDelete(List<E> list) {
+	public void batchDelete(Collection<E> entities) {
 
 	}
 
-	public void batchUpdate(List<E> list) {
+	public void batchUpdate(Collection<E> entities) {
 		// TODO Auto-generated method stub
 		//		
 		//		try { 
@@ -149,7 +150,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 
 	}
 
-	public void batchInsert(List<E> list) {
+	public void batchInsert(Collection<E> entities) {
 		// TODO Auto-generated method stub
 
 	}
