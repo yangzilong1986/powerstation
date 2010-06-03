@@ -3,14 +3,12 @@
  */
 package org.pssframework.service.system;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
-import org.pssframework.dao.system.OrgInfoDao;
-import org.pssframework.model.system.OrgInfo;
+import org.pssframework.dao.system.CodeInfoDao;
+import org.pssframework.model.system.CodeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +20,15 @@ import cn.org.rapid_framework.page.PageRequest;
  *
  */
 @Service
-public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
+public class CodeInfoManager extends BaseManager<CodeInfo, Long> {
+
+	@Autowired
+	private CodeInfoDao entitydao;
 
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return this.entityDao;
-	}
-
-	@Autowired
-	private OrgInfoDao entityDao;
-
-	public List getOrgList(Long orgId) {
-		List orgList  = new ArrayList();
-		//orgList = entityDao.findBy(orgId);
-		return orgList;
+		return this.entitydao;
 	}
 
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {

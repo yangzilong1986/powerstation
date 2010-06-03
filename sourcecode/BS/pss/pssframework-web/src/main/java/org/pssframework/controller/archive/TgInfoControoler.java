@@ -3,7 +3,7 @@
  */
 package org.pssframework.controller.archive;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.service.archive.TgInfoManager;
+import org.pssframework.service.system.CodeInfoManager;
+import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Baocj
@@ -37,8 +42,31 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 		this.tgInfoManager = manager;
 	}
 
+	private OrgInfoManager orgInfoManager;
+
+	/**
+	 * @param orgInfoManager the orgInfoManager to set
+	 */
+	public void setOrgInfoManager(OrgInfoManager orgInfoManager) {
+		this.orgInfoManager = orgInfoManager;
+	}
+
+	private CodeInfoManager codeInfoManager;
+
+	/**
+	 * @param orgInfoManager the orgInfoManager to set
+	 */
+	public void setCodeInfoManager(CodeInfoManager codeInfoManager) {
+		this.codeInfoManager = codeInfoManager;
+	}
+
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
+
+		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
+		//pageRequest.getFilters(); //add custom filters
+
+		Map fiterMap = pageRequest.getFilters();
 
 		TgInfo tginfo = this.tgInfoManager.getById(model.getTgId());
 
@@ -51,12 +79,12 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 		return result;
 	}
 
-	private List getOrgOptions() {
-		return null;
+	private Page getOrgOptions(PageRequest<Map> pageRequest) {
+		return orgInfoManager.findByPageRequest(pageRequest);
 	}
 
-	private List getStatusOptions() {
-		return null;
+	private Page getStatusOptions(PageRequest<Map> pageRequest) {
+		return codeInfoManager.findByPageRequest(pageRequest);
 	}
 
 	@Override
