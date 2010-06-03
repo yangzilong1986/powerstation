@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-5-11 9:23:15                            */
+/* Created on:     2010-6-3 20:57:58                            */
 /*==============================================================*/
 
 
@@ -59,25 +59,7 @@ create or replace package body IntegrityPackage AS
 /
 
 
-drop trigger "tib_c_cons"
-/
-
 drop trigger "tib_c_gp"
-/
-
-drop trigger "tib_c_meter"
-/
-
-drop trigger "tib_c_meter_mp_rela"
-/
-
-drop trigger "tib_c_mp"
-/
-
-drop trigger "tib_c_ps"
-/
-
-drop trigger "tib_c_terminal"
 /
 
 alter table C_GP
@@ -232,7 +214,7 @@ create table C_CONS  (
    CANCEL_DATE          DATE,
    DUE_DATE             DATE,
    STATUS_CODE          VARCHAR2(8),
-   ORG_NO               VARCHAR2(16),
+   ORG_ID               NUMBER,
    RRIO_CODE            VARCHAR2(8),
    CHK_CYCLE            NUMBER(5),
    POWEROFF_CODE        VARCHAR2(8),
@@ -345,7 +327,7 @@ comment on column C_CONS.STATUS_CODE is
 '
 /
 
-comment on column C_CONS.ORG_NO is
+comment on column C_CONS.ORG_ID is
 '供电单位编码，一般是指的用户的直接供电管理单位，也可以是大客户管理中心等由于管理原因产生的客户管理单位'
 /
 
@@ -447,7 +429,7 @@ create table C_METER  (
    REF_METER_FLAG       VARCHAR2(8),
    REF_METER_ID         NUMBER(16),
    MODULE_NO            VARCHAR2(32),
-   ORG_NO               VARCHAR2(16),
+   ORG_ID               NUMBER,
    COMM_ADDR1           VARCHAR2(16),
    COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
@@ -492,7 +474,7 @@ comment on column C_METER.MODULE_NO is
 '定义电能表是集抄时，对应的模块编号'
 /
 
-comment on column C_METER.ORG_NO is
+comment on column C_METER.ORG_ID is
 '供电管理单位的代码'
 /
 
@@ -554,7 +536,7 @@ create table C_MP  (
    MP_NO                VARCHAR2(16)                    not null,
    MP_NAME              VARCHAR2(256),
    MP_ADDR              VARCHAR2(256),
-   TYPE_CODE            VARCHAR2(8),
+   TYPE_CODE            NUMBER(12,4),
    MP_ATTR_CODE         VARCHAR2(8),
    USAGE_TYPE_CODE      VARCHAR2(8),
    SIDE_CODE            VARCHAR2(8),
@@ -563,7 +545,7 @@ create table C_MP  (
    RUN_DATE             DATE,
    WIRING_MODE          VARCHAR2(8),
    MEAS_MODE            VARCHAR2(8),
-   ORG_NO               VARCHAR2(16),
+   ORG_ID               NUMBER,
    SWITCH_NO            VARCHAR2(32),
    MR_SECT_NO           VARCHAR2(16),
    LINE_ID              NUMBER(16),
@@ -641,8 +623,8 @@ comment on column C_MP.MEAS_MODE is
 '引用国家电网公司营销管理代码类集:5110.33电能计量方式代码（1高供高计、2高供低计、3低供低计）'
 /
 
-comment on column C_MP.ORG_NO is
-'供电管理单位的代码'
+comment on column C_MP.ORG_ID is
+'供电单位编码，一般是指的用户的直接供电管理单位，也可以是大客户管理中心等由于管理原因产生的客户管理单位'
 /
 
 comment on column C_MP.SWITCH_NO is
@@ -800,7 +782,7 @@ comment on column C_PS.LASTTIME_STAMP is
 /*==============================================================*/
 create table C_TERMINAL  (
    TERM_ID              NUMBER                          not null,
-   ORG_NO               VARCHAR2(20),
+   ORG_ID               NUMBER,
    ASSET_NO             VARCHAR2(20),
    LOGICAL_ADDR         VARCHAR2(20),
    RUN_STATUS           VARCHAR2(5),
@@ -923,27 +905,6 @@ alter table C_PS
 /
 
 
-create trigger "tib_c_cons" before insert
-on C_CONS for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "CONS_ID" uses sequence SEQ_C_CONS
-    select SEQ_C_CONS.NEXTVAL INTO :new.CONS_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
 create trigger "tib_c_gp" before insert
 on C_GP for each row
 declare
@@ -956,111 +917,6 @@ declare
 begin
     --  Column "GP_ID" uses sequence SEQ_C_GP
     select SEQ_C_GP.NEXTVAL INTO :new.GP_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
-create trigger "tib_c_meter" before insert
-on C_METER for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "METER_ID" uses sequence SEQ_C_METER
-    select SEQ_C_METER.NEXTVAL INTO :new.METER_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
-create trigger "tib_c_meter_mp_rela" before insert
-on C_METER_MP_RELA for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "METER_MP_ID" uses sequence SEQ_MP_RELA
-    select SEQ_MP_RELA.NEXTVAL INTO :new.METER_MP_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
-create trigger "tib_c_mp" before insert
-on C_MP for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "MP_ID" uses sequence SEQ_C_MP
-    select SEQ_C_MP.NEXTVAL INTO :new.MP_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
-create trigger "tib_c_ps" before insert
-on C_PS for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "PS_ID" uses sequence SEQ_C_PS
-    select SEQ_C_PS.NEXTVAL INTO :new.PS_ID from dual;
-
---  Errors handling
-exception
-    when integrity_error then
-       raise_application_error(errno, errmsg);
-end;
-/
-
-
-create trigger "tib_c_terminal" before insert
-on C_TERMINAL for each row
-declare
-    integrity_error  exception;
-    errno            integer;
-    errmsg           char(200);
-    dummy            integer;
-    found            boolean;
-
-begin
-    --  Column "TERM_ID" uses sequence SEQ_C_TERMINAL
-    select SEQ_C_TERMINAL.NEXTVAL INTO :new.TERM_ID from dual;
 
 --  Errors handling
 exception
