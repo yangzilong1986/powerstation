@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.pssframework.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,54 +38,55 @@ import org.springframework.web.servlet.ModelAndView;
  * @author PSS
  * @param <T> 实体对象,如Blog
  */
-public class BaseRestSpringController<Entity,PK> extends BaseSpringController{
-	
+public class BaseRestSpringController<Entity, PK> extends BaseSpringController {
+
 	//特别说明: 由于spring的方法参数映射太过于灵活,如果以下参数不适应你,请自己修改参数并修改代码生成器模板
 	// 如果你不喜欢 HttpServletRequest request,HttpServletResponse response作为方法参数，也请删除
-	
+
 	@RequestMapping
-	public ModelAndView index(HttpServletRequest request,HttpServletResponse response,Entity model) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, Entity model) {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 进入新增 */
-	@RequestMapping(value="/new")
-	public ModelAndView _new(HttpServletRequest request,HttpServletResponse response,Entity model) throws Exception {
+	@RequestMapping(value = "/new")
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, Entity model) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 显示 */
-	@RequestMapping(value="/{id}")
+	@RequestMapping(value = "/{id}")
 	public ModelAndView show(@PathVariable PK id) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 编辑 */
-	@RequestMapping(value="/{id}/edit")
+	@RequestMapping(value = "/{id}/edit")
 	public ModelAndView edit(@PathVariable PK id) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 保存新增 */
-	@RequestMapping(method=RequestMethod.POST)
-	public ModelAndView create(HttpServletRequest request,HttpServletResponse response,Entity model) throws Exception {
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, Entity model) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 保存更新 */
-	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ModelAndView update(@PathVariable PK id,HttpServletRequest request,HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ModelAndView update(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
-	
+
 	/** 删除 */
-	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ModelAndView delete(@PathVariable PK id) {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 批量删除 */
-	@RequestMapping(method=RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE)
 	public ModelAndView batchDelete(@RequestParam("items") PK[] items) {
 		throw new UnsupportedOperationException("not yet implement");
 	}

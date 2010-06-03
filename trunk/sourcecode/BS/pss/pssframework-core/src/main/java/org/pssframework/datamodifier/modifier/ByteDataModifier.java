@@ -13,10 +13,12 @@ package org.pssframework.datamodifier.modifier;
 
 import org.pssframework.datamodifier.DataModifier;
 
-public class ByteDataModifier implements DataModifier{
+public class ByteDataModifier implements DataModifier {
 	public Object modify(Object value, String modifierArgument) {
-		if(value == null) return null;
-		if(value instanceof Byte) return value;
+		if (value == null)
+			return null;
+		if (value instanceof Byte)
+			return value;
 		return new Byte(value.toString());
 	}
 }

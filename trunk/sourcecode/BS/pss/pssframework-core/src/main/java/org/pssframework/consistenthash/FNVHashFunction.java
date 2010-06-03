@@ -9,6 +9,7 @@
  *     PSS Corporation - initial API and implementation
  *******************************************************************************/
 package org.pssframework.consistenthash;
+
 /**
  * FNV比MD5HashFunction提供更高的效率
  * 
@@ -18,7 +19,7 @@ package org.pssframework.consistenthash;
  * @author PSS
  *
  */
-public class FNVHashFunction implements HashFunction{
+public class FNVHashFunction implements HashFunction {
 
 	public int hash(Object obj) {
 		throw new UnsupportedOperationException("not yet implements");

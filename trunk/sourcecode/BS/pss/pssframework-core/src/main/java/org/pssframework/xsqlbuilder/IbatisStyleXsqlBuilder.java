@@ -20,14 +20,13 @@ package org.pssframework.xsqlbuilder;
  * @author PSS
  *
  */
-public class IbatisStyleXsqlBuilder extends XsqlBuilder{
-	
+public class IbatisStyleXsqlBuilder extends XsqlBuilder {
+
 	public IbatisStyleXsqlBuilder() {
 		setAsIbatisStyle();
 	}
 
-	public IbatisStyleXsqlBuilder(boolean isRemoveEmptyStrings,
-			SafeSqlProcesser safeSqlProcesser) {
+	public IbatisStyleXsqlBuilder(boolean isRemoveEmptyStrings, SafeSqlProcesser safeSqlProcesser) {
 		super(isRemoveEmptyStrings, safeSqlProcesser);
 		setAsIbatisStyle();
 	}
@@ -41,14 +40,13 @@ public class IbatisStyleXsqlBuilder extends XsqlBuilder{
 		super(safeSqlProcesser);
 		setAsIbatisStyle();
 	}
-	
+
 	private void setAsIbatisStyle() {
 		markKeyEndChar = "#";
 		markKeyStartChar = "#";
-		
+
 		replaceKeyEndChar = "$";
 		replaceKeyStartChar = "$";
 	}
-	
-	
+
 }

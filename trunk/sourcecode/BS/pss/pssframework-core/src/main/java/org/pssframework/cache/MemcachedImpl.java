@@ -26,18 +26,19 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * Memcached implementation (using http://code.google.com/p/spymemcached/)
  */
-public class MemcachedImpl implements ICache,InitializingBean {
+public class MemcachedImpl implements ICache, InitializingBean {
 	Log logger = LogFactory.getLog(ICache.class);
-    private MemcachedClient client;
-    private SerializingTranscoder serializingTranscoder = new SerializingTranscoder();
-    private String hosts = null;
-//    private static MemcachedImpl uniqueInstance;
-//    public static MemcachedImpl getInstance() throws IOException {
-//        if (uniqueInstance == null) {
-//            uniqueInstance = new MemcachedImpl();
-//        }
-//        return uniqueInstance;
-//    }
+	private MemcachedClient client;
+	private SerializingTranscoder serializingTranscoder = new SerializingTranscoder();
+	private String hosts = null;
+
+	//    private static MemcachedImpl uniqueInstance;
+	//    public static MemcachedImpl getInstance() throws IOException {
+	//        if (uniqueInstance == null) {
+	//            uniqueInstance = new MemcachedImpl();
+	//        }
+	//        return uniqueInstance;
+	//    }
 
 	public SerializingTranscoder getSerializingTranscoder() {
 		return serializingTranscoder;
@@ -54,7 +55,7 @@ public class MemcachedImpl implements ICache,InitializingBean {
 	public void setHosts(String hosts) {
 		this.hosts = hosts;
 	}
-	
+
 	public MemcachedClient getMemcachedClient() {
 		return client;
 	}
@@ -96,101 +97,102 @@ public class MemcachedImpl implements ICache,InitializingBean {
 		//            }
 		//        };
 
-        System.setProperty("net.spy.log.LoggerImpl", "net.spy.memcached.compat.log.Log4JLogger");
-        if(client == null)
-        	client = new MemcachedClient(AddrUtil.getAddresses(hosts));
+		System.setProperty("net.spy.log.LoggerImpl", "net.spy.memcached.compat.log.Log4JLogger");
+		if (client == null) {
+			client = new MemcachedClient(AddrUtil.getAddresses(hosts));
+		}
 	}
 
-    public void add(String key, Object value, int expiration) {
-        client.add(key, expiration, value, serializingTranscoder);
-    }
+	public void add(String key, Object value, int expiration) {
+		client.add(key, expiration, value, serializingTranscoder);
+	}
 
-    public Object get(String key) {
-        Future<Object> future = client.asyncGet(key, serializingTranscoder);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return null;
-    }
+	public Object get(String key) {
+		Future<Object> future = client.asyncGet(key, serializingTranscoder);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return null;
+	}
 
-    public void clear() {
-        client.flush();
-    }
+	public void clear() {
+		client.flush();
+	}
 
-    public void delete(String key) {
-        client.delete(key);
-    }
+	public void delete(String key) {
+		client.delete(key);
+	}
 
-    public Map<String, Object> get(String[] keys) {
-        Future<Map<String, Object>> future = client.asyncGetBulk(serializingTranscoder, keys);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return new HashMap<String, Object>();
-    }
+	public Map<String, Object> get(String[] keys) {
+		Future<Map<String, Object>> future = client.asyncGetBulk(serializingTranscoder, keys);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return new HashMap<String, Object>();
+	}
 
-    public long incr(String key, int by) {
-        return client.incr(key, by);
-    }
+	public long incr(String key, int by) {
+		return client.incr(key, by);
+	}
 
-    public long decr(String key, int by) {
-        return client.decr(key, by);
-    }
+	public long decr(String key, int by) {
+		return client.decr(key, by);
+	}
 
-    public void replace(String key, Object value, int expiration) {
-        client.replace(key, expiration, value, serializingTranscoder);
-    }
+	public void replace(String key, Object value, int expiration) {
+		client.replace(key, expiration, value, serializingTranscoder);
+	}
 
-    public boolean safeAdd(String key, Object value, int expiration) {
-        Future<Boolean> future = client.add(key, expiration, value, serializingTranscoder);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return false;
-    }
+	public boolean safeAdd(String key, Object value, int expiration) {
+		Future<Boolean> future = client.add(key, expiration, value, serializingTranscoder);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
+	}
 
-    public boolean safeDelete(String key) {
-        Future<Boolean> future = client.delete(key);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return false;
-    }
+	public boolean safeDelete(String key) {
+		Future<Boolean> future = client.delete(key);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
+	}
 
-    public boolean safeReplace(String key, Object value, int expiration) {
-        Future<Boolean> future = client.replace(key, expiration, value, serializingTranscoder);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return false;
-    }
+	public boolean safeReplace(String key, Object value, int expiration) {
+		Future<Boolean> future = client.replace(key, expiration, value, serializingTranscoder);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
+	}
 
-    public boolean safeSet(String key, Object value, int expiration) {
-        Future<Boolean> future = client.set(key, expiration, value, serializingTranscoder);
-        try {
-            return future.get(1, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            future.cancel(false);
-        }
-        return false;
-    }
+	public boolean safeSet(String key, Object value, int expiration) {
+		Future<Boolean> future = client.set(key, expiration, value, serializingTranscoder);
+		try {
+			return future.get(1, TimeUnit.SECONDS);
+		} catch (Exception e) {
+			future.cancel(false);
+		}
+		return false;
+	}
 
-    public void set(String key, Object value, int expiration) {
-        client.set(key, expiration, value, serializingTranscoder);
-    }
+	public void set(String key, Object value, int expiration) {
+		client.set(key, expiration, value, serializingTranscoder);
+	}
 
-    public void stop() {
-        client.shutdown();
-    }
+	public void stop() {
+		client.shutdown();
+	}
 
 }

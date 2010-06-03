@@ -18,10 +18,11 @@ import org.pssframework.xsqlbuilder.SafeSqlProcesser;
  * @author PSS
  *
  */
-public class EscapeBackslashAndSingleQuotesSafeSqlProcesser implements SafeSqlProcesser{
+public class EscapeBackslashAndSingleQuotesSafeSqlProcesser implements SafeSqlProcesser {
 
 	public String process(String value) {
-		if(value == null) return null;
+		if (value == null)
+			return null;
 		return value.replaceAll("'", "''").replaceAll("\\\\", "\\\\\\\\");
 	}
 

@@ -42,6 +42,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	/**
 	 * 
 	 */
+	@Override
 	protected void checkDaoConfig() throws IllegalArgumentException {
 		Assert.notNull("sqlSessionFactory must be not null");
 	}
@@ -195,7 +196,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	@SuppressWarnings("unchecked")
 	protected Page pageQuery(final String statementName, PageRequest pageRequest) {
-		
+
 		Assert.notNull(statementName);
 
 		Page page = new Page(pageRequest, 0);
@@ -209,9 +210,8 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 
 		Number totalCount = countQuery(filters);
 		// 获取总条数
-		if (totalCount == null || totalCount.intValue() <= 0) {
+		if (totalCount == null || totalCount.intValue() <= 0)
 			return page;
-		}
 
 		page = new Page(pageRequest, totalCount.intValue());
 
@@ -264,7 +264,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	@SuppressWarnings("unchecked")
 	private Page queryPage(final String statementName, final Map filters, Page page) {
-		
+
 		List list = getSqlSessionTemplate().selectList(getQuery(statementName), filters, page.getFirstResult(),
 				page.getPageSize());
 		page.setResult(list);
@@ -298,8 +298,9 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 				Object result = action.doInSession(session);
 				return result;
 			} finally {
-				if (session != null)
+				if (session != null) {
 					session.close();
+				}
 			}
 		}
 

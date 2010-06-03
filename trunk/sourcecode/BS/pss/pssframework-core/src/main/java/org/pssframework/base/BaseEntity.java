@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.pssframework.base;
 
-import javax.persistence.Entity;
-
 import cn.org.rapid_framework.util.DateConvertUtils;
 
 /**

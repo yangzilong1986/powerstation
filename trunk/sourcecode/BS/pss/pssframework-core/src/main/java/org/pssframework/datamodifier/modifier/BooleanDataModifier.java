@@ -8,15 +8,16 @@
  * Contributors:
  *     PSS Corporation - initial API and implementation
  *******************************************************************************/
- package org.pssframework.datamodifier.modifier;
+package org.pssframework.datamodifier.modifier;
 
 import org.pssframework.datamodifier.DataModifier;
 
-
-public class BooleanDataModifier implements DataModifier{
+public class BooleanDataModifier implements DataModifier {
 	public Object modify(Object value, String modifierArgument) {
-		if(value == null) return null;
-		if(value instanceof Boolean) return value;
+		if (value == null)
+			return null;
+		if (value instanceof Boolean)
+			return value;
 		return new Boolean(value.toString());
 	}
 }

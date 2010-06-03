@@ -10,18 +10,16 @@
  *******************************************************************************/
 package org.pssframework.xsqlbuilder;
 
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Properties;
 
 public class SafeSqlProcesserUtils {
-	
-	public void processAll(Properties map,SafeSqlProcesser processer) {
-		for(Iterator it = map.keySet().iterator();it.hasNext();) {
-			String key = (String)it.next();
+
+	public void processAll(Properties map, SafeSqlProcesser processer) {
+		for (Object element : map.keySet()) {
+			String key = (String) element;
 			String value = map.getProperty(key);
-			map.put(key,processer.process(value));
+			map.put(key, processer.process(value));
 		}
 	}
-	
+
 }

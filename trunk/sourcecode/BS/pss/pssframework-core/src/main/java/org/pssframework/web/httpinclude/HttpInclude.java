@@ -27,6 +27,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
+
 /**
  * 
  * 用于include其它页面以用于布局,可以用于在freemarker,velocity的servlet环境应用中直接include其它http请求
@@ -44,98 +45,106 @@ import javax.servlet.http.HttpServletResponseWrapper;
  *
  */
 public class HttpInclude {
-    private HttpServletRequest request;
-    private HttpServletResponse response;
-    
-    public HttpInclude(HttpServletRequest request, HttpServletResponse response) {
-        this.request = request;
-        this.response = response;
-    }
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 
-    public String include(String includePath) {
-        try {
-            ByteArrayOutputStream output = new ByteArrayOutputStream(8192);
-            include(output,includePath);
-            // TODO handle output encoding 
-            String result = output.toString("UTF-8");
-//          System.out.println("smart include content:"+result);
-            return result;
-        } catch (ServletException e) {
-            throw new RuntimeException("include error,path:"+includePath+" cause:"+e,e);
-        } catch (IOException e) {
-            throw new RuntimeException("include error,path:"+includePath+" cause:"+e,e);
-        }
-    }
-    
-    private void include(final OutputStream outputStream,String includePath) throws ServletException, IOException {
-        if(isRemoteHttpRequest(includePath)) {
-            getHttpRemoteContent(outputStream, includePath);
-        }else {
-            getLocalContent(outputStream, includePath);
-        }
-    }
+	public HttpInclude(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+		this.response = response;
+	}
 
-    private static boolean isRemoteHttpRequest(String includePath) {
-        return  includePath != null && (
-        			includePath.toLowerCase().startsWith("http://") ||
-        			includePath.toLowerCase().startsWith("https://")
-        		);
-    }
+	public String include(String includePath) {
+		try {
+			ByteArrayOutputStream output = new ByteArrayOutputStream(8192);
+			include(output, includePath);
+			// TODO handle output encoding 
+			String result = output.toString("UTF-8");
+			//          System.out.println("smart include content:"+result);
+			return result;
+		} catch (ServletException e) {
+			throw new RuntimeException("include error,path:" + includePath + " cause:" + e, e);
+		} catch (IOException e) {
+			throw new RuntimeException("include error,path:" + includePath + " cause:" + e, e);
+		}
+	}
 
-    private void getLocalContent(final OutputStream outputStream,String includePath) throws ServletException, IOException {
-        // TODO handle getLocalContent() encoding 
-    	// TODO printWriter must be auto flush on write()
-        final PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream,"UTF-8"));
-        request.getRequestDispatcher(includePath).include(request, new HttpServletResponseWrapper(response) {
-            public PrintWriter getWriter() throws IOException {
-                return printWriter;
-            }
-            public ServletOutputStream getOutputStream() throws IOException {
-                return new ServletOutputStream() {
-                    @Override
-                    public void write(int b) throws IOException {
-                        outputStream.write(b);
-                    }
-                    @Override
-                    public void write(byte[] b) throws IOException {
-                        outputStream.write(b);
-                    }
-                    @Override
-                    public void write(byte[] b, int off, int len)throws IOException {
-                        outputStream.write(b, off, len);
-                    }
-                };
-            }
-        });
-        printWriter.flush();
-    }
-    //TODO handle cookies and http query parameters encoding, cookie并且需要处理不可见的 session id cookie问题
-    private void getHttpRemoteContent(final OutputStream outputStream,String url) throws MalformedURLException, IOException {
-        URLConnection conn = new URL(url).openConnection();
-        conn.setReadTimeout(3000);
-        conn.setConnectTimeout(3000);
-//        conn.setRequestProperty("Cookie", toCookieString());
-        InputStream input = conn.getInputStream();
-        try {
-        	IOUtils.copy(input,outputStream);
-        }finally {
-        	if(input != null) input.close();
-        }
-    }
-    
-    static class IOUtils { 
-        private static void copy(InputStream in, OutputStream out) throws IOException {
-            byte[] buff = new byte[8192];
-            while(in.read(buff) >= 0) {
-                out.write(buff);
-            }
-        }
-        
-        private static void copy(Reader in, Writer out) throws IOException {
-            char[] buff = new char[8192];
-            while(in.read(buff) >= 0) {
-                out.write(buff);
-            }
-        }
-    }
+	private void include(final OutputStream outputStream, String includePath) throws ServletException, IOException {
+		if (isRemoteHttpRequest(includePath)) {
+			getHttpRemoteContent(outputStream, includePath);
+		} else {
+			getLocalContent(outputStream, includePath);
+		}
+	}
+
+	private static boolean isRemoteHttpRequest(String includePath) {
+		return includePath != null
+				&& (includePath.toLowerCase().startsWith("http://") || includePath.toLowerCase().startsWith("https://"));
+	}
+
+	private void getLocalContent(final OutputStream outputStream, String includePath) throws ServletException,
+			IOException {
+		// TODO handle getLocalContent() encoding 
+		// TODO printWriter must be auto flush on write()
+		final PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+		request.getRequestDispatcher(includePath).include(request, new HttpServletResponseWrapper(response) {
+			@Override
+			public PrintWriter getWriter() throws IOException {
+				return printWriter;
+			}
+
+			@Override
+			public ServletOutputStream getOutputStream() throws IOException {
+				return new ServletOutputStream() {
+					@Override
+					public void write(int b) throws IOException {
+						outputStream.write(b);
+					}
+
+					@Override
+					public void write(byte[] b) throws IOException {
+						outputStream.write(b);
+					}
+
+					@Override
+					public void write(byte[] b, int off, int len) throws IOException {
+						outputStream.write(b, off, len);
+					}
+				};
+			}
+		});
+		printWriter.flush();
+	}
+
+	//TODO handle cookies and http query parameters encoding, cookie并且需要处理不可见的 session id cookie问题
+	private void getHttpRemoteContent(final OutputStream outputStream, String url) throws MalformedURLException,
+			IOException {
+		URLConnection conn = new URL(url).openConnection();
+		conn.setReadTimeout(3000);
+		conn.setConnectTimeout(3000);
+		//        conn.setRequestProperty("Cookie", toCookieString());
+		InputStream input = conn.getInputStream();
+		try {
+			IOUtils.copy(input, outputStream);
+		} finally {
+			if (input != null) {
+				input.close();
+			}
+		}
+	}
+
+	static class IOUtils {
+		private static void copy(InputStream in, OutputStream out) throws IOException {
+			byte[] buff = new byte[8192];
+			while (in.read(buff) >= 0) {
+				out.write(buff);
+			}
+		}
+
+		private static void copy(Reader in, Writer out) throws IOException {
+			char[] buff = new char[8192];
+			while (in.read(buff) >= 0) {
+				out.write(buff);
+			}
+		}
+	}
 }

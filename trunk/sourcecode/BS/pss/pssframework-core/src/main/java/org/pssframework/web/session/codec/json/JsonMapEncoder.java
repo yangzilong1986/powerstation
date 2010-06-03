@@ -19,7 +19,7 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.pssframework.web.session.codec.MapEncoder;
 
-public class JsonMapEncoder implements MapEncoder{
+public class JsonMapEncoder implements MapEncoder {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -31,5 +31,5 @@ public class JsonMapEncoder implements MapEncoder{
 		objectMapper.writeValue(generator, map);
 		return out.toString(encoding.getJavaName());
 	}
-	
+
 }

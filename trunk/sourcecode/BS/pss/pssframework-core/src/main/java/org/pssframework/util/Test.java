@@ -4,7 +4,6 @@ package org.pssframework.util;
  * 
  */
 
-
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
@@ -31,7 +30,6 @@ public class Test {
 
 	}
 
-	
 	public Test(HanyuPinyinOutputFormat hanyuPinyinOutputFormat) {
 		format = hanyuPinyinOutputFormat;
 	}
@@ -62,8 +60,9 @@ public class Test {
 				if (java.lang.Character.toString(t1[i]).matches("[\\u4E00-\\u9FA5]+")) {
 					t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
 					t4.append(t2[0]);
-				} else
+				} else {
 					t4.append(String.valueOf(t1[i]));
+				}
 			}
 		} catch (BadHanyuPinyinOutputFormatCombination e1) {
 			e1.printStackTrace();
@@ -87,8 +86,9 @@ public class Test {
 				if (java.lang.Character.toString(t1[i]).matches("[\\u4E00-\\u9FA5]+")) {
 					t2 = PinyinHelper.toHanyuPinyinStringArray(t1[i], t3);
 					t4.append(t2[0].charAt(0));
-				} else
+				} else {
 					t4.append(String.valueOf(t1[i]));
+				}
 			}
 		} catch (BadHanyuPinyinOutputFormatCombination e1) {
 			e1.printStackTrace();

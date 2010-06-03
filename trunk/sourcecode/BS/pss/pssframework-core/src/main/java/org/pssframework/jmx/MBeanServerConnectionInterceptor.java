@@ -32,43 +32,39 @@ import org.springframework.util.MethodInvoker;
  *
  */
 @SuppressWarnings("unchecked")
-public class MBeanServerConnectionInterceptor implements MethodInterceptor,FactoryBean{
-	
-	
+public class MBeanServerConnectionInterceptor implements MethodInterceptor, FactoryBean {
+
 	private static Log log = LogFactory.getLog(MBeanServerConnectionInterceptor.class);
-	
+
 	private MBeanServerConnection connection;
 	private String serviceUrl;
-	
-	public MBeanServerConnectionInterceptor(MBeanServerConnection connection,
-			String serviceUrl) {
+
+	public MBeanServerConnectionInterceptor(MBeanServerConnection connection, String serviceUrl) {
 		super();
 		this.connection = connection;
 		this.serviceUrl = serviceUrl;
 	}
 
-	public Object invoke(MethodInvocation invocation) throws Throwable   {
+	public Object invoke(MethodInvocation invocation) throws Throwable {
 		try {
 			return processed(invocation);
-		}catch(IOException e) {
+		} catch (IOException e) {
 			return reconnectAndRetry(invocation);
-		}catch(InvocationTargetException e) {
+		} catch (InvocationTargetException e) {
 			Throwable target = e.getTargetException();
-			if(target instanceof IOException) {
+			if (target instanceof IOException)
 				return reconnectAndRetry(invocation);
-			}
 			throw e;
-		}catch(Throwable e) {
+		} catch (Throwable e) {
 			throw e;
 		}
 	}
 
-	private Object reconnectAndRetry(MethodInvocation invocation)
-			throws IOException, MalformedURLException, Throwable {
-		if(log.isInfoEnabled()) {
-			log.info("reconnectAndRetry:"+invocation.getMethod());
+	private Object reconnectAndRetry(MethodInvocation invocation) throws IOException, MalformedURLException, Throwable {
+		if (log.isInfoEnabled()) {
+			log.info("reconnectAndRetry:" + invocation.getMethod());
 		}
-		
+
 		reconnect();
 		return processed(invocation);
 	}
@@ -78,8 +74,7 @@ public class MBeanServerConnectionInterceptor implements MethodInterceptor,Facto
 		this.connection = connector.getMBeanServerConnection();
 	}
 
-	private Object processed(MethodInvocation invocation)
-			throws Throwable {
+	private Object processed(MethodInvocation invocation) throws Throwable {
 		MethodInvoker invoker = new MethodInvoker();
 		invoker.setArguments(invocation.getArguments());
 		invoker.setTargetObject(connection);
@@ -92,7 +87,7 @@ public class MBeanServerConnectionInterceptor implements MethodInterceptor,Facto
 	public Object getObject() throws Exception {
 		JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(serviceUrl), null);
 		this.connection = connector.getMBeanServerConnection();
-		
+
 		ProxyFactory connectionProxy = new ProxyFactory(this.connection);
 		connectionProxy.addAdvice(this);
 		return connectionProxy.getProxy();

@@ -13,11 +13,12 @@ package org.pssframework.datamodifier.modifier;
 
 import org.pssframework.datamodifier.DataModifier;
 
-
-public class FloatDataModifier implements DataModifier{
+public class FloatDataModifier implements DataModifier {
 	public Object modify(Object value, String modifierArgument) {
-		if(value == null) return null;
-		if(value instanceof Float) return value;
+		if (value == null)
+			return null;
+		if (value instanceof Float)
+			return value;
 		return new Float(value.toString());
 	}
 }

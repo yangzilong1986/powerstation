@@ -52,28 +52,24 @@ public class PageQueryNamedParameterJdbcTemplate {
 			}
 
 			public Object getValue(String paramName) throws IllegalArgumentException {
-				if (isOffsetLimitParam(paramName)) {
+				if (isOffsetLimitParam(paramName))
 					return offsetLimitParamMap.get(paramName);
-				} else {
+				else
 					return paramSource.getValue(paramName);
-				}
 			}
 
 			public boolean hasValue(String paramName) {
-				if (isOffsetLimitParam(paramName)) {
+				if (isOffsetLimitParam(paramName))
 					return offsetLimitParamMap.containsKey(paramName);
-				} else {
+				else
 					return paramSource.hasValue(paramName);
-				}
 			}
 
 			private boolean isOffsetLimitParam(String paramName) {
-				if (LIMIT_PLACEHOLDER.substring(1).equals(paramName)) {
+				if (LIMIT_PLACEHOLDER.substring(1).equals(paramName))
 					return true;
-				}
-				if (OFFSET_PLACEHOLDER.substring(1).equals(paramName)) {
+				if (OFFSET_PLACEHOLDER.substring(1).equals(paramName))
 					return true;
-				}
 				return false;
 			}
 		};

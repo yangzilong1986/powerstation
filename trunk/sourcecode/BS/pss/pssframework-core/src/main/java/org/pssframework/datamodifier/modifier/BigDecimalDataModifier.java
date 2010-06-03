@@ -15,11 +15,12 @@ import java.math.BigDecimal;
 
 import org.pssframework.datamodifier.DataModifier;
 
-
-public class BigDecimalDataModifier implements DataModifier{
+public class BigDecimalDataModifier implements DataModifier {
 	public Object modify(Object value, String modifierArgument) {
-		if(value == null) return null;
-		if(value instanceof BigDecimal) return value;
+		if (value == null)
+			return null;
+		if (value instanceof BigDecimal)
+			return value;
 		return new BigDecimal(value.toString());
 	}
 }
