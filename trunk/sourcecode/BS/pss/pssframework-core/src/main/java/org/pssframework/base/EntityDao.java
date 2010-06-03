@@ -11,6 +11,7 @@
 package org.pssframework.base;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -39,10 +40,10 @@ public interface EntityDao<E, PK extends Serializable> {
 
 	public List<E> findAll() throws DataAccessException;
 
-	public void batchInsert(List<E> list) throws DataAccessException;;
+	public void batchInsert(Collection<E> entities) throws DataAccessException;;
 
-	public void batchUpdate(List<E> list) throws DataAccessException;
+	public void batchUpdate(Collection<E> entities) throws DataAccessException;
 
-	public void batchDelete(List<E> list) throws DataAccessException;
+	public void batchDelete(Collection<E> entities) throws DataAccessException;
 
 }
