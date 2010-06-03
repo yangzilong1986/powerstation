@@ -19,6 +19,8 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 
+	private static final String OrgList = "SELECT t.orgid,t.orgname FROM orgInfo t WHERE t.orgno LIKE (SELECT a.orgno FROM orgInfo a WHERE a.orgid =:orgid) || '%' ORDER BY t.orgno";
+
 	@Override
 	public Class<?> getEntityClass() {
 		return OrgInfo.class;
@@ -36,9 +38,9 @@ public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
-		String sql = "select t from OrgInfo t where 1=1 " + "/~ and t.orgno like '[orgno]' ~/";
-		return pageQuery(sql, pageRequest);
+		return pageQuery(OrgList, pageRequest);
 	}
 
 	/**
@@ -47,10 +49,6 @@ public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 	 */
 	public OrgInfo getOrgInfo(String orgId) {
 		return (OrgInfo) findByProperty("orgId", getEntityClass());
-	}
-
-	public OrgInfo getByUserName(String v) {
-		return (OrgInfo) findByProperty("username", v);
 	}
 
 }
