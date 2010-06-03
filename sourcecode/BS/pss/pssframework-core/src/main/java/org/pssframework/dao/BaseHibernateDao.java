@@ -28,7 +28,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.dialect.Dialect;
@@ -250,7 +249,7 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 
 		return (E) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				return session.createCriteria(getEntityClass()).add(Expression.eq(propertyName, value)).uniqueResult();
+				return session.createCriteria(getEntityClass()).add(Restrictions.eq(propertyName, value)).uniqueResult();
 			}
 		});
 	}
@@ -258,7 +257,7 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 	public List<E> findAllBy(final String propertyName, final Object value) {
 		return getHibernateTemplate().executeFind(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				return session.createCriteria(getEntityClass()).add(Expression.eq(propertyName, value)).list();
+				return session.createCriteria(getEntityClass()).add(Restrictions.eq(propertyName, value)).list();
 			}
 		});
 	}
