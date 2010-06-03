@@ -19,7 +19,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   </sql>
 
   <!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
-  <insert id="insert" parameterType="org.pssframework.model.LeafInfo" useGeneratedKeys="true" keyProperty="userId">
+  <insert id="insert" parameterType="org.pssframework.model.tree.LeafInfo" useGeneratedKeys="true" keyProperty="userId">
     <![CDATA[
         INSERT INTO
         user_info (
@@ -44,7 +44,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
       sequenceName.nextval AS ID FROM DUAL </selectKey>
     -->
   </insert>
-  <update id="update" parameterType="org.pssframework.model.LeafInfo">
+  <update id="update" parameterType="org.pssframework.model.tree.LeafInfo">
     <![CDATA[
         UPDATE user_info SET
 	        username = #{username,jdbcType=VARCHAR} ,
