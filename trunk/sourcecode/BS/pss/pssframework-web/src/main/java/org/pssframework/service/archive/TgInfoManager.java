@@ -7,6 +7,7 @@ import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.TgInfoDao;
 import org.pssframework.model.archive.TgInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import cn.org.rapid_framework.page.Page;
@@ -18,6 +19,7 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
+	@Autowired
 	private TgInfoDao tgInfoDao;
 
 	@Override
