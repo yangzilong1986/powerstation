@@ -41,7 +41,7 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
 		// TODO Auto-generated method stub
-		return null;
+		return entityDao.findByPageRequest(pageRequest);
 	}
 
 }
