@@ -5,8 +5,12 @@
 
 package pep.codec.protocol.gb;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pep.codec.utils.BcdUtils;
 
 /**
@@ -18,6 +22,15 @@ public class DataTypeA1 {
     
     public DataTypeA1(Date date){
         calendar.setTime(date);
+    }
+
+    public DataTypeA1(String dateStr) {
+        SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            calendar.setTime(dateformat.parse(dateStr));
+        } catch (ParseException ex) {
+            Logger.getLogger(DataTypeA1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public DataTypeA1(){
