@@ -333,7 +333,7 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 	 * 
 	 * @param values 数量可变的参数,按顺序绑定.
 	 */
-	public <X> List<X> find(final String hql, final Object... values) {
+	public <X> List<X> findAll(final String hql, final Object... values) {
 		return createQuery(hql, values).list();
 	}
 
@@ -342,7 +342,7 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 	 * 
 	 * @param values 命名参数,按名称绑定.
 	 */
-	public <X> List<X> find(final String hql, final Map<String, ?> values) {
+	public <X> List<X> findAll(final String hql, final Map<String, ?> values) {
 		return createQuery(hql, values).list();
 	}
 
