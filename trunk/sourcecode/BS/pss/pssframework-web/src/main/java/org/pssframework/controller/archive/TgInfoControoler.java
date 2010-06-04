@@ -13,6 +13,7 @@ import org.pssframework.model.archive.TgInfo;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.util.PageRequestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,14 +48,26 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
 		//pageRequest.getFilters(); //add custom filters
+		pageRequest.setPageSize(PageRequestFactory.ALL_PAGE_SIZE);
 
 		Long tgid = 0L;
 		if (model.getTgId() != null) {
 			tgid = model.getTgId();
 		}
-		pageRequest.getFilters().put("tgid", tgid);
-		pageRequest.getFilters().put("orgid", model.getOrgId());
-		pageRequest.getFilters().put("status", model.getStatusCode());
+
+		Long orgid = 0L;
+		if (model.getOrgId() != null) {
+			orgid = model.getOrgId();
+		}
+
+		String runstatcode = "1";
+		if (model.getRunStatusCode() != null) {
+			runstatcode = model.getRunStatusCode();
+		}
+
+		pageRequest.getFilters().put("orgid", orgid);
+
+		pageRequest.getFilters().put("runstatuscode", runstatcode);
 
 		TgInfo tginfo = this.tgInfoManager.getById(tgid);
 

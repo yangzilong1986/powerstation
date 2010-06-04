@@ -57,7 +57,7 @@ public class TgInfo extends BaseEntity {
 	private Long tgCap;
 
 	@Column(name = "INST_ADDR", length = 256)
-	//INST_ADDR       VARCHAR2(256),
+	//INST_ADDR       VARCHAR2(256)
 	private String instAddr;
 
 	@Column(name = "CHG_DATE")
@@ -71,7 +71,7 @@ public class TgInfo extends BaseEntity {
 
 	@Column(name = "RUN_STATUS_CODE", length = 8)
 	//RUN_STATUS_CODE VARCHAR2(8),
-	private String statusCode;
+	private String runStatusCode;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -86,10 +86,24 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the instAddr
+	 */
+	public String getInstAddr() {
+		return instAddr;
+	}
+
+	/**
 	 * @return the lasttimeStamp
 	 */
 	public Date getLasttimeStamp() {
 		return lasttimeStamp;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
 	}
 
 	/**
@@ -100,10 +114,10 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the statusCode
+	 * @return the runStatusCode
 	 */
-	public String getStatusCode() {
-		return statusCode;
+	public String getRunStatusCode() {
+		return runStatusCode;
 	}
 
 	/**
@@ -134,11 +148,23 @@ public class TgInfo extends BaseEntity {
 		return tgNo;
 	}
 
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
 	/**
 	 * @param chaDate the chaDate to set
 	 */
 	public void setChaDate(Date chaDate) {
 		this.chaDate = chaDate;
+	}
+
+	/**
+	 * @param instAddr the instAddr to set
+	 */
+	public void setInstAddr(String instAddr) {
+		this.instAddr = instAddr;
 	}
 
 	/**
@@ -149,6 +175,13 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
 	 * @param pubPrivFlag the pubPrivFlag to set
 	 */
 	public void setPubPrivFlag(String pubPrivFlag) {
@@ -156,10 +189,10 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param statusCode the statusCode to set
+	 * @param runStatusCode the runStatusCode to set
 	 */
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
+	public void setRunStatusCode(String runStatusCode) {
+		this.runStatusCode = runStatusCode;
 	}
 
 	/**
@@ -190,42 +223,9 @@ public class TgInfo extends BaseEntity {
 		this.tgNo = tgNo;
 	}
 
-	/**
-	 * @param instAddr the instAddr to set
-	 */
-	public void setInstAddr(String instAddr) {
-		this.instAddr = instAddr;
-	}
-
-	/**
-	 * @return the instAddr
-	 */
-	public String getInstAddr() {
-		return instAddr;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
 	}
 
 }
