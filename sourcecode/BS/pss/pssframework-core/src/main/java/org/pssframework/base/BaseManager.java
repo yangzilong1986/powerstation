@@ -13,6 +13,7 @@ package org.pssframework.base;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,6 +44,14 @@ public abstract class BaseManager<E, PK extends Serializable> implements Manager
 	@Transactional(readOnly = true)
 	public List<E> findAll() throws DataAccessException {
 		return getEntityDao().findAll();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.pssframework.base.Manager#findAll()
+	 */
+	@Transactional(readOnly = true)
+	public List<E> findAll(Map<?, ?> map) throws DataAccessException {
+		return getEntityDao().findAll(map);
 	}
 
 	/* (non-Javadoc)
