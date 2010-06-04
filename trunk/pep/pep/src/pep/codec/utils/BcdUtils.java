@@ -158,6 +158,36 @@ public class BcdUtils {
         else throw  new IllegalArgumentException();
     }
 
+    public static byte[] bitSetStringToBytes(String bitString){
+        int len = bitString.length()/8;
+        byte[] bitArray = new byte[len];
+
+        for (int i=0; i<len; i++){
+            int ch = 0;
+            for (int j=0; j<8; j++){
+                if (bitString.charAt(i*8+j)=='1')
+                    ch |= 1<<j;
+            }
+            bitArray[i] = (byte) ch;
+        }
+
+        return bitArray;
+    }
+
+    public static String bytesToBitSetString(byte[] bytes){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<bytes.length; i++){
+            int b = bytes[i];
+            for (int j=0; j<8; j++){
+                if ((b & (1<<j))==(1<<j))
+                    sb.append('1');
+                else
+                    sb.append('0');
+            }
+        }
+        return sb.toString();
+    }
+
     private static char byteToChar(int b){
         char ch = (b<0xA)? (char) ('0' + b) : (char) ('A'+b-10);
         return ch;
