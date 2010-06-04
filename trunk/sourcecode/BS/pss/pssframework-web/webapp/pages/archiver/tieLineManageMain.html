@@ -1,0 +1,122 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>联络线管理主页面</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+//变电站
+$.handelCombox('subsTar','subsNo');
+})
+//新增线路
+function newLine(){
+  var url="/peis/jsp/archive/addTieLine.html";
+  top.showDialogBox("新增联络线",url, 575, 900);
+}
+//编辑线路 
+function editLine(){
+  var lineNo=$(".selected td:eq(1)").html();  //取到选中行线路编号
+  if(lineNo==null){
+    alert("请选中一条线路！");
+  }else{
+    var url="/peis/jsp/archive/updateTieLine.html";
+    top.showDialogBox("编辑联络线",url, 575, 900);
+  }
+}
+//删除线路
+function delLine(){
+  var lineNo=$(".selected td:eq(1)").html();  //取到选中行线路编号
+  if(lineNo==null){
+    alert("请选中一条线路！");
+  }else{
+    if(confirm("是否删除该条线路")==true){
+     alert("删除成功！");
+    }
+  }
+}
+</script>
+</head>
+<body>
+<div id="tool">
+  <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input1" /></div>
+  <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="66" class="label">变 电 站：</td>
+      <td width="120" class="dom" id="subsTar"></td>
+      <td width="80" class="label">联络线名称：</td>
+      <td width="120" class="dom"><input type="text" id="lineName" name="lineName"/></td>
+    </tr>
+  </table>
+</div>
+<div class="content">
+  <div id="cont_1">
+    <div class="target2">
+      <ul>
+        <li class="target_on"><a href="#" onclick="setTarget(1); return false;">线路列表</a></li>
+        <li class="clear"></li>
+      </ul>
+      <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+    </div>
+    <div class="pad5">
+       <input type="button" class="input1" name="add" value='新增' onclick="newLine()" />
+       <input type="button" class="input1" name="edit" value='编辑' onclick="editLine()" />
+       <input type="button" class="input1" name="del" value='删除' onclick="delLine()" />
+    </div>
+    <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 142));">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead><tr>
+          <th width="4%">序号</th>
+          <th width="15%">联络线编号</th>
+          <th width="20%">联络线名称</th>
+          <th width="15%">电压等级</th>
+          <th width="14%">管理单位</th>
+          <th width="10%">线损率阀值</th>
+        </tr></thead>
+        <tbody>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>1</td>
+            <td>86</td>
+            <td>110KV霞宝线</td>
+            <td>110KV</td>
+            <td>&nbsp;</td>
+            <td>5%</td>
+          </tr>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>2</td>
+            <td>88</td>
+            <td>110KV金宝线</td>
+            <td>110KV</td>
+            <td>&nbsp;</td>
+            <td>5%</td>
+          </tr>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>3</td>
+            <td>90</td>
+            <td>35KV首泵Ⅱ线</td>
+            <td>35KV</td>
+            <td>&nbsp;</td>
+            <td>5%</td>
+          </tr>
+          <tr onclick='selectSingleRow(this);' style='cursor:pointer;'>
+            <td>4</td>
+            <td>91</td>
+            <td>10KV霞区线</td>
+            <td>10KV</td>
+            <td>&nbsp;</td>
+            <td>5%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+    </div>
+  </div>
+</div>
+</body>
+</html>
