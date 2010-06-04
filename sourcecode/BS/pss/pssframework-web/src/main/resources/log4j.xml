@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- in java cmd add -Dlog4j.configuration=logging.xml -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="log.console"
+		class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d %t %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+	<appender name="log.file"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="log/atf.log" />
+		<param name="threshold" value="warn" />
+		<param name="Append" value="true" />
+
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d %t %-5p %c{2} - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="log.file.kxunDate_file"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="threshold" value="info" />
+		<param name="file" value="log/atf_kxun.log" />
+		<param name="append" value="true" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="log.traceFile"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="threshold" value="debug" />
+		<param name="file" value="log/traceFile.log" />
+		<param name="append" value="true" />
+		<param name="datePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="mail.MAIL"
+		class="org.apache.log4j.net.SMTPAppender">
+		<param name="threshold" value="debug" />
+		<param name="BufferSize" value="1" />
+		<param name="Subject" value="atf-log4jMessage" />
+		<param name="SMTPHost" value="mail.99im.net" />
+		<param name="From" value="nbiz.robot@99im.net" />
+		<param name="To" value="jim.yang@99bill.com,yuan.ge@99bill.com,ygj666888@gmail.com" />
+		<param name="SMTPUsername" value="nbiz.robot@99im.net" />
+		<param name="SMTPPassword" value="bill#1229" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%-d [%p]-[%c]-[%L] %m%n" />
+		</layout>  
+	</appender>
+<!--  
+	<appender name="JDBCAppender"
+		class="atf.test.log.JDBCPoolAppender">
+		<param name="threshold" value="debug" />
+		<param name="sqlname" value="log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="insert into log4j(createdate,thread,level_,class,message) values('%d','%t','%-5p','%c','%m')" />
+		</layout>
+	</appender>
+
+
+	<category name="atf">
+		<priority value="debug" />
+		<appender-ref ref="mail.MAIL" />
+		<appender-ref ref="JDBCAppender" />
+	</category>
+-->
+	<category name="rcs">
+		<priority value="error" />
+	</category>
+
+	<category name="org.hibernate">
+		<priority value="error" />
+	</category>
+
+	<category name="org.apache.ibatis">
+		<priority value="error" />
+	</category>
+	
+	<category name="org.springframework">
+		<priority value="error" />
+	</category>
+
+	<category name="org.quartz">
+		<priority value="error" />
+	</category>
+
+	<logger name="atf.pnr.api.kxun" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="log.file.kxunDate_file" />
+	</logger>
+
+	<logger name="atf.trace" additivity="false">
+		<priority value="debug" />
+		<appender-ref ref="log.traceFile" />
+	</logger>
+
+	<root>
+		<level value="error" />
+		<appender-ref ref="log.console" />
+		<appender-ref ref="log.file" />
+	</root>
+
+</log4j:configuration>
