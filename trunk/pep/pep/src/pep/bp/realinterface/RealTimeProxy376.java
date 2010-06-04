@@ -100,7 +100,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             } else if (Format == "BS64") {
                 packet.getDataBuffer().putBS64(DataItemValue);
             } else if (Format == "ASCII"); else if (Format == "A1") {
-                packet.getDataBuffer().putA1(new DataTypeA1(DataItemValue.getBytes()));
+                packet.getDataBuffer().putA1(new DataTypeA1( DataItemValue));
             } else if (Format == "A2") {
                 packet.getDataBuffer().putA2(new DataTypeA2(DataItemValue.getBytes()));
             } else if (Format == "A3"); else if (Format == "A4"); else if (Format == "A5"); else if (Format == "A6"); else if (Format == "A7"); else if (Format == "A8"); else if (Format == "A9"); else if (Format == "A10"); else if (Format == "A11"); else if (Format == "A12"); else if (Format == "A13"); else if (Format == "A14"); else if (Format == "A15"); else if (Format == "A16"); else if (Format == "A17"); else if (Format == "A18"); else if (Format == "A19"); else if (Format == "A20"); else if (Format == "A21"); else if (Format == "A22"); else if (Format == "A23"); else if (Format == "A24"); else if (Format == "A25"); else if (Format == "A26"); else if (Format == "A27");

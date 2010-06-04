@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.processor.*;
+import pep.mina.common.PepCommunicatorInterface;
 
 /**
  *
@@ -21,6 +22,7 @@ public class MainProcess {
     private LeakPointProcessor lpProcessor;
     private SMSNoticeProcessor SMSProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
+    private PepCommunicatorInterface pepCommunicator;//通信代理器
 
     private void runRealTimeTaskProcessor(){
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 3,
@@ -31,7 +33,7 @@ public class MainProcess {
             try {
                 String task = "启动实时交互任务处理器 " + i;
                 log.info(task);
-                threadPool.execute(new RealTimeTaskProcessor());
+                threadPool.execute(new RealTimeTaskProcessor(this.pepCommunicator));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -47,5 +49,12 @@ public class MainProcess {
         runRealTimeTaskProcessor();
         lpProcessor.run();
         SMSProcessor.run();
+    }
+
+        /**
+     * @param pepCommunicator the pepCommunicator to set
+     */
+    public void setPepCommunicator(PepCommunicatorInterface pepCommunicator) {
+        this.pepCommunicator = pepCommunicator;
     }
 }

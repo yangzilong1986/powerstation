@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.RTTaskService;
-import pep.bp.db.RTTaskServiceIMP;
 import pep.bp.model.RealTimeTask;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.gb376.PmPacket376;
@@ -31,12 +30,12 @@ public class RealTimeTaskProcessor implements Runnable {
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuRespPacketQueue respQueue;//返回报文队列
 
-    public RealTimeTaskProcessor() {
+
+    public RealTimeTaskProcessor( PepCommunicatorInterface pepCommunicator) {
         ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
         taskService = (RTTaskService) cxt.getBean("taskService");
-        pepCommunicator = new PepGbCommunicator();
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
-
+        this.pepCommunicator = pepCommunicator;
     }
 
     public void run() {
@@ -59,4 +58,6 @@ public class RealTimeTaskProcessor implements Runnable {
         }
 
     }
+
+
 }
