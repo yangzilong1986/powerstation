@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>档案一致性检查</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript" src="../../js/frame/jquery.xml2json.js"></script>
+<script type="text/javascript" src="../../js/frame/json2htmlex.js"></script>
+<script type="text/javascript" src="../../js/transbiz/transbizTableEx.js"></script>
+<script type="text/javascript">
+var msgText='请输入台区号或台区名';
+$(document).ready( function() {
+ //供电单位
+ $.handelCombox('orgNoTar','orgNo');
+ //线路
+ $.handelCombox('lineNoTar','lineNo');
+ 
+  inpuTextStyle();
+});
+
+//查询
+function query(){
+  $.json2html("DATA_TBODY","../../jsp/archive/xml/archiveCheck_Data_1.xml","cb-item");
+}
+//明细查询
+function openDetail(tgNo,tgName,totalNum,curNum,consisNum,consisPer){
+   var orgName=$('#orgNo option:selected').text();
+   var params = {    
+                   "tgNo":tgNo,
+                   "tgName":tgName,
+                   "totalNum":totalNum,
+                   "curNum":curNum,
+                   "consisNum":consisNum,
+                   "consisPer":consisPer,
+                   "orgName":orgName
+                };
+    var url="/peis/jsp/archive/archiveCheckDetail.html?"+jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
+    top.showDialogBox("用户及电表信息差异",url, 575, 960);
+}
+//输入框文字效果
+function inpuTextStyle(){
+  $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+  $('#tgName').blur(function(){
+    if(this.value==''){
+      this.value=msgText;
+      $('#tgName').attr({style: "color:#aaaaaa;width:140px;"});
+    }
+  });
+  $('#tgName').focus(function(){
+    if(this.value==msgText){
+       this.value='';
+       $('#tgName').attr({style: "color:black;width:140px;"});
+     }
+  });
+}
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()">档案一致性检查</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+   <div id="main">
+    <div id="tool">
+     <div class="opbutton1">
+       <input type="submit" name="query" id="query" onclick="query();" value="查 询" class="input1" />
+     </div>
+     <table border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom" id="orgNoTar"></td>
+          <td width="70" class="label">线　路：</td>
+          <td width="120" class="dom" id="lineNoTar"></td>
+          <td width="70" class="label" id="objectNameLable">配　变：</td>
+          <td width="120" class="dom"> 
+            <input type="text" id="tgName" name="tgName" value="请输入台区号或台区名" />
+          </td>
+          <td colspan="2">
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+     <div id="cont_1">
+       <div class="target4">
+          <ul>
+            <li class="target_on"><a href="#" onclick="setTarget(1); return false;">档案一致性检查</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+       </div>
+      <div id="tableContainer" class="tableContainer"
+       style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) - 155));">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead id="DATA_THEAD">
+             <tr>
+              <th>序号</th>
+              <th>台区号</th>
+              <th>台区名</th>
+              <th>集中器数</th>
+              <th>台区总表数</th>
+              <th>多功能表数</th>
+              <th>普通表数</th>
+              <th>集中器表数</th>
+              <th>总户数</th>
+              <th>定义一致户数</th>
+              <th>一致性百分率(%)</th>
+              <th>明细</th>
+             </tr>
+            </thead>
+            <tbody id="DATA_TBODY" align="center">
+            </tbody>
+          </table>
+      </div>
+      <div class="pageContainer">
+        <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">2</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</body>
+</html>
