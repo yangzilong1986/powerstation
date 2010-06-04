@@ -5,11 +5,7 @@
 package pep.codec.utils;
 
 import java.io.*;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import org.exolab.castor.mapping.MappingException;
-import org.xml.sax.InputSource;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.xml.*;
 import pep.bp.realinterface.conf.ProtocolCommandItem;

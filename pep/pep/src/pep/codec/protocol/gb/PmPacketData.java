@@ -6,6 +6,11 @@
 
 package pep.codec.protocol.gb;
 
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
 import pep.codec.utils.BcdUtils;
 
@@ -396,28 +401,62 @@ public class PmPacketData{
         return new DataTypeA27(array);
     }
 
+    public PmPacketData putAscii(String str, int len){
+        byte[] temp = str.getBytes(Charset.forName("US-ASCII"));
+        byte[] bytes = new byte[len];
+        for(int i=0; i<len; i++) bytes[i]=0;
+        int n;
+        if (len<=temp.length)
+            n = len;
+        else
+            n = temp.length;
+        for(int i=0; i<n; i++) bytes[i]=temp[i];
+        
+        dataBuff.put(bytes);
+        return this;
+    }
+    
+    public String getAscii(int len){
+        try {
+            String str = dataBuff.getString(len, Charset.forName("US-ASCII").newDecoder());
+            return str;
+        } catch (CharacterCodingException ex) {
+            Logger.getLogger(PmPacketData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
     public PmPacketData putBS8(String bs8){
+        dataBuff.put(BcdUtils.bitSetStringToBytes(bs8));
         return this;
     }
 
-    public int getBS8(){
-        return 0;
+    public String getBS8(){
+        byte[] bytes = new byte[1];
+        dataBuff.get(bytes);
+        return BcdUtils.binArrayToString(bytes);
     }
 
     public PmPacketData putBS24(String bs8){
+        dataBuff.put(BcdUtils.bitSetStringToBytes(bs8));
         return this;
     }
 
-    public int getBS24(){
-        return 0;
+    public String getBS24(){
+        byte[] bytes = new byte[3];
+        dataBuff.get(bytes);
+        return BcdUtils.binArrayToString(bytes);
     }
 
     public PmPacketData putBS64(String bs8){
+        dataBuff.put(BcdUtils.bitSetStringToBytes(bs8));
         return this;
     }
 
-    public int getBS64(){
-        return 0;
+    public String getBS64(){
+        byte[] bytes = new byte[8];
+        dataBuff.get(bytes);
+        return BcdUtils.binArrayToString(bytes);
     }
 
     @Override

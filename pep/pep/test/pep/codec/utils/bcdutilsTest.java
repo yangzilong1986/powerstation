@@ -5,6 +5,7 @@
 
 package pep.codec.utils;
 
+import java.nio.charset.Charset;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -108,5 +109,39 @@ public class bcdutilsTest {
         byte value = 5;
         String result = BcdUtils.byteToString(value);
         assertEquals(result,"05");
+    }
+
+    @Test
+    public void testStringToBytes(){
+        String str = "abcdefg";
+        byte[] bytes = str.getBytes(Charset.forName("US-ASCII"));
+        assertEquals(bytes[0],97);
+        assertEquals(bytes[1],98);
+    }
+    
+    @Test
+    public void testBitStringToBytes(){
+        final String bss8 = "11000000";
+        final byte[] rbs8 = {0x03};
+        byte[] bs8 = BcdUtils.bitSetStringToBytes(bss8);
+        assertTrue(TestUtils.byteArrayEquals(rbs8,bs8));
+
+        final String bss16 = "1100000011110000";
+        final byte[] rbs16 = {0x03, 0x0F};
+        byte[] bs16 = BcdUtils.bitSetStringToBytes(bss16);
+        assertTrue(TestUtils.byteArrayEquals(rbs16,bs16));
+    }
+
+    @Test
+    public void testBytesToBitSetString(){
+        final String bss8 = "11000000";
+        final byte[] rbs8 = {0x03};
+        String bs8 = BcdUtils.bytesToBitSetString(rbs8);
+        assertEquals(bss8,bs8);
+
+        final String bss16 = "1100000011110000";
+        final byte[] rbs16 = {0x03, 0x0F};
+        String bs16 = BcdUtils.bytesToBitSetString(rbs16);
+        assertEquals(bss16,bs16);
     }
 }
