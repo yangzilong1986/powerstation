@@ -13,6 +13,7 @@ package org.pssframework.base;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -25,13 +26,10 @@ public interface EntityDao<E, PK extends Serializable> {
 
 	public void deleteById(PK id) throws DataAccessException;
 
-	/** 插入数据 */
 	public void save(E entity) throws DataAccessException;
 
-	/** 更新数据 */
 	public void update(E entity) throws DataAccessException;
 
-	/** 根据id检查是否插入或是更新数据 */
 	public void saveOrUpdate(E entity) throws DataAccessException;
 
 	public boolean isUnique(E entity, String uniquePropertyNames) throws DataAccessException;
@@ -39,6 +37,8 @@ public interface EntityDao<E, PK extends Serializable> {
 	public void flush() throws DataAccessException;
 
 	public List<E> findAll() throws DataAccessException;
+
+	public List<E> findAll(Map<?, ?> map) throws DataAccessException;
 
 	public void batchInsert(Collection<E> entities) throws DataAccessException;;
 
