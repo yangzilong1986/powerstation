@@ -24,7 +24,8 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     private final static String SESSION_RTUS = PmPacket376ServerIoHandler.class.getName() + ".rtus";
     private final static Logger LOGGER = LoggerFactory.getLogger(PmPacket376ServerIoHandler.class);
 
-    public void setRtuMap(PepGbCommunicator rtuMap) {
+    public PmPacket376ServerIoHandler(PepGbCommunicator rtuMap) {
+        super();
         this.rtuMap = rtuMap;
     }
 
