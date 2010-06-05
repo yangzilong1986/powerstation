@@ -14,9 +14,6 @@ import org.pssframework.model.system.OrgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.org.rapid_framework.page.Page;
-import cn.org.rapid_framework.page.PageRequest;
-
 /**
  * @author Administrator
  *
@@ -26,22 +23,20 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
 		return this.entityDao;
 	}
 
 	@Autowired
 	private OrgInfoDao entityDao;
 
-	public List getOrgList(Long orgId) {
-		List orgList  = new ArrayList();
+	public <X> List<X> getOrgList(Long orgId) {
+		List<X> orgList = new ArrayList<X>();
 		//orgList = entityDao.findBy(orgId);
 		return orgList;
 	}
 
-	public Page findByPageRequest(PageRequest<Map> pageRequest) {
-		// TODO Auto-generated method stub
-		return entityDao.findByPageRequest(pageRequest);
+	public <X> List<X> findByPageRequest(Map mapRequest) {
+		return entityDao.findByPageRequest(mapRequest);
 	}
 
 }

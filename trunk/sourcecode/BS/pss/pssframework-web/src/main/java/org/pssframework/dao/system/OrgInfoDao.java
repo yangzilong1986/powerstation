@@ -3,14 +3,12 @@
  */
 package org.pssframework.dao.system;
 
+import java.util.List;
 import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.OrgInfo;
 import org.springframework.stereotype.Repository;
-
-import cn.org.rapid_framework.page.Page;
-import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
@@ -19,7 +17,7 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 
-	private static final String OrgList = "SELECT t.orgId,t.orgName FROM OrgInfo t WHERE t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId ='[orgid]') || '%' ORDER BY t.orgNo";
+	private static final String OrgList = " FROM OrgInfo t WHERE 1=1  /~ and t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId='[orgid]') ~/ ORDER BY t.orgNo";
 
 	@Override
 	public Class<?> getEntityClass() {
@@ -38,9 +36,8 @@ public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public Page findByPageRequest(PageRequest<Map> pageRequest) {
-		return pageQuery(OrgList, pageRequest);
+	public <X> List<X> findByPageRequest(Map<String, ?> mapRequest) {
+		return findAll(OrgList, mapRequest);
 	}
 
 	/**
