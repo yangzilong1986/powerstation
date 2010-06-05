@@ -71,7 +71,31 @@ public class DeptInfo extends BaseEntity {
 	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
+	/**
+	 * @return the abbr
+	 */
+	public String getAbbr() {
+		return abbr;
+	}
 
+	public String getDeptNo() {
+		return deptNo;
+	}
+
+	/**
+	 * @return the dispSn
+	 */
+	public Long getDispSn() {
+		return dispSn;
+	}
+
+	public Date getLasttimeStamp() {
+		return lasttimeStamp;
+	}
+
+	public String getName() {
+		return name;
+	}
 
 	/**
 	 * @return the orgId
@@ -80,19 +104,17 @@ public class DeptInfo extends BaseEntity {
 		return orgId;
 	}
 
-	/**
-	 * @param orgId
-	 *            the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
+	public String getpDeptNo() {
+		return pDeptNo;
 	}
 
-	/**
-	 * @return the abbr
-	 */
-	public String getAbbr() {
-		return abbr;
+	public String getTypeCode() {
+		return typeCode;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -103,11 +125,8 @@ public class DeptInfo extends BaseEntity {
 		this.abbr = abbr;
 	}
 
-	/**
-	 * @return the dispSn
-	 */
-	public Long getDispSn() {
-		return dispSn;
+	public void setDeptNo(String deptNo) {
+		this.deptNo = deptNo;
 	}
 
 	/**
@@ -118,46 +137,33 @@ public class DeptInfo extends BaseEntity {
 		this.dispSn = dispSn;
 	}
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
-	}
-
-	public String getTypeCode() {
-		return typeCode;
+	/**
+	 * @param orgId
+	 *            the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
 	}
 
 	public void setpDeptNo(String pDeptNo) {
 		this.pDeptNo = pDeptNo;
 	}
 
-	public String getpDeptNo() {
-		return pDeptNo;
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
 	}
 
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
-	}
-
-	public Date getLasttimeStamp() {
-		return lasttimeStamp;
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }
