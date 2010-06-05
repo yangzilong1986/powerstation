@@ -20,7 +20,7 @@ import org.pssframework.base.BaseEntity;
  *
  */
 @Entity
-@Table(name = "s_code")
+@Table(name = "a_code")
 @SequenceGenerator(sequenceName = "SEQ_S_CODE", name = "SEQ_S_CODE")
 public class CodeInfo extends BaseEntity {
 
@@ -48,6 +48,9 @@ public class CodeInfo extends BaseEntity {
 
 	@Column(name = "CODE_TYPE")
 	private String codeType; // 代码类型 : 0 – 系统编码 1 – 用户编码
+
+	@Column(name = "VALUE")
+	private String value; // 代码类型 : 0 – 系统编码 1 – 用户编码
 
 	/**
 	 * @return the codeId
@@ -141,6 +144,20 @@ public class CodeInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
 	}
 
 }

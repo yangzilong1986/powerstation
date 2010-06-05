@@ -10,9 +10,6 @@ import org.pssframework.model.archive.TgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.org.rapid_framework.page.Page;
-import cn.org.rapid_framework.page.PageRequest;
-
 /**
  * @author Administrator
  *
@@ -29,11 +26,6 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 		return this.tgInfoDao;
 	}
 
-
-	public Page findByPageRequest(PageRequest pageRequest) {
-		// TODO Auto-generated method stub
-		return tgInfoDao.findByPageRequest(pageRequest);
-	}
 
 	@Override
 	public TgInfo getById(Long id) {

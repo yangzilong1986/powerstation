@@ -1,5 +1,7 @@
 package org.pssframework.controller.system;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +13,6 @@ import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import cn.org.rapid_framework.page.Page;
-import cn.org.rapid_framework.page.PageRequest;
 
 @Controller
 @RequestMapping("/system/org")
@@ -33,16 +32,14 @@ public class OrgInfoController extends BaseRestSpringController<OrgInfo, Long> {
 
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, OrgInfo model) {
-		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
-		//pageRequest.getFilters(); //add custom filters
 
-		Map fiterMap = pageRequest.getFilters();
+		Map fiterMap = new HashMap();
 
-		Page page = this.orgInfoManager.findByPageRequest(pageRequest);
+		List orglist = this.orgInfoManager.findByPageRequest(fiterMap);
 
-		ModelAndView result = toModelAndView(page, pageRequest);
+		ModelAndView result = new ModelAndView();
 
-		result.addObject("orginfo", page.getResult());
+		result.addObject("orginfo", orglist);
 
 		result.setViewName("/system/orgList");
 

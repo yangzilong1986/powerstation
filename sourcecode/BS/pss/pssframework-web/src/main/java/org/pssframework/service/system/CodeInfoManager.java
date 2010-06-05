@@ -3,6 +3,7 @@
  */
 package org.pssframework.service.system;
 
+import java.util.List;
 import java.util.Map;
 
 import org.pssframework.base.BaseManager;
@@ -12,7 +13,6 @@ import org.pssframework.model.system.CodeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 /**
@@ -34,8 +34,12 @@ public class CodeInfoManager extends BaseManager<CodeInfo, Long> {
 		return this.codeInfoDao;
 	}
 
-	public Page findByPageRequest(PageRequest<Map> pageRequest) {
+	public List<CodeInfo> findAll(PageRequest<Map> pageRequest) {
 		return null;
+	}
+
+	public List<CodeInfo> findByPageRequest(Map<String, ?> mapRequest) {
+		return codeInfoDao.findAll(mapRequest);
 	}
 
 }
