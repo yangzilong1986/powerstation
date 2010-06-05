@@ -100,7 +100,7 @@ public class ConsInfo extends BaseEntity {
 	//BUILD_DATE        DATE,is '电子用户档案的首次建立日期';
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	private String buildDate;
+	private Date buildDate;
 
 	//PS_DATE           DATE,is '用户的首次送电日期';
 	@Column(name = "PS_DATE")
@@ -354,14 +354,14 @@ public class ConsInfo extends BaseEntity {
 	/**
 	 * @return the buildDate
 	 */
-	public String getBuildDate() {
+	public Date getBuildDate() {
 		return buildDate;
 	}
 
 	/**
 	 * @param buildDate the buildDate to set
 	 */
-	public void setBuildDate(String buildDate) {
+	public void setBuildDate(Date buildDate) {
 		this.buildDate = buildDate;
 	}
 
