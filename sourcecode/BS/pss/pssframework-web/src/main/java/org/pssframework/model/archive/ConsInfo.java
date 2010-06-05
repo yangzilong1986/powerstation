@@ -105,17 +105,17 @@ public class ConsInfo extends BaseEntity {
 	//PS_DATE           DATE,is '用户的首次送电日期';
 	@Column(name = "PS_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private String psDate;
+	private Date psDate;
 
 	//CANCEL_DATE       DATE,is '销户业务信息归档的日期';
 	@Column(name = "CANCEL_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private String cancelDate;
+	private Date cancelDate;
 
 	// DUE_DATE          DATE,is '临时用电客户约定的用电到期日期';
 	@Column(name = "DUE_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	private String dueDate;
+	private Date dueDate;
 
 	//STATUS_CODE       VARCHAR2(8),is '用电客户的状态说明，说明客户是否处于业扩变更中或已销户引用国家电网公司营销管理代码类集:5110.9 客户状态标志代码正常用电客户，当前新装客户，当前变更客户，已销户客户';
 	@Column(name = "STATUS_CODE", length = 16)
@@ -368,42 +368,42 @@ public class ConsInfo extends BaseEntity {
 	/**
 	 * @return the psDate
 	 */
-	public String getPsDate() {
+	public Date getPsDate() {
 		return psDate;
 	}
 
 	/**
 	 * @param psDate the psDate to set
 	 */
-	public void setPsDate(String psDate) {
+	public void setPsDate(Date psDate) {
 		this.psDate = psDate;
 	}
 
 	/**
 	 * @return the cancelDate
 	 */
-	public String getCancelDate() {
+	public Date getCancelDate() {
 		return cancelDate;
 	}
 
 	/**
 	 * @param cancelDate the cancelDate to set
 	 */
-	public void setCancelDate(String cancelDate) {
+	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 
 	/**
 	 * @return the dueDate
 	 */
-	public String getDueDate() {
+	public Date getDueDate() {
 		return dueDate;
 	}
 
 	/**
 	 * @param dueDate the dueDate to set
 	 */
-	public void setDueDate(String dueDate) {
+	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
