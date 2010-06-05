@@ -55,39 +55,61 @@ public class BaseRestSpringController<Entity, PK> extends BaseSpringController {
 	}
 
 	/** 显示 */
-	@RequestMapping(value = "/{id}")
 	public ModelAndView show(@PathVariable PK id) throws Exception {
+		throw new UnsupportedOperationException("not yet implement");
+	}
+
+	/** 显示 */
+	@RequestMapping(value = "/{id}")
+	public ModelAndView show(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		throw new UnsupportedOperationException("not yet implement");
+	}
+
+	/** 编辑 */
+	public ModelAndView edit(@PathVariable PK id) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 编辑 */
 	@RequestMapping(value = "/{id}/edit")
-	public ModelAndView edit(@PathVariable PK id) throws Exception {
+	public ModelAndView edit(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 保存新增 */
-	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, Entity model) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 保存更新 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ModelAndView update(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView update(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response
+			) throws Exception {
+		throw new UnsupportedOperationException("not yet implement");
+	}
+
+	/** 删除 */
+	public ModelAndView delete(@PathVariable PK id) {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 删除 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ModelAndView delete(@PathVariable PK id) {
+	public ModelAndView delete(@PathVariable PK id, HttpServletRequest request, HttpServletResponse response) {
+		throw new UnsupportedOperationException("not yet implement");
+	}
+
+	/** 批量删除 */
+	public ModelAndView batchDelete(@RequestParam("items") PK[] items) {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 
 	/** 批量删除 */
 	@RequestMapping(method = RequestMethod.DELETE)
-	public ModelAndView batchDelete(@RequestParam("items") PK[] items) {
+	public ModelAndView batchDelete(@RequestParam("items") PK[] items, HttpServletRequest request,
+			HttpServletResponse response) {
 		throw new UnsupportedOperationException("not yet implement");
 	}
 }
