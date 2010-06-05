@@ -1,25 +1,14 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>台区档案录入</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/css/main.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/css/loading.css" />
-<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/js/frame/tableEx.js"></script>
-<script type="text/javascript" src="${ctx}/js/frame/component.js"></script>
-<script type="text/javascript" src="${ctx}/js/archive/archiveCheck.js"></script>
-<script type="text/javascript" src="${ctx}/js/archive/archiveComm.js"></script>
-<script type="text/javascript" src="${ctx}/js/frame/jquery.dataForAjax.js"></script>
-<script type="text/javascript" src="${ctx}/js/frame/loading.js"></script>
 <script type="text/javascript">
-var contextPath = '${ctx}';
-//初始化加载
-$(function(){
-inputAndSelectInit();
-selectInit();
-})
+var contextPath  = '${ctx}';
 //打开新增变压器页面
 function openTransformer(tgId){
    var url=contextPath+"/jsp/archive/addTransformer.jsp?tgFlag=1";
@@ -37,24 +26,24 @@ function openTerm(){
 } 
 //上一步
 function lastStep(){
-  var tgCustFlag=$("input[name='tgCustFlag']").val();
+  var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
   if(tgCustFlag=="1"){//配变台区编辑
     //window.location.href = contextPath + "/archive/tgListQuery1.do?action=normalMode&sqlCode=AL_ARCHIVE_0028&pageRows=20";
      //window.location.href = contextPath + "/jsp/archive/selectTg.jsp";
      history.back();
   }else{//配变台区录入
-    var tgId=$("input[name='tgId']").val();
-    window.location.href=contextPath+"/archive/addTgAction.do?action=showTgInfoByTgID&tgId="+tgId;
+    var tgId=jQuery("input[name='tgId']").val();
+    window.location.href=contextPath+"/archive/addTgAction.do?action=showtginfoByTgID&tgId="+tgId;
   }
 }
 
 //完成
 function finish(){
-   var tgCustFlag=$("input[name='tgCustFlag']").val();
+   var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
    if(tgCustFlag=="1"){//配变台区编辑
-     var url=contextPath+"/archive/addTgAction.do?action=addTgInfo";
+     var url=contextPath+"/archive/addTgAction.do?action=addtginfo";
       if(tgCheck()){
-        $("#finish").attr("disabled",true);
+        jQuery("#finish").attr("disabled",true);
         var data = getFormData("form");
         if(data){
             jQuery.ajax({
@@ -64,14 +53,14 @@ function finish(){
                 dataType:'json',
                 success:function(json){
                     var msg=json['msg'];
-                    $("#finish").attr("disabled",false);
+                    jQuery("#finish").attr("disabled",false);
                     if(msg=="1"){
                       if(confirm("是否继续维护台区")==true){
                          //window.location.href = contextPath + "/archive/tgListQuery1.do?action=normalMode&sqlCode=AL_ARCHIVE_0028&pageRows=20";
                          window.location.href = contextPath + "/jsp/archive/selectTg.jsp";
                       }else{
                           var url1=contextPath+"/archive/commAction.do?action=clearSessionByTg"; //清除session
-                          $.ajax({
+                          jQuery.ajax({
                             url: url1,
                             cache: false,
                             success: function(html) {
@@ -92,11 +81,11 @@ function finish(){
    }else{//配变台区录入
       if(confirm("是否继续新增台区")==true){
          var url1=contextPath+"/archive/commAction.do?action=clearSessionByTg"; //清除session
-         $.ajax({
+         jQuery.ajax({
            url: url1,
            cache: false,
            success: function(html) {
-             window.location.href=contextPath+"/jsp/archive/addTgInfo.jsp";
+             window.location.href=contextPath+"/jsp/archive/addtginfo.jsp";
            }
          });
       }else{
@@ -129,7 +118,7 @@ function showTerminal(termId,termType){
    function delteTran(tranId){
      var url=contextPath+"/archive/tranAction.do?action=deleteTran&tranId="+tranId;
      if(confirm("确定要删除该变压器?")){
-        $.ajax({
+        jQuery.ajax({
           url: url,
           dataType:'json',
           cache: false,
@@ -155,7 +144,7 @@ function showTerminal(termId,termType){
    function delMeter(mpId){
      var url=contextPath+"/archive/meterAction.do?action=deleteTotalMeter&mpId="+mpId;
      if(confirm("确定要删除该总表?")){
-       $.ajax({
+       jQuery.ajax({
             url: url,
             dataType:'json',
             cache: false,
@@ -174,46 +163,23 @@ function showTerminal(termId,termType){
        });
      }
    }
-   //删除配变终端
-   function deleteTerminal(termId){
-     var url=contextPath+"/archive/terminalAction3.do?action=deleteTerminal&termId="+termId;
-     if(confirm("确定要删除该终端?")){
-       $.ajax({
-            url: url,
-            dataType:'json',
-            cache: false,
-            success: function(json){
-              var msg=json['msg'];
-               if(msg=="1"){
-                alert("删除成功");
-                //window.location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
-                loadTgRelevevance();
-                }else if(msg=="3"){
-                   alert("该终端下存在电表、采集器及低压用户，或者级联其他集中器，不允许删除");
-                }
-                else{
-                   alert("删除失败");
-                }
-            }
-          });
-     }
-   }
+  
 //控件样式初始化
 function inputAndSelectInit(){
-var tgCustFlag=$("input[name='tgCustFlag']").val();
+var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
  if(tgCustFlag=="1"){//配变台区编辑
-   $("input").attr("disabled","disabled").each(function(){
-       $(this).attr("disabled","");
+   jQuery("input").attr("disabled","disabled").each(function(){
+       jQuery(this).attr("disabled","");
    });
-   $("select").attr("disabled","disabled").each(function(){
-       $(this).attr("disabled","");
+   jQuery("select").attr("disabled","disabled").each(function(){
+       jQuery(this).attr("disabled","");
    });
-   $("textarea").attr("disabled","disabled").each(function(){
-         $(this).attr("disabled","");
+   jQuery("textarea").attr("disabled","disabled").each(function(){
+         jQuery(this).attr("disabled","");
      });
-   //$('#tab_1 > a').html("档案维护第三步");
+   //jQuery('#tab_1 > a').html("档案维护第三步");
  }else{
-   //$('#tab_1 > a').html("档案录入第三步");
+   //jQuery('#tab_1 > a').html("档案录入第三步");
  }
 }
 //select框初始化
@@ -223,23 +189,23 @@ function selectInit(){
 }
 //调用json方法获取list
 function getJsonObjectList(htmlId,className,methodName,objectType){
-  var objectId=$("input[name='tgId']").val();
+  var objectId=jQuery("input[name='tgId']").val();
   var params = {
                  "objectId":objectId,
                  "methodsName":methodName,
                  "className":className
 			   };
    var url=contextPath+"/archive/commAction.do?action=getJsonByListData&"+ jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
-   $.ajax({
+   jQuery.ajax({
         url: url,
         dataType:'json',
         cache: false,
         success: function(json){
            var htmlTbody="";
-           $(json).each(function(i){ //遍历结果数组 
+           jQuery(json).each(function(i){ //遍历结果数组 
                htmlTbody+=buildTbody(objectType,json[i]);
 		   }); 
-		   $("#"+htmlId).html(htmlTbody);
+		   jQuery("#"+htmlId).html(htmlTbody);
         }
     });
 }
@@ -251,6 +217,10 @@ function loadTgRelevevance(){
   getJsonObjectList("termDataBody","TgService","getTerminalsByTgId","53");//加载终端列表
   remove_loading();
 }
+
+
+
+
 </script>
 </head>
 <body>
@@ -258,46 +228,41 @@ function loadTgRelevevance(){
 <div id="main">
 <div class="tab"></div>
 <div class="tab_con"
-  style="height: expression(((     document.documentElement.clientHeight ||     document.body.clientHeight) -       123 ) );">
-<form action="/archive/tginfo" method="post">
-<div class="main">
-<div id="form"><input type="hidden" name="tgId" value="${tgId}" /> <input type="hidden" name="action"
-  value="showDeviceInfoByTgID" /> <!-- 标记位，用来区分配变台区录入还是编辑 --> <input type="hidden" name="tgCustFlag"
-  value="${tgCustFlag}" />
-<table border="0" cellpadding="0" cellspacing="0" width="900" align="center">
-  <tr>
-    <td width="13%" class="label"><font color="red">* </font>台区号：</td>
-    <td width="20%" class="dom"><form:input path="tgInfo.tgNo" /></td>
-    <td width="13%" class="label"><font color="red">* </font>台区名：</td>
-    <td width="20%" class="dom"><form:input path="tgInfo.tgName" /></td>
-  </tr>
-  <tr>
-    <td class="label"><font color="red">* </font>供电单位：</td>
-    <td class="dom"><form:select path="tgInfo.orgId" onchange="" items="${org}"></form:select></td>
-    <td class="label">容 量：</td>
-    <td class="dom"><form:input path="tgInfo.tgCap" /> kVA</td>
-  </tr>
-  <tr>
-    <td class="label">台区状态：</td>
-    <td class="dom"><form:select path="tgInfo.runStatusCode" onchange="" items="${Status}"/>
-    </td>
-  </tr>
-  <tr>
-    <td class="label">地 址：</td>
-    <td class="dom"><input type="text" name="instAddr" id="instAddr" value="${tgInfo.instAddr}"></td>
-  </tr>
-  <tr>
-    <td rowspan="3" class="label">备 注：</td>
-    <td class="dom" colspan="5"><textarea class="input_textarea3" name="remark" style="width: 734px; height: 80px"></textarea>
-    </td>
-  </tr>
-</table>
-</div>
-</div>
-</form>
-<div class="data2"><span>变压器信息</span>
-
-</div>
+  style="height: expression((( document.documentElement.clientHeight ||       document.body.clientHeight) -         123 ) );">
+<form:form action="/archive/tginfo"  modelAttribute="tginfo" >
+  <div class="main">
+  <div id="form"><form:hidden path="tgId" />
+  <table border="0" cellpadding="0" cellspacing="0" width="900" align="center">
+    <tr>
+      <td width="13%" class="label"><font color="red">* </font>台区号：</td>
+      <td width="20%" class="dom"><form:input path="tgNo" id="tgNo" cssClass="required" /></td>
+      <td width="13%" class="label"><font color="red">* </font>台区名：</td>
+      <td width="20%" class="dom"><form:input path="tgName" id="tgName" cssClass="required" /></td>
+    </tr>
+    <tr>
+      <td class="label">供电单位：</td>
+      <td class="dom"><form:select path="orgId" id="orgId" onchange="" itemLabel="orgName" itemValue="orgId"
+        items="${orglist}"></form:select></td>
+      <td class="label">容 量：</td>
+      <td class="dom"><form:input path="tgCap" id="tgCap" /> kVA</td>
+    </tr>
+    <tr>
+      <td class="label">台区状态：</td>
+      <td class="dom"><form:select path="runStatusCode" id="runStatusCode" onchange="" items="${Status}" /></td>
+    </tr>
+    <tr>
+      <td class="label">地 址：</td>
+      <td class="dom"><form:input path="instAddr" id="instAddr" /></td>
+      <td><input id="addTg" name="addTg" type="button" value="添加" /></td>
+      <td><input id="updateTg" name="updateTg" type="button" value="更新" /></td>
+      <td><input id="deleteTg" name="deleteTg" type="button" value="删除" /></td>
+      <td></td>
+    </tr>
+  </table>
+  </div>
+  </div>
+</form:form>
+<div class="data2"><span>变压器信息</span></div>
 <div class="data2_con">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <thead>
@@ -354,7 +319,8 @@ function loadTgRelevevance(){
         <td align="center">${meter.name}</td>
         <td align="center">${meter.name}</td>
         <td align="center"><a href="javascript:showMeter('${meter.name}','${meter.name}');"><spring:message
-          code="global.edit" /></a>| <a href="javascript:delMeter('${meter.name}')"><spring:message code="global.delete" /></a></td>
+          code="global.edit" /></a>| <a href="javascript:delMeter('${meter.name}')"><spring:message
+          code="global.delete" /></a></td>
       </tr>
     </c:forEach>
   </tbody>
@@ -400,4 +366,90 @@ function loadTgRelevevance(){
 </div>
 </div>
 </body>
+<script>
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
+ return result;
+}}
+);
+
+
+jQuery(function(){
+	jQuery("#addTg").click(function(){
+	if(val.validate()){
+      jQuery(this).attr("disabled","disabled");
+      addtginfo();
+      jQuery(this).attr("disabled","");
+	}else{
+		jQuery(this).attr("disabled","");
+	}
+  });
+
+
+	jQuery("#updateTg").click(function(){
+		if(val.validate()){
+	      jQuery(this).attr("disabled","disabled");
+	      updatetginfo();
+	      jQuery(this).attr("disabled","");
+		}else{
+			jQuery(this).attr("disabled","");
+		}
+	  })
+})
+
+
+getData= function(type){
+var data;
+if(type == "add"){
+  data = jQuery("form[id=tginfo]").not("#tgId").serialize(); 
+}else {
+	data = jQuery("form[id=tginfo]").serialize(); 
+}
+return data;
+}
+
+addtginfo = function(){
+  var tgFromData = getData('add');
+  var url="${ctx}/archive/tginfo.json";
+  if(confirm("确定要保存该台区?")){
+    jQuery.ajax({
+         url: url,
+         data:tgFromData,
+         dataType:'json',
+         type:'POST',
+         cache: false,
+         success: function(json){
+           var msg=json['msg'];
+           var isSucc = json['isSucc'];
+            alert(msg);
+         },error:function(e){
+             alert(e.message);
+         }
+       });
+  }
+}
+
+updatetginfo = function(){
+	var tgFromData = getData("update");
+  alert(tgFromData);
+	  var url="${ctx}/archive/tginfo/"+jQuery("#tgId").val()+'.json?_method=put';
+	  if(confirm("确定要更新该台区?")){
+	    jQuery.ajax({
+	         url: url,
+	         data:tgFromData,
+	         dataType:'json',
+	         type:'post',
+	         cache: false,
+	         success: function(json){
+	           var msg=json['msg'];
+	           var isSucc = json['isSucc'];
+	            alert(msg);
+	         },error:function(e){
+             alert("error")
+	             alert(e.getMessage());
+	         }
+	       });
+	  }
+}
+
+</script>
 </html>
