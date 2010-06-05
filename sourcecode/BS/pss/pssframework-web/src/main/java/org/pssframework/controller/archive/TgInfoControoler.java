@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.archive.TgInfoManager;
+import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +46,14 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
+	private TranInfoManger tranInfoManager;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
 
 		Map mapRequest = new HashMap();
+
 		Long tgid = 0L;
 		if (model.getTgId() != null) {
 			tgid = model.getTgId();
@@ -64,7 +69,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 			runstatcode = model.getRunStatusCode();
 		}
 
-		//mapRequest.put("orgid", orgid);
+		mapRequest.put("orgid", orgid);
 
 		mapRequest.put("codecate", runstatcode);
 
@@ -90,6 +95,10 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 	private List<CodeInfo> getStatusOptions(Map mapRequest) {
 		return codeInfoManager.findByPageRequest(mapRequest);
+	}
+
+	private List<TranInfo> getTranList(Map mapRequest) {
+		return tranInfoManager.findByPageRequest(mapRequest);
 	}
 
 	@Override

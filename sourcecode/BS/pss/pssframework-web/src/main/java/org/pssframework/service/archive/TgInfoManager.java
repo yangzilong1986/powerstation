@@ -22,7 +22,6 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
 		return this.tgInfoDao;
 	}
 
