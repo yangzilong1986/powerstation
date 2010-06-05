@@ -124,14 +124,8 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				XsqlFilterResult queryXsqlResult = queryXsqlResult(query, filters);
 
-				Query query = null;
-				if (hql) {
-					query = session.createQuery(queryXsqlResult.getXsql());
-				} else {
-					query = session.createSQLQuery(queryXsqlResult.getXsql());
-				}
-
-				query = setQueryParameters(query, queryXsqlResult.getAcceptedFilters());
+				Query query = setQueryParameters((hql ? session.createQuery(queryXsqlResult.getXsql()) : session
+						.createSQLQuery(queryXsqlResult.getXsql())), queryXsqlResult.getAcceptedFilters());
 
 				return query.list();
 			}
