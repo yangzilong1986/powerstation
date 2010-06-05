@@ -31,7 +31,12 @@ public class StaffInfo extends BaseEntity {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3702250520720629508L;
+	private static final long serialVersionUID = 3676801718128622302L;
+
+	/**
+	 * 
+	 */
+ 
 
 	/*
 	 * EMP_NO NUMBER(16) not null, is '本实体记录的唯一标识'
@@ -78,7 +83,7 @@ public class StaffInfo extends BaseEntity {
 	private String mobile;
 
 	// REMARK VARCHAR2(256), is '人员的特殊说明 ';
-	@Column(length = 32, nullable = false, name = "REMARK")
+	@Column(length =256, nullable = false, name = "REMARK")
 	private String remark;
 
 	// LASTTIME_STAMP DATE default SYSDATE is '最后表结构修改时间戳';
@@ -270,9 +275,7 @@ public class StaffInfo extends BaseEntity {
 	/**
 	 * @return the serialversionuid
 	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+ 
 
 	@Override
 	public String toString() {
