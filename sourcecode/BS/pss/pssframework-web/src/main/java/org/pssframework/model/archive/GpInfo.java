@@ -31,7 +31,7 @@ import org.pssframework.base.BaseEntity;
  * @since 1.0.0
  */
 @Entity
-@Table(name = "g_tran")
+@Table(name = "C_GP")
 @SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN")
 public class GpInfo extends BaseEntity {
 
