@@ -22,9 +22,7 @@ if ( typeof(Ext) == "undefined" || typeof(Ext.DomHelper) == "undefined" ){
 	<link href="<c:url value="/scripts/rapid-validation/validation.css"/>" type="text/css" rel="stylesheet">
 	<script src="<c:url value="/scripts/rapid-validation/prototype_for_validation.js"/>" type="text/javascript"></script>
 	
-	<!-- 
 	<script src="<c:url value="/scripts/rapid-validation/effects.js"/>" type="text/javascript"></script>
-	-->
 	
 	<!-- show validation error as tooptips -->
 	<script src="<c:url value="/scripts/rapid-validation/tooltips.js"/>" type="text/javascript"></script>
