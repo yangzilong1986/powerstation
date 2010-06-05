@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-3 21:30:45                            */
+/* Created on:     2010-6-5 20:02:19                            */
 /*==============================================================*/
 
 
@@ -310,7 +310,7 @@ create table C_METER  (
    COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
    BAUDRATE             VARCHAR2(16),
-   通讯方式                 VARCHAR2(8)
+   COMM_MODE            VARCHAR2(8)
 )
 tablespace TABS_ARCHIVE;
 
@@ -356,7 +356,7 @@ comment on column C_METER.COMM_NO is
 comment on column C_METER.BAUDRATE is
 '电能表的波特率';
 
-comment on column C_METER.通讯方式 is
+comment on column C_METER.COMM_MODE is
 '通讯方式：485、gprs、红外……';
 
 /*==============================================================*/
