@@ -38,12 +38,12 @@ public interface EntityDao<E, PK extends Serializable> {
 
 	public List<E> findAll() throws DataAccessException;
 
-	public List<E> findAll(Map<?, ?> map) throws DataAccessException;
-
 	public void batchInsert(Collection<E> entities) throws DataAccessException;;
 
 	public void batchUpdate(Collection<E> entities) throws DataAccessException;
 
 	public void batchDelete(Collection<E> entities) throws DataAccessException;
+
+	public <X> List<X> findAll(final String hql, final Map<String, ?> values);
 
 }
