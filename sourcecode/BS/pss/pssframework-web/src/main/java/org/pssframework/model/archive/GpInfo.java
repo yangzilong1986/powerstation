@@ -75,7 +75,7 @@ public class GpInfo extends BaseEntity {
 
 	@Column(name = "PLATE_CAP", precision = 16, scale = 6)
 	//PLATE_CAP          NUMBER(16,6),设备铭牌上登记的容量
-	private double plateCap;
+	private Double plateCap;
 
 	@Column(name = "MS_FLAG", length = 8)
 	//MS_FLAG            VARCHAR2(8),引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码
@@ -204,7 +204,7 @@ public class GpInfo extends BaseEntity {
 	/**
 	 * @return the plateCap
 	 */
-	public double getPlateCap() {
+	public Double getPlateCap() {
 		return plateCap;
 	}
 
@@ -372,7 +372,7 @@ public class GpInfo extends BaseEntity {
 	/**
 	 * @param plateCap the plateCap to set
 	 */
-	public void setPlateCap(Long plateCap) {
+	public void setPlateCap(Double plateCap) {
 		this.plateCap = plateCap;
 	}
 
