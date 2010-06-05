@@ -69,7 +69,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 			runstatcode = model.getRunStatusCode();
 		}
 
-		mapRequest.put("orgid", orgid);
+		//mapRequest.put("orgid", orgid);
 
 		mapRequest.put("codecate", runstatcode);
 
