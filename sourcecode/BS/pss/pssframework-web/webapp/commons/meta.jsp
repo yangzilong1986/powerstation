@@ -26,12 +26,12 @@ if ( typeof(Ext) == "undefined" || typeof(Ext.DomHelper) == "undefined" ){
 	
 	<!-- show validation error as tooptips -->
 	<script src="<c:url value="/scripts/rapid-validation/tooltips.js"/>" type="text/javascript"></script>
-	<link href="<c:url value="/scripts/rapid-validation/tooltips.css"/>" type="text/css" rel="stylesheet">
+<!--	<link href="<c:url value="/scripts/rapid-validation/tooltips.css"/>" type="text/css" rel="stylesheet">-->
 	
 	<script src="<c:url value="/scripts/rapid-validation/validation_cn.js"/>" type="text/javascript"></script>
 <!-- rapid-validation END-->
 
 <script src="<c:url value="/scripts/application.js"/>" type="text/javascript"></script>
-<script src="<c:url value="/scripts/jquery.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/scripts/jquery-1.4.2.min.js"/>" type="text/javascript"></script>
 
 <script src="<c:url value="/scripts/My97DatePicker/WdatePicker.js"/>" type="text/javascript"></script>
