@@ -23,34 +23,99 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
 
 /**
-*1) 描述变压器的运行信息及铭牌参数，包括变压器编码、变压器型号、变压器铭牌容量、当前状态等信息
-*2) 通过线损基础信息管理业务中录入产生，或新装增容与变更用电归档过程产生；或通过与生产系统接口过程产生。
-*3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。
+1) 依法与供电企业建立供用电关系的组织或个人称为用电客户，简称用户，不同用电地址视为不同用户。
+同一客户相邻地址的多个受电点，可以立为多个用户，也可以立为一个用户。
+用电客户包含用电地址，用电类别，供电电压，负荷性质，合同容量等用电属性。
+2)可以通过新装增容及变更用电归档等业务，由实体转入产生记录。
+3)该实体主要由查询客户用电基本信息等业务使用。
  *
  * @author baocj
  * @since 1.0.0
  */
 @Entity
-@Table(name = "g_tran")
-@SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN")
+@Table(name = "C_CONS")
+@SequenceGenerator(sequenceName = "SEQ_C_CONS", name = "SEQ_C_CONS")
 public class ConsInfo extends BaseEntity {
 
-	private static final long serialVersionUID = -3795917072464107754L;
-
-	@Column(name = "EQUIP_ID", unique = true, nullable = false)
+	@Column(name = "CONS_ID", unique = true, nullable = false)
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
-	//EQUIP_ID           NUMBER(16) not null, 设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识
-	private Long equipId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_CONS")
+	//CONS_ID           NUMBER(16) not null,is '本实体记录的唯一标识，产生规则为流水号';
+		private Long consId;
+	  
+	  //CONS_NO           VARCHAR2(16) not null,is '用电客户的外部标识 引用国家电网公司营销管理代码类集:5110.1  用电客户编号规则';
+	@Column(name = "CONS_NO", length = 16, nullable = false)
+	private String consNo;
+	
+	
+	//CONS_NAME         VARCHAR2(256) not null,is '用户的名称，一般等于客户实体中的客户名称，但也允许附加上一些非自然的信息。如 XXX（东城），便于通过用户名称直接识别。';
+	@Column(name = "CONS_NAME", length = 256)
+	private String consName;
+	
+	
+	//CONS_SORT_CODE    VARCHAR2(8),is '用户一种常用的分类方式，方便用户的管理01 高压，02 低压非居民，03 低压居民';
+	@Column(name = "CONS_SORT_CODE", length = 8)
+	private String consSortCode; 
+	
+	
+	
+	//ELEC_ADDR         VARCHAR2(256) not null,is '用电客户的用电地址';
+	@Column(name = "ELEC_ADDR", length = 256)
+	private String elecAddr; 
+	
+	
+	//TRADE_CODE        VARCHAR2(8),is '用电客户的行业分类代码引用国标GB/T 4754-2002';
+	@Column(name = "TRADE_CODE", length = 8)
+	private String tradeCode;
+	
+	//ELEC_TYPE_CODE    VARCHAR2(8),is '用电客户的用电类别分类引用国家电网公司营销管理代码类集:5110.4 用电类别大工业用电，中小化肥，居民生活用电，农业生产用电，贫困县农业排灌用电';
+	@Column(name = "ELEC_TYPE_CODE", length = 8)
+	private String elecTypeCode;  
+	
+	//CONTRACT_CAP      NUMBER(16,6),is '合同约定的本用户的容量';
+	@Column(name = "CONTRACT_CAP", precision = 16,scale =6)
+	private String contractCap;
+	
+	
+	//RUN_CAP           NUMBER(16,6),is '用电客户正在使用的合同容量，如暂停客户，在暂停期间其运行容量等于合同容量减去已暂停的容量';
+	@Column(name = "RUN_CAP", precision = 16,scale =6)
+	private String runCap;
+	
+	//SHIFT_NO          VARCHAR2(8),is '用电客户的生产班次分类引用国家电网公司营销管理代码类集:5110.6用电客户生产班次代码单班，二班，三班，连续生产;
+	@Column(name = "SHIFT_NO", length = 8)
+	private String shiftNo;
+
+	//LODE_ATTR_CODE    VARCHAR2(8),is '负荷的重要程度分类引用国家电网公司营销管理代码类集:5110.44负荷类别分类与代码一类，二类，三类';
+	@Column(name = "LODE_ATTR_CODE", length = 8)
+	private String lodeAttrCode;
+
+	//VOLT_CODE         VARCHAR2(8),is '用电客户的供电电压等级代码，多路电源时取电压等级最高的供电电压等级代码引用《国家电网公司信息分类与代码体系－综合代码类集－电压等级代码表》';
+	//HEC_INDUSTRY_CODE VARCHAR2(8),is '依据国家最新的高耗能行业划分';
+	//HOLIDAY           VARCHAR2(32),is '周休日通过数字连续表示周休哪几天，类似于飞机航班日期表示，如1.2.3,表示星期一星期二和星期三休息。';
+	//BUILD_DATE        DATE,is '电子用户档案的首次建立日期';
+	//PS_DATE           DATE,is '用户的首次送电日期';
+	//CANCEL_DATE       DATE,is '销户业务信息归档的日期';
+	// DUE_DATE          DATE,is '临时用电客户约定的用电到期日期';
+	//STATUS_CODE       VARCHAR2(8),is '用电客户的状态说明，说明客户是否处于业扩变更中或已销户引用国家电网公司营销管理代码类集:5110.9 客户状态标志代码正常用电客户，当前新装客户，当前变更客户，已销户客户';
+	//ORG_ID            NUMBER,is '供电单位编码，一般是指的用户的直接供电管理单位，也可以是大客户管理中心等由于管理原因产生的客户管理单位';
+	//RRIO_CODE         VARCHAR2(8),is '客户重要性等级：特级、一级、二级';
+	//CHK_CYCLE         NUMBER(5),is '检查周期(单位：月)：用于存放客户检查周期信息，便于周期检查计划制定时，获取参数。';
+	//POWEROFF_CODE     VARCHAR2(8),is '停电标志：01 已停电  02 未停电，反映客户当前是否处于停电状态';
+	//MR_SECT_NO        VARCHAR2(16) not null,is '抄表段标识,用于表示用电客户所属的抄表段';
+	//LASTTIME_STAMP    DATE default SYSDATE,is '最后表结构修改时间戳';
+	//PINYIN_CODE       VARCHAR2(16),'拼音code';'
+	  
+
+
+
 
 	//TG_ID              NUMBER(16), 台区标识
 	@ManyToOne(targetEntity = org.pssframework.model.archive.TgInfo.class, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "TG_ID", nullable = false)
 	private Long tgId;
 
-	@Column(name = "ORG_NO", length = 16, nullable = false)
 	// ORG_NO          VARCHAR2(16) not null, 部门
-	private String orgNo;
+
 
 	@Column(name = "CONS_ID", length = 16)
 	//CONS_ID            NUMBER(16),用电客户的内部唯一标识
