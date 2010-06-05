@@ -5,14 +5,11 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,154 +20,416 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
 
 /**
-*1) 描述变压器的运行信息及铭牌参数，包括变压器编码、变压器型号、变压器铭牌容量、当前状态等信息
-*2) 通过线损基础信息管理业务中录入产生，或新装增容与变更用电归档过程产生；或通过与生产系统接口过程产生。
-*3) 该实体主要由线损基础信息管理业务、考核单元管理业务使用，在电费计算用户专线线路损耗也需要使用。
- *
+ *comment on table C_GP is '采集系统范畴内的测量点概念';
+ * 
  * @author baocj
  * @since 1.0.0
  */
 @Entity
 @Table(name = "C_GP")
-@SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN")
+@SequenceGenerator(sequenceName = "SEQ_C_GP", name = "SEQ_C_GP")
 public class GpInfo extends BaseEntity {
 
-	private static final long serialVersionUID = -3795917072464107754L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 29826964346975554L;
 
-	@Column(name = "EQUIP_ID", unique = true, nullable = false)
+	@Column(name = "GP_ID", unique = true, nullable = false)
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
-	//EQUIP_ID           NUMBER(16) not null, 设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识
-	private Long equipId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_GP")
+	// GP_ID not null
+	private Long gpId;
 
-	//TG_ID              NUMBER(16), 台区标识
-	@ManyToOne(targetEntity = org.pssframework.model.archive.TgInfo.class, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "TG_ID", nullable = false)
-	private Long tgId;
+	@Column(name = "GP_ID", nullable = false)
+	// OBJECT_ID NUMBER not null,is
+	private Long objectId;
 
-	@Column(name = "ORG_NO", length = 16, nullable = false)
-	// ORG_NO          VARCHAR2(16) not null, 部门
-	private String orgNo;
+	// TERM_ID NUMBER,
+	@Column(name = "TERM_ID")
+	private Long termId;
 
-	@Column(name = "CONS_ID", length = 16)
-	//CONS_ID            NUMBER(16),用电客户的内部唯一标识
-	private Long consId;
+	// MP_ID NUMBER,
+	@Column(name = "MP_ID")
+	private Long mpId;
 
-	@Column(name = "TYPE_CODE", length = 8)
-	//TYPE_CODE          VARCHAR2(8), 区分是变压器还是高压电动
-	private String typeCode;
+	// GM_ID NUMBER,
+	@Column(name = "GM_ID")
+	private Long gmId;
 
-	@Column(name = "TRAN_NAME", length = 256)
-	//TRAN_NAME          VARCHAR2(256),设备的名称
-	private String tranName;
+	// GP_SN NUMBER,
+	@Column(name = "GP_SN")
+	private Long gpSn;
 
-	@Column(name = "INST_ADDR", length = 256)
-	//INST_ADDR          VARCHAR2(256),设备的安装地址
-	private String instAddr;
+	// GP_CHAR VARCHAR2(5),'见编码GP_CHAR'
+	@Column(name = "GP_CHAR", length = 5)
+	private String gpChar;
 
-	@Column(name = "INST_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	//INST_DATE          DATE,设备的安装日期
-	private Date instDate;
+	// GP_TYPE VARCHAR2(5),is '见编码GP_TYPE';
+	@Column(name = "GP_TYPE", length = 5)
+	private String gpType;
 
-	@Column(name = "PLATE_CAP", precision = 16, scale = 6)
-	//PLATE_CAP          NUMBER(16,6),设备铭牌上登记的容量
-	private Double plateCap;
+	// GP_STATUS VARCHAR2(5),is '见编码GP_STATUS，1 - 有效 0 - 无效';
+	@Column(name = "GP_STATUS", length = 5)
+	private String gpStatus;
 
-	@Column(name = "MS_FLAG", length = 8)
-	//MS_FLAG            VARCHAR2(8),引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码
-	private String msFlag;
+	// GP_ADDR VARCHAR2(20),is '通讯地址';
+	@Column(name = "GP_ADDR", length = 20)
+	private String gpAddr;
 
-	@Column(name = "RUN_STATUS_CODE", length = 8)
-	//RUN_STATUS_CODE    VARCHAR2(8),本次变更前的运行状态 01 运行、 02 停用、 03 拆除
-	private String runStatusCode;
+	// CT_TIMES NUMBER,
+	@Column(name = "CT_TIMES")
+	private Long ctTimes;
 
-	@Column(name = "PUB_PRIV_FLAG", length = 8)
-	//PUB_PRIV_FLAG      VARCHAR2(8),
-	private String pubPrivFlag;
+	// PT_TIMES NUMBER,
+	@Column(name = "PT_TIMES")
+	private Long ptTimes;
 
-	@Column(name = "PROTECT_MODE", length = 8)
-	//PROTECT_MODE       VARCHAR2(8),受电设备的保护方式， 引用代码 变压器保护方式分类
-	private String protectMode;
+	// PORT VARCHAR2(20),
+	@Column(name = "PORT", length = 20)
+	private String port;
 
-	@Column(name = "FRSTSIDE_VOLT_CODE", length = 8)
-	//FRSTSIDE_VOLT_CODE VARCHAR2(8),设备的一侧电压
-	private String frstsideVoltCode;
+	// PROTOCOL_NO VARCHAR2(5),is '电表规约号，见编码PROTOCOL_METER';
+	@Column(name = "PROTOCOL_NO", length = 5)
+	private String protocolNo;
 
-	@Column(name = "SNDSIDE_VOLT_CODE", length = 8)
-	//SNDSIDE_VOLT_CODE  VARCHAR2(8),设备的二侧电压
-	private String sndsideVoltCode;
+	// COMPUTE_FLAG VARCHAR2(5),is '电量计算标识 1 - 参与计算 0 - 不参与计算';
+	@Column(name = "COMPUTE_FLAG", length = 5)
+	private String computeFlag;
 
-	@Column(name = "MODEL_NO", length = 8)
-	//MODEL_NO           VARCHAR2(8),设备的型号
-	private String modelNo;
+	// PLUSE_CONSTANT NUMBER,
+	@Column(name = "PLUSE_CONSTANT")
+	private Long pluseConstant;
 
-	@Column(name = "RV_HV", length = 8)
-	//RV_HV              VARCHAR2(8),额定电压 _ 高压
-	private String rvHv;
+	// METER_CONSTANT NUMBER,
+	@Column(name = "METER_CONSTANT")
+	private Long meterConstant;
 
-	@Column(name = "RC_HV", length = 8)
-	//RC_HV              VARCHAR2(8),额定电流 _ 高压
-	private String rcHv;
+	// SUCRAT_CPT_ID VARCHAR2(5),1 - 参与计算 0 - 不参与计算'
+	@Column(name = "SUCRAT_CPT_ID", length = 5)
+	private String sucratCptId;
 
-	@Column(name = "RV_MV", length = 8)
-	//RV_MV              VARCHAR2(8),额定电压 _ 中压
-	private String rvMv;
+	// LINE_ID NUMBER,
+	@Column(name = " LINE_ID")
+	private Long lineId;
 
-	@Column(name = "RC_MV", length = 8)
-	//RC_MV              VARCHAR2(8),额定电流 _ 中压
-	private String rcMv;
-
-	@Column(name = "RV_LV", length = 8)
-	//RV_LV              VARCHAR2(8),额定电压 _ 低压
-	private String rvLv;
-
-	@Column(name = "RC_LV", length = 8)
-	//RC_LV              VARCHAR2(8),额定电流 _ 低压
-	private String rcLv;
-
-	@Column(name = "PR_CODE", length = 8)
-	//PR_CODE            VARCHAR2(8),设备的产权说明 01 局属、 02 用户
-	private String prCode;
-
-	@Column(name = "LASTTIME_STAMP")
-	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE ,最后表结构修改时间戳
-	private Date lasttimeStamp;
+	// MAS_METER_SN NUMBER,
+	@Column(name = "MAS_METER_SN ")
+	private Long masMeterSn;
 
 	/**
-	 * @return the consId
+	 * @return the gpId
 	 */
-	public Long getConsId() {
-		return consId;
+	public Long getGpId() {
+		return gpId;
 	}
 
 	/**
-	 * @return the equipId
+	 * @param gpId
+	 *            the gpId to set
 	 */
-	public Long getEquipId() {
-		return equipId;
+	public void setGpId(Long gpId) {
+		this.gpId = gpId;
 	}
 
 	/**
-	 * @return the frstsideVoltCode
+	 * @return the objectId
 	 */
-	public String getFrstsideVoltCode() {
-		return frstsideVoltCode;
+	public Long getObjectId() {
+		return objectId;
 	}
 
 	/**
-	 * @return the instAddr
+	 * @param objectId
+	 *            the objectId to set
 	 */
-	public String getInstAddr() {
-		return instAddr;
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
 	}
 
 	/**
-	 * @return the instDate
+	 * @return the termId
 	 */
-	public Date getInstDate() {
-		return instDate;
+	public Long getTermId() {
+		return termId;
+	}
+
+	/**
+	 * @param termId
+	 *            the termId to set
+	 */
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
+
+	/**
+	 * @return the mpId
+	 */
+	public Long getMpId() {
+		return mpId;
+	}
+
+	/**
+	 * @param mpId
+	 *            the mpId to set
+	 */
+	public void setMpId(Long mpId) {
+		this.mpId = mpId;
+	}
+
+	/**
+	 * @return the gmId
+	 */
+	public Long getGmId() {
+		return gmId;
+	}
+
+	/**
+	 * @param gmId
+	 *            the gmId to set
+	 */
+	public void setGmId(Long gmId) {
+		this.gmId = gmId;
+	}
+
+	/**
+	 * @return the gpSn
+	 */
+	public Long getGpSn() {
+		return gpSn;
+	}
+
+	/**
+	 * @param gpSn
+	 *            the gpSn to set
+	 */
+	public void setGpSn(Long gpSn) {
+		this.gpSn = gpSn;
+	}
+
+	/**
+	 * @return the gpChar
+	 */
+	public String getGpChar() {
+		return gpChar;
+	}
+
+	/**
+	 * @param gpChar
+	 *            the gpChar to set
+	 */
+	public void setGpChar(String gpChar) {
+		this.gpChar = gpChar;
+	}
+
+	/**
+	 * @return the gpType
+	 */
+	public String getGpType() {
+		return gpType;
+	}
+
+	/**
+	 * @param gpType
+	 *            the gpType to set
+	 */
+	public void setGpType(String gpType) {
+		this.gpType = gpType;
+	}
+
+	/**
+	 * @return the gpStatus
+	 */
+	public String getGpStatus() {
+		return gpStatus;
+	}
+
+	/**
+	 * @param gpStatus
+	 *            the gpStatus to set
+	 */
+	public void setGpStatus(String gpStatus) {
+		this.gpStatus = gpStatus;
+	}
+
+	/**
+	 * @return the gpAddr
+	 */
+	public String getGpAddr() {
+		return gpAddr;
+	}
+
+	/**
+	 * @param gpAddr
+	 *            the gpAddr to set
+	 */
+	public void setGpAddr(String gpAddr) {
+		this.gpAddr = gpAddr;
+	}
+
+	/**
+	 * @return the ctTimes
+	 */
+	public Long getCtTimes() {
+		return ctTimes;
+	}
+
+	/**
+	 * @param ctTimes
+	 *            the ctTimes to set
+	 */
+	public void setCtTimes(Long ctTimes) {
+		this.ctTimes = ctTimes;
+	}
+
+	/**
+	 * @return the ptTimes
+	 */
+	public Long getPtTimes() {
+		return ptTimes;
+	}
+
+	/**
+	 * @param ptTimes
+	 *            the ptTimes to set
+	 */
+	public void setPtTimes(Long ptTimes) {
+		this.ptTimes = ptTimes;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public String getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port
+	 *            the port to set
+	 */
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return the protocolNo
+	 */
+	public String getProtocolNo() {
+		return protocolNo;
+	}
+
+	/**
+	 * @param protocolNo
+	 *            the protocolNo to set
+	 */
+	public void setProtocolNo(String protocolNo) {
+		this.protocolNo = protocolNo;
+	}
+
+	/**
+	 * @return the computeFlag
+	 */
+	public String getComputeFlag() {
+		return computeFlag;
+	}
+
+	/**
+	 * @param computeFlag
+	 *            the computeFlag to set
+	 */
+	public void setComputeFlag(String computeFlag) {
+		this.computeFlag = computeFlag;
+	}
+
+	/**
+	 * @return the pluseConstant
+	 */
+	public Long getPluseConstant() {
+		return pluseConstant;
+	}
+
+	/**
+	 * @param pluseConstant
+	 *            the pluseConstant to set
+	 */
+	public void setPluseConstant(Long pluseConstant) {
+		this.pluseConstant = pluseConstant;
+	}
+
+	/**
+	 * @return the meterConstant
+	 */
+	public Long getMeterConstant() {
+		return meterConstant;
+	}
+
+	/**
+	 * @param meterConstant
+	 *            the meterConstant to set
+	 */
+	public void setMeterConstant(Long meterConstant) {
+		this.meterConstant = meterConstant;
+	}
+
+	/**
+	 * @return the sucratCptId
+	 */
+	public String getSucratCptId() {
+		return sucratCptId;
+	}
+
+	/**
+	 * @param sucratCptId
+	 *            the sucratCptId to set
+	 */
+	public void setSucratCptId(String sucratCptId) {
+		this.sucratCptId = sucratCptId;
+	}
+
+	/**
+	 * @return the lineId
+	 */
+	public Long getLineId() {
+		return lineId;
+	}
+
+	/**
+	 * @param lineId
+	 *            the lineId to set
+	 */
+	public void setLineId(Long lineId) {
+		this.lineId = lineId;
+	}
+
+	/**
+	 * @return the masMeterSn
+	 */
+	public Long getMasMeterSn() {
+		return masMeterSn;
+	}
+
+	/**
+	 * @param masMeterSn
+	 *            the masMeterSn to set
+	 */
+	public void setMasMeterSn(Long masMeterSn) {
+		this.masMeterSn = masMeterSn;
+	}
+
+	/**
+	 * @return the tranId
+	 */
+	public Long getTranId() {
+		return tranId;
+	}
+
+	/**
+	 * @param tranId
+	 *            the tranId to set
+	 */
+	public void setTranId(Long tranId) {
+		this.tranId = tranId;
 	}
 
 	/**
@@ -181,298 +440,21 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the modelNo
-	 */
-	public String getModelNo() {
-		return modelNo;
-	}
-
-	/**
-	 * @return the msFlag
-	 */
-	public String getMsFlag() {
-		return msFlag;
-	}
-
-	/**
-	 * @return the orgNo
-	 */
-	public String getOrgNo() {
-		return orgNo;
-	}
-
-	/**
-	 * @return the plateCap
-	 */
-	public Double getPlateCap() {
-		return plateCap;
-	}
-
-	/**
-	 * @return the prCode
-	 */
-	public String getPrCode() {
-		return prCode;
-	}
-
-	/**
-	 * @return the protectMode
-	 */
-	public String getProtectMode() {
-		return protectMode;
-	}
-
-	/**
-	 * @return the pubPrivFlag
-	 */
-	public String getPubPrivFlag() {
-		return pubPrivFlag;
-	}
-
-	/**
-	 * @return the rcHv
-	 */
-	public String getRcHv() {
-		return rcHv;
-	}
-
-	/**
-	 * @return the rcLv
-	 */
-	public String getRcLv() {
-		return rcLv;
-	}
-
-	/**
-	 * @return the rcMv
-	 */
-	public String getRcMv() {
-		return rcMv;
-	}
-
-	/**
-	 * @return the runStatusCode
-	 */
-	public String getRunStatusCode() {
-		return runStatusCode;
-	}
-
-	/**
-	 * @return the rvHv
-	 */
-	public String getRvHv() {
-		return rvHv;
-	}
-
-	/**
-	 * @return the rvLv
-	 */
-	public String getRvLv() {
-		return rvLv;
-	}
-
-	/**
-	 * @return the rvMv
-	 */
-	public String getRvMv() {
-		return rvMv;
-	}
-
-	/**
-	 * @return the sndsideVoltCode
-	 */
-	public String getSndsideVoltCode() {
-		return sndsideVoltCode;
-	}
-
-	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
-	}
-
-	/**
-	 * @return the tranName
-	 */
-	public String getTranName() {
-		return tranName;
-	}
-
-	/**
-	 * @return the typeCode
-	 */
-	public String getTypeCode() {
-		return typeCode;
-	}
-
-	/**
-	 * @param consId the consId to set
-	 */
-	public void setConsId(Long consId) {
-		this.consId = consId;
-	}
-
-	/**
-	 * @param equipId the equipId to set
-	 */
-	public void setEquipId(Long equipId) {
-		this.equipId = equipId;
-	}
-
-	/**
-	 * @param frstsideVoltCode the frstsideVoltCode to set
-	 */
-	public void setFrstsideVoltCode(String frstsideVoltCode) {
-		this.frstsideVoltCode = frstsideVoltCode;
-	}
-
-	/**
-	 * @param instAddr the instAddr to set
-	 */
-	public void setInstAddr(String instAddr) {
-		this.instAddr = instAddr;
-	}
-
-	/**
-	 * @param instDate the instDate to set
-	 */
-	public void setInstDate(Date instDate) {
-		this.instDate = instDate;
-	}
-
-	/**
-	 * @param lasttimeStamp the lasttimeStamp to set
+	 * @param lasttimeStamp
+	 *            the lasttimeStamp to set
 	 */
 	public void setLasttimeStamp(Date lasttimeStamp) {
 		this.lasttimeStamp = lasttimeStamp;
 	}
 
-	/**
-	 * @param modelNo the modelNo to set
-	 */
-	public void setModelNo(String modelNo) {
-		this.modelNo = modelNo;
-	}
+	// TRAN_ID NUMBER,
+	@Column(name = "TRAN_ID ")
+	private Long tranId;
 
-	/**
-	 * @param msFlag the msFlag to set
-	 */
-	public void setMsFlag(String msFlag) {
-		this.msFlag = msFlag;
-	}
-
-	/**
-	 * @param orgNo the orgNo to set
-	 */
-	public void setOrgNo(String orgNo) {
-		this.orgNo = orgNo;
-	}
-
-	/**
-	 * @param plateCap the plateCap to set
-	 */
-	public void setPlateCap(Double plateCap) {
-		this.plateCap = plateCap;
-	}
-
-	/**
-	 * @param prCode the prCode to set
-	 */
-	public void setPrCode(String prCode) {
-		this.prCode = prCode;
-	}
-
-	/**
-	 * @param protectMode the protectMode to set
-	 */
-	public void setProtectMode(String protectMode) {
-		this.protectMode = protectMode;
-	}
-
-	/**
-	 * @param pubPrivFlag the pubPrivFlag to set
-	 */
-	public void setPubPrivFlag(String pubPrivFlag) {
-		this.pubPrivFlag = pubPrivFlag;
-	}
-
-	/**
-	 * @param rcHv the rcHv to set
-	 */
-	public void setRcHv(String rcHv) {
-		this.rcHv = rcHv;
-	}
-
-	/**
-	 * @param rcLv the rcLv to set
-	 */
-	public void setRcLv(String rcLv) {
-		this.rcLv = rcLv;
-	}
-
-	/**
-	 * @param rcMv the rcMv to set
-	 */
-	public void setRcMv(String rcMv) {
-		this.rcMv = rcMv;
-	}
-
-	/**
-	 * @param runStatusCode the runStatusCode to set
-	 */
-	public void setRunStatusCode(String runStatusCode) {
-		this.runStatusCode = runStatusCode;
-	}
-
-	/**
-	 * @param rvHv the rvHv to set
-	 */
-	public void setRvHv(String rvHv) {
-		this.rvHv = rvHv;
-	}
-
-	/**
-	 * @param rvLv the rvLv to set
-	 */
-	public void setRvLv(String rvLv) {
-		this.rvLv = rvLv;
-	}
-
-	/**
-	 * @param rvMv the rvMv to set
-	 */
-	public void setRvMv(String rvMv) {
-		this.rvMv = rvMv;
-	}
-
-	/**
-	 * @param sndsideVoltCode the sndsideVoltCode to set
-	 */
-	public void setSndsideVoltCode(String sndsideVoltCode) {
-		this.sndsideVoltCode = sndsideVoltCode;
-	}
-
-	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
-	/**
-	 * @param tranName the tranName to set
-	 */
-	public void setTranName(String tranName) {
-		this.tranName = tranName;
-	}
-
-	/**
-	 * @param typeCode the typeCode to set
-	 */
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
-	}
+	// LASTTIME_STAMP DATE default SYSDATEis '最后表结构修改时间戳';
+	@Column(name = "LASTTIME_STAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lasttimeStamp;
 
 	@Override
 	public String toString() {
