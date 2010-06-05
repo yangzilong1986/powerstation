@@ -71,7 +71,7 @@ public class ConsInfo extends BaseEntity {
 
 	//CONTRACT_CAP      NUMBER(16,6),is '合同约定的本用户的容量';
 	@Column(name = "CONTRACT_CAP", precision = 16, scale = 6)
-	private String contractCap;
+	private Long contractCap;
 
 	//RUN_CAP           NUMBER(16,6),is '用电客户正在使用的合同容量，如暂停客户，在暂停期间其运行容量等于合同容量减去已暂停的容量';
 	@Column(name = "RUN_CAP", precision = 16, scale = 6)
@@ -256,14 +256,14 @@ public class ConsInfo extends BaseEntity {
 	/**
 	 * @return the contractCap
 	 */
-	public String getContractCap() {
+	public Long getContractCap() {
 		return contractCap;
 	}
 
 	/**
 	 * @param contractCap the contractCap to set
 	 */
-	public void setContractCap(String contractCap) {
+	public void setContractCap(Long contractCap) {
 		this.contractCap = contractCap;
 	}
 
