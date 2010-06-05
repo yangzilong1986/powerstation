@@ -161,4 +161,8 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 	}
 
+	public static void main(String[] args) {
+		Long sd = new Long(1L);
+		Double db = new Double(1.000);
+	}
 }
