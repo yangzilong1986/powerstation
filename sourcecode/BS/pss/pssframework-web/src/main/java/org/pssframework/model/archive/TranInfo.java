@@ -48,9 +48,9 @@ public class TranInfo extends BaseEntity {
 	@JoinColumn(name = "TG_ID", nullable = false)
 	private Long tgId;
 
-	@Column(name = "ORG_NO", length = 16, nullable = false)
-	// ORG_NO          VARCHAR2(16) not null, 部门
-	private String orgNo;
+	@Column(name = "ORG_ID", length = 16, nullable = false)
+	// ORG_ID          VARCHAR2(16) not null, 部门
+	private String orgId;
 
 	@Column(name = "CONS_ID", length = 16)
 	//CONS_ID            NUMBER(16),用电客户的内部唯一标识
@@ -195,10 +195,10 @@ public class TranInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the orgNo
+	 * @return the orgId
 	 */
 	public String getOrgNo() {
-		return orgNo;
+		return orgId;
 	}
 
 	/**
@@ -363,10 +363,10 @@ public class TranInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param orgNo the orgNo to set
+	 * @param orgId the orgId to set
 	 */
-	public void setOrgNo(String orgNo) {
-		this.orgNo = orgNo;
+	public void setOrgNo(String orgId) {
+		this.orgId = orgId;
 	}
 
 	/**
