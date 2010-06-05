@@ -34,7 +34,7 @@ public class MeterMpRelaInfo extends BaseEntity {
 
 	@Column(name = "METER_MP_ID", unique = true, nullable = false, length = 16)
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_METER_MP_RELA")
 	//METER_MP_ID NUMBER(16) not null,
 	private Long meterMpId;
 
