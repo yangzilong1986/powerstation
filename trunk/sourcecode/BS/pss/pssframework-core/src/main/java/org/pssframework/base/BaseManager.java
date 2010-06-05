@@ -50,8 +50,8 @@ public abstract class BaseManager<E, PK extends Serializable> implements Manager
 	 * @see org.pssframework.base.Manager#findAll()
 	 */
 	@Transactional(readOnly = true)
-	public List<E> findAll(Map<?, ?> map) throws DataAccessException {
-		return getEntityDao().findAll(map);
+	public List<E> findAll(String sql, Map<String, ?> map) throws DataAccessException {
+		return getEntityDao().findAll(sql, map);
 	}
 
 	/* (non-Javadoc)

@@ -328,4 +328,8 @@ public abstract class BaseSpringJdbcDao<E, PK extends Serializable> extends Jdbc
 		return primaryKeyColumns.get(0).getPropertyName();
 	}
 
+	public <X> List<X> findAll(final String hql, final Map<String, ?> values) {
+		return null;
+	}
+
 }

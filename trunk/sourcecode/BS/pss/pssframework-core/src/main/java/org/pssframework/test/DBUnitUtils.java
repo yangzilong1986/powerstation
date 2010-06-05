@@ -165,7 +165,7 @@ public class DBUnitUtils {
 			FileNotFoundException, SQLException, IOException {
 		if (tableName.length != sqlQuery.length)
 			throw new RuntimeException("tableName.length=" + tableName.length + " != query.length=" + sqlQuery.length);
-		for (int i = 0; i < tableName.length; i++) {
+		for (String element : tableName) {
 			exportFromDBToFile(tableName, sqlQuery, flatXMLFile);
 		}
 	}
@@ -218,8 +218,8 @@ public class DBUnitUtils {
 	public void exportFromDBToFile(String[] tableNames, File flatXMLFile) throws SQLException, DataSetException,
 			FileNotFoundException, IOException {
 		QueryDataSet partialDataSet = new QueryDataSet(getDatabaseConnection());
-		for (int i = 0; i < tableNames.length; i++) {
-			partialDataSet.addTable(tableNames[i]);
+		for (String tableName : tableNames) {
+			partialDataSet.addTable(tableName);
 		}
 		FlatXmlDataSet.write(partialDataSet, new FileOutputStream(flatXMLFile));
 	}
@@ -259,8 +259,9 @@ public class DBUnitUtils {
 	 * @throws SQLException
 	 */
 	public void close() throws SQLException {
-		if (databaseConnection != null)
+		if (databaseConnection != null) {
 			databaseConnection.close();
+		}
 	}
 
 	/**
@@ -270,8 +271,9 @@ public class DBUnitUtils {
 	 *             数据库连接出错
 	 */
 	private void initDbUnitConnection() throws Exception {
-		if (dataSource != null)
+		if (dataSource != null) {
 			databaseConnection = (new DatabaseConnection(dataSource.getConnection(), jdbcSchema));
+		}
 	}
 
 	private DatabaseConnection getDatabaseConnection() {

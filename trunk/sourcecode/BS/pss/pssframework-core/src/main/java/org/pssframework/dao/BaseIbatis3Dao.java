@@ -284,6 +284,10 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		//ignore
 	}
 
+	public <X>List<X> findAll(final String hql, final Map<String, ?> values) {
+		return null;
+	}
+
 	public static class SqlSessionTemplate {
 		SqlSessionFactory sqlSessionFactory;
 

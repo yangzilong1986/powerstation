@@ -111,6 +111,33 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		return pageQuery(query, countQuery, pageRequest);
 	}
 
+	protected XsqlFilterResult queryXsqlResult(final String query, final Map<String, ?> filters) {
+		XsqlBuilder builder = getXsqlBuilder();
+		//混合使用otherFilters与pageRequest.getFilters()为一个filters使用
+		XsqlFilterResult queryXsqlResult = builder.generateHql(query, filters);
+		return queryXsqlResult;
+	}
+
+	@SuppressWarnings("unchecked")
+	private List queryAll(final String query, final Map<String, ?> filters, final boolean hql) {
+		return (List) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException, SQLException {
+				XsqlFilterResult queryXsqlResult = queryXsqlResult(query, filters);
+
+				Query query = null;
+				if (hql) {
+					query = session.createQuery(queryXsqlResult.getXsql());
+				} else {
+					query = session.createSQLQuery(queryXsqlResult.getXsql());
+				}
+
+				query = setQueryParameters(query, queryXsqlResult.getAcceptedFilters());
+
+				return query.list();
+			}
+		});
+	}
+
 	public Page pageQuery(final String query, String countQuery, final PageRequest pageRequest) {
 		Map otherFilters = new HashMap(1);
 		otherFilters.put("sortColumns", pageRequest.getSortColumns());
@@ -343,7 +370,25 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 	 * @param values 命名参数,按名称绑定.
 	 */
 	public <X> List<X> findAll(final String hql, final Map<String, ?> values) {
-		return createQuery(hql, values).list();
+		return queryAll(hql, values, true);
+	}
+
+	/**
+	 * 按HQL查询对象列表.
+	 * 
+	 * @param values 命名参数,按名称绑定.
+	 */
+	public <X> List<X> findAllByHql(final String hql, final Map<String, ?> values) {
+		return queryAll(hql, values, true);
+	}
+
+	/**
+	 * 按HQL查询对象列表.
+	 * 
+	 * @param values 命名参数,按名称绑定.
+	 */
+	public <X> List<X> findAllBySql(final String hql, final Map<String, ?> values) {
+		return queryAll(hql, values, false);
 	}
 
 	/**
