@@ -40,8 +40,8 @@ public class TgInfo extends BaseEntity {
 	// TG_ID           NUMBER(16) not null,
 	private Long tgId;
 
-	@Column(name = "ORG_ID", length = 8, nullable = false)
-	// ORG_ID          NUMBER(16) not null,
+	@Column(name = "ORG_ID", nullable = false)
+	// ORG_ID not null,
 	private Long orgId;
 
 	@Column(name = "TG_NO", length = 16, nullable = false)
@@ -54,7 +54,7 @@ public class TgInfo extends BaseEntity {
 
 	@Column(name = "TG_CAP", precision = 16, scale = 6)
 	//TG_CAP          NUMBER(16,6)
-	private Long tgCap;
+	private Double tgCap;
 
 	@Column(name = "INST_ADDR", length = 256)
 	//INST_ADDR       VARCHAR2(256)
@@ -123,7 +123,7 @@ public class TgInfo extends BaseEntity {
 	/**
 	 * @return the tgCap
 	 */
-	public Long getTgCap() {
+	public Double getTgCap() {
 		return tgCap;
 	}
 
@@ -198,7 +198,7 @@ public class TgInfo extends BaseEntity {
 	/**
 	 * @param tgCap the tgCap to set
 	 */
-	public void setTgCap(Long tgCap) {
+	public void setTgCap(Double tgCap) {
 		this.tgCap = tgCap;
 	}
 
