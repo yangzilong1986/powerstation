@@ -32,48 +32,6 @@ public class MeterMpRelaInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 8779041510217455242L;
 
-	/**
-	 * @return the meterMpId
-	 */
-	public Long getMeterMpId() {
-		return meterMpId;
-	}
-
-	/**
-	 * @param meterMpId the meterMpId to set
-	 */
-	public void setMeterMpId(Long meterMpId) {
-		this.meterMpId = meterMpId;
-	}
-
-	/**
-	 * @return the meterId
-	 */
-	public Long getMeterId() {
-		return meterId;
-	}
-
-	/**
-	 * @param meterId the meterId to set
-	 */
-	public void setMeterId(Long meterId) {
-		this.meterId = meterId;
-	}
-
-	/**
-	 * @return the mpID
-	 */
-	public Long getMpID() {
-		return mpID;
-	}
-
-	/**
-	 * @param mpID the mpID to set
-	 */
-	public void setMpID(Long mpID) {
-		this.mpID = mpID;
-	}
-
 	@Column(name = "METER_MP_ID", unique = true, nullable = false, length = 16)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
@@ -85,18 +43,59 @@ public class MeterMpRelaInfo extends BaseEntity {
 	private Long meterId;
 
 	// MP_ID       NUMBER(16)
-
 	@Column(name = "PR_CODE", length = 16)
 	//MP_ID            VARCHAR2(8),设备的产权说明 01 局属、 02 用户
 	private Long mpID;
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+	/**
+	 * @return the meterId
+	 */
+	public Long getMeterId() {
+		return meterId;
+	}
+
+	/**
+	 * @return the meterMpId
+	 */
+	public Long getMeterMpId() {
+		return meterMpId;
+	}
+
+	/**
+	 * @return the mpID
+	 */
+	public Long getMpID() {
+		return mpID;
 	}
 
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param meterId the meterId to set
+	 */
+	public void setMeterId(Long meterId) {
+		this.meterId = meterId;
+	}
+
+	/**
+	 * @param meterMpId the meterMpId to set
+	 */
+	public void setMeterMpId(Long meterMpId) {
+		this.meterMpId = meterMpId;
+	}
+
+	/**
+	 * @param mpID the mpID to set
+	 */
+	public void setMpID(Long mpID) {
+		this.mpID = mpID;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
