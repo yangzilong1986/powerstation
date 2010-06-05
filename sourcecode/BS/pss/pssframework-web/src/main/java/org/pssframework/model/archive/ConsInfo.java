@@ -98,7 +98,7 @@ public class ConsInfo extends BaseEntity {
 	private String holiday;
 
 	//BUILD_DATE        DATE,is '电子用户档案的首次建立日期';
-	@Column(name = "LASTTIME_STAMP")
+	@Column(name = "BUILD_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date buildDate;
 
