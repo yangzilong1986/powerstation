@@ -17,6 +17,21 @@ img { border: 0; }
 .disNone { display: none; }
 .cb { clear: both; }
 
+.pt40 { padding-top: 40px; }
+.mgl15 { margin-left: 15px; }
+
+.font1 { font-family: "宋体"; color: #104f4f; }
+.font2 { font-family: "宋体"; color: #333; }
+.font3 { font-family: "宋体"; color: #474747; }
+.fontw { font-size: 14px; color: #fff; font-weight: bold; }
+.green { color: #0c6051; }
+
+/*login*/
+.login_bg { background: url(../img/bg_login.jpg) no-repeat; width: 1024px; height: 500px; margin: 0 auto; padding-top: 130px; }
+.login_bg1 { background: url(../img/login_bg1.png) no-repeat; width: 424px; height: 282px; margin: 0 auto; padding: 30px 80px 0 80px; }
+* html .login_bg1 { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="style/default/bgcolor/green-stategrid/img/login_bg1.png"); background: none; width: 424px; height: 282px; margin: 0 auto; padding: 30px 80px 0 80px; }
+.input1 { border: 1px #9f9f9f solid; height: 22px; background: none; line-height: 22px; color: #fff; font-family: Arial, Helvetica, sans-serif; padding-left: 5px; }
+
 .bg_panel_left { background: url(../img/bg_panel_left.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
 .bg_panel_right { background: url(../img/bg_panel_right.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
 
