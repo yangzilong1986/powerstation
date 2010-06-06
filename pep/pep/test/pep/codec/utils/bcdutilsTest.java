@@ -58,10 +58,12 @@ public class bcdutilsTest {
     @Test
     public void testStringToByteArray() {
         System.out.println("stringToBinArray");
-        String str = "12,34,56,1a,";
-        byte[] expResult = {(byte)0x12,(byte)0x34,(byte)0x56,(byte)0x1A};
+        String str = "12,34,56,1a,a2";
+        byte[] expResult = {(byte)0x12,(byte)0x34,(byte)0x56,(byte)0x1A,(byte)0xA2};
         byte[] result = BcdUtils.stringToByteArray(str);
         assertTrue(TestUtils.byteArrayEquals(expResult,result));
+        String str2 = BcdUtils.binArrayToString(result);
+        assertEquals(str2,"1234561AA2");
 
         str = "1,12,34,56,1a,";
         expResult = new byte[]{(byte)0x01,(byte)0x12,(byte)0x34,(byte)0x56,(byte)0x1A};
