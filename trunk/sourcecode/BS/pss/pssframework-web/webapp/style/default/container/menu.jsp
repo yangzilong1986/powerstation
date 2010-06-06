@@ -8,13 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>menu</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 </head>
 <body>
 <div id="menu">
-  <dl>
+  <dl id="dl1">
     <dt>
       <div id="Fod">
-        <div class=s onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
+        <div onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
         <div onmouseover=changeFod(this)><a href="#">数据采集管理</a></div>
         <div onmouseover=changeFod(this)><a href="#">设有序用电</a></div>
         <div onmouseover=changeFod(this)><a href="#">预付费管理</a></div>
@@ -25,15 +26,36 @@
         <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
       </div>
     </dt>
-    <dd class="dis"><div class="menu1"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu2"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu3"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu4"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu5"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu6"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu7"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu8"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
-    <dd class="undis"><div class="menu9"><a href="#">采集任务编制</a><a href="#">任务配置</a><a href="#">实时召测</a><a href="#">数据检查</a><a href="#">数据手工录入</a><a href="#">采集质量分析</a></div></dd>
+  </dl>
+  <dl id="dl2" style=>
+    <dt>
+      <div id="Fod">
+        <div onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
+        <div onmouseover=changeFod(this)><a href="#">数据采集管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">设有序用电</a></div>
+        <div onmouseover=changeFod(this)><a href="#">预付费管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">接口管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">线损分析</a></div>
+        <div onmouseover=changeFod(this)><a href="#">有序用电</a></div>
+        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
+      </div>
+    </dt>
+  </dl>
+  <dl id="dl3">
+    <dt>
+      <div id="Fod">
+        <div onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
+        <div onmouseover=changeFod(this)><a href="#">数据采集管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">设有序用电</a></div>
+        <div onmouseover=changeFod(this)><a href="#">预付费管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">接口管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">线损分析</a></div>
+        <div onmouseover=changeFod(this)><a href="#">有序用电</a></div>
+        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
+        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
+      </div>
+    </dt>
   </dl>
 </div>
 </body>
