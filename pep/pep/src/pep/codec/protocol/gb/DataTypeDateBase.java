@@ -5,8 +5,12 @@
 
 package pep.codec.protocol.gb;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pep.codec.utils.BcdUtils;
 
 /**
@@ -22,6 +26,17 @@ public class DataTypeDateBase {
     protected int second=0;
     
     protected DataTypeDateBase(){
+    }
+
+    public DataTypeDateBase(String dateStr) {
+        DateFormat df = DateFormat.getDateInstance();
+        Date date;
+        try {
+            date = df.parse(dateStr);
+            setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(DataTypeDateBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setDate(Date date){

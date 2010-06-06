@@ -30,6 +30,12 @@ public interface RTTaskService {
     public List<RealTimeTask> getTasks();
 
     /**
+     * 
+     * @param sequnceCode
+     * @return
+     */
+    public RealTimeTask getTask(long sequnceCode);
+    /**
      * 更新接收报文
      * @param sequnceCode
      * @param recvMsg
