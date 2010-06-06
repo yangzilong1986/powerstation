@@ -33,11 +33,6 @@ public class RoleInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -2306398962448879040L;
 
-	/**
-	 * 
-	 */
-	 
-
 	/*
 	 * ROLE_ID NUMBER not null,is 'PK，有序列SEQ_ROLE生成';'
 	 */
@@ -64,7 +59,7 @@ public class RoleInfo extends BaseEntity {
 	private String creator;
 
 	// CREATTIME DATE,
-	@Column(name = "LASTTIME_STAMP")
+	@Column(name = "CREATTIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creattime;
 
