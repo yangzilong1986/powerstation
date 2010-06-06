@@ -28,6 +28,7 @@ public class ProtocolConfig {
     public static ProtocolConfig getInstance() {
         if (instance == null) {
             instance = new ProtocolConfig();
+            CommandItems.FillMap();
         }
         return instance;
     }
@@ -39,6 +40,16 @@ public class ProtocolConfig {
 
         } else {
             return "";
+
+        }
+    }
+
+    public int getLength(String DataItemCode){
+        ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
+        if (null != dataItem) {
+            return dataItem.getLength();
+        } else {
+            return -1;
 
         }
     }

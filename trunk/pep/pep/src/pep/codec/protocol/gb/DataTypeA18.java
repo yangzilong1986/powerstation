@@ -22,6 +22,10 @@ public class DataTypeA18 extends DataTypeDateBase{
         this.setDay(day).setHour(hour).setMinute(minute);
     }
 
+    public DataTypeA18(String dateStr){
+        super(dateStr);
+    }
+
     public DataTypeA18(byte[] array){
         super();
         setArray(array);

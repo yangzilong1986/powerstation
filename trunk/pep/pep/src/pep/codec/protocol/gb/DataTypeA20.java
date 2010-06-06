@@ -31,6 +31,10 @@ public class DataTypeA20 extends DataTypeDateBase{
         setArray(array,0);
     }
 
+    public DataTypeA20(String dateStr){
+        super(dateStr);
+    }
+
     public void setArray(byte[] array, int beginPosition){
         super.setArray(array, beginPosition, "DDMMYY");
     }

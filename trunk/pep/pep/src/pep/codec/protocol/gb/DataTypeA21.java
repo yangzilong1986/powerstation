@@ -27,6 +27,10 @@ public class DataTypeA21 extends DataTypeDateBase{
         setArray(array,0);
     }
 
+    public DataTypeA21(String dateStr){
+        super(dateStr);
+    }
+
     public void setArray(byte[] array){
         setArray(array,0);
     }

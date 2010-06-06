@@ -27,6 +27,10 @@ public class DataTypeA19 extends DataTypeDateBase{
         setArray(array);
     }
 
+    public DataTypeA19(String dateStr){
+        super(dateStr);
+    }
+
     public void setArray(byte[] array){
         setArray(array,0);
     }

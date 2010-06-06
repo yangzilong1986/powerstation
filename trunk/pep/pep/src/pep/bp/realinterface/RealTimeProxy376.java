@@ -13,11 +13,11 @@ import pep.bp.db.RTTaskService;
 import pep.bp.model.RealTimeTask;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.mto.*;
-import pep.codec.protocol.gb.Authorize;
-import pep.codec.protocol.gb.DataTypeA1;
-import pep.codec.protocol.gb.DataTypeA2;
-import pep.codec.protocol.gb.TimeProtectValue;
-import pep.codec.protocol.gb.gb376.*;
+import pep.codec.protocol.gb.*;
+import pep.codec.protocol.gb.gb376.PmPacket376;
+import pep.codec.protocol.gb.gb376.PmPacket376DA;
+import pep.codec.protocol.gb.gb376.PmPacket376DT;
+
 import pep.codec.utils.BcdUtils;
 
 /**
@@ -91,19 +91,71 @@ public class RealTimeProxy376 implements ICollectInterface {
             String DataItemCode = (String) iterator.next();
             String DataItemValue = datacellParam.get(DataItemCode);
             String Format = config.getFormat(DataItemCode);
-            if (Format == "BIN") {
-                packet.getDataBuffer().put(DataItemValue.getBytes());
-            } else if (Format == "BS8") {
+            int Length = config.getLength(DataItemCode);
+            if (Format.equals("BIN") ) 
+                packet.getDataBuffer().put(Integer.parseInt(DataItemValue));
+            else if (Format.equals("BS8"))
                 packet.getDataBuffer().putBS8(DataItemValue);
-            } else if (Format == "BS24") {
+            else if (Format.equals("BS24"))
                 packet.getDataBuffer().putBS24(DataItemValue);
-            } else if (Format == "BS64") {
+            else if (Format.equals("BS64"))
                 packet.getDataBuffer().putBS64(DataItemValue);
-            } else if (Format == "ASCII"); else if (Format == "A1") {
+            else if (Format.equals("ASCII"))
+                packet.getDataBuffer().putAscii(DataItemValue,Length);
+            else if (Format.equals("A1"))
                 packet.getDataBuffer().putA1(new DataTypeA1( DataItemValue));
-            } else if (Format == "A2") {
-                packet.getDataBuffer().putA2(new DataTypeA2(DataItemValue.getBytes()));
-            } else if (Format == "A3"); else if (Format == "A4"); else if (Format == "A5"); else if (Format == "A6"); else if (Format == "A7"); else if (Format == "A8"); else if (Format == "A9"); else if (Format == "A10"); else if (Format == "A11"); else if (Format == "A12"); else if (Format == "A13"); else if (Format == "A14"); else if (Format == "A15"); else if (Format == "A16"); else if (Format == "A17"); else if (Format == "A18"); else if (Format == "A19"); else if (Format == "A20"); else if (Format == "A21"); else if (Format == "A22"); else if (Format == "A23"); else if (Format == "A24"); else if (Format == "A25"); else if (Format == "A26"); else if (Format == "A27");
+            else if (Format.equals("A2"))
+                packet.getDataBuffer().putA2(new DataTypeA2(Double.parseDouble(DataItemValue)));
+            else if (Format.equals("A3"))
+                packet.getDataBuffer().putA3(new DataTypeA3(Long.parseLong(DataItemValue)));
+            else if (Format.equals("A4"))
+                packet.getDataBuffer().putA4(new DataTypeA4(Byte.parseByte(DataItemValue)));
+            else if (Format.equals("A5"))
+                packet.getDataBuffer().putA5(new DataTypeA5(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A6"))
+                packet.getDataBuffer().putA6(new DataTypeA6(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A7"))
+                packet.getDataBuffer().putA7(new DataTypeA7(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A8"))
+                packet.getDataBuffer().putA8(new DataTypeA8(Integer.parseInt(DataItemValue)));
+            else if (Format.equals("A9"))
+                packet.getDataBuffer().putA9(new DataTypeA9(Double.parseDouble(DataItemValue)));
+            else if (Format.equals("A10"))
+                packet.getDataBuffer().putA10(new DataTypeA10(Long.parseLong(DataItemValue)));
+            else if (Format.equals("A11"))
+                packet.getDataBuffer().putA11(new DataTypeA11(Double.parseDouble(DataItemValue)));
+            else if (Format.equals("A12"))
+                packet.getDataBuffer().putA12(new DataTypeA12(Long.parseLong(DataItemValue)));
+            else if (Format.equals("A13"))
+                packet.getDataBuffer().putA13(new DataTypeA13(Double.parseDouble(DataItemValue)));
+            else if (Format.equals("A14"))
+                packet.getDataBuffer().putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
+            else if (Format.equals("A15"))
+                packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue));
+            else if (Format.equals("A16"))
+                packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue));
+            else if (Format.equals("A17"))
+                packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue));
+            else if (Format.equals("A18"))
+                packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue));
+            else if (Format.equals("A19"))
+                packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue));
+            else if (Format.equals("A20"))
+                packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue));
+            else if (Format.equals("A21"))
+                packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue));
+            else if (Format.equals("A22"))
+                packet.getDataBuffer().putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A23"))
+                packet.getDataBuffer().putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A24"))
+                packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue));
+            else if (Format.equals("A25"))
+                packet.getDataBuffer().putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
+            else if (Format.equals("A26"))
+                packet.getDataBuffer().putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
+            else if (Format.equals("A27"))
+                packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
 
         }
     }

@@ -62,22 +62,44 @@ public class RTTaskServiceIMP implements RTTaskService {
             String SQL = "select TASK_ID,SEQUENCE_CODE,SEND_MSG,POST_TIME,TASK_STATUS";
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
-            List<RealTimeTask> results =  (List<RealTimeTask>) jdbcTemplate.query(SQL, new TaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new TaskRowMapper());
             //更新任务状态
-            for(RealTimeTask task:results){
+            for (RealTimeTask task : results) {
                 jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
                         new Object[]{"1", task.getTaskId()});
             }
             return results;
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return null;
         }
-        catch (DataAccessException dataAccessException) {
+    }
+
+    public RealTimeTask getTask(long sequnceCode) {
+        try {
+            //查询未处理任务
+            String SQL = "select TASK_ID,SEQUENCE_CODE,SEND_MSG,POST_TIME,TASK_STATUS";
+            SQL += " from r_realtime_task";
+            SQL += " where SEQUENCE_CODE = ?";
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
+            if (results.size() > 0) {
+                RealTimeTask task = (RealTimeTask)(results.get(0));
+                //更新任务状态
+                jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
+                        new Object[]{"1", task.getTaskId()});
+
+                return task;
+            }
+            else
+                return  null;
+        } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
             return null;
         }
     }
 
     public void insertRecvMsg(long sequnceCode, String recvMsg) {
-       try {
+        try {
             jdbcTemplate.update("insert into  R_REALTIME_TASK_RECV(SEQUENCE_CODE,RECV_MSG) values(?,?)",
                     new Object[]{sequnceCode, recvMsg});
         } catch (DataAccessException dataAccessException) {

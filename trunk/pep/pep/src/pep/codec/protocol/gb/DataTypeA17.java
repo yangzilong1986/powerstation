@@ -5,6 +5,7 @@
 
 package pep.codec.protocol.gb;
 
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -20,6 +21,10 @@ public class DataTypeA17 extends DataTypeDateBase{
     public DataTypeA17(byte month,byte day,byte hour,byte minute){
         super();
         this.setMonth(month).setDay(day).setHour(hour).setMinute(minute);
+    }
+
+    public DataTypeA17(String dateStr){
+        super(dateStr);
     }
     
     public DataTypeA17(byte[] array){
