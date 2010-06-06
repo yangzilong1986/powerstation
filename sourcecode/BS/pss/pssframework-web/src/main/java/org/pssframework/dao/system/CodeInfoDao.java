@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CodeInfoDao extends BaseHibernateDao<CodeInfo, Long> {
 
-	String hql = "from aCode t where t.codeCate = ['codecate'] ";
+	String hql = "from CodeInfo t where 1 =1   /~ and t.codeCate = '[codecate]' ~/";
 
 	@Override
 	public Class<CodeInfo> getEntityClass() {
@@ -26,6 +26,6 @@ public class CodeInfoDao extends BaseHibernateDao<CodeInfo, Long> {
 
 	public List<CodeInfo> findAll(Map<String, ?> filters) {
 
-		return super.findAllBySql(hql, filters);
+		return super.findAll(hql, filters);
 	}
 }
