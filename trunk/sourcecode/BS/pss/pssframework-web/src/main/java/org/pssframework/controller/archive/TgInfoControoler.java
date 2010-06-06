@@ -126,7 +126,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 			msg = e.getMessage();
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", model.getTgId());
 	}
 
 	@Override

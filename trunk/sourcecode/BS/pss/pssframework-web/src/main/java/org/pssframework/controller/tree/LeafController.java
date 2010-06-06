@@ -73,7 +73,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 		String parentType = "ORG";
 
-		String parentId = "-1";
+		String parentId = "1";
 
 		if (StringUtils.isNotEmpty(request.getParameter(PARENT_ID))) {
 			parentId = request.getParameter(PARENT_ID);
