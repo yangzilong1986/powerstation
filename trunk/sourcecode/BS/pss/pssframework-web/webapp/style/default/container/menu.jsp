@@ -8,26 +8,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>menu</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
-<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
+<script type="text/javascript">
+function selectMenu(menuId) {
+    if(menuId = '1001') {
+        parent.tabscontainermain.location = "";
+    }
+}
+</script>
 </head>
 <body>
 <div id="menu">
   <dl id="dl1">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
-        <div onmouseover=changeFod(this)><a href="#">数据采集管理</a></div>
-        <div onmouseover=changeFod(this)><a href="#">设有序用电</a></div>
-        <div onmouseover=changeFod(this)><a href="#">预付费管理</a></div>
-        <div onmouseover=changeFod(this)><a href="#">接口管理</a></div>
-        <div onmouseover=changeFod(this)><a href="#">线损分析</a></div>
-        <div onmouseover=changeFod(this)><a href="#">有序用电</a></div>
-        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
-        <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
+        <div><a href="#" onclick="selectMenu('1001')">档案维护</a></div>
+        <!-- <div><a href="#">数据采集管理</a></div>
+        <div><a href="#">设有序用电</a></div>
+        <div><a href="#">预付费管理</a></div>
+        <div><a href="#">接口管理</a></div>
+        <div><a href="#">线损分析</a></div>
+        <div><a href="#">有序用电</a></div>
+        <div><a href="#">档案管理</a></div>
+        <div><a href="#">档案管理</a></div> -->
       </div>
     </dt>
   </dl>
-  <dl id="dl2" style=>
+  <!-- <dl id="dl2" style=>
     <dt>
       <div id="Fod">
         <div onmouseover=changeFod(this)><a href="#">采集点设置</a></div>
@@ -56,7 +62,7 @@
         <div onmouseover=changeFod(this)><a href="#">档案管理</a></div>
       </div>
     </dt>
-  </dl>
+  </dl> -->
 </div>
 </body>
 </html>
