@@ -71,7 +71,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 		//mapRequest.put("orgid", orgid);
 
-		mapRequest.put("codecate", runstatcode);
+		mapRequest.put("codecate", "TG_STATUS");
 
 		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
 
@@ -83,7 +83,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("orglist", getOrgOptions(mapRequest));
 
-		//result.addObject("statuslist", getStatusOptions(pageRequest).getResult());
+		result.addObject("statuslist", getStatusOptions(mapRequest));
 
 		return result;
 	}
