@@ -85,14 +85,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     union
   select to_char(l.line_id) as leafId,l.line_name as leafName,'LINE' as leafType
   from g_line l, g_line_tg_rela r, g_tg t
- where t.org_no = #{parentId}
+ where t.org_id = #{parentId}
    and r.tg_id = t.tg_id
    and r.line_id = l.line_id
    and 'ORG' = #{parentType}
    union
    select to_char(t.tg_id) as leafId, t.tg_name as leafName, 'TG' as leafType
     from g_tg t
-  where t.org_no = #{parentId} and ('ORG' = #{parentType} or 'LINE' = #{parentType})
+  where t.org_id = #{parentId} and ('ORG' = #{parentType} or 'LINE' = #{parentType})
   ]]>
   </sql>
   <select id="count" resultType="long">
