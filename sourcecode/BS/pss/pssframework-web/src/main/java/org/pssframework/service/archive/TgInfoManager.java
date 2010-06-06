@@ -25,9 +25,9 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 		return this.tgInfoDao;
 	}
 
-
 	@Override
 	public TgInfo getById(Long id) {
 		return tgInfoDao.getByTgId(id);
 	}
+
 }
