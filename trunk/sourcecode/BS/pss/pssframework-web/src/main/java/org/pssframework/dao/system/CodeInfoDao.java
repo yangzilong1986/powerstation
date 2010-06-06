@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CodeInfoDao extends BaseHibernateDao<CodeInfo, Long> {
 
-	String hql = "select t.code,t.name from aCode t where t.codeCate = ['codecate'] ";
+	String hql = "from aCode t where t.codeCate = ['codecate'] ";
 
 	@Override
 	public Class<CodeInfo> getEntityClass() {
