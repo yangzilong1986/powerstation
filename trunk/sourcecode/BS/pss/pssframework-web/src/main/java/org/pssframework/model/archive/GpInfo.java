@@ -41,7 +41,7 @@ public class GpInfo extends BaseEntity {
 	// GP_ID not null
 	private Long gpId;
 
-	@Column(name = "GP_ID", nullable = false)
+	@Column(name = "OBJECT_ID", nullable = false)
 	// OBJECT_ID NUMBER not null,is
 	private Long objectId;
 
