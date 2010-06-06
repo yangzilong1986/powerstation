@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
-<%@ include file="/commons/extjs.jsp" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,9 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         overflow:hidden;
         height:100%;
     }
-    p {
-        margin:5px;
-    }
     .settings {
         background-image:url(../shared/icons/fam/folder_wrench.png);
     }
@@ -39,17 +35,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <script type="text/javascript">
     Ext.onReady(function(){
-    
-        // NOTE: This is an example showing simple state management. During development,
-        // it is generally best to disable state management as dynamically-generated ids
-        // can change across page loads, leading to unpredictable results.  The developer
-        // should ensure that stable state ids are set for stateful components in real apps.
         Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
         
         var viewport = new Ext.Viewport({
             layout: 'border',
             items: [
-            // create instance immediately
+         /*
             new Ext.BoxComponent({
                 region: 'north',
                 height: 32, // give north and south regions a height
@@ -91,10 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         }
                     })]
                 })
-            }, 
-            // in this instance the TabPanel is not wrapped by another panel
-            // since no title is needed, this Panel is added directly
-            // as a Container
+            },
             new Ext.TabPanel({
                 region: 'center', // a center region is ALWAYS required for border layout
                 deferredRender: false,
@@ -111,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     autoScroll: true
                 }]
             })
-			, {
+			, */{
                 region: 'west',
                 title: 'West Side',
                 collapsible: true,
@@ -153,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					})]
                 })
             }
-			, {
+			/*, {
                 region: 'south',
                 title: 'South Side',
 				id:'south',
@@ -162,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 minSize: 50,
                 maxSize: 400
 
-				}
+				}*/
 			]});
         // get a reference to the HTML element with id "hideit" and add a click listener to it 
         Ext.get("hideit").on('click', function(){
@@ -304,6 +292,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="west" class="x-hide-display">
        ${treeInfo}
     </div>
+    <!--
     <div id="center2" class="x-hide-display">
         <a id="hideit" href="#">Toggle the west region</a>
         <p>My closable attribute is set to false so you can't close me. The other center panels can be closed.</p>
@@ -330,5 +319,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="south" class="x-hide-display">
         <p>south - generally for informational stuff, also could be for status bar</p>
     </div>
+      -->
 </body>
 </html>
