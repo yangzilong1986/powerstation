@@ -79,6 +79,7 @@ public class BaseRestSpringController<Entity, PK> extends BaseSpringController {
 	}
 
 	/** 保存新增 */
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, Entity model) throws Exception {
 		throw new UnsupportedOperationException("not yet implement");
 	}
