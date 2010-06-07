@@ -85,6 +85,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("statuslist", getStatusOptions(mapRequest));
 
+
 		return result;
 	}
 
@@ -117,16 +118,19 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = "成功";
+		Long tgId = 0L;
 		try {
 			model.setChaDate(new Date());
 			model.setPubPrivFlag("0");
 			tgInfoManager.saveOrUpdate(model);
+			tgId = model.getTgId();
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
+
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", model.getTgId());
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
 	}
 
 	@Override
@@ -146,6 +150,7 @@ public class TgInfoControoler extends BaseRestSpringController<TgInfo, java.lang
 			bind(request, tginfo);
 			tgInfoManager.update(tginfo);
 		} catch (Exception e) {
+			this.logger.info(e.getLocalizedMessage());
 			isSucc = false;
 			msg = e.getMessage();
 		}
