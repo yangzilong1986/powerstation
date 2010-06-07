@@ -93,7 +93,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             String Format = config.getFormat(DataItemCode);
             int Length = config.getLength(DataItemCode);
             if (Format.equals("BIN") ) 
-                packet.getDataBuffer().put(Integer.parseInt(DataItemValue));
+                packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue),Length);
             else if (Format.equals("BS8"))
                 packet.getDataBuffer().putBS8(DataItemValue);
             else if (Format.equals("BS24"))
@@ -131,25 +131,25 @@ public class RealTimeProxy376 implements ICollectInterface {
             else if (Format.equals("A14"))
                 packet.getDataBuffer().putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
             else if (Format.equals("A15"))
-                packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue));
+                packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue,"yyyy-MM-dd HH:mm:ss"));
             else if (Format.equals("A16"))
-                packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue));
+                packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue,"dd HH:mm:ss"));
             else if (Format.equals("A17"))
-                packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue));
+                packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue,"MM-dd HH:mm"));
             else if (Format.equals("A18"))
-                packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue));
+                packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue,"dd HH:mm"));
             else if (Format.equals("A19"))
-                packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue));
+                packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue,"HH:mm"));
             else if (Format.equals("A20"))
-                packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue));
+                packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue,"yyyy-MM-dd"));
             else if (Format.equals("A21"))
-                packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue));
+                packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue,"yyyy-mm"));
             else if (Format.equals("A22"))
                 packet.getDataBuffer().putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
             else if (Format.equals("A23"))
                 packet.getDataBuffer().putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
             else if (Format.equals("A24"))
-                packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue));
+                packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue,"dd HH"));
             else if (Format.equals("A25"))
                 packet.getDataBuffer().putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
             else if (Format.equals("A26"))
