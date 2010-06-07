@@ -53,7 +53,6 @@ increment by 1
 start with 1
  minvalue 1
 cache 20
-nocache
  maxvalue 99999999;
 
 create sequence SEQ_O_USER_ROLE
@@ -107,10 +106,10 @@ comment on column O_DEPT.DISP_SN is
 /* Table: O_ORG                                                 */
 /*==============================================================*/
 create table O_ORG  (
-   ORG_ID               NUMBER                          not null,
+   ORG_ID               NUMBER(16)                      not null,
    ORG_NO               VARCHAR2(16)                    not null,
    ORG_NAME             VARCHAR2(256),
-   P_ORG_NO             VARCHAR2(16),
+   P_ORG_ID             VARCHAR2(16),
    ORG_TYPE             VARCHAR2(8),
    SORT_NO              NUMBER(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
