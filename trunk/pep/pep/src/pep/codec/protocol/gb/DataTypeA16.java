@@ -24,8 +24,8 @@ public class DataTypeA16 extends DataTypeDateBase{
         this.setDay(day).setHour(hour).setMinute(minute).setSecond(second);
     }
 
-    public DataTypeA16(String dateStr) {
-        super(dateStr);
+    public DataTypeA16(String dateStr,String format) {
+        super(dateStr,format);
     }
 
     public DataTypeA16(byte[] array){

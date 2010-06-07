@@ -7,6 +7,7 @@ package pep.codec.protocol.gb;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -28,8 +29,8 @@ public class DataTypeDateBase {
     protected DataTypeDateBase(){
     }
 
-    public DataTypeDateBase(String dateStr) {
-        DateFormat df = DateFormat.getDateInstance();
+    public DataTypeDateBase(String dateStr,String format) {
+        SimpleDateFormat df = new SimpleDateFormat(format);;
         Date date;
         try {
             date = df.parse(dateStr);

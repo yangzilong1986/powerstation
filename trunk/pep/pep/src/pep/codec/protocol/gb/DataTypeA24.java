@@ -22,8 +22,8 @@ public class DataTypeA24 extends DataTypeDateBase{
         super.setDay(day).setHour(hour);
     }
 
-    public DataTypeA24(String dateStr){
-        super(dateStr);
+    public DataTypeA24(String dateStr,String format){
+        super(dateStr,format);
     }
 
     public DataTypeA24(byte[] array){

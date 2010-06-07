@@ -23,8 +23,8 @@ public class DataTypeA17 extends DataTypeDateBase{
         this.setMonth(month).setDay(day).setHour(hour).setMinute(minute);
     }
 
-    public DataTypeA17(String dateStr){
-        super(dateStr);
+    public DataTypeA17(String dateStr,String format){
+        super(dateStr,format);
     }
     
     public DataTypeA17(byte[] array){

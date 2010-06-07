@@ -66,6 +66,14 @@ public class PmPacketData{
         return dataBuff.get();
     }
 
+    public PmPacketData putBin(int value,int length){
+        if (length==1)
+            this.put((byte)value);
+        else if(length==2)
+            this.putWord(value);
+        return this;
+    }
+
     public PmPacketData put(byte[] bytes){
         dataBuff.put(bytes);
         return this;

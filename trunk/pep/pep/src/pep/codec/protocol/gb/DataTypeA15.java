@@ -20,8 +20,8 @@ public class DataTypeA15 extends DataTypeDateBase {
         setDate(date);
     }
 
-    public DataTypeA15(String dateStr) {
-        super(dateStr);
+    public DataTypeA15(String dateStr,String format) {
+        super(dateStr,format);
     }
 
 
