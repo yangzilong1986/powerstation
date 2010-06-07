@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.pssframework.util.ConvertRegisterHelper;
 import org.pssframework.util.PageRequestFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
@@ -32,6 +34,8 @@ import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 public class BaseSpringController extends MultiActionController {
+	
+	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	static {
 		//注册converters
