@@ -1,139 +1,147 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>变压器信息1</title>
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/css/window.css" />
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/tableEx.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/component.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/archive/archiveCheck.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/archive/archiveComm.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/const.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/jquery.url.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/jquery.dataForAjax.js"></script>
-<script type="text/javascript">
-var contextPath = '<peis:contextPath/>';
-$(document).ready(function(){
-  selectInit();
-});
-//保存变压器信息
-var tgFlag=$.url.param("tgFlag");  //tgFlag=1为配变，为空表示低压
-
-function save(){ 
-	var url=contextPath+"/archive/tranAction.do?action=updateTran";
-	if(tranCheck()) {
-	    $("#save").attr("disabled",true);
-		var data =getFormData("form");
-		if(data) {	 
-			jQuery.ajax({
-				type: 'post',
-				url: url,
-				data: data,
-				dataType: 'json',
-				success:function(json){
-					var msg=json['msg'];
-					$("#save").attr("disabled",false);
-					if(msg=="1"){
-						alert("保存成功");
-						parent.GB_hide();
-						if(tgFlag=="1"){
-							//top.getMainFrameObj().location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
-							//动态加载台区关联设备信息
-							top.getMainFrameObj().loadTgRelevevance();
-						}
-						else {				
-							//top.getMainFrameObj().location.href=contextPath+"/archive/addLowCustAction.do?action=showDeviceInfoByTgID";
-							top.getMainFrameObj().loadTgRelevevance();
-						}
-					}else if(msg=="2"){
-                       alert("该资产编号已经存在");
-                    }else{
-                       alert("保存失败");
-                    }
-				}
-			})
-		}
-   }
-}
-//select框初始化
-function selectInit(){
-    $("#modelCode").val(${object_tran.modelCode});
-    $("#tranStatus").val(${object_tran.tranStatus});
-    $("#firstVlot").val(${object_tran.firstVlot});
-    $("#secondVlot").val(${object_tran.secondVlot});
-    $("#thirdVlot").val(${object_tran.thirdVlot});
-}
-</script>
+<title>变压器</title>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 </head>
-<body style="overflow: hidden;">
-<div id="main" style="height: 100%;">
-  <div class="tab"><em>变压器信息</em></div>
-  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
-    <div class="main">
+<body>
+<div class="electric_lcon" id=electric_Con>
+  <ul class="default" id="electric_Con_1" style="padding:5px;">
+    <div class="tab"><span>变压器信息</span></div>
+    <div class="da_mid">
       <div id="form">
-       <input type="hidden" name="tranId" value="${object_tran.tranId}"/>
-       <input type="hidden" name="tgFlag" value="${tgFlag}"/>
-      <table border="0" cellpadding="0" cellspacing="0" width="900" align="center">
-        <tr>
-          <td width="13%" class="label"><font color="red">* </font>资产编号：</td>
-          <td width="20%" class="dom"><input type="text" id="assetNo" name="assetNo" value="${object_tran.assetNo}"/></td>
-          <td width="13%" class="label"><font color="red">* </font>变压器名称：</td>
-          <td width="20%" class="dom"><input type="text" id="tranName" name="tranName" value="${object_tran.tranName}"/></td>
-           <td width="13%" class="label">变压器型号：</td>
-          <td width="21%" class="dom">
-             <peis:selectlist name="modelCode" sql="SL_ARCHIVE_0005"/>
-          </td>
-        </tr>
-        <tr>
-          <td width="13%" class="label">容　量：</td>
-          <td width="20%" class="dom"><input type="text" id="tgCapa" name="tranCapa" value="<fmt:formatNumber value="${object_tran.tranCapa}" pattern="#0.0000#"  minFractionDigits="0"/>"  style="width: 115px;"/> kVA</td>
-          <td width="13%" class="label">变损阈值：</td>
-          <td width="20%" class="dom">
-             <input type="text" id="tgThreshold" name="tranThreshold"  value="<c:if test="${object_tran.tranThreshold!=null}"><fmt:formatNumber value="${object_tran.tranThreshold*100}" pattern="#0.0000#"  minFractionDigits="0"/></c:if>" style="width: 125px;"/> %</td>
-          <td class="label">运行状态：</td>
-          <td class="dom">
-            <peis:selectlist name="tranStatus" sql="SL_ARCHIVE_0006"/>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">入口电压等级：</td>
-          <td class="dom" >
-            <peis:selectlist name="firstVlot" sql="SL_ARCHIVE_0007"/>
-          </td>
-          <td class="label">出口电压等级1：</td>
-          <td class="dom">
-            <peis:selectlist name="secondVlot" sql="SL_ARCHIVE_0007"/>
-          </td>
-          <td class="label">出口电压等级2：</td>
-          <td class="dom">
-            <peis:selectlist name="thirdVlot" sql="SL_ARCHIVE_0007"/>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">安装日期：</td>
-          <td class="dom_date">
-            <input type="text" name="installDate" id="installDate" value="${object_tran.installDate}" onfocus="peisDatePicker()" readonly="readonly" />
-          </td>
-          <td class="label">安装地址：</td>
-          <td colspan="5" class="dom2">
-            <input type="text" id="installAddr" name="installAddr" value="${object_tran.installAddr}"/>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="3" class="label">备　注：</td>
-          <td class="dom2" colspan="5">
-            <textarea name="remark" style="width: 734px; height: 120px;">${object_tran.remark}</textarea>
-          </td>
-        </tr>
-      </table>
-      </div>
+        <form:form action="/archive/traninfo" modelAttribute="traninfo">
+          <form:hidden path="equipId"/>
+          <table border="0" cellpadding="0" cellspacing="0"  align="center">
+            <tr>
+              <td width="13%" class="green"><font color="red">* </font>变压器名称：</td>
+              <td width="20%" class="input2"><form:input path="tranName" cssClass="required" maxlength="16"/></td>
+              <td width="13%" class="green">变压器型号：</td>
+              <td width="21%" class="input2"><form:select path="typeCode" id="typeCode" itemLabel="name" itemValue="code"
+          onchange="" items="${typelist}" /></td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td width="13%" class="green">容 量：</td>
+              <td width="20%" class="input2"><form:input path="plateCap"/>
+                kVA</td>
+              <td class="green">运行状态：</td>
+              <td class="input2"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
+          onchange="" items="${statuslist}" /></td>
+            </tr>
+            <tr>
+              <td class="green">额定电压 _ 高压:</td>
+              <td class="input2"><form:select path="rvHv" id="rvHv" itemLabel="name" itemValue="code" onchange=""
+          items="${voltlist}" /></td>
+              <td class="green">额定电压 _ 中压：</td>
+              <td class="input2"><form:select path="rvMv" id="rvMv" itemLabel="name" itemValue="code" onchange=""
+          items="${voltlist}" /></td>
+              <td class="green">额定电压 _ 低压：</td>
+              <td class="input2"><form:select path="rvLv" id="rvLv" itemLabel="name" itemValue="code" onchange=""
+          items="${voltlist}" /></td>
+            </tr>
+            <tr>
+              <td class="green">额定电流 _ 高压：</td>
+              <td class="input2"><form:select path="rcHv" id="rcHv" itemLabel="name" itemValue="code" onchange=""
+          items="${ratedlist}" /></td>
+              <td class="green">额定电流 _ 中压：</td>
+              <td class="input2"><form:select path="rcMv" id="rcMv" itemLabel="name" itemValue="code" onchange=""
+          items="${ratedlist}" /></td>
+              <td class="green">额定电流 _ 低压：</td>
+              <td class="input2"><form:select path="rcLv" id="rcLv" itemLabel="name" itemValue="code" onchange=""
+          items="${ratedlist}" /></td>
+            </tr>
+            <tr>
+              <td class="green">安装日期：</td>
+              <td class="input_time"><form:input path="instDate" onfocus="peisDatePicker()" readonly="readonly"></form:input></td>
+              <td class="green">安装地址：</td>
+              <td colspan="5" class="input2"><form:input path="instAddr"></form:input></td>
+            </tr>
+          </table>
+        </form:form>
     </div>
-  </div>
-  <div class="guidePanel">
-    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
-  </div>
+    </div>
+    
+  </ul>
+</div>
+<div class="guidePanel">
+  <input class="input1" type="button" id="save" value="保 存" onClick="save();" />
 </div>
 </body>
+<script type="text/javascript">
+val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function(result,form) {
+ return result;
+}}
+);
+
+
+var contextPath = '<peis:contextPath/>';
+
+//保存变压器信息
+var tgFlag=null;
+
+
+//select框初始化
+function selectInit(){
+  $("#modelCode").val(${object_tran.modelCode});
+  $("#tranStatus").val(${object_tran.tranStatus});
+  $("#firstVlot").val(${object_tran.firstVlot});
+  $("#secondVlot").val(${object_tran.secondVlot});
+  $("#thirdVlot").val(${object_tran.thirdVlot});
+}
+
+
+
+jQuery(function(){
+  jQuery("#save").click(function(){
+  if(val.validate()){
+      jQuery(this).attr("disabled","disabled");
+      save();
+      jQuery(this).attr("disabled","");
+  }else{
+    jQuery(this).attr("disabled","");
+  }
+  });
+})
+  
+function save(){ 
+    var url=contextPath+"/archive/tranAction.do?action=updateTran";
+    if(tranCheck()) {
+        $("#save").attr("disabled",true);
+      var data =getFormData("form");
+      if(data) {   
+        jQuery.ajax({
+          type: 'post',
+          url: url,
+          data: data,
+          dataType: 'json',
+          success:function(json){
+            var msg=json['msg'];
+            $("#save").attr("disabled",false);
+            if(msg=="1"){
+              alert("保存成功");
+              parent.GB_hide();
+              if(tgFlag=="1"){
+                //top.getMainFrameObj().location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
+                //动态加载台区关联设备信息
+                top.getMainFrameObj().loadTgRelevevance();
+              }
+              else {        
+                //top.getMainFrameObj().location.href=contextPath+"/archive/addLowCustAction.do?action=showDeviceInfoByTgID";
+                top.getMainFrameObj().loadTgRelevevance();
+              }
+            }else if(msg=="2"){
+                         alert("该资产编号已经存在");
+                      }else{
+                         alert("保存失败");
+                      }
+          }
+        })
+      }
+     }
+  }
+</script>
 </html>
