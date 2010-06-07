@@ -39,8 +39,7 @@ comment on column A_CODE.CODE_TYPE is
 /*==============================================================*/
 create table A_DB_VERSION  (
    OBJ_NAME             VARCHAR2(20)                    not null,
-   OBJ_TYPE             Acquisition
-                        VARCHAR2(5),
+   OBJ_TYPE             VARCHAR2(5),
    MOD_TIME             date,
    MOD_MAN              VARCHAR2(20),
    constraint PK_A_DB_VERSION primary key (OBJ_NAME)
