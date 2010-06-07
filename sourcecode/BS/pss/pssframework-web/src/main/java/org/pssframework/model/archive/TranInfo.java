@@ -5,14 +5,11 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -44,8 +41,7 @@ public class TranInfo extends BaseEntity {
 	private Long equipId;
 
 	//TG_ID              NUMBER(16), 台区标识
-	@ManyToOne(targetEntity = org.pssframework.model.archive.TgInfo.class, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "TG_ID", nullable = false)
+	@Column(name = "TG_ID", nullable = false)
 	private Long tgId;
 
 	@Column(name = "ORG_ID", length = 16, nullable = false)
