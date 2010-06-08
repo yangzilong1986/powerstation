@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
+<%@ include file="taglibs.jsp" %>
 <div id="hd">
 	<div id="title">
 		<h1>Mini-Web示例</h1>
