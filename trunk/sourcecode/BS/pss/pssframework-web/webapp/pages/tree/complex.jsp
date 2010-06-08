@@ -1,39 +1,45 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/commons/taglibs.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/commons/taglibs.jsp"%>
+<%@ include file="/commons/meta.jsp"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <html>
+<link type="text/css" rel="stylesheet" href="${ctx}/e3/commons/ext/resources/css/ext-all.css" />
+<script type="text/javascript">
 
+if ( typeof(Ext) == "undefined" || typeof(Ext.DomHelper) == "undefined" ){
+  document.write("<script src='${ctx}/e3/commons/ext/adapter/ext/ext-base.js'/>"); 
+  document.write("<script src='${ctx}/e3/commons/ext/ext-all.js'/>"); 
+  } 
+</script>
 <head>
-	<%@ include file="/commons/meta.jsp" %>
-	<base href="<%=basePath%>">
-	<title>Complex Layout</title>
+<base href="<%=basePath%>">
+<title>Complex Layout</title>
 </head>
-
-
 <head>
-  <title>Complex Layout</title>
-    
-    <style type="text/css">
-    html, body {
-        font:normal 12px verdana;
-        margin:0;
-        padding:0;
-        border:0 none;
-        overflow:hidden;
-        height:100%;
-    }
-    .settings {
-        background-image:url(../shared/icons/fam/folder_wrench.png);
-    }
-    .nav {
-        background-image:url(../shared/icons/fam/folder_go.png);
-    }
-    </style>
-  
-    <script type="text/javascript">
+<title>Complex Layout</title>
+<style type="text/css">
+html,body {
+  font: normal 12px verdana;
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+  overflow: hidden;
+  height: 100%;
+}
+
+.settings {
+  background-image: url(../shared/icons/fam/folder_wrench.png);
+}
+
+.nav {
+  background-image: url(../shared/icons/fam/folder_go.png);
+}
+</style>
+<script type="text/javascript">
     Ext.onReady(function(){
         Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
         
@@ -288,11 +294,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
 </head>
 <body>
-    <!-- use class="x-hide-display" to prevent a brief flicker of the content -->
-    <div id="west" class="x-hide-display">
-       ${treeInfo}
-    </div>
-    <!--
+<!-- use class="x-hide-display" to prevent a brief flicker of the content -->
+<div id="west" class="x-hide-display">${treeInfo}</div>
+<!--
     <div id="center2" class="x-hide-display">
         <a id="hideit" href="#">Toggle the west region</a>
         <p>My closable attribute is set to false so you can't close me. The other center panels can be closed.</p>
