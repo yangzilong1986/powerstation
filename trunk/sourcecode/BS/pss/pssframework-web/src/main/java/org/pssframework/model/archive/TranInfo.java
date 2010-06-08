@@ -41,10 +41,10 @@ public class TranInfo extends BaseEntity {
 	private Long equipId;
 
 	//TG_ID              NUMBER(16), 台区标识
-	@Column(name = "TG_ID", nullable = false)
+	@Column(name = "TG_ID")
 	private Long tgId;
 
-	@Column(name = "ORG_ID", length = 16, nullable = false)
+	@Column(name = "ORG_ID")
 	// ORG_ID          VARCHAR2(16) not null, 部门
 	private String orgId;
 
