@@ -79,18 +79,18 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   
   <sql id="LeafInfoDynamic">
    <![CDATA[
-  select o.org_no as leafId, o.org_name as leafName, 'ORG' as leafType
+  select o.org_id as leafId, o.org_name as leafName, 'ORG' as leafType
     from o_org o
     where o.p_org_id = #{parentId} and 'ORG' = #{parentType}
     union
-  select to_char(l.line_id) as leafId,l.line_name as leafName,'LINE' as leafType
+  select l.line_id as leafId,l.line_name as leafName,'LINE' as leafType
   from g_line l, g_line_tg_rela r, g_tg t
  where t.org_id = #{parentId}
    and r.tg_id = t.tg_id
    and r.line_id = l.line_id
    and 'ORG' = #{parentType}
    union
-   select to_char(t.tg_id) as leafId, t.tg_name as leafName, 'TG' as leafType
+   select t.tg_id as leafId, t.tg_name as leafName, 'TG' as leafType
     from g_tg t
   where t.org_id = #{parentId} and ('ORG' = #{parentType} or 'LINE' = #{parentType})
   ]]>
