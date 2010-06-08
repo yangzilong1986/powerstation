@@ -11,7 +11,24 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 function checkUser() {
-    return true;
+    if($("#username").val() == "admin" && $("#password").val() == "admin") {
+        return true;
+    }
+    else if($("#username").val() == "") {
+        alert("请输入用户名");
+        $("#username").focus();
+        return false;
+    }
+    else if($("#password").val() == "") {
+        alert("请输入密码");
+        $("#password").focus();
+        return false;
+    }
+    else {
+        alert("用户名或密码不正确，请重新输入");
+        $("#username").focus();
+        return false;
+    }
 }
 
 $(document).ready( function() {
