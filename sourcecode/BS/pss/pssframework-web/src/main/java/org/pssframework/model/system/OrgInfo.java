@@ -54,11 +54,11 @@ public class OrgInfo extends BaseEntity {
 	@Column(length = 256, name = "ORG_NAME")
 	private String orgName;
 
-	/*
-	 * comment on column O_ORG.P_ORG_NO is '直接上级供电单位编号';VARCHAR2(16)
-	 */
-	@Column(length = 16, name = "P_ORG_NO")
-	private String pOrgNo;
+    /*
+     * comment on column O_ORG.P_ORG_ID is '直接上级供电单位编号';NUMBER(16)
+     */
+    @Column(name = "P_ORG_ID")
+    private Long pOrgId;
 
 	/*
 	 * comment on column O_ORG.ORG_TYPE VARCHAR2(8), is '单位类别：国网公司、
@@ -118,11 +118,11 @@ public class OrgInfo extends BaseEntity {
 		return orgType;
 	}
 
-	/**
-	 * @return the pOrgNo
-	 */
-	public String getpOrgNo() {
-		return pOrgNo;
+    /**
+     * @return the pOrgId
+     */
+    public Long getpOrgId() {
+        return pOrgId;
 	}
 
 	/**
@@ -176,8 +176,8 @@ public class OrgInfo extends BaseEntity {
 	 * @param pOrgNo
 	 *            the pOrgNo to set
 	 */
-	public void setpOrgNo(String pOrgNo) {
-		this.pOrgNo = pOrgNo;
+    public void setpOrgNo(Long pOrgId) {
+        this.pOrgId = pOrgId;
 	}
 
 	/**

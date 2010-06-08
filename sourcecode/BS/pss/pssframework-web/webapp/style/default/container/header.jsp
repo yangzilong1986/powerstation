@@ -15,11 +15,11 @@
   <div id="top_r">
     <div id="top_r_t">
       <ul>
-        <!-- <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#">基本应用</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#">基本应用</a></li>
         <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#">高级应用</a></li>
         <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#">运行管理</a></li>
         <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#">统计查询</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#">系统管理</a></li> -->
+        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#">系统管理</a></li>
       </ul>
     </div>
     <div id="top_menu">
