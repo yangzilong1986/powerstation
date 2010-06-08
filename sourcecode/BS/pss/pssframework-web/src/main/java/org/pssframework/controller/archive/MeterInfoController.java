@@ -3,10 +3,7 @@
  */
 package org.pssframework.controller.archive;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,15 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TranInfo;
-import org.pssframework.model.system.CodeInfo;
 import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,18 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 *变压器信息
  */
 @Controller
-@RequestMapping("/archive/traninfo")
-public class TranInfoController extends BaseRestSpringController<TranInfo, java.lang.Long> {
-
-	@Override
-	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-		super.initBinder(request, binder);
-	}
-
+@RequestMapping("/archive/meterinfo")
+public class MeterInfoController extends BaseRestSpringController<TranInfo, java.lang.Long> {
 	@Autowired
 	private TranInfoManger tranInfoManager;
 
@@ -69,8 +51,17 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 		mapRequest.put("codecate", "TG_STATUS");
 
-		//				//
+		//		TranInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new TranInfo() : this.tgInfoManager.getById(tgid);
+		//
 		ModelAndView result = new ModelAndView();
+		//
+		//		result.addObject("tginfo", tginfo);
+		//
+		//		result.setViewName("/archive/addTgRelevance");
+		//
+		//		result.addObject("orglist", getOrgOptions(mapRequest));
+		//
+		//		result.addObject("statuslist", getStatusOptions(mapRequest));
 
 		return result;
 	}
@@ -80,71 +71,47 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 			throws Exception {
 		boolean isSucc = true;
 		String msg = "成功";
-		Long tranid = 0L;
+		Long tgId = 0L;
 		try {
 			model.setPubPrivFlag("0");
 			tranInfoManager.saveOrUpdate(model);
-			tranid = model.getEquipId();
+			tgId = model.getTgId();
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tranid", tranid);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
 	}
 
-	@Override
-	public ModelAndView show(@PathVariable Long id) throws Exception {
-		ModelAndView result = getCommonModelAndView();
 
-		result.addObject("traninfo", tranInfoManager.getById(id));
-
-		result.setViewName("/archive/addTransformer");
-
-		TranInfo traninfo = this.tranInfoManager.getById(id) == null ? new TranInfo() : this.tranInfoManager
-				.getById(id);
-		result.addObject("traninfo", traninfo);
-
-		return result;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) throws Exception {
-		ModelAndView result = getCommonModelAndView();
-		result.addObject("traninfo", model);
-		result.setViewName("/archive/addTransformer");
-		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	private List<CodeInfo> getOptionList(Map mapRequest) {
-
-		return codeInfoManager.findByPageRequest(mapRequest);
-
-	}
-
-	@SuppressWarnings("unchecked")
-	private ModelAndView getCommonModelAndView() {
 		ModelAndView result = new ModelAndView();
 
 		Map mapRequest = new HashMap();
 
 		mapRequest.put("codecate", "TRAN_CODE");
 
-		result.addObject("typelist", getOptionList(mapRequest));
+		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
 
 		mapRequest.put("codecate", "TRAN_STATUS");
 
-		result.addObject("statuslist", getOptionList(mapRequest));
+		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
 
 		mapRequest.put("codecate", "VOLT_GRADE");
 
-		result.addObject("voltlist", getOptionList(mapRequest));
+		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
 
 		mapRequest.put("codecate", "RATED_EC");
 
-		result.addObject("ratedlist", getOptionList(mapRequest));
+		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+
+		result.addObject("traninfo", model);
+		
+		result.setViewName("/archive/addTransformer");
 
 		return result;
 	}
