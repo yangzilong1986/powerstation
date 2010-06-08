@@ -1,23 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>配变/台区用户档案(终端)</title>
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/css/window.css" />
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/css/greybox.css" />
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/js/ext/resources/css/ext-all.css" />
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/js/ext/resources/css/xtheme-gray.css" />
-<script type="text/javascript" src="<peis:contextPath/>/js/ext/adapter/ext/ext-base.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/ext/ext-all.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/tableEx.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/component.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/archive/archiveCheck.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/archive/archiveComm.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/const.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/jquery.url.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/jquery.dataForAjax.js"></script>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 var contextPath = '<peis:contextPath/>';
 
