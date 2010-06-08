@@ -113,7 +113,6 @@ addTran = function(){
              var isSucc = json['isSucc'];
              //jQuery("#tranId").val(json['tranId']);
              alert(json['tranId'])
-              alert(msg);
              window.close();
            },error:function(e){
                alert("error");
