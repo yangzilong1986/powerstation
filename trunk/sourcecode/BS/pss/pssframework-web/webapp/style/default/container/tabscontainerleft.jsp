@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<iframe height="730" src='${ctx}/tree'></iframe>
 </body>
 </html>

@@ -7,21 +7,32 @@
 <title>台区档案录入</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
+
+//弹出式窗口
+var opwindow = null;     //记录打开浏览窗口的对象
+function windowPopup(url, wd, ht) {
+    if(opwindow != null) {
+        opwindow.close();
+    }
+    opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
+}
+
+
 var contextPath  = '${ctx}';
 //打开新增变压器页面
 function openTransformer(tgId){
-   var url=contextPath+"/jsp/archive/addTransformer.jsp?tgFlag=1";
-   top.showDialogBox("变压器信息录入",url, 575, 960);
+   var url="${ctx}/archive/traninfo/new?tgId ="+tgId;
+   windowPopup( url,960, 575 );
 }
 //打开新增总表页面
 function openTotalMeter(tgId){
 	var url=contextPath+'/archive/totalMeter?_method=create';
-    top.showDialogBox("新增电表",url, 575, 960);
+    windowPopup("新增电表",url, 575, 960);
 }
 //打开新增终端页面
 function openTerm(){
    var url=contextPath+"/archive/terminalAction3.do?action=addTermInit";
-   top.showDialogBox("配变终端信息录入",url, 575, 960);
+   windowPopup("配变终端信息录入",url, 575, 960);
 } 
 //上一步
 function lastStep(){
@@ -96,21 +107,21 @@ function finish(){
 //打开变压器编辑页面
 function showTran(tranId){
    var url=contextPath+"/archive/tranAction.do?action=showTranByLowCustNew&tranId="+tranId+"&tgFlag=1";
-   top.showDialogBox("变压器信息编辑",url, 575, 960);
+   windowPopup("变压器信息编辑",url, 575, 960);
 }
 //打开总表编辑页面
 function showMeter(mpId,gpId){
    var url=contextPath+"/archive/meterAction.do?action=showMeterByLowCustNew&mpId="+mpId+"&gpId="+gpId+"&tgFlag=1";
-   top.showDialogBox("总表信息编辑",url, 575, 960);
+   windowPopup("总表信息编辑",url, 575, 960);
 }
 //编辑终端
 function showTerminal(termId,termType){
    if(termType=="03" || termType=="04"){ //配变终端
       var url=contextPath+"/archive/terminalAction3.do?action=addTermInit&termId="+termId+"&tgFlag=1&r=" + parseInt(Math.random() * 1000);
-      top.showDialogBox("配变终端信息编辑",url, 575, 960);
+      windowPopup("配变终端信息编辑",url, 575, 960);
    }else{//集中器
       var url=contextPath+"/jsp/archive/lowCustTermFrame.jsp?termId="+termId+"&termTypeFlag=1&r=" + parseInt(Math.random() * 1000);
-      top.showDialogBox("集中器信息编辑",url, 575, 960);
+      windowPopup("集中器信息编辑",url, 575, 960);
    }
 }
 //删除变压器
@@ -216,6 +227,8 @@ function loadTgRelevevance(){
   getJsonObjectList("termDataBody","TgService","getTerminalsByTgId","53");//加载终端列表
   remove_loading();
 }
+
+
 
 
 
@@ -368,10 +381,10 @@ function loadTgRelevevance(){
           </table>
         </form:form>
       </div>
-      <div class="tr mgt10"><a href="#"><img src='<pss:path type="bgcolor"/>/img2_bt.gif' width="15" height="15" /></a></div>
+      <div class="tr mgt10"><a onclick=""><img src='<pss:path type="bgcolor"/>/img2_bt.gif' width="15" height="15" /></a></div>
       <div class="mgt10" style="display:block; overflow-y:scroll; overflow-x:hidden; height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 160));">
         <div class="da_top"><span>变压器列表信息</span>
-          <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+          <h1><a onclick=openTransformer('${tginfo.tgId}') ><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
         </div>
         <div class="da_con">
           <table border="0" cellpadding="0" cellspacing="0" width="100%">

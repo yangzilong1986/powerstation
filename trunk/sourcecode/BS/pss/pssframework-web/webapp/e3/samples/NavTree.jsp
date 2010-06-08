@@ -1,4 +1,4 @@
-<%@ include file="/e3/commons/Common.jsp"%>
+<%@ include file="${ctx}/e3/commons/Common.jsp"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="e3" uri="/e3/tree/E3Tree.tld"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
