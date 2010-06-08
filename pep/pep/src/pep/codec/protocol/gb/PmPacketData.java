@@ -469,6 +469,9 @@ public class PmPacketData{
 
     @Override
     public String toString(){
-        return BcdUtils.binArrayToString(dataBuff.array());
+        int pos = dataBuff.position();
+        String result = BcdUtils.binArrayToString(dataBuff.array());
+        dataBuff.position(pos);
+        return result;
     }
 }
