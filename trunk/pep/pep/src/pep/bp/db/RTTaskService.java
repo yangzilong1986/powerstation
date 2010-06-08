@@ -41,4 +41,11 @@ public interface RTTaskService {
      * @param recvMsg
      */
     public void insertRecvMsg(long sequnceCode,String recvMsg);
+
+
+    /**
+     * 获取回执码
+     * @return
+     */
+    public int getSequnce();
 }

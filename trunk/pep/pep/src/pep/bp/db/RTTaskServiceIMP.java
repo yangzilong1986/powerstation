@@ -106,4 +106,17 @@ public class RTTaskServiceIMP implements RTTaskService {
             log.error(dataAccessException.getMessage());
         }
     }
+    
+    public int getSequnce() {
+        try {
+            String SQL = "select SEQ_TASK_SEQUNCE.nextval from DUAL";
+            int result = jdbcTemplate.queryForInt(SQL);
+            return result;
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return -1;
+        }
+    }
+
+
 }

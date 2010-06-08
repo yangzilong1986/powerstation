@@ -6,6 +6,7 @@ package pep.bp.realinterface.conf;
 
 import java.io.IOException;
 import java.rmi.MarshalException;
+import java.util.List;
 import java.util.Map;
 import javax.xml.bind.ValidationException;
 import pep.codec.utils.CastorUtil;
@@ -52,5 +53,9 @@ public class ProtocolConfig {
             return -1;
 
         }
+    }
+
+    public Map<String, ProtocolDataItem> getDataItemMap(String CommandItemCode){
+        return this.CommandItems.getCommandItem(CommandItemCode).getDataItemMap();
     }
 }

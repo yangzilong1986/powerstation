@@ -41,6 +41,10 @@ public class ProtocolCommandItems {
         this.CommandItems = CommandItems;
     }
 
+    public ProtocolCommandItem getCommandItem(String CommandItemCode){
+        return CommandItemMap.get(CommandItemCode);
+    }
+
     public ProtocolDataItem getDataItem(String DataItemCode) {
         String CommandCode = DataItemCode.substring(0, 8);
         ProtocolCommandItem commandItem = CommandItemMap.get(CommandCode);

@@ -5,17 +5,25 @@
 
 package pep.bp.realinterface;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pep.bp.db.RTTaskService;
+import pep.bp.model.RealTimeTask;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.realinterface.mto.MTO_376;
 import static org.junit.Assert.*;
 import pep.bp.realinterface.mto.MessageTranObject;
+import pep.codec.protocol.gb.gb376.PmPacket376;
+import pep.codec.utils.BcdUtils;
 
 /**
  *
@@ -24,7 +32,10 @@ import pep.bp.realinterface.mto.MessageTranObject;
 public class RealTimeProxy376Test {
 
     private static RealTimeProxy376 proxy;
+    private RTTaskService taskService;
     public RealTimeProxy376Test() {
+        ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
+        taskService = (RTTaskService) cxt.getBean("taskService");
     }
 
     @BeforeClass
@@ -52,16 +63,34 @@ public class RealTimeProxy376Test {
         MTO_376 MTO = new MTO_376();
         CollectObject object = new CollectObject();
         CommandItem citem = new CommandItem();
-        citem.setIdentifier("10010003");//参数及全体数据区初始化
+        Map datacellParams = new TreeMap();
+        datacellParams.put("1004000101", "10");//终端数传机延时时间RTS
+        datacellParams.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
+        datacellParams.put("1004000103", "30");//终端等待从动站响应的超时时间
+        datacellParams.put("1004000104", "3");//终端等待从动站响应的重发次数
+        datacellParams.put("1004000106", "00000111");//需要主站确认的通信服务（CON=1）的标志
+        datacellParams.put("1004000107", "15");//心跳周期
+        citem.setDatacellParam(datacellParams);
+
+        citem.setIdentifier("10040001");//终端上行通信口通信参数设置
         object.AddCommandItem(citem);
         object.setLogicalAddr("96123456");
         object.setEquipProtocol("01");
-        object.setMpSn(new int[]{1});
+        object.setMpSn(new int[]{0});
 
         MTO.getCollectObjects().add(object);
         RealTimeProxy376 instance = new RealTimeProxy376();
-        long result = instance.writeEquipmentParameters(MTO);
-        assertTrue(result>0);
+        long SequenceCode = instance.writeEquipmentParameters(MTO);
+        RealTimeTask task = taskService.getTask(SequenceCode);
+        PmPacket376 packet = new PmPacket376();
+        packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
+        assertTrue(packet.getAfn()==4);
+        byte[] dateItems = packet.getDataBuffer().getValue();
+        assertTrue(dateItems[4]==10);
+        assertTrue(dateItems[5]==20);
+        assertTrue(dateItems[6]==30);
+        assertTrue(dateItems[7]==3);
+
 
     }
 

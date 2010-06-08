@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -16,12 +17,13 @@ import java.util.Map;
 public class ProtocolCommandItem {
 
     private String CommandCode;
+    private String DiffFormat;//上下报文格式不一致
     private List<ProtocolDataItem> DataItems;
     private Map<String, ProtocolDataItem> DataItemMap;
 
     public ProtocolCommandItem() {
         DataItems = new ArrayList<ProtocolDataItem>();
-        DataItemMap = new HashMap<String, ProtocolDataItem>();
+        DataItemMap = new TreeMap<String, ProtocolDataItem>();
     }
 
     public void AddDataItem(ProtocolDataItem dataItem) {
@@ -66,5 +68,19 @@ public class ProtocolCommandItem {
                 this.DataItemMap.put(dataItem.getDataItemCode(), dataItem);
             }
         }
+    }
+
+    /**
+     * @return the DiffFormat
+     */
+    public String getDiffFormat() {
+        return DiffFormat;
+    }
+
+    /**
+     * @param DiffFormat the DiffFormat to set
+     */
+    public void setDiffFormat(String DiffFormat) {
+        this.DiffFormat = DiffFormat;
     }
 }
