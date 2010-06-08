@@ -81,7 +81,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
    <![CDATA[
   select o.org_no as leafId, o.org_name as leafName, 'ORG' as leafType
     from o_org o
-    where o.p_org_no = #{parentId} and 'ORG' = #{parentType}
+    where o.p_org_id = #{parentId} and 'ORG' = #{parentType}
     union
   select to_char(l.line_id) as leafId,l.line_name as leafName,'LINE' as leafType
   from g_line l, g_line_tg_rela r, g_tg t
