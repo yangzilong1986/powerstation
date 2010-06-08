@@ -10,6 +10,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import pep.mina.common.PepCommunicatorInterface;
+import pep.mina.protocolcodec.gb.PepGbCommunicator;
 import static org.junit.Assert.*;
 
 /**
@@ -23,7 +25,7 @@ public class RealTimeTaskProcessorTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        processor = new RealTimeTaskProcessor();
+        processor = new RealTimeTaskProcessor(new PepGbCommunicator());
     }
 
     @AfterClass

@@ -9,6 +9,7 @@ public class ProtocolDataItem {
     private String DataItemCode;
     private int Length;
     private String Format;//编码格式
+    private String DefaultValue;//默认值
 
     private String GroupCode;//
     private String Description;
@@ -17,13 +18,14 @@ public class ProtocolDataItem {
         super();
     }
     
-    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description){
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description,String DefaultValue){
         super();
         this.DataItemCode = DataItemCode;
         this.Length = Length;
         this.Format = Format;
         this.GroupCode = GroupCode;
         this.Description = Description;
+        this.DefaultValue = DefaultValue;
     }
     /**
      * @return the DataItemCode
@@ -93,5 +95,19 @@ public class ProtocolDataItem {
      */
     public void setDescription(String Description) {
         this.Description = Description;
+    }
+
+    /**
+     * @return the DefaultValue
+     */
+    public String getDefaultValue() {
+        return DefaultValue;
+    }
+
+    /**
+     * @param DefaultValue the DefaultValue to set
+     */
+    public void setDefaultValue(String DefaultValue) {
+        this.DefaultValue = DefaultValue;
     }
 }

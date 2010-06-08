@@ -17,6 +17,9 @@
         <field name="DataItems" collection="arraylist" type="pep.bp.realinterface.conf.ProtocolDataItem">
             <bind-xml name="DataItem"/>
         </field>
+		<field name="DiffFormat" >
+            <bind-xml name="DiffFormat" node="attribute"/>
+        </field>
     </class>
     <class name="pep.bp.realinterface.conf.ProtocolDataItem">
         <field name="DataItemCode">
@@ -28,11 +31,15 @@
         <field name="Format">
             <bind-xml name="Format" node="attribute"/>
         </field>
-        <field name="GroupCode">
+		<field name="GroupCode">
             <bind-xml name="GroupCode" node="attribute"/>
         </field>
 		<field name="Description">
             <bind-xml name="Description" node="attribute"/>
         </field>
+		<field name="DefaultValue">
+            <bind-xml name="DefaultValue" node="attribute"/>
+        </field>
+
     </class>
 </mapping>

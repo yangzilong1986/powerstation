@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import pep.bp.db.RTTaskService;
 import pep.bp.model.RealTimeTask;
 import pep.bp.realinterface.conf.ProtocolConfig;
+import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.bp.realinterface.mto.*;
 import pep.codec.protocol.gb.*;
 import pep.codec.protocol.gb.gb376.PmPacket376;
@@ -37,8 +38,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     private RTTaskService taskService;
 
     private int getID() {
-        ID++;
-        return ID;
+        return taskService.getSequnce();
     }
 
     private RealTimeTask Encode(MessageTranObject MTO, int sequenceCode, byte AFN) {
@@ -57,22 +57,14 @@ public class RealTimeProxy376 implements ICollectInterface {
             StringBuffer DataBuffer = new StringBuffer();
             PmPacket376DT dt = null;
             for (int i = 0; i <= MpSn.length - 1; i++) {
-                PmPacket376DA da = new PmPacket376DA();
-                da.setPn(MpSn[i]);
                 List<CommandItem> CommandItems = obj.getCommandItems();
-                for (CommandItem commandItem : CommandItems) {
-                    dt = new PmPacket376DT();
-                    int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-                    dt.setFn(fn);
-                    packet.getDataBuffer().putDA(da);
-                    packet.getDataBuffer().putDT(dt);
-                    //针对参数设置注入设置的值
-                    if (AFN == AFN_SETPARA) {
-                        InjectDataIteam(packet, commandItem, AFN);
-                    }
+                for (CommandItem commandItem : CommandItems) {                  
+                        InjectDataIteam(packet, commandItem, AFN,MpSn[i]);
                 }
-                if(AFN == AFN_RESET || AFN == AFN_SETPARA ||AFN == AFN_TRANSMIT)//消息认证码字段PW
+                if (AFN == AFN_RESET || AFN == AFN_SETPARA || AFN == AFN_TRANSMIT)//消息认证码字段PW
+                {
                     packet.setAuthorize(new Authorize());
+                }
 
                 packet.setTpv(new TimeProtectValue());//时间标签
                 task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
@@ -82,81 +74,95 @@ public class RealTimeProxy376 implements ICollectInterface {
         return task;
     }
 
-    private void InjectDataIteam(PmPacket376 packet, CommandItem commandItem, byte AFN) {
-
+    private void InjectDataIteam(PmPacket376 packet, CommandItem commandItem, byte AFN, int Sn) {
+        PmPacket376DA da = new PmPacket376DA(Sn);
         ProtocolConfig config = ProtocolConfig.getInstance();
-        Map<String, String> datacellParam = commandItem.getDatacellParam();
-        Iterator iterator = datacellParam.keySet().iterator();
-        while (iterator.hasNext()) {
-            String DataItemCode = (String) iterator.next();
-            String DataItemValue = datacellParam.get(DataItemCode);
-            String Format = config.getFormat(DataItemCode);
-            int Length = config.getLength(DataItemCode);
-            if (Format.equals("BIN") ) 
-                packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue),Length);
-            else if (Format.equals("BS8"))
-                packet.getDataBuffer().putBS8(DataItemValue);
-            else if (Format.equals("BS24"))
-                packet.getDataBuffer().putBS24(DataItemValue);
-            else if (Format.equals("BS64"))
-                packet.getDataBuffer().putBS64(DataItemValue);
-            else if (Format.equals("ASCII"))
-                packet.getDataBuffer().putAscii(DataItemValue,Length);
-            else if (Format.equals("A1"))
-                packet.getDataBuffer().putA1(new DataTypeA1( DataItemValue));
-            else if (Format.equals("A2"))
-                packet.getDataBuffer().putA2(new DataTypeA2(Double.parseDouble(DataItemValue)));
-            else if (Format.equals("A3"))
-                packet.getDataBuffer().putA3(new DataTypeA3(Long.parseLong(DataItemValue)));
-            else if (Format.equals("A4"))
-                packet.getDataBuffer().putA4(new DataTypeA4(Byte.parseByte(DataItemValue)));
-            else if (Format.equals("A5"))
-                packet.getDataBuffer().putA5(new DataTypeA5(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A6"))
-                packet.getDataBuffer().putA6(new DataTypeA6(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A7"))
-                packet.getDataBuffer().putA7(new DataTypeA7(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A8"))
-                packet.getDataBuffer().putA8(new DataTypeA8(Integer.parseInt(DataItemValue)));
-            else if (Format.equals("A9"))
-                packet.getDataBuffer().putA9(new DataTypeA9(Double.parseDouble(DataItemValue)));
-            else if (Format.equals("A10"))
-                packet.getDataBuffer().putA10(new DataTypeA10(Long.parseLong(DataItemValue)));
-            else if (Format.equals("A11"))
-                packet.getDataBuffer().putA11(new DataTypeA11(Double.parseDouble(DataItemValue)));
-            else if (Format.equals("A12"))
-                packet.getDataBuffer().putA12(new DataTypeA12(Long.parseLong(DataItemValue)));
-            else if (Format.equals("A13"))
-                packet.getDataBuffer().putA13(new DataTypeA13(Double.parseDouble(DataItemValue)));
-            else if (Format.equals("A14"))
-                packet.getDataBuffer().putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
-            else if (Format.equals("A15"))
-                packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue,"yyyy-MM-dd HH:mm:ss"));
-            else if (Format.equals("A16"))
-                packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue,"dd HH:mm:ss"));
-            else if (Format.equals("A17"))
-                packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue,"MM-dd HH:mm"));
-            else if (Format.equals("A18"))
-                packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue,"dd HH:mm"));
-            else if (Format.equals("A19"))
-                packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue,"HH:mm"));
-            else if (Format.equals("A20"))
-                packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue,"yyyy-MM-dd"));
-            else if (Format.equals("A21"))
-                packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue,"yyyy-mm"));
-            else if (Format.equals("A22"))
-                packet.getDataBuffer().putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A23"))
-                packet.getDataBuffer().putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A24"))
-                packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue,"dd HH"));
-            else if (Format.equals("A25"))
-                packet.getDataBuffer().putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
-            else if (Format.equals("A26"))
-                packet.getDataBuffer().putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
-            else if (Format.equals("A27"))
-                packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
+        Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+        Map<String, String> dataItemMap = commandItem.getDatacellParam();
 
+        Iterator iterator = DataItemMap_Config.keySet().iterator();
+        while (iterator.hasNext()) {
+            PmPacket376DT dt = new PmPacket376DT();
+            int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+            dt.setFn(fn);
+            packet.getDataBuffer().putDA(da);
+            packet.getDataBuffer().putDT(dt);
+            //针对参数设置注入设置的值
+            if (AFN == AFN_SETPARA) {
+                String DataItemCode = (String) iterator.next();
+                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+                String DataItemValue = dataItem.getDefaultValue();
+                if (dataItemMap.containsKey(DataItemCode)) {
+                    DataItemValue = dataItemMap.get(DataItemCode);
+                }
+                String Format = dataItem.getFormat();
+                int Length = dataItem.getLength();
+                if (Format.equals("BIN")) {
+                    packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue), Length);
+                } else if (Format.equals("BS8")) {
+                    packet.getDataBuffer().putBS8(DataItemValue);
+                } else if (Format.equals("BS24")) {
+                    packet.getDataBuffer().putBS24(DataItemValue);
+                } else if (Format.equals("BS64")) {
+                    packet.getDataBuffer().putBS64(DataItemValue);
+                } else if (Format.equals("ASCII")) {
+                    packet.getDataBuffer().putAscii(DataItemValue, Length);
+                } else if (Format.equals("A1")) {
+                    packet.getDataBuffer().putA1(new DataTypeA1(DataItemValue));
+                } else if (Format.equals("A2")) {
+                    packet.getDataBuffer().putA2(new DataTypeA2(Double.parseDouble(DataItemValue)));
+                } else if (Format.equals("A3")) {
+                    packet.getDataBuffer().putA3(new DataTypeA3(Long.parseLong(DataItemValue)));
+                } else if (Format.equals("A4")) {
+                    packet.getDataBuffer().putA4(new DataTypeA4(Byte.parseByte(DataItemValue)));
+                } else if (Format.equals("A5")) {
+                    packet.getDataBuffer().putA5(new DataTypeA5(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A6")) {
+                    packet.getDataBuffer().putA6(new DataTypeA6(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A7")) {
+                    packet.getDataBuffer().putA7(new DataTypeA7(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A8")) {
+                    packet.getDataBuffer().putA8(new DataTypeA8(Integer.parseInt(DataItemValue)));
+                } else if (Format.equals("A9")) {
+                    packet.getDataBuffer().putA9(new DataTypeA9(Double.parseDouble(DataItemValue)));
+                } else if (Format.equals("A10")) {
+                    packet.getDataBuffer().putA10(new DataTypeA10(Long.parseLong(DataItemValue)));
+                } else if (Format.equals("A11")) {
+                    packet.getDataBuffer().putA11(new DataTypeA11(Double.parseDouble(DataItemValue)));
+                } else if (Format.equals("A12")) {
+                    packet.getDataBuffer().putA12(new DataTypeA12(Long.parseLong(DataItemValue)));
+                } else if (Format.equals("A13")) {
+                    packet.getDataBuffer().putA13(new DataTypeA13(Double.parseDouble(DataItemValue)));
+                } else if (Format.equals("A14")) {
+                    packet.getDataBuffer().putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
+                } else if (Format.equals("A15")) {
+                    packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
+                } else if (Format.equals("A16")) {
+                    packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue, "dd HH:mm:ss"));
+                } else if (Format.equals("A17")) {
+                    packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue, "MM-dd HH:mm"));
+                } else if (Format.equals("A18")) {
+                    packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue, "dd HH:mm"));
+                } else if (Format.equals("A19")) {
+                    packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue, "HH:mm"));
+                } else if (Format.equals("A20")) {
+                    packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue, "yyyy-MM-dd"));
+                } else if (Format.equals("A21")) {
+                    packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue, "yyyy-mm"));
+                } else if (Format.equals("A22")) {
+                    packet.getDataBuffer().putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A23")) {
+                    packet.getDataBuffer().putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A24")) {
+                    packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue, "dd HH"));
+                } else if (Format.equals("A25")) {
+                    packet.getDataBuffer().putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
+                } else if (Format.equals("A26")) {
+                    packet.getDataBuffer().putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
+                } else if (Format.equals("A27")) {
+                    packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
+                }
+            }
         }
     }
 
