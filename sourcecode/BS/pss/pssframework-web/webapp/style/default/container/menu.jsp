@@ -11,7 +11,7 @@
 <script type="text/javascript">
 function selectMenu(menuId) {
     if(menuId = '1001') {
-        parent.tabscontainermain.location = "";
+        parent.tabscontainermain.location = '<pss:path type="webapp"/>/archive/tginfo';
     }
 }
 </script>
