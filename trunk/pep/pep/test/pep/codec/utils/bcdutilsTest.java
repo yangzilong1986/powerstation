@@ -146,4 +146,21 @@ public class bcdutilsTest {
         String bs16 = BcdUtils.bytesToBitSetString(rbs16);
         assertEquals(bss16,bs16);
     }
+   
+   private int byteToUnsigned(byte b){
+        if (b>=0)
+            return b;
+        else
+            return 256+b;
+    }
+
+    @Test
+    public void testByteToUnsigned(){
+        byte b;
+        for (int a=0x79; a<=0xFF; a++){
+            b = (byte)a;
+            int c = byteToUnsigned(b);
+            assertEquals(a,c);
+        }
+    }
 }
