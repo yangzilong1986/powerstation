@@ -108,7 +108,7 @@
 	</logger>
 
 	<root>
-		<level value="error" />
+		<level value="info" />
 		<appender-ref ref="log.console" />
 		<appender-ref ref="log.file" />
 	</root>
