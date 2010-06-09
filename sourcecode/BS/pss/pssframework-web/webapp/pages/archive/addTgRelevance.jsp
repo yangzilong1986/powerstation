@@ -19,18 +19,18 @@ function windowPopup(url, wd, ht) {
 var contextPath  = '${ctx}';
 //打开新增变压器页面
 function openTransformer(tgId){
-   var url="${ctx}/archive/traninfo/new?tgId ="+tgId;
-   windowPopup( url,960, 575 );
+   var url = "${ctx}/archive/traninfo/new?tgId ="+tgId;
+   windowPopup(url, 960, 575);
 }
 //打开新增总表页面
 function openTotalMeter(tgId){
-	var url=contextPath+'/archive/totalMeter?_method=create';
-    windowPopup("新增电表",url, 575, 960);
+	var url = contextPath + '/archive/totalMeter?_method=create';
+    windowPopup(url, 960, 575);
 }
 //打开新增终端页面
-function openTerm(){
-   var url=contextPath+"/archive/terminalAction3.do?action=addTermInit";
-   windowPopup("配变终端信息录入",url, 575, 960);
+function openTerm(tgId){
+   var url = contextPath + "/archive/";
+   windowPopup(url, 960, 575);
 } 
 //上一步
 function lastStep(){
@@ -375,7 +375,7 @@ function loadTgRelevevance(){
           </table>
         </div>
         <div class="mgt10 da_top"><span>集中器列表信息</span>
-          <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+          <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
         </div>
         <div class="da_con">
           <table border="0" cellpadding="0" cellspacing="0" width="100%">
