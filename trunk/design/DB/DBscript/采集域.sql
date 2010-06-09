@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-7 21:49:14                            */
+/* Created on:     2010-6-9 21:13:42                            */
 /*==============================================================*/
 
 
@@ -90,6 +90,7 @@ comment on column R_COMMANDITEM.OBJECT_FLAG_SUBS is
 create table R_REALTIME_TASK  (
    TASK_ID              NUMBER                          not null,
    SEQUENCE_CODE        NUMBER                          not null,
+   LOGICAL_ADDR         VARCHAR2(20),
    SEND_MSG             VARCHAR2(512),
    POST_TIME            DATE                           default SYSDATE,
    TASK_STATUS          VARCHAR2(5)                    default '0',
@@ -106,6 +107,7 @@ comment on column R_REALTIME_TASK.TASK_STATUS is
 create table R_REALTIME_TASK_RECV  (
    TASK_ID              NUMBER,
    SEQUENCE_CODE        NUMBER                          not null,
+   LOGICAL_ADDR         VARCHAR2(20),
    RECV_MSG             VARCHAR2(512),
    RECV_TIME            DATE                           default SYSDATE
 )
