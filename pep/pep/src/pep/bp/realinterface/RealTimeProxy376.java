@@ -3,6 +3,7 @@
  */
 package pep.bp.realinterface;
 
+import java.awt.image.DataBuffer;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,39 +55,40 @@ public class RealTimeProxy376 implements ICollectInterface {
             packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
             packet.getControlCode().setDownDirectFrameCount((byte) 0);
             int[] MpSn = obj.getMpSn();
-            StringBuffer DataBuffer = new StringBuffer();
-            PmPacket376DT dt = null;
             for (int i = 0; i <= MpSn.length - 1; i++) {
                 List<CommandItem> CommandItems = obj.getCommandItems();
-                for (CommandItem commandItem : CommandItems) {                  
-                        InjectDataIteam(packet, commandItem, AFN,MpSn[i]);
+                for (CommandItem commandItem : CommandItems) {
+                    PmPacket376DA da = new PmPacket376DA(MpSn[i]);
+                    PmPacket376DT dt = new PmPacket376DT();
+                    int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+                    dt.setFn(fn);
+                   // PmPacketData df = packet.getDataBuffer();
+                //    df.putDA(da);
+                //    df.putDT(dt);
+                    packet.getDataBuffer().putDA(da);
+                    packet.getDataBuffer().putDT(dt);
+                    InjectDataIteam(packet, commandItem, AFN);
                 }
                 if (AFN == AFN_RESET || AFN == AFN_SETPARA || AFN == AFN_TRANSMIT)//消息认证码字段PW
                 {
                     packet.setAuthorize(new Authorize());
                 }
-
-                packet.setTpv(new TimeProtectValue());//时间标签
-                task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
-                task.setSequencecode(sequenceCode);
             }
+            packet.setTpv(new TimeProtectValue());//时间标签
+            task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
+            task.setSequencecode(sequenceCode);
         }
         return task;
     }
 
-    private void InjectDataIteam(PmPacket376 packet, CommandItem commandItem, byte AFN, int Sn) {
-        PmPacket376DA da = new PmPacket376DA(Sn);
+    private void InjectDataIteam(PmPacket376 packet, CommandItem commandItem, byte AFN) {
+
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
 
         Iterator iterator = DataItemMap_Config.keySet().iterator();
         while (iterator.hasNext()) {
-            PmPacket376DT dt = new PmPacket376DT();
-            int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-            dt.setFn(fn);
-            packet.getDataBuffer().putDA(da);
-            packet.getDataBuffer().putDT(dt);
             //针对参数设置注入设置的值
             if (AFN == AFN_SETPARA) {
                 String DataItemCode = (String) iterator.next();

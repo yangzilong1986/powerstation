@@ -1,39 +1,14 @@
-2010-05-13 21:55:14,601 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 21:55:15,538 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - StatementCallback; bad SQL grammar [select TASK_ID,TASK_ID,SEND_MSG,POST_TIME,TASK_STATUS where TASK_STATUS = '0']; nested exception is java.sql.SQLException: ORA-00923: 未找到要求的 FROM 关键字
-
-2010-05-13 21:55:49,944 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 21:57:51,538 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 21:57:51,726 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - StatementCallback; bad SQL grammar [select TASK_ID,TASK_ID,SEND_MSG,POST_TIME,TASK_STATUS from r_realtime_task where TASK_STATUS = '0']; nested exception is java.sql.SQLException: 列名无效
-2010-05-13 21:57:58,476 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 21:58:09,835 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - StatementCallback; bad SQL grammar [select TASK_ID,TASK_ID,SEND_MSG,POST_TIME,TASK_STATUS from r_realtime_task where TASK_STATUS = '0']; nested exception is java.sql.SQLException: 列名无效
-2010-05-13 22:00:00,991 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:00:26,819 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - StatementCallback; bad SQL grammar [select TASK_ID,SEND_MSG,POST_TIME,TASK_STATUS from r_realtime_task where TASK_STATUS = '0']; nested exception is java.sql.SQLException: 列名无效
-2010-05-13 22:00:41,335 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:01:38,116 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:02:26,913 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [update  R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?)]; nested exception is java.sql.SQLException: ORA-00933: SQL 命令未正确结束
-
-2010-05-13 22:08:43,694 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:09:05,476 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [update  R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?)]; nested exception is java.sql.SQLException: ORA-00933: SQL 命令未正确结束
-
-2010-05-13 22:20:55,132 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:20:55,194 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?)]; nested exception is java.sql.SQLException: ORA-00933: SQL 命令未正确结束
-
-2010-05-13 22:21:04,726 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 22:21:38,773 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?)]; nested exception is java.sql.SQLException: ORA-00933: SQL 命令未正确结束
-
-2010-05-13 22:22:37,491 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 23:33:16,132 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
-2010-05-13 23:41:21,069 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - PreparedStatementCallback; bad SQL grammar [insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,MSN) values(SEQ_REALTIME_TASK.nextval,?,?)]; nested exception is java.sql.SQLException: ORA-00904: "MSN": 标识符无效
-
+2010-06-08 19:34:16,828 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:34:18,671 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:34:19,765 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:34:20,968 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:34:22,171 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:34:48,578 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:36:14,343 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:36:15,359 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:36:16,578 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:36:17,593 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:37:20,109 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:37:23,921 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:37:24,937 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
+2010-06-08 19:37:27,171 [main] ERROR [pep.bp.db.RTTaskServiceIMP] - Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create PoolableConnectionFactory (Io 异常: The Network Adapter could not establish the connection)
