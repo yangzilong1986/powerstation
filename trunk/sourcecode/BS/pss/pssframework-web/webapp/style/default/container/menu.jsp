@@ -31,6 +31,10 @@ function showBar(firstLevel) {
         }
     }
 }
+
+function changeFod(obj) {
+    
+}
 </script>
 </head>
 <body>
