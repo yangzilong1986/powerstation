@@ -442,7 +442,7 @@ public class PmPacketData{
     public String getBS8(){
         byte[] bytes = new byte[1];
         dataBuff.get(bytes);
-        return BcdUtils.binArrayToString(bytes);
+        return BcdUtils.bytesToBitSetString(bytes);
     }
 
     public PmPacketData putBS24(String bs8){
@@ -453,7 +453,7 @@ public class PmPacketData{
     public String getBS24(){
         byte[] bytes = new byte[3];
         dataBuff.get(bytes);
-        return BcdUtils.binArrayToString(bytes);
+        return BcdUtils.bytesToBitSetString(bytes);
     }
 
     public PmPacketData putBS64(String bs8){
@@ -464,7 +464,7 @@ public class PmPacketData{
     public String getBS64(){
         byte[] bytes = new byte[8];
         dataBuff.get(bytes);
-        return BcdUtils.binArrayToString(bytes);
+        return BcdUtils.bytesToBitSetString(bytes);
     }
 
     @Override
