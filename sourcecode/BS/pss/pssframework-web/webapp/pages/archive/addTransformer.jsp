@@ -13,6 +13,7 @@
   <div class="tab"><span>变压器信息</span></div>
   <div class="da_con"><form:form action="/archive/traninfo" modelAttribute="traninfo">
     <form:hidden path="equipId" />
+    <form:hidden path="tgId" />
     <table border="0" cellpadding="0" cellspacing="0" align="center">
       <tr>
         <td width="13%" class="green"><font color="red">* </font>变压器名称：</td>
@@ -112,7 +113,8 @@ addTran = function(){
              var msg = json['msg'];
              var isSucc = json['isSucc'];
              //jQuery("#tranId").val(json['tranId']);
-             alert(json['tranId'])
+             //alert(json['tranId'])
+             parent.location.href="${ctx}/arvhive/tginfo/"+${"#tgId"}.val();
              window.close();
            },error:function(e){
                alert("error");
