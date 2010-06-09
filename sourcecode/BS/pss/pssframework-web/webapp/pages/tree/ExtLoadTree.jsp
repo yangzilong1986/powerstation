@@ -79,44 +79,66 @@ function visitNode(pNode){
 
 function treeRenderBeforeHandler(pTree){
     var selectedNode;//用来记录当前右键选种的书节点  
+ 
     var rightClick = new Ext.menu.Menu( {
                   id : 'rightClickCont',
                   items : [ 
                   {
-                      id:'addUser',
+                      id:'new',
                       text : '新增机构',
                       handler : function(){
-                	     parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId=4";
+                          var node = selectedNode.id;
+                          var type = node.split("_")[0];
+                          var uid = node.split("_")[1];
+                          if("type"=='ORG'){ 
+                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+uid;
+                          }
                       }
                       
                   },
                   {
-                      id:'editUser',
+                      id:'edit',
                       text : '修改机构',
                       handler : function(){
-                	  parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+selectedNode.id;
+                          var node = selectedNode.id;
+                          var type = node.split("_")[0];
+                          var uid = node.split("_")[1];
+                          if("type"=='TG'){ 
+                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/edit?tgId="+uid;
+                          }
                       }
                       
                   },                  
                   {
-                      id:'delUser',
+                      id:'delete',
                       text : '删除机构',
                       handler : function(){
-                	 // parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+selectedNode.id;
+                          var node = selectedNode.id;
+                          var type = node.split("_")[0];
+                          var uid = node.split("_")[1];
+                          if("type"=='TG'){ 
+                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo?_method&tgId="+uid;
+                	       parent.tree.location.href = "${ctx}/tree";
+                          }
                       }
                   },
                   {
                       id:'viewUser',
                       text : '查看机构',
                       handler : function(){
-                        alert('跳转到查看机构[' + selectedNode.text + ']的页面');
+                    	  var node = selectedNode.id;
+                          var type = node.split("_")[0];
+                          var uid = node.split("_")[1];
+                          if("type"=='TG'){ 
+                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/"+uid;
+                          }
                       }
                   }
                   
                   ]
               });
               
-       pTree.on('contextmenu',function(node,pEventObj){  
+        pTree.on('contextmenu',function(node,pEventObj){  
         pEventObj.preventDefault();
         rightClick.showAt(pEventObj.getXY());
         selectedNode = node;
@@ -136,9 +158,9 @@ searchNode = function(){
 <input type="button" value="选种节点" onclick="showSelectedNode()" />
 <input type="button" value="遍历所有节点" onclick="visitAllNodes()" />
 <input type="button" value="刷新当前节点" onclick="refreshNode()" />
-<input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
+<input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />-->
 <input type="text" name="node" id="node">
-<input type="button" value="查找节点" onclick="searchNode()" />-->
+<input type="button" value="查找节点" onclick="searchNode()" />
 <div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
 </BODY>
