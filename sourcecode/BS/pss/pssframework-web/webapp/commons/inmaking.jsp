@@ -8,6 +8,11 @@
 <title>inmaking...</title>
 </head>
 <body>
-inmaking...
+<div align="center">
+    <img src="in.jpg" width="700" height="270" />
+</div>
+<div align="center">
+    <p>正在建设中...</p>
+</div>
 </body>
 </html>
