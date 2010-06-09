@@ -30,8 +30,8 @@ public class RTTaskServiceIMP implements RTTaskService {
 
     public void insertTask(RealTimeTask task) {
         try {
-            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?)",
-                    new Object[]{task.getSequencecode(), task.getSendmsg()});
+            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?,?)",
+                    new Object[]{task.getSequencecode(), task.getLogicAddress(),task.getSendmsg()});
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }
@@ -44,8 +44,8 @@ public class RTTaskServiceIMP implements RTTaskService {
     public void insertTasks(List<RealTimeTask> Tasks) {
         for (RealTimeTask task : Tasks) {
             try {
-                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?)",
-                        new Object[]{task.getSequencecode(), task.getSendmsg()});
+                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?,?)",
+                        new Object[]{task.getSequencecode(),task.getLogicAddress(), task.getSendmsg()});
             } catch (DataAccessException dataAccessException) {
                 log.error(dataAccessException.getMessage());
             }
@@ -59,7 +59,7 @@ public class RTTaskServiceIMP implements RTTaskService {
     public List<RealTimeTask> getTasks() {
         try {
             //查询未处理任务
-            String SQL = "select TASK_ID,SEQUENCE_CODE,SEND_MSG,POST_TIME,TASK_STATUS";
+            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS";
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
             List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new TaskRowMapper());
@@ -75,13 +75,13 @@ public class RTTaskServiceIMP implements RTTaskService {
         }
     }
 
-    public RealTimeTask getTask(long sequnceCode) {
+    public RealTimeTask getTask(long sequnceCode,String logicAddress) {
         try {
             //查询未处理任务
-            String SQL = "select TASK_ID,SEQUENCE_CODE,SEND_MSG,POST_TIME,TASK_STATUS";
+            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS";
             SQL += " from r_realtime_task";
-            SQL += " where SEQUENCE_CODE = ?";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
+            SQL += " where SEQUENCE_CODE = ? and LOGICAL_ADDR = ?";
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode,logicAddress}, new TaskRowMapper());
             if (results.size() > 0) {
                 RealTimeTask task = (RealTimeTask)(results.get(0));
                 //更新任务状态
@@ -98,10 +98,10 @@ public class RTTaskServiceIMP implements RTTaskService {
         }
     }
 
-    public void insertRecvMsg(long sequnceCode, String recvMsg) {
+    public void insertRecvMsg(long sequnceCode, String logicAddress, String recvMsg) {
         try {
-            jdbcTemplate.update("insert into  R_REALTIME_TASK_RECV(SEQUENCE_CODE,RECV_MSG) values(?,?)",
-                    new Object[]{sequnceCode, recvMsg});
+            jdbcTemplate.update("insert into  R_REALTIME_TASK_RECV(SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG) values(?,?,?)",
+                    new Object[]{sequnceCode,logicAddress, recvMsg});
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }

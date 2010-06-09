@@ -6,7 +6,7 @@
 package pep.bp.model;
 
 import java.util.Date;
-import pep.codec.protocol.gb.PmPacket;
+
 
 /**
  *
@@ -15,6 +15,7 @@ import pep.codec.protocol.gb.PmPacket;
 public class RealTimeTask {
     private int taskId;
     private int sequenceCode;
+    private String logicAddress;
     private String sendMsg;
     private String recvMsg;
     private Date postTime;
@@ -67,6 +68,20 @@ public class RealTimeTask {
 
     public long getTaskId() {
         return taskId;
+    }
+
+    /**
+     * @return the logicAddress
+     */
+    public String getLogicAddress() {
+        return logicAddress;
+    }
+
+    /**
+     * @param logicAddress the logicAddress to set
+     */
+    public void setLogicAddress(String logicAddress) {
+        this.logicAddress = logicAddress;
     }
 
 

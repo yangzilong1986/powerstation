@@ -77,7 +77,7 @@ public class RTTaskServiceIMPTest {
         long sequnceCode = 0L;
         String recvMsg = "";
         RTTaskServiceIMP instance = new RTTaskServiceIMP();
-        instance.insertRecvMsg(sequnceCode, recvMsg);
+        instance.insertRecvMsg(sequnceCode, "",recvMsg);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

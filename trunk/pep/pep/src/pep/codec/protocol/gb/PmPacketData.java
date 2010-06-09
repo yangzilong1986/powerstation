@@ -467,6 +467,17 @@ public class PmPacketData{
         return BcdUtils.bytesToBitSetString(bytes);
     }
 
+    public PmPacketData putIPPORT(String ipport){
+        dataBuff.put(BcdUtils.IpPortStringToBytes(ipport));
+        return this;
+    }
+
+    public String getIPPORT(){
+        byte[] bytes = new byte[1];
+        dataBuff.get(bytes);
+        return BcdUtils.bytesToBitSetString(bytes);
+    }
+
     @Override
     public String toString(){
         int pos = dataBuff.position();
