@@ -34,13 +34,13 @@ public interface RTTaskService {
      * @param sequnceCode
      * @return
      */
-    public RealTimeTask getTask(long sequnceCode);
+    public RealTimeTask getTask(long sequnceCode,String logicAddress);
     /**
      * 更新接收报文
      * @param sequnceCode
      * @param recvMsg
      */
-    public void insertRecvMsg(long sequnceCode,String recvMsg);
+    public void insertRecvMsg(long sequnceCode,String logicAddress ,String recvMsg);
 
 
     /**

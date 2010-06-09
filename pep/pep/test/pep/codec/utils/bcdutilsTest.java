@@ -163,4 +163,14 @@ public class bcdutilsTest {
             assertEquals(a,c);
         }
     }
+
+    @Test
+    public void testIpPoortStringToBytes(){
+        String IPStr = "192.168.0.1:8080";
+        byte[] results = BcdUtils.IpPortStringToBytes(IPStr);
+        assertEquals(results[0]+128,192);
+        assertEquals(results[1]+128,168);
+        assertEquals(results[2]+128,0);
+        assertEquals(results[3]+128,1);
+    }
 }

@@ -22,6 +22,7 @@ import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.realinterface.mto.MTO_376;
 import static org.junit.Assert.*;
 import pep.bp.realinterface.mto.MessageTranObject;
+import pep.codec.protocol.gb.PmPacketData;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.utils.BcdUtils;
 
@@ -33,6 +34,37 @@ public class RealTimeProxy376Test {
 
     private static RealTimeProxy376 proxy;
     private RTTaskService taskService;
+
+    private MTO_376 PutInCommandItem(Map datacellParams,String commandItemCode,String LogicAddress){
+         MTO_376 MTO = new MTO_376();
+        CollectObject object = new CollectObject();
+        CommandItem citem = new CommandItem();
+        citem.setDatacellParam(datacellParams);
+
+        citem.setIdentifier(commandItemCode);//终端上行通信口通信参数设置
+        object.AddCommandItem(citem);
+        object.setLogicalAddr(LogicAddress);
+        object.setEquipProtocol("01");
+        object.setMpSn(new int[]{0});
+
+        MTO.getCollectObjects().add(object);
+
+        return MTO;
+    }
+
+    private Map<String, String> getTestResults_WEP(MTO_376 MTO,String logicAddress,String commandItemCode) throws Exception{
+        RealTimeProxy376 instance = new RealTimeProxy376();
+        long SequenceCode = instance.writeEquipmentParameters(MTO);
+        RealTimeTask task = taskService.getTask(SequenceCode,logicAddress);
+        PmPacket376 packet = new PmPacket376();
+        packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
+        assertTrue(packet.getAfn()==4);
+        PmPacketData databuf = packet.getDataBuffer();
+        databuf.rewind();
+        return instance.decodeData(databuf,commandItemCode);
+    }
+
+
     public RealTimeProxy376Test() {
         ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
         taskService = (RTTaskService) cxt.getBean("taskService");
@@ -60,38 +92,35 @@ public class RealTimeProxy376Test {
      */
     @Test
     public void testWriteEquipmentParameters() throws Exception {
-        MTO_376 MTO = new MTO_376();
-        CollectObject object = new CollectObject();
-        CommandItem citem = new CommandItem();
-        Map datacellParams = new TreeMap();
-        datacellParams.put("1004000101", "10");//终端数传机延时时间RTS
-        datacellParams.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
-        datacellParams.put("1004000103", "30");//终端等待从动站响应的超时时间
-        datacellParams.put("1004000104", "3");//终端等待从动站响应的重发次数
-        datacellParams.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
-        datacellParams.put("1004000107", "15");//心跳周期
-        citem.setDatacellParam(datacellParams);
+       //测试F1
+        Map datacellParams1 = new TreeMap();
+        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
+        datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
+        datacellParams1.put("1004000103", "30");//终端等待从动站响应的超时时间
+        datacellParams1.put("1004000104", "3");//终端等待从动站响应的重发次数
+        datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
+        datacellParams1.put("1004000107", "15");//心跳周期
+        MTO_376 MTO1  = PutInCommandItem(datacellParams1,"10040001","96123456");
 
-        citem.setIdentifier("10040001");//终端上行通信口通信参数设置
-        object.AddCommandItem(citem);
-        object.setLogicalAddr("96123456");
-        object.setEquipProtocol("01");
-        object.setMpSn(new int[]{0});
+        Map<String,String> resultMap1 = getTestResults_WEP(MTO1,"96123456","10040001");
+        assertTrue(resultMap1.get("1004000101").equals("10"));
+        assertTrue(resultMap1.get("1004000102").equals("20"));
+        assertTrue(resultMap1.get("1004000103").equals("30"));
+        assertTrue(resultMap1.get("1004000104").equals("3"));
+        assertTrue(resultMap1.get("1004000106").equals("11100000"));
+        assertTrue(resultMap1.get("1004000107").equals("15"));
 
-        MTO.getCollectObjects().add(object);
-        RealTimeProxy376 instance = new RealTimeProxy376();
-        long SequenceCode = instance.writeEquipmentParameters(MTO);
-        RealTimeTask task = taskService.getTask(SequenceCode);
-        PmPacket376 packet = new PmPacket376();
-        packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
-        assertTrue(packet.getAfn()==4);
-        byte[] dateItems = packet.getDataBuffer().getValue();
-        assertTrue(dateItems[4]==10);
-        assertTrue(dateItems[5]==20);
-        assertTrue(dateItems[6]==30);
-        assertTrue(dateItems[7]==3);
+        //测试F3
+        Map datacellParams3 = new TreeMap();
+        datacellParams3.put("1004000301", "192.168.0.1:8080");//主用IP地址和端口
+        datacellParams3.put("1004000302", "192.168.0.2:8080");//备用IP地址和端口
+        datacellParams3.put("1004000303", "ZJDL.ZJ");//APN
+        MTO_376 MTO3  = PutInCommandItem(datacellParams3,"10040003","96123456");
 
-
+        Map<String,String> resultMap3 = getTestResults_WEP(MTO3,"96123456","10040003");
+        assertTrue(resultMap3.get("1004000301").equals("192.168.0.1:8080"));
+        assertTrue(resultMap3.get("1004000302").equals("192.168.0.2:8080"));
+        assertTrue(resultMap3.get("1004000303").equals("ZJDL.ZJ"));
     }
 
     /**

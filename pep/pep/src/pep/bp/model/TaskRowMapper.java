@@ -18,6 +18,7 @@ public class TaskRowMapper implements RowMapper {
         RealTimeTask task = new RealTimeTask();
         task.setTaskId(rs.getInt("TASK_ID"));
         task.setSequencecode(rs.getInt("SEQUENCE_CODE"));
+        task.setLogicAddress(rs.getString("LOGICAL_ADDR"));
         task.setSendmsg(rs.getString("SEND_MSG"));
         task.setStatestatus(rs.getString("TASK_STATUS"));
         return task;

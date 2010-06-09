@@ -51,7 +51,7 @@ public class RealTimeTaskProcessor implements Runnable {
             //检查返回
             try {
                 SequencedPmPacket packet = respQueue.PollPacket();
-                taskService.insertRecvMsg(packet.sequence, packet.pack.toString());
+                taskService.insertRecvMsg(packet.sequence,packet.pack.getAddress().toString(), packet.pack.toString());
             } catch (InterruptedException ex) {
                 log.error(ex.getMessage());
             }

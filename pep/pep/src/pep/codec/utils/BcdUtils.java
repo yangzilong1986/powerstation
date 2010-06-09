@@ -174,6 +174,22 @@ public class BcdUtils {
         return bitArray;
     }
 
+    public static byte[] IpPortStringToBytes(String ipportString){
+        String[] strs = ipportString.substring(0,ipportString.indexOf(":")).split("[.]");
+        byte[] b = new byte[strs.length+2];
+        int index = 0;
+
+        for(String str: strs)
+        {
+            b[index++] = (byte)(Integer.parseInt(str) - 128);
+        }
+         String[] port = ipportString.split("[:]");
+         b[index++] = (byte)(Integer.parseInt(port[1])<<8 -128);
+         b[index++] = (byte)(Integer.parseInt(port[1])>>8 -128);
+        return b;
+
+    }
+
     public static String bytesToBitSetString(byte[] bytes){
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<bytes.length; i++){

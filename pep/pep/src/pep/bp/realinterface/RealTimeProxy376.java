@@ -78,6 +78,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             packet.setTpv(new TimeProtectValue());//时间标签
             task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
             task.setSequencecode(sequenceCode);
+            task.setLogicAddress(obj.getLogicalAddr());
         }
         return task;
     }
@@ -102,6 +103,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                 int Length = dataItem.getLength();
                 if (Format.equals("BIN")) {
                     packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue), Length);
+                } else if (Format.equals("IPPORT")) {
+                    packet.getDataBuffer().putIPPORT(DataItemValue);
                 } else if (Format.equals("BS8")) {
                     packet.getDataBuffer().putBS8(DataItemValue);
                 } else if (Format.equals("BS24")) {
@@ -372,6 +375,8 @@ public class RealTimeProxy376 implements ICollectInterface {
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(CommandItemCode);
         Iterator iterator = DataItemMap_Config.keySet().iterator();
+        dataBuffer.getWord(1);//DA
+        dataBuffer.getWord(1);//DT
         while (iterator.hasNext()) {
             String DataItemCode = (String) iterator.next();
             ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
