@@ -18,8 +18,12 @@ function windowPopup(url, wd, ht) {
 
 var contextPath  = '${ctx}';
 //打开新增变压器页面
-function openTransformer(tgId){
-   var url = "${ctx}/archive/traninfo/new?tgId="+tgId;
+function openTransformer(){
+  
+  if(!$("#tgId").val()){
+    alert("请先建台区");return;
+  }
+   var url = "${ctx}/archive/traninfo/new?tgId="+$("#tgId").val();
    windowPopup(url, 960, 575);
 }
 //打开新增总表页面
@@ -229,192 +233,196 @@ function loadTgRelevevance(){
 </script>
 </head>
 <body>
-
 <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
-  <ul class=default id=electric_Con_1>
-    <div class="tab"><span>台区信息</span></div>
-    <div class="da_mid" style="display:block; overflow-y:auto; overflow-x: auto;width: expression((document.documentElement.clientWidth||document.body.clientWidth)-10); height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-35));">
-      <div>
-        <form:form action="/archive/tginfo" modelAttribute="tginfo">
-          <table width="95%" border="0" cellspacing="0" cellpadding="0">
-            <tr height="30">
-              <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
-              <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" cssStyle="width:145px;" /></td>
-              <td width="10%" align="right" class="green">台区名称：</td>
-              <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" /></td>
-              <td width="10%" align="right" class="green">管理单位：</td>
-              <td width="25%"><form:select path="orgId" id="orgId" itemLabel="orgName" itemValue="orgId" items="${orglist}" cssStyle="width:145px;"></form:select></td>
-            </tr>
-            <tr height="30">
-              <td width="15%" align="right" class="green">容　　量：</td>
-              <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:135px;" /> kVA</td>
-              <td width="10%" align="right" class="green">运行状态：</td>
-              <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" items="${statuslist}" cssStyle="width:145px;" /></td>
-              <td width="15%" align="right" class="green">地　　址：</td>
-              <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:145px;" /></td>
-            </tr>
-            <tr>
-              <td width="100%" colspan="6" align="right">
-                <input id="addTg" name="addTg" type="button" class="btnbg4" value="添加" />
-                <input id="updateTg" name="updateTg" type="button" class="btnbg4" value="更新" />
-                <input id="deleteTg" name="deleteTg" type="button" class="btnbg4" value="删除" />
-              </td>
-            </tr>
-          </table>
-        </form:form>
-      </div>
-      <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
-      <div class="mgt10">
-        <div class="mgt10 da_top"><span>变压器列表信息</span>
-          <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" style="cursor: pointer;" /></a></h1>
-        </div>
-        <div class="da_con">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>资产号</th>
-                <th>名称</th>
-                <th>容量(kVA)</th>
-                <th>型号</th>
-                <th>安装地址</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="mgt10 da_top"><span>台区考核表信息</span>
-          <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
-        </div>
-        <div class="da_con">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>资产编号</th>
-                <th>计量点名称</th>
-                <th>表地址</th>
-                <th>采集终端</th>
-                <th>表类型</th>
-                <th>设备厂家</th>
-                <th>运行状态</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr bgcolor="#f3f3f3">
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="mgt10 da_top"><span>保护开关列表信息</span>
-          <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
-        </div>
-        <div class="da_con">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th width="14%">变压器编号</th>
-                <th width="14%">变压器名称</th>
-                <th width="10%">变压器型号</th>
-                <th width="14%">&nbsp;</th>
-                <th width="10%">&nbsp;</th>
-                <th width="14%">&nbsp;</th>
-                <th width="14%">&nbsp;</th>
-                <th width="10%">&nbsp;</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr bgcolor="#f3f3f3">
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="mgt10 da_top"><span>集中器列表信息</span>
-          <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" style="cursor: pointer;" /></a></h1>
-        </div>
-        <div class="da_con">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>资产号</th>
-                <th>逻辑地址</th>
-                <th>终端类型</th>
-                <th>相线</th>
-                <th>设备厂家</th>
-                <th>运行状态</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr bgcolor="#f3f3f3">
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </ul>
+<ul class=default id=electric_Con_1>
+  <div class="tab"><span>台区信息</span></div>
+  <div class="da_mid"
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -35 ) );">
+  <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
+    <table width="95%" border="0" cellspacing="0" cellpadding="0">
+      <tr height="30">
+        <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
+        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16"
+          cssStyle="width:145px;" /></td>
+        <td width="10%" align="right" class="green">台区名称：</td>
+        <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" /></td>
+        <td width="10%" align="right" class="green">管理单位：</td>
+        <td width="25%"><form:select path="orgId" id="orgId" itemLabel="orgName" itemValue="orgId"
+          items="${orglist}" cssStyle="width:145px;"></form:select></td>
+      </tr>
+      <tr height="30">
+        <td width="15%" align="right" class="green">容 量：</td>
+        <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2"
+          cssStyle="width:135px;" /> kVA</td>
+        <td width="10%" align="right" class="green">运行状态：</td>
+        <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
+          items="${statuslist}" cssStyle="width:145px;" /></td>
+        <td width="15%" align="right" class="green">地 址：</td>
+        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:145px;" /></td>
+      </tr>
+      <tr>
+        <td width="100%" colspan="6" align="right"><input id="addTg" name="addTg" type="button" class="btnbg4"
+          value="添加" /> <input id="updateTg" name="updateTg" type="button" class="btnbg4" value="更新" /> <input
+          id="deleteTg" name="deleteTg" type="button" class="btnbg4" value="删除" /></td>
+      </tr>
+    </table>
+  </form:form></div>
+  <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
+  <div class="mgt10">
+  <div class="mgt10 da_top"><span>变压器列表信息</span>
+  <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+    width="16" height="16" style="cursor: pointer;" /></a></h1>
+  </div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>资产号</th>
+        <th>名称</th>
+        <th>容量(kVA)</th>
+        <th>型号</th>
+        <th>安装地址</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${tranlist}" var="tran">
+        <tr>
+          <td>${tran.consId}</td>
+          <td>${tran.tranName}</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  <div class="mgt10 da_top"><span>台区考核表信息</span>
+  <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  </div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>资产编号</th>
+        <th>计量点名称</th>
+        <th>表地址</th>
+        <th>采集终端</th>
+        <th>表类型</th>
+        <th>设备厂家</th>
+        <th>运行状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr bgcolor="#f3f3f3">
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="mgt10 da_top"><span>保护开关列表信息</span>
+  <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  </div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th width="14%">变压器编号</th>
+        <th width="14%">变压器名称</th>
+        <th width="10%">变压器型号</th>
+        <th width="14%">&nbsp;</th>
+        <th width="10%">&nbsp;</th>
+        <th width="14%">&nbsp;</th>
+        <th width="14%">&nbsp;</th>
+        <th width="10%">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr bgcolor="#f3f3f3">
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="mgt10 da_top"><span>集中器列表信息</span>
+  <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+    height="16" style="cursor: pointer;" /></a></h1>
+  </div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>资产号</th>
+        <th>逻辑地址</th>
+        <th>终端类型</th>
+        <th>相线</th>
+        <th>设备厂家</th>
+        <th>运行状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr bgcolor="#f3f3f3">
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+</ul>
 </div>
 </body>
 <script>
@@ -472,8 +480,7 @@ addtginfo = function(){
            var msg = json['msg'];
            var isSucc = json['isSucc'];
            jQuery("#tgId").val(json['tgId']);
-           alert(json['tgId'])
-            alert(msg);
+           parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
          },error:function(e){
              alert("error");
              alert(e.message);
