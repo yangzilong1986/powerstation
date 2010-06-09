@@ -140,7 +140,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 		OrgInfo orginfo = orgInfoManager.getById(Long.parseLong(parentID));
 
-		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "org" + orginfo.getOrgId());
+		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "ORG" + orginfo.getOrgId());
 		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?parentId=" + parentID + "&parentType=ORG",
 				pRequest));
 
@@ -169,7 +169,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 			@Override
 			protected Node createNode(Object pUserData, UserDataUncoder pUncoder) {
 				LeafInfo leaf = (LeafInfo) pUserData;
-				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "org" + leaf.getLeafId());
+				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "ORG" + leaf.getLeafId());
 				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&parentId=" + leaf.getLeafId()
 						+ "&parentType=" + leaf.getLeafType() + "&random=" + Math.random()));
 
