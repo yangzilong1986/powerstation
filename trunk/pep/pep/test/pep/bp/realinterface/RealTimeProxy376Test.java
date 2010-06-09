@@ -68,7 +68,7 @@ public class RealTimeProxy376Test {
         datacellParams.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
         datacellParams.put("1004000103", "30");//终端等待从动站响应的超时时间
         datacellParams.put("1004000104", "3");//终端等待从动站响应的重发次数
-        datacellParams.put("1004000106", "00000111");//需要主站确认的通信服务（CON=1）的标志
+        datacellParams.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
         datacellParams.put("1004000107", "15");//心跳周期
         citem.setDatacellParam(datacellParams);
 
