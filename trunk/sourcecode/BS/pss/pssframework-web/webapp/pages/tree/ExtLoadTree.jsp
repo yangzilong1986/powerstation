@@ -158,9 +158,9 @@ searchNode = function(){
 <input type="button" value="选种节点" onclick="showSelectedNode()" />
 <input type="button" value="遍历所有节点" onclick="visitAllNodes()" />
 <input type="button" value="刷新当前节点" onclick="refreshNode()" />
-<input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />-->
+<input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
-<input type="button" value="查找节点" onclick="searchNode()" />
+<input type="button" value="查找节点" onclick="searchNode()" />-->
 <div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
 </BODY>
