@@ -8,13 +8,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>menu</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
 function selectMenu(menuId) {
-    if(menuId = '3001') {
+    if(menuId == '3001') {
         parent.tabscontainermain.location = '<pss:path type="webapp"/>/archive/tginfo';
     }
     else {
-        parent.tabscontainermain.location = "<pss:path type="webapp"/>/commons/inmaking.jsp";
+        parent.tabscontainermain.location = '<pss:path type="webapp"/>/commons/inmaking.jsp';
+    }
+}
+
+function showBar(firstLevel) {
+    for(var i = 1; i <= 5; i++) {
+        if(i == firstLevel) {
+            //alert("#dl0" + i + ":" + "block");
+            $("#dl0" + i).css("display", "block");
+        }
+        else {
+            //alert("#dl0" + i + ":" + "none");
+            $("#dl0" + i).css("display", "none");
+        }
     }
 }
 </script>
@@ -25,7 +39,7 @@ function selectMenu(menuId) {
     <dt>
       <div id="Fod">
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('1001'); return false;">实时召测</a></div>
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('1002'); return false;">保护开关远程跳合闸</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('1002'); return false;">远程跳合闸</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('1003'); return false;">远程试验跳</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('1004'); return false;">数据检查</a></div>
       </div>
@@ -44,9 +58,8 @@ function selectMenu(menuId) {
   <dl id="dl03" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3001'); return false;">台区档案维护</a></div>
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3002'); return false;">单个终端参数维护</a></div>
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3003'); return false;">批量终端参数维护</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3001'); return false;">台区档案</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3002'); return false;">终端参数</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3004'); return false;">设备校时</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3005'); return false;">终端复位</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('3006'); return false;">异常处理</a></div>
@@ -57,9 +70,9 @@ function selectMenu(menuId) {
   <dl id="dl04" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4001'); return false;">跳闸信息批量查询</a></div>
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4002'); return false;">总表数据批量查询</a></div>
-        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4003'); return false;">开关数据和状态批量查询</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4001'); return false;">跳闸信息</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4002'); return false;">总表数据</a></div>
+        <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4003'); return false;">开关数据</a></div>
         <div onmouseover=changeFod(this)><a href="#" onclick="selectMenu('4004'); return false;">台区综合</a></div>
       </div>
     </dt>

@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>header container</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
+<script type="text/javascript">
+function showBar(firstLevel) {
+    parent.menu.showBar(firstLevel);
+}
+</script>
 </head>
 <body>
 <div class="bg_top">
@@ -15,11 +20,11 @@
   <div id="top_r">
     <div id="top_r_t">
       <ul>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#">基本应用</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#">高级应用</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#">运行管理</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#">统计查询</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#">系统管理</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#" onclick="showBar(1); return false;">基本应用</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#" onclick="showBar(2); return false;">高级应用</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#" onclick="showBar(3); return false;">运行管理</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#" onclick="showBar(4); return false;">统计查询</a></li>
+        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#" onclick="showBar(5); return false;">系统管理</a></li>
       </ul>
     </div>
     <div id="top_menu">
