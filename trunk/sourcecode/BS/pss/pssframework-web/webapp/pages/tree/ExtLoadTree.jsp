@@ -86,7 +86,7 @@ function treeRenderBeforeHandler(pTree){
                       id:'addUser',
                       text : '新增机构',
                       handler : function(){
-                        alert('跳转到新增机构页面');
+                	     parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId=4";
                       }
                       
                   },
@@ -94,7 +94,7 @@ function treeRenderBeforeHandler(pTree){
                       id:'editUser',
                       text : '修改机构',
                       handler : function(){
-                        alert('跳转到修改:[' + selectedNode.text + ']机构的页面');
+                	  parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+selectedNode.id;
                       }
                       
                   },                  
@@ -102,7 +102,7 @@ function treeRenderBeforeHandler(pTree){
                       id:'delUser',
                       text : '删除机构',
                       handler : function(){
-                        alert('机构[' + selectedNode.text + ']已被删除....');
+                	 // parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+selectedNode.id;
                       }
                   },
                   {
@@ -139,10 +139,7 @@ searchNode = function(){
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
 <input type="button" value="查找节点" onclick="searchNode()" />-->
-
-
-<div id="tree" style="overflow:auto; height:100%;width:100%;" /></div>
+<div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
-
 </BODY>
 </HTML>
