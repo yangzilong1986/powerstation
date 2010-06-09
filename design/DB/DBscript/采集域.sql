@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-3 21:31:30                            */
+/* Created on:     2010-6-7 21:49:14                            */
 /*==============================================================*/
 
 
@@ -21,7 +21,16 @@ drop table R_TERM_PARA_TP_LIST cascade constraints;
 
 drop sequence SEQ_R_TASK;
 
+drop sequence SEQ_TASK_SEQUNCE;
+
 create sequence SEQ_R_TASK
+increment by 1
+start with 1
+ maxvalue 9999999999
+ minvalue 1
+ cache 20;
+
+create sequence SEQ_TASK_SEQUNCE
 increment by 1
 start with 1
  maxvalue 9999999999
