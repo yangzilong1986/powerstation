@@ -3,7 +3,7 @@
 <%@include file="../../commons/meta.jsp"%>
 <HTML>
 <HEAD>
-<link type='text/css' rel='stylesheet' href='<c:url value="/e3/commons/ext/resources/css/ext-all.css"/>' />
+<link type="text/css" rel="stylesheet" href='<c:url value="/e3/commons/ext/resources/css/ext-all.css"/>' />
 <script src="<c:url value="/e3/commons/ext/adapter/ext/ext-base.js"/>"></script>
 <script src="<c:url value="/e3/commons/ext/ext-all.js"/>"></script>
 <script>
@@ -139,6 +139,10 @@ searchNode = function(){
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
 <input type="button" value="查找节点" onclick="searchNode()" />-->
-<%=request.getAttribute("leafInfo")%>
+
+
+<div id="tree" style="overflow:auto; height:100%;width:100%;" /></div>
+${leafInfo}
+
 </BODY>
 </HTML>
