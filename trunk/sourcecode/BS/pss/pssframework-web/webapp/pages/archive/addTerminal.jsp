@@ -1,19 +1,12 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@taglib uri="/WEB-INF/peis-tag.tld" prefix="peis"%>
-
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
 <html>
 <head>
-<title><bean:message bundle="archive" key="archive.new.term"/></title>
 <meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<link href="<peis:contextPath />/css/window.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<peis:contextPath/>/js/common/calendar.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/common/common.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/switchOp.js"></script>
+<title>终端</title>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 var contextPath = "<peis:contextPath/>";
 function displaySwitch() {
