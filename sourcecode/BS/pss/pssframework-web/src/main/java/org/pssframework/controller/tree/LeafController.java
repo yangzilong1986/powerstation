@@ -24,9 +24,12 @@ import net.jcreate.e3.tree.support.RequestUtil;
 import net.jcreate.e3.tree.support.WebTreeBuilder;
 
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.tree.LeafInfo;
+import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.tree.LeafInfoManager;
 import org.pssframework.support.WebTreeDynamicNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +55,9 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 	private final String PARENT_ID = "parentId";
 	private final String PARENT_TYPE = "parentType";
+
+	@Autowired
+	private OrgInfoManager orgInfoManager;
 
 	/** 
 	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
@@ -129,8 +135,14 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	private String showExtLoadTree(final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
-		WebTreeDynamicNode rootNode = new WebTreeDynamicNode("进创集团", "org" + "001");
-		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/4?parentId=4&parentType=ORG", pRequest));
+		//TODO
+		final String parentID = "4";
+
+		OrgInfo orginfo = orgInfoManager.getById(Long.parseLong(parentID));
+
+		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "org" + orginfo.getOrgId());
+		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?parentId=" + parentID + "&parentType=ORG",
+				pRequest));
 
 		DefaultTreeModel treeModel = new DefaultTreeModel();
 		treeModel.addRootNode(rootNode);
