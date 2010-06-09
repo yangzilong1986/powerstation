@@ -85,7 +85,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("statuslist", getStatusOptions(mapRequest));
 
-
 		return result;
 	}
 
@@ -104,8 +103,40 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		// TODO Auto-generated method stub
-		return super._new(request, response, model);
+		Map mapRequest = new HashMap();
+
+		Long tgid = 0L;
+		if (model.getTgId() != null) {
+			tgid = model.getTgId();
+		}
+
+		Long orgid = 0L;
+		if (model.getOrgId() != null) {
+			orgid = model.getOrgId();
+		}
+
+		String runstatcode = "1";
+		if (model.getRunStatusCode() != null) {
+			runstatcode = model.getRunStatusCode();
+		}
+
+		//mapRequest.put("orgid", orgid);
+
+		mapRequest.put("codecate", "TG_STATUS");
+
+		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
+
+		ModelAndView result = new ModelAndView();
+
+		result.addObject("tginfo", tginfo);
+
+		result.setViewName("/archive/addTgRelevance");
+
+		result.addObject("orglist", getOrgOptions(mapRequest));
+
+		result.addObject("statuslist", getStatusOptions(mapRequest));
+
+		return result;
 	}
 
 	@Override
