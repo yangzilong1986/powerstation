@@ -5,6 +5,7 @@ package org.pssframework.controller.archive;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
+	@Autowired
 	private TranInfoManger tranInfoManager;
 
 	@SuppressWarnings("unchecked")
@@ -75,6 +77,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
 
+		mapRequest.put("tgid", tginfo.getTgId() == null ? "0L" : tginfo.getTgId());
+
 		ModelAndView result = new ModelAndView();
 
 		result.addObject("tginfo", tginfo);
@@ -85,6 +89,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("statuslist", getStatusOptions(mapRequest));
 
+		result.addObject("tranlist", getTranList(mapRequest));
 		return result;
 	}
 
@@ -98,45 +103,16 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	}
 
 	private List<TranInfo> getTranList(Map mapRequest) {
-		return tranInfoManager.findByPageRequest(mapRequest);
+		List<TranInfo> tranlist = tranInfoManager.findByPageRequest(mapRequest);
+		if (tranlist == null || tranlist.size() <= 0) {
+			tranlist = new LinkedList<TranInfo>();
+		}
+		return tranlist;
 	}
 
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		Map mapRequest = new HashMap();
-
-		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
-		}
-
-		Long orgid = 0L;
-		if (model.getOrgId() != null) {
-			orgid = model.getOrgId();
-		}
-
-		String runstatcode = "1";
-		if (model.getRunStatusCode() != null) {
-			runstatcode = model.getRunStatusCode();
-		}
-
-		//mapRequest.put("orgid", orgid);
-
-		mapRequest.put("codecate", "TG_STATUS");
-
-		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
-
-		ModelAndView result = new ModelAndView();
-
-		result.addObject("tginfo", tginfo);
-
-		result.setViewName("/archive/addTgRelevance");
-
-		result.addObject("orglist", getOrgOptions(mapRequest));
-
-		result.addObject("statuslist", getStatusOptions(mapRequest));
-
-		return result;
+		return index(request, response, model);
 	}
 
 	@Override

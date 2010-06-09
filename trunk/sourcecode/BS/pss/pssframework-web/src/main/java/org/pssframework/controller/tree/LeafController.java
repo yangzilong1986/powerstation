@@ -22,13 +22,13 @@ import net.jcreate.e3.tree.support.DefaultTreeDirector;
 import net.jcreate.e3.tree.support.DefaultTreeModel;
 import net.jcreate.e3.tree.support.RequestUtil;
 import net.jcreate.e3.tree.support.WebTreeBuilder;
+import net.jcreate.e3.tree.support.WebTreeDynamicNode;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.tree.LeafInfo;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.tree.LeafInfoManager;
-import org.pssframework.support.WebTreeDynamicNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -118,31 +118,29 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 		return new ModelAndView(LIST_ACTION);
 	}
 
-	/** 删除 */
-	@Override
-	public ModelAndView delete(@PathVariable java.lang.Long id) {
-		leafInfoManager.removeById(id);
-		return new ModelAndView(LIST_ACTION);
-	}
-
-	/** 批量删除 */
-	@Override
-	public ModelAndView batchDelete(java.lang.Long[] items) {
-		for (int i = 0; i < items.length; i++) {
-			leafInfoManager.removeById(items[i]);
-		}
-		return new ModelAndView(LIST_ACTION);
-	}
-
 	private String showExtLoadTree(final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
 		//TODO
 		final String parentID = "4";
 
 		OrgInfo orginfo = orgInfoManager.getById(Long.parseLong(parentID));
 
-		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "ORG" + orginfo.getOrgId());
-		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?parentId=" + parentID + "&parentType=ORG",
-				pRequest));
+		Object obj = null;
+
+		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "ORG_" + orginfo.getOrgId(),
+				new UserDataUncoder() {
+
+					public Object getParentID(Object arg0) throws UncodeException {
+						// TODO Auto-generated method stub
+						return null;
+					}
+
+					public Object getID(Object arg0) throws UncodeException {
+						// TODO Auto-generated method stub
+						return ((OrgInfo) arg0).getOrgId();
+					}
+				});
+		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?" + PARENT_ID + "=" + parentID + "&"
+				+ PARENT_TYPE + "=ORG", pRequest));
 
 		DefaultTreeModel treeModel = new DefaultTreeModel();
 		treeModel.addRootNode(rootNode);
@@ -158,10 +156,10 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	@SuppressWarnings("unchecked")
 	public void loadExtSubOrgs(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		final String parentID = pRequest.getParameter("parentId");
+		final String parentID = pRequest.getParameter(PARENT_ID);
 		PageRequest<Map> pageRequest = newPageRequest(pRequest, DEFAULT_SORT_COLUMNS);
-		pageRequest.getFilters().put("parentId", parentID);
-		pageRequest.getFilters().put("parentType", pRequest.getParameter("parentType"));
+		pageRequest.getFilters().put(PARENT_ID, parentID);
+		pageRequest.getFilters().put(PARENT_TYPE, pRequest.getParameter(PARENT_TYPE));
 
 		Page nodesPages = leafInfoManager.findByPageRequest(pageRequest);
 
@@ -169,9 +167,9 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 			@Override
 			protected Node createNode(Object pUserData, UserDataUncoder pUncoder) {
 				LeafInfo leaf = (LeafInfo) pUserData;
-				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "ORG" + leaf.getLeafId());
-				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&parentId=" + leaf.getLeafId()
-						+ "&parentType=" + leaf.getLeafType() + "&random=" + Math.random()));
+				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "ORG_" + leaf.getLeafId());
+				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&" + PARENT_ID + "=" + leaf.getLeafId()
+						+ "&" + PARENT_TYPE + "=" + leaf.getLeafType() + "&random=" + Math.random()));
 
 				result.setValue(leaf.getLeafId());
 				return result;

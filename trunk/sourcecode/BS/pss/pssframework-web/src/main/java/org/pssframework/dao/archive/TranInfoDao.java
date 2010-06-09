@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TranInfoDao extends BaseHibernateDao<TranInfo, Long> {
 
-	private String hql = "from TranInfo t where 1=1 and /~ t.tgId = '[tgid]' ~/ ";
+	private String hql = "from TranInfo t where 1=1 /~  and t.tgId = '[tgid]' ~/ ";
 
 	@Override
 	public Class getEntityClass() {
@@ -25,6 +25,7 @@ public class TranInfoDao extends BaseHibernateDao<TranInfo, Long> {
 		return TranInfo.class;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <X> List<X> findByPageRequest(Map mapRequest) {
 		return findAll(hql, mapRequest);
 	}
