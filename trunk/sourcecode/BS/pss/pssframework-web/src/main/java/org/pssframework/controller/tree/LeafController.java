@@ -83,9 +83,8 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	@Override
 	public ModelAndView show(@PathVariable java.lang.Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		LeafInfo leafInfo = (LeafInfo) leafInfoManager.getById(id);
 		loadExtSubOrgs(request, response);
-		return new ModelAndView("/tree/ExtLoadTree", "leafInfo", leafInfo);
+		return null;
 	}
 
 	/** 编辑 */
@@ -145,8 +144,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	public String loadExtSubOrgs(final HttpServletRequest pRequest, final HttpServletResponse pResponse)
-			throws Exception {
+	public void loadExtSubOrgs(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
 		final String parentID = pRequest.getParameter("parentId");
 		PageRequest<Map> pageRequest = newPageRequest(pRequest, DEFAULT_SORT_COLUMNS);
@@ -161,7 +159,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 				LeafInfo leaf = (LeafInfo) pUserData;
 				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "org" + leaf.getLeafId());
 				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&parentId=" + leaf.getLeafId()
-						+ "&parentType=" + leaf.getLeafType()));
+						+ "&parentType=" + leaf.getLeafType() + "&random=" + Math.random()));
 
 				result.setValue(leaf.getLeafId());
 				return result;
@@ -177,7 +175,6 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 			}
 
 			public Object getID(Object arg) throws UncodeException {
-				System.out.println(((LeafInfo) arg).getLeafId());
 				return ((LeafInfo) arg).getLeafId();
 			}
 		});
@@ -187,11 +184,13 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 		WebTreeBuilder treeBuilder = new ExtSubTreeBuilder();
 		treeBuilder.init(pRequest);
 		director.build(treeModel, treeBuilder);
+
 		String treeScript = treeBuilder.getTreeScript();
+
 		pResponse.setBufferSize(1024 * 10);
 		pResponse.setContentType("text/json;charset=utf-8");
 		pResponse.getWriter().write(treeScript);
 		pResponse.flushBuffer();
-		return null;
+
 	}
 }
