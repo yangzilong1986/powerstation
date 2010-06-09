@@ -3,7 +3,6 @@
  */
 package pep.bp.realinterface;
 
-import java.awt.image.DataBuffer;
 import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,12 +61,14 @@ public class RealTimeProxy376 implements ICollectInterface {
                     PmPacket376DT dt = new PmPacket376DT();
                     int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
                     dt.setFn(fn);
-                   // PmPacketData df = packet.getDataBuffer();
-                //    df.putDA(da);
-                //    df.putDT(dt);
+                    // PmPacketData df = packet.getDataBuffer();
+                    //    df.putDA(da);
+                    //    df.putDT(dt);
                     packet.getDataBuffer().putDA(da);
                     packet.getDataBuffer().putDT(dt);
-                    InjectDataIteam(packet, commandItem, AFN);
+                    if (AFN == AFN_SETPARA) {
+                        InjectDataIteam(packet, commandItem, AFN);
+                    }
                 }
                 if (AFN == AFN_RESET || AFN == AFN_SETPARA || AFN == AFN_TRANSMIT)//消息认证码字段PW
                 {
@@ -364,5 +365,84 @@ public class RealTimeProxy376 implements ICollectInterface {
      */
     public Map<String, Map<String, String>> getReturnByRRD(long appId) throws Exception {
         return null;
+    }
+
+    public Map<String, String> decodeData(PmPacketData dataBuffer, String CommandItemCode) {
+        Map<String, String> results = new TreeMap<String, String>();
+        ProtocolConfig config = ProtocolConfig.getInstance();
+        Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(CommandItemCode);
+        Iterator iterator = DataItemMap_Config.keySet().iterator();
+        while (iterator.hasNext()) {
+            String DataItemCode = (String) iterator.next();
+            ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+            int Len = dataItem.getLength();
+            String Format = dataItem.getFormat();
+            if (Format.equals("BIN")) {
+                results.put(DataItemCode, String.valueOf(dataBuffer.get()));
+                }else if (Format.equals("BS8")) {
+                    results.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+                } else if (Format.equals("BS24")) {
+                    results.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
+                } else if (Format.equals("BS64")) {
+                    results.put(DataItemCode, String.valueOf(dataBuffer.getBS64()));
+                } else if (Format.equals("ASCII")) {
+                    results.put(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
+                } else if (Format.equals("A1")) {
+                    results.put(DataItemCode, dataBuffer.getA1().toString());
+                } else if (Format.equals("A2")) {
+                    results.put(DataItemCode, dataBuffer.getA2().toString());
+                } else if (Format.equals("A3")) {
+                    results.put(DataItemCode, dataBuffer.getA3().toString());
+                } else if (Format.equals("A4")) {
+                    results.put(DataItemCode, dataBuffer.getA4().toString());
+                } else if (Format.equals("A5")) {
+                    results.put(DataItemCode, dataBuffer.getA5().toString());
+                } else if (Format.equals("A6")) {
+                    results.put(DataItemCode, dataBuffer.getA6().toString());
+                } else if (Format.equals("A7")) {
+                    results.put(DataItemCode, dataBuffer.getA7().toString());
+                } else if (Format.equals("A8")) {
+                    results.put(DataItemCode, dataBuffer.getA8().toString());
+                } else if (Format.equals("A9")) {
+                    results.put(DataItemCode, dataBuffer.getA9().toString());
+                } else if (Format.equals("A10")) {
+                    results.put(DataItemCode, dataBuffer.getA10().toString());
+                } else if (Format.equals("A11")) {
+                    results.put(DataItemCode, dataBuffer.getA11().toString());
+                } else if (Format.equals("A12")) {
+                    results.put(DataItemCode, dataBuffer.getA12().toString());
+                } else if (Format.equals("A13")) {
+                    results.put(DataItemCode, dataBuffer.getA13().toString());
+                } else if (Format.equals("A14")) {
+                    results.put(DataItemCode, dataBuffer.getA14().toString());
+                } else if (Format.equals("A15")) {
+                    results.put(DataItemCode, dataBuffer.getA15().toString());
+                } else if (Format.equals("A16")) {
+                    results.put(DataItemCode, dataBuffer.getA16().toString());
+                } else if (Format.equals("A17")) {
+                    results.put(DataItemCode, dataBuffer.getA17().toString());
+                } else if (Format.equals("A18")) {
+                    results.put(DataItemCode, dataBuffer.getA18().toString());
+                } else if (Format.equals("A19")) {
+                    results.put(DataItemCode, dataBuffer.getA19().toString());
+                } else if (Format.equals("A20")) {
+                    results.put(DataItemCode, dataBuffer.getA20().toString());
+                } else if (Format.equals("A21")) {
+                    results.put(DataItemCode, dataBuffer.getA21().toString());
+                } else if (Format.equals("A22")) {
+                    results.put(DataItemCode, dataBuffer.getA22().toString());
+                } else if (Format.equals("A23")) {
+                    results.put(DataItemCode, dataBuffer.getA23().toString());
+                } else if (Format.equals("A24")) {
+                    results.put(DataItemCode, dataBuffer.getA24().toString());
+                } else if (Format.equals("A25")) {
+                    results.put(DataItemCode, dataBuffer.getA25().toString());
+                } else if (Format.equals("A26")) {
+                    results.put(DataItemCode, dataBuffer.getA26().toString());
+                } else if (Format.equals("A27")) {
+                    results.put(DataItemCode, dataBuffer.getA27().toString());
+                }
+        }
+        return results;
     }
 }

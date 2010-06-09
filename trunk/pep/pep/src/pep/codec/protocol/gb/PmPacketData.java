@@ -8,7 +8,7 @@ package pep.codec.protocol.gb;
 
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
