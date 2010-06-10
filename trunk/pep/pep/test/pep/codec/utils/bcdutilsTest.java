@@ -165,6 +165,14 @@ public class bcdutilsTest {
     }
 
     @Test
+    public void testReverseBytes(){
+        final byte[] bytes0 = {0x01,0x02,0x03};
+        final byte[] bytes1 = {0x03,0x02,0x01};
+        byte[] bytes = BcdUtils.reverseBytes(bytes0);
+        assertTrue(TestUtils.byteArrayEquals(bytes1,bytes));
+    }
+
+    @Test
     public void testIpPoortStringToBytes(){
         String IPStr = "192.168.0.1:8080";
         byte[] results = BcdUtils.IpPortStringToBytes(IPStr);
