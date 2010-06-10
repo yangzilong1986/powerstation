@@ -274,4 +274,22 @@ public class BcdUtils {
     private static boolean isHexChar(char ch){
         return ((ch>='0') && (ch<='9')) || ((Character.toUpperCase(ch)>='A') && (Character.toUpperCase(ch)<='F'));
     }
+
+    public static byte[] reverseBytes(byte[] bytes){
+        int len = bytes.length;
+        byte[] reverseBytes = new byte[len];
+
+        for (int i=0; i<len; i++){
+            reverseBytes[i] = bytes[len-i-1];
+        }
+        return reverseBytes;
+    }
+
+    public static String dupeString(String str, int repeats){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<repeats; i++)
+            sb.append(str);
+        return sb.toString();
+    }
+
 }
