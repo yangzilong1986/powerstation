@@ -375,6 +375,7 @@ public class RealTimeProxy376 implements ICollectInterface {
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(CommandItemCode);
         Iterator iterator = DataItemMap_Config.keySet().iterator();
+        dataBuffer.rewind();
         dataBuffer.getWord(1);//DA
         dataBuffer.getWord(1);//DT
         while (iterator.hasNext()) {
@@ -384,6 +385,8 @@ public class RealTimeProxy376 implements ICollectInterface {
             String Format = dataItem.getFormat();
             if (Format.equals("BIN")) {
                 results.put(DataItemCode, String.valueOf(dataBuffer.get()));
+                }else if (Format.equals("IPPORT")) {
+                    results.put(DataItemCode, dataBuffer.getIPPORT());
                 }else if (Format.equals("BS8")) {
                     results.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("BS24")) {

@@ -473,9 +473,9 @@ public class PmPacketData{
     }
 
     public String getIPPORT(){
-        byte[] bytes = new byte[1];
+        byte[] bytes = new byte[6];
         dataBuff.get(bytes);
-        return BcdUtils.bytesToBitSetString(bytes);
+        return BcdUtils.bytesingToIpPortStr(bytes);
     }
 
     @Override

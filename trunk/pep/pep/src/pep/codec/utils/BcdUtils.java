@@ -181,12 +181,34 @@ public class BcdUtils {
 
         for(String str: strs)
         {
-            b[index++] = (byte)(Integer.parseInt(str) - 128);
+            b[index++] = (byte)(Integer.parseInt(str));
         }
          String[] port = ipportString.split("[:]");
-         b[index++] = (byte)(Integer.parseInt(port[1])<<8 -128);
-         b[index++] = (byte)(Integer.parseInt(port[1])>>8 -128);
+         b[index++] = (byte)((Integer.parseInt(port[1]) & 0x00FF));
+         b[index++] = (byte)((Integer.parseInt(port[1]) & 0xFF00)>>8);
         return b;
+
+    }
+
+    public static String bytesingToIpPortStr(byte[] bytes){
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<4; i++){
+            int Ip = 0;
+            if(bytes[i] < 0)
+                Ip = bytes[i]+256;
+            else
+                Ip = bytes[i];
+            sb.append(String.valueOf(Ip));
+            if (i<3)
+                sb.append(".");
+            else
+                sb.append(":");
+        }
+        int portHigh = (bytes[5]>=0 ? bytes[5]:bytes[5]+256);
+        int portLow = (bytes[4]>=0 ? bytes[4]:bytes[4]+256);
+        int port = portHigh * 256 +portLow;
+        sb.append(String.valueOf(port));
+        return sb.toString();
 
     }
 
