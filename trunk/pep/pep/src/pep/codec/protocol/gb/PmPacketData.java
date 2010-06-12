@@ -411,13 +411,14 @@ public class PmPacketData{
 
     public PmPacketData putAscii(String str, int len){
         byte[] temp = str.getBytes(Charset.forName("US-ASCII"));
-        byte[] bytes = new byte[len];
-        for(int i=0; i<len; i++) bytes[i]=0;
+        
         int n;
         if (len<=temp.length)
             n = len;
         else
             n = temp.length;
+        byte[] bytes = new byte[n];
+        //for(int i=0; i<len; i++) bytes[i]=0;
         for(int i=0; i<n; i++) bytes[i]=temp[i];
         
         dataBuff.put(bytes);
@@ -475,7 +476,29 @@ public class PmPacketData{
     public String getIPPORT(){
         byte[] bytes = new byte[6];
         dataBuff.get(bytes);
-        return BcdUtils.bytesingToIpPortStr(bytes);
+        return BcdUtils.bytesToIpPortString(bytes);
+    }
+
+    public PmPacketData putIP(String ip){
+        dataBuff.put(BcdUtils.IPStringToBytes(ip));
+        return this;
+    }
+
+    public String getIP(){
+        byte[] bytes = new byte[4];
+        dataBuff.get(bytes);
+        return BcdUtils.bytesToIpString(bytes);
+    }
+
+    public PmPacketData putTEL(String telecode){
+        dataBuff.put(BcdUtils.TelStringToBytes(telecode));
+        return this;
+    }
+
+    public String getTEL(){
+        byte[] bytes = new byte[8];
+        dataBuff.get(bytes);
+        return BcdUtils.bytesToTelString(bytes);
     }
 
     @Override

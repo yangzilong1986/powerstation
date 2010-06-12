@@ -78,32 +78,32 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem2 = new ProtocolCommandItem();
         CommandItem2.setCommandCode("10040003");
-        CommandItem2.AddDataItem(new ProtocolDataItem("1004000301", 6, "BIN", "","主用IP地址和端口","127.0.0.1:80"));
-        CommandItem2.AddDataItem(new ProtocolDataItem("1004000302", 6, "BIN", "","备用IP地址和端口","127.0.0.1:80"));
+        CommandItem2.AddDataItem(new ProtocolDataItem("1004000301", 6, "IPPORT", "","主用IP地址和端口","127.0.0.1:80"));
+        CommandItem2.AddDataItem(new ProtocolDataItem("1004000302", 6, "IPPORT", "","备用IP地址和端口","127.0.0.1:80"));
         CommandItem2.AddDataItem(new ProtocolDataItem("1004000303", 16, "ASCII", "","APN","cmdz.zj"));
 
         ProtocolCommandItem CommandItem3 = new ProtocolCommandItem();
         CommandItem3.setCommandCode("10040004");
-        CommandItem3.AddDataItem(new ProtocolDataItem("1004000401", 8, "BIN", "","主站电话号码或主站手机号码","13147863416"));
-        CommandItem3.AddDataItem(new ProtocolDataItem("1004000402", 8, "BIN", "","短信中心号码","123456"));
+        CommandItem3.AddDataItem(new ProtocolDataItem("1004000401", 8, "TEL", "","主站电话号码或主站手机号码","13147863416"));
+        CommandItem3.AddDataItem(new ProtocolDataItem("1004000402", 8, "TEL", "","短信中心号码","123456"));
 
         ProtocolCommandItem CommandItem4 = new ProtocolCommandItem();
         CommandItem4.setCommandCode("10040005");
-        CommandItem4.AddDataItem(new ProtocolDataItem("1004000501", 1, "BIN", "","消息认证方案号","1"));
+        CommandItem4.AddDataItem(new ProtocolDataItem("1004000501", 1, "BIN", "","消息认证方案号","0"));
         CommandItem4.AddDataItem(new ProtocolDataItem("1004000502", 2, "BIN", "","消息认证方案参数","1"));
 
         ProtocolCommandItem CommandItem5 = new ProtocolCommandItem();
         CommandItem5.setCommandCode("10040007");
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000701", 4, "BIN", "","终端IP地址","127.0.0.1"));
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000702", 4, "BIN", "","子网掩码地址","255.255.255.0"));
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000703", 4, "BIN", "","网关地址","127.0.0.1"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000701", 4, "IP", "","终端IP地址","127.0.0.1"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000702", 4, "IP", "","子网掩码地址","255.255.255.0"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000703", 4, "IP", "","网关地址","127.0.0.1"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000704", 1, "BIN", "","代理服务器代理类型","1"));
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000705", 6, "BIN", "","代理服务器地址和端口","127.0.0.1:80"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000705", 6, "IPPORT", "","代理服务器地址和端口","127.0.0.1:80"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000706", 1, "BIN", "","代理服务器连接方式","1"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000707", 1, "BIN", "","代理服务器用户名长度","10"));
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000708", -1, "BIN", "","代理服务器用户名","admin"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000708", 20, "ASCII", "","代理服务器用户名","admin"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000709", 1, "BIN", "","代理服务器密码长度","10"));
-        CommandItem5.AddDataItem(new ProtocolDataItem("1004000710", -1, "ASCII", "","代理服务器密码","test"));
+        CommandItem5.AddDataItem(new ProtocolDataItem("1004000710", 20, "ASCII", "","代理服务器密码","test"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000711", 2, "BIN", "","终端侦听端口","80"));
 
         CommandItems.AddCommandItem(CommandItem1);

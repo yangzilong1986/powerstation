@@ -118,4 +118,35 @@ public class PmPacketTest {
             assertEquals(a, c);
         }
     }
+
+     @Test
+    public void testToString() {
+        PmPacket376 packet = new PmPacket376();
+        String packStr1 = packet.getDataBuffer().toString();
+            packet.setAfn((byte)4);//AFN
+            packet.getAddress().setRtua("96123456"); //逻辑地址
+            packet.getControlCode().setIsUpDirect(false);
+            packet.getControlCode().setIsOrgniger(true);
+            packet.getControlCode().setFunctionKey((byte)1);
+            packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+            packet.getControlCode().setDownDirectFrameCount((byte) 0);
+            packet.getSeq().setIsTpvAvalibe(true);
+        
+        String packStr2 = packet.getDataBuffer().toString();
+        assertEquals(packStr1, packStr2);
+        System.out.println("packStr1:"+packStr1);
+        System.out.println("packStr2:"+packStr2);
+    }
+
+     @Test
+    public void testPmPacketDataToString() {
+        PmPacketData databuf = new PmPacketData();
+        String packStr1 = databuf.toString();
+
+        String packStr2 = databuf.toString();
+        assertEquals(packStr1, packStr2);
+        System.out.println("packStr1:"+packStr1);
+        System.out.println("packStr2:"+packStr2);
+    }
+
 }

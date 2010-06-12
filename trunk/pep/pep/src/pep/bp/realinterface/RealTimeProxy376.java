@@ -53,6 +53,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             packet.getControlCode().setFunctionKey(FUNCODE_DOWM_1);
             packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
             packet.getControlCode().setDownDirectFrameCount((byte) 0);
+            packet.getSeq().setIsTpvAvalibe(true);
             int[] MpSn = obj.getMpSn();
             for (int i = 0; i <= MpSn.length - 1; i++) {
                 List<CommandItem> CommandItems = obj.getCommandItems();
@@ -101,11 +102,16 @@ public class RealTimeProxy376 implements ICollectInterface {
                 }
                 String Format = dataItem.getFormat();
                 int Length = dataItem.getLength();
+
                 if (Format.equals("BIN")) {
                     packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue), Length);
                 } else if (Format.equals("IPPORT")) {
                     packet.getDataBuffer().putIPPORT(DataItemValue);
-                } else if (Format.equals("BS8")) {
+                } else if (Format.equals("IP")) {
+                    packet.getDataBuffer().putIP(DataItemValue);
+                } else if (Format.equals("TEL")) {
+                    packet.getDataBuffer().putTEL(DataItemValue);
+                }else if (Format.equals("BS8")) {
                     packet.getDataBuffer().putBS8(DataItemValue);
                 } else if (Format.equals("BS24")) {
                     packet.getDataBuffer().putBS24(DataItemValue);
@@ -387,6 +393,10 @@ public class RealTimeProxy376 implements ICollectInterface {
                 results.put(DataItemCode, String.valueOf(dataBuffer.get()));
                 }else if (Format.equals("IPPORT")) {
                     results.put(DataItemCode, dataBuffer.getIPPORT());
+                }else if (Format.equals("IP")) {
+                    results.put(DataItemCode, dataBuffer.getIP());
+                }else if (Format.equals("TEL")) {
+                    results.put(DataItemCode, dataBuffer.getTEL());
                 }else if (Format.equals("BS8")) {
                     results.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("BS24")) {

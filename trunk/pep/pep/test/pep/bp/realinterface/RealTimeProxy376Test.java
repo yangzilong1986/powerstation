@@ -93,6 +93,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testWriteEquipmentParameters() throws Exception {
        //测试F1
+        /*
         Map datacellParams1 = new TreeMap();
         datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
         datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
@@ -121,6 +122,54 @@ public class RealTimeProxy376Test {
         assertTrue(resultMap3.get("1004000301").equals("192.168.0.1:8080"));
         assertTrue(resultMap3.get("1004000302").equals("192.168.0.2:8080"));
         assertTrue(resultMap3.get("1004000303").equals("ZJDL.ZJ"));
+
+        //测试F4
+        Map datacellParams4 = new TreeMap();
+        datacellParams4.put("1004000401", "13675834792");//主站电话号码或主站手机号码
+        datacellParams4.put("1004000402", "8613010360500");//短信中心号码
+        MTO_376 MTO4  = PutInCommandItem(datacellParams4,"10040004","96123456");
+
+        Map<String,String> resultMap4 = getTestResults_WEP(MTO4,"96123456","10040004");
+        assertTrue(resultMap4.get("1004000401").equals("13675834792"));
+        assertTrue(resultMap4.get("1004000402").equals("8613010360500"));
+        
+        //测试F5
+        Map datacellParams5 = new TreeMap();
+        datacellParams5.put("1004000501", "0");//消息认证方案号
+        datacellParams5.put("1004000502", "21");//消息认证方案参数
+        MTO_376 MTO5  = PutInCommandItem(datacellParams5,"10040005","96123456");
+
+        Map<String,String> resultMap5 = getTestResults_WEP(MTO5,"96123456","10040005");
+        assertTrue(resultMap5.get("1004000501").equals("0"));
+        assertTrue(resultMap5.get("1004000502").equals("21"));
+*/
+        //测试F7
+        Map datacellParams7 = new TreeMap();
+        datacellParams7.put("1004000701", "50.120.56.123");//终端IP地址
+        datacellParams7.put("1004000702", "255.255.255.0");//子网掩码地址
+        datacellParams7.put("1004000703", "218.108.248.200");//网关地址
+        datacellParams7.put("1004000704", "0");//代理服务器代理类型
+        datacellParams7.put("1004000705", "108.215.0.3:9988");//代理服务器地址和端口
+        datacellParams7.put("1004000706", "1");//代理服务器连接方式
+        datacellParams7.put("1004000707", "2");//代理服务器用户名长度
+        datacellParams7.put("1004000708", "cm");//代理服务器用户名
+        datacellParams7.put("1004000709", "3");//代理服务器密码长度
+        datacellParams7.put("1004000710", "123");//代理服务器密码
+        datacellParams7.put("1004000711", "9988");//终端侦听端口
+        MTO_376 MTO7  = PutInCommandItem(datacellParams7,"10040007","96123456");
+
+        Map<String,String> resultMap7 = getTestResults_WEP(MTO7,"96123456","10040007");
+        assertTrue(resultMap7.get("1004000701").equals("50.120.56.123"));
+        assertTrue(resultMap7.get("1004000702").equals("255.255.255.0"));
+        assertTrue(resultMap7.get("1004000703").equals("218.108.248.200"));
+        assertTrue(resultMap7.get("1004000704").equals("0"));
+        assertTrue(resultMap7.get("1004000705").equals("108.215.0.3:9988"));
+        assertTrue(resultMap7.get("1004000706").equals("1"));
+        assertTrue(resultMap7.get("1004000707").equals("2"));
+        assertTrue(resultMap7.get("1004000708").equals("cm"));
+        assertTrue(resultMap7.get("1004000709").equals("3"));
+        assertTrue(resultMap7.get("1004000710").equals("123"));
+        assertTrue(resultMap7.get("1004000711").equals("9988"));
     }
 
     /**
