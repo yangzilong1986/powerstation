@@ -46,9 +46,13 @@ function refreshNode(){
  selectNode.reload();
 }
 
-function refreshParentNode(){
- var selectModel= tree.getSelectionModel();
- var selectNode = selectModel.getSelectedNode();
+function refreshParentNode(selectedNode){
+  var selectNode = selectedNode;
+if(typeof selectedNode == 'undefinded'){
+	var selectModel= tree.getSelectionModel();
+   selectNode = selectModel.getSelectedNode();
+}
+ 
  if ( selectNode == null ){
    return;
  }
@@ -90,7 +94,7 @@ function treeRenderBeforeHandler(pTree){
                           var node = selectedNode.id;
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
-                          if("type"=='ORG'){ 
+                          if(type=='ORG'){ 
                 	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+uid;
                           }
                       }
@@ -103,8 +107,8 @@ function treeRenderBeforeHandler(pTree){
                           var node = selectedNode.id;
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
-                          if("type"=='TG'){ 
-                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/edit?tgId="+uid;
+                          if(type=='TG'){ 
+                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/"+uid+"/edit";
                           }
                       }
                       
@@ -116,11 +120,13 @@ function treeRenderBeforeHandler(pTree){
                           var node = selectedNode.id;
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
-                          if("type"=='TG'){ 
-                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo?_method&tgId="+uid;
-                	       parent.tree.location.href = "${ctx}/tree";
+                          if(type=='TG'){ 
+                        	  deletetginfo(uid);
+                          
                           }
-                      }
+
+                          refreshParentNode(selectedNode)
+                    }
                   },
                   {
                       id:'viewUser',
@@ -129,8 +135,9 @@ function treeRenderBeforeHandler(pTree){
                     	  var node = selectedNode.id;
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
-                          if("type"=='TG'){ 
+                          if(type=='TG'){ 
                 	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/"+uid;
+                         
                           }
                       }
                   }
@@ -151,16 +158,36 @@ searchNode = function(){
  
 }
 
+deletetginfo = function(id){
+    var url="${ctx}/archive/tginfo/"+id+'.json?_method=delete';
+    if(confirm("确定删除该台区?")){
+      jQuery.ajax({
+           url: url,
+           dataType:'json',
+           type:'post',
+           cache: false,
+           success: function(json){
+             var msg=json['msg'];
+             var isSucc = json['isSucc'];
+              alert(msg);
+           },error:function(e){
+             alert("error")
+               alert(e.getMessage());
+           }
+         });
+    }
+}
+
 </script>
 </HEAD>
 <BODY>
-<!--  
+<!-- 
 <input type="button" value="选种节点" onclick="showSelectedNode()" />
 <input type="button" value="遍历所有节点" onclick="visitAllNodes()" />
 <input type="button" value="刷新当前节点" onclick="refreshNode()" />
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
-<input type="button" value="查找节点" onclick="searchNode()" />-->
+<input type="button" value="查找节点" onclick="searchNode()" /> -->
 <div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
 </BODY>

@@ -241,6 +241,7 @@ function loadTgRelevevance(){
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
+      <input type="hidden" id="_type" name="_type" value="${_type}"/>
         <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
         <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16"
           cssStyle="width:145px;" /></td>
@@ -262,8 +263,10 @@ function loadTgRelevevance(){
       </tr>
       <tr>
         <td width="100%" colspan="6" align="right"><input id="addTg" name="addTg" type="button" class="btnbg4"
-          value="添加" /> <input id="updateTg" name="updateTg" type="button" class="btnbg4" value="更新" /> <input
-          id="deleteTg" name="deleteTg" type="button" class="btnbg4" value="删除" /></td>
+          value="添加" /> <input id="updateTg" name="updateTg" type="button" class="btnbg4" value="更新" /> 
+          <input id="save" name="save" type="button" class="btnbg4" value="保存" />
+          
+          </td>
       </tr>
     </table>
   </form:form></div>
@@ -453,6 +456,23 @@ jQuery(function(){
 			jQuery(this).attr("disabled","");
 		}
 	  })
+
+  jQuery("#save").click(function(){
+    if(val.validate()){
+        jQuery(this).attr("disabled","disabled");
+
+        if($("#_type").val()="edit"){
+        	updatetginfo();
+        }else if($("#_type").val()="new"){
+        	addtginfo();
+        }
+        
+        jQuery(this).attr("disabled","");
+    }else{
+      jQuery(this).attr("disabled","");
+    }
+    })
+	    
 })
 
 
