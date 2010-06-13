@@ -167,7 +167,8 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 			@Override
 			protected Node createNode(Object pUserData, UserDataUncoder pUncoder) {
 				LeafInfo leaf = (LeafInfo) pUserData;
-				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), "ORG_" + leaf.getLeafId());
+				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), leaf.getLeafType() + "_"
+						+ leaf.getLeafId());
 				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&" + PARENT_ID + "=" + leaf.getLeafId()
 						+ "&" + PARENT_TYPE + "=" + leaf.getLeafType() + "&random=" + Math.random()));
 
