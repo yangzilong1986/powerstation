@@ -8,9 +8,7 @@ import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
-import org.pssframework.dao.archive.TerminalInfoDao;
-import org.pssframework.model.archive.TerminalInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.pssframework.model.archive.PsInfo;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,18 +16,15 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class TerminalInfoManger extends BaseManager<TerminalInfo, Long> {
+public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
-	@Autowired
-	private TerminalInfoDao terminalInfo;
-	
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return terminalInfo;
+		return null;
 	}
 
-	public List<TerminalInfo> findByPageRequest(Map mapRequest) {
+	public List<PsInfo> findByPageRequest(Map mapRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}
