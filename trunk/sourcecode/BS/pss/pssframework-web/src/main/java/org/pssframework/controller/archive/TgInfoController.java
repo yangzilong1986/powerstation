@@ -212,6 +212,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		mapRequest.put("codecate", "TG_STATUS");
 
+		mapRequest.put("tgid", id);
+
 		CommonPart(result, mapRequest);
 
 		result.addObject("_type", "edit");
@@ -254,6 +256,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		mapRequest.put("codecate", "TG_STATUS");
 
+		mapRequest.put("tgid", id);
+
 		CommonPart(modelAndView, mapRequest);
 
 		modelAndView.setViewName(globalFoward);
@@ -264,17 +268,32 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	}
 
+	/**
+	 * 下拉框
+	 * @param model
+	 * @param mapRequest
+	 */
 	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
 		model.addObject("orglist", getOrgOptions(mapRequest));
 		model.addObject("statuslist", getStatusOptions(mapRequest));
 
 	}
 
+	/**
+	 * 关联项目
+	 * @param modelAndView
+	 * @param mapRequest
+	 */
 	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
 		modelAndView.addObject("tranlist", getTranList(mapRequest));
 
 	}
 
+	/**
+	 * 重叠部分
+	 * @param modelAndView
+	 * @param mapRequest
+	 */
 	private void CommonPart(ModelAndView modelAndView, Map<String, ?> mapRequest) {
 		getInitOption(modelAndView, mapRequest);
 		getRelevance(modelAndView, mapRequest);
