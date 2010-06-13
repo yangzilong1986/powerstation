@@ -38,6 +38,10 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	//默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
+	private static final String SUCC = "成功";
+
+	private static final String globalFoward = "/archive/addTgRelevance";
+
 	@Autowired
 	private TgInfoManager tgInfoManager;
 
@@ -50,46 +54,24 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private TranInfoManger tranInfoManager;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
-
-		Map mapRequest = new HashMap();
 
 		Long tgid = 0L;
 		if (model.getTgId() != null) {
 			tgid = model.getTgId();
 		}
 
-		Long orgid = 0L;
-		if (model.getOrgId() != null) {
-			orgid = model.getOrgId();
-		}
-
-		String runstatcode = "1";
-		if (model.getRunStatusCode() != null) {
-			runstatcode = model.getRunStatusCode();
-		}
-
 		//mapRequest.put("orgid", orgid);
 
-		mapRequest.put("codecate", "TG_STATUS");
-
 		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
-
-		mapRequest.put("tgid", tginfo.getTgId() == null ? "0L" : tginfo.getTgId());
 
 		ModelAndView result = new ModelAndView();
 
 		result.addObject("tginfo", tginfo);
 
-		result.setViewName("/archive/addTgRelevance");
+		result.setViewName(globalFoward);
 
-		result.addObject("orglist", getOrgOptions(mapRequest));
-
-		result.addObject("statuslist", getStatusOptions(mapRequest));
-
-		result.addObject("tranlist", getTranList(mapRequest));
 		return result;
 	}
 
@@ -98,10 +80,12 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return orgInfoManager.findByPageRequest(mapRequest);
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<CodeInfo> getStatusOptions(Map mapRequest) {
 		return codeInfoManager.findByPageRequest(mapRequest);
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<TranInfo> getTranList(Map mapRequest) {
 		List<TranInfo> tranlist = tranInfoManager.findByPageRequest(mapRequest);
 		if (tranlist == null || tranlist.size() <= 0) {
@@ -124,15 +108,21 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
 		boolean isSucc = true;
-		String msg = "成功";
+		String msg = SUCC;
 		Long tgId = 0L;
 		try {
 			model.setChaDate(new Date());
+
 			model.setPubPrivFlag("0");
+
 			tgInfoManager.saveOrUpdate(model);
+
 			tgId = model.getTgId();
+
 		} catch (Exception e) {
+
 			isSucc = false;
+
 			msg = e.getMessage();
 
 		}
@@ -140,17 +130,32 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView edit(@PathVariable Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return super.edit(id);
+		ModelAndView result = new ModelAndView();
+
+		TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
+
+		result.addObject("tginfo", tginfo);
+
+		Map mapRequest = new HashMap();
+
+		mapRequest.put("codecate", "TG_STATUS");
+
+		getInitOption(result, mapRequest);
+
+		getRelevance(result, mapRequest);
+
+		result.setViewName(globalFoward);
+		return result;
 	}
 
 	@Override
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		boolean isSucc = true;
-		String msg = "成功";
+		String msg = SUCC;
 		try {
 			TgInfo tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
@@ -165,11 +170,39 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+
 		TgInfo tginfo = this.tgInfoManager.getById(id);
-		return index(request, response, tginfo);
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		modelAndView.addObject("tginfo", tginfo);
+
+		Map mapRequest = new HashMap();
+
+		mapRequest.put("codecate", "TG_STATUS");
+
+		getInitOption(modelAndView, mapRequest);
+
+		getRelevance(modelAndView, mapRequest);
+
+		modelAndView.setViewName(globalFoward);
+
+		return modelAndView;
+
+	}
+
+	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+		model.addObject("orglist", getOrgOptions(mapRequest));
+		model.addObject("statuslist", getStatusOptions(mapRequest));
+
+	}
+
+	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
+		modelAndView.addObject("tranlist", getTranList(mapRequest));
 
 	}
 
