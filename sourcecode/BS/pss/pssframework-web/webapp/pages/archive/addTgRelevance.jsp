@@ -237,36 +237,43 @@ function loadTgRelevevance(){
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||     document.body.clientWidth) -10 ); height: expression(((     document.documentElement.clientHeight ||     document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
-      <input type="hidden" id="_type" name="_type" value="${_type}"/>
+        <input type="hidden" id="_type" name="_type" value="${_type}" />
+        <c:choose>
+          <c:when test="${_type=='edit' || _type=='new'}">
+          <c:set var="disabled" value="false" ></c:set>
+          </c:when>
+          <c:otherwise>
+            <c:set var="disabled" value="true"></c:set>
+          </c:otherwise>
+        </c:choose>
         <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
-        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16"
+        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" disabled="${disabled}"
           cssStyle="width:145px;" /></td>
         <td width="10%" align="right" class="green">台区名称：</td>
-        <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" /></td>
+        <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
+          disabled="${disabled}" /></td>
         <td width="10%" align="right" class="green">管理单位：</td>
-        <td width="25%"><form:select path="orgId" id="orgId" itemLabel="orgName" itemValue="orgId"
+        <td width="25%"><form:select path="orgId" id="orgId" itemLabel="orgName" itemValue="orgId" disabled="${disabled}"
           items="${orglist}" cssStyle="width:145px;"></form:select></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
         <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2"
-          cssStyle="width:135px;" /> kVA</td>
+          cssStyle="width:135px;" disabled="${disabled}"/> kVA</td>
         <td width="10%" align="right" class="green">运行状态：</td>
         <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
-          items="${statuslist}" cssStyle="width:145px;" /></td>
+          items="${statuslist}" cssStyle="width:145px;" disabled="${disabled}"/></td>
         <td width="15%" align="right" class="green">地 址：</td>
-        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:145px;" /></td>
+        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:145px;" disabled="${disabled}"/></td>
       </tr>
       <tr>
-        <td width="100%" colspan="6" align="right"><input id="addTg" name="addTg" type="button" class="btnbg4"
-          value="添加" /> <input id="updateTg" name="updateTg" type="button" class="btnbg4" value="更新" /> 
-          <input id="save" name="save" type="button" class="btnbg4" value="保存" />
-          
-          </td>
+        <td width="100%" colspan="6" align="right">
+        <input id="save" name="save" type="button" class="btnbg4"
+          value="保存"  <c:if test="${disabled == 'true'}">disabled</c:if>></input></td>
       </tr>
     </table>
   </form:form></div>
