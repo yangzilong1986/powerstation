@@ -66,6 +66,8 @@ public class PmPacketData{
         return dataBuff.get();
     }
 
+    
+
     public PmPacketData putBin(int value,int length){
         if (length==1)
             this.put((byte)value);
@@ -108,8 +110,10 @@ public class PmPacketData{
         dataBuff.put((byte)(value / 0x100));
     }
 
-    public int getWord(int value){
-        return dataBuff.getUnsignedShort();
+    public int getWord(){
+        byte valueLow = dataBuff.get();
+        byte valueHigh = dataBuff.get();
+        return valueHigh*0x100 + valueLow;
     }
 
     public PmPacketData putA1(DataTypeA1 a1){
@@ -417,8 +421,8 @@ public class PmPacketData{
             n = len;
         else
             n = temp.length;
-        byte[] bytes = new byte[n];
-        //for(int i=0; i<len; i++) bytes[i]=0;
+        byte[] bytes = new byte[len];
+        for(int i=0; i<len; i++) bytes[i]=0;
         for(int i=0; i<n; i++) bytes[i]=temp[i];
         
         dataBuff.put(bytes);
@@ -503,9 +507,10 @@ public class PmPacketData{
 
     @Override
     public String toString(){
-        int pos = dataBuff.position();
+       // int pos = dataBuff.position();
         String result = BcdUtils.binArrayToString(dataBuff.array());
-        dataBuff.position(pos);
+      //  dataBuff.position(pos);
         return result;
+
     }
 }
