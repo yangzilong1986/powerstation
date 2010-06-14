@@ -93,7 +93,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testWriteEquipmentParameters() throws Exception {
        //测试F1
-        /*
+        
         Map datacellParams1 = new TreeMap();
         datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
         datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
@@ -142,7 +142,7 @@ public class RealTimeProxy376Test {
         Map<String,String> resultMap5 = getTestResults_WEP(MTO5,"96123456","10040005");
         assertTrue(resultMap5.get("1004000501").equals("0"));
         assertTrue(resultMap5.get("1004000502").equals("21"));
-*/
+
         //测试F7
         Map datacellParams7 = new TreeMap();
         datacellParams7.put("1004000701", "50.120.56.123");//终端IP地址
