@@ -327,6 +327,7 @@ function loadTgRelevevance(){
       </tr>
     </thead>
     <tbody>
+     <c:forEach items="${meterlist}" var="meter">
       <tr>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -337,16 +338,7 @@ function loadTgRelevevance(){
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
-      <tr bgcolor="#f3f3f3">
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
+     </c:forEach>
     </tbody>
   </table>
   </div>
