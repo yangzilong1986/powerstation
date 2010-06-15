@@ -20,18 +20,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class TerminalInfoManger extends BaseManager<TerminalInfo, Long> {
 
+	private static final String Term = "select t from  TerminalInfo t,MpInfo m,GpInfo g where g.mpId = m.mpId and t.termId=g.termId"
+			+ "/~ m.tgId = '[tgid]' ~/ " + "/~ m.lineId = '[lineid]' ~/" + "/~ m.objectId = '[objectid]' ~/";
+
 	@Autowired
-	private TerminalInfoDao terminalInfo;
-	
+	private TerminalInfoDao terminalInfoDao;
+
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return terminalInfo;
+		return terminalInfoDao;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<TerminalInfo> findByPageRequest(Map mapRequest) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return terminalInfoDao.findAll(Term, mapRequest);
 	}
 
 }

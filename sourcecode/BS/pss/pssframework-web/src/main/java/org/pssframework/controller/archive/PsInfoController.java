@@ -3,116 +3,144 @@
  */
 package org.pssframework.controller.archive;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
-import org.pssframework.model.archive.TranInfo;
-import org.pssframework.service.archive.TranInfoManger;
+import org.pssframework.model.archive.PsInfo;
+import org.pssframework.service.archive.PsInfoManger;
+import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Administrator
-*变压器信息
+*漏保
  */
 @Controller
 @RequestMapping("/archive/psinfo")
-public class PsInfoController extends BaseRestSpringController<TranInfo, java.lang.Long> {
+public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang.Long> {
+
+	private static final String SUCC = "成功";
+
+	@Override
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		super.initBinder(request, binder);
+	}
+
 	@Autowired
-	private TranInfoManger tranInfoManager;
+	private PsInfoManger psInfoManager;
 
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
-
-		Map mapRequest = new HashMap();
-
-		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
-		}
-
-		String runstatcode = "1";
-		if (model.getRunStatusCode() != null) {
-			runstatcode = model.getRunStatusCode();
-		}
-
-		//mapRequest.put("orgid", orgid);
-
-		mapRequest.put("codecate", "TG_STATUS");
-
-		//		TranInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new TranInfo() : this.tgInfoManager.getById(tgid);
-		//
-		ModelAndView result = new ModelAndView();
-		//
-		//		result.addObject("tginfo", tginfo);
-		//
-		//		result.setViewName("/archive/addTgRelevance");
-		//
-		//		result.addObject("orglist", getOrgOptions(mapRequest));
-		//
-		//		result.addObject("statuslist", getStatusOptions(mapRequest));
-
-		return result;
-	}
+	@Autowired
+	private TerminalInfoManger terminalInfoManger;
 
 	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TranInfo model)
-			throws Exception {
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		boolean isSucc = true;
-		String msg = "成功";
-		Long tgId = 0L;
+		String msg = SUCC;
+		Long psId = 0L;
 		try {
-			model.setPubPrivFlag("0");
-			tranInfoManager.saveOrUpdate(model);
-			tgId = model.getTgId();
+			psInfoManager.saveOrUpdate(model);
+			psId = model.getPsId();
 		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
 			msg = e.getMessage();
 
 		}
-
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("psId", psId);
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) throws Exception {
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
+
+		String tgid = request.getParameter("tgid");
+
+		Map requestMap = new HashMap();
+		requestMap.put("tgid", tgid);
+
+		List termlist = terminalInfoManger.findByPageRequest(requestMap);
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TRAN_CODE");
+		// 漏保类型
+		mapRequest.put("codecate", "TERM_TYPE");
 
 		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "TRAN_STATUS");
+		// 通讯方式
+		mapRequest.put("codecate", "COMM_MODE");
 
-		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("commlist", codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "VOLT_GRADE");
+		// 波特率
+		mapRequest.put("codecate", "BTL");
 
-		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("btllist", codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "RATED_EC");
+		// 型号
+		mapRequest.put("codecate", "BTL");
 
-		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("modellist", codeInfoManager.findByPageRequest(mapRequest));
 
-		result.addObject("traninfo", model);
-		
-		result.setViewName("/archive/addTransformer");
+		result.setViewName("/archive/addPsInfo");
 
 		return result;
+	}
+
+	@Override
+	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		boolean isSucc = true;
+		String msg = SUCC;
+		try {
+			PsInfo psinfo = this.psInfoManager.getById(id);
+			bind(request, psinfo);
+			psInfoManager.update(psinfo);
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
+		}
+
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+	}
+
+	@Override
+	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+		boolean isSucc = true;
+		String msg = SUCC;
+		try {
+			this.psInfoManager.removeById(id);
+
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
+		}
+
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
 	}
 }
