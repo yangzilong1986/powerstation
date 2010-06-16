@@ -8,13 +8,13 @@
   <name>pssframework-parent</name>
   <properties>
     <!-- 主要依赖库的版本定义 -->
-    <springside.version>3.3.0</springside.version>
+    <springside.version>3.3.2</springside.version>
     <spring.version>3.0.2.RELEASE</spring.version>
     <hibernate.version>3.5.1-Final</hibernate.version>
     <struts2.version>2.1.8.1</struts2.version>
     <cxf.version>2.2.7</cxf.version>
     <jersey.version>1.1.5.1</jersey.version>
-    <spring-security.version>2.0.5.RELEASE</spring-security.version>
+    <spring-security.version>3.0.2.RELEASE</spring-security.version>
     <activemq.version>5.3.1</activemq.version>
     <jetty.version>6.1.23</jetty.version>
     <h2.version>1.2.132</h2.version>
