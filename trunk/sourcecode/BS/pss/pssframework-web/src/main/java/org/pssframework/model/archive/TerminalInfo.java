@@ -3,13 +3,17 @@
  */
 package org.pssframework.model.archive;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,117 +41,134 @@ public class TerminalInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -2619191629996760464L;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "terminalInfo", targetEntity = org.pssframework.model.archive.GpInfo.class)
+	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
+
+	/**
+	 * @return the gpInfos
+	 */
+	public List<GpInfo> getGpInfos() {
+		return gpInfos;
+	}
+
+	/**
+	 * @param gpInfos the gpInfos to set
+	 */
+	public void setGpInfos(List<GpInfo> gpInfos) {
+		this.gpInfos = gpInfos;
+	}
+
 	@Column(name = "TERM_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_TERMINAL")
-	//TERM_ID        NUMBER not null,
+	// TERM_ID NUMBER not null,
 	private Long termId;
 
 	@Column(name = "ORG_ID")
-	// ORG_ID         NUMBER not null, 部门
+	// ORG_ID NUMBER not null, 部门
 	private Long orgId;
 
 	@Column(name = "ASSET_NO", length = 20)
-	// ASSET_NO       VARCHAR2(20),
+	// ASSET_NO VARCHAR2(20),
 	private String assetNo;
 
 	@Column(name = "LOGICAL_ADDR", length = 20)
-	//LOGICAL_ADDR   VARCHAR2(20),
+	// LOGICAL_ADDR VARCHAR2(20),
 	private String logicalAddr;
 
 	@Column(name = "RUN_STATUS", length = 5)
-	//RUN_STATUS     VARCHAR2(5),
+	// RUN_STATUS VARCHAR2(5),
 	private String runStatusAddr;
 
 	@Column(name = "CUR_STATUS", length = 5)
-	//CUR_STATUS       VARCHAR2(5),
+	// CUR_STATUS VARCHAR2(5),
 	private String curStatus;
 
 	@Column(name = "SIM_NO", length = 20)
-	//SIM_NO       VARCHAR2(20),
+	// SIM_NO VARCHAR2(20),
 	private String simNo;
 
 	@Column(name = "TERM_TYPE", length = 5)
-	//TERM_TYPE       VARCHAR2(5),
+	// TERM_TYPE VARCHAR2(5),
 	private String termType;
 
 	@Column(name = "WIRING_MODE", length = 5)
-	//WIRING_MODE       VARCHAR2(5),
+	// WIRING_MODE VARCHAR2(5),
 	private String wiringMode;
 
 	@Column(name = "MODEL_CODE", length = 5)
-	//MODEL_CODE       VARCHAR2(5),
+	// MODEL_CODE VARCHAR2(5),
 	private String modelCode;
 
 	@Column(name = "LEAVE_FAC_NO", length = 20)
-	//LEAVE_FAC_NO   VARCHAR2(20),
+	// LEAVE_FAC_NO VARCHAR2(20),
 	private String leaveFacNo;
 
 	@Column(name = "BATCH_ID", length = 20)
-	//BATCH_ID       VARCHAR2(20),
+	// BATCH_ID VARCHAR2(20),
 	private String batchId;
 
 	@Column(name = "MADE_FAC", length = 5)
-	//MADE_FAC       VARCHAR2(5),
+	// MADE_FAC VARCHAR2(5),
 	private String madeFac;
 
 	@Column(name = "LEAVE_FAC_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LEAVE_FAC_DATE  DATE 
+	// LEAVE_FAC_DATE DATE
 	private Date leaveFacDate;
 
 	@Column(name = "INSTALL_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//INSTALL_DATE  DATE
+	// INSTALL_DATE DATE
 	private Date installDate;
 
 	@Column(name = "COMM_MODE", length = 5)
-	//COMM_MODE       VARCHAR2(5),
+	// COMM_MODE VARCHAR2(5),
 	private String commMode;
 
 	@Column(name = "CHANNEL_TYPE", length = 5)
-	//CHANNEL_TYPE       VARCHAR2(5),
+	// CHANNEL_TYPE VARCHAR2(5),
 	private String channelType;
 
 	@Column(name = "PROTOCOL_NO", length = 5)
-	//PROTOCOL_NO       VARCHAR2(5),
+	// PROTOCOL_NO VARCHAR2(5),
 	private String protocolNo;
 
 	@Column(name = "PR", length = 5)
-	//PR             VARCHAR2(5),
+	// PR VARCHAR2(5),
 	private String pr;
 
 	@Column(name = "ISAC", length = 5)
-	//ISAC           VARCHAR2(5),
+	// ISAC VARCHAR2(5),
 	private String isac;
 
 	@Column(name = "PHYSICS_ADDR", length = 30)
-	//PHYSICS_ADDR   VARCHAR2(30),
+	// PHYSICS_ADDR VARCHAR2(30),
 	private String physicsAddr;
 
 	@Column(name = "MACH_NO", length = 10)
-	//MACH_NO        VARCHAR2(10),
+	// MACH_NO VARCHAR2(10),
 	private String machNo;
 
 	@Column(name = "FEP_CNL", length = 30)
-	// FEP_CNL        VARCHAR2(30),
+	// FEP_CNL VARCHAR2(30),
 	private String fepCnl;
 
 	@Column(name = "CONSTR_GANG", length = 50)
-	//CONSTR_GANG    VARCHAR2(50),
+	// CONSTR_GANG VARCHAR2(50),
 	private String constrGang;
 
 	@Column(name = "COMM_PATTERN")
-	//COMM_PATTERN   NUMBER,
+	// COMM_PATTERN NUMBER,
 	private Long commPattern;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE ,最后表结构修改时间戳
+	// LASTTIME_STAMP DATE default SYSDATE ,最后表结构修改时间戳
 	private Date lasttimeStamp;
 
 	@Column(name = "PINYIN_CODE", length = 16)
-	//PINYIN_CODE    VARCHAR2(16)
+	// PINYIN_CODE VARCHAR2(16)
 	private String pinyinCode;
 
 	/**
