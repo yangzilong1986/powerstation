@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,133 +42,129 @@ public class MpInfo extends BaseEntity {
 	@Column(name = "MP_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_MP")
-	//MP_ID           NUMBER(16) not null, 容器所属的计量点唯一标识号
-	private Long equipId;
+	// MP_ID NUMBER(16) not null, 容器所属的计量点唯一标识号
+	private Long mpId;
+
+	@OneToOne(targetEntity = GpInfo.class, mappedBy = "mpInfo")
+	private GpInfo gpInfo;
 
 	@Column(name = "MP_NO", length = 16, nullable = false)
-	//MP_NO          VARCHAR2(256),用户自己编写的编号，默认跟标识一致'
+	// MP_NO VARCHAR2(256),用户自己编写的编号，默认跟标识一致'
 	private Long moNo;
 
 	@Column(name = "MP_NAME", length = 256)
-	//MP_NAME          VARCHAR2(256),计量点名称
+	// MP_NAME VARCHAR2(256),计量点名称
 	private String mpName;
 
 	@Column(name = "MP_ADDR", length = 256)
-	//MP_ADDR          VARCHAR2(256),计量点地址
+	// MP_ADDR VARCHAR2(256),计量点地址
 	private String mpAddr;
 
 	@Column(name = "TYPE_CODE", length = 256)
-	//TYPE_CODE          VARCHAR2(256),'定义计量点的主要分类，包括：01用电客户、02关口等';
+	// TYPE_CODE VARCHAR2(256),'定义计量点的主要分类，包括：01用电客户、02关口等';
 	private String typeCode;
 
 	@Column(name = "MP_ATTR_CODE", length = 8)
-	//  MP_ATTR_CODE    VARCHAR2(8), is '定义计量点的主要性质，包括：01结算、02考核等';
+	// MP_ATTR_CODE VARCHAR2(8), is '定义计量点的主要性质，包括：01结算、02考核等';
 	private String mpAttrCode;
 
 	@Column(name = "USAGE_TYPE_CODE", length = 8)
-	//USAGE_TYPE_CODE VARCHAR2(8), is '定义计量点的主要用途，引用国家电网公司营销管理代码类集:5110.19电能计量点类型分类与代码（01售电侧结算、02台区供电考核、03线路供电考核、04指标分析、05趸售供电关口、06地市供电关口、07省级供电关口、08跨省输电关口、09跨区输电关口、10跨国输电关口、11发电上网关口......）';
+	// USAGE_TYPE_CODE VARCHAR2(8), is
+	// '定义计量点的主要用途，引用国家电网公司营销管理代码类集:5110.19电能计量点类型分类与代码（01售电侧结算、02台区供电考核、03线路供电考核、04指标分析、05趸售供电关口、06地市供电关口、07省级供电关口、08跨省输电关口、09跨区输电关口、10跨国输电关口、11发电上网关口......）';
 	private String usageTypeCode;
 
 	@Column(name = "SIDE_CODE", length = 8)
-	//SIDE_CODE       VARCHAR2(8),is '标明计量点所属的具体位置，包括：01变电站内、02变电站外、03高压侧、04低压侧等';
+	// SIDE_CODE VARCHAR2(8),is '标明计量点所属的具体位置，包括：01变电站内、02变电站外、03高压侧、04低压侧等';
 	private String sideCode;
 
 	@Column(name = "VOLT_CODE", length = 8)
-	//VOLT_CODE       VARCHAR2(8),is '标明计量点的电压等级，引用国家电网公司信息分类与代码体系－综合代码类集－电压等级代码表，包括：01 10KV、02 110KV、03 220KV、04 35KV、05 220V、06 6KV、07 380V、08 500KV等';
+	// VOLT_CODE VARCHAR2(8),is
+	// '标明计量点的电压等级，引用国家电网公司信息分类与代码体系－综合代码类集－电压等级代码表，包括：01 10KV、02 110KV、03
+	// 220KV、04 35KV、05 220V、06 6KV、07 380V、08 500KV等';
 	private String voltCode;
 
 	@Column(name = "APP_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//APP_DATE        DATE,is '标明计量点申请设立的日期';
+	// APP_DATE DATE,is '标明计量点申请设立的日期';
 	private Date appDate;
 
 	@Column(name = "RUN_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//APP_DATE        DATE, is '投运日期';
+	// APP_DATE DATE, is '投运日期';
 	private Date runDate;
 
 	@Column(name = "WIRING_MODE", length = 8)
-	//SIDE_CODE       VARCHAR2(8),	  is '引用国家电网公司营销管理代码类集:5110.84电能表接线方式分类与代码（1单相、2三相三线、3三相四线）';
+	// SIDE_CODE VARCHAR2(8), is
+	// '引用国家电网公司营销管理代码类集:5110.84电能表接线方式分类与代码（1单相、2三相三线、3三相四线）';
 	private String wiringMode;
 
-	//MEAS_MODE       VARCHAR2(8),	  is '引用国家电网公司营销管理代码类集:5110.33电能计量方式代码（1高供高计、2高供低计、3低供低计）';
+	// MEAS_MODE VARCHAR2(8), is
+	// '引用国家电网公司营销管理代码类集:5110.33电能计量方式代码（1高供高计、2高供低计、3低供低计）';
 	@Column(name = "MEAS_MODE", length = 8)
 	private String measMode;
 
-	//ORG_ID          NUMBER,is '供电单位编码，一般是指的用户的直接供电管理单位，也可以是大客户管理中心等由于管理原因产生的客户管理单位';
+	// ORG_ID NUMBER,is '供电单位编码，一般是指的用户的直接供电管理单位，也可以是大客户管理中心等由于管理原因产生的客户管理单位';
 	@Column(name = "ORG_ID", length = 16)
 	private Long orgId;
 
-	//SWITCH_NO       VARCHAR2(32),is '标明计量点所属的开关编号';
+	// SWITCH_NO VARCHAR2(32),is '标明计量点所属的开关编号';
 	@Column(name = "SWITCH_NO", length = 32)
 	private String switchNo;
 
-	//MR_SECT_NO      VARCHAR2(16),is '标明计量点所属的抄表段编号';
+	// MR_SECT_NO VARCHAR2(16),is '标明计量点所属的抄表段编号';
 	@Column(name = "MR_SECT_NO", length = 16)
 	private String mrSectNo;
 
-	//LINE_ID         NUMBER(16), is '线路的系统内部唯一标识';
+	// LINE_ID NUMBER(16), is '线路的系统内部唯一标识';
 	@Column(name = "LINE_ID", length = 16)
 	private Long lineId;
 
-	//TG_ID           NUMBER(16),is '台区的唯一标识';
+	// TG_ID NUMBER(16),is '台区的唯一标识';
 	@Column(name = "TG_ID", length = 16)
 	private Long tgId;
 
-	//EXCHG_TYPE_CODE VARCHAR2(8),is '标明计量点的电量交换对象，包括：01发电企业、02区域电网、03省级企业、04地市企业、05趸售单位等';
+	// EXCHG_TYPE_CODE VARCHAR2(8),is
+	// '标明计量点的电量交换对象，包括：01发电企业、02区域电网、03省级企业、04地市企业、05趸售单位等';
 	@Column(name = "EXCHG_TYPE_CODE", length = 8)
 	private String exchgTypeCode;
 
-	//MD_TYPE_CODE    VARCHAR2(8),is '引用国家电网公司营销管理代码类集:5110.32电能计量装置分类与代码（1Ⅰ类计量装置、2Ⅱ类计量装置、3Ⅲ类计量装置、4Ⅳ类计量装置、5Ⅴ类计量装置......）';
+	// MD_TYPE_CODE VARCHAR2(8),is
+	// '引用国家电网公司营销管理代码类集:5110.32电能计量装置分类与代码（1Ⅰ类计量装置、2Ⅱ类计量装置、3Ⅲ类计量装置、4Ⅳ类计量装置、5Ⅴ类计量装置......）';
 	@Column(name = "MD_TYPE_CODE", length = 8)
 	private String mdTypeCoe;
 
-	//MR_SN  NUMBER(5),is '定义计量点的抄表顺序';
+	// MR_SN NUMBER(5),is '定义计量点的抄表顺序';
 	@Column(name = "MR_SN", length = 8)
 	private Long mrSn;
 
-	//METER_FLAG      VARCHAR2(8),is '标明计量点是否安装计量装置，包括：01是、02否';
+	// METER_FLAG VARCHAR2(8),is '标明计量点是否安装计量装置，包括：01是、02否';
 	@Column(name = "METER_FLAG", length = 8)
 	private String meterFlag;
 
-	//STATUS_CODE     VARCHAR2(8),is '标明计量点的当前状态，包括：01设立、02在用、03停用、04撤销等';
+	// STATUS_CODE VARCHAR2(8),is '标明计量点的当前状态，包括：01设立、02在用、03停用、04撤销等';
 	@Column(name = "STATUS_CODE", length = 8)
 	private String statusCoe;
 
-	//LC_FLAG         VARCHAR2(8),is '是否安装负控设备，01是、02否';
+	// LC_FLAG VARCHAR2(8),is '是否安装负控设备，01是、02否';
 	@Column(name = "LC_FLAG", length = 8)
 	private String lcFlag;
 
-	// CONS_ID         NUMBER(16),is '用户标识';
+	// CONS_ID NUMBER(16),is '用户标识';
 	@Column(name = "CONS_ID", length = 16)
 	private Long consId;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE ,最后表结构修改时间戳
+	// LASTTIME_STAMP DATE default SYSDATE ,最后表结构修改时间戳
 	private Date lasttimeStamp;
 
-	//PINYIN_CODE     VARCHAR2(16) 
+	// PINYIN_CODE VARCHAR2(16)
 	@Column(name = "PINYIN_CODE", length = 16)
 	private String pingyinCode;
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @return the equipId
-	 */
-	public Long getEquipId() {
-		return equipId;
-	}
-
-	/**
-	 * @param equipId the equipId to set
-	 */
-	public void setEquipId(Long equipId) {
-		this.equipId = equipId;
 	}
 
 	/**
@@ -537,5 +534,33 @@ public class MpInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param mpId the mpId to set
+	 */
+	public void setMpId(Long mpId) {
+		this.mpId = mpId;
+	}
+
+	/**
+	 * @return the mpId
+	 */
+	public Long getMpId() {
+		return mpId;
+	}
+
+	/**
+	 * @param gpInfo the gpInfo to set
+	 */
+	public void setGpInfo(GpInfo gpInfo) {
+		this.gpInfo = gpInfo;
+	}
+
+	/**
+	 * @return the gpInfo
+	 */
+	public GpInfo getGpInfo() {
+		return gpInfo;
 	}
 }

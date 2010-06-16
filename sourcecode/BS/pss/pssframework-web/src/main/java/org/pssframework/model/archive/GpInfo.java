@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -46,12 +49,14 @@ public class GpInfo extends BaseEntity {
 	private Long objectId;
 
 	// TERM_ID NUMBER,
-	@Column(name = "TERM_ID")
-	private Long termId;
+	@ManyToOne(targetEntity = TerminalInfo.class)
+	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
+	private TerminalInfo terminalInfo;
 
 	// MP_ID NUMBER,
-	@Column(name = "MP_ID")
-	private Long mpId;
+	@OneToOne
+	@JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
+	private MpInfo mpInfo;
 
 	// GM_ID NUMBER,
 	@Column(name = "GM_ID")
@@ -145,36 +150,6 @@ public class GpInfo extends BaseEntity {
 	 */
 	public void setObjectId(Long objectId) {
 		this.objectId = objectId;
-	}
-
-	/**
-	 * @return the termId
-	 */
-	public Long getTermId() {
-		return termId;
-	}
-
-	/**
-	 * @param termId
-	 *            the termId to set
-	 */
-	public void setTermId(Long termId) {
-		this.termId = termId;
-	}
-
-	/**
-	 * @return the mpId
-	 */
-	public Long getMpId() {
-		return mpId;
-	}
-
-	/**
-	 * @param mpId
-	 *            the mpId to set
-	 */
-	public void setMpId(Long mpId) {
-		this.mpId = mpId;
 	}
 
 	/**
@@ -464,5 +439,33 @@ public class GpInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param terminalInfo the terminalInfo to set
+	 */
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
+
+	/**
+	 * @return the terminalInfo
+	 */
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
+	}
+
+	/**
+	 * @param mpInfo the mpInfo to set
+	 */
+	public void setMpInfo(MpInfo mpInfo) {
+		this.mpInfo = mpInfo;
+	}
+
+	/**
+	 * @return the mpInfo
+	 */
+	public MpInfo getMpInfo() {
+		return mpInfo;
 	}
 }
