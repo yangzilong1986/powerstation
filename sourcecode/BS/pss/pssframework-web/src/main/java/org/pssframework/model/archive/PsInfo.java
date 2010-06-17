@@ -5,9 +5,9 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,8 +58,8 @@ public class PsInfo extends BaseEntity {
 	// PS_ID NUMBER not null,is '漏点保护开关(leakage protection switch)';
 	private Long psId;
 
-	@ManyToOne(targetEntity = TerminalInfo.class, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "TERM_ID", nullable = false, referencedColumnName = "TERM_ID")
+	@ManyToOne(targetEntity = TerminalInfo.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
 	// TERM_ID NUMBER,is'终端号'
 	private TerminalInfo terminalInfo;
 
