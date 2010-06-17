@@ -49,27 +49,9 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
 
-		Map mapRequest = new HashMap();
-
-		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
-		}
-
-		String runstatcode = "1";
-		if (model.getRunStatusCode() != null) {
-			runstatcode = model.getRunStatusCode();
-		}
-
-		//mapRequest.put("orgid", orgid);
-
-		mapRequest.put("codecate", "TG_STATUS");
-
-		//				//
 		ModelAndView result = new ModelAndView();
 
 		return result;
