@@ -325,7 +325,7 @@ public class RealTimeProxy376 implements ICollectInterface {
      * @throws Exception
      */
     public Map<String, String> getReturnByWEP(long appId,String logicAddress) throws Exception {
-        RealTimeTask task = this.taskService.getTask(appId, logicAddress);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId, logicAddress);
         return null;
     }
 

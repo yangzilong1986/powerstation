@@ -19,19 +19,19 @@ public class RealTimeTask {
     private int sequenceCode;
     private String logicAddress;
     private String sendMsg;
-    private List<String> recvMsgs;
+    private List<RTTaskRecv> recvMsgs;
     private Date postTime;
     private String taskStatus = "0"; //默认未处理
 
     public RealTimeTask(){
-        this.recvMsgs = new ArrayList<String>();
+        this.recvMsgs = new ArrayList<RTTaskRecv>();
     }
 
     public void setSendmsg(String sendMsg) {
         this.sendMsg = sendMsg;
     }
 
-    public void addRecvmsg(String recvMsg) {
+    public void addRecvmsg(RTTaskRecv recvMsg) {
         this.recvMsgs.add(recvMsg);
     }
 
@@ -84,6 +84,10 @@ public class RealTimeTask {
      */
     public void setLogicAddress(String logicAddress) {
         this.logicAddress = logicAddress;
+    }
+
+    public void setRecvMsgs(List<RTTaskRecv> recvs){
+        this.recvMsgs = recvs;
     }
 
 
