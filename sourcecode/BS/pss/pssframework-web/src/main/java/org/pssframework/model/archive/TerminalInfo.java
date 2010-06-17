@@ -43,8 +43,8 @@ public class TerminalInfo extends BaseEntity {
 	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class)
 	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
 
-	@OneToMany(mappedBy = "terminalInfo", targetEntity = PsInfo.class)
-	private List<PsInfo> psInfos = new ArrayList<PsInfo>();
+	// @OneToMany(mappedBy = "terminalInfo", targetEntity = PsInfo.class)
+	// private List<PsInfo> psInfos = new ArrayList<PsInfo>();
 
 	@Column(name = "TERM_ID", unique = true, nullable = false)
 	@Id
@@ -323,9 +323,9 @@ public class TerminalInfo extends BaseEntity {
 	/**
 	 * @return the psInfos
 	 */
-	public List<PsInfo> getPsInfos() {
-		return psInfos;
-	}
+	// public List<PsInfo> getPsInfos() {
+	// return psInfos;
+	// }
 
 	/**
 	 * @return the runStatusAddr
@@ -531,9 +531,9 @@ public class TerminalInfo extends BaseEntity {
 	/**
 	 * @param psInfos the psInfos to set
 	 */
-	public void setPsInfos(List<PsInfo> psInfos) {
-		this.psInfos = psInfos;
-	}
+	// public void setPsInfos(List<PsInfo> psInfos) {
+	// this.psInfos = psInfos;
+	// }
 
 	/**
 	 * @param runStatusAddr the runStatusAddr to set

@@ -20,6 +20,7 @@ import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -63,11 +64,15 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		try {
 			psInfoManager.saveOrUpdate(model);
 			psId = model.getPsId();
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
 			msg = e.getMessage();
 
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
 		}
 		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("psId", psId);
 	}
