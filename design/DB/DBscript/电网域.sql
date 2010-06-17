@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-3 21:29:08                            */
+/* Created on:     2010-6-17 21:30:20                           */
 /*==============================================================*/
 
 
@@ -18,6 +18,9 @@ alter table G_SUBS_LINE_RELA
 
 alter table G_SUBS_LINE_RELA
    drop constraint FK_G_SUBS_L_G_SUBS_LI_G_TRAN;
+
+alter table G_TRAN
+   drop constraint FK_G_TRAN_G_TG_G_TR_G_TG;
 
 drop table G_LINE cascade constraints;
 
@@ -400,4 +403,8 @@ alter table G_SUBS_LINE_RELA
 alter table G_SUBS_LINE_RELA
    add constraint FK_G_SUBS_L_G_SUBS_LI_G_TRAN foreign key (EQUIP_ID)
       references G_TRAN (EQUIP_ID);
+
+alter table G_TRAN
+   add constraint FK_G_TRAN_G_TG_G_TR_G_TG foreign key (TG_ID)
+      references G_TG (TG_ID);
 
