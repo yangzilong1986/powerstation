@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -124,6 +125,10 @@ public class PsInfo extends BaseEntity {
 	// PINYIN_CODE VARCHAR2(16)
 	@Column(name = "PINYIN_CODE", length = 16)
 	private String pingyinCode;
+
+	@OneToOne(targetEntity = GpInfo.class, mappedBy = "psInfo")
+	@JoinColumn(name = "GP_ID", referencedColumnName = "GP_ID")
+	private GpInfo gpInfo;
 
 	/**
 	 * @return the psId
@@ -361,6 +366,20 @@ public class PsInfo extends BaseEntity {
 	 */
 	public TerminalInfo getTerminalInfo() {
 		return terminalInfo;
+	}
+
+	/**
+	 * @param gpInfo the gpInfo to set
+	 */
+	public void setGpInfo(GpInfo gpInfo) {
+		this.gpInfo = gpInfo;
+	}
+
+	/**
+	 * @return the gpInfo
+	 */
+	public GpInfo getGpInfo() {
+		return gpInfo;
 	}
 
 }

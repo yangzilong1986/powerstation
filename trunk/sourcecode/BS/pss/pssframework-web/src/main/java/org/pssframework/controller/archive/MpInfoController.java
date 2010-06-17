@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
-import org.pssframework.model.archive.TranInfo;
-import org.pssframework.service.archive.TranInfoManger;
+import org.pssframework.model.archive.MpInfo;
+import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,71 +24,42 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/archive/mpinfo")
-public class MpInfoController extends BaseRestSpringController<TranInfo, java.lang.Long> {
+public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang.Long> {
+
 	@Autowired
-	private TranInfoManger tranInfoManager;
+	private MpInfoManger mpInfoManger;
 
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
 
-		Map mapRequest = new HashMap();
-
-		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
-		}
-
-		String runstatcode = "1";
-		if (model.getRunStatusCode() != null) {
-			runstatcode = model.getRunStatusCode();
-		}
-
-		//mapRequest.put("orgid", orgid);
-
-		mapRequest.put("codecate", "TG_STATUS");
-
-		//		TranInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new TranInfo() : this.tgInfoManager.getById(tgid);
-		//
 		ModelAndView result = new ModelAndView();
-		//
-		//		result.addObject("tginfo", tginfo);
-		//
-		//		result.setViewName("/archive/addTgRelevance");
-		//
-		//		result.addObject("orglist", getOrgOptions(mapRequest));
-		//
-		//		result.addObject("statuslist", getStatusOptions(mapRequest));
 
 		return result;
 	}
 
 	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TranInfo model)
-			throws Exception {
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = "成功";
-		Long tgId = 0L;
+		Long mpId = 0L;
 		try {
-			model.setPubPrivFlag("0");
-			tranInfoManager.saveOrUpdate(model);
-			tgId = model.getTgId();
+			mpInfoManger.saveOrUpdate(model);
+			mpId = model.getMpId();
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("trean",
-				model.getEquipId());
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) throws Exception {
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
 		Map mapRequest = new HashMap();

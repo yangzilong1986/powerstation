@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -41,8 +43,9 @@ public class TranInfo extends BaseEntity {
 	private Long equipId;
 
 	// TG_ID NUMBER(16), 台区标识
-	@Column(name = "TG_ID")
-	private Long tgId;
+	@ManyToOne(targetEntity = TgInfo.class)
+	@JoinColumn(name = "TG_ID", referencedColumnName = "TG_ID")
+	private TgInfo tgInfo;
 
 	@Column(name = "ORG_ID")
 	// ORG_ID VARCHAR2(16) not null, 部门
@@ -282,13 +285,6 @@ public class TranInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
-	}
-
-	/**
 	 * @return the tranName
 	 */
 	public String getTranName() {
@@ -455,13 +451,6 @@ public class TranInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
-	/**
 	 * @param tranName the tranName to set
 	 */
 	public void setTranName(String tranName) {
@@ -478,5 +467,19 @@ public class TranInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param tgInfo the tgInfo to set
+	 */
+	public void setTgInfo(TgInfo tgInfo) {
+		this.tgInfo = tgInfo;
+	}
+
+	/**
+	 * @return the tgInfo
+	 */
+	public TgInfo getTgInfo() {
+		return tgInfo;
 	}
 }

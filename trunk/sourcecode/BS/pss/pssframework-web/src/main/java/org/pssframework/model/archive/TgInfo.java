@@ -4,6 +4,7 @@
 package org.pssframework.model.archive;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,7 +35,7 @@ import org.pssframework.model.system.OrgInfo;
  * @since 1.0.0
  */
 @Entity
-@Table(name = "g_tg")
+@Table(name = "G_TG")
 @SequenceGenerator(sequenceName = "SEQ_G_TG", name = "SEQ_G_TG")
 public class TgInfo extends BaseEntity {
 
@@ -44,6 +46,9 @@ public class TgInfo extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TG")
 	// TG_ID NUMBER(16) not null,
 	private Long tgId;
+
+	@OneToMany(mappedBy = "tgInfo", targetEntity = TranInfo.class)
+	private List<TranInfo> tranInfos;
 
 	@OneToOne(targetEntity = LineTgRelaInfo.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TG_ID", referencedColumnName = "TG_ID")
@@ -110,6 +115,20 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the lineTgRelaInfo
+	 */
+	public LineTgRelaInfo getLineTgRelaInfo() {
+		return lineTgRelaInfo;
+	}
+
+	/**
+	 * @return the orgInfo
+	 */
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
+	}
+
+	/**
 	 * @return the pubPrivFlag
 	 */
 	public String getPubPrivFlag() {
@@ -151,6 +170,13 @@ public class TgInfo extends BaseEntity {
 		return tgNo;
 	}
 
+	/**
+	 * @return the tranInfos
+	 */
+	public List<TranInfo> getTranInfos() {
+		return tranInfos;
+	}
+
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
@@ -175,6 +201,20 @@ public class TgInfo extends BaseEntity {
 	 */
 	public void setLasttimeStamp(Date lasttimeStamp) {
 		this.lasttimeStamp = lasttimeStamp;
+	}
+
+	/**
+	 * @param lineTgRelaInfo the lineTgRelaInfo to set
+	 */
+	public void setLineTgRelaInfo(LineTgRelaInfo lineTgRelaInfo) {
+		this.lineTgRelaInfo = lineTgRelaInfo;
+	}
+
+	/**
+	 * @param orgInfo the orgInfo to set
+	 */
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
 	}
 
 	/**
@@ -219,37 +259,16 @@ public class TgInfo extends BaseEntity {
 		this.tgNo = tgNo;
 	}
 
+	/**
+	 * @param tranInfos the tranInfos to set
+	 */
+	public void setTranInfos(List<TranInfo> tranInfos) {
+		this.tranInfos = tranInfos;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @param orgInfo the orgInfo to set
-	 */
-	public void setOrgInfo(OrgInfo orgInfo) {
-		this.orgInfo = orgInfo;
-	}
-
-	/**
-	 * @return the orgInfo
-	 */
-	public OrgInfo getOrgInfo() {
-		return orgInfo;
-	}
-
-	/**
-	 * @param lineTgRelaInfo the lineTgRelaInfo to set
-	 */
-	public void setLineTgRelaInfo(LineTgRelaInfo lineTgRelaInfo) {
-		this.lineTgRelaInfo = lineTgRelaInfo;
-	}
-
-	/**
-	 * @return the lineTgRelaInfo
-	 */
-	public LineTgRelaInfo getLineTgRelaInfo() {
-		return lineTgRelaInfo;
 	}
 
 }

@@ -44,6 +44,9 @@ public class GpInfo extends BaseEntity {
 	// GP_ID not null
 	private Long gpId;
 
+	@OneToOne(targetEntity = PsInfo.class, mappedBy = "gpInfo")
+	private PsInfo psInfo;
+
 	@Column(name = "OBJECT_ID", nullable = false)
 	// OBJECT_ID NUMBER not null,is
 	private Long objectId;
@@ -467,5 +470,19 @@ public class GpInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param psInfo the psInfo to set
+	 */
+	public void setPsInfo(PsInfo psInfo) {
+		this.psInfo = psInfo;
+	}
+
+	/**
+	 * @return the psInfo
+	 */
+	public PsInfo getPsInfo() {
+		return psInfo;
 	}
 }
