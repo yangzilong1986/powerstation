@@ -248,6 +248,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		TgInfo tginfo = this.tgInfoManager.getById(id);
 
+		// tginfo.getOrgInfo().getOrgId()
+
 		ModelAndView modelAndView = new ModelAndView();
 
 		modelAndView.addObject("tginfo", tginfo);
