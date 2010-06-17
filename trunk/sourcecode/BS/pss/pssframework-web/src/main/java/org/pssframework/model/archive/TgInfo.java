@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +21,7 @@ import javax.persistence.TemporalType;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.system.OrgInfo;
 
 /**
 *1) 描述台区基本信息,专变也做为台区管理，包括台区编码、台区名称、台区地址、公专变标志等信息
@@ -37,45 +41,50 @@ public class TgInfo extends BaseEntity {
 	@Column(name = "TG_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TG")
-	// TG_ID           NUMBER(16) not null,
+	// TG_ID NUMBER(16) not null,
 	private Long tgId;
 
-	@Column(name = "ORG_ID", nullable = false)
+	@OneToOne(targetEntity = LineTgRelaInfo.class)
+	@JoinColumn(name = "TG_ID", referencedColumnName = "TG_ID")
+	private LineTgRelaInfo lineTgRelaInfo;
+
+	@ManyToOne(targetEntity = OrgInfo.class)
+	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
 	// ORG_ID not null,
-	private Long orgId;
+	private OrgInfo orgInfo;
 
 	@Column(name = "TG_NO", length = 16, nullable = false)
-	//TG_NO           VARCHAR2(16) not null,
+	// TG_NO VARCHAR2(16) not null,
 	private String tgNo;
 
 	@Column(name = "TG_NAME", length = 256, nullable = false)
-	// TG_NAME         VARCHAR2(256) not null,
+	// TG_NAME VARCHAR2(256) not null,
 	private String tgName;
 
 	@Column(name = "TG_CAP", precision = 16, scale = 6)
-	//TG_CAP          NUMBER(16,6)
+	// TG_CAP NUMBER(16,6)
 	private Double tgCap;
 
 	@Column(name = "INST_ADDR", length = 256)
-	//INST_ADDR       VARCHAR2(256)
+	// INST_ADDR VARCHAR2(256)
 	private String instAddr;
 
 	@Column(name = "CHG_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//CHG_DATE        DATE,
+	// CHG_DATE DATE,
 	private Date chaDate;
 
 	@Column(name = "PUB_PRIV_FLAG", length = 8)
-	//PUB_PRIV_FLAG   VARCHAR2(8),
+	// PUB_PRIV_FLAG VARCHAR2(8),
 	private String pubPrivFlag;
 
 	@Column(name = "RUN_STATUS_CODE", length = 8)
-	//RUN_STATUS_CODE VARCHAR2(8),
+	// RUN_STATUS_CODE VARCHAR2(8),
 	private String runStatusCode;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE
+	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
 	/**
@@ -97,13 +106,6 @@ public class TgInfo extends BaseEntity {
 	 */
 	public Date getLasttimeStamp() {
 		return lasttimeStamp;
-	}
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
 	}
 
 	/**
@@ -175,13 +177,6 @@ public class TgInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
 	 * @param pubPrivFlag the pubPrivFlag to set
 	 */
 	public void setPubPrivFlag(String pubPrivFlag) {
@@ -226,6 +221,34 @@ public class TgInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param orgInfo the orgInfo to set
+	 */
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
+	}
+
+	/**
+	 * @return the orgInfo
+	 */
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
+	}
+
+	/**
+	 * @param lineTgRelaInfo the lineTgRelaInfo to set
+	 */
+	public void setLineTgRelaInfo(LineTgRelaInfo lineTgRelaInfo) {
+		this.lineTgRelaInfo = lineTgRelaInfo;
+	}
+
+	/**
+	 * @return the lineTgRelaInfo
+	 */
+	public LineTgRelaInfo getLineTgRelaInfo() {
+		return lineTgRelaInfo;
 	}
 
 }

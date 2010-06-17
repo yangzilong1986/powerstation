@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,22 +40,11 @@ public class TerminalInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -2619191629996760464L;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "terminalInfo", targetEntity = org.pssframework.model.archive.GpInfo.class)
+	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class)
 	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
 
-	/**
-	 * @return the gpInfos
-	 */
-	public List<GpInfo> getGpInfos() {
-		return gpInfos;
-	}
-
-	/**
-	 * @param gpInfos the gpInfos to set
-	 */
-	public void setGpInfos(List<GpInfo> gpInfos) {
-		this.gpInfos = gpInfos;
-	}
+	@OneToMany(mappedBy = "terminalInfo", targetEntity = PsInfo.class)
+	private List<PsInfo> psInfos = new ArrayList<PsInfo>();
 
 	@Column(name = "TERM_ID", unique = true, nullable = false)
 	@Id
@@ -172,157 +160,10 @@ public class TerminalInfo extends BaseEntity {
 	private String pinyinCode;
 
 	/**
-	 * @return the termId
-	 */
-	public Long getTermId() {
-		return termId;
-	}
-
-	/**
-	 * @param termId the termId to set
-	 */
-	public void setTermId(Long termId) {
-		this.termId = termId;
-	}
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
-	}
-
-	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
 	 * @return the assetNo
 	 */
 	public String getAssetNo() {
 		return assetNo;
-	}
-
-	/**
-	 * @param assetNo the assetNo to set
-	 */
-	public void setAssetNo(String assetNo) {
-		this.assetNo = assetNo;
-	}
-
-	/**
-	 * @return the logicalAddr
-	 */
-	public String getLogicalAddr() {
-		return logicalAddr;
-	}
-
-	/**
-	 * @param logicalAddr the logicalAddr to set
-	 */
-	public void setLogicalAddr(String logicalAddr) {
-		this.logicalAddr = logicalAddr;
-	}
-
-	/**
-	 * @return the runStatusAddr
-	 */
-	public String getRunStatusAddr() {
-		return runStatusAddr;
-	}
-
-	/**
-	 * @param runStatusAddr the runStatusAddr to set
-	 */
-	public void setRunStatusAddr(String runStatusAddr) {
-		this.runStatusAddr = runStatusAddr;
-	}
-
-	/**
-	 * @return the curStatus
-	 */
-	public String getCurStatus() {
-		return curStatus;
-	}
-
-	/**
-	 * @param curStatus the curStatus to set
-	 */
-	public void setCurStatus(String curStatus) {
-		this.curStatus = curStatus;
-	}
-
-	/**
-	 * @return the simNo
-	 */
-	public String getSimNo() {
-		return simNo;
-	}
-
-	/**
-	 * @param simNo the simNo to set
-	 */
-	public void setSimNo(String simNo) {
-		this.simNo = simNo;
-	}
-
-	/**
-	 * @return the termType
-	 */
-	public String getTermType() {
-		return termType;
-	}
-
-	/**
-	 * @param termType the termType to set
-	 */
-	public void setTermType(String termType) {
-		this.termType = termType;
-	}
-
-	/**
-	 * @return the wiringMode
-	 */
-	public String getWiringMode() {
-		return wiringMode;
-	}
-
-	/**
-	 * @param wiringMode the wiringMode to set
-	 */
-	public void setWiringMode(String wiringMode) {
-		this.wiringMode = wiringMode;
-	}
-
-	/**
-	 * @return the modelCode
-	 */
-	public String getModelCode() {
-		return modelCode;
-	}
-
-	/**
-	 * @param modelCode the modelCode to set
-	 */
-	public void setModelCode(String modelCode) {
-		this.modelCode = modelCode;
-	}
-
-	/**
-	 * @return the leaveFacNo
-	 */
-	public String getLeaveFacNo() {
-		return leaveFacNo;
-	}
-
-	/**
-	 * @param leaveFacNo the leaveFacNo to set
-	 */
-	public void setLeaveFacNo(String leaveFacNo) {
-		this.leaveFacNo = leaveFacNo;
 	}
 
 	/**
@@ -333,52 +174,10 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param batchId the batchId to set
+	 * @return the channelType
 	 */
-	public void setBatchId(String batchId) {
-		this.batchId = batchId;
-	}
-
-	/**
-	 * @return the madeFac
-	 */
-	public String getMadeFac() {
-		return madeFac;
-	}
-
-	/**
-	 * @param madeFac the madeFac to set
-	 */
-	public void setMadeFac(String madeFac) {
-		this.madeFac = madeFac;
-	}
-
-	/**
-	 * @return the leaveFacDate
-	 */
-	public Date getLeaveFacDate() {
-		return leaveFacDate;
-	}
-
-	/**
-	 * @param leaveFacDate the leaveFacDate to set
-	 */
-	public void setLeaveFacDate(Date leaveFacDate) {
-		this.leaveFacDate = leaveFacDate;
-	}
-
-	/**
-	 * @return the installDate
-	 */
-	public Date getInstallDate() {
-		return installDate;
-	}
-
-	/**
-	 * @param installDate the installDate to set
-	 */
-	public void setInstallDate(Date installDate) {
-		this.installDate = installDate;
+	public String getChannelType() {
+		return channelType;
 	}
 
 	/**
@@ -389,108 +188,10 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param commMode the commMode to set
+	 * @return the commPattern
 	 */
-	public void setCommMode(String commMode) {
-		this.commMode = commMode;
-	}
-
-	/**
-	 * @return the channelType
-	 */
-	public String getChannelType() {
-		return channelType;
-	}
-
-	/**
-	 * @param channelType the channelType to set
-	 */
-	public void setChannelType(String channelType) {
-		this.channelType = channelType;
-	}
-
-	/**
-	 * @return the protocolNo
-	 */
-	public String getProtocolNo() {
-		return protocolNo;
-	}
-
-	/**
-	 * @param protocolNo the protocolNo to set
-	 */
-	public void setProtocolNo(String protocolNo) {
-		this.protocolNo = protocolNo;
-	}
-
-	/**
-	 * @return the pr
-	 */
-	public String getPr() {
-		return pr;
-	}
-
-	/**
-	 * @param pr the pr to set
-	 */
-	public void setPr(String pr) {
-		this.pr = pr;
-	}
-
-	/**
-	 * @return the isac
-	 */
-	public String getIsac() {
-		return isac;
-	}
-
-	/**
-	 * @param isac the isac to set
-	 */
-	public void setIsac(String isac) {
-		this.isac = isac;
-	}
-
-	/**
-	 * @return the physicsAddr
-	 */
-	public String getPhysicsAddr() {
-		return physicsAddr;
-	}
-
-	/**
-	 * @param physicsAddr the physicsAddr to set
-	 */
-	public void setPhysicsAddr(String physicsAddr) {
-		this.physicsAddr = physicsAddr;
-	}
-
-	/**
-	 * @return the machNo
-	 */
-	public String getMachNo() {
-		return machNo;
-	}
-
-	/**
-	 * @param machNo the machNo to set
-	 */
-	public void setMachNo(String machNo) {
-		this.machNo = machNo;
-	}
-
-	/**
-	 * @return the fepCnl
-	 */
-	public String getFepCnl() {
-		return fepCnl;
-	}
-
-	/**
-	 * @param fepCnl the fepCnl to set
-	 */
-	public void setFepCnl(String fepCnl) {
-		this.fepCnl = fepCnl;
+	public Long getCommPattern() {
+		return commPattern;
 	}
 
 	/**
@@ -501,24 +202,38 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param constrGang the constrGang to set
+	 * @return the curStatus
 	 */
-	public void setConstrGang(String constrGang) {
-		this.constrGang = constrGang;
+	public String getCurStatus() {
+		return curStatus;
 	}
 
 	/**
-	 * @return the commPattern
+	 * @return the fepCnl
 	 */
-	public Long getCommPattern() {
-		return commPattern;
+	public String getFepCnl() {
+		return fepCnl;
 	}
 
 	/**
-	 * @param commPattern the commPattern to set
+	 * @return the gpInfos
 	 */
-	public void setCommPattern(Long commPattern) {
-		this.commPattern = commPattern;
+	public List<GpInfo> getGpInfos() {
+		return gpInfos;
+	}
+
+	/**
+	 * @return the installDate
+	 */
+	public Date getInstallDate() {
+		return installDate;
+	}
+
+	/**
+	 * @return the isac
+	 */
+	public String getIsac() {
+		return isac;
 	}
 
 	/**
@@ -529,10 +244,59 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param lasttimeStamp the lasttimeStamp to set
+	 * @return the leaveFacDate
 	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
+	public Date getLeaveFacDate() {
+		return leaveFacDate;
+	}
+
+	/**
+	 * @return the leaveFacNo
+	 */
+	public String getLeaveFacNo() {
+		return leaveFacNo;
+	}
+
+	/**
+	 * @return the logicalAddr
+	 */
+	public String getLogicalAddr() {
+		return logicalAddr;
+	}
+
+	/**
+	 * @return the machNo
+	 */
+	public String getMachNo() {
+		return machNo;
+	}
+
+	/**
+	 * @return the madeFac
+	 */
+	public String getMadeFac() {
+		return madeFac;
+	}
+
+	/**
+	 * @return the modelCode
+	 */
+	public String getModelCode() {
+		return modelCode;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * @return the physicsAddr
+	 */
+	public String getPhysicsAddr() {
+		return physicsAddr;
 	}
 
 	/**
@@ -543,19 +307,271 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the pr
+	 */
+	public String getPr() {
+		return pr;
+	}
+
+	/**
+	 * @return the protocolNo
+	 */
+	public String getProtocolNo() {
+		return protocolNo;
+	}
+
+	/**
+	 * @return the psInfos
+	 */
+	public List<PsInfo> getPsInfos() {
+		return psInfos;
+	}
+
+	/**
+	 * @return the runStatusAddr
+	 */
+	public String getRunStatusAddr() {
+		return runStatusAddr;
+	}
+
+	/**
+	 * @return the simNo
+	 */
+	public String getSimNo() {
+		return simNo;
+	}
+
+	/**
+	 * @return the termId
+	 */
+	public Long getTermId() {
+		return termId;
+	}
+
+	/**
+	 * @return the termType
+	 */
+	public String getTermType() {
+		return termType;
+	}
+
+	/**
+	 * @return the wiringMode
+	 */
+	public String getWiringMode() {
+		return wiringMode;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param assetNo the assetNo to set
+	 */
+	public void setAssetNo(String assetNo) {
+		this.assetNo = assetNo;
+	}
+
+	/**
+	 * @param batchId the batchId to set
+	 */
+	public void setBatchId(String batchId) {
+		this.batchId = batchId;
+	}
+
+	/**
+	 * @param channelType the channelType to set
+	 */
+	public void setChannelType(String channelType) {
+		this.channelType = channelType;
+	}
+
+	/**
+	 * @param commMode the commMode to set
+	 */
+	public void setCommMode(String commMode) {
+		this.commMode = commMode;
+	}
+
+	/**
+	 * @param commPattern the commPattern to set
+	 */
+	public void setCommPattern(Long commPattern) {
+		this.commPattern = commPattern;
+	}
+
+	/**
+	 * @param constrGang the constrGang to set
+	 */
+	public void setConstrGang(String constrGang) {
+		this.constrGang = constrGang;
+	}
+
+	/**
+	 * @param curStatus the curStatus to set
+	 */
+	public void setCurStatus(String curStatus) {
+		this.curStatus = curStatus;
+	}
+
+	/**
+	 * @param fepCnl the fepCnl to set
+	 */
+	public void setFepCnl(String fepCnl) {
+		this.fepCnl = fepCnl;
+	}
+
+	/**
+	 * @param gpInfos the gpInfos to set
+	 */
+	public void setGpInfos(List<GpInfo> gpInfos) {
+		this.gpInfos = gpInfos;
+	}
+
+	/**
+	 * @param installDate the installDate to set
+	 */
+	public void setInstallDate(Date installDate) {
+		this.installDate = installDate;
+	}
+
+	/**
+	 * @param isac the isac to set
+	 */
+	public void setIsac(String isac) {
+		this.isac = isac;
+	}
+
+	/**
+	 * @param lasttimeStamp the lasttimeStamp to set
+	 */
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
+	}
+
+	/**
+	 * @param leaveFacDate the leaveFacDate to set
+	 */
+	public void setLeaveFacDate(Date leaveFacDate) {
+		this.leaveFacDate = leaveFacDate;
+	}
+
+	/**
+	 * @param leaveFacNo the leaveFacNo to set
+	 */
+	public void setLeaveFacNo(String leaveFacNo) {
+		this.leaveFacNo = leaveFacNo;
+	}
+
+	/**
+	 * @param logicalAddr the logicalAddr to set
+	 */
+	public void setLogicalAddr(String logicalAddr) {
+		this.logicalAddr = logicalAddr;
+	}
+
+	/**
+	 * @param machNo the machNo to set
+	 */
+	public void setMachNo(String machNo) {
+		this.machNo = machNo;
+	}
+
+	/**
+	 * @param madeFac the madeFac to set
+	 */
+	public void setMadeFac(String madeFac) {
+		this.madeFac = madeFac;
+	}
+
+	/**
+	 * @param modelCode the modelCode to set
+	 */
+	public void setModelCode(String modelCode) {
+		this.modelCode = modelCode;
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * @param physicsAddr the physicsAddr to set
+	 */
+	public void setPhysicsAddr(String physicsAddr) {
+		this.physicsAddr = physicsAddr;
+	}
+
+	/**
 	 * @param pinyinCode the pinyinCode to set
 	 */
 	public void setPinyinCode(String pinyinCode) {
 		this.pinyinCode = pinyinCode;
 	}
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+	/**
+	 * @param pr the pr to set
+	 */
+	public void setPr(String pr) {
+		this.pr = pr;
+	}
+
+	/**
+	 * @param protocolNo the protocolNo to set
+	 */
+	public void setProtocolNo(String protocolNo) {
+		this.protocolNo = protocolNo;
+	}
+
+	/**
+	 * @param psInfos the psInfos to set
+	 */
+	public void setPsInfos(List<PsInfo> psInfos) {
+		this.psInfos = psInfos;
+	}
+
+	/**
+	 * @param runStatusAddr the runStatusAddr to set
+	 */
+	public void setRunStatusAddr(String runStatusAddr) {
+		this.runStatusAddr = runStatusAddr;
+	}
+
+	/**
+	 * @param simNo the simNo to set
+	 */
+	public void setSimNo(String simNo) {
+		this.simNo = simNo;
+	}
+
+	/**
+	 * @param termId the termId to set
+	 */
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
+
+	/**
+	 * @param termType the termType to set
+	 */
+	public void setTermType(String termType) {
+		this.termType = termType;
+	}
+
+	/**
+	 * @param wiringMode the wiringMode to set
+	 */
+	public void setWiringMode(String wiringMode) {
+		this.wiringMode = wiringMode;
 	}
 
 	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

@@ -122,124 +122,20 @@ public class GpInfo extends BaseEntity {
 	@Column(name = "MAS_METER_SN ")
 	private Long masMeterSn;
 
-	/**
-	 * @return the gpId
-	 */
-	public Long getGpId() {
-		return gpId;
-	}
+	// TRAN_ID NUMBER,
+	@Column(name = "TRAN_ID ")
+	private Long tranId;
+
+	// LASTTIME_STAMP DATE default SYSDATEis '最后表结构修改时间戳';
+	@Column(name = "LASTTIME_STAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lasttimeStamp;
 
 	/**
-	 * @param gpId
-	 *            the gpId to set
+	 * @return the computeFlag
 	 */
-	public void setGpId(Long gpId) {
-		this.gpId = gpId;
-	}
-
-	/**
-	 * @return the objectId
-	 */
-	public Long getObjectId() {
-		return objectId;
-	}
-
-	/**
-	 * @param objectId
-	 *            the objectId to set
-	 */
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
-	}
-
-	/**
-	 * @return the gmId
-	 */
-	public Long getGmId() {
-		return gmId;
-	}
-
-	/**
-	 * @param gmId
-	 *            the gmId to set
-	 */
-	public void setGmId(Long gmId) {
-		this.gmId = gmId;
-	}
-
-	/**
-	 * @return the gpSn
-	 */
-	public Long getGpSn() {
-		return gpSn;
-	}
-
-	/**
-	 * @param gpSn
-	 *            the gpSn to set
-	 */
-	public void setGpSn(Long gpSn) {
-		this.gpSn = gpSn;
-	}
-
-	/**
-	 * @return the gpChar
-	 */
-	public String getGpChar() {
-		return gpChar;
-	}
-
-	/**
-	 * @param gpChar
-	 *            the gpChar to set
-	 */
-	public void setGpChar(String gpChar) {
-		this.gpChar = gpChar;
-	}
-
-	/**
-	 * @return the gpType
-	 */
-	public String getGpType() {
-		return gpType;
-	}
-
-	/**
-	 * @param gpType
-	 *            the gpType to set
-	 */
-	public void setGpType(String gpType) {
-		this.gpType = gpType;
-	}
-
-	/**
-	 * @return the gpStatus
-	 */
-	public String getGpStatus() {
-		return gpStatus;
-	}
-
-	/**
-	 * @param gpStatus
-	 *            the gpStatus to set
-	 */
-	public void setGpStatus(String gpStatus) {
-		this.gpStatus = gpStatus;
-	}
-
-	/**
-	 * @return the gpAddr
-	 */
-	public String getGpAddr() {
-		return gpAddr;
-	}
-
-	/**
-	 * @param gpAddr
-	 *            the gpAddr to set
-	 */
-	public void setGpAddr(String gpAddr) {
-		this.gpAddr = gpAddr;
+	public String getComputeFlag() {
+		return computeFlag;
 	}
 
 	/**
@@ -250,26 +146,101 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param ctTimes
-	 *            the ctTimes to set
+	 * @return the gmId
 	 */
-	public void setCtTimes(Long ctTimes) {
-		this.ctTimes = ctTimes;
+	public Long getGmId() {
+		return gmId;
 	}
 
 	/**
-	 * @return the ptTimes
+	 * @return the gpAddr
 	 */
-	public Long getPtTimes() {
-		return ptTimes;
+	public String getGpAddr() {
+		return gpAddr;
 	}
 
 	/**
-	 * @param ptTimes
-	 *            the ptTimes to set
+	 * @return the gpChar
 	 */
-	public void setPtTimes(Long ptTimes) {
-		this.ptTimes = ptTimes;
+	public String getGpChar() {
+		return gpChar;
+	}
+
+	/**
+	 * @return the gpId
+	 */
+	public Long getGpId() {
+		return gpId;
+	}
+
+	/**
+	 * @return the gpSn
+	 */
+	public Long getGpSn() {
+		return gpSn;
+	}
+
+	/**
+	 * @return the gpStatus
+	 */
+	public String getGpStatus() {
+		return gpStatus;
+	}
+
+	/**
+	 * @return the gpType
+	 */
+	public String getGpType() {
+		return gpType;
+	}
+
+	/**
+	 * @return the lasttimeStamp
+	 */
+	public Date getLasttimeStamp() {
+		return lasttimeStamp;
+	}
+
+	/**
+	 * @return the lineId
+	 */
+	public Long getLineId() {
+		return lineId;
+	}
+
+	/**
+	 * @return the masMeterSn
+	 */
+	public Long getMasMeterSn() {
+		return masMeterSn;
+	}
+
+	/**
+	 * @return the meterConstant
+	 */
+	public Long getMeterConstant() {
+		return meterConstant;
+	}
+
+	/**
+	 * @return the mpInfo
+	 */
+	public MpInfo getMpInfo() {
+		return mpInfo;
+	}
+
+	/**
+	 * @return the objectId
+	 */
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	/**
+	 * @return the pluseConstant
+	 */
+	public Long getPluseConstant() {
+		return pluseConstant;
 	}
 
 	/**
@@ -280,14 +251,6 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param port
-	 *            the port to set
-	 */
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	/**
 	 * @return the protocolNo
 	 */
 	public String getProtocolNo() {
@@ -295,18 +258,36 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param protocolNo
-	 *            the protocolNo to set
+	 * @return the ptTimes
 	 */
-	public void setProtocolNo(String protocolNo) {
-		this.protocolNo = protocolNo;
+	public Long getPtTimes() {
+		return ptTimes;
 	}
 
 	/**
-	 * @return the computeFlag
+	 * @return the sucratCptId
 	 */
-	public String getComputeFlag() {
-		return computeFlag;
+	public String getSucratCptId() {
+		return sucratCptId;
+	}
+
+	/**
+	 * @return the terminalInfo
+	 */
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
+	}
+
+	/**
+	 * @return the tranId
+	 */
+	public Long getTranId() {
+		return tranId;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -318,55 +299,75 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the pluseConstant
+	 * @param ctTimes
+	 *            the ctTimes to set
 	 */
-	public Long getPluseConstant() {
-		return pluseConstant;
+	public void setCtTimes(Long ctTimes) {
+		this.ctTimes = ctTimes;
 	}
 
 	/**
-	 * @param pluseConstant
-	 *            the pluseConstant to set
+	 * @param gmId
+	 *            the gmId to set
 	 */
-	public void setPluseConstant(Long pluseConstant) {
-		this.pluseConstant = pluseConstant;
+	public void setGmId(Long gmId) {
+		this.gmId = gmId;
 	}
 
 	/**
-	 * @return the meterConstant
+	 * @param gpAddr
+	 *            the gpAddr to set
 	 */
-	public Long getMeterConstant() {
-		return meterConstant;
+	public void setGpAddr(String gpAddr) {
+		this.gpAddr = gpAddr;
 	}
 
 	/**
-	 * @param meterConstant
-	 *            the meterConstant to set
+	 * @param gpChar
+	 *            the gpChar to set
 	 */
-	public void setMeterConstant(Long meterConstant) {
-		this.meterConstant = meterConstant;
+	public void setGpChar(String gpChar) {
+		this.gpChar = gpChar;
 	}
 
 	/**
-	 * @return the sucratCptId
+	 * @param gpId
+	 *            the gpId to set
 	 */
-	public String getSucratCptId() {
-		return sucratCptId;
+	public void setGpId(Long gpId) {
+		this.gpId = gpId;
 	}
 
 	/**
-	 * @param sucratCptId
-	 *            the sucratCptId to set
+	 * @param gpSn
+	 *            the gpSn to set
 	 */
-	public void setSucratCptId(String sucratCptId) {
-		this.sucratCptId = sucratCptId;
+	public void setGpSn(Long gpSn) {
+		this.gpSn = gpSn;
 	}
 
 	/**
-	 * @return the lineId
+	 * @param gpStatus
+	 *            the gpStatus to set
 	 */
-	public Long getLineId() {
-		return lineId;
+	public void setGpStatus(String gpStatus) {
+		this.gpStatus = gpStatus;
+	}
+
+	/**
+	 * @param gpType
+	 *            the gpType to set
+	 */
+	public void setGpType(String gpType) {
+		this.gpType = gpType;
+	}
+
+	/**
+	 * @param lasttimeStamp
+	 *            the lasttimeStamp to set
+	 */
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
 	}
 
 	/**
@@ -378,13 +379,6 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the masMeterSn
-	 */
-	public Long getMasMeterSn() {
-		return masMeterSn;
-	}
-
-	/**
 	 * @param masMeterSn
 	 *            the masMeterSn to set
 	 */
@@ -393,66 +387,11 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the tranId
+	 * @param meterConstant
+	 *            the meterConstant to set
 	 */
-	public Long getTranId() {
-		return tranId;
-	}
-
-	/**
-	 * @param tranId
-	 *            the tranId to set
-	 */
-	public void setTranId(Long tranId) {
-		this.tranId = tranId;
-	}
-
-	/**
-	 * @return the lasttimeStamp
-	 */
-	public Date getLasttimeStamp() {
-		return lasttimeStamp;
-	}
-
-	/**
-	 * @param lasttimeStamp
-	 *            the lasttimeStamp to set
-	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
-	}
-
-	// TRAN_ID NUMBER,
-	@Column(name = "TRAN_ID ")
-	private Long tranId;
-
-	// LASTTIME_STAMP DATE default SYSDATEis '最后表结构修改时间戳';
-	@Column(name = "LASTTIME_STAMP")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lasttimeStamp;
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	/**
-	 * @param terminalInfo the terminalInfo to set
-	 */
-	public void setTerminalInfo(TerminalInfo terminalInfo) {
-		this.terminalInfo = terminalInfo;
-	}
-
-	/**
-	 * @return the terminalInfo
-	 */
-	public TerminalInfo getTerminalInfo() {
-		return terminalInfo;
+	public void setMeterConstant(Long meterConstant) {
+		this.meterConstant = meterConstant;
 	}
 
 	/**
@@ -463,9 +402,70 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the mpInfo
+	 * @param objectId
+	 *            the objectId to set
 	 */
-	public MpInfo getMpInfo() {
-		return mpInfo;
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	/**
+	 * @param pluseConstant
+	 *            the pluseConstant to set
+	 */
+	public void setPluseConstant(Long pluseConstant) {
+		this.pluseConstant = pluseConstant;
+	}
+
+	/**
+	 * @param port
+	 *            the port to set
+	 */
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	/**
+	 * @param protocolNo
+	 *            the protocolNo to set
+	 */
+	public void setProtocolNo(String protocolNo) {
+		this.protocolNo = protocolNo;
+	}
+
+	/**
+	 * @param ptTimes
+	 *            the ptTimes to set
+	 */
+	public void setPtTimes(Long ptTimes) {
+		this.ptTimes = ptTimes;
+	}
+
+	/**
+	 * @param sucratCptId
+	 *            the sucratCptId to set
+	 */
+	public void setSucratCptId(String sucratCptId) {
+		this.sucratCptId = sucratCptId;
+	}
+
+	/**
+	 * @param terminalInfo the terminalInfo to set
+	 */
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
+
+	/**
+	 * @param tranId
+	 *            the tranId to set
+	 */
+	public void setTranId(Long tranId) {
+		this.tranId = tranId;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
