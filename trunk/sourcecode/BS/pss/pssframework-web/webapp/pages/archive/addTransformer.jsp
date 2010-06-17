@@ -11,52 +11,48 @@
 <div class="electric_lcon" id=electric_Con>
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>变压器信息</span></div>
-  <div class="da_con"><form:form action="/archive/traninfo" modelAttribute="traninfo">
+  <div class="da_mid"
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
+  <form:form action="/archive/traninfo" modelAttribute="traninfo">
     <form:hidden path="equipId" />
     <form:hidden path="tgId" />
     <table border="0" cellpadding="0" cellspacing="0" align="center">
-      <tr>
-        <td width="13%" class="green"><font color="red">* </font>变压器名称：</td>
-        <td width="20%" class="input2"><form:input path="tranName" cssClass="required" maxlength="16" /></td>
-        <td width="13%" class="green">变压器型号：</td>
-        <td width="21%" class="input2"><form:select path="typeCode" id="typeCode" itemLabel="name" itemValue="code"
-          onchange="" items="${typelist}" /></td>
-        <td colspan="2"></td>
+      <tr height="40">
+        <td width="15%" align="right" class="green"><font color="red">* </font>变压器名称：</td>
+        <td width="15%"><form:input path="tranName" cssClass="required input2" maxlength="16" /></td>
+        <td width="15%" align="right" class="green">变压器型号：</td>
+        <td width="15%"><form:select path="typeCode" id="typeCode" itemLabel="name" itemValue="code" onchange=""
+          items="${typelist}" cssStyle="width:150px"/></td>
       </tr>
-      <tr>
-        <td width="13%" class="green">容 量：</td>
-        <td width="20%" class="input2"><form:input path="plateCap" /> kVA</td>
-        <td class="green">运行状态：</td>
-        <td class="input2"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
-          onchange="" items="${statuslist}" /></td>
+      <tr height="40">
+        <td width="13%" align="right" class="green">容 量：</td>
+        <td width="20%"><form:input path="plateCap" cssClass="input2" /> kVA</td>
+        <td align="right" class="green">运行状态：</td>
+        <td><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" onchange=""
+          items="${statuslist}" cssStyle="width:150px"/></td>
       </tr>
-      <tr>
-        <td class="green">额定电压 _ 高压:</td>
-        <td class="input2"><form:select path="rvHv" id="rvHv" itemLabel="name" itemValue="code" onchange=""
-          items="${voltlist}" /></td>
-        <td class="green">额定电压 _ 中压：</td>
-        <td class="input2"><form:select path="rvMv" id="rvMv" itemLabel="name" itemValue="code" onchange=""
-          items="${voltlist}" /></td>
-        <td class="green">额定电压 _ 低压：</td>
-        <td class="input2"><form:select path="rvLv" id="rvLv" itemLabel="name" itemValue="code" onchange=""
-          items="${voltlist}" /></td>
+      <tr height="40">
+        <td width="15%" align="right" class="green">安装日期：</td>
+        <td width="15%"><form:input path="instDate" cssClass="input_time"
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly"></form:input></td>
+        <td align="right" class="green">安装地址：</td>
+        <td colspan="5"><form:input path="instAddr" cssClass="input2"></form:input></td>
       </tr>
-      <tr>
-        <td class="green">额定电流 _ 高压：</td>
-        <td class="input2"><form:select path="rcHv" id="rcHv" itemLabel="name" itemValue="code" onchange=""
-          items="${ratedlist}" /></td>
-        <td class="green">额定电流 _ 中压：</td>
-        <td class="input2"><form:select path="rcMv" id="rcMv" itemLabel="name" itemValue="code" onchange=""
-          items="${ratedlist}" /></td>
-        <td class="green">额定电流 _ 低压：</td>
-        <td class="input2"><form:select path="rcLv" id="rcLv" itemLabel="name" itemValue="code" onchange=""
-          items="${ratedlist}" /></td>
+      <tr height="40">
+        <td align="right" class="green">额定电压_高压:</td>
+        <td><form:select path="rvHv" id="rvHv" itemLabel="name" itemValue="code" onchange="" items="${voltlist}" cssStyle="width:150px"/></td>
+        <td align="right" class="green">额定电压_中压：</td>
+        <td><form:select path="rvMv" id="rvMv" itemLabel="name" itemValue="code" onchange="" items="${voltlist}" cssStyle="width:150px"/></td>
+        <td align="right" class="green">额定电压_低压：</td>
+        <td><form:select path="rvLv" id="rvLv" itemLabel="name" itemValue="code" onchange="" items="${voltlist}" cssStyle="width:150px"/></td>
       </tr>
-      <tr>
-        <td class="green">安装日期：</td>
-        <td class="input_time"><form:input  path="instDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly"></form:input></td>
-        <td class="green">安装地址：</td>
-        <td colspan="5" class="input2"><form:input path="instAddr"></form:input></td>
+      <tr height="40">
+        <td align="right" class="green">额定电流_高压：</td>
+        <td><form:select path="rcHv" id="rcHv" itemLabel="name" itemValue="code" onchange="" items="${ratedlist}" cssStyle="width:150px"/></td>
+        <td align="right" class="green">额定电流_中压：</td>
+        <td><form:select path="rcMv" id="rcMv" itemLabel="name" itemValue="code" onchange="" items="${ratedlist}" cssStyle="width:150px"/></td>
+        <td align="right" class="green">额定电流_低压：</td>
+        <td><form:select path="rcLv" id="rcLv" itemLabel="name" itemValue="code" onchange="" items="${ratedlist}" cssStyle="width:150px"/></td>
       </tr>
     </table>
   </form:form>
@@ -72,7 +68,6 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 );
 
 
-var contextPath = '<peis:contextPath/>';
 
 //保存变压器信息
 var tgFlag=null;

@@ -36,6 +36,13 @@ function openTerm(tgId){
    var url = contextPath + "/archive/terminalinfo/new?tgId=" + tgId;
    windowPopup(url, 960, 575);
 } 
+
+
+//打开漏保
+function openPs(tgId){
+   var url = contextPath + "/archive/psinfo/new?tgId=" + tgId;
+   windowPopup(url, 960, 575);
+} 
 //上一步
 function lastStep(){
   var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
@@ -257,8 +264,7 @@ function loadTgRelevevance(){
         <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
           disabled="${disabled}" /></td>
         <td width="10%" align="right" class="green">管理单位：</td>
-        <td width="25%"><form:select path="orgId" id="orgId" itemLabel="orgName" itemValue="orgId" disabled="${disabled}"
-          items="${orglist}" cssStyle="width:145px;"></form:select></td>
+        <td width="25%">${tginfo.orgInfo}</td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
@@ -310,7 +316,7 @@ function loadTgRelevevance(){
   </table>
   </div>
   <div class="mgt10 da_top"><span>台区考核表信息</span>
-  <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
   </div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -343,7 +349,7 @@ function loadTgRelevevance(){
   </table>
   </div>
   <div class="mgt10 da_top"><span>保护开关列表信息</span>
-  <h1><a href="#"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  <h1><a onclick="openPs('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
   </div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
