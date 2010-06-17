@@ -68,79 +68,11 @@ public class RoleInfo extends BaseEntity {
 	// LASTTIME_STAMP DATE default SYSDATE is '最后表结构修改时间戳';
 	private Date lasttimeStamp;
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @return the roleId
-	 */
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	/**
-	 * @param roleId the roleId to set
-	 */
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-
-	/**
-	 * @return the roleName
-	 */
-	public Long getRoleName() {
-		return roleName;
-	}
-
-	/**
-	 * @param roleName the roleName to set
-	 */
-	public void setRoleName(Long roleName) {
-		this.roleName = roleName;
-	}
-
-	/**
-	 * @return the rolePemark
-	 */
-	public String getRolePemark() {
-		return rolePemark;
-	}
-
-	/**
-	 * @param rolePemark the rolePemark to set
-	 */
-	public void setRolePemark(String rolePemark) {
-		this.rolePemark = rolePemark;
-	}
-
-	/**
-	 * @return the roleType
-	 */
-	public String getRoleType() {
-		return roleType;
-	}
-
-	/**
-	 * @param roleType the roleType to set
-	 */
-	public void setRoleType(String roleType) {
-		this.roleType = roleType;
-	}
-
 	/**
 	 * @return the creator
 	 */
 	public String getCreator() {
 		return creator;
-	}
-
-	/**
-	 * @param creator the creator to set
-	 */
-	public void setCreator(String creator) {
-		this.creator = creator;
 	}
 
 	/**
@@ -151,17 +83,57 @@ public class RoleInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param creattime the creattime to set
-	 */
-	public void setCreattime(Date creattime) {
-		this.creattime = creattime;
-	}
-
-	/**
 	 * @return the lasttimeStamp
 	 */
 	public Date getLasttimeStamp() {
 		return lasttimeStamp;
+	}
+
+	/**
+	 * @return the roleId
+	 */
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	/**
+	 * @return the roleName
+	 */
+	public Long getRoleName() {
+		return roleName;
+	}
+
+	/**
+	 * @return the rolePemark
+	 */
+	public String getRolePemark() {
+		return rolePemark;
+	}
+
+	/**
+	 * @return the roleType
+	 */
+	public String getRoleType() {
+		return roleType;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param creator the creator to set
+	 */
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	/**
+	 * @param creattime the creattime to set
+	 */
+	public void setCreattime(Date creattime) {
+		this.creattime = creattime;
 	}
 
 	/**
@@ -171,9 +143,37 @@ public class RoleInfo extends BaseEntity {
 		this.lasttimeStamp = lasttimeStamp;
 	}
 
+	/**
+	 * @param roleId the roleId to set
+	 */
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
+	/**
+	 * @param roleName the roleName to set
+	 */
+	public void setRoleName(Long roleName) {
+		this.roleName = roleName;
+	}
+
+	/**
+	 * @param rolePemark the rolePemark to set
+	 */
+	public void setRolePemark(String rolePemark) {
+		this.rolePemark = rolePemark;
+	}
+
+	/**
+	 * @param roleType the roleType to set
+	 */
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
+	}
+
 	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

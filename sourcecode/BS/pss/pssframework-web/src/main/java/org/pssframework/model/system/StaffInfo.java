@@ -93,6 +93,13 @@ public class StaffInfo extends BaseEntity {
 	private Date lasttimeStamp;
 
 	/**
+	 * @return the deptNo
+	 */
+	public String getDeptNo() {
+		return deptNo;
+	}
+
+	/**
 	 * @return the empNo
 	 */
 	public Long getEmpNo() {
@@ -100,18 +107,78 @@ public class StaffInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param empNo
-	 *            the empNo to set
+	 * @return the gender
 	 */
-	public void setEmpNo(Long empNo) {
-		this.empNo = empNo;
+	public String getGender() {
+		return gender;
 	}
 
 	/**
-	 * @return the deptNo
+	 * @return the lasttimeStamp
 	 */
-	public String getDeptNo() {
-		return deptNo;
+	public Date getLasttimeStamp() {
+		return lasttimeStamp;
+	}
+
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the passwd
+	 */
+	public String getPasswd() {
+		return passwd;
+	}
+
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+
+	/**
+	 * @return the posName
+	 */
+	public String getPosName() {
+		return posName;
+	}
+
+	/**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
+
+	/**
+	 * @return the staffNo
+	 */
+	public String getStaffNo() {
+		return staffNo;
+	}
+
+	/**
+	 * @return the workTypeCode
+	 */
+	public String getWorkTypeCode() {
+		return workTypeCode;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -123,55 +190,11 @@ public class StaffInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the staffNo
+	 * @param empNo
+	 *            the empNo to set
 	 */
-	public String getStaffNo() {
-		return staffNo;
-	}
-
-	/**
-	 * @param staffNo
-	 *            the staffNo to set
-	 */
-	public void setStaffNo(String staffNo) {
-		this.staffNo = staffNo;
-	}
-
-	/**
-	 * @return the passwd
-	 */
-	public String getPasswd() {
-		return passwd;
-	}
-
-	/**
-	 * @param passwd
-	 *            the passwd to set
-	 */
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the gender
-	 */
-	public String getGender() {
-		return gender;
+	public void setEmpNo(Long empNo) {
+		this.empNo = empNo;
 	}
 
 	/**
@@ -183,55 +206,11 @@ public class StaffInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the posName
+	 * @param lasttimeStamp
+	 *            the lasttimeStamp to set
 	 */
-	public String getPosName() {
-		return posName;
-	}
-
-	/**
-	 * @param posName
-	 *            the posName to set
-	 */
-	public void setPosName(String posName) {
-		this.posName = posName;
-	}
-
-	/**
-	 * @return the position
-	 */
-	public String getPosition() {
-		return position;
-	}
-
-	/**
-	 * @param position
-	 *            the position to set
-	 */
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-	/**
-	 * @return the workTypeCode
-	 */
-	public String getWorkTypeCode() {
-		return workTypeCode;
-	}
-
-	/**
-	 * @param workTypeCode
-	 *            the workTypeCode to set
-	 */
-	public void setWorkTypeCode(String workTypeCode) {
-		this.workTypeCode = workTypeCode;
-	}
-
-	/**
-	 * @return the mobile
-	 */
-	public String getMobile() {
-		return mobile;
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
 	}
 
 	/**
@@ -243,10 +222,35 @@ public class StaffInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the remark
+	 * @param name
+	 *            the name to set
 	 */
-	public String getRemark() {
-		return remark;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @param passwd
+	 *            the passwd to set
+	 */
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	/**
+	 * @param position
+	 *            the position to set
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	/**
+	 * @param posName
+	 *            the posName to set
+	 */
+	public void setPosName(String posName) {
+		this.posName = posName;
 	}
 
 	/**
@@ -258,18 +262,19 @@ public class StaffInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the lasttimeStamp
+	 * @param staffNo
+	 *            the staffNo to set
 	 */
-	public Date getLasttimeStamp() {
-		return lasttimeStamp;
+	public void setStaffNo(String staffNo) {
+		this.staffNo = staffNo;
 	}
 
 	/**
-	 * @param lasttimeStamp
-	 *            the lasttimeStamp to set
+	 * @param workTypeCode
+	 *            the workTypeCode to set
 	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
+	public void setWorkTypeCode(String workTypeCode) {
+		this.workTypeCode = workTypeCode;
 	}
 
 	/**
@@ -280,11 +285,6 @@ public class StaffInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 }
