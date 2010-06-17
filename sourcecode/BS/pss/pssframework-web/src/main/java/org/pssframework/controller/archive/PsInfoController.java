@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.PsInfo;
+import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
@@ -76,36 +77,69 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
-		String tgid = request.getParameter("tgid");
+		String tgid = request.getParameter("tgId");
 
 		Map requestMap = new HashMap();
 		requestMap.put("tgid", tgid);
 
-		List termlist = terminalInfoManger.findByPageRequest(requestMap);
+		result.addObject("psinfo", model);
+
+		List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(requestMap);
+
+		result.addObject("termList", termlist);
 
 		Map mapRequest = new HashMap();
 
-		// 漏保类型
-		mapRequest.put("codecate", "TERM_TYPE");
+		// RATED_EC 额定电流
+		mapRequest.put("codecate", "RATED_EC");
 
-		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ratedEcList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// RATED_EC 剩余电流档位
+		mapRequest.put("codecate", "REMC_GEAR");
+
+		result.addObject("remcGearList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// 剩余电流档位当前值 REMC_GEAR_VALUE
+
+		mapRequest.put("codecate", "REMC_GEAR_VALUE");
+
+		result.addObject("remcGearValueList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// -漏电分断延迟档位 OFF_DELAY_GEAR
+		mapRequest.put("codecate", "OFF_DELAY_GEAR");
+
+		result.addObject("offDelayGearList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// -漏电分断延迟时间 OFF_DELAY_VALUE
+
+		mapRequest.put("codecate", "OFF_DELAY_VALUE");
+
+		result.addObject("offDelayValueList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// 漏保类型
+		mapRequest.put("codecate", "PS_TYPE");
+
+		result.addObject("psTypeList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
 		mapRequest.put("codecate", "COMM_MODE");
 
-		result.addObject("commlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 波特率
 		mapRequest.put("codecate", "BTL");
 
-		result.addObject("btllist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
 
-		// 型号
-		mapRequest.put("codecate", "BTL");
+		// 漏保型号
+		mapRequest.put("codecate", "PS_MODEL");
 
-		result.addObject("modellist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("psModelList", codeInfoManager.findByPageRequest(mapRequest));
 
 		result.setViewName("/archive/addPsInfo");
+
+		result.addObject("_type", "new");
 
 		return result;
 	}
