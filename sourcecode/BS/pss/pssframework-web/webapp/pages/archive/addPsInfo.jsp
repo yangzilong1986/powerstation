@@ -120,7 +120,6 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 
 $(function(){
 jQuery("#save").click(function(){
-  alert(123)
     if(val.validate()){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
@@ -163,8 +162,9 @@ addpsinfo = function(){
            var msg = json['msg'];
            var isSucc = json['isSucc'];
            jQuery("#psId").val(json['psId']);
+           window.colse();
+           parent.location.src="${ctx}/archive/tginfo/${tgId}";
          },error:function(e){
-             alert("error");
              alert(e.message);
          }
        });

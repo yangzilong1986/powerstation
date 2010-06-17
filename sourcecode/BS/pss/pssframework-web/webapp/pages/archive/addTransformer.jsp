@@ -12,7 +12,7 @@
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>变压器信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <form:form action="/archive/traninfo" modelAttribute="traninfo">
     <form:hidden path="equipId" />
     <form:hidden path="tgId" />

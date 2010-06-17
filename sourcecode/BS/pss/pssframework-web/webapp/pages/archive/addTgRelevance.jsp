@@ -264,7 +264,8 @@ function loadTgRelevevance(){
         <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
           disabled="${disabled}" /></td>
         <td width="10%" align="right" class="green">管理单位：</td>
-        <td width="25%">${tginfo.orgInfo}</td>
+        <td width="25%"><form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId" itemLabel="orgName"
+          itemValue="orgId" cssStyle="width:155px;" /></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
