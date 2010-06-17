@@ -39,24 +39,24 @@ public class LineRealInfo extends BaseEntity {
 	@Column(name = "LINE_RELA_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_LINE_REAL")
-	// RELA_ID              NUMBER(16)                      not null,
+	// RELA_ID NUMBER(16) not null,
 	private Long lineRelaId;
 
 	@Column(name = "LINE_ID", length = 16)
-	// LINE_ID             NUMBER(16),
+	// LINE_ID NUMBER(16),
 	private Long lineId;
 
 	@Column(name = "LINK_LINE_ID", length = 16)
-	// LINK_LINE_ID              NUMBER(16),
+	// LINK_LINE_ID NUMBER(16),
 	private Long linkLineId;
 
 	@Column(name = "CASCADE_FLAG", length = 8)
-	// CASCADE_FLAG              VARCHAR2(8),
+	// CASCADE_FLAG VARCHAR2(8),
 	private Long cascadeFlag;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE
+	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
 	/**

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -38,20 +40,22 @@ public class MeterMpRelaInfo extends BaseEntity {
 	// METER_MP_ID NUMBER(16) not null,
 	private Long meterMpId;
 
-	@Column(name = "METER_ID", nullable = false, length = 16)
+	@OneToOne(targetEntity = MeterInfo.class)
+	@JoinColumn(name = "METER_ID", referencedColumnName = "METER_ID")
 	// METER_ID NUMBER(16) not null,
-	private Long meterId;
+	private MeterInfo meterInfo;
 
 	// MP_ID NUMBER(16)
-	@Column(name = "PR_CODE", length = 16)
+	@OneToOne(targetEntity = MpInfo.class)
+	@JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
 	// MP_ID VARCHAR2(8),设备的产权说明 01 局属、 02 用户
-	private Long mpID;
+	private MpInfo mpInfo;
 
 	/**
-	 * @return the meterId
+	 * @return the meterInfo
 	 */
-	public Long getMeterId() {
-		return meterId;
+	public MeterInfo getMeterInfo() {
+		return meterInfo;
 	}
 
 	/**
@@ -62,10 +66,10 @@ public class MeterMpRelaInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the mpID
+	 * @return the mpInfo
 	 */
-	public Long getMpID() {
-		return mpID;
+	public MpInfo getMpInfo() {
+		return mpInfo;
 	}
 
 	@Override
@@ -74,11 +78,10 @@ public class MeterMpRelaInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param meterId
-	 *            the meterId to set
+	 * @param meterInfo the meterInfo to set
 	 */
-	public void setMeterId(Long meterId) {
-		this.meterId = meterId;
+	public void setMeterInfo(MeterInfo meterInfo) {
+		this.meterInfo = meterInfo;
 	}
 
 	/**
@@ -90,11 +93,10 @@ public class MeterMpRelaInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param mpID
-	 *            the mpID to set
+	 * @param mpInfo the mpInfo to set
 	 */
-	public void setMpID(Long mpID) {
-		this.mpID = mpID;
+	public void setMpInfo(MpInfo mpInfo) {
+		this.mpInfo = mpInfo;
 	}
 
 	@Override

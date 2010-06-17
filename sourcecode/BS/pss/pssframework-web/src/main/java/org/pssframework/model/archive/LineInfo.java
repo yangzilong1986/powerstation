@@ -40,40 +40,40 @@ public class LineInfo extends BaseEntity {
 	@Column(name = "LINE_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_LINE")
-	// LINE_ID              NUMBER(16)                      not null,
+	// LINE_ID NUMBER(16) not null,
 	private Long lineId;
 
 	@Column(name = "LINE_NO", length = 16)
-	//LINE_NO              VARCHAR2(16),
+	// LINE_NO VARCHAR2(16),
 	private String LineNo;
 
 	@Column(name = "LINE_NAME", length = 256, nullable = false)
-	//LINE_NAME            VARCHAR2(256)                   not null,
+	// LINE_NAME VARCHAR2(256) not null,
 	private String LineName;
 
 	@Column(name = "ORG_ID", length = 16, nullable = false)
-	// ORG_ID          VARCHAR2(16) not null,
+	// ORG_ID VARCHAR2(16) not null,
 	private Long orgId;
 
 	@Column(name = "VOLT_CODE", length = 8)
-	//VOLT_CODE            VARCHAR2(8),
+	// VOLT_CODE VARCHAR2(8),
 	private String voltCode;
 
 	@Column(name = "SUBLINE_FLAG", length = 8)
-	//SUBLINE_FLAG         VARCHAR2(8),
+	// SUBLINE_FLAG VARCHAR2(8),
 	private String sublineFlag;
 
 	@Column(name = "RUN_STATUS_CODE", length = 16)
-	//RUN_STATUS_CODE      VARCHAR2(8),
+	// RUN_STATUS_CODE VARCHAR2(8),
 	private String runStatusCode;
 
 	@Column(name = "CONS_ID", length = 16)
-	// CONS_ID              NUMBER(16),
+	// CONS_ID NUMBER(16),
 	private Long consId;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE
+	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
 	/**
@@ -81,6 +81,13 @@ public class LineInfo extends BaseEntity {
 	 */
 	public Long getConsId() {
 		return consId;
+	}
+
+	/**
+	 * @return the lasttimeStamp
+	 */
+	public Date getLasttimeStamp() {
+		return lasttimeStamp;
 	}
 
 	/**
@@ -105,6 +112,13 @@ public class LineInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	/**
 	 * @return the runStatusCode
 	 */
 	public String getRunStatusCode() {
@@ -125,11 +139,23 @@ public class LineInfo extends BaseEntity {
 		return voltCode;
 	}
 
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
 	/**
 	 * @param consId the consId to set
 	 */
 	public void setConsId(Long consId) {
 		this.consId = consId;
+	}
+
+	/**
+	 * @param lasttimeStamp the lasttimeStamp to set
+	 */
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
 	}
 
 	/**
@@ -154,6 +180,13 @@ public class LineInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
 	 * @param runStatusCode the runStatusCode to set
 	 */
 	public void setRunStatusCode(String runStatusCode) {
@@ -174,43 +207,9 @@ public class LineInfo extends BaseEntity {
 		this.voltCode = voltCode;
 	}
 
-
-	/**
-	 * @param lasttimeStamp the lasttimeStamp to set
-	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
-	}
-
-	/**
-	 * @return the lasttimeStamp
-	 */
-	public Date getLasttimeStamp() {
-		return lasttimeStamp;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
 	}
 
 }

@@ -30,6 +30,7 @@ import org.pssframework.base.BaseEntity;
 @Table(name = "G_SUBS_LINE_RELA")
 @SequenceGenerator(sequenceName = "SEQ_G_SUBS_LINE_RELA", name = "SEQ_G_SUBS_LINE_RELA")
 public class SubsLineRelaInfo extends BaseEntity {
+
 	/**
 	 * 
 	 */
@@ -38,28 +39,28 @@ public class SubsLineRelaInfo extends BaseEntity {
 	@Column(name = "RELA_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_SUBS_LINE_RELA")
-	// RELA_ID              NUMBER(16)                      not null,
+	// RELA_ID NUMBER(16) not null,
 	private Long relaId;
 
 	@Column(name = "EQUIP_ID", length = 16)
-	// EQUIP_ID             NUMBER(16),
+	// EQUIP_ID NUMBER(16),
 	private Long equioId;
 
 	@Column(name = "LINE_ID", length = 16)
-	// LINE_ID              NUMBER(16),
+	// LINE_ID NUMBER(16),
 	private Long lineId;
 
 	@Column(name = "SUBS_ID", length = 16)
-	// SUBS_ID              NUMBER(16),
+	// SUBS_ID NUMBER(16),
 	private Long subsId;
 
 	@Column(name = "RELA_FLAG", length = 8)
-	// RELA_FLAG            VARCHAR2(8),
+	// RELA_FLAG VARCHAR2(8),
 	private String relaFlag;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE
+	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
 	/**

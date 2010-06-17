@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,24 +42,25 @@ public class LineTgRelaInfo extends BaseEntity {
 	@Column(name = "LINE_TQ_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_LINE_TG_RELA")
-	// LINE_TQ_ID           NUMBER(16)                      not null,
+	// LINE_TQ_ID NUMBER(16) not null,
 	private Long lineTgId;
 
-	@Column(name = "TG_ID", length = 16, nullable = false)
-	// TG_ID                NUMBER(16),
-	private Long tgId;
+	@OneToOne(targetEntity = TgInfo.class, mappedBy = "lineTgRelaInfo")
+	@JoinColumn(name = "TG_ID", nullable = false, referencedColumnName = "TG_ID")
+	// TG_ID NUMBER(16),
+	private TgInfo tgInfo;
 
 	@Column(name = "LINE_ID", length = 8, nullable = false)
-	//LINE_ID              NUMBER(16),
+	// LINE_ID NUMBER(16),
 	private Long lineId;
 
 	@Column(name = "RELA_FLAG", length = 8, nullable = false)
-	//RELA_FLAG            VARCHAR2(8),
+	// RELA_FLAG VARCHAR2(8),
 	private Long relaFlag;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE
+	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
 
 	/**
@@ -88,11 +91,9 @@ public class LineTgRelaInfo extends BaseEntity {
 		return relaFlag;
 	}
 
-	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -123,20 +124,22 @@ public class LineTgRelaInfo extends BaseEntity {
 		this.relaFlag = relaFlag;
 	}
 
-	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	/**
+	 * @param tgInfo the tgInfo to set
+	 */
+	public void setTgInfo(TgInfo tgInfo) {
+		this.tgInfo = tgInfo;
+	}
+
+	/**
+	 * @return the tgInfo
+	 */
+	public TgInfo getTgInfo() {
+		return tgInfo;
 	}
 }

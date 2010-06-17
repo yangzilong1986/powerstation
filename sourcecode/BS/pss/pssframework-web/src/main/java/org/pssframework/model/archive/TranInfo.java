@@ -37,101 +37,101 @@ public class TranInfo extends BaseEntity {
 	@Column(name = "EQUIP_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_TRAN")
-	//EQUIP_ID           NUMBER(16) not null, 设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识
+	// EQUIP_ID NUMBER(16) not null, 设备的唯一标识， 变更的时候用于对应线损模型中的变压器唯一标识
 	private Long equipId;
 
-	//TG_ID              NUMBER(16), 台区标识
+	// TG_ID NUMBER(16), 台区标识
 	@Column(name = "TG_ID")
 	private Long tgId;
 
 	@Column(name = "ORG_ID")
-	// ORG_ID          VARCHAR2(16) not null, 部门
+	// ORG_ID VARCHAR2(16) not null, 部门
 	private String orgId;
 
 	@Column(name = "CONS_ID", length = 16)
-	//CONS_ID            NUMBER(16),用电客户的内部唯一标识
+	// CONS_ID NUMBER(16),用电客户的内部唯一标识
 	private Long consId;
 
 	@Column(name = "TYPE_CODE", length = 8)
-	//TYPE_CODE          VARCHAR2(8), 区分是变压器还是高压电动
+	// TYPE_CODE VARCHAR2(8), 区分是变压器还是高压电动
 	private String typeCode;
 
 	@Column(name = "TRAN_NAME", length = 256)
-	//TRAN_NAME          VARCHAR2(256),设备的名称
+	// TRAN_NAME VARCHAR2(256),设备的名称
 	private String tranName;
 
 	@Column(name = "INST_ADDR", length = 256)
-	//INST_ADDR          VARCHAR2(256),设备的安装地址
+	// INST_ADDR VARCHAR2(256),设备的安装地址
 	private String instAddr;
 
 	@Column(name = "INST_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
-	//INST_DATE          DATE,设备的安装日期
+	// INST_DATE DATE,设备的安装日期
 	private Date instDate;
 
 	@Column(name = "PLATE_CAP", precision = 16, scale = 6)
-	//PLATE_CAP          NUMBER(16,6),设备铭牌上登记的容量
+	// PLATE_CAP NUMBER(16,6),设备铭牌上登记的容量
 	private Long plateCap;
 
 	@Column(name = "MS_FLAG", length = 8)
-	//MS_FLAG            VARCHAR2(8),引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码
+	// MS_FLAG VARCHAR2(8),引用国家电网公司营销管理代码类集 :5110.17 电源用途分类与代码
 	private String msFlag;
 
 	@Column(name = "RUN_STATUS_CODE", length = 8)
-	//RUN_STATUS_CODE    VARCHAR2(8),本次变更前的运行状态 01 运行、 02 停用、 03 拆除
+	// RUN_STATUS_CODE VARCHAR2(8),本次变更前的运行状态 01 运行、 02 停用、 03 拆除
 	private String runStatusCode;
 
 	@Column(name = "PUB_PRIV_FLAG", length = 8)
-	//PUB_PRIV_FLAG      VARCHAR2(8),
+	// PUB_PRIV_FLAG VARCHAR2(8),
 	private String pubPrivFlag;
 
 	@Column(name = "PROTECT_MODE", length = 8)
-	//PROTECT_MODE       VARCHAR2(8),受电设备的保护方式， 引用代码 变压器保护方式分类
+	// PROTECT_MODE VARCHAR2(8),受电设备的保护方式， 引用代码 变压器保护方式分类
 	private String protectMode;
 
 	@Column(name = "FRSTSIDE_VOLT_CODE", length = 8)
-	//FRSTSIDE_VOLT_CODE VARCHAR2(8),设备的一侧电压
+	// FRSTSIDE_VOLT_CODE VARCHAR2(8),设备的一侧电压
 	private String frstsideVoltCode;
 
 	@Column(name = "SNDSIDE_VOLT_CODE", length = 8)
-	//SNDSIDE_VOLT_CODE  VARCHAR2(8),设备的二侧电压
+	// SNDSIDE_VOLT_CODE VARCHAR2(8),设备的二侧电压
 	private String sndsideVoltCode;
 
 	@Column(name = "MODEL_NO", length = 8)
-	//MODEL_NO           VARCHAR2(8),设备的型号
+	// MODEL_NO VARCHAR2(8),设备的型号
 	private String modelNo;
 
 	@Column(name = "RV_HV", length = 8)
-	//RV_HV              VARCHAR2(8),额定电压 _ 高压
+	// RV_HV VARCHAR2(8),额定电压 _ 高压
 	private String rvHv;
 
 	@Column(name = "RC_HV", length = 8)
-	//RC_HV              VARCHAR2(8),额定电流 _ 高压
+	// RC_HV VARCHAR2(8),额定电流 _ 高压
 	private String rcHv;
 
 	@Column(name = "RV_MV", length = 8)
-	//RV_MV              VARCHAR2(8),额定电压 _ 中压
+	// RV_MV VARCHAR2(8),额定电压 _ 中压
 	private String rvMv;
 
 	@Column(name = "RC_MV", length = 8)
-	//RC_MV              VARCHAR2(8),额定电流 _ 中压
+	// RC_MV VARCHAR2(8),额定电流 _ 中压
 	private String rcMv;
 
 	@Column(name = "RV_LV", length = 8)
-	//RV_LV              VARCHAR2(8),额定电压 _ 低压
+	// RV_LV VARCHAR2(8),额定电压 _ 低压
 	private String rvLv;
 
 	@Column(name = "RC_LV", length = 8)
-	//RC_LV              VARCHAR2(8),额定电流 _ 低压
+	// RC_LV VARCHAR2(8),额定电流 _ 低压
 	private String rcLv;
 
 	@Column(name = "PR_CODE", length = 8)
-	//PR_CODE            VARCHAR2(8),设备的产权说明 01 局属、 02 用户
+	// PR_CODE VARCHAR2(8),设备的产权说明 01 局属、 02 用户
 	private String prCode;
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
-	//LASTTIME_STAMP  DATE default SYSDATE ,最后表结构修改时间戳
+	// LASTTIME_STAMP DATE default SYSDATE ,最后表结构修改时间戳
 	private Date lasttimeStamp;
 
 	/**
@@ -300,6 +300,11 @@ public class TranInfo extends BaseEntity {
 	 */
 	public String getTypeCode() {
 		return typeCode;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -473,10 +478,5 @@ public class TranInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
 	}
 }

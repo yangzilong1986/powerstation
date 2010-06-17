@@ -48,6 +48,9 @@ public class MpInfo extends BaseEntity {
 	@OneToOne(targetEntity = GpInfo.class, mappedBy = "mpInfo")
 	private GpInfo gpInfo;
 
+	@OneToOne(targetEntity = MeterMpRelaInfo.class, mappedBy = "mpInfo")
+	private MeterMpRelaInfo meterMpRelaInfo;
+
 	@Column(name = "MP_NO", length = 16, nullable = false)
 	// MP_NO VARCHAR2(256),用户自己编写的编号，默认跟标识一致'
 	private Long moNo;
@@ -162,331 +165,11 @@ public class MpInfo extends BaseEntity {
 	@Column(name = "PINYIN_CODE", length = 16)
 	private String pingyinCode;
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @return the moNo
-	 */
-	public Long getMoNo() {
-		return moNo;
-	}
-
-	/**
-	 * @param moNo the moNo to set
-	 */
-	public void setMoNo(Long moNo) {
-		this.moNo = moNo;
-	}
-
-	/**
-	 * @return the mpName
-	 */
-	public String getMpName() {
-		return mpName;
-	}
-
-	/**
-	 * @param mpName the mpName to set
-	 */
-	public void setMpName(String mpName) {
-		this.mpName = mpName;
-	}
-
-	/**
-	 * @return the mpAddr
-	 */
-	public String getMpAddr() {
-		return mpAddr;
-	}
-
-	/**
-	 * @param mpAddr the mpAddr to set
-	 */
-	public void setMpAddr(String mpAddr) {
-		this.mpAddr = mpAddr;
-	}
-
-	/**
-	 * @return the typeCode
-	 */
-	public String getTypeCode() {
-		return typeCode;
-	}
-
-	/**
-	 * @param typeCode the typeCode to set
-	 */
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
-	}
-
-	/**
-	 * @return the mpAttrCode
-	 */
-	public String getMpAttrCode() {
-		return mpAttrCode;
-	}
-
-	/**
-	 * @param mpAttrCode the mpAttrCode to set
-	 */
-	public void setMpAttrCode(String mpAttrCode) {
-		this.mpAttrCode = mpAttrCode;
-	}
-
-	/**
-	 * @return the usageTypeCode
-	 */
-	public String getUsageTypeCode() {
-		return usageTypeCode;
-	}
-
-	/**
-	 * @param usageTypeCode the usageTypeCode to set
-	 */
-	public void setUsageTypeCode(String usageTypeCode) {
-		this.usageTypeCode = usageTypeCode;
-	}
-
-	/**
-	 * @return the sideCode
-	 */
-	public String getSideCode() {
-		return sideCode;
-	}
-
-	/**
-	 * @param sideCode the sideCode to set
-	 */
-	public void setSideCode(String sideCode) {
-		this.sideCode = sideCode;
-	}
-
-	/**
-	 * @return the voltCode
-	 */
-	public String getVoltCode() {
-		return voltCode;
-	}
-
-	/**
-	 * @param voltCode the voltCode to set
-	 */
-	public void setVoltCode(String voltCode) {
-		this.voltCode = voltCode;
-	}
-
 	/**
 	 * @return the appDate
 	 */
 	public Date getAppDate() {
 		return appDate;
-	}
-
-	/**
-	 * @param appDate the appDate to set
-	 */
-	public void setAppDate(Date appDate) {
-		this.appDate = appDate;
-	}
-
-	/**
-	 * @return the runDate
-	 */
-	public Date getRunDate() {
-		return runDate;
-	}
-
-	/**
-	 * @param runDate the runDate to set
-	 */
-	public void setRunDate(Date runDate) {
-		this.runDate = runDate;
-	}
-
-	/**
-	 * @return the wiringMode
-	 */
-	public String getWiringMode() {
-		return wiringMode;
-	}
-
-	/**
-	 * @param wiringMode the wiringMode to set
-	 */
-	public void setWiringMode(String wiringMode) {
-		this.wiringMode = wiringMode;
-	}
-
-	/**
-	 * @return the measMode
-	 */
-	public String getMeasMode() {
-		return measMode;
-	}
-
-	/**
-	 * @param measMode the measMode to set
-	 */
-	public void setMeasMode(String measMode) {
-		this.measMode = measMode;
-	}
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
-	}
-
-	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
-	 * @return the switchNo
-	 */
-	public String getSwitchNo() {
-		return switchNo;
-	}
-
-	/**
-	 * @param switchNo the switchNo to set
-	 */
-	public void setSwitchNo(String switchNo) {
-		this.switchNo = switchNo;
-	}
-
-	/**
-	 * @return the mrSectNo
-	 */
-	public String getMrSectNo() {
-		return mrSectNo;
-	}
-
-	/**
-	 * @param mrSectNo the mrSectNo to set
-	 */
-	public void setMrSectNo(String mrSectNo) {
-		this.mrSectNo = mrSectNo;
-	}
-
-	/**
-	 * @return the lineId
-	 */
-	public Long getLineId() {
-		return lineId;
-	}
-
-	/**
-	 * @param lineId the lineId to set
-	 */
-	public void setLineId(Long lineId) {
-		this.lineId = lineId;
-	}
-
-	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
-	}
-
-	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
-	/**
-	 * @return the exchgTypeCode
-	 */
-	public String getExchgTypeCode() {
-		return exchgTypeCode;
-	}
-
-	/**
-	 * @param exchgTypeCode the exchgTypeCode to set
-	 */
-	public void setExchgTypeCode(String exchgTypeCode) {
-		this.exchgTypeCode = exchgTypeCode;
-	}
-
-	/**
-	 * @return the mdTypeCoe
-	 */
-	public String getMdTypeCoe() {
-		return mdTypeCoe;
-	}
-
-	/**
-	 * @param mdTypeCoe the mdTypeCoe to set
-	 */
-	public void setMdTypeCoe(String mdTypeCoe) {
-		this.mdTypeCoe = mdTypeCoe;
-	}
-
-	/**
-	 * @return the mrSn
-	 */
-	public Long getMrSn() {
-		return mrSn;
-	}
-
-	/**
-	 * @param mrSn the mrSn to set
-	 */
-	public void setMrSn(Long mrSn) {
-		this.mrSn = mrSn;
-	}
-
-	/**
-	 * @return the meterFlag
-	 */
-	public String getMeterFlag() {
-		return meterFlag;
-	}
-
-	/**
-	 * @param meterFlag the meterFlag to set
-	 */
-	public void setMeterFlag(String meterFlag) {
-		this.meterFlag = meterFlag;
-	}
-
-	/**
-	 * @return the statusCoe
-	 */
-	public String getStatusCoe() {
-		return statusCoe;
-	}
-
-	/**
-	 * @param statusCoe the statusCoe to set
-	 */
-	public void setStatusCoe(String statusCoe) {
-		this.statusCoe = statusCoe;
-	}
-
-	/**
-	 * @return the lcFlag
-	 */
-	public String getLcFlag() {
-		return lcFlag;
-	}
-
-	/**
-	 * @param lcFlag the lcFlag to set
-	 */
-	public void setLcFlag(String lcFlag) {
-		this.lcFlag = lcFlag;
 	}
 
 	/**
@@ -497,10 +180,17 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param consId the consId to set
+	 * @return the exchgTypeCode
 	 */
-	public void setConsId(Long consId) {
-		this.consId = consId;
+	public String getExchgTypeCode() {
+		return exchgTypeCode;
+	}
+
+	/**
+	 * @return the gpInfo
+	 */
+	public GpInfo getGpInfo() {
+		return gpInfo;
 	}
 
 	/**
@@ -511,36 +201,66 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param lasttimeStamp the lasttimeStamp to set
+	 * @return the lcFlag
 	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
+	public String getLcFlag() {
+		return lcFlag;
 	}
 
 	/**
-	 * @return the pingyinCode
+	 * @return the lineId
 	 */
-	public String getPingyinCode() {
-		return pingyinCode;
+	public Long getLineId() {
+		return lineId;
 	}
 
 	/**
-	 * @param pingyinCode the pingyinCode to set
+	 * @return the mdTypeCoe
 	 */
-	public void setPingyinCode(String pingyinCode) {
-		this.pingyinCode = pingyinCode;
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	public String getMdTypeCoe() {
+		return mdTypeCoe;
 	}
 
 	/**
-	 * @param mpId the mpId to set
+	 * @return the measMode
 	 */
-	public void setMpId(Long mpId) {
-		this.mpId = mpId;
+	public String getMeasMode() {
+		return measMode;
+	}
+
+	/**
+	 * @return the meterFlag
+	 */
+	public String getMeterFlag() {
+		return meterFlag;
+	}
+
+	/**
+	 * @return the meterMpRelaInfo
+	 */
+	public MeterMpRelaInfo getMeterMpRelaInfo() {
+		return meterMpRelaInfo;
+	}
+
+	/**
+	 * @return the moNo
+	 */
+	public Long getMoNo() {
+		return moNo;
+	}
+
+	/**
+	 * @return the mpAddr
+	 */
+	public String getMpAddr() {
+		return mpAddr;
+	}
+
+	/**
+	 * @return the mpAttrCode
+	 */
+	public String getMpAttrCode() {
+		return mpAttrCode;
 	}
 
 	/**
@@ -551,6 +271,130 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the mpName
+	 */
+	public String getMpName() {
+		return mpName;
+	}
+
+	/**
+	 * @return the mrSectNo
+	 */
+	public String getMrSectNo() {
+		return mrSectNo;
+	}
+
+	/**
+	 * @return the mrSn
+	 */
+	public Long getMrSn() {
+		return mrSn;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * @return the pingyinCode
+	 */
+	public String getPingyinCode() {
+		return pingyinCode;
+	}
+
+	/**
+	 * @return the runDate
+	 */
+	public Date getRunDate() {
+		return runDate;
+	}
+
+	/**
+	 * @return the sideCode
+	 */
+	public String getSideCode() {
+		return sideCode;
+	}
+
+	/**
+	 * @return the statusCoe
+	 */
+	public String getStatusCoe() {
+		return statusCoe;
+	}
+
+	/**
+	 * @return the switchNo
+	 */
+	public String getSwitchNo() {
+		return switchNo;
+	}
+
+	/**
+	 * @return the tgId
+	 */
+	public Long getTgId() {
+		return tgId;
+	}
+
+	/**
+	 * @return the typeCode
+	 */
+	public String getTypeCode() {
+		return typeCode;
+	}
+
+	/**
+	 * @return the usageTypeCode
+	 */
+	public String getUsageTypeCode() {
+		return usageTypeCode;
+	}
+
+	/**
+	 * @return the voltCode
+	 */
+	public String getVoltCode() {
+		return voltCode;
+	}
+
+	/**
+	 * @return the wiringMode
+	 */
+	public String getWiringMode() {
+		return wiringMode;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param appDate the appDate to set
+	 */
+	public void setAppDate(Date appDate) {
+		this.appDate = appDate;
+	}
+
+	/**
+	 * @param consId the consId to set
+	 */
+	public void setConsId(Long consId) {
+		this.consId = consId;
+	}
+
+	/**
+	 * @param exchgTypeCode the exchgTypeCode to set
+	 */
+	public void setExchgTypeCode(String exchgTypeCode) {
+		this.exchgTypeCode = exchgTypeCode;
+	}
+
+	/**
 	 * @param gpInfo the gpInfo to set
 	 */
 	public void setGpInfo(GpInfo gpInfo) {
@@ -558,9 +402,182 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the gpInfo
+	 * @param lasttimeStamp the lasttimeStamp to set
 	 */
-	public GpInfo getGpInfo() {
-		return gpInfo;
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
+	}
+
+	/**
+	 * @param lcFlag the lcFlag to set
+	 */
+	public void setLcFlag(String lcFlag) {
+		this.lcFlag = lcFlag;
+	}
+
+	/**
+	 * @param lineId the lineId to set
+	 */
+	public void setLineId(Long lineId) {
+		this.lineId = lineId;
+	}
+
+	/**
+	 * @param mdTypeCoe the mdTypeCoe to set
+	 */
+	public void setMdTypeCoe(String mdTypeCoe) {
+		this.mdTypeCoe = mdTypeCoe;
+	}
+
+	/**
+	 * @param measMode the measMode to set
+	 */
+	public void setMeasMode(String measMode) {
+		this.measMode = measMode;
+	}
+
+	/**
+	 * @param meterFlag the meterFlag to set
+	 */
+	public void setMeterFlag(String meterFlag) {
+		this.meterFlag = meterFlag;
+	}
+
+	/**
+	 * @param meterMpRelaInfo the meterMpRelaInfo to set
+	 */
+	public void setMeterMpRelaInfo(MeterMpRelaInfo meterMpRelaInfo) {
+		this.meterMpRelaInfo = meterMpRelaInfo;
+	}
+
+	/**
+	 * @param moNo the moNo to set
+	 */
+	public void setMoNo(Long moNo) {
+		this.moNo = moNo;
+	}
+
+	/**
+	 * @param mpAddr the mpAddr to set
+	 */
+	public void setMpAddr(String mpAddr) {
+		this.mpAddr = mpAddr;
+	}
+
+	/**
+	 * @param mpAttrCode the mpAttrCode to set
+	 */
+	public void setMpAttrCode(String mpAttrCode) {
+		this.mpAttrCode = mpAttrCode;
+	}
+
+	/**
+	 * @param mpId the mpId to set
+	 */
+	public void setMpId(Long mpId) {
+		this.mpId = mpId;
+	}
+
+	/**
+	 * @param mpName the mpName to set
+	 */
+	public void setMpName(String mpName) {
+		this.mpName = mpName;
+	}
+
+	/**
+	 * @param mrSectNo the mrSectNo to set
+	 */
+	public void setMrSectNo(String mrSectNo) {
+		this.mrSectNo = mrSectNo;
+	}
+
+	/**
+	 * @param mrSn the mrSn to set
+	 */
+	public void setMrSn(Long mrSn) {
+		this.mrSn = mrSn;
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * @param pingyinCode the pingyinCode to set
+	 */
+	public void setPingyinCode(String pingyinCode) {
+		this.pingyinCode = pingyinCode;
+	}
+
+	/**
+	 * @param runDate the runDate to set
+	 */
+	public void setRunDate(Date runDate) {
+		this.runDate = runDate;
+	}
+
+	/**
+	 * @param sideCode the sideCode to set
+	 */
+	public void setSideCode(String sideCode) {
+		this.sideCode = sideCode;
+	}
+
+	/**
+	 * @param statusCoe the statusCoe to set
+	 */
+	public void setStatusCoe(String statusCoe) {
+		this.statusCoe = statusCoe;
+	}
+
+	/**
+	 * @param switchNo the switchNo to set
+	 */
+	public void setSwitchNo(String switchNo) {
+		this.switchNo = switchNo;
+	}
+
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(Long tgId) {
+		this.tgId = tgId;
+	}
+
+	/**
+	 * @param typeCode the typeCode to set
+	 */
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
+	}
+
+	/**
+	 * @param usageTypeCode the usageTypeCode to set
+	 */
+	public void setUsageTypeCode(String usageTypeCode) {
+		this.usageTypeCode = usageTypeCode;
+	}
+
+	/**
+	 * @param voltCode the voltCode to set
+	 */
+	public void setVoltCode(String voltCode) {
+		this.voltCode = voltCode;
+	}
+
+	/**
+	 * @param wiringMode the wiringMode to set
+	 */
+	public void setWiringMode(String wiringMode) {
+		this.wiringMode = wiringMode;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }
