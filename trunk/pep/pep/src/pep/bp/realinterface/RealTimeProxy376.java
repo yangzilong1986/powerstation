@@ -41,10 +41,11 @@ public class RealTimeProxy376 implements ICollectInterface {
         return taskService.getSequnce();
     }
 
-    private RealTimeTask Encode(MessageTranObject MTO, int sequenceCode, byte AFN) {
+    private List<RealTimeTask> Encode(MessageTranObject MTO, int sequenceCode, byte AFN) {
         MTO_376 mto = (MTO_376) MTO;
-        RealTimeTask task = new RealTimeTask();
+        List<RealTimeTask> tasks=  new ArrayList<RealTimeTask>();
         for (CollectObject obj : mto.getCollectObjects()) {
+            RealTimeTask task = new RealTimeTask();
             PmPacket376 packet = new PmPacket376();
             packet.setAfn(AFN);//AFN
             packet.getAddress().setRtua(obj.getLogicalAddr()); //逻辑地址
@@ -80,12 +81,13 @@ public class RealTimeProxy376 implements ICollectInterface {
             task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
             task.setSequencecode(sequenceCode);
             task.setLogicAddress(obj.getLogicalAddr());
+            tasks.add(task);
         }
-        return task;
+        return tasks;
     }
 
     private void InjectDataIteam(PmPacket376 packet, CommandItem commandItem, byte AFN) {
-
+        String groupValue = "";
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
@@ -113,6 +115,11 @@ public class RealTimeProxy376 implements ICollectInterface {
                     packet.getDataBuffer().putTEL(DataItemValue);
                 }else if (Format.equals("BS8")) {
                     packet.getDataBuffer().putBS8(DataItemValue);
+                }else if (Format.equals("GROUP_BS8")) {
+                    groupValue += DataItemValue;
+                    String IsGroupEnd = dataItem.getIsGroupEnd();
+                    if(IsGroupEnd.equals("1") )
+                        packet.getDataBuffer().putBS8(groupValue);
                 } else if (Format.equals("BS24")) {
                     packet.getDataBuffer().putBS24(DataItemValue);
                 } else if (Format.equals("BS64")) {
@@ -196,8 +203,9 @@ public class RealTimeProxy376 implements ICollectInterface {
 
             } else {
                 int sequenceCode = getID();
-                RealTimeTask task = this.Encode(MTO, sequenceCode, AFN_SETPARA);
-                this.taskService.insertTask(task);
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFN_SETPARA);
+                for(RealTimeTask task:tasks)
+                    this.taskService.insertTask(task);
                 return sequenceCode;
             }
         } catch (NumberFormatException numberFormatException) {
@@ -221,8 +229,9 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                RealTimeTask task = this.Encode(MTO, sequenceCode, AFN_GETPARA);
-                this.taskService.insertTask(task);
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFN_GETPARA);
+                for(RealTimeTask task : tasks)
+                    this.taskService.insertTask(task);
                 return sequenceCode;
             }
 
@@ -247,8 +256,9 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                RealTimeTask task = this.Encode(MTO, sequenceCode, AFN_RESET);
-                this.taskService.insertTask(task);
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFN_RESET);
+                for(RealTimeTask task:tasks)
+                    this.taskService.insertTask(task);
                 return sequenceCode;
             }
 
@@ -293,8 +303,10 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                RealTimeTask task = this.Encode(MTO, sequenceCode, AFN_TRANSMIT);
-                this.taskService.insertTask(task);
+
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFN_TRANSMIT);
+                for(RealTimeTask task:tasks)
+                    this.taskService.insertTask(task);
                 return sequenceCode;
             }
         } catch (NumberFormatException numberFormatException) {
@@ -312,7 +324,8 @@ public class RealTimeProxy376 implements ICollectInterface {
      * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
      * @throws Exception
      */
-    public Map<String, String> getReturnByWEP(long appId) throws Exception {
+    public Map<String, String> getReturnByWEP(long appId,String logicAddress) throws Exception {
+        RealTimeTask task = this.taskService.getTask(appId, logicAddress);
         return null;
     }
 
@@ -377,6 +390,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     }
 
     public Map<String, String> decodeData(PmPacketData dataBuffer, String CommandItemCode) {
+        String GroupValue = "";
         Map<String, String> results = new TreeMap<String, String>();
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(CommandItemCode);
@@ -402,6 +416,11 @@ public class RealTimeProxy376 implements ICollectInterface {
                     results.put(DataItemCode, dataBuffer.getTEL());
                 }else if (Format.equals("BS8")) {
                     results.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+                }else if (Format.equals("GROUP_BS8")) {
+                    if(GroupValue.length() == 0)
+                        GroupValue = dataBuffer.getBS8();
+                    results.put(DataItemCode, GroupValue.substring(0,Len));
+                    GroupValue = GroupValue.substring(Len,GroupValue.length());
                 } else if (Format.equals("BS24")) {
                     results.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
                 } else if (Format.equals("BS64")) {

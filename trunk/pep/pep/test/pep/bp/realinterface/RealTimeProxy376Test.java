@@ -93,7 +93,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testWriteEquipmentParameters() throws Exception {
        //测试F1
-        
+  
         Map datacellParams1 = new TreeMap();
         datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
         datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
@@ -170,6 +170,49 @@ public class RealTimeProxy376Test {
         assertTrue(resultMap7.get("1004000709").equals("3"));
         assertTrue(resultMap7.get("1004000710").equals("123"));
         assertTrue(resultMap7.get("1004000711").equals("9988"));
+
+        //测试F8
+        Map datacellParams8 = new TreeMap();
+        datacellParams8.put("1004000801", "0");//TCP
+        datacellParams8.put("1004000803", "01");//工作模式：客户机
+        datacellParams8.put("1004000805", "01");//终端工作在客户机模式下的三种在线模式:永久在线
+        datacellParams8.put("1004000806", "30");//重拨间隔：30秒
+        datacellParams8.put("1004000807", "3");//重拨次数：3
+        datacellParams8.put("1004000808", "30");//连续无通信自动断线时间：30分钟
+        datacellParams8.put("1004000809", "111111111111111111111111");//在线时段标志
+        MTO_376 MTO8  = PutInCommandItem(datacellParams8,"10040008","96123456");
+
+        Map<String,String> resultMap8 = getTestResults_WEP(MTO8,"96123456","10040008");
+        assertTrue(resultMap8.get("1004000801").equals("0"));
+        assertTrue(resultMap8.get("1004000803").equals("01"));
+        assertTrue(resultMap8.get("1004000805").equals("01"));
+        assertTrue(resultMap8.get("1004000806").equals("30"));
+        assertTrue(resultMap8.get("1004000807").equals("3"));
+        assertTrue(resultMap8.get("1004000808").equals("30"));
+        assertTrue(resultMap8.get("1004000809").equals("111111111111111111111111"));
+     
+        //测试F9
+        Map datacellParams9 = new TreeMap();
+        datacellParams9.put("1004000901", "1111111111111111111111111111111111111111111111111111111111111111");//事件记录有效标志位
+        datacellParams9.put("1004000902", "1111111111111111111111111111111111111111111111111111111111111111");//事件重要性等级标志位
+
+        MTO_376 MTO9  = PutInCommandItem(datacellParams9,"10040009","96123456");
+
+        Map<String,String> resultMap9 = getTestResults_WEP(MTO9,"96123456","10040009");
+        assertTrue(resultMap9.get("1004000901").equals("1111111111111111111111111111111111111111111111111111111111111111"));
+        assertTrue(resultMap9.get("1004000902").equals("1111111111111111111111111111111111111111111111111111111111111111"));
+   
+       //测试F16
+        Map datacellParams16 = new TreeMap();
+        datacellParams16.put("1004001601", "cmdz");//虚拟专网用户名
+        datacellParams16.put("1004001602", "cmdz.zj");//虚拟专网密码
+
+        MTO_376 MTO16  = PutInCommandItem(datacellParams16,"10040016","96123456");
+
+        Map<String,String> resultMap16 = getTestResults_WEP(MTO16,"96123456","10040016");
+        assertTrue(resultMap16.get("1004001601").equals("cmdz"));
+        assertTrue(resultMap16.get("1004001602").equals("cmdz.zj"));
+
     }
 
     /**
@@ -256,7 +299,7 @@ public class RealTimeProxy376Test {
         long appId = 0L;
         RealTimeProxy376 instance = new RealTimeProxy376();
         Map expResult = null;
-        Map result = instance.getReturnByWEP(appId);
+        Map result = instance.getReturnByWEP(appId,"96123456");
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

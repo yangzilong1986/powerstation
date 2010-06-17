@@ -5,7 +5,9 @@
 
 package pep.bp.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -17,17 +19,20 @@ public class RealTimeTask {
     private int sequenceCode;
     private String logicAddress;
     private String sendMsg;
-    private String recvMsg;
+    private List<String> recvMsgs;
     private Date postTime;
     private String taskStatus = "0"; //默认未处理
-    
+
+    public RealTimeTask(){
+        this.recvMsgs = new ArrayList<String>();
+    }
 
     public void setSendmsg(String sendMsg) {
         this.sendMsg = sendMsg;
     }
 
-    public void setRecvmsg(String recvMsg) {
-        this.recvMsg = recvMsg;
+    public void addRecvmsg(String recvMsg) {
+        this.recvMsgs.add(recvMsg);
     }
 
     public void setPosttime(Date postTime) {
@@ -50,9 +55,6 @@ public class RealTimeTask {
         return this.sendMsg;
     }
 
-    public String getRecvmsg() {
-        return this.recvMsg;
-    }
 
     public Date getPosttime() {
         return postTime;

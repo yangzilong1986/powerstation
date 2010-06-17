@@ -1,5 +1,7 @@
 package pep.bp.realinterface.conf;
 
+import java.util.Map;
+
 /**
  *
  * @author Thinkpad
@@ -13,6 +15,8 @@ public class ProtocolDataItem {
 
     private String GroupCode;//
     private String Description;
+    private String GroupValue;//针对数据位定义数据项的情况
+    private String IsGroupEnd;
 
     public ProtocolDataItem(){
         super();
@@ -26,6 +30,18 @@ public class ProtocolDataItem {
         this.GroupCode = GroupCode;
         this.Description = Description;
         this.DefaultValue = DefaultValue;
+    }
+
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description,String DefaultValue,String IsGroupEnd){
+        super();
+        this.DataItemCode = DataItemCode;
+        this.Length = Length;
+        this.Format = Format;
+        this.GroupCode = GroupCode;
+        this.Description = Description;
+        this.DefaultValue = DefaultValue;
+        this.IsGroupEnd = IsGroupEnd;
+
     }
     /**
      * @return the DataItemCode
@@ -109,5 +125,33 @@ public class ProtocolDataItem {
      */
     public void setDefaultValue(String DefaultValue) {
         this.DefaultValue = DefaultValue;
+    }
+
+    /**
+     * @return the GroupValue
+     */
+    public String getGroupValue() {
+        return GroupValue;
+    }
+
+    /**
+     * @param GroupValue the GroupValue to set
+     */
+    public void setGroupValue(String GroupValue) {
+        this.GroupValue = GroupValue;
+    }
+
+    /**
+     * @return the IsGroupEnd
+     */
+    public String getIsGroupEnd() {
+        return IsGroupEnd;
+    }
+
+    /**
+     * @param IsGroupEnd the IsGroupEnd to set
+     */
+    public void setIsGroupEnd(String IsGroupEnd) {
+        this.IsGroupEnd = IsGroupEnd;
     }
 }
