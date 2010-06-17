@@ -755,7 +755,7 @@ img {
 #bg ul li {
     float: left;
     background: url(../img/page_bg3.gif) no-repeat;
-    width: 57px;
+    width: 100px;
     height: 22px;
     margin-left: 3px;
     line-height: 22px;
@@ -764,7 +764,7 @@ img {
 
 #bg .curr {
     background: url(../img/page_bg2.gif) no-repeat;
-    width: 57px;
+    width: 100px;
     height: 22px;
 }
 
@@ -832,6 +832,9 @@ img {
     border: 0;
     cursor: pointer;
 }
+
+.electric_lcon .default{display:block;}
+.datamenu_lcon .default{display:block;}
 
 div.tableContainer {
     border: 1px #85C0B4 solid;
