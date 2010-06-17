@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,11 +45,11 @@ public class TgInfo extends BaseEntity {
 	// TG_ID NUMBER(16) not null,
 	private Long tgId;
 
-	@OneToOne(targetEntity = LineTgRelaInfo.class)
+	@OneToOne(targetEntity = LineTgRelaInfo.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "TG_ID", referencedColumnName = "TG_ID")
 	private LineTgRelaInfo lineTgRelaInfo;
 
-	@ManyToOne(targetEntity = OrgInfo.class)
+	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
 	// ORG_ID not null,
 	private OrgInfo orgInfo;
