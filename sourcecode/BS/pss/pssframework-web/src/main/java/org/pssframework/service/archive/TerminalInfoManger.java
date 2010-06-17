@@ -20,8 +20,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class TerminalInfoManger extends BaseManager<TerminalInfo, Long> {
 
-	private static final String Term = "select t from  TerminalInfo t,MpInfo m,GpInfo g where g.mpId = m.mpId and t.termId=g.termId"
-			+ "/~ m.tgId = '[tgid]' ~/ " + "/~ m.lineId = '[lineid]' ~/" + "/~ m.objectId = '[objectid]' ~/";
+	private static final String Term =
+
+	"select t from  TerminalInfo t,MpInfo m,GpInfo g where m.gpInfo.terminalInfo.termId = t.termId "
+			+ "/~ and m.tgId = '[tgid]' ~/ " + "/~ and m.lineId = '[lineid]' ~/"
+			+ "/~ and m.objectId = '[objectid]' ~/";
+
+	// "select t from  TerminalInfo t,MpInfo m,GpInfo g where g.mpId = m.mpId and t.termId=g.termId"
+	// + "/~ m.tgId = '[tgid]' ~/ " + "/~ m.lineId = '[lineid]' ~/" +
+	// "/~ m.objectId = '[objectid]' ~/";
 
 	@Autowired
 	private TerminalInfoDao terminalInfoDao;
