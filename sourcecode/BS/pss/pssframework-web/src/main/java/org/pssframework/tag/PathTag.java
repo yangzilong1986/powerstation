@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -57,8 +58,9 @@ public class PathTag extends TagSupport {
      */
     @Override
     public int doStartTag() throws JspException {
+        HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
         String contextRealPath = pageContext.getServletContext().getRealPath("/");
-        String contextPath = pageContext.getServletContext().getContextPath();
+        String contextPath = request.getContextPath();
         Properties props = new Properties();
         InputStream inputStream = null;
         try {
