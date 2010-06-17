@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 public class GpInfoManger extends BaseManager<GpInfo, Long> {
 
 	@Autowired
-	GpInfoDao gpInfoDao;
+	private GpInfoDao gpInfoDao;
 
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return gpInfoDao;
 	}
 
 }
