@@ -35,6 +35,8 @@ public interface RTTaskService {
      * @return
      */
     public RealTimeTask getTask(long sequnceCode,String logicAddress);
+
+    public List<RealTimeTask> getTasks(long sequnceCode,String logicAddress);
     /**
      * 更新接收报文
      * @param sequnceCode
