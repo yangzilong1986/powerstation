@@ -41,6 +41,9 @@ public class OrgInfo extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_ORG")
 	private Long orgId;
 
+	// @OneToMany(targetEntity = TgInfo.class, mappedBy = "orgInfo")
+	// private List<TgInfo> tgInfos;
+
 	/*
 	 * VARCHAR2(16) not null, comment on column O_ORG.ORG_NO is '本实体记录的唯一标识，
 	 * 创建供电单位的 唯一编码 '
@@ -54,11 +57,11 @@ public class OrgInfo extends BaseEntity {
 	@Column(length = 256, name = "ORG_NAME")
 	private String orgName;
 
-    /*
-     * comment on column O_ORG.P_ORG_ID is '直接上级供电单位编号';NUMBER(16)
-     */
-    @Column(name = "P_ORG_ID")
-    private Long pOrgId;
+	/*
+	 * comment on column O_ORG.P_ORG_ID is '直接上级供电单位编号';NUMBER(16)
+	 */
+	@Column(name = "P_ORG_ID")
+	private Long pOrgId;
 
 	/*
 	 * comment on column O_ORG.ORG_TYPE VARCHAR2(8), is '单位类别：国网公司、
@@ -118,11 +121,11 @@ public class OrgInfo extends BaseEntity {
 		return orgType;
 	}
 
-    /**
-     * @return the pOrgId
-     */
-    public Long getpOrgId() {
-        return pOrgId;
+	/**
+	 * @return the pOrgId
+	 */
+	public Long getpOrgId() {
+		return pOrgId;
 	}
 
 	/**
@@ -130,6 +133,18 @@ public class OrgInfo extends BaseEntity {
 	 */
 	public Long getSortNo() {
 		return sortNo;
+	}
+
+	/**
+	 * @return the tgInfos
+	 */
+	// public List<TgInfo> getTgInfos() {
+	// return tgInfos;
+	// }
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -176,8 +191,8 @@ public class OrgInfo extends BaseEntity {
 	 * @param pOrgNo
 	 *            the pOrgNo to set
 	 */
-    public void setpOrgNo(Long pOrgId) {
-        this.pOrgId = pOrgId;
+	public void setpOrgNo(Long pOrgId) {
+		this.pOrgId = pOrgId;
 	}
 
 	/**
@@ -188,14 +203,16 @@ public class OrgInfo extends BaseEntity {
 		this.sortNo = sortNo;
 	}
 
+	/**
+	 * @param tgInfos the tgInfos to set
+	 */
+	// public void setTgInfos(List<TgInfo> tgInfos) {
+	// this.tgInfos = tgInfos;
+	// }
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 }

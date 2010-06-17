@@ -64,20 +64,6 @@ public class UserRoleInfo extends BaseEntity {
 	private Date lasttimeStamp;
 	  
 	/**
-	 * @return the empRoleId
-	 */
-	public Long getEmpRoleId() {
-		return empRoleId;
-	}
-
-	/**
-	 * @param empRoleId the empRoleId to set
-	 */
-	public void setEmpRoleId(Long empRoleId) {
-		this.empRoleId = empRoleId;
-	}
-
-	/**
 	 * @return the empNo
 	 */
 	public Long getEmpNo() {
@@ -85,24 +71,10 @@ public class UserRoleInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param empNo the empNo to set
+	 * @return the empRoleId
 	 */
-	public void setEmpNo(Long empNo) {
-		this.empNo = empNo;
-	}
-
-	/**
-	 * @return the roleId
-	 */
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	/**
-	 * @param roleId the roleId to set
-	 */
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public Long getEmpRoleId() {
+		return empRoleId;
 	}
 
 	/**
@@ -113,17 +85,43 @@ public class UserRoleInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param grantable the grantable to set
-	 */
-	public void setGrantable(Long grantable) {
-		this.grantable = grantable;
-	}
-
-	/**
 	 * @return the lasttimeStamp
 	 */
 	public Date getLasttimeStamp() {
 		return lasttimeStamp;
+	}
+
+	/**
+	 * @return the roleId
+	 */
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param empNo the empNo to set
+	 */
+	public void setEmpNo(Long empNo) {
+		this.empNo = empNo;
+	}
+
+	/**
+	 * @param empRoleId the empRoleId to set
+	 */
+	public void setEmpRoleId(Long empRoleId) {
+		this.empRoleId = empRoleId;
+	}
+
+	/**
+	 * @param grantable the grantable to set
+	 */
+	public void setGrantable(Long grantable) {
+		this.grantable = grantable;
 	}
 
 	/**
@@ -133,14 +131,16 @@ public class UserRoleInfo extends BaseEntity {
 		this.lasttimeStamp = lasttimeStamp;
 	}
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+	/**
+	 * @param roleId the roleId to set
+	 */
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
 	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

@@ -53,17 +53,10 @@ public class CodeInfo extends BaseEntity {
 	private String value; // 代码类型 : 0 – 系统编码 1 – 用户编码
 
 	/**
-	 * @return the codeId
+	 * @return the code
 	 */
-	public Long getCodeId() {
-		return codeId;
-	}
-
-	/**
-	 * @param codeId the codeId to set
-	 */
-	public void setCodeId(Long codeId) {
-		this.codeId = codeId;
+	public String getCode() {
+		return code;
 	}
 
 	/**
@@ -74,52 +67,10 @@ public class CodeInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param codeCate the codeCate to set
+	 * @return the codeId
 	 */
-	public void setCodeCate(String codeCate) {
-		this.codeCate = codeCate;
-	}
-
-	/**
-	 * @return the code
-	 */
-	public String getCode() {
-		return code;
-	}
-
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the remark
-	 */
-	public String getRemark() {
-		return remark;
-	}
-
-	/**
-	 * @param remark the remark to set
-	 */
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public Long getCodeId() {
+		return codeId;
 	}
 
 	/**
@@ -130,20 +81,71 @@ public class CodeInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * @param codeCate the codeCate to set
+	 */
+	public void setCodeCate(String codeCate) {
+		this.codeCate = codeCate;
+	}
+
+	/**
+	 * @param codeId the codeId to set
+	 */
+	public void setCodeId(Long codeId) {
+		this.codeId = codeId;
+	}
+
+	/**
 	 * @param codeType the codeType to set
 	 */
 	public void setCodeType(String codeType) {
 		this.codeType = codeType;
 	}
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	/**
+	 * @param remark the remark to set
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	/**
@@ -153,11 +155,9 @@ public class CodeInfo extends BaseEntity {
 		this.value = value;
 	}
 
-	/**
-	 * @return the value
-	 */
-	public String getValue() {
-		return value;
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }
