@@ -106,11 +106,42 @@ public class CastorUtil {
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000710", 20, "ASCII", "","代理服务器密码","test"));
         CommandItem5.AddDataItem(new ProtocolDataItem("1004000711", 2, "BIN", "","终端侦听端口","80"));
 
+        ProtocolCommandItem CommandItem6 = new ProtocolCommandItem();
+        CommandItem6.setCommandCode("10040008");
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000801", 1, "GROUP_BS8", "1004000801","工作模式（TCP/UDP）","0","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000802", 1, "GROUP_BS8", "1004000801","备用","0","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000803", 2, "GROUP_BS8", "1004000801","终端工作模式","01","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000804", 2, "GROUP_BS8", "1004000801","备用","00","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000805", 2, "GROUP_BS8", "1004000801","终端工作在客户机模式下的三种在线模式","01","1"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000806", 2, "BIN", "","客户机模式下永久在线、时段在线模式重拨间隔","10"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000807", 1, "BIN", "","被动激活模式重拨次数","3"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000808", 1, "BIN", "","客户机模式下被动激活模式连续无通信自动断线时间","30"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000809", 3, "BS24", "","客户机模式下时段在线模式允许在线时段标志","111111111111111111111111"));
+
+        ProtocolCommandItem CommandItem7 = new ProtocolCommandItem();
+        CommandItem7.setCommandCode("10040009");
+        CommandItem7.AddDataItem(new ProtocolDataItem("1004000901", 8, "BS64", "","事件记录有效标志位","1111111111111111111111111111111111111111111111111111111111111111"));
+        CommandItem7.AddDataItem(new ProtocolDataItem("1004000902", 8, "BS64", "","事件重要性等级标志位","1111111111111111111111111111111111111111111111111111111111111111"));
+
+        ProtocolCommandItem CommandItem8 = new ProtocolCommandItem();
+        CommandItem8.setCommandCode("10040012");
+        CommandItem8.AddDataItem(new ProtocolDataItem("1004001201", 1, "BS8", "","状态量接入标志位","11111111"));
+        CommandItem8.AddDataItem(new ProtocolDataItem("1004001202", 1, "BS8", "","状态量属性标志位","11111111"));
+
+        ProtocolCommandItem CommandItem9 = new ProtocolCommandItem();
+        CommandItem9.setCommandCode("10040016");
+        CommandItem9.AddDataItem(new ProtocolDataItem("1004001601", 32, "ASCII", "","虚拟专网用户名","cmdz"));
+        CommandItem9.AddDataItem(new ProtocolDataItem("1004001602", 32, "ASCII", "","虚拟专网密码","cmdz.zj"));
+
         CommandItems.AddCommandItem(CommandItem1);
         CommandItems.AddCommandItem(CommandItem2);
         CommandItems.AddCommandItem(CommandItem3);
         CommandItems.AddCommandItem(CommandItem4);
         CommandItems.AddCommandItem(CommandItem5);
+        CommandItems.AddCommandItem(CommandItem6);
+        CommandItems.AddCommandItem(CommandItem7);
+        CommandItems.AddCommandItem(CommandItem8);
+        CommandItems.AddCommandItem(CommandItem9);
         try {
 // write it out as XML
             Mapping map = new Mapping();

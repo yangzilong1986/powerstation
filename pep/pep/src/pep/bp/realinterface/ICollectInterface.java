@@ -65,7 +65,7 @@ public interface ICollectInterface {
      * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
      * @throws Exception
      */
-    public Map<String, String> getReturnByWEP(long appId) throws Exception;
+    public Map<String, String> getReturnByWEP(long appId,String logicAddress) throws Exception;
     
     /**
      * 获取参数设置结果
