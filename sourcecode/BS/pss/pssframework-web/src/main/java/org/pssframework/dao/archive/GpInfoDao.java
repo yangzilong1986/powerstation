@@ -8,11 +8,13 @@ import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.archive.GpInfo;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Administrator
  *
  */
+@Repository
 public class GpInfoDao extends BaseHibernateDao<GpInfo, java.lang.Long> {
 
 	private static final String hql = "";

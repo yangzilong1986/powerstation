@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -44,7 +45,8 @@ public class GpInfo extends BaseEntity {
 	// GP_ID not null
 	private Long gpId;
 
-	@OneToOne(targetEntity = PsInfo.class, mappedBy = "gpInfo")
+	@OneToOne(targetEntity = PsInfo.class)
+	@PrimaryKeyJoinColumn
 	private PsInfo psInfo;
 
 	@Column(name = "OBJECT_ID", nullable = false)
