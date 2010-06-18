@@ -21,7 +21,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "a_code")
-@SequenceGenerator(sequenceName = "SEQ_S_CODE", name = "SEQ_S_CODE")
+@SequenceGenerator(sequenceName = "SEQ_S_CODE", name = "SEQ_S_CODE", allocationSize = 1)
 public class CodeInfo extends BaseEntity {
 
 	/**

@@ -32,7 +32,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_TERMINAL")
-@SequenceGenerator(sequenceName = "SEQ_C_TERMINAL", name = "SEQ_C_TERMINAL")
+@SequenceGenerator(sequenceName = "SEQ_C_TERMINAL", name = "SEQ_C_TERMINAL", allocationSize = 1)
 public class TerminalInfo extends BaseEntity {
 
 	/**

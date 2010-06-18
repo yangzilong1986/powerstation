@@ -36,7 +36,7 @@ import org.pssframework.model.system.OrgInfo;
  */
 @Entity
 @Table(name = "G_TG")
-@SequenceGenerator(sequenceName = "SEQ_G_TG", name = "SEQ_G_TG")
+@SequenceGenerator(sequenceName = "SEQ_G_TG", name = "SEQ_G_TG", allocationSize = 1)
 public class TgInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -3795917072464107754L;

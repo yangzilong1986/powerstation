@@ -25,7 +25,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "o_staff")
-@SequenceGenerator(sequenceName = "SEQ_O_STAFF", name = "SEQ_O_STAFF")
+@SequenceGenerator(sequenceName = "SEQ_O_STAFF", name = "SEQ_O_STAFF", allocationSize = 1)
 public class StaffInfo extends BaseEntity {
 
 	/**

@@ -31,7 +31,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_CONS")
-@SequenceGenerator(sequenceName = "SEQ_C_CONS", name = "SEQ_C_CONS")
+@SequenceGenerator(sequenceName = "SEQ_C_CONS", name = "SEQ_C_CONS", allocationSize = 1)
 public class ConsInfo extends BaseEntity {
 
 	/**

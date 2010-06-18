@@ -31,7 +31,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_MP")
-@SequenceGenerator(sequenceName = "SEQ_C_MP", name = "SEQ_C_MP")
+@SequenceGenerator(sequenceName = "SEQ_C_MP", name = "SEQ_C_MP", allocationSize = 1)
 public class MpInfo extends BaseEntity {
 
 	/**

@@ -25,7 +25,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "o_user_role")
-@SequenceGenerator(sequenceName = "SEQ_O_USER_ROLE", name = "SEQ_O_USER_ROLE")
+@SequenceGenerator(sequenceName = "SEQ_O_USER_ROLE", name = "SEQ_O_USER_ROLE", allocationSize = 1)
 public class UserRoleInfo extends BaseEntity {
 
 	/**
