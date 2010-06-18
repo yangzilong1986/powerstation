@@ -5,6 +5,7 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,17 +38,6 @@ import org.pssframework.base.BaseEntity;
 @SequenceGenerator(sequenceName = "SEQ_C_PS", name = "SEQ_C_PS")
 public class PsInfo extends BaseEntity {
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
 	/**
 	 * 
 	 */
@@ -64,10 +54,6 @@ public class PsInfo extends BaseEntity {
 	// TERM_ID NUMBER,is'终端号'
 	private TerminalInfo terminalInfo;
 
-	// @Column(name = "TERM_ID")
-	// // TERM_ID NUMBER,is'终端号'
-	// private Long termId;
-
 	// ASSET_NO VARCHAR2(20),is '资产号';
 	@Column(name = "ASSET_NO", length = 20)
 	private String assetNo;
@@ -75,6 +61,10 @@ public class PsInfo extends BaseEntity {
 	// PS_ADDR VARCHAR2(20)is'地址'
 	@Column(name = "PS_ADDR", length = 20)
 	private String psAddr;
+
+	// @Column(name = "TERM_ID")
+	// // TERM_ID NUMBER,is'终端号'
+	// private Long termId;
 
 	// MODEL_CODE VARCHAR2(5)is '漏保型号 : 见编码PS_MODEL';
 	@Column(name = "MODEL_CODE", length = 5)
@@ -108,14 +98,14 @@ public class PsInfo extends BaseEntity {
 	@Column(name = "OFF_DELAY_VALUE", length = 5)
 	private String offDelayValue;
 
-	// FUNCTION_CODE VARCHAR2(5),is '功能号'
-
 	@Column(name = "FUNCTION_CODE", length = 5)
 	private String functionCode;
 
 	// PS_TYPE VARCHAR2(5),is '1：总保；2：二级保';
 	@Column(name = "PS_TYPE", length = 5)
 	private String psType;
+
+	// FUNCTION_CODE VARCHAR2(5),is '功能号'
 
 	@Column(name = "LASTTIME_STAMP")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -126,22 +116,36 @@ public class PsInfo extends BaseEntity {
 	@Column(name = "PINYIN_CODE", length = 16)
 	private String pingyinCode;
 
-	@OneToOne(targetEntity = GpInfo.class, mappedBy = "psInfo")
+	@OneToOne(targetEntity = GpInfo.class, mappedBy = "psInfo", cascade = CascadeType.ALL)
 	@JoinColumn(name = "GP_ID", referencedColumnName = "GP_ID")
 	private GpInfo gpInfo;
 
 	/**
-	 * @return the psId
+	 * @return the assetNo
 	 */
-	public Long getPsId() {
-		return psId;
+	public String getAssetNo() {
+		return assetNo;
 	}
 
 	/**
-	 * @param psId the psId to set
+	 * @return the btl
 	 */
-	public void setPsId(Long psId) {
-		this.psId = psId;
+	public String getBtl() {
+		return btl;
+	}
+
+	/**
+	 * @return the commModeGm
+	 */
+	public String getCommModeGm() {
+		return commModeGm;
+	}
+
+	/**
+	 * @return the functionCode
+	 */
+	public String getFunctionCode() {
+		return functionCode;
 	}
 
 	/**
@@ -159,171 +163,10 @@ public class PsInfo extends BaseEntity {
 	// }
 
 	/**
-	 * @return the assetNo
+	 * @return the gpInfo
 	 */
-	public String getAssetNo() {
-		return assetNo;
-	}
-
-	/**
-	 * @param assetNo the assetNo to set
-	 */
-	public void setAssetNo(String assetNo) {
-		this.assetNo = assetNo;
-	}
-
-	/**
-	 * @return the psAddr
-	 */
-	public String getPsAddr() {
-		return psAddr;
-	}
-
-	/**
-	 * @param psAddr the psAddr to set
-	 */
-	public void setPsAddr(String psAddr) {
-		this.psAddr = psAddr;
-	}
-
-	/**
-	 * @return the modelCode
-	 */
-	public String getModelCode() {
-		return modelCode;
-	}
-
-	/**
-	 * @param modelCode the modelCode to set
-	 */
-	public void setModelCode(String modelCode) {
-		this.modelCode = modelCode;
-	}
-
-	/**
-	 * @return the commModeGm
-	 */
-	public String getCommModeGm() {
-		return commModeGm;
-	}
-
-	/**
-	 * @param commModeGm the commModeGm to set
-	 */
-	public void setCommModeGm(String commModeGm) {
-		this.commModeGm = commModeGm;
-	}
-
-	/**
-	 * @return the btl
-	 */
-	public String getBtl() {
-		return btl;
-	}
-
-	/**
-	 * @param btl the btl to set
-	 */
-	public void setBtl(String btl) {
-		this.btl = btl;
-	}
-
-	/**
-	 * @return the ratedEc
-	 */
-	public String getRatedEc() {
-		return ratedEc;
-	}
-
-	/**
-	 * @param ratedEc the ratedEc to set
-	 */
-	public void setRatedEc(String ratedEc) {
-		this.ratedEc = ratedEc;
-	}
-
-	/**
-	 * @return the remcGear
-	 */
-	public String getRemcGear() {
-		return remcGear;
-	}
-
-	/**
-	 * @param remcGear the remcGear to set
-	 */
-	public void setRemcGear(String remcGear) {
-		this.remcGear = remcGear;
-	}
-
-	/**
-	 * @return the remcGearValue
-	 */
-	public String getRemcGearValue() {
-		return remcGearValue;
-	}
-
-	/**
-	 * @param remcGearValue the remcGearValue to set
-	 */
-	public void setRemcGearValue(String remcGearValue) {
-		this.remcGearValue = remcGearValue;
-	}
-
-	/**
-	 * @return the offDelayGear
-	 */
-	public String getOffDelayGear() {
-		return offDelayGear;
-	}
-
-	/**
-	 * @param offDelayGear the offDelayGear to set
-	 */
-	public void setOffDelayGear(String offDelayGear) {
-		this.offDelayGear = offDelayGear;
-	}
-
-	/**
-	 * @return the offDelayValue
-	 */
-	public String getOffDelayValue() {
-		return offDelayValue;
-	}
-
-	/**
-	 * @param offDelayValue the offDelayValue to set
-	 */
-	public void setOffDelayValue(String offDelayValue) {
-		this.offDelayValue = offDelayValue;
-	}
-
-	/**
-	 * @return the functionCode
-	 */
-	public String getFunctionCode() {
-		return functionCode;
-	}
-
-	/**
-	 * @param functionCode the functionCode to set
-	 */
-	public void setFunctionCode(String functionCode) {
-		this.functionCode = functionCode;
-	}
-
-	/**
-	 * @return the psType
-	 */
-	public String getPsType() {
-		return psType;
-	}
-
-	/**
-	 * @param psType the psType to set
-	 */
-	public void setPsType(String psType) {
-		this.psType = psType;
+	public GpInfo getGpInfo() {
+		return gpInfo;
 	}
 
 	/**
@@ -334,10 +177,24 @@ public class PsInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param lasttimeStamp the lasttimeStamp to set
+	 * @return the modelCode
 	 */
-	public void setLasttimeStamp(Date lasttimeStamp) {
-		this.lasttimeStamp = lasttimeStamp;
+	public String getModelCode() {
+		return modelCode;
+	}
+
+	/**
+	 * @return the offDelayGear
+	 */
+	public String getOffDelayGear() {
+		return offDelayGear;
+	}
+
+	/**
+	 * @return the offDelayValue
+	 */
+	public String getOffDelayValue() {
+		return offDelayValue;
 	}
 
 	/**
@@ -348,17 +205,45 @@ public class PsInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param pingyinCode the pingyinCode to set
+	 * @return the psAddr
 	 */
-	public void setPingyinCode(String pingyinCode) {
-		this.pingyinCode = pingyinCode;
+	public String getPsAddr() {
+		return psAddr;
 	}
 
 	/**
-	 * @param terminalInfo the terminalInfo to set
+	 * @return the psId
 	 */
-	public void setTerminalInfo(TerminalInfo terminalInfo) {
-		this.terminalInfo = terminalInfo;
+	public Long getPsId() {
+		return psId;
+	}
+
+	/**
+	 * @return the psType
+	 */
+	public String getPsType() {
+		return psType;
+	}
+
+	/**
+	 * @return the ratedEc
+	 */
+	public String getRatedEc() {
+		return ratedEc;
+	}
+
+	/**
+	 * @return the remcGear
+	 */
+	public String getRemcGear() {
+		return remcGear;
+	}
+
+	/**
+	 * @return the remcGearValue
+	 */
+	public String getRemcGearValue() {
+		return remcGearValue;
 	}
 
 	/**
@@ -366,6 +251,39 @@ public class PsInfo extends BaseEntity {
 	 */
 	public TerminalInfo getTerminalInfo() {
 		return terminalInfo;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param assetNo the assetNo to set
+	 */
+	public void setAssetNo(String assetNo) {
+		this.assetNo = assetNo;
+	}
+
+	/**
+	 * @param btl the btl to set
+	 */
+	public void setBtl(String btl) {
+		this.btl = btl;
+	}
+
+	/**
+	 * @param commModeGm the commModeGm to set
+	 */
+	public void setCommModeGm(String commModeGm) {
+		this.commModeGm = commModeGm;
+	}
+
+	/**
+	 * @param functionCode the functionCode to set
+	 */
+	public void setFunctionCode(String functionCode) {
+		this.functionCode = functionCode;
 	}
 
 	/**
@@ -376,10 +294,93 @@ public class PsInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the gpInfo
+	 * @param lasttimeStamp the lasttimeStamp to set
 	 */
-	public GpInfo getGpInfo() {
-		return gpInfo;
+	public void setLasttimeStamp(Date lasttimeStamp) {
+		this.lasttimeStamp = lasttimeStamp;
+	}
+
+	/**
+	 * @param modelCode the modelCode to set
+	 */
+	public void setModelCode(String modelCode) {
+		this.modelCode = modelCode;
+	}
+
+	/**
+	 * @param offDelayGear the offDelayGear to set
+	 */
+	public void setOffDelayGear(String offDelayGear) {
+		this.offDelayGear = offDelayGear;
+	}
+
+	/**
+	 * @param offDelayValue the offDelayValue to set
+	 */
+	public void setOffDelayValue(String offDelayValue) {
+		this.offDelayValue = offDelayValue;
+	}
+
+	/**
+	 * @param pingyinCode the pingyinCode to set
+	 */
+	public void setPingyinCode(String pingyinCode) {
+		this.pingyinCode = pingyinCode;
+	}
+
+	/**
+	 * @param psAddr the psAddr to set
+	 */
+	public void setPsAddr(String psAddr) {
+		this.psAddr = psAddr;
+	}
+
+	/**
+	 * @param psId the psId to set
+	 */
+	public void setPsId(Long psId) {
+		this.psId = psId;
+	}
+
+	/**
+	 * @param psType the psType to set
+	 */
+	public void setPsType(String psType) {
+		this.psType = psType;
+	}
+
+	/**
+	 * @param ratedEc the ratedEc to set
+	 */
+	public void setRatedEc(String ratedEc) {
+		this.ratedEc = ratedEc;
+	}
+
+	/**
+	 * @param remcGear the remcGear to set
+	 */
+	public void setRemcGear(String remcGear) {
+		this.remcGear = remcGear;
+	}
+
+	/**
+	 * @param remcGearValue the remcGearValue to set
+	 */
+	public void setRemcGearValue(String remcGearValue) {
+		this.remcGearValue = remcGearValue;
+	}
+
+	/**
+	 * @param terminalInfo the terminalInfo to set
+	 */
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+
 	}
 
 }

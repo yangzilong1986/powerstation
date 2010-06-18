@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.CodeInfo;
+import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 	@Autowired
 	private CodeInfoManager codeInfoManager;
+
+	@Autowired
+	private TgInfoManager tgInfoManager;
 
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
@@ -94,7 +99,12 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) throws Exception {
 		ModelAndView result = getCommonModelAndView();
+
+		TgInfo tgInfo = tgInfoManager.getById(Long.parseLong(request.getParameter("tgId")));
+
+		result.addObject("tgInfo", tgInfo);
 		result.addObject("traninfo", model);
+
 		result.setViewName("/archive/addTransformer");
 		return result;
 	}
