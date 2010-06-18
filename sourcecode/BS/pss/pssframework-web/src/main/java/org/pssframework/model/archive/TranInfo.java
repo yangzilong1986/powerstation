@@ -31,7 +31,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "g_tran")
-@SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN")
+@SequenceGenerator(sequenceName = "SEQ_G_TRAN", name = "SEQ_G_TRAN", allocationSize = 1)
 public class TranInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -3795917072464107754L;

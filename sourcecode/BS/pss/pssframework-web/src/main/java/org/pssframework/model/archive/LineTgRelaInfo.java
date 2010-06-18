@@ -31,7 +31,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "G_LINE_TG_RELA")
-@SequenceGenerator(sequenceName = "SEQ_G_LINE_TG_RELA", name = "SEQ_G_LINE_TG_RELA")
+@SequenceGenerator(sequenceName = "SEQ_G_LINE_TG_RELA", name = "SEQ_G_LINE_TG_RELA", allocationSize = 1)
 public class LineTgRelaInfo extends BaseEntity {
 
 	/**

@@ -25,7 +25,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "o_org")
-@SequenceGenerator(sequenceName = "SEQ_O_ORG", name = "SEQ_O_ORG")
+@SequenceGenerator(sequenceName = "SEQ_O_ORG", name = "SEQ_O_ORG", allocationSize = 1)
 public class OrgInfo extends BaseEntity {
 
 	/**

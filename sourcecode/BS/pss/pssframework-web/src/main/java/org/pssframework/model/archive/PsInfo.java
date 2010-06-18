@@ -35,7 +35,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_PS")
-@SequenceGenerator(sequenceName = "SEQ_C_PS", name = "SEQ_C_PS")
+@SequenceGenerator(sequenceName = "SEQ_C_PS", name = "SEQ_C_PS", allocationSize = 1)
 public class PsInfo extends BaseEntity {
 
 	/**

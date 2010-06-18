@@ -28,7 +28,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "G_LINE_REAL")
-@SequenceGenerator(sequenceName = "SEQ_G_LINE_REAL", name = "SEQ_G_LINE_REAL")
+@SequenceGenerator(sequenceName = "SEQ_G_LINE_REAL", name = "SEQ_G_LINE_REAL", allocationSize = 1)
 public class LineRealInfo extends BaseEntity {
 
 	/**

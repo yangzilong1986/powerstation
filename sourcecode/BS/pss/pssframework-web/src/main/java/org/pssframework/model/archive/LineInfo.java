@@ -29,7 +29,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "g_line")
-@SequenceGenerator(sequenceName = "SEQ_G_LINE", name = "SEQ_G_LINE")
+@SequenceGenerator(sequenceName = "SEQ_G_LINE", name = "SEQ_G_LINE", allocationSize = 1)
 public class LineInfo extends BaseEntity {
 
 	/**

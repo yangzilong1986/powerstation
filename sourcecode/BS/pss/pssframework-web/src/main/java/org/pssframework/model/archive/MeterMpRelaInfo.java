@@ -26,7 +26,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_METER_MP_RELA")
-@SequenceGenerator(sequenceName = "SEQ_C_METER_MP_RELA", name = "SEQ_C_METER_MP_RELA")
+@SequenceGenerator(sequenceName = "SEQ_C_METER_MP_RELA", name = "SEQ_C_METER_MP_RELA", allocationSize = 1)
 public class MeterMpRelaInfo extends BaseEntity {
 
 	/**

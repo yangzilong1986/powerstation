@@ -28,7 +28,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "G_SUBS_LINE_RELA")
-@SequenceGenerator(sequenceName = "SEQ_G_SUBS_LINE_RELA", name = "SEQ_G_SUBS_LINE_RELA")
+@SequenceGenerator(sequenceName = "SEQ_G_SUBS_LINE_RELA", name = "SEQ_G_SUBS_LINE_RELA", allocationSize = 1)
 public class SubsLineRelaInfo extends BaseEntity {
 
 	/**

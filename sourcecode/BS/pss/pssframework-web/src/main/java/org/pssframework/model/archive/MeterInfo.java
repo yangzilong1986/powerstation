@@ -30,7 +30,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_METER")
-@SequenceGenerator(sequenceName = "SEQ_C_METER", name = "SEQ_C_METER")
+@SequenceGenerator(sequenceName = "SEQ_C_METER", name = "SEQ_C_METER", allocationSize = 1)
 public class MeterInfo extends BaseEntity {
 
 	/**
