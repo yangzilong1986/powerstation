@@ -313,7 +313,7 @@ create table C_METER  (
    COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
    BAUDRATE             VARCHAR2(16),
-   通讯方式                 VARCHAR2(8)
+   COMM_MODE            VARCHAR2(8)
 )
 tablespace TABS_ARCHIVE;
 
