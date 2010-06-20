@@ -107,7 +107,8 @@ function meterState(){
       </tr>
     </table>
   </form:form></div>
-  <div><input type="button" id="save" value="保 存" /></div>
+  
+  <div style="text-align: center"><br></br><input type="button" id="save" value="保 存" class="btnbg4"/></div>
   </div>
 </ul>
 </div>

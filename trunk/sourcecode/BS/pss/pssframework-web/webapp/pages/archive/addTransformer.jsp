@@ -15,7 +15,7 @@
     style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <form:form action="/archive/traninfo" modelAttribute="traninfo">
     <form:hidden path="equipId" />
-    <form:hidden path="tgId" />
+    <form:hidden path="tgInfo" />
     <table border="0" cellpadding="0" cellspacing="0" align="center">
       <tr height="40">
         <td width="15%" align="right" class="green"><font color="red">* </font>变压器名称：</td>
@@ -26,7 +26,7 @@
       </tr>
       <tr height="40">
         <td width="13%" align="right" class="green">容 量：</td>
-        <td width="20%"><form:input path="plateCap" cssClass="input2" /> kVA</td>
+        <td width="20%"><form:input path="plateCap" cssClass="input2" cssStyle="width:130px"/> kVA</td>
         <td align="right" class="green">运行状态：</td>
         <td><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" onchange=""
           items="${statuslist}" cssStyle="width:150px"/></td>
@@ -34,12 +34,12 @@
       <tr height="40">
         <td width="15%" align="right" class="green">安装日期：</td>
         <td width="15%"><form:input path="instDate" cssClass="input_time"
-          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly"></form:input></td>
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;"></form:input></td>
         <td align="right" class="green">安装地址：</td>
-        <td colspan="5"><form:input path="instAddr" cssClass="input2"></form:input></td>
+        <td colspan="3"><form:input path="instAddr" cssClass="input2" cssStyle="width:390px"></form:input></td>
       </tr>
       <tr height="40">
-        <td align="right" class="green">额定电压_高压:</td>
+        <td align="right" class="green">额定电压_高压：</td>
         <td><form:select path="rvHv" id="rvHv" itemLabel="name" itemValue="code" onchange="" items="${voltlist}" cssStyle="width:150px"/></td>
         <td align="right" class="green">额定电压_中压：</td>
         <td><form:select path="rvMv" id="rvMv" itemLabel="name" itemValue="code" onchange="" items="${voltlist}" cssStyle="width:150px"/></td>
@@ -56,7 +56,7 @@
       </tr>
     </table>
   </form:form>
-  <div class="guidePanel"><input type="button" id="save" value="保 存" onClick="save();" /></div>
+  <div style="text-align: center"><br></br><input type="button" id="save" value="保 存" class="btnbg4"/></div>
   </div>
 </ul>
 </div>
@@ -109,10 +109,9 @@ addTran = function(){
              var isSucc = json['isSucc'];
              //jQuery("#tranId").val(json['tranId']);
              //alert(json['tranId'])
-             parent.location.href="${ctx}/arvhive/tginfo/"+${"#tgId"}.val();
+             parent.location.href="${ctx}/arvhive/tginfo/${tgInfo.tgId}";
              window.close();
            },error:function(e){
-               alert("error");
                alert(e.message);
            }
          });
