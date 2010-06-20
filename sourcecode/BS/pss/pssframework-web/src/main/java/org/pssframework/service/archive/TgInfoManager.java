@@ -12,22 +12,22 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Administrator
- *
+ * 
  */
 @Service
 public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
-	@Autowired
-	private TgInfoDao tgInfoDao;
+    @Autowired
+    private TgInfoDao tgInfoDao;
 
-	@Override
-	protected EntityDao getEntityDao() {
-		return this.tgInfoDao;
-	}
+    @Override
+    protected EntityDao getEntityDao() {
+        return this.tgInfoDao;
+    }
 
-	@Override
-	public TgInfo getById(Long id) {
-		return tgInfoDao.getByTgId(id);
-	}
+    @Override
+    public TgInfo getById(Long id) {
+        return tgInfoDao.getById(id);
+    }
 
 }

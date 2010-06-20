@@ -15,21 +15,21 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Administrator
- *
+ * 
  */
 @Service
 public class TranInfoManger extends BaseManager<TranInfo, Long> {
 
-	@Autowired
-	private TranInfoDao tranInfoDao;
+    @Autowired
+    private TranInfoDao tranInfoDao;
 
-	@Override
-	protected EntityDao getEntityDao() {
-		return tranInfoDao;
-	}
+    @Override
+    protected EntityDao getEntityDao() {
+        return tranInfoDao;
+    }
 
-	public <X> List<X> findByPageRequest(Map mapRequest) {
-		return tranInfoDao.findByPageRequest(mapRequest);
-	}
+    public <X> List<X> findByPageRequest(Map mapRequest) {
+        return tranInfoDao.findByPageRequest(mapRequest);
+    }
 
 }

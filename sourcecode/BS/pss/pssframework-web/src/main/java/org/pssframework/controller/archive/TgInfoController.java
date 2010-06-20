@@ -17,14 +17,12 @@ import org.pssframework.model.archive.MeterInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
-import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.archive.MeterInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
-import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,270 +33,265 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Baocj
- *
+ * 
  */
 @Controller
 @RequestMapping("/archive/tginfo")
 public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
 
-	//默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = null;
+    // 默认多列排序,example: username desc,createTime asc
+    protected static final String DEFAULT_SORT_COLUMNS = null;
 
-	private static final String SUCC = "成功";
+    private static final String globalFoward = "/archive/addTgRelevance";
 
-	private static final String globalFoward = "/archive/addTgRelevance";
+    @Autowired
+    private TgInfoManager tgInfoManager;
 
-	@Autowired
-	private TgInfoManager tgInfoManager;
+    @Autowired
+    private OrgInfoManager orgInfoManager;
 
-	@Autowired
-	private OrgInfoManager orgInfoManager;
+    @Autowired
+    private CodeInfoManager codeInfoManager;
 
-	@Autowired
-	private CodeInfoManager codeInfoManager;
+    @Autowired
+    private TerminalInfoManger terminalInfoManager;
 
-	@Autowired
-	private TranInfoManger tranInfoManager;
+    @Autowired
+    private PsInfoManger psInfoManager;
 
-	@Autowired
-	private TerminalInfoManger terminalInfoManager;
+    @Autowired
+    private MeterInfoManger meterInfoManager;
 
-	@Autowired
-	private PsInfoManger psInfoManager;
+    @Override
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
 
-	@Autowired
-	private MeterInfoManger meterInfoManager;
+        Long tgid = 0L;
+        if(model.getTgId() != null) {
+            tgid = model.getTgId();
+        }
 
-	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
+        // mapRequest.put("orgid", orgid);
 
-		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
-		}
+        TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
 
-		//mapRequest.put("orgid", orgid);
+        ModelAndView result = new ModelAndView();
 
-		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
+        result.addObject("tginfo", tginfo);
 
-		ModelAndView result = new ModelAndView();
+        result.setViewName(globalFoward);
 
-		result.addObject("tginfo", tginfo);
+        return result;
+    }
 
-		result.setViewName(globalFoward);
+    @SuppressWarnings("unchecked")
+    private List<OrgInfo> getOrgOptions(Map mapRequest) {
+        return orgInfoManager.findByPageRequest(mapRequest);
+    }
 
-		return result;
-	}
+    @SuppressWarnings("unchecked")
+    private List<CodeInfo> getStatusOptions(Map mapRequest) {
+        return codeInfoManager.findByPageRequest(mapRequest);
+    }
 
-	@SuppressWarnings("unchecked")
-	private List<OrgInfo> getOrgOptions(Map mapRequest) {
-		return orgInfoManager.findByPageRequest(mapRequest);
-	}
+    @SuppressWarnings("unchecked")
+    private List<MeterInfo> getMeterList(Map mapRequest) {
+        List<MeterInfo> meterlist = meterInfoManager.findByPageRequest(mapRequest);
+        if(meterlist == null || meterlist.size() <= 0) {
+            meterlist = new LinkedList<MeterInfo>();
+        }
+        return meterlist;
+    }
 
-	@SuppressWarnings("unchecked")
-	private List<CodeInfo> getStatusOptions(Map mapRequest) {
-		return codeInfoManager.findByPageRequest(mapRequest);
-	}
+    @SuppressWarnings("unchecked")
+    private List<PsInfo> getPsList(Map mapRequest) {
+        List<PsInfo> pslist = psInfoManager.findByPageRequest(mapRequest);
+        if(pslist == null || pslist.size() <= 0) {
+            pslist = new LinkedList<PsInfo>();
+        }
+        return pslist;
+    }
 
-	@SuppressWarnings("unchecked")
-	private List<TranInfo> getTranList(Map mapRequest) {
-		List<TranInfo> tranlist = tranInfoManager.findByPageRequest(mapRequest);
-		if (tranlist == null || tranlist.size() <= 0) {
-			tranlist = new LinkedList<TranInfo>();
-		}
-		return tranlist;
-	}
+    @SuppressWarnings("unchecked")
+    private List<TerminalInfo> getTerminalList(Map mapRequest) {
+        List<TerminalInfo> terminallist = terminalInfoManager.findByPageRequest(mapRequest);
+        if(terminallist == null || terminallist.size() <= 0) {
+            terminallist = new LinkedList<TerminalInfo>();
+        }
+        return terminallist;
+    }
 
-	@SuppressWarnings("unchecked")
-	private List<MeterInfo> getMeterList(Map mapRequest) {
-		List<MeterInfo> meterlist = meterInfoManager.findByPageRequest(mapRequest);
-		if (meterlist == null || meterlist.size() <= 0) {
-			meterlist = new LinkedList<MeterInfo>();
-		}
-		return meterlist;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+        ModelAndView result = new ModelAndView();
 
-	@SuppressWarnings("unchecked")
-	private List<PsInfo> getPsList(Map mapRequest) {
-		List<PsInfo> pslist = psInfoManager.findByPageRequest(mapRequest);
-		if (pslist == null || pslist.size() <= 0) {
-			pslist = new LinkedList<PsInfo>();
-		}
-		return pslist;
-	}
+        result.addObject("tginfo", new TgInfo());
 
-	@SuppressWarnings("unchecked")
-	private List<TerminalInfo> getTerminalList(Map mapRequest) {
-		List<TerminalInfo> terminallist = terminalInfoManager.findByPageRequest(mapRequest);
-		if (terminallist == null || terminallist.size() <= 0) {
-			terminallist = new LinkedList<TerminalInfo>();
-		}
-		return terminallist;
-	}
+        Map mapRequest = new HashMap();
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		ModelAndView result = new ModelAndView();
+        mapRequest.put("codecate", "TG_STATUS");
 
-		result.addObject("tginfo", new TgInfo());
+        CommonPart(result, mapRequest);
 
-		Map mapRequest = new HashMap();
+        result.addObject("_type", "new");
 
-		mapRequest.put("codecate", "TG_STATUS");
+        result.setViewName(globalFoward);
+        return result;
+    }
 
-		CommonPart(result, mapRequest);
+    @Override
+    public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+        boolean isSucc = true;
+        String msg = DELETE_SUCCESS;
+        try {
 
-		result.addObject("_type", "new");
+            tgInfoManager.removeById(id);
 
-		result.setViewName(globalFoward);
-		return result;
-	}
+        }
+        catch(Exception e) {
 
-	@Override
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-		boolean isSucc = true;
-		String msg = SUCC;
-		try {
+            isSucc = false;
 
-			tgInfoManager.removeById(id);
+            msg = e.getMessage();
 
-		} catch (Exception e) {
+        }
+        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+    }
 
-			isSucc = false;
+    @Override
+    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+        boolean isSucc = true;
+        String msg = CREATED_SUCCESS;
+        Long tgId = 0L;
+        try {
+            model.setChaDate(new Date());
 
-			msg = e.getMessage();
+            model.setPubPrivFlag("0");
 
-		}
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
-	}
+            tgInfoManager.saveOrUpdate(model);
 
-	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		boolean isSucc = true;
-		String msg = SUCC;
-		Long tgId = 0L;
-		try {
-			model.setChaDate(new Date());
+            tgId = model.getTgId();
 
-			model.setPubPrivFlag("0");
+        }
+        catch(Exception e) {
 
-			tgInfoManager.saveOrUpdate(model);
+            isSucc = false;
 
-			tgId = model.getTgId();
+            msg = e.getMessage();
 
-		} catch (Exception e) {
+        }
 
-			isSucc = false;
+        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
+    }
 
-			msg = e.getMessage();
+    @Override
+    @SuppressWarnings("unchecked")
+    public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        ModelAndView result = new ModelAndView();
 
-		}
+        TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
-	}
+        result.addObject("tginfo", tginfo);
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		ModelAndView result = new ModelAndView();
+        Map mapRequest = new HashMap();
 
-		TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
+        mapRequest.put("codecate", "TG_STATUS");
 
-		result.addObject("tginfo", tginfo);
+        mapRequest.put("tgid", id);
 
-		Map mapRequest = new HashMap();
+        CommonPart(result, mapRequest);
 
-		mapRequest.put("codecate", "TG_STATUS");
+        result.addObject("_type", "edit");
 
-		mapRequest.put("tgid", id);
+        result.setViewName(globalFoward);
+        return result;
+    }
 
-		CommonPart(result, mapRequest);
+    @Override
+    public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        boolean isSucc = true;
+        String msg = UPDATE_SUCCESS;
+        try {
+            TgInfo tginfo = this.tgInfoManager.getById(id);
+            tginfo.setChaDate(new Date());
+            bind(request, tginfo);
+            tgInfoManager.update(tginfo);
+        }
+        catch(Exception e) {
+            this.logger.info(e.getLocalizedMessage());
+            isSucc = false;
+            msg = e.getMessage();
+        }
 
-		result.addObject("_type", "edit");
+        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+    }
 
-		result.setViewName(globalFoward);
-		return result;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
 
-	@Override
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		boolean isSucc = true;
-		String msg = SUCC;
-		try {
-			TgInfo tginfo = this.tgInfoManager.getById(id);
-			tginfo.setChaDate(new Date());
-			bind(request, tginfo);
-			tgInfoManager.update(tginfo);
-		} catch (Exception e) {
-			this.logger.info(e.getLocalizedMessage());
-			isSucc = false;
-			msg = e.getMessage();
-		}
+        TgInfo tginfo = this.tgInfoManager.getById(id);
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
-	}
+        // tginfo.getOrgInfo().getOrgId()
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
 
-		TgInfo tginfo = this.tgInfoManager.getById(id);
+        modelAndView.addObject("tginfo", tginfo);
 
-		// tginfo.getOrgInfo().getOrgId()
+        Map mapRequest = new HashMap();
 
-		ModelAndView modelAndView = new ModelAndView();
+        mapRequest.put("codecate", "TG_STATUS");
 
-		modelAndView.addObject("tginfo", tginfo);
+        mapRequest.put("tgid", id);
 
-		Map mapRequest = new HashMap();
+        CommonPart(modelAndView, mapRequest);
 
-		mapRequest.put("codecate", "TG_STATUS");
+        modelAndView.setViewName(globalFoward);
 
-		mapRequest.put("tgid", id);
+        modelAndView.addObject("_type", "show");
 
-		CommonPart(modelAndView, mapRequest);
+        return modelAndView;
 
-		modelAndView.setViewName(globalFoward);
+    }
 
-		modelAndView.addObject("_type", "show");
+    /**
+     * 下拉框
+     * 
+     * @param model
+     * @param mapRequest
+     */
+    private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+        model.addObject("orglist", getOrgOptions(mapRequest));
+        model.addObject("statuslist", getStatusOptions(mapRequest));
 
-		return modelAndView;
+    }
 
-	}
+    /**
+     * 关联项目
+     * 
+     * @param modelAndView
+     * @param mapRequest
+     */
+    private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
 
-	/**
-	 * 下拉框
-	 * @param model
-	 * @param mapRequest
-	 */
-	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
-		model.addObject("orglist", getOrgOptions(mapRequest));
-		model.addObject("statuslist", getStatusOptions(mapRequest));
+        modelAndView.addObject("pslist", getPsList(mapRequest));
+        modelAndView.addObject("termlist", getTerminalList(mapRequest));
+        modelAndView.addObject("meterlist", getMeterList(mapRequest));
 
-	}
+    }
 
-	/**
-	 * 关联项目
-	 * @param modelAndView
-	 * @param mapRequest
-	 */
-	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
-		modelAndView.addObject("tranlist", getTranList(mapRequest));
-
-	}
-
-	/**
-	 * 重叠部分
-	 * @param modelAndView
-	 * @param mapRequest
-	 */
-	private void CommonPart(ModelAndView modelAndView, Map<String, ?> mapRequest) {
-		getInitOption(modelAndView, mapRequest);
-		getRelevance(modelAndView, mapRequest);
-	}
+    /**
+     * 重叠部分
+     * 
+     * @param modelAndView
+     * @param mapRequest
+     */
+    private void CommonPart(ModelAndView modelAndView, Map<String, ?> mapRequest) {
+        getInitOption(modelAndView, mapRequest);
+        getRelevance(modelAndView, mapRequest);
+    }
 
 }

@@ -8,7 +8,9 @@ import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
+import org.pssframework.dao.archive.MeterInfoDao;
 import org.pssframework.model.archive.MeterInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,16 +19,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MeterInfoManger extends BaseManager<MeterInfo, Long> {
+    @Autowired
+    private MeterInfoDao meterInfoDao;
 
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return null;
+        return meterInfoDao;
 	}
 
 	public List<MeterInfo> findByPageRequest(Map mapRequest) {
 		// TODO Auto-generated method stub
-		return null;
+        return meterInfoDao.findByPageRequest(mapRequest);
 	}
 
 }

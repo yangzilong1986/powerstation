@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author Administrator
-*变压器信息
+ * @author Administrator 计量点
  */
 @Controller
 @RequestMapping("/archive/mpinfo")
