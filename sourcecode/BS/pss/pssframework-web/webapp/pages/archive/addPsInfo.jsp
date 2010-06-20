@@ -50,10 +50,11 @@ function meterState(){
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((         document.documentElement.clientHeight ||         document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="_type" name="_type" value="${_type}" />
-     <input type="hidden" id="tgId" name="tgId" value="${tgId}" />
+    <input type="hidden" id="tgId" name="tgId" value="${tgId}" />
+    <input type="hidden" id="gpInfo.objectId" name="gpInfo.objectId" value="${tgId}" />
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="40">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
@@ -103,12 +104,27 @@ function meterState(){
       </tr>
       <tr>
         <td align="right" class="green">漏保地址：</td>
-        <td colspan="3"><form:input path="psAddr" size="98" cssClass="input2"/></td>
+        <td><form:input path="gpInfo.gpAddr" cssClass="input2" maxlength="5"/></td>
+        <td align="right" class="green">测量点序号：</td>
+        <td><form:input path="gpInfo.gpSn" cssClass="input2" maxlength="5"/></td>
+      </tr>
+      <tr>
+        <td align="right" class="green">CT：</td>
+        <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
+        <td align="right" class="green">PT：</td>
+        <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
+      </tr>
+      <tr>
+       <td align="right" class="green">规约：</td>
+        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protoco" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
       </tr>
     </table>
   </form:form></div>
-  
-  <div style="text-align: center"><br></br><input type="button" id="save" value="保 存" class="btnbg4"/></div>
+  <div style="text-align: center"><br></br>
+  <input type="button" id="save" value="保 存" class="btnbg4" /></div>
   </div>
 </ul>
 </div>
@@ -150,21 +166,23 @@ return data;
 }
 
 addpsinfo = function(){
-  var tgFromData = getData('add');
+  var psFormData = getData('add');
   var url="${ctx}/archive/psinfo.json";
   if(confirm("确定要保存该漏电保护器?")){
     jQuery.ajax({
          url: url,
-         data:tgFromData,
+         data:psFormData,
          dataType:'json',
          type:'POST',
          cache: false,
          success: function(json){
            var msg = json['msg'];
            var isSucc = json['isSucc'];
-           jQuery("#psId").val(json['psId']);
-           window.colse();
-           parent.location.src="${ctx}/archive/tginfo/${tgId}";
+           alert(msg);
+           if(isSucc){
+        	   opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+               window.colse();
+           }
          },error:function(e){
              alert(e.message);
          }
@@ -173,20 +191,23 @@ addpsinfo = function(){
 }
 
 updatepsinfo = function(){
-  var tgFromData = getData("update");
-    var url="${ctx}/archive/psinfo/"+jQuery("#psId").val()+'.json?_method=put';
+  var psFormData = getData("update");
+    var url="${ctx}/archive/psinfo/${psinfo.psId}.json?_method=put";
     if(confirm("确定要更新该漏电保护器?")){
       jQuery.ajax({
            url: url,
-           data:tgFromData,
+           data:psFormData,
            dataType:'json',
            type:'post',
            cache: false,
            success: function(json){
              var msg=json['msg'];
              var isSucc = json['isSucc'];
-     
-              alert(msg);
+             alert(msg);
+             if(isSucc){
+          	   opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+                 window.colse();
+             }
            },error:function(e){
              alert("error")
                alert(e.getMessage());

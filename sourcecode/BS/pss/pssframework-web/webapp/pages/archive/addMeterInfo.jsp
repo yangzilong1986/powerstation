@@ -134,7 +134,7 @@ function selectInit(){
 }
 </script>
 </head>
-<body style="overflow: hidden;">
+<body >
  <div id="form">
 <div id="main" style="height: 100%;">
   <div class="tab"><em>电表信息</em></div>
