@@ -109,7 +109,7 @@ function setup() {
                     }
             ]
     };
-    alert(escape(JSON.stringify(dto)));
+    //alert(escape(JSON.stringify(dto)));
     var url = '<pss:path type="webapp"/>/eparam/termparam/down';
     $.ajax({
         type: 'POST',
