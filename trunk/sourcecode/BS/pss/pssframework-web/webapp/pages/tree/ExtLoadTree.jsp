@@ -83,7 +83,7 @@ function visitNode(pNode){
 
 function treeRenderBeforeHandler(pTree){
     var selectedNode;//用来记录当前右键选种的书节点  
- 
+    var url;
     var rightClick = new Ext.menu.Menu( {
                   id : 'rightClickCont',
                   items : [ 
@@ -95,7 +95,8 @@ function treeRenderBeforeHandler(pTree){
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
                           if(type=='ORG'){ 
-                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/new?orgId="+uid;
+                        	  url = "${ctx}/archive/tginfo/new?orgId="+uid;
+                        	  parent.parent.tabscontainermain.showTab("台区档案", url);
                           }
                       }
                       
@@ -108,7 +109,8 @@ function treeRenderBeforeHandler(pTree){
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
                           if(type=='TG'){ 
-                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/"+uid+"/edit";
+                	       url = "${ctx}/archive/tginfo/"+uid+"/edit";
+                     	  parent.parent.tabscontainermain.showTab("台区档案", url);
                           }
                       }
                       
@@ -136,7 +138,8 @@ function treeRenderBeforeHandler(pTree){
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
                           if(type=='TG'){ 
-                	       parent.parent.tabscontainermain.location.href = "${ctx}/archive/tginfo/"+uid;
+                   	       url = "${ctx}/archive/tginfo/"+uid;
+                      	  parent.parent.tabscontainermain.showTab("台区档案", url);
                          
                           }
                       }
