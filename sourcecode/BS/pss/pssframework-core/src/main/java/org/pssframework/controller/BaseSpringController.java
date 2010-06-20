@@ -1,12 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2010 PSS Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     PSS Corporation - initial API and implementation
+ * Copyright (c) 2010 PSS Corporation and others. All rights reserved. This
+ * program and the accompanying materials are made available under the terms of
+ * the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors: PSS Corporation - initial API and implementation
  *******************************************************************************/
 package org.pssframework.controller;
 
@@ -34,11 +32,23 @@ import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 public class BaseSpringController extends MultiActionController {
-	
+
+	protected final static String CREATED_SUCCESS = "创建成功";
+
+	protected final static String UPDATE_SUCCESS = "更新成功";
+
+	protected final static String DELETE_SUCCESS = "删除成功";
+
+	protected final static String CREATED_FAIL = "创建失败";
+
+	protected final static String UPDATE_FAIL = "更新失败";
+
+	protected final static String DELETE_FAIL = "删除失败";
+
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	static {
-		//注册converters
+		// 注册converters
 		ConvertRegisterHelper.registerConverters();
 	}
 
