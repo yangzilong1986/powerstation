@@ -56,7 +56,7 @@ public class MpInfo extends BaseEntity {
 
     @Column(name = "MP_NO", length = 16, nullable = false)
     // MP_NO VARCHAR2(256),用户自己编写的编号，默认跟标识一致'
-    private Long moNo;
+    private Long mpNo;
 
     @Column(name = "MP_NAME", length = 256)
     // MP_NAME VARCHAR2(256),计量点名称
@@ -246,10 +246,10 @@ public class MpInfo extends BaseEntity {
     }
 
     /**
-     * @return the moNo
+     * @return the mpNo
      */
-    public Long getMoNo() {
-        return moNo;
+    public Long getMpNo() {
+        return mpNo;
     }
 
     /**
@@ -465,11 +465,11 @@ public class MpInfo extends BaseEntity {
     }
 
     /**
-     * @param moNo
-     *            the moNo to set
+     * @param mpNo
+     *            the mpNo to set
      */
-    public void setMoNo(Long moNo) {
-        this.moNo = moNo;
+    public void setMpNo(Long mpNo) {
+        this.mpNo = mpNo;
     }
 
     /**

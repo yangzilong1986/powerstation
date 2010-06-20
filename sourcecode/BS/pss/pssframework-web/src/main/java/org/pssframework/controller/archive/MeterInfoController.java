@@ -29,11 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class MeterInfoController extends BaseRestSpringController<MeterInfo, java.lang.Long> {
 
     @Autowired
-    private HttpServletRequest request;
-    @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
     private MeterInfoManger meterInfoManager;
 
     @Autowired
@@ -79,7 +74,7 @@ public class MeterInfoController extends BaseRestSpringController<MeterInfo, jav
 
         requestMap.put("tgid", tgid);
 
-        result.addObject("meterinfo", model);
+        result.addObject("psinfo", model);
 
         result.addObject("tgId", tgid);
 
