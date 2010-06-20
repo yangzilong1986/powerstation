@@ -4,6 +4,7 @@
 package org.pssframework.controller.archive;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.MeterInfo;
+import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.MeterInfoManger;
+import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,93 +22,109 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author Administrator
-*变压器信息
+ * @author Administrator 变压器信息
  */
 @Controller
 @RequestMapping("/archive/meterinfo")
 public class MeterInfoController extends BaseRestSpringController<MeterInfo, java.lang.Long> {
 
-	@Autowired
-	private MeterInfoManger tranInfoManager;
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private HttpServletResponse response;
 
-	@Autowired
-	private CodeInfoManager codeInfoManager;
+    @Autowired
+    private MeterInfoManger meterInfoManager;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MeterInfo model) {
+    @Autowired
+    private CodeInfoManager codeInfoManager;
 
-		Map mapRequest = new HashMap();
+    @Autowired
+    private TerminalInfoManger terminalInfoManger;
 
-		Long tgid = 0L;
+    @Override
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MeterInfo model) {
 
-		// mapRequest.put("orgid", orgid);
+        return new ModelAndView();
+    }
 
-		mapRequest.put("codecate", "TG_STATUS");
+    @Override
+    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
+            throws Exception {
+        boolean isSucc = true;
+        String msg = CREATED_SUCCESS;
+        Long meterId = 0L;
+        try {
+            meterInfoManager.saveOrUpdate(model);
+            meterId = model.getMeterId();
+        }
+        catch(Exception e) {
+            isSucc = false;
+            msg = e.getMessage();
 
-		// MeterInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new
-		// MeterInfo() : this.tgInfoManager.getById(tgid);
-		//
-		ModelAndView result = new ModelAndView();
-		//
-		// result.addObject("tginfo", tginfo);
-		//
-		// result.setViewName("/archive/addTgRelevance");
-		//
-		// result.addObject("orglist", getOrgOptions(mapRequest));
-		//
-		// result.addObject("statuslist", getStatusOptions(mapRequest));
+        }
 
-		return result;
-	}
+        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("meterId", meterId);
+    }
 
-	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
-			throws Exception {
-		boolean isSucc = true;
-		String msg = "成功";
-		Long meterId = 0L;
-		try {
-			tranInfoManager.saveOrUpdate(model);
-			meterId = model.getMeterId();
-		} catch (Exception e) {
-			isSucc = false;
-			msg = e.getMessage();
+    @Override
+    @SuppressWarnings("unchecked")
+    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
+            throws Exception {
+        ModelAndView result = new ModelAndView();
 
-		}
+        String tgid = request.getParameter("tgId");
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("meterId", meterId);
-	}
+        Map requestMap = new HashMap();
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
-			throws Exception {
-		ModelAndView result = new ModelAndView();
+        requestMap.put("tgid", tgid);
 
-		Map mapRequest = new HashMap();
+        result.addObject("meterinfo", model);
 
-		mapRequest.put("codecate", "TRAN_CODE");
+        result.addObject("tgId", tgid);
 
-		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
+        CommonPart(result, requestMap);
 
-		mapRequest.put("codecate", "TRAN_STATUS");
+        result.addObject("_type", "new");
 
-		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
+        return result;
+    }
 
-		mapRequest.put("codecate", "VOLT_GRADE");
+    /**
+     * 
+     * @param model
+     * @param mapRequest
+     */
+    @SuppressWarnings("unchecked")
+    private void CommonPart(ModelAndView result, Map mapRequest) {
+        List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
+        result.setViewName("/archive/addTransformer");
+        result.addObject("termList", termlist);
 
-		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
+        // CT
+        mapRequest.put("codecate", "CT_RATIO");
 
-		mapRequest.put("codecate", "RATED_EC");
+        result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
 
-		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+        // PT
+        mapRequest.put("codecate", "PT_RATIO");
 
-		result.addObject("traninfo", model);
+        result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
 
-		result.setViewName("/archive/addTransformer");
+        // 通讯方式
+        mapRequest.put("codecate", "COMM_MODE");
 
-		return result;
-	}
+        result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // 波特率
+        mapRequest.put("codecate", "BTL");
+
+        result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // 接线方式
+        mapRequest.put("codecate", "WIRING_MODE");
+
+        result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
+
+    }
 }

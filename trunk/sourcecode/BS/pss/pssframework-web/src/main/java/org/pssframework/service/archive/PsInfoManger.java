@@ -15,22 +15,23 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Administrator
- *
+ * 
  */
 @Service
 public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
-	@Autowired
-	private PsInfoDao psInfoDao;
-	@Override
-	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
-		return psInfoDao;
-	}
+    @Autowired
+    private PsInfoDao psInfoDao;
 
-	public List<PsInfo> findByPageRequest(Map mapRequest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected EntityDao getEntityDao() {
+        // TODO Auto-generated method stub
+        return psInfoDao;
+    }
+
+    public List<PsInfo> findByPageRequest(Map mapRequest) {
+        // TODO Auto-generated method stub
+        return psInfoDao.findByPageRequest(mapRequest);
+    }
 
 }

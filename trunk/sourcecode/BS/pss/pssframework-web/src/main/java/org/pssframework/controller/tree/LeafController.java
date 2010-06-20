@@ -69,12 +69,9 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	/** 列表 */
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, LeafInfo leafInfo) {
-
 		ModelAndView result = new ModelAndView();
 		result.addObject("leafInfo", this.showExtLoadTree(request, response));
-
 		result.setViewName("/tree/ExtLoadTree");
-
 		return result;
 	}
 
