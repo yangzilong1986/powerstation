@@ -313,7 +313,8 @@ create table C_METER  (
    COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
    BAUDRATE             VARCHAR2(16),
-   COMM_MODE            VARCHAR2(8)
+   COMM_MODE            VARCHAR2(8),
+   constraint PK_C_METER primary key (METER_ID)
 )
 tablespace TABS_ARCHIVE;
 
@@ -359,7 +360,7 @@ comment on column C_METER.COMM_NO is
 comment on column C_METER.BAUDRATE is
 '电能表的波特率';
 
-comment on column C_METER.通讯方式 is
+comment on column C_METER.COMM_MODE is
 '通讯方式：485、gprs、红外……';
 
 /*==============================================================*/
