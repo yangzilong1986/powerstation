@@ -4,6 +4,7 @@
 package org.pssframework.controller.archive;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.MpInfo;
+import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.MpInfoManger;
+import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,64 +28,100 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/mpinfo")
 public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang.Long> {
 
-	@Autowired
-	private MpInfoManger mpInfoManger;
+    @Autowired
+    private MpInfoManger mpInfoManger;
 
-	@Autowired
-	private CodeInfoManager codeInfoManager;
+    @Autowired
+    private CodeInfoManager codeInfoManager;
 
-	@Override
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
+    @Autowired
+    private TerminalInfoManger terminalInfoManger;
 
-		ModelAndView result = new ModelAndView();
+    @Override
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
 
-		return result;
-	}
+        ModelAndView result = new ModelAndView();
 
-	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
-		boolean isSucc = true;
-		String msg = "成功";
-		Long mpId = 0L;
-		try {
-			mpInfoManger.saveOrUpdate(model);
-			mpId = model.getMpId();
-		} catch (Exception e) {
-			isSucc = false;
-			msg = e.getMessage();
+        return result;
+    }
 
-		}
+    @Override
+    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
+        boolean isSucc = true;
+        String msg = CREATED_SUCCESS;
+        Long mpId = 0L;
+        try {
+            mpInfoManger.saveOrUpdate(model);
+            mpId = model.getMpId();
+        }
+        catch(Exception e) {
+            isSucc = false;
+            msg = e.getMessage();
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
-	}
+        }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
-		ModelAndView result = new ModelAndView();
+        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
+    }
 
-		Map mapRequest = new HashMap();
+    @SuppressWarnings("unchecked")
+    @Override
+    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
+        ModelAndView result = new ModelAndView();
 
-		mapRequest.put("codecate", "TRAN_CODE");
+        String tgid = request.getParameter("tgId");
 
-		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
+        Map requestMap = new HashMap();
 
-		mapRequest.put("codecate", "TRAN_STATUS");
+        requestMap.put("tgid", tgid);
 
-		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
+        result.addObject("mpinfo", model);
 
-		mapRequest.put("codecate", "VOLT_GRADE");
+        result.addObject("tgId", tgid);
 
-		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
+        CommonPart(result, requestMap);
 
-		mapRequest.put("codecate", "RATED_EC");
+        result.addObject("_type", "new");
 
-		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+        return result;
+    }
 
-		result.addObject("traninfo", model);
+    /**
+     * 
+     * @param model
+     * @param mapRequest
+     */
+    @SuppressWarnings("unchecked")
+    private void CommonPart(ModelAndView result, Map mapRequest) {
+        List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
+        result.setViewName("/archive/addTransformer");
+        result.addObject("termList", termlist);
 
-		result.setViewName("/archive/addTransformer");
+        // CT
+        mapRequest.put("codecate", "CT_RATIO");
 
-		return result;
-	}
+        result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // PT
+        mapRequest.put("codecate", "PT_RATIO");
+
+        result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // 通讯方式
+        mapRequest.put("codecate", "COMM_MODE");
+
+        result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // 波特率
+        mapRequest.put("codecate", "BTL");
+
+        result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
+
+        // 接线方式
+        mapRequest.put("codecate", "WIRING_MODE");
+
+        result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
+
+        result.setViewName("/archive/addMpInfo");
+
+    }
 }
