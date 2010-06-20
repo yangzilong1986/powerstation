@@ -109,7 +109,7 @@ create table O_ORG  (
    ORG_ID               NUMBER(16)                      not null,
    ORG_NO               VARCHAR2(16)                    not null,
    ORG_NAME             VARCHAR2(256),
-   P_ORG_ID             VARCHAR2(16),
+   P_ORG_ID             NUMBER(16),
    ORG_TYPE             VARCHAR2(8),
    SORT_NO              NUMBER(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
@@ -125,7 +125,7 @@ comment on column O_ORG.ORG_NO is
 comment on column O_ORG.ORG_NAME is
 '供电单位详细的名称';
 
-comment on column O_ORG.P_ORG_NO is
+comment on column O_ORG.P_ORG_ID is
 '直接上级供电单位编号';
 
 comment on column O_ORG.ORG_TYPE is
