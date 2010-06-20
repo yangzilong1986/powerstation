@@ -56,8 +56,10 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
      */
     @RequestMapping(value = "/down")
     public void _down(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String termIdString = request.getParameter("termId");
-        System.out.println(termIdString);
+        // String termIdString = request.getParameter("termId");
+        // System.out.println(termIdString);
+        String dtoJSONString = request.getParameter("dto");
+        System.out.println(dtoJSONString);
     }
 
     /**
