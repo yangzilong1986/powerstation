@@ -17,20 +17,8 @@ function windowPopup(url, wd, ht) {
 }
 
 var contextPath  = '${ctx}';
-//打开新增变压器页面
-function openTransformer(){
-  
-  if(!$("#tgId").val()){
-    alert("请先建台区");return;
-  }
-   var url = "${ctx}/archive/traninfo/new?tgId="+$("#tgId").val();
-   windowPopup(url, 960, 575);
-}
-//打开新增总表页面
-function openTotalMeter(tgId){
-	var url = contextPath + '/archive/totalMeter?_method=create';
-    windowPopup(url, 960, 575);
-}
+
+
 //打开新增终端页面
 function openTerm(tgId){
    var url = contextPath + "/archive/terminalinfo/new?tgId=" + tgId;
@@ -56,68 +44,7 @@ function lastStep(){
   }
 }
 
-//完成
-function finish(){
-   var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
-   if(tgCustFlag=="1"){//配变台区编辑
-     var url=contextPath+"/archive/addTgAction.do?action=addtginfo";
-      if(tgCheck()){
-        jQuery("#finish").attr("disabled",true);
-        var data = getFormData("form");
-        if(data){
-            jQuery.ajax({
-                type:'post',
-                url:url,
-                data:data,
-                dataType:'json',
-                success:function(json){
-                    var msg=json['msg'];
-                    jQuery("#finish").attr("disabled",false);
-                    if(msg=="1"){
-                      if(confirm("是否继续维护台区")==true){
-                         //window.location.href = contextPath + "/archive/tgListQuery1.do?action=normalMode&sqlCode=AL_ARCHIVE_0028&pageRows=20";
-                         window.location.href = contextPath + "/jsp/archive/selectTg.jsp";
-                      }else{
-                          var url1=contextPath+"/archive/commAction.do?action=clearSessionByTg"; //清除session
-                          jQuery.ajax({
-                            url: url1,
-                            cache: false,
-                            success: function(html) {
-                              //window.location.href=contextPath+"/jsp/archive/tgTypeUpdate.jsp";
-                              window.location.href=contextPath+"/archive/commAction.do?action=forwardSelectType&jspName=tgTypeUpdate&selectType=0";
-                            }
-                          });
-                      }
-                    }else if(msg=="2"){
-                       alert("该台区已经存在");
-                    }else{
-                       alert("保存失败");
-                    }
-                }
-            });
-        }
-      }
-   }else{//配变台区录入
-      if(confirm("是否继续新增台区")==true){
-         var url1=contextPath+"/archive/commAction.do?action=clearSessionByTg"; //清除session
-         jQuery.ajax({
-           url: url1,
-           cache: false,
-           success: function(html) {
-             window.location.href=contextPath+"/jsp/archive/addtginfo.jsp";
-           }
-         });
-      }else{
-         //window.location.href=contextPath+"/jsp/archive/tgType.jsp"; 
-         window.location.href=contextPath+"/archive/commAction.do?action=forwardSelectType&jspName=tgType&selectType=1";
-      }
-   }
-}
-//打开变压器编辑页面
-function showTran(tranId){
-   var url=contextPath+"/archive/tranAction.do?action=showTranByLowCustNew&tranId="+tranId+"&tgFlag=1";
-   windowPopup("变压器信息编辑",url, 575, 960);
-}
+
 //打开总表编辑页面
 function showMeter(mpId,gpId){
    var url=contextPath+"/archive/meterAction.do?action=showMeterByLowCustNew&mpId="+mpId+"&gpId="+gpId+"&tgFlag=1";
@@ -133,32 +60,7 @@ function showTerminal(termId,termType){
       windowPopup("集中器信息编辑",url, 575, 960);
    }
 }
-//删除变压器
-   function delteTran(tranId){
-     var url=contextPath+"/archive/tranAction.do?action=deleteTran&tranId="+tranId;
-     if(confirm("确定要删除该变压器?")){
-        jQuery.ajax({
-          url: url,
-          dataType:'json',
-          cache: false,
-          success: function(json){
-            var msg=json['msg'];
-             if(msg=="1"){
-              alert("删除成功");
-               //window.location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
-                //动态加载台区关联设备信息
-				loadTgRelevevance();
-              }else if(msg=="3"){
-                  alert("变压器下存在终端（集中器）或电表，不允许删除");
-              }
-              else{
-                 alert("删除失败");
-              }
-          }
-        });
-        
-     }
-   }
+
   //删除总表
    function delMeter(mpId){
      var url=contextPath+"/archive/meterAction.do?action=deleteTotalMeter&mpId="+mpId;
@@ -183,29 +85,7 @@ function showTerminal(termId,termType){
      }
    }
   
-//控件样式初始化
-function inputAndSelectInit(){
-var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
- if(tgCustFlag=="1"){//配变台区编辑
-   jQuery("input").attr("disabled","disabled").each(function(){
-       jQuery(this).attr("disabled","");
-   });
-   jQuery("select").attr("disabled","disabled").each(function(){
-       jQuery(this).attr("disabled","");
-   });
-   jQuery("textarea").attr("disabled","disabled").each(function(){
-         jQuery(this).attr("disabled","");
-     });
-   //jQuery('#tab_1 > a').html("档案维护第三步");
- }else{
-   //jQuery('#tab_1 > a').html("档案录入第三步");
- }
-}
-//select框初始化
-function selectInit(){
 
-   
-}
 //调用json方法获取list
 function getJsonObjectList(htmlId,className,methodName,objectType){
   var objectId=jQuery("input[name='tgId']").val();
@@ -228,14 +108,6 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         }
     });
 }
-//动态加载台区关联设备信息
-function loadTgRelevevance(){
-  show_loading();
-  getJsonObjectList("tranDataBody","TgService","getTransByTgId","12");
-  getJsonObjectList("meterDataBody","TgService","getMeterByTgId","232");
-  getJsonObjectList("termDataBody","TgService","getTerminalsByTgId","53");//加载终端列表
-  remove_loading();
-}
 
 </script>
 </head>
@@ -244,43 +116,42 @@ function loadTgRelevevance(){
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||     document.body.clientWidth) -10 ); height: expression(((     document.documentElement.clientHeight ||     document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((       document.documentElement.clientHeight ||       document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
         <input type="hidden" id="_type" name="_type" value="${_type}" />
         <c:choose>
           <c:when test="${_type=='edit' || _type=='new'}">
-          <c:set var="disabled" value="false" ></c:set>
+            <c:set var="disabled" value="false"></c:set>
           </c:when>
           <c:otherwise>
             <c:set var="disabled" value="true"></c:set>
           </c:otherwise>
         </c:choose>
         <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
-        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" disabled="${disabled}"
-          cssStyle="width:145px;" /></td>
+        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16"
+          disabled="${disabled}" cssStyle="width:145px;" /></td>
         <td width="10%" align="right" class="green">台区名称：</td>
         <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
           disabled="${disabled}" /></td>
         <td width="10%" align="right" class="green">管理单位：</td>
-        <td width="25%"><form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId" itemLabel="orgName"
-          itemValue="orgId" cssStyle="width:150px;" /></td>
+        <td width="25%"><form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId"
+          itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
         <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2"
-          cssStyle="width:125px;" disabled="${disabled}"/> kVA</td>
+          cssStyle="width:125px;" disabled="${disabled}" /> kVA</td>
         <td width="10%" align="right" class="green">运行状态：</td>
         <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
-          items="${statuslist}" cssStyle="width:145px;" disabled="${disabled}"/></td>
+          items="${statuslist}" cssStyle="width:145px;" disabled="${disabled}" /></td>
         <td width="15%" align="right" class="green">地 址：</td>
-        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}"/></td>
+        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}" /></td>
       </tr>
       <tr>
-        <td width="100%" colspan="6" align="right">
-        <input id="save" name="save" type="button" class="btnbg4"
-          value="保存"  <c:if test="${disabled == 'true'}">disabled</c:if>></input></td>
+        <td width="100%" colspan="6" align="right"><input id="save" name="save" type="button" class="btnbg4"
+          value="保存" <c:if test="${disabled == 'true'}">disabled</c:if>></td>
       </tr>
     </table>
   </form:form></div>
@@ -291,10 +162,9 @@ function loadTgRelevevance(){
     width="16" height="16" style="cursor: pointer;" /></a></h1>
   </div>
   <div class="da_con">
-  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tranInfo">
     <thead>
       <tr>
-        <th>资产号</th>
         <th>名称</th>
         <th>容量(kVA)</th>
         <th>型号</th>
@@ -303,27 +173,26 @@ function loadTgRelevevance(){
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${tranlist}" var="tran">
-        <tr>
-          <td>${tran.consId}</td>
+      <c:forEach items="${tginfo.tranInfos}" var="tran" varStatus="status">
+        <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${tran.tranName}</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td>${tran.plateCap}</td>
+          <td>${tran.modelNo}</td>
+          <td>${tran.instAddr}</td>
+          <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
   <div class="mgt10 da_top"><span>台区考核表信息</span>
-  <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+    width="16" height="16" /></a></h1>
   </div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>资产编号</th>
         <th>计量点名称</th>
         <th>表地址</th>
         <th>采集终端</th>
@@ -334,59 +203,43 @@ function loadTgRelevevance(){
       </tr>
     </thead>
     <tbody>
-     <c:forEach items="${meterlist}" var="meter">
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-     </c:forEach>
+      <c:forEach items="${meterlist}" var="meter" varStatus="status">
+        <tr <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>${meter.meterMpRelaInfo.mpInfo.mpName}</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </c:forEach>
     </tbody>
   </table>
   </div>
   <div class="mgt10 da_top"><span>保护开关列表信息</span>
-  <h1><a onclick="openPs('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16" height="16" /></a></h1>
+  <h1><a onclick="openPs('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+    height="16" /></a></h1>
   </div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th width="14%">变压器编号</th>
-        <th width="14%">变压器名称</th>
-        <th width="10%">变压器型号</th>
-        <th width="14%">&nbsp;</th>
-        <th width="10%">&nbsp;</th>
-        <th width="14%">&nbsp;</th>
-        <th width="14%">&nbsp;</th>
-        <th width="10%">&nbsp;</th>
+        <th >资产编号</th>
+        <th >集中器地址</th>
+        <th >漏保型号</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr bgcolor="#f3f3f3">
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
+      <c:forEach items="${pslist}" var="ps" varStatus="status">
+        <tr id="ps_${ps.psId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>${ps.assetNo}</td>
+          <td>${ps.gpInfo.gpAddr}</td>
+          <td>${ps.gpInfo.gpAddr}</td>
+          <td><a onclick="deletePsInfo('${ps.psId}')">删除</a>&nbsp;/&nbsp;<a onclick="updatePsInfo('${ps.psId}')">修改</a></td>
+        </tr>
+      </c:forEach>
     </tbody>
   </table>
   </div>
@@ -409,15 +262,6 @@ function loadTgRelevevance(){
     </thead>
     <tbody>
       <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-      <tr bgcolor="#f3f3f3">
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -491,7 +335,7 @@ if(type == "add"){
 }
 return data;
 }
-
+/*******************************************************************/
 addtginfo = function(){
   var tgFromData = getData('add');
   var url="${ctx}/archive/tginfo.json";
@@ -531,12 +375,101 @@ updatetginfo = function(){
 	   
 	            alert(msg);
 	         },error:function(e){
-             alert("error")
+                  alert("error")
 	             alert(e.getMessage());
 	         }
 	       });
 	  }
 }
+/*******************************************************************/
 
+//打开新增变压器页面
+function openTransformer(){
+  
+  if(!$("#tgId").val()){
+    alert("请先建台区");return;
+  }
+   var url = "${ctx}/archive/tranInfo/new?tgId="+$("#tgId").val();
+   windowPopup(url, 960, 575);
+}
+
+deleteTranInfo=function(tranId){
+ if(tranId==null || tranId ==""){
+   return;
+ } 
+
+ var url = "${ctx}/archive/tranInfo/"+tranId+".json?_method=delete";
+ if (confirm("确定要删除该变压器?")) {
+     jQuery.ajax({
+         url: url,
+         dataType:'json',
+         type:'POST',
+         cache: false,
+         success: function(json) {
+             var msg = json['msg'];
+             var isSucc = json['isSucc'];
+             if(isSucc){
+              alert(msg);
+              $("#tran_"+tranId).remove();
+             }
+         },error:function(e) {
+             alert("delete error");
+             alert(e.message);
+         }
+     });
+ }
+}
+
+updateTranInfo=function(tranId){
+	   var url = "${ctx}/archive/tranInfo/"+tranId+"/edit";
+	   windowPopup(url, 960, 575);
+}
+
+/*******************************************************************/
+deletePsInfo=function(psId){
+   if(psId==null || psId ==""){
+     return;
+   } 
+
+   var url = "${ctx}/archive/psinfo/"+psId+".json?_method=delete";
+   if (confirm("确定要删除该保护器?")) {
+       jQuery.ajax({
+           url: url,
+           dataType:'json',
+           type:'POST',
+           cache: false,
+           success: function(json) {
+               var msg = json['msg'];
+               var isSucc = json['isSucc'];
+               alert(msg);
+               if(isSucc){
+                $("#ps_"+psId).remove();
+               }
+           },error:function(e) {
+               alert("delete error");
+               alert(e.message);
+           }
+       });
+   }
+  }
+
+updatePsInfo=function(psId){
+     var url = "${ctx}/archive/psinfo/"+psId+"/edit?tgId="+$("#tgId").val();
+     windowPopup(url, 960, 575);
+}
+
+/*******************************************************************/
+ 
+ //打开新增总表页面
+function openMeterInfo(tgId){
+
+	  
+	  if(!$("#tgId").val()){
+	    alert("请先建台区");return;
+	  }
+	   var url = "${ctx}/archive/mpinfo/new?tgId="+$("#tgId").val();
+	   windowPopup(url, 960, 575);
+     
+}
 </script>
 </html>
