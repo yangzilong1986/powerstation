@@ -6,7 +6,7 @@ package org.pssframework.dao.archive;
 import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
-import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.archive.ConsInfo;
 import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
@@ -17,24 +17,18 @@ import cn.org.rapid_framework.page.PageRequest;
  *
  */
 @Repository
-public class ConsInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
+public class ConsInfoDao extends BaseHibernateDao<ConsInfo, java.lang.Long> {
 
 	@Override
 	public Class<?> getEntityClass() {
 		// TODO Auto-generated method stub
-		return TgInfo.class;
+        return ConsInfo.class;
 	}
 
 	@Override
-	public void saveOrUpdate(TgInfo entity) {
+    public void saveOrUpdate(ConsInfo entity) {
 		this.log.info("saveOrUpdate");
-		if (entity.getTgId() == null) {
-			this.log.info("save");
-			save(entity);
-		} else {
-			this.log.info("update");
-			update(entity);
-		}
+
 	}
 
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
@@ -44,11 +38,11 @@ public class ConsInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 		return pageQuery(sql, pageRequest);
 	}
 
-	public TgInfo getByCust(String cust, Object val) {
-		return (TgInfo) findByProperty(cust, val);
+    public ConsInfo getByCust(String cust, Object val) {
+        return (ConsInfo) findByProperty(cust, val);
 	}
 
-	public TgInfo getByTgId(Long id) {
+    public ConsInfo getByTgId(Long id) {
 		return getById(id);
 	}
 

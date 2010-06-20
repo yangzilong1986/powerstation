@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TranInfoDao extends BaseHibernateDao<TranInfo, Long> {
 
-	private String hql = "from TranInfo t where 1=1 /~  and t.tgInfo.tgId = '[tgid]' ~/ ";
+	private String hql = "from TranInfo t where 1=1 /~  and t.tgId = '[tgid]' ~/ ";
 
 	@Override
 	public Class getEntityClass() {

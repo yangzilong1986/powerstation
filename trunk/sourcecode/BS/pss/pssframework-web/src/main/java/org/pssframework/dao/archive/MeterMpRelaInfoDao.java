@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
-import org.pssframework.model.archive.TranInfo;
+import org.pssframework.model.archive.MeterMpRelaInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,14 +15,14 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public class MeterMpRelaInfoDao extends BaseHibernateDao<TranInfo, Long> {
+public class MeterMpRelaInfoDao extends BaseHibernateDao<MeterMpRelaInfo, Long> {
 
 	private String hql = "from TranInfo t where 1=1 and /~ t.tgId = '[tgid]' ~/ ";
 
 	@Override
 	public Class getEntityClass() {
 		// TODO Auto-generated method stub
-		return TranInfo.class;
+        return MeterMpRelaInfo.class;
 	}
 
 	public <X> List<X> findByPageRequest(Map mapRequest) {
