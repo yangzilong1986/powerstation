@@ -265,17 +265,17 @@ function loadTgRelevevance(){
           disabled="${disabled}" /></td>
         <td width="10%" align="right" class="green">管理单位：</td>
         <td width="25%"><form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId" itemLabel="orgName"
-          itemValue="orgId" cssStyle="width:155px;" /></td>
+          itemValue="orgId" cssStyle="width:150px;" /></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
         <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2"
-          cssStyle="width:135px;" disabled="${disabled}"/> kVA</td>
+          cssStyle="width:125px;" disabled="${disabled}"/> kVA</td>
         <td width="10%" align="right" class="green">运行状态：</td>
         <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
           items="${statuslist}" cssStyle="width:145px;" disabled="${disabled}"/></td>
         <td width="15%" align="right" class="green">地 址：</td>
-        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:145px;" disabled="${disabled}"/></td>
+        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}"/></td>
       </tr>
       <tr>
         <td width="100%" colspan="6" align="right">
@@ -467,9 +467,9 @@ jQuery(function(){
     if(val.validate()){
         jQuery(this).attr("disabled","disabled");
 
-        if($("#_type").val()="edit"){
+        if($("#_type").val()=="edit"){
         	updatetginfo();
-        }else if($("#_type").val()="new"){
+        }else if($("#_type").val()=="new"){
         	addtginfo();
         }
         
@@ -506,7 +506,7 @@ addtginfo = function(){
            var msg = json['msg'];
            var isSucc = json['isSucc'];
            jQuery("#tgId").val(json['tgId']);
-           parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
+           parent.parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
          },error:function(e){
              alert("error");
              alert(e.message);
