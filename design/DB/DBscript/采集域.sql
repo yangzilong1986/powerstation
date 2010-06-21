@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-9 21:13:42                            */
+/* Created on:     2010-6-20 13:48:06                           */
 /*==============================================================*/
 
 
@@ -94,6 +94,8 @@ create table R_REALTIME_TASK  (
    SEND_MSG             VARCHAR2(512),
    POST_TIME            DATE                           default SYSDATE,
    TASK_STATUS          VARCHAR2(5)                    default '0',
+   GP_MARK              VARCHAR2(50),
+   COMMAND_MARK         VARCHAR2(50),
    constraint PK_R_REALTIME_TASK primary key (TASK_ID)
 )
 tablespace TABS_INTERACTION;

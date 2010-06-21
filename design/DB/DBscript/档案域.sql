@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-17 21:44:59                           */
+/* Created on:     2010-6-21 18:59:11                           */
 /*==============================================================*/
 
 
@@ -10,14 +10,11 @@ alter table C_GP
 alter table C_GP
    drop constraint FK_C_GP_C_MP_C_GP_C_MP;
 
-alter table C_METER_MP_RELA
-   drop constraint FK_C_METER_C_METER_C_C_METER;
-
-alter table C_METER_MP_RELA
-   drop constraint FK_C_METER_C_METER_M_C_MP;
-
 alter table C_MP
    drop constraint FK_C_MP_C_MP_C_CO_C_CONS;
+
+alter table C_MP
+   drop constraint FK_C_MP_C_MP_C_ME_C_METER;
 
 alter table C_MP_USE
    drop constraint FK_C_MP_USE_C_MP_C_MP_C_MP;
@@ -33,8 +30,6 @@ drop table C_CONS cascade constraints;
 drop table C_GP cascade constraints;
 
 drop table C_METER cascade constraints;
-
-drop table C_METER_MP_RELA cascade constraints;
 
 drop table C_MP cascade constraints;
 
@@ -313,8 +308,7 @@ create table C_METER  (
    COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
    BAUDRATE             VARCHAR2(16),
-   COMM_MODE            VARCHAR2(8),
-   constraint PK_C_METER primary key (METER_ID)
+   COMM_MODE            VARCHAR2(8)
 )
 tablespace TABS_ARCHIVE;
 
@@ -364,31 +358,6 @@ comment on column C_METER.COMM_MODE is
 '通讯方式：485、gprs、红外……';
 
 /*==============================================================*/
-/* Table: C_METER_MP_RELA                                       */
-/*==============================================================*/
-create table C_METER_MP_RELA  (
-   METER_MP_ID          NUMBER(16)                      not null,
-   METER_ID             NUMBER(16)                      not null,
-   MP_ID                NUMBER(16),
-   constraint PK_C_METER_MP_RELA primary key (METER_MP_ID)
-)
-tablespace TABS_ARCHIVE;
-
-comment on table C_METER_MP_RELA is
-'1)用于记录电能表和计量点之间关系的信息，定义了电能表与计量点的唯一标识属性，本实体主要包括电能表计量点关系标识、电能表资产编号、计量点编号等属性。
-2)通过新装、增容及变更用电归档、关口计量点新装及变更归档等业务，由实体转入产生记录。
-3)该实体主要由查询计量点相关信息等业务使用。';
-
-comment on column C_METER_MP_RELA.METER_MP_ID is
-'本实体记录的唯一标识号';
-
-comment on column C_METER_MP_RELA.METER_ID is
-'本实体记录的唯一标识号，取自营销设备域的电能表信息实体。';
-
-comment on column C_METER_MP_RELA.MP_ID is
-'容器所属的计量点唯一标识号';
-
-/*==============================================================*/
 /* Table: C_MP                                                  */
 /*==============================================================*/
 create table C_MP  (
@@ -419,6 +388,7 @@ create table C_MP  (
    CONS_ID              NUMBER(16),
    LASTTIME_STAMP       DATE                           default SYSDATE,
    PINYIN_CODE          VARCHAR2(16),
+   METER_ID             NUMBER(16)                      not null,
    constraint PK_C_MP primary key (MP_ID)
 )
 tablespace TABS_ARCHIVE;
@@ -507,6 +477,9 @@ comment on column C_MP.CONS_ID is
 comment on column C_MP.LASTTIME_STAMP is
 '最后表结构修改时间戳';
 
+comment on column C_MP.METER_ID is
+'本实体记录的唯一标识号，取自营销设备域的电能表信息实体。';
+
 /*==============================================================*/
 /* Table: C_MP_USE                                              */
 /*==============================================================*/
@@ -539,7 +512,6 @@ create table C_PS  (
    TERM_ID              NUMBER,
    GP_ID                NUMBER,
    ASSET_NO             VARCHAR2(20),
-   PS_ADDR              VARCHAR2(20),
    MODEL_CODE           VARCHAR2(5),
    COMM_MODE_GM         VARCHAR2(5),
    BTL                  VARCHAR2(5),
@@ -677,17 +649,13 @@ alter table C_GP
    add constraint FK_C_GP_C_MP_C_GP_C_MP foreign key (MP_ID)
       references C_MP (MP_ID);
 
-alter table C_METER_MP_RELA
-   add constraint FK_C_METER_C_METER_C_C_METER foreign key (METER_ID)
-      references C_METER (METER_ID);
-
-alter table C_METER_MP_RELA
-   add constraint FK_C_METER_C_METER_M_C_MP foreign key (MP_ID)
-      references C_MP (MP_ID);
-
 alter table C_MP
    add constraint FK_C_MP_C_MP_C_CO_C_CONS foreign key (CONS_ID)
       references C_CONS (CONS_ID);
+
+alter table C_MP
+   add constraint FK_C_MP_C_MP_C_ME_C_METER foreign key (METER_ID)
+      references C_METER (METER_ID);
 
 alter table C_MP_USE
    add constraint FK_C_MP_USE_C_MP_C_MP_C_MP foreign key (MP_ID)
