@@ -201,7 +201,7 @@ abstract public class PmPacket {
 
     @Override
     public String toString() {
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("控制域: ").append(controlCode.toString()).append("\n");
         buff.append("地址域: ").append(address.toString()).append("\n");
         buff.append("数据域: ").append(dataBuff.toString()).append("\n");

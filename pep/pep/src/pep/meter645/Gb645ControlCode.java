@@ -33,42 +33,46 @@ public class Gb645ControlCode {
         return (value & 0x80)==0;
     }
 
-    public void isFromMast(boolean value){
+    public Gb645ControlCode isFromMast(boolean value){
         if (value)
             this.value &= 0x3F;  //主站发出没有异常位
         else
             this.value |= 0x80;
+        return this;
     }
 
     public boolean isYichang() {
         return (value & 0x40)==0x40;
     }
 
-    public void isYichang(boolean value){
+    public Gb645ControlCode isYichang(boolean value){
         if (value)
             this.value |= 0x40;
         else
             this.value &= 0xBF;
+        return this;
     }
 
     public boolean isHasHouxuzhen(){
         return (this.value & 0x20) == 0x20;
     }
 
-    public void isHasHouxuzhen(boolean value){
+    public Gb645ControlCode isHasHouxuzhen(boolean value){
         if (value)
             this.value |= 0x20;
         else
             this.value &= 0xDF;
+        return this;
     }
 
     public byte getFuncCode(){
         return (byte) (this.value & 0x1F);
     }
 
-    public void setFuncCode(byte code){
+    public Gb645ControlCode setFuncCode(byte code){
         this.value = (byte) (this.value & 0xE0);
         this.value |= code &0x1F;
+        return this;
     }
 
     @Override
