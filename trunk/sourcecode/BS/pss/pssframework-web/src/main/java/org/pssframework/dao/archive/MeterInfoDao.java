@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MeterInfoDao extends BaseHibernateDao<MeterInfo, Long> {
 
-    private String hql = "select m from MeterInfo m,MpInfo p,MeterMpRelaInfo r where 1=1 and p.mpId = r.mpInfo.mpId and m.meterId = r.meterInfo.meterId /~ and p.tgId = '[tgid]' ~/ "
+	private String hql = "select m from MeterInfo m,MpInfo p where 1=1 and p.meterInfo.meterId = m.meterId /~ and p.tgId = '[tgid]' ~/ "
             + "/~ and p.tgId = '[tgid]' ~/ " + "/~ and p.lineId = '[lineid]' ~/ " + "/~ and p.orgId = '[orgid]' ~/ "
 
     ;

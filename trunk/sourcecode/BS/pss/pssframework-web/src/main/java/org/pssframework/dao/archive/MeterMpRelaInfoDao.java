@@ -8,13 +8,11 @@ import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.archive.MeterMpRelaInfo;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author Administrator
  *
  */
-@Repository
 public class MeterMpRelaInfoDao extends BaseHibernateDao<MeterMpRelaInfo, Long> {
 
 	private String hql = "from TranInfo t where 1=1 and /~ t.tgId = '[tgid]' ~/ ";
