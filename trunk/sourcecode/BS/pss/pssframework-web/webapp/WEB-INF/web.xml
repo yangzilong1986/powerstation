@@ -99,7 +99,19 @@
     <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
   </listener>
 
-
+  <!-- Hibernate Open Session In View filter-->
+  <filter>
+    <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>hibernateOpenSessionInViewFilter</filter-name>
+    <url-pattern>/</url-pattern>
+  </filter-mapping>
+  <!-- SpringSecuirty 控制并发Session -->
+  <listener>
+    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+  </listener>
   <!-- URL重写filter,用于将访问静态资源http://localhost/foo.css 转为http://localhost/static/foo.css -->
   <servlet-mapping>
     <servlet-name>default</servlet-name>
