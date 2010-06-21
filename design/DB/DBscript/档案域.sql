@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-21 18:59:11                           */
+/* Created on:     2010-6-21 20:33:13                           */
 /*==============================================================*/
 
 
@@ -304,8 +304,6 @@ create table C_METER  (
    REF_METER_ID         NUMBER(16),
    MODULE_NO            VARCHAR2(32),
    ORG_ID               NUMBER,
-   COMM_ADDR1           VARCHAR2(16),
-   COMM_ADDR2           VARCHAR2(16),
    COMM_NO              VARCHAR2(8),
    BAUDRATE             VARCHAR2(16),
    COMM_MODE            VARCHAR2(8)
@@ -342,12 +340,6 @@ comment on column C_METER.MODULE_NO is
 comment on column C_METER.ORG_ID is
 '供电管理单位的代码';
 
-comment on column C_METER.COMM_ADDR1 is
-'通讯地址1';
-
-comment on column C_METER.COMM_ADDR2 is
-'通讯地址2';
-
 comment on column C_METER.COMM_NO is
 '通讯规约：645……';
 
@@ -377,7 +369,6 @@ create table C_MP  (
    ORG_ID               NUMBER,
    SWITCH_NO            VARCHAR2(32),
    MR_SECT_NO           VARCHAR2(16),
-   LINE_ID              NUMBER(16),
    TG_ID                NUMBER(16),
    EXCHG_TYPE_CODE      VARCHAR2(8),
    MD_TYPE_CODE         VARCHAR2(8),
@@ -446,9 +437,6 @@ comment on column C_MP.SWITCH_NO is
 
 comment on column C_MP.MR_SECT_NO is
 '标明计量点所属的抄表段编号';
-
-comment on column C_MP.LINE_ID is
-'线路的系统内部唯一标识';
 
 comment on column C_MP.TG_ID is
 '台区的唯一标识';
