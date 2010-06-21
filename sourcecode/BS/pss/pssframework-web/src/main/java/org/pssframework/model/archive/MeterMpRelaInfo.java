@@ -4,14 +4,9 @@
 package org.pssframework.model.archive;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -24,9 +19,6 @@ import org.pssframework.base.BaseEntity;
  * @author baocj
  * @since 1.0.0
  */
-@Entity
-@Table(name = "C_METER_MP_RELA")
-@SequenceGenerator(sequenceName = "SEQ_C_METER_MP_RELA", name = "SEQ_C_METER_MP_RELA", allocationSize = 1)
 public class MeterMpRelaInfo extends BaseEntity {
 
 	/**
@@ -40,23 +32,14 @@ public class MeterMpRelaInfo extends BaseEntity {
 	// METER_MP_ID NUMBER(16) not null,
 	private Long meterMpId;
 
-	@OneToOne(targetEntity = MeterInfo.class)
-	@JoinColumn(name = "METER_ID", referencedColumnName = "METER_ID")
 	// METER_ID NUMBER(16) not null,
-	private MeterInfo meterInfo;
+	@Column(name = "METER_ID")
+	private Long meterId;
 
 	// MP_ID NUMBER(16)
-	@OneToOne(targetEntity = MpInfo.class)
-	@JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
 	// MP_ID VARCHAR2(8),设备的产权说明 01 局属、 02 用户
-	private MpInfo mpInfo;
-
-	/**
-	 * @return the meterInfo
-	 */
-	public MeterInfo getMeterInfo() {
-		return meterInfo;
-	}
+	@Column(name = "MP_ID")
+	private Long mpId;;
 
 	/**
 	 * @return the meterMpId
@@ -65,23 +48,9 @@ public class MeterMpRelaInfo extends BaseEntity {
 		return meterMpId;
 	}
 
-	/**
-	 * @return the mpInfo
-	 */
-	public MpInfo getMpInfo() {
-		return mpInfo;
-	}
-
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	/**
-	 * @param meterInfo the meterInfo to set
-	 */
-	public void setMeterInfo(MeterInfo meterInfo) {
-		this.meterInfo = meterInfo;
 	}
 
 	/**
@@ -92,15 +61,36 @@ public class MeterMpRelaInfo extends BaseEntity {
 		this.meterMpId = meterMpId;
 	}
 
-	/**
-	 * @param mpInfo the mpInfo to set
-	 */
-	public void setMpInfo(MpInfo mpInfo) {
-		this.mpInfo = mpInfo;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param meterId the meterId to set
+	 */
+	public void setMeterId(Long meterId) {
+		this.meterId = meterId;
+	}
+
+	/**
+	 * @return the meterId
+	 */
+	public Long getMeterId() {
+		return meterId;
+	}
+
+	/**
+	 * @param mpId the mpId to set
+	 */
+	public void setMpId(Long mpId) {
+		this.mpId = mpId;
+	}
+
+	/**
+	 * @return the mpId
+	 */
+	public Long getMpId() {
+		return mpId;
 	}
 }

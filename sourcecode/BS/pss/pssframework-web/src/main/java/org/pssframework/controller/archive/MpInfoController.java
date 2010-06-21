@@ -3,6 +3,8 @@
  */
 package org.pssframework.controller.archive;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,10 @@ import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,100 +33,118 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/mpinfo")
 public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang.Long> {
 
-    @Autowired
-    private MpInfoManger mpInfoManger;
+	@Override
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		super.initBinder(request, binder);
+	}
 
-    @Autowired
-    private CodeInfoManager codeInfoManager;
+	@Autowired
+	private MpInfoManger mpInfoManger;
 
-    @Autowired
-    private TerminalInfoManger terminalInfoManger;
+	@Autowired
+	private CodeInfoManager codeInfoManager;
 
-    @Override
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
+	@Autowired
+	private TerminalInfoManger terminalInfoManger;
 
-        ModelAndView result = new ModelAndView();
+	@Override
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
 
-        return result;
-    }
+		ModelAndView result = new ModelAndView();
 
-    @Override
-    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
-        boolean isSucc = true;
-        String msg = CREATED_SUCCESS;
-        Long mpId = 0L;
-        try {
-            mpInfoManger.saveOrUpdate(model);
-            mpId = model.getMpId();
-        }
-        catch(Exception e) {
-            isSucc = false;
-            msg = e.getMessage();
+		return result;
+	}
 
-        }
+	@Override
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
+		boolean isSucc = true;
+		String msg = CREATED_SUCCESS;
+		Long mpId = 0L;
+		try {
+			mpInfoManger.saveOrUpdate(model);
+			mpId = model.getMpId();
+		} catch (Exception e) {
+			isSucc = false;
+			msg = e.getMessage();
 
-        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
-    }
+		}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
-        ModelAndView result = new ModelAndView();
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
+	}
 
-        String tgid = request.getParameter("tgId");
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
+		ModelAndView result = new ModelAndView();
 
-        Map requestMap = new HashMap();
+		String tgid = request.getParameter("tgId");
 
-        requestMap.put("tgid", tgid);
+		Map requestMap = new HashMap();
 
-        result.addObject("mpinfo", model);
+		requestMap.put("tgid", tgid);
 
-        result.addObject("tgId", tgid);
+		result.addObject("mpinfo", model);
 
-        CommonPart(result, requestMap);
+		result.addObject("tgId", tgid);
 
-        result.addObject("_type", "new");
+		CommonPart(result, requestMap);
 
-        return result;
-    }
+		result.addObject("_type", "new");
 
-    /**
-     * 
-     * @param model
-     * @param mapRequest
-     */
-    @SuppressWarnings("unchecked")
-    private void CommonPart(ModelAndView result, Map mapRequest) {
-        List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
-        result.setViewName("/archive/addTransformer");
-        result.addObject("termList", termlist);
+		return result;
+	}
 
-        // CT
-        mapRequest.put("codecate", "CT_RATIO");
+	/**
+	 * 
+	 * @param model
+	 * @param mapRequest
+	 */
+	@SuppressWarnings("unchecked")
+	private void CommonPart(ModelAndView result, Map mapRequest) {
+		List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
+		result.setViewName("/archive/addTransformer");
+		result.addObject("termList", termlist);
 
-        result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
+		// CT
+		mapRequest.put("codecate", "CT_RATIO");
 
-        // PT
-        mapRequest.put("codecate", "PT_RATIO");
+		result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
+		// PT
+		mapRequest.put("codecate", "PT_RATIO");
 
-        // 通讯方式
-        mapRequest.put("codecate", "COMM_MODE");
+		result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
+		// 通讯方式
+		mapRequest.put("codecate", "COMM_MODE");
 
-        // 波特率
-        mapRequest.put("codecate", "BTL");
+		result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
+		// 波特率
+		mapRequest.put("codecate", "BTL");
 
-        // 接线方式
-        mapRequest.put("codecate", "WIRING_MODE");
+		result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
+		// 接线方式
+		mapRequest.put("codecate", "WIRING_MODE");
 
-        result.setViewName("/archive/addMpInfo");
+		result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
 
-    }
+		// 计量方式
+		mapRequest.put("codecate", "MEAS_MODE");
+
+		result.addObject("measModeList", codeInfoManager.findByPageRequest(mapRequest));
+
+		// 表 规 约
+		mapRequest.put("codecate", "PROTOCOL_METER");
+
+		result.addObject("protocolMeterList", codeInfoManager.findByPageRequest(mapRequest));
+
+		result.setViewName("/archive/addMpInfo");
+
+	}
 }
