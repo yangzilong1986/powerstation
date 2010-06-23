@@ -2784,8 +2784,8 @@ Shadow=0</a:DisplayPreferences>
 <o:ReferenceSymbol Id="o7">
 <a:CreationDate>1271169608</a:CreationDate>
 <a:ModificationDate>1271169692</a:ModificationDate>
-<a:Rect>((-17158,1335), (4613,1785))</a:Rect>
-<a:ListOfPoints>((4613,1560),(-17158,1560))</a:ListOfPoints>
+<a:Rect>((-16868,831), (4949,1281))</a:Rect>
+<a:ListOfPoints>((4949,1056),(-16868,1056))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -2805,8 +2805,8 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o11">
 <a:CreationDate>1271169615</a:CreationDate>
 <a:ModificationDate>1271169691</a:ModificationDate>
-<a:Rect>((-19576,273), (-19126,16752))</a:Rect>
-<a:ListOfPoints>((-19351,273),(-19351,16752))</a:ListOfPoints>
+<a:Rect>((-19109,10), (-18659,16356))</a:Rect>
+<a:ListOfPoints>((-18884,10),(-18884,16356))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -2826,8 +2826,8 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o14">
 <a:CreationDate>1271173770</a:CreationDate>
 <a:ModificationDate>1271175183</a:ModificationDate>
-<a:Rect>((-28163,-18190), (-11263,-12864))</a:Rect>
-<a:ListOfPoints>((-11263,-18190),(-15242,-18190),(-15242,-12864),(-28163,-12864))</a:ListOfPoints>
+<a:Rect>((-27794,-18108), (-11263,-13261))</a:Rect>
+<a:ListOfPoints>((-11263,-18108),(-15242,-18108),(-15242,-13261),(-27794,-13261))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -2847,8 +2847,8 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o18">
 <a:CreationDate>1271175183</a:CreationDate>
 <a:ModificationDate>1271175183</a:ModificationDate>
-<a:Rect>((-7292,-15058), (4483,-1134))</a:Rect>
-<a:ListOfPoints>((-7292,-15058),(4483,-15058),(4483,-1134))</a:ListOfPoints>
+<a:Rect>((-7292,-15198), (4829,-1306))</a:Rect>
+<a:ListOfPoints>((-7292,-15198),(4829,-15198),(4829,-1306))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -2868,7 +2868,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:TableSymbol Id="o8">
 <a:CreationDate>1271166919</a:CreationDate>
 <a:ModificationDate>1271175029</a:ModificationDate>
-<a:Rect>((2880,-9160), (15496,4763))</a:Rect>
+<a:Rect>((3343,-8035), (15033,3638))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2891,7 +2891,7 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <o:TableSymbol Id="o12">
 <a:CreationDate>1271166976</a:CreationDate>
 <a:ModificationDate>1271169383</a:ModificationDate>
-<a:Rect>((-20040,9693), (-4566,18591))</a:Rect>
+<a:Rect>((-19500,10368), (-5106,17916))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2914,7 +2914,7 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <o:TableSymbol Id="o9">
 <a:CreationDate>1271169469</a:CreationDate>
 <a:ModificationDate>1271169691</a:ModificationDate>
-<a:Rect>((-20392,-6484), (-6463,3240))</a:Rect>
+<a:Rect>((-19852,-5809), (-7003,2565))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2937,7 +2937,7 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <o:TableSymbol Id="o16">
 <a:CreationDate>1271171591</a:CreationDate>
 <a:ModificationDate>1271174635</a:ModificationDate>
-<a:Rect>((-30122,-19931), (-17738,-11033))</a:Rect>
+<a:Rect>((-29582,-19256), (-18278,-11708))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2960,7 +2960,7 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <o:TableSymbol Id="o15">
 <a:CreationDate>1271173471</a:CreationDate>
 <a:ModificationDate>1271175183</a:ModificationDate>
-<a:Rect>((-12500,-20202), (348,-13854))</a:Rect>
+<a:Rect>((-12500,-19977), (348,-14079))</a:Rect>
 <a:LineColor>12615680</a:LineColor>
 <a:FillColor>16570034</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
