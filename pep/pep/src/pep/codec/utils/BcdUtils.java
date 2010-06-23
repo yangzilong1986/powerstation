@@ -398,4 +398,9 @@ public class BcdUtils {
         }
         return sb.toString();
     }
+
+    public static int byteToUnsigned(byte b){
+        return (0x100+b)%0x100;
+    }
+
 }
