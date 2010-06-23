@@ -173,7 +173,7 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${tginfo.tranInfos}" var="tran" varStatus="status">
+      <c:forEach items="${tranlist}" var="tran" varStatus="status">
         <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${tran.tranName}</td>
           <td>${tran.plateCap}</td>
@@ -203,15 +203,15 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${meterlist}" var="meter" varStatus="status">
+      <c:forEach items="${mplist}" var="mpInfo" varStatus="status">
         <tr <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>${meter.meterMpRelaInfo.mpInfo.mpName}</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
+          <td>${mpInfo.mpName}</td>
+          <td>${mpInfo.gpInfos[0].gpAddr}</td>
+          <td>${mpInfo.mpName}</td>
+          <td>${mpInfo.mpName}</td>
+          <td>${mpInfo.mpName}</td>
+          <td>${mpInfo.mpName}</td>
+          <td></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -467,7 +467,7 @@ function openMeterInfo(tgId){
 	  if(!$("#tgId").val()){
 	    alert("请先建台区");return;
 	  }
-	   var url = "${ctx}/archive/mpinfo/new?tgId="+$("#tgId").val();
+	   var url = "${ctx}/archive/mpinfo/new?tgId="+$("#tgId").val()+"&tgInfo.tgId="+$("#tgId").val();
 	   windowPopup(url, 960, 575);
      
 }
