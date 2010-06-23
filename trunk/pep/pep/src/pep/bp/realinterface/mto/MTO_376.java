@@ -24,7 +24,7 @@ public class MTO_376 extends MessageTranObject{
 
     public String toJson(){
         Map map = new HashMap();
-        map.put("ID",this.getID());
+       // map.put("ID",this.getID());
         map.put("CollectObjects", this.CollectObjects);
         JSONObject jsonObject = JSONObject.fromObject(map);
         return jsonObject.toString();

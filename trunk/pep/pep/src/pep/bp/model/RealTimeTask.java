@@ -22,6 +22,8 @@ public class RealTimeTask {
     private List<RTTaskRecv> recvMsgs;
     private Date postTime;
     private String taskStatus = "0"; //默认未处理
+    private String gpMark;//测量点标志：1#2#3#
+    private String commandMark;//命令项标志：10040009#10040010
 
     public RealTimeTask(){
         this.recvMsgs = new ArrayList<RTTaskRecv>();
@@ -32,7 +34,7 @@ public class RealTimeTask {
     }
 
     public void addRecvmsg(RTTaskRecv recvMsg) {
-        this.recvMsgs.add(recvMsg);
+        this.getRecvMsgs().add(recvMsg);
     }
 
     public void setPosttime(Date postTime) {
@@ -88,6 +90,41 @@ public class RealTimeTask {
 
     public void setRecvMsgs(List<RTTaskRecv> recvs){
         this.recvMsgs = recvs;
+    }
+
+    /**
+     * @return the recvMsgs
+     */
+    public List<RTTaskRecv> getRecvMsgs() {
+        return recvMsgs;
+    }
+
+    /**
+     * @return the gpMark
+     */
+    public String getGpMark() {
+        return gpMark;
+    }
+
+    /**
+     * @param gpMark the gpMark to set
+     */
+    public void setGpMark(String gpMark) {
+        this.gpMark = gpMark;
+    }
+
+    /**
+     * @return the commandMark
+     */
+    public String getCommandMark() {
+        return commandMark;
+    }
+
+    /**
+     * @param commandMark the commandMark to set
+     */
+    public void setCommandMark(String commandMark) {
+        this.commandMark = commandMark;
     }
 
 

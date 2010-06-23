@@ -13,7 +13,7 @@ public class ProtocolDataItem {
     private String Format;//编码格式
     private String DefaultValue;//默认值
 
-    private String GroupCode;//
+    private int BitNumber;//组数据项位数
     private String Description;
     private String GroupValue;//针对数据位定义数据项的情况
     private String IsGroupEnd;
@@ -22,22 +22,22 @@ public class ProtocolDataItem {
         super();
     }
     
-    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description,String DefaultValue){
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,int BitNumber,String Description,String DefaultValue){
         super();
         this.DataItemCode = DataItemCode;
         this.Length = Length;
         this.Format = Format;
-        this.GroupCode = GroupCode;
+        this.BitNumber = BitNumber;
         this.Description = Description;
         this.DefaultValue = DefaultValue;
     }
 
-    public ProtocolDataItem(String DataItemCode,int Length,String Format,String GroupCode,String Description,String DefaultValue,String IsGroupEnd){
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,int BitNumber,String Description,String DefaultValue,String IsGroupEnd){
         super();
         this.DataItemCode = DataItemCode;
         this.Length = Length;
         this.Format = Format;
-        this.GroupCode = GroupCode;
+        this.BitNumber = BitNumber;
         this.Description = Description;
         this.DefaultValue = DefaultValue;
         this.IsGroupEnd = IsGroupEnd;
@@ -86,17 +86,17 @@ public class ProtocolDataItem {
     }
 
     /**
-     * @return the GroupCode
+     * @return the BitNumber
      */
-    public String getGroupCode() {
-        return GroupCode;
+    public int getBitNumber() {
+        return BitNumber;
     }
 
     /**
      * @param GroupCode the GroupCode to set
      */
-    public void setGroupCode(String GroupCode) {
-        this.GroupCode = GroupCode;
+    public void setBitNumber(int BitNumber) {
+        this.BitNumber = BitNumber;
     }
 
     /**

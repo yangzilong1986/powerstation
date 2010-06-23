@@ -10,7 +10,7 @@ import pep.bp.realinterface.IRealMessage;
  * @author Thinkpad
  */
 public abstract class MessageTranObject implements IRealMessage{
-    private int ID;
+   /* private int ID;
     public int getID(){
         return this.ID;
     }
@@ -18,7 +18,7 @@ public abstract class MessageTranObject implements IRealMessage{
     public void setID(int value){
         this.ID = value;
     }
-
+*/
     public abstract String toJson();
 
     public abstract MTOType getType();

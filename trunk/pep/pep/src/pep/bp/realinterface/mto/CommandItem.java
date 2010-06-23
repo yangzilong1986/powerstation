@@ -13,8 +13,10 @@ import java.util.*;
 public class CommandItem {
 
     private String identifier;             //命令项标识
-    private Map datacellParam;             //数据单元格式<String, String>
+    private Map datacellParam;             //普通数据单元格式<String, String>
+    private CircleDataItems circleDataItems;//循环数据项容器
     private List<AssistParam> assistParams;        //辅助项，例如二类数据的数据时标
+    private int circleLevel ;
 
     public CommandItem() {
     }
@@ -47,5 +49,33 @@ public class CommandItem {
 
     public void setAssistParams(List<AssistParam> assistParams){
         this.assistParams = assistParams;
+    }
+
+    /**
+     * @return the circleLevel
+     */
+    public int getCircleLevel() {
+        return circleLevel;
+    }
+
+    /**
+     * @param circleLevel the circleLevel to set
+     */
+    public void setCircleLevel(int circleLevel) {
+        this.circleLevel = circleLevel;
+    }
+
+    /**
+     * @return the circleDataItems
+     */
+    public CircleDataItems getCircleDataItems() {
+        return circleDataItems;
+    }
+
+    /**
+     * @param circleDataItems the circleDataItems to set
+     */
+    public void setCircleDataItems(CircleDataItems circleDataItems) {
+        this.circleDataItems = circleDataItems;
     }
 }

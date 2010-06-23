@@ -32,8 +32,8 @@ public class RTTaskServiceIMP implements RTTaskService {
 
     public void insertTask(RealTimeTask task) {
         try {
-            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?,?)",
-                    new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg()});
+            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?)",
+                    new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark()});
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }
@@ -46,8 +46,8 @@ public class RTTaskServiceIMP implements RTTaskService {
     public void insertTasks(List<RealTimeTask> Tasks) {
         for (RealTimeTask task : Tasks) {
             try {
-                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG) values(SEQ_REALTIME_TASK.nextval,?,?,?)",
-                        new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg()});
+                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?)",
+                        new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark()});
             } catch (DataAccessException dataAccessException) {
                 log.error(dataAccessException.getMessage());
             }
@@ -61,7 +61,7 @@ public class RTTaskServiceIMP implements RTTaskService {
     public List<RealTimeTask> getTasks() {
         try {
             //查询未处理任务
-            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS";
+            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
             List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new TaskRowMapper());
@@ -83,13 +83,13 @@ public class RTTaskServiceIMP implements RTTaskService {
         }
     }
 
-    public RealTimeTask getTask(long sequnceCode, String logicAddress) {
+    public RealTimeTask getTask(long sequnceCode) {
         try {
             //查询未处理任务
-            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS";
+            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
-            SQL += " where SEQUENCE_CODE = ? and LOGICAL_ADDR = ?";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode, logicAddress}, new TaskRowMapper());
+            SQL += " where SEQUENCE_CODE = ? ";
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
             if (results.size() > 0) {
                 RealTimeTask task = (RealTimeTask) (results.get(0));
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
@@ -112,13 +112,13 @@ public class RTTaskServiceIMP implements RTTaskService {
         }
     }
 
-    public List<RealTimeTask> getTasks(long sequnceCode, String logicAddress) {
+    public List<RealTimeTask> getTasks(long sequnceCode) {
         try {
             //查询未处理任务
-            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS";
+            String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
-            SQL += " where SEQUENCE_CODE = ? and LOGICAL_ADDR = ?";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode, logicAddress}, new TaskRowMapper());
+            SQL += " where SEQUENCE_CODE = ?";
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
             //更新任务状态
             for (RealTimeTask task : results) {
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
