@@ -83,4 +83,5 @@ public class ProtocolCommandItem {
     public void setDiffFormat(String DiffFormat) {
         this.DiffFormat = DiffFormat;
     }
+
 }

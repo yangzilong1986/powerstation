@@ -21,6 +21,8 @@ public class TaskRowMapper implements RowMapper {
         task.setLogicAddress(rs.getString("LOGICAL_ADDR"));
         task.setSendmsg(rs.getString("SEND_MSG"));
         task.setStatestatus(rs.getString("TASK_STATUS"));
+        task.setGpMark(rs.getString("GP_MARK"));
+        task.setCommandMark(rs.getString("COMMAND_MARK"));
         return task;
     }
 
