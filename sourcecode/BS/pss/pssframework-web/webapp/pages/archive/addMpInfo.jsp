@@ -7,7 +7,6 @@
 <title>总表信息</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
-//初始化加载
 
 //所属终端
 function addTerminal(){
@@ -108,87 +107,181 @@ function meterState(){
 </head>
 <body>
 <form:form action="/archive/mpinfo" modelAttribute="mpinfo">
+  <input type="hidden" name="_type" id="_type" value="${_type}"></input>
+  <form:hidden path="tgInfo.tgId" />
+  <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${tgId}">
+  <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
   <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
   <ul class=default id=electric_Con_1>
     <div class="tab"><span>总表信息</span></div>
     <div class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );"">
+      style="display: block; overflow-y: auto; overflow-x: auto; width: expression((document.documentElement.clientWidth ||document.body.clientWidth) -10 ); height: expression(((                         document.documentElement.clientHeight ||                         document.body.clientHeight) -35 ) );"">
     <div class="tab"><span>重要信息</span></div>
-    <div id="485Show" class="da_mid" style="display: block; overflow-y: auto; overflow-x: auto;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 800));">
+    <div id="485Show" class="da_mid"
+      style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -               700 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr>
+      <tr height="30px">
         <td width="13%" class="green"><font color="red">* </font>序 号：</td>
-        <td width="20%"><form:input path="gpInfo.gpSn" /></td>
+        <td width="20%"><form:input path="gpInfos[0].gpSn" cssClass="required validate-number" /></td>
         <td width="13%" class="green"><font color="red">* </font>计量点名称：</td>
-        <td width="20%"><form:input path="mpName" /></td>
+        <td width="20%"><form:input path="mpName" cssClass="required" /></td>
         <td width="13%" class="green"><font color="red">* </font>计量点编号：</td>
-        <td width="20%"><form:input path="mpNo" /></td>
+        <td width="20%"><form:input path="mpNo" cssClass="required" /></td>
       </tr>
-      <tr>
+      <tr height="30px">
         <td class="green">CT变比：</td>
-        <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
+        <td><form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
         <td class="green">PT变比：</td>
-        <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
+        <td><form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
         <td class="green"><font color="red">* </font>表 地 址：</td>
-        <td><form:input path="gpInfo.gpAddr" /></td>
+        <td><form:input path="gpInfos[0].gpAddr" cssClass="required" /></td>
       </tr>
-      <tr>
+      <tr height="30px">
         <td class="green">表 规 约：</td>
-        <td><form:select path="meterMpRelaInfo.meterInfo.commNo" /></td>
+        <td><form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" /></td>
         <td class="green">所属终端：</td>
-        <td><form:select path="gpInfo.terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-          itemValue="termId" cssStyle="width:155px;" /> <input type="button" value="..." onclick="addTerminal();"
-          style="width: 20px" /></td>
+        <td><form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
+          itemValue="termId" cssStyle="width:155px;" /></td>
       </tr>
     </table>
     </div>
     <br></br>
+    <script>
+      function setCheckBox(obj){
+          if(obj.checked==true){
+            obj.value = '0';
+          }else{
+            obj.value = '1';
+          }
+      }
+      </script>
     <div class="tab"><span>一般信息</span></div>
-    <div id="pulseShow" class="da_mid" style="display: block; overflow-y: auto; overflow-x: auto;display: block; overflow-y: auto; overflow-x: auto;height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 750));">
+    <div id="pulseShow" class="da_mid"
+      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -               600 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr>
-        <td width="13%" class="green">安装位置：</td>
-        <td width="20%"><form:input path="mpAddr"></form:input></td>
-        <td width="13%" class="green">出厂编号：</td>
-        <td width="20%"></td>
-        <td width="13%" class="green">波 特 率：</td>
-        <td width="20%"><form:select path="meterMpRelaInfo.meterInfo.baudrate" items="${btlList}" id="btl"
-          itemLabel="name" itemValue="code" cssStyle="width:155px;" /></td>
-      </tr>
-      <tr>
-        <td class="green">接线方式：</td>
-        <td><form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name"
+      <tr height="30px">
+        <td width="13%" class="green">计量方式：</td>
+        <td width="20%"><form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" /></td>
-        <td class="green">供电线路：</td>
-        <td><form:select path="lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+        <td width="13%" class="green">端 口 号：</td>
+        <td width="20%"><form:input path="gpInfos[0].port"></form:input></td>
+        <td width="13%" class="green">波 特 率：</td>
+        <td width="20%"><form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" /></td>
       </tr>
-      <tr>
-        <td class="green">端 口 号：</td>
-        <td><form:input path="gpInfo.port"></form:input></td>
-        <td width="34%" colspan="2" align="center"><form:checkbox path="gpInfo.sucratCptId" value="0" /> 功率累计<form:checkbox
-          path="gpInfo.computeFlag" value="0" /> 电量计算</td>
-      </tr>
-      <tr>
-        <td class="green">计量方式：</td>
-        <td><form:select path="measMode" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+      <tr height="30px">
         <td class="green">申请日期：</td>
         <td class="dom_date"><form:input path="appDate" cssClass="input_time"
           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
         <td class="green">投运日期：</td>
         <td class="dom_date"><form:input path="runDate" cssClass="input_time"
           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
+        <td class="green">供电线路：</td>
+        <td><form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
+      </tr>
+      <tr height="30px">
+        <td class="green">接线方式：</td>
+        <td><form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" /></td>
+        <td class="green">安装位置：</td>
+        <td colspan=2><form:input path="mpAddr" size="60"></form:input></td>
+        <td><form:checkbox path="gpInfos[0].sucratCptId" value="0" onclick="setCheckBox(this)" /> 功率累计 <form:checkbox
+          path="gpInfos[0].computeFlag" value="0" onclick="setCheckBox(this)" /> 电量计算</td>
       </tr>
     </table>
     </div>
-      <div style="text-align: center"><br />
-  <input type="button" id="save" value="保 存" class="btnbg4" /></div>
-  </div>
-    </ul>
+    <div style="text-align: center"><br />
+    <input type="button" id="save" value="保 存" class="btnbg4" /></div>
+    </div>
+  </ul>
   </div>
 </form:form>
 </body>
+<script>
+val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function(result,form) {
+ return result;
+}}
+);
+
+$(function(){
+jQuery("#save").click(function(){
+    if(val.validate()){
+        jQuery(this).attr("disabled","disabled");
+        if($("#_type").val()=="edit"){
+          updatempinfo();
+        }else if($("#_type").val()=="new"){
+          addmpinfo();
+        }
+        
+        jQuery(this).attr("disabled","");
+    }else{
+      jQuery(this).attr("disabled","");
+    }
+    })
+      
+})
+
+
+
+getData= function(type){
+var data;
+  data = jQuery("form[id=mpinfo]").serialize(); 
+return data;
+}
+
+addmpinfo = function(){
+  var psFormData = getData('add');
+  var url="${ctx}/archive/mpinfo.json";
+  if(confirm("确定要保存该电表?")){
+    jQuery.ajax({
+         url: url,
+         data:psFormData,
+         dataType:'json',
+         type:'POST',
+         cache: false,
+         success: function(json){
+           var msg = json['msg'];
+           var isSucc = json['isSucc'];
+           alert(msg);
+           if(isSucc){
+             opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+               window.colse();
+           }
+         },error:function(e){
+             alert(e.message);
+         }
+       });
+  }
+}
+
+updatempinfo = function(){
+  var psFormData = getData("update");
+    var url="${ctx}/archive/mpinfo/${mpinfo.mpId}.json?_method=put";
+    if(confirm("确定要更新该电表?")){
+      jQuery.ajax({
+           url: url,
+           data:psFormData,
+           dataType:'json',
+           type:'post',
+           cache: false,
+           success: function(json){
+             var msg=json['msg'];
+             var isSucc = json['isSucc'];
+             alert(msg);
+             if(isSucc){
+               opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+                 window.colse();
+             }
+           },error:function(e){
+             alert("error")
+               alert(e.getMessage());
+           }
+         });
+    }
+}
+</script>
 </html>
