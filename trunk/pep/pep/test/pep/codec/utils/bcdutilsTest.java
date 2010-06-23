@@ -148,10 +148,10 @@ public class bcdutilsTest {
     }
    
    private int byteToUnsigned(byte b){
-        if (b>=0)
-            return b;
-        else
-            return 256+b;
+        //if (b>=0)
+        //    return b;
+        //else
+            return (0x100+b)%0x100; //256+b;
     }
 
     @Test
@@ -159,7 +159,7 @@ public class bcdutilsTest {
         byte b;
         for (int a=0x79; a<=0xFF; a++){
             b = (byte)a;
-            int c = byteToUnsigned(b);
+            int c = BcdUtils.byteToUnsigned(b);
             assertEquals(a,c);
         }
     }
