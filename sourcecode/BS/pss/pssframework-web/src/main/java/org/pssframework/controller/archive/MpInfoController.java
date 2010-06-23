@@ -51,6 +51,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
+
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
 
@@ -70,6 +71,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
+			logger.error(e.getMessage());
 
 		}
 
@@ -86,6 +88,8 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		Map requestMap = new HashMap();
 
 		requestMap.put("tgid", tgid);
+
+		// model.setTgInfo(tgInfoManager.getById(Long.parseLong(tgid)));
 
 		result.addObject("mpinfo", model);
 
