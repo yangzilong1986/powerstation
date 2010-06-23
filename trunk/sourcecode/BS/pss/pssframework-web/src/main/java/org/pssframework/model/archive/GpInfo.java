@@ -8,14 +8,12 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -47,8 +45,7 @@ public class GpInfo extends BaseEntity {
 	// GP_ID not null
 	private Long gpId;
 
-	@OneToOne(targetEntity = PsInfo.class)
-	@PrimaryKeyJoinColumn
+	@OneToOne(mappedBy = "gpInfo")
 	private PsInfo psInfo;
 
 	@ManyToOne(targetEntity = TgInfo.class)
@@ -60,13 +57,13 @@ public class GpInfo extends BaseEntity {
 	private Long objectId;
 
 	// TERM_ID NUMBER,
-	@ManyToOne(targetEntity = TerminalInfo.class)
+	@ManyToOne
 	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
 	private TerminalInfo terminalInfo;
 
 	// MP_ID NUMBER,
-	@OneToOne(targetEntity = MpInfo.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "MP_ID")
 	private MpInfo mpInfo;
 
 	// GM_ID NUMBER,

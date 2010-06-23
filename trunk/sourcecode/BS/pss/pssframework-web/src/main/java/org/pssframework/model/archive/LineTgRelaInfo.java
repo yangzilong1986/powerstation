@@ -5,13 +5,14 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,15 +40,15 @@ public class LineTgRelaInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 2825980935242589812L;
 
-	@Column(name = "LINE_TQ_ID", unique = true, nullable = false)
+	@Column(name = "LINE_TG_ID", unique = true, nullable = false)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_G_LINE_TG_RELA")
 	// LINE_TQ_ID NUMBER(16) not null,
 	private Long lineTgId;
 
-	@OneToOne(targetEntity = TgInfo.class, mappedBy = "lineTgRelaInfo")
-	@JoinColumn(name = "TG_ID", nullable = false, referencedColumnName = "TG_ID")
+	@ManyToOne(targetEntity = TgInfo.class, cascade = CascadeType.REFRESH)
 	// TG_ID NUMBER(16),
+	@JoinColumn(name = "TG_ID")
 	private TgInfo tgInfo;
 
 	@Column(name = "LINE_ID", length = 8, nullable = false)

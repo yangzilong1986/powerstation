@@ -3,7 +3,9 @@
  */
 package org.pssframework.model.archive;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -46,14 +50,14 @@ public class MpInfo extends BaseEntity {
 	// MP_ID NUMBER(16) not null, 容器所属的计量点唯一标识号
 	private Long mpId;
 
-	@OneToOne(targetEntity = GpInfo.class, mappedBy = "mpInfo", cascade = CascadeType.ALL)
-	private GpInfo gpInfo;
+	@OneToMany(mappedBy = "mpInfo", cascade = CascadeType.ALL)
+	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "METER_ID")
 	private MeterInfo meterInfo;
 
-	@OneToOne(targetEntity = MpUseInfo.class, mappedBy = "mpInfo", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "mpInfo")
 	private MpUseInfo mpUseInfo;
 
 	@Column(name = "MP_NO", length = 16, nullable = false)
@@ -128,8 +132,10 @@ public class MpInfo extends BaseEntity {
 	// private Long lineId;
 
 	// TG_ID NUMBER(16),is '台区的唯一标识';
-	@Column(name = "TG_ID", length = 16)
-	private Long tgId;
+
+	@ManyToOne
+	@JoinColumn(name = "TG_ID")
+	private TgInfo tgInfo;
 
 	// EXCHG_TYPE_CODE VARCHAR2(8),is
 	// '标明计量点的电量交换对象，包括：01发电企业、02区域电网、03省级企业、04地市企业、05趸售单位等';
@@ -189,13 +195,6 @@ public class MpInfo extends BaseEntity {
 	 */
 	public String getExchgTypeCode() {
 		return exchgTypeCode;
-	}
-
-	/**
-	 * @return the gpInfo
-	 */
-	public GpInfo getGpInfo() {
-		return gpInfo;
 	}
 
 	/**
@@ -325,13 +324,6 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
-	}
-
-	/**
 	 * @return the typeCode
 	 */
 	public String getTypeCode() {
@@ -386,14 +378,6 @@ public class MpInfo extends BaseEntity {
 	 */
 	public void setExchgTypeCode(String exchgTypeCode) {
 		this.exchgTypeCode = exchgTypeCode;
-	}
-
-	/**
-	 * @param gpInfo
-	 *            the gpInfo to set
-	 */
-	public void setGpInfo(GpInfo gpInfo) {
-		this.gpInfo = gpInfo;
 	}
 
 	/**
@@ -541,14 +525,6 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param tgId
-	 *            the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
-	/**
 	 * @param typeCode
 	 *            the typeCode to set
 	 */
@@ -612,5 +588,33 @@ public class MpInfo extends BaseEntity {
 	 */
 	public MeterInfo getMeterInfo() {
 		return meterInfo;
+	}
+
+	/**
+	 * @param gpInfos the gpInfos to set
+	 */
+	public void setGpInfos(List<GpInfo> gpInfos) {
+		this.gpInfos = gpInfos;
+	}
+
+	/**
+	 * @return the gpInfos
+	 */
+	public List<GpInfo> getGpInfos() {
+		return gpInfos;
+	}
+
+	/**
+	 * @param tgInfo the tgInfo to set
+	 */
+	public void setTgInfo(TgInfo tgInfo) {
+		this.tgInfo = tgInfo;
+	}
+
+	/**
+	 * @return the tgInfo
+	 */
+	public TgInfo getTgInfo() {
+		return tgInfo;
 	}
 }

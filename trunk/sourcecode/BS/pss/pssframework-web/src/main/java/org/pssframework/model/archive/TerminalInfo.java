@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,8 +44,8 @@ public class TerminalInfo extends BaseEntity {
 	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class)
 	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
 
-	// @OneToMany(mappedBy = "terminalInfo", targetEntity = PsInfo.class)
-	// private List<PsInfo> psInfos = new ArrayList<PsInfo>();
+	@OneToMany(mappedBy = "terminalInfo", targetEntity = TermObjRelaInfo.class, cascade = CascadeType.ALL)
+	private List<TermObjRelaInfo> termObjRelas;
 
 	@Column(name = "TERM_ID", unique = true, nullable = false)
 	@Id
@@ -573,5 +574,19 @@ public class TerminalInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param termObjRelas the termObjRelas to set
+	 */
+	public void setTermObjRelas(List<TermObjRelaInfo> termObjRelas) {
+		this.termObjRelas = termObjRelas;
+	}
+
+	/**
+	 * @return the termObjRelas
+	 */
+	public List<TermObjRelaInfo> getTermObjRelas() {
+		return termObjRelas;
 	}
 }

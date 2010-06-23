@@ -29,79 +29,79 @@ import org.pssframework.base.BaseEntity;
 @SequenceGenerator(sequenceName = "SEQ_C_MP_USE", name = "SEQ_C_MP_USE", allocationSize = 1)
 public class MpUseInfo extends BaseEntity {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3440470953000205969L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3440470953000205969L;
 
-    @Column(name = "USAGE_ID", unique = true, nullable = false)
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_MP_USE")
-    // METER_MP_ID NUMBER(16) not null,
-    private Long usageId;
+	@Column(name = "USAGE_ID", unique = true, nullable = false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_MP_USE")
+	// METER_MP_ID NUMBER(16) not null,
+	private Long usageId;
 
-    @Column(name = "USAGE_CODE")
-    // USAGE_CODE VARCHAR2(8)
-    private String usageCode;
+	@Column(name = "USAGE_CODE")
+	// USAGE_CODE VARCHAR2(8)
+	private String usageCode;
 
-    // MP_ID NUMBER(16)
-    @OneToOne(targetEntity = MpInfo.class)
-    @JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
-    // MP_ID VARCHAR2(8),设备的产权说明 01 局属、 02 用户
-    private MpInfo mpInfo;
+	// MP_ID NUMBER(16)
+	@OneToOne
+	@JoinColumn(name = "MP_ID", referencedColumnName = "MP_ID")
+	// MP_ID VARCHAR2(8),设备的产权说明 01 局属、 02 用户
+	private MpInfo mpInfo;
 
-    /**
-     * @return the mpInfo
-     */
-    public MpInfo getMpInfo() {
-        return mpInfo;
-    }
+	/**
+	 * @return the mpInfo
+	 */
+	public MpInfo getMpInfo() {
+		return mpInfo;
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    /**
-     * @param mpInfo
-     *            the mpInfo to set
-     */
-    public void setMpInfo(MpInfo mpInfo) {
-        this.mpInfo = mpInfo;
-    }
+	/**
+	 * @param mpInfo
+	 *            the mpInfo to set
+	 */
+	public void setMpInfo(MpInfo mpInfo) {
+		this.mpInfo = mpInfo;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    /**
-     * @param usageId
-     *            the usageId to set
-     */
-    public void setUsageId(Long usageId) {
-        this.usageId = usageId;
-    }
+	/**
+	 * @param usageId
+	 *            the usageId to set
+	 */
+	public void setUsageId(Long usageId) {
+		this.usageId = usageId;
+	}
 
-    /**
-     * @return the usageId
-     */
-    public Long getUsageId() {
-        return usageId;
-    }
+	/**
+	 * @return the usageId
+	 */
+	public Long getUsageId() {
+		return usageId;
+	}
 
-    /**
-     * @param usageCode
-     *            the usageCode to set
-     */
-    public void setUsageCode(String usageCode) {
-        this.usageCode = usageCode;
-    }
+	/**
+	 * @param usageCode
+	 *            the usageCode to set
+	 */
+	public void setUsageCode(String usageCode) {
+		this.usageCode = usageCode;
+	}
 
-    /**
-     * @return the usageCode
-     */
-    public String getUsageCode() {
-        return usageCode;
-    }
+	/**
+	 * @return the usageCode
+	 */
+	public String getUsageCode() {
+		return usageCode;
+	}
 }

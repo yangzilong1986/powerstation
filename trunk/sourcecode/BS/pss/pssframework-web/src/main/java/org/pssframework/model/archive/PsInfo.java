@@ -5,7 +5,6 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -110,9 +109,9 @@ public class PsInfo extends BaseEntity {
     @Column(name = "PINYIN_CODE", length = 16)
     private String pingyinCode;
 
-    @OneToOne(targetEntity = GpInfo.class, mappedBy = "psInfo", cascade = CascadeType.ALL)
-    @JoinColumn(name = "GP_ID", referencedColumnName = "GP_ID")
-    private GpInfo gpInfo = new GpInfo();
+	@OneToOne
+	@JoinColumn(name = "GP_ID")
+	private GpInfo gpInfo;
 
     /**
      * @return the assetNo

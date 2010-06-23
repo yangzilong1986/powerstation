@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MpInfoDao extends BaseHibernateDao<MpInfo, Long> {
 
-	private String hql = "from TranInfo t where 1=1 and /~ t.tgId = '[tgid]' ~/ ";
+	private String hql = "from MpInfo t where 1=1 and /~ t.tgInfo.tgId = '[tgid]' ~/ ";
 
 	@Override
 	public Class getEntityClass() {
