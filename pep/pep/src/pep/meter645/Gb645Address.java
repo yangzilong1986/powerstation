@@ -13,7 +13,9 @@ import pep.codec.utils.BcdUtils;
  */
 public class Gb645Address {
     private byte[] value = new byte[6];
-
+    private int shrinkBytes;
+    private byte shrinkToken;
+    
     public Gb645Address(byte[] data, int beginposition){
         super();
         if (data.length>=beginposition+6){
@@ -22,25 +24,45 @@ public class Gb645Address {
         }
     }
 
-    public Gb645Address(String address){
+    public Gb645Address(String address,int shrinkBytes, byte shrinkToken){
         super();
         setAddress(address);
+        this.shrinkBytes = shrinkBytes;
+        this.shrinkToken = shrinkToken;
+    }
+    
+    public Gb645Address(String address,int shrinkBytes){
+        this(address,shrinkBytes,(byte)0xAA);
     }
 
+    public Gb645Address(String address){
+        this(address,0);
+    }
+
+    public void setShrinkBytes(int shrinkBytes){
+        this.shrinkBytes = shrinkBytes;
+    }
+    
+    public void setShrinkToken(byte shrinkToken){
+        this.shrinkToken = shrinkToken;
+    }
+    
     public String getAddress(){
         return Gb645Address.meterAddressToString(value);
     }
 
-    public void setAddress(String address){
+    public final void setAddress(String address){
         this.value = Gb645Address.stringToMeterAddress(address);
     }
 
-    public byte[] getShrinkedMeterAddr(int shrinkBytes, byte shrinkToken){
+    public byte[] getValue(){
+        return this.getShrinkedMeterAddr();
+    }
+    
+    private byte[] getShrinkedMeterAddr(){
         if ((shrinkBytes>=0) && (shrinkBytes<=6)){
             byte [] temp = new byte[6];
-            for (int i=0; i<6-shrinkBytes; i++){
-                temp[i] = this.value[i];
-            }
+            System.arraycopy(this.value, 0, temp, 0, 6 - shrinkBytes);
             for (int i=6-shrinkBytes; i<6;i++){
                 temp[i] = (byte) shrinkToken;
             }
@@ -48,10 +70,6 @@ public class Gb645Address {
         }
         else
             return this.value;
-    }
-
-    public byte[] getShrinkedMeterAddr(int shrinkBytes){
-        return getShrinkedMeterAddr(shrinkBytes,(byte)0xAA);
     }
 
     public static String meterAddressToString(byte[] addr){
