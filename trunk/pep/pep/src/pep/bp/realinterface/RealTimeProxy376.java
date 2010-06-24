@@ -31,6 +31,7 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     private static int ID;
     private final int FAILCODE = -1;
+    private final byte AFN_CONFIRM = 0x00; //AFN：确认/否认
     private final byte AFN_RESET = 0x01; //AFN：复位
     private final byte AFN_SETPARA = 0x04; //AFN：设置参数
     private final byte AFN_GETPARA = 0x0A; //AFN：读取参数
@@ -128,11 +129,18 @@ public class RealTimeProxy376 implements ICollectInterface {
             List<DataItem> dataItemList = group.getDataItemList();
             for(DataItem dataItem : dataItemList){
                 DataItemCode = dataItem.getDataItemCode();
-                DataItemValue = dataItem.getDataItemValue();
+                
                 if((Long.valueOf(DataItemCode) -TempCode > 10000)&&(TempCode!=0)){
-                    protocoldataItem = DataItemMap_Config.get(String.valueOf(TempCode+1));
+                    ProtocolDataItem TempdataItem = DataItemMap_Config.get(String.valueOf(TempCode+10000).substring(0, 10));
+                    DataItemValue = TempdataItem.getDefaultValue();
+                    Format = TempdataItem.getFormat();
+                    Length = TempdataItem.getLength();
+                    IsGroupEnd = TempdataItem.getIsGroupEnd();
+                    bitnumber = TempdataItem.getBitNumber();
+                    FillDataBuffer(packet,Format,DataItemValue,IsGroupEnd,Length,bitnumber);
                 }
                 protocoldataItem = DataItemMap_Config.get(DataItemCode.substring(0, 10));
+                DataItemValue = dataItem.getDataItemValue();
                 Format = protocoldataItem.getFormat();
                 Length = protocoldataItem.getLength();
                 IsGroupEnd = protocoldataItem.getIsGroupEnd();
@@ -183,6 +191,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                // String IsGroupEnd = dataItem.getIsGroupEnd();
                 if (IsGroupEnd.equals("1")) {
                     packet.getDataBuffer().putBS8(groupValue);
+                    groupValue = "";
+
                 }
             } else if (Format.equals("GROUP_BIN")) {
                 groupBinValue += Integer.parseInt(DataItemValue) << (bits - bitnumber);
@@ -412,9 +422,11 @@ public class RealTimeProxy376 implements ICollectInterface {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 PmPacketData dataBuf = packet.getDataBuffer();
+                dataBuf.rewind();
                 dataBuf.getDA(new PmPacket376DA());
-                dataBuf.getDT(new PmPacket376DT());
-                byte result = dataBuf.get();
+                PmPacket376DT dt = new PmPacket376DT();
+                dataBuf.getDT(dt);
+                int result = dt.getFn();
                 //全部确认或否认
                 if (result < 3) {
                     for (int i = 0; i < GpArray.length; i++) {
@@ -511,11 +523,14 @@ public class RealTimeProxy376 implements ICollectInterface {
             int bitnumber = dataItem.getBitNumber();
             String IsGroupEnd = dataItem.getIsGroupEnd();
             if (Format.equals("BIN")) {
+                results.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
+                /*
                 if (Len == 1) {
                     results.put(DataItemCode, String.valueOf(dataBuffer.get()));
                 } else {
                     results.put(DataItemCode, String.valueOf(dataBuffer.getWord()));
                 }
+                 */
             } else if (Format.equals("IPPORT")) {
                 results.put(DataItemCode, dataBuffer.getIPPORT());
             } else if (Format.equals("IP")) {
@@ -535,9 +550,10 @@ public class RealTimeProxy376 implements ICollectInterface {
             } else if (Format.equals("GROUP_BIN")) {
                 if(groupBinValue == 0)
                     groupBinValue = dataBuffer.get();
-                if(groupBinValue<0) groupBinValue = groupBinValue*(-1) + 128;
+                if(groupBinValue<0) groupBinValue = groupBinValue + 256;
                 byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
-                bits-= bitnumber;
+                groupBinValue = groupBinValue-(resultValue<<(bits - bitnumber));
+                bits-= bitnumber;               
                 results.put(DataItemCode, String.valueOf(resultValue));
                 if (IsGroupEnd.equals("1")){
                     groupBinValue = 0;

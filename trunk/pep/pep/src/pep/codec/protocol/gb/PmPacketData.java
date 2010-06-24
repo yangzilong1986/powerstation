@@ -68,11 +68,13 @@ public class PmPacketData{
 
     
 
-    public PmPacketData putBin(int value,int length){
-        if (length==1)
-            this.put((byte)value);
-        else if(length==2)
-            this.putWord(value);
+    public PmPacketData putBin(long value,int length){
+        byte[] b = new byte[length];
+        for(int i=0;i<length;i++){
+            int offset = (b.length-1-i)*8;
+            b[length-1-i] = (byte)((value >>> offset) & 0xFF);
+        }
+        dataBuff.put(b);
         return this;
     }
 
@@ -114,6 +116,15 @@ public class PmPacketData{
         byte valueLow = dataBuff.get();
         byte valueHigh = dataBuff.get();
         return valueHigh*0x100 + valueLow;
+    }
+
+    public long getBin(int len){
+        long value = 0;
+        for(int i=0;i< len;i++){
+            byte data = dataBuff.get();
+            value +=  data << (8*i);
+        }
+        return value;
     }
 
     public PmPacketData putA1(DataTypeA1 a1){
