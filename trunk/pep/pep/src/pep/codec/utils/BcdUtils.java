@@ -50,8 +50,8 @@ public class BcdUtils {
     }
 
     public static long bcdToInt(byte[] bcds, int beginIndex, int length) {
-        int result = 0;
-        int base = 1;
+        long result = 0;
+        long base = 1;
         int b;
         for (int i = 0; i < length; i++) {
             b = BcdUtils.byteToUnsigned(bcds[beginIndex + i]);
