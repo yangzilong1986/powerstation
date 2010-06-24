@@ -226,7 +226,7 @@ public class RealTimeProxy376Test {
         diGroup1.AddDataItem(new DataItem("10040010100001","000001"));//本次配置第0001块电能表/交流采样装置电能费率个数
         diGroup1.AddDataItem(new DataItem("10040010120001","00"));//本次配置第0001块电能表/交流采样装置有功电能示值的整数位个数
         diGroup1.AddDataItem(new DataItem("10040010130001","00"));//本次配置第0001块电能表/交流采样装置有功电能示值的小数位个数
-        diGroup1.AddDataItem(new DataItem("10040010140001","1"));//本次配置第0001块电能表/交流采样装置所属采集器通信地址
+        diGroup1.AddDataItem(new DataItem("10040010140001","999999999999"));//本次配置第0001块电能表/交流采样装置所属采集器通信地址
         diGroup1.AddDataItem(new DataItem("10040010150001","0000"));//本次配置第0001块电能表/交流采样装置所属的用户大类号
         diGroup1.AddDataItem(new DataItem("10040010160001","0000"));//本次配置第0001块电能表/交流采样装置所属的用户小类号
         circleDataItems.AddDataItemGroup(diGroup1);
@@ -245,7 +245,7 @@ public class RealTimeProxy376Test {
         assertTrue(resultMap10.get("1004001010").equals("000001"));
         assertTrue(resultMap10.get("1004001012").equals("00"));
         assertTrue(resultMap10.get("1004001013").equals("00"));
-        assertTrue(resultMap10.get("1004001014").equals("1"));
+        assertTrue(resultMap10.get("1004001014").equals("999999999999"));
         assertTrue(resultMap10.get("1004001015").equals("0000"));
         assertTrue(resultMap10.get("1004001016").equals("0000"));
 
