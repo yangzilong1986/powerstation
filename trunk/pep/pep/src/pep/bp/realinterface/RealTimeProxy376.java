@@ -108,7 +108,6 @@ public class RealTimeProxy376 implements ICollectInterface {
      */
     private void InjectDataIteamCircle1(PmPacket376 packet, CommandItem commandItem) {
         long TempCode = 0;
-        byte bits = 8;
         ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         CircleDataItems circleDIs = commandItem.getCircleDataItems();
@@ -189,7 +188,6 @@ public class RealTimeProxy376 implements ICollectInterface {
                 if (IsGroupEnd.equals("1")) {
                     packet.getDataBuffer().putBS8(groupValue);
                     groupValue = "";
-
                 }
             } else if (Format.equals("GROUP_BIN")) {
                 groupBinValue += Integer.parseInt(DataItemValue) << (bits - bitnumber);
@@ -521,13 +519,6 @@ public class RealTimeProxy376 implements ICollectInterface {
             String IsGroupEnd = dataItem.getIsGroupEnd();
             if (Format.equals("BIN")) {
                 results.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
-                /*
-                if (Len == 1) {
-                    results.put(DataItemCode, String.valueOf(dataBuffer.get()));
-                } else {
-                    results.put(DataItemCode, String.valueOf(dataBuffer.getWord()));
-                }
-                 */
             } else if (Format.equals("IPPORT")) {
                 results.put(DataItemCode, dataBuffer.getIPPORT());
             } else if (Format.equals("IP")) {
