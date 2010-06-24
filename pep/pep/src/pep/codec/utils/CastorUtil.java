@@ -136,14 +136,14 @@ public class CastorUtil {
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001006", 1, "BIN", 0,"电能表/交流采样装置通信协议类型","100"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001007", 6, "A12", 0,"电能表/交流采样装置通信地址","0"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001008", 6, "BIN", 0,"电能表/交流采样装置通信密码","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001009", 1, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001010", 1, "GROUP_BS8", 6,"电能表/交流采样装置电能费率个数","000001","1"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001011", 1, "GROUP_BS8", 4,"备用","0000","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001012", 1, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的整数位个数","00","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001013", 1, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的小数位个数","00","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001009", 2, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001010", 6, "GROUP_BS8", 6,"电能表/交流采样装置电能费率个数","000001","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001011", 4, "GROUP_BS8", 4,"备用","0000","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001012", 2, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的整数位个数","00","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001013", 2, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的小数位个数","00","1"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001014", 6, "A12", 0,"电能表/交流采样装置所属采集器通信地址","1"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001015", 1, "GROUP_BS8", 0,"用户大类号","0000","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001016", 1, "GROUP_BS8", 0,"及用户小类号","0000","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001015", 4, "GROUP_BS8", 0,"用户大类号","0000","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001016", 4, "GROUP_BS8", 0,"及用户小类号","0000","1"));
 
 
         ProtocolCommandItem CommandItem8 = new ProtocolCommandItem();

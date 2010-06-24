@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class RTTaskRecv {
     private int taskId;
-    private int sequenceCode;
+    private long sequenceCode;
     private String logicAddress;
     private String recvMsg;
     private Date recvTime;
@@ -35,14 +35,14 @@ public class RTTaskRecv {
     /**
      * @return the sequenceCode
      */
-    public int getSequenceCode() {
+    public long getSequenceCode() {
         return sequenceCode;
     }
 
     /**
      * @param sequenceCode the sequenceCode to set
      */
-    public void setSequenceCode(int sequenceCode) {
+    public void setSequenceCode(long sequenceCode) {
         this.sequenceCode = sequenceCode;
     }
 
