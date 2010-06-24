@@ -249,7 +249,7 @@ addmpinfo = function(){
            alert(msg);
            if(isSucc){
              opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
-               window.colse();
+             closeWin()
            }
          },error:function(e){
              alert(e.message);
@@ -274,7 +274,7 @@ updatempinfo = function(){
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
-                 window.colse();
+               closeWin()
              }
            },error:function(e){
              alert("error")
@@ -283,5 +283,10 @@ updatempinfo = function(){
          });
     }
 }
+
+function   closeWin() 
+{ 
+        window.close(); 
+} 
 </script>
 </html>

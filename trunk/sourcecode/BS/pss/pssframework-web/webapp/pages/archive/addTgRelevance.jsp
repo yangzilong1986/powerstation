@@ -61,31 +61,6 @@ function showTerminal(termId,termType){
    }
 }
 
-  //删除总表
-   function delMeter(mpId){
-     var url=contextPath+"/archive/meterAction.do?action=deleteTotalMeter&mpId="+mpId;
-     if(confirm("确定要删除该总表?")){
-       jQuery.ajax({
-            url: url,
-            dataType:'json',
-            cache: false,
-            success: function(json){
-              var msg=json['msg'];
-               if(msg=="1"){
-                alert("删除成功");
-                //window.location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
-                 //动态加载台区关联设备信息
-				loadTgRelevevance();
-                }
-                else{
-                   alert("删除失败");
-                }
-            }
-       });
-     }
-   }
-  
-
 //调用json方法获取list
 function getJsonObjectList(htmlId,className,methodName,objectType){
   var objectId=jQuery("input[name='tgId']").val();
@@ -261,15 +236,17 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
+       <c:forEach items="${termlist}" var="term" varStatus="status">
+        <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>${term.assetNo}</td>
+          <td>${term.logicalAddr}</td>
+          <td>${term.termType}</td>
+          <td>${term.runStatus}</td>
+          <td>${term.termType}</td>
+          <td>${term.termType}</td>
+          <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateTermInfo('${term.termId}')">修改</a></td>
+        </tr>
+      </c:forEach>
     </tbody>
   </table>
   </div>
@@ -471,5 +448,38 @@ function openMeterInfo(tgId){
 	   windowPopup(url, 960, 575);
      
 }
+/*******************************************************************/
+deleteTermInfo=function(termId){
+   if(termId==null || termId ==""){
+     return;
+   } 
+
+   var url = "${ctx}/archive/terminalinfo/"+termId+".json?_method=delete";
+   if (confirm("确定要删除该集中器?")) {
+       jQuery.ajax({
+           url: url,
+           dataType:'json',
+           type:'POST',
+           cache: false,
+           success: function(json) {
+               var msg = json['msg'];
+               var isSucc = json['isSucc'];
+               alert(msg);
+               if(isSucc){
+                $("#term_"+termId).remove();
+               }
+           },error:function(e) {
+               alert("delete error");
+               alert(e.message);
+           }
+       });
+   }
+  }
+
+updateTermInfo=function(termId){
+     var url = "${ctx}/archive/terminalinfo/"+termId+"/edit?tgId="+$("#tgId").val();
+     windowPopup(url, 960, 575);
+}
+/*******************************************************************/
 </script>
 </html>

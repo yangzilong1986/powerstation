@@ -12,13 +12,13 @@
 <div class="electric_lcon" id=electric_Con>
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>终端信息</span></div>
-   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((       document.documentElement.clientHeight ||       document.body.clientHeight) -35 ) );">
- <form:form action="/archive/terminalinfo" modelAttribute="terminalinfo">
+  <div class="da_mid"
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
+  <form:form action="/archive/terminalinfo" modelAttribute="terminalinfo">
     <input type="hidden" name="_type" id="_type" value="${_type}">
     <spring:bind path="termObjRelas">
-    <input type="hidden" name="termObjRelas[0].objId"  id="termObjRelas[0].objId"  value="${tgId}">
-    <input type="hidden" name="termObjRelas[0].objType" id="termObjRelas[0].objType"  value="2">
+      <input type="hidden" name="termObjRelas[0].objId" id="termObjRelas[0].objId" value="${tgId}">
+      <input type="hidden" name="termObjRelas[0].objType" id="termObjRelas[0].objType" value="2">
     </spring:bind>
     <table border="0" cellpadding="0" cellspacing="0" align="center">
       <tr height="30">
@@ -28,9 +28,8 @@
         <td width="10%" align="right" class="green"><font color="red">* </font>逻辑地址：</td>
         <td width="20%"><form:input path="logicalAddr" cssClass="required input2" maxlength="20"
           cssStyle="width:155px;" /></td>
-        <td width="10%" align="right" class="green">当前状态：</td>
-        <td width="25%"><form:select path="curStatus" id="curStatus" itemLabel="name" itemValue="code" onchange=""
-          items="${statuslist}" cssStyle="width:155px;" /></td>
+        <td width="10%" align="right" class="green">SIM：</td>
+        <td width="25%"><form:input path="simNo" cssClass="required input2" maxlength="20" /></td>
       </tr>
       <tr height="30">
         <td align="right" class="green">设备规约：</td>
@@ -58,8 +57,9 @@
         <td align="right" class="green">安装日期：</td>
         <td><form:input path="installDate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" cssClass="input_time"
           readonly="readonly" cssStyle="width:155px;height:25px;"></form:input></td>
-        <td class="green"></td>
-        <td></td>
+        <td align="right" class="green">当前状态：</td>
+        <td><form:select path="curStatus" id="curStatus" itemLabel="name" itemValue="code" onchange=""
+          items="${statuslist}" cssStyle="width:155px;" /></td>
         <td class="green"></td>
         <td></td>
       </tr>
@@ -118,10 +118,9 @@ $(function(){
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
-                 window.colse();
+               closeWin()
              }
            },error:function(e){
-               alert(e.message);
            }
          });
     }
@@ -142,8 +141,9 @@ $(function(){
                var isSucc = json['isSucc'];
                alert(msg);
                if(isSucc){
+            	  
                  opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
-                   window.colse();
+            	   closeWin()
                }
              },error:function(e){
                alert("error")
@@ -153,5 +153,10 @@ $(function(){
       }
   }
 
+
+  function   closeWin() 
+  { 
+          window.close(); 
+  } 
 </script>
 </html>

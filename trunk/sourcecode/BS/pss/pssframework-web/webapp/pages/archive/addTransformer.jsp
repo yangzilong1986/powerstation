@@ -116,10 +116,10 @@
                     alert(msg);
                     if(isSucc){
                     opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgId}/edit";
-                    window.close();
+                    closeWin() 
                     }
                 },error:function(e) {
-                    alert("save error");
+                   
                     alert(e.message);
                 }
             });
@@ -138,5 +138,9 @@
         });
     })
 
+    function   closeWin() 
+{ 
+        window.close(); 
+} 
 </script>
 </html>
