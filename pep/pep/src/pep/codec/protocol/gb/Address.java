@@ -65,12 +65,12 @@ public class Address {
         return this;
     }
 
-    public Address setValue(byte[] value) {
+    public final Address setValue(byte[] value) {
         return this.setValue(value, 0);
     }
 
     public String getRtua(){
-        StringBuffer buff = new StringBuffer(8);
+        StringBuilder buff = new StringBuilder(8);
         buff.append(BcdUtils.byteToString(value[1]));
         buff.append(BcdUtils.byteToString(value[0]));
         buff.append(BcdUtils.byteToString(value[3]));
@@ -79,7 +79,7 @@ public class Address {
         return buff.toString();
     }
 
-    public Address setRtua(String rtua){
+    public final Address setRtua(String rtua){
         if (rtua.length()==8) {
             value[1] = BcdUtils.stringToByte(rtua.substring(0,2));
             value[0] = BcdUtils.stringToByte(rtua.substring(2,4));
@@ -94,10 +94,10 @@ public class Address {
     }
 
     public boolean getIsGoupAddress(){
-        return (value[4] &1)==1;
+        return (byte)(value[4] &1)==(byte) 1;
     }
 
-    public Address setIsGroupAddress(boolean isGroupAddress){
+    public final Address setIsGroupAddress(boolean isGroupAddress){
         if (isGroupAddress) value[4] = (byte)(value[4] | 0x01);
         else value[4] = (byte)(value[4] & 0xFE);
 
@@ -108,7 +108,7 @@ public class Address {
         return (byte)(value[4]>>1);
     }
 
-    public Address setMastStationId(byte mstId){
+    public final Address setMastStationId(byte mstId){
         value[4] = (byte)((value[4] & 0x01)|(mstId<<1));
 
         return this;
@@ -116,7 +116,7 @@ public class Address {
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
 
         if (getIsGoupAddress()){
             buff.append("GroupAdress=").append(getRtua());

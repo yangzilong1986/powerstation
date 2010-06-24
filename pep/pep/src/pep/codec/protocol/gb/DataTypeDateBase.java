@@ -5,7 +5,6 @@
 
 package pep.codec.protocol.gb;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class DataTypeDateBase {
     }
 
     public DataTypeDateBase(String dateStr,String format) {
-        SimpleDateFormat df = new SimpleDateFormat(format);;
+        SimpleDateFormat df = new SimpleDateFormat(format);
         Date date;
         try {
             date = df.parse(dateStr);
@@ -40,7 +39,7 @@ public class DataTypeDateBase {
         }
     }
 
-    public void setDate(Date date){
+    public final void setDate(Date date){
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         this.year = calendar.get(GregorianCalendar.YEAR) % 100;
@@ -51,7 +50,7 @@ public class DataTypeDateBase {
         this.second = calendar.get(GregorianCalendar.SECOND);
     }
 
-    public Date getDate(){
+    public final Date getDate(){
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.set(GregorianCalendar.YEAR, 2000+this.year);
         calendar.set(GregorianCalendar.MONTH, this.month-1);

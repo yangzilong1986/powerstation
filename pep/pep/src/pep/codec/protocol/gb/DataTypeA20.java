@@ -35,22 +35,12 @@ public class DataTypeA20 extends DataTypeDateBase{
         super(dateStr,format);
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         super.setArray(array, beginPosition, "DDMMYY");
     }
 
     public byte[] getArray(){
         return super.getArray("DDMMYY");
-    }
-
-    @Override
-    public void setDate(Date date){
-        super.setDate(date);
-    }
-
-    @Override
-    public Date getDate(){
-        return super.getDate();
     }
 
     @Override

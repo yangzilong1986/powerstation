@@ -18,7 +18,7 @@ public class DataTypeA13 extends DataTypeLongBase{
         setArray(array,0);
     }
 
-    public void setValue(double value){
+    public final void setValue(double value){
         this.value = java.lang.Math.round(value*10000);
     }
 
@@ -26,7 +26,7 @@ public class DataTypeA13 extends DataTypeLongBase{
         return this.value/10000.0;
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         setArray(array,beginPosition,4);
     }
 

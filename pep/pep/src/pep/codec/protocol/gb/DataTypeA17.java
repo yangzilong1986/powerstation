@@ -5,7 +5,6 @@
 
 package pep.codec.protocol.gb;
 
-import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -32,7 +31,7 @@ public class DataTypeA17 extends DataTypeDateBase{
         setArray(array);
     }
     
-    public void setArray(byte[] array){
+    public final void setArray(byte[] array){
         setArray(array,0);
     }
     
@@ -55,7 +54,7 @@ public class DataTypeA17 extends DataTypeDateBase{
     }
 
     @Override
-    public DataTypeA17 setMonth(byte month){
+    public final DataTypeA17 setMonth(byte month){
         super.setMonth(month);
         return this;
     }
@@ -95,7 +94,7 @@ public class DataTypeA17 extends DataTypeDateBase{
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("month=").append(this.month);
         buff.append(",day=").append(this.day);
         buff.append(", hour=").append(this.hour);

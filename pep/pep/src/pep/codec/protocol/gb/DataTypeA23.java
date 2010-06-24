@@ -18,7 +18,7 @@ public class DataTypeA23 extends DataTypeLongBase{
         setArray(array,0);
     }
 
-    public void setValue(float value){
+    public final void setValue(float value){
         this.value = java.lang.Math.round(java.lang.Math.floor(value*10000));
     }
 
@@ -27,7 +27,7 @@ public class DataTypeA23 extends DataTypeLongBase{
     }
 
     @Override
-    public void setArray(byte[] array, int beginPosition) {
+    public final void setArray(byte[] array, int beginPosition) {
         super.setArray(array, beginPosition, 3);
     }
 

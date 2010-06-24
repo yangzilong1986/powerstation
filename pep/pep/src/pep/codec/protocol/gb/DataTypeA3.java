@@ -26,7 +26,7 @@ public class DataTypeA3 {
         setArray(array,0);
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         if (array.length-beginPosition<4)
             throw new IllegalArgumentException();
         else{

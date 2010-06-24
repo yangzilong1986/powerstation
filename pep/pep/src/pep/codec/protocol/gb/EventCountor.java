@@ -59,7 +59,7 @@ public class EventCountor {
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("ec1=").append(ec1);
         buff.append(", ec2=").append(ec2);
 

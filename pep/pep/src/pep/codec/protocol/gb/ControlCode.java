@@ -98,7 +98,7 @@ public class ControlCode {
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
 
         if (this.getIsUpDirect()) buff.append("上行帧; ");
         else buff.append("下行帧; ");

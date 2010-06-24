@@ -23,7 +23,7 @@ public class DataTypeA5 extends DataTypeA5A6Base {
         return (float) (this.value/10.0);
     }
 
-    public void setValue(float value) {
+    public final void setValue(float value) {
         this.value = (int) Math.round(Math.floor(value * 10));
     }
     

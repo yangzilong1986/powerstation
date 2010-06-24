@@ -30,7 +30,7 @@ public class DataTypeA2 {
         return this.value;
     }
 
-    public void setArray(byte[] array) {
+    public final void setArray(byte[] array) {
         setArray(array, 0);
     }
 

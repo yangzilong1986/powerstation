@@ -18,7 +18,7 @@ public class DataTypeA9 extends DataTypeA9A25Base {
         setArray(array,0);
     }
     
-    public void setValue(double value){
+    public final void setValue(double value){
         this.value = java.lang.Math.round(java.lang.Math.floor(value*10000));
     }
 

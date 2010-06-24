@@ -31,7 +31,7 @@ public class DataTypeA19 extends DataTypeDateBase{
         super(dateStr,format);
     }
 
-    public void setArray(byte[] array){
+    public final void setArray(byte[] array){
         setArray(array,0);
     }
 
@@ -54,7 +54,7 @@ public class DataTypeA19 extends DataTypeDateBase{
     }
 
     @Override
-    public DataTypeA19 setHour(byte hour){
+    public final DataTypeA19 setHour(byte hour){
         super.setHour(hour);
         return this;
     }
@@ -72,7 +72,7 @@ public class DataTypeA19 extends DataTypeDateBase{
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("hour=").append(this.hour);
         buff.append(", minute=").append(this.minitue);
 
