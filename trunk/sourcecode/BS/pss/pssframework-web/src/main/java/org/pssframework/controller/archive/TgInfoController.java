@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
-import org.pssframework.model.archive.MeterInfo;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
@@ -21,7 +20,6 @@ import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
-import org.pssframework.service.archive.MeterInfoManger;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
@@ -64,9 +62,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	private PsInfoManger psInfoManager;
 
 	@Autowired
-	private MeterInfoManger meterInfoManager;
-
-	@Autowired
 	private MpInfoManger mpInfoManger;
 
 	@Autowired
@@ -79,8 +74,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		if (model.getTgId() != null) {
 			tgid = model.getTgId();
 		}
-
-		// mapRequest.put("orgid", orgid);
 
 		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
 
@@ -122,15 +115,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<MeterInfo> getMeterList(Map mapRequest) {
-		List<MeterInfo> meterlist = meterInfoManager.findByPageRequest(mapRequest);
-		if (meterlist == null || meterlist.size() <= 0) {
-			meterlist = new LinkedList<MeterInfo>();
-		}
-		return meterlist;
-	}
-
-	@SuppressWarnings("unchecked")
 	private List<PsInfo> getPsList(Map mapRequest) {
 		List<PsInfo> pslist = psInfoManager.findByPageRequest(mapRequest);
 		if (pslist == null || pslist.size() <= 0) {
@@ -151,6 +135,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+		logger.debug("tg.{}", "new");
+
 		ModelAndView result = new ModelAndView();
 
 		result.addObject("tginfo", new TgInfo());
@@ -169,6 +155,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@Override
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+		logger.debug("tg.{},{}", "delete", id);
 		boolean isSucc = true;
 		String msg = DELETE_SUCCESS;
 		try {
@@ -187,6 +174,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+		logger.debug("tg.{}", "create");
 		boolean isSucc = true;
 		String msg = CREATED_SUCCESS;
 		Long tgId = 0L;
@@ -214,6 +202,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@SuppressWarnings("unchecked")
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		logger.debug("tg.{},{}", "edit", id);
+
 		ModelAndView result = new ModelAndView();
 
 		TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
@@ -237,8 +227,12 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Override
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+
+		logger.debug("tg.{},{}", "update", id);
+
 		boolean isSucc = true;
 		String msg = UPDATE_SUCCESS;
+
 		try {
 			TgInfo tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
@@ -257,6 +251,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Override
 	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+
+		logger.debug("tg.{},{}", "show", id);
 
 		TgInfo tginfo = this.tgInfoManager.getById(id);
 

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.MpInfoManger;
@@ -38,7 +39,8 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+
 		super.initBinder(request, binder);
 	}
 
@@ -50,7 +52,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
-
 
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
@@ -66,8 +67,11 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		String msg = CREATED_SUCCESS;
 		Long mpId = 0L;
 		try {
+			for (GpInfo gpInfo : model.getGpInfos()) {
+				gpInfo.setMpInfo(model);
+			}
 			mpInfoManger.saveOrUpdate(model);
-			mpId = model.getMpId();
+			// mpId = model.getMpId();
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
@@ -75,7 +79,9 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("mpId", mpId);
+		ModelAndView result = new ModelAndView();
+		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")

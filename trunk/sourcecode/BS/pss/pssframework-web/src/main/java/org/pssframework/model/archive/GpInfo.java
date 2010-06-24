@@ -5,7 +5,6 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,7 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -32,6 +32,7 @@ import org.pssframework.base.BaseEntity;
 @Entity
 @Table(name = "C_GP")
 @SequenceGenerator(sequenceName = "SEQ_C_GP", name = "SEQ_C_GP", allocationSize = 1)
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer" })
 public class GpInfo extends BaseEntity {
 
 	/**
@@ -62,7 +63,7 @@ public class GpInfo extends BaseEntity {
 	private TerminalInfo terminalInfo;
 
 	// MP_ID NUMBER,
-	@ManyToOne(cascade = CascadeType.REFRESH)
+	@ManyToOne
 	@JoinColumn(name = "MP_ID")
 	private MpInfo mpInfo;
 

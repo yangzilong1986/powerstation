@@ -3,7 +3,6 @@
  */
 package org.pssframework.model.archive;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -37,6 +37,7 @@ import org.pssframework.base.BaseEntity;
 @Entity
 @Table(name = "C_MP")
 @SequenceGenerator(sequenceName = "SEQ_C_MP", name = "SEQ_C_MP", allocationSize = 1)
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "gpInfos" })
 public class MpInfo extends BaseEntity {
 
 	/**
@@ -51,7 +52,7 @@ public class MpInfo extends BaseEntity {
 	private Long mpId;
 
 	@OneToMany(mappedBy = "mpInfo", cascade = CascadeType.ALL)
-	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
+	private List<GpInfo> gpInfos;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "METER_ID")

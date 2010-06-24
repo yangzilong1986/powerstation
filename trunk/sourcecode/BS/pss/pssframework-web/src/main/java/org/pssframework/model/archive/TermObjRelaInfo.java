@@ -36,8 +36,8 @@ public class TermObjRelaInfo extends BaseEntity {
 	// TERM_OBJ_ID NUMBER(16) not null,
 	private Long termObjId;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID", nullable = false)
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
 	private TerminalInfo terminalInfo;
 
 	/**
