@@ -14,7 +14,7 @@ import java.util.Date;
 public class BcdUtils {
 
     public static String binArrayToString(byte bin[]) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Byte b : bin) {
             int low = b & 0x0F;
             int high = (b >> 4) & 0x0F;
@@ -35,7 +35,7 @@ public class BcdUtils {
     }
 
     public static String byteToString(byte b) {
-        StringBuffer buff = new StringBuffer(2);
+        StringBuilder buff = new StringBuilder(2);
         buff.append(BcdUtils.byteToChar((b >> 4) & 0x0F)).append(BcdUtils.byteToChar(b & 0x0F));
 
         return buff.toString();
@@ -49,11 +49,13 @@ public class BcdUtils {
         return ((bcd & 0xf0) >> 4) * 10 + (bcd & 0x0f);
     }
 
-    public static int bcdToInt(byte[] bcds, int beginIndex, int length) {
+    public static long bcdToInt(byte[] bcds, int beginIndex, int length) {
         int result = 0;
         int base = 1;
+        int b;
         for (int i = 0; i < length; i++) {
-            result += (((bcds[beginIndex + i] & 0xf0) >> 4) * 10 + (bcds[beginIndex + i] & 0x0f)) * base;
+            b = BcdUtils.byteToUnsigned(bcds[beginIndex + i]);
+            result += (BcdUtils.bcdToInt(b)) * base;
             base *= 100;
         }
         return result;
@@ -83,7 +85,7 @@ public class BcdUtils {
         String uformat = format.toUpperCase();
         int yyyyidx = uformat.indexOf("YYYY");
         if (yyyyidx != -1) {
-            calendar.set(GregorianCalendar.YEAR, BcdUtils.bcdToInt(bcdArray, beginPosition + yyyyidx / 2, 2));
+            calendar.set(GregorianCalendar.YEAR, (int)BcdUtils.bcdToInt(bcdArray, beginPosition + yyyyidx / 2, 2));
         } else {
             int yyindex = uformat.indexOf("YY");
             if (yyindex != -1) {
