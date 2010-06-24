@@ -75,9 +75,6 @@ public class RealTimeProxy376 implements ICollectInterface {
                     PmPacket376DT dt = new PmPacket376DT();
                     int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
                     dt.setFn(fn);
-                    // PmPacketData df = packet.getDataBuffer();
-                    //    df.putDA(da);
-                    //    df.putDT(dt);
                     packet.getDataBuffer().putDA(da);
                     packet.getDataBuffer().putDT(dt);
                     if (AFN == AFN_SETPARA) {
