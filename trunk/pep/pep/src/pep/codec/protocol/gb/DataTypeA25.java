@@ -18,7 +18,7 @@ public class DataTypeA25 extends DataTypeA9A25Base {
         setArray(array,0);
     }
 
-    public void setValue(long value){
+    public final void setValue(long value){
         this.value = value;
     }
 

@@ -5,11 +5,7 @@
 
 package pep.codec.protocol.gb;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  *
@@ -33,22 +29,12 @@ public class DataTypeA15 extends DataTypeDateBase {
         setArray(array,0);
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         setArray(array, beginPosition, "MIHHDDMMYY");
     }
 
     public byte[] getArray(){
         return getArray("MIHHDDMMYY");
-    }
-
-    @Override
-    public Date getDate(){
-        return super.getDate();
-    }
-
-    @Override
-    public void setDate(Date date){
-        super.setDate(date);
     }
 
     @Override

@@ -35,17 +35,12 @@ public class DataTypeA24 extends DataTypeDateBase{
         setArray(array,0);
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         super.setArray(array, beginPosition, "HHDD");
     }
 
     public byte[] getArray(){
         return super.getArray("HHDD");
-    }
-
-    @Override
-    public void setDate(Date date){
-        super.setDate(date);
     }
 
     public Date getDate(byte year, byte month){
@@ -77,7 +72,7 @@ public class DataTypeA24 extends DataTypeDateBase{
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("day=").append(this.getDay());
         buff.append(", hour=").append(this.getHour());
 

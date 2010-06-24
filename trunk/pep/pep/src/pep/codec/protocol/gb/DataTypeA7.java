@@ -18,7 +18,7 @@ public class DataTypeA7 extends DataTypeA7A8Base {
         setValue(value);
     }
 
-    public void setValue(float value){
+    public final void setValue(float value){
         this.value = (int) java.lang.Math.round(java.lang.Math.floor(value*10));
     }
 

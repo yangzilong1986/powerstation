@@ -434,7 +434,7 @@ public class PmPacketData{
             n = temp.length;
         byte[] bytes = new byte[len];
         for(int i=0; i<len; i++) bytes[i]=0;
-        for(int i=0; i<n; i++) bytes[i]=temp[i];
+        System.arraycopy(temp, 0, bytes, 0, n);
         
         dataBuff.put(bytes);
         return this;

@@ -18,7 +18,7 @@ public class DataTypeA12 extends DataTypeLongBase{
         setArray(array,0);
     }
 
-    public void setValue(long value){
+    public final void setValue(long value){
         this.value = value;
     }
 
@@ -26,7 +26,7 @@ public class DataTypeA12 extends DataTypeLongBase{
         return this.value;
     }
 
-    public void setArray(byte[] array, int beginPosition){
+    public final void setArray(byte[] array, int beginPosition){
         setArray(array,beginPosition,6);
     }
 

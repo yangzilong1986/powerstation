@@ -5,8 +5,6 @@
 
 package pep.codec.protocol.gb;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -72,7 +70,7 @@ public class DataTypeA16 extends DataTypeDateBase{
     }
 
     @Override
-    public DataTypeA16 setDay(byte day){
+    public final DataTypeA16 setDay(byte day){
         super.setDay(day);
         return this;
     }
@@ -86,7 +84,7 @@ public class DataTypeA16 extends DataTypeDateBase{
         return this;
     }
 
-    public DataTypeA16 setArray(byte[] value){
+    public final DataTypeA16 setArray(byte[] value){
         return this.setArray(value, 0);
     }
 
@@ -98,7 +96,7 @@ public class DataTypeA16 extends DataTypeDateBase{
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("day=").append(this.getDay());
         buff.append(", hour=").append(this.getHour());
         buff.append(", minute=").append(this.getMinute());

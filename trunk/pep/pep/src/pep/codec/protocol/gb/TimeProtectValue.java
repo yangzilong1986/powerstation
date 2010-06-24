@@ -81,7 +81,7 @@ public class TimeProtectValue {
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("pfc=").append(pfc);
         buff.append(", baseTime=(").append(this.baseTime.toString()).append(")");
         buff.append(", limit=").append(limit);

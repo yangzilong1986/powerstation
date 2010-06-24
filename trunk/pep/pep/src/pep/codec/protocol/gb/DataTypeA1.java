@@ -54,7 +54,7 @@ public class DataTypeA1 {
         }
     }
 
-    public void setArray(byte[] value){
+    public final void setArray(byte[] value){
         setArray(value,0);
     }
 

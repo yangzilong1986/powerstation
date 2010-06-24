@@ -18,7 +18,7 @@ public class DataTypeA27 extends DataTypeLongBase{
         setArray(array,0);
     }
 
-    public void setValue(long value){
+    public final void setValue(long value){
         this.value = value;
     }
 
@@ -27,7 +27,7 @@ public class DataTypeA27 extends DataTypeLongBase{
     }
 
     @Override
-    public void setArray(byte[] array, int beginPosition) {
+    public final void setArray(byte[] array, int beginPosition) {
         super.setArray(array, beginPosition, 4);
     }
 

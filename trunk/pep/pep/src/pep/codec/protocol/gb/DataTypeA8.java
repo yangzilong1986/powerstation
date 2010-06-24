@@ -18,7 +18,7 @@ public class DataTypeA8 extends DataTypeA7A8Base {
         setValue(value);
     }
 
-    public void setValue(int value){
+    public final void setValue(int value){
         this.value = value;
     }
 
