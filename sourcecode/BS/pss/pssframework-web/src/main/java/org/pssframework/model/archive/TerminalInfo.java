@@ -3,7 +3,6 @@
  */
 package org.pssframework.model.archive;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -34,6 +34,7 @@ import org.pssframework.base.BaseEntity;
 @Entity
 @Table(name = "C_TERMINAL")
 @SequenceGenerator(sequenceName = "SEQ_C_TERMINAL", name = "SEQ_C_TERMINAL", allocationSize = 1)
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "termObjRelas" })
 public class TerminalInfo extends BaseEntity {
 
 	/**
@@ -42,9 +43,9 @@ public class TerminalInfo extends BaseEntity {
 	private static final long serialVersionUID = -2619191629996760464L;
 
 	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class)
-	private List<GpInfo> gpInfos = new ArrayList<GpInfo>();
+	private List<GpInfo> gpInfos;
 
-	@OneToMany(mappedBy = "terminalInfo", targetEntity = TermObjRelaInfo.class, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "terminalInfo", cascade = CascadeType.ALL)
 	private List<TermObjRelaInfo> termObjRelas;
 
 	@Column(name = "TERM_ID", unique = true, nullable = false)
@@ -67,7 +68,7 @@ public class TerminalInfo extends BaseEntity {
 
 	@Column(name = "RUN_STATUS", length = 5)
 	// RUN_STATUS VARCHAR2(5),
-	private String runStatusAddr;
+	private String runStatus;
 
 	@Column(name = "CUR_STATUS", length = 5)
 	// CUR_STATUS VARCHAR2(5),
@@ -331,8 +332,8 @@ public class TerminalInfo extends BaseEntity {
 	/**
 	 * @return the runStatusAddr
 	 */
-	public String getRunStatusAddr() {
-		return runStatusAddr;
+	public String getRunStatus() {
+		return runStatus;
 	}
 
 	/**
@@ -539,8 +540,8 @@ public class TerminalInfo extends BaseEntity {
 	/**
 	 * @param runStatusAddr the runStatusAddr to set
 	 */
-	public void setRunStatusAddr(String runStatusAddr) {
-		this.runStatusAddr = runStatusAddr;
+	public void setRunStatus(String runStatus) {
+		this.runStatus = runStatus;
 	}
 
 	/**
@@ -587,6 +588,8 @@ public class TerminalInfo extends BaseEntity {
 	 * @return the termObjRelas
 	 */
 	public List<TermObjRelaInfo> getTermObjRelas() {
+
 		return termObjRelas;
 	}
+
 }
