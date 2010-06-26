@@ -23,7 +23,7 @@ public class PmPacketData{
 
     public PmPacketData(){
         super();
-        dataBuff = IoBuffer.allocate(20, false);
+        dataBuff = IoBuffer.allocate(0, false);
         dataBuff.setAutoExpand(true);
     }
 
@@ -523,5 +523,9 @@ public class PmPacketData{
       //  dataBuff.position(pos);
         return result;
 
+    }
+
+    public boolean HaveDate(){
+        return (this.dataBuff.position() < this.dataBuff.limit());
     }
 }
