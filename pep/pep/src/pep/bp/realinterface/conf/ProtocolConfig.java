@@ -17,15 +17,16 @@ import pep.codec.utils.CastorUtil;
  */
 public class ProtocolConfig {
 
-    private final String PROTOCOL_DATA_CONFIG_MAPPING ;
-    private final String PROTOCOL_DATA_CONFIG ;
+   // private final String PROTOCOL_DATA_CONFIG_MAPPING ;
+  //  private final String PROTOCOL_DATA_CONFIG ;
     private static ProtocolConfig instance = null;
     private static ProtocolCommandItems CommandItems;
 
     protected ProtocolConfig() {
-        PROTOCOL_DATA_CONFIG_MAPPING = ProtocolConfig.class.getResource("protocol-data-config-mapping.xml").getPath();
-        PROTOCOL_DATA_CONFIG = ProtocolConfig.class.getResource("protocol-data-config.xml").getPath();
-        CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(PROTOCOL_DATA_CONFIG_MAPPING, PROTOCOL_DATA_CONFIG);
+   //     PROTOCOL_DATA_CONFIG_MAPPING = ProtocolConfig.class.getResource("protocol-data-config-mapping.xml").getPath();
+ //       PROTOCOL_DATA_CONFIG = ProtocolConfig.class.getResource("protocol-data-config.xml").getPath();
+ //       CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(PROTOCOL_DATA_CONFIG_MAPPING, PROTOCOL_DATA_CONFIG);
+        CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal("protocol-data-config-mapping.xml", "protocol-data-config.xml");
     }
 
     public static ProtocolConfig getInstance() {
