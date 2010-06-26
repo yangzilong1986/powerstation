@@ -24,26 +24,10 @@ public class CircleDataItems {
         return dataItemGroups;
     }
    
-    private DataItem numberItem;
     private List<DataItemGroup> dataItemGroups;
 
     public CircleDataItems(){
         this.dataItemGroups = new ArrayList<DataItemGroup>();
-    }
-
-
-    /**
-     * @return the numberItem
-     */
-    public DataItem getNumberItem() {
-        return numberItem;
-    }
-
-    /**
-     * @param numberItem the numberItem to set
-     */
-    public void setNumberItem(DataItem numberItem) {
-        this.numberItem = numberItem;
     }
 
     public void AddDataItemGroup(DataItemGroup group){
