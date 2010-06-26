@@ -1,0 +1,47 @@
+<!DOCTYPE databases PUBLIC
+"-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+"http://castor.exolab.org/mapping.dtd">
+<mapping>
+    <description>协议数据项配置的映射文件</description>
+    <class name="pep.bp.realinterface.conf.ProtocolCommandItems" >
+        <map-to xml="ProtocolCommandItems"/>
+        <field name="CommandItems" collection="arraylist" type="pep.bp.realinterface.conf.ProtocolCommandItem">
+            <bind-xml name="CommandItem"/>
+        </field>
+    </class>
+    <class name="pep.bp.realinterface.conf.ProtocolCommandItem">
+        <map-to xml="CommandItem"/>
+        <field name="CommandCode">
+            <bind-xml name="CommandCode" node="attribute"/>
+        </field>
+        <field name="DataItems" collection="arraylist" type="pep.bp.realinterface.conf.ProtocolDataItem">
+            <bind-xml name="DataItem"/>
+        </field>
+		<field name="DiffFormat" >
+            <bind-xml name="DiffFormat" node="attribute"/>
+        </field>
+    </class>
+    <class name="pep.bp.realinterface.conf.ProtocolDataItem">
+        <field name="DataItemCode">
+            <bind-xml name="DataItemCode" node="attribute"/>
+        </field>
+        <field name="Length">
+            <bind-xml name="Length" node="attribute"/>
+        </field>
+        <field name="Format">
+            <bind-xml name="Format" node="attribute"/>
+        </field>
+		<field name="BitNumber">
+            <bind-xml name="BitNumber" node="attribute"/>
+        </field>
+		<field name="Description">
+            <bind-xml name="Description" node="attribute"/>
+        </field>
+		<field name="DefaultValue">
+            <bind-xml name="DefaultValue" node="attribute"/>
+        </field>
+    <field name="IsGroupEnd">
+            <bind-xml name="IsGroupEnd" node="attribute"/>
+        </field>
+    </class>
+</mapping>
