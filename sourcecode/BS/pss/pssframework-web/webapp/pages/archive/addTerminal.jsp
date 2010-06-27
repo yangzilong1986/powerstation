@@ -61,8 +61,9 @@
         <td align="right" class="green">当前状态：</td>
         <td><form:select path="curStatus" id="curStatus" itemLabel="name" itemValue="code" onchange=""
           items="${statuslist}" cssStyle="width:155px;" /></td>
-        <td class="green"></td>
-        <td></td>
+       <td align="right" class="green">运行状态：</td>
+        <td><form:select path="runStatus" id="runStatus" itemLabel="name" itemValue="code" onchange=""
+          items="${runStatuslist}" cssStyle="width:155px;" /></td>
       </tr>
     </table>
   </form:form>

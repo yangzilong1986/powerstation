@@ -1,7 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
-<%@page import="org.pssframework.support.system.SystemConst"%><html>
+<%@page import="org.pssframework.support.system.SystemConst"%>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>台区档案录入</title>
@@ -19,18 +20,10 @@ function windowPopup(url, wd, ht) {
 var contextPath  = '${ctx}';
 
 
-//打开新增终端页面
-function openTerm(tgId){
-   var url = contextPath + "/archive/terminalinfo/new?tgId=" + tgId;
-   windowPopup(url, 960, 575);
-} 
 
 
-//打开漏保
-function openPs(tgId){
-   var url = contextPath + "/archive/psinfo/new?tgId=" + tgId;
-   windowPopup(url, 960, 575);
-} 
+
+
 //上一步
 function lastStep(){
   var tgCustFlag=jQuery("input[name='tgCustFlag']").val();
@@ -91,7 +84,7 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((         document.documentElement.clientHeight ||         document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -173,7 +166,6 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         <th>表地址</th>
         <th>采集终端</th>
         <th>表类型</th>
-        <th>设备厂家</th>
         <th>运行状态</th>
         <th>操作</th>
       </tr>
@@ -185,8 +177,7 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
           <td>${mpInfo.gpInfos[0].gpAddr}</td>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.mpName}</td>
-          <td>${mpInfo.mpName}</td>
-          <td><pss:code code="${mpInfo.statusCode}" codeCate="TERM_TYPE" /></td>
+          <td><pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
           <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
         </tr>
@@ -232,7 +223,6 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         <th>逻辑地址</th>
         <th>终端类型</th>
         <th>相线</th>
-        <th>设备厂家</th>
         <th>运行状态</th>
         <th>操作</th>
       </tr>
@@ -242,10 +232,9 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${term.assetNo}</td>
           <td>${term.logicalAddr}</td>
-          <td><pss:code code="${term.termType}" codeCate="TERM_TYPE" /></td>
-          <td>${term.runStatus}</td>
-          <td>${term.termType}</td>
-          <td>${term.termType}</td>
+          <td><pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
+          <td><pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
+          <td><pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
           <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateTermInfo('${term.termId}')">修改</a></td>
         </tr>
@@ -440,7 +429,6 @@ updatePsInfo=function(psId){
 
 /*******************************************************************/
  
- //打开新增总表页面
 function openMeterInfo(tgId){
 
 	  
@@ -469,7 +457,7 @@ deleteMpInfo=function(mpId){
                var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                  alert(msg);
                  if(isSucc){
-                  $("#mp_"+termId).remove();
+                  $("#mp_"+mpId).remove();
                  }
              },error:function(e) {
                  alert("delete error");
@@ -484,6 +472,16 @@ deleteMpInfo=function(mpId){
        windowPopup(url, 960, 575);
   }
 /*******************************************************************/
+  //打开新增终端页面
+ function openTerm(tgId){
+    
+    if(!$("#tgId").val()){
+      alert("请先建台区");return;
+    }
+  var url = contextPath + "/archive/terminalinfo/new?tgId=" +$("#tgId").val();
+  windowPopup(url, 960, 575);
+} 
+ 
 deleteTermInfo=function(termId){
    if(termId==null || termId ==""){
      return;
