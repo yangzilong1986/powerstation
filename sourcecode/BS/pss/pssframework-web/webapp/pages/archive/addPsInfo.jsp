@@ -54,8 +54,7 @@ function meterState(){
     style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" value="${_type}" />
-    <input type="hidden" id="tgId" name="tgId" value="${tgId}" />
-    <input type="hidden" id="gpInfo.objectId" name="gpInfo.objectId" value="${tgId}" />
+    <form:hidden path="gpInfo.objectId" />
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
@@ -179,7 +178,7 @@ addpsinfo = function(){
          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
            alert(msg);
            if(isSucc){
-        	   opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+        	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
         	   closeWin() 
            }
          },error:function(e){
@@ -204,7 +203,7 @@ updatepsinfo = function(){
           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
              alert(msg);
              if(isSucc){
-          	   opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+          	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
           	 closeWin() 
              }
            },error:function(e){
