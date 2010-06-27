@@ -3,6 +3,13 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_TG_STATUS;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,14 +24,12 @@ import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
-import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
-import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/tginfo")
 public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
 
-	// 默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = null;
-
-	private static final String globalFoward = "/archive/addTgRelevance";
+	private static final String VIEW = "/archive/addTgRelevance";
 
 	@Autowired
 	private TgInfoManager tgInfoManager;
@@ -64,9 +66,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private MpInfoManger mpInfoManger;
 
-	@Autowired
-	private TranInfoManger tranInfoManger;
-
 	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
 
@@ -81,7 +80,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("tginfo", tginfo);
 
-		result.setViewName(globalFoward);
+		result.setViewName(VIEW);
 
 		return result;
 	}
@@ -103,15 +102,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			meterlist = new LinkedList<MpInfo>();
 		}
 		return meterlist;
-	}
-
-	@SuppressWarnings("unchecked")
-	private List<TranInfo> getTranList(Map mapRequest) {
-		List<TranInfo> tranlist = tranInfoManger.findByPageRequest(mapRequest);
-		if (tranlist == null || tranlist.size() <= 0) {
-			tranlist = new LinkedList<TranInfo>();
-		}
-		return tranlist;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -143,13 +133,13 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TG_STATUS");
+		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		CommonPart(result, mapRequest);
 
-		result.addObject("_type", "new");
+		result.addObject(CONTROLLER_METHOD_TYPE, "new");
 
-		result.setViewName(globalFoward);
+		result.setViewName(VIEW);
 		return result;
 	}
 
@@ -157,7 +147,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		logger.debug("tg.{},{}", "delete", id);
 		boolean isSucc = true;
-		String msg = DELETE_SUCCESS;
+		String msg = MSG_DELETE_SUCCESS;
 		try {
 
 			tgInfoManager.removeById(id);
@@ -169,14 +159,14 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			msg = e.getMessage();
 
 		}
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
 		logger.debug("tg.{}", "create");
 		boolean isSucc = true;
-		String msg = CREATED_SUCCESS;
+		String msg = MSG_CREATED_SUCCESS;
 		Long tgId = 0L;
 		try {
 			model.setChaDate(new Date());
@@ -195,7 +185,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("tgId", tgId);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg).addObject("tgId",
+				tgId);
 	}
 
 	@Override
@@ -212,15 +203,15 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TG_STATUS");
+		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", id);
 
 		CommonPart(result, mapRequest);
 
-		result.addObject("_type", "edit");
+		result.addObject(CONTROLLER_METHOD_TYPE, "edit");
 
-		result.setViewName(globalFoward);
+		result.setViewName(VIEW);
 		return result;
 	}
 
@@ -231,7 +222,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		logger.debug("tg.{},{}", "update", id);
 
 		boolean isSucc = true;
-		String msg = UPDATE_SUCCESS;
+		String msg = MSG_UPDATE_SUCCESS;
 
 		try {
 			TgInfo tginfo = this.tgInfoManager.getById(id);
@@ -244,7 +235,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			msg = e.getMessage();
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -264,15 +255,16 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TG_STATUS");
+		// 台区状态
+		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", id);
 
 		CommonPart(modelAndView, mapRequest);
 
-		modelAndView.setViewName(globalFoward);
+		modelAndView.setViewName(VIEW);
 
-		modelAndView.addObject("_type", "show");
+		modelAndView.addObject(CONTROLLER_METHOD_TYPE, "show");
 
 		return modelAndView;
 
@@ -297,7 +289,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 * @param mapRequest
 	 */
 	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
-		modelAndView.addObject("tranlist", getTranList(mapRequest));
+		// modelAndView.addObject("tranlist", getTranList(mapRequest));
 		modelAndView.addObject("pslist", getPsList(mapRequest));
 		modelAndView.addObject("termlist", getTerminalList(mapRequest));
 		modelAndView.addObject("mplist", getMpList(mapRequest));

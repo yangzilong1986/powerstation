@@ -3,6 +3,13 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,12 +67,12 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	@Override
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		boolean isSucc = true;
-		String msg = DELETE_SUCCESS;
+		String msg = MSG_DELETE_SUCCESS;
 		try {
 			terminalInfoManger.removeById(id);
 		} catch (Exception e) {
 			isSucc = false;
-			msg = DELETE_FAIL;
+			msg = MSG_DELETE_FAIL;
 			logger.error(e.getMessage());
 
 		}
@@ -77,7 +84,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		boolean isSucc = true;
-		String msg = UPDATE_SUCCESS;
+		String msg = MSG_UPDATE_SUCCESS;
 		try {
 			TerminalInfo terminalInfo = terminalInfoManger.getById(id);
 
@@ -85,7 +92,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			terminalInfoManger.saveOrUpdate(terminalInfo);
 		} catch (Exception e) {
 			isSucc = false;
-			msg = UPDATE_FAIL;
+			msg = MSG_UPDATE_FAIL;
 			logger.error(e.getMessage());
 
 		}
@@ -97,7 +104,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TerminalInfo model)
 			throws Exception {
 		boolean isSucc = true;
-		String msg = CREATED_SUCCESS;
+		String msg = MSG_CREATED_SUCCESS;
 		try {
 			for (TermObjRelaInfo termObjRelaInfo : model.getTermObjRelas()) {
 				termObjRelaInfo.setTerminalInfo(model);
@@ -105,7 +112,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			terminalInfoManger.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;
-			msg = CREATED_FAIL;
+			msg = MSG_CREATED_FAIL;
 			logger.error(e.getMessage());
 
 		}

@@ -3,6 +3,9 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_TG_STATUS;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,86 +29,84 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/gpinfo")
 public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang.Long> {
 
-    @Autowired
-    private GpInfoManger gpInfoManger;
+	@Autowired
+	private GpInfoManger gpInfoManger;
 
-    @Autowired
-    private CodeInfoManager codeInfoManager;
+	@Autowired
+	private CodeInfoManager codeInfoManager;
 
-    private static final String SUCC = "成功";
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, GpInfo model) {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, GpInfo model) {
+		Map mapRequest = new HashMap();
 
-        Map mapRequest = new HashMap();
+		Long tgid = 0L;
 
-        Long tgid = 0L;
+		// mapRequest.put("orgid", orgid);
 
-        // mapRequest.put("orgid", orgid);
+		mapRequest.put("codecate", CODE_TG_STATUS);
 
-        mapRequest.put("codecate", "TG_STATUS");
+		// GpInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new
+		// GpInfo() : this.tgInfoManager.getById(tgid);
+		//
+		ModelAndView result = new ModelAndView();
+		//
+		// result.addObject("tginfo", tginfo);
+		//
+		// result.setViewName("/archive/addTgRelevance");
+		//
+		// result.addObject("orglist", getOrgOptions(mapRequest));
+		//
+		// result.addObject("statuslist", getStatusOptions(mapRequest));
 
-        // GpInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new
-        // GpInfo() : this.tgInfoManager.getById(tgid);
-        //
-        ModelAndView result = new ModelAndView();
-        //
-        // result.addObject("tginfo", tginfo);
-        //
-        // result.setViewName("/archive/addTgRelevance");
-        //
-        // result.addObject("orglist", getOrgOptions(mapRequest));
-        //
-        // result.addObject("statuslist", getStatusOptions(mapRequest));
+		return result;
+	}
 
-        return result;
-    }
+	@Override
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
+		boolean isSucc = true;
+		String msg = MSG_CREATED_SUCCESS;
+		Long gpId = 0L;
+		try {
+			gpInfoManger.saveOrUpdate(model);
+			gpId = model.getGpId();
+		} catch (Exception e) {
+			isSucc = false;
+			msg = e.getMessage();
 
-    @Override
-    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
-        boolean isSucc = true;
-        String msg = SUCC;
-        Long gpId = 0L;
-        try {
-            gpInfoManger.saveOrUpdate(model);
-            gpId = model.getGpId();
-        } catch (Exception e) {
-            isSucc = false;
-            msg = e.getMessage();
+		}
 
-        }
+		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("gpid", model.getGpId());
+	}
 
-        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("gpid", model.getGpId());
-    }
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
+		ModelAndView result = new ModelAndView();
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
-        ModelAndView result = new ModelAndView();
+		Map mapRequest = new HashMap();
 
-        Map mapRequest = new HashMap();
+		mapRequest.put("codecate", "TRAN_CODE");
 
-        mapRequest.put("codecate", "TRAN_CODE");
+		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
+		mapRequest.put("codecate", "TRAN_STATUS");
 
-        mapRequest.put("codecate", "TRAN_STATUS");
+		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
+		mapRequest.put("codecate", "VOLT_GRADE");
 
-        mapRequest.put("codecate", "VOLT_GRADE");
+		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
+		mapRequest.put("codecate", "RATED_EC");
 
-        mapRequest.put("codecate", "RATED_EC");
+		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
 
-        result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("traninfo", model);
 
-        result.addObject("traninfo", model);
+		result.setViewName("/archive/addTransformer");
 
-        result.setViewName("/archive/addTransformer");
-
-        return result;
-    }
+		return result;
+	}
 }
