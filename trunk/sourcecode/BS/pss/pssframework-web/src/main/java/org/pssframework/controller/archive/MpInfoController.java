@@ -235,4 +235,13 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		result.setViewName(MpInfoController.VIEW);
 
 	}
+
+	/**
+	 * check gpSn 唯一性
+	 * @param psInfo
+	 * @return
+	 */
+	private boolean checkGpsn(MpInfo info) {
+		return mpInfoManger.checkGpSn(info);
+	}
 }

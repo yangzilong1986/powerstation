@@ -56,6 +56,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/psinfo")
 public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang.Long> {
 
+	private static final String VIEW = "/archive/addPsInfo";
+
 	@Override
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
@@ -79,11 +81,17 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		Long psId = 0L;
+
+		if (checkGpsn(model))
+			return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
+					"改终端下测量点序号重复");
+
 		try {
 			// 默认485
 			model.getGpInfo().setGpChar("1");
 			// 台区
 			model.getGpInfo().setGpType("2");
+
 			this.psInfoManager.saveOrUpdate(model);
 			psId = model.getPsId();
 		} catch (DataAccessException e) {
@@ -106,15 +114,13 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			throws Exception {
 		ModelAndView result = new ModelAndView();
 
-		String tgid = request.getParameter("tgId");
+		PsInfo psInfo = this.psInfoManager.getById(id);
 
 		Map requestMap = new HashMap();
 
-		requestMap.put("tgid", tgid);
+		requestMap.put("tgid", psInfo.getGpInfo().getObjectId());
 
-		result.addObject("psinfo", this.psInfoManager.getById(id));
-
-		result.addObject("tgId", tgid);
+		result.addObject("psinfo", psInfo);
 
 		this.CommonPart(result, requestMap);
 
@@ -127,15 +133,13 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
-		String tgid = request.getParameter("tgId");
+		Long tgid = model.getGpInfo().getObjectId();
 
 		Map requestMap = new HashMap();
 
 		requestMap.put("tgid", tgid);
 
 		result.addObject("psinfo", model);
-
-		result.addObject("tgId", tgid);
 
 		this.CommonPart(result, requestMap);
 
@@ -149,9 +153,15 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
+
 		try {
 			PsInfo psinfo = this.psInfoManager.getById(id);
 			this.bind(request, psinfo);
+
+			if (checkGpsn(psinfo))
+				return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
+						"改终端下测量点序号重复");
+
 			this.psInfoManager.update(psinfo);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());
@@ -255,7 +265,18 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		result.addObject("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		result.setViewName("/archive/addPsInfo");
+		result.setViewName(VIEW);
+
+	}
+
+	/**
+	 * check gpSn 唯一性
+	 * @param psInfo
+	 * @return
+	 */
+	private boolean checkGpsn(PsInfo psInfo) {
+
+		return psInfoManager.checkGpsn(psInfo);
 
 	}
 }
