@@ -143,11 +143,34 @@ public final class SystemConst {
 	public static final String CODE_PS_MODEL = "PS_MODEL";
 
 	/**
-	 * 规约
+	 * 漏保规约
 	 */
 	public static final String CODE_PROTOCOL_PS = "PROTOCOL_PS";
-	
-	"PROTOCOL_TERM"
+
+	/**
+	 * 终端规约
+	 */
+	public static final String CODE_PROTOCOL_TERM = "PROTOCOL_TERM";
+
+	/**
+	 * 当前状态
+	 */
+	public static final String CODE_CUR_STATUS = "CUR_STATUS";
+
+	/**
+	 * 终端类型
+	 */
+	public static final String CODE_TERM_TYPE = "TERM_TYPE";
+
+	/**
+	 * 厂家
+	 */
+	public static final String CODE_MADE_FAC = "MADE_FAC";
+
+	/**
+	 * 产权
+	 */
+	public static final String CODE_PR = "PR";
 
 	/***********************************************************************************/
 }
