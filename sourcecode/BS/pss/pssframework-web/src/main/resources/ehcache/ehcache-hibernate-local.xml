@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
+  <diskStore path="java.io.tmpdir/hibernate/pssframework-web" />
 
-	<diskStore path="java.io.tmpdir/hibernate/pssframework-web" />
+  <!-- DefaultCache setting. -->
+  <defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+    timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
 
-	<!-- DefaultCache setting. -->
-	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
-		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
-
-	<!-- Special objects setting. -->
-	<cache name="org.pssframework.entity.security.User" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.User.roleList" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.Role" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.Role.authorityList" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.Authority" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.Resource" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
-	<cache name="org.pssframework.entity.security.Resource.authorityList" maxElementsInMemory="10000"
-		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <!-- Special objects setting. -->
+  <!-- archive -->
+  <cache name="org.pssframework.model.archive.TgInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.TgInfo.tranInfos" maxElementsInMemory="10000"
+    memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.TgInfo.mpInfos" maxElementsInMemory="10000"
+    memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+ 
+  <cache name="org.pssframework.model.archive.TranInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.MpInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.GpInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.PsInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.TerminalInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.archive.TermObjRelaInfo" maxElementsInMemory="10000"
+    memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <!-- system -->
+  <cache name="org.pssframework.model.system.OrgInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+  <cache name="org.pssframework.model.system.CodeInfo" maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU"
+    eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
 </ehcache>
