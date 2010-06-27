@@ -4,12 +4,14 @@
 package org.pssframework.model.system;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +20,8 @@ import javax.persistence.TemporalType;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.archive.TranInfo;
 
 /**
  * @author Administrator
@@ -41,8 +45,11 @@ public class OrgInfo extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_ORG")
 	private Long orgId;
 
-	// @OneToMany(targetEntity = TgInfo.class, mappedBy = "orgInfo")
-	// private List<TgInfo> tgInfos;
+	@OneToMany(mappedBy = "orgInfo")
+	private List<TgInfo> tgInfos;
+
+	@OneToMany(mappedBy = "orgInfo")
+	private List<TranInfo> tranInfos;
 
 	/*
 	 * VARCHAR2(16) not null, comment on column O_ORG.ORG_NO is '本实体记录的唯一标识，
@@ -213,6 +220,34 @@ public class OrgInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @param tgInfos the tgInfos to set
+	 */
+	public void setTgInfos(List<TgInfo> tgInfos) {
+		this.tgInfos = tgInfos;
+	}
+
+	/**
+	 * @return the tgInfos
+	 */
+	public List<TgInfo> getTgInfos() {
+		return tgInfos;
+	}
+
+	/**
+	 * @param tranInfos the tranInfos to set
+	 */
+	public void setTranInfos(List<TranInfo> tranInfos) {
+		this.tranInfos = tranInfos;
+	}
+
+	/**
+	 * @return the tranInfos
+	 */
+	public List<TranInfo> getTranInfos() {
+		return tranInfos;
 	}
 
 }
