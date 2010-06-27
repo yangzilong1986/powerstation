@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -107,7 +108,7 @@ function meterState(){
 </head>
 <body>
 <form:form action="/archive/mpinfo" modelAttribute="mpinfo">
-  <input type="hidden" name="_type" id="_type" value="${_type}"></input>
+  <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" value="${_type}"></input>
   <form:hidden path="tgInfo.tgId" />
   <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${tgId}">
   <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
@@ -247,8 +248,8 @@ addmpinfo = function(){
          type:'POST',
          cache: false,
          success: function(json){
-           var msg = json['msg'];
-           var isSucc = json['isSucc'];
+    	 var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+         var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
            alert(msg);
            if(isSucc){
              opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
@@ -272,8 +273,8 @@ updatempinfo = function(){
            type:'post',
            cache: false,
            success: function(json){
-             var msg=json['msg'];
-             var isSucc = json['isSucc'];
+    	  var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";

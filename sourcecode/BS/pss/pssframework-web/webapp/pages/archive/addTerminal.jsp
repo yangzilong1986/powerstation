@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
 <html>
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
@@ -15,7 +16,7 @@
   <div class="da_mid"
     style="display: block; overflow-y: auto; overflow-x: auto; width: expression((           document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
   <form:form action="/archive/terminalinfo" modelAttribute="terminalinfo">
-    <input type="hidden" name="_type" id="_type" value="${_type}">
+    <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" value="${_type}">
     <spring:bind path="termObjRelas">
       <input type="hidden" name="termObjRelas[0].objId" id="termObjRelas[0].objId" value="${tgId}">
       <input type="hidden" name="termObjRelas[0].objType" id="termObjRelas[0].objType" value="2">
@@ -113,8 +114,8 @@ $(function(){
            type:'POST',
            cache: false,
            success: function(json){
-             var msg = json['msg'];
-             var isSucc = json['isSucc'];
+    	  var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
@@ -137,13 +138,12 @@ $(function(){
              type:'post',
              cache: false,
              success: function(json){
-               var msg=json['msg'];
-               var isSucc = json['isSucc'];
+        	 var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+             var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
-            	  
                  opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
-            	   closeWin()
+            	   closeWin();
                }
              },error:function(e){
                alert("error")
