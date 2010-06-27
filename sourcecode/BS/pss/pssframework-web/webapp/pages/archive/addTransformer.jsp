@@ -14,14 +14,15 @@
   <div class="da_mid"
     style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
   <form:form action="/archive/tranInfo" modelAttribute="tranInfo">
-    <form:hidden path="equipId" />
-    <form:hidden path="tgId" />
+  <input type="hidden" id="_type" name="_type" value="${_type}" />
+    <form:hidden path="tgInfo.tgId" />
+    <form:hidden path="orgInfo.orgId" />
     <table border="0" cellpadding="0" cellspacing="0" align="center">
       <tr height="40">
         <td width="15%" align="right" class="green"><font color="red">* </font>变压器名称：</td>
         <td width="15%"><form:input path="tranName" cssClass="required input2" maxlength="16" /></td>
         <td width="15%" align="right" class="green">变压器型号：</td>
-        <td width="15%"><form:select path="typeCode" id="typeCode" itemLabel="name" itemValue="code" onchange=""
+        <td width="15%"><form:select path="modelNo" id="modelNo" itemLabel="name" itemValue="code" onchange=""
           items="${typelist}" cssStyle="width:150px" /></td>
       </tr>
       <tr height="40">
@@ -92,19 +93,19 @@
     getData = function(type) {
         var data;
         if (type == "add") {
-            data = jQuery("form[id=tranInfo]").serialize();
+            data = $("form[id=tranInfo]").serialize();
         } else {
-            data = jQuery("form[id=tranInfo]").serialize();
+            data = $("form[id=tranInfo]").serialize();
         }
         return data;
     }
 
 
-    addTran = function() {
+    addTranInfo = function() {
         var fromData = getData('add');
         var url = "${ctx}/archive/tranInfo.json";
         if (confirm("确定要保存该变压器?")) {
-            jQuery.ajax({
+            $.ajax({
                 url: url,
                 data:fromData,
                 dataType:'json',
@@ -115,7 +116,7 @@
                     var isSucc = json['isSucc'];
                     alert(msg);
                     if(isSucc){
-                    opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgId}/edit";
+                    opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgInfo.tgId}/edit";
                     closeWin() 
                     }
                 },error:function(e) {
@@ -124,23 +125,53 @@
                 }
             });
         }
-    }
+    };
 
-    jQuery(function() {
-        jQuery("#save").click(function() {
+    $(function() {
+        $("#save").click(function() {
             if (val.validate()) {
-                jQuery(this).attr("disabled", "disabled");
-                addTran();
-                jQuery(this).attr("disabled", "");
+                $(this).attr("disabled", "disabled");
+                if($("#_type").val()=="edit"){
+                	updateTranInfo();
+                }else if($("#_type").val()=="new"){
+                	addTranInfo();
+                }
+                
+                $(this).attr("disabled", "");
             } else {
-                jQuery(this).attr("disabled", "");
+                $(this).attr("disabled", "");
             }
         });
-    })
+    });
 
-    function   closeWin() 
-{ 
-        window.close(); 
-} 
+    function   closeWin(){ 
+       window.close(); 
+      } ;
+
+    updateTranInfo = function (){
+    	var tgFromData = getData("update");
+    	  var url="${ctx}/archive/tranInfo/${tranInfo.equipId}.json?_method=put";
+    	  if(confirm("确定要更新该变压器?")){
+    	    $.ajax({
+    	         url: url,
+    	         data:tgFromData,
+    	         dataType:'json',
+    	         type:'post',
+    	         cache: false,
+    	         success: function(json){
+    	           var msg=json['msg'];
+    	           var isSucc = json['isSucc'];
+    	            alert(msg);
+    	            if(isSucc){
+                        opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgInfo.tgId}/edit";
+                        closeWin();
+                        }
+    	         },error:function(e){
+                      alert("error")
+    	             alert(e.getMessage());
+    	         }
+    	       });
+    	  }
+    }
 </script>
 </html>

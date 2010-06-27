@@ -151,10 +151,13 @@ function meterState(){
     <br></br>
     <script>
       function setCheckBox(obj){
-          if(obj.checked==true){
-            obj.value = '0';
-          }else{
-            obj.value = '1';
+          if(obj.type=='checkbox'){
+            if(obj.checked==true){
+              obj.value = '0';
+            }else{
+              obj.value = '1';
+            }
+            return obj
           }
       }
       </script>
@@ -248,7 +251,7 @@ addmpinfo = function(){
            var isSucc = json['isSucc'];
            alert(msg);
            if(isSucc){
-             opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+             opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
              closeWin()
            }
          },error:function(e){
@@ -273,7 +276,7 @@ updatempinfo = function(){
              var isSucc = json['isSucc'];
              alert(msg);
              if(isSucc){
-               opener.location.href ="${ctx}/archive/tginfo/${tgId}/edit";
+               opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
                closeWin()
              }
            },error:function(e){
