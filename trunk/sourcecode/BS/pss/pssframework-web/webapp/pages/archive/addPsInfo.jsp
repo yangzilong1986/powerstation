@@ -57,14 +57,20 @@ function meterState(){
     <input type="hidden" id="tgId" name="tgId" value="${tgId}" />
     <input type="hidden" id="gpInfo.objectId" name="gpInfo.objectId" value="${tgId}" />
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr height="40">
+      <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
         <td width="30%"><form:input path="assetNo" cssClass="required input2" /></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
         <td width="30%"><form:select path="terminalInfo" items="${termList}" id="termId" itemLabel="logicalAddr"
           itemValue="termId" cssStyle="width:155px;" /></td>
       </tr>
-      <tr height="40">
+       <tr height="30px">
+        <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
+        <td><form:input path="gpInfo.gpAddr"  maxlength="20" cssClass="required input2"/></td>
+        <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
+        <td><form:input path="gpInfo.gpSn"  cssClass="required input2 validate-number"/></td>
+      </tr>
+      <tr height="30px">
         <td align="right" class="green">通信方式：</td>
         <td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" /></td>
@@ -72,7 +78,7 @@ function meterState(){
         <td><form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
       </tr>
-      <tr height="40">
+      <tr height="30px">
         <td align="right" class="green">波特率：</td>
         <td><form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
@@ -80,15 +86,16 @@ function meterState(){
         <td><form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
       </tr>
-      <tr height="40">
+      <tr height="30px">
         <td align="right" class="green">剩余电流档位：</td>
         <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
-        <td align="right" class="green">剩余电流档位当前值：</td>
-        <td><form:select path="remcGearValue" items="${remcGearValueList}" id="remcGearValue" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
+
+           <td align="right" class="green">规约：</td>
+        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
       </tr>
-      <tr height="40">
+      <tr height="30px">
         <td align="right" class="green">漏电分断延迟档位：</td>
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" /></td>
@@ -96,20 +103,15 @@ function meterState(){
         <td><form:select path="offDelayValue" items="${offDelayValueList}" id="offDelayValue" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" /></td>
       </tr>
-      <tr height="40">
+      <tr height="30px">
         <td align="right" class="green">功能设置字：</td>
         <td><form:input path="functionCode" cssClass="input2" /></td>
         <td align="right" class="green">漏保类型：</td>
         <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
       </tr>
-      <tr>
-        <td align="right" class="green">漏保地址：</td>
-        <td><form:input path="gpInfo.gpAddr" cssClass="input2" maxlength="5"/></td>
-        <td align="right" class="green">测量点序号：</td>
-        <td><form:input path="gpInfo.gpSn" cssClass="input2" maxlength="5"/></td>
-      </tr>
-      <tr>
+     
+      <tr height="30px">
         <td align="right" class="green">CT：</td>
         <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
@@ -117,11 +119,7 @@ function meterState(){
         <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
       </tr>
-      <tr>
-       <td align="right" class="green">规约：</td>
-        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protoco" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
-      </tr>
+      
     </table>
   </form:form></div>
   <div style="text-align: center"><br></br>
