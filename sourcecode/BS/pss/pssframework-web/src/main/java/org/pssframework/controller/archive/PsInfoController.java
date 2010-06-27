@@ -3,6 +3,23 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_BTL;
+import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
+import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
+import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
+import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_PS;
+import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
+import static org.pssframework.support.system.SystemConst.CODE_PS_TYPE;
+import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
+import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR;
+import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR_VALUE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
@@ -39,206 +56,205 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/psinfo")
 public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang.Long> {
 
-    @Override
-    @InitBinder
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-        super.initBinder(request, binder);
-    }
+	@Override
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		super.initBinder(request, binder);
+	}
 
-    @Autowired
-    private PsInfoManger psInfoManager;
+	@Autowired
+	private PsInfoManger psInfoManager;
 
-    @Autowired
-    private CodeInfoManager codeInfoManager;
+	@Autowired
+	private CodeInfoManager codeInfoManager;
 
-    @Autowired
-    private TerminalInfoManger terminalInfoManger;
+	@Autowired
+	private TerminalInfoManger terminalInfoManger;
 
-    @Override
-    public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
-        boolean isSucc = true;
-        String msg = MSG_CREATED_SUCCESS;
-        Long psId = 0L;
-        try {
-            // 默认485
-            model.getGpInfo().setGpChar("1");
-            // 台区
-            model.getGpInfo().setGpType("2");
-            psInfoManager.saveOrUpdate(model);
-            psId = model.getPsId();
-        }
-        catch(DataAccessException e) {
-            this.logger.error(e.getLocalizedMessage());
-            isSucc = false;
-            msg = e.getMessage();
+	@Override
+	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
+		boolean isSucc = true;
+		String msg = MSG_CREATED_SUCCESS;
+		Long psId = 0L;
+		try {
+			// 默认485
+			model.getGpInfo().setGpChar("1");
+			// 台区
+			model.getGpInfo().setGpType("2");
+			this.psInfoManager.saveOrUpdate(model);
+			psId = model.getPsId();
+		} catch (DataAccessException e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
 
-        }
-        catch(Exception e) {
-            this.logger.error(e.getLocalizedMessage());
-            isSucc = false;
-            msg = e.getMessage();
-        }
-        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("psId", psId);
-    }
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
+		}
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg).addObject("psId", psId);
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        ModelAndView result = new ModelAndView();
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ModelAndView result = new ModelAndView();
 
-        String tgid = request.getParameter("tgId");
+		String tgid = request.getParameter("tgId");
 
-        Map requestMap = new HashMap();
+		Map requestMap = new HashMap();
 
-        requestMap.put("tgid", tgid);
+		requestMap.put("tgid", tgid);
 
-        result.addObject("psinfo", psInfoManager.getById(id));
+		result.addObject("psinfo", this.psInfoManager.getById(id));
 
-        result.addObject("tgId", tgid);
+		result.addObject("tgId", tgid);
 
-        CommonPart(result, requestMap);
+		this.CommonPart(result, requestMap);
 
-        result.addObject("_type", "edit");
-        return result;
-    }
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+		return result;
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
-        ModelAndView result = new ModelAndView();
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
+		ModelAndView result = new ModelAndView();
 
-        String tgid = request.getParameter("tgId");
+		String tgid = request.getParameter("tgId");
 
-        Map requestMap = new HashMap();
+		Map requestMap = new HashMap();
 
-        requestMap.put("tgid", tgid);
+		requestMap.put("tgid", tgid);
 
-        result.addObject("psinfo", model);
+		result.addObject("psinfo", model);
 
-        result.addObject("tgId", tgid);
+		result.addObject("tgId", tgid);
 
-        CommonPart(result, requestMap);
+		this.CommonPart(result, requestMap);
 
-        result.addObject("_type", "new");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-        return result;
-    }
+		return result;
+	}
 
-    @Override
-    public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        boolean isSucc = true;
+	@Override
+	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
-        try {
-            PsInfo psinfo = this.psInfoManager.getById(id);
-            bind(request, psinfo);
-            psInfoManager.update(psinfo);
-        }
-        catch(Exception e) {
-            this.logger.error(e.getLocalizedMessage());
-            isSucc = false;
-            msg = e.getMessage();
-        }
+		try {
+			PsInfo psinfo = this.psInfoManager.getById(id);
+			this.bind(request, psinfo);
+			this.psInfoManager.update(psinfo);
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
+		}
 
-        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
-    }
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
+	}
 
-    @Override
-    public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-        boolean isSucc = true;
+	@Override
+	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
-        try {
-            this.psInfoManager.removeById(id);
+		try {
+			this.psInfoManager.removeById(id);
 
-        }
-        catch(Exception e) {
-            this.logger.error(e.getLocalizedMessage());
-            isSucc = false;
-            msg = e.getMessage();
-        }
+		} catch (Exception e) {
+			this.logger.error(e.getLocalizedMessage());
+			isSucc = false;
+			msg = e.getMessage();
+		}
 
-        return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
-    }
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
+	}
 
-    /**
-     * 
-     * @param model
-     * @param mapRequest
-     */
-    @SuppressWarnings("unchecked")
-    private void CommonPart(ModelAndView result, Map mapRequest) {
+	/**
+	 * 
+	 * @param model
+	 * @param mapRequest
+	 */
+	@SuppressWarnings("unchecked")
+	private void CommonPart(ModelAndView result, Map mapRequest) {
 
-        List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
+		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
 
-        result.addObject("termList", termlist);
+		result.addObject("termList", termlist);
 
-        // RATED_EC 额定电流
-        mapRequest.put("codecate", "RATED_EC");
+		// RATED_EC 额定电流
+		mapRequest.put("codecate", CODE_RATED_EC);
 
-        result.addObject("ratedEcList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ratedEcList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // RATED_EC 剩余电流档位
-        mapRequest.put("codecate", "REMC_GEAR");
+		// RATED_EC 剩余电流档位
+		mapRequest.put("codecate", CODE_REMC_GEAR);
 
-        result.addObject("remcGearList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("remcGearList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 剩余电流档位当前值 REMC_GEAR_VALUE
+		// 剩余电流档位当前值 REMC_GEAR_VALUE
 
-        mapRequest.put("codecate", "REMC_GEAR_VALUE");
+		mapRequest.put("codecate", CODE_REMC_GEAR_VALUE);
 
-        result.addObject("remcGearValueList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("remcGearValueList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // -漏电分断延迟档位 OFF_DELAY_GEAR
-        mapRequest.put("codecate", "OFF_DELAY_GEAR");
+		// -漏电分断延迟档位 OFF_DELAY_GEAR
+		mapRequest.put("codecate", CODE_OFF_DELAY_GEAR);
 
-        result.addObject("offDelayGearList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("offDelayGearList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // -漏电分断延迟时间 OFF_DELAY_VALUE
+		// -漏电分断延迟时间 OFF_DELAY_VALUE
 
-        mapRequest.put("codecate", "OFF_DELAY_VALUE");
+		mapRequest.put("codecate", CODE_OFF_DELAY_VALUE);
 
-        result.addObject("offDelayValueList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("offDelayValueList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 漏保类型
-        mapRequest.put("codecate", "PS_TYPE");
+		// 漏保类型
+		mapRequest.put("codecate", CODE_PS_TYPE);
 
-        result.addObject("psTypeList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("psTypeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 通讯方式
-        mapRequest.put("codecate", "COMM_MODE");
+		// 通讯方式
+		mapRequest.put("codecate", CODE_COMM_MODE);
 
-        result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 波特率
-        mapRequest.put("codecate", "BTL");
+		// 波特率
+		mapRequest.put("codecate", CODE_BTL);
 
-        result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 漏保型号
-        mapRequest.put("codecate", "PS_MODEL");
+		// 漏保型号
+		mapRequest.put("codecate", CODE_PS_MODEL);
 
-        result.addObject("psModelList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("psModelList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // CT
-        mapRequest.put("codecate", "CT_RATIO");
+		// CT
+		mapRequest.put("codecate", CODE_CT_RATIO);
 
-        result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // PT
-        mapRequest.put("codecate", "PT_RATIO");
+		// PT
+		mapRequest.put("codecate", CODE_PT_RATIO);
 
-        result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        // 规约
-        mapRequest.put("codecate", "PROTOCOL_PS");
+		// 规约
+		mapRequest.put("codecate", CODE_PROTOCOL_PS);
 
-        result.addObject("protocolList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-        result.setViewName("/archive/addPsInfo");
+		result.setViewName("/archive/addPsInfo");
 
-    }
+	}
 }

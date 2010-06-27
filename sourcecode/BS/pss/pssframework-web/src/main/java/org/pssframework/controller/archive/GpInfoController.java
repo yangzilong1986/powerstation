@@ -3,7 +3,13 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
 import static org.pssframework.support.system.SystemConst.CODE_TG_STATUS;
+import static org.pssframework.support.system.SystemConst.CODE_TRAN_CODE;
+import static org.pssframework.support.system.SystemConst.CODE_TRAN_STATUS;
+import static org.pssframework.support.system.SystemConst.CODE_VOLT_GRADE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 
 import java.util.HashMap;
@@ -29,6 +35,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/gpinfo")
 public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang.Long> {
 
+	private static final String VIEW = "/archive/addTransformer";
+
 	@Autowired
 	private GpInfoManger gpInfoManger;
 
@@ -41,24 +49,9 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 
 		Map mapRequest = new HashMap();
 
-		Long tgid = 0L;
-
-		// mapRequest.put("orgid", orgid);
-
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
-		// GpInfo tginfo = this.tranInfoManager.getById(tgid) == null ? new
-		// GpInfo() : this.tgInfoManager.getById(tgid);
-		//
 		ModelAndView result = new ModelAndView();
-		//
-		// result.addObject("tginfo", tginfo);
-		//
-		// result.setViewName("/archive/addTgRelevance");
-		//
-		// result.addObject("orglist", getOrgOptions(mapRequest));
-		//
-		// result.addObject("statuslist", getStatusOptions(mapRequest));
 
 		return result;
 	}
@@ -67,17 +60,16 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
-		Long gpId = 0L;
 		try {
-			gpInfoManger.saveOrUpdate(model);
-			gpId = model.getGpId();
+			this.gpInfoManger.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg).addObject("gpid", model.getGpId());
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg).addObject("gpid", model.getGpId());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -87,25 +79,25 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TRAN_CODE");
+		mapRequest.put("codecate", CODE_TRAN_CODE);
 
-		result.addObject("typelist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("typelist", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "TRAN_STATUS");
+		mapRequest.put("codecate", CODE_TRAN_STATUS);
 
-		result.addObject("statuslist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("statuslist", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "VOLT_GRADE");
+		mapRequest.put("codecate", CODE_VOLT_GRADE);
 
-		result.addObject("voltlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("voltlist", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		mapRequest.put("codecate", "RATED_EC");
+		mapRequest.put("codecate", CODE_RATED_EC);
 
-		result.addObject("ratedlist", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ratedlist", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		result.addObject("traninfo", model);
 
-		result.setViewName("/archive/addTransformer");
+		result.setViewName(VIEW);
 
 		return result;
 	}

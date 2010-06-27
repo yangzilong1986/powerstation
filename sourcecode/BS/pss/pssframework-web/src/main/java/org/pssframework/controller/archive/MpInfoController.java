@@ -3,6 +3,8 @@
  */
 package org.pssframework.controller.archive;
 
+
+
 import static org.pssframework.support.system.SystemConst.CODE_BTL;
 import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
 import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
@@ -10,6 +12,10 @@ import static org.pssframework.support.system.SystemConst.CODE_MEAS_MODE;
 import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
 import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
 import static org.pssframework.support.system.SystemConst.CODE_WIRING_MODE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
@@ -85,16 +91,17 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 			for (GpInfo gpInfo : model.getGpInfos()) {
 				gpInfo.setMpInfo(model);
 			}
-			mpInfoManger.saveOrUpdate(model);
+			this.mpInfoManger.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
+				msg);
 		return result;
 	}
 
@@ -103,16 +110,17 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
-			mpInfoManger.removeById(id);
+			this.mpInfoManger.removeById(id);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
+				msg);
 		return result;
 	}
 
@@ -122,18 +130,19 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			MpInfo mpInfo = mpInfoManger.getById(id);
-			bind(request, mpInfo);
-			mpInfoManger.saveOrUpdate(mpInfo);
+			MpInfo mpInfo = this.mpInfoManger.getById(id);
+			this.bind(request, mpInfo);
+			this.mpInfoManger.saveOrUpdate(mpInfo);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
+				msg);
 		return result;
 	}
 
@@ -148,9 +157,9 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		result.addObject("mpinfo", model);
 
-		CommonPart(result, requestMap);
+		this.CommonPart(result, requestMap);
 
-		result.addObject("_type", "new");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
 		return result;
 	}
@@ -162,45 +171,45 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	 */
 	@SuppressWarnings("unchecked")
 	private void CommonPart(ModelAndView result, Map mapRequest) {
-		List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
+		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
 		result.addObject("termList", termlist);
 
 		// CT
 		mapRequest.put("codecate", CODE_CT_RATIO);
 
-		result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// PT
 		mapRequest.put("codecate", CODE_PT_RATIO);
 
-		result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
 		mapRequest.put("codecate", CODE_COMM_MODE);
 
-		result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 波特率
 		mapRequest.put("codecate", CODE_BTL);
 
-		result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 接线方式
 		mapRequest.put("codecate", CODE_WIRING_MODE);
 
-		result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("wiringModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 计量方式
 		mapRequest.put("codecate", CODE_MEAS_MODE);
 
-		result.addObject("measModeList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("measModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 表 规 约
 		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
-		result.addObject("protocolMeterList", codeInfoManager.findByPageRequest(mapRequest));
+		result.addObject("protocolMeterList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		result.setViewName(VIEW);
+		result.setViewName(MpInfoController.VIEW);
 
 	}
 }
