@@ -120,7 +120,7 @@ public final class SystemConst {
 	/**
 	 * 剩余电流档位当前值 REMC_GEAR_VALUE
 	 */
-	public static final String CODE_REMC_GEAR_VALUE = "REMC_GEAR_VALUE";
+	public static final String CODE_REMC_GEAR_VALUE = "REM_EC";
 
 	/**
 	 * -漏电分断延迟档位 OFF_DELAY_GEAR
@@ -171,6 +171,16 @@ public final class SystemConst {
 	 * 产权
 	 */
 	public static final String CODE_PR = "PR";
+
+	/**
+	 * 电表状态
+	 */
+	public static final String CODE_METER_STATUS = "METER_STATUS";
+
+	/**
+	 * 运行状态
+	 */
+	public static final String CODE_RUN_STATUS = "RUN_STATUS";
 
 	/***********************************************************************************/
 }
