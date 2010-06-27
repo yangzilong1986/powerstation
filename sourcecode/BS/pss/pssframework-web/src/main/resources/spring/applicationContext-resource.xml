@@ -65,4 +65,8 @@
 
   <!-- 用于持有ApplicationContext,可以使用ApplicationContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->
   <!-- <bean class="cn.org.rapid_framework.util.ApplicationContextHolder"/> -->
+  
+  <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    <property name="configLocation" value="classpath:/ehcache/ehcache-hibernate-local.xml" />
+  </bean>
 </beans>
