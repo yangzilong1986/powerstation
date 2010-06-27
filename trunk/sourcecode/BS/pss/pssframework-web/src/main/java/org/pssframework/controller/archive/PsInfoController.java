@@ -8,7 +8,7 @@ import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
 import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
 import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
 import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
-import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_PS;
+import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
 import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
 import static org.pssframework.support.system.SystemConst.CODE_PS_TYPE;
 import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
@@ -96,8 +96,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			isSucc = false;
 			msg = e.getMessage();
 		}
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg).addObject("psId", psId);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg)
+				.addObject("psId", psId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,8 +159,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			msg = e.getMessage();
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
@@ -176,8 +175,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			msg = e.getMessage();
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	/**
@@ -249,8 +247,11 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		result.addObject("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
 
-		// 规约
-		mapRequest.put("codecate", CODE_PROTOCOL_PS);
+		// TODO
+		/*
+		 * 这里先采用电表规约
+		 */
+		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
 		result.addObject("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
 

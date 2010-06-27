@@ -3,18 +3,18 @@
  */
 package org.pssframework.controller.archive;
 
-
-
 import static org.pssframework.support.system.SystemConst.CODE_BTL;
 import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
 import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
 import static org.pssframework.support.system.SystemConst.CODE_MEAS_MODE;
+import static org.pssframework.support.system.SystemConst.CODE_METER_STATUS;
 import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
 import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
 import static org.pssframework.support.system.SystemConst.CODE_WIRING_MODE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
@@ -100,8 +100,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
-				msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 		return result;
 	}
 
@@ -119,8 +118,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
-				msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 		return result;
 	}
 
@@ -141,8 +139,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		}
 
 		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE,
-				msg);
+		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 		return result;
 	}
 
@@ -160,6 +157,27 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		this.CommonPart(result, requestMap);
 
 		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ModelAndView result = new ModelAndView();
+
+		Map requestMap = new HashMap();
+
+		MpInfo model = mpInfoManger.getById(id);
+
+		requestMap.put("tgid", model.getTgInfo().getTgId());
+
+		result.addObject("mpinfo", model);
+
+		this.CommonPart(result, requestMap);
+
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
 		return result;
 	}
@@ -208,6 +226,11 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
 		result.addObject("protocolMeterList", this.codeInfoManager.findByPageRequest(mapRequest));
+
+		// 表 状态
+		mapRequest.put("codecate", CODE_METER_STATUS);
+
+		result.addObject("runStatusList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		result.setViewName(MpInfoController.VIEW);
 

@@ -8,6 +8,7 @@ import static org.pssframework.support.system.SystemConst.CODE_CUR_STATUS;
 import static org.pssframework.support.system.SystemConst.CODE_MADE_FAC;
 import static org.pssframework.support.system.SystemConst.CODE_PR;
 import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_TERM;
+import static org.pssframework.support.system.SystemConst.CODE_RUN_STATUS;
 import static org.pssframework.support.system.SystemConst.CODE_TERM_TYPE;
 import static org.pssframework.support.system.SystemConst.CODE_WIRING_MODE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
@@ -203,6 +204,9 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 
 		mapRequest.put("codecate", CODE_PR);
 		result.addObject("prlist", this.getOptionList(mapRequest));
+
+		mapRequest.put("codecate", CODE_RUN_STATUS);
+		result.addObject("runStatuslist", this.getOptionList(mapRequest));
 
 	}
 }
