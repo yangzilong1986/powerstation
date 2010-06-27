@@ -33,18 +33,6 @@ import cn.org.rapid_framework.page.PageRequest;
 
 public class BaseSpringController extends MultiActionController {
 
-	protected final static String CREATED_SUCCESS = "创建成功";
-
-	protected final static String UPDATE_SUCCESS = "更新成功";
-
-	protected final static String DELETE_SUCCESS = "删除成功";
-
-	protected final static String CREATED_FAIL = "创建失败";
-
-	protected final static String UPDATE_FAIL = "更新失败";
-
-	protected final static String DELETE_FAIL = "删除失败";
-
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
 	static {
