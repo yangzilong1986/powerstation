@@ -24,22 +24,31 @@ public final class SystemConst {
 	public final static String MSG_DELETE_FAIL = "删除失败";
 
 	/*********************************CONTROLLER******************************************/
-	public static final String CONTROLLER_METHOD_TYPE = "cMethodType";
+	/**
+	 * 方法
+	 */
+	public static final String CONTROLLER_METHOD_TYPE = "_type";
 
-	public static final String CONTROLLER_METHOD_TYPE_NEW = "cMethodTypeNew";
+	public static final String CONTROLLER_METHOD_TYPE_NEW = "new";
 
-	public static final String CONTROLLER_METHOD_TYPE_DELETE = "cMethodTypeDelete";
+	public static final String CONTROLLER_METHOD_TYPE_DELETE = "delete";
 
-	public static final String CONTROLLER_METHOD_TYPE_EDIT = "cMethodTypeEdit";
+	public static final String CONTROLLER_METHOD_TYPE_EDIT = "edit";
 
-	public static final String CONTROLLER_METHOD_TYPE_SHOW = "cMethodTypeShow";
+	public static final String CONTROLLER_METHOD_TYPE_SHOW = "show";
 
-	public static final String CONTROLLER_METHOD_TYPE_UPDATE = "cMethodTypeUpdate";
+	public static final String CONTROLLER_METHOD_TYPE_UPDATE = "update";
 
-	public static final String CONTROLLER_METHOD_TYPE_INDEX = "cMethodTypeIndex";
+	public static final String CONTROLLER_METHOD_TYPE_INDEX = "index";
 
+	/**
+	 * ajax是否成功
+	 */
 	public static final String CONTROLLER_AJAX_IS_SUCC = "cAjaxIsSucc";
 
+	/**
+	 * ajax消息
+	 */
 	public static final String CONTROLLER_AJAX_MESSAGE = "cAjaxMsg";
 
 	/*********************************ACODE***********************************************/
@@ -82,5 +91,63 @@ public final class SystemConst {
 	 *台区状态
 	 */
 	public static final String CODE_TG_STATUS = "TG_STATUS";
+
+	/**
+	 * 变压器型号
+	 */
+	public static final String CODE_TRAN_CODE = "TRAN_CODE";
+
+	/**
+	 * 变压器状态
+	 */
+	public static final String CODE_TRAN_STATUS = "TRAN_STATUS";
+
+	/**
+	 * 电压等级
+	 */
+	public static final String CODE_VOLT_GRADE = "VOLT_GRADE";
+
+	/**
+	 * 额定电流
+	 */
+	public static final String CODE_RATED_EC = "RATED_EC";
+
+	/**
+	 * REMC_GEAR 剩余电流档位
+	 */
+	public static final String CODE_REMC_GEAR = "REMC_GEAR";
+
+	/**
+	 * 剩余电流档位当前值 REMC_GEAR_VALUE
+	 */
+	public static final String CODE_REMC_GEAR_VALUE = "REMC_GEAR_VALUE";
+
+	/**
+	 * -漏电分断延迟档位 OFF_DELAY_GEAR
+	 */
+	public static final String CODE_OFF_DELAY_GEAR = "OFF_DELAY_GEAR";
+
+	/**
+	 * 漏电分断延迟时间 OFF_DELAY_VALUE
+	 */
+	public static final String CODE_OFF_DELAY_VALUE = "OFF_DELAY_VALUE";
+
+	/**
+	 * 漏保类型
+	 */
+	public static final String CODE_PS_TYPE = "PS_TYPE";
+
+	/**
+	 * 漏保型号
+	 */
+	public static final String CODE_PS_MODEL = "PS_MODEL";
+
+	/**
+	 * 规约
+	 */
+	public static final String CODE_PROTOCOL_PS = "PROTOCOL_PS";
+	
+	"PROTOCOL_TERM"
+
 	/***********************************************************************************/
 }
