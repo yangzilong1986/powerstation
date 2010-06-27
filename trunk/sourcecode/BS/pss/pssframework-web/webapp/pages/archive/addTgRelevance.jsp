@@ -1,7 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
-
 <%@page import="org.pssframework.support.system.SystemConst"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -92,11 +91,11 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((       document.documentElement.clientHeight ||       document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((         document.documentElement.clientHeight ||         document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
-        <input type="hidden" id="_type" name="_type" value="${_type}" />
+        <input type="hidden" id="_type" name="_type" value="${_type}"></input>
         <c:choose>
           <c:when test="${_type=='edit' || _type=='new'}">
             <c:set var="disabled" value="false"></c:set>
@@ -153,9 +152,10 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${tran.tranName}</td>
           <td>${tran.plateCap}</td>
-          <td><pss:code code="${tran.modelNo}" codeCate="TRAN_CODE"/></td>
+          <td><pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
           <td>${tran.instAddr}</td>
-          <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
+          <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a
+            onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -186,8 +186,9 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.mpName}</td>
-          <td><pss:code code="${mpInfo.statusCode}" codeCate="TERM_TYPE"/></td>
-          <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
+          <td><pss:code code="${mpInfo.statusCode}" codeCate="TERM_TYPE" /></td>
+          <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a
+            onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -201,9 +202,9 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th >资产编号</th>
-        <th >集中器地址</th>
-        <th >漏保型号</th>
+        <th>资产编号</th>
+        <th>集中器地址</th>
+        <th>漏保型号</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -237,15 +238,16 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
       </tr>
     </thead>
     <tbody>
-       <c:forEach items="${termlist}" var="term" varStatus="status">
+      <c:forEach items="${termlist}" var="term" varStatus="status">
         <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${term.assetNo}</td>
           <td>${term.logicalAddr}</td>
-          <td><pss:code code="${term.termType}" codeCate="TERM_TYPE"/></td>
+          <td><pss:code code="${term.termType}" codeCate="TERM_TYPE" /></td>
           <td>${term.runStatus}</td>
           <td>${term.termType}</td>
           <td>${term.termType}</td>
-          <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateTermInfo('${term.termId}')">修改</a></td>
+          <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a
+            onclick="updateTermInfo('${term.termId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -384,8 +386,8 @@ deleteTranInfo=function(tranId){
          type:'POST',
          cache: false,
          success: function(json) {
-    	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
-           var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
+    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
              if(isSucc){
               alert(msg);
               $("#tran_"+tranId).remove();
@@ -417,8 +419,8 @@ deletePsInfo=function(psId){
            type:'POST',
            cache: false,
            success: function(json) {
-    	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
-           var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
+    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
                 $("#ps_"+psId).remove();
@@ -463,8 +465,8 @@ deleteMpInfo=function(mpId){
              type:'POST',
              cache: false,
              success: function(json) {
-        	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
-               var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
+        	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                  alert(msg);
                  if(isSucc){
                   $("#mp_"+termId).remove();
@@ -495,8 +497,8 @@ deleteTermInfo=function(termId){
            type:'POST',
            cache: false,
            success: function(json) {
-               var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
-               var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
+               var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
                 $("#term_"+termId).remove();

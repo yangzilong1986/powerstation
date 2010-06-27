@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,7 +15,7 @@
   <div class="da_mid"
     style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
   <form:form action="/archive/tranInfo" modelAttribute="tranInfo">
-  <input type="hidden" id="_type" name="_type" value="${_type}" />
+  <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" value="${_type}" />
     <form:hidden path="tgInfo.tgId" />
     <form:hidden path="orgInfo.orgId" />
     <table border="0" cellpadding="0" cellspacing="0" align="center">
@@ -112,8 +113,8 @@
                 type:'POST',
                 cache: false,
                 success: function(json) {
-                    var msg = json['msg'];
-                    var isSucc = json['isSucc'];
+            	 var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+                 var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                     alert(msg);
                     if(isSucc){
                     opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgInfo.tgId}/edit";
@@ -159,8 +160,8 @@
     	         type:'post',
     	         cache: false,
     	         success: function(json){
-    	           var msg=json['msg'];
-    	           var isSucc = json['isSucc'];
+    	    	 var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+    	          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
     	            alert(msg);
     	            if(isSucc){
                         opener.location.href = "${ctx}/archive/tginfo/${tranInfo.tgInfo.tgId}/edit";
