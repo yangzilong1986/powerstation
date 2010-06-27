@@ -9,12 +9,38 @@ package org.pssframework.support.system;
  */
 public final class SystemConst {
 
+	/*********************************MESSAGE********************************************/
+
+	public final static String MSG_CREATED_SUCCESS = "创建成功";
+
+	public final static String MSG_UPDATE_SUCCESS = "更新成功";
+
+	public final static String MSG_DELETE_SUCCESS = "删除成功";
+
+	public final static String MSG_CREATED_FAIL = "创建失败";
+
+	public final static String MSG_UPDATE_FAIL = "更新失败";
+
+	public final static String MSG_DELETE_FAIL = "删除失败";
+
 	/*********************************CONTROLLER******************************************/
-	public static final String CONTROLLER_METHOD_TYPE = "method_type";
+	public static final String CONTROLLER_METHOD_TYPE = "cMethodType";
 
-	public static final String CONTROLLER_AJAX_SUCC = "ajaxSucc";
+	public static final String CONTROLLER_METHOD_TYPE_NEW = "cMethodTypeNew";
 
-	public static final String CONTROLLER_AJAX_MESSAGE = "ajaxMsg";
+	public static final String CONTROLLER_METHOD_TYPE_DELETE = "cMethodTypeDelete";
+
+	public static final String CONTROLLER_METHOD_TYPE_EDIT = "cMethodTypeEdit";
+
+	public static final String CONTROLLER_METHOD_TYPE_SHOW = "cMethodTypeShow";
+
+	public static final String CONTROLLER_METHOD_TYPE_UPDATE = "cMethodTypeUpdate";
+
+	public static final String CONTROLLER_METHOD_TYPE_INDEX = "cMethodTypeIndex";
+
+	public static final String CONTROLLER_AJAX_IS_SUCC = "cAjaxIsSucc";
+
+	public static final String CONTROLLER_AJAX_MESSAGE = "cAjaxMsg";
 
 	/*********************************ACODE***********************************************/
 	/**
