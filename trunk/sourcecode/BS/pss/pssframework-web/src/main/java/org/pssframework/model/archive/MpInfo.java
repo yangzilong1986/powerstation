@@ -158,7 +158,7 @@ public class MpInfo extends BaseEntity {
 
 	// STATUS_CODE VARCHAR2(8),is '标明计量点的当前状态，包括：01设立、02在用、03停用、04撤销等';
 	@Column(name = "STATUS_CODE", length = 8)
-	private String statusCoe;
+	private String statusCode;
 
 	// LC_FLAG VARCHAR2(8),is '是否安装负控设备，01是、02否';
 	@Column(name = "LC_FLAG", length = 8)
@@ -308,13 +308,6 @@ public class MpInfo extends BaseEntity {
 	 */
 	public String getSideCode() {
 		return sideCode;
-	}
-
-	/**
-	 * @return the statusCoe
-	 */
-	public String getStatusCoe() {
-		return statusCoe;
 	}
 
 	/**
@@ -510,14 +503,6 @@ public class MpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param statusCoe
-	 *            the statusCoe to set
-	 */
-	public void setStatusCoe(String statusCoe) {
-		this.statusCoe = statusCoe;
-	}
-
-	/**
 	 * @param switchNo
 	 *            the switchNo to set
 	 */
@@ -617,5 +602,19 @@ public class MpInfo extends BaseEntity {
 	 */
 	public TgInfo getTgInfo() {
 		return tgInfo;
+	}
+
+	/**
+	 * @param statusCode the statusCode to set
+	 */
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	/**
+	 * @return the statusCode
+	 */
+	public String getStatusCode() {
+		return statusCode;
 	}
 }

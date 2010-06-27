@@ -3,7 +3,6 @@
  */
 package org.pssframework.model.archive;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,10 +46,8 @@ public class TgInfo extends BaseEntity {
 	// TG_ID NUMBER(16) not null,
 	private Long tgId;
 
-	// @OneToMany(targetEntity = TranInfo.class, mappedBy = "tgInfo")
-	// @JoinColumn(name = "TG_ID", referencedColumnName = "TG_ID", updatable =
-	// false, insertable = false)
-	// private List<TranInfo> tranInfos;
+	@OneToMany(mappedBy = "tgInfo", cascade = CascadeType.ALL)
+	private List<TranInfo> tranInfos;
 
 	@OneToMany(targetEntity = MpInfo.class, mappedBy = "tgInfo")
 	private List<MpInfo> mpInfos;
@@ -59,7 +56,7 @@ public class TgInfo extends BaseEntity {
 	private List<GpInfo> gpInfos;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tgInfo")
-	private List<LineTgRelaInfo> lineTgRelaInfos = new ArrayList<LineTgRelaInfo>();
+	private List<LineTgRelaInfo> lineTgRelaInfos;
 
 	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
@@ -317,6 +314,20 @@ public class TgInfo extends BaseEntity {
 	 */
 	public List<LineTgRelaInfo> getLineTgRelaInfos() {
 		return lineTgRelaInfos;
+	}
+
+	/**
+	 * @param tranInfos the tranInfos to set
+	 */
+	public void setTranInfos(List<TranInfo> tranInfos) {
+		this.tranInfos = tranInfos;
+	}
+
+	/**
+	 * @return the tranInfos
+	 */
+	public List<TranInfo> getTranInfos() {
+		return tranInfos;
 	}
 
 }
