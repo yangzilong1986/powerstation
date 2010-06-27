@@ -3,6 +3,10 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,7 +60,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
     @Override
     public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
         boolean isSucc = true;
-        String msg = CREATED_SUCCESS;
+        String msg = MSG_CREATED_SUCCESS;
         Long psId = 0L;
         try {
             // 默认485
@@ -128,7 +132,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
     public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         boolean isSucc = true;
-        String msg = UPDATE_SUCCESS;
+		String msg = MSG_UPDATE_SUCCESS;
         try {
             PsInfo psinfo = this.psInfoManager.getById(id);
             bind(request, psinfo);
@@ -146,7 +150,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
     @Override
     public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
         boolean isSucc = true;
-        String msg = DELETE_SUCCESS;
+		String msg = MSG_DELETE_SUCCESS;
         try {
             this.psInfoManager.removeById(id);
 

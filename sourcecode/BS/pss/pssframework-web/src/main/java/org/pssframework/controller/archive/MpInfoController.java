@@ -3,6 +3,19 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_BTL;
+import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
+import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_MEAS_MODE;
+import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
+import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_WIRING_MODE;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,6 +37,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +47,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/archive/mpinfo")
 public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang.Long> {
+
+	private static final String VIEW = "/archive/addMpInfo";
 
 	@Override
 	@InitBinder
@@ -64,17 +80,54 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		boolean isSucc = true;
-		String msg = CREATED_SUCCESS;
-		Long mpId = 0L;
+		String msg = MSG_CREATED_SUCCESS;
 		try {
 			for (GpInfo gpInfo : model.getGpInfos()) {
 				gpInfo.setMpInfo(model);
 			}
 			mpInfoManger.saveOrUpdate(model);
-			// mpId = model.getMpId();
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
+			logger.error(e.getMessage());
+
+		}
+
+		ModelAndView result = new ModelAndView();
+		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		return result;
+	}
+
+	@Override
+	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+		boolean isSucc = true;
+		String msg = MSG_DELETE_SUCCESS;
+		try {
+			mpInfoManger.removeById(id);
+		} catch (Exception e) {
+			isSucc = false;
+			msg = MSG_DELETE_FAIL;
+			logger.error(e.getMessage());
+
+		}
+
+		ModelAndView result = new ModelAndView();
+		result.addObject("isSucc", isSucc).addObject("msg", msg);
+		return result;
+	}
+
+	@Override
+	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		boolean isSucc = true;
+		String msg = MSG_UPDATE_SUCCESS;
+		try {
+			MpInfo mpInfo = mpInfoManger.getById(id);
+			bind(request, mpInfo);
+			mpInfoManger.saveOrUpdate(mpInfo);
+		} catch (Exception e) {
+			isSucc = false;
+			msg = MSG_UPDATE_FAIL;
 			logger.error(e.getMessage());
 
 		}
@@ -89,17 +142,11 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
-		String tgid = request.getParameter("tgId");
-
 		Map requestMap = new HashMap();
 
-		requestMap.put("tgid", tgid);
-
-		// model.setTgInfo(tgInfoManager.getById(Long.parseLong(tgid)));
+		requestMap.put("tgid", model.getTgInfo().getTgId());
 
 		result.addObject("mpinfo", model);
-
-		result.addObject("tgId", tgid);
 
 		CommonPart(result, requestMap);
 
@@ -116,45 +163,44 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@SuppressWarnings("unchecked")
 	private void CommonPart(ModelAndView result, Map mapRequest) {
 		List<TerminalInfo> termlist = terminalInfoManger.findByPageRequest(mapRequest);
-		result.setViewName("/archive/addTransformer");
 		result.addObject("termList", termlist);
 
 		// CT
-		mapRequest.put("codecate", "CT_RATIO");
+		mapRequest.put("codecate", CODE_CT_RATIO);
 
 		result.addObject("ctList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// PT
-		mapRequest.put("codecate", "PT_RATIO");
+		mapRequest.put("codecate", CODE_PT_RATIO);
 
 		result.addObject("ptList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
-		mapRequest.put("codecate", "COMM_MODE");
+		mapRequest.put("codecate", CODE_COMM_MODE);
 
 		result.addObject("commModeList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 波特率
-		mapRequest.put("codecate", "BTL");
+		mapRequest.put("codecate", CODE_BTL);
 
 		result.addObject("btlList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 接线方式
-		mapRequest.put("codecate", "WIRING_MODE");
+		mapRequest.put("codecate", CODE_WIRING_MODE);
 
 		result.addObject("wiringModeList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 计量方式
-		mapRequest.put("codecate", "MEAS_MODE");
+		mapRequest.put("codecate", CODE_MEAS_MODE);
 
 		result.addObject("measModeList", codeInfoManager.findByPageRequest(mapRequest));
 
 		// 表 规 约
-		mapRequest.put("codecate", "PROTOCOL_METER");
+		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
 		result.addObject("protocolMeterList", codeInfoManager.findByPageRequest(mapRequest));
 
-		result.setViewName("/archive/addMpInfo");
+		result.setViewName(VIEW);
 
 	}
 }

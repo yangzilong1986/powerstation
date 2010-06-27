@@ -3,6 +3,8 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,7 @@ public class MeterInfoController extends BaseRestSpringController<MeterInfo, jav
     public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
             throws Exception {
         boolean isSucc = true;
-        String msg = CREATED_SUCCESS;
+        String msg = MSG_CREATED_SUCCESS;
         Long meterId = 0L;
         try {
             meterInfoManager.saveOrUpdate(model);
