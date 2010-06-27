@@ -4,8 +4,12 @@
 package org.pssframework.controller.archive;
 
 import static org.pssframework.support.system.SystemConst.CODE_TG_STATUS;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
@@ -80,24 +84,24 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		result.addObject("tginfo", tginfo);
 
-		result.setViewName(VIEW);
+		result.setViewName(TgInfoController.VIEW);
 
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<OrgInfo> getOrgOptions(Map mapRequest) {
-		return orgInfoManager.findByPageRequest(mapRequest);
+		return this.orgInfoManager.findByPageRequest(mapRequest);
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<CodeInfo> getStatusOptions(Map mapRequest) {
-		return codeInfoManager.findByPageRequest(mapRequest);
+		return this.codeInfoManager.findByPageRequest(mapRequest);
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<MpInfo> getMpList(Map mapRequest) {
-		List<MpInfo> meterlist = mpInfoManger.findByPageRequest(mapRequest);
+		List<MpInfo> meterlist = this.mpInfoManger.findByPageRequest(mapRequest);
 		if (meterlist == null || meterlist.size() <= 0) {
 			meterlist = new LinkedList<MpInfo>();
 		}
@@ -106,7 +110,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@SuppressWarnings("unchecked")
 	private List<PsInfo> getPsList(Map mapRequest) {
-		List<PsInfo> pslist = psInfoManager.findByPageRequest(mapRequest);
+		List<PsInfo> pslist = this.psInfoManager.findByPageRequest(mapRequest);
 		if (pslist == null || pslist.size() <= 0) {
 			pslist = new LinkedList<PsInfo>();
 		}
@@ -115,7 +119,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@SuppressWarnings("unchecked")
 	private List<TerminalInfo> getTerminalList(Map mapRequest) {
-		List<TerminalInfo> terminallist = terminalInfoManager.findByPageRequest(mapRequest);
+		List<TerminalInfo> terminallist = this.terminalInfoManager.findByPageRequest(mapRequest);
 		if (terminallist == null || terminallist.size() <= 0) {
 			terminallist = new LinkedList<TerminalInfo>();
 		}
@@ -125,7 +129,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@SuppressWarnings("unchecked")
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		logger.debug("tg.{}", "new");
+		this.logger.debug("tg.{}", CONTROLLER_METHOD_TYPE_NEW);
 
 		ModelAndView result = new ModelAndView();
 
@@ -135,22 +139,22 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
-		CommonPart(result, mapRequest);
+		this.CommonPart(result, mapRequest);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, "new");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		result.setViewName(VIEW);
+		result.setViewName(TgInfoController.VIEW);
 		return result;
 	}
 
 	@Override
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-		logger.debug("tg.{},{}", "delete", id);
+		this.logger.debug("tg.{},{}", "delete", id);
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 
-			tgInfoManager.removeById(id);
+			this.tgInfoManager.removeById(id);
 
 		} catch (Exception e) {
 
@@ -159,12 +163,13 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			msg = e.getMessage();
 
 		}
-		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
-		logger.debug("tg.{}", "create");
+		this.logger.debug("tg.{}", "create");
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		Long tgId = 0L;
@@ -173,7 +178,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 			model.setPubPrivFlag("0");
 
-			tgInfoManager.saveOrUpdate(model);
+			this.tgInfoManager.saveOrUpdate(model);
 
 			tgId = model.getTgId();
 
@@ -185,15 +190,15 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg).addObject("tgId",
-				tgId);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg).addObject("tgId", tgId);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		logger.debug("tg.{},{}", "edit", id);
+		this.logger.debug("tg.{},{}", "edit", id);
 
 		ModelAndView result = new ModelAndView();
 
@@ -207,11 +212,11 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		mapRequest.put("tgid", id);
 
-		CommonPart(result, mapRequest);
+		this.CommonPart(result, mapRequest);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, "edit");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		result.setViewName(VIEW);
+		result.setViewName(TgInfoController.VIEW);
 		return result;
 	}
 
@@ -219,7 +224,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		logger.debug("tg.{},{}", "update", id);
+		this.logger.debug("tg.{},{}", "update", id);
 
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
@@ -227,15 +232,16 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		try {
 			TgInfo tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
-			bind(request, tginfo);
-			tgInfoManager.update(tginfo);
+			this.bind(request, tginfo);
+			this.tgInfoManager.update(tginfo);
 		} catch (Exception e) {
 			this.logger.info(e.getLocalizedMessage());
 			isSucc = false;
 			msg = e.getMessage();
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -243,7 +249,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-		logger.debug("tg.{},{}", "show", id);
+		this.logger.debug("tg.{},{}", "show", id);
 
 		TgInfo tginfo = this.tgInfoManager.getById(id);
 
@@ -260,11 +266,11 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		mapRequest.put("tgid", id);
 
-		CommonPart(modelAndView, mapRequest);
+		this.CommonPart(modelAndView, mapRequest);
 
-		modelAndView.setViewName(VIEW);
+		modelAndView.setViewName(TgInfoController.VIEW);
 
-		modelAndView.addObject(CONTROLLER_METHOD_TYPE, "show");
+		modelAndView.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);;
 
 		return modelAndView;
 
@@ -277,8 +283,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 * @param mapRequest
 	 */
 	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
-		model.addObject("orglist", getOrgOptions(mapRequest));
-		model.addObject("statuslist", getStatusOptions(mapRequest));
+		model.addObject("orglist", this.getOrgOptions(mapRequest));
+		model.addObject("statuslist", this.getStatusOptions(mapRequest));
 
 	}
 
@@ -290,9 +296,9 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 */
 	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
 		// modelAndView.addObject("tranlist", getTranList(mapRequest));
-		modelAndView.addObject("pslist", getPsList(mapRequest));
-		modelAndView.addObject("termlist", getTerminalList(mapRequest));
-		modelAndView.addObject("mplist", getMpList(mapRequest));
+		modelAndView.addObject("pslist", this.getPsList(mapRequest));
+		modelAndView.addObject("termlist", this.getTerminalList(mapRequest));
+		modelAndView.addObject("mplist", this.getMpList(mapRequest));
 
 	}
 
@@ -303,8 +309,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 * @param mapRequest
 	 */
 	private void CommonPart(ModelAndView modelAndView, Map<String, ?> mapRequest) {
-		getInitOption(modelAndView, mapRequest);
-		getRelevance(modelAndView, mapRequest);
+		this.getInitOption(modelAndView, mapRequest);
+		this.getRelevance(modelAndView, mapRequest);
 	}
 
 }

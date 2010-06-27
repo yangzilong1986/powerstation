@@ -3,6 +3,18 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
+import static org.pssframework.support.system.SystemConst.CODE_CUR_STATUS;
+import static org.pssframework.support.system.SystemConst.CODE_MADE_FAC;
+import static org.pssframework.support.system.SystemConst.CODE_PR;
+import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_TERM;
+import static org.pssframework.support.system.SystemConst.CODE_TERM_TYPE;
+import static org.pssframework.support.system.SystemConst.CODE_WIRING_MODE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
@@ -41,6 +53,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/terminalinfo")
 public class TerminalInfoController extends BaseRestSpringController<TerminalInfo, java.lang.Long> {
 
+	private static final String VIEW = "/archive/addTerminal";
+
 	@Override
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
@@ -69,15 +83,15 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
-			terminalInfoManger.removeById(id);
+			this.terminalInfoManger.removeById(id);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
@@ -86,18 +100,18 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			TerminalInfo terminalInfo = terminalInfoManger.getById(id);
+			TerminalInfo terminalInfo = this.terminalInfoManger.getById(id);
 
-			bind(request, terminalInfo);
-			terminalInfoManger.saveOrUpdate(terminalInfo);
+			this.bind(request, terminalInfo);
+			this.terminalInfoManger.saveOrUpdate(terminalInfo);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
@@ -109,20 +123,20 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			for (TermObjRelaInfo termObjRelaInfo : model.getTermObjRelas()) {
 				termObjRelaInfo.setTerminalInfo(model);
 			}
-			terminalInfoManger.saveOrUpdate(model);
+			this.terminalInfoManger.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_CREATED_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<CodeInfo> getOptionList(Map mapRequest) {
-		return codeInfoManager.findByPageRequest(mapRequest);
+		return this.codeInfoManager.findByPageRequest(mapRequest);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -131,15 +145,15 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			throws Exception {
 		ModelAndView result = new ModelAndView();
 
-		getCommPart(result, new HashMap());
+		this.getCommPart(result, new HashMap());
 
-		result.addObject("terminalinfo", terminalInfoManger.getById(id));
+		result.addObject("terminalinfo", this.terminalInfoManger.getById(id));
 
-		result.addObject("_type", "edit");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
 		result.addObject("tgId", request.getParameter("tgId"));
 
-		result.setViewName("/archive/addTerminal");
+		result.setViewName(VIEW);
 
 		return result;
 	}
@@ -153,15 +167,15 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 
 		Map mapRequest = new HashMap();
 
-		getCommPart(result, mapRequest);
+		this.getCommPart(result, mapRequest);
 
 		result.addObject("terminalinfo", model);
 
-		result.addObject("_type", "new");
+		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
 		result.addObject("tgId", request.getParameter("tgId"));
 
-		result.setViewName("/archive/addTerminal");
+		result.setViewName(VIEW);
 
 		return result;
 	}
@@ -169,26 +183,26 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	@SuppressWarnings("unchecked")
 	private void getCommPart(ModelAndView result, Map mapRequest) {
 
-		mapRequest.put("codecate", "PROTOCOL_TERM");
-		result.addObject("protocollist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_PROTOCOL_TERM);
+		result.addObject("protocollist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "COMM_MODE");
-		result.addObject("commlist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_COMM_MODE);
+		result.addObject("commlist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "CUR_STATUS");
-		result.addObject("statuslist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_CUR_STATUS);
+		result.addObject("statuslist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "TERM_TYPE");
-		result.addObject("typelist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_TERM_TYPE);
+		result.addObject("typelist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "MADE_FAC");
-		result.addObject("faclist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_MADE_FAC);
+		result.addObject("faclist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "WIRING_MODE");
-		result.addObject("wiringlist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_WIRING_MODE);
+		result.addObject("wiringlist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "PR");
-		result.addObject("prlist", getOptionList(mapRequest));
+		mapRequest.put("codecate", CODE_PR);
+		result.addObject("prlist", this.getOptionList(mapRequest));
 
 	}
 }

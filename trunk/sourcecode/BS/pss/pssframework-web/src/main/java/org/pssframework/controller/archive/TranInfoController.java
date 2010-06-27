@@ -3,6 +3,16 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
+import static org.pssframework.support.system.SystemConst.CODE_TRAN_CODE;
+import static org.pssframework.support.system.SystemConst.CODE_TRAN_STATUS;
+import static org.pssframework.support.system.SystemConst.CODE_VOLT_GRADE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
@@ -40,7 +50,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/archive/tranInfo")
 public class TranInfoController extends BaseRestSpringController<TranInfo, java.lang.Long> {
 
-	private static final String METHOD_TYPE = "_type";
+	private static final String METHOD_TYPE = CONTROLLER_METHOD_TYPE;
+
+	private static final String VIEW = "/archive/addTransformer";
 
 	@Override
 	@InitBinder
@@ -72,15 +84,16 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		String msg = MSG_CREATED_SUCCESS;
 		try {
 			model.setPubPrivFlag("0");
-			tranInfoManager.saveOrUpdate(model);
+			this.tranInfoManager.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 			msg = e.getMessage();
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
@@ -89,29 +102,30 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			TranInfo tranInfo = tranInfoManager.getById(id);
-			bind(request, tranInfo);
-			tranInfoManager.saveOrUpdate(tranInfo);
+			TranInfo tranInfo = this.tranInfoManager.getById(id);
+			this.bind(request, tranInfo);
+			this.tranInfoManager.saveOrUpdate(tranInfo);
 		} catch (Exception e) {
 			isSucc = false;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 			msg = MSG_UPDATE_FAIL;
 
 		}
 
-		return new ModelAndView().addObject("isSucc", isSucc).addObject("msg", msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
 	@Override
 	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ModelAndView result = getCommonModelAndView();
+		ModelAndView result = this.getCommonModelAndView();
 
-		result.addObject("tranInfo", tranInfoManager.getById(id));
+		result.addObject("tranInfo", this.tranInfoManager.getById(id));
 
-		result.setViewName("/archive/addTransformer");
+		result.setViewName(VIEW);
 
-		result.addObject(METHOD_TYPE, "show");
+		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);;
 
 		return result;
 	}
@@ -119,30 +133,30 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	@Override
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ModelAndView result = getCommonModelAndView();
+		ModelAndView result = this.getCommonModelAndView();
 
-		result.addObject("tranInfo", tranInfoManager.getById(id));
+		result.addObject("tranInfo", this.tranInfoManager.getById(id));
 
-		result.setViewName("/archive/addTransformer");
+		result.setViewName(VIEW);
 
-		result.addObject(METHOD_TYPE, "edit");
+		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
 		return result;
 	}
 
 	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
-		ModelAndView result = getCommonModelAndView();
+		ModelAndView result = this.getCommonModelAndView();
 		result.addObject("tranInfo", model);
-		result.setViewName("/archive/addTransformer");
-		result.addObject(METHOD_TYPE, "new");
+		result.setViewName(VIEW);
+		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	private List<CodeInfo> getOptionList(Map mapRequest) {
 
-		return codeInfoManager.findByPageRequest(mapRequest);
+		return this.codeInfoManager.findByPageRequest(mapRequest);
 
 	}
 
@@ -152,21 +166,21 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 		Map mapRequest = new HashMap();
 
-		mapRequest.put("codecate", "TRAN_CODE");
+		mapRequest.put("codecate", CODE_TRAN_CODE);
 
-		result.addObject("typelist", getOptionList(mapRequest));
+		result.addObject("typelist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "TRAN_STATUS");
+		mapRequest.put("codecate", CODE_TRAN_STATUS);
 
-		result.addObject("statuslist", getOptionList(mapRequest));
+		result.addObject("statuslist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "VOLT_GRADE");
+		mapRequest.put("codecate", CODE_VOLT_GRADE);
 
-		result.addObject("voltlist", getOptionList(mapRequest));
+		result.addObject("voltlist", this.getOptionList(mapRequest));
 
-		mapRequest.put("codecate", "RATED_EC");
+		mapRequest.put("codecate", CODE_RATED_EC);
 
-		result.addObject("ratedlist", getOptionList(mapRequest));
+		result.addObject("ratedlist", this.getOptionList(mapRequest));
 
 		return result;
 	}
@@ -177,17 +191,18 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		String msg = MSG_DELETE_SUCCESS;
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			tranInfoManager.removeById(id);
+			this.tranInfoManager.removeById(id);
 		} catch (DataAccessException e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
-			logger.error(e.getMessage());
+			this.logger.error(e.getMessage());
 		}
-		modelAndView.addObject("isSucc", isSucc).addObject("msg", msg);
+		modelAndView.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
+				CONTROLLER_AJAX_MESSAGE, msg);
 		return modelAndView;
 	}
 }
