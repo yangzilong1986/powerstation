@@ -40,4 +40,34 @@
             </description>
         </attribute>
     </tag>
+    
+    <tag>
+        <name>code</name>
+        <tag-class>org.pssframework.tag.CodeTag</tag-class>
+        <body-content>empty</body-content>
+        <description>
+            <![CDATA[
+             system's code 
+            ]]>
+        </description>
+        <attribute>
+            <name>code</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[
+                
+                ]]>
+            </description>
+        </attribute>
+        <attribute>
+            <name>codeCate</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[
+                ]]>
+            </description>
+        </attribute>
+    </tag>
 </taglib>
