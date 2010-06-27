@@ -1,7 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
-<html>
+
+<%@page import="org.pssframework.support.system.SystemConst"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>台区档案录入</title>
@@ -148,11 +149,11 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${tranlist}" var="tran" varStatus="status">
+      <c:forEach items="${tginfo.tranInfos}" var="tran" varStatus="status">
         <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${tran.tranName}</td>
           <td>${tran.plateCap}</td>
-          <td>${tran.modelNo}</td>
+          <td><pss:code code="${tran.modelNo}" codeCate="TRAN_CODE"/></td>
           <td>${tran.instAddr}</td>
           <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
         </tr>
@@ -179,14 +180,14 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
     </thead>
     <tbody>
       <c:forEach items="${mplist}" var="mpInfo" varStatus="status">
-        <tr <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+        <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.gpInfos[0].gpAddr}</td>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.mpName}</td>
-          <td>${mpInfo.mpName}</td>
-          <td></td>
+          <td><pss:code code="${mpInfo.statusCode}" codeCate="TERM_TYPE"/></td>
+          <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -240,7 +241,7 @@ function getJsonObjectList(htmlId,className,methodName,objectType){
         <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${term.assetNo}</td>
           <td>${term.logicalAddr}</td>
-          <td>${term.termType}</td>
+          <td><pss:code code="${term.termType}" codeCate="TERM_TYPE"/></td>
           <td>${term.runStatus}</td>
           <td>${term.termType}</td>
           <td>${term.termType}</td>
@@ -366,7 +367,7 @@ function openTransformer(){
   if(!$("#tgId").val()){
     alert("请先建台区");return;
   }
-   var url = "${ctx}/archive/tranInfo/new?tgId="+$("#tgId").val();
+   var url = "${ctx}/archive/tranInfo/new?tgId="+$("#tgId").val()+"&orgInfo.orgId="+$("#orgId").val();
    windowPopup(url, 960, 575);
 }
 
@@ -383,8 +384,8 @@ deleteTranInfo=function(tranId){
          type:'POST',
          cache: false,
          success: function(json) {
-             var msg = json['msg'];
-             var isSucc = json['isSucc'];
+    	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
+           var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
              if(isSucc){
               alert(msg);
               $("#tran_"+tranId).remove();
@@ -416,8 +417,8 @@ deletePsInfo=function(psId){
            type:'POST',
            cache: false,
            success: function(json) {
-               var msg = json['msg'];
-               var isSucc = json['isSucc'];
+    	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
+           var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
                alert(msg);
                if(isSucc){
                 $("#ps_"+psId).remove();
@@ -444,10 +445,42 @@ function openMeterInfo(tgId){
 	  if(!$("#tgId").val()){
 	    alert("请先建台区");return;
 	  }
-	   var url = "${ctx}/archive/mpinfo/new?tgId="+$("#tgId").val()+"&tgInfo.tgId="+$("#tgId").val();
+	   var url = "${ctx}/archive/mpinfo/new?tgInfo.tgId="+$("#tgId").val();
 	   windowPopup(url, 960, 575);
      
 }
+
+deleteMpInfo=function(mpId){
+     if(mpId==null || mpId ==""){
+       return;
+     } 
+
+     var url = "${ctx}/archive/mpinfo/"+mpId+".json?_method=delete";
+     if (confirm("确定要删除该电表?")) {
+         jQuery.ajax({
+             url: url,
+             dataType:'json',
+             type:'POST',
+             cache: false,
+             success: function(json) {
+        	   var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
+               var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
+                 alert(msg);
+                 if(isSucc){
+                  $("#mp_"+termId).remove();
+                 }
+             },error:function(e) {
+                 alert("delete error");
+                 alert(e.message);
+             }
+         });
+     }
+    }
+
+  updateMpInfo=function(mpId){
+       var url = "${ctx}/archive/mpinfo/"+mpId+"/edit?tgId="+$("#tgId").val();
+       windowPopup(url, 960, 575);
+  }
 /*******************************************************************/
 deleteTermInfo=function(termId){
    if(termId==null || termId ==""){
@@ -462,8 +495,8 @@ deleteTermInfo=function(termId){
            type:'POST',
            cache: false,
            success: function(json) {
-               var msg = json['msg'];
-               var isSucc = json['isSucc'];
+               var msg = json[<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>];
+               var isSucc = json[<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>];
                alert(msg);
                if(isSucc){
                 $("#term_"+termId).remove();
