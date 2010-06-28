@@ -11,7 +11,7 @@
 	</appender>
 	<appender name="log.file"
 		class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="log/atf.log" />
+		<param name="File" value="../logs/pss.log" />
 		<param name="threshold" value="warn" />
 		<param name="Append" value="true" />
 
@@ -25,7 +25,7 @@
 	<appender name="log.file.kxunDate_file"
 		class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="info" />
-		<param name="file" value="log/atf_kxun.log" />
+		<param name="file" value="../logs/atf_kxun.log" />
 		<param name="append" value="true" />
 		<param name="datePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -36,7 +36,7 @@
 	<appender name="log.traceFile"
 		class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="threshold" value="debug" />
-		<param name="file" value="log/traceFile.log" />
+		<param name="file" value="../logs/traceFile.log" />
 		<param name="append" value="true" />
 		<param name="datePattern" value="'.'yyyy-MM-dd" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -61,7 +61,7 @@
 	</appender>
 <!--  
 	<appender name="JDBCAppender"
-		class="atf.test.log.JDBCPoolAppender">
+		class="pss.test.log.JDBCPoolAppender">
 		<param name="threshold" value="debug" />
 		<param name="sqlname" value="log" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -97,12 +97,7 @@
 		<priority value="error" />
 	</category>
 
-	<logger name="atf.pnr.api.kxun" additivity="false">
-		<priority value="info" />
-		<appender-ref ref="log.file.kxunDate_file" />
-	</logger>
-
-	<logger name="atf.trace" additivity="false">
+	<logger name="pss.trace" additivity="false">
 		<priority value="debug" />
 		<appender-ref ref="log.traceFile" />
 	</logger>
