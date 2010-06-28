@@ -58,7 +58,12 @@ public class Gb645Address {
     public byte[] getValue(){
         return this.getShrinkedMeterAddr();
     }
-    
+
+    public void setValue(byte[] msg, int beginIndex){
+        for (int i=0; i<6; i++)
+            this.value[i] = msg[beginIndex+i];
+    }
+
     private byte[] getShrinkedMeterAddr(){
         if ((shrinkBytes>=0) && (shrinkBytes<=6)){
             byte [] temp = new byte[6];
