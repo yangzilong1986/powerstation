@@ -25,6 +25,7 @@ public class MpInfoDao extends BaseHibernateDao<MpInfo, Long> {
         return MpInfo.class;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <X> List<X> findByPageRequest(Map mapRequest) {
 		return findAll(hql, mapRequest);
 	}
