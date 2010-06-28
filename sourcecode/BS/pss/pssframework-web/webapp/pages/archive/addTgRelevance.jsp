@@ -113,7 +113,7 @@ var contextPath  = '${ctx}';
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${mplist}" var="mpInfo" varStatus="status">
+      <c:forEach items="${tginfo.mpInfos}" var="mpInfo" varStatus="status">
         <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.gpInfos[0].gpAddr}</td>

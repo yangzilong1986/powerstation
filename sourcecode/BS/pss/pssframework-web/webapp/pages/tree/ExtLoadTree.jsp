@@ -95,7 +95,7 @@ function treeRenderBeforeHandler(pTree){
                           var type = node.split("_")[0];
                           var uid = node.split("_")[1];
                           if(type=='ORG'){ 
-                        	  url = "${ctx}/archive/tginfo/new?orgId="+uid;
+                        	  url = "${ctx}/archive/tginfo/new?orgInfo.orgId="+uid;
                         	  parent.parent.tabscontainermain.showTab("台区档案", url);
                           }
                       }
