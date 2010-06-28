@@ -133,17 +133,20 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		ModelAndView result = new ModelAndView();
 
-		result.addObject("tginfo", new TgInfo());
+		result.addObject("tginfo", model);
 
 		Map mapRequest = new HashMap();
 
 		mapRequest.put("codecate", CODE_TG_STATUS);
+
+		mapRequest.put("tgid", 0L);
 
 		this.CommonPart(result, mapRequest);
 
 		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
 		result.setViewName(TgInfoController.VIEW);
+
 		return result;
 	}
 
@@ -298,7 +301,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		// modelAndView.addObject("tranlist", getTranList(mapRequest));
 		modelAndView.addObject("pslist", this.getPsList(mapRequest));
 		modelAndView.addObject("termlist", this.getTerminalList(mapRequest));
-		modelAndView.addObject("mplist", this.getMpList(mapRequest));
+		// modelAndView.addObject("mplist", this.getMpList(mapRequest));
 
 	}
 
