@@ -39,7 +39,7 @@ public class BcdDataBuffer {
     }
 
     public byte[] getValue(){
-        byte[] rslt = new byte[dataBuff.limit()];
+        byte[] rslt = new byte[dataBuff.position()];
         dataBuff.rewind().get(rslt);
         return rslt;
     }

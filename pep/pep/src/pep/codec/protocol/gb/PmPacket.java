@@ -9,6 +9,7 @@ package pep.codec.protocol.gb;
  * @author luxiaochung
  */
 import java.nio.ByteBuffer;
+import pep.codec.utils.BcdUtils;
 
 abstract public class PmPacket {
 
@@ -130,7 +131,7 @@ abstract public class PmPacket {
     public PmPacket setValue(byte[] msg, int firstIndex) {
         int head = PmPacket.getMsgHeadOffset(msg, getProtocolVersion(), firstIndex);
         if (head != -1) {
-            int len = (byteToUnsigned(msg[head + 1]) + byteToUnsigned(msg[head + 2]) * 0xFF) >> 2;
+            int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0xFF) >> 2;
             controlCode.setValue(msg[head + 6]);
             address.setValue(msg, head + 7);
             afn = msg[head + 12];
@@ -176,14 +177,6 @@ abstract public class PmPacket {
         return cs;
     }
 
-    private static int byteToUnsigned(byte b) {
-        if (b >= 0) {
-            return b;
-        } else {
-            return 256 + b;
-        }
-    }
-
     private static boolean isNeedAuthorize(byte afn) {
         boolean result;
         switch (afn) {
@@ -218,24 +211,20 @@ abstract public class PmPacket {
     }
 
     protected static int getMsgHeadOffset(byte[] msg, byte protocolVersion, int firstIndex) {
-        int headOffset = -1;
-
         int head = PmPacket.getHeadOffset(msg, firstIndex, protocolVersion);
         while (head != -1) {
-
-            int len = (byteToUnsigned(msg[head + 1]) + byteToUnsigned(msg[head + 2]) * 0x0100) >> 2;
+            int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0x0100) >> 2;
 
             if (msg[head + len + 7] == 0x16) {
                 if (PmPacket.calcCs(msg, head + 6, head + len + 6) == msg[head + len + 6]) {
-                    headOffset = head;
-                    break;
+                    return head;
                 }
             }
             firstIndex++;
             head = PmPacket.getHeadOffset(msg, firstIndex, protocolVersion);
         }
 
-        return headOffset;
+        return -1;
     }
 
     private static int getHeadOffset(byte[] msg, int beginIndex, byte protocolVersion) {

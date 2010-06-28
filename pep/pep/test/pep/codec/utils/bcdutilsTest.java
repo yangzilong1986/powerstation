@@ -172,4 +172,11 @@ public class bcdutilsTest {
         assertTrue(TestUtils.byteArrayEquals(bytes1,bytes));
     }
 
+    @Test
+    public void testBcdToInt2(){
+        final byte[] bytes0 = {(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99,(byte)0x99};
+        final long value = 999999999999L;
+        long val = BcdUtils.bcdToInt(bytes0, 0, 6);
+        assertEquals(val,value);
+    }
 }
