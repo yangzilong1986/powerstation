@@ -1,0 +1,568 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动上送任务配置</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript"> 
+var contextPath = "../..";
+var chooseInfo = '请先选择终端对象！';
+var execResult = '执行结果';
+var readResult = '读取结果';
+var queryResult = '查询结果';
+var reading = '正在读取...';
+var downing = '正在应用...';
+var quering = '正在查询...';
+
+/**
+ * 全选checkbox
+ */
+function selectAllCB() {
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.selectAll.checked) {
+                if(!document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+            else {
+                if(document.all.ItemID.checked) {
+                    document.all.ItemID.click();
+                }
+            }
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(document.all.selectAll.checked) {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(!document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+            else {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        document.all.ItemID[i].click();
+                    }
+                }
+            }
+        }
+    }
+    catch(e) {
+    }
+}
+
+// 获得所有标示
+function getAllIdString() {
+    var sResult = "";
+    try {
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            sResult += "," + document.all.ItemID.value + "";
+        }
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            for(var i = 0; i < document.all.ItemID.length; i++) {
+                sResult += "," + document.all.ItemID[i].value + "";
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+    return sResult;
+}
+
+/**
+ * 得到已选择队列
+ * type:0-不加引号，1-加引号
+
+ */
+function getSelectedIdString(type) {
+    var sResult = "";
+    try {
+        if(type == 1) {
+            if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+                 if(document.all.ItemID.checked) {
+                     sResult += ",'" + document.all.ItemID.value + "'";
+                 }
+            }
+            else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        sResult += ",'" + document.all.ItemID[i].value + "'";
+                    }
+                }
+            }
+        }
+        else {
+            if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+                 if(document.all.ItemID.checked) {
+                     sResult += "," + document.all.ItemID.value;
+                 }
+            }
+            else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+                for(var i = 0; i < document.all.ItemID.length; i++) {
+                    if(document.all.ItemID[i].checked) {
+                        sResult += "," + document.all.ItemID[i].value;
+                    }
+                }
+            }
+        }
+        if(sResult.indexOf(",") != -1) {
+            sResult = sResult.substring(1);
+        }
+    }
+    catch(e) {
+    }
+
+    return sResult;
+}
+
+//数组比较
+Array.prototype.contains = function(obj) {   
+    var boo = false;   
+    for(var i=0;i<this.length;i++) {   
+        if(typeof obj == "object") {   
+            if(this[i].equals(obj)) {   
+                boo = true;   
+                break;   
+            }                          
+        }else {   
+            if(this[i] == obj)  {   
+                   boo = true;   
+                   break;                  
+            }   
+        }              
+    }   
+    return boo;   
+}
+
+function filter(a1, a2) {   
+    var myAry = [];   
+    var fun = function(item,ary) {   
+        var boo = false;   
+        for(var i=0;i<ary.length;i++) {   
+            if(item==ary[i]) {   
+                  boo = true;   
+                  break;   
+            }   
+        }   
+        return boo;                                
+    }      
+    for(var i=0;i<a1.length;i++) {   
+        if(!a2.contains(a1[i]))   
+            myAry.push(a1[i]);                     
+    }              
+    return myAry;   
+}
+
+// 设置结果内容
+function setText(idList, content){
+    if (idList != null) {
+        var idArr = idList.split(",");
+        for (var i=0; i < idArr.length; i++){
+            //设置结果内容
+            document.getElementById(idArr[i]).innerHTML = content;
+        }
+    }
+}
+
+var queryResult = {'data':[{'logicalAddr':'12080117','taskIds':'1,2'},
+                           {'logicalAddr':'12080118','taskIds':'3'},
+                           {'logicalAddr':'12080119','taskIds':'2'},
+                           {'logicalAddr':'12080120','taskIds':'3,4'},
+                           {'logicalAddr':'12080122','taskIds':'3,4'},
+                           {'logicalAddr':'12080123','taskIds':'3,4'},
+                           {'logicalAddr':'12080124','taskIds':'3,4'},
+                           {'logicalAddr':'12080125','taskIds':''},
+                           {'logicalAddr':'12080126','taskIds':''},
+                           {'logicalAddr':'12080127','taskIds':''},
+                           {'logicalAddr':'12080128','taskIds':''},
+                           {'logicalAddr':'12080129','taskIds':''},
+                           {'logicalAddr':'12080130','taskIds':''},
+                           {'logicalAddr':'12080131','taskIds':''},
+                           {'logicalAddr':'12080132','taskIds':''},
+                           {'logicalAddr':'12080133','taskIds':''},
+                           {'logicalAddr':'12080134','taskIds':''},
+                           {'logicalAddr':'12080135','taskIds':''},
+                           {'logicalAddr':'12080136','taskIds':''},
+                           {'logicalAddr':'12080137','taskIds':''}]};
+function queryMasterTask(){
+    var selectedList = getSelectedIdString(0);
+    if(selectedList == "" || selectedList == null) {
+        alert("请选择终端");
+        return;
+    }
+    var logicalAddr;
+    var taskIds;
+    //清空结果内容
+    setText(getAllIdString(), '');
+    //结果内容正在读取
+    setText(selectedList, quering);
+    var selectedArr = selectedList.split(",");
+    
+    for(var i = 0; i < queryResult.data.length; i++) {
+        logicalAddr = queryResult.data[i].logicalAddr;
+        taskIds = queryResult.data[i].taskIds;
+        if(selectedArr.contains(logicalAddr)){
+            if(taskIds != null && taskIds != '') {
+                $("#" + logicalAddr).html("任务 " + taskIds);
+            }
+            else {
+                $("#" + logicalAddr).html("无配置任务");
+            }
+        }
+    }
+}
+
+var applyResult = {'data':[{'logicalAddr':'12080117','taskIds':'1,2'},
+                           {'logicalAddr':'12080118','taskIds':''},
+                           {'logicalAddr':'12080119','taskIds':'1,2'},
+                           {'logicalAddr':'12080120','taskIds':'3,4'},
+                           {'logicalAddr':'12080122','taskIds':'3,4'},
+                           {'logicalAddr':'12080123','taskIds':'3,4'},
+                           {'logicalAddr':'12080124','taskIds':'3,4'},
+                           {'logicalAddr':'12080125','taskIds':'1,2'},
+                           {'logicalAddr':'12080126','taskIds':'1,2'},
+                           {'logicalAddr':'12080127','taskIds':'1,2'},
+                           {'logicalAddr':'12080128','taskIds':'1,2'},
+                           {'logicalAddr':'12080129','taskIds':'1,2'},
+                           {'logicalAddr':'12080130','taskIds':'1,2'},
+                           {'logicalAddr':'12080131','taskIds':'1,2'},
+                           {'logicalAddr':'12080132','taskIds':'1,2'},
+                           {'logicalAddr':'12080133','taskIds':''},
+                           {'logicalAddr':'12080134','taskIds':''},
+                           {'logicalAddr':'12080135','taskIds':'1,2'},
+                           {'logicalAddr':'12080136','taskIds':'1,2'},
+                           {'logicalAddr':'12080137','taskIds':'1,2'}]};
+function applyTask(){
+    var selectedList = getSelectedIdString(0);
+    if(selectedList == "" || selectedList == null) {
+        alert("请选择终端");
+        return;
+    }
+    var logicalAddr;
+    var taskIds;
+    //清空结果内容
+    setText(getAllIdString(), '');
+    //结果内容正在读取
+    setText(selectedList, quering);
+    var selectedArr = selectedList.split(",");
+    
+    for(var i = 0; i < applyResult.data.length; i++) {
+        logicalAddr = applyResult.data[i].logicalAddr;
+        taskIds = applyResult.data[i].taskIds;
+        if(selectedArr.contains(logicalAddr)){
+            if(taskIds != null && taskIds != '') {
+                $("#" + logicalAddr).html("任务 " + taskIds + " 应用成功");
+            }
+            else {
+                $("#" + logicalAddr).html("无任务可应用");
+            }
+        }
+    }
+}
+</script>
+</head>
+  
+<body>
+  <input type="hidden" id="action" name="action" value="normalMode"/>
+  <input type="hidden" id="sqlCode" name="sqlCode" value="AL_TASKSET_0001"/>
+  <input name="protocol_no" id="protocol_no"  type=hidden value="0" >
+  <input name="sys_object" id="sys_object"  type=hidden value="0" >
+ 
+  <div>
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">规约类型：</td>
+          <td width="120" class="dom">
+            <select name="protocol_type" id="protocol_type" >
+              <option value="0-0">--所有--</option>
+              <option value="106-1">国网规约-专变用户</option>
+            </select>
+            <script type="text/javascript">document.all.protocol_type.value="0-0";</script>
+          </td>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+            <select name="org_no" id="org_no" >
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">$("#org_no").val("44");</script>
+          </td>
+          <td width="70" class="label">对象编号：</td>
+          <td width="120" class="dom"><input type="text" name="object_no" value="" id="object_no"></td>
+          <td width="70" class="label">终端地址：</td>
+          <td width="120" class="dom"><input type="text" name="logical_addr" value="" id="logical_addr"></td>
+          <td></td>
+        </tr>
+      </table>
+      <div class="t_botton">
+        <div class="t_left">
+          <input type="button" id="taskApply" class="input2" value="任务应用" onclick="applyTask()"/>
+          <input type="button" id="taskQuery" class="input2" value="任务查询" onclick="queryMasterTask()"/>
+          &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="query" class="input1" value="查 询" onclick="">
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">对象信息</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 118));">
+          <table id="object_table" width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead><tr>
+              <th width="5%"><input type="checkbox" id="selectAll" onclick="selectAllCB()" checked /></th>
+              <th width="10%">序号</th>
+              <th width="15%">对象编号</th>
+              <th width="20%">对象名称</th>
+              <th width="15%">终端逻辑地址</th>
+              <th width="10%">状态</th>
+              <th width="25%">执行结果</th>
+            </tr></thead>
+            <tbody align="center">
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080117"  onclick="" checked/></td>
+                <td>1</td>
+                <td>2700025147</td>
+                <td>广州元瑛鞋业有限公司</td>
+                <td>12080117</td>
+                <td>在线</td>
+                <td id="12080117"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080118"  onclick="" checked/></td>
+                <td>2</td>
+                <td>2700025004</td>
+                <td>广州市天通纸制品厂</td>
+                <td>12080118</td>
+                <td>在线</td>
+                <td id="12080118"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080119"  onclick="" checked/></td>
+                <td>3</td>
+                <td>2700191757</td>
+                <td>广州市澳鹭环保设备有限公司</td>
+                <td>12080119</td>
+                <td>在线</td>
+                <td id="12080119"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080120"  onclick="" checked/></td>
+                <td>4</td>
+                <td>0900027130</td>
+                <td>广州市西青区宏发木业加工厂</td>
+                <td>12080120</td>
+                <td>在线</td>
+                <td id="12080120"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080122"  onclick="" checked/></td>
+                <td>5</td>
+                <td>2700034496</td>
+                <td>广州市西青区李七庄乡凌庄子村民委员会</td>
+                <td>12080122</td>
+                <td>在线</td>
+                <td id="12080122"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080123"  onclick="" checked/></td>
+                <td>6</td>
+                <td>2700001596</td>
+                <td>广州市亚天工贸有限公司</td>
+                <td>12080123</td>
+                <td>在线</td>
+                <td id="12080123"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080124"  onclick="" checked/></td>
+                <td>7</td>
+                <td>2700024217</td>
+                <td>广州市长城化工厂</td>
+                <td>12080124</td>
+                <td>在线</td>
+                <td id="12080124"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080125"  onclick="" checked/></td>
+                <td>8</td>
+                <td>2700191119</td>
+                <td>广州市盛强冷弯型钢有限公司</td>
+                <td>12080125</td>
+                <td>在线</td>
+                <td id="12080125"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080126"  onclick="" checked/></td>
+                <td>9</td>
+                <td>1212751004</td>
+                <td>南赵庄村</td>
+                <td>12080126</td>
+                <td>在线</td>
+                <td id="12080126"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080127"  onclick="" checked/></td>
+                <td>10</td>
+                <td>2700057768</td>
+                <td>广州市美石石化产品有限公司</td>
+                <td>12080127</td>
+                <td>在线</td>
+                <td id="12080127"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080128"  onclick="" checked/></td>
+                <td>11</td>
+                <td>1403893098</td>
+                <td>广州市中奥沥青有限公司</td>
+                <td>12080128</td>
+                <td>在线</td>
+                <td id="12080128"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080129"  onclick="" checked/></td>
+                <td>12</td>
+                <td>2700118756</td>
+                <td>广州市西青区南河镇小卞庄村民委员会</td>
+                <td>12080129</td>
+                <td>在线</td>
+                <td id="12080129"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080130"  onclick="" checked/></td>
+                <td>13</td>
+                <td>1403893077</td>
+                <td>广州市西青区辛口镇郭庄子村民委员会</td>
+                <td>12080130</td>
+                <td>在线</td>
+                <td id="12080130"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080131"  onclick="" checked/></td>
+                <td>14</td>
+                <td>1209759021</td>
+                <td>广州市福盛金属制品有限公司</td>
+                <td>12080131</td>
+                <td>在线</td>
+                <td id="12080131"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080132"  onclick="" checked/></td>
+                <td>15</td>
+                <td>2700127517</td>
+                <td>广州市谊鹏汽车配件有限公司</td>
+                <td>12080132</td>
+                <td>在线</td>
+                <td id="12080132"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080133"  onclick="" checked/></td>
+                <td>16</td>
+                <td>0900018424</td>
+                <td>广州市昊众科工贸有限公司</td>
+                <td>12080133</td>
+                <td>在线</td>
+                <td id="12080133"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080134"  onclick="" checked/></td>
+                <td>17</td>
+                <td>1405849030</td>
+                <td>广州市西青区杨柳青第二中学</td>
+                <td>12080134</td>
+                <td>在线</td>
+                <td id="12080134"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080135"  onclick="" checked/></td>
+                <td>18</td>
+                <td>1241575023</td>
+                <td>广州市测绘院</td>
+                <td>12080135</td>
+                <td>在线</td>
+                <td id="12080135"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080136"  onclick="" checked/></td>
+                <td>19</td>
+                <td>2700080989</td>
+                <td>中国石油天然气股份有限公司广州销售分公司</td>
+                <td>12080136</td>
+                <td>在线</td>
+                <td id="12080136"></td>
+              </tr>
+              
+              <tr>
+                <td><input type="checkbox" name="ItemID" id="ItemID" value="12080137"  onclick="" checked/></td>
+                <td>20</td>
+                <td>2700029043</td>
+                <td>广州金工机械设备制造有限公司</td>
+                <td>12080137</td>
+                <td>在线</td>
+                <td id="12080137"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

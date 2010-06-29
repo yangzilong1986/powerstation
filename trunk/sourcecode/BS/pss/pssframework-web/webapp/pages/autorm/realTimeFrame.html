@@ -1,0 +1,583 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自动上送任务配置</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/autorm/common.js"></script>
+<script type="text/javascript">
+var chooseObject = '请选择抄表对象';
+
+function deleteDataitemTd() {
+    var rows = document.all.object_table.rows;
+    var cells = rows.item(0).cells.length;
+    for(var j = cells - 1; j > 7; j--) {
+        for(var i = 0; i < rows.length; i++) {
+            rows[i].deleteCell(j);
+        }
+    }
+}
+
+function insertTd(title, code) {
+    var rows = document.all.object_table.rows;
+    var ids = document.all.ItemID;
+    var tids = document.all.tdID;
+    var th = document.createElement("th");
+    th.innerHTML = title;
+    rows[0].appendChild(th);
+    for(var i = 1; i < rows.length; i++) {
+        var row = rows[i];
+        //一条数据
+        if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length == "undefined") {
+            if(document.all.ItemID.checked) {
+                var td1 = row.insertCell();
+                resendId=document.all.ItemID.value;
+                td1.id = document.all.tdID.value +"#"+ code;
+                td1.innerHTML = "正在发送...";
+            }
+            else {
+                var td2 = row.insertCell();
+                td2.id = "";
+                td2.innerHTML = "";
+            }
+        }
+        //多条数据
+        else if(typeof document.all.ItemID != "undefined" && typeof document.all.ItemID.length != "undefined") {
+            if(ids[i-1].checked) {
+                var td1 = row.insertCell();
+                resendId=ids[i-1].value;
+                td1.id = tids[i-1].value +"#"+ code;
+                td1.innerHTML = "正在发送...";
+            }
+            else {
+                var td2 = row.insertCell();
+                td2.id = "";
+                td2.innerHTML = "";
+            }
+        }
+    }
+}
+
+function enabledButton() {
+    document.all.dqgflData.disabled = false;
+    document.all.dqglData.disabled = false;
+    document.all.dydlData.disabled = false;
+    document.all.sydlData.disabled = false;
+    document.all.queryData.disabled = false;
+}
+ 
+function disabledButton() {
+    document.all.dqgflData.disabled = true;
+    document.all.dqglData.disabled = true;
+    document.all.dydlData.disabled = true;
+    document.all.sydlData.disabled = true;
+    document.all.queryData.disabled = true;
+}
+
+function viewTds(jsonObj, commanditems, fetchCount) {
+    var commandArr = commanditems.split(",");
+    var rows = document.all.object_table.rows;
+    var cells = rows.item(0).cells.length;
+    for(var i = 1; i < rows.length; i++) {
+        for(var j = 8; j < cells; j++) {
+            if(jsonObj != null){
+                for(var k = 0; k < jsonObj.data.length; k++){
+                    for(var m = 0; m < commandArr.length; m++){
+                        var commandItem = commandArr[m];
+                        var colId = rows[i].cells[j].id ;
+                        var index = colId.lastIndexOf("#");
+                        var keyName = colId.substring(0, index+1) + commandItem + colId.substring(index, colId.length);
+                        if(jsonObj.data[k].key == keyName){
+                            rows[i].cells[j].innerHTML = jsonObj.data[k].value;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if(fetchCount == 1 && rows[i].cells[j].innerHTML == "正在发送..."){
+                rows[i].cells[j].innerHTML = "等待超时"; 
+            }
+        }
+    }
+}
+
+
+var commanditems;
+var jsonObj;
+// 当前各费率电能示值
+function readDqgflData() {
+    deleteDataitemTd();
+    insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
+    insertTd('正向有功尖(kWh)', 'DI_0101');    //正向有功尖
+    insertTd('正向有功峰(kWh)', 'DI_0102');    //正向有功峰
+    insertTd('正向有功平(kWh)', 'DI_0103');    //正向有功平
+    insertTd('正向有功谷(kWh)', 'DI_0104');    //正向有功谷
+    insertTd('正向无功总(kvarh)', 'DI_A000');  //正向无功总
+    insertTd('反向有功总(kWh)', 'DI_0200');    //反向有功总
+    insertTd('反向无功总(kvarh)', 'DI_A100');  //反向无功总
+    disabledButton();
+    var sSelectedList = getSelectedIdString(0);
+    if(sSelectedList == "") {
+        alert(chooseObject);
+        return;
+    }
+    jsonObj = {'data':[{'key':'10000001#6#100C0033#DI_0100','value':'2'},
+                       {'key':'10000001#6#100C0033#DI_0101','value':'3'},
+                       {'key':'10000001#6#100C0033#DI_0102','value':'4'},
+                       {'key':'10000001#6#100C0033#DI_0103','value':'5'}]};
+    commanditems = "100C0033,100C0034";
+    setTimeout("fetchReturnResult(3)", 3000);
+}
+ 
+// 当前功率
+function readDqglData() {
+    deleteDataitemTd();
+    insertTd('当前总有功功率(kW)', 'DI_2300');  //当前总有功功率
+    insertTd('当前总无功功率(kW)', 'DI_2400');  //当前总无功功率
+    disabledButton();
+    var sSelectedList = getSelectedIdString(0);
+    if(sSelectedList == "") {
+        alert(chooseObject);
+        return;
+    }
+    jsonObj = {'data':[{'key':'10000001#6#100C0025#DI_2300','value':'3'},
+                       {'key':'10000001#6#100C0025#DI_2400','value':'3'},
+                       {'key':'11223344#1#100C0017#DI_2300','value':'4'},
+                       {'key':'11223344#1#100C0017#DI_2400','value':'4'},
+                       {'key':'11223344#1#100C0018#DI_2300','value':'5'},
+                       {'key':'11223344#1#100C0018#DI_2400','value':'5'}]};
+    commanditems = "100C0025,100C0017,100C0018";
+    setTimeout("fetchReturnResult(3)", 3000);
+}
+ 
+// 电压电流
+function readDydlData() {
+    deleteDataitemTd();
+    insertTd('A相电压(V)', 'DI_2101');     //A相电压
+    insertTd('B相电压(V)', 'DI_2102');     //B相电压
+    insertTd('C相电压(V)', 'DI_2103');     //C相电压
+    insertTd('A相电流(A)', 'DI_2201');     //A相电流
+    insertTd('B相电流(A)', 'DI_2202');     //B相电流
+    insertTd('C相电流(A)', 'DI_2203');     //C相电流
+    disabledButton();
+    var sSelectedList = getSelectedIdString(0);
+    if(sSelectedList == "") {
+        alert(chooseObject);
+        return;
+    }
+    jsonObj = {'data':[{'key':'10000001#6#100C0025#DI_2101','value':'13'},
+                       {'key':'10000001#6#100C0025#DI_2102','value':'13'},
+                       {'key':'11223344#1#100C0025#DI_2103','value':'14'},
+                       {'key':'11223344#1#100C0025#DI_2201','value':'14'},
+                       {'key':'12001115#1#100C0025#DI_2202','value':'15'},
+                       {'key':'12001115#1#100C0025#DI_2203','value':'15'}]};
+    commanditems = "100C0025";
+    setTimeout("fetchReturnResult(3)", 3000);
+}
+ 
+//剩余电量（费）
+function readSydlData() {
+    deleteDataitemTd();
+    insertTd('剩余电量(费)(kWh)', 'DI_BE28');    
+    disabledButton();
+    var sSelectedList = getSelectedIdString(0);
+    if(sSelectedList == "") {
+        alert(chooseObject);
+        return;
+    }
+    jsonObj = {'data':[{'key':'10000001#6#100C0023#DI_BE28','value':'34'},
+                       {'key':'10000001#6#100C0023#DI_BE28','value':'34'},
+                       {'key':'11223344#1#100C0023#DI_BE28','value':'34'},
+                       {'key':'11223344#1#100C0023#DI_BE28','value':'34'},
+                       {'key':'12001115#1#100C0023#DI_BE28','value':'34'},
+                       {'key':'12001115#1#100C0023#DI_BE28','value':'34'}]};
+    commanditems = "100C0023";
+    setTimeout("fetchReturnResult(3)", 3000);
+}
+
+function fetchReturnResult(fetchCount) {
+    viewTds(jsonObj, commanditems, fetchCount);
+    if(fetchCount > 1) {
+        setTimeout("fetchReturnResult(" + (fetchCount-1) + ")", 3000);
+    }
+    else {
+        enabledButton();
+    }
+}
+
+</script>
+</head>
+  
+<body>
+  <div> 
+    <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+            <select name="orgNo" id="orgNo" >
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">document.all.orgNo.value="44";</script>
+          </td>
+          <td width="70" class="label">对象编号：</td>
+          <td width="120" class="dom"><input type="text" name="objectNo" value=""></td>
+          <td width="70" class="label">终端地址：</td>
+          <td width="120" class="dom"><input type="text" name="logicalAddr" value=""></td>
+          <td width="70" class="label"></td>
+          <td width="120" class="dom"></td>
+          <td colspan="3"></td>
+        </tr>
+      </table>
+      <div class="t_botton">
+        <div class="t_left">
+          <input type="button" name="dqgflData" class="input4" value="各费率电能示值" onclick="readDqgflData()"/>
+          <input type="button" name="dqglData" class="input2"  value="当前功率" onclick="readDqglData()"/>
+          <input type="button" name="dydlData" class="input2"  value="电压电流" onclick="readDydlData()"/>
+          <input type="button" name="sydlData" class="input4"  value="剩余电量(费)" onclick="readSydlData()"/>
+          &nbsp;&nbsp;&nbsp;&nbsp;<input class="input1" type="submit" name="queryData" value="查 询"/> 
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="target">
+          <ul>
+            <li class="target_on"><a href="#" onclick="return false;">实时抄表</a></li>
+            <li class="clear"></li>
+          </ul>
+          <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+        </div>
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 118));">
+          <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+              <th><input type="checkbox" name="selectAll" onclick="selectAllCB()" checked/></th>
+              <th>序号</th>
+              <th>对象编号</th>
+              <th>对象名称</th>
+              <th>对象类型</th>
+              <th>终端地址</th>
+              <th>测量点性质</th>
+              <th>测量点序号</th>
+            </tr></thead>
+            <tbody align="center">
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101831" checked/>
+                  <input type="hidden" name="tdID" value="10000001#6"/>
+                </td>
+                <td>1</td>
+                <td>11314676</td>
+                <td>广州市盛强冷弯型钢有限公司</td>
+                <td>专变用户</td>
+                <td>10000001</td>
+                <td>脉冲</td>
+                <td>6</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="99916480" checked/>
+                  <input type="hidden" name="tdID" value="11223344#1"/>
+                </td>
+                <td>2</td>
+                <td>11501100</td>
+                <td>广州市福盛金属制品有限公司</td>
+                <td>专变用户</td>
+                <td>11223344</td>
+                <td>485</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="99916500" checked/>
+                  <input type="hidden" name="tdID" value="11223344#1"/>
+                </td>
+                <td>3</td>
+                <td>11501100</td>
+                <td>广州市福盛金属制品有限公司</td>
+                <td>专变用户</td>
+                <td>11223344</td>
+                <td>总加组</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="99916482" checked/>
+                  <input type="hidden" name="tdID" value="11223344#1"/>
+                </td>
+                <td>4</td>
+                <td>11501100</td>
+                <td>广州市福盛金属制品有限公司</td>
+                <td>专变用户</td>
+                <td>11223344</td>
+                <td>模拟量</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1102461" checked/>
+                  <input type="hidden" name="tdID" value="12000002#1"/>
+                </td>
+                <td>5</td>
+                <td>13462246</td>
+                <td>广州市长城化工厂</td>
+                <td>专变用户</td>
+                <td>12000002</td>
+                <td>485</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1103002" checked/>
+                  <input type="hidden" name="tdID" value="12001115#1"/>
+                </td>
+                <td>6</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>485</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101321" checked/>
+                  <input type="hidden" name="tdID" value="12001115#3"/>
+                </td>
+                <td>7</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>485</td>
+                <td>3</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101323" checked/>
+                  <input type="hidden" name="tdID" value="12001115#4"/>
+                </td>
+                <td>8</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>485</td>
+                <td>4</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101833" checked/>
+                  <input type="hidden" name="tdID" value="12001115#11"/>
+                </td>
+                <td>9</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>485</td>
+                <td>11</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="99927" checked/>
+                  <input type="hidden" name="tdID" value="12001115#2"/>
+                </td>
+                <td>10</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>2</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101362" checked/>
+                  <input type="hidden" name="tdID" value="12001115#5"/>
+                </td>
+                <td>11</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>5</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101363" checked/>
+                  <input type="hidden" name="tdID" value="12001115#6"/>
+                </td>
+                <td>12</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>6</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101834" checked/>
+                  <input type="hidden" name="tdID" value="12001115#6"/>
+                </td>
+                <td>13</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>6</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101364" checked/>
+                  <input type="hidden" name="tdID" value="12001115#7"/>
+                </td>
+                <td>14</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>7</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1101832" checked/>
+                  <input type="hidden" name="tdID" value="12001115#9"/>
+                </td>
+                <td>15</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>脉冲</td>
+                <td>9</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="99928" checked/>
+                  <input type="hidden" name="tdID" value="12001115#1"/>
+                </td>
+                <td>16</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>总加组</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1102681" checked/>
+                  <input type="hidden" name="tdID" value="12001115#5"/>
+                </td>
+                <td>17</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>模拟量</td>
+                <td>5</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1102682" checked/>
+                  <input type="hidden" name="tdID" value="12001115#5"/>
+                </td>
+                <td>18</td>
+                <td>12001111</td>
+                <td>广州市天通纸制品厂</td>
+                <td>专变用户</td>
+                <td>12001115</td>
+                <td>模拟量</td>
+                <td>5</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1102704" checked/>
+                  <input type="hidden" name="tdID" value="12034682#1"/>
+                </td>
+                <td>19</td>
+                <td>32002222</td>
+                <td>广州市亚天工贸有限公司</td>
+                <td>专变用户</td>
+                <td>12034682</td>
+                <td>485</td>
+                <td>1</td>
+              </tr>
+               
+              <tr>
+                <td>
+                  <input type="checkbox" name="ItemID" value="1102705" checked/>
+                  <input type="hidden" name="tdID" value="12034682#2"/>
+                </td>
+                <td>20</td>
+                <td>32002222</td>
+                <td>广州市亚天工贸有限公司</td>
+                <td>专变用户</td>
+                <td>12034682</td>
+                <td>485</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+        </div>
+      </div>
+    </div> 
+  </div>
+</body>
+</html>

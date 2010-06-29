@@ -1,0 +1,146 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>修正记录查询</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript"> 
+</script>
+</head>
+<body>
+  <div id="main">
+    <div id="tool">
+      <div class="opbutton1"><input type="submit" name="query" id="query" value="查 询" class="input2" /></div>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="70" class="label">供电单位：</td>
+          <td width="120" class="dom">
+            <select id="orgNo" name="orgNo">
+              <option value="44">广东省电力公司</option>
+              <option value="4401"> -- 广州市电力公司</option>
+              <option value="4402"> -- 韶关市电力公司</option>
+              <option value="4403"> -- 深圳市电力公司</option>
+              <option value="4404"> -- 珠海市电力公司</option>
+              <option value="4405"> -- 汕头市电力公司</option>
+              <option value="4406"> -- 佛山市电力公司</option>
+              <option value="4407"> -- 江门市电力公司</option>
+              <option value="4408"> -- 湛江市电力公司</option>
+              <option value="440806"> -- -- 遂溪供电局</option>
+              <option value="440807"> -- -- 徐闻供电局</option>
+              <option value="440808"> -- -- 吴川供电局</option>
+              <option value="440809"> -- -- 廉江供电局</option>
+              <option value="440810"> -- -- 雷州供电局</option>
+              <option value="4409"> -- 茂名市电力公司</option>
+              <option value="4412"> -- 肇庆市电力公司</option>
+              <option value="4413"> -- 惠州市电力公司</option>
+              <option value="4414"> -- 梅州市电力公司</option>
+              <option value="4415"> -- 汕尾市电力公司</option>
+              <option value="4416"> -- 河源市电力公司</option>
+              <option value="4417"> -- 阳江市电力公司</option>
+              <option value="4418"> -- 清远市电力公司</option>
+              <option value="4419"> -- 东莞市电力公司</option>
+              <option value="4420"> -- 中山市电力公司</option>
+              <option value="4421"> -- 潮州市电力公司</option>
+              <option value="4422"> -- 揭阳市电力公司</option>
+              <option value="4423"> -- 云浮市电力公司</option>
+            </select>
+            <script type="text/javascript">$("#orgNo").val("44");</script>
+          </td>
+          <td width="70" class="label">类　型：</td>
+          <td width="120" class="dom">
+            <select id="errType" name="errType">
+              <option value="1">表码超大</option>
+              <option value="2">表码非法</option>
+              <option value="3">表码倒走</option>
+              <option value="4">表码连续不走字</option>
+              <option value="5">日断相次数变化</option>
+            </select>
+            <script type="text/javascript">$("#errType").val("1");</script>
+          </td>
+          <td colspan="5"></td>
+        </tr>
+        <tr>
+          <td width="70" class="label">开始时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="start_date" name="start_date" value="2009-8-27" />
+          </td>
+          <td width="70" class="label">结束时间：</td>
+          <td width="120" class="dom_date">
+            <input type="text" id="end_date" name="end_date" value="2009-9-20" />
+          </td>
+          <td colspan="5"></td>
+        </tr>
+        <tr>
+          <td colspan="9">&nbsp;
+            <input type="radio" name="sys_object" value="0" checked="checked" onclick="">全部
+            <input type="radio" name="sys_object" value="1" onclick="">专变
+            <input type="radio" name="sys_object" value="2" onclick="">配变
+            <input type="radio" name="sys_object" value="3" onclick="">低压集抄
+            <input type="radio" name="sys_object" value="4" onclick="">变电站
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content">
+      <div id="cont_1">
+        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 124));">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead><tr>
+              <th width="10%">编号</th>
+              <th width="10%">表局编号</th>
+              <th width="15%">异常类型</th>
+              <th width="20%">修正前内容</th>
+              <th width="15%">修正后内容</th>
+              <th width="15%">修正时间</th>
+              <th width="15%">修正人</th>
+            </tr></thead>
+            <colgroup>
+              <col id="col_00" title="编号" />
+              <col id="col_01" title="表局编号" />
+              <col id="col_02" title="异常类型" />
+              <col id="col_03" title="修正前内容" />
+              <col id="col_04" title="修正后内容" />
+              <col id="col_05" title="修正时间" />
+              <col id="col_06" title="修正人" />
+            </colgroup>
+            <tbody>
+              <tr align="center">
+                <td>1</td>
+                <td>532432</td>
+                <td>表码超大</td>
+                <td>566666</td>
+                <td>234.5</td>
+                <td>20090504</td>
+                <td>Admin</td>
+              </tr>
+              <tr align="center">
+                <td>2</td>
+                <td>432432</td>
+                <td>表码超大</td>
+                <td>76637554</td>
+                <td>2387.5</td>
+                <td>20090504</td>
+                <td>Admin</td>
+              </tr>
+              <tr align="center">
+                <td>3</td>
+                <td>543543</td>
+                <td>表码超大</td>
+                <td>33212131</td>
+                <td>2397.5</td>
+                <td>20090504</td>
+                <td>Admin</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pageContainer">
+          <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

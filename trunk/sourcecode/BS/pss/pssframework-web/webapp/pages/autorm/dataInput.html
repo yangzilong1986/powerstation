@@ -1,0 +1,373 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据录入</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/autorm/calendar.js"></script>
+<script>
+/** 设置数据输入域状态  */
+function setDataInputStatus(flag) { 
+    $("#elecDataTable input").each(function() {
+        $(this).attr("disabled", flag);
+    });
+}
+
+//初始化
+$(document).ready(function(){
+    setDataInputStatus(true);
+    
+    /** radio控件绑定ajax事件 */
+    $(":radio").each(function(){
+        $(this).bind("click", getElecData4Ajax);
+    });
+
+    /** 编辑数据 */
+    $('#btn_save').bind("click", editElecData4Ajax);
+});
+
+//查询用户信息
+function queryCustInfo(){
+    parent.method = "add";
+    var assetNo = $.trim($('#assetNo').val());
+    if(parent.assetObj.assetNo == assetNo){
+        $('#custNo').html(parent.assetObj.custNo);
+        $('#custName').html(parent.assetObj.custName);
+        $('#installAddr').html(parent.assetObj.installAddr);
+        $('#ct').html(parent.assetObj.ct);
+        $('#pt').html(parent.assetObj.pt);
+        //alert($('input[type=radio][name=dataDens][checked=true]').val());
+        //alert($(':radio:checked').val());
+        dealDataInput();
+    }
+    else {
+        //alert("该电表资产号不存在!");
+        clearData();
+        setDataInputStatus(true);
+    }
+}
+
+function dealDataInput(){
+    var dataDens = $('input[type=radio][name=dataDens][checked=true]').val();
+    if("10" == dataDens){
+        if(parent.dayDataObj.IS_EXIST){
+            fillData4Json(parent.dayDataObj);
+            setDataInputStatus(true);
+        }
+        else {
+            clearDataInfo();
+            setDataInputStatus(false);
+        }
+    }
+    else if("20" == dataDens){
+        if(parent.monDataObj.IS_EXIST){
+            fillData4Json(parent.monDataObj);
+            setDataInputStatus(true);
+        }
+        else {
+            clearDataInfo();
+            setDataInputStatus(false);
+        }
+    }
+}
+
+/** ajax 取电量数据 */
+function getElecData4Ajax(){
+    parent.method = "add";
+    var assetNo = $.trim($('#assetNo').val());
+    var custNo = $('#custNo').html();
+    //已经查询到的数据 
+    if(custNo != null && custNo != ""){
+        dealDataInput();
+    }
+}
+
+/** ajax 提交数据，提交完清空表单  */
+function editElecData4Ajax(){
+    if(!checkElecData()){
+        alert("数据格式问题!");
+        return;
+    }
+    
+    var dataDens = $('input[type=radio][name=dataDens][checked=true]').val();
+    if("10" == dataDens){
+        saveData4Json(parent.dayDataObj);
+    }
+    else if("20" == dataDens){
+        saveData4Json(parent.monDataObj);
+    }
+    if(parent.method == "add"){
+        parent.recordpage.insertDataByType(dataDens);
+        alert("追加成功!");
+    }
+    else if(parent.method == "mod"){
+        parent.recordpage.updateDataByType(dataDens);
+        alert("更新成功!");
+    }
+    if("10" == dataDens){
+        fillData4Json(parent.dayDataObj);
+    }
+    else if("20" == dataDens){
+        fillData4Json(parent.monDataObj);
+    }
+    setDataInputStatus(true);
+}
+
+function saveData4Json(jsonObj){
+    jsonObj.P_ACT_TOTAL = $(':input[name=P_ACT_TOTAL]').val()=="" ? "0" : $(':input[name=P_ACT_TOTAL]').val();
+    jsonObj.P_ACT_SHARP = $(':input[name=P_ACT_SHARP]').val()=="" ? "0" : $(':input[name=P_ACT_SHARP]').val();
+    jsonObj.P_ACT_PEAK = $(':input[name=P_ACT_PEAK]').val()=="" ? "0" : $(':input[name=P_ACT_PEAK]').val();
+    jsonObj.P_ACT_LEVEL = $(':input[name=P_ACT_LEVEL]').val()=="" ? "0" : $(':input[name=P_ACT_LEVEL]').val();
+    jsonObj.P_ACT_VALLEY = $(':input[name=P_ACT_VALLEY]').val()=="" ? "0" : $(':input[name=P_ACT_VALLEY]').val();
+    
+    jsonObj.I_ACT_TOTAL = $(':input[name=I_ACT_TOTAL]').val()=="" ? "0" : $(':input[name=I_ACT_TOTAL]').val();
+    jsonObj.I_ACT_SHARP = $(':input[name=I_ACT_SHARP]').val()=="" ? "0" : $(':input[name=I_ACT_SHARP]').val();
+    jsonObj.I_ACT_PEAK = $(':input[name=I_ACT_PEAK]').val()=="" ? "0" : $(':input[name=I_ACT_PEAK]').val();
+    jsonObj.I_ACT_LEVEL = $(':input[name=I_ACT_LEVEL]').val()=="" ? "0" : $(':input[name=I_ACT_LEVEL]').val();
+    jsonObj.I_ACT_VALLEY = $(':input[name=I_ACT_VALLEY]').val()=="" ? "0" : $(':input[name=I_ACT_VALLEY]').val();
+
+    jsonObj.P_REACT_TOTAL = $(':input[name=P_REACT_TOTAL]').val()=="" ? "0" : $(':input[name=P_REACT_TOTAL]').val();
+    jsonObj.I_REACT_TOTAL = $(':input[name=I_REACT_TOTAL]').val()=="" ? "0" : $(':input[name=I_REACT_TOTAL]').val();
+    jsonObj.IS_EXIST = true;
+}
+
+function delData4Json(jsonObj){
+    jsonObj.P_ACT_TOTAL = '';
+    jsonObj.P_ACT_SHARP = '';
+    jsonObj.P_ACT_PEAK = '';
+    jsonObj.P_ACT_LEVEL = '';
+    jsonObj.P_ACT_VALLEY = '';
+    
+    jsonObj.I_ACT_TOTAL = '';
+    jsonObj.I_ACT_SHARP = '';
+    jsonObj.I_ACT_PEAK = '';
+    jsonObj.I_ACT_LEVEL = '';
+    jsonObj.I_ACT_VALLEY = '';
+
+    jsonObj.P_REACT_TOTAL = '';
+    jsonObj.I_REACT_TOTAL = '';
+    jsonObj.IS_EXIST = false;
+}
+
+/** 检查电量数据的有效性 */
+function checkElecData(){
+    var flag = true;
+    $('#elecDataTable input').each(function(){
+        if(isNaN($(this).val()) && $(this).val()!= "保 存"){
+            $(this).val("");
+            $(this).focus();
+            flag = false;
+            return false;
+        }
+    });
+    return flag;
+}
+
+function fillData4Json(jsonObj){
+    if(jsonObj == null){
+        return;
+    }
+    $(':input[name=P_ACT_TOTAL]').val(jsonObj.P_ACT_TOTAL);
+    $(':input[name=P_ACT_SHARP]').val(jsonObj.P_ACT_SHARP);
+    $(':input[name=P_ACT_PEAK]').val(jsonObj.P_ACT_PEAK);
+    $(':input[name=P_ACT_LEVEL]').val(jsonObj.P_ACT_LEVEL);
+    $(':input[name=P_ACT_VALLEY]').val(jsonObj.P_ACT_VALLEY);
+    
+    $(':input[name=I_ACT_TOTAL]').val(jsonObj.I_ACT_TOTAL);
+    $(':input[name=I_ACT_SHARP]').val(jsonObj.I_ACT_SHARP);
+    $(':input[name=I_ACT_PEAK]').val(jsonObj.I_ACT_PEAK);
+    $(':input[name=I_ACT_LEVEL]').val(jsonObj.I_ACT_LEVEL);
+    $(':input[name=I_ACT_VALLEY]').val(jsonObj.I_ACT_VALLEY);
+
+    $(':input[name=P_REACT_TOTAL]').val(jsonObj.P_REACT_TOTAL);
+    $(':input[name=I_REACT_TOTAL]').val(jsonObj.I_REACT_TOTAL);
+}
+
+function clearData(){
+    $('#custNo').html('');
+    $('#custName').html('');
+    $('#installAddr').html('');
+    $('#ct').html('');
+    $('#pt').html('');
+    
+    $(':input[name=P_ACT_TOTAL]').val('');
+    $(':input[name=P_ACT_SHARP]').val('');
+    $(':input[name=P_ACT_PEAK]').val('');
+    $(':input[name=P_ACT_LEVEL]').val('');
+    $(':input[name=P_ACT_VALLEY]').val('');
+    
+    $(':input[name=I_ACT_TOTAL]').val('');
+    $(':input[name=I_ACT_SHARP]').val('');
+    $(':input[name=I_ACT_PEAK]').val('');
+    $(':input[name=I_ACT_LEVEL]').val('');
+    $(':input[name=I_ACT_VALLEY]').val('');
+
+    $(':input[name=P_REACT_TOTAL]').val('');
+    $(':input[name=I_REACT_TOTAL]').val('');
+}
+
+function clearDataInfo(){
+    $(':input[name=P_ACT_TOTAL]').val('');
+    $(':input[name=P_ACT_SHARP]').val('');
+    $(':input[name=P_ACT_PEAK]').val('');
+    $(':input[name=P_ACT_LEVEL]').val('');
+    $(':input[name=P_ACT_VALLEY]').val('');
+    
+    $(':input[name=I_ACT_TOTAL]').val('');
+    $(':input[name=I_ACT_SHARP]').val('');
+    $(':input[name=I_ACT_PEAK]').val('');
+    $(':input[name=I_ACT_LEVEL]').val('');
+    $(':input[name=I_ACT_VALLEY]').val('');
+
+    $(':input[name=P_REACT_TOTAL]').val('');
+    $(':input[name=I_REACT_TOTAL]').val('');
+}
+
+//编辑电量数据
+function editDataFromOtherPage(dataDens){
+    parent.method = "mod";
+    $('#custNo').html(parent.assetObj.custNo);
+    $('#custName').html(parent.assetObj.custName);
+    $('#installAddr').html(parent.assetObj.installAddr);
+    $('#ct').html(parent.assetObj.ct);
+    $('#pt').html(parent.assetObj.pt);
+    $('input[type=radio][name=dataDens]').each(function(){
+        if(this.value == dataDens){
+            this.checked = true;
+        }
+    });
+    if("10" == dataDens){
+        fillData4Json(parent.dayDataObj);
+        setDataInputStatus(false);
+    }
+    else if("20" == dataDens){
+        fillData4Json(parent.monDataObj);
+        setDataInputStatus(false);
+    }
+}
+</script>
+</head>
+
+<body>
+  <div id="body">
+    <div id="main2">
+      <input type="hidden" name="gpId" value="" id="gpId">
+      <input type="hidden" name="orgNo" value="" id="orgNo">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="70" class="label">表 号：</td>
+            <td width="120" class="dom">
+              <input type="text" name="assetNo" value="" id="assetNo">
+            </td>
+            <td width="70" class="label">数据时间：</td>
+            <td width="150" class="dom_date">
+              <input type="text" name="dDate" value="2009-9-17" id="jssj">
+            </td>
+            <td width="70" class="label">数据密度：</td>
+            <td width="180">
+              <input type="radio" name="dataDens" value="10" checked="checked">日冻结
+              <input type="radio" name="dataDens" value="20">月冻结
+            </td>
+            <td colspan="4"><input class="input1" type="submit" id="btn_query_cust" value="查 询" onclick="queryCustInfo();"/></td>
+          </tr>
+          <tr>
+            <td width="70" class="label">户 号：</td>
+            <td width="120" class="dom" id="custNo"></td>
+            <td width="70" class="label">户 名：</td>
+            <td width="150" class="dom" id="custName"></td>
+            <td width="70" class="label">安装地址：</td>
+            <td width="180" class="dom" id="installAddr"></td>
+            <td width="70" class="label">CT变比：</td>
+            <td width="120" class="dom" id="ct"></td>
+            <td width="70" class="label">PT变比：</td>
+            <td width="120" class="dom" id="pt"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0"  class="function_title">
+          <tr>
+            <td colspan="9"></td>
+          </tr>
+          <tr>
+            <td width="70" class="label">数据信息</td>
+            <td colspan="8"></td>
+          </tr>
+        </table>
+        <table id="elecDataTable" width="100%" class="tablestyle" border=0 cellpadding=0 cellspacing=0 align="center">
+          <tr>
+            <td width="86" class="label">正向有功总：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_ACT_TOTAL" value="" id="P_ACT_TOTAL">
+            </td>
+            <td width="86" class="label">反向有功总：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_ACT_TOTAL" value="" id="I_ACT_TOTAL">
+            </td>
+            <td width="86" class="label">正向无功总：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_REACT_TOTAL" value="" id="P_REACT_TOTAL">
+            </td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td width="86" class="label">正向有功尖：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_ACT_SHARP" value="" id="P_ACT_SHARP">
+            </td>
+            <td width="86" class="label">反向有功尖：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_ACT_SHARP" value="" id="I_ACT_SHARP">
+            </td>
+            <td width="86" class="label">反向无功总：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_REACT_TOTAL" value="" id="I_REACT_TOTAL">
+            </td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td width="86" class="label">正向有功峰：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_ACT_PEAK" value="" id="P_ACT_PEAK">
+            </td>
+            <td width="86" class="label">反向有功峰：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_ACT_PEAK" value="" id="I_ACT_PEAK">
+            </td>
+            <td colspan="5"></td>
+          </tr>
+          <tr>
+            <td width="86" class="label">正向有功平：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_ACT_LEVEL" value="" id="P_ACT_LEVEL">
+            </td>
+            <td width="86" class="label">反向有功平：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_ACT_LEVEL" value="" id="I_ACT_LEVEL">
+            </td>
+            <td colspan="5"></td>
+          </tr>
+          <tr>
+            <td width="86" class="label">正向有功谷：</td>
+            <td width="80" class="dom">
+              <input type="text" name="P_ACT_VALLEY" value="" id="P_ACT_VALLEY">
+            </td>
+            <td width="86" class="label">反向有功谷：</td>
+            <td width="80" class="dom">
+              <input type="text" name="I_ACT_VALLEY" value="" id="I_ACT_VALLEY">
+            </td>
+            <td colspan="5"></td>
+          </tr>
+          <tr>
+            <td colspan="6" align="center">
+              <input id="btn_save" class="input1" type="button" value="保 存">
+            </td>
+            <td colspan="3"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

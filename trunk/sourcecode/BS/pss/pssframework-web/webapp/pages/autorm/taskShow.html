@@ -1,0 +1,455 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>实时抄表</title>
+  <link href="../../css/mainframe.css" rel="stylesheet"type="text/css">
+  <script type="text/javascript" language="javascript" src="../../js/jquery.js"></script>
+  <script type="text/javascript" language="javascript" src="../../js/autorm/task.js"></script>
+  <script type="text/javascript" language="javascript" src="../../js/autorm/calendar_second.js"></script>
+  <script type="text/javascript" src="../../js/frame/component.js"></script>
+  <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+  <script type="text/javascript">
+  var task_id1 = "15";
+  var task_id2 = "1012";
+   
+  var delectInfo = '确定要删除这条任务记录吗?';
+  var modifInfo = '确定要修改这条任务记录吗?';
+  var nameError = '任务名称不能为空！';
+  var idError = '任务号不能为空！';
+  var sendExecError = '上送周期不能为空！';
+  var execExecError = '执行周期不能为空！';
+  var cqblError = '抽取倍率不能为空！';
+  var sjxError = '请先选择数据项';
+  var taskNameLength = '任务名称不能大于100个字符'; 
+  
+  function setTableStyle(){
+      /**
+       * even/odd rows
+       */
+      setRows($(".tblcontent table>tbody>tr:odd"));
+      
+      /**
+       * mouseover/mouseout event
+       */
+      $(".tblcontent table>tbody>tr").each( function() {
+          $(this).mouseover( function() {
+              $(this).addClass("mouseover");
+          });
+          $(this).mouseout( function() {
+              $(this).removeClass("mouseover");
+          });
+      });
+  }
+  </script>
+</head>
+  
+<body onload="init()">
+  <input type="hidden" id="flush" name="flush" value=""/>
+  <input type="hidden" id="action" name="action" value="taskShow"/>
+  <input type="hidden" id="protocol_type_hidden" name="protocol_type_hidden" />
+  <input type="hidden" id="task_id_hidden" name="task_id_hidden" />
+  <input type="hidden" id="taskType_hidden" name="taskType_hidden"/>
+  <input type="hidden" id="dataItems_codes" name="dataItems_codes"/>
+ 
+  <div class="pad5">
+    <input type="button" name="new" value="新 建" onclick="beginAdd()" id="new" class="input1">
+    <input type="button" name="modif" value="修 改" onclick="beginMod()" id="modif" class="input1">
+    <input type="button" name="save" value="保 存" onclick="save()" id="save" class="input1">
+    <input type="button" name="del" value="删 除" onclick="doDelete()" id="del" class="input1">
+    <input type="submit" name="copy" value="复 制" onclick="beginCopy()" id="copy" class="input1">
+  </div>
+  <div class="tab"><em>任务信息</em></div>
+  <div class="tab_con">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="label">规约类型：</td>
+          <td width="25%" class="dom">
+            <select name="protocol_type" id="protocol_type" onChange="changProtocol()">
+              <option value="100-1">698规约-专变用户</option>
+              <option value="146-1">广东变电站规约-专变用户</option>
+              <option value="122-1">广东大用户规约-专变用户</option>
+              <option value="123-1">广东大用户规约（第二版）-专变用户</option>
+              <option value="126-1">广东集抄规约-专变用户</option>
+              <option value="124-1">广东配变规约-专变用户</option>
+              <option value="106-1">国网规约-专变用户</option>
+              <option value="125-1">江西配变规约-专变用户</option>
+              <option value="120-1">浙江规约-专变用户</option>
+              <option value="121-1">浙江增补规约-专变用户</option>
+              <option value="129-1">浙江自定义规约-专变用户</option>
+            </select>
+            <script type="text/javascript">$("#protocol_type").val("106-1");</script>
+          </td>
+          <td width="15%" class="label">任务类型：</td>
+          <td width="25%">
+            <input type="radio" id="taskType1" name="taskType" value="1" onclick="changeTaskType()" checked="checked">自动上送
+            <input type="radio" id="taskType2" name="taskType" value="2" onclick="changeTaskType()">主站轮召
+          </td>
+        </tr>
+        <tr>
+          <td width="15%" class="label">任 务 号：</td>
+          <td width="25%" class="dom"><input type="text" name="task_id" value="" onkeyup="this.value=this.value.replace(/\D/gi,'')" id="task_id"></td>
+          <td width="15%" class="label">任务名称：</td>
+          <td width="25%" class="dom"><input type="text" name="taskName" maxlength="40" size="40" value="" id="taskName"></td>
+        </tr>
+        <tr>
+          <td id="upLable" width="15%" class="label" style="display:">上送周期：</td>
+          <td id="upDom" width="25%" style="display:">
+            &nbsp;<input type="text" name="sendupCycleGw" value="" onkeyup="this.value=this.value.replace(/\D/gi,'')" id="sendupCycleGw" style="width: 70;">
+            <select name="sendupUnitGw" id="sendupUnitGw" >
+              <option value="0">分 </option>
+              <option value="1">时 </option>
+              <option value="2">日 </option>
+              <option value="3">月 </option>
+            </select>
+          </td>
+          <td id="execLable" width="15%" class="label" style="display:none">执行周期：</td>
+          <td id="execDom" width="25%" style="display:none"><input type="text" name="execCycleMaster" value="" onkeyup="this.value=this.value.replace(/\D/gi,'')" id="execCycleMaster" style="width: 70;">
+            <select name="execUnitMaster" id="execUnitMaster" >
+              <option value="0">分 </option>
+              <option value="1">时 </option>
+              <option value="2">日 </option>
+              <option value="3">月 </option>
+            </select>
+          </td>
+          <td width="15%" class="label">是否审计：</td>
+          <td width="25%">
+            <input type="radio" name="auditFlag" value="1" id="auditFlag">审计
+            <input type="radio" name="auditFlag" value="0" id="auditFlag">不审计
+          </td>
+        </tr>
+        <tr>
+          <td width="15%" class="label">计量类型：</td>
+          <td width="25%" class="dom">
+            <select name="gpChar" id="gpChar" >
+              <option value="1">测量点</option>
+              <option value="2">总加组</option>
+              <option value="6">终端信息点</option>
+            </select>
+          </td>
+          <td width="15%" class="label">数据类型：</td>
+          <td width="25%" class="dom">
+            <select name="dataType" id="dataType"  onChange="changeDataType()">
+              <option value="100000">当前数据</option>
+              <option value="100010">小时冻结数据</option>
+              <option value="100100">日冻结数据</option>
+              <option value="100110">抄表日冻结数据</option>
+              <option value="100200">月冻结数据</option>
+              <option value="100300">曲线数据</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" align="right"><input type="button" class="input3 mgr10"  name="excluSetting" value="高级设置" onclick="excluSettingShow()" id="excluSetting"/></td>
+        </tr>
+      </table>
+    </div>
+    <div id=mytips style="position:absolute;background-color:#85C0B4;width:121;height:16;border:1px   solid   gray;display:none;">
+      <table id="excluSettingAuto" style="display: none">
+        <tr>
+          <td width="30%">基准时间:</td>
+          <td width="60%"><input type="text" name="baseTimeGw" value="2009-10-01 15:38:27" onfocus="setday(this)" readonly="readonly" id="baseTimeGw"></td>
+        </tr>
+        <tr>
+          <td>抽取倍率:</td>
+          <td><input type="text" name="extCntGw" value="2" onkeyup="this.value=this.value.replace(/\D/gi,'')" id="extCntGw"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <input type="button" class="input1" onclick="setting()" value=" 确 定 "/>
+            <input type="button" class="input1" onclick="cancel()" value=" 取 消 "/>
+            <br><br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <br><br>
+          </td>
+        </tr>
+      </table> 
+      <table id="excluSettingMaster" style="display: none">
+        <tr>
+          <td width="40%">执行开始时间：</td>
+          <td width="60%"><input type="text" name="startTimeMaster" value="2009-10-01 15:38:27" onfocus="setday(this)" readonly="readonly" id="startTimeMaster"><br><br></td>
+        </tr>
+        <tr>
+          <td width="40%">优先级：</td>
+          <td>
+            <select name="priMaster" id="priMaster" >
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center"><input type="button" class="input" onclick="setting()" value=" 确 定 "/>
+            <input type="button" class="input" onclick="cancel()" value=" 取 消 "/>
+            <br><br>
+          </td>
+        </tr>
+      </table> 
+    </div> 
+    <div class="data1"><span>数据项列表</span><h1><input type="button" name="chooseDataItem" value="选择数据项" onclick="chooseData()" id="chooseDataItem" class="input3"></h1></div>
+    <div class="data1_con">
+      <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 264));">
+        <table id="dataItem" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead><tr>
+            <th width="15%">序号</th>
+            <th width="20%">数据项代码</th>
+            <th width="60%">数据项名称</th>
+          </tr></thead>
+          <tbody align="center">
+            <tr onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td>1</td>
+              <td>100D0017</td>
+              <td>正向有/无功电能示值、一/四象限无功电能示值（总、费率1~M）</td>
+            </tr>
+            <tr onclick="selectSingleRow(this);" style="cursor:pointer;">
+              <td>2</td>
+              <td>100D0018</td>
+              <td>反向有/无功电能示值、二/三象限无功电能示值（总、费率1~M）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+
+// 改变规约类型
+function changProtocol() {
+    var protocol_type = document.getElementById("protocol_type").value;
+    //window.location =contextPath+"/autorm/taskAction.do?action=taskAddShow&protocol_type="+ protocol_type.value;
+    var task_id = document.getElementById("task_id");
+    //alert(protocol_type);
+    if("100-1" == protocol_type){
+        task_id.value = 1001;
+    }
+    else if("146-1" == protocol_type){
+        task_id.value = 1461;
+    }
+    else if("122-1" == protocol_type){
+        task_id.value = 1221;
+    }
+    else if("123-1" == protocol_type){
+        task_id.value = 1231;
+    }
+    else if("124-1" == protocol_type){
+        task_id.value = 1241;
+    }
+    else if("126-1" == protocol_type){
+        task_id.value = 1261;
+    }
+    else if("106-1" == protocol_type){
+        task_id.value = 1061;
+    }
+    else if("120-1" == protocol_type){
+        task_id.value = 1201;
+    }
+    else if("121-1" == protocol_type){
+        task_id.value = 1211;
+    }
+    else if("125-1" == protocol_type){
+        task_id.value = 1251;
+    }
+    else if("129-1" == protocol_type){
+        task_id.value = 1291;
+    }
+}
+
+//保存
+function save(){
+    var task_id = document.getElementById("task_id").value;
+    if(task_id == ""){
+        alert("任务号不能为空!");
+        return;
+    }
+    var task_name = document.getElementById("taskName").value;
+    if(task_name == ""){
+        alert("任务名称不能为空!");  
+        return;
+    }
+    var data_type = document.getElementById("dataType").value;
+    var opeType = document.all.action.value;
+    if("taskAdd" == opeType){
+        parent.taskList.insertRow(task_id, task_name, data_type);
+        alert("添加成功!");
+    }
+    else if("taskMod" == opeType){
+        parent.taskList.updateRow(task_id, task_name, data_type);
+        alert("修改成功!");
+    }
+    parent.flush();
+}
+
+// 拷贝任务
+function beginCopy(){
+    beginMod();
+    var protocol_type = document.getElementById("protocol_type");
+    protocol_type.disabled = false;
+    var task_type = document.getElementsByName("taskType");
+    task_type[0].disabled = false;
+    task_type[1].disabled = false;
+    var task_id = document.getElementById("task_id");
+    task_id.value = parent.taskList.maxTaskId + 1;
+    task_id.disabled = false;
+    var exec_cycle_ms = document.getElementById("execCycleMaster");
+    exec_cycle_ms.value = "5";
+    var exec_unit_ms = document.getElementById("execUnitMaster");
+    exec_unit_ms.value = "0";
+    document.all.action.value = "taskAdd";
+}
+
+// 任务删除
+function doDelete() {
+    if (window.confirm(delectInfo)) {
+        parent.taskList.deleteRow();
+        alert("删除成功!");
+        //parent.flush();
+    }
+}
+
+// 添加任务
+function beginAdd() { 
+    // 获得数据对象
+    var protocol_type = document.getElementById("protocol_type");
+    protocol_type.value = "100-1";
+    var task_type = document.getElementsByName("taskType");
+    task_type[0].checked = true;
+    var task_id = document.getElementById("task_id");
+    task_id.value = parent.taskList.maxTaskId + 1;
+    var task_name = document.getElementById("taskName");
+    task_name.value = "";
+    var sendup_cycle_gw = document.getElementById("sendupCycleGw");
+    sendup_cycle_gw.value = "1";
+    var sendup_unit_gw = document.getElementById("sendupUnitGw");
+    sendup_unit_gw.value = "0";
+    var exec_cycle_ms = document.getElementById("execCycleMaster");
+    exec_cycle_ms.value = "5";
+    var exec_unit_ms = document.getElementById("execUnitMaster");
+    exec_unit_ms.value = "0";
+    
+    var audit_flag = document.getElementsByName("auditFlag");
+    audit_flag[0].checked = true;
+    var gpChar = document.getElementById("gpChar");
+    gpChar.value = "1";
+    var data_type = document.getElementById("dataType");
+    data_type.value = "100000";
+    var exec_cyle_master = document.getElementById("execCycleMaster");
+    var exec_unit_master = document.getElementById("execUnitMaster");
+    var sendupUnitGw = document.getElementById("sendupUnitGw");
+    // 获得按钮对象
+    var add = document.getElementById("new");
+    var save = document.getElementById("save");
+    var modif = document.getElementById("modif");
+    var del = document.getElementById("del");
+    var copy = document.getElementById("copy");
+    var excluSetting = document.getElementById("excluSetting");
+    var chooseDataItem = document.getElementById("chooseDataItem");
+    // 设置按钮状态
+    excluSetting.disabled = false;
+    chooseDataItem.disabled = false;
+    add.disabled = true;
+    modif.disabled = true;
+    del.disabled = true;
+    copy.disabled = true;
+    save.disabled = false;
+ 
+    protocol_type.disabled = false;
+    task_type[0].disabled = false;
+    task_type[1].disabled = false;
+    task_id.disabled = false;
+    task_name.disabled = false;
+    sendup_cycle_gw.disabled = false;
+    audit_flag[0].disabled = false;
+    audit_flag[1].disabled = false;
+    gpChar.disabled = false;
+    data_type.disabled = false;
+    exec_cyle_master.disabled = false;
+    exec_unit_master.disabled = false;
+    sendupUnitGw.disabled = false;
+    task_type[0].disabled = false;
+    task_type[1].disabled = false;
+    document.all.action.value = "taskAdd";
+}
+
+// 数据项设定结果
+function initDataItems_codes() {
+    var codes = "";
+    var dataItemTable = document.getElementById("dataItem");
+    var dataItems_codes = document.getElementById("dataItems_codes");
+    for (i = 1; i < dataItemTable.rows.length; i++) {
+        codes += dataItemTable.rows[i].cells[1].innerHTML + "@@";
+    }
+    dataItems_codes.value = codes;
+}
+
+var dataItems;
+// 打开数据项选择页面
+function chooseData() {
+    var dataItemTable = document.getElementById("dataItem");
+    dataItems = "@@";
+    for (i = 1; i < dataItemTable.rows.length; i++) {
+        dataItems += dataItemTable.rows[i].cells[1].innerHTML + "@@";
+    }
+    var str_url = "/peis/jsp/autorm/dataItemList.html";
+    //windowPopup(str_url, 1000, 600);
+    top.showDialogBox("数据项选择", str_url, 575, 900);
+}
+ 
+// 修改
+function beginMod() {
+    // 获得数据对象
+    var protocol_type = document.getElementById("protocol_type");
+    var task_type = document.getElementsByName("taskType");
+    var task_id = document.getElementById("task_id");
+    var task_name = document.getElementById("taskName");
+    var sendup_cycle_gw = document.getElementById("sendupCycleGw");
+    var audit_flag = document.getElementsByName("auditFlag");
+    var gpChar = document.getElementById("gpChar");
+    var data_type = document.getElementById("dataType");
+    var exec_cyle_master = document.getElementById("execCycleMaster");
+    var exec_unit_master = document.getElementById("execUnitMaster");
+    var sendupUnitGw = document.getElementById("sendupUnitGw");
+    // 获得按钮对象
+    var add = document.getElementById("new");
+    var save = document.getElementById("save");
+    var modif = document.getElementById("modif");
+    var del = document.getElementById("del");
+    var copy = document.getElementById("copy");
+    var excluSetting = document.getElementById("excluSetting");
+    var chooseDataItem = document.getElementById("chooseDataItem");
+    // 设置按钮状态
+    excluSetting.disabled = false;
+    chooseDataItem.disabled = false;
+    add.disabled = true;
+    modif.disabled = true;
+    del.disabled = true;
+    copy.disabled = true;
+    save.disabled = false;
+ 
+    protocol_type.disabled = true;
+    task_type[0].disabled = false;
+    task_type[1].disabled = false;
+    task_id.disabled = true;
+    task_name.disabled = false;
+    sendup_cycle_gw.disabled = false;
+    audit_flag[0].disabled = false;
+    audit_flag[1].disabled = false;
+    gpChar.disabled = false;
+    data_type.disabled = false;
+    exec_cyle_master.disabled = false;
+    exec_unit_master.disabled = false;
+    sendupUnitGw.disabled = false;
+    task_type[0].disabled = true;
+    task_type[1].disabled = true;
+    document.all.action.value = "taskMod";
+}
+</script>
+</html>
