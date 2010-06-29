@@ -1,3 +1,10 @@
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 10gR2                         */
+/* Created on:     2010-6-29 19:03:13                           */
+/*==============================================================*/
+
+
+
 -- Type package declaration
 create or replace package PDTypes  
 as
@@ -688,7 +695,7 @@ create table C_PS  (
    REMC_GEAR_VALUE      VARCHAR2(5),
    OFF_DELAY_GEAR       VARCHAR2(5),
    OFF_DELAY_VALUE      VARCHAR2(5),
-   FUNCTION_CODE        VARCHAR2(5),
+   FUNCTION_CODE        VARCHAR2(8),
    PS_TYPE              VARCHAR2(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
    PINYIN_CODE          VARCHAR2(16),
@@ -722,23 +729,15 @@ comment on column C_PS.RATED_EC is
 /
 
 comment on column C_PS.REMC_GEAR is
-'1-5档 （5 为自动档）'
-/
-
-comment on column C_PS.REMC_GEAR_VALUE is
 '见编码REM_EC'
 /
 
 comment on column C_PS.OFF_DELAY_GEAR is
-'（1—2）'
-/
-
-comment on column C_PS.OFF_DELAY_VALUE is
 '见编码OFF_DELAY_VALUE'
 /
 
 comment on column C_PS.PS_TYPE is
-'1：总保；2：二级保'
+'见code PS_TYPE  1：总保；2：二级保'
 /
 
 comment on column C_PS.LASTTIME_STAMP is
@@ -910,3 +909,4 @@ exception
        raise_application_error(errno, errmsg);
 end;
 /
+
