@@ -1,0 +1,94 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>采集任务编制</title>
+  <link href="../../css/main.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript">
+  function showTask(taskId, protocol_type) {
+      taskoperate.document.getElementById("new").disabled = false;
+      taskoperate.document.getElementById("save").disabled = true;
+      window.taskoperate.modif.disabled = false;
+      window.taskoperate.save.disabled = true;
+      window.taskoperate.del.disabled = false;
+      window.taskoperate.copy.disabled = false;
+      window.taskoperate.protocol_type.value = protocol_type;
+      var taskType = window.taskList.task_type.value;
+      if(taskType == "1"){
+          window.taskoperate.taskType[0].checked = true;
+      }
+      else{
+          window.taskoperate.taskType[1].checked = true;
+      }
+      window.taskoperate.protocol_type.disabled = true;
+      window.taskoperate.taskType[0].disabled = true;
+      window.taskoperate.taskType[1].disabled = true;
+      window.taskoperate.task_id.disabled = true;
+      
+      window.taskoperate.task_id.value = taskId;
+      window.taskoperate.taskName.value = taskList.document.getElementById("rwmc_"+taskId).innerHTML;
+      window.taskoperate.taskName.disabled = true;
+      window.taskoperate.sendupCycleGw.value = "5";
+      window.taskoperate.sendupCycleGw.disabled = true;
+      window.taskoperate.execUnitMaster.value = "5";
+      window.taskoperate.execUnitMaster.disabled = true;
+      window.taskoperate.auditFlag[0].checked = true;
+      window.taskoperate.auditFlag[0].disabled = true;
+      window.taskoperate.auditFlag[1].disabled = true;
+      var dataType = taskList.document.getElementById("sjlx_"+taskId).innerHTML;
+      if("日冻结数据" == dataType){
+          window.taskoperate.dataType.value = "100100";
+      }
+      else if("月冻结数据" == dataType){
+          window.taskoperate.dataType.value = "100200";
+      }
+      else if("当前数据" == dataType){
+          window.taskoperate.dataType.value = "100000";
+      }
+      else if("小时冻结数据" == dataType){
+          window.taskoperate.dataType.value = "100010";
+      }
+      else if("抄表日冻结数据" == dataType){
+          window.taskoperate.dataType.value = "100110";
+      }
+      else if("曲线数据" == dataType){
+          window.taskoperate.dataType.value = "100300";
+      }
+      window.taskoperate.dataType.disabled = true;
+      window.taskoperate.gpChar.disabled = true;
+      window.taskoperate.sendupUnitGw.disabled = true;
+      window.taskoperate.excluSetting.disabled = true;
+      window.taskoperate.chooseDataItem.disabled = true;
+  }
+
+  function flush() {
+      //window.taskList.location.reload();
+      window.taskoperate.location.reload();
+  }
+  </script>
+</head>
+  
+<body>
+<div id="body">
+  <div class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on">采集任务编制</li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main2" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 42));">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+      <tr>
+        <td width="390" valign="top" class="pad10" style="border-right:1px solid #5d90d7;">
+          <iframe id="taskList" src="taskList.html" width="100%"  scrolling="no" height="100%" frameborder="0"></iframe>
+        </td>
+        <td valign="top" class="pad5">
+          <iframe id="taskoperate" src="taskShow.html" width="100%"  scrolling="no" height="100%" frameborder="0"></iframe>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,234 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据录入记录</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+<script type="text/javascript" src="../../js/autorm/calendar.js"></script>
+<script> 
+function insertDataByType(dataDens){
+    if("10" == dataDens){
+        insertRow(parent.dayDataObj, dataDens);
+    }
+    else if("20" == dataDens){
+        insertRow(parent.monDataObj, dataDens);
+    }
+}
+
+function insertRow(jsonObj, dataDens){
+    var objTable = document.getElementById("DATA_TBODY");
+    var rowNum = objTable.rows.length;
+    var addRow = objTable.insertRow(objTable.rows.length);
+    $(addRow).mouseover(function () { this.style.cursor='pointer'; });
+    $(addRow).click(function () { selectSingleRow(this); });
+    var cell1 = addRow.insertCell(0);
+    cell1.innerHTML = rowNum+1;
+    var cell2 = addRow.insertCell(1);
+    cell2.innerHTML = parent.assetObj.custNo;
+    var cell3 = addRow.insertCell(2);
+    cell3.innerHTML = parent.assetObj.custName;
+    var cell4 = addRow.insertCell(3);
+    cell4.innerHTML = parent.assetObj.assetNo;
+    var cell5 = addRow.insertCell(4);
+    var cell6 = addRow.insertCell(5);
+    if("10" == dataDens){
+        cell5.innerHTML = "2009-09-17";
+        cell6.innerHTML = "日冻结";
+    }
+    else if("20" == dataDens){
+        cell5.innerHTML = "2009-09";
+        cell6.innerHTML = "月冻结";
+    }
+    var cell7 = addRow.insertCell(6);
+    cell7.innerHTML = jsonObj.P_ACT_TOTAL;
+    var cell8 = addRow.insertCell(7);
+    cell8.innerHTML = jsonObj.I_ACT_TOTAL;
+    var cell9 = addRow.insertCell(8);
+    cell9.innerHTML = jsonObj.P_REACT_TOTAL;
+    var cell10 = addRow.insertCell(9);
+    cell10.innerHTML = jsonObj.I_REACT_TOTAL;
+    var cell11 = addRow.insertCell(10);
+    cell11.innerHTML = "admin";
+    setTableStyle();
+}
+
+function updateDataByType(dataDens){
+    var objTable = document.getElementById("DATA_TBODY");
+    var rowNum = objTable.rows.length;
+    if(rowNum <= 0){
+        return;
+    }
+    var dataType = (dataDens == "10" ? "日冻结" : "月冻结");
+    var jsonObj = (dataDens == "10" ? parent.dayDataObj : parent.monDataObj);
+    for(var i = 0; i < rowNum; i++){
+        var rowObj = objTable.rows[i];
+        if(rowObj.cells(5).innerHTML == dataType){
+            rowObj.cells(6).innerHTML = jsonObj.P_ACT_TOTAL;
+            rowObj.cells(7).innerHTML = jsonObj.I_ACT_TOTAL;
+            rowObj.cells(8).innerHTML = jsonObj.P_REACT_TOTAL;
+            rowObj.cells(9).innerHTML = jsonObj.I_REACT_TOTAL;
+            break;
+        }
+    }
+}
+
+function setTableStyle(){
+    /**
+     * even/odd rows
+     */
+    setRows($(".tableContainer table>tbody>tr:odd"));
+    
+    /**
+     * mouseover/mouseout event
+     */
+    $(".tableContainer table>tbody>tr").each( function() {
+        $(this).mouseover( function() {
+            $(this).addClass("mouseover");
+        });
+        $(this).mouseout( function() {
+            $(this).removeClass("mouseover");
+        });
+    });
+}
+
+$(document).ready(function(){
+    $('#btn_edit').bind("click", gotoEdit);
+    $('#btn_del').bind("click", gotoDel);
+});
+
+/** 去编辑页面  */
+function gotoEdit(){
+    var selectTr = $('#DATA_TBODY tr').filter(".selected");
+    if(selectTr.length == 0){
+        alert("请选中要编辑的行！");
+        return;
+    }
+    parent.changeTab(1);
+    var dataType = $('td:eq(5)', selectTr).html();
+    var dataDens = dataType == "日冻结" ? "10" : "20";
+    parent.inputpage.editDataFromOtherPage(dataDens);
+}
+
+function gotoDel(){
+    var selectTr = $('#DATA_TBODY tr').filter(".selected");
+
+    if(selectTr.length == 0){
+        alert("请选中要删除的行！");
+        return;
+    }
+    
+    if(!window.confirm("是否要删除这条记录！")){
+        return;
+    }
+    var dataType = $('td:eq(5)', selectTr).html();
+    var dataDens = dataType == "日冻结" ? "10" : "20";
+    if("10" == dataDens){
+        parent.inputpage.delData4Json(parent.dayDataObj);
+    }
+    else if("20" == dataDens){
+        parent.inputpage.delData4Json(parent.monDataObj);
+    }
+    deleteRow(selectTr);
+    alert("删除成功！");
+}
+
+function deleteRow(selectedRow){
+    if(selectedRow == null){
+        return;
+    }
+    var index = selectedRow.rowIndex;
+    var objTable = document.getElementById("DATA_TBODY");
+    objTable.deleteRow(index);
+}
+</script>
+</head>
+
+<body>
+  <input type="hidden" name="action" value="query">  
+  <input type="hidden" name="page" value="1">
+  <input type="hidden" name="pageSize" value="20">
+  <div id="body">
+    <div id="main">
+      <div id="tool">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="70" class="label">表 号：</td>
+            <td width="120" class="dom">
+              <input type="text" name="assetNo" value="">
+            </td>
+          </tr>
+          <tr>
+            <td width="70" class="label">开始时间：</td>
+            <td width="120" class="dom_date">
+              <input type="text" name="startDate" value="2009-9-17" id="kssj">
+            </td>
+            <td width="70" class="label">结束时间：</td>
+            <td width="120" class="dom_date">
+              <input type="text" name="endDate" value="2009-9-18" id="jssj">
+            </td>
+            <td width="70" class="label">录入人：</td>
+            <td width="120" class="dom_date">
+              <select name="userNo">
+                <option value="" selected="selected">所有</option>
+                <option value="admin">系统管理员</option>
+                <option value="developer">开发者</option>
+                <option value="shenguohui">沈国辉</option>
+                <option value="yaoshu">姚舒</option>
+                <option value="sjadmin">省公司管理员</option>
+                <option value="zhangyu">张瑜</option>
+                <option value="dingzj">丁宗镌</option>
+                <option value="dsleader">地市王局长</option>
+                <option value="liuyong">局级管理员</option>
+              </select>  
+            </td>
+          </tr>
+        </table>
+        <div class="t_botton">
+          <div class="t_right">
+            <input class="input1" type="button" id="btn_edit" value="编 辑"/>
+            <input class="input1" type="button" id="btn_del" value="删 除"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<input class="input1" type="submit" id="query" value="查 询"/>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="content">
+        <div id="cont_1">
+          <div class="target">
+            <ul>
+              <li class="target_on"><a href="#" onClick="return false;">数据检查</a></li>
+              <li class="clear"></li>
+            </ul>
+            <h1><img src="../../img/bt_data.gif" width="10" height="10" align="middle"" /> <a href="#">修改显示字段</a></h1>
+          </div>
+          <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 152));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead><tr>
+                <th width="3%">序号</th>
+                <th width="10%">户号</th>
+                <th width="10%">户名</th>
+                <th width="10%">表号</th>
+                <th width="5%">数据时间</th>
+                <th width="5%">数据类型</th>
+                <th width="5%">正向有功总</th>
+                <th width="5%">反向有功总</th>
+                <th width="5%">正向无功总</th>
+                <th width="5%">反向无功总</th>
+                <th width="5%">追加人</th>
+              </tr></thead>
+              <tbody id="DATA_TBODY" align="center">
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="pageContainer">
+            <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
