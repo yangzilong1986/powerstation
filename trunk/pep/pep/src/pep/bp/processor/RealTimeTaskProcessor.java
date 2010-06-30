@@ -21,7 +21,7 @@ import pep.mina.protocolcodec.gb.PepGbCommunicator;
  *
  * @author Thinkpad
  */
-public class RealTimeTaskProcessor implements Runnable {
+public class RealTimeTaskProcessor extends BaseProcessor {
 
     private final static Logger log = LoggerFactory.getLogger(RealTimeTaskProcessor.class);
     private RTTaskService taskService;
@@ -30,7 +30,7 @@ public class RealTimeTaskProcessor implements Runnable {
 
 
     public RealTimeTaskProcessor( PepCommunicatorInterface pepCommunicator) {
-        ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
+        super();
         taskService = (RTTaskService) cxt.getBean("taskService");
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
