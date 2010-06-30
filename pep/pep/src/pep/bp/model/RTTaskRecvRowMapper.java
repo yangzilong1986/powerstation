@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author Thinkpad
  */
-public class TaskRecvRowMapper implements RowMapper {
+public class RTTaskRecvRowMapper implements RowMapper {
 
     public Object mapRow(ResultSet rs, int index) throws SQLException {
         RTTaskRecv recv = new RTTaskRecv();
