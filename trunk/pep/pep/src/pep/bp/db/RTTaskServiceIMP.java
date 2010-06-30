@@ -13,8 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.RTTaskRecv;
 import pep.bp.model.RealTimeTask;
-import pep.bp.model.TaskRecvRowMapper;
-import pep.bp.model.TaskRowMapper;
+import pep.bp.model.RTTaskRecvRowMapper;
+import pep.bp.model.RTTaskRowMapper;
 
 /**
  *
@@ -64,14 +64,14 @@ public class RTTaskServiceIMP implements RTTaskService {
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new TaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
 
             //更新任务状态
             for (RealTimeTask task : results) {
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where SEQUENCE_CODE = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new TaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
                 jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
                         new Object[]{"1", task.getTaskId()});
@@ -89,13 +89,13 @@ public class RTTaskServiceIMP implements RTTaskService {
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where SEQUENCE_CODE = ? ";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
             if (results.size() > 0) {
                 RealTimeTask task = (RealTimeTask) (results.get(0));
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where SEQUENCE_CODE = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new TaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
                 
                 //更新任务状态
@@ -118,13 +118,13 @@ public class RTTaskServiceIMP implements RTTaskService {
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where SEQUENCE_CODE = ?";
-            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new TaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
             //更新任务状态
             for (RealTimeTask task : results) {
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where SEQUENCE_CODE = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new TaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getSequencecode(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
                 jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
                         new Object[]{"1", task.getTaskId()});
