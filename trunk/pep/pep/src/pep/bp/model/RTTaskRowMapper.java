@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author Thinkpad
  */
-public class TaskRowMapper implements RowMapper {
+public class RTTaskRowMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int index) throws SQLException{
         RealTimeTask task = new RealTimeTask();
         task.setTaskId(rs.getInt("TASK_ID"));
