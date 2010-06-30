@@ -314,7 +314,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of writeResetCommands method, of class RealTimeProxy376.
      */
-    @Test
+    //@Test
     public void testWriteResetCommands() throws Exception {
         System.out.println("writeResetCommands");
         CommandItem commandItem = new CommandItem();
@@ -363,14 +363,47 @@ public class RealTimeProxy376Test {
      */
     @Test
     public void testReadRealtimeData() throws Exception {
-        System.out.println("readRealtimeData");
-        MessageTranObject MTO = null;
+        System.out.println("ReadRealtimeData");
+        Map datacellParams7 = new TreeMap();
+        datacellParams7.put("1004000701", "");//终端IP地址
+        datacellParams7.put("1004000702", "");//子网掩码地址
+        datacellParams7.put("1004000703", "");//网关地址
+
+        CommandItem commandItem = new CommandItem();
+        commandItem.setIdentifier("10010001");
+        commandItem.setDatacellParam(datacellParams7);
+
+        CollectObject obj= new CollectObject();
+        obj.setLogicalAddr("96123456");
+        obj.setMpSn(new int[]{1});
+        obj.AddCommandItem(commandItem);
+
+        MTO_376 MTO3 = new MTO_376();
+        MTO3.addCollectObject(obj);
+
+
         RealTimeProxy376 instance = new RealTimeProxy376();
-        long expResult = 0L;
-        long result = instance.readRealtimeData(MTO);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        long SequenceCode = instance.readRealtimeData(MTO3);
+        RealTimeTask task = taskService.getTask(SequenceCode);
+        PmPacket376 packet = new PmPacket376();
+        packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
+        assertTrue(packet.getAddress().getRtua().equals("96123456"));
+        assertTrue(packet.getAfn()==0x0C);
+        PmPacket376DA da = new PmPacket376DA();
+        PmPacket376DT dt = new PmPacket376DT();
+        packet.getDataBuffer().rewind();
+        packet.getDataBuffer().getDA(da);
+        packet.getDataBuffer().getDT(dt);
+        assertTrue(da.getPn()==1);
+        assertTrue(dt.getFn()==1);
+        packet.getDataBuffer().getDA(da);
+        packet.getDataBuffer().getDT(dt);
+        assertTrue(da.getPn()==1);
+        assertTrue(dt.getFn()==2);
+        packet.getDataBuffer().getDA(da);
+        packet.getDataBuffer().getDT(dt);
+        assertTrue(da.getPn()==1);
+        assertTrue(dt.getFn()==3);
     }
 
     /**
