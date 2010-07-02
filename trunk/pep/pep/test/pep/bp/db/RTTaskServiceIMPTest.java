@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import static org.junit.Assert.*;
-import pep.bp.model.RealTimeTask;
+import pep.bp.model.RealTimeTaskDAO;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -47,7 +47,7 @@ public class RTTaskServiceIMPTest {
      */
     @Test
     public void testInsertTask() {
-        RealTimeTask task = new RealTimeTask();
+        RealTimeTaskDAO task = new RealTimeTaskDAO();
         task.setSequencecode(1);
         task.setSendmsg("test");
         taskService.insertTask(task);
@@ -58,9 +58,9 @@ public class RTTaskServiceIMPTest {
      */
     @Test
     public void testInsertTasks() {
-        List<RealTimeTask> Tasks = new ArrayList(5);
+        List<RealTimeTaskDAO> Tasks = new ArrayList(5);
         for(int i=1;i<=5;i++){
-            RealTimeTask task = new RealTimeTask();
+            RealTimeTaskDAO task = new RealTimeTaskDAO();
             task.setSequencecode(i);
             task.setSendmsg("test"+i);
             Tasks.add(task);
@@ -87,7 +87,7 @@ public class RTTaskServiceIMPTest {
      */
     @Test
     public void testGetTasks() {
-        List<RealTimeTask> tasks = taskService.getTasks();
+        List<RealTimeTaskDAO> tasks = taskService.getTasks();
         assertTrue(tasks.size()>0);
 
     }
