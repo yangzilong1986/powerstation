@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
  */
 public class TermTaskRowMapper implements RowMapper{
     public Object mapRow(ResultSet rs, int index) throws SQLException{
-        TermTask task = new TermTask();
+        TermTaskDAO task = new TermTaskDAO();
         task.setLogicAddress(rs.getString("LOGICAL_ADDR"));
         task.setGp_char(rs.getString("GP_CHAR"));
         task.setGp_sn(rs.getInt("GP_SN"));

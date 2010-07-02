@@ -11,13 +11,13 @@ import java.util.List;
  *
  * @author Thinkpad
  */
-public class CommandItem {
+public class CommanddItemDAO {
     private String protocol_no;
     private String commandItemCode;
     private String commandItemName;
     private String gp_char;
     private String aux_info;
-    private List<DataItem> DataItems;
+    private List<DataItemDAO> DataItems;
 
     /**
      * @return the protocol_no
@@ -92,14 +92,14 @@ public class CommandItem {
     /**
      * @return the DataItems
      */
-    public List<DataItem> getDataItems() {
+    public List<DataItemDAO> getDataItems() {
         return DataItems;
     }
 
     /**
      * @param DataItems the DataItems to set
      */
-    public void setDataItems(List<DataItem> DataItems) {
+    public void setDataItems(List<DataItemDAO> DataItems) {
         this.DataItems = DataItems;
     }
 }
