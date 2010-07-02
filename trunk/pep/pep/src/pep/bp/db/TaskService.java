@@ -5,13 +5,14 @@
 
 package pep.bp.db;
 
-import pep.bp.model.TermTask;
+import java.util.List;
+import pep.bp.model.TermTaskDAO;
 
 /**
  *
  * @author Thinkpad
  */
 public interface TaskService {
-    public TermTask getTermTask(String logicAddress,String gp_char,int gp_sn);
+    public List<TermTaskDAO> getTermTask_Polling();
 
 }
