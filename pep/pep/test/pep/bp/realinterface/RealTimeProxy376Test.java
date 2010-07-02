@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.RTTaskService;
-import pep.bp.model.RTTaskRecv;
-import pep.bp.model.RealTimeTask;
+import pep.bp.model.RTTaskRecvDAO;
+import pep.bp.model.RealTimeTaskDAO;
 import pep.bp.realinterface.mto.CircleDataItems;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
@@ -26,8 +26,7 @@ import pep.bp.realinterface.mto.DataItemGroup;
 import pep.bp.realinterface.mto.MTO_376;
 import static org.junit.Assert.*;
 import pep.bp.realinterface.mto.MessageTranObject;
-import pep.codec.protocol.gb.PmPacketDT;
-import pep.codec.protocol.gb.PmPacketData;
+import pep.bp.utils.Converter;
 import pep.codec.protocol.gb.TimeProtectValue;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376DA;
@@ -42,6 +41,7 @@ public class RealTimeProxy376Test {
 
     private static RealTimeProxy376 proxy;
     private RTTaskService taskService;
+    private Converter converter;
 
     private MTO_376 PutInCommandItem(Map datacellParams,CircleDataItems circleDataItems, String commandItemCode,String LogicAddress){
          MTO_376 MTO = new MTO_376();
@@ -68,11 +68,11 @@ public class RealTimeProxy376Test {
     private Map<String, String> getTestResults(MTO_376 MTO,String key) throws Exception{
         RealTimeProxy376 instance = new RealTimeProxy376();
         long SequenceCode = instance.writeEquipmentParameters(MTO);
-        RealTimeTask task = taskService.getTask(SequenceCode);
+        RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
         packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
         Map<String,Map<String, String>> results = new HashMap<String,Map<String, String>>();
-        instance.decodeData(packet,results);
+        converter.decodeData(packet,results);
         return results.get(key);
     }
 
@@ -80,6 +80,7 @@ public class RealTimeProxy376Test {
     public RealTimeProxy376Test() {
         ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
         taskService = (RTTaskService) cxt.getBean("taskService");
+        converter = new Converter();
     }
 
     @BeforeClass
@@ -330,7 +331,7 @@ public class RealTimeProxy376Test {
 
         RealTimeProxy376 instance = new RealTimeProxy376();
         long SequenceCode = instance.writeResetCommands(MTO3);
-        RealTimeTask task = taskService.getTask(SequenceCode);
+        RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
         packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
         assertTrue(packet.getAddress().getRtua().equals("96123456"));
@@ -384,7 +385,7 @@ public class RealTimeProxy376Test {
 
         RealTimeProxy376 instance = new RealTimeProxy376();
         long SequenceCode = instance.readRealtimeData(MTO3);
-        RealTimeTask task = taskService.getTask(SequenceCode);
+        RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
         packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()),0);
         assertTrue(packet.getAddress().getRtua().equals("96123456"));
@@ -449,7 +450,7 @@ public class RealTimeProxy376Test {
         packet.getDataBuffer().putDT(dt);
         packet.setTpv(new TimeProtectValue());//时间标签
 
-        RTTaskRecv recv = new RTTaskRecv();
+        RTTaskRecvDAO recv = new RTTaskRecvDAO();
         recv.setLogicAddress("96123456");
         recv.setRecvMsg(BcdUtils.binArrayToString(packet.getValue()));
         recv.setSequenceCode(SequenceCode);
