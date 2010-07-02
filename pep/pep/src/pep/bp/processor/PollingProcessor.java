@@ -21,7 +21,7 @@ public class PollingProcessor extends BaseProcessor {
     private RTTaskService taskService;
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuRespPacketQueue respQueue;//返回报文队列
-
+    
 
     public void run() {
 

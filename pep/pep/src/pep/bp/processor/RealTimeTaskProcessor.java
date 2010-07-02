@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.RTTaskService;
-import pep.bp.model.RealTimeTask;
+import pep.bp.model.RealTimeTaskDAO;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.mina.common.PepCommunicatorInterface;
@@ -39,8 +39,8 @@ public class RealTimeTaskProcessor extends BaseProcessor {
     public void run() {
         while (true) {
             //做发送操作
-            List<RealTimeTask> tasks = taskService.getTasks();
-            for (RealTimeTask task : tasks) {
+            List<RealTimeTaskDAO> tasks = taskService.getTasks();
+            for (RealTimeTaskDAO task : tasks) {
                 PmPacket packet = new PmPacket376();
                 packet.setValue(task.getSendmsg().getBytes(), 0);
                 pepCommunicator.SendPacket(task.getSequencecode(), packet);
