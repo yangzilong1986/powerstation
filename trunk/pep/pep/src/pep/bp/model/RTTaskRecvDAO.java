@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Thinkpad
  */
-public class RTTaskRecv {
+public class RTTaskRecvDAO {
     private int taskId;
     private long sequenceCode;
     private String logicAddress;

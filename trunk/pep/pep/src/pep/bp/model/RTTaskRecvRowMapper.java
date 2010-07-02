@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class RTTaskRecvRowMapper implements RowMapper {
 
     public Object mapRow(ResultSet rs, int index) throws SQLException {
-        RTTaskRecv recv = new RTTaskRecv();
+        RTTaskRecvDAO recv = new RTTaskRecvDAO();
         recv.setTaskId(rs.getInt("TASK_ID"));
         recv.setSequenceCode(rs.getInt("SEQUENCE_CODE"));
         recv.setLogicAddress(rs.getString("LOGICAL_ADDR"));

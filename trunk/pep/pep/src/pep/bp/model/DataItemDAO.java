@@ -9,7 +9,7 @@ package pep.bp.model;
  *
  * @author Thinkpad
  */
-public class DataItem {
+public class DataItemDAO {
     private String dataItemCode;
     private String dataItemName;
     private String dataItemUnit;

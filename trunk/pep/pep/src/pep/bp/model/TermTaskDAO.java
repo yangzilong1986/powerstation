@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Thinkpad
  */
-public class TermTask {
+public class TermTaskDAO {
     private String logicAddress;
     private String gp_char;
     private int gp_sn;
@@ -29,7 +29,7 @@ public class TermTask {
     private Date end_time_master;
     private int exec_circle_master;
     private int exec_unit_master;
-    private List<CommandItem> commandItemList;
+    private List<CommanddItemDAO> commandItemList;
 
     /**
      * @return the logicAddress
@@ -202,14 +202,14 @@ public class TermTask {
     /**
      * @return the commandItemList
      */
-    public List<CommandItem> getCommandItemList() {
+    public List<CommanddItemDAO> getCommandItemList() {
         return commandItemList;
     }
 
     /**
      * @param commandItemList the commandItemList to set
      */
-    public void setCommandItemList(List<CommandItem> commandItemList) {
+    public void setCommandItemList(List<CommanddItemDAO> commandItemList) {
         this.setCommandItemList(commandItemList);
     }
 
