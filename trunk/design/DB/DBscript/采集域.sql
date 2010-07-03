@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-29 20:22:04                           */
+/* Created on:     2010-7-3 15:43:09                            */
 /*==============================================================*/
 
 
@@ -180,6 +180,7 @@ create table R_TASK  (
    EXEC_UNIT_MASTER     NUMBER,
    EXECONCE_TIMES       NUMBER,
    PRI_MASTER           NUMBER,
+   AFN                  NUMBER,
    constraint PK_R_TASK primary key (TASK_ID, PROTOCOL_NO, SYS_OBJECT)
 );
 
