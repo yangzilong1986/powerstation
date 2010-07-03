@@ -1,29 +1,56 @@
 /*
- * 主站轮召处理器
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package pep.bp.processor;
-import pep.bp.db.RTTaskService;
-import pep.codec.protocol.gb.PmPacket;
-import pep.codec.protocol.gb.gb376.PmPacket376;
-import pep.mina.common.PepCommunicatorInterface;
-import pep.mina.common.RtuRespPacketQueue;
-import pep.mina.common.SequencedPmPacket;
-import pep.mina.protocolcodec.gb.PepGbCommunicator;
+
+import java.util.Date;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.Trigger;
+import org.quartz.TriggerUtils;
+import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  *
  * @author Thinkpad
  */
-public class PollingProcessor extends BaseProcessor {
-    private final static Logger log = LoggerFactory.getLogger(PollingProcessor.class);
-    private RTTaskService taskService;
-    private PepCommunicatorInterface pepCommunicator;//通信代理器
-    private RtuRespPacketQueue respQueue;//返回报文队列
-    
+public class PollingProcessor {
+    private final static Logger log = LoggerFactory.getLogger(PollingJob.class);
+    //任务周期类型
+    private final int CIRCLE_UNIT_MINUTE =0;
+    private final int CIRCLE_UNIT_HOUR =1;
+    private final int CIRCLE_UNIT_DAY =2;
+    private final int CIRCLE_UNIT_MONTH =3;
 
-    public void run() {
+    //日任务启动时间点
+    private final int STARTUP_TIME = 23;
 
+    private Trigger triggerHour,triggerDay;
+
+    public void run() throws SchedulerException{
+        SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
+        Scheduler sched = schedFact.getScheduler();
+        sched.start();
+
+        //小时任务
+        JobDetail jobDetailHour = new JobDetail("PollingJobHour",null,PollingJob.class);
+        jobDetailHour.getJobDataMap().put("circleUnit", CIRCLE_UNIT_HOUR);
+        triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
+        triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date()));//从下一个分钟开始
+
+        JobDetail jobDetailDay = new JobDetail("PollingJobDay",null,PollingJob.class);
+        jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
+        triggerDay = TriggerUtils.makeDailyTrigger(STARTUP_TIME,0); // 每天23：00
+        triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date()));//从下一个秒开始
+
+        sched.scheduleJob(jobDetailHour, triggerHour);
+        sched.scheduleJob(jobDetailHour, triggerDay);
+         
     }
 }

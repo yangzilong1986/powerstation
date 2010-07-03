@@ -31,7 +31,7 @@ public class RealTimeTaskProcessor extends BaseProcessor {
 
     public RealTimeTaskProcessor( PepCommunicatorInterface pepCommunicator) {
         super();
-        taskService = (RTTaskService) cxt.getBean("taskService");
+        taskService = (RTTaskService) cxt.getBean("RTTaskService");
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
     }
