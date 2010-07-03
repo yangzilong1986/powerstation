@@ -12,7 +12,7 @@ public class TimerData {
 
     private ITimerFunctor functor;
     private int id = 0;
-    private long period = 60 * 1000;	//间隔（秒）
+    private long period = 60 * 60 * 1000;	//60分钟
 
     public TimerData() {
     }
