@@ -5,6 +5,8 @@
 
 package pep.bp.db;
 
+
+import java.sql.Date;
 import java.util.List;
 import pep.bp.model.TermTaskDAO;
 
@@ -13,6 +15,7 @@ import pep.bp.model.TermTaskDAO;
  * @author Thinkpad
  */
 public interface TaskService {
-    public List<TermTaskDAO> getTermTask_Polling();
+    public List<TermTaskDAO> getPollingTask(int CircleUnit);
+    public void updateTask(int TaskId,String ProtocolNo,String Sys_Object,Date StartTime,Date EndTime,int PollingNum);
 
 }

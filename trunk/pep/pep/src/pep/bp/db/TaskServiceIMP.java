@@ -5,6 +5,7 @@
 
 package pep.bp.db;
 
+import java.sql.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,7 @@ public class TaskServiceIMP implements  TaskService{
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-     public List<TermTaskDAO> getTermTask_Polling(){
+     public List<TermTaskDAO> getPollingTask(int CircleUnit){
          try {
             //主站轮召任务
             StringBuffer sbSQL = new StringBuffer();
@@ -42,7 +43,9 @@ public class TaskServiceIMP implements  TaskService{
             sbSQL.append(" from g_term_task a,g_task b");
             sbSQL.append(" where a.task_id = b.task_id");
             sbSQL.append(" and a.protocol_no = b.protocol_no");
-            sbSQL.append(" and b.task_type = '2'");
+            sbSQL.append(" and b.task_type = '2'");//主站轮召
+            sbSQL.append(" and a.startup_flag = '1'");//启用
+            sbSQL.append(" and b.exec_unit_master = "+CircleUnit);//周期单位
             String SQL = sbSQL.toString();
             List<TermTaskDAO> results = (List<TermTaskDAO>) jdbcTemplate.query(SQL, new TermTaskRowMapper());
 
@@ -74,6 +77,18 @@ public class TaskServiceIMP implements  TaskService{
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
             return null;
+        }
+     }
+
+     public void updateTask(int TaskId,String ProtocolNo,String Sys_Object,Date StartTime,Date EndTime,int PollingNum){
+         try {
+             StringBuffer sbSQL = new StringBuffer();
+             sbSQL.append("update g_task set START_TIME_MASTER = ?,END_TIME_MASTER=?,EXECONCE_TIMES=?");
+             sbSQL.append(" where TASK_ID = ? and PROTOCOL_NO=? and SYS_OBJECT = ?");
+            jdbcTemplate.update(sbSQL.toString(),
+                    new Object[]{StartTime, EndTime, PollingNum,TaskId,ProtocolNo,Sys_Object});
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
         }
      }
 }
