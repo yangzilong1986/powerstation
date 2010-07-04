@@ -4,6 +4,7 @@
  */
 package pep.bp.utils;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -54,12 +55,13 @@ import pep.codec.protocol.gb.gb376.PmPacket376DT;
  * @author Thinkpad
  */
 public class Converter {
+
     private static final byte FUNCODE_DOWM_1 = 1;//PRM =1 功能码：1 （发送/确认）
     private String groupValue = "";
     private int groupBinValue = 0;
     byte bits = 8;
 
-    public void CollectObject2Packet(CollectObject obj, PmPacket376 packet, byte AFN,StringBuffer gpMark,StringBuffer commandMark) {
+    public void CollectObject2Packet(CollectObject obj, PmPacket376 packet, byte AFN, StringBuffer gpMark, StringBuffer commandMark) {
 
         packet.setAfn(AFN);//AFN
         packet.getAddress().setRtua(obj.getLogicalAddr()); //逻辑地址
@@ -82,9 +84,8 @@ public class Converter {
                 dt.setFn(fn);
                 packet.getDataBuffer().putDA(da);
                 packet.getDataBuffer().putDT(dt);
-                if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READREALDATA)) {
+                if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA1)) {
                     InjectDataItem(packet, commandItem, commandItem.getCircleLevel());
-
                 }
             }
             if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
@@ -95,6 +96,46 @@ public class Converter {
         packet.setTpv(new TimeProtectValue());//时间标签
     }
 
+    public List<PmPacket376> CollectObject2PacketList(CollectObject obj, byte AFN, StringBuffer gpMark, StringBuffer commandMark) {
+        List<PmPacket376> results = new ArrayList<PmPacket376>();
+        while (true)
+            do {
+                PmPacket376 packet = new PmPacket376();
+                packet.setAfn(AFN);//AFN
+                packet.getAddress().setRtua(obj.getLogicalAddr()); //逻辑地址
+                packet.getControlCode().setIsUpDirect(false);
+                packet.getControlCode().setIsOrgniger(true);
+                packet.getControlCode().setFunctionKey(FUNCODE_DOWM_1);
+                packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+                packet.getControlCode().setDownDirectFrameCount((byte) 0);
+                packet.getSeq().setIsTpvAvalibe(true);
+                int[] MpSn = obj.getMpSn();
+
+                for (int i = 0; i <= MpSn.length - 1; i++) {
+                    gpMark.append(String.valueOf(MpSn[i]) + "#");
+                    List<CommandItem> CommandItems = obj.getCommandItems();
+                    for (CommandItem commandItem : CommandItems) {
+                        commandMark.append(commandItem.getIdentifier() + "#");
+                        PmPacket376DA da = new PmPacket376DA(MpSn[i]);
+                        PmPacket376DT dt = new PmPacket376DT();
+                        int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+                        dt.setFn(fn);
+                        packet.getDataBuffer().putDA(da);
+                        packet.getDataBuffer().putDT(dt);
+                        if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA1)) {
+                            InjectDataItem(packet, commandItem, commandItem.getCircleLevel());
+                        }
+                    }
+                    if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
+                    {
+                        packet.setAuthorize(new Authorize());
+                    }
+                }
+                packet.setTpv(new TimeProtectValue());//时间标签
+            }
+    }
+
+
     private void putDataBuf(PmPacket376 packet, CommandItem commandItem) {
         String DataItemValue, Format, IsGroupEnd = "";
         int Length, bitnumber = 0;
@@ -103,7 +144,6 @@ public class Converter {
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
         if (dataItemMap != null) {
-
 
             Iterator iterator = dataItemMap.keySet().iterator();
             while (iterator.hasNext()) {
