@@ -187,7 +187,7 @@ addpsinfo = function(){
         	   closeWin() 
            }
          },error:function(e){
-             alert(e.message);
+             alert(e);
          }
        });
   }
@@ -212,7 +212,7 @@ updatepsinfo = function(){
           	 closeWin();
              }
            },error:function(e){
-               alert(e.getMessage());
+               alert(e);
            }
          });
     }
