@@ -31,14 +31,12 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     private static int ID;
     private final int FAILCODE = -1;
+    private final int cmdItemNum = 4;
 
-//    private final byte FUNCODE_DOWM_1 = 1;//PRM =1 功能码：1 （发送/确认）
     private final static Logger log = LoggerFactory.getLogger(RealTimeProxy376.class);
     private RTTaskService taskService;
     private Converter converter;
- //   private String groupValue = "";
- //   private int groupBinValue = 0;
-//    byte bits = 8;
+
 
     private int getID() {
         return taskService.getSequnce();
@@ -52,46 +50,18 @@ public class RealTimeProxy376 implements ICollectInterface {
         for (CollectObject obj : mto.getCollectObjects()) {
             gpMark.delete(0,gpMark.length());
             commandMark.delete(0,commandMark.length());
-            RealTimeTaskDAO task = new RealTimeTaskDAO();
-            PmPacket376 packet = new PmPacket376();
-//            packet.setAfn(AFN);//AFN
-//            packet.getAddress().setRtua(obj.getLogicalAddr()); //逻辑地址
-//            packet.getControlCode().setIsUpDirect(false);
-//            packet.getControlCode().setIsOrgniger(true);
-//            packet.getControlCode().setFunctionKey(FUNCODE_DOWM_1);
-//            packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
-//            packet.getControlCode().setDownDirectFrameCount((byte) 0);
-//            packet.getSeq().setIsTpvAvalibe(true);
-//            int[] MpSn = obj.getMpSn();
-//            for (int i = 0; i <= MpSn.length - 1; i++) {
-//                gpMark += String.valueOf(MpSn[i]) + "#";
-//                List<CommandItem> CommandItems = obj.getCommandItems();
-//                for (CommandItem commandItem : CommandItems) {
-//                    commandMark += commandItem.getIdentifier() + "#";
-//                    PmPacket376DA da = new PmPacket376DA(MpSn[i]);
-//                    PmPacket376DT dt = new PmPacket376DT();
-//                    int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-//                    dt.setFn(fn);
-//                    packet.getDataBuffer().putDA(da);
-//                    packet.getDataBuffer().putDT(dt);
-//                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFN_SETPARA)||(AFN == AFN_READREALDATA)) {
-//                        InjectDataItem(packet, commandItem, commandItem.getCircleLevel());
-//
-//                    }
-//                }
-//                if (AFN == AFN_RESET || AFN == AFN_SETPARA || AFN == AFN_TRANSMIT)//消息认证码字段PW
-//                {
-//                    packet.setAuthorize(new Authorize());
-//                }
-//            }
-//            packet.setTpv(new TimeProtectValue());//时间标签
-            converter.CollectObject2Packet(obj, packet, AFN, gpMark, commandMark);
-            task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
-            task.setSequencecode(sequenceCode);
-            task.setLogicAddress(obj.getLogicalAddr());
-            task.setGpMark(gpMark.toString());
-            task.setCommandMark(commandMark.toString());
-            tasks.add(task);
+            
+            List<PmPacket376> packetList = converter.CollectObject2PacketList(obj, AFN,gpMark, commandMark,cmdItemNum);
+            for(PmPacket376 packet : packetList)
+            {
+                RealTimeTaskDAO task = new RealTimeTaskDAO();
+                task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
+                task.setSequencecode(sequenceCode);
+                task.setLogicAddress(obj.getLogicalAddr());
+                task.setGpMark(gpMark.toString());
+                task.setCommandMark(commandMark.toString());
+                tasks.add(task);
+            }
         }
         return tasks;
     }
@@ -383,7 +353,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_READREALDATA);
+                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_READDATA1);
                 for (RealTimeTaskDAO task : tasks) {
                     this.taskService.insertTask(task);
                 }

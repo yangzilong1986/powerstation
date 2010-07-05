@@ -28,6 +28,7 @@ public class TermTaskRowMapper implements RowMapper{
         task.setSendup_Circle_gw(rs.getInt("SENDUP_CYCLE_GW"));
         task.setSendup_Unit_gw(rs.getInt("SENDUP_UNIT_GW"));
         task.setExt_cnt_gw(rs.getInt("EXT_CNT_GW"));
+        task.setAFN((byte)rs.getInt("AFN"));
         return task;
     }
 }
