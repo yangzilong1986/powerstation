@@ -87,11 +87,6 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 					"改终端下测量点序号重复");
 
 		try {
-			// 默认485
-			model.getGpInfo().setGpChar("1");
-			// 台区
-			model.getGpInfo().setGpType("2");
-
 			this.psInfoManager.saveOrUpdate(model);
 			psId = model.getPsId();
 		} catch (DataAccessException e) {
