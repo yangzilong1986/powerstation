@@ -170,7 +170,6 @@ return data;
 
 addpsinfo = function(){
   var psFormData = getData('add');
-  alert(psFormData);
   var url="${ctx}/archive/psinfo.json";
   if(confirm("确定要保存该漏电保护器?")){
     jQuery.ajax({
