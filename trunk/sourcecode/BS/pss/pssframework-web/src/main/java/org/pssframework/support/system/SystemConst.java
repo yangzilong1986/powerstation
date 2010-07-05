@@ -115,7 +115,7 @@ public final class SystemConst {
 	/**
 	 * REMC_GEAR 剩余电流档位
 	 */
-	public static final String CODE_REMC_GEAR = "REMC_GEAR";
+	public static final String CODE_REMC_GEAR = "REM_EC";
 
 	/**
 	 * 剩余电流档位当前值 REMC_GEAR_VALUE
@@ -125,7 +125,7 @@ public final class SystemConst {
 	/**
 	 * -漏电分断延迟档位 OFF_DELAY_GEAR
 	 */
-	public static final String CODE_OFF_DELAY_GEAR = "OFF_DELAY_GEAR";
+	public static final String CODE_OFF_DELAY_GEAR = "OFF_DELAY_VALUE";
 
 	/**
 	 * 漏电分断延迟时间 OFF_DELAY_VALUE
