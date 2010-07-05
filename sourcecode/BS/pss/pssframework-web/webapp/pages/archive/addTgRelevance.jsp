@@ -136,7 +136,7 @@ var contextPath  = '${ctx}';
     <thead>
       <tr>
         <th>资产编号</th>
-        <th>集中器地址</th>
+        <th>漏保地址</th>
         <th>漏保型号</th>
         <th>操作</th>
       </tr>
