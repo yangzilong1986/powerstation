@@ -29,6 +29,7 @@ public class TermTaskDAO {
     private Date end_time_master;
     private int exec_circle_master;
     private int exec_unit_master;
+    private byte AFN;
     private List<CommanddItemDAO> commandItemList;
 
     /**
@@ -267,6 +268,20 @@ public class TermTaskDAO {
      */
     public void setExec_unit_master(int exec_unit_master) {
         this.exec_unit_master = exec_unit_master;
+    }
+
+    /**
+     * @return the AFN
+     */
+    public byte getAFN() {
+        return AFN;
+    }
+
+    /**
+     * @param AFN the AFN to set
+     */
+    public void setAFN(byte AFN) {
+        this.AFN = AFN;
     }
 
 
