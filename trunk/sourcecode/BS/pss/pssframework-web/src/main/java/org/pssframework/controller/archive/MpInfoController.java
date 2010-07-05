@@ -89,6 +89,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		String msg = MSG_CREATED_SUCCESS;
 		try {
 			for (GpInfo gpInfo : model.getGpInfos()) {
+				gpInfo.setObjectId(model.getTgInfo().getTgId());
 				gpInfo.setMpInfo(model);
 			}
 			this.mpInfoManger.saveOrUpdate(model);
