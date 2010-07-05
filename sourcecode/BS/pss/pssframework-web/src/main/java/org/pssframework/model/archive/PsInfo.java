@@ -4,6 +4,8 @@
 package org.pssframework.model.archive;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -92,7 +95,7 @@ public class PsInfo extends BaseEntity {
 	@Column(name = "OFF_DELAY_VALUE", length = 5)
 	private String offDelayValue;
 
-	@Column(name = "FUNCTION_CODE", length = 5)
+	@Column(name = "FUNCTION_CODE")
 	private String functionCode;
 
 	// PS_TYPE VARCHAR2(5),is '1：总保；2：二级保';
@@ -113,6 +116,38 @@ public class PsInfo extends BaseEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "GP_ID")
 	private GpInfo gpInfo;
+
+	@Transient
+	private Map<String, Integer> functionMap;
+
+	@Transient
+	private int[] functionsChecked;
+
+	/**
+	 * @return the functionMap
+	 */
+	public Map<String, Integer> getFunctionMap() {
+
+		Map<String, Integer> functionMap = new LinkedHashMap<String, Integer>();
+		functionMap.put("欠压保护", 0);
+		functionMap.put("过压保护", 1);
+		functionMap.put("突变保护", 2);
+		functionMap.put("缓变保护 ", 3);
+		functionMap.put("特波保护", 4);
+		functionMap.put("自动跟踪", 5);
+		functionMap.put("告警功能", 6);
+		functionMap.put("特波30mA", 7);
+
+		return functionMap;
+	}
+
+	/**
+	 * @param functionMap the functionMap to set
+	 */
+	public void setFunctionMap(Map<String, Integer> functionMap) {
+
+		this.functionMap = functionMap;
+	}
 
 	/**
 	 * @return the assetNo
@@ -141,21 +176,6 @@ public class PsInfo extends BaseEntity {
 	public String getFunctionCode() {
 		return functionCode;
 	}
-
-	/**
-	 * @return the termId
-	 */
-	// public Long getTermId() {
-	// return termId;
-	// }
-
-	/**
-	 * @param termId
-	 *            the termId to set
-	 */
-	// public void setTermId(Long termId) {
-	// this.termId = termId;
-	// }
 
 	/**
 	 * @return the gpInfo
@@ -380,4 +400,32 @@ public class PsInfo extends BaseEntity {
 
 	}
 
+	/**
+	 * @param functionsChecked the functionsChecked to set
+	 */
+	public void setFunctionsChecked(int[] functionsChecked) {
+
+		this.functionsChecked = functionsChecked;
+	}
+
+	/**
+	 * @return the functionsChecked
+	 */
+	public int[] getFunctionsChecked() {
+		if (this.functionsChecked != null && this.functionsChecked.length > 0)
+			return this.functionsChecked;
+
+		int[] strChecked = new int[] { -1, -1, -1, -1, -1, -1, -1, -1 };
+		if (this.getFunctionCode() != null && this.getFunctionCode().length() > 0) {
+			char[] by = this.getFunctionCode().toCharArray();
+			for (int i = 0; i < by.length; i++) {
+				char j = by[i];
+				if ('1' == j) {
+					strChecked[i] = i;
+				}
+			}
+		}
+		return strChecked;
+
+	}
 }
