@@ -209,10 +209,9 @@ updatepsinfo = function(){
              alert(msg);
              if(isSucc){
           	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
-          	 closeWin() 
+          	 closeWin();
              }
            },error:function(e){
-             alert("error")
                alert(e.getMessage());
            }
          });
