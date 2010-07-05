@@ -13,6 +13,7 @@ import org.pssframework.dao.archive.PsInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PsInfoManger extends BaseManager<PsInfo, Long> {
+
+	private static char[] initChecked = new char[] { '0', '0', '0', '0', '0', '0', '0', '0' };
 
 	@Autowired
 	private PsInfoDao psInfoDao;
@@ -36,6 +39,43 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		return psInfoDao.findByPageRequest(mapRequest);
 	}
 
+	@Override
+	public void saveOrUpdate(PsInfo model) throws DataAccessException {
+		// 默认485
+		model.getGpInfo().setGpChar("1");
+
+		// 台区
+		model.getGpInfo().setGpType("2");
+
+		int[] functionsChecked = model.getFunctionsChecked();
+
+		if (functionsChecked != null) {
+
+			for (int checked : functionsChecked) {
+				initChecked[checked] = '1';
+			}
+
+		}
+		model.setFunctionCode(String.valueOf(initChecked));
+		super.saveOrUpdate(model);
+	}
+
+	@Override
+	public void update(PsInfo model) throws DataAccessException {
+
+		int[] functionsChecked = model.getFunctionsChecked();
+
+		if (functionsChecked != null) {
+
+			for (int checked : functionsChecked) {
+				initChecked[checked] = '1';
+			}
+
+		}
+		model.setFunctionCode(String.valueOf(initChecked));
+		super.update(model);
+	}
+
 	public boolean checkGpsn(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
 
@@ -49,18 +89,20 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 			return bolRep;
 		}
 
-		for (GpInfo gpInfo : gpInfos) {
+		if (gpInfos != null && gpInfos.size() > 0) {
 
-			if (gpInfo.getGpSn() == gpInfoIn.getGpSn()) {
+			for (GpInfo gpInfo : gpInfos) {
 
-				bolRep = true;
+				if (gpInfo.getGpSn() == gpInfoIn.getGpSn()) {
 
-				logger.debug("终端{}测量点序号重复", gpInfo.getTerminalInfo().getTermId());
+					bolRep = true;
 
-				break;
+					logger.debug("终端{}测量点序号重复", gpInfo.getTerminalInfo().getTermId());
+
+					break;
+				}
 			}
 		}
-
 		return bolRep;
 	}
 }
