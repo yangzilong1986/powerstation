@@ -51,23 +51,24 @@ function meterState(){
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||           document.body.clientWidth) -10 ); height: expression(((           document.documentElement.clientHeight ||           document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||                 document.body.clientWidth) -10 ); height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
-    <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" value="${_type}" />
+    <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
+      value="${_type}" />
     <form:hidden path="gpInfo.objectId" />
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
         <td width="30%"><form:input path="assetNo" cssClass="required input2" /></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
-        <td width="30%"><form:select path="terminalInfo" items="${termList}" id="termId" itemLabel="logicalAddr"
-          itemValue="termId" cssStyle="width:155px;" /></td>
+        <td width="30%"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
+          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></td>
       </tr>
-       <tr height="30px">
+      <tr height="30px">
         <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
-        <td><form:input path="gpInfo.gpAddr"  maxlength="20" cssClass="required input2"/></td>
+        <td><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
-        <td><form:input path="gpInfo.gpSn"  cssClass="required input2 validate-number"/></td>
+        <td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
@@ -89,10 +90,9 @@ function meterState(){
         <td align="right" class="green">剩余电流档位：</td>
         <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
-
-           <td align="right" class="green">规约：</td>
-        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+        <td align="right" class="green">规约：</td>
+        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" /></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏电分断延迟档位：</td>
@@ -103,14 +103,6 @@ function meterState(){
           itemValue="code" cssStyle="width:155px;" /></td>
       </tr>
       <tr height="30px">
-        <td align="right" class="green">功能设置字：</td>
-        <td><form:input path="functionCode" cssClass="input2" /></td>
-        <td align="right" class="green">漏保类型：</td>
-        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
-      </tr>
-     
-      <tr height="30px">
         <td align="right" class="green">CT：</td>
         <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
@@ -118,7 +110,17 @@ function meterState(){
         <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" /></td>
       </tr>
-      
+      <tr height="30px">
+        <td align="right" class="green">漏保类型：</td>
+        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">功能状态设置：</td>
+        <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
+          <form:checkbox path="functionsChecked" value="${function.value}" />${function.key}
+ </c:forEach></td>
+      </tr>
     </table>
   </form:form></div>
   <div style="text-align: center"><br></br>
@@ -148,6 +150,7 @@ jQuery("#save").click(function(){
       jQuery(this).attr("disabled","");
     }
     })
+
       
 })
 
@@ -163,8 +166,11 @@ if(type == "add"){
 return data;
 }
 
+
+
 addpsinfo = function(){
   var psFormData = getData('add');
+  alert(psFormData);
   var url="${ctx}/archive/psinfo.json";
   if(confirm("确定要保存该漏电保护器?")){
     jQuery.ajax({
