@@ -28,14 +28,14 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 	@Autowired
 	private PsInfoDao psInfoDao;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
 		return psInfoDao;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<PsInfo> findByPageRequest(Map mapRequest) {
-		// TODO Auto-generated method stub
 		return psInfoDao.findByPageRequest(mapRequest);
 	}
 
@@ -57,6 +57,7 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 		}
 		model.setFunctionCode(String.valueOf(initChecked));
+
 		super.saveOrUpdate(model);
 	}
 
@@ -64,6 +65,8 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 	public void update(PsInfo model) throws DataAccessException {
 
 		int[] functionsChecked = model.getFunctionsChecked();
+
+		logger.debug("update functionsChecked{}", functionsChecked);
 
 		if (functionsChecked != null) {
 
@@ -73,6 +76,9 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 		}
 		model.setFunctionCode(String.valueOf(initChecked));
+
+		logger.debug("start to updating");
+
 		super.update(model);
 	}
 
@@ -82,10 +88,14 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		boolean bolRep = false;
 
 		List<GpInfo> gpInfos = new LinkedList<GpInfo>();
+
 		try {
 			gpInfos = psInfo.getTerminalInfo().getGpInfos();
+
 		} catch (NullPointerException e) {
-			logger.debug("该漏保没有关联终端");
+
+			logger.info("该漏保没有关联终端");
+
 			return bolRep;
 		}
 
@@ -93,11 +103,11 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 			for (GpInfo gpInfo : gpInfos) {
 
-				if (gpInfo.getGpSn() == gpInfoIn.getGpSn()) {
+				if (gpInfo.getGpSn().equals(gpInfoIn.getGpSn())) {
 
 					bolRep = true;
 
-					logger.debug("终端{}测量点序号重复", gpInfo.getTerminalInfo().getTermId());
+					logger.info("终端{}测量点序号重复", gpInfo.getTerminalInfo().getTermId());
 
 					break;
 				}
