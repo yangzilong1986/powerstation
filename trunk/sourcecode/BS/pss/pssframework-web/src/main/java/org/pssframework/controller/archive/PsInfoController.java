@@ -159,7 +159,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 			this.psInfoManager.update(psinfo);
 		} catch (Exception e) {
-			this.logger.error(e.getLocalizedMessage());
+			this.logger.error(e.getMessage());
 			isSucc = false;
 			msg = e.getMessage();
 		}
