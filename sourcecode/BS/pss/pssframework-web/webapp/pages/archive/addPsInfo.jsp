@@ -186,8 +186,8 @@ addpsinfo = function(){
         	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
         	   closeWin() 
            }
-         },error:function(e){
-             alert(e);
+         },error:function(XmlHttpRequest,textStatus, errorThrown){
+        	 alert("新建失败;"+XmlHttpRequest.responseText);
          }
        });
   }
@@ -211,8 +211,10 @@ updatepsinfo = function(){
           	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
           	 closeWin();
              }
-           },error:function(e){
-               alert(e);
+           },
+           error:function(XmlHttpRequest)
+           {
+           alert("更新失败;"+XmlHttpRequest.responseText +  XmlHttpRequest.statusText);
            }
          });
     }
