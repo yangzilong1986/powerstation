@@ -84,7 +84,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		if (checkGpsn(model))
 			return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
-					"改终端下测量点序号重复");
+					"该终端下测量点序号重复");
 
 		try {
 			this.psInfoManager.saveOrUpdate(model);
@@ -150,14 +150,24 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		String msg = MSG_UPDATE_SUCCESS;
 
 		try {
+			
 			PsInfo psinfo = this.psInfoManager.getById(id);
-			this.bind(request, psinfo);
+			logger.debug("get psinfo {} from db", psinfo);
 
-			if (checkGpsn(psinfo))
+			this.bind(request, psinfo);
+			logger.debug("bind psinfo {} from request", psinfo);
+			
+			if (checkGpsn(psinfo)) {
+
+				logger.info("The serial number terminal repeat measurement points");
+
 				return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
-						"改终端下测量点序号重复");
+						"该终端下测量点序号重复");
+
+			}
 
 			this.psInfoManager.update(psinfo);
+
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
 			isSucc = false;
