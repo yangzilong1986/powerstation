@@ -131,6 +131,7 @@ abstract public class PmPacket {
     public PmPacket setValue(byte[] msg, int firstIndex) {
         int head = PmPacket.getMsgHeadOffset(msg, getProtocolVersion(), firstIndex);
         if (head != -1) {
+            int auxPassedBytes = 0;
             int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0xFF) >> 2;
             controlCode.setValue(msg[head + 6]);
             address.setValue(msg, head + 7);
@@ -153,12 +154,14 @@ abstract public class PmPacket {
 
             if (controlCode.getIsUpDirect() && controlCode.getUpDirectIsAppealCall()) {
                 eventCountor.setValue(msg, 14 + len);
+                auxPassedBytes = EventCountor.size();
             }
             if ((!controlCode.getIsUpDirect()) && (PmPacket.isNeedAuthorize(afn))) {
                 authorize.setValue(msg, 16 + len);
+                auxPassedBytes = Authorize.length();
             }
             if (seq.getIsTpvAvalibe()) {
-                tpv.setValue(msg, 16 + len + Authorize.length());
+                tpv.setValue(msg, 16 + len+auxPassedBytes);
             }
         }
         return this;
