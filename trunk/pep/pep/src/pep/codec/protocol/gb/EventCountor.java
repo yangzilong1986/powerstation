@@ -13,6 +13,10 @@ public class EventCountor {
     private byte ec1;
     private byte ec2;
 
+    public static int size(){
+        return 2;
+    }
+
     public byte getEc1(){
         return ec1;
     }
