@@ -46,7 +46,7 @@ public class PmPacketData{
     }
 
     public byte[] getValue(){
-        byte[] rslt = new byte[dataBuff.limit()];
+        byte[] rslt = new byte[dataBuff.position()]; //不能取limit(); luxiaochung
         dataBuff.rewind().get(rslt);
         return rslt;
     }
