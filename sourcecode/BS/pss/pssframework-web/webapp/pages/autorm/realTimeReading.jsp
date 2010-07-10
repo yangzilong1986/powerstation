@@ -4,6 +4,8 @@
 <%@page import="org.pssframework.support.system.SystemConst"%>
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 var inputText = inputText1;
 var inputLabel = inputLabel1;
@@ -13,6 +15,7 @@ var timeData; //其他数据项页面中的数据时间
 var dataGap; //其他数据项页面中的数据间隔
 var points; //其他数据项页面中的点数
 var protocolNo;//其他数据项页面中的规约号
+
 function inputTextStyle() {
     $('#objectNo').attr({style: "color: #aaaaaa;"});
     $('#objectNo').blur( function() {
@@ -51,7 +54,7 @@ function initInputText() {
     $("#objectNo").val(inputText);
 }
 
-//$(document).ready( function() {
+/*$(document).ready( function() {
     $('[name="sysObject"]:radio').click(function(){
       var sysObject=$('[name="sysObject"][checked=true]:radio').val();
       $('#objectNo').unbind();
@@ -82,7 +85,8 @@ function initInputText() {
     enableButton();
     autoCompleter("objectNo","1",154);
     autoCompleter("logicalAddr","50",120);
-//});
+});
+*/
 
 function checkForm(oform) {
     if($('#objectNo').val() == inputText) {
@@ -172,6 +176,8 @@ function openAdvancedQuery(){
   var sysObject = $("input[name='sysObject'][checked]").val();
   qry_adv_click({OBJECT_TYPE : sysObject,ARCHIVE_TYPE : '0',QUERY_TYPE : '0'});
 }
+
+
 //导出excel
 function creatExcel(){
    var tableObj = document.getElementById('dataBody');
@@ -208,7 +214,6 @@ function creatExcel(){
      }
    }
    if(excelFlag == "2"){ //当前功率
-
       xmlId = "realTimeReading_2";
    }else if(excelFlag == "3"){ //电流电压
       xmlId = "realTimeReading_3";
@@ -269,131 +274,89 @@ function openOtherData(){
 }
 
 </script>
-
 </head>
 <body>
-<html:form styleId="readingQueryForm" action="/autorm/getReadingQueryAction" onsubmit="return checkForm(this);" method="post">
-<input type="hidden" id="label" name="label" value=""/>
-<div id="body">
-  <div id="tab" class="tab">
-    <ul>
-      <li id="tab_1" class="tab_on"><a href="#" onclick="return false;" onfocus="blur()"><bean:message bundle="autorm" key="autorm.realTimeReading.title"/></a></li>
-      <li class="clear"></li>
+<form:form>
+  <div class="electric_lcon" id="electric_Con">
+  <ul class=default id=electric_Con_1>
+    <div >
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr height="30px">
+        <td width="100" class="green" align="right" >单位：</td>
+        <td width="120" ></td>
+        <td width="100" class="green" align="right" >台区：</td>
+        <td width="150"></td>
+        <td width="100" class="green" align="right" >集中器地址：</td>
+        <td width="120" class="dom"></td>
+      </tr>
+      <tr height="30px">
+        <td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
+          onclick="readDqgflData()" class="btnbg4"/>
+           <input type="button"  class="btnbg4" id="dqglData" name="dqglData" value="当前功率"
+          onclick="readDqglData()" /> <input class="btnbg4"  type="button" id="dydlData" name="dydlData" value="当前电流"
+          onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData" name="otherData" value="其他数据项"
+          onclick="openOtherData()" /> 
+        <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
+        <td><input class="btnbg4" type="button" name="query" id="query" value="查询" onclick="queryData()" /></td>
+      </tr>
+    </table>
+    </div>
+    <div id="bg" style="height: 30px; text-align: center;">
+    <ul id=”datamenu_Option“ class="cb font1">
+      <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">实时召测</li>
     </ul>
-    <h1><a href="#"><img src="<pss:contextPath/>/img/bt_help.gif" width="14" height="15" /></a></h1>
-  </div>
-  <div id="main">
-    <div id="tool">
-      <div class="opbutton2">
-        <input type="button" name="query" id="query" value="<bean:message bundle="autorm" key="autorm.button.query"/>" onclick="queryData()" class="input1" />
-        <input type="button" class="input2" onclick="openAdvancedQuery();"  value="高级查询" />
-      </div>
-      <div class="opbutton1">
-        <input type="button" id="dqgflData" name="dqgflData" class="input4" value="<bean:message bundle="autorm" key="autorm.button.dqgflData"/>" onclick="readDqgflData()"/>
-        <input type="button" id="dqglData" name="dqglData" class="input2" value="<bean:message bundle="autorm" key="autorm.button.dqglData"/>" onclick="readDqglData()"/>
-        <input type="button" id="dydlData" name="dydlData" class="input2" value="<bean:message bundle="autorm" key="autorm.button.dydlData"/>" onclick="readDydlData()"/>
-        <!-- <input type="button" id="sydlData" name="sydlData" class="input3" value="<bean:message bundle="autorm" key="autorm.button.sydlData"/>" onclick="readSydlData()"/> -->
-        <input title="只对广东集抄规约有效" type="button" id="sssjData" name="sssjData" class="input2" value="<bean:message bundle="autorm" key="autorm.button.sssjData"/>" onclick="readSssjData()"/>
-        <input type="button" id="otherData" name="otherData" class="input3" value="其他数据项" onclick="openOtherData()"/>
-      </div>
-      <table border="0" cellpadding="0" cellspacing="0">
+    </div>
+    <div class="tableContainer"
+      style="height: expression(((   document.documentElement.clientHeight ||document.body.clientHeight) -105 ) );">
+    <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead>
         <tr>
-          <td width="70" class="label">单位：</td>
-          <td width="120" class="dom"></td>
-          <td width="70" class="label" id="objectLabel">台区：</td>
-          <td width="150"></td>
-          <td width="70" class="label" id="termAddrLabel">集中器地址：</td>
-          <td width="120" class="dom"></td>
-          <td width="70" class="label"></td>
-          <td width="120" class="dom"></td>
-          <td></td>
+          <th width="3%"><input type="checkbox" name="selectAll" onclick="selectAllCB()" checked /></th>
+          <th>对象编号</th>
+          <th>对象名称</th>
+          <th>对象类型</th>
+          <th>终端地址</th>
+          <th>电表局号</th>
+          <th>测量点序号</th>
         </tr>
-      </table>
+      </thead>
+      <tbody id="dataBody">
+        <!-- 增加排序功能 -->
+        <c:forEach items="${PG_QUERY_RESULT}" var="item" varStatus="status">
+          <tr>
+            <td align="center"><input type="checkbox" name="ItemID" value="<c:out value="${item.GP_ID}"/>" checked />
+            <c:if test="${item.PROTOCOL_NO == 126}">
+              <input type="hidden" name="tdID"
+                value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_ADDR}"/>" />
+            </c:if> <c:if test="${item.PROTOCOL_NO != 126}">
+              <input type="hidden" name="tdID"
+                value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_SN}"/>" />
+            </c:if></td>
+            <td align="center"><c:out value="${status.count}" /></td>
+            <td><c:out value="${item.OBJECT_NO}" /></td>
+            <td><c:out value="${item.OBJECT_NAME}" /></td>
+            <td align="center"><c:out value="${item.OBJECTTYPE}" /></td>
+            <td align="center"><c:out value="${item.LOGICAL_ADDR}" /></td>
+            <td align="center"><c:out value="${item.ASSET_NO}" /></td>
+            <td align="center"><c:out value="${item.GP_SN}" /></td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
     </div>
-    <div class="content">
-      <div id="cont_1">
-        <div class="target">
-          <ul>
-            <li class="target_on"><a href="#" onclick="return false;"></a></li>
-            <li class="clear"></li>
-          </ul>
-        </div>
-        <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-185));">
-          <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <thead><tr>
-              <th width="3%"><input type="checkbox" name="selectAll" onclick="selectAllCB()" checked /></th>
-              <th><bean:message bundle="autorm" key="autorm.dxxh"/></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="OBJECT_NO" title="对象编号"></peis:pagehead></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="OBJECT_NAME" title="对象名称"></peis:pagehead></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="OBJECTTYPE" title="对象类型"></peis:pagehead></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="LOGICAL_ADDR" title="终端地址"></peis:pagehead></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="ASSET_NO" title="电表局号"></peis:pagehead></th>
-              <th><pss:pagehead actionForm="readingQueryForm" styleClass="order" function="orderBy" href="" orderBy="GP_SN" title="测量点序号"></peis:pagehead></th>
-            </tr></thead>
-            <tbody id="dataBody">
-              <!--  <logic:present name="PG_QUERY_RESULT">
-              <logic:iterate id="datainfo" name="PG_QUERY_RESULT" indexId="number"> 
-              <tr>
-                <td align="center">
-                  <input type="checkbox" name="ItemID" value="<bean:write name="datainfo" property="col1"/>" checked />
-                  <logic:equal name="datainfo" property="col10" value="126">
-                  <input type="hidden" name="tdID" value="<bean:write name="datainfo" property="col5"/>_<bean:write name="datainfo" property="col9"/>"/>
-                  </logic:equal>
-                  <logic:notEqual name="datainfo" property="col10" value="126">
-                  <input type="hidden" name="tdID" value="<bean:write name="datainfo" property="col5"/>_<bean:write name="datainfo" property="col7"/>"/>
-                  </logic:notEqual>
-                </td>
-                <td align="center"><bean:write name="datainfo" property="rowNo"/></td>
-                <td><bean:write name="datainfo" property="col2"/></td>
-                <td><bean:write name="datainfo" property="col3"/></td>
-                <td align="center"><bean:write name="datainfo" property="col4"/></td>
-                <td align="center"><bean:write name="datainfo" property="col5"/></td>
-                <td align="center"><bean:write name="datainfo" property="col6"/></td>
-                <td align="center"><bean:write name="datainfo" property="col7"/></td>
-              </tr>
-              </logic:iterate>
-              </logic:present>-->
-              <!-- 增加排序功能 -->
-              <c:forEach items="${PG_QUERY_RESULT}" var="item" varStatus="status">
-                 <tr>
-                    <td align="center">
-                      <input type="checkbox" name="ItemID" value="<c:out value="${item.GP_ID}"/>" checked />
-                      <c:if test="${item.PROTOCOL_NO == 126}">
-                         <input type="hidden" name="tdID" value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_ADDR}"/>"/>
-                      </c:if>
-                      <c:if test="${item.PROTOCOL_NO != 126}">
-                         <input type="hidden" name="tdID" value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_SN}"/>"/>
-                      </c:if>
-                    </td>
-                    <td align="center"><c:out value="${status.count}"/></td>
-                    <td><c:out value="${item.OBJECT_NO}"/></td>
-                    <td><c:out value="${item.OBJECT_NAME}"/></td>
-                    <td align="center"><c:out value="${item.OBJECTTYPE}"/></td>
-                    <td align="center"><c:out value="${item.LOGICAL_ADDR}"/></td>
-                    <td align="center"><c:out value="${item.ASSET_NO}"/></td>
-                    <td align="center"><c:out value="${item.GP_SN}"/></td>
-                 </tr>
-              </c:forEach>
-            </tbody>
-          </table>
-        </div>
-        <div class="pageContainer">
-           <pss:pagebar actionForm="readingQueryForm" url="/autorm/getReadingQueryAction.do?action=normalMode" rowsChange="true" export="导出excel的名字"/>
-        </div>
-      </div>
+    </ul>
     </div>
-  </div>
-</div>
-</html:form>
-<iframe id="resultframe" src="<pss:contextPath/>/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
+</form:form>
+<iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
 </body>
 <script type="text/javascript">
-var contextPath = "<pss:contextPath/>";
+var contextPath = "${ctx}";
 var readingTitle = '<bean:message bundle="autorm" key="autorm.realTimeReading.title.reading"/>';
 var overTimeTitle = '<bean:message bundle="autorm" key="autorm.realTimeReading.title.overtime"/>';
 var chooseObject = '<bean:message bundle="autorm" key="autorm.realTimeReading.title.chooseObject"/>';
 
 var totalNums = 0;
+
 //当前各费率电能示值
 function readDqgflData() {
     var sSelectedList = getSelectedIdString(0);
