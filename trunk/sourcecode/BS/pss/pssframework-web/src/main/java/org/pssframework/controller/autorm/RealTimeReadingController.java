@@ -3,7 +3,6 @@
  */
 package org.pssframework.controller.autorm;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +40,9 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, RealTimeReadingInfo model) {
 		ModelAndView modelAndView = new ModelAndView(VIEW);
 
+		Map<String, ?> mapRequest = null;
+		getInitOption(modelAndView, mapRequest);
+
 		return modelAndView;
 	}
 
@@ -63,10 +65,6 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 
 	@SuppressWarnings("unchecked")
 	private List<TgInfo> getTgOrgOptions(Map mapRequest) {
-		List<TgInfo> tglist = this.tgInfoManager.findByPageRequest(mapRequest);
-		if (tglist == null || tglist.size() <= 0) {
-			tglist = new LinkedList<TgInfo>();
-		}
-		return tglist;
+		return tgInfoManager.findByPageRequest(mapRequest);
 	}
 }
