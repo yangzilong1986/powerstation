@@ -84,73 +84,129 @@ function visitNode(pNode){
 function treeRenderBeforeHandler(pTree){
     var selectedNode;//用来记录当前右键选种的书节点  
     var url;
-    var rightClick = new Ext.menu.Menu( {
-                  id : 'rightClickCont',
-                  items : [ 
-                  {
-                      id:'new',
-                      text : '新增机构',
-                      handler : function(){
-                          var node = selectedNode.id;
-                          var type = node.split("_")[0];
-                          var uid = node.split("_")[1];
-                          if(type=='ORG'){ 
-                        	  url = "${ctx}/archive/tginfo/new?orgInfo.orgId="+uid;
-                        	  parent.parent.tabscontainermain.showTab("台区档案", url);
-                          }
-                      }
-                      
-                  },
-                  {
-                      id:'edit',
-                      text : '修改机构',
-                      handler : function(){
-                          var node = selectedNode.id;
-                          var type = node.split("_")[0];
-                          var uid = node.split("_")[1];
-                          if(type=='TG'){ 
-                	       url = "${ctx}/archive/tginfo/"+uid+"/edit";
-                     	  parent.parent.tabscontainermain.showTab("台区档案", url);
-                          }
-                      }
-                      
-                  },                  
-                  {
-                      id:'delete',
-                      text : '删除机构',
-                      handler : function(){
-                          var node = selectedNode.id;
-                          var type = node.split("_")[0];
-                          var uid = node.split("_")[1];
-                          if(type=='TG'){ 
-                        	  deletetginfo(uid);
-                          
-                          }
-
-                          refreshParentNode(selectedNode)
-                    }
-                  },
-                  {
-                      id:'viewUser',
-                      text : '查看机构',
-                      handler : function(){
-                    	  var node = selectedNode.id;
-                          var type = node.split("_")[0];
-                          var uid = node.split("_")[1];
-                          if(type=='TG'){ 
-                   	       url = "${ctx}/archive/tginfo/"+uid;
-                      	  parent.parent.tabscontainermain.showTab("台区档案", url);
-                         
-                          }
-                      }
-                  }
-                  
-                  ]
-              });
-              
+    var node;
+    var type;
+    var uid;
+    var msg;
+    var rightClick = new Ext.menu.Menu();
         pTree.on('contextmenu',function(node,pEventObj){  
         pEventObj.preventDefault();
+
+        if(node.id.split("_")[0] == 'ORG'){
+    
+            rightClick.removeAll();
+            
+        	rightClick = new Ext.menu.Menu({
+                id : 'rightClickCont',
+                items : [ 
+                 { 
+                      handler : function(){
+                     	  node = selectedNode.id;
+                     	  type = node.split("_")[0];
+                     	  uid  = node.split("_")[1]; 
+                      },
+                     id:'newOrg',
+                     text:'新增部门',
+                     disabled: true
+                },
+                {
+                	  handler : function(){
+                    	  node = selectedNode.id;
+                    	  type = node.split("_")[0];
+                    	  uid  = node.split("_")[1]; 
+                    	  url = "${ctx}/archive/tginfo/new?orgInfo.orgId="+uid;
+                    	  parent.parent.tabscontainermain.showTab("台区档案", url);
+                      },
+                      id:'newTg',
+                      text:'新增台区'
+                 },
+                      
+                { 
+                     handler : function(){
+                	  node = selectedNode.id;
+                	  type = node.split("_")[0];
+                	  uid  = node.split("_")[1]; 
+                      },
+                    id:'newLine',
+                    text:'新增线路',
+                    disabled: true
+                },
+                {
+                    id:'edit',
+                    text : '修改部门',
+                    handler : function(){
+                    },
+                    disabled: true
+                    
+                },                  
+                {
+                    id:'delete',
+                    text : '删除部门',
+                    handler : function(){
+                    },
+                    disabled: true
+                },
+                {
+                    id:'view',
+                    text : '查看部门',
+                    handler : function(){
+                    },
+                    disabled: true
+                }
+                ]
+            });
+        	
+        }else if(node.id.split("_")[0] == 'TG'){
+
+        	rightClick.removeAll();
+          
+        	rightClick = new Ext.menu.Menu({
+                id : 'rightClickCont',
+                items : [ 
+
+                {
+                    id:'edit',
+                    text : '修改台区',
+                    handler : function(){
+                	   node = selectedNode.id;
+                	  type = node.split("_")[0];
+                	  uid  = node.split("_")[1]; 
+          	          url = "${ctx}/archive/tginfo/"+uid+"/edit";
+               	      parent.parent.tabscontainermain.showTab("台区档案", url);
+                    }
+                    
+                },                  
+                {
+                    id:'delete',
+                    text : '删除台区',
+                    handler : function(){
+                    	  node = selectedNode.id;
+                    	  type = node.split("_")[0];
+                    	  uid  = node.split("_")[1]; 
+                      	  deletetginfo(uid);
+                      	  refreshParentNode(selectedNode)
+                     }
+                },
+                {
+                    id:'view',
+                    text : '查看台区',
+                    handler : function(){
+                    	  node = selectedNode.id;
+                    	  type = node.split("_")[0];
+                    	  uid  = node.split("_")[1]; 
+                 	       url = "${ctx}/archive/tginfo/"+uid;
+                    	  parent.parent.tabscontainermain.showTab("台区档案", url);
+                       
+                    }
+                }
+                ]
+            });
+        }
+        
+
+        
         rightClick.showAt(pEventObj.getXY());
+        
         selectedNode = node;
       });
         
@@ -174,7 +230,6 @@ deletetginfo = function(id){
              var isSucc = json['isSucc'];
               alert(msg);
            },error:function(e){
-             alert("error")
                alert(e.getMessage());
            }
          });
@@ -184,13 +239,13 @@ deletetginfo = function(id){
 </script>
 </HEAD>
 <BODY>
-<!-- 
+<!--
 <input type="button" value="选种节点" onclick="showSelectedNode()" />
 <input type="button" value="遍历所有节点" onclick="visitAllNodes()" />
 <input type="button" value="刷新当前节点" onclick="refreshNode()" />
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
-<input type="button" value="查找节点" onclick="searchNode()" /> -->
+<input type="button" value="查找节点" onclick="searchNode()" />-->
 <div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
 </BODY>
