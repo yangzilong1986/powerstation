@@ -59,6 +59,13 @@ public class TgInfo extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tgInfo")
 	private List<LineTgRelaInfo> lineTgRelaInfos;
 
+	// @ManyToMany(targetEntity = LineInfo.class, cascade = {
+	// CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	// @JoinTable(name = "THEATER_AUDIENCE", joinColumns = { @JoinColumn(name =
+	// "THEATER_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUDIENCE_ID")
+	// })
+	// @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
 	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
 	// ORG_ID not null,
