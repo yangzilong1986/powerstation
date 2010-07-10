@@ -20,7 +20,7 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 
-	private static final String hql = "";
+	private static final String hql = "from TgInfo t where  1=1 " + "/~ and t.tgId = '[tgid]' ~/";
 
 	@Override
 	public Class<?> getEntityClass() {

@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseRestSpringController;
-import org.pssframework.model.archive.TermObjRelaInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.service.archive.TerminalInfoManger;
@@ -102,7 +101,6 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
 			TerminalInfo terminalInfo = this.terminalInfoManger.getById(id);
-
 			this.bind(request, terminalInfo);
 			this.terminalInfoManger.saveOrUpdate(terminalInfo);
 		} catch (Exception e) {
@@ -121,9 +119,6 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		try {
-			for (TermObjRelaInfo termObjRelaInfo : model.getTermObjRelas()) {
-				termObjRelaInfo.setTerminalInfo(model);
-			}
 			this.terminalInfoManger.saveOrUpdate(model);
 		} catch (Exception e) {
 			isSucc = false;

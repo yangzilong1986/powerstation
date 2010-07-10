@@ -25,6 +25,40 @@ public class RealTimeReadingInfo extends BaseEntity {
 
 	private static final long serialVersionUID = -2589564770513599171L;
 
+	// 部门
+	private Long orgId;
+
+	// 对象Id
+	private Long objId;
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	/**
+	 * @return the objId
+	 */
+	public Long getObjId() {
+		return objId;
+	}
+
+	/**
+	 * @param objId the objId to set
+	 */
+	public void setObjId(Long objId) {
+		this.objId = objId;
+	}
+
 	// 对象编号
 	private String objNo;
 
