@@ -57,7 +57,7 @@ function changeFod(obj) {
   <dl id="dl01" style="display: block;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', ''); return false;">实时召测</a></div>
+        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">实时召测</a></div>
         <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', ''); return false;">远程跳合闸</a></div>
         <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', ''); return false;">远程试验跳</a></div>
         <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', ''); return false;">数据检查</a></div>
