@@ -4,6 +4,7 @@
 package org.pssframework.service.system;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,16 +28,23 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 	}
 
 	@Autowired
-	private OrgInfoDao entityDao;
+	private OrgInfoDao<?> entityDao;
 
-	public <X> List<X> getOrgList(Long orgId) {
-		List<X> orgList = new ArrayList<X>();
-		//orgList = entityDao.findBy(orgId);
+	public List<OrgInfo> getOrgList(Long orgId) {
+		List<OrgInfo> orgList = new ArrayList<OrgInfo>();
+		// orgList = entityDao.findBy(orgId);
 		return orgList;
 	}
 
-	public <X> List<X> findByPageRequest(Map mapRequest) {
-		return entityDao.findByPageRequest(mapRequest);
+	public List<OrgInfo> findByPageRequest(Map mapRequest) {
+
+		List<OrgInfo> list = new LinkedList<OrgInfo>();
+		list = entityDao.findByPageRequest(mapRequest);
+		if (list == null || list.size() == 0) {
+			list = new LinkedList<OrgInfo>();
+		}
+		return list;
+
 	}
 
 }

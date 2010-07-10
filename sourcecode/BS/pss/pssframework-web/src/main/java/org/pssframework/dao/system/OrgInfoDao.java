@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
+public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 
 	private static final String OrgList = " FROM OrgInfo t WHERE 1=1  /~ and t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId='[orgid]') ~/ ORDER BY t.orgNo";
 
@@ -36,7 +36,7 @@ public class OrgInfoDao extends BaseHibernateDao<OrgInfo, Long> {
 		}
 	}
 
-	public <X> List<X> findByPageRequest(Map<String, ?> mapRequest) {
+	public List<OrgInfo> findByPageRequest(Map<String, ?> mapRequest) {
 		return findAll(OrgList, mapRequest);
 	}
 

@@ -28,7 +28,6 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 	@Autowired
 	private PsInfoDao psInfoDao;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected EntityDao getEntityDao() {
 		return psInfoDao;

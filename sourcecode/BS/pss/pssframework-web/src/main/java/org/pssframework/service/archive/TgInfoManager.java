@@ -3,6 +3,7 @@
  */
 package org.pssframework.service.archive;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +34,13 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 		return tgInfoDao.getById(id);
 	}
 
-	public <X> List<X> findByPageRequest(Map mapRequest) {
-		return tgInfoDao.findByPageRequest(mapRequest);
+	public List<TgInfo> findByPageRequest(Map mapRequest) {
+		List<TgInfo> list = new LinkedList<TgInfo>();
+		list = tgInfoDao.findByPageRequest(mapRequest);
+		if (list == null || list.size() == 0) {
+			list = new LinkedList<TgInfo>();
+		}
+		return list;
 	}
 
 }
