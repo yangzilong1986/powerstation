@@ -7,8 +7,8 @@
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
-var inputText = inputText1;
-var inputLabel = inputLabel1;
+var inputText = ""; 
+var inputLabel = "";
 var excelFlag=0; //导出EXCEL标记 1:各费率电能示值 2：当前功率 3:电压电流4：实时数据
 var otherDataFlag=0; //其他数据项标识  1：实时召测其他数据项 0：实时召测各费率电能示值，当前功率，电压电流，实时数据
 var timeData; //其他数据项页面中的数据时间
@@ -281,35 +281,35 @@ function openOtherData(){
 <form:form>
   <div class="electric_lcon" id="electric_Con">
   <ul class=default id=electric_Con_1>
-    <div >
-    <table border="0" cellpadding="0" cellspacing="0">
-      <tr height="30px">
-        <td width="100" class="green" align="right" >单位：</td>
-        <td width="120" ></td>
-        <td width="100" class="green" align="right" >台区：</td>
-        <td width="150"></td>
-        <td width="100" class="green" align="right" >集中器地址：</td>
-        <td width="120" class="dom"></td>
-      </tr>
-      <tr height="30px">
-        <td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
-          onclick="readDqgflData()" class="btnbg4"/>
-           <input type="button"  class="btnbg4" id="dqglData" name="dqglData" value="当前功率"
-          onclick="readDqglData()" /> <input class="btnbg4"  type="button" id="dydlData" name="dydlData" value="当前电流"
-          onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData" name="otherData" value="其他数据项"
-          onclick="openOtherData()" /> 
-        <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
-        <td><input class="btnbg4" type="button" name="query" id="query" value="查询" onclick="queryData()" /></td>
-      </tr>
-    </table>
-    </div>
+    <div><form:form action="/autorm/realTimeReading" modelAttribute="realTimeReadingInfo">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr height="30px">
+          <td width="100" class="green" align="right">单位：</td>
+          <td width="120"><form:select path="orgId" items="${orglist}" disabled="${disabled}" id="orgId"
+            itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
+          <td width="100" class="green" align="right">台区：</td>
+          <td width="150"><form:select path="objId" items="${tglist}" disabled="${disabled}" id="tgId"
+            itemLabel="tgName" itemValue="tgId" cssStyle="width:150px;" /></td>
+          <td width="100" class="green" align="right">集中器地址：</td>
+          <td width="120" class="dom"><form:input path="termAddr" /></td>
+        </tr>
+        <tr height="30px">
+          <td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
+            onclick="readDqgflData()" class="btnbg4" /> <input type="button" class="btnbg4" id="dqglData"
+            name="dqglData" value="当前功率" onclick="readDqglData()" /> <input class="btnbg4" type="button" id="dydlData"
+            name="dydlData" value="当前电流" onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData"
+            name="otherData" value="其他数据项" onclick="openOtherData()" /> <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
+          <td><input class="btnbg4" type="button" name="query" id="query" value="查询" onclick="queryData()" /></td>
+        </tr>
+      </table>
+    </form:form></div>
     <div id="bg" style="height: 30px; text-align: center;">
     <ul id=”datamenu_Option“ class="cb font1">
       <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">实时召测</li>
     </ul>
     </div>
     <div class="tableContainer"
-      style="height: expression(((   document.documentElement.clientHeight ||document.body.clientHeight) -105 ) );">
+      style="height: expression(((     document.documentElement.clientHeight || document.body.clientHeight) -105 ) );">
     <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
       <thead>
         <tr>
@@ -346,8 +346,8 @@ function openOtherData(){
       </tbody>
     </table>
     </div>
-    </ul>
-    </div>
+  </ul>
+  </div>
 </form:form>
 <iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
 </body>
