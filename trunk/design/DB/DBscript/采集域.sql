@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-7-3 15:43:09                            */
+/* Created on:     2010-7-10 16:13:15                           */
 /*==============================================================*/
 
 
@@ -32,13 +32,11 @@ drop table R_TERM_PARA_TP_LIST cascade constraints;
 
 drop table R_TERM_TASK cascade constraints;
 
-drop sequence SEQ_R_TASK;
+drop sequence SEQ_REALTIME_TASK;
 
 drop sequence SEQ_TASK;
 
-drop sequence SEQ_TASK_SEQUNCE;
-
-create sequence SEQ_R_TASK
+create sequence SEQ_REALTIME_TASK
 increment by 1
 start with 1
  maxvalue 9999999999
@@ -49,13 +47,6 @@ create sequence SEQ_TASK
 increment by 1
 start with 1
  maxvalue 999999999999
- minvalue 1
- cache 20;
-
-create sequence SEQ_TASK_SEQUNCE
-increment by 1
-start with 1
- maxvalue 9999999999
  minvalue 1
  cache 20;
 
@@ -405,4 +396,3 @@ alter table R_REALTIME_TASK_RECV
 alter table R_TASK_TACTIC
    add constraint FK_R_TASK_T_R_TASK_TA_R_TASK foreign key (TASK_ID, PROTOCOL_NO, SYS_OBJECT)
       references R_TASK (TASK_ID, PROTOCOL_NO, SYS_OBJECT);
-
