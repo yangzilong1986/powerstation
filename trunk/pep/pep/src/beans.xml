@@ -51,11 +51,11 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--实时交互任务 -->
-    <bean id="RTTaskService" class=" pep.bp.db.RTTaskServiceIMP">
+    <bean id="rtTaskService" class=" pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!--主站轮召/主动上报任务 -->
-    <bean id="TaskService" class=" pep.bp.db.TaskServiceIMP">
+    <bean id="taskService" class=" pep.bp.db.TaskServiceIMP">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 </beans>

@@ -6,6 +6,7 @@
 package pep.bp.processor;
 
 import java.util.Date;
+import java.util.logging.Level;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -20,7 +21,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thinkpad
  */
-public class PollingProcessor {
+public class PollingProcessor implements Runnable{
     private final static Logger log = LoggerFactory.getLogger(PollingJob.class);
     //任务周期类型
     private final int CIRCLE_UNIT_MINUTE =0;
@@ -33,24 +34,27 @@ public class PollingProcessor {
 
     private Trigger triggerHour,triggerDay;
 
-    public void run() throws SchedulerException{
-        SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
-        Scheduler sched = schedFact.getScheduler();
-        sched.start();
-
-        //小时任务
-        JobDetail jobDetailHour = new JobDetail("PollingJobHour",null,PollingJob.class);
-        jobDetailHour.getJobDataMap().put("circleUnit", CIRCLE_UNIT_HOUR);
-        triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
-        triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date()));//从下一个分钟开始
-
-        JobDetail jobDetailDay = new JobDetail("PollingJobDay",null,PollingJob.class);
-        jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
-        triggerDay = TriggerUtils.makeDailyTrigger(STARTUP_TIME,0); // 每天23：00
-        triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date()));//从下一个秒开始
-
-        sched.scheduleJob(jobDetailHour, triggerHour);
-        sched.scheduleJob(jobDetailHour, triggerDay);
+    public void run() {
+        try {
+            SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
+            Scheduler sched = schedFact.getScheduler();
+            sched.start();
+            //小时任务
+            JobDetail jobDetailHour = new JobDetail("PollingJobHour", null, PollingJob.class);
+            jobDetailHour.getJobDataMap().put("circleUnit", CIRCLE_UNIT_HOUR);
+            triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
+            triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
+            triggerHour.setName("triggerHour");
+            JobDetail jobDetailDay = new JobDetail("PollingJobDay", null, PollingJob.class);
+            jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
+            triggerDay = TriggerUtils.makeDailyTrigger(STARTUP_TIME, 0); // 每天23：00
+            triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date())); //从下一个秒开始
+            triggerDay.setName("triggerDay");
+            sched.scheduleJob(jobDetailHour, triggerHour);
+            sched.scheduleJob(jobDetailDay, triggerDay);
+        } catch (SchedulerException ex) {
+            java.util.logging.Logger.getLogger(PollingProcessor.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
     }
 }

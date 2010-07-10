@@ -108,7 +108,7 @@ public class Converter {
             gpMark.append(String.valueOf(MpSn[i]) + "#");
             List<CommandItem> CommandItems = obj.getCommandItems();
             for (CommandItem commandItem : CommandItems) {
-                if(CmdItemNum % CmdItemNum == 0)
+                if(Index % CmdItemNum == 0)
                 {
                     packet = new PmPacket376();
                     packet.setAfn(AFN);//AFN

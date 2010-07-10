@@ -6,6 +6,7 @@ package pep.bp.processor;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pep.system.SystemConst;
 
 /**
  *
@@ -14,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class BaseProcessor implements Runnable{
     protected ApplicationContext cxt;
     public BaseProcessor(){
-        cxt = new ClassPathXmlApplicationContext("beans.xml");
+        cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
     }
 
     public void run(){
