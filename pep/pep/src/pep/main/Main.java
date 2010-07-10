@@ -10,6 +10,8 @@ import java.net.InetSocketAddress;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import pep.bp.bussinessprocess.MainProcess;
+import pep.mina.common.PepCommunicatorInterface;
 import pep.mina.protocolcodec.gb.PepGbCommunicator;
 import pep.mina.protocolcodec.gb.gb376.PmPacket376CodecFactory;
 import pep.mina.protocolcodec.gb.gb376.PmPacket376ServerIoHandler;
@@ -33,5 +35,10 @@ public class Main {
         acceptor.setHandler(serverIoHandle);
         acceptor.bind();
         System.out.println("SG376 server is listenig at port " + PORT);
+
+
+        //启动业务处理器
+        MainProcess PBProcessor = new MainProcess(rtuMap);
+        PBProcessor.run();
     }
 }

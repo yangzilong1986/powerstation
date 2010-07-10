@@ -22,6 +22,7 @@ import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
 
 import pep.codec.utils.BcdUtils;
+import pep.system.SystemConst;
 
 /**
  *
@@ -241,8 +242,8 @@ public class RealTimeProxy376 implements ICollectInterface {
 //    }
 
     public RealTimeProxy376() {
-        ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
-        taskService = (RTTaskService) cxt.getBean("taskService");
+        ApplicationContext cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
+        taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
         converter = new Converter();
     }
 

@@ -19,8 +19,11 @@ import pep.mina.common.PepCommunicatorInterface;
 public class MainProcess {
 
     private static int rtTaskProcessorMaxNumber = 2;
+    private static int pollingProcessorMaxNumber = 1;
     private LeakPointProcessor lpProcessor;
     private SMSNoticeProcessor SMSProcessor;
+    private RealTimeTaskProcessor RTaskProcessor;
+    private PollingProcessor pollingProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
 
@@ -40,21 +43,29 @@ public class MainProcess {
         }
     }
 
-    public MainProcess() {
+    private void runPollingProcessor(){
+        try {
+            if (this.pollingProcessor == null) {
+                this.pollingProcessor = new PollingProcessor();
+            }
+            pollingProcessor.run();
+            log.info("启动主动轮召任务处理器 ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
+    public MainProcess(PepCommunicatorInterface pepCommunicator) {
+        this.pepCommunicator = pepCommunicator;
         lpProcessor = new LeakPointProcessor();
-        SMSProcessor = new SMSNoticeProcessor();
+        pollingProcessor = new PollingProcessor();
+        RTaskProcessor = new RealTimeTaskProcessor(pepCommunicator);
     }
 
     public void run() {
         runRealTimeTaskProcessor();
-        lpProcessor.run();
-        SMSProcessor.run();
+        runPollingProcessor();
     }
 
-        /**
-     * @param pepCommunicator the pepCommunicator to set
-     */
-    public void setPepCommunicator(PepCommunicatorInterface pepCommunicator) {
-        this.pepCommunicator = pepCommunicator;
-    }
 }

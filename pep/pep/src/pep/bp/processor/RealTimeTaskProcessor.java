@@ -16,6 +16,7 @@ import pep.mina.common.PepCommunicatorInterface;
 import pep.mina.common.RtuRespPacketQueue;
 import pep.mina.common.SequencedPmPacket;
 import pep.mina.protocolcodec.gb.PepGbCommunicator;
+import pep.system.SystemConst;
 
 /**
  *
@@ -31,7 +32,7 @@ public class RealTimeTaskProcessor extends BaseProcessor {
 
     public RealTimeTaskProcessor( PepCommunicatorInterface pepCommunicator) {
         super();
-        taskService = (RTTaskService) cxt.getBean("RTTaskService");
+        taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
     }
