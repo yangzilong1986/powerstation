@@ -24,7 +24,7 @@ public class MainProcessTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        processor = new MainProcess();
+     //   processor = new MainProcess();
     }
 
     @AfterClass

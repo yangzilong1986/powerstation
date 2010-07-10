@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import static org.junit.Assert.*;
 import pep.bp.model.RealTimeTaskDAO;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import pep.system.SystemConst;
 
 /**
  *
@@ -30,8 +31,8 @@ public class RTTaskServiceIMPTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
-        taskService = (RTTaskService)cxt.getBean("taskService");
+        ApplicationContext cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
+        taskService = (RTTaskService)cxt.getBean(SystemConst.REALTIMETASK_BEAN);
     }
 
     @AfterClass
