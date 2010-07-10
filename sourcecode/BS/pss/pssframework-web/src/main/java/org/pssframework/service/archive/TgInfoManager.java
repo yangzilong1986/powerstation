@@ -3,6 +3,9 @@
  */
 package org.pssframework.service.archive;
 
+import java.util.List;
+import java.util.Map;
+
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.TgInfoDao;
@@ -17,17 +20,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
-    @Autowired
-    private TgInfoDao tgInfoDao;
+	@Autowired
+	private TgInfoDao tgInfoDao;
 
-    @Override
-    protected EntityDao getEntityDao() {
-        return this.tgInfoDao;
-    }
+	@Override
+	protected EntityDao getEntityDao() {
+		return this.tgInfoDao;
+	}
 
-    @Override
-    public TgInfo getById(Long id) {
-        return tgInfoDao.getById(id);
-    }
+	@Override
+	public TgInfo getById(Long id) {
+		return tgInfoDao.getById(id);
+	}
+
+	public <X> List<X> findByPageRequest(Map mapRequest) {
+		return tgInfoDao.findByPageRequest(mapRequest);
+	}
 
 }
