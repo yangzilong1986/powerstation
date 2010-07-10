@@ -3,6 +3,7 @@
  */
 package org.pssframework.dao.archive;
 
+import java.util.List;
 import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
@@ -18,6 +19,8 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 @Repository
 public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
+
+	private static final String hql = "";
 
 	@Override
 	public Class<?> getEntityClass() {
@@ -42,6 +45,10 @@ public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 				+ "/~ and t.password = '[password]' ~/" + "/~ and t.sex = '[sex]' ~/" + "/~ and t.age = '[age]' ~/"
 				+ "/~ order by [sortColumns] ~/";
 		return pageQuery(sql, pageRequest);
+	}
+
+	public <X> List<X> findByPageRequest(Map pageRequest) {
+		return findAll(hql, pageRequest);
 	}
 
 	public TgInfo getByCust(String cust, Object val) {
