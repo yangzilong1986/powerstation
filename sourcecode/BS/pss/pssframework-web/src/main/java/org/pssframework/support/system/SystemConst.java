@@ -9,6 +9,19 @@ package org.pssframework.support.system;
  */
 public final class SystemConst {
 
+	/*********************************SYSTEM********************************************/
+	// 大用户
+	public final static String SYSTEM_BIG_CUSTOMER = "1";
+
+	// 台区
+	public final static String SYSTEM_TG = "2";
+
+	// 变电站
+	public final static String SYSTEM_SUBSTATION = "3";
+
+	// 低压集抄
+	public final static String SYSTEM_LOW_PRESSURE = "4";
+
 	/*********************************MESSAGE********************************************/
 
 	public final static String MSG_CREATED_SUCCESS = "创建成功";

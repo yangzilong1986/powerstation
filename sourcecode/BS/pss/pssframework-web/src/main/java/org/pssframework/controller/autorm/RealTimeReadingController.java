@@ -3,6 +3,7 @@
  */
 package org.pssframework.controller.autorm;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,8 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, RealTimeReadingInfo model) {
 		ModelAndView modelAndView = new ModelAndView(VIEW);
 
-		Map<String, ?> mapRequest = null;
+		Map<String, ?> mapRequest = new LinkedHashMap();
+
 		getInitOption(modelAndView, mapRequest);
 
 		return modelAndView;
@@ -53,18 +55,18 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	 * @param mapRequest
 	 */
 	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+
 		model.addObject("orglist", this.getOrgOptions(mapRequest));
+
 		model.addObject("tglist", this.getTgOrgOptions(mapRequest));
 
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<OrgInfo> getOrgOptions(Map mapRequest) {
+	private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
 		return this.orgInfoManager.findByPageRequest(mapRequest);
 	}
 
-	@SuppressWarnings("unchecked")
-	private List<TgInfo> getTgOrgOptions(Map mapRequest) {
+	private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
 		return tgInfoManager.findByPageRequest(mapRequest);
 	}
 }
