@@ -199,6 +199,7 @@ function creatExcel(){
    }else if(excelFlag == "2"){ //当前功率
 
    var sysObject = $("input[type=radio][checked]").val();
+   
    if(sysObject == "3"){  //如果是低压集抄
       if(excelFlag == "1"){ //各费率电能示值
          xmlId = "realTimeReading_5";
@@ -207,6 +208,7 @@ function creatExcel(){
       if(excelFlag == "1"){ //各费率电能示值
          xmlId = "realTimeReading_6";
       }
+   }
    }
    else{
      if(excelFlag == "1"){ //各费率电能示值
