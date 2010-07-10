@@ -170,6 +170,10 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 						+ "&" + PARENT_TYPE + "=" + leaf.getLeafType() + "&random=" + Math.random()));
 
 				result.setValue(leaf.getLeafId());
+
+				result.setIcon(getUrl("/style/default/bgcolor/green-stategrid/img/tree_icon06.gif"));
+				// result.setOpenIcon(getUrl("style/default/bgcolor/green-stategrid/img/tree_icon06.gif"));
+
 				return result;
 			}
 		};
