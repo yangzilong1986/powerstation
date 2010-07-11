@@ -147,31 +147,65 @@ function setup() {
             }]
     };*/
     //alert(escape(JSON.stringify(dto)));
-    var cilist = "10040001,10040003,10040004";
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"coList":').append('[{');
+    sb_dto.append('"logicalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+    sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+    sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+    sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+    sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    var cilist = "10040001,10040003,10040004,10040008,10040009";
     var ciarray = cilist.split(',');
     for(var i = 0; i < ciarray.length; i++) {
         //alert($("tr[ci='" + ciarray[i] + "']").length);
-        var sb = new StringBuffer();
+        if(i > 0) {
+            sb_dto.append('{');
+        }
+        sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+        sb_dto.append('"datacellParam":').append('[').append('{');
+        //var sb = new StringBuffer();
         for(var j = 0; j < $("tr[ci='" + ciarray[i] + "']").length; j++) {
             //alert($($("tr[ci='10040001']")[j]).attr("di"));
-            sb.append(',"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
+            if(j > 0) {
+                sb_dto.append('{');
+            }
+            sb_dto.append('"dataItemCode":"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '"').append(',');
+            sb_dto.append('"dataItemValue":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"')
+            if(j < $("tr[ci='" + ciarray[i] + "']").length - 1) {
+                sb_dto.append('}').append(',');
+            }
+            //sb.append(',"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
         }
-        alert(sb.toString().substring(1));
+        sb_dto.append('}').append(']');
+        //alert(sb.toString().substring(1));
+        
+        if(i < ciarray.length - 1) {
+            sb_dto.append('}').append(',');
+        }
     }
-    
-    /*var url = '<pss:path type="webapp"/>/eparam/termparam/down';
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    //alert(sb_dto.toString());
+    //alert(escape(sb_dto.toString()));
+    var url = '<pss:path type="webapp"/>/eparam/termparam/down';
     $.ajax({
         type: 'POST',
         //contentType: 'application/json',
         url: url,
-        data: 'dto=' + escape(JSON.stringify(dto)),
+        data: 'dto=' + escape(sb_dto.toString()),
         dataType: 'json',
         success: function(data) {
             //alert(msg);
         },
         error: function() {
         }
-    });*/
+    });
 }
 
 function read() {
@@ -186,7 +220,7 @@ function read() {
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="100" height="30" align="right" class="green">终端逻辑地址：</td>
-          <td width="120"><input id="logicalAddr" name="logicalAddr" class="input2" value="" style="width: 140px; height: 18px;"/></td>
+          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="" style="width: 140px; height: 18px;"/></td>
           <td width="100" align="right">
             <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="test(); return false;" style="cursor: pointer;" />
           </td>
@@ -206,6 +240,15 @@ function read() {
             <li onclick="setup()">设　置</li>
             <li onclick="read()">读　取</li>
           </ul>
+        </div>
+        <div style="display: none;">
+          <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
+          <input type="hidden" id="logicalAddr" name="logicalAddr" value="91010001" />
+          <input type="hidden" id="channelType" name="channelType" value="1" />
+          <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
+          <input type="hidden" id="pwContent" name="pwContent" value="8888" />
+          <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
+          <input type="hidden" id="mpSn" name="mpSn" value="0" />
         </div>
         <div class="content">
           <div id="cont_1">
@@ -449,7 +492,9 @@ function read() {
                     <tr ci="10040008" di="1004000808" class="clz10040008" style="display: none;">
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">客户机模式下被动激活模式连续无通信自动断线时间</td>
-                      <td>&nbsp;</td>
+                      <td>
+                        <input id="1004000808" value="10" />
+                      </td>
                       <td>&nbsp;</td>
                       <td>min</td>
                       <td>&nbsp;</td>
