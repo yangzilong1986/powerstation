@@ -6,11 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.eparam.TermParamInfo;
 import org.pssframework.service.eparam.TermParamManager;
+import org.pssframework.util.ConverterUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import pep.bp.realinterface.ICollectInterface;
+import pep.bp.realinterface.RealTimeProxy376;
+import pep.bp.realinterface.mto.MessageTranObject;
 
 /**
  * @author Zhangyu
@@ -38,7 +43,6 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         TermParamInfo termParamInfo = termParamManager.getById(id);
@@ -59,7 +63,10 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         // String termIdString = request.getParameter("termId");
         // System.out.println(termIdString);
         String dtoJSONString = request.getParameter("dto");
-        System.out.println(dtoJSONString);
+        MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
+        ICollectInterface ci = new RealTimeProxy376();
+        long collectId = ci.writeEquipmentParameters(mto);
+        logger.debug("collectId : " + collectId);
     }
 
     /**
