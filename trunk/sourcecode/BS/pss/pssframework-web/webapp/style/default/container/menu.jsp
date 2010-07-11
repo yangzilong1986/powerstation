@@ -19,7 +19,7 @@ function showMainTab(tabTitle, url) {
 
 function selectMenu(menuId, url) {
     var tabTitle = $("#a" + menuId).html();
-    if(url == '') {
+    if(url == '' || url == '/psmanage/rmttpsw' || url == '/psmanage/rmttest') {
         url = '/commons/inmaking.jsp';
     }
     showMainTab(tabTitle, url);
@@ -57,10 +57,11 @@ function changeFod(obj) {
   <dl id="dl01" style="display: block;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">实时召测</a></div>
-        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', ''); return false;">远程跳合闸</a></div>
-        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', ''); return false;">远程试验跳</a></div>
-        <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', ''); return false;">数据检查</a></div>
+        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div>
+        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon'); return false;">漏保监测</a></div>
+        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', '/psmanage/rmttpsw'); return false;">远程跳合闸</a></div>
+        <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', '/psmanage/rmttest'); return false;">远程试验跳</a></div>
+        <div onmouseover=changeFod(this)><a id="a1005" href="#" onclick="selectMenu('1005', ''); return false;">数据检查</a></div>
       </div>
     </dt>
   </dl>
