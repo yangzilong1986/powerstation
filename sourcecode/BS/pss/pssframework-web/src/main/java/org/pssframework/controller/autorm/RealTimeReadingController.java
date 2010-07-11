@@ -43,6 +43,8 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 
 		Map<String, ?> mapRequest = new LinkedHashMap();
 
+        
+
 		getInitOption(modelAndView, mapRequest);
 
 		return modelAndView;

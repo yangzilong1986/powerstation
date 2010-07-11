@@ -121,8 +121,6 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 		OrgInfo orginfo = orgInfoManager.getById(Long.parseLong(parentID));
 
-		Object obj = null;
-
 		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "ORG_" + orginfo.getOrgId(),
 				new UserDataUncoder() {
 
