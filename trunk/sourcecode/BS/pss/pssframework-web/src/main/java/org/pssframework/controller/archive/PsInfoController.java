@@ -3,36 +3,6 @@
  */
 package org.pssframework.controller.archive;
 
-import static org.pssframework.support.system.SystemConst.CODE_BTL;
-import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE;
-import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
-import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
-import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
-import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
-import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
-import static org.pssframework.support.system.SystemConst.CODE_PS_TYPE;
-import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
-import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
-import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR;
-import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR_VALUE;
-import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
-import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
-import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
-import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
-import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
-import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
-import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
-import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
@@ -48,6 +18,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.pssframework.support.system.SystemConst.*;
 
 /**
  * @author Administrator 漏保
@@ -195,7 +175,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 	/**
 	 * 
-	 * @param model
+	 * @param result
 	 * @param mapRequest
 	 */
 	@SuppressWarnings("unchecked")
@@ -238,7 +218,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		result.addObject("psTypeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
-		mapRequest.put("codecate", CODE_COMM_MODE);
+		mapRequest.put("codecate", CODE_COMM_MODE_GM);
 
 		result.addObject("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
