@@ -156,6 +156,11 @@ public class CastorUtil {
         CommandItem9.AddDataItem(new ProtocolDataItem("1004001601", 32, "ASCII", 0,"虚拟专网用户名","cmdz"));
         CommandItem9.AddDataItem(new ProtocolDataItem("1004001602", 32, "ASCII", 0,"虚拟专网密码","cmdz.zj"));
 
+        ProtocolCommandItem CommandItem17 = new ProtocolCommandItem();
+        CommandItem17.setCommandCode("10040017");
+        CommandItem17.AddDataItem(new ProtocolDataItem("1004001701", 2, "A2", 0,"终端保安定值","100"));
+
+
         ProtocolCommandItem CommandItem11 = new ProtocolCommandItem();
         CommandItem11.setCommandCode("10040025");
         CommandItem11.AddDataItem(new ProtocolDataItem("1004002501", 2, "BIN", 0,"电压互感器倍率","1"));
@@ -168,70 +173,70 @@ public class CastorUtil {
         CommandItem11.AddDataItem(new ProtocolDataItem("1004002506", 2, "GROUP_BS8", 2,"电源接线方式","01","1"));
 
 
-        ProtocolCommandItem CommandItem12 = new ProtocolCommandItem();
-        CommandItem12.setCommandCode("100C0002");
-        CommandItem12.AddDataItem(new ProtocolDataItem("100C000201", 6, "A1", 0,"终端日历时钟",""));
+        ProtocolCommandItem CommandItem22 = new ProtocolCommandItem();
+        CommandItem22.setCommandCode("100C0002");
+        CommandItem22.AddDataItem(new ProtocolDataItem("100C000201", 6, "A1", 0,"终端日历时钟",""));
 
-        ProtocolCommandItem CommandItem13 = new ProtocolCommandItem();
-        CommandItem13.setCommandCode("100C0003");
-        CommandItem13.AddDataItem(new ProtocolDataItem("100C000301", 31, "BS248", 0,"终端参数状态",""));
+        ProtocolCommandItem CommandItem23 = new ProtocolCommandItem();
+        CommandItem23.setCommandCode("100C0003");
+        CommandItem23.AddDataItem(new ProtocolDataItem("100C000301", 31, "BS248", 0,"终端参数状态",""));
 
-        ProtocolCommandItem CommandItem14 = new ProtocolCommandItem();
-        CommandItem14.setCommandCode("100C0004");
-        CommandItem14.AddDataItem(new ProtocolDataItem("100C000401", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem14.AddDataItem(new ProtocolDataItem("100C000402", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem14.AddDataItem(new ProtocolDataItem("100C000403", 2, "GROUP_BS8", 2,"允许∕禁止通话","01","0"));
-        CommandItem14.AddDataItem(new ProtocolDataItem("100C000404", 2, "GROUP_BS8", 2,"允许∕禁止主动上报","01","1"));
+        ProtocolCommandItem CommandItem24 = new ProtocolCommandItem();
+        CommandItem24.setCommandCode("100C0004");
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000401", 2, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000402", 2, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000403", 2, "GROUP_BS8", 2,"允许∕禁止通话","01","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000404", 2, "GROUP_BS8", 2,"允许∕禁止主动上报","01","1"));
 
-        ProtocolCommandItem CommandItem15 = new ProtocolCommandItem();
-        CommandItem15.setCommandCode("100C0007");
-        CommandItem15.AddDataItem(new ProtocolDataItem("100C000701", 1, "BIN", 0,"重要事件计数器EC1值",""));
-        CommandItem15.AddDataItem(new ProtocolDataItem("100C000702", 1, "BIN", 0,"一般事件计数器EC2值",""));
+        ProtocolCommandItem CommandItem25 = new ProtocolCommandItem();
+        CommandItem25.setCommandCode("100C0007");
+        CommandItem25.AddDataItem(new ProtocolDataItem("100C000701", 1, "BIN", 0,"重要事件计数器EC1值",""));
+        CommandItem25.AddDataItem(new ProtocolDataItem("100C000702", 1, "BIN", 0,"一般事件计数器EC2值",""));
 
-        ProtocolCommandItem CommandItem16 = new ProtocolCommandItem();
-        CommandItem16.setCommandCode("100C0008");
-        CommandItem16.AddDataItem(new ProtocolDataItem("100C000801", 8, "BS64", 0,"终端事件标志状态",""));
+        ProtocolCommandItem CommandItem26 = new ProtocolCommandItem();
+        CommandItem26.setCommandCode("100C0008");
+        CommandItem26.AddDataItem(new ProtocolDataItem("100C000801", 8, "BS64", 0,"终端事件标志状态",""));
 
-        ProtocolCommandItem CommandItem18 = new ProtocolCommandItem();
-        CommandItem18.setCommandCode("100C0010");
-        CommandItem18.AddDataItem(new ProtocolDataItem("100C001001", 4, "BIN", 0,"终端与主站当日通信流量",""));
-        CommandItem18.AddDataItem(new ProtocolDataItem("100C001002", 4, "BIN", 0,"终端与主站当月通信流量",""));
+        ProtocolCommandItem CommandItem28 = new ProtocolCommandItem();
+        CommandItem28.setCommandCode("100C0010");
+        CommandItem28.AddDataItem(new ProtocolDataItem("100C001001", 4, "BIN", 0,"终端与主站当日通信流量",""));
+        CommandItem28.AddDataItem(new ProtocolDataItem("100C001002", 4, "BIN", 0,"终端与主站当月通信流量",""));
 
-        ProtocolCommandItem CommandItem19 = new ProtocolCommandItem();
-        CommandItem19.setCommandCode("100C0025");
-        CommandItem19.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间",""));
+        ProtocolCommandItem CommandItem29 = new ProtocolCommandItem();
+        CommandItem29.setCommandCode("100C0025");
+        CommandItem29.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间",""));
 
-        CommandItem19.AddDataItem(new ProtocolDataItem("2300", 3, "A9", 0,"当前总有功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2301", 3, "A9", 0,"当前A相有功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2302", 3, "A9", 0,"当前B相有功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2303", 3, "A9", 0,"当前C相有功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2400", 3, "A9", 0,"当前总无功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2401", 3, "A9", 0,"当前A相无功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2402", 3, "A9", 0,"当前B相无功功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2403", 3, "A9", 0,"当前C相无功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2300", 3, "A9", 0,"当前总有功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2301", 3, "A9", 0,"当前A相有功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2302", 3, "A9", 0,"当前B相有功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2303", 3, "A9", 0,"当前C相有功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2400", 3, "A9", 0,"当前总无功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2401", 3, "A9", 0,"当前A相无功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2402", 3, "A9", 0,"当前B相无功功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2403", 3, "A9", 0,"当前C相无功功率",""));
 
-        CommandItem19.AddDataItem(new ProtocolDataItem("2600", 2, "A5", 0,"当前总功率因数",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2601", 2, "A5", 0,"当前A相功率因数",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2602", 2, "A5", 0,"当前B相功率因数",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2603", 2, "A5", 0,"当前C相功率因数",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2600", 2, "A5", 0,"当前总功率因数",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2601", 2, "A5", 0,"当前A相功率因数",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2602", 2, "A5", 0,"当前B相功率因数",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2603", 2, "A5", 0,"当前C相功率因数",""));
 
-        CommandItem19.AddDataItem(new ProtocolDataItem("2101", 2, "A7", 0,"当前A相电压",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2102", 2, "A7", 0,"当前B相电压",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2103", 2, "A7", 0,"当前C相电压",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2101", 2, "A7", 0,"当前A相电压",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2102", 2, "A7", 0,"当前B相电压",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2103", 2, "A7", 0,"当前C相电压",""));
 
-        CommandItem19.AddDataItem(new ProtocolDataItem("2201", 2, "A25", 0,"当前A相电流",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2202", 2, "A25", 0,"当前B相电流",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2203", 2, "A25", 0,"当前C相电流",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2204", 2, "A25", 0,"当前零序电流",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2201", 2, "A25", 0,"当前A相电流",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2202", 2, "A25", 0,"当前B相电流",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2203", 2, "A25", 0,"当前C相电流",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2204", 2, "A25", 0,"当前零序电流",""));
 
-        CommandItem19.AddDataItem(new ProtocolDataItem("2500", 2, "A9", 0,"当前总视在功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2501", 2, "A9", 0,"当前A相视在功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2502", 2, "A9", 0,"当前B相视在功率",""));
-        CommandItem19.AddDataItem(new ProtocolDataItem("2503", 2, "A9", 0,"当前C相视在功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2500", 2, "A9", 0,"当前总视在功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2501", 2, "A9", 0,"当前A相视在功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2502", 2, "A9", 0,"当前B相视在功率",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("2503", 2, "A9", 0,"当前C相视在功率",""));
 
-        ProtocolCommandItem CommandItem20 = new ProtocolCommandItem();
-        CommandItem20.setCommandCode("100C0073");
-        CommandItem20.AddDataItem(new ProtocolDataItem("100C007301", 2, "A2", 0,"直流模拟量实时数据",""));
+        ProtocolCommandItem CommandItem30 = new ProtocolCommandItem();
+        CommandItem30.setCommandCode("100C0073");
+        CommandItem30.AddDataItem(new ProtocolDataItem("100C007301", 2, "A2", 0,"直流模拟量实时数据",""));
 
 
         CommandItems.AddCommandItem(CommandItem1);
@@ -243,22 +248,25 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem7);
         CommandItems.AddCommandItem(CommandItem8);
         CommandItems.AddCommandItem(CommandItem9);
+        CommandItems.AddCommandItem(CommandItem17);
         CommandItems.AddCommandItem(CommandItem10);
         CommandItems.AddCommandItem(CommandItem11);
-        CommandItems.AddCommandItem(CommandItem12);
-        CommandItems.AddCommandItem(CommandItem13);
-        CommandItems.AddCommandItem(CommandItem14);
-        CommandItems.AddCommandItem(CommandItem15);
-        CommandItems.AddCommandItem(CommandItem16);
-        CommandItems.AddCommandItem(CommandItem18);
-        CommandItems.AddCommandItem(CommandItem19);
-        CommandItems.AddCommandItem(CommandItem20);
+        CommandItems.AddCommandItem(CommandItem22);
+        CommandItems.AddCommandItem(CommandItem23);
+        CommandItems.AddCommandItem(CommandItem24);
+        CommandItems.AddCommandItem(CommandItem25);
+        CommandItems.AddCommandItem(CommandItem26);
+        
+        CommandItems.AddCommandItem(CommandItem28);
+        CommandItems.AddCommandItem(CommandItem29);
+        CommandItems.AddCommandItem(CommandItem30);
         try {
 // write it out as XML
             Mapping map = new Mapping();
-            String classPath = ProtocolConfig.class.getResource("protocol-data-config-mapping.xml").getPath();
+           // String classPath = ProtocolConfig.class.getResource("protocol-data-config-mapping.xml").getPath();
+            String classPath = "protocol-data-config-mapping.xml";
             map.loadMapping(classPath);
-            File file = new File(ProtocolConfig.class.getResource("protocol-data-config.xml").getPath());
+            File file = new File("protocol-data-config.xml");
             Writer writer = new FileWriter(file);
             Marshaller marshaller = new Marshaller(writer);
             marshaller.setMapping(map);

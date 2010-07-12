@@ -16,7 +16,7 @@ public interface ICollectInterface {
      * @return 回执码(-1:表示失败)
      * @throws Exception
      */
-    public long writeEquipmentParameters(MessageTranObject MTO)throws Exception;
+    public long writeParameters(MessageTranObject MTO)throws Exception;
 
     /**
      * 参数读取
@@ -24,7 +24,7 @@ public interface ICollectInterface {
      * @return 回执码（-1:表示失败）
      * @throws Exception
      */
-    public long readEquipmentParameters(MessageTranObject MTO)throws Exception;
+    public long readParameters(MessageTranObject MTO)throws Exception;
 
     /**
      * 下发复位命令
@@ -34,13 +34,6 @@ public interface ICollectInterface {
      */
     public long writeResetCommands(MessageTranObject MTO)throws Exception;
 
-    /**
-     * 下发控制命令
-     * @param MTO
-     * @return 回执码（-1:表示失败）
-     * @throws Exception
-     */
-    public long writeControlCommands(MessageTranObject MTO)throws Exception;
 
     /**
      * 实时召测
@@ -48,7 +41,7 @@ public interface ICollectInterface {
      * @return
      * @throws Exception
      */
-    public long readRealtimeData(MessageTranObject MTO)throws Exception;
+    public long readData(MessageTranObject MTO)throws Exception;
 
 
     /**
@@ -65,7 +58,7 @@ public interface ICollectInterface {
      * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
      * @throws Exception
      */
-    public Map<String, String> getReturnByWEP(long appId) throws Exception;
+    public Map<String, String> getReturnByWriteParameter(long appId) throws Exception;
     
     /**
      * 获取参数设置结果
@@ -73,7 +66,7 @@ public interface ICollectInterface {
      * @return 返回JSon格式结果
      * @throws Exception
      */
-    public  String getReturnByWEP_Json(long appId) throws Exception;
+    public  String getReturnByWriteParameter_Json(long appId) throws Exception;
     
     /**
      * 获取参数读取结果
@@ -81,7 +74,7 @@ public interface ICollectInterface {
      * @return 返回结果<"zdljdz#cldxh#commanditem", <"dataitem", "datavalue">>
      * @throws Exception
      */
-    public Map<String, Map<String, String>> getReturnByREP(long appId) throws Exception;
+    public Map<String, Map<String, String>> getReturnByReadParameter(long appId) throws Exception;
 
     /**
      * 获取参数读取结果
@@ -89,7 +82,7 @@ public interface ICollectInterface {
      * @return 返回JSon格式结果
      * @throws Exception
      */
-    public String getReturnByREP_Json(long appId) throws Exception;
+    public String getReturnByReadParameter_Json(long appId) throws Exception;
 
 
     /**
@@ -98,15 +91,8 @@ public interface ICollectInterface {
      * @return
      * @throws Exception
      */
-    public Map<String, String> getReturnByWRC(long appId) throws Exception;
+    public Map<String, String> getReturnByWriteResetCommand(long appId) throws Exception;
 
-    /**
-     * 获取下发控制命令返回结果
-     * @param appId
-     * @return
-     * @throws Exception
-     */
-    public Map<String, String> getReturnByWCC(long appId) throws Exception;
 
     /**
      * 获取实时召测返回结果
@@ -114,5 +100,5 @@ public interface ICollectInterface {
      * @return
      * @throws Exception
      */
-    public Map<String, Map<String, String>> getReturnByRRD(long appId) throws Exception;
+    public Map<String, Map<String, String>> getReturnByReadData(long appId) throws Exception;
 }
