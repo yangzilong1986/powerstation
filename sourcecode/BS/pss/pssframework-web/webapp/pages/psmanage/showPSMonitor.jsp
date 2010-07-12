@@ -42,10 +42,11 @@ function test() {
             <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-75));">
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="20%" height="100%">
+                  <td width="180" height="100%">
                     <iframe id="psTreeFrame" name="psTreeFrame" src="<pss:path type="webapp"/>/pages/psmanage/psTree.jsp" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
-                  <td width="80%">
+                  <td width="3" height="100%" style="background-color: #bbdcd8;"></td>
+                  <td>
                     <iframe id="psMonitorFrame" name="psMonitorFrame" src="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                 </tr>
