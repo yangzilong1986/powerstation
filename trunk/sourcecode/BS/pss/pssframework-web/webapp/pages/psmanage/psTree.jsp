@@ -7,36 +7,87 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>psTree</title>
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/plugin/treeview/jquery.treeview.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/plugin/treeview/screen.css" />
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.js"></script>
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.cookie.js"></script>
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.treeview.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    // first example
+    $("#navigation").treeview({
+        persist: "location",
+        collapsed: true,
+        unique: true
+    });
+    
+    // second example
+    $("#browser").treeview();
+    $("#add").click(function() {
+        var branches = $("<li><span class='folder'>New Sublist</span><ul>" + 
+            "<li><span class='file'>Item1</span></li>" + 
+            "<li><span class='file'>Item2</span></li></ul></li>").appendTo("#browser");
+        $("#browser").treeview({
+            add: branches
+        });
+        branches = $("<li class='closed'><span class='folder'>New Sublist</span><ul><li><span class='file'>Item1</span></li><li><span class='file'>Item2</span></li></ul></li>").prependTo("#folder21");
+        $("#browser").treeview({
+            add: branches
+        });
+    });
+    
+    // third example
+    $("#red").treeview({
+        animated: "fast",
+        collapsed: true,
+        unique: true,
+        persist: "cookie",
+        toggle: function() {
+            window.console && console.log("%o was toggled", this);
+        }
+    });
+    
+    // fourth example
+    $("#black, #gray").treeview({
+        control: "#treecontrol",
+        persist: "cookie",
+        cookieId: "treeview-black"
+    });
+
+});
+</script>
 </head>
 <body>
 <div>
   <ul id="browser" class="filetree">
-    <li><span class="folder">Folder 1</span>
+    <li><span class="folder">乾龙1#</span>
       <ul>
-        <li><span class="file">Item 1.1</span></li>
-      </ul>
-    </li>
-    <li><span class="folder">Folder 2</span>
-      <ul>
-        <li><span class="folder">Subfolder 2.1</span>
+        <li><span class="folder">91010001</span>
           <ul id="folder21">
-            <li><span class="file">File 2.1.1</span></li>
-            <li><span class="file">File 2.1.2</span></li>
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1" target="psMonitorFrame">CS0001</a></span></li>
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=2" target="psMonitorFrame">CS0002</a></span></li>
           </ul>
         </li>
-        <li><span class="file">File 2.2</span></li>
       </ul>
     </li>
-    <li class="closed"><span class="folder">Folder 3 (closed at start)</span>
+    <li><span class="folder">乾龙2#</span>
       <ul>
-        <li><span class="file">File 3.1</span></li>
+        <li><span class="folder">91010002</span>
+          <ul id="folder21">
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=3" target="psMonitorFrame">CS0003</a></span></li>
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=4" target="psMonitorFrame">CS0004</a></span></li>
+          </ul>
+        </li>
+        <li><span class="folder">91010003</span>
+          <ul id="folder21">
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=5" target="psMonitorFrame">CS0005</a></span></li>
+            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=6" target="psMonitorFrame">CS0006</a></span></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><span class="file">File 4</span></li>
   </ul>
 </div>
 </body>
