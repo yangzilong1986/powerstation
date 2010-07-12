@@ -15,8 +15,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.CommanddItemDAO;
 import pep.bp.model.CommandItemRowMapper;
-import pep.bp.model.DataItemDAO;
-import pep.bp.model.DataItemRowMapper;
 import pep.bp.model.TermTaskDAO;
 import pep.bp.model.TermTaskRowMapper;
 
