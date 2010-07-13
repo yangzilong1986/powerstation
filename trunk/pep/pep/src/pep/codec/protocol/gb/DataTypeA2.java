@@ -35,7 +35,7 @@ public class DataTypeA2 {
     }
 
     public void setArray(byte[] array, int beginPosition) {
-        if (array.length - beginPosition < 6) {
+        if (array.length - beginPosition < 2) {
             throw new IllegalArgumentException();
         } else {
             int val = BcdUtils.bcdToInt(array[beginPosition]) + (array[beginPosition+1] & 0x0f) * 100;

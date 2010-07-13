@@ -308,7 +308,7 @@ public class Converter {
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
         if (dataItemMap != null) {
 
-            Iterator iterator = dataItemMap.keySet().iterator();
+            Iterator iterator = DataItemMap_Config.keySet().iterator();
             while (iterator.hasNext()) {
                 ProtocolDataItem dataItem;
                 String DataItemCode = (String) iterator.next();
@@ -321,7 +321,7 @@ public class Converter {
                 Length = dataItem.getLength();
                 IsGroupEnd = dataItem.getIsGroupEnd();
                 bitnumber = dataItem.getBitNumber();
-                FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                 FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
             }
         }
 //        if (commandItem.getCircleLevel() == 1) {
@@ -535,8 +535,8 @@ public class Converter {
                     if (GroupValue.length() == 0) {
                         GroupValue = dataBuffer.getBS8();
                     }
-                    dataItems.put(DataItemCode, GroupValue.substring(0, Len));
-                    GroupValue = GroupValue.substring(Len, GroupValue.length());
+                    dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
+                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
                     if (IsGroupEnd.equals("1")) {
                         GroupValue = "";
                     }

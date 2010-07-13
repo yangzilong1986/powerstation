@@ -25,4 +25,9 @@ public class DataTypeA7 extends DataTypeA7A8Base {
     public float getValue(){
         return (float) (this.value / 10.0);
     }
+
+    @Override
+    public String toString() {
+        return (new Double(value/ 10.0)).toString();
+    }
 }

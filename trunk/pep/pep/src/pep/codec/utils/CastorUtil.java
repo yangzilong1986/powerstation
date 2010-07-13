@@ -112,9 +112,9 @@ public class CastorUtil {
         CommandItem6.setCommandCode("10040008");
         CommandItem6.AddDataItem(new ProtocolDataItem("1004000801", 1, "GROUP_BS8", 1,"工作模式（TCP/UDP）","0","0"));
         CommandItem6.AddDataItem(new ProtocolDataItem("1004000802", 1, "GROUP_BS8", 1,"备用","0","0"));
-        CommandItem6.AddDataItem(new ProtocolDataItem("1004000803", 2, "GROUP_BS8", 2,"终端工作模式","01","0"));
-        CommandItem6.AddDataItem(new ProtocolDataItem("1004000804", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem6.AddDataItem(new ProtocolDataItem("1004000805", 2, "GROUP_BS8", 2,"终端工作在客户机模式下的三种在线模式","01","1"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000803", 1, "GROUP_BS8", 2,"终端工作模式","01","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000804", 1, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem6.AddDataItem(new ProtocolDataItem("1004000805", 1, "GROUP_BS8", 2,"终端工作在客户机模式下的三种在线模式","01","1"));
         CommandItem6.AddDataItem(new ProtocolDataItem("1004000806", 2, "BIN", 0,"客户机模式下永久在线、时段在线模式重拨间隔","10"));
         CommandItem6.AddDataItem(new ProtocolDataItem("1004000807", 1, "BIN", 0,"被动激活模式重拨次数","3"));
         CommandItem6.AddDataItem(new ProtocolDataItem("1004000808", 1, "BIN", 0,"客户机模式下被动激活模式连续无通信自动断线时间","30"));
@@ -136,14 +136,14 @@ public class CastorUtil {
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001006", 1, "BIN", 0,"电能表/交流采样装置通信协议类型","100"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001007", 6, "A12", 0,"电能表/交流采样装置通信地址","0"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001008", 6, "BIN", 0,"电能表/交流采样装置通信密码","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001009", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001010", 6, "GROUP_BS8", 6,"电能表/交流采样装置电能费率个数","000001","1"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001011", 4, "GROUP_BS8", 4,"备用","0000","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001012", 2, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的整数位个数","00","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001013", 2, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的小数位个数","00","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001009", 1, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001010", 1, "GROUP_BS8", 6,"电能表/交流采样装置电能费率个数","000001","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001011", 1, "GROUP_BS8", 4,"备用","0000","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001012", 1, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的整数位个数","00","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001013", 1, "GROUP_BS8", 2,"电能表/交流采样装置有功电能示值的小数位个数","00","1"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001014", 6, "A12", 0,"电能表/交流采样装置所属采集器通信地址","1"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001015", 4, "GROUP_BS8", 4,"用户大类号","0000","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001016", 4, "GROUP_BS8", 4,"及用户小类号","0000","1"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001015", 1, "GROUP_BS8", 4,"用户大类号","0000","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001016", 1, "GROUP_BS8", 4,"及用户小类号","0000","1"));
 
 
         ProtocolCommandItem CommandItem8 = new ProtocolCommandItem();
@@ -165,13 +165,71 @@ public class CastorUtil {
         CommandItem11.setCommandCode("10040025");
         CommandItem11.AddDataItem(new ProtocolDataItem("1004002501", 2, "BIN", 0,"电压互感器倍率","1"));
         CommandItem11.AddDataItem(new ProtocolDataItem("1004002502", 2, "BIN", 0,"电流互感器倍率","1"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002503", 2, "A7", 0,"额定电压","1"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002504", 1, "A22", 0,"额定电流","1"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002505", 3, "A23", 0,"额定负荷","1"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002506", 4, "GROUP_BS8", 4,"备用","0000","0"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002505", 2, "GROUP_BS8", 2,"单相表接线相","00","0"));
-        CommandItem11.AddDataItem(new ProtocolDataItem("1004002506", 2, "GROUP_BS8", 2,"电源接线方式","01","1"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002503", 2, "A7", 0,"额定电压","220"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002504", 1, "A22", 0,"额定电流","50"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002505", 3, "A23", 0,"额定负荷","500"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002506", 1, "GROUP_BS8", 4,"备用","0000","0"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002507", 1, "GROUP_BS8", 2,"单相表接线相","00","0"));
+        CommandItem11.AddDataItem(new ProtocolDataItem("1004002508", 1, "GROUP_BS8", 2,"电源接线方式","01","1"));
 
+        ProtocolCommandItem CommandItem12 = new ProtocolCommandItem();
+        CommandItem12.setCommandCode("10040026");
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002601", 2, "A7", 0,"电压合格上限","100"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002602", 2, "A7", 0,"电压合格下限","80"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002603", 2, "A7", 0,"电压断相门限","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002604", 2, "A7", 0,"电压上上限（过压门限）","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002605", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002606", 2, "A5", 0,"越限恢复系数","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002607", 2, "A7", 0,"电压下下限（欠压门限）","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002608", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002609", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002610", 3, "A25", 0,"相电流上上限（过流门限）","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002611", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002612", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002613", 3, "A25", 0,"相电流上限（额定电流门限）","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002614", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002615", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002616", 3, "A25", 0,"零序电流上限","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002617", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002618", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002619", 3, "A23", 0,"视在功率上上限","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002620", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002621", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002622", 3, "A23", 0,"视在功率上限","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002623", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002624", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002625", 2, "A5", 0,"三相电压不平衡限值","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002626", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002627", 2, "A5", 0,"越限恢复系数","1"));
+
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002628", 2, "A5", 0,"三相电流不平衡限值","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002629", 1, "BIN", 0,"越限持续时间","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002630", 2, "A5", 0,"越限恢复系数","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002631", 2, "BIN", 0,"连续失压时间限值","1"));
+
+        ProtocolCommandItem CommandItem13 = new ProtocolCommandItem();
+        CommandItem13.setCommandCode("10040061");
+        CommandItem13.AddDataItem(new ProtocolDataItem("1004006101", 1, "BS8", 0,"直流模拟量接入标志位","11111111"));
+
+        ProtocolCommandItem CommandItem14 = new ProtocolCommandItem();
+        CommandItem14.setCommandCode("10040081");
+        CommandItem14.AddDataItem(new ProtocolDataItem("1004008101", 2, "A2", 0,"直流模拟量量程起始值","11111111"));
+        CommandItem14.AddDataItem(new ProtocolDataItem("1004008102", 2, "A2", 0,"直流模拟量量程终止值","11111111"));
+
+        ProtocolCommandItem CommandItem15 = new ProtocolCommandItem();
+        CommandItem15.setCommandCode("10040082");
+        CommandItem15.AddDataItem(new ProtocolDataItem("1004008201", 2, "A2", 0,"直流模拟量上限","100"));
+        CommandItem15.AddDataItem(new ProtocolDataItem("1004008202", 2, "A2", 0,"直流模拟量下限","1"));
+
+        ProtocolCommandItem CommandItem16 = new ProtocolCommandItem();
+        CommandItem16.setCommandCode("10040083");
+        CommandItem16.AddDataItem(new ProtocolDataItem("1004008301", 1, "BIN", 0,"直流模拟量冻结密度","24"));
 
         ProtocolCommandItem CommandItem22 = new ProtocolCommandItem();
         CommandItem22.setCommandCode("100C0002");
@@ -183,10 +241,10 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem24 = new ProtocolCommandItem();
         CommandItem24.setCommandCode("100C0004");
-        CommandItem24.AddDataItem(new ProtocolDataItem("100C000401", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem24.AddDataItem(new ProtocolDataItem("100C000402", 2, "GROUP_BS8", 2,"备用","00","0"));
-        CommandItem24.AddDataItem(new ProtocolDataItem("100C000403", 2, "GROUP_BS8", 2,"允许∕禁止通话","01","0"));
-        CommandItem24.AddDataItem(new ProtocolDataItem("100C000404", 2, "GROUP_BS8", 2,"允许∕禁止主动上报","01","1"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000401", 1, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000402", 1, "GROUP_BS8", 2,"备用","00","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000403", 1, "GROUP_BS8", 2,"允许∕禁止通话","01","0"));
+        CommandItem24.AddDataItem(new ProtocolDataItem("100C000404", 1, "GROUP_BS8", 2,"允许∕禁止主动上报","01","1"));
 
         ProtocolCommandItem CommandItem25 = new ProtocolCommandItem();
         CommandItem25.setCommandCode("100C0007");
@@ -251,6 +309,11 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem17);
         CommandItems.AddCommandItem(CommandItem10);
         CommandItems.AddCommandItem(CommandItem11);
+        CommandItems.AddCommandItem(CommandItem12);
+        CommandItems.AddCommandItem(CommandItem13);
+        CommandItems.AddCommandItem(CommandItem14);
+        CommandItems.AddCommandItem(CommandItem15);
+        CommandItems.AddCommandItem(CommandItem16);
         CommandItems.AddCommandItem(CommandItem22);
         CommandItems.AddCommandItem(CommandItem23);
         CommandItems.AddCommandItem(CommandItem24);
