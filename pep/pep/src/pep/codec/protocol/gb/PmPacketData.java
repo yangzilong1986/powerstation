@@ -144,7 +144,7 @@ public class PmPacketData{
     }
     
     public DataTypeA2 getA2(){
-        byte[] array = new byte[6];
+        byte[] array = new byte[2];
         dataBuff.get(array);
         return new DataTypeA2(array);
     }
