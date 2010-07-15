@@ -65,20 +65,6 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 
 		Map mapRequest = new LinkedHashMap();
 
-		// Long lTermAddr = -1L;
-		// if (model.getTermAddr() == null) {
-		// mapRequest.put(TERM_ADDR, lTermAddr);
-		// } else {
-		// mapRequest.put(TERM_ADDR, model.getTermAddr());
-		// }
-		// Long lObjId = -1L;
-		// if (model.getObjId() == null) {
-		// mapRequest.put(OBJ_ID, lObjId);
-		// } else {
-		// mapRequest.put(OBJ_ID, model.getObjId());
-		//
-		// }
-
 		Page page = this.realTimeReadingManager.findByPageRequest(pageRequest);
 
 		ModelAndView modelAndView = toModelAndView(page, pageRequest);
