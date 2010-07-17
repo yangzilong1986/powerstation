@@ -26,6 +26,12 @@ public class ProtocolCommandItem {
         DataItemMap = new TreeMap<String, ProtocolDataItem>();
     }
 
+    public ProtocolCommandItem(String CommandCode,ProtocolDataItem dataItem) {
+        this();
+        this.CommandCode = CommandCode;
+        DataItems.add(dataItem);
+    }
+
     public void AddDataItem(ProtocolDataItem dataItem) {
         DataItems.add(dataItem);
     }

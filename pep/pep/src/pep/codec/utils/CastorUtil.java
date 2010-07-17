@@ -262,7 +262,7 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem29 = new ProtocolCommandItem();
         CommandItem29.setCommandCode("100C0025");
-        CommandItem29.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间",""));
+        CommandItem29.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
 
         CommandItem29.AddDataItem(new ProtocolDataItem("2300", 3, "A9", 0,"当前总有功功率",""));
         CommandItem29.AddDataItem(new ProtocolDataItem("2301", 3, "A9", 0,"当前A相有功功率",""));
@@ -296,6 +296,53 @@ public class CastorUtil {
         CommandItem30.setCommandCode("100C0073");
         CommandItem30.AddDataItem(new ProtocolDataItem("100C007301", 2, "A2", 0,"直流模拟量实时数据",""));
 
+        ProtocolCommandItem CommandItem31 = new ProtocolCommandItem();
+        CommandItem31.setCommandCode("100C0129");
+        CommandItem31.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
+        CommandItem31.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
+        CommandItem31.AddDataItem(new ProtocolDataItem("0100", 5, "A14", 0,"正向有功总电能示值",""));
+
+
+        ProtocolCommandItem CommandItem32 = new ProtocolCommandItem("8000B611",new ProtocolDataItem("B611", 2, "BCD_INT", 0,"当前B相电压",""));
+        ProtocolCommandItem CommandItem33 = new ProtocolCommandItem("8000B612",new ProtocolDataItem("B612", 2, "BCD_INT", 0,"当前B相电压",""));
+        ProtocolCommandItem CommandItem34 = new ProtocolCommandItem("8000B613",new ProtocolDataItem("B613", 2, "BCD_INT", 0,"当前C相电压",""));
+        ProtocolCommandItem CommandItem35 = new ProtocolCommandItem("8000B621",new ProtocolDataItem("B621", 2, "BCD_INT", 0,"当前A相电流",""));
+        ProtocolCommandItem CommandItem36 = new ProtocolCommandItem("8000B622",new ProtocolDataItem("B622", 2, "BCD_INT", 0,"当前B相电流",""));
+        ProtocolCommandItem CommandItem37 = new ProtocolCommandItem("8000B623",new ProtocolDataItem("B623", 2, "BCD_INT", 0,"当前C相电流",""));
+        ProtocolCommandItem CommandItem38 = new ProtocolCommandItem("8000B660",new ProtocolDataItem("B660", 2, "BCD_INT", 0,"当前剩余电流",""));
+
+        ProtocolCommandItem CommandItem39 = new ProtocolCommandItem();
+        CommandItem39.setCommandCode("8000B66F");
+        CommandItem39.AddDataItem(new ProtocolDataItem("B611", 2, "BCD_INT", 0,"当前A相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B612", 2, "BCD_INT", 0,"当前B相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B613", 2, "BCD_INT", 0,"当前C相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B621", 2, "BCD_INT", 0,"当前A相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B622", 2, "BCD_INT", 0,"当前B相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B623", 2, "BCD_INT", 0,"当前C相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B660", 2, "BCD_INT", 0,"当前剩余电流",""));
+
+        ProtocolCommandItem CommandItem40 = new ProtocolCommandItem("8000C012",new ProtocolDataItem("C012", 2, "DATE_LOUBAO", 0,"漏电保护装置校时",""));
+
+        ProtocolCommandItem CommandItem41 = new ProtocolCommandItem();
+        CommandItem41.setCommandCode("8000C040");
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04001", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04003", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04004", 1, "GROUP_BS8", 4,"动作值","","1"));
+
+        ProtocolCommandItem CommandItem42 = new ProtocolCommandItem("8000C041",new ProtocolDataItem("C041", 2, "BCD_INT", 0,"负载电流动作档位",""));
+        ProtocolCommandItem CommandItem43 = new ProtocolCommandItem("8000C042",new ProtocolDataItem("C042", 2, "BCD_INT", 0,"剩余电流动作档位",""));
+        ProtocolCommandItem CommandItem44 = new ProtocolCommandItem("8000C043",new ProtocolDataItem("C043", 2, "BCD_INT", 0,"剩余电流动作延时档位",""));
+        ProtocolCommandItem CommandItem45 = new ProtocolCommandItem("8000C044",new ProtocolDataItem("C044", 2, "BCD_INT", 0,"开关功能启用设定字",""));
+        ProtocolCommandItem CommandItem46 = new ProtocolCommandItem("8000C045",new ProtocolDataItem("C045", 2, "BCD_INT", 0,"产品类ID",""));
+
+        ProtocolCommandItem CommandItem47 = new ProtocolCommandItem();
+        CommandItem47.setCommandCode("8000C04F");
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C041", 2, "BCD_INT", 0,"负载电流动作档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C042", 2, "BCD_INT", 0,"剩余电流动作档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C043", 2, "BCD_INT", 0,"剩余电流动作延时档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C044", 2, "BCD_INT", 0,"开关功能启用设定字",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C045", 2, "BCD_INT", 0,"产品类ID",""));
 
         CommandItems.AddCommandItem(CommandItem1);
         CommandItems.AddCommandItem(CommandItem2);
@@ -323,6 +370,24 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem28);
         CommandItems.AddCommandItem(CommandItem29);
         CommandItems.AddCommandItem(CommandItem30);
+
+        CommandItems.AddCommandItem(CommandItem31);
+        CommandItems.AddCommandItem(CommandItem32);
+        CommandItems.AddCommandItem(CommandItem33);
+        CommandItems.AddCommandItem(CommandItem34);
+        CommandItems.AddCommandItem(CommandItem35);
+        CommandItems.AddCommandItem(CommandItem36);
+        CommandItems.AddCommandItem(CommandItem37);
+        CommandItems.AddCommandItem(CommandItem38);
+        CommandItems.AddCommandItem(CommandItem39);
+        CommandItems.AddCommandItem(CommandItem40);
+        CommandItems.AddCommandItem(CommandItem41);
+        CommandItems.AddCommandItem(CommandItem42);
+        CommandItems.AddCommandItem(CommandItem43);
+        CommandItems.AddCommandItem(CommandItem44);
+        CommandItems.AddCommandItem(CommandItem45);
+        CommandItems.AddCommandItem(CommandItem46);
+        CommandItems.AddCommandItem(CommandItem47);
         try {
 // write it out as XML
             Mapping map = new Mapping();

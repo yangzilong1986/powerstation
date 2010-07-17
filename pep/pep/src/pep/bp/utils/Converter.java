@@ -102,7 +102,7 @@ public class Converter {
             for (CommandItem commandItem : CommandItems) {
                 if (IsSeqValid(commandItem)) //针对类似F10的参数，按每帧最大长度进行自动分包处理
                 {
-                    commandItem2PacketList(commandItem, AFN, obj.getLogicalAddr(), i,DataBuffLen, results);
+                    commandItem2PacketList(commandItem, AFN, obj.getLogicalAddr(), i, DataBuffLen, results);
                 } else {
                     if (Index % CmdItemNum == 0) {
                         preSetPacket(packet, AFN, obj.getLogicalAddr());
@@ -130,6 +130,32 @@ public class Converter {
 
                 Index++;
             }
+        }
+        return results;
+    }
+
+    public List<PmPacket376> CollectObject_TransMit2PacketList(CollectObject obj, StringBuffer commandMark) {
+        List<PmPacket376> results = new ArrayList<PmPacket376>();
+        PmPacket376 packet = new PmPacket376();
+        int Index = 0;
+        int DataBuffLen = SystemConst.MAX_PACKET_LEN - 16 - 22;//[68+L+L+68+C+A+AFN+SEQ+TP+PW+CS+16]
+        List<CommandItem> CommandItems = obj.getCommandItems();
+        for (CommandItem commandItem : CommandItems) {
+            preSetPacket(packet, AFNType.AFN_TRANSMIT, obj.getLogicalAddr());
+            commandMark.append(commandItem.getIdentifier() + "#");
+            PmPacket376DA da = new PmPacket376DA(0);
+            PmPacket376DT dt = new PmPacket376DT();
+            int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+            dt.setFn(fn);
+            packet.getDataBuffer().putDA(da);
+            packet.getDataBuffer().putDT(dt);
+            putDataBuf(packet, commandItem);
+
+            packet.setAuthorize(new Authorize());
+            packet.setTpv(new TimeProtectValue());//时间标签
+            results.add(packet);
+
+            Index++;
         }
         return results;
     }
@@ -203,7 +229,7 @@ public class Converter {
                 }
 
                 //生成一个报文
-                if (((Index-1) % ActualgroupNumber == 0) && (!CanPacket)) {
+                if (((Index - 1) % ActualgroupNumber == 0) && (!CanPacket)) {
                     packet = new PmPacket376();
                     preSetPacket(packet, AFN, Rtua);
                     PmPacket376DA da = new PmPacket376DA(MpSn);
@@ -246,27 +272,24 @@ public class Converter {
                         packet.setAuthorize(new Authorize());
                     }
                     packet.setTpv(new TimeProtectValue());//时间标签
-                    if(groups.size() ==1){//单帧
+                    if (groups.size() == 1) {//单帧
                         packet.getSeq().setIsTpvAvalibe(true);
                         packet.getSeq().setIsFinishFrame(true);
                         packet.getSeq().setIsFirstFrame(true);
                         packet.getSeq().setSeq((byte) 0);
-                    }
-                    else if(packetNo ==1)//起始帧
+                    } else if (packetNo == 1)//起始帧
                     {
                         packet.getSeq().setIsTpvAvalibe(true);
                         packet.getSeq().setIsFinishFrame(false);
                         packet.getSeq().setIsFirstFrame(true);
                         packet.getSeq().setSeq((byte) packetNo);
-                    }
-                    else if((packetNo > 1)&&(Index < groups.size()))//中间帧
+                    } else if ((packetNo > 1) && (Index < groups.size()))//中间帧
                     {
                         packet.getSeq().setIsTpvAvalibe(true);
                         packet.getSeq().setIsFinishFrame(false);
                         packet.getSeq().setIsFirstFrame(false);
                         packet.getSeq().setSeq((byte) packetNo);
-                    }
-                    else if(Index == groups.size())//结束帧
+                    } else if (Index == groups.size())//结束帧
                     {
                         packet.getSeq().setIsTpvAvalibe(true);
                         packet.getSeq().setIsFinishFrame(true);
@@ -281,7 +304,7 @@ public class Converter {
                 Index++;
             }
         }
-        
+
         return results;
     }
 
@@ -299,7 +322,7 @@ public class Converter {
 
     }
 
-    private void putDataBuf(PmPacket376 packet, CommandItem commandItem) {
+    public void putDataBuf(PmPacket376 packet, CommandItem commandItem) {
         String DataItemValue, Format, IsGroupEnd = "";
         int Length, bitnumber = 0;
         long TempCode = 0;
@@ -321,40 +344,11 @@ public class Converter {
                 Length = dataItem.getLength();
                 IsGroupEnd = dataItem.getIsGroupEnd();
                 bitnumber = dataItem.getBitNumber();
-                 FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
             }
         }
-//        if (commandItem.getCircleLevel() == 1) {
-//            CircleDataItems circleDIs = commandItem.getCircleDataItems();
-//            if (circleDIs != null) {
-//                List<DataItemGroup> groupList = circleDIs.getDataItemGroups();
-//                for (DataItemGroup group : groupList) {
-//                    List<DataItem> dataItemList = group.getDataItemList();
-//                    for (DataItem dataItem : dataItemList) {
-//                        String DataItemCode = dataItem.getDataItemCode();
-//
-//                        if ((Long.valueOf(DataItemCode) - TempCode > 10000) && (TempCode != 0)) {
-//                            ProtocolDataItem TempdataItem = DataItemMap_Config.get(String.valueOf(TempCode + 10000).substring(0, 10));
-//                            DataItemValue = TempdataItem.getDefaultValue();
-//                            Format = TempdataItem.getFormat();
-//                            Length = TempdataItem.getLength();
-//                            IsGroupEnd = TempdataItem.getIsGroupEnd();
-//                            bitnumber = TempdataItem.getBitNumber();
-//                            FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
-//                        }
-//                        ProtocolDataItem protocoldataItem = DataItemMap_Config.get(DataItemCode.substring(0, 10));
-//                        DataItemValue = dataItem.getDataItemValue();
-//                        Format = protocoldataItem.getFormat();
-//                        Length = protocoldataItem.getLength();
-//                        IsGroupEnd = protocoldataItem.getIsGroupEnd();
-//                        bitnumber = protocoldataItem.getBitNumber();
-//                        FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
-//                        TempCode = Long.valueOf(DataItemCode);
-//                    }
-//                }
-//            }
-//        }
     }
+
 
     private void putDataBuf_seq(PmPacket376 packet, CommandItem commandItem, int DataBufLenth) {
         String DataItemValue, Format, IsGroupEnd = "";

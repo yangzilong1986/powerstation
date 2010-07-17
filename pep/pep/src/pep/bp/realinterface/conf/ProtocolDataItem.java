@@ -16,7 +16,8 @@ public class ProtocolDataItem {
     private int BitNumber;//组数据项位数
     private String Description;
     private String GroupValue;//针对数据位定义数据项的情况
-    private String IsGroupEnd;
+    private String IsGroupEnd="0";
+    private String IsTd = "0";//0,1 表示是否是数据时标
 
     public ProtocolDataItem(){
         super();
@@ -41,6 +42,19 @@ public class ProtocolDataItem {
         this.Description = Description;
         this.DefaultValue = DefaultValue;
         this.IsGroupEnd = IsGroupEnd;
+
+    }
+
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,int BitNumber,String Description,String DefaultValue,String IsGroupEnd,String IsTd){
+        super();
+        this.DataItemCode = DataItemCode;
+        this.Length = Length;
+        this.Format = Format;
+        this.BitNumber = BitNumber;
+        this.Description = Description;
+        this.DefaultValue = DefaultValue;
+        this.IsGroupEnd = IsGroupEnd;
+        this.IsTd = IsTd;
 
     }
     /**
@@ -153,5 +167,19 @@ public class ProtocolDataItem {
      */
     public void setIsGroupEnd(String IsGroupEnd) {
         this.IsGroupEnd = IsGroupEnd;
+    }
+
+    /**
+     * @return the IsTd
+     */
+    public String getIsTd() {
+        return IsTd;
+    }
+
+    /**
+     * @param IsTd the IsTd to set
+     */
+    public void setIsTd(String IsTd) {
+        this.IsTd = IsTd;
     }
 }

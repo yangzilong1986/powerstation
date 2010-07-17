@@ -4,6 +4,8 @@
 package pep.bp.realinterface;
 
 import java.util.*;
+import java.util.Date;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +14,8 @@ import org.springframework.dao.DataAccessException;
 import pep.bp.db.RTTaskService;
 import pep.bp.model.RTTaskRecvDAO;
 import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.realinterface.conf.ProtocolConfig;
+import pep.bp.realinterface.conf.ProtocolDataItem;
 
 import pep.bp.realinterface.mto.*;
 import pep.bp.utils.AFNType;
@@ -22,6 +26,7 @@ import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
 
 import pep.codec.utils.BcdUtils;
+import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**
@@ -33,11 +38,9 @@ public class RealTimeProxy376 implements ICollectInterface {
     private static int ID;
     private final int FAILCODE = -1;
     private final int cmdItemNum = 4;
-
     private final static Logger log = LoggerFactory.getLogger(RealTimeProxy376.class);
     private RTTaskService taskService;
     private Converter converter;
-
 
     private int getID() {
         return taskService.getSequnce();
@@ -49,16 +52,82 @@ public class RealTimeProxy376 implements ICollectInterface {
         StringBuffer gpMark = new StringBuffer();
         StringBuffer commandMark = new StringBuffer();
         for (CollectObject obj : mto.getCollectObjects()) {
-            gpMark.delete(0,gpMark.length());
-            commandMark.delete(0,commandMark.length());
-            
-            List<PmPacket376> packetList = converter.CollectObject2PacketList(obj, AFN,gpMark, commandMark,cmdItemNum);
-            for(PmPacket376 packet : packetList)
-            {
+            gpMark.delete(0, gpMark.length());
+            commandMark.delete(0, commandMark.length());
+
+            List<PmPacket376> packetList = converter.CollectObject2PacketList(obj, AFN, gpMark, commandMark, cmdItemNum);
+            for (PmPacket376 packet : packetList) {
                 RealTimeTaskDAO task = new RealTimeTaskDAO();
                 task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
                 task.setSequencecode(sequenceCode);
                 task.setLogicAddress(obj.getLogicalAddr());
+                task.setGpMark(gpMark.toString());
+                task.setCommandMark(commandMark.toString());
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
+
+    private List<RealTimeTaskDAO> Encode_TransMit(MessageTranObject MTO, int sequenceCode) {
+        MTO_376 mto = (MTO_376) MTO;
+        List<PmPacket376> packetList = new ArrayList<PmPacket376>();
+        
+        List<RealTimeTaskDAO> tasks = new ArrayList<RealTimeTaskDAO>();
+        ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
+        StringBuffer gpMark = new StringBuffer();
+        StringBuffer commandMark = new StringBuffer();
+        for (CollectObject_TransMit obj : mto.getCollectObjects_Transmit()) {
+            gpMark.delete(0, gpMark.length());
+            gpMark.append(obj.getMeterAddr());
+            commandMark.delete(0, commandMark.length());
+            List<CommandItem> CommandItems = obj.getCommandItems();
+            for (CommandItem commandItem : CommandItems) {
+
+                PmPacket376 packet = new PmPacket376();
+                packet.setAfn(AFNType.AFN_TRANSMIT);//AFN
+                packet.getAddress().setRtua(obj.getTerminalAddr()); //逻辑地址
+                packet.getControlCode().setIsUpDirect(false);
+                packet.getControlCode().setIsOrgniger(true);
+                packet.getControlCode().setFunctionKey((byte)1);
+                packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+                packet.getControlCode().setDownDirectFrameCount((byte) 0);
+                packet.getSeq().setIsTpvAvalibe(true);
+
+                commandMark.append(commandItem.getIdentifier() + "#");
+                PmPacket376DA da = new PmPacket376DA(0);
+                PmPacket376DT dt = new PmPacket376DT();
+                int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+                dt.setFn(fn);
+                //376规约组帧
+                packet.getDataBuffer().putDA(da);
+                packet.getDataBuffer().putDT(dt);
+                packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
+                packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
+                packet.getDataBuffer().put(obj.getWaitforPacket());//透明转发接收等待报文超时时间
+                packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
+                packet.getDataBuffer().putBin(obj.getTransmitMsg().length(), 2);//透明转发内容字节数k
+
+                //645规约组帧
+                Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
+                pack.setControlCode(true, false, false, obj.getFuncode());
+                Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+                Iterator iterator = DataItemMap_Config.keySet().iterator();
+                while (iterator.hasNext()) {
+//                    String
+//                    pack.getData().pu
+                }
+                
+                converter.putDataBuf(packet, commandItem);
+                packet.setAuthorize(new Authorize());
+                packet.setTpv(new TimeProtectValue());//时间标签
+                packetList.add(packet);
+            }
+            for (PmPacket376 packet : packetList) {
+                RealTimeTaskDAO task = new RealTimeTaskDAO();
+                task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
+                task.setSequencecode(sequenceCode);
+                task.setLogicAddress(obj.getTerminalAddr());
                 task.setGpMark(gpMark.toString());
                 task.setCommandMark(commandMark.toString());
                 tasks.add(task);
@@ -81,7 +150,6 @@ public class RealTimeProxy376 implements ICollectInterface {
 //            }
 //        }
 //    }
-
 //    private void putDataBuf(PmPacket376 packet, CommandItem commandItem) {
 //        String DataItemValue, Format, IsGroupEnd = "";
 //        int Length, bitnumber = 0;
@@ -139,7 +207,6 @@ public class RealTimeProxy376 implements ICollectInterface {
 //            }
 //        }
 //    }
-
     /**
      * 针对一层循环的命令项的参数值注入
      * @param packet
@@ -151,7 +218,6 @@ public class RealTimeProxy376 implements ICollectInterface {
 //        int Length, bitnumber = 0;
 //        putDataBuf(packet, commandItem);
 //    }
-
 //    private void FillDataBuffer(PmPacket376 packet, String Format, String DataItemValue, String IsGroupEnd, int Length, int bitnumber) {
 //        if (Format.equals("BIN")) {
 //            packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue), Length);
@@ -240,7 +306,6 @@ public class RealTimeProxy376 implements ICollectInterface {
 //            packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
 //        }
 //    }
-
     public RealTimeProxy376() {
         ApplicationContext cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
         taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
@@ -331,7 +396,6 @@ public class RealTimeProxy376 implements ICollectInterface {
         }
     }
 
-
     /**
      * 实时召测
      * @param MTO
@@ -374,7 +438,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             } else {
                 int sequenceCode = getID();
 
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_TRANSMIT);
+                List<RealTimeTaskDAO> tasks = this.Encode_TransMit(MTO, sequenceCode);
                 for (RealTimeTaskDAO task : tasks) {
                     this.taskService.insertTask(task);
                 }
@@ -487,7 +551,6 @@ public class RealTimeProxy376 implements ICollectInterface {
         return null;
     }
 
-
     /**
      * 获取实时召测返回结果
      * @param appId
@@ -495,8 +558,50 @@ public class RealTimeProxy376 implements ICollectInterface {
      * @throws Exception
      */
     public Map<String, Map<String, String>> getReturnByReadData(long appId) throws Exception {
-        return null;
+        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        StringBuffer sb = new StringBuffer();
+        Map<String, Map<String, String>> results = new HashMap<String, Map<String, String>>();
+        for (RealTimeTaskDAO task : tasks) {
+            String logicAddress = task.getLogicAddress();
+            String[] GpArray = task.getGpMark().split("#");
+            String[] CommandArray = task.getCommandMark().split("#");
+            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            PmPacket376 packet = new PmPacket376();
+            for (RTTaskRecvDAO recv : recvs) {
+                byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
+                packet.setValue(msg, 0);
+                converter.decodeData(packet, results);
+            }
+        }
+        return results;
     }
 
-    
+    private Map<String, Map<String, String>> Deal2DataMap(Map<String, Map<String, String>> sourceMap)
+    {
+        String dataItemCode = "";
+        Map<String, Map<String, String>> results = new TreeMap<String, Map<String, String>>();
+        ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
+        Iterator iterator = sourceMap.keySet().iterator();
+        while (iterator.hasNext()) {
+            String key = (String) iterator.next();
+            String keyInner = "";
+            String CommandItemCode = key.split("#")[2];
+            Map<String, String> DataMap = sourceMap.get(key);
+            Iterator iterator2 = DataMap.keySet().iterator();
+            Map<String, String> resultMap = new TreeMap<String, String>();
+            while (iterator2.hasNext()) {
+                dataItemCode = (String) iterator2.next();
+                String dataValue = DataMap.get(dataItemCode);
+                ProtocolDataItem dataItem = config.getDataItemMap(CommandItemCode).get(dataItemCode);
+                String IsTd = dataItem.getIsTd();
+                if(IsTd.equals("1"))
+                    keyInner = dataValue;
+                else
+                    keyInner = DateFormatUtils.format(new Date(),"YYYY-MM-DD HH:MI:SS");
+                resultMap.put(keyInner, dataValue);               
+            }
+            results.put(key+"#"+dataItemCode, resultMap);
+        }
+        return results;
+    }
 }
