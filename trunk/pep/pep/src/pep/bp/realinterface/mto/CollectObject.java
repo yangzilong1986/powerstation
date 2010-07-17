@@ -16,7 +16,6 @@ public class CollectObject {
     private String pwContent;              //密码内容
     private int mpExpressMode;             //测量点表示方式 
     private int[] mpSn;                    //测量点序号组
-    private byte AFN;
 
     private List<CommandItem> CommandItems; //命令项列表
     public CollectObject() {
@@ -85,19 +84,5 @@ public class CollectObject {
 
     public List<CommandItem> getCommandItems(){
         return this.CommandItems;
-    }
-
-    /**
-     * @return the AFN
-     */
-    public byte getAFN() {
-        return AFN;
-    }
-
-    /**
-     * @param AFN the AFN to set
-     */
-    public void setAFN(byte AFN) {
-        this.AFN = AFN;
     }
 }
