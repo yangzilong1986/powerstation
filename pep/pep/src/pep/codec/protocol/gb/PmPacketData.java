@@ -27,6 +27,15 @@ public class PmPacketData{
         dataBuff.setAutoExpand(true);
     }
 
+    public PmPacketData(IoBuffer rowIoBuffer){
+        super();
+        dataBuff = rowIoBuffer;
+    }
+
+    public IoBuffer getRowIoBuffer(){
+        return dataBuff;
+    }
+
     /**
      * 清除原来的数据
      */
