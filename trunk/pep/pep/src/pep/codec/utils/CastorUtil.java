@@ -328,7 +328,9 @@ public class CastorUtil {
         CommandItem41.AddDataItem(new ProtocolDataItem("C04001", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
         CommandItem41.AddDataItem(new ProtocolDataItem("C04002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
         CommandItem41.AddDataItem(new ProtocolDataItem("C04003", 1, "GROUP_BS8", 2,"相位","","0"));
-        CommandItem41.AddDataItem(new ProtocolDataItem("C04004", 1, "GROUP_BS8", 4,"动作值","","1"));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04004", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04005", 2, "BCD_INT", 4,"动作值",""));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04006", 4, "DATE_LOUBAO", 4,"动作时间",""));
 
         ProtocolCommandItem CommandItem42 = new ProtocolCommandItem("8000C041",new ProtocolDataItem("C041", 2, "BCD_INT", 0,"负载电流动作档位",""));
         ProtocolCommandItem CommandItem43 = new ProtocolCommandItem("8000C042",new ProtocolDataItem("C042", 2, "BCD_INT", 0,"剩余电流动作档位",""));
