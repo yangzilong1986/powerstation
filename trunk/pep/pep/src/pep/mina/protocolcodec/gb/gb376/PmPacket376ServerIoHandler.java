@@ -49,7 +49,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
         String rtua = pack.getAddress().getRtua();
         registRtua(session, rtua);
-        if (!((pack.getAfn()==2)&&(showActTestPack)))
+        if (!((pack.getAfn()==2)&&(!showActTestPack)))
           LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
 
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
