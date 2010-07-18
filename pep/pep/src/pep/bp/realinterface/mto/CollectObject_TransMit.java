@@ -6,7 +6,6 @@ package pep.bp.realinterface.mto;
 
 import java.util.ArrayList;
 import java.util.List;
-import pep.bp.utils.MeterType;
 import pep.bp.utils.SerialPortPara;
 import pep.common.exception.BPException;
 

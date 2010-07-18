@@ -52,6 +52,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
             rtu = new RtuCommunicationInfo(rtua);
+            rtuSessionMap.put(rtua, rtu);
         }
         rtu.sendPacket(sequence, packet);
     }
@@ -98,7 +99,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
     public void rtuReceiveTcpPacket(String rtua, IoSession session, PmPacket pack) {
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
-            rtu = new RtuCommunicationInfo(rtua, session);
+            rtu = new RtuCommunicationInfo(rtua, null);
             putRtuCommunicationInfo(rtua, rtu);
         }
 

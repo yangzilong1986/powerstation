@@ -23,7 +23,6 @@ public class MainProcess {
     private static int pollingProcessorMaxNumber = 1;
     private LeakPointProcessor lpProcessor;
     private SMSNoticeProcessor SMSProcessor;
-    private RealTimeSender RTaskProcessor;
     private PollingProcessor pollingProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
@@ -46,7 +45,7 @@ public class MainProcess {
             try {
                 String task = "启动主站下发返回处理器 " + i;
                 log.info(task);
-                threadPool.execute(new RealTimeSender(this.pepCommunicator));
+                threadPool.execute(new ResponseDealer(this.pepCommunicator));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -73,7 +72,6 @@ public class MainProcess {
         this.pepCommunicator = pepCommunicator;
         lpProcessor = new LeakPointProcessor();
         pollingProcessor = new PollingProcessor();
-        RTaskProcessor = new RealTimeSender(pepCommunicator);
 
     }
 

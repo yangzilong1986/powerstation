@@ -52,7 +52,6 @@ public class PollingJob implements Job {
         for(TermTaskDAO task:TermTaskList){
             DoTask(this.pepCommunicator,task);
         }
-
     }
 
     private void DoTask(PepCommunicatorInterface pepCommunicator,TermTaskDAO task){
