@@ -128,8 +128,7 @@ public class RtuCommunicationInfo {
             RtuRespPacketQueue.instance().addPacket(new SequencedPmPacket(sequence, packet, SequencedPmPacket.Status.NOT_ONLINE));
         } else {
             this.unsendPacket.add(new SeqPacket(sequence, packet));
-
-            if (!this.idle) {
+            if (this.idle) {
                 sendNextPacket();
             }
         }
@@ -156,10 +155,11 @@ public class RtuCommunicationInfo {
     private void doSendPacket() {
         this.currentSendTicket = new Date();
         this.currentSendTimes++;
-        if (this.currentSendTimes<maxRetryTimes)
+        if (this.currentSendTimes < maxRetryTimes) {
             this.session.write(this.currentPacket);
-        else
+        } else {
             this.sendNextPacket();
+        }
     }
 
     /**

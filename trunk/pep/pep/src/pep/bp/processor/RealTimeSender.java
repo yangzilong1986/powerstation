@@ -11,9 +11,10 @@ import pep.bp.db.RTTaskService;
 import pep.bp.model.RealTimeTaskDAO;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.gb376.PmPacket376;
+import pep.codec.utils.BcdUtils;
 import pep.mina.common.PepCommunicatorInterface;
 import pep.mina.common.RtuRespPacketQueue;
-import pep.mina.common.SequencedPmPacket;
+
 import pep.system.SystemConst;
 
 /**
@@ -42,7 +43,7 @@ public class RealTimeSender extends BaseProcessor {
             List<RealTimeTaskDAO> tasks = taskService.getTasks();
             for (RealTimeTaskDAO task : tasks) {
                 PmPacket packet = new PmPacket376();
-                packet.setValue(task.getSendmsg().getBytes(), 0);
+                packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
                 pepCommunicator.SendPacket(task.getSequencecode(), packet);
             }
         }

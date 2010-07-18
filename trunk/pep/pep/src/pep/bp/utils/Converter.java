@@ -4,16 +4,12 @@
  */
 package pep.bp.utils;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.apache.commons.lang.time.DateFormatUtils;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.bp.realinterface.mto.CircleDataItems;
@@ -54,7 +50,6 @@ import pep.codec.protocol.gb.TimeProtectValue;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
-import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**

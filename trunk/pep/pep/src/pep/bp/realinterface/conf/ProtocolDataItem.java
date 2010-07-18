@@ -1,6 +1,5 @@
 package pep.bp.realinterface.conf;
 
-import java.util.Map;
 
 /**
  *
