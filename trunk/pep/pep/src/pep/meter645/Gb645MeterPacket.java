@@ -6,6 +6,7 @@
 package pep.meter645;
 
 import org.apache.mina.core.buffer.IoBuffer;
+import pep.codec.protocol.gb.PmPacketData;
 import pep.codec.utils.BcdDataBuffer;
 import pep.codec.utils.BcdUtils;
 
@@ -47,6 +48,10 @@ public class Gb645MeterPacket {
 
     public  BcdDataBuffer getData(){
         return this.data;
+    }
+
+    public PmPacketData getDataAsPmPacketData(){
+        return new PmPacketData(this.data.getRowIoBuffer());
     }
 
     private void setDataBytes(byte[] msg, int beginIndex, int len){ //将接收到的序列转换为去掉33
