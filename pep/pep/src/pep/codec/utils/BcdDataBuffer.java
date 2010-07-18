@@ -20,6 +20,15 @@ public class BcdDataBuffer {
         dataBuff.setAutoExpand(true);
     }
 
+    public BcdDataBuffer(IoBuffer rowIoBuffer){
+        dataBuff = rowIoBuffer;
+    }
+
+    //获取IoBuffer
+    public IoBuffer getRowIoBuffer(){
+        return dataBuff;
+    }
+
     /**
      * 清除原来的数据
      */
