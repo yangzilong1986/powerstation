@@ -155,7 +155,10 @@ public class RtuCommunicationInfo {
     private void doSendPacket() {
         this.currentSendTicket = new Date();
         this.currentSendTimes++;
-        this.session.write(this.currentPacket);
+        if (this.currentSendTimes<maxRetryTimes)
+            this.session.write(this.currentPacket);
+        else
+            this.sendNextPacket();
     }
 
     /**
