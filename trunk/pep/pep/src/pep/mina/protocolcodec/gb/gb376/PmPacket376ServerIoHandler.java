@@ -21,6 +21,7 @@ import pep.mina.protocolcodec.gb.PepGbCommunicator;
 public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     private PepGbCommunicator rtuMap;
+    private boolean showActTestPack=false;
     private final static String SESSION_RTUS = PmPacket376ServerIoHandler.class.getName() + ".rtus";
     private final static Logger LOGGER = LoggerFactory.getLogger(PmPacket376ServerIoHandler.class);
 
@@ -48,7 +49,8 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
         String rtua = pack.getAddress().getRtua();
         registRtua(session, rtua);
-        LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
+        if (!((pack.getAfn()=2)&&(showActTestPack)))
+          LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
 
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
             PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
@@ -68,5 +70,12 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         }
 
         rtus.add(rtua);
+    }
+
+    @Override
+    public void messageSent(IoSession session, Object message) throws Exception {
+        PmPacket376 pack = (PmPacket376) message;
+        LOGGER.info("Send to rtua<"+ pack.getAddress().getRtua()+ ">: "+
+                BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
     }
 }
