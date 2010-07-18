@@ -4,11 +4,16 @@
  */
 package pep.bp.utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.apache.commons.lang.time.DateFormatUtils;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.bp.realinterface.mto.CircleDataItems;
@@ -49,6 +54,7 @@ import pep.codec.protocol.gb.TimeProtectValue;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
+import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**
@@ -241,7 +247,7 @@ public class Converter {
                         String DataItemCode = (String) iterator.next();
                         dataItem = DataItemMap_Config.get(DataItemCode);
                     }
-                    FillDataBuffer(packet, dataItem.getFormat(), String.valueOf(ActualgroupNumber), dataItem.getIsGroupEnd(), dataItem.getLength(), dataItem.getBitNumber());
+                    FillDataBuffer(packet.getDataBuffer(), dataItem.getFormat(), String.valueOf(ActualgroupNumber), dataItem.getIsGroupEnd(), dataItem.getLength(), dataItem.getBitNumber());
                 }
 
                 List<DataItem> dataItemList = group.getDataItemList();
@@ -255,7 +261,7 @@ public class Converter {
                         Length = TempdataItem.getLength();
                         IsGroupEnd = TempdataItem.getIsGroupEnd();
                         bitnumber = TempdataItem.getBitNumber();
-                        FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                        FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                     }
                     ProtocolDataItem protocoldataItem = DataItemMap_Config.get(DataItemCode.substring(0, 10));
                     DataItemValue = dataItemTemp.getDataItemValue();
@@ -263,7 +269,7 @@ public class Converter {
                     Length = protocoldataItem.getLength();
                     IsGroupEnd = protocoldataItem.getIsGroupEnd();
                     bitnumber = protocoldataItem.getBitNumber();
-                    FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                    FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                     TempCode = Long.valueOf(DataItemCode);
                 }
                 if ((Index % ActualgroupNumber == 0) && (Index > 1) && (CanPacket)) {
@@ -344,7 +350,7 @@ public class Converter {
                 Length = dataItem.getLength();
                 IsGroupEnd = dataItem.getIsGroupEnd();
                 bitnumber = dataItem.getBitNumber();
-                FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
             }
         }
     }
@@ -376,7 +382,7 @@ public class Converter {
                             Length = TempdataItem.getLength();
                             IsGroupEnd = TempdataItem.getIsGroupEnd();
                             bitnumber = TempdataItem.getBitNumber();
-                            FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                            FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                         }
                         ProtocolDataItem protocoldataItem = DataItemMap_Config.get(DataItemCode.substring(0, 10));
                         DataItemValue = dataItem.getDataItemValue();
@@ -384,7 +390,7 @@ public class Converter {
                         Length = protocoldataItem.getLength();
                         IsGroupEnd = protocoldataItem.getIsGroupEnd();
                         bitnumber = protocoldataItem.getBitNumber();
-                        FillDataBuffer(packet, Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                        FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                         TempCode = Long.valueOf(DataItemCode);
                     }
                 }
@@ -392,94 +398,96 @@ public class Converter {
         }
     }
 
-    private void FillDataBuffer(PmPacket376 packet, String Format, String DataItemValue, String IsGroupEnd, int Length, int bitnumber) {
+    public void FillDataBuffer(PmPacketData packetdata, String Format, String DataItemValue, String IsGroupEnd, int Length, int bitnumber) {
         if (Format.equals("BIN")) {
-            packet.getDataBuffer().putBin(Integer.parseInt(DataItemValue), Length);
+            packetdata.putBin(Integer.parseInt(DataItemValue), Length);
         } else if (Format.equals("IPPORT")) {
-            packet.getDataBuffer().putIPPORT(DataItemValue);
+            packetdata.putIPPORT(DataItemValue);
         } else if (Format.equals("IP")) {
-            packet.getDataBuffer().putIP(DataItemValue);
+            packetdata.putIP(DataItemValue);
         } else if (Format.equals("TEL")) {
-            packet.getDataBuffer().putTEL(DataItemValue);
+            packetdata.putTEL(DataItemValue);
         } else if (Format.equals("BS8")) {
-            packet.getDataBuffer().putBS8(DataItemValue);
+            packetdata.putBS8(DataItemValue);
         } else if (Format.equals("GROUP_BS8")) {
             groupValue += DataItemValue;
             // String IsGroupEnd = dataItem.getIsGroupEnd();
             if (IsGroupEnd.equals("1")) {
-                packet.getDataBuffer().putBS8(groupValue);
+                packetdata.putBS8(groupValue);
                 groupValue = "";
             }
         } else if (Format.equals("GROUP_BIN")) {
             groupBinValue += Integer.parseInt(DataItemValue) << (bits - bitnumber);
             bits -= bitnumber;
             if (IsGroupEnd.equals("1")) {
-                packet.getDataBuffer().put((byte) groupBinValue);
+                packetdata.put((byte) groupBinValue);
                 bits = 8;
                 groupBinValue = 0;
             }
         } else if (Format.equals("BS24")) {
-            packet.getDataBuffer().putBS24(DataItemValue);
+            packetdata.putBS24(DataItemValue);
         } else if (Format.equals("BS64")) {
-            packet.getDataBuffer().putBS64(DataItemValue);
+            packetdata.putBS64(DataItemValue);
         } else if (Format.equals("ASCII")) {
-            packet.getDataBuffer().putAscii(DataItemValue, Length);
+            packetdata.putAscii(DataItemValue, Length);
         } else if (Format.equals("A1")) {
-            packet.getDataBuffer().putA1(new DataTypeA1(DataItemValue));
+            packetdata.putA1(new DataTypeA1(DataItemValue));
         } else if (Format.equals("A2")) {
-            packet.getDataBuffer().putA2(new DataTypeA2(Double.parseDouble(DataItemValue)));
+            packetdata.putA2(new DataTypeA2(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A3")) {
-            packet.getDataBuffer().putA3(new DataTypeA3(Long.parseLong(DataItemValue)));
+            packetdata.putA3(new DataTypeA3(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A4")) {
-            packet.getDataBuffer().putA4(new DataTypeA4(Byte.parseByte(DataItemValue)));
+            packetdata.putA4(new DataTypeA4(Byte.parseByte(DataItemValue)));
         } else if (Format.equals("A5")) {
-            packet.getDataBuffer().putA5(new DataTypeA5(Float.parseFloat(DataItemValue)));
+            packetdata.putA5(new DataTypeA5(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A6")) {
-            packet.getDataBuffer().putA6(new DataTypeA6(Float.parseFloat(DataItemValue)));
+            packetdata.putA6(new DataTypeA6(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A7")) {
-            packet.getDataBuffer().putA7(new DataTypeA7(Float.parseFloat(DataItemValue)));
+            packetdata.putA7(new DataTypeA7(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A8")) {
-            packet.getDataBuffer().putA8(new DataTypeA8(Integer.parseInt(DataItemValue)));
+            packetdata.putA8(new DataTypeA8(Integer.parseInt(DataItemValue)));
         } else if (Format.equals("A9")) {
-            packet.getDataBuffer().putA9(new DataTypeA9(Double.parseDouble(DataItemValue)));
+            packetdata.putA9(new DataTypeA9(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A10")) {
-            packet.getDataBuffer().putA10(new DataTypeA10(Long.parseLong(DataItemValue)));
+            packetdata.putA10(new DataTypeA10(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A11")) {
-            packet.getDataBuffer().putA11(new DataTypeA11(Double.parseDouble(DataItemValue)));
+            packetdata.putA11(new DataTypeA11(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A12")) {
-            packet.getDataBuffer().putA12(new DataTypeA12(Long.parseLong(DataItemValue)));
+            packetdata.putA12(new DataTypeA12(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A13")) {
-            packet.getDataBuffer().putA13(new DataTypeA13(Double.parseDouble(DataItemValue)));
+            packetdata.putA13(new DataTypeA13(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A14")) {
-            packet.getDataBuffer().putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
+            packetdata.putA14(new DataTypeA14(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A15")) {
-            packet.getDataBuffer().putA15(new DataTypeA15(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
+            packetdata.putA15(new DataTypeA15(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
         } else if (Format.equals("A16")) {
-            packet.getDataBuffer().putA16(new DataTypeA16(DataItemValue, "dd HH:mm:ss"));
+            packetdata.putA16(new DataTypeA16(DataItemValue, "dd HH:mm:ss"));
         } else if (Format.equals("A17")) {
-            packet.getDataBuffer().putA17(new DataTypeA17(DataItemValue, "MM-dd HH:mm"));
+            packetdata.putA17(new DataTypeA17(DataItemValue, "MM-dd HH:mm"));
         } else if (Format.equals("A18")) {
-            packet.getDataBuffer().putA18(new DataTypeA18(DataItemValue, "dd HH:mm"));
+            packetdata.putA18(new DataTypeA18(DataItemValue, "dd HH:mm"));
         } else if (Format.equals("A19")) {
-            packet.getDataBuffer().putA19(new DataTypeA19(DataItemValue, "HH:mm"));
+            packetdata.putA19(new DataTypeA19(DataItemValue, "HH:mm"));
         } else if (Format.equals("A20")) {
-            packet.getDataBuffer().putA20(new DataTypeA20(DataItemValue, "yyyy-MM-dd"));
+            packetdata.putA20(new DataTypeA20(DataItemValue, "yyyy-MM-dd"));
         } else if (Format.equals("A21")) {
-            packet.getDataBuffer().putA21(new DataTypeA21(DataItemValue, "yyyy-mm"));
+            packetdata.putA21(new DataTypeA21(DataItemValue, "yyyy-mm"));
         } else if (Format.equals("A22")) {
-            packet.getDataBuffer().putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
+            packetdata.putA22(new DataTypeA22(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A23")) {
-            packet.getDataBuffer().putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
+            packetdata.putA23(new DataTypeA23(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A24")) {
-            packet.getDataBuffer().putA24(new DataTypeA24(DataItemValue, "dd HH"));
+            packetdata.putA24(new DataTypeA24(DataItemValue, "dd HH"));
         } else if (Format.equals("A25")) {
-            packet.getDataBuffer().putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
+            packetdata.putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A26")) {
-            packet.getDataBuffer().putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
+            packetdata.putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A27")) {
-            packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
+            packetdata.putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
         }
     }
+
+ 
 
     public Map<String, Map<String, String>> decodeData(PmPacket376 packet, Map<String, Map<String, String>> results) {
         String key = "";

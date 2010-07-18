@@ -13,7 +13,7 @@ import pep.common.exception.BPException;
 
 
 public class SerialPortPara {
-    private BaudRate baudrate; //波特率
+    private String baudrate; //波特率
     private int stopbit;//停止位
     private int checkbit;//校验位
     private int odd_even_bit;//奇偶位
@@ -22,14 +22,14 @@ public class SerialPortPara {
     /**
      * @return the baudrate
      */
-    public BaudRate getBaudrate() {
+    public String getBaudrate() {
         return baudrate;
     }
 
     /**
      * @param baudrate the baudrate to set
      */
-    public void setBaudrate(BaudRate baudrate) {
+    public void setBaudrate(String baudrate) {
         this.baudrate = baudrate;
     }
 
@@ -92,7 +92,7 @@ public class SerialPortPara {
      * @param databit the databit to set
      */
     public void setDatabit(int databit) throws BPException {
-        if((odd_even_bit< 5)||(odd_even_bit > 8))
+        if((databit< 5)||(databit > 8))
             throw new BPException("输入数据位非法，必须是5-8范围内");
         this.databit = databit;
     }
