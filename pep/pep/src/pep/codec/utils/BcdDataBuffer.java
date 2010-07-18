@@ -21,6 +21,7 @@ public class BcdDataBuffer {
     }
 
     public BcdDataBuffer(IoBuffer rowIoBuffer){
+        super();
         dataBuff = rowIoBuffer;
     }
 
