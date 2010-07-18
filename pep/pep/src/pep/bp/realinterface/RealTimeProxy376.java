@@ -120,7 +120,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                     String IsGroupEnd = dataItem.getIsGroupEnd();
                     int Length = dataItem.getLength();
                     int bitnumber = dataItem.getBitNumber();
-                 //   converter.FillDataBuffer(pack.getData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                    converter.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                 }
                 packet.setAuthorize(new Authorize());
                 packet.setTpv(new TimeProtectValue());//时间标签
