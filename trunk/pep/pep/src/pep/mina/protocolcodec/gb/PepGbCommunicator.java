@@ -102,10 +102,6 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
             putRtuCommunicationInfo(rtua, rtu);
         }
 
-        if (rtu.getSession() == null) {
-            rtu.setTcpSession(session);
-        }
-
         if (!pack.getControlCode().getIsOrgniger()) {
             rtu.receiveRtuUploadPacket(pack);
         } else if (pack.getAfn() != 2) //主动上送
@@ -115,6 +111,10 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
 
         if ((pack.getControlCode().getIsUpDirect()) && (pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
             rtu.callRtuEventRecord(pack.getEC());
+        }
+
+        if (rtu.getSession() == null) {
+            rtu.setTcpSession(session);
         }
     }
 }
