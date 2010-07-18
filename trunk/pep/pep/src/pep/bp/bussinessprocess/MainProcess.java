@@ -18,25 +18,35 @@ import pep.mina.common.PepCommunicatorInterface;
  */
 public class MainProcess {
 
-    private static int rtTaskProcessorMaxNumber = 2;
+    private static int rtTaskSenderMaxNumber = 1;
+    private static int rtResponseDealerMaxNumber = 1;
     private static int pollingProcessorMaxNumber = 1;
     private LeakPointProcessor lpProcessor;
     private SMSNoticeProcessor SMSProcessor;
-    private RealTimeTaskProcessor RTaskProcessor;
+    private RealTimeSender RTaskProcessor;
     private PollingProcessor pollingProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
+    private ThreadPoolExecutor threadPool;
 
-    private void runRealTimeTaskProcessor(){
-        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 4, 3,
-                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3),
-                new ThreadPoolExecutor.DiscardOldestPolicy());
-
-        for (int i = 1; i <= rtTaskProcessorMaxNumber; i++) {
+    private void runRealTimeTaskSender(){
+        for (int i = 1; i <= rtTaskSenderMaxNumber; i++) {
             try {
-                String task = "启动实时交互任务处理器 " + i;
+                String task = "启动实时交互任务发送器 " + i;
                 log.info(task);
-                threadPool.execute(new RealTimeTaskProcessor(this.pepCommunicator));
+                threadPool.execute(new RealTimeSender(this.pepCommunicator));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void runResponseDealer(){
+        for (int i = 1; i <= rtResponseDealerMaxNumber; i++) {
+            try {
+                String task = "启动主站下发返回处理器 " + i;
+                log.info(task);
+                threadPool.execute(new RealTimeSender(this.pepCommunicator));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -57,14 +67,19 @@ public class MainProcess {
     }
 
     public MainProcess(PepCommunicatorInterface pepCommunicator) {
+        this.threadPool = new ThreadPoolExecutor(2, 4, 3,
+                TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3),
+                new ThreadPoolExecutor.DiscardOldestPolicy());
         this.pepCommunicator = pepCommunicator;
         lpProcessor = new LeakPointProcessor();
         pollingProcessor = new PollingProcessor();
-        RTaskProcessor = new RealTimeTaskProcessor(pepCommunicator);
+        RTaskProcessor = new RealTimeSender(pepCommunicator);
+
     }
 
     public void run() {
-        runRealTimeTaskProcessor();
+        runRealTimeTaskSender();
+        runResponseDealer();
         //runPollingProcessor();
     }
 
