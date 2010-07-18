@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import pep.bp.realinterface.ICollectInterface;
-import pep.bp.realinterface.RealTimeProxy376;
 import pep.bp.realinterface.mto.MessageTranObject;
 
 /**
@@ -26,6 +25,9 @@ import pep.bp.realinterface.mto.MessageTranObject;
 public class TermParamController extends BaseRestSpringController<TermParamInfo, Long> {
     @Autowired
     private TermParamManager termParamManager;
+
+	@Autowired
+	private ICollectInterface realTimeProxy376;
 
     @Override
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TermParamInfo model) {
@@ -64,8 +66,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         // System.out.println(termIdString);
         String dtoJSONString = request.getParameter("dto");
         MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
-        ICollectInterface ci = new RealTimeProxy376();
-        long collectId = ci.writeEquipmentParameters(mto);
+		long collectId = realTimeProxy376.writeParameters(mto);
         logger.debug("collectId : " + collectId);
     }
 
