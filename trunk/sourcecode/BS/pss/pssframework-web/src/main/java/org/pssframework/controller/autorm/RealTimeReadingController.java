@@ -10,7 +10,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.pssframework.controller.BaseRestSpringController;
+import net.jcreate.e3.table.DataModel;
+import net.jcreate.e3.table.NavRequest;
+import net.jcreate.e3.table.PageInfo;
+import net.jcreate.e3.table.SortInfo;
+import net.jcreate.e3.table.html.HTMLTableHelper;
+import net.jcreate.e3.table.model.CollectionDataModel;
+import net.jcreate.e3.table.support.DefaultPageInfo;
+import net.jcreate.e3.table.support.DefaultSortInfo;
+
+import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.autorm.RealTimeReadingInfo;
 import org.pssframework.model.system.OrgInfo;
@@ -24,18 +33,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import pep.bp.realinterface.ICollectInterface;
-import pep.bp.realinterface.RealTimeProxy376;
 import pep.bp.realinterface.mto.MessageTranObject;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
- *
+ * 
  */
 @Controller
 @RequestMapping("/autorm/realTimeReading")
-public class RealTimeReadingController extends BaseRestSpringController<RealTimeReadingInfo, Long> {
+public class RealTimeReadingController extends BaseSpringController {
 
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
@@ -49,6 +57,9 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	private static final String OBJ_ID = "objId";
 
 	@Autowired
+	private ICollectInterface realTimeProxy376;
+
+	@Autowired
 	private OrgInfoManager orgInfoManager;
 
 	@Autowired
@@ -58,20 +69,32 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	private RealTimeReadingManager realTimeReadingManager;
 
 	@SuppressWarnings("unchecked")
-	@Override
+	@RequestMapping
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, RealTimeReadingInfo model) {
+
+		NavRequest navRequest = HTMLTableHelper.getNavRequest("userTable", request);
 
 		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
 
 		Map mapRequest = new LinkedHashMap();
 
-		Page page = this.realTimeReadingManager.findByPageRequest(pageRequest);
+		// this.realTimeReadingManager.findByPageRequest(navRequest);//获取数据模型
+		Page page = this.realTimeReadingManager.findByPageRequest(pageRequest);//获取数据模型
 
-		ModelAndView modelAndView = toModelAndView(page, pageRequest);
+		SortInfo pSortInfo = new DefaultSortInfo(navRequest.getSortCode(), navRequest.getSortDir());
+		PageInfo pNavInfo = new DefaultPageInfo(page.getFirstResult(), page.getTotalCount(), page.getPageSize());
+		DataModel dataModel = new CollectionDataModel(page.getResult(), pSortInfo, pNavInfo);
+
+		//Page page = 
+
+		ModelAndView modelAndView = new ModelAndView();
 
 		modelAndView.setViewName(VIEW);
 
 		getInitOption(modelAndView, mapRequest);
+
+		modelAndView.addObject("userTable", dataModel);//保存翻页结果
+		modelAndView.addObject("model", model);//保存翻页结果
 
 		return modelAndView;
 	}
@@ -105,12 +128,14 @@ public class RealTimeReadingController extends BaseRestSpringController<RealTime
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/down")
-	public void down(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView down(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String dtoJSONString = request.getParameter("dto");
 		MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
-		ICollectInterface ci = new RealTimeProxy376();
-		long collectId = ci.readData(mto);
+		long collectId = realTimeProxy376.readData(mto);
 		logger.debug("collectId : " + collectId);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("collectId", collectId);
+		return modelAndView;
 	}
 
 }
