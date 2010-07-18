@@ -96,9 +96,8 @@ public class RealTimeProxy376 implements ICollectInterface {
 
                 commandMark.append(commandItem.getIdentifier() + "#");
                 PmPacket376DA da = new PmPacket376DA(0);
-                PmPacket376DT dt = new PmPacket376DT();
-                int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-                dt.setFn(fn);
+                PmPacket376DT dt = new PmPacket376DT(1);
+          
                 //376规约组帧
                 packet.getDataBuffer().putDA(da);
                 packet.getDataBuffer().putDT(dt);
@@ -114,11 +113,15 @@ public class RealTimeProxy376 implements ICollectInterface {
                 Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
                 Iterator iterator = DataItemMap_Config.keySet().iterator();
                 while (iterator.hasNext()) {
-//                    String
-//                    pack.getData().pu
+                    String DataItemCode = (String) iterator.next();
+                    ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+                    String DataItemValue = dataItem.getDefaultValue();
+                    String Format =  dataItem.getFormat();
+                    String IsGroupEnd = dataItem.getIsGroupEnd();
+                    int Length = dataItem.getLength();
+                    int bitnumber = dataItem.getBitNumber();
+                 //   converter.FillDataBuffer(pack.getData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                 }
-                
-                converter.putDataBuf(packet, commandItem);
                 packet.setAuthorize(new Authorize());
                 packet.setTpv(new TimeProtectValue());//时间标签
                 packetList.add(packet);

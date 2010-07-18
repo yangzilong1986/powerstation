@@ -5,13 +5,11 @@
 package pep.codec.utils;
 
 import java.io.*;
-import java.net.URL;
 import org.exolab.castor.mapping.MappingException;
 import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.xml.*;
 import pep.bp.realinterface.conf.ProtocolCommandItem;
 import pep.bp.realinterface.conf.ProtocolCommandItems;
-import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.common.exception.CastorException;
 

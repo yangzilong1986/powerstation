@@ -4,6 +4,7 @@
 
 package pep.bp.realinterface.mto;
 
+import java.util.ArrayList;
 import java.util.List;
 import pep.bp.utils.MeterType;
 import pep.bp.utils.SerialPortPara;
@@ -17,7 +18,7 @@ public class CollectObject_TransMit {
     private String terminalAddr;            //终端逻辑地址
     private String equipProtocol;           //设备规约号
     private String meterAddr;              //表地址
-    private MeterType meterType;            //表计规约
+    private int meterType;            //表计规约
     private byte funcode;                  //表计规约功能码
     private byte Port;                     //终端通信端口号
     private SerialPortPara serialPortPara; //透明转发通信控制字
@@ -25,6 +26,14 @@ public class CollectObject_TransMit {
     private byte waitforByte;//透明转发接收等待字节超时时间
     private String transmitMsg;//透明转发内容
     private List<CommandItem> CommandItems; //命令项列表
+
+    public CollectObject_TransMit() {
+        CommandItems = new ArrayList<CommandItem>();
+    }
+
+    public void addCommandItem(CommandItem commandItem){
+        this.CommandItems.add(commandItem);
+    }
 
     /**
      * @return the TerminalAddr
@@ -158,14 +167,14 @@ public class CollectObject_TransMit {
     /**
      * @return the meterType
      */
-    public MeterType getMeterType() {
+    public int getMeterType() {
         return meterType;
     }
 
     /**
      * @param meterType the meterType to set
      */
-    public void setMeterType(MeterType meterType) {
+    public void setMeterType(int meterType) {
         this.meterType = meterType;
     }
 
