@@ -19,6 +19,7 @@ public class ProtocolDataItem {
     private String IsGroupEnd="0";
     private String IsTd = "0";//0,1 表示是否是数据时标
 
+
     public ProtocolDataItem(){
         super();
     }

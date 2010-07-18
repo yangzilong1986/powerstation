@@ -65,7 +65,7 @@ public class MainProcess {
 
     public void run() {
         runRealTimeTaskProcessor();
-        runPollingProcessor();
+        //runPollingProcessor();
     }
 
 }
