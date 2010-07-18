@@ -79,6 +79,7 @@ public class RtuCommunicationInfo {
     public synchronized RtuCommunicationInfo setTcpSession(IoSession session) {
         this.isTcp = true;
         this.session = session;
+        this.sendNextPacket();
         return this;
     }
 
