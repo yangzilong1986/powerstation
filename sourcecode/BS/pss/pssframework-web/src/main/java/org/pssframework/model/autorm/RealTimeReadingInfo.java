@@ -69,10 +69,10 @@ public class RealTimeReadingInfo extends BaseEntity {
 	private String objType;
 
 	// 终端地址
-	private String termAddr;
+	private String logicalAddr;
 
 	// 电表局号
-	private String meterNo;
+	private String mpNo;
 
 	// 测量点序号
 	private Long gpSn;
@@ -120,31 +120,17 @@ public class RealTimeReadingInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the termAddr
-	 */
-	public String getTermAddr() {
-		return termAddr;
-	}
-
-	/**
-	 * @param termAddr the termAddr to set
-	 */
-	public void setTermAddr(String termAddr) {
-		this.termAddr = termAddr;
-	}
-
-	/**
 	 * @return the meterNo
 	 */
-	public String getMeterNo() {
-		return meterNo;
+	public String getMpNo() {
+		return mpNo;
 	}
 
 	/**
 	 * @param meterNo the meterNo to set
 	 */
-	public void setMeterNo(String meterNo) {
-		this.meterNo = meterNo;
+	public void setMpNo(String mpNo) {
+		this.mpNo = mpNo;
 	}
 
 	/**
@@ -159,6 +145,20 @@ public class RealTimeReadingInfo extends BaseEntity {
 	 */
 	public void setGpSn(Long gpSn) {
 		this.gpSn = gpSn;
+	}
+
+	/**
+	 * @param logicalAddr the logicalAddr to set
+	 */
+	public void setLogicalAddr(String logicalAddr) {
+		this.logicalAddr = logicalAddr;
+	}
+
+	/**
+	 * @return the logicalAddr
+	 */
+	public String getLogicalAddr() {
+		return logicalAddr;
 	}
 
 }

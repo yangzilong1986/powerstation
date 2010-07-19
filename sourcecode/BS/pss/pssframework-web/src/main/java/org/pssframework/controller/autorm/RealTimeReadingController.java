@@ -12,12 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.jcreate.e3.table.DataModel;
 import net.jcreate.e3.table.NavRequest;
-import net.jcreate.e3.table.PageInfo;
-import net.jcreate.e3.table.SortInfo;
 import net.jcreate.e3.table.html.HTMLTableHelper;
-import net.jcreate.e3.table.model.CollectionDataModel;
-import net.jcreate.e3.table.support.DefaultPageInfo;
-import net.jcreate.e3.table.support.DefaultSortInfo;
 
 import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.TgInfo;
@@ -31,10 +26,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import pep.bp.realinterface.ICollectInterface;
 import pep.bp.realinterface.mto.MessageTranObject;
-import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 /**
@@ -74,18 +69,18 @@ public class RealTimeReadingController extends BaseSpringController {
 
 		NavRequest navRequest = HTMLTableHelper.getNavRequest("userTable", request);
 
+		Map params = WebUtils.getParametersStartingWith(request, "");
+
 		PageRequest<Map> pageRequest = newPageRequest(request, DEFAULT_SORT_COLUMNS);
+		pageRequest.setSortColumns(navRequest.getSortCode());
+		pageRequest.setPageSize(navRequest.getPageSize());
+		pageRequest.setPageNumber(navRequest.getStart());
+		pageRequest.getFilters().putAll(params);
 
 		Map mapRequest = new LinkedHashMap();
 
 		// this.realTimeReadingManager.findByPageRequest(navRequest);//获取数据模型
-		Page page = this.realTimeReadingManager.findByPageRequest(pageRequest);//获取数据模型
-
-		SortInfo pSortInfo = new DefaultSortInfo(navRequest.getSortCode(), navRequest.getSortDir());
-		PageInfo pNavInfo = new DefaultPageInfo(page.getFirstResult(), page.getTotalCount(), page.getPageSize());
-		DataModel dataModel = new CollectionDataModel(page.getResult(), pSortInfo, pNavInfo);
-
-		//Page page = 
+		DataModel dataModel = this.realTimeReadingManager.findByPageRequest(pageRequest);//获取数据模型
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -94,6 +89,7 @@ public class RealTimeReadingController extends BaseSpringController {
 		getInitOption(modelAndView, mapRequest);
 
 		modelAndView.addObject("userTable", dataModel);//保存翻页结果
+		modelAndView.addObject("pageInfo", dataModel.getNavInfo());//保存翻页结果
 		modelAndView.addObject("model", model);//保存翻页结果
 
 		return modelAndView;
