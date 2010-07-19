@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+	<bean id="converter" class="pep.bp.utils.Converter"></bean>
+
+	<bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
+		<property name="taskService" ref="rtTaskService" />
+		<property name="converter" ref="converter" />
+	</bean>
+	<bean id="protocolConfig" class="pep.bp.realinterface.conf.ProtocolConfig">
+		<constructor-arg index="0"
+			value="classpath:/pep/bp/realinterface/conf/protocol-data-config-mapping.xml"></constructor-arg>
+		<constructor-arg index="1"
+			value="classpath:/pep/bp/realinterface/conf/protocol-data-config.xml"></constructor-arg>
+	</bean>
+
+</beans>
