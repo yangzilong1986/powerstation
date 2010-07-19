@@ -159,7 +159,7 @@ function setup() {
     sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
     sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = "10040001,10040003,10040004,10040008,10040009";
+    var cilist = "10040001";
     var ciarray = cilist.split(',');
     for(var i = 0; i < ciarray.length; i++) {
         //alert($("tr[ci='" + ciarray[i] + "']").length);
@@ -243,7 +243,7 @@ function read() {
         </div>
         <div style="display: none;">
           <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
-          <input type="hidden" id="logicalAddr" name="logicalAddr" value="91010001" />
+          <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" />
           <input type="hidden" id="channelType" name="channelType" value="1" />
           <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
           <input type="hidden" id="pwContent" name="pwContent" value="8888" />
