@@ -5,7 +5,7 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
-<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/json2.js"></script>
 <script type="text/javascript">
 var inputText = ""; 
 var inputLabel = "";
@@ -135,20 +135,8 @@ function disableButton() {
 }
 
 //查询
-function queryData(){
-    if($("input[name='sysObject'][checked]").val() == "1") {
-        $("input[name='sqlCode']").val("AL_AUTORM_1101");
-    }
-    else if($("input[name='sysObject'][checked]").val() == "2") {
-        $("input[name='sqlCode']").val("AL_AUTORM_1102");
-    }
-    else if($("input[name='sysObject'][checked]").val() == "3") {
-        $("input[name='sqlCode']").val("AL_AUTORM_1103");
-    }
-    else if($("input[name='sysObject'][checked]").val() == "4") {
-        $("input[name='sqlCode']").val("AL_AUTORM_1104");
-    }
-    readingQueryForm.submit();
+function queryData(obj){
+  getReferenceForm(obj).action='${ctx}/autorm/realTimeReading';
 }
 
 //高级查询
@@ -274,81 +262,149 @@ function openOtherData(){
    var url = contextPath + "/do/autorm/otherDataAction.do?action=init&sysObject="+sysObject;
    top.showDialogBox("其他数据项", url, 575, 980);
 }
+function StringBuffer(){
+    this.data = [];
+}
 
+StringBuffer.prototype.append = function(){
+    this.data.push(arguments[0]);
+    return this;
+}
+
+StringBuffer.prototype.toString = function(){
+    return this.data.join("");
+}
+
+function setup() {
+	/*var dto = {
+            "mtoType": "100",
+            "coList": [{
+                "logicalAddr": "96123456",
+                "equipProtocol": "100",
+                "channelType": "1",
+                "pwAlgorith": "0",
+                "pwContent": "8888",
+                "mpExpressMode": "3",
+                "mpSn": "0",
+                "commandItems": [{
+                    "identifier": "100C0025" 
+                    
+                }]
+                
+            }]
+    };*/
+	
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"coList":').append('[{');
+    sb_dto.append('"logicalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+    sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+    sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+    sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+    sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    var cilist = "100C0025";
+    var ciarray = cilist.split(',');
+    for(var i = 0; i < ciarray.length; i++) {
+        if(i > 0) {
+            sb_dto.append('{');
+        }
+        sb_dto.append('"identifier":"' + ciarray[i] + '"');
+        if(i < ciarray.length - 1) {
+            sb_dto.append('}').append(',');
+        }
+    }
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    var url = '<pss:path type="webapp"/>/autorm/realTimeReading/down';
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: 'dto=' + escape(sb_dto.toString()),
+        dataType: 'json',
+        success: function(data) {
+            alert(data['collectId']);
+        },
+        error: function() {
+        }
+    });
+}
+
+function read() {
+    
+}
 </script>
 </head>
 <body>
-<form:form>
-  <div class="electric_lcon" id="electric_Con">
-  <ul class=default id=electric_Con_1>
-    <div><form:form action="/autorm/realTimeReading" modelAttribute="realTimeReadingInfo">
-      <table border="0" cellpadding="0" cellspacing="0">
-        <tr height="30px">
-          <td width="100" class="green" align="right">单位：</td>
-          <td width="120"><form:select path="orgId" items="${orglist}" disabled="${disabled}" id="orgId"
-            itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
-          <td width="100" class="green" align="right">台区：</td>
-          <td width="150"><form:select path="objId" items="${tglist}" disabled="${disabled}" id="tgId"
-            itemLabel="tgName" itemValue="tgId" cssStyle="width:150px;" /></td>
-          <td width="100" class="green" align="right">集中器地址：</td>
-          <td width="120" class="dom"><form:input path="termAddr" /></td>
-        </tr>
-        <tr height="30px">
-          <td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
-            onclick="readDqgflData()" class="btnbg4" /> <input type="button" class="btnbg4" id="dqglData"
-            name="dqglData" value="当前功率" onclick="readDqglData()" /> <input class="btnbg4" type="button" id="dydlData"
-            name="dydlData" value="当前电流" onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData"
-            name="otherData" value="其他数据项" onclick="openOtherData()" /> <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
-          <td><input class="btnbg4" type="button" name="query" id="query" value="查询" onclick="queryData()" /></td>
-        </tr>
-      </table>
-    </form:form></div>
-    <div id="bg" style="height: 30px; text-align: center;">
-    <ul id=”datamenu_Option“ class="cb font1">
-      <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">实时召测</li>
-    </ul>
-    </div>
-    <div class="tableContainer"
-      style="height: expression(((     document.documentElement.clientHeight || document.body.clientHeight) -105 ) );">
-    <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th width="3%"><input type="checkbox" name="selectAll" onclick="selectAllCB()" checked /></th>
-          <th>对象编号</th>
-          <th>对象名称</th>
-          <th>对象类型</th>
-          <th>终端地址</th>
-          <th>电表局号</th>
-          <th>测量点序号</th>
-        </tr>
-      </thead>
-      <tbody id="dataBody">
-        <!-- 增加排序功能 -->
-        <c:forEach items="${PG_QUERY_RESULT}" var="item" varStatus="status">
-          <tr>
-            <td align="center"><input type="checkbox" name="ItemID" value="<c:out value="${item.GP_ID}"/>" checked />
-            <c:if test="${item.PROTOCOL_NO == 126}">
-              <input type="hidden" name="tdID"
-                value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_ADDR}"/>" />
-            </c:if> <c:if test="${item.PROTOCOL_NO != 126}">
-              <input type="hidden" name="tdID"
-                value="<c:out value="${item.LOGICAL_ADDR}"/>_<c:out value="${item.GP_SN}"/>" />
-            </c:if></td>
-            <td align="center"><c:out value="${status.count}" /></td>
-            <td><c:out value="${item.OBJECT_NO}" /></td>
-            <td><c:out value="${item.OBJECT_NAME}" /></td>
-            <td align="center"><c:out value="${item.OBJECTTYPE}" /></td>
-            <td align="center"><c:out value="${item.LOGICAL_ADDR}" /></td>
-            <td align="center"><c:out value="${item.ASSET_NO}" /></td>
-            <td align="center"><c:out value="${item.GP_SN}" /></td>
-          </tr>
-        </c:forEach>
-      </tbody>
-    </table>
-    </div>
-  </ul>
-  </div>
-</form:form>
+<div class="electric_lcon" id="electric_Con">
+<ul class=default id=electric_Con_1>
+	<div><form:form name="/autorm/realTimeReading" modelAttribute="model">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr height="30px">
+				<td width="100" class="green" align="right">单位：</td>
+				<td width="120"><select name="orgId" style="width: 150px;">
+					<c:forEach var="item" items="${orglist}">
+						<option <c:if test="${item.orgId eq model.orgId}">selected</c:if>
+							value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
+					</c:forEach>
+				</select></td>
+				<td width="100" class="green" align="right">台区：</td>
+				<td width="150"><select name="objId" style="width: 150px;">
+					<c:set value="${model.objId}" var="tg"></c:set>
+					<c:forEach var="item" items="${tglist}">
+						<option <c:if test="${item.tgId eq model.objId}">selected</c:if>
+							value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
+					</c:forEach>
+				</select></td>
+				<td width="100" class="green" align="right">集中器地址：</td>
+				<td width="120" class="dom"><input value="${model.logicalAddr}" name="logicalAddr" /></td>
+			</tr>
+			<tr height="30px">
+				<td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
+					onclick="readDqgflData()" class="btnbg4" /> <input type="button" class="btnbg4" id="dqglData" name="dqglData"
+					value="当前功率" onclick="readDqglData()" /> <input class="btnbg4" type="button" id="dydlData" name="dydlData"
+					value="电压电流" onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData" name="otherData"
+					value="其他数据项" onclick="openOtherData()" /> <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
+				<td><input class="btnbg4" type="submit" name="query" id="query" value="查询" /></td>
+			</tr>
+		</table>
+	</form:form></div>
+	<div id="bg" style="height: 30px; text-align: center;">
+	<ul id=”datamenu_Option“ class="cb font1">
+		<li class="curr" id=datamenu_Option_0 style="cursor: pointer;">实时召测</li>
+	</ul>
+	<input type="hidden"
+					id="protocolNo" name="protocolNo" value="100" /> <input type="hidden" id="logicalAddr" name="logicalAddr"
+					value="96123456" /> <input type="hidden" id="channelType" name="channelType" value="1" /> <input type="hidden"
+					id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
+				<input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" /> <input type="hidden" id="mpSn"
+					name="mpSn" value="0" />
+	</div>
+	<div class="tableContainer"
+		style="height: expression((( document.documentElement.clientHeight ||   document.body.clientHeight) -105 ) );">
+	<e3t:table id="userTable" var="user" varStatus="userStatus" items="userTable"
+		uri="${ctx}/autorm/realTimeReading"  mode="ajax">
+		<e3t:param name="orgId" value="${model.orgId}"></e3t:param>
+		<e3t:param name="objId" value="${model.objId}"></e3t:param>
+		<e3t:param name="logicalAddr" value="${model.logicalAddr}"></e3t:param>
+		<e3t:column property="checkUserIDs" style="width:55px"
+			title="全选<input onclick='selectAll()' type='checkbox' id='checkUserIDs' />" sortable="false">
+			<input type="checkbox" name="items" value="${user.objNo}" name="checkUserID" />
+		</e3t:column>
+		<e3t:column property="objNo" title="对象编号" />
+		<e3t:column property="objName" title="对象名称" />
+		<e3t:column property="objType" title="对象类型"/>
+		<e3t:column property="logicalAddr" title="终端地址" >
+		<c:if test="${user.logicalAddr != null}">${user.logicalAddr}</c:if></e3t:column>
+		<e3t:column property="mpNo" title="电表局号" />
+		<e3t:column property="gpSn" title="测量点序号" />
+	</e3t:table></div>
+</ul>
+</div>
 <iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
 </body>
 <script type="text/javascript">
@@ -361,6 +417,7 @@ var totalNums = 0;
 
 //当前各费率电能示值
 function readDqgflData() {
+    var sysObject = "2";
     var sSelectedList = getSelectedIdString(0);
     if(sSelectedList == "") {
         alert(chooseObject);
@@ -368,63 +425,63 @@ function readDqgflData() {
     }
     excelFlag = 1;
     deleteDataitemTd();
-    if($("input[name='sysObject'][checked]").val() == "1") {        // 专变用户
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygz"/>(kWh)', 'DI_0100');    //正向有功总
+    if(sysObject == "1") {        // 专变用户
+        insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygj"/>(kWh)', 'DI_0101');    //正向有功尖
+        insertTd('正向有功尖(kWh)', 'DI_0101');    //正向有功尖
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygf"/>(kWh)', 'DI_0102');    //正向有功峰
+        insertTd('正向有功峰(kWh)', 'DI_0102');    //正向有功峰
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygp"/>(kWh)', 'DI_0103');    //正向有功平
+        insertTd('正向有功平(kWh)', 'DI_0103');    //正向有功平
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygg"/>(kWh)', 'DI_0104');    //正向有功谷
+        insertTd('正向有功谷(kWh)', 'DI_0104');    //正向有功谷
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxwgz"/>(kvarh)', 'DI_A000');  //正向无功总
+        insertTd('正向无功总', 'DI_A000');  //正向无功总
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxygz"/>(kWh)', 'DI_0200');    //反向有功总
+        insertTd('反向有功总(kWh)', 'DI_0200');    //反向有功总
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxwgz"/>(kvarh)', 'DI_A100');  //反向无功总
-
-    }
-    else if($("input[name='sysObject'][checked]").val() == "2") {   // 配变/台区
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygz"/>(kWh)', 'DI_0100');    //正向有功总
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygj"/>(kWh)', 'DI_0101');    //正向有功尖
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygf"/>(kWh)', 'DI_0102');    //正向有功峰
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygp"/>(kWh)', 'DI_0103');    //正向有功平
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygg"/>(kWh)', 'DI_0104');    //正向有功谷
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxwgz"/>(kvarh)', 'DI_A000');  //正向无功总
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxygz"/>(kWh)', 'DI_0200');    //反向有功总
-
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxwgz"/>(kvarh)', 'DI_A100');  //反向无功总
+        insertTd('反向无功总(kvarh)', 'DI_A100');  //反向无功总
 
     }
-    else if($("input[name='sysObject'][checked]").val() == "3") {   // 低压集抄
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygz"/>(kWh)', 'DI_0100');    //正向有功总
+    else if(sysObject == "2") {   // 配变/台区
+        insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygj"/>(kWh)', 'DI_0101');    //正向有功尖
+        insertTd('正向有功尖(kWh)', 'DI_0101');    //正向有功尖
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygf"/>(kWh)', 'DI_0102');    //正向有功峰
+        insertTd('正向有功峰(kWh)', 'DI_0102');    //正向有功峰
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygp"/>(kWh)', 'DI_0103');    //正向有功平
+        insertTd('正向有功平(kWh)', 'DI_0103');    //正向有功平
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygg"/>(kWh)', 'DI_0104');    //正向有功谷
+        insertTd('正向有功谷(kWh)', 'DI_0104');    //正向有功谷
+
+        insertTd('正向无功总(kvarh)', 'DI_A000');  //正向无功总
+
+        insertTd('反向有功总(kWh)', 'DI_0200');    //反向有功总
+
+        insertTd('反向无功总(kvarh)', 'DI_A100');  //反向无功总
 
     }
-    else if($("input[name='sysObject'][checked]").val() == "4") {   // 变电站
+    else if(sysObject == "3") {   // 低压集抄
+        insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygz"/>(kWh)', 'DI_0100');    //正向有功总
+        insertTd('正向有功尖(kWh)', 'DI_0101');    //正向有功尖
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxwgz"/>(kvarh)', 'DI_A000');  //正向无功总
+        insertTd('正向有功峰(kWh)', 'DI_0102');    //正向有功峰
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxygz"/>(kWh)', 'DI_0200');    //反向有功总
+        insertTd('正向有功平(kWh)', 'DI_0103');    //正向有功平
 
-        insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.fxwgz"/>(kvarh)', 'DI_A100');  //反向无功总
+        insertTd('正向有功谷(kWh)', 'DI_0104');    //正向有功谷
+
+    }
+    else if(sysObject == "4") {   // 变电站
+
+        insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
+
+        insertTd('正向无功总(kvarh)', 'DI_A000');  //正向无功总
+
+        insertTd('反向有功总(kWh)', 'DI_0200');    //反向有功总
+
+        insertTd('反向无功总(kvarh)', 'DI_A100');  //反向无功总
 
     }
     disableButton();
@@ -445,7 +502,7 @@ function readDqgflData() {
     sCommanditems += "127#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 127 - 小项
     sCommanditems += "146#1#21010002;";                                                                     // 146
     resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+    resultframe.fastReadingActionForm.sys_object.value = sysObject;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
     resultframe.fastReadingActionForm.submit();
@@ -460,11 +517,11 @@ function readDqglData() {
     }
     excelFlag=2;
     deleteDataitemTd();
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.dqzyggl"/>(kW)', 'DI_2300');  //当前总有功功率
+    insertTd('当前总有功功率(kW)', 'DI_2300');  //当前总有功功率
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.dqzwggl"/>(kW)', 'DI_2400');  //当前总无功功率
+    insertTd('当前总无功功率(kW)', 'DI_2400');  //当前总无功功率
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.dqzglys"/>', 'DI_2600');      //当前总功率因数
+    insertTd('当前总功率因数', 'DI_2600');      //当前总功率因数
 
     disableButton();
     otherDataFlag = 0 ;
@@ -472,14 +529,14 @@ function readDqglData() {
     sCommanditems += "100#1#100C0025;100#3#100C0017,100C0018;";                                             // 100
     sCommanditems += "101#1#100C0025;100#3#100C0017,100C0018;";                                             // 101
     sCommanditems += "106#1#100C0025;106#3#100C0017,100C0018;";                                             // 106
-    //sCommanditems += "122#1#2000B630,2000B640,2000B650;";                                                   // 122
+    //sCommanditems += "122#1#2000B630,2000B640,2000B650;";                                                 // 122
     sCommanditems += "123#1#2000B630,2000B640,2000B650;";                                                   // 123
     sCommanditems += "124#1#2000B630,2000B640,2000B650;";                                                   // 124
     sCommanditems += "125#1#2000B630,2000B640,2000B650;";                                                   // 125
     sCommanditems += "127#1#2000B630,2000B640,2000B650;";                                                   // 127
     sCommanditems += "146#1#21010018,21010019;";                                                            // 146
     resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+    resultframe.fastReadingActionForm.sys_object.value = 2;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
     resultframe.fastReadingActionForm.submit();
@@ -487,24 +544,24 @@ function readDqglData() {
 
 //电压电流
 function readDydlData() {
-    var sSelectedList = getSelectedIdString(0);
+    /* var sSelectedList = getSelectedIdString(0);
     if(sSelectedList == "") {
         alert(chooseObject);
         return;
-    }
+    }*/
     excelFlag=3;
-    deleteDataitemTd();
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Axdy"/>(V)', 'DI_2101');     //A相电压
+    //deleteDataitemTd();
+    //insertTd('A相电压(V)', 'DI_2101');     //A相电压
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Bxdy"/>(V)', 'DI_2102');     //B相电压
+    //insertTd('B相电压(V)', 'DI_2102');     //B相电压
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Cxdy"/>(V)', 'DI_2103');     //C相电压
+    //insertTd('C相电压(V)', 'DI_2103');     //C相电压
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Axdl"/>(A)', 'DI_2201');     //A相电流
+    //insertTd('A相电流(A)', 'DI_2201');     //A相电流
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Bxdl"/>(A)', 'DI_2202');     //B相电流
+    //insertTd('B相电流(A)', 'DI_2202');     //B相电流
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.Cxdl"/>(A)', 'DI_2203');     //C相电流
+    //insertTd('C相电流(A)', 'DI_2203');     //C相电流
 
     disableButton();
     otherDataFlag = 0 ;
@@ -512,20 +569,21 @@ function readDydlData() {
     sCommanditems += "100#1#100C0025;";                                                                     // 100
     sCommanditems += "101#1#100C0025;";                                                                     // 101
     sCommanditems += "106#1#100C0025;";                                                                     // 106
-    //sCommanditems += "122#1#2000B61F,2000B62F;";                                                            // 122 - 大项
-    //sCommanditems += "122#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
-    //sCommanditems += "123#1#2000B61F,2000B62F;";                                                            // 123 - 大项
+    //sCommanditems += "122#1#2000B61F,2000B62F;";                                                          // 122 - 大项
+    //sCommanditems += "122#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                      // 122 - 大项
+    //sCommanditems += "123#1#2000B61F,2000B62F;";                                                          // 123 - 大项
     sCommanditems += "123#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
-    //sCommanditems += "124#1#2000B61F,2000B62F;";                                                            // 124 - 大项
+    //sCommanditems += "124#1#2000B61F,2000B62F;";                                                          // 124 - 大项
     sCommanditems += "124#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
     sCommanditems += "125#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 125 - 大项
     sCommanditems += "127#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 127 - 大项
     sCommanditems += "146#1#21010020,21010021;";                                                            // 146
-    resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+setup();
+    /*resultframe.fastReadingActionForm.action.value = "send";
+    resultframe.fastReadingActionForm.sys_object.value = 2;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
-    resultframe.fastReadingActionForm.submit();
+    resultframe.fastReadingActionForm.submit();*/
 }
 
 //剩余电量（费）
@@ -537,13 +595,13 @@ function readSydlData() {
         return;
     }
     deleteDataitemTd();
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.sydlf"/>(kWh)', 'DI_BE28');    
+    insertTd('剩余电量（费）(kWh)', 'DI_BE28');    
     disableButton();
     otherDataFlag = 0 ;
     var sCommanditems = "";
     sCommanditems += "106#3#100C0023;";
     resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+    resultframe.fastReadingActionForm.sys_object.value = 2;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
     resultframe.fastReadingActionForm.submit();
@@ -558,22 +616,22 @@ function readSssjData() {
     }
     excelFlag=4;
     deleteDataitemTd();
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygz"/>(kWh)', 'DI_0100');    //正向有功总
+    insertTd('正向有功总(kWh)', 'DI_0100');    //正向有功总
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygj"/>(kWh)', 'DI_0101');    //正向有功尖
+    insertTd('正向有功尖(kWh)', 'DI_0101');    //正向有功尖
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygf"/>(kWh)', 'DI_0102');    //正向有功峰
+    insertTd('正向有功峰(kWh)', 'DI_0102');    //正向有功峰
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygp"/>(kWh)', 'DI_0103');    //正向有功平
+    insertTd('正向有功平(kWh)', 'DI_0103');    //正向有功平
 
-    insertTd('<bean:message bundle="autorm" key="autorm.realTimeReading.title.zxygg"/>(kWh)', 'DI_0104');    //正向有功谷
+    insertTd('正向有功谷(kWh)', 'DI_0104');    //正向有功谷
 
     disableButton();
     otherDataFlag = 0 ;
     var sCommanditems = "";
     sCommanditems += "126#1#20119010,20119011,20119012,20119013,20119014;";
     resultframe.fastReadingActionForm.action.value = "sendSssj";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+    resultframe.fastReadingActionForm.sys_object.value = 2;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
     resultframe.fastReadingActionForm.submit();
@@ -602,11 +660,11 @@ function readOtherData(commd,dataItemArray,date,timeStep,point,proNo){
     //alert(commd);
 
     resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = $("input[name='sysObject'][checked]").val();
+    resultframe.fastReadingActionForm.sys_object.value = 2;
     resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
     resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
     resultframe.fastReadingActionForm.points.value = points;
-    resultframe.fastReadingActionForm.submit();
+   // resultframe.fastReadingActionForm.submit();
 }
 
 //打开其他数据项
@@ -661,13 +719,14 @@ function fetchReturnResult(appIds, sFetchCount, commanditems) {
 }
 
 function insertTd(title, code) {
-    var rows = document.all.object_table.rows;
+	var head = document.all.userTable.getElementsByTagName("thead");
+    var rows = document.all.userTable.rows;
     var ids = document.all.ItemID;
     var tids = document.all.tdID;
     var th = document.createElement("th");
     th.innerHTML = title;
     rows[0].appendChild(th);
-    for(var i = 1; i < rows.length; i++) {
+    for(var i = 1; i < (rows.length -1); i++) {
         var row = rows[i];
         //一条数据
 
@@ -707,7 +766,7 @@ function viewTds(data, commanditems, fetchCount) {
     /*if(data != null){
         var result=data.split(";");
         var command=commanditems.split(",");
-        var rows = document.all.object_table.rows;
+        var rows = document.all.userTable.rows;
         var ids = document.all.ItemID;
         var tids = document.all.tdID;
         var cells = rows.item(0).cells.length;
@@ -760,7 +819,7 @@ function viewTds(data, commanditems, fetchCount) {
             }
         }
         if(fetchCount == 0 && totalNums > 0) {
-            var rows = document.all.object_table.rows;
+            var rows = document.all.userTable.rows;
             var ids = document.all.ItemID;
             var tids = document.all.tdID;
             var cells = rows.item(0).cells.length;
@@ -785,9 +844,13 @@ function insertCurData(key,value){
     }
 }
 function deleteDataitemTd() {
-    var rows = document.all.object_table.rows;
+	var form = $("#net_jcreate_e3_table_html_paramsForm_userTable [name=table]:first").rows;
+	alert(form);
+	 
+    var rows = table.attr("rows");
+    alert(rows);
     var cells = rows.item(0).cells.length;
-    for(var j = cells - 1; j > 7; j--) {
+    for(var j = cells - 1; j > 6; j--) {
         for(var i = 0; i < rows.length; i++) {
             rows[i].deleteCell(j);
         }
@@ -795,21 +858,21 @@ function deleteDataitemTd() {
 }
 
 function deleteRow(){
-    var table = document.all.object_table;
+    var table = document.all.userTable;
     table.deleteRow(-1);
     resultframe.fastReadingActionForm.isAll.value = "";
 }
 
 function notGetResult(){
     var isAll=resultframe.fastReadingActionForm.isAll.value;
-    var rows =document.all.object_table.rows;
+    var rows =document.all.userTable.rows;
     var ids=document.all.ItemID;
     var cells = rows.item(0).cells.length;
     var result="";
     var resendId; 
     var total=new Array(0,0);   
     for(var i=1;i<rows.length;i++) {
-        for(var j=8;j<cells;j++) {
+        for(var j=7;j<cells;j++) {
             if(isAll != '1') {
                 if(rows[i].cells[j].innerText == readingTitle) {
                     rows[i].cells[j].innerHTML=overTimeTitle;
@@ -829,7 +892,7 @@ function notGetResult(){
                 }
                 else {
                     //alert(rows[i].cells[j].innerText);
-                    total[j-8]+=parseFloat(rows[i].cells[j].innerText);
+                    total[j-7]+=parseFloat(rows[i].cells[j].innerText);
                 }
             }
         }

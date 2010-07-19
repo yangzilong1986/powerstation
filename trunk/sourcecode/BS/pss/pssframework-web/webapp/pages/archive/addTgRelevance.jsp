@@ -107,7 +107,6 @@ var contextPath  = '${ctx}';
         <th>计量点名称</th>
         <th>表地址</th>
         <th>采集终端</th>
-        <th>表类型</th>
         <th>运行状态</th>
         <th>操作</th>
       </tr>
@@ -117,8 +116,7 @@ var contextPath  = '${ctx}';
         <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>${mpInfo.mpName}</td>
           <td>${mpInfo.gpInfos[0].gpAddr}</td>
-          <td>${mpInfo.mpName}</td>
-          <td>${mpInfo.mpName}</td>
+          <td>${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
           <td><pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
           <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
