@@ -19,6 +19,9 @@ $(document).ready(function() {
     $("#rtVoltage").corner();
     $("#rtEc").corner();
     $("#rtPsParam").corner();
+    $("#timeSetup").corner();
+    $("#statusSetup").corner();
+    $("#paramsSetup").corner();
 });
 </script>
 </head>
@@ -126,18 +129,52 @@ $(document).ready(function() {
     <div class="datamenu_lcon" id="datamenu_Con">
       <ul class=default id=datamenu_Con_0>
         <div class="content" style="border: 1px solid #85c0b4;">
-          <div id="setupTime" style="width: 100%; height: 50; margin: 3px; background-color: #dff0f1;">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-            </table>
+          <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-290));">
+            <div id="timeSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div id="statusSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div id="paramsSetup" style="width: 100%; height: 90; margin: 3px; background-color: #dff0f1;">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </ul>
@@ -148,13 +185,22 @@ $(document).ready(function() {
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
-                    <th width="5%" class="bg01">序号</th>
+                    <th width="8%" class="bg01">序号</th>
                     <th width="30%" class="bg01">跳闸时间</th>
                     <th width="20%" class="bg01">跳闸类型</th>
                     <th width="15%" class="bg01">故障相位</th>
-                    <th width="30%" class="bg01">跳闸电参数</th>
+                    <th width="27%" class="bg01">跳闸电参数</th>
                   </tr>
                 </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
