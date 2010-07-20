@@ -23,15 +23,6 @@ function selectMenu(menuId, url) {
         url = '/commons/inmaking.jsp';
     }
     showMainTab(tabTitle, url);
-    /*if(menuId == '3001') {
-        parent.tabscontainermain.location = '<pss:path type="webapp"/>/archive/tginfo';
-    }
-    else if(menuId == '3002') {
-        parent.tabscontainermain.location = '<pss:path type="webapp"/>/eparam/termparam';
-    }
-    else {
-        parent.tabscontainermain.location = '<pss:path type="webapp"/>/commons/inmaking.jsp';
-    }*/
 }
 
 function showBar(firstLevel) {
