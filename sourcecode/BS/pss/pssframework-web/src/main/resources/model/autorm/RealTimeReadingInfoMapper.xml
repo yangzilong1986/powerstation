@@ -73,16 +73,16 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</choose>
 	</sql>
 	<select id="count" resultType="long">
-		select count(1) from g_tg tg, c_term_obj_rela re, c_terminal te, c_gp gp, c_mp mp WHERE tg.tg_id = re.obj_id AND re.obj_type =
-		'2' AND te.term_id = re.term_id AND gp.term_id = re.term_id AND gp.mp_id = mp.mp_id and gp.object_id = tg.tg_id
+		<![CDATA[select count(1) from g_tg tg, c_term_obj_rela re, c_terminal te, c_gp gp, c_mp mp WHERE tg.tg_id = re.obj_id AND re.obj_type =
+		'2' AND te.term_id = re.term_id AND gp.term_id = re.term_id AND gp.mp_id = mp.mp_id and gp.object_id = tg.tg_id]]>
 		<include refid="realTimeReadingInfoDynamicWhere" />
 	</select>
 	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
 	<select id="pageSelect" resultMap="RealTimeReadingInfoResult">
 		select
 		<include refid="realTimeReadingInfoColumns" />
-		from g_tg tg, c_term_obj_rela re, c_terminal te, c_gp gp, c_mp mp WHERE tg.tg_id = re.obj_id AND re.obj_type = '2' AND
-		te.term_id = re.term_id AND gp.term_id = re.term_id AND gp.mp_id = mp.mp_id and gp.object_id = tg.tg_id
+		<![CDATA[from g_tg tg, c_term_obj_rela re, c_terminal te, c_gp gp, c_mp mp WHERE tg.tg_id = re.obj_id AND re.obj_type = '2' AND
+		te.term_id = re.term_id AND gp.term_id = re.term_id AND gp.mp_id = mp.mp_id and gp.object_id = tg.tg_id]]>
 		<include refid="realTimeReadingInfoDynamicWhere" />
 		<if test="sortColumns != null and sortColumns.length() != 0"> ${sortColumns}</if>
 	</select>
