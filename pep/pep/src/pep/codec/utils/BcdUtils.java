@@ -340,7 +340,7 @@ public class BcdUtils {
     }
 
     private static String standardizationHexString(String str) {
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
 
         int firstTokenPosition = findFirstTokenPosition(str, 0);
         while (firstTokenPosition != -1) {
