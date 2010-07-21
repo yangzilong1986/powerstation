@@ -10,21 +10,18 @@ package org.pssframework.controller;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.pssframework.util.ConvertRegisterHelper;
 import org.pssframework.util.PageRequestFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import cn.org.rapid_framework.beanutils.BeanUtils;
@@ -32,19 +29,20 @@ import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 public class BaseSpringController extends MultiActionController {
-
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected final static String CREATED_SUCCESS = "创建成功";
+	protected final static String UPDATE_SUCCESS = "更新成功";
+	protected final static String DELETE_SUCCESS = "删除成功";
 
 	static {
-		// 注册converters
+		//注册converters
 		ConvertRegisterHelper.registerConverters();
 	}
 
-	public void copyProperties(Object target, Object source) {
+	public static void copyProperties(Object target, Object source) {
 		BeanUtils.copyProperties(target, source);
 	}
 
-	public <T> T copyProperties(Class<T> destClass, Object orig) {
+	public static <T> T copyProperties(Class<T> destClass, Object orig) {
 		return BeanUtils.copyProperties(destClass, orig);
 	}
 
@@ -53,7 +51,6 @@ public class BaseSpringController extends MultiActionController {
 	 *
 	 * @see MultiActionController#createBinder(HttpServletRequest,Object)
 	 */
-	@Override
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
 		binder.registerCustomEditor(Short.class, new CustomNumberEditor(Short.class, true));
 		binder.registerCustomEditor(Integer.class, new CustomNumberEditor(Integer.class, true));
@@ -62,15 +59,19 @@ public class BaseSpringController extends MultiActionController {
 		binder.registerCustomEditor(Double.class, new CustomNumberEditor(Double.class, true));
 		binder.registerCustomEditor(BigDecimal.class, new CustomNumberEditor(BigDecimal.class, true));
 		binder.registerCustomEditor(BigInteger.class, new CustomNumberEditor(BigInteger.class, true));
+
+		binder.registerCustomEditor(java.util.Date.class,
+				new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+
 	}
 
-	public ModelAndView toModelAndView(Page<?> page, PageRequest<?> pageRequest) {
-		return toModelAndView("", page, pageRequest);
+	public static ModelMap toModelMap(Page page, PageRequest pageRequest) {
+		return toModelMap("", page, pageRequest);
 	}
 
-	public ModelAndView toModelAndView(String tableId, Page<?> page, PageRequest<?> pageRequest) {
-		ModelAndView model = new ModelAndView();
-		saveIntoModelAndView(tableId, page, pageRequest, model);
+	public static ModelMap toModelMap(String tableId, Page page, PageRequest pageRequest) {
+		ModelMap model = new ModelMap();
+		saveIntoModelMap(tableId, page, pageRequest, model);
 		return model;
 	}
 
@@ -78,41 +79,19 @@ public class BaseSpringController extends MultiActionController {
 	 * 用于一个页面有多个extremeTable是使用
 	 * @param tableId 等于extremeTable的tableId属性
 	 */
-	public void saveIntoModelAndView(String tableId, Page<?> page, PageRequest<?> pageRequest, ModelAndView model) {
+	public static void saveIntoModelMap(String tableId, Page page, PageRequest pageRequest, ModelMap model) {
 		Assert.notNull(tableId, "tableId must be not null");
 		Assert.notNull(page, "page must be not null");
 
-		model.addObject(tableId + "page", page);
-		model.addObject(tableId + "totalRows", new Integer(page.getTotalCount()));
-		model.addObject(tableId + "pageRequest", pageRequest);
+		model.addAttribute(tableId + "page", page);
+		model.addAttribute(tableId + "totalRows", new Integer(page.getTotalCount()));
+		model.addAttribute(tableId + "pageRequest", pageRequest);
+		model.addAttribute(tableId + "query", pageRequest);
 	}
 
-	public PageRequest newPageRequest(HttpServletRequest request, String defaultSortColumns) {
-		return newPageRequest(request, defaultSortColumns, PageRequestFactory.DEFAULT_PAGE_SIZE);
-	}
-
-	public PageRequest newPageRequest(HttpServletRequest request, String defaultSortColumns, int defaultPageSize) {
-		return PageRequestFactory.newPageRequest(request, defaultSortColumns, defaultPageSize);
-	}
-
-	/**
-	 * 保存消息在request中,messages.jsp会取出来显示此消息
-	 */
-	protected static void saveMessage(HttpServletRequest request, String message) {
-		if (StringUtils.isNotBlank(message)) {
-			List list = getOrCreateRequestAttribute(request, "springMessages", ArrayList.class);
-			list.add(message);
-		}
-	}
-
-	/**
-	 * 保存错误消息在request中,messages.jsp会取出来显示此消息
-	 */
-	protected static void saveError(HttpServletRequest request, String errorMsg) {
-		if (StringUtils.isNotBlank(errorMsg)) {
-			List list = getOrCreateRequestAttribute(request, "springErrors", ArrayList.class);
-			list.add(errorMsg);
-		}
+	public static PageRequest bindPageRequest(HttpServletRequest request, PageRequest pageRequest,
+			String defaultSortColumns) {
+		return PageRequestFactory.bindPageRequest(pageRequest, request, defaultSortColumns);
 	}
 
 	public static <T> T getOrCreateRequestAttribute(HttpServletRequest request, String key, Class<T> clazz) {
