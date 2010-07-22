@@ -247,15 +247,6 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 
 		Map parameterObject = PropertyUtils.describe(pageRequest);
 		filters.putAll(parameterObject);
-		
-		//混合两个filters为一个filters,MapAndObject.get()方法将在两个对象取值,Map如果取值为null,则再在Bean中取值
-		if (pageRequest.getFilters() instanceof Map) {
-			filters.putAll((Map) pageRequest.getFilters());
-		} else {
-			Map parameterObject = BeanUtils.describe(pageRequest.getFilters());
-			filters.putAll(parameterObject);
-		}
-
 		return filters;
 	}
 
