@@ -4,10 +4,22 @@
  */
 package pep.codec.utils;
 
-import java.io.*;
-import org.exolab.castor.mapping.MappingException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.net.URI;
+import java.net.URL;
+
 import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.xml.*;
+import org.exolab.castor.mapping.MappingException;
+import org.exolab.castor.xml.MarshalException;
+import org.exolab.castor.xml.Marshaller;
+import org.exolab.castor.xml.Unmarshaller;
+import org.exolab.castor.xml.ValidationException;
+
 import pep.bp.realinterface.conf.ProtocolCommandItem;
 import pep.bp.realinterface.conf.ProtocolCommandItems;
 import pep.bp.realinterface.conf.ProtocolDataItem;
@@ -22,6 +34,26 @@ import pep.common.exception.CastorException;
 public class CastorUtil {
 
     public static Object unmarshal(String mappingResource, String dataResource) {
+        try {
+            Mapping map = new Mapping();
+            map.loadMapping(mappingResource);
+            File file = new File(dataResource);
+            Reader reader = new FileReader(file);
+            Unmarshaller unmarshaller = new Unmarshaller(map);
+            try {
+                return unmarshaller.unmarshal(reader);
+            } finally {
+                reader.close();
+            }
+        } catch (Exception ex) {
+            String msg = "Error to unmarshal from xml ["
+                    + "mappingResource: " + mappingResource
+                    + ", dataResource: " + dataResource + "]";
+            throw new CastorException(msg, ex);
+        }
+    }
+    
+    public static Object unmarshal(URL mappingResource, URI dataResource) {
         try {
             Mapping map = new Mapping();
             map.loadMapping(mappingResource);
