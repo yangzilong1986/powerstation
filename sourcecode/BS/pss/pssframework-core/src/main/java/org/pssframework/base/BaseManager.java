@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public abstract class BaseManager<E, PK extends Serializable> {
 
-	protected Logger log = LoggerFactory.getLogger(getClass());
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	//(getClass());
 
