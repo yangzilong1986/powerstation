@@ -42,6 +42,16 @@ public class RealTimeProxy376 implements ICollectInterface {
     private RTTaskService taskService;
     private Converter converter;
 
+
+        public void setTaskService(RTTaskService rtTaskService){
+    	this.taskService = rtTaskService;
+    }
+
+    public void setConverter(Converter converter){
+    	this.converter = converter;
+    }
+
+
     private int getID() {
         return taskService.getSequnce();
     }
@@ -104,24 +114,31 @@ public class RealTimeProxy376 implements ICollectInterface {
                 packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
                 packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
                 packet.getDataBuffer().put(obj.getWaitforPacket());//透明转发接收等待报文超时时间
-                packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
-                packet.getDataBuffer().putBin(obj.getTransmitMsg().length(), 2);//透明转发内容字节数k
+                packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间             
 
                 //645规约组帧
                 Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
                 pack.setControlCode(true, false, false, obj.getFuncode());
                 Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+                Map<String, String> dataItemMap = commandItem.getDatacellParam();
                 Iterator iterator = DataItemMap_Config.keySet().iterator();
                 while (iterator.hasNext()) {
                     String DataItemCode = (String) iterator.next();
                     ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
                     String DataItemValue = dataItem.getDefaultValue();
+                    if (dataItemMap.containsKey(DataItemCode)) {
+                        DataItemValue = dataItemMap.get(DataItemCode);
+                    }
                     String Format =  dataItem.getFormat();
                     String IsGroupEnd = dataItem.getIsGroupEnd();
                     int Length = dataItem.getLength();
                     int bitnumber = dataItem.getBitNumber();
                     converter.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                 }
+
+                packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
+                packet.getDataBuffer().put(pack.getValue());
+
                 packet.setAuthorize(new Authorize());
                 packet.setTpv(new TimeProtectValue());//时间标签
                 packetList.add(packet);
@@ -309,11 +326,11 @@ public class RealTimeProxy376 implements ICollectInterface {
 //            packet.getDataBuffer().putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
 //        }
 //    }
-    public RealTimeProxy376() {
-        ApplicationContext cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
-        taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
-        converter = new Converter();
-    }
+//    public RealTimeProxy376() {
+//        ApplicationContext cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
+//        taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
+//        converter = new Converter();
+//    }
 
     /**
      * 参数设置
