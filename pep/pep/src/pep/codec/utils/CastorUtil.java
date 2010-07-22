@@ -4,22 +4,12 @@
  */
 package pep.codec.utils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.net.URI;
 import java.net.URL;
-
-import org.exolab.castor.mapping.Mapping;
 import org.exolab.castor.mapping.MappingException;
-import org.exolab.castor.xml.MarshalException;
-import org.exolab.castor.xml.Marshaller;
-import org.exolab.castor.xml.Unmarshaller;
-import org.exolab.castor.xml.ValidationException;
-
+import org.exolab.castor.mapping.Mapping;
+import org.exolab.castor.xml.*;
 import pep.bp.realinterface.conf.ProtocolCommandItem;
 import pep.bp.realinterface.conf.ProtocolCommandItems;
 import pep.bp.realinterface.conf.ProtocolDataItem;
@@ -52,7 +42,7 @@ public class CastorUtil {
             throw new CastorException(msg, ex);
         }
     }
-    
+
     public static Object unmarshal(URL mappingResource, URI dataResource) {
         try {
             Mapping map = new Mapping();
@@ -333,23 +323,24 @@ public class CastorUtil {
         CommandItem31.AddDataItem(new ProtocolDataItem("0100", 5, "A14", 0,"正向有功总电能示值",""));
 
 
-        ProtocolCommandItem CommandItem32 = new ProtocolCommandItem("8000B611",new ProtocolDataItem("B611", 2, "BCD_INT", 0,"当前B相电压",""));
-        ProtocolCommandItem CommandItem33 = new ProtocolCommandItem("8000B612",new ProtocolDataItem("B612", 2, "BCD_INT", 0,"当前B相电压",""));
-        ProtocolCommandItem CommandItem34 = new ProtocolCommandItem("8000B613",new ProtocolDataItem("B613", 2, "BCD_INT", 0,"当前C相电压",""));
-        ProtocolCommandItem CommandItem35 = new ProtocolCommandItem("8000B621",new ProtocolDataItem("B621", 2, "BCD_INT", 0,"当前A相电流",""));
-        ProtocolCommandItem CommandItem36 = new ProtocolCommandItem("8000B622",new ProtocolDataItem("B622", 2, "BCD_INT", 0,"当前B相电流",""));
-        ProtocolCommandItem CommandItem37 = new ProtocolCommandItem("8000B623",new ProtocolDataItem("B623", 2, "BCD_INT", 0,"当前C相电流",""));
-        ProtocolCommandItem CommandItem38 = new ProtocolCommandItem("8000B660",new ProtocolDataItem("B660", 2, "BCD_INT", 0,"当前剩余电流",""));
+        //漏保数据项
+        ProtocolCommandItem CommandItem32 = new ProtocolCommandItem("8000B611",new ProtocolDataItem("B611", 2, "A8", 0,"当前A相电压",""));
+        ProtocolCommandItem CommandItem33 = new ProtocolCommandItem("8000B612",new ProtocolDataItem("B612", 2, "A8", 0,"当前B相电压",""));
+        ProtocolCommandItem CommandItem34 = new ProtocolCommandItem("8000B613",new ProtocolDataItem("B613", 2, "A8", 0,"当前C相电压",""));
+        ProtocolCommandItem CommandItem35 = new ProtocolCommandItem("8000B621",new ProtocolDataItem("B621", 2, "A8", 0,"当前A相电流",""));
+        ProtocolCommandItem CommandItem36 = new ProtocolCommandItem("8000B622",new ProtocolDataItem("B622", 2, "A8", 0,"当前B相电流",""));
+        ProtocolCommandItem CommandItem37 = new ProtocolCommandItem("8000B623",new ProtocolDataItem("B623", 2, "A8", 0,"当前C相电流",""));
+        ProtocolCommandItem CommandItem38 = new ProtocolCommandItem("8000B660",new ProtocolDataItem("B660", 2, "A8", 0,"当前剩余电流",""));
 
         ProtocolCommandItem CommandItem39 = new ProtocolCommandItem();
         CommandItem39.setCommandCode("8000B66F");
-        CommandItem39.AddDataItem(new ProtocolDataItem("B611", 2, "BCD_INT", 0,"当前A相电压",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B612", 2, "BCD_INT", 0,"当前B相电压",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B613", 2, "BCD_INT", 0,"当前C相电压",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B621", 2, "BCD_INT", 0,"当前A相电流",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B622", 2, "BCD_INT", 0,"当前B相电流",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B623", 2, "BCD_INT", 0,"当前C相电流",""));
-        CommandItem39.AddDataItem(new ProtocolDataItem("B660", 2, "BCD_INT", 0,"当前剩余电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B611", 2, "A8", 0,"当前A相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B612", 2, "A8", 0,"当前B相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B613", 2, "A8", 0,"当前C相电压",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B621", 2, "A8", 0,"当前A相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B622", 2, "A8", 0,"当前B相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B623", 2, "A8", 0,"当前C相电流",""));
+        CommandItem39.AddDataItem(new ProtocolDataItem("B660", 2, "A8", 0,"当前剩余电流",""));
 
         ProtocolCommandItem CommandItem40 = new ProtocolCommandItem("8000C012",new ProtocolDataItem("C012", 2, "DATE_LOUBAO", 0,"漏电保护装置校时",""));
 
@@ -359,22 +350,203 @@ public class CastorUtil {
         CommandItem41.AddDataItem(new ProtocolDataItem("C04002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
         CommandItem41.AddDataItem(new ProtocolDataItem("C04003", 1, "GROUP_BS8", 2,"相位","","0"));
         CommandItem41.AddDataItem(new ProtocolDataItem("C04004", 1, "GROUP_BS8", 4,"动作类型","","1"));
-        CommandItem41.AddDataItem(new ProtocolDataItem("C04005", 2, "BCD_INT", 4,"动作值",""));
-        CommandItem41.AddDataItem(new ProtocolDataItem("C04006", 4, "DATE_LOUBAO", 4,"动作时间",""));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04005", 2, "A8", 4,"动作值",""));
+        CommandItem41.AddDataItem(new ProtocolDataItem("C04006", 4, "A1", 4,"动作时间",""));
 
-        ProtocolCommandItem CommandItem42 = new ProtocolCommandItem("8000C041",new ProtocolDataItem("C041", 2, "BCD_INT", 0,"负载电流动作档位",""));
-        ProtocolCommandItem CommandItem43 = new ProtocolCommandItem("8000C042",new ProtocolDataItem("C042", 2, "BCD_INT", 0,"剩余电流动作档位",""));
-        ProtocolCommandItem CommandItem44 = new ProtocolCommandItem("8000C043",new ProtocolDataItem("C043", 2, "BCD_INT", 0,"剩余电流动作延时档位",""));
-        ProtocolCommandItem CommandItem45 = new ProtocolCommandItem("8000C044",new ProtocolDataItem("C044", 2, "BCD_INT", 0,"开关功能启用设定字",""));
-        ProtocolCommandItem CommandItem46 = new ProtocolCommandItem("8000C045",new ProtocolDataItem("C045", 2, "BCD_INT", 0,"产品类ID",""));
+        ProtocolCommandItem CommandItem42 = new ProtocolCommandItem("8000C041",new ProtocolDataItem("C041", 2, "A8", 0,"负载电流动作档位",""));
+        ProtocolCommandItem CommandItem43 = new ProtocolCommandItem("8000C042",new ProtocolDataItem("C042", 2, "A8", 0,"剩余电流动作档位",""));
+        ProtocolCommandItem CommandItem44 = new ProtocolCommandItem("8000C043",new ProtocolDataItem("C043", 2, "A8", 0,"剩余电流动作延时档位",""));
+        ProtocolCommandItem CommandItem45 = new ProtocolCommandItem("8000C044",new ProtocolDataItem("C044", 2, "A8", 0,"开关功能启用设定字",""));
+        ProtocolCommandItem CommandItem46 = new ProtocolCommandItem("8000C045",new ProtocolDataItem("C045", 2, "A8", 0,"产品类ID",""));
 
         ProtocolCommandItem CommandItem47 = new ProtocolCommandItem();
         CommandItem47.setCommandCode("8000C04F");
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C041", 2, "BCD_INT", 0,"负载电流动作档位",""));
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C042", 2, "BCD_INT", 0,"剩余电流动作档位",""));
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C043", 2, "BCD_INT", 0,"剩余电流动作延时档位",""));
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C044", 2, "BCD_INT", 0,"开关功能启用设定字",""));
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C045", 2, "BCD_INT", 0,"产品类ID",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C041", 2, "A8", 0,"负载电流动作档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C042", 2, "A8", 0,"剩余电流动作档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C043", 2, "A8", 0,"剩余电流动作延时档位",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C044", 2, "A8", 0,"开关功能启用设定字",""));
+        CommandItem47.AddDataItem(new ProtocolDataItem("8000C045", 2, "A8", 0,"产品类ID",""));
+
+        //最近一次跳闸类型动作值及时间
+        ProtocolCommandItem CommandItem48 = new ProtocolCommandItem();
+        CommandItem48.setCommandCode("8000E510");
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51001", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51003", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51004", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51005", 2, "A8", 4,"动作值",""));
+        CommandItem48.AddDataItem(new ProtocolDataItem("8000E51006", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem49 = new ProtocolCommandItem();
+        CommandItem49.setCommandCode("8000E511");
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51101", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51102", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51103", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51104", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51105", 2, "A8", 4,"动作值",""));
+        CommandItem49.AddDataItem(new ProtocolDataItem("8000E51106", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem50 = new ProtocolCommandItem();
+        CommandItem50.setCommandCode("8000E512");
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51201", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51202", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51203", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51204", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51205", 2, "A8", 4,"动作值",""));
+        CommandItem50.AddDataItem(new ProtocolDataItem("8000E51206", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem51 = new ProtocolCommandItem();
+        CommandItem51.setCommandCode("8000E513");
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51301", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51003", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51004", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51005", 2, "A8", 4,"动作值",""));
+        CommandItem51.AddDataItem(new ProtocolDataItem("8000E51006", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem52 = new ProtocolCommandItem();
+        CommandItem52.setCommandCode("8000E514");
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51401", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51402", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51403", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51404", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51405", 2, "A8", 4,"动作值",""));
+        CommandItem52.AddDataItem(new ProtocolDataItem("8000E51406", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem53 = new ProtocolCommandItem();
+        CommandItem53.setCommandCode("8000E515");
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51501", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51502", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51503", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51504", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51505", 2, "A8", 4,"动作值",""));
+        CommandItem53.AddDataItem(new ProtocolDataItem("8000E51506", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem54 = new ProtocolCommandItem();
+        CommandItem54.setCommandCode("8000E516");
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51601", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51602", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51603", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51604", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51605", 2, "A8", 4,"动作值",""));
+        CommandItem54.AddDataItem(new ProtocolDataItem("8000E51606", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem55 = new ProtocolCommandItem();
+        CommandItem55.setCommandCode("8000E517");
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51701", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51702", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51703", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51704", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51705", 2, "A8", 4,"动作值",""));
+        CommandItem55.AddDataItem(new ProtocolDataItem("8000E51706", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem56 = new ProtocolCommandItem();
+        CommandItem56.setCommandCode("8000E518");
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51801", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51802", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51803", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51804", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51805", 2, "A8", 4,"动作值",""));
+        CommandItem56.AddDataItem(new ProtocolDataItem("8000E51806", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem57 = new ProtocolCommandItem();
+        CommandItem57.setCommandCode("8000E519");
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51901", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51902", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51903", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51904", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51905", 2, "A8", 4,"动作值",""));
+        CommandItem57.AddDataItem(new ProtocolDataItem("8000E51906", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem58 = new ProtocolCommandItem();
+        CommandItem58.setCommandCode("8000E51A");
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A01", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A02", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A04", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A05", 2, "A8", 4,"动作值",""));
+        CommandItem58.AddDataItem(new ProtocolDataItem("8000E51A06", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem59 = new ProtocolCommandItem();
+        CommandItem59.setCommandCode("8000E51B");
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B01", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B02", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B04", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B05", 2, "A8", 4,"动作值",""));
+        CommandItem59.AddDataItem(new ProtocolDataItem("8000E51B06", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem60 = new ProtocolCommandItem();
+        CommandItem60.setCommandCode("8000E51C");
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C01", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C02", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C04", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C05", 2, "A8", 4,"动作值",""));
+        CommandItem60.AddDataItem(new ProtocolDataItem("8000E51C06", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem61 = new ProtocolCommandItem();
+        CommandItem61.setCommandCode("8000E51D");
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D01", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D02", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D04", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D05", 2, "A8", 4,"动作值",""));
+        CommandItem61.AddDataItem(new ProtocolDataItem("8000E51D06", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem62 = new ProtocolCommandItem();
+        CommandItem62.setCommandCode("8000E51E");
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E01", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E02", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E04", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E05", 2, "A8", 4,"动作值",""));
+        CommandItem62.AddDataItem(new ProtocolDataItem("8000E51E06", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem63 = new ProtocolCommandItem();
+        CommandItem63.setCommandCode("8000E520");
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52001", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52002", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52003", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52004", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52005", 2, "A8", 4,"动作值",""));
+        CommandItem63.AddDataItem(new ProtocolDataItem("8000E52006", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem64 = new ProtocolCommandItem();
+        CommandItem64.setCommandCode("8000E521");
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52101", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52102", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52103", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52104", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52105", 2, "A8", 4,"动作值",""));
+        CommandItem64.AddDataItem(new ProtocolDataItem("8000E52106", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem65 = new ProtocolCommandItem();
+        CommandItem65.setCommandCode("8000E522");
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52201", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52202", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52203", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52204", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52205", 2, "A8", 4,"动作值",""));
+        CommandItem65.AddDataItem(new ProtocolDataItem("8000E52206", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem66 = new ProtocolCommandItem();
+        CommandItem66.setCommandCode("8000E523");
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52301", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52302", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52303", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52304", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52305", 2, "A8", 4,"动作值",""));
+        CommandItem66.AddDataItem(new ProtocolDataItem("8000E52306", 4, "A1", 4,"动作时间",""));
+
+        ProtocolCommandItem CommandItem67 = new ProtocolCommandItem();
+        CommandItem67.setCommandCode("8000E524");
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52401", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52402", 1, "GROUP_BS8", 1,"锁死状态","","0"));
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52403", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52404", 1, "GROUP_BS8", 4,"动作类型","","1"));
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52405", 2, "A8", 4,"动作值",""));
+        CommandItem67.AddDataItem(new ProtocolDataItem("8000E52406", 4, "A1", 4,"动作时间",""));
 
         CommandItems.AddCommandItem(CommandItem1);
         CommandItems.AddCommandItem(CommandItem2);
@@ -420,6 +592,27 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem45);
         CommandItems.AddCommandItem(CommandItem46);
         CommandItems.AddCommandItem(CommandItem47);
+
+         CommandItems.AddCommandItem(CommandItem48);
+        CommandItems.AddCommandItem(CommandItem49);
+        CommandItems.AddCommandItem(CommandItem50);
+        CommandItems.AddCommandItem(CommandItem51);
+        CommandItems.AddCommandItem(CommandItem52);
+        CommandItems.AddCommandItem(CommandItem53);
+        CommandItems.AddCommandItem(CommandItem54);
+        CommandItems.AddCommandItem(CommandItem55);
+        CommandItems.AddCommandItem(CommandItem56);
+        CommandItems.AddCommandItem(CommandItem57);
+        CommandItems.AddCommandItem(CommandItem58);
+        CommandItems.AddCommandItem(CommandItem59);
+        CommandItems.AddCommandItem(CommandItem60);
+        CommandItems.AddCommandItem(CommandItem61);
+        CommandItems.AddCommandItem(CommandItem62);
+        CommandItems.AddCommandItem(CommandItem63);
+        CommandItems.AddCommandItem(CommandItem64);
+        CommandItems.AddCommandItem(CommandItem65);
+        CommandItems.AddCommandItem(CommandItem66);
+        CommandItems.AddCommandItem(CommandItem67);
         try {
 // write it out as XML
             Mapping map = new Mapping();
