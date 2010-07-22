@@ -19,13 +19,13 @@ import static org.junit.Assert.*;
  * @author Thinkpad
  */
 public class RealTimeTaskProcessorTest {
-    private static RealTimeTaskProcessor processor;
+    private static RealTimeSender processor;
     public RealTimeTaskProcessorTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        processor = new RealTimeTaskProcessor(new PepGbCommunicator());
+        processor = new RealTimeSender(new PepGbCommunicator());
     }
 
     @AfterClass
