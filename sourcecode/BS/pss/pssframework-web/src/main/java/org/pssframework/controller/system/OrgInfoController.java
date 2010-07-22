@@ -30,7 +30,7 @@ public class OrgInfoController extends BaseRestSpringController<OrgInfo, Long> {
 		this.orgInfoManager = manager;
 	}
 
-	@Override
+
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, OrgInfo model) {
 
 		Map fiterMap = new HashMap();

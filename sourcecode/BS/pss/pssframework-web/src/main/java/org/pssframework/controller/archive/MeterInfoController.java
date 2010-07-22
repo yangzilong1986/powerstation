@@ -14,6 +14,8 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +30,10 @@ import org.pssframework.service.archive.MeterInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,13 +55,16 @@ public class MeterInfoController extends BaseRestSpringController<MeterInfo, jav
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MeterInfo model) {
 
 		return new ModelAndView();
 	}
 
-	@Override
+	/** binder用于bean属性的设置 */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+	}
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
 			throws Exception {
 		boolean isSucc = true;
@@ -75,7 +83,6 @@ public class MeterInfoController extends BaseRestSpringController<MeterInfo, jav
 				.addObject("meterId", meterId);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MeterInfo model)
 			throws Exception {

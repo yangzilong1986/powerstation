@@ -27,6 +27,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TranInfo;
@@ -37,11 +38,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import cn.org.rapid_framework.web.scope.Flash;
 
 /**
  * @author Administrator 变压器信息
@@ -54,13 +60,10 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 	private static final String VIEW = "/archive/addTransformer";
 
-	@Override
+	/** binder用于bean属性的设置 */
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-		super.initBinder(request, binder);
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 	}
 
 	@Autowired
@@ -69,7 +72,8 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	@Override
+	/** 列表 */
+	@RequestMapping
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
 
 		ModelAndView result = new ModelAndView();
@@ -77,80 +81,85 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		return result;
 	}
 
-	@Override
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TranInfo model)
-			throws Exception {
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap model, @Valid TranInfo tranInfo, BindingResult errors, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		try {
-			model.setPubPrivFlag("0");
-			this.tranInfoManager.saveOrUpdate(model);
+			tranInfo.setPubPrivFlag("0");
+			this.tranInfoManager.saveOrUpdate(tranInfo);
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			this.logger.error(e.getMessage());
 			msg = e.getMessage();
-
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+		return null;
 	}
 
-	@Override
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap model, @PathVariable Long id, @Valid TranInfo tranInfo, BindingResult errors,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			TranInfo tranInfo = this.tranInfoManager.getById(id);
-			this.bind(request, tranInfo);
+			//TranInfo tranInfo = this.tranInfoManager.getById(id);
+			//this.bind(request, tranInfo);
 			this.tranInfoManager.saveOrUpdate(tranInfo);
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			this.logger.error(e.getMessage());
 			msg = MSG_UPDATE_FAIL;
-
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc);
+
+		model.addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return null;
 	}
 
-	@Override
-	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+	/** 显示 */
+	@RequestMapping(value = "/{id}")
+	public String show(ModelMap model, @PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ModelAndView result = this.getCommonModelAndView();
+		model = this.getCommonModelMap();
 
-		result.addObject("tranInfo", this.tranInfoManager.getById(id));
+		model.addAttribute("tranInfo", this.tranInfoManager.getById(id));
 
-		result.setViewName(VIEW);
+		model.addAttribute(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
 
-		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);;
-
-		return result;
+		return VIEW;
 	}
 
-	@Override
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+	/** 编辑 */
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		ModelAndView result = this.getCommonModelAndView();
+		result = this.getCommonModelMap();
 
-		result.addObject("tranInfo", this.tranInfoManager.getById(id));
+		result.addAttribute("tranInfo", this.tranInfoManager.getById(id));
 
-		result.setViewName(VIEW);
+		result.addAttribute(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
-
-		return result;
+		return VIEW;
 	}
 
-	@Override
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TranInfo model) {
-		ModelAndView result = this.getCommonModelAndView();
-		result.addObject("tranInfo", model);
-		result.setViewName(VIEW);
-		result.addObject(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
-		return result;
+	/** 进入新增 */
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap result, HttpServletRequest request, HttpServletResponse response, TranInfo model) {
+		result = this.getCommonModelMap();
+		result.addAttribute("tranInfo", model);
+		result.addAttribute(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -161,48 +170,51 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	}
 
 	@SuppressWarnings("unchecked")
-	private ModelAndView getCommonModelAndView() {
-		ModelAndView result = new ModelAndView();
+	private ModelMap getCommonModelMap() {
+		ModelMap result = new ModelMap();
 
 		Map mapRequest = new HashMap();
 
 		mapRequest.put("codecate", CODE_TRAN_CODE);
 
-		result.addObject("typelist", this.getOptionList(mapRequest));
+		result.addAttribute("typelist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_TRAN_STATUS);
 
-		result.addObject("statuslist", this.getOptionList(mapRequest));
+		result.addAttribute("statuslist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_VOLT_GRADE);
 
-		result.addObject("voltlist", this.getOptionList(mapRequest));
+		result.addAttribute("voltlist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_RATED_EC);
 
-		result.addObject("ratedlist", this.getOptionList(mapRequest));
+		result.addAttribute("ratedlist", this.getOptionList(mapRequest));
 
 		return result;
 	}
 
-	@Override
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap model, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
-		ModelAndView modelAndView = new ModelAndView();
 		try {
 			this.tranInfoManager.removeById(id);
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (DataAccessException e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
-		modelAndView.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
-		return modelAndView;
+
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return null;
 	}
 }

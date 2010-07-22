@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/psmanage/rmttpsw")
 public class RemoteTpSwController extends BaseRestSpringController<PsInfo, Long> {
-    @Override
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PsInfo model) {
         ModelAndView result = new ModelAndView();
         result.addObject("psInfo", model);
@@ -25,7 +24,6 @@ public class RemoteTpSwController extends BaseRestSpringController<PsInfo, Long>
         return result;
     }
 
-    @Override
     public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         PsInfo psInfo = new PsInfo();

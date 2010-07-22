@@ -13,51 +13,16 @@ import org.pssframework.base.BaseEntity;
  */
 public class RealTimeReadingInfo extends BaseEntity {
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
 	private static final long serialVersionUID = -2589564770513599171L;
+
+	//测量点id
+	private Long gpId;
 
 	// 部门
 	private Long orgId;
 
 	// 对象Id
 	private Long objId;
-
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
-	}
-
-	/**
-	 * @param orgId the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
-	/**
-	 * @return the objId
-	 */
-	public Long getObjId() {
-		return objId;
-	}
-
-	/**
-	 * @param objId the objId to set
-	 */
-	public void setObjId(Long objId) {
-		this.objId = objId;
-	}
 
 	// 对象编号
 	private String objNo;
@@ -77,46 +42,22 @@ public class RealTimeReadingInfo extends BaseEntity {
 	// 测量点序号
 	private Long gpSn;
 
-	/**
-	 * @return the objNo
-	 */
-	public String getObjNo() {
-		return objNo;
+	public Long getGpId() {
+		return gpId;
 	}
 
 	/**
-	 * @param objNo the objNo to set
+	 * @return the gpSn
 	 */
-	public void setObjNo(String objNo) {
-		this.objNo = objNo;
+	public Long getGpSn() {
+		return gpSn;
 	}
 
 	/**
-	 * @return the objName
+	 * @return the logicalAddr
 	 */
-	public String getObjName() {
-		return objName;
-	}
-
-	/**
-	 * @param objName the objName to set
-	 */
-	public void setObjName(String objName) {
-		this.objName = objName;
-	}
-
-	/**
-	 * @return the objType
-	 */
-	public String getObjType() {
-		return objType;
-	}
-
-	/**
-	 * @param objType the objType to set
-	 */
-	public void setObjType(String objType) {
-		this.objType = objType;
+	public String getLogicalAddr() {
+		return logicalAddr;
 	}
 
 	/**
@@ -127,17 +68,47 @@ public class RealTimeReadingInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param meterNo the meterNo to set
+	 * @return the objId
 	 */
-	public void setMpNo(String mpNo) {
-		this.mpNo = mpNo;
+	public Long getObjId() {
+		return objId;
 	}
 
 	/**
-	 * @return the gpSn
+	 * @return the objName
 	 */
-	public Long getGpSn() {
-		return gpSn;
+	public String getObjName() {
+		return objName;
+	}
+
+	/**
+	 * @return the objNo
+	 */
+	public String getObjNo() {
+		return objNo;
+	}
+
+	/**
+	 * @return the objType
+	 */
+	public String getObjType() {
+		return objType;
+	}
+
+	/**
+	 * @return the orgId
+	 */
+	public Long getOrgId() {
+		return orgId;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	public void setGpId(Long gpId) {
+		this.gpId = gpId;
 	}
 
 	/**
@@ -155,10 +126,50 @@ public class RealTimeReadingInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the logicalAddr
+	 * @param meterNo the meterNo to set
 	 */
-	public String getLogicalAddr() {
-		return logicalAddr;
+	public void setMpNo(String mpNo) {
+		this.mpNo = mpNo;
+	}
+
+	/**
+	 * @param objId the objId to set
+	 */
+	public void setObjId(Long objId) {
+		this.objId = objId;
+	}
+
+	/**
+	 * @param objName the objName to set
+	 */
+	public void setObjName(String objName) {
+		this.objName = objName;
+	}
+
+	/**
+	 * @param objNo the objNo to set
+	 */
+	public void setObjNo(String objNo) {
+		this.objNo = objNo;
+	}
+
+	/**
+	 * @param objType the objType to set
+	 */
+	public void setObjType(String objType) {
+		this.objType = objType;
+	}
+
+	/**
+	 * @param orgId the orgId to set
+	 */
+	public void setOrgId(Long orgId) {
+		this.orgId = orgId;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

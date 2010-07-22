@@ -13,6 +13,9 @@ import org.pssframework.model.archive.GpInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
+
 /**
  * @author Administrator
  * 
@@ -33,4 +36,9 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
         // TODO Auto-generated method stub
         return gpInfoDao.findByPageRequest(mapRequest);
     }
+
+	public Page findPage(PageRequest query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

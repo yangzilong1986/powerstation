@@ -12,8 +12,10 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,6 +24,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.MpInfo;
@@ -37,9 +40,15 @@ import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -70,7 +79,14 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private MpInfoManger mpInfoManger;
 
-	@Override
+	/** binder用于bean属性的设置 */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+	}
+
+	/** 列表 */
+	@RequestMapping
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
 
 		Long tgid = 0L;
@@ -127,7 +143,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
 		this.logger.debug("tg.{}", CONTROLLER_METHOD_TYPE_NEW);
 
@@ -150,7 +165,6 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return result;
 	}
 
-	@Override
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		this.logger.debug("tg.{},{}", "delete", id);
 		boolean isSucc = true;
@@ -166,11 +180,9 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			msg = e.getMessage();
 
 		}
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
-	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
 		this.logger.debug("tg.{}", "create");
 		boolean isSucc = true;
@@ -193,89 +205,83 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg).addObject("tgId", tgId);
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg)
+				.addObject("tgId", tgId);
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 编辑 */
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap model, @PathVariable Long id) throws Exception {
 		this.logger.debug("tg.{},{}", "edit", id);
-
-		ModelAndView result = new ModelAndView();
 
 		TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
 
-		result.addObject("tginfo", tginfo);
+		model.addAttribute("tginfo", tginfo);
 
-		Map mapRequest = new HashMap();
+		Map<String, Object> mapRequest = new HashMap<String, Object>();
 
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", id);
 
-		this.CommonPart(result, mapRequest);
+		this.CommonPart(model, mapRequest);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		result.setViewName(TgInfoController.VIEW);
-		return result;
+		return VIEW;
 	}
 
-	@Override
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-
-		this.logger.debug("tg.{},{}", "update", id);
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap model, @PathVariable Long id, @Valid TgInfo tginfo, BindingResult errors,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
+		if (errors.hasErrors()) {
+			model.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, MSG_UPDATE_FAIL);
+			return "/archive/tginfo/" + id + "/edit";
+		}
+		this.logger.debug("tg.{},{}", "update", id);
+
 		try {
-			TgInfo tginfo = this.tgInfoManager.getById(id);
+			//TgInfo tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
-			this.bind(request, tginfo);
+			//this.bind(request, tginfo);
 			this.tgInfoManager.update(tginfo);
 		} catch (Exception e) {
 			this.logger.info(e.getLocalizedMessage());
 			isSucc = false;
 			msg = e.getMessage();
 		}
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg);
+		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 显示 */
+	@RequestMapping(value = "/{id}")
+	public String show(ModelMap model, @PathVariable Long id) throws Exception {
 
 		this.logger.debug("tg.{},{}", "show", id);
 
 		TgInfo tginfo = this.tgInfoManager.getById(id);
 
-		// tginfo.getOrgInfo().getOrgId()
+		model.addAttribute("tginfo", tginfo);
 
-		ModelAndView modelAndView = new ModelAndView();
-
-		modelAndView.addObject("tginfo", tginfo);
-
-		Map mapRequest = new HashMap();
+		Map<String, Object> mapRequest = new HashMap<String, Object>();
 
 		// 台区状态
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", id);
 
-		this.CommonPart(modelAndView, mapRequest);
+		this.CommonPart(model, mapRequest);
 
-		modelAndView.setViewName(TgInfoController.VIEW);
+		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
 
-		modelAndView.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);;
-
-		return modelAndView;
+		return VIEW;
 
 	}
 
@@ -285,9 +291,9 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 * @param model
 	 * @param mapRequest
 	 */
-	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
-		model.addObject("orglist", this.getOrgOptions(mapRequest));
-		model.addObject("statuslist", this.getStatusOptions(mapRequest));
+	private void getInitOption(ModelMap model, Map<String, ?> mapRequest) {
+		model.addAttribute("orglist", this.getOrgOptions(mapRequest));
+		model.addAttribute("statuslist", this.getStatusOptions(mapRequest));
 
 	}
 
@@ -297,23 +303,23 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 * @param modelAndView
 	 * @param mapRequest
 	 */
-	private void getRelevance(ModelAndView modelAndView, Map<String, ?> mapRequest) {
+	private void getRelevance(ModelMap modelMap, Map<String, ?> mapRequest) {
 		// modelAndView.addObject("tranlist", getTranList(mapRequest));
-		modelAndView.addObject("pslist", this.getPsList(mapRequest));
-		modelAndView.addObject("termlist", this.getTerminalList(mapRequest));
-		// modelAndView.addObject("mplist", this.getMpList(mapRequest));
+		modelMap.addAttribute("pslist", this.getPsList(mapRequest));
+		modelMap.addAttribute("termlist", this.getTerminalList(mapRequest));
+		// modelMap.addObject("mplist", this.getMpList(mapRequest));
 
 	}
 
 	/**
 	 * 重叠部分
 	 * 
-	 * @param modelAndView
+	 * @param modelMap
 	 * @param mapRequest
 	 */
-	private void CommonPart(ModelAndView modelAndView, Map<String, ?> mapRequest) {
-		this.getInitOption(modelAndView, mapRequest);
-		this.getRelevance(modelAndView, mapRequest);
+	private void CommonPart(ModelMap modelMap, Map<String, ?> mapRequest) {
+		this.getInitOption(modelMap, mapRequest);
+		this.getRelevance(modelMap, mapRequest);
 	}
 
 }
