@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.pssframework.util.ConvertRegisterHelper;
 import org.pssframework.util.PageRequestFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.ui.ModelMap;
@@ -29,6 +31,7 @@ import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 public class BaseSpringController extends MultiActionController {
+	protected Logger logger = LoggerFactory.getLogger(getClass());
 	protected final static String CREATED_SUCCESS = "创建成功";
 	protected final static String UPDATE_SUCCESS = "更新成功";
 	protected final static String DELETE_SUCCESS = "删除成功";
