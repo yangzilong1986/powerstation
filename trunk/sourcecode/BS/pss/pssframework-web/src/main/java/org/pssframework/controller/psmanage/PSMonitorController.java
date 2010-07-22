@@ -3,7 +3,7 @@ package org.pssframework.controller.psmanage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.PsInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/psmanage/psmon")
-public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> {
-    @Override
+public class PSMonitorController extends BaseSpringController {
+
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PsInfo model) {
         ModelAndView result = new ModelAndView();
         result.addObject("psInfo", model);
@@ -25,7 +25,7 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
         return result;
     }
 
-    @Override
+
     public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         PsInfo psInfo = new PsInfo();

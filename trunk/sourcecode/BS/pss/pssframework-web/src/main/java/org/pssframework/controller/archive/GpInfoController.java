@@ -12,20 +12,30 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUC
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.service.archive.GpInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import cn.org.rapid_framework.page.Page;
 
 /**
  * @author Administrator
@@ -43,8 +53,13 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
+	/** binder用于bean属性的设置 */
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+	}
+
 	@SuppressWarnings("unchecked")
-	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, GpInfo model) {
 
 		Map mapRequest = new HashMap();
@@ -56,7 +71,23 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 		return result;
 	}
 
-	@Override
+	/** 列表 */
+	@RequestMapping
+	public String index(ModelMap model, GpInfoQuery query, HttpServletRequest request, HttpServletResponse response) {
+		Page page = this.gpInfoManger.findPage(query);
+
+		model.addAllAttributes(toModelMap(page, query));
+		return "/${classNameLowerCase}/index";
+	}
+
+	/**
+	 * 增加了@ModelAttribute的方法可以在本controller方法调用前执行,可以存放一些共享变量,如枚举值,或是一些初始化操作
+	 */
+	@ModelAttribute
+	public void init(ModelMap model) {
+		model.put("now", new java.sql.Timestamp(System.currentTimeMillis()));
+	}
+
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
@@ -68,12 +99,11 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(
-				CONTROLLER_AJAX_MESSAGE, msg).addObject("gpid", model.getGpId());
+		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg)
+				.addObject("gpid", model.getGpId());
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, GpInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
@@ -100,5 +130,9 @@ public class GpInfoController extends BaseRestSpringController<GpInfo, java.lang
 		result.setViewName(VIEW);
 
 		return result;
+	}
+
+	class GpInfoQuery extends BaseQuery {
+
 	}
 }

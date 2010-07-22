@@ -44,19 +44,23 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		return this.realTimeReadingDao;
 	}
 
-	public DataModel findByPageRequest(PageRequest pagePara) {
+	public Page findByPageRequest(PageRequest pagePara) {
 
 		Page page = realTimeReadingDao.findByPageRequest(pagePara);
 
-		return this.create(pagePara, page);
+		return page;
 	}
 
 	public DataModel create(PageRequest pagePara, Page page) throws CreateDataModelException {
 
 		SortInfo sortInfo = null;
 		if (pagePara.getSortColumns() != null) {
-			List list = pagePara.getSortInfos();
-			sortInfo = new DefaultSortInfo(pagePara.getSortColumns(), String.valueOf(list.get(0)));
+			List<cn.org.rapid_framework.page.SortInfo> list = pagePara.getSortInfos();
+			String order = "";
+			for (cn.org.rapid_framework.page.SortInfo info : list) {
+				order = info.getSortOrder();
+			}
+			sortInfo = new DefaultSortInfo(pagePara.getSortColumns(), order);
 		} else {
 			sortInfo = EmptySortInfo.me;
 		}

@@ -40,7 +40,7 @@ import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,13 +55,11 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 
 	private static final String VIEW = "/archive/addTerminal";
 
-	@Override
+
+	/** binder用于bean属性的设置 */
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-		super.initBinder(request, binder);
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 	}
 
 	@Autowired
@@ -70,7 +68,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	@Override
+
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TerminalInfo model) {
 
 		ModelAndView result = new ModelAndView();
@@ -78,7 +76,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return result;
 	}
 
-	@Override
+
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
@@ -94,14 +92,14 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
-	@Override
+
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
 			TerminalInfo terminalInfo = this.terminalInfoManger.getById(id);
-			this.bind(request, terminalInfo);
+			//this.bind(request, terminalInfo);
 			this.terminalInfoManger.saveOrUpdate(terminalInfo);
 		} catch (Exception e) {
 			isSucc = false;
@@ -113,7 +111,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
-	@Override
+
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TerminalInfo model)
 			throws Exception {
 		boolean isSucc = true;
@@ -136,7 +134,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ModelAndView result = new ModelAndView();
@@ -155,7 +153,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TerminalInfo model)
 			throws Exception {
 

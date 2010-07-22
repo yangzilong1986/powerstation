@@ -3,6 +3,36 @@
  */
 package org.pssframework.controller.archive;
 
+import static org.pssframework.support.system.SystemConst.CODE_BTL;
+import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE_GM;
+import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
+import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
+import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
+import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
+import static org.pssframework.support.system.SystemConst.CODE_PS_TYPE;
+import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
+import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR;
+import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR_VALUE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
@@ -13,21 +43,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.pssframework.support.system.SystemConst.*;
 
 /**
  * @author Administrator 漏保
@@ -38,13 +58,10 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 	private static final String VIEW = "/archive/addPsInfo";
 
-	@Override
+	/** binder用于bean属性的设置 */
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
-		super.initBinder(request, binder);
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 	}
 
 	@Autowired
@@ -56,7 +73,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-	@Override
+
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
@@ -84,7 +101,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ModelAndView result = new ModelAndView();
@@ -104,7 +121,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
@@ -123,7 +140,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		return result;
 	}
 
-	@Override
+
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		boolean isSucc = true;
@@ -134,7 +151,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			PsInfo psinfo = this.psInfoManager.getById(id);
 			logger.debug("get psinfo {} from db", psinfo);
 
-			this.bind(request, psinfo);
+			//this.bind(request, psinfo);
 			logger.debug("bind psinfo {} from request", psinfo);
 			
 			if (checkGpsn(psinfo)) {
@@ -157,7 +174,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
 	}
 
-	@Override
+
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;

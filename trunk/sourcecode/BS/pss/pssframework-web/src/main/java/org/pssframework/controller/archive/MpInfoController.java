@@ -41,7 +41,7 @@ import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,14 +56,10 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 	private static final String VIEW = "/archive/addMpInfo";
 
-	@Override
+	/** binder用于bean属性的设置 */
 	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-
-		super.initBinder(request, binder);
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 	}
 
 	@Autowired
@@ -75,7 +71,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-	@Override
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
 
 		ModelAndView result = new ModelAndView();
@@ -83,7 +78,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		return result;
 	}
 
-	@Override
 	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
@@ -105,7 +99,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		return result;
 	}
 
-	@Override
 	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
@@ -123,14 +116,13 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		return result;
 	}
 
-	@Override
 	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
 			MpInfo mpInfo = this.mpInfoManger.getById(id);
-			this.bind(request, mpInfo);
+			//this.bind(request, mpInfo);
 			this.mpInfoManger.saveOrUpdate(mpInfo);
 		} catch (Exception e) {
 			isSucc = false;
@@ -145,7 +137,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
 		ModelAndView result = new ModelAndView();
 
@@ -163,7 +154,6 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		ModelAndView result = new ModelAndView();
