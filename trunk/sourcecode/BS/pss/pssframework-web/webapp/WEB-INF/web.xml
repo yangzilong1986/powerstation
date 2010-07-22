@@ -69,8 +69,7 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
-
-  <!-- ExtremeTable 导出Excel和Pdf的Filter -->
+  <!-- ExtremeTable 导出Excel和Pdf的Filter
   <filter>
     <filter-name>eXtremeExport</filter-name>
     <filter-class>org.extremecomponents.table.filter.ExportFilter</filter-class>
@@ -82,8 +81,8 @@
   <filter-mapping>
     <filter-name>eXtremeExport</filter-name>
     <url-pattern>/*</url-pattern>
-  </filter-mapping>
-
+  </filter-mapping> -->
+    
   <!--Spring ApplicationContext 载入 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
