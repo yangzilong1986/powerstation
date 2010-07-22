@@ -29,7 +29,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
 	@Autowired
 	private ICollectInterface realTimeProxy376;
 
-    @Override
+	@RequestMapping
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TermParamInfo model) {
         Long termId = null;
         if(model.getTermId() != null) {
@@ -44,7 +44,6 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         return result;
     }
 
-    @Override
     public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         TermParamInfo termParamInfo = termParamManager.getById(id);
