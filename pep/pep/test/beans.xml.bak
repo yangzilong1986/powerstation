@@ -22,7 +22,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
-    <!-- 属性文件读入,使用rapid中的JdbcPlaceholderConfigurer则可以从数据库读取配置信息
+    <!-- 属性文件读入,使用rapid中的JdbcPlaceholderConfigurer则可以从数据库读取配置信息 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -51,27 +51,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <bean id="converter" class="pep.bp.utils.Converter"></bean>
-
-    <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
-        <property name="dataSource" ref="dataSource" />
+    <bean id="taskService" class=" pep.bp.db.RTTaskServiceIMP">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
-        <property name="taskService" ref="rtTaskService" />
-        <property name="converter" ref="converter" />
-    </bean>
-
-    <bean id="realTimeProxy376Test" class="pep.bp.realinterface.RealTimeProxy376Test">
-        <property name="proxy" ref="realTimeProxy376"/>
-        <property name="taskService" ref="rtTaskService" />
-        <property name="converter" ref="converter" />
-    </bean>
-
-    <bean id="protocolConfig" class="pep.bp.realinterface.conf.ProtocolConfig">
-        <constructor-arg index="0"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config-mapping.xml"></constructor-arg>
-        <constructor-arg index="1"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config.xml"></constructor-arg>
-    </bean>
-
 </beans>
