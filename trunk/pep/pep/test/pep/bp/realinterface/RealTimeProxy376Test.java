@@ -6,7 +6,6 @@
 package pep.bp.realinterface;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.junit.After;
@@ -36,7 +35,6 @@ import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
 import pep.codec.utils.BcdUtils;
 import pep.meter645.Gb645MeterPacket;
-import pep.system.SystemConst;
 
 /**
  *
@@ -46,6 +44,13 @@ public class RealTimeProxy376Test {
 
     private static String RTUA = "";
     private static RealTimeProxy376 proxy;
+
+    /**
+     * @param aRTUA the RTUA to set
+     */
+    public static void setRTUA(String aRTUA) {
+        RTUA = aRTUA;
+    }
     private RTTaskService taskService;
     private Converter converter;
 
@@ -76,7 +81,7 @@ public class RealTimeProxy376Test {
     }
 
     private Map<String, String> getTestResults(MTO_376 MTO,String key) throws Exception{
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.writeParameters(MTO);
         RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
@@ -96,7 +101,7 @@ public class RealTimeProxy376Test {
     @BeforeClass
     public static void setUpClass() throws Exception {
         //proxy = new RealTimeProxy376();
-      new  ClassPathXmlApplicationContext("bean.xml");
+   
     }
 
     @AfterClass
@@ -105,6 +110,10 @@ public class RealTimeProxy376Test {
 
     @Before
     public void setUp() {
+        ApplicationContext app =    new  ClassPathXmlApplicationContext("beans.xml");
+        proxy = (RealTimeProxy376)app.getBean("realTimeProxy376");
+        this.taskService = (RTTaskService)app.getBean("rtTaskService");
+        this.converter = (Converter)app.getBean("converter");
     }
 
     @After
@@ -247,7 +256,7 @@ public class RealTimeProxy376Test {
 //        }
 //
 //        MTO_376 MTO10  = PutInCommandItem(datacellParams10,circleDataItems,"10040010","96123456",0);
-//        RealTimeProxy376 instance = new RealTimeProxy376();
+//        RealTimeProxy376 instance = proxy;
 //        long SequenceCode = instance.writeParameters(MTO10);
 //        List<RealTimeTaskDAO> taskList = taskService.getTasks(SequenceCode);
 //        assertTrue(taskList.size()>1);
@@ -410,7 +419,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO3 = new MTO_376();
         MTO3.addCollectObject(obj);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.readParameters(MTO3);
 
         this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 4A 00 4A 00 68 98 12 96 56 34 00 0A 60 00 00 01 00 0A 14 1E 03 07 0F 8A 16 55  ");
@@ -444,7 +453,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO3 = new MTO_376();
         MTO3.addCollectObject(obj);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance =proxy;
         long SequenceCode = instance.readParameters(MTO3);
 
         this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
@@ -474,7 +483,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO3 = new MTO_376();
         MTO3.addCollectObject(obj);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.readParameters(MTO3);
 
         this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 72 00 72 00 68 98 12 96 56 34 00 0A 60 00 00 01 01 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF 26 16 55 ");
@@ -516,7 +525,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO3 = new MTO_376();
         MTO3.addCollectObject(obj);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.readParameters(MTO3);
 
         this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
@@ -563,7 +572,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO3 = new MTO_376();
         MTO3.addCollectObject(obj);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.writeResetCommands(MTO3);
         RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
@@ -597,7 +606,7 @@ public class RealTimeProxy376Test {
         MTO3.addCollectObject(obj);
 
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.readData(MTO3);
         RealTimeTaskDAO task = taskService.getTask(SequenceCode);
         PmPacket376 packet = new PmPacket376();
@@ -646,7 +655,7 @@ public class RealTimeProxy376Test {
         MTO_376 MTO = new MTO_376();   
         MTO.addCollectObject_Transmit(cob);
 
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long expResult = 0L;
         long SequenceCode = instance.transmitMsg(MTO);
         
@@ -679,7 +688,7 @@ public class RealTimeProxy376Test {
         datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
         datacellParams1.put("1004000107", "15");//心跳周期
         MTO_376 MTO1  = PutInCommandItem(datacellParams1,null,"10040001","96123456",0);
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.writeParameters(MTO1);
 
         taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 4A 00 4A 00 68 98 12 96 56 34 00 0A 60 00 00 01 00 0A 14 1E 03 07 0F 8A 16 55 ");
@@ -697,7 +706,7 @@ public class RealTimeProxy376Test {
     public void testGetReturnByWEP_Json() throws Exception {
         System.out.println("getReturnByWEP_Json");
         long appId = 0L;
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         String expResult = "";
         String result = instance.getReturnByWriteParameter_Json(appId);
         assertEquals(expResult, result);
@@ -712,7 +721,7 @@ public class RealTimeProxy376Test {
     public void testGetReturnByReadParameter() throws Exception {
         System.out.println("getReturnByREP");
         long appId = 0L;
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         Map expResult = null;
         Map result = instance.getReturnByReadParameter(appId);
         assertEquals(expResult, result);
@@ -727,12 +736,26 @@ public class RealTimeProxy376Test {
     public void testGetReturnByRRD() throws Exception {
         System.out.println("getReturnByRRD");
         long appId = 0L;
-        RealTimeProxy376 instance = new RealTimeProxy376();
+        RealTimeProxy376 instance = proxy;
         Map expResult = null;
         Map result = instance.getReturnByReadData(appId);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    /**
+     * @param taskService the taskService to set
+     */
+    public void setTaskService(RTTaskService taskService) {
+        this.taskService = taskService;
+    }
+
+    /**
+     * @param converter the converter to set
+     */
+    public void setConverter(Converter converter) {
+        this.converter = converter;
     }
 
 }
