@@ -5,10 +5,16 @@
 package pep.bp.realinterface.conf;
 
 import java.io.IOException;
-import java.rmi.MarshalException;
-import java.util.List;
 import java.util.Map;
-import javax.xml.bind.ValidationException;
+
+import org.omg.CORBA.CTX_RESTRICT_SCOPE;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+
 import pep.codec.utils.CastorUtil;
 
 /**
@@ -17,49 +23,56 @@ import pep.codec.utils.CastorUtil;
  */
 public class ProtocolConfig {
 
-    private final String PROTOCOL_DATA_CONFIG_MAPPING ;
-    private final String PROTOCOL_DATA_CONFIG ;
-    private static ProtocolConfig instance = null;
-    private static ProtocolCommandItems CommandItems;
+	private static String PROTOCOL_DATA_CONFIG_MAPPING;
+	private static String PROTOCOL_DATA_CONFIG;
+	private static ProtocolConfig instance = null;
+	private static ProtocolCommandItems CommandItems;
 
-    protected ProtocolConfig() {
-        PROTOCOL_DATA_CONFIG_MAPPING = ProtocolConfig.class.getResource("protocol-data-config-mapping.xml").getPath();
-        PROTOCOL_DATA_CONFIG = ProtocolConfig.class.getResource("protocol-data-config.xml").getPath();
-        CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(PROTOCOL_DATA_CONFIG_MAPPING, PROTOCOL_DATA_CONFIG);
-  //      CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal("protocol-data-config-mapping.xml", "protocol-data-config.xml");
-    }
+	public ProtocolConfig(final String str1, final String str2) throws IOException {
+		PROTOCOL_DATA_CONFIG_MAPPING = str1;
+		PROTOCOL_DATA_CONFIG = str2;
+		ResourceLoader resourceLoader = new DefaultResourceLoader();
+		Resource resource1 = resourceLoader.getResource(str1);
+		Resource resource2 = resourceLoader.getResource(str2);
+		CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
+	}
 
-    public static ProtocolConfig getInstance() {
-        if (instance == null) {
-            instance = new ProtocolConfig();
-            CommandItems.FillMap();
-        }
-        return instance;
-    }
+	public static ProtocolConfig getInstance() {
+		if (instance == null) {
+			try {
+				instance = new ProtocolConfig(PROTOCOL_DATA_CONFIG_MAPPING, PROTOCOL_DATA_CONFIG);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			CommandItems.FillMap();
+		}
+		return instance;
+	}
 
-    public String getFormat(String DataItemCode) {
-        ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
-        if (null != dataItem) {
-            return dataItem.getFormat();
+	public String getFormat(String DataItemCode) {
+		ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
+		if (null != dataItem) {
+			return dataItem.getFormat();
 
-        } else {
-            return "";
+		} else {
+			return "";
 
-        }
-    }
+		}
+	}
 
-    public int getLength(String DataItemCode){
-        ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
-        if (null != dataItem) {
-            return dataItem.getLength();
-        } else {
-            return -1;
+	public int getLength(String DataItemCode) {
+		ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
+		if (null != dataItem) {
+			return dataItem.getLength();
+		} else {
+			return -1;
 
-        }
-    }
+		}
+	}
 
-    public Map<String, ProtocolDataItem> getDataItemMap(String CommandItemCode){
-        return this.CommandItems.getCommandItem(CommandItemCode).getDataItemMap();
-    }
+	public Map<String, ProtocolDataItem> getDataItemMap(String CommandItemCode) {
+		return this.CommandItems.getCommandItem(CommandItemCode).getDataItemMap();
+	}
 
 }
