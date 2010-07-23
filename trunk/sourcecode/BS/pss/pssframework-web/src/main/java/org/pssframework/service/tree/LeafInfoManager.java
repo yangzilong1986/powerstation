@@ -25,7 +25,7 @@ public class LeafInfoManager extends BaseManager<LeafInfo, Serializable> {
 	@Autowired
 	private LeafInfoDao leafInfoDao;
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
 		return leafInfoDao.findByPageRequest(pageRequest);
 	}
