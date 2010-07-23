@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.pssframework.model.autorm;
+package org.pssframework.query.autorm;
 
 import org.pssframework.base.BaseQuery;
 

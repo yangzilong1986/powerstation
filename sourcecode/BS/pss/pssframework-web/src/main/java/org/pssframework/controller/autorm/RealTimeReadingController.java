@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.TgInfo;
-import org.pssframework.model.autorm.ReadTimReadingQuery;
-import org.pssframework.model.autorm.RealTimeReadingInfo;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.query.autorm.ReadTimReadingQuery;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.atuorm.RealTimeReadingManager;
 import org.pssframework.service.system.OrgInfoManager;
@@ -62,8 +61,8 @@ public class RealTimeReadingController extends BaseSpringController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, RealTimeReadingInfo model) {
-		ReadTimReadingQuery timReadingQuery = new ReadTimReadingQuery();
+	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) {
+		ReadTimReadingQuery timReadingQuery = new org.pssframework.query.autorm.ReadTimReadingQuery();
 
 		PageRequest<Map> pageRequest = bindPageRequest(request, timReadingQuery, DEFAULT_SORT_COLUMNS);
 
