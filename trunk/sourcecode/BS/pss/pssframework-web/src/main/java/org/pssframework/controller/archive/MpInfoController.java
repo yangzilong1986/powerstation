@@ -36,7 +36,6 @@ import javax.validation.Valid;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.MpInfo;
-import org.pssframework.model.archive.MpQuery;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
@@ -81,7 +80,8 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 	/** 列表 */
 	@RequestMapping
-	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, MpQuery mpQuery) {
+	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
+			org.pssframework.query.archive.MpQuery mpQuery) {
 
 		return VIEW;
 	}
