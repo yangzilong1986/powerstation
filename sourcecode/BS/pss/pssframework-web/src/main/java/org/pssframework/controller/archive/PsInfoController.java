@@ -20,8 +20,11 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAG
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +35,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.PsInfo;
@@ -43,11 +47,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.org.rapid_framework.web.scope.Flash;
 
 /**
  * @author Administrator 漏保
@@ -57,6 +65,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang.Long> {
 
 	private static final String VIEW = "/archive/addPsInfo";
+
+	private static final String FORWARD = "/archive/psinfo";
+
+	//该终端下测量点序号重复
+	private static final String GP_IS_REPEAT = "该终端下测量点序号重复";
 
 	/** binder用于bean属性的设置 */
 	@InitBinder
@@ -73,38 +86,43 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
+			@Valid PsInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		Long psId = 0L;
 
-		if (checkGpsn(model))
-			return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
-					"该终端下测量点序号重复");
+		if (checkGpsn(model)) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, GP_IS_REPEAT);
+			return VIEW;
+		}
 
 		try {
 			this.psInfoManager.saveOrUpdate(model);
 			psId = model.getPsId();
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_SUCCESS);
 		} catch (DataAccessException e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
-			msg = e.getMessage();
-
+			msg = MSG_CREATED_FAIL;
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
-			msg = e.getMessage();
+			msg = MSG_CREATED_FAIL;
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
 		}
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg)
-				.addObject("psId", psId);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg).addAttribute(
+				"psId", psId);
+		return VIEW;
 	}
 
+	/** 编辑 */
 	@SuppressWarnings("unchecked")
-
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		ModelAndView result = new ModelAndView();
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
 		PsInfo psInfo = this.psInfoManager.getById(id);
 
@@ -112,54 +130,58 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		requestMap.put("tgid", psInfo.getGpInfo().getObjectId());
 
-		result.addObject("psinfo", psInfo);
+		result.addAttribute("psinfo", psInfo);
 
 		this.CommonPart(result, requestMap);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
-		return result;
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
-
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, PsInfo model) throws Exception {
-		ModelAndView result = new ModelAndView();
+	/** 进入新增 */
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, PsInfo model)
+			throws Exception {
 
 		Long tgid = model.getGpInfo().getObjectId();
 
-		Map requestMap = new HashMap();
+		Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
 
 		requestMap.put("tgid", tgid);
 
-		result.addObject("psinfo", model);
+		modelMap.addAttribute("psinfo", model);
 
-		this.CommonPart(result, requestMap);
+		this.CommonPart(modelMap, requestMap);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+		modelMap.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		return result;
+		return VIEW;
 	}
 
-
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap modelMap, @Valid PsInfo psinfo, BindingResult errors, @PathVariable Long id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
-		try {
-			
-			PsInfo psinfo = this.psInfoManager.getById(id);
-			logger.debug("get psinfo {} from db", psinfo);
+		if (errors.hasErrors()) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false)
+					.addAttribute(CONTROLLER_AJAX_MESSAGE, MSG_UPDATE_FAIL);
+			return FORWARD + "/" + id + "/edit";
+		}
 
-			//this.bind(request, psinfo);
+		try {
+
 			logger.debug("bind psinfo {} from request", psinfo);
-			
+
 			if (checkGpsn(psinfo)) {
 
 				logger.info("The serial number terminal repeat measurement points");
-
-				return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, false).addObject(CONTROLLER_AJAX_MESSAGE,
-						"该终端下测量点序号重复");
+				modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, "");
+				return VIEW;
 
 			}
 
@@ -168,26 +190,28 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
 			isSucc = false;
-			msg = e.getMessage();
+			msg = MSG_UPDATE_FAIL;
 		}
-
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap modelMap, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.psInfoManager.removeById(id);
-
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
-			msg = e.getMessage();
+			msg = MSG_DELETE_FAIL;
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
-
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
 	/**
@@ -196,68 +220,68 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	 * @param mapRequest
 	 */
 	@SuppressWarnings("unchecked")
-	private void CommonPart(ModelAndView result, Map mapRequest) {
+	private void CommonPart(ModelMap result, Map<String, Comparable> mapRequest) {
 
 		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
 
-		result.addObject("termList", termlist);
+		result.addAttribute("termList", termlist);
 
 		// RATED_EC 额定电流
 		mapRequest.put("codecate", CODE_RATED_EC);
 
-		result.addObject("ratedEcList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("ratedEcList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// RATED_EC 剩余电流档位
 		mapRequest.put("codecate", CODE_REMC_GEAR);
 
-		result.addObject("remcGearList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("remcGearList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 剩余电流档位当前值 REMC_GEAR_VALUE
 
 		mapRequest.put("codecate", CODE_REMC_GEAR_VALUE);
 
-		result.addObject("remcGearValueList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("remcGearValueList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// -漏电分断延迟档位 OFF_DELAY_GEAR
 		mapRequest.put("codecate", CODE_OFF_DELAY_GEAR);
 
-		result.addObject("offDelayGearList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("offDelayGearList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// -漏电分断延迟时间 OFF_DELAY_VALUE
 
 		mapRequest.put("codecate", CODE_OFF_DELAY_VALUE);
 
-		result.addObject("offDelayValueList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("offDelayValueList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 漏保类型
 		mapRequest.put("codecate", CODE_PS_TYPE);
 
-		result.addObject("psTypeList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("psTypeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
 		mapRequest.put("codecate", CODE_COMM_MODE_GM);
 
-		result.addObject("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 波特率
 		mapRequest.put("codecate", CODE_BTL);
 
-		result.addObject("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 漏保型号
 		mapRequest.put("codecate", CODE_PS_MODEL);
 
-		result.addObject("psModelList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("psModelList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// CT
 		mapRequest.put("codecate", CODE_CT_RATIO);
 
-		result.addObject("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// PT
 		mapRequest.put("codecate", CODE_PT_RATIO);
 
-		result.addObject("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// TODO
 		/*
@@ -265,9 +289,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		 */
 		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
-		result.addObject("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		result.setViewName(VIEW);
+		result.addAttribute("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 	}
 

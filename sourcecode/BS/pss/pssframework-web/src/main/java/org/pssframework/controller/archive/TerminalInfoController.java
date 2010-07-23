@@ -31,6 +31,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TerminalInfo;
@@ -40,11 +41,15 @@ import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.org.rapid_framework.web.scope.Flash;
 
 /**
  * @author Administrator 变压器信息
@@ -54,7 +59,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class TerminalInfoController extends BaseRestSpringController<TerminalInfo, java.lang.Long> {
 
 	private static final String VIEW = "/archive/addTerminal";
-
 
 	/** binder用于bean属性的设置 */
 	@InitBinder
@@ -68,64 +72,70 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
+	/** 列表 */
+	@RequestMapping
+	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response,
+			TerminalInfo terminalInfo) {
 
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TerminalInfo model) {
-
-		ModelAndView result = new ModelAndView();
-
-		return result;
+		return VIEW;
 	}
 
-
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap model, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.terminalInfoManger.removeById(id);
+			Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
+			Flash.current().error(msg);
 
 		}
-
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap modelMap, @PathVariable Long id, HttpServletRequest request,
+			HttpServletResponse response, @Valid TerminalInfo terminalInfo, BindingResult errors) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			TerminalInfo terminalInfo = this.terminalInfoManger.getById(id);
-			//this.bind(request, terminalInfo);
 			this.terminalInfoManger.saveOrUpdate(terminalInfo);
+			Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
 			this.logger.error(e.getMessage());
-
+			Flash.current().error(msg);
 		}
-
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TerminalInfo model)
-			throws Exception {
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
+			@Valid TerminalInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		try {
 			this.terminalInfoManger.saveOrUpdate(model);
+			Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_CREATED_FAIL;
 			this.logger.error(e.getMessage());
+			Flash.current().error(msg);
 
 		}
-
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -133,73 +143,66 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return this.codeInfoManager.findByPageRequest(mapRequest);
 	}
 
+	/** 编辑 */
 	@SuppressWarnings("unchecked")
-
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		ModelAndView result = new ModelAndView();
-
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request) throws Exception {
 		this.getCommPart(result, new HashMap());
 
-		result.addObject("terminalinfo", this.terminalInfoManger.getById(id));
+		result.addAttribute("terminalinfo", this.terminalInfoManger.getById(id));
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		result.addObject("tgId", request.getParameter("tgId"));
+		result.addAttribute("tgId", request.getParameter("tgId"));
 
-		result.setViewName(VIEW);
-
-		return result;
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
-
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TerminalInfo model)
-			throws Exception {
-
-		ModelAndView result = new ModelAndView();
+	/** 进入新增 */
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap model, HttpServletRequest request, HttpServletResponse response,
+			TerminalInfo terminalInfo) throws Exception {
 
 		Map mapRequest = new HashMap();
 
-		this.getCommPart(result, mapRequest);
+		this.getCommPart(model, mapRequest);
 
-		result.addObject("terminalinfo", model);
+		model.addAttribute("terminalinfo", terminalInfo);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		result.addObject("tgId", request.getParameter("tgId"));
+		model.addAttribute("tgId", request.getParameter("tgId"));
 
-		result.setViewName(VIEW);
-
-		return result;
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
-	private void getCommPart(ModelAndView result, Map mapRequest) {
+	private void getCommPart(ModelMap result, Map mapRequest) {
 
 		mapRequest.put("codecate", CODE_PROTOCOL_TERM);
-		result.addObject("protocollist", this.getOptionList(mapRequest));
+		result.addAttribute("protocollist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_COMM_MODE);
-		result.addObject("commlist", this.getOptionList(mapRequest));
+		result.addAttribute("commlist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_CUR_STATUS);
-		result.addObject("statuslist", this.getOptionList(mapRequest));
+		result.addAttribute("statuslist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_TERM_TYPE);
-		result.addObject("typelist", this.getOptionList(mapRequest));
+		result.addAttribute("typelist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_MADE_FAC);
-		result.addObject("faclist", this.getOptionList(mapRequest));
+		result.addAttribute("faclist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_WIRING_MODE);
-		result.addObject("wiringlist", this.getOptionList(mapRequest));
+		result.addAttribute("wiringlist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_PR);
-		result.addObject("prlist", this.getOptionList(mapRequest));
+		result.addAttribute("prlist", this.getOptionList(mapRequest));
 
 		mapRequest.put("codecate", CODE_RUN_STATUS);
-		result.addObject("runStatuslist", this.getOptionList(mapRequest));
+		result.addAttribute("runStatuslist", this.getOptionList(mapRequest));
 
 	}
 }
