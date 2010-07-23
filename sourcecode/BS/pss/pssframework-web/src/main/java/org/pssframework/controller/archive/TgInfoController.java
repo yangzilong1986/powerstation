@@ -49,7 +49,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
+import cn.org.rapid_framework.web.scope.Flash;
 
 /**
  * @author Baocj
@@ -87,22 +88,18 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	/** 列表 */
 	@RequestMapping
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TgInfo model) {
+	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, TgInfo tgInfo) {
 
 		Long tgid = 0L;
-		if (model.getTgId() != null) {
-			tgid = model.getTgId();
+		if (tgInfo.getTgId() != null) {
+			tgid = tgInfo.getTgId();
 		}
 
 		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
 
-		ModelAndView result = new ModelAndView();
+		model.addAttribute("tginfo", tginfo);
 
-		result.addObject("tginfo", tginfo);
-
-		result.setViewName(TgInfoController.VIEW);
-
-		return result;
+		return VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -142,60 +139,62 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return terminallist;
 	}
 
-	@SuppressWarnings("unchecked")
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+	/** 进入新增 */
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap model, TgInfo tgInfo, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		this.logger.debug("tg.{}", CONTROLLER_METHOD_TYPE_NEW);
 
-		ModelAndView result = new ModelAndView();
+		model.addAttribute("tginfo", tgInfo);
 
-		result.addObject("tginfo", model);
-
-		Map mapRequest = new HashMap();
+		Map<String, Object> mapRequest = new HashMap<String, Object>();
 
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", 0L);
 
-		this.CommonPart(result, mapRequest);
+		this.CommonPart(model, mapRequest);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		result.setViewName(TgInfoController.VIEW);
-
-		return result;
+		return VIEW;
 	}
 
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap model, @PathVariable Long id) {
 		this.logger.debug("tg.{},{}", "delete", id);
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
-
 			this.tgInfoManager.removeById(id);
-
+			Flash.current().success(msg);
 		} catch (Exception e) {
-
 			isSucc = false;
-
 			msg = e.getMessage();
+			Flash.current().error(msg);
 
 		}
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, TgInfo model) throws Exception {
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap model, @Valid TgInfo tgInfo, BindingResult errors, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		this.logger.debug("tg.{}", "create");
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 		Long tgId = 0L;
 		try {
-			model.setChaDate(new Date());
+			tgInfo.setChaDate(new Date());
 
-			model.setPubPrivFlag("0");
+			tgInfo.setPubPrivFlag("0");
 
-			this.tgInfoManager.saveOrUpdate(model);
+			this.tgInfoManager.saveOrUpdate(tgInfo);
 
-			tgId = model.getTgId();
+			tgId = tgInfo.getTgId();
 
 		} catch (Exception e) {
 
@@ -205,8 +204,10 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		}
 
-		return new ModelAndView().addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg)
-				.addObject("tgId", tgId);
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg).addAttribute(
+				"tgId", tgId);
+
+		return VIEW;
 	}
 
 	/** 编辑 */
@@ -257,7 +258,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
-		return null;
+		return VIEW;
 	}
 
 	/** 显示 */
