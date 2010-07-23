@@ -10,6 +10,7 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
@@ -196,11 +197,15 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 			tgId = tgInfo.getTgId();
 
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 
 			isSucc = false;
 
-			msg = e.getMessage();
+			msg = MSG_CREATED_FAIL;
+
+			logger.debug(e.getMessage());
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 
 		}
 
@@ -241,20 +246,22 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		String msg = MSG_UPDATE_SUCCESS;
 
 		if (errors.hasErrors()) {
-			model.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, MSG_UPDATE_FAIL);
+			model.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
 			return "/archive/tginfo/" + id + "/edit";
 		}
 		this.logger.debug("tg.{},{}", "update", id);
 
 		try {
-			//TgInfo tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
-			//this.bind(request, tginfo);
 			this.tgInfoManager.update(tginfo);
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
-			this.logger.info(e.getLocalizedMessage());
+			this.logger.info(e.getMessage());
 			isSucc = false;
-			msg = e.getMessage();
+			msg = MSG_UPDATE_FAIL;
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 

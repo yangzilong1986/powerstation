@@ -105,6 +105,12 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			HttpServletResponse response, @Valid TerminalInfo terminalInfo, BindingResult errors) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
+
+		if (errors.hasErrors()) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
+			return VIEW;
+		}
 		try {
 			this.terminalInfoManger.saveOrUpdate(terminalInfo);
 			Flash.current().success(msg);
@@ -121,9 +127,15 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-			@Valid TerminalInfo model) throws Exception {
+			@Valid TerminalInfo model, BindingResult errors) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
+
+		if (errors.hasErrors()) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
+			return VIEW;
+		}
 		try {
 			this.terminalInfoManger.saveOrUpdate(model);
 			Flash.current().success(msg);
