@@ -249,7 +249,7 @@ addtginfo = function(){
   var tgFromData = getData('add');
   var url="${ctx}/archive/tginfo.json";
   if(confirm("确定要保存该台区?")){
-    jQuery.ajax({
+    $.ajax({
          url: url,
          data:tgFromData,
          dataType:'json',
@@ -272,15 +272,16 @@ addtginfo = function(){
 updatetginfo = function(){
 	var tgFromData = getData("update");
 	  var url="${ctx}/archive/tginfo/"+jQuery("#tgId").val()+'.json?_method=put';
+	  alert(tgFromData);
 	  if(confirm("确定要更新该台区?")){
-	    jQuery.ajax({
+	    $.ajax({
 	         url: url,
 	         data:tgFromData,
 	         dataType:'json',
 	         type:'post',
 	         cache: false,
 	         success: function(json){
-	    	var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+	    	 var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
 	          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
 	            alert(msg);
 	            parent.parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
@@ -310,7 +311,7 @@ deleteTranInfo=function(tranId){
 
  var url = "${ctx}/archive/tranInfo/"+tranId+".json?_method=delete";
  if (confirm("确定要删除该变压器?")) {
-     jQuery.ajax({
+     $.ajax({
          url: url,
          dataType:'json',
          type:'POST',
@@ -353,7 +354,7 @@ deletePsInfo=function(psId){
 
    var url = "${ctx}/archive/psinfo/"+psId+".json?_method=delete";
    if (confirm("确定要删除该保护器?")) {
-       jQuery.ajax({
+       $.ajax({
            url: url,
            dataType:'json',
            type:'POST',
@@ -398,7 +399,7 @@ deleteMpInfo=function(mpId){
 
      var url = "${ctx}/archive/mpinfo/"+mpId+".json?_method=delete";
      if (confirm("确定要删除该电表?")) {
-         jQuery.ajax({
+         $.ajax({
              url: url,
              dataType:'json',
              type:'POST',
@@ -440,7 +441,7 @@ deleteTermInfo=function(termId){
 
    var url = "${ctx}/archive/terminalinfo/"+termId+".json?_method=delete";
    if (confirm("确定要删除该集中器?")) {
-       jQuery.ajax({
+       $.ajax({
            url: url,
            dataType:'json',
            type:'POST',
