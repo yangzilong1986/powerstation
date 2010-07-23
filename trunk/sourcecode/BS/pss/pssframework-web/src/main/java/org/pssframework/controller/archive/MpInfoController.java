@@ -16,6 +16,7 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAG
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
@@ -30,10 +31,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.MpInfo;
+import org.pssframework.model.archive.MpQuery;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
@@ -41,11 +44,15 @@ import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import cn.org.rapid_framework.web.scope.Flash;
 
 /**
  * @author Administrator 计量点
@@ -55,6 +62,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang.Long> {
 
 	private static final String VIEW = "/archive/addMpInfo";
+	private static final String VALIDATE = "验证出错";
 
 	/** binder用于bean属性的设置 */
 	@InitBinder
@@ -71,57 +79,74 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, MpInfo model) {
+	/** 列表 */
+	@RequestMapping
+	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, MpQuery mpQuery) {
 
-		ModelAndView result = new ModelAndView();
-
-		return result;
+		return VIEW;
 	}
 
-	public ModelAndView create(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap modelMap, BindingResult errors, HttpServletRequest request,
+			HttpServletResponse response, @Valid MpInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
+
+		if (errors.hasErrors()) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
+			return VIEW;
+		}
+
 		try {
 			for (GpInfo gpInfo : model.getGpInfos()) {
 				gpInfo.setObjectId(model.getTgInfo().getTgId());
 				gpInfo.setMpInfo(model);
 			}
 			this.mpInfoManger.saveOrUpdate(model);
+			Flash.current().success(MSG_CREATED_SUCCESS);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
 			this.logger.error(e.getMessage());
-
+			Flash.current().success(MSG_CREATED_FAIL);
 		}
-
-		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
-		return result;
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-	public ModelAndView delete(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap modelMap, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.mpInfoManger.removeById(id);
+			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
-
+			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
-		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
-		return result;
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
-	public ModelAndView update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap modelMap, @PathVariable Long id, @Valid MpInfo mpInfo, BindingResult errors,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
+		if (errors.hasErrors()) {
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
+			return VIEW;
+		}
 		try {
-			MpInfo mpInfo = this.mpInfoManger.getById(id);
 			//this.bind(request, mpInfo);
 			this.mpInfoManger.saveOrUpdate(mpInfo);
 		} catch (Exception e) {
@@ -131,32 +156,33 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		}
 
-		ModelAndView result = new ModelAndView();
-		result.addObject(CONTROLLER_AJAX_IS_SUCC, isSucc).addObject(CONTROLLER_AJAX_MESSAGE, msg);
-		return result;
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW;
 	}
 
+	/** 进入新增 */
 	@SuppressWarnings("unchecked")
-	public ModelAndView _new(HttpServletRequest request, HttpServletResponse response, MpInfo model) throws Exception {
-		ModelAndView result = new ModelAndView();
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap result, HttpServletRequest request, HttpServletResponse response, MpInfo model)
+			throws Exception {
 
 		Map requestMap = new HashMap();
 
 		requestMap.put("tgid", model.getTgInfo().getTgId());
 
-		result.addObject("mpinfo", model);
+		result.addAttribute("mpinfo", model);
 
 		this.CommonPart(result, requestMap);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		return result;
+		return VIEW;
 	}
 
+	/** 编辑 */
 	@SuppressWarnings("unchecked")
-	public ModelAndView edit(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		ModelAndView result = new ModelAndView();
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
 		Map requestMap = new HashMap();
 
@@ -164,13 +190,13 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		requestMap.put("tgid", model.getTgInfo().getTgId());
 
-		result.addObject("mpinfo", model);
+		result.addAttribute("mpinfo", model);
 
 		this.CommonPart(result, requestMap);
 
-		result.addObject(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		return result;
+		return VIEW;
 	}
 
 	/**
@@ -179,51 +205,49 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	 * @param mapRequest
 	 */
 	@SuppressWarnings("unchecked")
-	private void CommonPart(ModelAndView result, Map mapRequest) {
+	private void CommonPart(ModelMap result, Map mapRequest) {
 		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
-		result.addObject("termList", termlist);
+		result.addAttribute("termList", termlist);
 
 		// CT
 		mapRequest.put("codecate", CODE_CT_RATIO);
 
-		result.addObject("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// PT
 		mapRequest.put("codecate", CODE_PT_RATIO);
 
-		result.addObject("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 通讯方式
 		mapRequest.put("codecate", CODE_COMM_MODE);
 
-		result.addObject("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 波特率
 		mapRequest.put("codecate", CODE_BTL);
 
-		result.addObject("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 接线方式
 		mapRequest.put("codecate", CODE_WIRING_MODE);
 
-		result.addObject("wiringModeList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("wiringModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 计量方式
 		mapRequest.put("codecate", CODE_MEAS_MODE);
 
-		result.addObject("measModeList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("measModeList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 表 规 约
 		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
-		result.addObject("protocolMeterList", this.codeInfoManager.findByPageRequest(mapRequest));
+		result.addAttribute("protocolMeterList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 		// 表 状态
 		mapRequest.put("codecate", CODE_METER_STATUS);
 
-		result.addObject("runStatusList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		result.setViewName(MpInfoController.VIEW);
+		result.addAttribute("runStatusList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 	}
 
