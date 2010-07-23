@@ -124,7 +124,7 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc);
 
 		model.addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
-		return null;
+		return VIEW;
 	}
 
 	/** 显示 */
@@ -215,6 +215,6 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		}
 
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
-		return null;
+		return VIEW;
 	}
 }
