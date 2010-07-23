@@ -27,7 +27,6 @@ import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.tree.LeafInfo;
-import org.pssframework.model.tree.LeafQuery;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.tree.LeafInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,7 +158,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 		final String parentID = pRequest.getParameter(PARENT_ID);
 		final String parentTYPE = pRequest.getParameter(PARENT_TYPE);
 
-		BaseQuery leafQuery = new LeafQuery();
+		BaseQuery leafQuery = new org.pssframework.query.tree.LeafQuery();
 
 		PageRequest pageRequest = bindPageRequest(pRequest, leafQuery, DEFAULT_SORT_COLUMNS);
 

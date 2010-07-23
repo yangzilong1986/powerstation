@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.pssframework.model.tree;
+package org.pssframework.query.tree;
 
 import org.pssframework.base.BaseQuery;
 
