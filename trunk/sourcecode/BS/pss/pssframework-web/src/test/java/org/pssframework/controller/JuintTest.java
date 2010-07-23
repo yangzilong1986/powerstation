@@ -1,8 +1,21 @@
 package org.pssframework.controller;
 
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+
+import pep.bp.realinterface.mto.MTO_376;
+import pep.bp.realinterface.mto.MessageTranObject;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,8 +26,12 @@ import org.junit.Test;
  */
 public class JuintTest {
 
+	private String jsonString;
+
 	@Before
 	public void one() {
+		jsonString = "{\"mtoType\":\"GW_376\",\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"GW_376\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
+		//jsonString = "{\"mtoType\":\"GW_376\",\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",   \"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
 	}
 
 	@After
@@ -22,11 +39,57 @@ public class JuintTest {
 
 	}
 
-	@Test
 	public void fuck() {
 		char[] init = new char[] { '0', '0', '0', '0', '0', '0', '0', '0' };
 		System.out.println(String.valueOf(init));
 
+	}
+
+	@Test
+	public void jackSon() throws JsonGenerationException, JsonMappingException, IOException {
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		MessageTranObject mto_376 = mapper.readValue(jsonString, MTO_376.class);
+		System.out.println(mto_376);
+
+		MockHttpServletRequest httpServletRequest = new MockHttpServletRequest();
+		MockHttpServletResponse httpServletResponse = new MockHttpServletResponse();
+		Map<String, String> mapIn1 = new TreeMap<String, String>();
+		mapIn1.put("a", "a1");
+		mapIn1.put("b", "b2");
+		mapIn1.put("c", "c3");
+		mapIn1.put("d", "d4");
+
+		Map<String, String> mapIn2 = new TreeMap<String, String>();
+		mapIn2.put("e", "e1");
+		mapIn2.put("f", "f2");
+		mapIn2.put("g", "g3");
+		mapIn2.put("h", "h4");
+
+		Map<String, String> mapIn3 = new TreeMap<String, String>();
+		mapIn2.put("i", "i1");
+		mapIn2.put("j", "j2");
+		mapIn2.put("k", "k3");
+		mapIn2.put("l", "l4");
+
+		Map<String, String> mapIn4 = new TreeMap<String, String>();
+		mapIn4.put("m", "m1");
+		mapIn4.put("n", "n2");
+		mapIn4.put("o", "o3");
+		mapIn4.put("p", "p4");
+
+		Map<String, Map<String, String>> testMap = new LinkedHashMap<String, Map<String, String>>();
+		testMap.put("zdljdz1#cldbh1#common1#dataitem1", mapIn1);
+		testMap.put("zdljdz2#cldbh2#common1#dataitem2", mapIn2);
+		testMap.put("zdljdz3#cldbh3#common1#dataitem3", mapIn3);
+		testMap.put("zdljdz4#cldbh4#common1#dataitem4", mapIn4);
+
+		mapper = new ObjectMapper();
+		httpServletResponse.setCharacterEncoding("utf-8");
+		httpServletResponse.setContentType("application/json");
+		mapper.writeValue(httpServletResponse.getOutputStream(), testMap);
+		System.out.println(mapper.writeValueAsString(testMap));
 	}
 
 	private static byte[] shortToByteArray(short s) {
