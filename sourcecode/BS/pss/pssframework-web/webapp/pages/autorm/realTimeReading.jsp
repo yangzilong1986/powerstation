@@ -2,10 +2,13 @@
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
 <%@page import="org.pssframework.support.system.SystemConst"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
-<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/json2.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
+<script type="text/javascript" src="${ctx}/scripts/json2.js"></script>
 <script type="text/javascript">
 var inputText = ""; 
 var inputLabel = "";
@@ -386,23 +389,49 @@ function read() {
 	</div>
 	<div class="tableContainer"
 		style="height: expression((( document.documentElement.clientHeight ||   document.body.clientHeight) -105 ) );">
-	<e3t:table id="userTable" var="user" varStatus="userStatus" items="userTable"
-		uri="${ctx}/autorm/realTimeReading"  mode="ajax">
-		<e3t:param name="orgId" value="${model.orgId}"></e3t:param>
-		<e3t:param name="objId" value="${model.objId}"></e3t:param>
-		<e3t:param name="logicalAddr" value="${model.logicalAddr}"></e3t:param>
-		<e3t:column property="checkUserIDs" style="width:55px"
-			title="全选<input onclick='selectAll()' type='checkbox' id='checkUserIDs' />" sortable="false">
-			<input type="checkbox" name="items" value="${user.objNo}" name="checkUserID" />
-		</e3t:column>
-		<e3t:column property="objNo" title="对象编号" />
-		<e3t:column property="objName" title="对象名称" />
-		<e3t:column property="objType" title="对象类型"/>
-		<e3t:column property="logicalAddr" title="终端地址" >
-		<c:if test="${user.logicalAddr != null}">${user.logicalAddr}</c:if></e3t:column>
-		<e3t:column property="mpNo" title="电表局号" />
-		<e3t:column property="gpSn" title="测量点序号" />
-	</e3t:table></div>
+                <table width="100%"  border="0" cellspacing="0" class="gridBody"> 
+                  <thead class="tableHeader"> 
+                           
+                          <tr> 
+                                <th style="width:1px;"> </th> 
+                                <th style="width:1px;"><input type="checkbox" onclick="setAllCheckboxState('items',this.checked)"></th> 
+                                 
+                                <!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; --> 
+                                <th sortColumn="objNo" >对象编号</th> 
+                                <th sortColumn="objName">对象名称</th> 
+                                <th sortColumn="objType" >对象类型</th> 
+                                <th sortColumn="logicalAddr" >终端地址</th> 
+                                <th sortColumn="mpNo" >电表局号</th> 
+                                <th sortColumn="gpSn" >测量点序号</th> 
+ 
+                                <th>操作</th> 
+                          </tr> 
+                           
+                  </thead> 
+                  <tbody class="tableBody"> 
+                          <c:forEach items="${page.result}" var="item" varStatus="status"> 
+                           
+                          <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}"> 
+                                <td>${page.thisPageFirstElementNumber + status.index}</td> 
+                                <td><input type="checkbox" name="items" value="checkbox"></td> 
+                                 
+                                <td><c:out value='${item.objNo}'/>&nbsp;</td> 
+                                <td><c:out value='${item.objName}'/>&nbsp;</td> 
+                                <td><c:out value='${item.objType}'/>&nbsp;</td> 
+                                <td><c:out value='${item.logicalAddr}'/>&nbsp;</td> 
+                                <td><c:out value='${item.mpNo}'/>&nbsp;</td> 
+                                <td><c:out value='${item.gpSn}'/>&nbsp;</td> 
+                                <td> 
+                                        <a href="${ctx}/pages/Blog/show.do?id=${item.gpId}&">查看</a>&nbsp;&nbsp;&nbsp; 
+                                        <a href="${ctx}/pages/Blog/edit.do?id=${item.gpId}&">修改</a> 
+                                </td> 
+                          </tr> 
+                           
+                          </c:forEach> 
+                  </tbody> 
+                </table> 
+	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar>
+	</div>
 </ul>
 </div>
 <iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
@@ -910,4 +939,10 @@ function notGetResult(){
     enableButton();
 }
 </script>
+	<script type="text/javascript" >
+		$(document).ready(function() {
+			// 分页需要依赖的初始化动作
+			window.simpleTable = new SimpleTable('model','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
+		});
+	</script>
 </html>
