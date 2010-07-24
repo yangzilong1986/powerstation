@@ -565,18 +565,18 @@ function readDydlData() {
         return;
     }*/
     excelFlag=3;
-    //deleteDataitemTd();
-    //insertTd('A相电压(V)', 'DI_2101');     //A相电压
+    deleteDataitemTd();
+    insertTd('A相电压(V)', 'DI_2101');     //A相电压
 
-    //insertTd('B相电压(V)', 'DI_2102');     //B相电压
+    insertTd('B相电压(V)', 'DI_2102');     //B相电压
 
-    //insertTd('C相电压(V)', 'DI_2103');     //C相电压
+    insertTd('C相电压(V)', 'DI_2103');     //C相电压
 
-    //insertTd('A相电流(A)', 'DI_2201');     //A相电流
+    insertTd('A相电流(A)', 'DI_2201');     //A相电流
 
-    //insertTd('B相电流(A)', 'DI_2202');     //B相电流
+    insertTd('B相电流(A)', 'DI_2202');     //B相电流
 
-    //insertTd('C相电流(A)', 'DI_2203');     //C相电流
+    insertTd('C相电流(A)', 'DI_2203');     //C相电流
 
     disableButton();
     otherDataFlag = 0 ;
