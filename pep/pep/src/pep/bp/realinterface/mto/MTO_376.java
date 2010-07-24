@@ -12,6 +12,7 @@ import net.sf.json.*;
 public class MTO_376 extends MessageTranObject{
     private List<CollectObject> collectObjects = new ArrayList<CollectObject>();
     private List<CollectObject_TransMit> collectObjects_Transmit = new ArrayList<CollectObject_TransMit>();
+    
 
     public List<CollectObject> getCollectObjects(){
        return this.collectObjects;
@@ -58,5 +59,4 @@ public class MTO_376 extends MessageTranObject{
     public void setCollectObjects_Transmit(List<CollectObject_TransMit> collectObjects_Transmit) {
         this.collectObjects_Transmit = collectObjects_Transmit;
     }
-
 }
