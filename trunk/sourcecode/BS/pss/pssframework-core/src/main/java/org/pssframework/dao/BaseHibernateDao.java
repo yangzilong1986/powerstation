@@ -129,7 +129,6 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 
 	public void batchDelete(Collection<E> entities) {
 		getHibernateTemplate().deleteAll(entities);
-
 	}
 
 	public void batchUpdate(Collection<E> entities) {
