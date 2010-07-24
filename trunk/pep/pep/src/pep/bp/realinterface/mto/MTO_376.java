@@ -10,39 +10,53 @@ import net.sf.json.*;
  * @author Thinkpad
  */
 public class MTO_376 extends MessageTranObject{
-    private List<CollectObject> CollectObjects = new ArrayList<CollectObject>();
-    private List<CollectObject_TransMit> CollectObjects_Transmit = new ArrayList<CollectObject_TransMit>();
+    private List<CollectObject> collectObjects = new ArrayList<CollectObject>();
+    private List<CollectObject_TransMit> collectObjects_Transmit = new ArrayList<CollectObject_TransMit>();
 
     public List<CollectObject> getCollectObjects(){
-       return this.CollectObjects;
+       return this.collectObjects;
     }
 
     public List<CollectObject_TransMit> getCollectObjects_Transmit(){
-       return this.CollectObjects_Transmit;
+       return this.collectObjects_Transmit;
     }
 
     public void addCollectObject(CollectObject collectObject){
-        if (null == CollectObjects)
-            CollectObjects = new ArrayList<CollectObject>();
-        this.CollectObjects.add(collectObject);
+        if (null == getCollectObjects())
+            setCollectObjects(new ArrayList<CollectObject>());
+        this.getCollectObjects().add(collectObject);
     }
 
     public void addCollectObject_Transmit(CollectObject_TransMit collectObject){
-        if (null == CollectObjects)
-            CollectObjects_Transmit = new ArrayList<CollectObject_TransMit>();
-        this.CollectObjects_Transmit.add(collectObject);
+        if (null == getCollectObjects())
+            setCollectObjects_Transmit(new ArrayList<CollectObject_TransMit>());
+        this.getCollectObjects_Transmit().add(collectObject);
     }
 
     public String toJson(){
         Map map = new HashMap();
        // map.put("ID",this.getID());
-        map.put("CollectObjects", this.CollectObjects);
+        map.put("CollectObjects", this.getCollectObjects());
         JSONObject jsonObject = JSONObject.fromObject(map);
         return jsonObject.toString();
     }
     
     public  MTOType getType(){
         return MTOType.GW_376;
+    }
+
+    /**
+     * @param collectObjects the collectObjects to set
+     */
+    public void setCollectObjects(List<CollectObject> collectObjects) {
+        this.collectObjects = collectObjects;
+    }
+
+    /**
+     * @param collectObjects_Transmit the collectObjects_Transmit to set
+     */
+    public void setCollectObjects_Transmit(List<CollectObject_TransMit> collectObjects_Transmit) {
+        this.collectObjects_Transmit = collectObjects_Transmit;
     }
 
 }
