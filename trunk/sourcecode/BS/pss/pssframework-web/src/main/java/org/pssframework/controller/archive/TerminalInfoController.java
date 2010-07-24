@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.pssframework.controller.archive;
 
@@ -49,8 +49,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.org.rapid_framework.web.scope.Flash;
-
 /**
  * @author Administrator 变压器信息
  */
@@ -60,7 +58,9 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 
 	private static final String VIEW = "/archive/addTerminal";
 
-	/** binder用于bean属性的设置 */
+	/**
+	 * binder用于bean属性的设置
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -72,37 +72,43 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	@Autowired
 	private CodeInfoManager codeInfoManager;
 
-	/** 列表 */
+	/**
+	 * 列表
+	 */
 	@RequestMapping
 	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response,
-			TerminalInfo terminalInfo) {
+	                    TerminalInfo terminalInfo) {
 
 		return VIEW;
 	}
 
-	/** 删除 */
+	/**
+	 * 删除
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(ModelMap model, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.terminalInfoManger.removeById(id);
-			Flash.current().success(msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE,msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE,msg);
 
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;
 	}
 
-	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	/**
+	 * 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(ModelMap modelMap, @PathVariable Long id, HttpServletRequest request,
-			HttpServletResponse response, @Valid TerminalInfo terminalInfo, BindingResult errors) throws Exception {
+	                     HttpServletResponse response, @Valid TerminalInfo terminalInfo, BindingResult errors) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
@@ -112,22 +118,26 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 			return VIEW;
 		}
 		try {
-			this.terminalInfoManger.saveOrUpdate(terminalInfo);
-			Flash.current().success(msg);
+			TerminalInfo terminalInfoDb = this.terminalInfoManger.getById(id);
+			bind(request, terminalInfoDb);
+			this.terminalInfoManger.update(terminalInfoDb);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE,msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(msg);
+			//Flash.current().error(msg);
 		}
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;
 	}
 
-	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	/**
+	 * 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-			@Valid TerminalInfo model, BindingResult errors) throws Exception {
+	                     @Valid TerminalInfo model, BindingResult errors) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 
@@ -138,12 +148,12 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		}
 		try {
 			this.terminalInfoManger.saveOrUpdate(model);
-			Flash.current().success(msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE,msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_CREATED_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(msg);
+			//Flash.current().error(msg);
 
 		}
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
@@ -155,7 +165,9 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return this.codeInfoManager.findByPageRequest(mapRequest);
 	}
 
-	/** 编辑 */
+	/**
+	 * 编辑
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request) throws Exception {
@@ -174,7 +186,7 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	/** 进入新增 */
 	@RequestMapping(value = "/new")
 	public String _new(ModelMap model, HttpServletRequest request, HttpServletResponse response,
-			TerminalInfo terminalInfo) throws Exception {
+	                   TerminalInfo terminalInfo) throws Exception {
 
 		Map mapRequest = new HashMap();
 

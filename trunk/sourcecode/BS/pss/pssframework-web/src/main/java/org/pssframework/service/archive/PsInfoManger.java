@@ -57,6 +57,10 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		}
 		model.setFunctionCode(String.valueOf(initChecked));
 
+		GpInfo gpInfo = model.getGpInfo();
+
+		gpInfo.setTerminalInfo(model.getTerminalInfo());
+
 		super.saveOrUpdate(model);
 	}
 
