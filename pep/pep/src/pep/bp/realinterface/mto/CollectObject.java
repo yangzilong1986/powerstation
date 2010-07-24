@@ -17,9 +17,9 @@ public class CollectObject {
     private int mpExpressMode;             //测量点表示方式 
     private int[] mpSn;                    //测量点序号组
 
-    private List<CommandItem> CommandItems; //命令项列表
+    private List<CommandItem> commandItems; //命令项列表
     public CollectObject() {
-        CommandItems = new ArrayList<CommandItem>();
+        commandItems = new ArrayList<CommandItem>();
     }
 
     public String getLogicalAddr() {
@@ -79,10 +79,17 @@ public class CollectObject {
     }
 
     public void AddCommandItem(CommandItem Item){
-        this.CommandItems.add(Item);
+        this.commandItems.add(Item);
     }
 
     public List<CommandItem> getCommandItems(){
-        return this.CommandItems;
+        return this.commandItems;
+    }
+
+    /**
+     * @param commandItems the commandItems to set
+     */
+    public void setCommandItems(List<CommandItem> commandItems) {
+        this.commandItems = commandItems;
     }
 }
