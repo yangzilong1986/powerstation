@@ -60,13 +60,16 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
      * @throws Exception
      */
     @RequestMapping(value = "/down")
-    public void _down(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView _down(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // String termIdString = request.getParameter("termId");
         // System.out.println(termIdString);
         String dtoJSONString = request.getParameter("dto");
         MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
-		long collectId = realTimeProxy376.writeParameters(mto);
-        logger.debug("collectId : " + collectId);
+        long collectId = realTimeProxy376.writeParameters(mto);
+        logger.info("collectId : " + collectId);
+        ModelAndView result = new ModelAndView();
+        result.addObject("collectId", collectId);
+        return result;
     }
 
     /**
@@ -78,6 +81,6 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
     @RequestMapping(value = "/up")
     public void _up(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String termIdString = request.getParameter("termId");
-        System.out.println(termIdString);
+        // System.out.println(termIdString);
     }
 }
