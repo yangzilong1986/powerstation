@@ -23,61 +23,6 @@ StringBuffer.prototype.toString = function(){
     return this.data.join("");
 }
 
-$(function(){
-    /*$('#test').datagrid({
-        width: $(window).width(),
-        height:$(window).height()-95,
-        nowrap: false,
-        striped: true,
-        url: '',
-        sortName: 'code',
-        sortOrder: 'desc',
-        idField: 'code',
-        frozenColumns:[[
-            {field:'ck',checkbox:true},
-            {field:'type',title:'参数类型 ',width:100},
-            {field:'code',title:'命令项标识',width:100}
-        ]],
-        columns:[[
-            {field:'name',title:'命令项名称 / 数据项名称',width:200},
-            {field:'value',title:'待设值',width:100},
-            {field:'lstValue',title:'上次设置值',width:100},
-            {field:'unit',title:'单位',width:100},
-            {field:'result',title:'操作结果',width:200}
-        ]],
-        pagination:false,
-        rownumbers:false,
-        singleSelect:false
-    });*/
-});
-
-var people = {
-        "programmers": [
-            { "firstName": "Brett", "lastName":"McLaughlin", "email": "brett@newInstance.com" },
-            { "firstName": "Jason", "lastName":"Hunter", "email": "jason@servlets.com" },
-            { "firstName": "Elliotte", "lastName":"Harold", "email": "elharo@macfaq.com" }
-        ],
-        "authors": [
-            { "firstName": "Isaac", "lastName": "Asimov", "genre": "science fiction" },
-            { "firstName": "Tad", "lastName": "Williams", "genre": "fantasy" },
-            { "firstName": "Frank", "lastName": "Peretti", "genre": "christian fiction" }
-        ],
-        "musicians": [
-            { "firstName": "Eric", "lastName": "Clapton", "instrument": "guitar" },
-            { "firstName": "Sergei", "lastName": "Rachmaninoff", "instrument": "piano" }
-        ]
-};
-
-function getJSONString() {
-    alert(JSON.stringify(people));
-    //alert(escape(JSON.stringify(people)));
-}
-
-function test() {
-    //alert($("tr_10040001*").length);
-    //getJSONString();
-}
-
 function folder(imgObj, itemId) {
     if(imgObj.lang == 'plus') {
         imgObj.lang = 'minus';
