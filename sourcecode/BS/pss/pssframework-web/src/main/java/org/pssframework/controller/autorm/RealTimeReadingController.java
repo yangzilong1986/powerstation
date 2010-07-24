@@ -114,27 +114,19 @@ public class RealTimeReadingController extends BaseSpringController {
 	@RequestMapping(value = "/down")
 	public ModelAndView down(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String jsonString = request.getParameter("dto");
-		if (jsonString != null) {
-			//jsonString = jsonString.substring(jsonString.indexOf("\"") + 1, jsonString.lastIndexOf("\""));
-		}
-		//jsonString = "{\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
-		//"{\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}" 
+
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		MessageTranObject mto_376 = null;
 		try {
 			mto_376 = objectMapper.readValue(jsonString, MTO_376.class);
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug(e.getMessage());
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug(e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.debug(e.getMessage());
 		}
-		System.out.println(mto_376);
 
 		long collectId = realTimeProxy376.readData(mto_376);
 
