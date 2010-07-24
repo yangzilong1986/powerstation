@@ -16,7 +16,25 @@ a { text-decoration: none; }
 img { border: 0; }
 .disNone { display: none; }
 .cb { clear: both; }
+.cle { font: 0px/0px sans-serif; clear: both; display: block; }
 
+.tc { text-align: center; }
+.tr { text-align: right; }
+.tl { text-align: left; }
+.fl { float: left; }
+.fr { float: right; }
+
+.pad5 { padding: 5px; }
+.pad10 { padding: 10px; }
+.pad15 { padding: 15px; }
+.pad20 { padding: 20px; }
+.pad25 { padding: 25px; }
+.pad30 { padding: 30px; }
+.pad40 { padding: 40px; }
+.pt5 { padding-top: 5px; }
+.pt10 { padding-top: 10px; }
+.pt20 { padding-top: 20px; }
+.pt30 { padding-top: 30px; }
 .pt40 { padding-top: 40px; }
 .mgl15 { margin-left: 15px; }
 
@@ -25,11 +43,12 @@ img { border: 0; }
 .font3 { font-family: "宋体"; color: #474747; }
 .fontw { font-size: 14px; color: #fff; font-weight: bold; }
 .green { color: #0c6051; }
+.white { color:#fff; }
 
 /*login*/
 .login_bg { background: url(../img/bg_login.jpg) no-repeat; width: 1024px; height: 500px; margin: 0 auto; padding-top: 130px; }
-.login_bg1 { background: url(../img/login_bg1.png) no-repeat; width: 424px; height: 282px; margin: 0 auto; padding: 30px 80px 0 80px; }
-* html .login_bg1 { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="style/default/bgcolor/green-stategrid/img/login_bg1.png"); background: none; width: 424px; height: 282px; margin: 0 auto; padding: 30px 80px 0 80px; }
+.login_bg1 { background: url(../img/login_bg1.png) no-repeat; width: 584px; height: 312px; margin: 0 auto; }
+* html .login_bg1 { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="style/default/bgcolor/green-stategrid/img/login_bg1.png"); background:none; width:584px; height:312px; margin:0 auto; }
 .input1 { border: 1px #9f9f9f solid; height: 22px; background: none; line-height: 22px; color: #fff; font-family: Arial, Helvetica, sans-serif; padding-left: 5px; }
 
 .bg_panel_left { background: url(../img/bg_panel_left.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
@@ -43,8 +62,8 @@ img { border: 0; }
 .panel_upanddown p { text-align: center; padding-top: 2px; }
 
 .bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 14px; }
-#logo { float: left; width: 473px; padding-top: 13px; }
-#top_r { float: right; width: 465px; padding-top: 6px; }
+#logo { float: left; padding-top: 13px; }
+#top_r { float: right; width: 480px; padding-top: 6px; }
 #top_r_t { height: 55px; }
 #top_r_t ul { overflow: hidden; }
 #top_r_t ul li { float: left; width: 65px; height: 55px; text-align: center; font-family: "宋体"; font-size: 14px; font-weight: bold; margin-left: 25px; }
