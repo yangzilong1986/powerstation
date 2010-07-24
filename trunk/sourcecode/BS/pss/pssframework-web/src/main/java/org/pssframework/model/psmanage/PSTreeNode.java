@@ -10,19 +10,15 @@ public class PSTreeNode extends BaseEntity {
      */
     private static final long serialVersionUID = 296523343003940191L;
 
-    private String treeNodeType;
+    private String treeNodeType;            // 树节点类型
 
-    private String treeNodeId;
+    private String treeNodeId;              // 树节点编号
 
-    private String treeNodeName;
+    private String treeNodeName;            // 树节点名称
 
-    private String treeNodeParentType;
+    private PSTreeNode parent;              // 父节点
 
-    private String treeNodeParentId;
-
-    private String treeNodeParentName;
-
-    private List<PSTreeNode> children;
+    private List<PSTreeNode> children;      // 子节点
 
     public String getTreeNodeType() {
         return treeNodeType;
@@ -48,28 +44,12 @@ public class PSTreeNode extends BaseEntity {
         this.treeNodeName = treeNodeName;
     }
 
-    public String getTreeNodeParentType() {
-        return treeNodeParentType;
+    public PSTreeNode getParent() {
+        return parent;
     }
 
-    public void setTreeNodeParentType(String treeNodeParentType) {
-        this.treeNodeParentType = treeNodeParentType;
-    }
-
-    public String getTreeNodeParentId() {
-        return treeNodeParentId;
-    }
-
-    public void setTreeNodeParentId(String treeNodeParentId) {
-        this.treeNodeParentId = treeNodeParentId;
-    }
-
-    public String getTreeNodeParentName() {
-        return treeNodeParentName;
-    }
-
-    public void setTreeNodeParentName(String treeNodeParentName) {
-        this.treeNodeParentName = treeNodeParentName;
+    public void setParent(PSTreeNode parent) {
+        this.parent = parent;
     }
 
     public List<PSTreeNode> getChildren() {
@@ -85,11 +65,9 @@ public class PSTreeNode extends BaseEntity {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((children == null) ? 0 : children.hashCode());
+        result = prime * result + ((parent == null) ? 0 : parent.hashCode());
         result = prime * result + ((treeNodeId == null) ? 0 : treeNodeId.hashCode());
         result = prime * result + ((treeNodeName == null) ? 0 : treeNodeName.hashCode());
-        result = prime * result + ((treeNodeParentId == null) ? 0 : treeNodeParentId.hashCode());
-        result = prime * result + ((treeNodeParentName == null) ? 0 : treeNodeParentName.hashCode());
-        result = prime * result + ((treeNodeParentType == null) ? 0 : treeNodeParentType.hashCode());
         result = prime * result + ((treeNodeType == null) ? 0 : treeNodeType.hashCode());
         return result;
     }
@@ -109,6 +87,12 @@ public class PSTreeNode extends BaseEntity {
         }
         else if(!children.equals(other.children))
             return false;
+        if(parent == null) {
+            if(other.parent != null)
+                return false;
+        }
+        else if(!parent.equals(other.parent))
+            return false;
         if(treeNodeId == null) {
             if(other.treeNodeId != null)
                 return false;
@@ -120,24 +104,6 @@ public class PSTreeNode extends BaseEntity {
                 return false;
         }
         else if(!treeNodeName.equals(other.treeNodeName))
-            return false;
-        if(treeNodeParentId == null) {
-            if(other.treeNodeParentId != null)
-                return false;
-        }
-        else if(!treeNodeParentId.equals(other.treeNodeParentId))
-            return false;
-        if(treeNodeParentName == null) {
-            if(other.treeNodeParentName != null)
-                return false;
-        }
-        else if(!treeNodeParentName.equals(other.treeNodeParentName))
-            return false;
-        if(treeNodeParentType == null) {
-            if(other.treeNodeParentType != null)
-                return false;
-        }
-        else if(!treeNodeParentType.equals(other.treeNodeParentType))
             return false;
         if(treeNodeType == null) {
             if(other.treeNodeType != null)

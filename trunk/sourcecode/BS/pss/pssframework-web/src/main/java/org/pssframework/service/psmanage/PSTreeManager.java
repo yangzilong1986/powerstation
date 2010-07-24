@@ -1,6 +1,7 @@
 package org.pssframework.service.psmanage;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
@@ -21,4 +22,14 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
         return null;
     }
 
+    /**
+     * 
+     * @param tgNo
+     * @param tgName
+     * @return
+     */
+    public List<PSTreeNode> findPSTreeByTg(String tgNo, String tgName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

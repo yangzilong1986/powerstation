@@ -28,8 +28,14 @@ public class PSTreeNodeDao extends BaseIbatis3Dao<PSTreeNode, Serializable> {
 
     }
 
+    /**
+     * 
+     * @param tgNo
+     * @param tgName
+     * @return
+     */
     public List<PSTreeNode> findPSTreeByTg(String tgNo, String tgName) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 }
