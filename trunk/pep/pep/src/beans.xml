@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:flow="http://www.springframework.org/schema/webflow-config"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-1.0.xsd
+       http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd
+       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <!-- 属性文件读入,使用rapid中的JdbcPlaceholderConfigurer则可以从数据库读取配置信息
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>-->
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--连接池启动时的初始值-->
+        <property name="initialSize" value="2"/>
+        <!--连接池的最大值-->
+        <property name="maxActive" value="10"/>
+        <!--最大空闲值-->
+        <property name="maxIdle" value="5"/>
+        <!--最小空闲值-->
+        <property name="minIdle" value="2"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="converter" class="pep.bp.utils.Converter"></bean>
+
+    <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
+        <property name="taskService" ref="rtTaskService" />
+        <property name="converter" ref="converter" />
+    </bean>
+
+    <!--<bean id="realTimeProxy376Test" class="pep.bp.realinterface.RealTimeProxy376Test">
+        <property name="proxy" ref="realTimeProxy376"/>
+        <property name="taskService" ref="rtTaskService" />
+        <property name="converter" ref="converter" />
+    </bean>-->
+
+    <bean id="protocolConfig" class="pep.bp.realinterface.conf.ProtocolConfig">
+        <constructor-arg index="0"
+                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config-mapping.xml"></constructor-arg>
+        <constructor-arg index="1"
+                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config.xml"></constructor-arg>
+    </bean>
+
+</beans>

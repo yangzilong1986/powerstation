@@ -21,6 +21,8 @@ abstract public class PmPacket {
     private EventCountor eventCountor;
     private Authorize authorize;
     private TimeProtectValue tpv;
+    private String remark1;
+    private String remark2;
 
     public PmPacket() {
         super();
@@ -241,5 +243,33 @@ abstract public class PmPacket {
             }
         }
         return head;
+    }
+
+    /**
+     * @return the remark1
+     */
+    public String getRemark1() {
+        return remark1;
+    }
+
+    /**
+     * @param remark1 the remark1 to set
+     */
+    public void setRemark1(String remark1) {
+        this.remark1 = remark1;
+    }
+
+    /**
+     * @return the remark2
+     */
+    public String getRemark2() {
+        return remark2;
+    }
+
+    /**
+     * @param remark2 the remark2 to set
+     */
+    public void setRemark2(String remark2) {
+        this.remark2 = remark2;
     }
 }

@@ -44,7 +44,7 @@ public class RealTimeSender extends BaseProcessor {
             for (RealTimeTaskDAO task : tasks) {
                 PmPacket packet = new PmPacket376();
                 packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
-                pepCommunicator.SendPacket(task.getSequencecode(), packet);
+                pepCommunicator.SendPacket(task.getTaskId() , packet);
             }
         }
 
