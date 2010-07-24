@@ -59,6 +59,10 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	private final String PARENT_ID = "parentId";
 	private final String PARENT_TYPE = "parentType";
 
+	private final static String ROOT_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon03.gif";
+
+	private final static String TG_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon08.gif";
+
 	@Autowired
 	private OrgInfoManager orgInfoManager;
 
@@ -141,6 +145,10 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?" + PARENT_ID + "=" + parentID + "&"
 				+ PARENT_TYPE + "=ORG", pRequest));
 
+		rootNode.setIcon(RequestUtil.getUrl(ROOT_IMG, pRequest));
+
+		rootNode.setOpenIcon(RequestUtil.getUrl(ROOT_IMG, pRequest));
+
 		DefaultTreeModel treeModel = new DefaultTreeModel();
 		treeModel.addRootNode(rootNode);
 		TreeDirector director = new DefaultTreeDirector();
@@ -175,7 +183,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 				result.setValue(leaf.getLeafId());
 
-				result.setIcon(getUrl("/style/default/bgcolor/green-stategrid/img/tree_icon03.gif"));
+				result.setIcon(getUrl(TG_IMG));
 
 				return result;
 			}
@@ -208,6 +216,5 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 		pResponse.flushBuffer();
 
 	}
-
 
 }
