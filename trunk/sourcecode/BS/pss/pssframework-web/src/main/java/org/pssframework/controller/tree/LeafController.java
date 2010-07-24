@@ -57,6 +57,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	private final String LIST_ACTION = "redirect:/tree";
 
 	private final String PARENT_ID = "parentId";
+
 	private final String PARENT_TYPE = "parentType";
 
 	private final static String ROOT_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon03.gif";
