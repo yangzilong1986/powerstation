@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+                        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="PSTreeNode">
+    <resultMap id="PSTreeNodeResult" type="org.pssframework.model.psmanage.PSTreeNode" />
+    
+    <sql id="TgNodesSQL">
+        <![CDATA[
+		select 'TG' as treeNodeType, t.TG_ID as treeNodeId, t.TG_NAME as treeNodeName
+		  from G_TG t
+		 where t.TG_NO like '%' | #{tgNo} | '%'
+		    or t.TG_NAME like '%' | #{tgName} | '%'
+        ]]>
+    </sql>
+    
+    <!-- 查询台区节点 -->
+    <select id="getTgNodesByNoOrName" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+    	<include refid="TgNodesSQL" />
+		<![CDATA[
+		order by treeNodeName
+		]]>
+    </select>
+	
+	<!-- -->
+	<select id="countTgNodesByNoOrName" resultType="long">
+		select count(1) from (
+		<include refid="TgNodesSQL" />
+		)
+	</select>
+</mapper>
