@@ -451,6 +451,7 @@ public class RealTimeProxy376 implements ICollectInterface {
      * @return
      * @throws Exception
      */
+    @Override
     public long transmitMsg(MessageTranObject MTO) throws Exception {
         try {
             if ((null == MTO) || (MTO.getType() != MTOType.GW_376)) {
