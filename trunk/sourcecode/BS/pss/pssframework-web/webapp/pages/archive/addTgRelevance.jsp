@@ -272,7 +272,6 @@ addtginfo = function(){
 updatetginfo = function(){
 	var tgFromData = getData("update");
 	  var url="${ctx}/archive/tginfo/"+jQuery("#tgId").val()+'.json?_method=put';
-	  alert(tgFromData);
 	  if(confirm("确定要更新该台区?")){
 	    $.ajax({
 	         url: url,

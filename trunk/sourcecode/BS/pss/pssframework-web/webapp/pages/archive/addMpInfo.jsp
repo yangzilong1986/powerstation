@@ -108,50 +108,52 @@ function meterState(){
 </head>
 <body>
 <form:form action="/archive/mpinfo" modelAttribute="mpinfo">
-  <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
-    value="${_type}"></input>
-  <form:hidden path="tgInfo.tgId" />
-  <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
-  <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
-  <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
-  <ul class=default id=electric_Con_1>
-    <div class="tab"><span>总表信息</span></div>
-    <div class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression(((                           document.documentElement.clientHeight ||                           document.body.clientHeight) -35 ) );"">
-    <div class="tab"><span>重要信息</span></div>
-    <div id="485Show" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((               document.documentElement.clientHeight ||               document.body.clientHeight) -                 700 ) );">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr height="30px">
-        <td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
-        <td width="20%"><form:input path="gpInfos[0].gpSn" cssClass="required validate-number" /></td>
-        <td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
-        <td width="20%"><form:input path="mpName" cssClass="required" /></td>
-        <td width="13%" class="green" align="right"><font color="red">* </font>计量点编号：</td>
-        <td width="20%"><form:input path="mpNo" cssClass="required" /></td>
-      </tr>
-      <tr height="30px">
-        <td class="green" align="right">CT变比：</td>
-        <td><form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
-        <td class="green" align="right">PT变比：</td>
-        <td><form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
-        <td class="green" align="right"><font color="red">* </font>表 地 址：</td>
-        <td><form:input path="gpInfos[0].gpAddr" cssClass="required" /></td>
-      </tr>
-      <tr height="30px">
-        <td class="green" align="right">表 规 约：</td>
-        <td><form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
-        <td class="green" align="right">所属终端：</td>
-        <td><form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId"
-          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></td>
-      </tr>
-    </table>
-    </div>
-    <br></br>
-    <script>
+	<input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
+		value="${_type}"></input>
+	<form:hidden path="tgInfo.tgId" />
+	<input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
+	<input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
+	<div class="electric_lcon" id="electric_Con" style="margin: 5px;">
+	<ul class=default id=electric_Con_1>
+		<div class="tab"><span>总表信息</span></div>
+		<div class="da_mid"
+			style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||   document.body.clientWidth) -10 ); height: expression(((                             document.documentElement.clientHeight ||                             document.body.clientHeight) -35 ) );"">
+		<div class="tab"><span>重要信息</span></div>
+		<div id="485Show" class="da_mid"
+			style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -                   700 ) );">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr height="30px">
+				<td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
+				<td width="20%"><form:input path="gpInfos[0].gpSn" cssClass="required validate-number" /></td>
+				<td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
+				<td width="20%"><form:input path="mpName" cssClass="required" /></td>
+				<td width="13%" class="green" align="right"><font color="red">* </font>计量点编号：</td>
+				<td width="20%"><form:input path="mpNo" cssClass="required" /></td>
+			</tr>
+			<tr height="30px">
+				<td class="green" align="right">CT变比：</td>
+				<td><form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
+					cssStyle="width:155px;" /></td>
+				<td class="green" align="right">PT变比：</td>
+				<td><form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
+					cssStyle="width:155px;" /></td>
+				<td class="green" align="right"><font color="red">* </font>表 地 址：</td>
+				<td><form:input path="gpInfos[0].gpAddr" cssClass="required" /></td>
+			</tr>
+			<tr height="30px">
+				<td class="green" align="right">表 规 约：</td>
+				<td><form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+					itemValue="code" cssStyle="width:155px;" /></td>
+				<td class="green" align="right">所属终端：</td>
+				<td><form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
+					itemValue="termId" cssStyle="width:155px;" /></td>
+				<td class="green" align="right"><font color="red">* </font>资产号：</td>
+				<td><form:input path="meterInfo.assertNo" cssClass="required" /></td>
+			</tr>
+		</table>
+		</div>
+		<br></br>
+		<script>
       function setCheckBox(obj){
           if(obj.type=='checkbox'){
             if(obj.checked==true){
@@ -163,56 +165,52 @@ function meterState(){
           }
       }
       </script>
-    <div class="tab"><span>一般信息</span></div>
-    <div id="pulseShow" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((               document.documentElement.clientHeight ||               document.body.clientHeight) -                 600 ) );">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr height="30px">
-        <td width="13%" class="green" align="right">计量方式：</td>
-        <td width="20%"><form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
-        <td width="13%" class="green" align="right">端 口 号：</td>
-        <td width="20%"><form:input path="gpInfos[0].port"></form:input></td>
-        <td width="13%" class="green" align="right">波 特 率：</td>
-        <td width="20%"><form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
-      </tr>
-      <tr height="30px">
-        <td class="green" align="right">申请日期：</td>
-        <td class="dom_date"><form:input path="appDate" cssClass="input_time"
-          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
-        <td class="green" align="right">投运日期：</td>
-        <td class="dom_date"><form:input path="runDate" cssClass="input_time"
-          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
-        <td class="green" align="right">供电线路：</td>
-        <td><form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
-      </tr>
-      <tr height="30px">
-        <td class="green" align="right">运行状态：</td>
-        <td><form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
-        <td class="green" align="right">接线方式：</td>
-        <td><form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
-       
-      </tr>
-      <tr height="30px">
-             
-           <td class="green" align="right">安装位置：</td>
-        <td colspan=3><form:input path="mpAddr" size="60"></form:input></td>
-       <td colspan="2" > <form:checkbox path="gpInfos[0].sucratCptId" value="0" onclick="setCheckBox(this)" /> 功率累计 <form:checkbox
-          path="gpInfos[0].computeFlag" value="0" onclick="setCheckBox(this)" /> 电量计算</td>
-     
-      </tr>
-      
-    </table>
-    </div>
-    <div style="text-align: center"><br />
-    <input type="button" id="save" value="保 存" class="btnbg4" /></div>
-    </div>
-  </ul>
-  </div>
+		<div class="tab"><span>一般信息</span></div>
+		<div id="pulseShow" class="da_mid"
+			style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -                   600 ) );">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr height="30px">
+				<td width="13%" class="green" align="right">计量方式：</td>
+				<td width="20%"><form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name"
+					itemValue="code" cssStyle="width:155px;" /></td>
+				<td width="13%" class="green" align="right">端 口 号：</td>
+				<td width="20%"><form:input path="gpInfos[0].port"></form:input></td>
+				<td width="13%" class="green" align="right">波 特 率：</td>
+				<td width="20%"><form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name"
+					itemValue="code" cssStyle="width:155px;" /></td>
+			</tr>
+			<tr height="30px">
+				<td class="green" align="right">申请日期：</td>
+				<td class="dom_date"><form:input path="appDate" cssClass="input_time"
+					onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
+				<td class="green" align="right">投运日期：</td>
+				<td class="dom_date"><form:input path="runDate" cssClass="input_time"
+					onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
+				<td class="green" align="right">供电线路：</td>
+				<td><form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
+					cssStyle="width:155px;" /></td>
+			</tr>
+			<tr height="30px">
+				<td class="green" align="right">运行状态：</td>
+				<td><form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
+					cssStyle="width:155px;" /></td>
+				<td class="green" align="right">接线方式：</td>
+				<td><form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
+					cssStyle="width:155px;" /></td>
+			</tr>
+			<tr height="30px">
+				<td class="green" align="right">安装位置：</td>
+				<td colspan=3><form:input path="mpAddr" size="60"></form:input></td>
+				<td colspan="2"><form:checkbox path="gpInfos[0].sucratCptId" value="0" onclick="setCheckBox(this)" /> 功率累计 <form:checkbox
+					path="gpInfos[0].computeFlag" value="0" onclick="setCheckBox(this)" /> 电量计算</td>
+			</tr>
+		</table>
+		</div>
+		<div style="text-align: center"><br />
+		<input type="button" id="save" value="保 存" class="btnbg4" /></div>
+		</div>
+	</ul>
+	</div>
 </form:form>
 </body>
 <script>
