@@ -1,5 +1,7 @@
 package org.pssframework.controller.eparam;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,14 +63,13 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
      */
     @RequestMapping(value = "/down")
     public ModelAndView _down(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // String termIdString = request.getParameter("termId");
-        // System.out.println(termIdString);
+        ModelAndView result = new ModelAndView();
         String dtoJSONString = request.getParameter("dto");
         MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
         long collectId = realTimeProxy376.writeParameters(mto);
         logger.info("collectId : " + collectId);
-        ModelAndView result = new ModelAndView();
         result.addObject("collectId", collectId);
+        result.addObject("fetchCount", 5);
         return result;
     }
 
@@ -79,8 +80,20 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
      * @throws Exception
      */
     @RequestMapping(value = "/up")
-    public void _up(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String termIdString = request.getParameter("termId");
-        // System.out.println(termIdString);
+    public ModelAndView _up(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView result = new ModelAndView();
+        String strCollectId = request.getParameter("collectId");
+        if(strCollectId != null) {
+            long collectId = Integer.parseInt(strCollectId);
+            Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter(collectId);
+            /*
+             * Map<String, String> resultMap = new HashMap<String, String>(); resultMap.put("96123456#0#10040001",
+             * "000000"); resultMap.put("96123456#0#10040003", "000000"); resultMap.put("96123456#0#10040004",
+             * "000000"); resultMap.put("96123456#0#10040008", "000000"); resultMap.put("96123456#0#10040009",
+             * "000000");
+             */
+            result.addObject("resultMap", resultMap);
+        }
+        return result;
     }
 }
