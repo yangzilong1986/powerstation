@@ -8,7 +8,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>header container</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
+function isIE() {
+    if($.browser.msie && $.browser.version == '6.0') { return true; }
+    return false;
+}
+
+function correctPNG() {
+    for(var i = 0; i < document.images.length; i++) {
+        var img = document.images[i];
+        var LW = img.width;
+        var LH = img.height;
+        var imgName = img.src.toUpperCase();
+        if(imgName.substring(imgName.length-3, imgName.length) == "PNG") { 
+            img.style.filter += 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=' + img.src + ', sizingmethod=scale);';
+            img.src = '<pss:path type="bgcolor"/>/img/blank.gif';
+            img.width = LW;
+            img.height = LH;
+        }
+    }
+}
+
+$(document).ready( function() {
+    if(isIE()) {
+        correctPNG();
+    }
+});
+
 function showBar(firstLevel) {
     parent.menu.showBar(firstLevel);
 }
@@ -16,7 +43,7 @@ function showBar(firstLevel) {
 </head>
 <body>
 <div class="bg_top">
-  <div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo.png" width="473" height="60" /></div>
+  <div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo1.png" /></div>
   <div id="top_r">
     <div id="top_r_t">
       <ul>
