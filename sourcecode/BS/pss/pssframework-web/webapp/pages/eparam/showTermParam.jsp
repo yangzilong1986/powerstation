@@ -8,6 +8,7 @@
 <title>终端参数设置</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/application.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/json2.js"></script>
 <script type="text/javascript">
 function StringBuffer(){
@@ -104,7 +105,8 @@ function setup() {
     sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
     sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = "10040001";
+    var cilist = getSelectedCheckboxs();
+    alert(cilist);
     var ciarray = cilist.split(',');
     for(var i = 0; i < ciarray.length; i++) {
         //alert($("tr[ci='" + ciarray[i] + "']").length);
@@ -138,7 +140,7 @@ function setup() {
     sb_dto.append('}');
     //alert(sb_dto.toString());
     //alert(escape(sb_dto.toString()));
-    var url = '<pss:path type="webapp"/>/eparam/termparam/down';
+    var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
     $.ajax({
         type: 'POST',
         //contentType: 'application/json',
@@ -146,7 +148,7 @@ function setup() {
         data: 'dto=' + escape(sb_dto.toString()),
         dataType: 'json',
         success: function(data) {
-            //alert(msg);
+            alert(data.collectId);
         },
         error: function() {
         }
@@ -155,6 +157,20 @@ function setup() {
 
 function read() {
     
+}
+
+function selectAll(obj, name) {
+    setAllCheckboxState(name, $(obj).attr("checked"));
+}
+
+function getSelectedCheckboxs() {
+    var selected_checkboxs = "";
+    $("input[type=checkbox][name='itemId']").each( function() {
+        if($(this).attr("checked")) {
+            selected_checkboxs += "," + $(this).val();
+        }
+    });
+    return ($.trim(selected_checkboxs).length > 0 ? selected_checkboxs.substring(1) : "");
 }
 </script>
 </head>
@@ -202,7 +218,7 @@ function read() {
                 <thead>
                   <tr>
                     <th width="7%" height="30" class="bg01">
-                      <input align="middle" type="checkbox" name="selectAll" checked="checked" />
+                      <input align="middle" type="checkbox" name="selectAll" checked="checked" onclick="selectAll(this, 'itemId')" />
                     </th>
                     <th width="8%" class="bg01">参数类型</th>
                     <th width="30%" class="bg01">参数名称</th>
