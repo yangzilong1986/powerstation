@@ -1,21 +1,30 @@
 package org.pssframework.controller;
 
-import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
+import cn.org.rapid_framework.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.BeanUtilsBean2;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.pssframework.model.system.OrgInfo;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-
 import pep.bp.realinterface.mto.MTO_376;
 import pep.bp.realinterface.mto.MessageTranObject;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,9 +37,14 @@ public class JuintTest {
 
 	private String jsonString;
 
+	static {
+		 ConvertUtils.register(new SqlDateConverter(), java.util.Date.class);
+		// ConvertUtils.register(new UtilDateConverter(), java.util.Date.class);   
+	}
+
 	@Before
 	public void one() {
-		jsonString = "{\"mtoType\":\"GW_376\",\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"GW_376\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
+		jsonString = "{\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"GW_376\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
 		//jsonString = "{\"mtoType\":\"GW_376\",\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",   \"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
 	}
 
@@ -40,12 +54,37 @@ public class JuintTest {
 	}
 
 	public void fuck() {
-		char[] init = new char[] { '0', '0', '0', '0', '0', '0', '0', '0' };
+		char[] init = new char[]{'0', '0', '0', '0', '0', '0', '0', '0'};
 		System.out.println(String.valueOf(init));
 
 	}
 
 	@Test
+	public void testDouble() {
+		double c = 0.22d;
+		double d = 0.23d;
+		DecimalFormat df = new DecimalFormat("########.##");
+		System.out.print(c * d);
+
+		System.out.print(df.format(c * d));
+
+
+	}
+
+	@Test
+	public void testBeanCopy() {
+
+		OrgInfo orgInfo1 = new OrgInfo();
+		orgInfo1.setOrgId(1L);
+		OrgInfo orgInfo2 = new OrgInfo();
+		orgInfo2.setOrgName("asdasd");
+		BeanUtilsBean2 beanUtilsBean =  new BeanUtilsBean2();
+	org.springframework.beans.BeanUtils.copyProperties(orgInfo2,orgInfo1);
+		//BeanUtils.copyProperties(orgInfo2, orgInfo1);
+		assertEquals(orgInfo2.getOrgId(), new Long(1L));
+		assertEquals(orgInfo2.getOrgName(),"asdasd");
+	}
+
 	public void jackSon() throws JsonGenerationException, JsonMappingException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -119,28 +158,27 @@ public class JuintTest {
 	}
 
 	/*
-	 * byte to int
-	 * 
-	 * @param b 待转换的字节数组
-	 * 
-	 * @param offset 偏移量，字节数组中开始转换的位置
-	 * 
-	 * @return
-	 */
+				* byte to int
+				*
+				* @param b 待转换的字节数组
+				*
+				* @param offset 偏移量，字节数组中开始转换的位置
+				*
+				* @return
+				*/
+
 	public static int byte2int(byte b[], int offset) {
 		return b[offset + 3] & 0xff | (b[offset + 2] & 0xff) << 8 | (b[offset + 1] & 0xff) << 16
 				| (b[offset] & 0xff) << 24;
 	}
 
 	/**
-	* int to byte
-	* 
-	* @param n待转换的整形变量
-	* @param buf
-	*            转换后生成的字节数组
-	* @param offset
-	*            偏移量，字节数组中开始存放的位置
-	*/
+	 * int to byte
+	 *
+	 * @param n待转换的整形变量
+	 * @param buf       转换后生成的字节数组
+	 * @param offset    偏移量，字节数组中开始存放的位置
+	 */
 	public static void int2byte(int n, byte buf[], int offset) {
 		buf[offset] = (byte) (n >> 24);
 		buf[offset + 1] = (byte) (n >> 16);
@@ -149,23 +187,20 @@ public class JuintTest {
 	}
 
 	/**
-	* @returntype void
-	* @param n
-	*            待转换的short变量
-	* @param buf
-	*            转换后存放的byte数组
-	* @param offset偏移量，字节数组中开始存放的位置
-	*/
+	 * @param n                      待转换的short变量
+	 * @param buf                    转换后存放的byte数组
+	 * @param offset偏移量，字节数组中开始存放的位置
+	 * @returntype void
+	 */
 	public static void short2byte(int n, byte buf[], int offset) {
 		buf[offset] = (byte) (n >> 8);
 		buf[offset + 1] = (byte) n;
 	}
 
 	/**
-	* 
-	* @param buf
-	* @return
-	*/
+	 * @param buf
+	 * @return
+	 */
 	public static String byte2Hex(byte[] buf) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
@@ -196,26 +231,23 @@ public class JuintTest {
 	}
 
 	/**
-	* convert signed one byte into a hexadecimal digit
-	* 
-	* @param b
-	*            byte
-	* @return convert result
-	*/
+	 * convert signed one byte into a hexadecimal digit
+	 *
+	 * @param b byte
+	 * @return convert result
+	 */
 	public static String byteToHex(byte b) {
 		int i = b & 0xFF;
 		return Integer.toHexString(i);
 	}
 
 	/**
-	* convert signed 4 bytes into a 32-bit integer
-	* 
-	* @param buf
-	*            bytes buffer
-	* @param pos
-	*            beginning <code>byte</code>> for converting
-	* @return convert result
-	*/
+	 * convert signed 4 bytes into a 32-bit integer
+	 *
+	 * @param buf bytes buffer
+	 * @param pos beginning <code>byte</code>> for converting
+	 * @return convert result
+	 */
 	public static long unsigned4BytesToInt(byte[] buf, int pos) {
 		int firstByte = 0;
 		int secondByte = 0;
