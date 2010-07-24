@@ -42,7 +42,7 @@ public interface RTTaskService {
      * @param sequnceCode
      * @param recvMsg
      */
-    public void insertRecvMsg(long sequnceCode,String logicAddress ,String recvMsg);
+    public void insertRecvMsg(long taskid,String logicAddress ,String recvMsg);
 
 
     /**

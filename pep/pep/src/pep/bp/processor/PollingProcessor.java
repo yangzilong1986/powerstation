@@ -13,7 +13,6 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.TriggerUtils;
-import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +33,7 @@ public class PollingProcessor implements Runnable{
 
     private Trigger triggerHour,triggerDay;
 
+    @Override
     public void run() {
         try {
             SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();

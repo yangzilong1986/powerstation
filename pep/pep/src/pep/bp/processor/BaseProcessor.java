@@ -18,6 +18,7 @@ public class BaseProcessor implements Runnable{
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
     }
 
+    @Override
     public void run(){
 
     }

@@ -70,7 +70,7 @@ public class RealTimeTaskDAO {
         return taskStatus;
     }
 
-    public long getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
