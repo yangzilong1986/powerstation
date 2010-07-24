@@ -299,15 +299,14 @@ function setup() {
 	
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
-    sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"coList":').append('[{');
+    sb_dto.append('"collectObjects":').append('[{');
     sb_dto.append('"logicalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#equipProtocol").val() + '"').append(',');
     sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
     sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
     sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
     sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
-    sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+    sb_dto.append('"mpSn":["' + $("#mpSn").val() + '"]').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
     var cilist = "100C0025";
     var ciarray = cilist.split(',');
@@ -323,11 +322,12 @@ function setup() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    var url = '<pss:path type="webapp"/>/autorm/realTimeReading/down';
+    
+   var url = '<pss:path type="webapp"/>/autorm/realTimeReading/down';
     $.ajax({
         type: 'POST',
         url: url,
-        data: 'dto=' + escape(sb_dto.toString()),
+        data: "dto="+sb_dto.toString(),
         dataType: 'json',
         success: function(data) {
             alert(data['collectId']);
@@ -351,20 +351,20 @@ function read() {
 				<td width="100" class="green" align="right">单位：</td>
 				<td width="120"><select name="orgId" style="width: 150px;">
 					<c:forEach var="item" items="${orglist}">
-						<option <c:if test="${item.orgId eq model.orgId}">selected</c:if>
-							value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
+						<option <c:if test="${item.orgId eq model.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out
+							value="${item.orgName}" /></option>
 					</c:forEach>
 				</select></td>
 				<td width="100" class="green" align="right">台区：</td>
 				<td width="150"><select name="objId" style="width: 150px;">
 					<c:set value="${model.objId}" var="tg"></c:set>
 					<c:forEach var="item" items="${tglist}">
-						<option <c:if test="${item.tgId eq model.objId}">selected</c:if>
-							value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
+						<option <c:if test="${item.tgId eq model.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out
+							value="${item.tgName}" /></option>
 					</c:forEach>
 				</select></td>
 				<td width="100" class="green" align="right">集中器地址：</td>
-				<td width="120" class="dom"><input value="${model.logicalAddr}" name="logicalAddr" /></td>
+				<td width="120" class="dom"><input value="${model.logicalAddr}" name="logicalAddr" id="logicalAddr1"/></td>
 			</tr>
 			<tr height="30px">
 				<td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
@@ -380,58 +380,44 @@ function read() {
 	<ul id=”datamenu_Option“ class="cb font1">
 		<li class="curr" id=datamenu_Option_0 style="cursor: pointer;">实时召测</li>
 	</ul>
-	<input type="hidden"
-					id="protocolNo" name="protocolNo" value="100" /> <input type="hidden" id="logicalAddr" name="logicalAddr"
-					value="96123456" /> <input type="hidden" id="channelType" name="channelType" value="1" /> <input type="hidden"
-					id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
-				<input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" /> <input type="hidden" id="mpSn"
-					name="mpSn" value="0" />
-	</div>
+	<input type="hidden" id="protocolNo" name="protocolNo" value="GW_376" />
+	<input type="hidden" id="equipProtocol" name="equipProtocol" value="100" /> <input type="hidden" id="logicalAddr"
+		name="logicalAddr" value="96123456" /> <input type="hidden" id="channelType" name="channelType" value="1" /> <input
+		type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent"
+		value="8888" /> <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" /> <input type="hidden"
+		id="mpSn" name="mpSn" value="0" /></div>
 	<div class="tableContainer"
-		style="height: expression((( document.documentElement.clientHeight ||   document.body.clientHeight) -105 ) );">
-                <table width="100%"  border="0" cellspacing="0" class="gridBody"> 
-                  <thead class="tableHeader"> 
-                           
-                          <tr> 
-                                <th style="width:1px;"> </th> 
-                                <th style="width:1px;"><input type="checkbox" onclick="setAllCheckboxState('items',this.checked)"></th> 
-                                 
-                                <!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; --> 
-                                <th sortColumn="objNo" >对象编号</th> 
-                                <th sortColumn="objName">对象名称</th> 
-                                <th sortColumn="objType" >对象类型</th> 
-                                <th sortColumn="logicalAddr" >终端地址</th> 
-                                <th sortColumn="mpNo" >电表局号</th> 
-                                <th sortColumn="gpSn" >测量点序号</th> 
- 
-                                <th>操作</th> 
-                          </tr> 
-                           
-                  </thead> 
-                  <tbody class="tableBody"> 
-                          <c:forEach items="${page.result}" var="item" varStatus="status"> 
-                           
-                          <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}"> 
-                                <td>${page.thisPageFirstElementNumber + status.index}</td> 
-                                <td><input type="checkbox" name="items" value="checkbox"></td> 
-                                 
-                                <td><c:out value='${item.objNo}'/>&nbsp;</td> 
-                                <td><c:out value='${item.objName}'/>&nbsp;</td> 
-                                <td><c:out value='${item.objType}'/>&nbsp;</td> 
-                                <td><c:out value='${item.logicalAddr}'/>&nbsp;</td> 
-                                <td><c:out value='${item.mpNo}'/>&nbsp;</td> 
-                                <td><c:out value='${item.gpSn}'/>&nbsp;</td> 
-                                <td> 
-                                        <a href="${ctx}/pages/Blog/show.do?id=${item.gpId}&">查看</a>&nbsp;&nbsp;&nbsp; 
-                                        <a href="${ctx}/pages/Blog/edit.do?id=${item.gpId}&">修改</a> 
-                                </td> 
-                          </tr> 
-                           
-                          </c:forEach> 
-                  </tbody> 
-                </table> 
-	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar>
-	</div>
+		style="height: expression(((   document.documentElement.clientHeight ||     document.body.clientHeight) -105 ) );">
+	<table width="100%" border="0" cellspacing="0" class="gridBody" id="dataBody">
+		<thead class="tableHeader">
+			<tr>
+				<th style="width: 1px;"></th>
+				<th style="width: 1px;"><input type="checkbox" onclick="setAllCheckboxState('items',this.checked)"></th>
+				<!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; -->
+				<th sortColumn="objNo">对象编号</th>
+				<th sortColumn="objName">对象名称</th>
+				<th sortColumn="objType">对象类型</th>
+				<th sortColumn="logicalAddr">终端地址</th>
+				<th sortColumn="mpNo">电表局号</th>
+				<th sortColumn="gpSn">测量点序号</th>
+			</tr>
+		</thead>
+		<tbody class="tableBody">
+			<c:forEach items="${page.result}" var="item" varStatus="status">
+				<tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
+					<td>${page.thisPageFirstElementNumber + status.index}</td>
+					<td><input type="checkbox" name="items" value="checkbox"></td>
+					<td><c:out value='${item.objNo}' />&nbsp;</td>
+					<td><c:out value='${item.objName}' />&nbsp;</td>
+					<td><c:out value='${item.objType}' />&nbsp;</td>
+					<td><c:out value='${item.logicalAddr}' />&nbsp;</td>
+					<td><c:out value='${item.mpNo}' />&nbsp;</td>
+					<td><c:out value='${item.gpSn}' />&nbsp;</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </ul>
 </div>
 <iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
@@ -748,8 +734,7 @@ function fetchReturnResult(appIds, sFetchCount, commanditems) {
 }
 
 function insertTd(title, code) {
-	var head = document.all.userTable.getElementsByTagName("thead");
-    var rows = document.all.userTable.rows;
+    var rows = document.all.dataBody.rows;
     var ids = document.all.ItemID;
     var tids = document.all.tdID;
     var th = document.createElement("th");
@@ -873,13 +858,10 @@ function insertCurData(key,value){
     }
 }
 function deleteDataitemTd() {
-	var form = $("#net_jcreate_e3_table_html_paramsForm_userTable [name=table]:first").rows;
-	alert(form);
-	 
-    var rows = table.attr("rows");
+    var rows = $("#head").rows;
     alert(rows);
     var cells = rows.item(0).cells.length;
-    for(var j = cells - 1; j > 6; j--) {
+    for(var j = cells - 1; j > 7; j--) {
         for(var i = 0; i < rows.length; i++) {
             rows[i].deleteCell(j);
         }
@@ -901,7 +883,7 @@ function notGetResult(){
     var resendId; 
     var total=new Array(0,0);   
     for(var i=1;i<rows.length;i++) {
-        for(var j=7;j<cells;j++) {
+        for(var j=8;j<cells;j++) {
             if(isAll != '1') {
                 if(rows[i].cells[j].innerText == readingTitle) {
                     rows[i].cells[j].innerHTML=overTimeTitle;
@@ -921,7 +903,7 @@ function notGetResult(){
                 }
                 else {
                     //alert(rows[i].cells[j].innerText);
-                    total[j-7]+=parseFloat(rows[i].cells[j].innerText);
+                    total[j-8]+=parseFloat(rows[i].cells[j].innerText);
                 }
             }
         }
@@ -939,7 +921,7 @@ function notGetResult(){
     enableButton();
 }
 </script>
-	<script type="text/javascript" >
+<script type="text/javascript">
 		$(document).ready(function() {
 			// 分页需要依赖的初始化动作
 			window.simpleTable = new SimpleTable('model','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
