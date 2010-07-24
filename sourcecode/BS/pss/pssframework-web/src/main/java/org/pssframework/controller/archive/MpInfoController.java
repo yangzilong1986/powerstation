@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.pssframework.controller.archive;
 
@@ -16,7 +16,6 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAG
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
-import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
@@ -51,8 +50,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.org.rapid_framework.web.scope.Flash;
-
 /**
  * @author Administrator 计量点
  */
@@ -63,7 +60,9 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	private static final String VIEW = "/archive/addMpInfo";
 	private static final String VALIDATE = "验证出错";
 
-	/** binder用于bean属性的设置 */
+	/**
+	 * binder用于bean属性的设置
+	 */
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
@@ -78,18 +77,22 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
-	/** 列表 */
+	/**
+	 * 列表
+	 */
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-			org.pssframework.query.archive.MpQuery mpQuery) {
+	                    org.pssframework.query.archive.MpQuery mpQuery) {
 
 		return VIEW;
 	}
 
-	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	/**
+	 * 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult
+	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(ModelMap modelMap, BindingResult errors, HttpServletRequest request,
-			HttpServletResponse response, @Valid MpInfo model) throws Exception {
+	public String create(ModelMap modelMap, @Valid MpInfo model, BindingResult errors, HttpServletRequest request,
+	                     HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 
@@ -105,40 +108,44 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 				gpInfo.setMpInfo(model);
 			}
 			this.mpInfoManger.saveOrUpdate(model);
-			Flash.current().success(MSG_CREATED_SUCCESS);
+			//Flash.current().success(MSG_CREATED_SUCCESS);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
 			this.logger.error(e.getMessage());
-			Flash.current().success(MSG_CREATED_FAIL);
+			//Flash.current().success(MSG_CREATED_FAIL);
 		}
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;
 	}
 
-	/** 删除 */
+	/**
+	 * 删除
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(ModelMap modelMap, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.mpInfoManger.removeById(id);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;
 	}
 
-	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	/**
+	 * 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(ModelMap modelMap, @PathVariable Long id, @Valid MpInfo mpInfo, BindingResult errors,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	                     HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		if (errors.hasErrors()) {
@@ -147,20 +154,24 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 			return VIEW;
 		}
 		try {
-			//this.bind(request, mpInfo);
-			this.mpInfoManger.saveOrUpdate(mpInfo);
+			MpInfo mpInfoDb = this.mpInfoManger.getById(id);
+			this.bind(request, mpInfoDb);
+			this.mpInfoManger.saveOrUpdate(mpInfoDb);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
 			this.logger.error(e.getMessage());
-
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;
 	}
 
-	/** 进入新增 */
+	/**
+	 * 进入新增
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/new")
 	public String _new(ModelMap result, HttpServletRequest request, HttpServletResponse response, MpInfo model)
@@ -179,7 +190,9 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 		return VIEW;
 	}
 
-	/** 编辑 */
+	/**
+	 * 编辑
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
@@ -200,8 +213,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	}
 
 	/**
-	 * 
-	 * @param model
+	 * @param result     ModelMap
 	 * @param mapRequest
 	 */
 	@SuppressWarnings("unchecked")
@@ -253,7 +265,8 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 	/**
 	 * check gpSn 唯一性
-	 * @param psInfo
+	 *
+	 * @param info
 	 * @return
 	 */
 	private boolean checkGpsn(MpInfo info) {

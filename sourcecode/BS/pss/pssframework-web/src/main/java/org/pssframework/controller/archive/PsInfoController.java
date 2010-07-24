@@ -55,8 +55,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.org.rapid_framework.web.scope.Flash;
-
 /**
  * @author Administrator 漏保
  */
@@ -102,20 +100,20 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		try {
 			this.psInfoManager.saveOrUpdate(model);
 			psId = model.getPsId();
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_SUCCESS);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_SUCCESS);
 		} catch (DataAccessException e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
 			msg = MSG_CREATED_FAIL;
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
 			msg = MSG_CREATED_FAIL;
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
 		}
-		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg).addAttribute(
-				"psId", psId);
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg)
+				.addAttribute("psId", psId);
 		return VIEW;
 	}
 
@@ -184,8 +182,9 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 				return VIEW;
 
 			}
-
-			this.psInfoManager.update(psinfo);
+			PsInfo psInfoDb = this.psInfoManager.getById(id);
+			bind(request, psInfoDb);
+			this.psInfoManager.update(psInfoDb);
 
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
@@ -203,12 +202,12 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.psInfoManager.removeById(id);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW;

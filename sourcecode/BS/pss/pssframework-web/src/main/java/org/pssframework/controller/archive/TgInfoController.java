@@ -51,8 +51,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.org.rapid_framework.web.scope.Flash;
-
 /**
  * @author Baocj
  * 
@@ -169,11 +167,11 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.tgInfoManager.removeById(id);
-			Flash.current().success(msg);
+			//Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
-			Flash.current().error(msg);
+			//Flash.current().error(msg);
 
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
@@ -189,6 +187,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		String msg = MSG_CREATED_SUCCESS;
 		Long tgId = 0L;
 		try {
+
 			tgInfo.setChaDate(new Date());
 
 			tgInfo.setPubPrivFlag("0");
@@ -197,7 +196,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 			tgId = tgInfo.getTgId();
 
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 
 			isSucc = false;
@@ -205,7 +204,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			msg = MSG_CREATED_FAIL;
 
 			logger.debug(e.getMessage());
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 
 		}
 
@@ -253,14 +252,15 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		this.logger.debug("tg.{},{}", "update", id);
 
 		try {
+			tginfo = this.tgInfoManager.getById(id);
 			tginfo.setChaDate(new Date());
 			this.tgInfoManager.update(tginfo);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.info(e.getMessage());
 			isSucc = false;
 			msg = MSG_UPDATE_FAIL;
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
@@ -308,7 +308,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	/**
 	 * 关联项目
 	 * 
-	 * @param modelAndView
+	 * @param modelMap
 	 * @param mapRequest
 	 */
 	private void getRelevance(ModelMap modelMap, Map<String, ?> mapRequest) {

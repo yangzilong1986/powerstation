@@ -47,8 +47,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.org.rapid_framework.web.scope.Flash;
-
 /**
  * @author Administrator 变压器信息
  */
@@ -90,12 +88,12 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		try {
 			tranInfo.setPubPrivFlag("0");
 			this.tranInfoManager.saveOrUpdate(tranInfo);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			this.logger.error(e.getMessage());
 			msg = e.getMessage();
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
@@ -109,15 +107,15 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		try {
-			//TranInfo tranInfo = this.tranInfoManager.getById(id);
-			//this.bind(request, tranInfo);
+			tranInfo = this.tranInfoManager.getById(id);
+			this.bind(request, tranInfo);
 			this.tranInfoManager.saveOrUpdate(tranInfo);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			this.logger.error(e.getMessage());
 			msg = MSG_UPDATE_FAIL;
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
 
@@ -201,17 +199,17 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		String msg = MSG_DELETE_SUCCESS;
 		try {
 			this.tranInfoManager.removeById(id);
-			Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (DataAccessException e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = MSG_DELETE_FAIL;
 			this.logger.error(e.getMessage());
-			Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
