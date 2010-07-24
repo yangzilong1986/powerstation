@@ -93,6 +93,7 @@ function setup() {
             }]
     };*/
     //alert(escape(JSON.stringify(dto)));
+    disableOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
@@ -106,7 +107,8 @@ function setup() {
     sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
     var cilist = getSelectedCheckboxs();
-    alert(cilist);
+    //alert(cilist);
+    $("#opcilist").val(cilist);
     var ciarray = cilist.split(',');
     for(var i = 0; i < ciarray.length; i++) {
         //alert($("tr[ci='" + ciarray[i] + "']").length);
@@ -140,6 +142,7 @@ function setup() {
     sb_dto.append('}');
     //alert(sb_dto.toString());
     //alert(escape(sb_dto.toString()));
+    initOpResult('正在下发...');
     var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
     $.ajax({
         type: 'POST',
@@ -148,15 +151,103 @@ function setup() {
         data: 'dto=' + escape(sb_dto.toString()),
         dataType: 'json',
         success: function(data) {
-            alert(data.collectId);
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发失败...');
+        }
+    });
+}
+
+function fetchSetupResult(collectId, fetchCount) {
+    //alert(collectId + "," + fetchCount);
+    //alert($("#opcilist").val());
+    var url = '<pss:path type="webapp"/>/eparam/termparam/up.json';
+    var params = {
+            "collectId": collectId
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showSetupResult(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResult('设置超时');
+                enableOperation();
+            }
         },
         error: function() {
         }
     });
 }
 
+function showSetupResult(resultMap) {
+    var cilist = $("#opcilist").val();
+    var logicalAddr = $("#logicalAddr").val();
+    var mpSn = $("#mpSn").val();
+    var ciarray = cilist.split(',');
+    var cilistTemp = new StringBuffer();
+    for(var i = 0; i < ciarray.length; i++) {
+        //alert(resultMap[logicalAddr + '#' + mpSn + "#" + ciarray[i]]);
+        var result = resultMap[logicalAddr + '#' + mpSn + "#" + ciarray[i]];
+        if(typeof result != "undefined") {
+            $("#ciop" + ciarray[i]).html(resultMap[logicalAddr + '#' + mpSn + "#" + ciarray[i]]);
+        }
+        else {
+            cilistTemp.append(',').append(ciarray[i]);
+        }
+    }
+    if(cilistTemp.toString().length > 0) {
+        $("#opcilist").val(cilistTemp.toString().substring(1));
+        return false;
+    }
+    else {
+        $("#opcilist").val('');
+        return true;
+    }
+}
+
 function read() {
     
+}
+
+function initOpResult(msg) {
+    var cilist = $("#opcilist").val();
+    var ciarray = cilist.split(',');
+    for(var i = 0; i < ciarray.length; i++) {
+        $("#ciop" + ciarray[i]).html(msg);
+    }
+}
+
+function disableOperation() {
+    $("#bSetup").attr("disabled", true);
+    $("#bRead").attr("disabled", true);
+    
+    $("input[type=checkbox][name='selectAll']").each( function() {
+        $(this).attr("disabled", true);
+    });
+    $("input[type=checkbox][name='itemId']").each( function() {
+        $(this).attr("disabled", true);
+    });
+}
+
+function enableOperation() {
+    $("#bSetup").attr("disabled", false);
+    $("#bRead").attr("disabled", false);
+    
+    $("input[type=checkbox][name='selectAll']").each( function() {
+        $(this).attr("disabled", false);
+    });
+    $("input[type=checkbox][name='itemId']").each( function() {
+        $(this).attr("disabled", false);
+    });
 }
 
 function selectAll(obj, name) {
@@ -198,8 +289,8 @@ function getSelectedCheckboxs() {
       <ul class=default id=datamenu_Con_0>
         <div id="bg2">
           <ul>
-            <li onclick="setup()">设　置</li>
-            <li onclick="read()">读　取</li>
+            <li id="bSetup" onclick="setup()">设　置</li>
+            <li id="bRead" onclick="read()">读　取</li>
           </ul>
         </div>
         <div style="display: none;">
@@ -210,6 +301,7 @@ function getSelectedCheckboxs() {
           <input type="hidden" id="pwContent" name="pwContent" value="8888" />
           <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
           <input type="hidden" id="mpSn" name="mpSn" value="0" />
+          <input type="hidden" id="opcilist" name="opcilist" value="" />
         </div>
         <div class="content">
           <div id="cont_1">
@@ -263,7 +355,7 @@ function getSelectedCheckboxs() {
                       </td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
-                      <td>&nbsp;</td>
+                      <td id="">&nbsp;</td>
                     </tr>
                     <tr ci="10040001" di="1004000102" class="clz10040001" style="display: none;">
                       <td height="25">&nbsp;</td>
