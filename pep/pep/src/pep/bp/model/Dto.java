@@ -12,7 +12,7 @@ import java.util.TreeMap;
  *
  * @author Thinkpad
  */
-public class PostData {
+public class Dto {
     private String logicAddress;
     private ArrayList gpArray;
     private String DataTime;
@@ -20,7 +20,7 @@ public class PostData {
     private String commandItemCode;
     private TreeMap<String,String> dataMap;
 
-    public PostData(){
+    public Dto(){
         this.dataMap= new TreeMap<String,String>();
         gpArray =new ArrayList();
     }

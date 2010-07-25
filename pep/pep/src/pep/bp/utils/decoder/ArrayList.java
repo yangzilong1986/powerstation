@@ -3,15 +3,12 @@
  * and open the template in the editor.
  */
 
-package pep.bp.db;
-
-import pep.bp.model.Dto;
+package pep.bp.utils.decoder;
 
 /**
  *
  * @author Thinkpad
  */
-public interface DataService {
+class ArrayList {
 
-    public void insertRecvData(Dto data);
 }
