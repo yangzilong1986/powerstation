@@ -34,6 +34,23 @@ function hasOneChecked(name){
     return false;
 }
 
+function getCheckedAsString(name){
+	var re = [];
+	var items = document.getElementsByName(name);
+    if (items.length > 0) {
+        for (var i = 0; i < items.length; i++){
+            if (items[i].checked == true){
+            	re.push(items[i].value)
+            }
+        }
+    } else {
+        if (items.checked == true) {
+            return true;
+        }
+    }
+    return re;
+}
+
 function setAllCheckboxState(name,state) {
 	var elms = document.getElementsByName(name);
 	for(var i = 0; i < elms.length; i++) {
