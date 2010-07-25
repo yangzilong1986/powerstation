@@ -1,7 +1,15 @@
 package org.pssframework.controller;
 
-import cn.org.rapid_framework.beanutils.BeanUtils;
-import org.apache.commons.beanutils.BeanUtilsBean;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.apache.commons.beanutils.BeanUtilsBean2;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.SqlDateConverter;
@@ -14,17 +22,9 @@ import org.junit.Test;
 import org.pssframework.model.system.OrgInfo;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+
 import pep.bp.realinterface.mto.MTO_376;
 import pep.bp.realinterface.mto.MessageTranObject;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.text.DecimalFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by IntelliJ IDEA.
@@ -61,6 +61,19 @@ public class JuintTest {
 
 	@Test
 	public void testDouble() {
+		String[] s = new String[5];
+		s[3] = "1";
+		assertEquals(s[3], "1");
+
+		List list = new ArrayList();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.add(1);
+		Object[] o = list.toArray();
+		assertEquals(o[4], 1);
+
 		double c = 0.22d;
 		double d = 0.23d;
 		DecimalFormat df = new DecimalFormat("########.##");
@@ -71,7 +84,6 @@ public class JuintTest {
 
 	}
 
-	@Test
 	public void testBeanCopy() {
 
 		OrgInfo orgInfo1 = new OrgInfo();
