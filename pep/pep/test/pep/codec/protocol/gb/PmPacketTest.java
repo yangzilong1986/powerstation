@@ -110,6 +110,15 @@ public class PmPacketTest {
     }
 
     @Test
+    public void testGetPacket2(){
+        byte[] msg = BcdUtils.stringToByteArray("55 68 32 01 32 01 68 98 12 96 56 34 00 0C 62 00 00 01 03 11 19 25 07 10 FE FE FE FE FE FE FE"+
+                "FE FE FE FE FE 00 00 00 00 00 00 00 00 00 00 00 00 00 10 00 10 00 10 00 10 00 00 00 00 90 21 00 00");
+           int head = PmPacket376.getMsgHeadOffset(msg, 0);
+        assertEquals(head, -1);
+
+    }
+
+    @Test
     public void testByteToUnsigned() {
         byte b;
         for (int a = 0x79; a <= 0xFF; a++) {
