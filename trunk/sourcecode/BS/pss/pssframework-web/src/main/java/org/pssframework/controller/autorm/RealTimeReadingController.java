@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.pssframework.controller.autorm;
 
@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -21,12 +23,12 @@ import org.pssframework.query.autorm.ReadTimReadingQuery;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.atuorm.RealTimeReadingManager;
 import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.util.DataConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import pep.bp.realinterface.ICollectInterface;
 import pep.bp.realinterface.mto.MTO_376;
 import pep.bp.realinterface.mto.MessageTranObject;
 import cn.org.rapid_framework.page.Page;
@@ -34,7 +36,6 @@ import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
- * 
  */
 @Controller
 @RequestMapping("/autorm/realTimeReading")
@@ -51,8 +52,6 @@ public class RealTimeReadingController extends BaseSpringController {
 
 	private static final String OBJ_ID = "objId";
 
-	@Autowired
-	private ICollectInterface realTimeProxy376;
 
 	@Autowired
 	private OrgInfoManager orgInfoManager;
@@ -80,12 +79,14 @@ public class RealTimeReadingController extends BaseSpringController {
 
 		modelAndView.addObject("page", page);
 
+		modelAndView.addObject("pageRequest", pageRequest);
+
 		return modelAndView;
 	}
 
 	/**
 	 * 下拉框
-	 * 
+	 *
 	 * @param model
 	 * @param mapRequest
 	 */
@@ -106,7 +107,6 @@ public class RealTimeReadingController extends BaseSpringController {
 	}
 
 	/**
-	 * 
 	 * @param request
 	 * @param response
 	 * @throws Exception
@@ -128,9 +128,9 @@ public class RealTimeReadingController extends BaseSpringController {
 			logger.debug(e.getMessage());
 		}
 
-		long collectId = realTimeProxy376.readData(mto_376);
+		long collectId = this.realTimeReadingManager.send(mto_376);
 
-		logger.debug("collectId : " + collectId);
+		logger.info("collectId : " + collectId);
 
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -140,19 +140,47 @@ public class RealTimeReadingController extends BaseSpringController {
 	}
 
 	/**
-	 * 
 	 * @param request
 	 * @param response
 	 * @throws Exception
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/up")
 	public ModelAndView up(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long collectionId = Long.parseLong(request.getParameter("collectId"));
-		Map<String, Map<String, String>> mto = realTimeProxy376.getReturnByReadData(collectionId);
+		Map mto = realTimeReadingManager.getReturnByRRTD(new Long[]{collectionId});
 		ObjectMapper holder = new ObjectMapper();
-		holder.writeValue(response.getOutputStream(), mto);
+		JSONObject jsonObject = DataConverter.map2json(mto);
+		holder.writeValue(response.getOutputStream(), jsonObject);
 		ModelAndView modelAndView = new ModelAndView();
 		return modelAndView;
+	}
+
+
+	/**
+	 * 获得实时召测返回结果，AJAX方式
+	 *
+	 * @param servletRequest
+	 * @param servletResponse
+	 * @return
+	 */
+	public void fetchByAjax(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws Exception {
+		String appIds = servletRequest.getParameter("r_appids");
+		String fetchCount = servletRequest.getParameter("fetchCount");
+		String otherDataFlag = servletRequest.getParameter("otherDataFlag"); //其他数据项标识
+		String timeData = servletRequest.getParameter("timeData");
+		String dataGap = servletRequest.getParameter("dataGap");
+		String points = servletRequest.getParameter("points");
+		String proNo = servletRequest.getParameter("proNo");
+		logger.info("r_appids:" + appIds + "fetchCount:" + fetchCount + "otherDataFlag : " + otherDataFlag + " timeData:" + timeData + " dataGap:" + dataGap + " points:" + points + "proNo:" + proNo);
+		if (appIds != null) {
+			Map returnMap = null;
+			if ("0".equals(otherDataFlag)) {
+				//returnMap = realTimeReadingService.getReturnByRRTD(appIds, fetchCount);
+			} else { //其他数据项
+				//returnMap = realTimeReadingService.getCurveReturnByRRTD(appIds, fetchCount, timeData, dataGap, points, proNo);
+			}
+		}
 	}
 
 }

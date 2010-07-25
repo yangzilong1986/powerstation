@@ -3,31 +3,31 @@
  */
 package org.pssframework.service.atuorm;
 
-import cn.org.rapid_framework.generator.util.StringHelper;
-import cn.org.rapid_framework.page.Page;
-import cn.org.rapid_framework.page.PageRequest;
-import net.jcreate.e3.table.CreateDataModelException;
-import net.jcreate.e3.table.DataModel;
-import net.jcreate.e3.table.SortInfo;
-import net.jcreate.e3.table.model.CollectionDataModel;
-import net.jcreate.e3.table.support.DefaultPageInfo;
-import net.jcreate.e3.table.support.DefaultSortInfo;
-import net.jcreate.e3.table.support.EmptySortInfo;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.autorm.RealTimeReadingDao;
 import org.pssframework.model.autorm.RealTimeReadingInfo;
 import org.pssframework.service.ServiceException;
-import org.pssframework.util.DataConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import pep.bp.realinterface.ICollectInterface;
 import pep.bp.realinterface.mto.AssistParam;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.realinterface.mto.MessageTranObject;
-
-import java.util.*;
+import cn.org.rapid_framework.generator.util.StringHelper;
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
@@ -57,59 +57,6 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 
 		return page;
 	}
-
-	public DataModel create(PageRequest pagePara, Page page) throws CreateDataModelException {
-
-		SortInfo sortInfo = null;
-		if (pagePara.getSortColumns() != null) {
-			List<cn.org.rapid_framework.page.SortInfo> list = pagePara.getSortInfos();
-			String order = "";
-			for (cn.org.rapid_framework.page.SortInfo info : list) {
-				order = info.getSortOrder();
-			}
-			sortInfo = new DefaultSortInfo(pagePara.getSortColumns(), order);
-		} else {
-			sortInfo = EmptySortInfo.me;
-		}
-
-		//开始位置,从0开始
-		int start = page.getFirstResult();
-
-		//每页记录数,
-		int pageSize = page.getPageSize();
-
-		//总记录数
-		int totalSize = page.getTotalCount();
-
-		if (totalSize < 0)
-			throw new CreateDataModelException("记录总数应该大于或等于零!");
-		DefaultPageInfo pageInfo = new DefaultPageInfo(start, totalSize, pageSize);
-		//pageInfo.setExported(pNavRequest.isExported());
-		//当start大于 totalSize -1 时,需要调整start的值.
-		if (start < 0) {
-			start = 0;
-		}
-		if (start > (totalSize - 1)) {
-			//@todo: getStartOfLastPage的计算不会依赖start的值,否则这种算法有问题
-			//,有空的时候把getStartOfLastPage代码挪出来
-			start = pageInfo.getStartOfLastPage();
-			pageInfo.setStart(start);
-		}
-
-		List<?> data = null;
-		if (totalSize > 0) {
-			data = page.getResult();
-		} else {
-			data = Collections.EMPTY_LIST;
-		}
-
-		DataModel result = new CollectionDataModel(data, sortInfo, pageInfo);
-		logger.info("curpage:" + pageInfo.getCurrPage());
-		logger.info("getTotalPages:" + pageInfo.getTotalPages());
-		logger.info("getTotal:" + pageInfo.getTotal());
-		return result;
-	}
-
 
 	public Map readRealTimeData(String gpIds, Map commandItemMap, String dataDensity, String dataPoints, String dataTime, int fetchCount) throws ServiceException {
 		//设置超时时间
@@ -220,7 +167,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 							assistParam.setValue("40");
 							assistParams.add(assistParam);
 							try {
-								bSend = collectInterface.readRealtimeData102(collectObjects, commandItems, assistParams, Long.parseLong(sAppId));
+								//bSend = collectInterface.readRealtimeData102(collectObjects, commandItems, assistParams, Long.parseLong(sAppId));
 								//bSend = true;
 								if (bSend) {
 									sbValidAppIds.append("," + sAppId);
@@ -535,6 +482,29 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 						logger.info("错误信息：" + _e);
 						mapReturn = null;
 					}
+
+				
+
+	//
+					//							Map testValueMap1 = new HashMap();
+					//		testValueMap1.put("20100309000000", "0.0001");
+					//		testValueMap1.put("20100309001500", "0.0002");
+					//		testValueMap1.put("20100309003000", "0.0003");
+					//		testValueMap1.put("20100309010000", "0.0004");
+					//		testValueMap1.put("20100309011500", "0.0005");
+					//		testValueMap1.put("20100309013000", "0.0006");
+					//		testValueMap1.put("20100309014500", "0.0007");
+					//		testValueMap1.put("20100309020000", "0.0008");
+					//		testValueMap1.put("20100309021500", "0.0009");
+					//		testValueMap1.put("20100309023000", "0.0010");
+					//					mapReturn.put("96123456#5#100C0025#2101", testValueMap1);
+					//					mapReturn.put("96123456#5#100C0025#2102", testValueMap1);
+					//					mapReturn.put("96123456#5#100C0025#2201", testValueMap1);
+					//					mapReturn.put("96123456#5#100C0025#2202", testValueMap1);
+
+
+
+
 					if (mapReturn != null) {
 						Iterator iterator = mapReturn.keySet().iterator();
 						while (iterator.hasNext()) {
@@ -653,9 +623,8 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 				mpSn = collectObject.getMpSn();
 			}
 			return null;
-		} else {
+		} else
 			return null;
-		}
 	}
 
 	public Map getCurveReturnByRRTD(String appIds, String fetchCount, String timeData, String dataGap, String points, String proNo) throws ServiceException {

@@ -16,8 +16,8 @@ public class ReadTimReadingQuery extends BaseQuery {
 	 */
 	private static final long serialVersionUID = 3218026520608204003L;
 	private Long orgId;
-	private Long tgId;
-	private String loggicAddr;
+	private Long objId;
+	private String logicalAddr;
 
 	/**
 	 * @return the orgId
@@ -33,32 +33,20 @@ public class ReadTimReadingQuery extends BaseQuery {
 		this.orgId = orgId;
 	}
 
-	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
+	public void setObjId(Long objId) {
+		this.objId = objId;
 	}
 
-	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
+	public Long getObjId() {
+		return objId;
 	}
 
-	/**
-	 * @return the loggicAddr
-	 */
-	public String getLoggicAddr() {
-		return loggicAddr;
+	public void setLogicalAddr(String logicalAddr) {
+		this.logicalAddr = logicalAddr;
 	}
 
-	/**
-	 * @param loggicAddr the loggicAddr to set
-	 */
-	public void setLoggicAddr(String loggicAddr) {
-		this.loggicAddr = loggicAddr;
+	public String getLogicalAddr() {
+		return logicalAddr;
 	}
 
 }
