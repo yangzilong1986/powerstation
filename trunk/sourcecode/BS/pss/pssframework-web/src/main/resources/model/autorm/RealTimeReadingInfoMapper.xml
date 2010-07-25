@@ -9,7 +9,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<sql id="realTimeReadingInfoColumns">
 		<!-- 目前只是台区 -->
 		<if test="true">tg.tg_no as objNo,tg.tg_name as objName,'台区' as objType,</if>
-		te.logical_addr as termAddr, mp.mp_no as mpNo, gp.gp_sn as gpSn,gp.gp_id as gpId
+		te.logical_addr as logicalAddr, mp.mp_no as mpNo, gp.gp_sn as gpSn,gp.gp_id as gpId
 	</sql>
 	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
 	<insert id="insert" parameterType="org.pssframework.model.autorm.RealTimeReadingInfo" useGeneratedKeys="true" keyProperty="userId">
@@ -63,14 +63,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</select>
 	<sql id="realTimeReadingInfoDynamicWhere">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
-		<!--  <choose>
+		 <choose>
 			<when test="objId != null">and tg.tg_id = #{objId}</when>
 			<otherwise>and tg.tg_id = -1</otherwise>
 		</choose>
 		<choose>
 			<when test="logicalAddr != null">and te.logical_addr = #{logicalAddr}</when>
-			<otherwise>and te.logical_addr = -1</otherwise>
-		</choose>-->
+		</choose>
 	</sql>
 	<select id="count" resultType="long">
 		<![CDATA[select count(1) from g_tg tg, c_term_obj_rela re, c_terminal te, c_gp gp, c_mp mp WHERE tg.tg_id = re.obj_id AND re.obj_type =
