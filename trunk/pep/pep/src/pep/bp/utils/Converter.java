@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * 组帧/解帧的门面类
  */
 package pep.bp.utils;
 
@@ -9,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import pep.bp.model.PostData;
+import pep.bp.model.Dto;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.bp.realinterface.mto.CircleDataItems;
@@ -18,6 +16,7 @@ import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.realinterface.mto.DataItem;
 import pep.bp.realinterface.mto.DataItemGroup;
+import pep.bp.utils.decoder.Decoder;
 import pep.codec.protocol.gb.Authorize;
 import pep.codec.protocol.gb.DataTypeA1;
 import pep.codec.protocol.gb.DataTypeA10;
@@ -51,6 +50,7 @@ import pep.codec.protocol.gb.TimeProtectValue;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
+import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**
@@ -63,6 +63,8 @@ public class Converter {
     private String groupValue = "";
     private int groupBinValue = 0;
     byte bits = 8;
+    private ProtocolConfig config;
+    private Decoder decoder;
 
     public void CollectObject2Packet(CollectObject obj, PmPacket376 packet, byte AFN, StringBuffer gpMark, StringBuffer commandMark) {
 
@@ -181,7 +183,6 @@ public class Converter {
         List<DataItemGroup> groups = commandItem.getCircleDataItems().getDataItemGroups();
         if (groups.size() > 0) {
             DataItemGroup group = groups.get(0);
-            ProtocolConfig config = ProtocolConfig.getInstance();
             Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
 
             List<DataItem> dataItemList = group.getDataItemList();
@@ -216,7 +217,6 @@ public class Converter {
         int bitnumber = 0;
         ProtocolDataItem dataItem = null;
 
-        ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
 
@@ -331,7 +331,6 @@ public class Converter {
         String DataItemValue, Format, IsGroupEnd = "";
         int Length, bitnumber = 0;
         long TempCode = 0;
-        ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
         if (dataItemMap != null) {
@@ -361,7 +360,6 @@ public class Converter {
         int Length = 0;
         int bitnumber = 0;
         long TempCode = 0;
-        ProtocolConfig config = ProtocolConfig.getInstance();
         Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
 
@@ -486,269 +484,452 @@ public class Converter {
         }
     }
 
- 
 
-    public void decodeData(PmPacket376 packet, Map<String, Map<String, String>> results) {
-        String key = "";
-        String GroupValue = "";
-
-        ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
-        String logicAddress = packet.getAddress().getRtua();
-        PmPacketData dataBuffer = packet.getDataBuffer();
-        dataBuffer.rewind();
-        while (dataBuffer.HaveDate()) {
-            PmPacket376DA da = new PmPacket376DA();
-            PmPacket376DT dt = new PmPacket376DT();
-            dataBuffer.getDA(da);
-            dataBuffer.getDT(dt);
-            byte afn = packet.getAfn();
-            if (afn == 0x0A) {
-                afn = 0x04;
-            }
-            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
-            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
-
-            Map<String, String> dataItems = results.get(commandItemCode);
-            if (dataItems == null) {
-                dataItems = new TreeMap();
-            }
-            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
-            Iterator iterator = DataItemMap_Config.keySet().iterator();
-
-            while (iterator.hasNext()) {
-                String DataItemCode = (String) iterator.next();
-                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
-                int Len = dataItem.getLength();
-                String Format = dataItem.getFormat();
-                int bitnumber = dataItem.getBitNumber();
-                String IsGroupEnd = dataItem.getIsGroupEnd();
-                if (Format.equals("BIN")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
-                } else if (Format.equals("IPPORT")) {
-                    dataItems.put(DataItemCode, dataBuffer.getIPPORT());
-                } else if (Format.equals("IP")) {
-                    dataItems.put(DataItemCode, dataBuffer.getIP());
-                } else if (Format.equals("TEL")) {
-                    dataItems.put(DataItemCode, dataBuffer.getTEL());
-                } else if (Format.equals("BS8")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
-                } else if (Format.equals("GROUP_BS8")) {
-                    if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8();
-                    }
-                    dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
-                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
-                    if (IsGroupEnd.equals("1")) {
-                        GroupValue = "";
-                    }
-                } else if (Format.equals("GROUP_BIN")) {
-                    if (groupBinValue == 0) {
-                        groupBinValue = dataBuffer.get();
-                    }
-                    if (groupBinValue < 0) {
-                        groupBinValue = groupBinValue + 256;
-                    }
-                    byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
-                    groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
-                    bits -= bitnumber;
-                    dataItems.put(DataItemCode, String.valueOf(resultValue));
-                    if (IsGroupEnd.equals("1")) {
-                        groupBinValue = 0;
-                        bits = 8;
-                    }
-                } else if (Format.equals("BS24")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
-                } else if (Format.equals("BS64")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS64()));
-                } else if (Format.equals("ASCII")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
-                } else if (Format.equals("A1")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA1().toString());
-                } else if (Format.equals("A2")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA2().toString());
-                } else if (Format.equals("A3")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA3().toString());
-                } else if (Format.equals("A4")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA4().toString());
-                } else if (Format.equals("A5")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA5().toString());
-                } else if (Format.equals("A6")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA6().toString());
-                } else if (Format.equals("A7")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA7().toString());
-                } else if (Format.equals("A8")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA8().toString());
-                } else if (Format.equals("A9")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA9().toString());
-                } else if (Format.equals("A10")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA10().toString());
-                } else if (Format.equals("A11")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA11().toString());
-                } else if (Format.equals("A12")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA12().toString());
-                } else if (Format.equals("A13")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA13().toString());
-                } else if (Format.equals("A14")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA14().toString());
-                } else if (Format.equals("A15")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA15().toString());
-                } else if (Format.equals("A16")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA16().toString());
-                } else if (Format.equals("A17")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA17().toString());
-                } else if (Format.equals("A18")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA18().toString());
-                } else if (Format.equals("A19")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA19().toString());
-                } else if (Format.equals("A20")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA20().toString());
-                } else if (Format.equals("A21")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA21().toString());
-                } else if (Format.equals("A22")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA22().toString());
-                } else if (Format.equals("A23")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA23().toString());
-                } else if (Format.equals("A24")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA24().toString());
-                } else if (Format.equals("A25")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA25().toString());
-                } else if (Format.equals("A26")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA26().toString());
-                } else if (Format.equals("A27")) {
-                    dataItems.put(DataItemCode, dataBuffer.getA27().toString());
-                }
-            }
-            if (!results.containsKey(key)) {
-                results.put(key, dataItems);
-            }
-        }
-
+    public void decodeData(PmPacket376 packet, Map<String, Map<String, String>> results){
+        this.decoder.decode(packet, results);
     }
 
-    public void decodeDataDB(PmPacket376 packet, PostData postData) {
-        String key = "";
-        String GroupValue = "";
+//    public void decodeData(PmPacket376 packet, Map<String, Map<String, String>> results) {
+//        String key = "";
+//        String GroupValue = "";
+//        String logicAddress = packet.getAddress().getRtua();
+//        PmPacketData dataBuffer = packet.getDataBuffer();
+//        dataBuffer.rewind();
+//        while (dataBuffer.HaveDate()) {
+//            PmPacket376DA da = new PmPacket376DA();
+//            PmPacket376DT dt = new PmPacket376DT();
+//            dataBuffer.getDA(da);
+//            dataBuffer.getDT(dt);
+//            byte afn = packet.getAfn();
+//            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
+//            if (afn == 0x0A) {
+//                afn = 0x04;
+//            }
+//            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
+//            Map<String, String> dataItems = results.get(commandItemCode);
+//            if (dataItems == null) {
+//                dataItems = new TreeMap();
+//            }
+//            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
+//            Iterator iterator = DataItemMap_Config.keySet().iterator();
+//
+//            while (iterator.hasNext()) {
+//                String DataItemCode = (String) iterator.next();
+//                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+//                int Len = dataItem.getLength();
+//                String Format = dataItem.getFormat();
+//                int bitnumber = dataItem.getBitNumber();
+//                String IsGroupEnd = dataItem.getIsGroupEnd();
+//                if (Format.equals("BIN")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
+//                } else if (Format.equals("IPPORT")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getIPPORT());
+//                } else if (Format.equals("IP")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getIP());
+//                } else if (Format.equals("TEL")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getTEL());
+//                } else if (Format.equals("BS8")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+//                } else if (Format.equals("GROUP_BS8")) {
+//                    if (GroupValue.length() == 0) {
+//                        GroupValue = dataBuffer.getBS8();
+//                    }
+//                    dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
+//                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
+//                    if (IsGroupEnd.equals("1")) {
+//                        GroupValue = "";
+//                    }
+//                } else if (Format.equals("GROUP_BIN")) {
+//                    if (groupBinValue == 0) {
+//                        groupBinValue = dataBuffer.get();
+//                    }
+//                    if (groupBinValue < 0) {
+//                        groupBinValue = groupBinValue + 256;
+//                    }
+//                    byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
+//                    groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
+//                    bits -= bitnumber;
+//                    dataItems.put(DataItemCode, String.valueOf(resultValue));
+//                    if (IsGroupEnd.equals("1")) {
+//                        groupBinValue = 0;
+//                        bits = 8;
+//                    }
+//                } else if (Format.equals("BS24")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
+//                } else if (Format.equals("BS64")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS64()));
+//                } else if (Format.equals("ASCII")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
+//                } else if (Format.equals("A1")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA1().toString());
+//                } else if (Format.equals("A2")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA2().toString());
+//                } else if (Format.equals("A3")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA3().toString());
+//                } else if (Format.equals("A4")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA4().toString());
+//                } else if (Format.equals("A5")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA5().toString());
+//                } else if (Format.equals("A6")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA6().toString());
+//                } else if (Format.equals("A7")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA7().toString());
+//                } else if (Format.equals("A8")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA8().toString());
+//                } else if (Format.equals("A9")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA9().toString());
+//                } else if (Format.equals("A10")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA10().toString());
+//                } else if (Format.equals("A11")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA11().toString());
+//                } else if (Format.equals("A12")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA12().toString());
+//                } else if (Format.equals("A13")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA13().toString());
+//                } else if (Format.equals("A14")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA14().toString());
+//                } else if (Format.equals("A15")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA15().toString());
+//                } else if (Format.equals("A16")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA16().toString());
+//                } else if (Format.equals("A17")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA17().toString());
+//                } else if (Format.equals("A18")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA18().toString());
+//                } else if (Format.equals("A19")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA19().toString());
+//                } else if (Format.equals("A20")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA20().toString());
+//                } else if (Format.equals("A21")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA21().toString());
+//                } else if (Format.equals("A22")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA22().toString());
+//                } else if (Format.equals("A23")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA23().toString());
+//                } else if (Format.equals("A24")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA24().toString());
+//                } else if (Format.equals("A25")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA25().toString());
+//                } else if (Format.equals("A26")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA26().toString());
+//                } else if (Format.equals("A27")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA27().toString());
+//                }
+//            }
+//            if (!results.containsKey(key)) {
+//                results.put(key, dataItems);
+//            }
+//        }
+//    }
 
-        ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
-        String logicAddress = packet.getAddress().getRtua();
-        postData.setLogicAddress(logicAddress) ;
-        PmPacketData dataBuffer = packet.getDataBuffer();
-        dataBuffer.rewind();
-        while (dataBuffer.HaveDate()) {
-            PmPacket376DA da = new PmPacket376DA();
-            PmPacket376DT dt = new PmPacket376DT();
-            dataBuffer.getDA(da);
-            dataBuffer.getDT(dt);
-            byte afn = packet.getAfn();
-            postData.setAfn(afn);
-            postData.AddGP(da.getPn());
-            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
-            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
-            Iterator iterator = DataItemMap_Config.keySet().iterator();
 
-            while (iterator.hasNext()) {
-                String DataItemCode = (String) iterator.next();
-                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
-                int Len = dataItem.getLength();
-                String Format = dataItem.getFormat();
-                int bitnumber = dataItem.getBitNumber();
-                String IsGroupEnd = dataItem.getIsGroupEnd();
-                if (Format.equals("BIN")) {
-                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
-                } else if (Format.equals("IPPORT")) {
-                    postData.AddData(DataItemCode, dataBuffer.getIPPORT());
-                } else if (Format.equals("IP")) {
-                    postData.AddData(DataItemCode, dataBuffer.getIP());
-                } else if (Format.equals("TEL")) {
-                    postData.AddData(DataItemCode, dataBuffer.getTEL());
-                } else if (Format.equals("BS8")) {
-                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS8()));
-                } else if (Format.equals("GROUP_BS8")) {
-                    if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8();
-                    }
-                    postData.AddData(DataItemCode, GroupValue.substring(0, bitnumber));
-                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
-                    if (IsGroupEnd.equals("1")) {
-                        GroupValue = "";
-                    }
-                } else if (Format.equals("GROUP_BIN")) {
-                    if (groupBinValue == 0) {
-                        groupBinValue = dataBuffer.get();
-                    }
-                    if (groupBinValue < 0) {
-                        groupBinValue = groupBinValue + 256;
-                    }
-                    byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
-                    groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
-                    bits -= bitnumber;
-                    postData.AddData(DataItemCode, String.valueOf(resultValue));
-                    if (IsGroupEnd.equals("1")) {
-                        groupBinValue = 0;
-                        bits = 8;
-                    }
-                } else if (Format.equals("BS24")) {
-                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS24()));
-                } else if (Format.equals("BS64")) {
-                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS64()));
-                } else if (Format.equals("ASCII")) {
-                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
-                } else if (Format.equals("A1")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA1().toString());
-                } else if (Format.equals("A2")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA2().toString());
-                } else if (Format.equals("A3")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA3().toString());
-                } else if (Format.equals("A4")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA4().toString());
-                } else if (Format.equals("A5")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA5().toString());
-                } else if (Format.equals("A6")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA6().toString());
-                } else if (Format.equals("A7")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA7().toString());
-                } else if (Format.equals("A8")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA8().toString());
-                } else if (Format.equals("A9")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA9().toString());
-                } else if (Format.equals("A10")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA10().toString());
-                } else if (Format.equals("A11")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA11().toString());
-                } else if (Format.equals("A12")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA12().toString());
-                } else if (Format.equals("A13")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA13().toString());
-                } else if (Format.equals("A14")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA14().toString());
-                } else if (Format.equals("A15")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA15().toString());
-                } else if (Format.equals("A16")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA16().toString());
-                } else if (Format.equals("A17")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA17().toString());
-                } else if (Format.equals("A18")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA18().toString());
-                } else if (Format.equals("A19")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA19().toString());
-                } else if (Format.equals("A20")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA20().toString());
-                } else if (Format.equals("A21")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA21().toString());
-                } else if (Format.equals("A22")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA22().toString());
-                } else if (Format.equals("A23")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA23().toString());
-                } else if (Format.equals("A24")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA24().toString());
-                } else if (Format.equals("A25")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA25().toString());
-                } else if (Format.equals("A26")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA26().toString());
-                } else if (Format.equals("A27")) {
-                    postData.AddData(DataItemCode, dataBuffer.getA27().toString());
-                }
-            }
-        }
+    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results){
+        this.decoder.decode_TransMit(packet, results);
+    }
+//    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results) {
+//        String key = "";
+//        String GroupValue = "";
+//
+//        String logicAddress = packet.getAddress().getRtua();
+//        PmPacketData dataBuffer = packet.getDataBuffer();
+//        dataBuffer.rewind();
+//        while (dataBuffer.HaveDate()) {
+//            PmPacket376DA da = new PmPacket376DA();
+//            PmPacket376DT dt = new PmPacket376DT();
+//            dataBuffer.getDA(da);
+//            dataBuffer.getDT(dt);
+//            byte afn = packet.getAfn();
+//            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
+//            if (afn == 0x0A) {
+//                afn = 0x04;
+//            }
+//            if(afn == 0X10){  //透明转发，特殊处理
+//                dataBuffer.getBin(1);//终端通信端口号
+//                dataBuffer.getBS8();//透明转发通信控制字
+//                dataBuffer.getBS8();//透明转发接收等待报文超时时间
+//                dataBuffer.getBin(1);//透明转发接收等待字节超时时间
+//                long len = dataBuffer.getBin(2);//透明转发内容字节数k
+//                byte[] databuff = dataBuffer.getValue();
+//                int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
+//                Gb645MeterPacket pack = Gb645MeterPacket.getPacket(databuff, head);
+//                dataBuffer = pack.getDataAsPmPacketData();
+//            }
+//
+//            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
+//
+//            Map<String, String> dataItems = results.get(commandItemCode);
+//            if (dataItems == null) {
+//                dataItems = new TreeMap();
+//            }
+//            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
+//            Iterator iterator = DataItemMap_Config.keySet().iterator();
+//
+//            while (iterator.hasNext()) {
+//                String DataItemCode = (String) iterator.next();
+//                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+//                int Len = dataItem.getLength();
+//                String Format = dataItem.getFormat();
+//                int bitnumber = dataItem.getBitNumber();
+//                String IsGroupEnd = dataItem.getIsGroupEnd();
+//                if (Format.equals("BIN")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
+//                } else if (Format.equals("IPPORT")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getIPPORT());
+//                } else if (Format.equals("IP")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getIP());
+//                } else if (Format.equals("TEL")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getTEL());
+//                } else if (Format.equals("BS8")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+//                } else if (Format.equals("GROUP_BS8")) {
+//                    if (GroupValue.length() == 0) {
+//                        GroupValue = dataBuffer.getBS8();
+//                    }
+//                    dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
+//                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
+//                    if (IsGroupEnd.equals("1")) {
+//                        GroupValue = "";
+//                    }
+//                } else if (Format.equals("GROUP_BIN")) {
+//                    if (groupBinValue == 0) {
+//                        groupBinValue = dataBuffer.get();
+//                    }
+//                    if (groupBinValue < 0) {
+//                        groupBinValue = groupBinValue + 256;
+//                    }
+//                    byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
+//                    groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
+//                    bits -= bitnumber;
+//                    dataItems.put(DataItemCode, String.valueOf(resultValue));
+//                    if (IsGroupEnd.equals("1")) {
+//                        groupBinValue = 0;
+//                        bits = 8;
+//                    }
+//                } else if (Format.equals("BS24")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
+//                } else if (Format.equals("BS64")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS64()));
+//                } else if (Format.equals("ASCII")) {
+//                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
+//                } else if (Format.equals("A1")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA1().toString());
+//                } else if (Format.equals("A2")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA2().toString());
+//                } else if (Format.equals("A3")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA3().toString());
+//                } else if (Format.equals("A4")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA4().toString());
+//                } else if (Format.equals("A5")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA5().toString());
+//                } else if (Format.equals("A6")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA6().toString());
+//                } else if (Format.equals("A7")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA7().toString());
+//                } else if (Format.equals("A8")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA8().toString());
+//                } else if (Format.equals("A9")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA9().toString());
+//                } else if (Format.equals("A10")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA10().toString());
+//                } else if (Format.equals("A11")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA11().toString());
+//                } else if (Format.equals("A12")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA12().toString());
+//                } else if (Format.equals("A13")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA13().toString());
+//                } else if (Format.equals("A14")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA14().toString());
+//                } else if (Format.equals("A15")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA15().toString());
+//                } else if (Format.equals("A16")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA16().toString());
+//                } else if (Format.equals("A17")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA17().toString());
+//                } else if (Format.equals("A18")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA18().toString());
+//                } else if (Format.equals("A19")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA19().toString());
+//                } else if (Format.equals("A20")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA20().toString());
+//                } else if (Format.equals("A21")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA21().toString());
+//                } else if (Format.equals("A22")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA22().toString());
+//                } else if (Format.equals("A23")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA23().toString());
+//                } else if (Format.equals("A24")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA24().toString());
+//                } else if (Format.equals("A25")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA25().toString());
+//                } else if (Format.equals("A26")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA26().toString());
+//                } else if (Format.equals("A27")) {
+//                    dataItems.put(DataItemCode, dataBuffer.getA27().toString());
+//                }
+//            }
+//            if (!results.containsKey(key)) {
+//                results.put(key, dataItems);
+//            }
+//        }
+//
+//    }
+
+    public void decodeDataDB(PmPacket376 packet, Dto postData){
+        this.decoder.decode(packet, postData);
+    }
+
+//    public void decodeDataDB(PmPacket376 packet, Dto postData) {
+//
+//        String key = "";
+//        String GroupValue = "";
+//
+//        String logicAddress = packet.getAddress().getRtua();
+//        postData.setLogicAddress(logicAddress) ;
+//        PmPacketData dataBuffer = packet.getDataBuffer();
+//        dataBuffer.rewind();
+//        while (dataBuffer.HaveDate()) {
+//            PmPacket376DA da = new PmPacket376DA();
+//            PmPacket376DT dt = new PmPacket376DT();
+//            dataBuffer.getDA(da);
+//            dataBuffer.getDT(dt);
+//            byte afn = packet.getAfn();
+//            postData.setAfn(afn);
+//            postData.AddGP(da.getPn());
+//            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
+//            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
+//            Iterator iterator = DataItemMap_Config.keySet().iterator();
+//
+//            while (iterator.hasNext()) {
+//                String DataItemCode = (String) iterator.next();
+//                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+//                int Len = dataItem.getLength();
+//                String Format = dataItem.getFormat();
+//                int bitnumber = dataItem.getBitNumber();
+//                String IsGroupEnd = dataItem.getIsGroupEnd();
+//                if (Format.equals("BIN")) {
+//                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
+//                } else if (Format.equals("IPPORT")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getIPPORT());
+//                } else if (Format.equals("IP")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getIP());
+//                } else if (Format.equals("TEL")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getTEL());
+//                } else if (Format.equals("BS8")) {
+//                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+//                } else if (Format.equals("GROUP_BS8")) {
+//                    if (GroupValue.length() == 0) {
+//                        GroupValue = dataBuffer.getBS8();
+//                    }
+//                    postData.AddData(DataItemCode, GroupValue.substring(0, bitnumber));
+//                    GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
+//                    if (IsGroupEnd.equals("1")) {
+//                        GroupValue = "";
+//                    }
+//                } else if (Format.equals("GROUP_BIN")) {
+//                    if (groupBinValue == 0) {
+//                        groupBinValue = dataBuffer.get();
+//                    }
+//                    if (groupBinValue < 0) {
+//                        groupBinValue = groupBinValue + 256;
+//                    }
+//                    byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
+//                    groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
+//                    bits -= bitnumber;
+//                    postData.AddData(DataItemCode, String.valueOf(resultValue));
+//                    if (IsGroupEnd.equals("1")) {
+//                        groupBinValue = 0;
+//                        bits = 8;
+//                    }
+//                } else if (Format.equals("BS24")) {
+//                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS24()));
+//                } else if (Format.equals("BS64")) {
+//                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getBS64()));
+//                } else if (Format.equals("ASCII")) {
+//                    postData.AddData(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
+//                } else if (Format.equals("A1")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA1().toString());
+//                } else if (Format.equals("A2")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA2().toString());
+//                } else if (Format.equals("A3")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA3().toString());
+//                } else if (Format.equals("A4")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA4().toString());
+//                } else if (Format.equals("A5")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA5().toString());
+//                } else if (Format.equals("A6")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA6().toString());
+//                } else if (Format.equals("A7")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA7().toString());
+//                } else if (Format.equals("A8")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA8().toString());
+//                } else if (Format.equals("A9")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA9().toString());
+//                } else if (Format.equals("A10")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA10().toString());
+//                } else if (Format.equals("A11")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA11().toString());
+//                } else if (Format.equals("A12")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA12().toString());
+//                } else if (Format.equals("A13")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA13().toString());
+//                } else if (Format.equals("A14")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA14().toString());
+//                } else if (Format.equals("A15")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA15().toString());
+//                } else if (Format.equals("A16")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA16().toString());
+//                } else if (Format.equals("A17")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA17().toString());
+//                } else if (Format.equals("A18")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA18().toString());
+//                } else if (Format.equals("A19")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA19().toString());
+//                } else if (Format.equals("A20")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA20().toString());
+//                } else if (Format.equals("A21")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA21().toString());
+//                } else if (Format.equals("A22")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA22().toString());
+//                } else if (Format.equals("A23")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA23().toString());
+//                } else if (Format.equals("A24")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA24().toString());
+//                } else if (Format.equals("A25")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA25().toString());
+//                } else if (Format.equals("A26")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA26().toString());
+//                } else if (Format.equals("A27")) {
+//                    postData.AddData(DataItemCode, dataBuffer.getA27().toString());
+//                }
+//            }
+//        }
+//    }
+
+    /**
+     * @return the config
+     */
+    public ProtocolConfig getConfig() {
+        return config;
+    }
+
+    /**
+     * @param config the config to set
+     */
+    public void setConfig(ProtocolConfig config) {
+        this.config = config;
+    }
+
+    /**
+     * @return the decoder
+     */
+    public Decoder getDecoder() {
+        return decoder;
+    }
+
+    /**
+     * @param decoder the decoder to set
+     */
+    public void setDecoder(Decoder decoder) {
+        this.decoder = decoder;
     }
 }

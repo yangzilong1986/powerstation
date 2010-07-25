@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.db.DataService;
 import pep.bp.db.RTTaskService;
-import pep.bp.model.PostData;
+import pep.bp.model.Dto;
 import pep.bp.utils.Converter;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.gb376.PmPacket376;
@@ -26,7 +26,7 @@ public class UpLoadProcessor extends BaseProcessor{
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuAutoUploadPacketQueue upLoadQueue;//主动上报报文队列
     private Converter converter;
-    private PostData data;
+    private Dto data;
 
     public  UpLoadProcessor(PepCommunicatorInterface pepCommunicator){
         super();
@@ -34,7 +34,7 @@ public class UpLoadProcessor extends BaseProcessor{
         upLoadQueue = pepCommunicator.getRtuAutoUploadPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
         this.converter = new Converter();
-        this.data = new PostData();
+        this.data = new Dto();
     }
     @Override
     public void run(){

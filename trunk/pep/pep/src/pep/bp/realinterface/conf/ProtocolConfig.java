@@ -7,10 +7,7 @@ package pep.bp.realinterface.conf;
 import java.io.IOException;
 import java.util.Map;
 
-import org.omg.CORBA.CTX_RESTRICT_SCOPE;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -28,13 +25,21 @@ public class ProtocolConfig {
 	private static ProtocolConfig instance = null;
 	private static ProtocolCommandItems CommandItems;
 
+
 	public ProtocolConfig(final String str1, final String str2) throws IOException {
-		PROTOCOL_DATA_CONFIG_MAPPING = str1;
-		PROTOCOL_DATA_CONFIG = str2;
-		ResourceLoader resourceLoader = new DefaultResourceLoader();
-		Resource resource1 = resourceLoader.getResource(str1);
-		Resource resource2 = resourceLoader.getResource(str2);
-		CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
+            if (instance == null) {
+                try {
+                    PROTOCOL_DATA_CONFIG_MAPPING = str1;
+                    PROTOCOL_DATA_CONFIG = str2;
+                    ResourceLoader resourceLoader = new DefaultResourceLoader();
+                    Resource resource1 = resourceLoader.getResource(str1);
+                    Resource resource2 = resourceLoader.getResource(str2);
+                    CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
+                    CommandItems.FillMap();
+                } catch (IOException iOException) {
+                    iOException.printStackTrace();
+                }
+            }
 	}
 
 	public static ProtocolConfig getInstance() {
@@ -71,6 +76,7 @@ public class ProtocolConfig {
 		}
 	}
 
+    @SuppressWarnings("static-access")
 	public Map<String, ProtocolDataItem> getDataItemMap(String CommandItemCode) {
 		return this.CommandItems.getCommandItem(CommandItemCode).getDataItemMap();
 	}

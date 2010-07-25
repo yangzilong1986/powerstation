@@ -16,7 +16,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import pep.bp.model.PostData;
+import pep.bp.model.Dto;
 
 /**
  *
@@ -32,7 +32,7 @@ public class DataServiceIMP implements DataService{
     }
 
     @Override
-    public void insertRecvData(PostData data) {
+    public void insertRecvData(Dto data) {
 
     }
 
@@ -75,6 +75,28 @@ public class DataServiceIMP implements DataService{
             sql.append(VOLT_A + ",");
             sql.append(VOLT_B + ",");
             sql.append(VOLT_C + ")}");
+
+            this.jdbcTemplate.execute(sql.toString());
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+        }
+    }
+
+
+    //设备事件
+    private void postData_Event_Data(String logicalAddress,byte gpSn,String dataDate,
+            String p_act_total,String p_act_sharp,String p_act_peak,String p_act_level,String p_act_valley)
+    {
+        try {
+            StringBuffer sql = new StringBuffer("{call PRC_INSERT_P_ACT(");
+            sql.append(logicalAddress + ",");
+            sql.append(gpSn + ",");
+            sql.append(dataDate + ",");
+            sql.append(p_act_total + ",");
+            sql.append(p_act_sharp + ",");
+            sql.append(p_act_peak + ",");
+            sql.append(p_act_level + ",");
+            sql.append(p_act_valley + ")}");
 
             this.jdbcTemplate.execute(sql.toString());
         } catch (DataAccessException dataAccessException) {

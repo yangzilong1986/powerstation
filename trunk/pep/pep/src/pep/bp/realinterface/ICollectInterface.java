@@ -53,6 +53,22 @@ public interface ICollectInterface {
     public long transmitMsg(MessageTranObject MTO)throws Exception;
 
     /**
+     * 透明转发召测（参数类）
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem", <dataItem,value>>
+     * @throws Exception
+     */
+    public Map<String, Map<String,String>> readTransmitPara(long appId) throws Exception;
+
+    /**
+     * 透明转发召测（数据类）
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem#dataItem", <dataTime,value>>
+     * @throws Exception
+     */
+    public Map<String, Map<String,String>> readTransmitData(long appId) throws Exception;
+
+    /**
      * 获取参数设置结果
      * @param appId 回执码
      * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
