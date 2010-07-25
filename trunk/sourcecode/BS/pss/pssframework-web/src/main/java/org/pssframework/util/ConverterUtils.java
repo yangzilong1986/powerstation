@@ -1,5 +1,6 @@
 package org.pssframework.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +38,37 @@ public class ConverterUtils {
     public static List<MessageTranObject> jsonString2MTOList(String jsonString) throws Exception {
         List<MessageTranObject> mtoList = new ArrayList<MessageTranObject>();
         return mtoList;
+    }
+
+    /**
+     * 
+     * @param mtoType
+     * @param jsonString
+     * @return
+     * @throws Exception
+     */
+    public static MessageTranObject jsonString2MessageTranObject(String mtoType, String jsonString) throws Exception {
+        MessageTranObject mto = null;
+        if("100".equals(mtoType)) {
+            mto = new MTO_376();
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        if(mto != null && MTOType.GW_376.equals(mto.getType())) {
+            try {
+                mto = objectMapper.readValue(jsonString, MTO_376.class);
+            }
+            catch(JsonParseException e) {
+                logger.debug(e.getMessage());
+            }
+            catch(JsonMappingException e) {
+                logger.debug(e.getMessage());
+            }
+            catch(IOException e) {
+                logger.debug(e.getMessage());
+            }
+        }
+
+        return mto;
     }
 
     /**
