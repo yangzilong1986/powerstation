@@ -220,7 +220,7 @@ abstract public class PmPacket {
         while (head != -1) {
             int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0x0100) >> 2;
 
-            if (msg[head + len + 7] == 0x16) {
+            if ((msg.length>=(head + len + 7))&&(msg[head + len + 7] == 0x16)) {
                 if (PmPacket.calcCs(msg, head + 6, head + len + 6) == msg[head + len + 6]) {
                     return head;
                 }
