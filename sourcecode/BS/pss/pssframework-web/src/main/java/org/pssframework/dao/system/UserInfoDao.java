@@ -5,11 +5,13 @@ package org.pssframework.dao.system;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.UserInfo;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Administrator
  *
  */
+@Repository
 public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	@Override
