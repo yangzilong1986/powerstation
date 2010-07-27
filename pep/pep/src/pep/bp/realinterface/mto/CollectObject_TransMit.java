@@ -18,20 +18,20 @@ public class CollectObject_TransMit {
     private String equipProtocol;           //设备规约号
     private String meterAddr;              //表地址
     private int meterType;            //表计规约
-    private byte funcode;                  //表计规约功能码
-    private byte Port;                     //终端通信端口号
+    private int funcode;                  //表计规约功能码
+    private int port;                     //终端通信端口号
     private SerialPortPara serialPortPara; //透明转发通信控制字
-    private byte waitforPacket;//透明转发接收等待报文超时时间
-    private byte waitforByte;//透明转发接收等待字节超时时间
+    private int waitforPacket;//透明转发接收等待报文超时时间
+    private int waitforByte;//透明转发接收等待字节超时时间
     private String transmitMsg;//透明转发内容
-    private List<CommandItem> CommandItems; //命令项列表
+    private List<CommandItem> commandItems; //命令项列表
 
     public CollectObject_TransMit() {
-        CommandItems = new ArrayList<CommandItem>();
+        commandItems = new ArrayList<CommandItem>();
     }
 
     public void addCommandItem(CommandItem commandItem){
-        this.CommandItems.add(commandItem);
+        this.commandItems.add(commandItem);
     }
 
     /**
@@ -79,15 +79,15 @@ public class CollectObject_TransMit {
     /**
      * @return the Port
      */
-    public byte getPort() {
-        return Port;
+    public int getPort() {
+        return port;
     }
 
     /**
      * @param Port the Port to set
      */
     public void setPort(byte Port) {
-        this.Port = Port;
+        this.port = Port;
     }
 
     /**
@@ -107,7 +107,7 @@ public class CollectObject_TransMit {
     /**
      * @return the waitforPacket
      */
-    public byte getWaitforPacket() {
+    public int getWaitforPacket() {
         return waitforPacket;
     }
     
@@ -124,7 +124,7 @@ public class CollectObject_TransMit {
     /**
      * @return the waitforByte
      */
-    public byte getWaitforByte() {
+    public int getWaitforByte() {
         return waitforByte;
     }
 
@@ -153,14 +153,14 @@ public class CollectObject_TransMit {
      * @return the CommandItems
      */
     public List<CommandItem> getCommandItems() {
-        return CommandItems;
+        return commandItems;
     }
 
     /**
      * @param CommandItems the CommandItems to set
      */
     public void setCommandItems(List<CommandItem> CommandItems) {
-        this.CommandItems = CommandItems;
+        this.commandItems = CommandItems;
     }
 
     /**
@@ -180,7 +180,7 @@ public class CollectObject_TransMit {
     /**
      * @return the funcode
      */
-    public byte getFuncode() {
+    public int getFuncode() {
         return funcode;
     }
 

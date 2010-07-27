@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author Thinkpad
  */
 public class CommandItemRowMapper implements RowMapper{
+    @Override
 public Object mapRow(ResultSet rs, int index) throws SQLException{
         CommanddItemDAO cmdItem = new CommanddItemDAO();
         cmdItem.setProtocol_no(rs.getString("protocol_no"));

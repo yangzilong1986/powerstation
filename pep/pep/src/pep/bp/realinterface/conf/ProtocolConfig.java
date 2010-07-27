@@ -5,6 +5,7 @@
 package pep.bp.realinterface.conf;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,7 +24,7 @@ public class ProtocolConfig {
 	private static String PROTOCOL_DATA_CONFIG_MAPPING;
 	private static String PROTOCOL_DATA_CONFIG;
 	private static ProtocolConfig instance = null;
-	private static ProtocolCommandItems CommandItems;
+	private static ProtocolCommandItems commandItems;
 
 
 	public ProtocolConfig(final String str1, final String str2) throws IOException {
@@ -34,8 +35,8 @@ public class ProtocolConfig {
                     ResourceLoader resourceLoader = new DefaultResourceLoader();
                     Resource resource1 = resourceLoader.getResource(str1);
                     Resource resource2 = resourceLoader.getResource(str2);
-                    CommandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
-                    CommandItems.FillMap();
+                    commandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
+                    commandItems.FillMap();
                 } catch (IOException iOException) {
                     iOException.printStackTrace();
                 }
@@ -50,13 +51,13 @@ public class ProtocolConfig {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			CommandItems.FillMap();
+			commandItems.FillMap();
 		}
 		return instance;
 	}
 
 	public String getFormat(String DataItemCode) {
-		ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
+		ProtocolDataItem dataItem = commandItems.getDataItem(DataItemCode);
 		if (null != dataItem) {
 			return dataItem.getFormat();
 
@@ -67,7 +68,7 @@ public class ProtocolConfig {
 	}
 
 	public int getLength(String DataItemCode) {
-		ProtocolDataItem dataItem = CommandItems.getDataItem(DataItemCode);
+		ProtocolDataItem dataItem = commandItems.getDataItem(DataItemCode);
 		if (null != dataItem) {
 			return dataItem.getLength();
 		} else {
@@ -78,7 +79,11 @@ public class ProtocolConfig {
 
     @SuppressWarnings("static-access")
 	public Map<String, ProtocolDataItem> getDataItemMap(String CommandItemCode) {
-		return this.CommandItems.getCommandItem(CommandItemCode).getDataItemMap();
+		return this.commandItems.getCommandItem(CommandItemCode).getDataItemMap();
 	}
+
+        public List<ProtocolDataItem> getDataItemList(String CommandItemCode){
+            return commandItems.getCommandItem(CommandItemCode).getDataItems();
+        }
 
 }

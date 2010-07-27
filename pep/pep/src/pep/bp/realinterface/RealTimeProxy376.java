@@ -111,12 +111,12 @@ public class RealTimeProxy376 implements ICollectInterface {
                 packet.getDataBuffer().putDT(dt);
                 packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
                 packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
-                packet.getDataBuffer().put(obj.getWaitforPacket());//透明转发接收等待报文超时时间
+                packet.getDataBuffer().put((byte)obj.getWaitforPacket());//透明转发接收等待报文超时时间
                 packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间             
 
                 //645规约组帧
                 Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
-                pack.setControlCode(true, false, false, obj.getFuncode());
+                pack.setControlCode(true, false, false, (byte)obj.getFuncode());
                 Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
                 Map<String, String> dataItemMap = commandItem.getDatacellParam();
                 Iterator iterator = DataItemMap_Config.keySet().iterator();
@@ -348,6 +348,35 @@ public class RealTimeProxy376 implements ICollectInterface {
         return results;
     }
 
+    @Override
+    public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception{
+        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        StringBuffer sb = new StringBuffer();
+        Map<String, String> results = new HashMap<String, String>();
+        for (RealTimeTaskDAO task : tasks) {
+            String logicAddress = task.getLogicAddress();
+            String gpMark = task.getGpMark();
+            String[] GpArray = null;
+            if(null!=gpMark){
+                GpArray = task.getGpMark().split("#");
+            }
+
+            String[] CommandArray = task.getCommandMark().split("#");
+            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            PmPacket376 packet = new PmPacket376();
+            for (RTTaskRecvDAO recv : recvs) {
+                byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
+                packet.setValue(msg, 0);
+                PmPacketData dataBuf = packet.getDataBuffer();
+                dataBuf.rewind();
+                dataBuf.getDA(new PmPacket376DA());
+                dataBuf.getDT(new PmPacket376DT());
+
+            }
+        }
+        return results;
+    }
+
     /**
      * 获取参数设置结果
      * @param appId
@@ -494,10 +523,11 @@ public class RealTimeProxy376 implements ICollectInterface {
                 if(IsTd.equals("1"))
                     keyInner = dataValue;
                 else
-                    keyInner = DateFormatUtils.format(new Date(),"YYYY-MM-DD HH:MI:SS");
-                resultMap.put(keyInner, dataValue);               
+                    keyInner = DateFormatUtils.format(new Date(),"yyyy-MM-dd hh:mm:ss");
+                resultMap.put(keyInner, dataValue);
+                results.put(key+"#"+dataItemCode, resultMap);
             }
-            results.put(key+"#"+dataItemCode, resultMap);
+            
         }
         return results;
     }

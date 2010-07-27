@@ -45,6 +45,7 @@ public class PollingJob implements Job {
         this.pepCommunicator = pepCommunicator;
     }
 
+    @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         JobDataMap dataMap = context.getJobDetail().getJobDataMap();
         int circleUnit = dataMap.getInt("circleUnit");

@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author Thinkpad
  */
 public class RTTaskRowMapper implements RowMapper {
+    @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException{
         RealTimeTaskDAO task = new RealTimeTaskDAO();
         task.setTaskId(rs.getInt("TASK_ID"));

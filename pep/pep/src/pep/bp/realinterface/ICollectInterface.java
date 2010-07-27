@@ -75,7 +75,16 @@ public interface ICollectInterface {
      * @throws Exception
      */
     public Map<String, String> getReturnByWriteParameter(long appId) throws Exception;
-    
+
+
+    /**
+     * 获取透明转发参数设置结果
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem", "result">
+     * @throws Exception
+     */
+    public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception;
+
     /**
      * 获取参数设置结果
      * @param appId

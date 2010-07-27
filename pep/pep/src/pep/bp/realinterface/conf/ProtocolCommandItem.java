@@ -5,7 +5,6 @@
 package pep.bp.realinterface.conf;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,62 +15,62 @@ import java.util.TreeMap;
  */
 public class ProtocolCommandItem {
 
-    private String CommandCode;
-    private String DiffFormat;//上下报文格式不一致
-    private List<ProtocolDataItem> DataItems;
-    private Map<String, ProtocolDataItem> DataItemMap;
+    private String commandCode;
+    private String diffFormat;//上下报文格式不一致
+    private List<ProtocolDataItem> dataItems;
+    private Map<String, ProtocolDataItem> dataItemMap;
 
     public ProtocolCommandItem() {
-        DataItems = new ArrayList<ProtocolDataItem>();
-        DataItemMap = new TreeMap<String, ProtocolDataItem>();
+        dataItems = new ArrayList<ProtocolDataItem>();
+        dataItemMap = new TreeMap<String, ProtocolDataItem>();
     }
 
     public ProtocolCommandItem(String CommandCode,ProtocolDataItem dataItem) {
         this();
-        this.CommandCode = CommandCode;
-        DataItems.add(dataItem);
+        this.commandCode = CommandCode;
+        dataItems.add(dataItem);
     }
 
     public void AddDataItem(ProtocolDataItem dataItem) {
-        DataItems.add(dataItem);
+        dataItems.add(dataItem);
     }
 
     /**
      * @return the CommandCode
      */
     public String getCommandCode() {
-        return CommandCode;
+        return commandCode;
     }
 
     /**
      * @param CommandCode the CommandCode to set
      */
     public void setCommandCode(String CommandCode) {
-        this.CommandCode = CommandCode;
+        this.commandCode = CommandCode;
     }
 
     /**
      * @return the DataItems
      */
     public List<ProtocolDataItem> getDataItems() {
-        return DataItems;
+        return dataItems;
     }
 
     /**
      * @param DataItems the DataItems to set
      */
     public void setDataItems(List<ProtocolDataItem> DataItems) {
-        this.DataItems = DataItems;
+        this.dataItems = DataItems;
     }
 
     public Map<String, ProtocolDataItem> getDataItemMap() {
-        return DataItemMap;
+        return dataItemMap;
     }
 
     public void FillMap() {
-        if (DataItemMap.size() == 0) {
-            for (ProtocolDataItem dataItem : DataItems) {
-                this.DataItemMap.put(dataItem.getDataItemCode(), dataItem);
+        if (dataItemMap.size() == 0) {
+            for (ProtocolDataItem dataItem : dataItems) {
+                this.dataItemMap.put(dataItem.getDataItemCode(), dataItem);
             }
         }
     }
@@ -80,14 +79,14 @@ public class ProtocolCommandItem {
      * @return the DiffFormat
      */
     public String getDiffFormat() {
-        return DiffFormat;
+        return diffFormat;
     }
 
     /**
      * @param DiffFormat the DiffFormat to set
      */
     public void setDiffFormat(String DiffFormat) {
-        this.DiffFormat = DiffFormat;
+        this.diffFormat = DiffFormat;
     }
 
 }

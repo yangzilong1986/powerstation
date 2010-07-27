@@ -15,39 +15,39 @@ import java.util.Map;
  */
 public class ProtocolCommandItems {
 
-    private Map<String, ProtocolCommandItem> CommandItemMap;
-    private List<ProtocolCommandItem> CommandItems;
+    private Map<String, ProtocolCommandItem> commandItemMap;
+    private List<ProtocolCommandItem> commandItems;
 
     public ProtocolCommandItems() {
-        this.CommandItemMap = new HashMap<String, ProtocolCommandItem>();
-        this.CommandItems = new ArrayList<ProtocolCommandItem>();
+        this.commandItemMap = new HashMap<String, ProtocolCommandItem>();
+        this.commandItems = new ArrayList<ProtocolCommandItem>();
     }
 
     public void AddCommandItem(ProtocolCommandItem commandItem) {
-        this.CommandItems.add(commandItem);
+        this.commandItems.add(commandItem);
     }
 
     /**
      * @return the CommandItems
      */
     public List<ProtocolCommandItem> getCommandItems() {
-        return CommandItems;
+        return commandItems;
     }
 
     /**
      * @param CommandItems the CommandItems to set
      */
     public void setCommandItems(List<ProtocolCommandItem> CommandItems) {
-        this.CommandItems = CommandItems;
+        this.commandItems = CommandItems;
     }
 
     public ProtocolCommandItem getCommandItem(String CommandItemCode){
-        return CommandItemMap.get(CommandItemCode);
+        return commandItemMap.get(CommandItemCode);
     }
 
     public ProtocolDataItem getDataItem(String DataItemCode) {
         String CommandCode = DataItemCode.substring(0, 8);
-        ProtocolCommandItem commandItem = CommandItemMap.get(CommandCode);
+        ProtocolCommandItem commandItem = commandItemMap.get(CommandCode);
         if (null != commandItem) {
             return commandItem.getDataItemMap().get(DataItemCode);
         } else {
@@ -56,10 +56,10 @@ public class ProtocolCommandItems {
     }
 
     public void FillMap() {
-        if (this.CommandItemMap.size() == 0) {
-            for (ProtocolCommandItem commandItem : CommandItems) {
+        if (this.commandItemMap.size() == 0) {
+            for (ProtocolCommandItem commandItem : commandItems) {
                 commandItem.FillMap();
-                this.CommandItemMap.put(commandItem.getCommandCode(), commandItem);
+                this.commandItemMap.put(commandItem.getCommandCode(), commandItem);
             }
         }
     }
