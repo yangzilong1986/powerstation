@@ -14,7 +14,7 @@ import org.pssframework.service.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
@@ -24,7 +24,7 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  * @author calvin
  */
 //Spring Bean的标识.
-@Component
+@Service
 //默认将类中的所有函数纳入事务管理.
 @Transactional
 public class AccountManager extends BaseManager<UserInfo, Long> {
