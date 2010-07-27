@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author Thinkpad
  */
 public class DataItemRowMapper implements RowMapper {
+    @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException{
         DataItemDAO dataItem = new DataItemDAO();
         dataItem.setDataItemCode("dataitem_code");

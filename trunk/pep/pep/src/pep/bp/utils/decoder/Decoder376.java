@@ -6,6 +6,8 @@ package pep.bp.utils.decoder;
 
 import java.util.Map;
 import java.util.TreeMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import pep.bp.model.Dto;
 
@@ -21,30 +23,35 @@ import pep.meter645.Gb645MeterPacket;
  * @author Thinkpad
  */
 public class Decoder376 extends Decoder {
+    private final static Logger log = LoggerFactory.getLogger(Decoder376.class);
 
     @Override
     public void decode(Object pack, Map<String, Map<String, String>> results) {
-        PmPacket376 packet = (PmPacket376) pack;
-        String key = "";
-        String logicAddress = packet.getAddress().getRtua();
-        PmPacketData dataBuffer = packet.getDataBuffer();
-        dataBuffer.rewind();
-        while (dataBuffer.HaveDate()) {
-            PmPacket376DA da = new PmPacket376DA();
-            PmPacket376DT dt = new PmPacket376DT();
-            dataBuffer.getDA(da);
-            dataBuffer.getDT(dt);
-            byte afn = packet.getAfn();
-            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
-            if (afn == 0x0A) {
-                afn = 0x04;
+        try {
+            PmPacket376 packet = (PmPacket376) pack;
+            String key = "";
+            String logicAddress = packet.getAddress().getRtua();
+            PmPacketData dataBuffer = packet.getDataBuffer();
+            dataBuffer.rewind();
+            while (dataBuffer.HaveDate()) {
+                PmPacket376DA da = new PmPacket376DA();
+                PmPacket376DT dt = new PmPacket376DT();
+                dataBuffer.getDA(da);
+                dataBuffer.getDT(dt);
+                byte afn = packet.getAfn();
+                String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
+                if (afn == 0x0A) {
+                    afn = 0x04;
+                }
+                key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
+                Map<String, String> dataItems = new TreeMap();
+                this.DecodeData2Map(commandItemCode, dataItems, dataBuffer);
+                if (!results.containsKey(key)) {
+                    results.put(key, dataItems);
+                }
             }
-            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
-            Map<String, String> dataItems = new TreeMap();
-            this.DecodeData2Map(commandItemCode, dataItems, dataBuffer);
-            if (!results.containsKey(key)) {
-                results.put(key, dataItems);
-            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
     }
 

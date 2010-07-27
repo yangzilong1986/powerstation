@@ -19,6 +19,7 @@ public abstract class MessageTranObject implements IRealMessage{
         this.ID = value;
     }
 */
+    @Override
     public abstract String toJson();
 
     public abstract MTOType getType();

@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
  * @author Thinkpad
  */
 public class TermTaskRowMapper implements RowMapper{
+    @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException{
         TermTaskDAO task = new TermTaskDAO();
         task.setLogicAddress(rs.getString("LOGICAL_ADDR"));

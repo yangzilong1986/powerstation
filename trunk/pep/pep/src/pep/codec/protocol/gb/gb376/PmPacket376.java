@@ -15,6 +15,7 @@ import pep.codec.protocol.gb.PmPacket;
 public class PmPacket376 extends PmPacket {
     private static byte protocolVersion = 2;
 
+    @Override
     protected byte getProtocolVersion(){
         return PmPacket376.protocolVersion;
     }

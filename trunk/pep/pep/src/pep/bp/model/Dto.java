@@ -15,7 +15,7 @@ import java.util.TreeMap;
 public class Dto {
     private String logicAddress;
     private ArrayList gpArray;
-    private String DataTime;
+    private String dataTime;
     private byte afn;
     private String commandItemCode;
     private TreeMap<String,String> dataMap;
@@ -27,7 +27,7 @@ public class Dto {
 
     public void AddData(String dataItemCode,String dataValue){
         if(!this.dataMap.containsKey(dataItemCode))
-            this.dataMap.put(DataTime, dataValue);
+            this.dataMap.put(dataTime, dataValue);
     }
 
     public void AddGP(int gpSn){
@@ -52,14 +52,14 @@ public class Dto {
      * @return the DataTime
      */
     public String getDataTime() {
-        return DataTime;
+        return dataTime;
     }
 
     /**
      * @param DataTime the DataTime to set
      */
     public void setDataTime(String DataTime) {
-        this.DataTime = DataTime;
+        this.dataTime = DataTime;
     }
 
     /**

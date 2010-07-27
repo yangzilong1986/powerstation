@@ -4,6 +4,7 @@
 package pep.bp.utils.decoder;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import pep.bp.model.Dto;
@@ -26,12 +27,11 @@ public abstract class Decoder {
         if (dataItems == null) {
             dataItems = new TreeMap();
         }
-        Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
-        Iterator iterator = DataItemMap_Config.keySet().iterator();
-
-        while (iterator.hasNext()) {
-            String DataItemCode = (String) iterator.next();
-            ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+        dataBuffer.rewind();
+        List<ProtocolDataItem> DataItemList_Config = config.getDataItemList(commandItemCode);
+       
+        for(ProtocolDataItem dataItem:DataItemList_Config){
+            String DataItemCode = dataItem.getDataItemCode();
             int Len = dataItem.getLength();
             String Format = dataItem.getFormat();
             int bitnumber = dataItem.getBitNumber();

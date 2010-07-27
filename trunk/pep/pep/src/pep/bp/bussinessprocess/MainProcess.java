@@ -22,7 +22,7 @@ public class MainProcess {
     private static int rtResponseDealerMaxNumber = 1;
     private static int pollingProcessorMaxNumber = 1;
     private LeakPointProcessor lpProcessor;
-    private SMSNoticeProcessor SMSProcessor;
+    private SMSNoticeProcessor sMSProcessor;
     private PollingProcessor pollingProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
