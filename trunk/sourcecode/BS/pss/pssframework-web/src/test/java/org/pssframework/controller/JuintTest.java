@@ -65,7 +65,7 @@ public class JuintTest {
 		Integer a = 12;
 		String e = Integer.toHexString(a);
 
-		String.format("c00", e);
+		String.format("c0", e);
 		System.out.println(e);
 
 		String[] s = new String[5];
