@@ -61,6 +61,13 @@ public class JuintTest {
 
 	@Test
 	public void testDouble() {
+
+		Integer a = 12;
+		String e = Integer.toHexString(a);
+
+		String.format("c00", e);
+		System.out.println(e);
+
 		String[] s = new String[5];
 		s[3] = "1";
 		assertEquals(s[3], "1");
