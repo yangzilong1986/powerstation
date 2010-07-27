@@ -316,7 +316,6 @@ function setup(commanditems) {
 	    sb_dto.append('"collectObjects":').append('[');
 	    	    
 	    		for(var loop = 0; loop < length; loop++){
-	    			alert(loop)
 	    			if(loop != 0){
 	    				sb_dto.append(',');
 	    			}
@@ -326,7 +325,6 @@ function setup(commanditems) {
 	    			logicalAddr = data[0];
 	    			gpsn = data[1];
 
-	    			
 	    		sb_dto.append('{');
 	    		
 	    sb_dto.append('"logicalAddr":"' + logicalAddr + '"').append(',');
@@ -362,7 +360,7 @@ function setup(commanditems) {
         data: "dto="+sb_dto.toString(),
         dataType: 'json',
         success: function(data) {
-	        fetchReturnResult(data.collectId, 3, 100);
+	        fetchReturnResult(data.collectId, 5, 100);
         },
         error: function() {
         }
@@ -416,12 +414,12 @@ function read() {
 				<td width="120" class="dom"><input value="${pageRequest.logicalAddr}" name="logicalAddr" id="logicalAddr1"/></td>
 			</tr>
 			<tr height="30px">
-				<td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率电能示值"
+				<td align="center" colspan='5'><input type="button" id="dqgflData" name="dqgflData" value="各费率示值"
 					onclick="readDqgflData()" class="btnbg4" /> <input type="button" class="btnbg4" id="dqglData" name="dqglData"
 					value="当前功率" onclick="readDqglData()" /> <input class="btnbg4" type="button" id="dydlData" name="dydlData"
-					value="电压电流" onclick="readDydlData()" /> <input class="btnbg4" type="button" id="otherData" name="otherData"
-					value="其他数据项" onclick="openOtherData()" /> <!-- <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
-				<td><input class="btnbg4" type="button" name="test" id="test" value="zhaoce" onclick="read()"/><input class="btnbg4" type="submit" name="query" id="query" value="查询" /></td>
+					value="电压电流" onclick="readDydlData()" /> <!--  <input class="btnbg4" type="button" id="otherData" name="otherData"
+					value="其他数据项" onclick="openOtherData()" />  <input type="button" onclick="openAdvancedQuery();" value="高级查询" /> --></td>
+				<td><!--  <input class="btnbg4" type="button" name="test" id="test" value="zhaoce" onclick="read()"/>--><input class="btnbg4" type="submit" name="query" id="query" value="查询" /></td>
 			</tr>
 		</table>
 	</form:form></div>
@@ -482,129 +480,126 @@ var totalNums = 0;
 //当前各费率电能示值
 function readDqgflData() {
     var sysObject = "2";
-    var sSelectedList = getSelectedIdString(0);
-    if(sSelectedList == "") {
-        alert(chooseObject);
+    if (!hasOneChecked("ItemID")){
+        alert('请选择要操作的对象!');
         return;
-    }
-    excelFlag = 1;
-    deleteDataitemTd();
-    if(sysObject == "1") {        // 专变用户
-        insertTd('正向有功总(kWh)', '0100');    //正向有功总
-
-        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
-
-        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
-
-        insertTd('正向有功平(kWh)', '0103');    //正向有功平
-
-        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
-
-        insertTd('正向无功总', 'A000');         //正向无功总
-
-        insertTd('反向有功总(kWh)', '0200');    //反向有功总
-
-        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
-
-    }
-    else if(sysObject == "2") {   // 配变/台区
-        insertTd('正向有功总(kWh)', '0100');    //正向有功总
-
-        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
-
-        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
-
-        insertTd('正向有功平(kWh)', '0103');    //正向有功平
-
-        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
-
-        insertTd('正向无功总(kvarh)', 'A000');  //正向无功总
-
-        insertTd('反向有功总(kWh)', '0200');    //反向有功总
-
-        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
-
-    }
-    else if(sysObject == "3") {   // 低压集抄
-        insertTd('正向有功总(kWh)', '0100');    //正向有功总
-
-        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
-
-        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
-
-        insertTd('正向有功平(kWh)', '0103');    //正向有功平
-
-        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
-
-    }
-    else if(sysObject == "4") {   // 变电站
-
-        insertTd('正向有功总(kWh)', '0100');    //正向有功总
-
-        insertTd('正向无功总(kvarh)', 'A000');  //正向无功总
-
-        insertTd('反向有功总(kWh)', '0200');    //反向有功总
-
-        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
-
-    }
-    disableButton();
-    otherDataFlag = 0 ;
-    var sCommanditems = "";
-    sCommanditems += "100#1#100C0129,100C0130,100C0131,100C0132;";                                          // 100
-    sCommanditems += "101#1#100C0129;";                                                                     // 101
-    sCommanditems += "102#1#100C0129;";                                                                     // 102
-    sCommanditems += "106#1#100C0033,100C0034;";                                                            // 106
-    //sCommanditems += "122#1#2000901F,20009110,20009020,20009120;";                                          // 122 - 大项
-    //sCommanditems += "122#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 122 - 小项
-    //sCommanditems += "123#1#2000901F,20009110,20009020,20009120;";                                          // 123 - 大项
-    sCommanditems += "123#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 123 - 小项
-    //sCommanditems += "124#1#2000901F,20009110,20009020,20009120;";                                          // 124 - 大项
-    sCommanditems += "124#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 124 - 小项
-    sCommanditems += "125#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 125 - 小项
-    sCommanditems += "126#1#20169010,20169011,20169012,20169013,20169014;";                                 // 126
-    sCommanditems += "127#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 127 - 小项
-    sCommanditems += "146#1#21010002;";                                                                     // 146
-    resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = sysObject;
-    resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
-    resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
-    resultframe.fastReadingActionForm.submit();
+	}
+	if (confirm('确定执行召测[当前各费率]?')){
+	
+	    excelFlag = 1;
+	    deleteDataitemTd();
+	    if(sysObject == "1") {        // 专变用户
+	        insertTd('正向有功总(kWh)', '0100');    //正向有功总
+	
+	        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
+	
+	        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
+	
+	        insertTd('正向有功平(kWh)', '0103');    //正向有功平
+	
+	        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
+	
+	        insertTd('正向无功总', 'A000');         //正向无功总
+	
+	        insertTd('反向有功总(kWh)', '0200');    //反向有功总
+	
+	        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
+	
+	    }
+	    else if(sysObject == "2") {   // 配变/台区
+	        insertTd('正向有功总(kWh)', '0100');    //正向有功总
+	
+	        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
+	
+	        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
+	
+	        insertTd('正向有功平(kWh)', '0103');    //正向有功平
+	
+	        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
+	
+	        insertTd('正向无功总(kvarh)', 'A000');  //正向无功总
+	
+	        insertTd('反向有功总(kWh)', '0200');    //反向有功总
+	
+	        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
+	
+	    }
+	    else if(sysObject == "3") {   // 低压集抄
+	        insertTd('正向有功总(kWh)', '0100');    //正向有功总
+	
+	        insertTd('正向有功尖(kWh)', '0101');    //正向有功尖
+	
+	        insertTd('正向有功峰(kWh)', '0102');    //正向有功峰
+	
+	        insertTd('正向有功平(kWh)', '0103');    //正向有功平
+	
+	        insertTd('正向有功谷(kWh)', '0104');    //正向有功谷
+	
+	    }
+	    else if(sysObject == "4") {   // 变电站
+	
+	        insertTd('正向有功总(kWh)', '0100');    //正向有功总
+	
+	        insertTd('正向无功总(kvarh)', 'A000');  //正向无功总
+	
+	        insertTd('反向有功总(kWh)', '0200');    //反向有功总
+	
+	        insertTd('反向无功总(kvarh)', 'A100');  //反向无功总
+	
+	    }
+	    disableButton();
+	    otherDataFlag = 0 ;
+	    var sCommanditems = "";
+	    sCommanditems += "100#1#100C0129,100C0130,100C0131,100C0132;";                                          // 100
+	    sCommanditems += "101#1#100C0129;";                                                                     // 101
+	    sCommanditems += "102#1#100C0129;";                                                                     // 102
+	    sCommanditems += "106#1#100C0033,100C0034;";                                                            // 106
+	    //sCommanditems += "122#1#2000901F,20009110,20009020,20009120;";                                          // 122 - 大项
+	    //sCommanditems += "122#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 122 - 小项
+	    //sCommanditems += "123#1#2000901F,20009110,20009020,20009120;";                                          // 123 - 大项
+	    sCommanditems += "123#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 123 - 小项
+	    //sCommanditems += "124#1#2000901F,20009110,20009020,20009120;";                                          // 124 - 大项
+	    sCommanditems += "124#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 124 - 小项
+	    sCommanditems += "125#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 125 - 小项
+	    sCommanditems += "126#1#20169010,20169011,20169012,20169013,20169014;";                                 // 126
+	    sCommanditems += "127#1#20009010,20009011,20009012,20009013,20009014,20009110,20009020,20009120;";      // 127 - 小项
+	    sCommanditems += "146#1#21010002;";
+	    setup('100C0129,100C0130,100C0131,100C0132');                                                                     // 146
+	   }
 }
 
 //当前功率
 function readDqglData() {
-    var sSelectedList = getSelectedIdString(0);
-    if(sSelectedList == "") {
-        alert(chooseObject);
+    if (!hasOneChecked("ItemID")){
+        alert('请选择要操作的对象!');
         return;
-    }
-    excelFlag=2;
-    deleteDataitemTd();
-    insertTd('当前总有功功率(kW)', '2300');  //当前总有功功率
+	}
+	if (confirm('确定执行召测[当前功率]?')){
+	    excelFlag=2;
+	    deleteDataitemTd();
+	    insertTd('当前总有功功率(kW)', '2300');  //当前总有功功率
+	
+	    insertTd('当前总无功功率(kW)', '2400');  //当前总无功功率
+	
+	    insertTd('当前总功率因数', '2600');      //当前总功率因数
+	
+	    disableButton();
+	    otherDataFlag = 0 ;
+	    var sCommanditems = "";
+	    sCommanditems += "100#1#100C0025;100#3#100C0017,100C0018;";                                             // 100
+	    sCommanditems += "101#1#100C0025;100#3#100C0017,100C0018;";                                             // 101
+	    sCommanditems += "106#1#100C0025;106#3#100C0017,100C0018;";                                             // 106
+	    //sCommanditems += "122#1#2000B630,2000B640,2000B650;";                                                 // 122
+	    sCommanditems += "123#1#2000B630,2000B640,2000B650;";                                                   // 123
+	    sCommanditems += "124#1#2000B630,2000B640,2000B650;";                                                   // 124
+	    sCommanditems += "125#1#2000B630,2000B640,2000B650;";                                                   // 125
+	    sCommanditems += "127#1#2000B630,2000B640,2000B650;";                                                   // 127
+	    sCommanditems += "146#1#21010018,21010019;"; 
 
-    insertTd('当前总无功功率(kW)', '2400');  //当前总无功功率
+	}     
 
-    insertTd('当前总功率因数', '2600');      //当前总功率因数
-
-    disableButton();
-    otherDataFlag = 0 ;
-    var sCommanditems = "";
-    sCommanditems += "100#1#100C0025;100#3#100C0017,100C0018;";                                             // 100
-    sCommanditems += "101#1#100C0025;100#3#100C0017,100C0018;";                                             // 101
-    sCommanditems += "106#1#100C0025;106#3#100C0017,100C0018;";                                             // 106
-    //sCommanditems += "122#1#2000B630,2000B640,2000B650;";                                                 // 122
-    sCommanditems += "123#1#2000B630,2000B640,2000B650;";                                                   // 123
-    sCommanditems += "124#1#2000B630,2000B640,2000B650;";                                                   // 124
-    sCommanditems += "125#1#2000B630,2000B640,2000B650;";                                                   // 125
-    sCommanditems += "127#1#2000B630,2000B640,2000B650;";                                                   // 127
-    sCommanditems += "146#1#21010018,21010019;";                                                            // 146
-    resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = 2;
-    resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
-    resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
-    resultframe.fastReadingActionForm.submit();
-}
+	setup('100C0025');                                                     
+	}
 
 //电压电流
 function readDydlData() {
@@ -613,66 +608,60 @@ function readDydlData() {
 	        alert('请选择要操作的对象!');
 	        return;
 		}
-		if (confirm('确定执行[召测]操作?')){
+		if (confirm('确定执行召测[电压电流]?')){
 		
 
-    excelFlag=3;
-    deleteDataitemTd();
-    insertTd('A相电压(V)', '2101');     //A相电压
-
-    insertTd('B相电压(V)', '2102');     //B相电压
-
-    insertTd('C相电压(V)', '2103');     //C相电压
-
-    insertTd('A相电流(A)', '2201');     //A相电流
-
-    insertTd('B相电流(A)', '2202');     //B相电流
-
-    insertTd('C相电流(A)', '2203');     //C相电流
-
-    disableButton();
-    otherDataFlag = 0 ;
-    var sCommanditems = "";
-    sCommanditems += "100#1#100C0025;";                                                                     // 100
-    sCommanditems += "101#1#100C0025;";                                                                     // 101
-    sCommanditems += "106#1#100C0025;";                                                                     // 106
-    //sCommanditems += "122#1#2000B61F,2000B62F;";                                                          // 122 - 大项
-    //sCommanditems += "122#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                      // 122 - 大项
-    //sCommanditems += "123#1#2000B61F,2000B62F;";                                                          // 123 - 大项
-    sCommanditems += "123#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
-    //sCommanditems += "124#1#2000B61F,2000B62F;";                                                          // 124 - 大项
-    sCommanditems += "124#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
-    sCommanditems += "125#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 125 - 大项
-    sCommanditems += "127#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 127 - 大项
-    sCommanditems += "146#1#21010020,21010021;";                                                            // 146
-setup('100C0025');
+		    excelFlag=3;
+		    deleteDataitemTd();
+		    insertTd('A相电压(V)', '2101');     //A相电压
+		
+		    insertTd('B相电压(V)', '2102');     //B相电压
+		
+		    insertTd('C相电压(V)', '2103');     //C相电压
+		
+		    insertTd('A相电流(A)', '2201');     //A相电流
+		
+		    insertTd('B相电流(A)', '2202');     //B相电流
+		
+		    insertTd('C相电流(A)', '2203');     //C相电流
+		
+		    disableButton();
+		    otherDataFlag = 0 ;
+		    var sCommanditems = "";
+		    sCommanditems += "100#1#100C0025;";                                                                     // 100
+		    sCommanditems += "101#1#100C0025;";                                                                     // 101
+		    sCommanditems += "106#1#100C0025;";                                                                     // 106
+		    //sCommanditems += "122#1#2000B61F,2000B62F;";                                                          // 122 - 大项
+		    //sCommanditems += "122#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                      // 122 - 大项
+		    //sCommanditems += "123#1#2000B61F,2000B62F;";                                                          // 123 - 大项
+		    sCommanditems += "123#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
+		    //sCommanditems += "124#1#2000B61F,2000B62F;";                                                          // 124 - 大项
+		    sCommanditems += "124#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 122 - 大项
+		    sCommanditems += "125#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 125 - 大项
+		    sCommanditems += "127#1#2000B611,2000B612,2000B613,2000B621,2000B622,2000B623;";                        // 127 - 大项
+		    sCommanditems += "146#1#21010020,21010021;";                                                            // 146
+			setup('100C0025');
 		}
-    /*resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = 2;
-    resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
-    resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
-    resultframe.fastReadingActionForm.submit();*/
-}
+   }
 
 //剩余电量（费）
 
 function readSydlData() {
-    var sSelectedList = getSelectedIdString(0);
-    if(sSelectedList == "") {
-        alert(chooseObject);
-        return;
-    }
-    deleteDataitemTd();
-    insertTd('剩余电量（费）(kWh)', 'BE28');
-    disableButton();
-    otherDataFlag = 0 ;
-    var sCommanditems = "";
-    sCommanditems += "106#3#100C0023;";
-    resultframe.fastReadingActionForm.action.value = "send";
-    resultframe.fastReadingActionForm.sys_object.value = 2;
-    resultframe.fastReadingActionForm.r_selectlist.value = sSelectedList;
-    resultframe.fastReadingActionForm.r_commanditems.value = sCommanditems;
-    resultframe.fastReadingActionForm.submit();
+	 if (!hasOneChecked("ItemID")){
+	        alert('请选择要操作的对象!');
+	        return;
+		}
+		if (confirm('确定执行召测[电压电流]?')){
+
+	    deleteDataitemTd();
+	    insertTd('剩余电量（费）(kWh)', 'BE28');
+	    disableButton();
+	    otherDataFlag = 0 ;
+	    var sCommanditems = "";
+	    sCommanditems += "106#3#100C0023;";
+	    setup('100C0023');
+		}
+	
 }
 
 //集中器实时数据[广东集抄规约]
@@ -789,24 +778,6 @@ function fetchReturnResult(appIds, sFetchCount, commanditems) {
 		  }
 	});
 
-
-	   /*
-    $.getJSON(url, function(data) {
-
-        alert(" ******data****** : \n [ " + data + " ] ");
-        viewTds(data, commanditems, (iFetchCount - 1));
-        alert(totalNums);
-        if(totalNums <= 0) {
-            iFetchCount = 0;
-        }
-        if(iFetchCount > 0) {
-            setTimeout("fetchReturnResult('" + appIds + "', " + (iFetchCount - 1) +", '"+ commanditems+ "')", 3000);
-        }
-        else {
-            enableButton();
-        }
-
-    });   */
     if(iFetchCount == 0) {
         enableButton();
         //alert("操作结束");
