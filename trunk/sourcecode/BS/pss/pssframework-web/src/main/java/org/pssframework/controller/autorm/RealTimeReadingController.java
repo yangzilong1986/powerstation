@@ -140,12 +140,19 @@ public class RealTimeReadingController extends BaseSpringController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/up")
 	public ModelAndView up(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		Long collectionId = Long.parseLong(request.getParameter("collectId"));
+
 		Map mto = realTimeReadingManager.getReturnByRRTD(new Long[] { collectionId });
+
 		ObjectMapper holder = new ObjectMapper();
+
 		JSONObject jsonObject = DataConverter.map2json(mto);
+
 		holder.writeValue(response.getOutputStream(), jsonObject);
+
 		ModelAndView modelAndView = new ModelAndView();
+
 		return modelAndView;
 	}
 
