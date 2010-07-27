@@ -46,13 +46,6 @@ public class RealTimeReadingController extends BaseSpringController {
 
 	private static final String VIEW = "/autorm/realTimeReading";
 
-	private static final String ORG_ID = "orgId";
-
-	private static final String TERM_ADDR = "termAddr";
-
-	private static final String OBJ_ID = "objId";
-
-
 	@Autowired
 	private OrgInfoManager orgInfoManager;
 
@@ -148,39 +141,12 @@ public class RealTimeReadingController extends BaseSpringController {
 	@RequestMapping(value = "/up")
 	public ModelAndView up(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long collectionId = Long.parseLong(request.getParameter("collectId"));
-		Map mto = realTimeReadingManager.getReturnByRRTD(new Long[]{collectionId});
+		Map mto = realTimeReadingManager.getReturnByRRTD(new Long[] { collectionId });
 		ObjectMapper holder = new ObjectMapper();
 		JSONObject jsonObject = DataConverter.map2json(mto);
 		holder.writeValue(response.getOutputStream(), jsonObject);
 		ModelAndView modelAndView = new ModelAndView();
 		return modelAndView;
-	}
-
-
-	/**
-	 * 获得实时召测返回结果，AJAX方式
-	 *
-	 * @param servletRequest
-	 * @param servletResponse
-	 * @return
-	 */
-	public void fetchByAjax(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws Exception {
-		String appIds = servletRequest.getParameter("r_appids");
-		String fetchCount = servletRequest.getParameter("fetchCount");
-		String otherDataFlag = servletRequest.getParameter("otherDataFlag"); //其他数据项标识
-		String timeData = servletRequest.getParameter("timeData");
-		String dataGap = servletRequest.getParameter("dataGap");
-		String points = servletRequest.getParameter("points");
-		String proNo = servletRequest.getParameter("proNo");
-		logger.info("r_appids:" + appIds + "fetchCount:" + fetchCount + "otherDataFlag : " + otherDataFlag + " timeData:" + timeData + " dataGap:" + dataGap + " points:" + points + "proNo:" + proNo);
-		if (appIds != null) {
-			Map returnMap = null;
-			if ("0".equals(otherDataFlag)) {
-				//returnMap = realTimeReadingService.getReturnByRRTD(appIds, fetchCount);
-			} else { //其他数据项
-				//returnMap = realTimeReadingService.getCurveReturnByRRTD(appIds, fetchCount, timeData, dataGap, points, proNo);
-			}
-		}
 	}
 
 }
