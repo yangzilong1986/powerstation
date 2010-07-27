@@ -31,6 +31,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.dialect.Dialect;
@@ -571,6 +572,20 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		ClassMetadata meta = getSessionFactory().getClassMetadata(getEntityClass());
 		return meta.getIdentifierPropertyName();
 	}
+	
+	/**
+	 *	获取全部对象,支持排序.
+	 */
+	public List<E> getAll(String orderBy, boolean isAsc) {
+		Criteria c = createCriteria();
+		if (isAsc) {
+			c.addOrder(Order.asc(orderBy));
+		} else {
+			c.addOrder(Order.desc(orderBy));
+		}
+		return c.list();
+	}
+
 	/************************************************************************/
 
 }
