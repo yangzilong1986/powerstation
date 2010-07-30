@@ -70,55 +70,65 @@ function meterState(){
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
         <td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
       </tr>
+      </table>
+       <c:choose>
+          <c:when test="${_type=='edit' || _type=='new'}">
+            <c:set var="disabled" value="false"></c:set>
+          </c:when>
+          <c:otherwise>
+            <c:set var="disabled" value="true"></c:set>
+          </c:otherwise>
+        </c:choose>
+      <table id = "detail">
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
         <td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
         <td align="right" class="green">漏保型号：</td>
         <td><form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">波特率：</td>
         <td><form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
         <td align="right" class="green">额定电流：</td>
         <td><form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">剩余电流档位：</td>
         <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
         <td align="right" class="green">规约：</td>
         <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏电分断延迟档位：</td>
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
         <td align="right" class="green">漏电分断延迟时间：</td>
         <td><form:select path="offDelayValue" items="${offDelayValueList}" id="offDelayValue" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" /></td>
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">CT：</td>
         <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
         <td align="right" class="green">PT：</td>
         <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏保类型：</td>
         <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" /></td>
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">功能状态设置：</td>
         <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
-          <form:checkbox path="functionsChecked" value="${function.value}" />${function.key}
+          <form:checkbox path="functionsChecked" value="${function.value}" disabled="${disabled}"/>${function.key}
  </c:forEach></td>
       </tr>
     </table>
@@ -136,6 +146,11 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 );
 
 $(function(){
+
+if(${_type} == "new"){	
+	$("#detail").hide();
+}
+	
 jQuery("#save").click(function(){
     if(val.validate()){
         jQuery(this).attr("disabled","disabled");
