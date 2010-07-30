@@ -4,12 +4,17 @@
 package org.pssframework.model.system;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,7 +22,13 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Administrator
@@ -27,6 +38,12 @@ import org.pssframework.base.BaseEntity;
 @Table(name = "o_role")
 @SequenceGenerator(sequenceName = "SEQ_O_ROLE", name = "SEQ_O_ROLE", allocationSize = 1)
 public class RoleInfo extends BaseEntity {
+
+	public RoleInfo(Long roleId, String roleName) {
+		this.roleId = roleId;
+		this.roleName = roleName;
+
+	}
 
 	/**
 	 * 
@@ -43,7 +60,7 @@ public class RoleInfo extends BaseEntity {
 
 	// ROLE_NAME VARCHAR2(50) not null,
 	@Column(nullable = false, unique = true, name = "ROLE_NAME")
-	private Long roleName;
+	private String roleName;
 
 	// ROLE_REMARK VARCHAR2(256),
 	@Column(length = 256, name = "ROLE_REMARK")
@@ -67,6 +84,17 @@ public class RoleInfo extends BaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	// LASTTIME_STAMP DATE default SYSDATE is '最后表结构修改时间戳';
 	private Date lasttimeStamp;
+
+	@ManyToMany
+	@JoinTable(name = "O_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
+	@Fetch(FetchMode.SUBSELECT)
+	@OrderBy("AUTHORITY_ID")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<AuthorityInfo> authorityInfoList = Lists.newArrayList();
+
+	public List<AuthorityInfo> getAuthorityInfoList() {
+		return authorityInfoList;
+	}
 
 	/**
 	 * @return the creator
@@ -99,7 +127,7 @@ public class RoleInfo extends BaseEntity {
 	/**
 	 * @return the roleName
 	 */
-	public Long getRoleName() {
+	public String getRoleName() {
 		return roleName;
 	}
 
@@ -153,7 +181,7 @@ public class RoleInfo extends BaseEntity {
 	/**
 	 * @param roleName the roleName to set
 	 */
-	public void setRoleName(Long roleName) {
+	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
