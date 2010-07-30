@@ -78,7 +78,7 @@ public class MainProcess {
     public void run() {
         runRealTimeTaskSender();
         runResponseDealer();
-        //runPollingProcessor();
+        runPollingProcessor();
     }
 
 }

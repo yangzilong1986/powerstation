@@ -38,10 +38,14 @@ public class PollingJob implements Job {
     private RtuRespPacketQueue respQueue;//返回报文队列
     private ApplicationContext cxt;
     private Converter converter;
-    public  PollingJob(PepCommunicatorInterface pepCommunicator,int IntervalHour){
+    public PollingJob(){
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
         taskService = (TaskService) cxt.getBean("taskService");
         converter = new Converter();
+    }
+
+    public  PollingJob(PepCommunicatorInterface pepCommunicator,int IntervalHour){
+        
         this.pepCommunicator = pepCommunicator;
     }
 

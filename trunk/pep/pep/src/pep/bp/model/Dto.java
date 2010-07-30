@@ -27,11 +27,11 @@ public class Dto {
 
     public void AddData(String dataItemCode,String dataValue){
         if(!this.dataMap.containsKey(dataItemCode))
-            this.dataMap.put(dataTime, dataValue);
+            this.getDataMap().put(dataItemCode, dataValue);
     }
 
     public void AddGP(int gpSn){
-        this.gpArray.add(gpSn);
+        this.getGpArray().add(gpSn);
     }
     /**
      * @return the logicAddress
@@ -88,5 +88,19 @@ public class Dto {
      */
     public void setCommandItemCode(String commandItemCode) {
         this.commandItemCode = commandItemCode;
+    }
+
+    /**
+     * @return the gpArray
+     */
+    public ArrayList getGpArray() {
+        return gpArray;
+    }
+
+    /**
+     * @return the dataMap
+     */
+    public TreeMap<String, String> getDataMap() {
+        return dataMap;
     }
 }

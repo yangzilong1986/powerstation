@@ -60,9 +60,22 @@
         <property name="config" ref="protocolConfig"/>
     </bean>
 
+    <bean id="actDataStoredProcedure" class="pep.bp.db.ACTDataStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+
     <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource" />
+
     </bean>
+
+    <bean id="dataService" class="pep.bp.db.DataServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+        <property name="actStoredProcedure" ref="actDataStoredProcedure" />
+
+    </bean>
+
     <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
         <property name="taskService" ref="rtTaskService" />
         <property name="converter" ref="converter" />
