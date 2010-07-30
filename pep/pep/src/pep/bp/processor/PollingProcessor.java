@@ -45,13 +45,13 @@ public class PollingProcessor implements Runnable{
             triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
             triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
             triggerHour.setName("triggerHour");
-            JobDetail jobDetailDay = new JobDetail("PollingJobDay", null, PollingJob.class);
-            jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
-            triggerDay = TriggerUtils.makeDailyTrigger(STARTUP_TIME, 0); // 每天23：00
-            triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date())); //从下一个秒开始
-            triggerDay.setName("triggerDay");
+//            JobDetail jobDetailDay = new JobDetail("PollingJobDay", null, PollingJob.class);
+//            jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
+//            triggerDay = TriggerUtils.makeDailyTrigger(STARTUP_TIME, 0); // 每天23：00
+//            triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date())); //从下一个秒开始
+//            triggerDay.setName("triggerDay");
             sched.scheduleJob(jobDetailHour, triggerHour);
-            sched.scheduleJob(jobDetailDay, triggerDay);
+            //sched.scheduleJob(jobDetailDay, triggerDay);
         } catch (SchedulerException ex) {
             java.util.logging.Logger.getLogger(PollingProcessor.class.getName()).log(Level.SEVERE, null, ex);
         }
