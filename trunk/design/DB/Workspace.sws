@@ -4,11 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{EA57D8B5-A7CB-4DA2-B755-2BB048C5E269}" Loaded="No" Name="DM_06_数据域" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="DM_06_数据域.pdm"/>
-		<Model Expanded="Yes" ID="{864A4FB6-B1B7-48AA-8A1F-B05E5156C972}" Loaded="No" Name="HX用电信息采集系统" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="file:///E|/系统部/HX_用电信息采集系统V1.0/04设计/hx.pdm"/>
-		<Model Expanded="Yes" ID="{72173FC1-4AC1-4C04-A146-BD582B9DF793}" Loaded="No" Name="DM01_组织域" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="DM01_组织域.pdm"/>
-		<Model Expanded="Yes" ID="{864A4FB6-B1B7-48AA-8A1F-B05E5156C972}" Loaded="No" Name="HX用电信息采集系统" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="file:///E|/系统部/HX_用电信息采集系统V1.0/04设计/hx.pdm"/>
-		<Model Expanded="Yes" ID="{72173FC1-4AC1-4C04-A146-BD582B9DF793}" Name="DM01_组织域" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="DM01_组织域.pdm"/>
+		<Model Expanded="Yes" ID="{EA57D8B5-A7CB-4DA2-B755-2BB048C5E269}" Name="DM_06_数据域" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="DM_06_数据域.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
