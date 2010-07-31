@@ -6,6 +6,7 @@
 package pep.bp.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,10 @@ public class TermTaskDAO {
     private byte aFN;
     private List<CommanddItemDAO> commandItemList;
 
+
+    public TermTaskDAO(){
+        this.commandItemList = new ArrayList<CommanddItemDAO>();
+    }
     /**
      * @return the logicAddress
      */
@@ -211,7 +216,7 @@ public class TermTaskDAO {
      * @param commandItemList the commandItemList to set
      */
     public void setCommandItemList(List<CommanddItemDAO> commandItemList) {
-        this.setCommandItemList(commandItemList);
+        this.commandItemList = commandItemList;
     }
 
     /**

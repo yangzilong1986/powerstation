@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package pep.bp.processor;
+package pep.bp.processor.polling;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -15,6 +15,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pep.mina.common.PepCommunicatorInterface;
 
 /**
  *
@@ -31,17 +32,24 @@ public class PollingProcessor implements Runnable{
     //日任务启动时间点
     private final int STARTUP_TIME = 23;
 
+    private PepCommunicatorInterface pepCommunicator;
     private Trigger triggerHour,triggerDay;
+
+    public PollingProcessor(PepCommunicatorInterface pepCommunicator){
+        this.pepCommunicator = pepCommunicator;
+    }
 
     @Override
     public void run() {
         try {
+
             SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
             Scheduler sched = schedFact.getScheduler();
             sched.start();
+
             //小时任务
-            JobDetail jobDetailHour = new JobDetail("PollingJobHour", null, PollingJob.class);
-            jobDetailHour.getJobDataMap().put("circleUnit", CIRCLE_UNIT_HOUR);
+            JobDetail jobDetailHour = new JobDetail("PollingJobHour", null, PollingJobProxy.class);
+            jobDetailHour.getJobDataMap().put("PollingJob",new PollingJob(pepCommunicator,CIRCLE_UNIT_HOUR));
             triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
             triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
             triggerHour.setName("triggerHour");
@@ -51,6 +59,7 @@ public class PollingProcessor implements Runnable{
 //            triggerDay.setStartTime(TriggerUtils.getEvenSecondDate(new Date())); //从下一个秒开始
 //            triggerDay.setName("triggerDay");
             sched.scheduleJob(jobDetailHour, triggerHour);
+
             //sched.scheduleJob(jobDetailDay, triggerDay);
         } catch (SchedulerException ex) {
             java.util.logging.Logger.getLogger(PollingProcessor.class.getName()).log(Level.SEVERE, null, ex);

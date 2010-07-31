@@ -2,11 +2,10 @@
  * 主站轮召处理器
  */
 
-package pep.bp.processor;
+package pep.bp.processor.polling;
 import java.util.List;
 
 import org.quartz.Job;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -25,6 +24,7 @@ import pep.bp.model.TermTaskDAO;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.utils.Converter;
+import pep.codec.utils.BcdUtils;
 import pep.system.SystemConst;
 
 /**
@@ -38,21 +38,18 @@ public class PollingJob implements Job {
     private RtuRespPacketQueue respQueue;//返回报文队列
     private ApplicationContext cxt;
     private Converter converter;
-    public PollingJob(){
+    private int circleUnit;
+
+    public  PollingJob(PepCommunicatorInterface pepCommunicator,int circleUnit){
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
         taskService = (TaskService) cxt.getBean("taskService");
-        converter = new Converter();
-    }
-
-    public  PollingJob(PepCommunicatorInterface pepCommunicator,int IntervalHour){
-        
+        converter = (Converter)cxt.getBean("converter");
         this.pepCommunicator = pepCommunicator;
+        this.circleUnit = circleUnit;
     }
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        JobDataMap dataMap = context.getJobDetail().getJobDataMap();
-        int circleUnit = dataMap.getInt("circleUnit");
         List<TermTaskDAO> TermTaskList = taskService.getPollingTask(circleUnit);
         for(TermTaskDAO task:TermTaskList){
             DoTask(this.pepCommunicator,task);
@@ -71,8 +68,9 @@ public class PollingJob implements Job {
         object.setLogicalAddr(task.getLogicAddress());
         object.setMpSn(new int[]{task.getGp_sn()});
         PmPacket376 packet = new PmPacket376();
-        converter.CollectObject2Packet(object, packet,task.getAFN(),null, null);
+        converter.CollectObject2Packet(object, packet,task.getAFN(),new StringBuffer(), new StringBuffer());
         pepCommunicator.SendPacket(-1, packet);
+        log.info("下发轮召报文："+BcdUtils.binArrayToString(packet.getValue()) );
         
     }
 }

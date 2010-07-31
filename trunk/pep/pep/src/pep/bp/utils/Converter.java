@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pep.bp.model.Dto;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
@@ -58,7 +60,7 @@ import pep.system.SystemConst;
  * @author Thinkpad
  */
 public class Converter {
-
+    private final static Logger log = LoggerFactory .getLogger(Converter.class);
     private static final byte FUNCODE_DOWM_1 = 1;//PRM =1 功能码：1 （发送/确认）
     private String groupValue = "";
     private int groupBinValue = 0;
@@ -67,31 +69,34 @@ public class Converter {
     private Decoder decoder;
 
     public void CollectObject2Packet(CollectObject obj, PmPacket376 packet, byte AFN, StringBuffer gpMark, StringBuffer commandMark) {
+            try {
+            preSetPacket(packet, AFN, obj.getLogicalAddr());
+            int[] MpSn = obj.getMpSn();
 
-        preSetPacket(packet, AFN, obj.getLogicalAddr());
-        int[] MpSn = obj.getMpSn();
-
-        for (int i = 0; i <= MpSn.length - 1; i++) {
-            gpMark.append(String.valueOf(MpSn[i]) + "#");
-            List<CommandItem> CommandItems = obj.getCommandItems();
-            for (CommandItem commandItem : CommandItems) {
-                commandMark.append(commandItem.getIdentifier() + "#");
-                PmPacket376DA da = new PmPacket376DA(MpSn[i]);
-                PmPacket376DT dt = new PmPacket376DT();
-                int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-                dt.setFn(fn);
-                packet.getDataBuffer().putDA(da);
-                packet.getDataBuffer().putDT(dt);
-                if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA1)) {
-                    putDataBuf(packet, commandItem);
+            for (int i = 0; i <= MpSn.length - 1; i++) {
+                gpMark.append(MpSn[i] + "#");
+                List<CommandItem> CommandItems = obj.getCommandItems();
+                for (CommandItem commandItem : CommandItems) {
+                    commandMark.append(commandItem.getIdentifier() + "#");
+                    PmPacket376DA da = new PmPacket376DA(MpSn[i]);
+                    PmPacket376DT dt = new PmPacket376DT();
+                    int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
+                    dt.setFn(fn);
+                    packet.getDataBuffer().putDA(da);
+                    packet.getDataBuffer().putDT(dt);
+                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA1)) {
+                        putDataBuf(packet, commandItem);
+                    }
+                }
+                if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
+                {
+                    packet.setAuthorize(new Authorize());
                 }
             }
-            if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
-            {
-                packet.setAuthorize(new Authorize());
-            }
+            packet.setTpv(new TimeProtectValue());//时间标签
+        } catch (NumberFormatException numberFormatException) {
+            log.error(numberFormatException.getMessage());
         }
-        packet.setTpv(new TimeProtectValue());//时间标签
     }
 
     public List<PmPacket376> CollectObject2PacketList(CollectObject obj, byte AFN, StringBuffer gpMark, StringBuffer commandMark, int CmdItemNum) {
