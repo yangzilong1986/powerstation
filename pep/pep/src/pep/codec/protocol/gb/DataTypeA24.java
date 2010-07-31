@@ -72,10 +72,15 @@ public class DataTypeA24 extends DataTypeDateBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
+        
         StringBuilder buff = new StringBuilder();
-        buff.append("day=").append(this.getDay());
-        buff.append(", hour=").append(this.getHour());
+        buff.append(this.day).append("日");
+        buff.append(this.hour).append("时");
 
+        //StringBuilder buff = new StringBuilder();
+        //buff.append("day=").append(this.getDay());
+        //buff.append(", hour=").append(this.getHour());
         return buff.toString();
     }
 }

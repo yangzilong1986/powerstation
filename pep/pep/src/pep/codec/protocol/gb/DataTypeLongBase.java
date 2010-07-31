@@ -12,6 +12,7 @@ import pep.codec.utils.BcdUtils;
  * @author luxiaochung
  */
 public abstract class DataTypeLongBase {
+    protected boolean isNull = true;
     protected long value;
 
     protected DataTypeLongBase(){
@@ -22,7 +23,12 @@ public abstract class DataTypeLongBase {
         if (array.length-beginPosition<len)
             throw new IllegalArgumentException();
         else
-            this.value = BcdUtils.bcdToInt(array, beginPosition, len);
+            try {
+                this.value = BcdUtils.bcdToInt(array, beginPosition, len);
+                this.isNull = false;
+            } catch (Exception ex){
+                this.isNull = true;
+            }
     }
 
     protected byte[] getArray(int len){

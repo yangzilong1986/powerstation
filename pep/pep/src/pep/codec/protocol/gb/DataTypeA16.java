@@ -96,6 +96,8 @@ public class DataTypeA16 extends DataTypeDateBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
+        
         StringBuilder buff = new StringBuilder();
         buff.append("day=").append(this.getDay());
         buff.append(", hour=").append(this.getHour());

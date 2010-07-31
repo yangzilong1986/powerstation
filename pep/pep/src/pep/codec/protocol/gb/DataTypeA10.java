@@ -11,10 +11,12 @@ package pep.codec.protocol.gb;
  */
 public class DataTypeA10 extends DataTypeLongBase{
     public DataTypeA10(long value){
+        super();
         setValue(value);
     }
 
     public DataTypeA10(byte[] array){
+        super();
         setArray(array,0);
     }
 
@@ -36,6 +38,9 @@ public class DataTypeA10 extends DataTypeLongBase{
 
     @Override
     public String toString(){
-        return (new Long(this.value)).toString();
+        if (this.isNull)
+            return "";
+        else
+            return (new Long(this.value)).toString();
     }
 }

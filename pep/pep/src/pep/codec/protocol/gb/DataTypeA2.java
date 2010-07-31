@@ -13,6 +13,7 @@ import pep.codec.utils.BcdUtils;
 public class DataTypeA2 {
 
     private double value;
+    private boolean isNull;
 
     public DataTypeA2(double value) {
         this.value = value;
@@ -38,34 +39,39 @@ public class DataTypeA2 {
         if (array.length - beginPosition < 2) {
             throw new IllegalArgumentException();
         } else {
-            int val = BcdUtils.bcdToInt(array[beginPosition]) + (array[beginPosition+1] & 0x0f) * 100;
-            byte g = (byte) ((array[beginPosition+1] & 0xE0) >> 5);
-            double s = (array[beginPosition+1] & 0x10) != 0 ? -1.0 : 1.0;
-            switch (g) {
-                case 0x00:
-                    this.value = val * s * 10000;
-                    break;
-                case 0x01:
-                    this.value = val * s * 1000;
-                    break;
-                case 0x02:
-                    this.value = val * s * 100;
-                    break;
-                case 0x03:
-                    this.value = val * s * 10;
-                    break;
-                case 0x04:
-                    this.value = val * s;
-                    break;
-                case 0x05:
-                    this.value = val * s / 10;
-                    break;
-                case 0x06:
-                    this.value = val * s / 100;
-                    break;
-                case 0x07:
-                    this.value = val * s / 1000;
-                    break;
+            try {
+                int val = BcdUtils.bcdToInt(array[beginPosition]) + (array[beginPosition + 1] & 0x0f) * 100;
+                byte g = (byte) ((array[beginPosition + 1] & 0xE0) >> 5);
+                double s = (array[beginPosition + 1] & 0x10) != 0 ? -1.0 : 1.0;
+                switch (g) {
+                    case 0x00:
+                        this.value = val * s * 10000;
+                        break;
+                    case 0x01:
+                        this.value = val * s * 1000;
+                        break;
+                    case 0x02:
+                        this.value = val * s * 100;
+                        break;
+                    case 0x03:
+                        this.value = val * s * 10;
+                        break;
+                    case 0x04:
+                        this.value = val * s;
+                        break;
+                    case 0x05:
+                        this.value = val * s / 10;
+                        break;
+                    case 0x06:
+                        this.value = val * s / 100;
+                        break;
+                    case 0x07:
+                        this.value = val * s / 1000;
+                        break;
+                }
+                this.isNull = false;
+            } catch (Exception ex) {
+                this.isNull = true;
             }
         }
     }
@@ -91,6 +97,7 @@ public class DataTypeA2 {
 
     @Override
     public String toString() {
+        if (this.isNull) return "";
         return (new Double(value)).toString();
     }
 }

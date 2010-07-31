@@ -25,4 +25,10 @@ public class DataTypeA8 extends DataTypeA7A8Base {
     public int getValue(){
         return this.value;
     }
+
+    @Override
+    public String toString() {
+        if (this.isNull) return "";
+        return (new Integer(value)).toString();
+    }
 }

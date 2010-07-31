@@ -37,6 +37,7 @@ public class DataTypeA26 extends DataTypeLongBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
         return (new Float(getValue())).toString();
     }
 }
