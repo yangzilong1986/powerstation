@@ -6,6 +6,8 @@
 package pep.bp.model;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -13,94 +15,49 @@ import java.util.TreeMap;
  * @author Thinkpad
  */
 public class Dto {
+    
+    public class DtoItem {
+        public int gp; //测量点号
+        public String meterAddress;
+        public boolean isMeterAddress;  //使用地址表示测量点
+        public String dataTime;
+        public String commandItemCode;
+        public Map<String,String> dataMap;
+        
+        protected DtoItem(int gp, String dataTime, String commandItemCode){
+            super();
+            this.gp = gp;
+            this.isMeterAddress = false;
+            this.dataTime = dataTime;
+            this.commandItemCode = commandItemCode;
+            this.dataMap = new TreeMap<String,String>();
+        }
+        
+         protected DtoItem(String meterAddress, String dataTime, String commandItemCode){
+            super();
+            this.meterAddress = meterAddress;
+            this.isMeterAddress = true;
+            this.dataTime = dataTime;
+            this.commandItemCode = commandItemCode;
+            this.dataMap = new TreeMap<String,String>();
+         }
+    }
+    
     private String logicAddress;
-    private ArrayList gpArray;
-    private String dataTime;
     private byte afn;
-    private String commandItemCode;
-    private TreeMap<String,String> dataMap;
+    private List<DtoItem> dataItems;
 
-    public Dto(){
-        this.dataMap= new TreeMap<String,String>();
-        gpArray =new ArrayList();
-    }
-
-    public void AddData(String dataItemCode,String dataValue){
-        if(!this.dataMap.containsKey(dataItemCode))
-            this.getDataMap().put(dataItemCode, dataValue);
-    }
-
-    public void AddGP(int gpSn){
-        this.getGpArray().add(gpSn);
-    }
-    /**
-     * @return the logicAddress
-     */
-    public String getLogicAddress() {
-        return logicAddress;
-    }
-
-    /**
-     * @param logicAddress the logicAddress to set
-     */
-    public void setLogicAddress(String logicAddress) {
-        this.logicAddress = logicAddress;
-    }
-
-
-    /**
-     * @return the DataTime
-     */
-    public String getDataTime() {
-        return dataTime;
-    }
-
-    /**
-     * @param DataTime the DataTime to set
-     */
-    public void setDataTime(String DataTime) {
-        this.dataTime = DataTime;
-    }
-
-    /**
-     * @return the afn
-     */
-    public int getAfn() {
-        return afn;
-    }
-
-    /**
-     * @param afn the afn to set
-     */
-    public void setAfn(byte afn) {
+    public Dto(String rtua,byte afn){
+        this.logicAddress = rtua;
         this.afn = afn;
+        this.dataItems = new ArrayList<DtoItem>();
     }
 
-    /**
-     * @return the commandItemCode
-     */
-    public String getCommandItemCode() {
-        return commandItemCode;
+    public DtoItem AddDataItem(String meterAddress, String dataTime, String commandItemCode){
+        return new DtoItem(meterAddress,dataTime,commandItemCode);
     }
 
-    /**
-     * @param commandItemCode the commandItemCode to set
-     */
-    public void setCommandItemCode(String commandItemCode) {
-        this.commandItemCode = commandItemCode;
-    }
-
-    /**
-     * @return the gpArray
-     */
-    public ArrayList getGpArray() {
-        return gpArray;
-    }
-
-    /**
-     * @return the dataMap
-     */
-    public TreeMap<String, String> getDataMap() {
-        return dataMap;
+    public DtoItem AddDataItem(int gp, String dataTime, String commandItemCode){
+        return new DtoItem(gp,dataTime,commandItemCode);
     }
 }
