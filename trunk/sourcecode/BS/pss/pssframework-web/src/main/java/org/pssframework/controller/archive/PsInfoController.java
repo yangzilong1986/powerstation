@@ -40,8 +40,12 @@ import javax.validation.Valid;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
+import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.archive.TranInfo;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
+import org.pssframework.service.archive.TgInfoManager;
+import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -83,6 +87,12 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
+
+	@Autowired
+	private TranInfoManger tranInfoManger;
+
+	@Autowired
+	private TgInfoManager tgInfoManager;
 
 	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(method = RequestMethod.POST)
@@ -128,6 +138,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		requestMap.put("tgid", psInfo.getGpInfo().getObjectId());
 
+		result.addAttribute("istAddr", getPsAddr(psInfo.getGpInfo().getObjectId()));
+
 		result.addAttribute("psinfo", psInfo);
 
 		this.CommonPart(result, requestMap);
@@ -137,8 +149,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		return VIEW;
 	}
 
-	@SuppressWarnings("unchecked")
 	/** 进入新增 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/new")
 	public String _new(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response, PsInfo model)
 			throws Exception {
@@ -147,7 +159,10 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
 
+
 		requestMap.put("tgid", tgid);
+
+		modelMap.addAttribute("istAddr", getPsAddr(tgid));
 
 		modelMap.addAttribute("psinfo", model);
 
@@ -301,5 +316,15 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		return psInfoManager.checkGpsn(psInfo);
 
+	}
+
+	private String getPsAddr(Long tgId) {
+		TgInfo tgInfo = this.tgInfoManager.getById(tgId);
+		String istAddr = null;
+		List<TranInfo> tranInfoList = tgInfo.getTranInfos();
+		for (TranInfo tranInfo : tranInfoList) {
+			istAddr = tranInfo.getInstAddr();
+		}
+		return istAddr;
 	}
 }
