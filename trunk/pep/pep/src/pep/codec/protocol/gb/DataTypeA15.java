@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class DataTypeA15 extends DataTypeDateBase {
     public DataTypeA15(Date date){
+        super();
         setDate(date);
     }
 
@@ -22,6 +23,7 @@ public class DataTypeA15 extends DataTypeDateBase {
 
 
     public DataTypeA15(byte[] array){
+        super();
         setArray(array,0);
     }
 
@@ -39,6 +41,7 @@ public class DataTypeA15 extends DataTypeDateBase {
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
         return this.getDate().toString();
     }
 }

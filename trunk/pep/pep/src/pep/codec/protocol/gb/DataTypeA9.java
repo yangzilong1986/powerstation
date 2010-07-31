@@ -25,4 +25,10 @@ public class DataTypeA9 extends DataTypeA9A25Base {
     public double getValue(){
         return this.value/10000.0;
     }
+
+    @Override
+    public String toString() {
+        if (this.isNull) return "";
+        return (new Double(value/ 10000.0)).toString();
+    }
 }

@@ -29,6 +29,7 @@ public class DataTypeA5 extends DataTypeA5A6Base {
 
     @Override
     public String toString() {
+        if (this.isNull) return "";
         return (new Double(value/ 10.0)).toString();
     }
 }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pep.codec.protocol.gb;
 
 import pep.codec.utils.BcdUtils;
@@ -12,7 +11,9 @@ import pep.codec.utils.BcdUtils;
  * @author luxiaochung
  */
 public abstract class DataTypeA5A6Base {
+
     protected int value;
+    protected boolean isNull;
 
     protected DataTypeA5A6Base() {
     }
@@ -33,14 +34,21 @@ public abstract class DataTypeA5A6Base {
         setArray(array, 0);
     }
 
-    public void setArray(byte[] array, int beginPosition){
-        if (array.length-beginPosition<2)
+    public void setArray(byte[] array, int beginPosition) {
+        if (array.length - beginPosition < 2) {
             throw new IllegalArgumentException();
-        else{
-            boolean s = (array[beginPosition+1]&0x80)==0x80;
-            this.value = BcdUtils.bcdToInt(array[beginPosition]);
-            this.value += BcdUtils.bcdToInt(array[beginPosition+1] & 0x7F)*100;
-            if (s) this.value *= -1;
+        } else {
+            try {
+                boolean s = (array[beginPosition + 1] & 0x80) == 0x80;
+                this.value = BcdUtils.bcdToInt(array[beginPosition]);
+                this.value += BcdUtils.bcdToInt(array[beginPosition + 1] & 0x7F) * 100;
+                if (s) {
+                    this.value *= -1;
+                }
+                this.isNull = false;
+            } catch (Exception ex) {
+                this.isNull = true;
+            }
         }
     }
 

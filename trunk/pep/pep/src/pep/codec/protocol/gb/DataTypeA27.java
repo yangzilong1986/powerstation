@@ -37,6 +37,7 @@ public class DataTypeA27 extends DataTypeLongBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
         return (new Long(getValue())).toString();
     }
 }

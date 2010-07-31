@@ -27,4 +27,10 @@ public class DataTypeA6 extends DataTypeA5A6Base {
     public final void setValue(float value) {
         this.value = (int) Math.round(Math.floor(value * 100));
     }
+
+    @Override
+    public String toString() {
+        if (this.isNull) return "";
+        return (new Double(value/ 100.0)).toString();
+    }
 }

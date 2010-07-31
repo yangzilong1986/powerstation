@@ -24,6 +24,7 @@ public class DataTypeDateBase {
     protected int hour =0;
     protected int minitue=0;
     protected int second=0;
+    protected boolean isNull=true;
     
     protected DataTypeDateBase(){
     }
@@ -34,6 +35,7 @@ public class DataTypeDateBase {
         try {
             date = df.parse(dateStr);
             setDate(date);
+            this.isNull = false;
         } catch (ParseException ex) {
             Logger.getLogger(DataTypeDateBase.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -48,6 +50,7 @@ public class DataTypeDateBase {
         this.hour = calendar.get(GregorianCalendar.HOUR_OF_DAY);
         this.minitue = calendar.get(GregorianCalendar.MINUTE);
         this.second = calendar.get(GregorianCalendar.SECOND);
+        this.isNull = false;
     }
 
     public final Date getDate(){
@@ -124,6 +127,11 @@ public class DataTypeDateBase {
         if (array.length-beginPosition<format.length()/2)
             throw new IllegalArgumentException();
         else
-            setDate(BcdUtils.bcdToDate(array, format, beginPosition));
+            try {
+                setDate(BcdUtils.bcdToDate(array, format, beginPosition));
+                this.isNull = false;
+            } catch (Exception ex){
+                this.isNull = true;
+            }
     }
 }

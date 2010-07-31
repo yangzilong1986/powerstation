@@ -67,10 +67,15 @@ public class DataTypeA21 extends DataTypeDateBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
+        
         StringBuilder buff = new StringBuilder();
-        buff.append("year=").append(this.getYear());
-        buff.append(", month=").append(this.getMonth());
+        buff.append(this.year).append("年");
+        buff.append(this.month).append("月");
 
+        //StringBuilder buff = new StringBuilder();
+        //buff.append("year=").append(this.getYear());
+        //buff.append(", month=").append(this.getMonth());
         return buff.toString();
     }
 }

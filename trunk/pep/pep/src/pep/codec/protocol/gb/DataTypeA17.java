@@ -94,11 +94,17 @@ public class DataTypeA17 extends DataTypeDateBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
+
         StringBuilder buff = new StringBuilder();
-        buff.append("month=").append(this.month);
-        buff.append(",day=").append(this.day);
-        buff.append(", hour=").append(this.hour);
-        buff.append(", minute=").append(this.minitue);
+        buff.append(this.month).append("月");
+        buff.append(this.day).append("日");
+        buff.append(this.hour).append("时");
+        buff.append(this.minitue).append("分");
+        //buff.append("month=").append(this.month);
+        //buff.append(",day=").append(this.day);
+        //buff.append(", hour=").append(this.hour);
+        //buff.append(", minute=").append(this.minitue);
 
         return buff.toString();
     }

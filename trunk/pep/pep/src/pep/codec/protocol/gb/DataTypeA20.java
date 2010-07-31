@@ -78,6 +78,7 @@ public class DataTypeA20 extends DataTypeDateBase{
 
     @Override
     public String toString(){
+        if (this.isNull) return "";
         return super.getDate().toString();
     }
 }

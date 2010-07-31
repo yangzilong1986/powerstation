@@ -18,9 +18,11 @@ import pep.codec.utils.BcdUtils;
  * @author luxiaochung
  */
 public class DataTypeA1 {
+    private boolean isNull = true;
     private  GregorianCalendar calendar = new GregorianCalendar();
     
     public DataTypeA1(Date date){
+        this.isNull = false;
         calendar.setTime(date);
     }
 
@@ -28,6 +30,7 @@ public class DataTypeA1 {
         SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             calendar.setTime(dateformat.parse(dateStr));
+            this.isNull = false;
         } catch (ParseException ex) {
             Logger.getLogger(DataTypeA1.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -45,12 +48,16 @@ public class DataTypeA1 {
         if (value.length-beginIdx<6)
            throw new IllegalArgumentException();
         else{
-            calendar.set(GregorianCalendar.SECOND, BcdUtils.bcdToInt(value[beginIdx]));
-            calendar.set(GregorianCalendar.MINUTE, BcdUtils.bcdToInt(value[beginIdx+1]));
-            calendar.set(GregorianCalendar.HOUR, BcdUtils.bcdToInt(value[beginIdx+2]));
-            calendar.set(GregorianCalendar.DAY_OF_MONTH, BcdUtils.bcdToInt(value[beginIdx+4]));
-            calendar.set(GregorianCalendar.MONTH, BcdUtils.bcdToInt((byte)((value[beginIdx+4]-1)&0x1F)));
-            calendar.set(GregorianCalendar.YEAR,2000+BcdUtils.bcdToInt(value[beginIdx+5]));
+            try {
+                calendar.set(GregorianCalendar.SECOND, BcdUtils.bcdToInt(value[beginIdx]));
+                calendar.set(GregorianCalendar.MINUTE, BcdUtils.bcdToInt(value[beginIdx+1]));
+                calendar.set(GregorianCalendar.HOUR, BcdUtils.bcdToInt(value[beginIdx+2]));
+                calendar.set(GregorianCalendar.DAY_OF_MONTH, BcdUtils.bcdToInt(value[beginIdx+4]));
+                calendar.set(GregorianCalendar.MONTH, BcdUtils.bcdToInt((byte)((value[beginIdx+4]-1)&0x1F)));
+                calendar.set(GregorianCalendar.YEAR,2000+BcdUtils.bcdToInt(value[beginIdx+5]));
+            } catch (Exception ex){
+                this.isNull = true;
+            }
         }
     }
 
@@ -75,11 +82,17 @@ public class DataTypeA1 {
     }
 
     public void setDate(Date date){
+        if (date==null) return;
+
         calendar.setTime(date);
+        this.isNull = false;
     }
 
     @Override
     public String toString(){
-        return calendar.toString();
+        if (this.isNull)
+            return "";
+        else
+            return calendar.toString();
     }
 }
