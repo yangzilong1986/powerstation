@@ -10,5 +10,5 @@ package pep.bp.utils;
  * @author Thinkpad
  */
 public interface MeterType {
-    public int Meter645 = 0;
+    public int Meter645 = 100;
 }

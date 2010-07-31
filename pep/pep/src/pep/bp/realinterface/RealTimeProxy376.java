@@ -122,6 +122,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                     //645规约组帧
                     Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
                     pack.setControlCode(true, false, false, (byte) obj.getFuncode());
+                    byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8))) ;
+                    pack.getDataAsPmPacketData().put(DI);
                     Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
                     Map<String, String> dataItemMap = commandItem.getDatacellParam();
                     Iterator iterator = DataItemMap_Config.keySet().iterator();
