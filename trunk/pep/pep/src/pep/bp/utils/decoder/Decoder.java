@@ -137,11 +137,9 @@ public abstract class Decoder {
 
     protected void DecodeData2Dto(String commandItemCode, Dto dto, PmPacketData dataBuffer)
     {       String GroupValue = "";
-            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItemCode);
-            Iterator iterator = DataItemMap_Config.keySet().iterator();
-            while (iterator.hasNext()) {
-                String DataItemCode = (String) iterator.next();
-                ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+            List<ProtocolDataItem> DataItemList_Config  = config.getDataItemList(commandItemCode);
+            for(ProtocolDataItem dataItem:DataItemList_Config){
+                String DataItemCode = dataItem.getDataItemCode();
                 int Len = dataItem.getLength();
                 String Format = dataItem.getFormat();
                 int bitnumber = dataItem.getBitNumber();

@@ -4,6 +4,7 @@
 
 package pep.bp.processor;
 
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.db.DataService;
@@ -31,19 +32,24 @@ public class UpLoadProcessor extends BaseProcessor{
         dataService = (DataService) cxt.getBean(SystemConst.DATASERVICE_BEAN);
         upLoadQueue = pepCommunicator.getRtuAutoUploadPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
-        this.converter = new Converter();
+        this.converter = (Converter)cxt.getBean("converter");
         this.data = new Dto();
     }
     @Override
     public void run(){
         while (true) {
             try {
-                PmPacket376 packet = (PmPacket376)upLoadQueue.PollPacket();
+                PmPacket376 packet = (PmPacket376) upLoadQueue.PollPacket();
                 this.converter.decodeDataDB(packet, data);
                 dataService.insertRecvData(data);
-            } catch (Exception ex) {
+            } catch (InterruptedException ex) {
+                log.error(ex.getMessage());
+                break;
+            }
+            catch (Exception ex) {
                 log.error(ex.getMessage());
             }
+
         }
     }
 }
