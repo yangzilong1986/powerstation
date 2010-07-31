@@ -46,16 +46,16 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		// 台区
 		model.getGpInfo().setGpType("2");
 
-		int[] functionsChecked = model.getFunctionsChecked();
-
-		if (functionsChecked != null) {
-
-			for (int checked : functionsChecked) {
-				initChecked[checked] = '1';
-			}
-
-		}
-		model.setFunctionCode(String.valueOf(initChecked));
+		//		int[] functionsChecked = model.getFunctionsChecked();
+		//
+		//		if (functionsChecked != null) {
+		//
+		//			for (int checked : functionsChecked) {
+		//				initChecked[checked] = '1';
+		//			}
+		//
+		//		}
+		//		model.setFunctionCode(String.valueOf(initChecked));
 
 		GpInfo gpInfo = model.getGpInfo();
 
@@ -67,20 +67,20 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 	@Override
 	public void update(PsInfo model) throws DataAccessException {
 
-		int[] functionsChecked = model.getFunctionsChecked();
+		//int[] functionsChecked = model.getFunctionsChecked();
 
-		logger.debug("update functionsChecked{}", functionsChecked);
+		//logger.debug("update functionsChecked{}", functionsChecked);
 
-		if (functionsChecked != null) {
+		//if (functionsChecked != null) {
 
-			for (int checked : functionsChecked) {
-				initChecked[checked] = '1';
-			}
+		//	for (int checked : functionsChecked) {
+		//		initChecked[checked] = '1';
+		//	}
 
-		}
-		model.setFunctionCode(String.valueOf(initChecked));
+		//}
+		//model.setFunctionCode(String.valueOf(initChecked));
 
-		logger.debug("start to updating");
+		//logger.debug("start to updating");
 
 		super.update(model);
 	}

@@ -23,8 +23,6 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
@@ -37,7 +35,7 @@ import com.google.common.collect.Lists;
  *
  */
 @Entity
-@Table(name = "o_staff")
+@Table(name = "O_STAFF")
 @SequenceGenerator(sequenceName = "SEQ_O_STAFF", name = "SEQ_O_STAFF", allocationSize = 1)
 public class UserInfo extends BaseEntity {
 
@@ -112,6 +110,16 @@ public class UserInfo extends BaseEntity {
 	@Column(name = "ACCOUNT_NON_LOCKED")
 	private Integer accountNonLocked;
 
+	//多对多定义
+	@ManyToMany
+	//中间表定义,表名采用默认命名规则
+	@JoinTable(name = "O_USER_ROLE", joinColumns = { @JoinColumn(name = "EMP_NO") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	//Fecth策略定义
+	@Fetch(FetchMode.SUBSELECT)
+	//集合按id排序.
+	@OrderBy("roleId")
+	//集合中对象id的缓存.
+	//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<RoleInfo> roleInfoList = Lists.newArrayList();//有序的关联对象集合
 
 	/**
@@ -222,16 +230,7 @@ public class UserInfo extends BaseEntity {
 		return ReflectionUtils.convertElementPropertyToList(roleInfoList, "id");
 	}
 
-	//多对多定义
-	@ManyToMany
-	//中间表定义,表名采用默认命名规则
-	@JoinTable(name = "O_USER_ROLE", joinColumns = { @JoinColumn(name = "EMP_NO") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-	//Fecth策略定义
-	@Fetch(FetchMode.SUBSELECT)
-	//集合按id排序.
-	@OrderBy("id")
-	//集合中对象id的缓存.
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+
 	public List<RoleInfo> getRoleInfoList() {
 		return roleInfoList;
 	}

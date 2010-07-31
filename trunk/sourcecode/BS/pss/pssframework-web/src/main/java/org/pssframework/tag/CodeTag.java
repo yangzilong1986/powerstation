@@ -78,7 +78,13 @@ public class CodeTag extends RequestContextAwareTag {
 		logger.debug("开始获取code");
 
 		Map mapRequest = new HashMap();
-		mapRequest.put("code", this.code);
+		String codeN = "NULL";
+		if (this.code == null || "".endsWith(code.trim())) {
+
+		} else {
+			codeN = this.code;
+		}
+		mapRequest.put("code", codeN);
 		mapRequest.put("codecate", this.codeCate);
 		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(pageContext.getServletContext());
 		try {

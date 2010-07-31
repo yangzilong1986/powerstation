@@ -32,12 +32,12 @@ public class AuthorityInfo extends BaseEntity {
 	/**
 	 * SpringSecurity中默认的角色/授权名前缀.
 	 */
-	public static final String AUTHORITY_PREFIX = "ROLE_";
+	public static final String AUTHORITY_PREFIX = "ROLE_AUTHORITY_";
 
 	@Column(nullable = false, unique = true)
 	private String authorityName;
 
-	@Column(nullable = false, unique = true, name = "authority_Id ")
+	@Column(nullable = false, unique = true, name = "AUTHORITY_ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_authority")
 	private Long authorityId;
@@ -63,6 +63,11 @@ public class AuthorityInfo extends BaseEntity {
 		return AUTHORITY_PREFIX + authorityName;
 	}
 
+	@Transient
+	public String getPrefixedId() {
+		return AUTHORITY_PREFIX + this.authorityId;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
@@ -75,4 +80,5 @@ public class AuthorityInfo extends BaseEntity {
 	public Long getAuthorityId() {
 		return authorityId;
 	}
+
 }

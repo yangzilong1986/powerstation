@@ -5,6 +5,7 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,7 +27,14 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.system.SmsNoInfo;
+
+import com.google.common.collect.Lists;
 
 /**
  * 1)用于记录需要安装计量装置的位置点的信息，可以解决一个正反向表被两个户分别使用，这时计量点定义成两个；可以解决三个单相表代替一个三相表的功能，这时计量点定义成一个；可以解决主副表问题，这时计量点可以定义成一个。
@@ -122,6 +132,16 @@ public class PsInfo extends BaseEntity {
 
 	@Transient
 	private int[] functionsChecked;
+
+	@ManyToMany
+	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_NO") })
+	@Fetch(FetchMode.SUBSELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<SmsNoInfo> smsNoInfoList = Lists.newArrayList();
+
+	public List<SmsNoInfo> getSmsNoInfoList() {
+		return smsNoInfoList;
+	}
 
 	/**
 	 * @return the functionMap
