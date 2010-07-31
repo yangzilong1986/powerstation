@@ -45,8 +45,15 @@ public class BcdUtils {
         return (byte) (BcdUtils.charToByte(str.charAt(0)) * 0x10 + BcdUtils.charToByte(str.charAt(1)));
     }
 
+    public static boolean isBcdByte(int bcd){
+        return (((bcd & 0x0f)<=9)&&(((bcd & 0xf0)>>4)<=9));
+    }
+
     public static int bcdToInt(int bcd) {
-        return ((bcd & 0xf0) >> 4) * 10 + (bcd & 0x0f);
+        if (BcdUtils.isBcdByte(bcd))
+            return ((bcd & 0xf0) >> 4) * 10 + (bcd & 0x0f);
+        else
+            throw new IllegalArgumentException("非法BCD字符");
     }
 
     public static long bcdToInt(byte[] bcds, int beginIndex, int length) {
