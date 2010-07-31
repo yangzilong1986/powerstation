@@ -167,6 +167,7 @@ public class RtuCommunicationInfo {
      * 向所有Rtu通讯对象发送到达重复检查点消息
      */
     public void checkNotResponed(Date checkTime) {
+        if (this.currentSendTicket==null) return;
         if (checkTime.getTime() - this.currentSendTicket.getTime() >= RtuCommunicationInfo.TIME_OUT) {
             if (this.currentSendTimes == this.maxRetryTimes) {
                 RtuRespPacketQueue.instance().addPacket(
