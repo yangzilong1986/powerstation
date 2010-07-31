@@ -4,6 +4,7 @@
  */
 
 package pep.bp.utils;
+import pep.codec.utils.BcdUtils;
 import pep.common.exception.BPException;
 
 /**
@@ -105,7 +106,7 @@ public class SerialPortPara {
         sb.append(this.stopbit-1);//停止位
         sb.append(this.checkbit);//校验位
         sb.append(this.odd_even_bit);//奇偶位
-        sb.append(this.databit-5);//数据位
+        sb.append(BcdUtils.IntToBitSetString(this.databit-5) );//数据位
         sb.reverse();
         return sb.toString();
     }
