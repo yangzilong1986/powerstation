@@ -26,11 +26,11 @@ public class MainProcess {
     private SMSNoticeProcessor sMSProcessor;
     private PollingProcessor pollingProcessor;
     private UpLoadProcessor upLoadProcessor;
-    private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
+    private final static Logger log = LoggerFactory.getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private ThreadPoolExecutor threadPool;
 
-    private void runRealTimeTaskSender(){
+    private void runRealTimeTaskSender() {
         for (int i = 1; i <= rtTaskSenderMaxNumber; i++) {
             try {
                 String task = "启动实时交互任务发送器 " + i;
@@ -42,7 +42,7 @@ public class MainProcess {
         }
     }
 
-    private void runResponseDealer(){
+    private void runResponseDealer() {
         for (int i = 1; i <= rtResponseDealerMaxNumber; i++) {
             try {
                 String task = "启动主站下发返回处理器 " + i;
@@ -54,7 +54,7 @@ public class MainProcess {
         }
     }
 
-    private void runPollingProcessor(){
+    private void runPollingProcessor() {
         try {
             if (this.pollingProcessor == null) {
                 this.pollingProcessor = new PollingProcessor(this.pepCommunicator);
@@ -64,19 +64,15 @@ public class MainProcess {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
 
-    private void runupLoadProcessor(){
-        try {
-            if (this.upLoadProcessor == null) {
-                this.upLoadProcessor = new UpLoadProcessor(this.pepCommunicator);
-            }
-            upLoadProcessor.run();
-            log.info("启动主动上报任务处理器 ");
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void runupLoadProcessor() {
+        if (this.upLoadProcessor == null) {
+            this.upLoadProcessor = new UpLoadProcessor(this.pepCommunicator);
         }
+        log.info("启动主动上报任务处理器 ");
+        upLoadProcessor.run();
 
     }
 
@@ -96,5 +92,4 @@ public class MainProcess {
         runPollingProcessor();
         runupLoadProcessor();
     }
-
 }

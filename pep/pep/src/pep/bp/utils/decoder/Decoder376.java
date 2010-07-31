@@ -71,7 +71,7 @@ public class Decoder376 extends Decoder {
             byte afn = packet.getAfn();
             dto.setAfn(afn);
             dto.AddGP(da.getPn());
-            String commandItemCode = "10" + String.format("%02d", afn) + String.format("%04d", dt.getFn());
+            String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
             this.DecodeData2Dto(commandItemCode, dto, dataBuffer);
         }
     }
