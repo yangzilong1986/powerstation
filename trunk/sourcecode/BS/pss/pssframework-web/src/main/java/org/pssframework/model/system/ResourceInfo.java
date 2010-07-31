@@ -5,10 +5,7 @@ package org.pssframework.model.system;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,7 +18,6 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "O_FUN")
-@SequenceGenerator(sequenceName = "SEQ_O_FUN", name = "SEQ_O_FUN", allocationSize = 1)
 public class ResourceInfo extends BaseEntity {
 
 	/**
@@ -36,7 +32,6 @@ public class ResourceInfo extends BaseEntity {
 
 	@Column(nullable = false, unique = true, name = "FUN_ID")
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_FUN")
 	private Long resourceId;
 
 	@Column(nullable = false, name = "FUN_NAME")
