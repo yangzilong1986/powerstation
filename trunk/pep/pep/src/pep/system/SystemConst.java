@@ -14,6 +14,7 @@ public class SystemConst {
     public static final String SPRING_BEANS = "beans.xml";
     public static final String REALTIMETASK_BEAN = "rtTaskService";
     public static final String TERMTASK_BEAN = "taskService";
+    public static final String DATASERVICE_BEAN = "dataService";
 
 
     //----------------------------------------------Parse Parameters ------------------
