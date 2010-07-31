@@ -51,11 +51,12 @@ function meterState(){
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||                 document.body.clientWidth) -10 ); height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||document.body.clientWidth) -10 ); height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
       value="${_type}" />
     <form:hidden path="gpInfo.objectId" />
+    <div id= "main">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
@@ -70,16 +71,25 @@ function meterState(){
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
         <td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
       </tr>
+            <tr height="30px">
+      <td align="right" class="green">短信号码：</td>
+            <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
+          <form:input path="functionsChecked" value="${function.value}" disabled="${disabled}"/>
+ </c:forEach></td>
+     <td></td>
+     <td></td>
+     <td></td>
+      </tr>
+      <tr height="30px">
+      <td align="right" class="green">安装地址：</td>
+      <td colspan="3">${istAddr}</td>
+      </tr>
       </table>
-       <c:choose>
-          <c:when test="${_type=='edit' || _type=='new'}">
-            <c:set var="disabled" value="false"></c:set>
-          </c:when>
-          <c:otherwise>
             <c:set var="disabled" value="true"></c:set>
-          </c:otherwise>
-        </c:choose>
-      <table id = "detail">
+            </div>
+            <div class="tab" id="detail_tile"><span>当前状态</span></div>
+            <div id = "detail" class="da_mid" style="width: expression(document.body.clientWidth-32)">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
         <td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name"
@@ -108,10 +118,10 @@ function meterState(){
         <td align="right" class="green">漏电分断延迟档位：</td>
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
-        <td align="right" class="green">漏电分断延迟时间：</td>
-        <td><form:select path="offDelayValue" items="${offDelayValueList}" id="offDelayValue" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" disabled="${disabled}"/></td>
-      </tr>
+         <td align="right" class="green">漏保类型：</td>
+        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}"/></td>
+     </tr>
       <tr height="30px">
         <td align="right" class="green">CT：</td>
         <td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
@@ -120,18 +130,14 @@ function meterState(){
         <td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" disabled="${disabled}"/></td>
       </tr>
-      <tr height="30px">
-        <td align="right" class="green">漏保类型：</td>
-        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}"/></td>
-      </tr>
-      <tr height="30px">
+    	      <tr height="30px">
         <td align="right" class="green">功能状态设置：</td>
         <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
           <form:checkbox path="functionsChecked" value="${function.value}" disabled="${disabled}"/>${function.key}
  </c:forEach></td>
       </tr>
     </table>
+    </div>
   </form:form></div>
   <div style="text-align: center"><br></br>
   <input type="button" id="save" value="保 存" class="btnbg4" /></div>
@@ -147,7 +153,8 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 
 $(function(){
 
-if(${_type} == "new"){	
+if('${_type}' == "new"){
+	$("#detail_tile").hide();
 	$("#detail").hide();
 }
 	
