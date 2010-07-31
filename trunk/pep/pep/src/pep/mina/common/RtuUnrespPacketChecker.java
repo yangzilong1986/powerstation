@@ -5,11 +5,13 @@
 
 package pep.mina.common;
 
+import java.util.TimerTask;
+
 /**
  *
  * @author luxiaochung
  */
-public class RtuUnrespPacketChecker implements Runnable {
+public class RtuUnrespPacketChecker extends TimerTask {
     private PepCommunicatorInterface communicator;
     
     public RtuUnrespPacketChecker(){
