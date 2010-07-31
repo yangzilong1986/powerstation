@@ -28,7 +28,7 @@ public class UpLoadProcessor extends BaseProcessor{
 
     public  UpLoadProcessor(PepCommunicatorInterface pepCommunicator){
         super();
-        dataService = (DataService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
+        dataService = (DataService) cxt.getBean(SystemConst.DATASERVICE_BEAN);
         upLoadQueue = pepCommunicator.getRtuAutoUploadPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
         this.converter = new Converter();
