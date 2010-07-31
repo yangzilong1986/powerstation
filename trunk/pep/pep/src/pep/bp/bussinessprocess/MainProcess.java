@@ -25,6 +25,7 @@ public class MainProcess {
     private LeakPointProcessor lpProcessor;
     private SMSNoticeProcessor sMSProcessor;
     private PollingProcessor pollingProcessor;
+    private UpLoadProcessor upLoadProcessor;
     private final static Logger log = LoggerFactory .getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private ThreadPoolExecutor threadPool;
@@ -66,6 +67,19 @@ public class MainProcess {
         
     }
 
+    private void runupLoadProcessor(){
+        try {
+            if (this.upLoadProcessor == null) {
+                this.upLoadProcessor = new UpLoadProcessor(this.pepCommunicator);
+            }
+            upLoadProcessor.run();
+            log.info("启动主动上报任务处理器 ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public MainProcess(PepCommunicatorInterface pepCommunicator) {
         this.threadPool = new ThreadPoolExecutor(2, 4, 3,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3),
@@ -80,6 +94,7 @@ public class MainProcess {
         runRealTimeTaskSender();
         runResponseDealer();
         runPollingProcessor();
+        runupLoadProcessor();
     }
 
 }
