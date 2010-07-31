@@ -58,13 +58,13 @@ public class ConverterUtils {
                 mto = objectMapper.readValue(jsonString, MTO_376.class);
             }
             catch(JsonParseException e) {
-                logger.debug(e.getMessage());
+                logger.error("JsonParseException", e.fillInStackTrace());
             }
             catch(JsonMappingException e) {
-                logger.debug(e.getMessage());
+                logger.error("JsonMappingException", e.fillInStackTrace());
             }
             catch(IOException e) {
-                logger.debug(e.getMessage());
+                logger.error("IOException", e.fillInStackTrace());
             }
         }
 

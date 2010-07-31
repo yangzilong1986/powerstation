@@ -1,6 +1,5 @@
 package org.pssframework.controller.eparam;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +31,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
 	@Autowired
 	private ICollectInterface realTimeProxy376;
 
-	@RequestMapping
+    @RequestMapping
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TermParamInfo model) {
         Long termId = null;
         if(model.getTermId() != null) {
@@ -68,6 +67,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         String type = request.getParameter("type");
         if("setup".equals(type)) { // 设置
             String dtoJSONString = request.getParameter("dto");
+            logger.info("dtoJSONString : " + dtoJSONString);
             MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
             long collectId = realTimeProxy376.writeParameters(mto);
             logger.info("collectId : " + collectId);
@@ -76,6 +76,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         }
         else {                     // 读取
             String dtoJSONString = request.getParameter("dto");
+            logger.info("dtoJSONString : " + dtoJSONString);
             String mtoType = request.getParameter("mtoType");
             MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(mtoType, dtoJSONString);
             long collectId = realTimeProxy376.readParameters(mto);
@@ -102,6 +103,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
                 long collectId = Integer.parseInt(strCollectId);
                 Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter(collectId);
                 result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
             }
         }
         else {                     // 读取
@@ -118,8 +120,8 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
                 tempMap.put("1004000107", "7");
                 resultMap.put("96123456#0#10040001", tempMap);*/
                 result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
             }
-            
         }
         return result;
     }

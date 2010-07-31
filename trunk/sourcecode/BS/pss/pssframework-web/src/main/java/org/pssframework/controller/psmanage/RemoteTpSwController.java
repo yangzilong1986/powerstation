@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/psmanage/rmttpsw")
 public class RemoteTpSwController extends BaseRestSpringController<PsInfo, Long> {
+
+    @RequestMapping
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PsInfo model) {
         ModelAndView result = new ModelAndView();
         result.addObject("psInfo", model);
@@ -30,6 +32,30 @@ public class RemoteTpSwController extends BaseRestSpringController<PsInfo, Long>
         ModelAndView result = new ModelAndView();
         result.addObject("psInfo", psInfo);
         result.setViewName("/psmanage/showRemoteTpSw");
+        return result;
+    }
+
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/down")
+    public ModelAndView _down(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView result = new ModelAndView();
+        return result;
+    }
+
+    /**
+     * 
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/up")
+    public ModelAndView _up(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView result = new ModelAndView();
         return result;
     }
 }
