@@ -19,7 +19,7 @@ function showMainTab(tabTitle, url) {
 
 function selectMenu(menuId, url) {
     var tabTitle = $("#a" + menuId).html();
-    if(url == '' || url == '/psmanage/rmttpsw' || url == '/psmanage/rmttest') {
+    if(url == '') {
         url = '/commons/inmaking.jsp';
     }
     showMainTab(tabTitle, url);
