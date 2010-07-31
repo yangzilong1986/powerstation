@@ -142,9 +142,9 @@ var contextPath  = '${ctx}';
     <tbody>
       <c:forEach items="${pslist}" var="ps" varStatus="status">
         <tr id="ps_${ps.psId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>${ps.assetNo}</td>
-          <td>${ps.gpInfo.gpAddr}</td>
-          <td><pss:code code="${ps.modelCode}" codeCate="<%=SystemConst.CODE_PS_MODEL %>" /></td>
+          <td>&nbsp;${ps.assetNo}</td>
+          <td>&nbsp;${ps.gpInfo.gpAddr}</td>
+          <td>&nbsp;<pss:code code="${ps.modelCode}" codeCate="<%=SystemConst.CODE_PS_MODEL %>" /></td>
           <td><a onclick="deletePsInfo('${ps.psId}')">删除</a>&nbsp;/&nbsp;<a onclick="updatePsInfo('${ps.psId}')">修改</a></td>
         </tr>
       </c:forEach>
@@ -170,11 +170,11 @@ var contextPath  = '${ctx}';
     <tbody>
       <c:forEach items="${termlist}" var="term" varStatus="status">
         <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>${term.assetNo}</td>
-          <td>${term.logicalAddr}</td>
-          <td><pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
-          <td><pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
-          <td><pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
+          <td>&nbsp;${term.assetNo}</td>
+          <td>&nbsp;${term.logicalAddr}</td>
+          <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
+          <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
+          <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
           <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateTermInfo('${term.termId}')">修改</a></td>
         </tr>
