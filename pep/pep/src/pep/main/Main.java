@@ -7,10 +7,13 @@ package pep.main;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Date;
+import java.util.Timer;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 //import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import pep.bp.bussinessprocess.MainProcess;
+import pep.mina.common.RtuUnrespPacketChecker;
 import pep.mina.protocolcodec.gb.PepGbCommunicator;
 import pep.mina.protocolcodec.gb.gb376.PmPacket376CodecFactory;
 import pep.mina.protocolcodec.gb.gb376.PmPacket376ServerIoHandler;
@@ -35,6 +38,10 @@ public class Main {
         acceptor.bind();
         System.out.println("SG376 server is listenig at port " + PORT);
 
+        Timer checkTimer = new Timer();
+        RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker();
+        long timestamp = 30*1000;
+        checkTimer.schedule(checker, timestamp,timestamp);
 
         //启动业务处理器
         MainProcess PBProcessor = new MainProcess(rtuMap);
