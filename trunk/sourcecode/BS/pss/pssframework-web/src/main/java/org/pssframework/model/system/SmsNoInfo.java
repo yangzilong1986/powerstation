@@ -3,12 +3,19 @@
  */
 package org.pssframework.model.system;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.archive.PsInfo;
 
 /**
  * @author Administrator
@@ -16,6 +23,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_SMS_NO")
+@SequenceGenerator(sequenceName = "SEQ_C_SMS_NO", name = "SEQ_C_SMS_NO", allocationSize = 1)
 public class SmsNoInfo extends BaseEntity {
 
 	/**
@@ -23,11 +31,19 @@ public class SmsNoInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -4228800947787949272L;
 
-	@Column(name = "SMS_NO", unique = true, nullable = false)
 	@Id
+	@Column(name = "SMS_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_SMS_NO")
+	private Long smsId;
+
+	@Column(name = "SMS_NO", unique = true, nullable = false)
 	private Long smsNo;
+
 	@Column(name = "CONTACT_NAME")
 	private String contactName;
+
+	@ManyToMany(mappedBy = "smsNoInfoList")
+	private List<PsInfo> psInfoList;
 
 	/**
 	 * @return the smsNo
@@ -55,6 +71,22 @@ public class SmsNoInfo extends BaseEntity {
 	 */
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
+	}
+
+	public void setSmsId(Long smsId) {
+		this.smsId = smsId;
+	}
+
+	public Long getSmsId() {
+		return smsId;
+	}
+
+	public void setPsInfoList(List<PsInfo> psInfoList) {
+		this.psInfoList = psInfoList;
+	}
+
+	public List<PsInfo> getPsInfoList() {
+		return psInfoList;
 	}
 
 }
