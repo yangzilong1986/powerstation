@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
-function test() {
+function inquiry() {
     
 }
 </script>
@@ -25,7 +25,7 @@ function test() {
           <td width="100" height="30" align="right" class="green">台区名称：</td>
           <td width="120"><input id="tgName" name="tgName" class="input2" value="" style="width: 140px; height: 18px;"/></td>
           <td width="100" align="right">
-            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="test(); return false;" style="cursor: pointer;" />
+            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="inquiry(); return false;" style="cursor: pointer;" />
           </td>
         </tr>
       </table>
@@ -43,7 +43,7 @@ function test() {
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="180" height="100%">
-                    <iframe id="psTreeFrame" name="psTreeFrame" src="<pss:path type="webapp"/>/pages/psmanage/psTree.jsp" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+                    <iframe id="psTreeFrame" name="psTreeFrame" src="<pss:path type="webapp"/>/pages/psmanage/psTree.jsp?type=psmon" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                   <td width="3" height="100%" style="background-color: #bbdcd8;"></td>
                   <td>

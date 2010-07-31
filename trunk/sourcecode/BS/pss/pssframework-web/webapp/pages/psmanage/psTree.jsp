@@ -13,6 +13,7 @@
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.js"></script>
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.cookie.js"></script>
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/treeview/jquery.treeview.js"></script>
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.query.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     
@@ -56,6 +57,21 @@ $(document).ready(function(){
         cookieId: "treeview-black"
     });
 
+    var psType = $.query.get('type');
+    $("a.psobj").each( function() {
+        if("psmon" == psType) {
+            $(this).attr('href', '<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1&random=' + Math.random());
+            $(this).attr('target', 'psMonitorFrame');
+        }
+        else if("rmttest" == psType) {
+            $(this).attr('href', '<pss:path type="webapp"/>/pages/psmanage/psRemoteTest.jsp?psId=1&random=' + Math.random());
+            $(this).attr('target', 'psRemoteTestFrame');
+        }
+        else if("rmttpsw" == psType) {
+            $(this).attr('href', '<pss:path type="webapp"/>/pages/psmanage/psRemoteTpSw.jsp?psId=1&random=' + Math.random());
+            $(this).attr('target', 'psRemoteTpSwFrame');
+        }
+    });
 });
 </script>
 </head>
@@ -64,26 +80,9 @@ $(document).ready(function(){
   <ul id="browser" class="filetree">
     <li><span class="folder">乾龙1#</span>
       <ul>
-        <li><span class="folder">91010001</span>
+        <li><span class="folder">96123456</span>
           <ul id="folder21">
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1" target="psMonitorFrame">CS0001</a></span></li>
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=2" target="psMonitorFrame">CS0002</a></span></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><span class="folder">乾龙2#</span>
-      <ul>
-        <li><span class="folder">91010002</span>
-          <ul id="folder21">
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=3" target="psMonitorFrame">CS0003</a></span></li>
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=4" target="psMonitorFrame">CS0004</a></span></li>
-          </ul>
-        </li>
-        <li><span class="folder">91010003</span>
-          <ul id="folder21">
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=5" target="psMonitorFrame">CS0005</a></span></li>
-            <li><span class="file"><a href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=6" target="psMonitorFrame">CS0006</a></span></li>
+            <li><span class="file"><a class="psobj" href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1" target="psMonitorFrame">资产121</a></span></li>
           </ul>
         </li>
       </ul>

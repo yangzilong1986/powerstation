@@ -22,20 +22,200 @@ $(document).ready(function() {
     $("#timeSetup").corner();
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
+
+    readB66F();
+    readC04F();
 });
+
+function StringBuffer() {
+    this.data = [];
+}
+
+StringBuffer.prototype.append = function() {
+    this.data.push(arguments[0]);
+    return this;
+}
+
+StringBuffer.prototype.toString = function() {
+    return this.data.join("");
+}
+
+function readB66F() {
+    alert("readB66F start");
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000B66F"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            alert(data);
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchResultReadB66F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            alert(errorThrown);
+            setTimeout("readB66F()", 3000);
+        }
+    });
+}
+
+function fetchResultReadB66F(collectId, fetchCount) {
+    //alert(collectId + "," + fetchCount);
+    //alert($("#opcilist").val());
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "ReadB66F"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showSetupResult(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchResultReadB66F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                setTimeout("readB66F()", 3000);
+            }
+        },
+        error: function() {
+            setTimeout("readB66F()", 3000);
+        }
+    });
+}
+
+function readC04F() {
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C04F"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchResultReadC04F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            setTimeout("readC04F()", 3000);
+        }
+    });
+}
+
+function fetchResultReadC04F(collectId, fetchCount) {
+    //alert(collectId + "," + fetchCount);
+    //alert($("#opcilist").val());
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "ReadC04F"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showSetupResult(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchResultReadC04F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                setTimeout("readC04F()", 3000);
+            }
+        },
+        error: function() {
+            setTimeout("readC04F()", 3000);
+        }
+    });
+}
 </script>
 </head>
 <body style="overflow-x: hidden; overflow-y: auto;">
 <div>
+  <div style="display: none;">
+    <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
+    <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" />
+    <input type="hidden" id="meterAddr" name="meterAddr" value="1" />
+    <input type="hidden" id="meterType" name="meterType" value="100" />
+    <input type="hidden" id="funcode" name="funcode" value="1" />
+    <input type="hidden" id="port" name="port" value="1" />
+    <input type="hidden" id="baudrate" name="baudrate" value="110" />
+    <input type="hidden" id="stopbit" name="stopbit" value="1" />
+    <input type="hidden" id="checkbit" name="checkbit" value="0" />
+    <input type="hidden" id="odd_even_bit" name="odd_even_bit" value="1" />
+    <input type="hidden" id="databit" name="databit" value="8" />
+    <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
+    <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
+  </div>
   <div id="psInfo" style="margin: 3px; background-color: #dff0f1;">
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td width="18%" height="30" align="right">资产编号：</td>
-        <td width="15%" align="left">CS0001</td>
+        <td width="15%" align="left">资产122</td>
         <td width="18%" height="30" align="right">漏保型号：</td>
         <td width="15%" align="left">QLL1-Z(250)</td>
         <td width="18%" height="30" align="right">漏保地址：</td>
-        <td width="16%" align="left">000000000001</td>
+        <td width="16%" align="left">12345678</td>
       </tr>
       <tr>
         <td width="18%" height="30" align="right">漏保类型：</td>
@@ -60,13 +240,13 @@ $(document).ready(function() {
       <div id="rmtTrip" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td></td>
+            <td height="90" align="center"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></td>
           </tr>
           <tr>
-            <td></td>
+            <td height="30"></td>
           </tr>
           <tr>
-            <td></td>
+            <td height="30"></td>
           </tr>
         </table>
       </div>
@@ -76,13 +256,13 @@ $(document).ready(function() {
         <div id="rtVoltage" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td></td>
+            <td height="22" align="center">A相电压：<input id="8000B66F#B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
           <tr>
-            <td></td>
+            <td height="22" align="center">B相电压：<input id="8000B66F#B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
           <tr>
-            <td></td>
+            <td height="22" align="center">C相电压：<input id="8000B66F#B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
         </table>
         </div>
@@ -91,13 +271,13 @@ $(document).ready(function() {
         <div id="rtEc" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td></td>
+            <td height="22" align="center">A相电流：<input id="8000B66F#B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
           <tr>
-            <td></td>
+            <td height="22" align="center">B相电流：<input id="8000B66F#B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
           <tr>
-            <td></td>
+            <td height="22" align="center">C相电流：<input id="8000B66F#B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
         </table>
         </div>
@@ -107,13 +287,24 @@ $(document).ready(function() {
       <div id="rtPsParam" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td></td>
+            <td align="right" width="45%" height="29">剩余电流：</td>
+            <td align="left" width="55%"><input id="8000B66F#B660" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
           </tr>
           <tr>
-            <td></td>
+            <td align="right" height="29">剩余电流动作值：</td>
+            <td align="left"><input rid="8000C04F#8000C04F07" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
           </tr>
           <tr>
-            <td></td>
+            <td align="right" height="29">分断时间：</td>
+            <td align="left"><input id="8000C04F#8000C04F09" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> ms </td>
+          </tr>
+          <tr>
+            <td align="right" height="29">额定负载电流：</td>
+            <td align="left"><input id="8000C04F#8000C04F05" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+          </tr>
+          <tr>
+            <td align="right" height="29">设备状态：</td>
+            <td align="left"><input id="8000C04F#8000C04F0X" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
         </table>
       </div>
