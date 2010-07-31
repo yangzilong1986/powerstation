@@ -42,10 +42,10 @@ import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.archive.TranInfo;
+import org.pssframework.model.system.SmsNoInfo;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
-import org.pssframework.service.archive.TranInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -87,9 +87,6 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
-
-	@Autowired
-	private TranInfoManger tranInfoManger;
 
 	@Autowired
 	private TgInfoManager tgInfoManager;
@@ -142,6 +139,10 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		result.addAttribute("psinfo", psInfo);
 
+		List<SmsNoInfo> smsNoInfoList = psInfo.getSmsNoInfoList();
+
+		result.addAttribute("smsNoInfoList", smsNoInfoList);
+
 		this.CommonPart(result, requestMap);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
@@ -159,10 +160,13 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
 
-
 		requestMap.put("tgid", tgid);
 
 		modelMap.addAttribute("istAddr", getPsAddr(tgid));
+
+		List<SmsNoInfo> smsNoInfoList = model.getSmsNoInfoList();
+
+		modelMap.addAttribute("smsNoInfoList", smsNoInfoList);
 
 		modelMap.addAttribute("psinfo", model);
 

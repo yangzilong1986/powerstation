@@ -34,8 +34,6 @@ import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
 import org.pssframework.model.system.SmsNoInfo;
 
-import com.google.common.collect.Lists;
-
 /**
  * 1)用于记录需要安装计量装置的位置点的信息，可以解决一个正反向表被两个户分别使用，这时计量点定义成两个；可以解决三个单相表代替一个三相表的功能，这时计量点定义成一个；可以解决主副表问题，这时计量点可以定义成一个。
  * 定义了计量点的自然属性，本实体主要包括计量点编号、计量点名称、计量点地址、计量点分类、计量点性质等属性。 2)通过新装、增容及变更用电归档、关口计量点新装及变更归档等业务，由实体转入产生记录。
@@ -133,14 +131,37 @@ public class PsInfo extends BaseEntity {
 	@Transient
 	private int[] functionsChecked;
 
-	@ManyToMany
-	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_NO") })
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<SmsNoInfo> smsNoInfoList = Lists.newArrayList();
+	private List<SmsNoInfo> smsNoInfoList;
 
 	public List<SmsNoInfo> getSmsNoInfoList() {
+		//		SmsNoInfo smsNoInfo = new SmsNoInfo();
+		//		if (smsNoInfoList != null) {
+		//			int size = smsNoInfoList.size();
+		//			if (size == 3)
+		//				return smsNoInfoList;
+		//
+		//			for (int i = 0; i < 3 - size; i++) {
+		//				smsNoInfoList.add(smsNoInfo);
+		//			}
+		//		} else {
+		//			smsNoInfoList = Lists.newArrayListWithCapacity(3);
+		//			for (int i = 0; i < 3; i++) {
+		//				smsNoInfoList.add(smsNoInfo);
+		//			}
+		//		}
+
 		return smsNoInfoList;
+	}
+
+	/**
+	 * @param smsNoInfoList the smsNoInfoList to set
+	 */
+	public void setSmsNoInfoList(List<SmsNoInfo> smsNoInfoList) {
+		this.smsNoInfoList = smsNoInfoList;
 	}
 
 	/**

@@ -12,6 +12,7 @@ import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.PsInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.PsInfo;
+import org.pssframework.model.system.SmsNoInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -46,17 +47,6 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		// 台区
 		model.getGpInfo().setGpType("2");
 
-		//		int[] functionsChecked = model.getFunctionsChecked();
-		//
-		//		if (functionsChecked != null) {
-		//
-		//			for (int checked : functionsChecked) {
-		//				initChecked[checked] = '1';
-		//			}
-		//
-		//		}
-		//		model.setFunctionCode(String.valueOf(initChecked));
-
 		GpInfo gpInfo = model.getGpInfo();
 
 		gpInfo.setTerminalInfo(model.getTerminalInfo());
@@ -82,7 +72,12 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 		//logger.debug("start to updating");
 
-		super.update(model);
+		//		for (SmsNoInfo smsInfo : model.getSmsNoInfoList()) {
+		//			smsInfo.getPsInfoList().add(model);
+		//
+		//		}
+
+		super.saveOrUpdate(model);
 	}
 
 	public boolean checkGpsn(PsInfo psInfo) {
@@ -117,5 +112,13 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 			}
 		}
 		return bolRep;
+	}
+
+	private void setSmsNo(PsInfo model) {
+
+		for (SmsNoInfo smsNoInfo : model.getSmsNoInfoList()) {
+			//smsNoInfo.setSmsNo(smsNo);
+		}
+
 	}
 }
