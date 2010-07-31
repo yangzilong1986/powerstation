@@ -21,7 +21,6 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 /**
  * 安全相关实体的管理类, 包括用户,角色,资源与授权类.
  * 
- * @author calvin
  */
 //Spring Bean的标识.
 @Service
@@ -34,6 +33,21 @@ public class AccountManager extends BaseManager<UserInfo, Long> {
 	private UserInfoDao userDao;
 	private RoleInfoDao roleInfoDao;
 	private AuthorityInfoDao authorityDao;
+
+	@Autowired
+	public void setUserDao(UserInfoDao userDao) {
+		this.userDao = userDao;
+	}
+
+	@Autowired
+	public void setRoleDao(RoleInfoDao roleInfoDao) {
+		this.roleInfoDao = roleInfoDao;
+	}
+
+	@Autowired
+	public void setAuthorityDao(AuthorityInfoDao authorityDao) {
+		this.authorityDao = authorityDao;
+	}
 
 	//-- UserInfo Manager --//
 	@Transactional(readOnly = true)
@@ -103,24 +117,9 @@ public class AccountManager extends BaseManager<UserInfo, Long> {
 		return authorityDao.getAll();
 	}
 
-	@Autowired
-	public void setUserDao(UserInfoDao userDao) {
-		this.userDao = userDao;
-	}
-
-	@Autowired
-	public void setRoleDao(RoleInfoDao roleInfoDao) {
-		this.roleInfoDao = roleInfoDao;
-	}
-
-	@Autowired
-	public void setAuthorityDao(AuthorityInfoDao authorityDao) {
-		this.authorityDao = authorityDao;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao;
 	}
 }

@@ -19,6 +19,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -35,7 +36,7 @@ import com.google.common.collect.Lists;
  * 
  */
 @Entity
-@Table(name = "o_role")
+@Table(name = "O_ROLE")
 @SequenceGenerator(sequenceName = "SEQ_O_ROLE", name = "SEQ_O_ROLE", allocationSize = 1)
 public class RoleInfo extends BaseEntity {
 
@@ -88,7 +89,7 @@ public class RoleInfo extends BaseEntity {
 	@ManyToMany
 	@JoinTable(name = "O_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
-	@OrderBy("AUTHORITY_ID")
+	@OrderBy("authorityId")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<AuthorityInfo> authorityInfoList = Lists.newArrayList();
 
@@ -96,11 +97,32 @@ public class RoleInfo extends BaseEntity {
 		return authorityInfoList;
 	}
 
+	@ManyToMany
+	@JoinTable(name = "O_ROLE_FUN", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "FUN_ID") })
+	@Fetch(FetchMode.SUBSELECT)
+	@OrderBy("resourceId")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<ResourceInfo> resourceInfoList = Lists.newArrayList();
+
 	/**
 	 * @return the creator
 	 */
 	public String getCreator() {
 		return creator;
+	}
+
+	/**
+	 * @param authorityInfoList the authorityInfoList to set
+	 */
+	public void setAuthorityInfoList(List<AuthorityInfo> authorityInfoList) {
+		this.authorityInfoList = authorityInfoList;
+	}
+
+	/**
+	 * @param resourceInfoList the resourceInfoList to set
+	 */
+	public void setResourceInfoList(List<ResourceInfo> resourceInfoList) {
+		this.resourceInfoList = resourceInfoList;
 	}
 
 	/**
@@ -202,6 +224,22 @@ public class RoleInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	@Transient
+	public String getAuthNames() {
+		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToString(authorityInfoList, "name",
+				", ");
+	}
+
+	@Transient
+	@SuppressWarnings("unchecked")
+	public List<Long> getAuthIds() {
+		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToList(authorityInfoList, "id");
+	}
+
+	public List<ResourceInfo> getResourceInfoList() {
+		return this.resourceInfoList;
 	}
 
 }

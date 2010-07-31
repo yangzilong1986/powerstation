@@ -233,7 +233,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	 * @param result
 	 * @param mapRequest
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private void CommonPart(ModelMap result, Map<String, Comparable> mapRequest) {
 
 		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
