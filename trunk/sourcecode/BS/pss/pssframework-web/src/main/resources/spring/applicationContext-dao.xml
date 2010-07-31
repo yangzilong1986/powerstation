@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <!-- 
+	<!-- 
  -->
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
-  default-autowire="byName" default-lazy-init="false">
-  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-    <property name="dataSource" ref="dataSource" />
-  </bean>
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-  <!-- Transaction manager for a single JDBC DataSource -->
-  <!--
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property
-    name="dataSource" ref="dataSource" /> </bean>
-  -->
-  <bean id="sqlSessionFactory" class="org.pssframework.dao.SqlSessionFactoryFactoryBean">
-    <property name="configLocation" value="classpath:ibatis/configuration-ibatis.xml" />
-    <property name="mapperLocations" value="classpath*:/model/**/*Mapper.xml" />
-    <property name="dataSource" ref="dataSource" />
-  </bean>
-
-
-  <!--Hibernate Annotation SessionFatory-->
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
-    <!--<property name="mappingLocations" value="classpath*:com/creawor/demo/model/*.hbm.xml"/>-->
-
-    <!-- packagesToScan可以自动搜索某个package的全部标记@Entity class -->
-    <property name="packagesToScan">
-      <list>
-        <value>org.**.model</value>
-      </list>
-    </property>
-    <property name="hibernateProperties">
-      <props>
-        <!--常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect -->
-        <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-        <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-        <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-      </props>
-    </property>
-  </bean>
-
-  <!--Hibernate TransactionManager-->
-  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory" />
-  </bean>
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<!--
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property
+		name="dataSource" ref="dataSource" /> </bean>
+	-->
+	<bean id="sqlSessionFactory" class="org.pssframework.dao.SqlSessionFactoryFactoryBean">
+		<property name="configLocation" value="classpath:ibatis/configuration-ibatis.xml" />
+		<property name="mapperLocations" value="classpath*:/model/**/*Mapper.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 
-  <!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
-  <context:component-scan base-package="org.**.dao" />
+	<!--Hibernate Annotation SessionFatory-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!--<property name="mappingLocations" value="classpath*:com/creawor/demo/model/*.hbm.xml"/>-->
+
+		<!-- packagesToScan可以自动搜索某个package的全部标记@Entity class -->
+		<property name="packagesToScan">
+			<list>
+				<value>org.**.model</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!--常用数据库方言 MySQL5Dialect,SQLServerDialect,OracleDialect,SybaseDialect,DB2Dialect,HSQLDialect -->
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--Hibernate TransactionManager-->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!-- component-scan自动搜索@Component , @Controller , @Service , @Repository等标注的类 -->
+	<context:component-scan base-package="org.**.dao" />
 </beans>
