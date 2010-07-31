@@ -4,6 +4,7 @@
  */
 package pep.bp.bussinessprocess;
 
+import pep.bp.processor.polling.PollingProcessor;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -55,7 +56,7 @@ public class MainProcess {
     private void runPollingProcessor(){
         try {
             if (this.pollingProcessor == null) {
-                this.pollingProcessor = new PollingProcessor();
+                this.pollingProcessor = new PollingProcessor(this.pepCommunicator);
             }
             pollingProcessor.run();
             log.info("启动主动轮召任务处理器 ");
@@ -71,7 +72,7 @@ public class MainProcess {
                 new ThreadPoolExecutor.DiscardOldestPolicy());
         this.pepCommunicator = pepCommunicator;
         lpProcessor = new LeakPointProcessor();
-        pollingProcessor = new PollingProcessor();
+        pollingProcessor = new PollingProcessor(this.pepCommunicator);
 
     }
 

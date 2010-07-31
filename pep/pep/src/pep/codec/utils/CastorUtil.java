@@ -375,6 +375,13 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem40 = new ProtocolCommandItem("8000C012",new ProtocolDataItem("C012", 2, "DATE_LOUBAO", 0,"漏电保护装置校时",""));
 
+        ProtocolCommandItem CommandItem69 = new ProtocolCommandItem();
+        CommandItem69.setCommandCode("8000C036");
+        CommandItem69.AddDataItem(new ProtocolDataItem("8000C03601", 1, "BIN", 1,"跳合闸操作","","0"));
+
+        ProtocolCommandItem CommandItem70 = new ProtocolCommandItem();
+        CommandItem70.setCommandCode("8000C037");
+
         ProtocolCommandItem CommandItem41 = new ProtocolCommandItem();
         CommandItem41.setCommandCode("8000C040");
         CommandItem41.AddDataItem(new ProtocolDataItem("C04001", 1, "GROUP_BS8", 1,"分合闸状态","","0"));
@@ -645,6 +652,8 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem66);
         CommandItems.AddCommandItem(CommandItem67);
         CommandItems.AddCommandItem(CommandItem68);
+        CommandItems.AddCommandItem(CommandItem69);
+        CommandItems.AddCommandItem(CommandItem70);
         try {
 // write it out as XML
             Mapping map = new Mapping();

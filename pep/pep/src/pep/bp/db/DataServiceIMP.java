@@ -96,17 +96,7 @@ public class DataServiceIMP implements DataService{
             String p_act_total,String p_act_sharp,String p_act_peak,String p_act_level,String p_act_valley)
     {
         try {
-            StringBuffer sql = new StringBuffer("{call PRC_INSERT_P_ACT(");
-            sql.append(logicalAddress + ",");
-            sql.append(gpSn + ",");
-            sql.append(dataDate + ",");
-            sql.append(p_act_total + ",");
-            sql.append(p_act_sharp + ",");
-            sql.append(p_act_peak + ",");
-            sql.append(p_act_level + ",");
-            sql.append(p_act_valley + ")}");
-
-            this.jdbcTemplate.execute(sql.toString());
+            
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }

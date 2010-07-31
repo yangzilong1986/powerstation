@@ -70,6 +70,11 @@
 
     </bean>
 
+    <bean id="taskService" class="pep.bp.db.TaskServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+
+    </bean>
+
     <bean id="dataService" class="pep.bp.db.DataServiceIMP">
         <property name="dataSource" ref="dataSource" />
         <property name="actStoredProcedure" ref="actDataStoredProcedure" />
