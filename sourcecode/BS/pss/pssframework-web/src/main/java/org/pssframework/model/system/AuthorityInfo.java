@@ -20,8 +20,8 @@ import org.pssframework.base.BaseEntity;
  *
  */
 @Entity
-@Table(name = "o_authority")
-@SequenceGenerator(sequenceName = "SEQ_O_authority", name = "SEQ_O_authority", allocationSize = 1)
+@Table(name = "O_AUTHORITY")
+@SequenceGenerator(sequenceName = "SEQ_O_AUTHORITY", name = "SEQ_O_AUTHORITY", allocationSize = 1)
 public class AuthorityInfo extends BaseEntity {
 
 	/**
@@ -39,7 +39,7 @@ public class AuthorityInfo extends BaseEntity {
 
 	@Column(nullable = false, unique = true, name = "AUTHORITY_ID")
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_authority")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_AUTHORITY")
 	private Long authorityId;
 
 	public AuthorityInfo() {
