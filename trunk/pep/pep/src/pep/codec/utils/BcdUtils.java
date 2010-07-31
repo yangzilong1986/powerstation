@@ -337,6 +337,16 @@ public class BcdUtils {
         return sb.toString();
     }
 
+    public static String IntToBitSetString(int value) {
+        StringBuilder sb = new StringBuilder();
+        while(value > 0)
+        {
+            sb.append(value % 2);
+            value = value >> 1;
+        }
+        return sb.toString();
+    }
+
     private static char byteToChar(int b) {
         char ch = (b < 0xA) ? (char) ('0' + b) : (char) ('A' + b - 10);
         return ch;
