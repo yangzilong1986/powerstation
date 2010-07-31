@@ -39,7 +39,7 @@ public class Main {
         System.out.println("SG376 server is listenig at port " + PORT);
 
         Timer checkTimer = new Timer();
-        RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker();
+        RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker(rtuMap);
         long timestamp = 30*1000;
         checkTimer.schedule(checker, timestamp,timestamp);
 
