@@ -74,7 +74,7 @@ public class BcdDataBuffer {
         return this;
     }
 
-    private byte[] getBytes(int len){
+    public byte[] getBytes(int len){
         byte[] bytes = new byte[len];
         dataBuff.get(bytes);
         return bytes;
@@ -136,5 +136,7 @@ public class BcdDataBuffer {
         return putWord((int) (longWord / 0x10000));
     }
 
-
+    public int restBytes(){
+        return this.dataBuff.limit()-this.dataBuff.position();
+    }
 }
