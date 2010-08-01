@@ -80,8 +80,10 @@ function meterState(){
 				</td>
 			</tr>-->
 			<tr height="30px">
+				<td align="right" class="green">漏保名称：</td>
+				<td ><form:input path="psName" cssClass="required input2" /></td>
 				<td align="right" class="green">安装地址：</td>
-				<td colspan="3">${istAddr}</td>
+				<td >${istAddr}</td>
 			</tr>
 		</table>
 		<c:set var="disabled" value="true"></c:set></div>
