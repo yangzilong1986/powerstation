@@ -6,6 +6,8 @@
 package pep.bp.db;
 
 import pep.bp.model.Dto;
+import pep.codec.protocol.gb.gb376.Packet376Event36;
+import pep.codec.protocol.gb.gb376.PmPacket376EventBase;
 
 /**
  *
@@ -14,4 +16,8 @@ import pep.bp.model.Dto;
 public interface DataService {
 
     public void insertRecvData(Dto data);
+
+    public void insertLBEvent(Packet376Event36 event);
+
+    public void insertEvent(PmPacket376EventBase event);
 }

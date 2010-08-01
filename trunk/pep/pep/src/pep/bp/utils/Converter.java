@@ -486,6 +486,8 @@ public class Converter {
             packetdata.putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A27")) {
             packetdata.putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
+        }else if (Format.equals("A29")) {
+            packetdata.putBcdInt(Long.parseLong(DataItemValue), 1);
         }
     }
 

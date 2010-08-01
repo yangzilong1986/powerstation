@@ -129,6 +129,8 @@ public abstract class Decoder {
                 dataItems.put(DataItemCode, String.valueOf(dataBuffer.getA26().getValue()));
             } else if (Format.equals("A27")) {
                 dataItems.put(DataItemCode, String.valueOf(dataBuffer.getA27().getValue()));
+            }else if (Format.equals("A29")) {
+                dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBcdInt(1)));
             }
         }
     }
@@ -238,7 +240,9 @@ public abstract class Decoder {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA26()));
                 } else if (Format.equals("A27")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA27()));
-                }
+                }else if (Format.equals("A29")) {
+                dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBcdInt(1)));
+            }
             }
     }
 
