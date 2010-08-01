@@ -97,10 +97,14 @@ public class Dto {
 
 
     public DtoItem AddDataItem(String meterAddress, String dataTime, String commandItemCode){
-        return new DtoItem(meterAddress,dataTime,commandItemCode);
+        DtoItem dtoItem = new DtoItem(meterAddress,dataTime,commandItemCode);
+        this.dataItems.add(dtoItem);
+        return dtoItem;
     }
 
     public DtoItem AddDataItem(int gp, String dataTime, String commandItemCode){
-        return new DtoItem(gp,dataTime,commandItemCode);
+        DtoItem dtoItem = new DtoItem(gp,dataTime,commandItemCode);
+        this.dataItems.add(dtoItem);
+        return dtoItem;
     }
 }
