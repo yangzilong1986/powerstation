@@ -18,7 +18,9 @@
     <property name="basenames">
       <list>
         <value>i18n/messages</value>
-        <value>i18n/tree</value>
+        <value>i18n/application_archive</value>
+        <value>i18n/application_synquery</value>
+        <value>i18n/application_system</value>
       </list>
     </property>
   </bean>
