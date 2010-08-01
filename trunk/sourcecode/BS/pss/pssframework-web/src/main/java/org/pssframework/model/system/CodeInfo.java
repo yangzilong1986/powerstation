@@ -23,7 +23,8 @@ import org.pssframework.base.BaseEntity;
 @Table(name = "a_code")
 @SequenceGenerator(sequenceName = "SEQ_S_CODE", name = "SEQ_S_CODE", allocationSize = 1)
 public class CodeInfo extends BaseEntity {
-
+	public static final String CODECATE = "codecate";
+	public static final String CODE = "code";
 	/**
 	 * 
 	 */
