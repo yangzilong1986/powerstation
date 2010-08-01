@@ -64,6 +64,9 @@
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
+    <bean id="eccurv_DataStoredProcedure" class="pep.bp.db.ECCURV_DataStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
 
     <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource" />
