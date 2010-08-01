@@ -15,7 +15,7 @@ import pep.meter645.Gb645Address;
  * @author luxiaochung
  */
 public class Packet376Event36 extends PmPacket376EventBase {
-    public class Event376{
+    public class Meter{
         public String meterAddress;
         public byte xiangweiHeTongxunPinzhi;
         public byte meterProtocol;
@@ -30,7 +30,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
     }
 
     public byte Tongxunduankou;
-    public List<Event376> meters = new ArrayList<Event376>();
+    public List<Meter> meters = new ArrayList<Meter>();
 
     @Override
     protected void DecodeEventDetail(BcdDataBuffer eventData, int len) {
@@ -39,7 +39,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
         len -= 2;
 
         while ((eventData.restBytes()>=8) && (len>0)){
-            Event376 event = new Event376();
+            Meter event = new Meter();
             event.meterAddress = Gb645Address.meterAddressToString(eventData.getBytes(6));
             event.xiangweiHeTongxunPinzhi = (byte) eventData.getByte();
             event.meterProtocol = (byte) eventData.getByte();
@@ -50,7 +50,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
         StringBuilder sb = new StringBuilder();
         sb.append("Comm port=").append(this.Tongxunduankou).append(" ");
         sb.append("meters=(");
-        for(Event376 event: this.meters){
+        for(Meter event: this.meters){
             sb.append("(").append(event.toString()).append(")");
         }
         sb.append(")");
