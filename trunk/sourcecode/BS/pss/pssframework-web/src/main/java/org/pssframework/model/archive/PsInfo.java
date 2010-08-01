@@ -51,7 +51,7 @@ public class PsInfo extends BaseEntity {
 	private Long psId;
 
 	// PS_NAME VARCHAR2(256),is '名称';
-	@Column(name = "PS_NAME", length = 256)
+	@Column(name = "PS_NAME", length = 256, nullable = false)
 	private String psName;
 
 	@ManyToOne(targetEntity = TerminalInfo.class)
