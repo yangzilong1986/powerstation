@@ -17,6 +17,7 @@ import org.pssframework.model.archive.MeterInfo;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.support.system.SystemConst;
+import org.pssframework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,9 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		GpInfo gpInfosIn = null;
 		try {
 			gpInfosIn = info.getGpInfos().get(0);
+
+			formatGpAddr(gpInfosIn);
+
 		} catch (IndexOutOfBoundsException e) {
 			return bolRep;
 		} finally {
@@ -86,6 +90,7 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 	 *
 	 * @param entity
 	 */
+	@SuppressWarnings("rawtypes")
 	private void setTotalTimes(MpInfo entity) {
 		MeterInfo meterInfo = entity.getMeterInfo();
 		List<GpInfo> lstGpInfos = entity.getGpInfos();
@@ -119,5 +124,14 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		//(10,2)
 		DecimalFormat df = new DecimalFormat("########.##");
 		meterInfo.settFactor(Double.parseDouble(df.format(ct * pt)));
+	}
+
+	private void formatGpAddr(GpInfo gpInfo) {
+		String gpAddr = gpInfo.getGpAddr();
+		if (gpAddr != null && gpAddr.length() < 12) {
+			gpAddr = StringUtil.lPad(gpAddr, "0", 12);
+			gpInfo.setGpAddr(gpAddr);
+		}
+
 	}
 }
