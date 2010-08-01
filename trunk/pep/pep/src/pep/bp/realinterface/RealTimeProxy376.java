@@ -512,7 +512,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                 converter.decodeData_TransMit(packet, tempMap);
             }
         }
-        return Deal2DataMap(tempMap);
+        return tempMap;
     }
 
     @Override
