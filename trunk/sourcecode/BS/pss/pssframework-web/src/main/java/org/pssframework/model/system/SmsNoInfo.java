@@ -6,13 +6,10 @@ package org.pssframework.model.system;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 import org.pssframework.base.BaseEntity;
 import org.pssframework.model.archive.PsInfo;
@@ -21,9 +18,6 @@ import org.pssframework.model.archive.PsInfo;
  * @author Administrator
  *
  */
-@Entity
-@Table(name = "C_SMS_NO")
-@SequenceGenerator(sequenceName = "SEQ_C_SMS_NO", name = "SEQ_C_SMS_NO", allocationSize = 1)
 public class SmsNoInfo extends BaseEntity {
 
 	/**

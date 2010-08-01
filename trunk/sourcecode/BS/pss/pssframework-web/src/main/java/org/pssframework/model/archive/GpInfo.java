@@ -88,7 +88,7 @@ public class GpInfo extends BaseEntity {
 	private String gpStatus;
 
 	// GP_ADDR VARCHAR2(20),is '通讯地址';
-	@Column(name = "GP_ADDR", length = 20)
+	@Column(name = "GP_ADDR", length = 12)
 	private String gpAddr;
 
 	// CT_TIMES NUMBER,

@@ -6,9 +6,10 @@ package org.pssframework.model.system;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,8 +25,6 @@ import org.pssframework.base.BaseEntity;
  * @author Administrator
  * 
  */
-@Entity
-@Table(name = "O_DEPT")
 public class DeptInfo extends BaseEntity {
 
 	/**
@@ -38,9 +37,10 @@ public class DeptInfo extends BaseEntity {
 	// DEPT_NO VARCHAR2(16) not null,is '本实体记录的唯一标识，创建部门的唯一编码。';
 	private String deptNo; // 标准代码实体联合主键
 
-	// ORG_ID NUMBER,is '部门id';
-	@Column(name = "ORG_ID")
-	private Long orgId;
+	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
+	// ORG_ID not null,
+	private OrgInfo orgInfo;
 
 	// ABBR VARCHAR2(256) is '部门名称的缩写。';
 	@Column(name = "ABBR", length = 256)
@@ -97,13 +97,6 @@ public class DeptInfo extends BaseEntity {
 		return name;
 	}
 
-	/**
-	 * @return the orgId
-	 */
-	public Long getOrgId() {
-		return orgId;
-	}
-
 	public String getpDeptNo() {
 		return pDeptNo;
 	}
@@ -145,14 +138,6 @@ public class DeptInfo extends BaseEntity {
 		this.name = name;
 	}
 
-	/**
-	 * @param orgId
-	 *            the orgId to set
-	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
-	}
-
 	public void setpDeptNo(String pDeptNo) {
 		this.pDeptNo = pDeptNo;
 	}
@@ -164,6 +149,14 @@ public class DeptInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
+	}
+
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
 	}
 
 }

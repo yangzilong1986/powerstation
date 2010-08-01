@@ -8,12 +8,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -52,9 +54,13 @@ public class UserInfo extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_O_STAFF")
 	private Long empNo;
 
-	// DEPT_NO VARCHAR2(16), is '本实体记录的唯一标识， 创建部门的唯一编码';
-	@Column(length = 16, nullable = false, name = "DEPT_NO")
-	private String deptNo;
+	@Column(name = "DEPT_NO")
+	private Long deptNo;
+
+	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
+	// ORG_ID not null,
+	private OrgInfo orgInfo;
 
 	// STAFF_NO VARCHAR2(16), is '工号， 营销业务人员的服务工号';
 	@Column(length = 16, nullable = false, name = "STAFF_NO")
@@ -144,13 +150,6 @@ public class UserInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the deptNo
-	 */
-	public String getDeptNo() {
-		return deptNo;
-	}
-
-	/**
 	 * @return the empNo
 	 */
 	public Long getEmpNo() {
@@ -230,7 +229,6 @@ public class UserInfo extends BaseEntity {
 		return ReflectionUtils.convertElementPropertyToList(roleInfoList, "id");
 	}
 
-
 	public List<RoleInfo> getRoleInfoList() {
 		return roleInfoList;
 	}
@@ -282,14 +280,6 @@ public class UserInfo extends BaseEntity {
 	 */
 	public void setCredentialsNonExpired(Integer credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	/**
-	 * @param deptNo
-	 *            the deptNo to set
-	 */
-	public void setDeptNo(String deptNo) {
-		this.deptNo = deptNo;
 	}
 
 	/**
@@ -401,6 +391,22 @@ public class UserInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public void setDeptNo(Long deptNo) {
+		this.deptNo = deptNo;
+	}
+
+	public Long getDeptNo() {
+		return deptNo;
+	}
+
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
+	}
+
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
 	}
 
 }

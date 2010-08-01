@@ -21,7 +21,6 @@ import com.google.common.collect.Sets;
 /**
  * 实现SpringSecurity的UserDetailsService接口,实现获取用户Detail信息的回调函数.
  * 
- * @author calvin
  */
 @Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {

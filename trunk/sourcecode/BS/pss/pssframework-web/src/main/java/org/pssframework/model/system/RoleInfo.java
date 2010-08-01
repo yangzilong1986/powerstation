@@ -40,11 +40,11 @@ import com.google.common.collect.Lists;
 @SequenceGenerator(sequenceName = "SEQ_O_ROLE", name = "SEQ_O_ROLE", allocationSize = 1)
 public class RoleInfo extends BaseEntity {
 
-	public RoleInfo(Long roleId, String roleName) {
-		this.roleId = roleId;
-		this.roleName = roleName;
-
-	}
+	//	public RoleInfo(Long roleId, String roleName) {
+	//		this.roleId = roleId;
+	//		this.roleName = roleName;
+	//
+	//	}
 
 	/**
 	 * 

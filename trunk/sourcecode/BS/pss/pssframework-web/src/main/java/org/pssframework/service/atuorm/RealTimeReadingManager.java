@@ -46,11 +46,13 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 	@Autowired
 	private ICollectInterface realTimeProxy376;
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public EntityDao getEntityDao() {
 		return this.realTimeReadingDao;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest pagePara) {
 
 		Page page = realTimeReadingDao.findByPageRequest(pagePara);
@@ -58,7 +60,9 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		return page;
 	}
 
-	public Map readRealTimeData(String gpIds, Map commandItemMap, String dataDensity, String dataPoints, String dataTime, int fetchCount) throws ServiceException {
+	@SuppressWarnings("rawtypes")
+	public Map readRealTimeData(String gpIds, Map commandItemMap, String dataDensity, String dataPoints,
+			String dataTime, int fetchCount) throws ServiceException {
 		//设置超时时间
 		//collectInterface.setTmOut(fetchCount * 3 * 2);
 		Map map = new HashMap();
@@ -95,42 +99,47 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					boolean bSend = false;
 					List collectObjects = getCollectObjects(gpIds, protocolNo, gpChar);
 					//添加辅助项
-					List<AssistParam> assistParamList = null;  //辅助项
+					List<AssistParam> assistParamList = null; //辅助项
 					if (isAddAssistParam(dataDensity, dataPoints, dataTime)) {
 						if (isStateGrid(protocolNo) && isSecClassData(commanditemCodes.split(","))) {
 							assistParamList = new ArrayList<AssistParam>();
-							setAssistParam(assistParamList, dataDensity, dataPoints, dataTime, protocolNo, commanditemCodes.split(","));
+							setAssistParam(assistParamList, dataDensity, dataPoints, dataTime, protocolNo,
+									commanditemCodes.split(","));
 						}
 					}
 					if (collectObjects != null && collectObjects.size() > 0 && sAppId != null) {
 						if (isStateGrid(protocolNo)) {
-							logger.info("collectInterface.readRealtimeData [ protocolNo : " + protocolNo + " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : " + collectObjects.size() + "]");
+							logger.info("collectInterface.readRealtimeData [ protocolNo : " + protocolNo
+									+ " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes
+									+ " ; object size : " + collectObjects.size() + "]");
 							try {
 								//bSend = collectInterface.readRealtimeData(collectObjects, commanditemCodes.split(","), assistParamList, Long.parseLong(sAppId));
 								//bSend = true;
 								if (bSend) {
 									sbValidAppIds.append("," + sAppId);
 								}
-							}
-							catch (Exception _e) {
+							} catch (Exception _e) {
 								logger.info("错误信息：" + _e);
 								bSend = false;
 							}
 						} else if (isZheGrid(protocolNo)) {
-							logger.info("collectInterface.readRealtimeDataZJ [ protocolNo : " + protocolNo + " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : " + collectObjects.size() + "]");
+							logger.info("collectInterface.readRealtimeDataZJ [ protocolNo : " + protocolNo
+									+ " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes
+									+ " ; object size : " + collectObjects.size() + "]");
 							try {
 								//bSend = collectInterface.readRealtimeDataZJ(collectObjects, commanditemCodes.split(","), assistParamList, Long.parseLong(sAppId));
 								//bSend = true;
 								if (bSend) {
 									sbValidAppIds.append("," + sAppId);
 								}
-							}
-							catch (Exception _e) {
+							} catch (Exception _e) {
 								logger.info("错误信息：" + _e);
 								bSend = false;
 							}
-						} else if ("126".equals(protocolNo)) {     // 集中器抄收测量点其他数据 - 广东集抄规约[126]
-							logger.info("collectInterface.gdConcRGOD [ protocolNo : " + protocolNo + " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : " + collectObjects.size() + "]");
+						} else if ("126".equals(protocolNo)) { // 集中器抄收测量点其他数据 - 广东集抄规约[126]
+							logger.info("collectInterface.gdConcRGOD [ protocolNo : " + protocolNo + " ; appid : "
+									+ Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes
+									+ " ; object size : " + collectObjects.size() + "]");
 							List<AssistParam> assistParams = new ArrayList();
 							AssistParam assistParam = new AssistParam();
 							assistParam.setKey("F01B");
@@ -147,13 +156,14 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 								if (bSend) {
 									sbValidAppIds.append("," + sAppId);
 								}
-							}
-							catch (Exception _e) {
+							} catch (Exception _e) {
 								logger.info("错误信息：" + _e);
 								bSend = false;
 							}
-						} else if ("146".equals(protocolNo)) {     // 广东变电站规约[146]
-							logger.info("collectInterface.readRealtimeData102 [ protocolNo : " + protocolNo + " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : " + collectObjects.size() + "]");
+						} else if ("146".equals(protocolNo)) { // 广东变电站规约[146]
+							logger.info("collectInterface.readRealtimeData102 [ protocolNo : " + protocolNo
+									+ " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes
+									+ " ; object size : " + collectObjects.size() + "]");
 							List<CommandItem> commandItems = new ArrayList();
 							String[] commanditems = commanditemCodes.split(",");
 							for (int j = 0; j < commanditems.length; j++) {
@@ -172,8 +182,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 								if (bSend) {
 									sbValidAppIds.append("," + sAppId);
 								}
-							}
-							catch (Exception _e) {
+							} catch (Exception _e) {
 								logger.info("错误信息：" + _e);
 								bSend = false;
 							}
@@ -225,13 +234,14 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 				boolean bSend = false;
 				List concentratorObjects = null;//getConcentratorObjects(gpIds, protocolNo, gpChar);
 				if (concentratorObjects != null && concentratorObjects.size() > 0) {
-					if ("126".equals(protocolNo)) {     // 广东集抄规约[126]
-						logger.info("collectInterface.gdConcRTMR [ protocolNo : " + protocolNo + " ; appid : " + Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : " + concentratorObjects.size() + "]");
+					if ("126".equals(protocolNo)) { // 广东集抄规约[126]
+						logger.info("collectInterface.gdConcRTMR [ protocolNo : " + protocolNo + " ; appid : "
+								+ Long.parseLong(sAppId) + " ; commanditem : " + commanditemCodes + " ; object size : "
+								+ concentratorObjects.size() + "]");
 						try {
 							//bSend = collectInterface.gdConcRTMR(concentratorObjects, commanditemCodes.split(","), null, Long.parseLong(sAppId));
 							//bSend = true;
-						}
-						catch (Exception _e) {
+						} catch (Exception _e) {
 							bSend = false;
 						}
 					}
@@ -248,6 +258,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		return null;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List getCollectObjects(String gpIds, String protocolNo, String gpChar) throws ServiceException {
 		logger.info("protocolNo   : " + protocolNo);
 		logger.info("gpChar       : " + gpChar);
@@ -282,7 +293,9 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					} else {
 						gpSns = gpSns.split("#")[0] + "," + oGpSn.toString();
 					}
-					map.put(oLogicalAddr.toString(), gpSns + "#" + (oPwAlgorigth != null ? oPwAlgorigth.toString() : "") + "#" + (oPwContent != null ? oPwContent.toString() : ""));
+					map.put(oLogicalAddr.toString(), gpSns + "#"
+							+ (oPwAlgorigth != null ? oPwAlgorigth.toString() : "") + "#"
+							+ (oPwContent != null ? oPwContent.toString() : ""));
 				}
 			}
 
@@ -340,7 +353,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					collectObject.setPwAlgorith(sPwAlgorigth);
 					collectObject.setPwContent(sPwContent);
 					//collectObject.setMpExpressMode(Constant.MP_EXPRESSMODE_BLOCK);
-					collectObject.setMpSn(new int[]{mpSn[0], mpSn[mpSn.length - 1]});
+					collectObject.setMpSn(new int[] { mpSn[0], mpSn[mpSn.length - 1] });
 					collectObjects.add(collectObject);
 				} else {
 					sLogicalAddr = (String) itMapKeySet.next();
@@ -384,7 +397,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		return null;
 	}
 
- /*
+	/*
 	public List getConcentratorObjects(String gpIds, String protocolNo, String gpChar) throws ServiceException {
 		logger.info("protocolNo   : " + protocolNo);
 		logger.info("gpChar       : " + gpChar);
@@ -461,12 +474,11 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		}
 		return null;
 	}
- */
+	*/
 
 	public Map getReturnByRRTD(Long[] appIds) throws ServiceException {
 		return getReturnByRRTD(appIds, null);
 	}
-
 
 	public Map getReturnByRRTD(Long[] appIdArray, String fetchCount) throws ServiceException {
 		Map result = new HashMap();
@@ -477,15 +489,12 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					logger.debug("------ collectInterface.getReturnByRRTD ------");
 					try {
 						mapReturn = realTimeProxy376.getReturnByReadData(appIdArray[i]);
-					}
-					catch (Exception _e) {
+					} catch (Exception _e) {
 						logger.info("错误信息：" + _e);
 						mapReturn = null;
 					}
 
-				
-
-	//
+					//
 					//							Map testValueMap1 = new HashMap();
 					//		testValueMap1.put("20100309000000", "0.0001");
 					//		testValueMap1.put("20100309001500", "0.0002");
@@ -501,9 +510,6 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					//					mapReturn.put("96123456#5#100C0025#2102", testValueMap1);
 					//					mapReturn.put("96123456#5#100C0025#2201", testValueMap1);
 					//					mapReturn.put("96123456#5#100C0025#2202", testValueMap1);
-
-
-
 
 					if (mapReturn != null) {
 						Iterator iterator = mapReturn.keySet().iterator();
@@ -523,18 +529,17 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 									timekey = (String) valueiterator.next();
 									sresult = (String) value.get(timekey);
 									result.put(key, sresult);
-									logger.info("    [[key, timekey, value]] : " + "[" + key + " , " + timekey + " , " + sresult + "]");
+									logger.info("    [[key, timekey, value]] : " + "[" + key + " , " + timekey + " , "
+											+ sresult + "]");
 								}
 							}
 						}
 						//释放MAP
 						mapReturn = null;
 					}
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					logger.info("数据格式错误信息：" + e);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					logger.info("错误信息：" + e);
 				}
 			}
@@ -627,7 +632,8 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 			return null;
 	}
 
-	public Map getCurveReturnByRRTD(String appIds, String fetchCount, String timeData, String dataGap, String points, String proNo) throws ServiceException {
+	public Map getCurveReturnByRRTD(String appIds, String fetchCount, String timeData, String dataGap, String points,
+			String proNo) throws ServiceException {
 		Map result = new HashMap();
 		if (appIds != null) {
 			String[] appIdArray = appIds.split(",");
@@ -638,23 +644,22 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 					try {
 						mapReturn = realTimeProxy376.getReturnByReadData(Long.parseLong(appIdArray[i]));
 						//测试数据
-//	                    	Map testValueMap1 = new HashMap();
-//	                    	testValueMap1.put("20100309000000", "0.0001");
-//	                    	testValueMap1.put("20100309001500", "0.0002");
-//	                    	testValueMap1.put("20100309003000", "0.0003");
-//	                    	testValueMap1.put("20100309010000", "0.0004");
-//	                    	testValueMap1.put("20100309011500", "0.0005");
-//	                    	testValueMap1.put("20100309013000", "0.0006");
-//	                    	testValueMap1.put("20100309014500", "0.0007");
-//	                    	testValueMap1.put("20100309020000", "0.0008");
-//	                    	testValueMap1.put("20100309021500", "0.0009");
-//	                    	testValueMap1.put("20100309023000", "0.0010");
-//	                    	mapReturn.put("8D013099#0#2000A01F#DI_1101", testValueMap1);
-//	                    	mapReturn.put("8D013099#0#2000A01F#DI_1100", testValueMap1);
-//	                    	mapReturn.put("8D013099#1#2000A01F#DI_1101", testValueMap1);
-//	                    	mapReturn.put("8D013099#1#2000A01F#DI_1100", testValueMap1);
-					}
-					catch (Exception _e) {
+						//	                    	Map testValueMap1 = new HashMap();
+						//	                    	testValueMap1.put("20100309000000", "0.0001");
+						//	                    	testValueMap1.put("20100309001500", "0.0002");
+						//	                    	testValueMap1.put("20100309003000", "0.0003");
+						//	                    	testValueMap1.put("20100309010000", "0.0004");
+						//	                    	testValueMap1.put("20100309011500", "0.0005");
+						//	                    	testValueMap1.put("20100309013000", "0.0006");
+						//	                    	testValueMap1.put("20100309014500", "0.0007");
+						//	                    	testValueMap1.put("20100309020000", "0.0008");
+						//	                    	testValueMap1.put("20100309021500", "0.0009");
+						//	                    	testValueMap1.put("20100309023000", "0.0010");
+						//	                    	mapReturn.put("8D013099#0#2000A01F#DI_1101", testValueMap1);
+						//	                    	mapReturn.put("8D013099#0#2000A01F#DI_1100", testValueMap1);
+						//	                    	mapReturn.put("8D013099#1#2000A01F#DI_1101", testValueMap1);
+						//	                    	mapReturn.put("8D013099#1#2000A01F#DI_1100", testValueMap1);
+					} catch (Exception _e) {
 						logger.info("错误信息 ：" + _e);
 						mapReturn = null;
 					}
@@ -676,11 +681,9 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 						//释放MAP
 						mapReturn = null;
 					}
-				}
-				catch (NumberFormatException e) {
+				} catch (NumberFormatException e) {
 					logger.info("错误信息：" + e);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					logger.info("错误信息：" + e);
 				}
 			}
@@ -696,8 +699,8 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 	 * @param dataPoints
 	 * @param dataTime
 	 */
-	private void setAssistParam(List<AssistParam> assistParams, String dataDensity, String dataPoints, String dataTime, String protocolNo,
-	                            String[] commanditemCodes) {
+	private void setAssistParam(List<AssistParam> assistParams, String dataDensity, String dataPoints, String dataTime,
+			String protocolNo, String[] commanditemCodes) {
 		AssistParam assistParam1 = new AssistParam();// 数据密度
 		assistParam1.setKey("F002");
 		assistParam1.setValue(dataDensity);
@@ -777,7 +780,8 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 	 */
 	private boolean isStateGrid(String protocolNo) {
 		boolean result = false;
-		if ("100".equals(protocolNo) || "101".equals(protocolNo) || "102".equals(protocolNo) || "106".equals(protocolNo)) {
+		if ("100".equals(protocolNo) || "101".equals(protocolNo) || "102".equals(protocolNo)
+				|| "106".equals(protocolNo)) {
 			result = true;
 		}
 		return result;
@@ -791,8 +795,9 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 	 */
 	private boolean isZheGrid(String protocolNo) {
 		boolean result = false;
-		if ("120".equals(protocolNo) || "121".equals(protocolNo) || "122".equals(protocolNo) || "123".equals(protocolNo)
-				|| "124".equals(protocolNo) || "125".equals(protocolNo) || "127".equals(protocolNo) || "129".equals(protocolNo)) {
+		if ("120".equals(protocolNo) || "121".equals(protocolNo) || "122".equals(protocolNo)
+				|| "123".equals(protocolNo) || "124".equals(protocolNo) || "125".equals(protocolNo)
+				|| "127".equals(protocolNo) || "129".equals(protocolNo)) {
 			result = true;
 		}
 		return result;
@@ -899,7 +904,6 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 		}
 		return result;
 	}
-
 
 	/**
 	 * 实时召测下发

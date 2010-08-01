@@ -98,16 +98,16 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		CodeInfo codeInfoCt = null;
 		CodeInfo codeInfoPt = null;
 		Map ctMap = new HashMap();
-		ctMap.put(CodeInfoDao.CODECATE, SystemConst.CODE_CT_RATIO);
+		ctMap.put(CodeInfo.CODECATE, SystemConst.CODE_CT_RATIO);
 
 		Map ptMap = new HashMap();
-		ctMap.put(CodeInfoDao.CODECATE, SystemConst.CODE_PT_RATIO);
+		ctMap.put(CodeInfo.CODECATE, SystemConst.CODE_PT_RATIO);
 
 		for (GpInfo gpInfo : lstGpInfos) {
 			//ct
-			ctMap.put(CodeInfoDao.CODE, gpInfo.getCtTimes());
+			ctMap.put(CodeInfo.CODECATE, gpInfo.getCtTimes());
 			//pt
-			ptMap.put(CodeInfoDao.CODE, gpInfo.getPtTimes());
+			ptMap.put(CodeInfo.CODE, gpInfo.getPtTimes());
 
 		}
 		if (codeInfoDao.findAll(ctMap) != null && codeInfoDao.findAll(ctMap).size() > 0) {

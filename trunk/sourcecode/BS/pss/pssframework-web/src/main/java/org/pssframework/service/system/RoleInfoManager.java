@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
+
 /**
  * @author Administrator
  *
@@ -23,6 +26,7 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	@Autowired(required = true)
 	private RoleInfoDao roleInfoDao;
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
@@ -38,7 +42,7 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
 	@Override
 	public List<RoleInfo> findAll() {
-		return roleInfoDao.getAll("roleId", true);
+		return roleInfoDao.findAll();
 	}
 
 	@Override
@@ -54,6 +58,11 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	@Override
 	public void removeById(Long id) {
 		roleInfoDao.delete(id);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Page findByPageRequest(PageRequest pageRequest) {
+		return roleInfoDao.findByPageRequest(pageRequest);
 	}
 
 }
