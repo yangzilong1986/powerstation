@@ -537,4 +537,8 @@ public class PmPacketData{
     public boolean HaveDate(){
         return (this.dataBuff.position() < this.dataBuff.limit());
     }
+
+    public int restBytes(){
+        return this.dataBuff.limit()-this.dataBuff.position();
+    }
 }
