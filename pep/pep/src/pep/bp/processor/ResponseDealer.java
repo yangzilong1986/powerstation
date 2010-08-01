@@ -26,8 +26,7 @@ public class ResponseDealer extends BaseProcessor {
     private RtuRespPacketQueue respQueue;//返回报文队列
     private RtuAutoUploadPacketQueue upLoadQueue;
 
-
-    public ResponseDealer( PepCommunicatorInterface pepCommunicator) {
+    public ResponseDealer(PepCommunicatorInterface pepCommunicator) {
         super();
         taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
@@ -41,12 +40,14 @@ public class ResponseDealer extends BaseProcessor {
             //检查返回
             try {
                 SequencedPmPacket packet = respQueue.PollPacket();
-                if(packet.sequence == -1)//主动轮召任务返回处理
-                    upLoadQueue.addPacket(packet.pack);
-                else  //实时召测任务返回处理
-                {
-                    if((packet.status == Status.SUSSESS)||(packet.status == Status.TO_BE_CONTINUE))
-                        taskService.insertRecvMsg(packet.sequence,packet.pack.getAddress().getRtua(), BcdUtils.binArrayToString(packet.pack.getValue()));
+                if ((packet.status == Status.SUSSESS) || (packet.status == Status.TO_BE_CONTINUE)) {
+                    if (packet.pack.getAddress().getMastStationId() == 2)//主动轮召任务返回处理
+                    {
+                        upLoadQueue.addPacket(packet.pack);
+                    } else //实时召测任务返回处理
+                    {
+                        taskService.insertRecvMsg(packet.sequence, packet.pack.getAddress().getRtua(), BcdUtils.binArrayToString(packet.pack.getValue()));
+                    }
                 }
             } catch (Exception ex) {
                 log.error(ex.getMessage());
@@ -54,6 +55,4 @@ public class ResponseDealer extends BaseProcessor {
         }
 
     }
-
-
 }

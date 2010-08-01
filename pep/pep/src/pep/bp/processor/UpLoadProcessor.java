@@ -25,7 +25,6 @@ public class UpLoadProcessor extends BaseProcessor{
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuAutoUploadPacketQueue upLoadQueue;//主动上报报文队列
     private Converter converter;
-    private Dto data;
 
     public  UpLoadProcessor(PepCommunicatorInterface pepCommunicator){
         super();
@@ -33,22 +32,23 @@ public class UpLoadProcessor extends BaseProcessor{
         upLoadQueue = pepCommunicator.getRtuAutoUploadPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
         this.converter = (Converter)cxt.getBean("converter");
-        this.data = new Dto();
+      //  this.data = new Dto();
     }
     @Override
     public void run(){
         while (true) {
             try {
                 PmPacket376 packet = (PmPacket376) upLoadQueue.PollPacket();
-                this.converter.decodeDataDB(packet, data);
-                dataService.insertRecvData(data);
+                Dto dto = new Dto(packet.getAddress().getRtua(),packet.getAfn());
+                this.converter.decodeDataDB(packet,dto );
+                dataService.insertRecvData(dto);
             } catch (InterruptedException ex) {
                 log.error(ex.getMessage());
                 break;
             }
-            catch (Exception ex) {
-                log.error(ex.getMessage());
-            }
+//            catch (Exception ex) {
+//                log.error(ex.getMessage());
+//            }
 
         }
     }

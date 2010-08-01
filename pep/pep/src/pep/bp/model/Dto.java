@@ -15,6 +15,48 @@ import java.util.TreeMap;
  * @author Thinkpad
  */
 public class Dto {
+
+    /**
+     * @return the logicAddress
+     */
+    public String getLogicAddress() {
+        return logicAddress;
+    }
+
+    /**
+     * @param logicAddress the logicAddress to set
+     */
+    public void setLogicAddress(String logicAddress) {
+        this.logicAddress = logicAddress;
+    }
+
+    /**
+     * @return the afn
+     */
+    public byte getAfn() {
+        return afn;
+    }
+
+    /**
+     * @param afn the afn to set
+     */
+    public void setAfn(byte afn) {
+        this.afn = afn;
+    }
+
+    /**
+     * @return the dataItems
+     */
+    public List<DtoItem> getDataItems() {
+        return dataItems;
+    }
+
+    /**
+     * @param dataItems the dataItems to set
+     */
+    public void setDataItems(List<DtoItem> dataItems) {
+        this.dataItems = dataItems;
+    }
     
     public class DtoItem {
         public int gp; //测量点号
@@ -52,6 +94,7 @@ public class Dto {
         this.afn = afn;
         this.dataItems = new ArrayList<DtoItem>();
     }
+
 
     public DtoItem AddDataItem(String meterAddress, String dataTime, String commandItemCode){
         return new DtoItem(meterAddress,dataTime,commandItemCode);

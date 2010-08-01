@@ -6,6 +6,7 @@
 package pep.bp.db;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.Dto;
+import pep.bp.model.Dto.DtoItem;
 
 /**
  *
@@ -36,33 +38,30 @@ public class DataServiceIMP implements DataService{
     }
 
     @Override
-    public void insertRecvData(Dto data) {
-        int gpSn = 0;
-        ArrayList gpList = data.getGpArray();
-        Map<String,String> dataItemMap = data.getDataMap();
-        if(data.getAfn() == (byte)12){
-            if(data.getCommandItemCode().equals("100C0129")){
-                for(int i=0;i<=gpList.size()-1;i++){
-                    gpSn = (Integer)gpList.get(i);
-                    insertData_P_ACT(data.getLogicAddress(),gpSn,data.getDataTime(),
+    public void insertRecvData(Dto dto) {
+        byte AFN = dto.getAfn();
+
+        List dtoItems = dto.getDataItems();
+        for(int i=0;i<= dtoItems.size()-1;i++){
+            DtoItem  dtoItem = (DtoItem)dtoItems.get(i);
+            String commandItemCode = dtoItem.commandItemCode;
+            Map<String,String> dataItemMap = dtoItem.dataMap;
+            if(AFN == (byte)0X0C){
+                if(commandItemCode.equals("100C0129")){
+                    insertData_P_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("0100"),dataItemMap.get("0101"),
                                      dataItemMap.get("0102"),dataItemMap.get("0103"),
                                      dataItemMap.get("0104"));
                 }
-            }
-
-            if(data.getCommandItemCode().equals("100C0025")){
-                for(int i=0;i<=gpList.size()-1;i++){
-                    gpSn = (Integer)gpList.get(i);
-                    insertData_EC_CURV(data.getLogicAddress(),gpSn,data.getDataTime(),
+                if(commandItemCode.equals("100C0025")){
+                    insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("2201"),dataItemMap.get("2202"),dataItemMap.get("2203"),
                                      dataItemMap.get("2204"),"",dataItemMap.get("2101"),
                                      dataItemMap.get("2102"),dataItemMap.get("2103"));
                 }
             }
         }
-
-    }
+     }
 
 
 

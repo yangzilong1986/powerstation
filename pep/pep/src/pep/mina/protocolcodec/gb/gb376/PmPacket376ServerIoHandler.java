@@ -83,4 +83,9 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
         }
     }
+
+    @Override
+    public void exceptionCaught(IoSession session, Throwable thrml){
+        LOGGER.info("Catch a exception: "+ thrml.getMessage());
+    }
 }
