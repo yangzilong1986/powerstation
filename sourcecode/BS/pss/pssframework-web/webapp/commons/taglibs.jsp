@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="/WEB-INF/tld/extremecomponents.tld" prefix="ec" %>
 <%@ taglib uri="/WEB-INF/tld/pss.tld" prefix="pss" %>
 <%@ taglib prefix="e3t" uri="/e3/table/E3Table.tld" %>
