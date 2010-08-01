@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import pep.bp.model.Dto;
+import pep.bp.model.Dto.DtoItem;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.codec.protocol.gb.PmPacketData;
@@ -135,8 +136,9 @@ public abstract class Decoder {
     }
 
 
-    protected void DecodeData2Dto(String commandItemCode, Dto dto, PmPacketData dataBuffer)
+    protected void DecodeData2Dto(int gp,String commandItemCode, DtoItem dtoItem, PmPacketData dataBuffer)
     {       String GroupValue = "";
+            Map<String,String> dataMap = dtoItem.dataMap;
             List<ProtocolDataItem> DataItemList_Config  = config.getDataItemList(commandItemCode);
             for(ProtocolDataItem dataItem:DataItemList_Config){
                 String DataItemCode = dataItem.getDataItemCode();
@@ -145,20 +147,20 @@ public abstract class Decoder {
                 int bitnumber = dataItem.getBitNumber();
                 String IsGroupEnd = dataItem.getIsGroupEnd();
                 if (Format.equals("BIN")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
                 } else if (Format.equals("IPPORT")) {
-                    dto.AddData(DataItemCode, dataBuffer.getIPPORT());
+                    dataMap.put(DataItemCode, dataBuffer.getIPPORT());
                 } else if (Format.equals("IP")) {
-                    dto.AddData(DataItemCode, dataBuffer.getIP());
+                    dataMap.put(DataItemCode, dataBuffer.getIP());
                 } else if (Format.equals("TEL")) {
-                    dto.AddData(DataItemCode, dataBuffer.getTEL());
+                    dataMap.put(DataItemCode, dataBuffer.getTEL());
                 } else if (Format.equals("BS8")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("GROUP_BS8")) {
                     if (GroupValue.length() == 0) {
                         GroupValue = dataBuffer.getBS8();
                     }
-                    dto.AddData(DataItemCode, GroupValue.substring(0, bitnumber));
+                    dataMap.put(DataItemCode, GroupValue.substring(0, bitnumber));
                     GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
                     if (IsGroupEnd.equals("1")) {
                         GroupValue = "";
@@ -173,71 +175,71 @@ public abstract class Decoder {
                     byte resultValue = (byte) (groupBinValue >> (bits - bitnumber));
                     groupBinValue = groupBinValue - (resultValue << (bits - bitnumber));
                     bits -= bitnumber;
-                    dto.AddData(DataItemCode, String.valueOf(resultValue));
+                    dataMap.put(DataItemCode, String.valueOf(resultValue));
                     if (IsGroupEnd.equals("1")) {
                         groupBinValue = 0;
                         bits = 8;
                     }
                 } else if (Format.equals("BS24")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getBS24()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS24()));
                 } else if (Format.equals("BS64")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getBS64()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS64()));
                 } else if (Format.equals("ASCII")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getAscii(Len)));
                 } else if (Format.equals("A1")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA1()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA1()));
                 } else if (Format.equals("A2")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA2()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA2()));
                 } else if (Format.equals("A3")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA3()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA3()));
                 } else if (Format.equals("A4")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA4()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA4()));
                 } else if (Format.equals("A5")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA5()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA5()));
                 } else if (Format.equals("A6")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA6()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA6()));
                 } else if (Format.equals("A7")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA7()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA7()));
                 } else if (Format.equals("A8")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA8()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA8()));
                 } else if (Format.equals("A9")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA9()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA9()));
                 } else if (Format.equals("A10")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA10()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA10()));
                 } else if (Format.equals("A11")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA11()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA11()));
                 } else if (Format.equals("A12")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA12()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA12()));
                 } else if (Format.equals("A13")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA13()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA13()));
                 } else if (Format.equals("A14")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA14()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA14()));
                 } else if (Format.equals("A15")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA15()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA15()));
                 } else if (Format.equals("A16")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA16()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA16()));
                 } else if (Format.equals("A17")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA17()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA17()));
                 } else if (Format.equals("A18")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA18()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA18()));
                 } else if (Format.equals("A19")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA19()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA19()));
                 } else if (Format.equals("A20")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA20()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA20()));
                 } else if (Format.equals("A21")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA21()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA21()));
                 } else if (Format.equals("A22")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA22()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA22()));
                 } else if (Format.equals("A23")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA23()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA23()));
                 } else if (Format.equals("A24")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA24()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA24()));
                 } else if (Format.equals("A25")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA25()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA25()));
                 } else if (Format.equals("A26")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA26()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA26()));
                 } else if (Format.equals("A27")) {
-                    dto.AddData(DataItemCode, String.valueOf(dataBuffer.getA27()));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA27()));
                 }
             }
     }

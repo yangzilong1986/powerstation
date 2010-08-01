@@ -4,12 +4,15 @@
  */
 package pep.bp.utils.decoder;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pep.bp.model.Dto;
+import pep.bp.model.Dto.DtoItem;
+import pep.bp.utils.UtilsBp;
 
 import pep.codec.protocol.gb.PmPacketData;
 import pep.codec.protocol.gb.gb376.PmPacket376;
@@ -69,11 +72,13 @@ public class Decoder376 extends Decoder {
             dataBuffer.getDA(da);
             dataBuffer.getDT(dt);
             byte afn = packet.getAfn();
+            int gp =  da.getPn();
             dto.setAfn(afn);
-            dto.AddGP(da.getPn());
+            String CurrentTime = UtilsBp.getNow();
             String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
+            DtoItem dtoItem = dto.AddDataItem(gp, CurrentTime, commandItemCode);
             dataBuffer.rewind();
-            this.DecodeData2Dto(commandItemCode, dto, dataBuffer);
+            this.DecodeData2Dto(gp,commandItemCode, dtoItem, dataBuffer);
         }
     }
 

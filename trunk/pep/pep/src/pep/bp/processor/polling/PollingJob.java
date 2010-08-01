@@ -39,6 +39,12 @@ public class PollingJob implements Job {
     private ApplicationContext cxt;
     private Converter converter;
     private int circleUnit;
+    private int sequenceCode=0;
+
+
+    private int getsequenceCode(){
+        return sequenceCode++;
+    }
 
     public  PollingJob(PepCommunicatorInterface pepCommunicator,int circleUnit){
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
@@ -68,8 +74,9 @@ public class PollingJob implements Job {
         object.setLogicalAddr(task.getLogicAddress());
         object.setMpSn(new int[]{task.getGp_sn()});
         PmPacket376 packet = new PmPacket376();
+        packet.getAddress().setMastStationId((byte)2);
         converter.CollectObject2Packet(object, packet,task.getAFN(),new StringBuffer(), new StringBuffer());
-        pepCommunicator.SendPacket(-1, packet);
+        pepCommunicator.SendPacket(this.getsequenceCode(), packet);
         log.info("下发轮召报文："+BcdUtils.binArrayToString(packet.getValue()) );
         
     }
