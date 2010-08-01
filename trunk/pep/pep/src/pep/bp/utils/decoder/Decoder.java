@@ -3,7 +3,6 @@
  */
 package pep.bp.utils.decoder;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -28,7 +27,6 @@ public abstract class Decoder {
         if (dataItems == null) {
             dataItems = new TreeMap();
         }
-        dataBuffer.rewind();
         List<ProtocolDataItem> DataItemList_Config = config.getDataItemList(commandItemCode);
        
         for(ProtocolDataItem dataItem:DataItemList_Config){
@@ -215,7 +213,7 @@ public abstract class Decoder {
                 } else if (Format.equals("A14")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA14()));
                 } else if (Format.equals("A15")) {
-                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA15()));
+                    dataMap.put(DataItemCode, dataBuffer.getA15().toString());
                 } else if (Format.equals("A16")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA16()));
                 } else if (Format.equals("A17")) {
