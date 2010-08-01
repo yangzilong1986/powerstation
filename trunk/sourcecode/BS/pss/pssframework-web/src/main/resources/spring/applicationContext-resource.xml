@@ -69,6 +69,6 @@
   <!-- <bean class="cn.org.rapid_framework.util.ApplicationContextHolder"/> -->
   
   <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-    <property name="configLocation" value="classpath:/ehcache/ehcache-hibernate-local.xml" />
+    <property name="configLocation" value="classpath:/ehcache/ehcache.xml" />
   </bean>
 </beans>

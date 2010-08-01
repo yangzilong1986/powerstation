@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:s="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
 	default-lazy-init="true">
 
 	<description>SpringSecurity安全配置</description>
@@ -35,10 +35,10 @@
 	</s:authentication-manager>
 
 	<!-- 项目实现的用户查询服务  -->
-	<bean id="userDetailsService" class="org.springside.examples.showcase.security.UserDetailsServiceImpl" />
+	<bean id="userDetailsService" class="org.pssframework.security.UserDetailsServiceImpl" />
 
 	<!-- 开发时自动登录的filter -->
-	<bean id="autoLoginFilter" class="org.springside.examples.showcase.security.AutoLoginFilter">
+	<bean id="autoLoginFilter" class="org.pssframework.security.AutoLoginFilter">
 		<property name="enabled" value="${security.autologin.enabled}" />
 		<property name="defaultUserName" value="admin" />
 	</bean>
@@ -48,9 +48,9 @@
 		<property name="captchaEngine">
 			<bean class="org.springside.modules.security.jcaptcha.GMailEngine" />
 		</property>
-		<!-- 
-		默认生成的图片180秒过期 , 可另行设置
+		 
+		<!--默认生成的图片180秒过期 , 可另行设置-->
 		<property name="minGuarantedStorageDelayInSeconds" value="180" />
-		-->
+		
 	</bean>
 </beans>
