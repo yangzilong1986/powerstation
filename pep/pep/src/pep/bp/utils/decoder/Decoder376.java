@@ -88,6 +88,7 @@ public class Decoder376 extends Decoder {
         try {
             PmPacket376 packet = (PmPacket376) pack;
             String key = "";
+            String MeterAddress = "";
             String logicAddress = packet.getAddress().getRtua();
             PmPacketData dataBuffer = packet.getDataBuffer();
             PmPacketData dataBuffer645 = null;
@@ -104,6 +105,7 @@ public class Decoder376 extends Decoder {
                 dataBuffer.getRowIoBuffer().get(databuff);
                 int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
                 Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
+                MeterAddress =  packet645.getAddress().getAddress();
                 dataBuffer645 = packet645.getDataAsPmPacketData();
             }
 
@@ -116,7 +118,7 @@ public class Decoder376 extends Decoder {
                 dataBuffer645.get();//将附带的开关信息状态读掉
 
             }
-            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
+            key = logicAddress + "#" + MeterAddress + "#" + commandItemCode;
             Map<String, String> dataItems = new TreeMap();
             this.DecodeData2Map(commandItemCode, dataItems, dataBuffer645);
             if (!results.containsKey(key)) {
