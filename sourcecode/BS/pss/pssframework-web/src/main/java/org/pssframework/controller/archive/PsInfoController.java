@@ -42,7 +42,6 @@ import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.archive.TranInfo;
-import org.pssframework.model.system.SmsNoInfo;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
@@ -139,10 +138,6 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		result.addAttribute("psinfo", psInfo);
 
-		List<SmsNoInfo> smsNoInfoList = psInfo.getSmsNoInfoList();
-
-		result.addAttribute("smsNoInfoList", smsNoInfoList);
-
 		this.CommonPart(result, requestMap);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
@@ -163,10 +158,6 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		requestMap.put("tgid", tgid);
 
 		modelMap.addAttribute("istAddr", getPsAddr(tgid));
-
-		List<SmsNoInfo> smsNoInfoList = model.getSmsNoInfoList();
-
-		modelMap.addAttribute("smsNoInfoList", smsNoInfoList);
 
 		modelMap.addAttribute("psinfo", model);
 

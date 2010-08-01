@@ -35,10 +35,4 @@ public class RealTimeReadingDao extends BaseIbatis3Dao<RealTimeReadingInfo, Long
 		this.log.info("findByPageRequest");
 		return pageQuery("pageSelect", pageRequest);
 	}
-
-	//	public DataModel findByPageRequest(NavRequest pNavRequest) {
-	//
-	//		this.log.info("findByPageRequest");
-	//		return pageQuery("pageSelect", pNavRequest);
-	//	}
 }

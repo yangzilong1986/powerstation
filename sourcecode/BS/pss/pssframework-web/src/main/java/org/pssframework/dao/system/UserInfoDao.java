@@ -3,9 +3,14 @@
  */
 package org.pssframework.dao.system;
 
+import java.util.Map;
+
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.UserInfo;
 import org.springframework.stereotype.Repository;
+
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
@@ -13,6 +18,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
+
+	private static final String PAGE_USER_INFO = "from UserInfo t ";
 
 	@Override
 	public Class getEntityClass() {
@@ -30,6 +37,10 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 			return true;
 		Object object = findUniqueBy(propertyName, newValue);
 		return (object == null);
+	}
+
+	public Page findByPageRequest(PageRequest<Map> pageRequest) {
+		return pageQuery(PAGE_USER_INFO, pageRequest);
 	}
 
 }

@@ -10,6 +10,8 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,13 @@ import javax.validation.Valid;
 
 import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
-import org.pssframework.model.system.RoleInfo;
-import org.pssframework.service.system.RoleInfoManager;
+import org.pssframework.model.system.CodeInfo;
+import org.pssframework.model.system.OrgInfo;
+import org.pssframework.model.system.UserInfo;
+import org.pssframework.service.system.CodeInfoManager;
+import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.service.system.UserInfoManager;
+import org.pssframework.support.system.SystemConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,17 +44,23 @@ import cn.org.rapid_framework.page.PageRequest;
  *
  */
 @Controller
-@RequestMapping("/system/role")
-public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long> {
-	private static final String VIEW_MANAGER = "/system/roleManagerFrame";
-	private static final String VIEW_QUERY = "/system/roleList";
-	private static final String VIEW_DETAIL = "/system/roleDetail";
-	private static final String VIEW_EDIT = "/system/roleEdit";
+@RequestMapping("/system/user")
+public class UserInfoController extends BaseRestSpringController<UserInfo, Long> {
+	private static final String VIEW_MANAGER = "/system/userManagerFrame";
+	private static final String VIEW_QUERY = "/system/userList";
+	private static final String VIEW_DETAIL = "/system/userDetail";
+	private static final String VIEW_EDIT = "/system/editUserPage";
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
 	@Autowired
-	private RoleInfoManager roleInfoManager;
+	private UserInfoManager userInfoManager;
+
+	@Autowired
+	private OrgInfoManager orgInfoManager;
+
+	@Autowired
+	private CodeInfoManager codeInfoManager;
 
 	@RequestMapping(value = "/manager")
 	public ModelAndView manager(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
@@ -58,13 +71,13 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "list")
 	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			RoleInfo roleInfo) {
+			UserInfo userInfo) {
 
 		BaseQuery baseQuery = new BaseQuery();
 
 		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
 
-		Page page = this.roleInfoManager.findByPageRequest(pageRequest);//获取数据模型
+		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
 
 		modelAndView.addObject("page", page);
 
@@ -75,21 +88,17 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "detail")
-	public ModelAndView detail(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
-		modelAndView.setViewName(VIEW_DETAIL);
-		return modelAndView;
-	}
-
 	/**显示
 	 * 
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String show(ModelMap result, @PathVariable Long id) throws Exception {
 
-		RoleInfo roleInfo = this.roleInfoManager.getById(id);
+		UserInfo userInfo = this.userInfoManager.getById(id);
 
-		result.addAttribute("roleInfo", roleInfo);
+		result.addAttribute("user", userInfo);
+
+		result.addAttribute("orgInfo", getOrgInfo());
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
@@ -100,9 +109,17 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
-		RoleInfo roleInfo = this.roleInfoManager.getById(id);
+		UserInfo userInfo = this.userInfoManager.getById(id);
 
-		result.addAttribute("role", roleInfo);
+		Map codeMap = new HashMap();
+
+		codeMap.put(CodeInfo.CODECATE, SystemConst.CODE_USER_STATUS);
+
+		result.addAttribute("user", userInfo);
+
+		result.addAttribute("orgInfo", getOrgInfo());
+
+		result.addAttribute("userStat", getCodeInfo(codeMap));
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
@@ -111,19 +128,19 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(ModelMap modelMap, @Valid RoleInfo roleInfo, BindingResult errors, @PathVariable Long id,
+	public String update(ModelMap modelMap, @Valid UserInfo userInfo, BindingResult errors, @PathVariable Long id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
 		try {
-			logger.debug("bind roleInfo {} from request", roleInfo);
+			logger.debug("bind userInfo {} from request", userInfo);
 
-			RoleInfo roleInfoDb = this.roleInfoManager.getById(id);
+			UserInfo userInfoDb = this.userInfoManager.getById(id);
 
-			bind(request, roleInfoDb);
+			bind(request, userInfoDb);
 
-			this.roleInfoManager.saveOrUpdate(roleInfoDb);
+			this.userInfoManager.saveOrUpdate(userInfoDb);
 
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
@@ -134,4 +151,13 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 		return VIEW_EDIT;
 	}
 
+	private List<OrgInfo> getOrgInfo() {
+		List<OrgInfo> orgInfoList = orgInfoManager.findAll();
+		return orgInfoList;
+	}
+
+	private List<CodeInfo> getCodeInfo(Map mapCode) {
+		List<CodeInfo> codeInfo = codeInfoManager.findByPageRequest(mapCode);
+		return codeInfo;
+	}
 }

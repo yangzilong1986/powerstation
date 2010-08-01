@@ -5,7 +5,6 @@ package org.pssframework.model.archive;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -15,8 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -27,12 +24,7 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
-import org.pssframework.model.system.SmsNoInfo;
 
 /**
  * 1)用于记录需要安装计量装置的位置点的信息，可以解决一个正反向表被两个户分别使用，这时计量点定义成两个；可以解决三个单相表代替一个三相表的功能，这时计量点定义成一个；可以解决主副表问题，这时计量点可以定义成一个。
@@ -131,6 +123,7 @@ public class PsInfo extends BaseEntity {
 	@Transient
 	private int[] functionsChecked;
 
+	/*
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_ID") })
 	@Fetch(FetchMode.SUBSELECT)
@@ -138,31 +131,14 @@ public class PsInfo extends BaseEntity {
 	private List<SmsNoInfo> smsNoInfoList;
 
 	public List<SmsNoInfo> getSmsNoInfoList() {
-		//		SmsNoInfo smsNoInfo = new SmsNoInfo();
-		//		if (smsNoInfoList != null) {
-		//			int size = smsNoInfoList.size();
-		//			if (size == 3)
-		//				return smsNoInfoList;
-		//
-		//			for (int i = 0; i < 3 - size; i++) {
-		//				smsNoInfoList.add(smsNoInfo);
-		//			}
-		//		} else {
-		//			smsNoInfoList = Lists.newArrayListWithCapacity(3);
-		//			for (int i = 0; i < 3; i++) {
-		//				smsNoInfoList.add(smsNoInfo);
-		//			}
-		//		}
 
 		return smsNoInfoList;
 	}
 
-	/**
-	 * @param smsNoInfoList the smsNoInfoList to set
-	 */
 	public void setSmsNoInfoList(List<SmsNoInfo> smsNoInfoList) {
 		this.smsNoInfoList = smsNoInfoList;
 	}
+	*/
 
 	/**
 	 * @return the functionMap

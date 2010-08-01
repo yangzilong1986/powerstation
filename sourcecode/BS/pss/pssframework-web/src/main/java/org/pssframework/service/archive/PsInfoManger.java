@@ -12,7 +12,6 @@ import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.PsInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.PsInfo;
-import org.pssframework.model.system.SmsNoInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -57,26 +56,6 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 	@Override
 	public void update(PsInfo model) throws DataAccessException {
 
-		//int[] functionsChecked = model.getFunctionsChecked();
-
-		//logger.debug("update functionsChecked{}", functionsChecked);
-
-		//if (functionsChecked != null) {
-
-		//	for (int checked : functionsChecked) {
-		//		initChecked[checked] = '1';
-		//	}
-
-		//}
-		//model.setFunctionCode(String.valueOf(initChecked));
-
-		//logger.debug("start to updating");
-
-		//		for (SmsNoInfo smsInfo : model.getSmsNoInfoList()) {
-		//			smsInfo.getPsInfoList().add(model);
-		//
-		//		}
-
 		super.saveOrUpdate(model);
 	}
 
@@ -114,11 +93,4 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		return bolRep;
 	}
 
-	private void setSmsNo(PsInfo model) {
-
-		for (SmsNoInfo smsNoInfo : model.getSmsNoInfoList()) {
-			//smsNoInfo.setSmsNo(smsNo);
-		}
-
-	}
 }

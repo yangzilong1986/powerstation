@@ -14,8 +14,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,8 +26,15 @@ import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.model.system.UserInfo;
+
+import com.google.common.collect.Lists;
 
 /**
  *1) 描述台区基本信息,专变也做为台区管理，包括台区编码、台区名称、台区地址、公专变标志等信息 2) 通过线损基础信息管理业务中录入产生，或通过新装增容与变更用电归档过程产生；或通过与生产系统接口过程产生。 3)
@@ -58,13 +68,6 @@ public class TgInfo extends BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tgInfo")
 	private List<LineTgRelaInfo> lineTgRelaInfos;
-
-	// @ManyToMany(targetEntity = LineInfo.class, cascade = {
-	// CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-	// @JoinTable(name = "THEATER_AUDIENCE", joinColumns = { @JoinColumn(name =
-	// "THEATER_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUDIENCE_ID")
-	// })
-	// @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
 	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
@@ -104,6 +107,24 @@ public class TgInfo extends BaseEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	// LASTTIME_STAMP DATE default SYSDATE
 	private Date lasttimeStamp;
+
+	@ManyToMany
+	@JoinTable(name = "G_TG_USER", joinColumns = { @JoinColumn(name = "TG_ID") }, inverseJoinColumns = { @JoinColumn(name = "EMP_NO") })
+	@Fetch(FetchMode.SUBSELECT)
+	@OrderBy("empNo")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<UserInfo> userInfoList = Lists.newArrayList();
+
+	public List<UserInfo> getUserInfoList() {
+		return userInfoList;
+	}
+
+	/**
+	 * @param userInfoList the userInfoList to set
+	 */
+	public void setUserInfoList(List<UserInfo> userInfoList) {
+		this.userInfoList = userInfoList;
+	}
 
 	/**
 	 * @return the chaDate
