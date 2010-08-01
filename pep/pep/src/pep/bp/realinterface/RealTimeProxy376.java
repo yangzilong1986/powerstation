@@ -489,7 +489,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             for (RTTaskRecvDAO recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
-                converter.decodeData(packet, tempMap);
+                converter.decodeData_TransMit(packet, tempMap);
             }
         }
         return Deal2DataMap(tempMap);
@@ -509,7 +509,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             for (RTTaskRecvDAO recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
-                converter.decodeData(packet, tempMap);
+                converter.decodeData_TransMit(packet, tempMap);
             }
         }
         return Deal2DataMap(tempMap);
