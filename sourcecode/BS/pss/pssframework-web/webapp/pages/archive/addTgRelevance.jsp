@@ -67,7 +67,7 @@ var contextPath  = '${ctx}';
   </form:form></div>
   <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
   <div class="mgt10">
-  <div class="mgt10 da_top"><span>变压器列表信息</span>
+  <div class="mgt10 da_top"><span>变压器信息</span>
   <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
     width="16" height="16" style="cursor: pointer;" /></a></h1>
   </div>
@@ -125,7 +125,7 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>保护开关列表信息</span>
+  <div class="mgt10 da_top"><span>保护开关信息</span>
   <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
     height="16" /></a></h1>
   </div>
@@ -151,7 +151,9 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>集中器列表信息</span>
+  
+  <!-- 集中器信息 -->
+  <div class="mgt10 da_top"><span>集中器信息</span>
   <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
     height="16" style="cursor: pointer;" /></a></h1>
   </div>
@@ -182,6 +184,36 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
+  
+  <!-- 操作员信息 -->
+    <div class="mgt10 da_top"><span>操作员信息</span>
+  <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+    height="16" style="cursor: pointer;" /></a></h1>
+  </div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>电话号码</th>
+        <th>权限</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${userList}" var="user" varStatus="status">
+        <tr id="user_${user.empNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>&nbsp;${user.name}</td>
+          <td>&nbsp;${user.mobile}</td>
+          <td>&nbsp;</td>
+          <td><a onclick="deleteUserInfo('${user.empNo}')">删除</a>&nbsp;/&nbsp;<a
+            onclick="updateUserInfo('${user.empNo}')">修改</a></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  
   </div>
   </div>
 </ul>

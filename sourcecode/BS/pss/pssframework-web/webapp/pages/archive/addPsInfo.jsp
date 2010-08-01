@@ -71,14 +71,14 @@ function meterState(){
 				<td align="right" class="green"><font color="red">* </font>测量点序号：</td>
 				<td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
 			</tr>
-			<tr height="30px">
+			<!--  <tr height="30px">
 				<td align="right" class="green">短信号码：</td>
 				<td colspan="3">
 				<form:input path="smsNoInfoList[0].smsNo" />
 				<form:input path="smsNoInfoList[1].smsNo" />
 				<form:input path="smsNoInfoList[2].smsNo" />
 				</td>
-			</tr>
+			</tr>-->
 			<tr height="30px">
 				<td align="right" class="green">安装地址：</td>
 				<td colspan="3">${istAddr}</td>

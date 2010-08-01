@@ -2,21 +2,23 @@
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
 <%@page import="org.pssframework.support.system.SystemConst"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>roleList</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript">
 var contextPath = "${ctx}";
 var sSelectedRoleID = "";
 function selectRow(sRoleID, oRow) {
     sSelectedRoleID = sRoleID;
-    var roleType = document.forms[0].roleType.value;
     parent.document.frames["roleDetail"].location.href = contextPath
-            + '/system/role/detail?roleId=' + sSelectedRoleID + '&roleType=' + roleType
-            + '&random=' + Math.random();
-    selectSingleRow(oRow);
+            + '/system/role/'+ sSelectedRoleID 
+            + '?random=' + Math.random();
+    //selectSingleRow(oRow);
 }
 
 //列表变更
@@ -35,49 +37,44 @@ function changeList(type) {
 }
 
 function init() {
-    var tem = document.getElementById("tem");
-    if(tem.value != "null" && tem.value != "") {
-        selectSingleRow(document.getElementById(tem.value));
-    }
-    else {
-        var len = document.getElementsByTagName("tr");
-        if(len.length > 1) {
-            var obj = len[1];
-            obj.onclick();
-        }
-    }
+  
 }
+
+$(function(){
+	 var firstId = $("#dataBody>tr:first").attr("id");
+	 selectRow(firstId);
+})
 </script>
 </head>
-<body onload="init()">
-<div id="body">
-  <html:form action="/system/roleAction">
-    <input type="hidden" name="action" value="list" />
-    <input type="hidden" id="tem" name="tem" value="<%=request.getParameter("id")%>" />
-  </html:form>
-  <div class="content">
-    <div id="cont_1">
-      <div id="tableContainer" class="tableContainer" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight)-34));">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th><bean:message bundle="system" key="role.xh" /></th>
-              <th><bean:message bundle="system" key="role.jsmc" /></th>
-            </tr>
-          </thead>
-          <logic:present name="PG_QUERY_RESULT">
-            <logic:iterate id="datainfo" name="PG_QUERY_RESULT" indexId="number">
-              <tr id="<bean:write name="datainfo" property="col1"/>" align="center" class="trmainstyle" onclick="selectRow('<bean:write name="datainfo" property="col1"/>', this)" style="cursor: pointer;">
-                <td><bean:write name="datainfo" property="rowNo" /></td>
-                <td><bean:write name="datainfo" property="col2" /></td>
-              </tr>
-            </logic:iterate>
-          </logic:present>
-        </table>
-      </div>
-      <div class="nullContainer"></div>
-    </div>
-  </div>
-</div>
+<body>
+<div id="body"><form:form action="/system/role/list" modelAttribute="roleInfo">
+	<div class="content">
+	<div id="cont_1">
+	<div
+		style="height: expression(((     document.documentElement.clientHeight ||       document.body.clientHeight) -34 ) );">
+	<table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
+		<thead class="tableHeader">
+			<tr>
+				<th><spring:message code="system.role.xh" /></th>
+				<th align="center"><input type="checkbox" onclick="setAllCheckboxState('ItemID',this.checked)"></th>
+				<!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; -->
+				<th sortColumn="roleName"><spring:message code="system.role.jsmc" /></th>
+			</tr>
+		</thead>
+		<tbody id="dataBody">
+			<c:forEach items="${page.result}" var="item" varStatus="status">
+				<tr id="${item.roleId}" class="${status.count % 2 == 0 ? 'odd' : 'even'}"
+					onclick="selectRow('${item.roleId}', this)" style="cursor: pointer;">
+					<td>${page.thisPageFirstElementNumber + status.index}</td>
+					<td><input type="checkbox" name="ItemID" value=""></td>
+					<td>${item.roleName}&nbsp;</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+	</div>
+	</div>
+</form:form></div>
 </body>
 </html>

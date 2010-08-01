@@ -1,24 +1,24 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis"%>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
-<meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><spring:message code="system.permission.manage.title" /></title>
 <title>userList</title>
-<link rel="stylesheet" type="text/css" href="<peis:contextPath/>/css/mainframe.css" />
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/component.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/tableEX.js"></script>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript">
-var contextPath = "<peis:contextPath/>";
+var contextPath = "${ctx}";
 var sSelectedUserID = "";
 function selectRow(sUserID, oRow) {
     sSelectedUserID = sUserID;
-    parent.document.frames["userManager"].location.href = contextPath + '/system/userAction.do?action=detail&userId=' + sSelectedUserID + '&random=' + Math.random();
-    selectSingleRow(oRow);
+    var url = contextPath + '/system/user/' + sSelectedUserID + '?random=' + Math.random();
+    parent.document.frames["userManager"].location.href = url;
+   // selectSingleRow(oRow);
 }
 
 //列表变更
@@ -32,72 +32,51 @@ function changeOrg() {
     document.forms[0].submit();
 }
 
-function init() {
-    if('<peis:param type="PAGE" paramName="isAll"/>' == 'true') {
-        $("#orgNo").attr("disabled", true);
-    }
-    else {
-        $("#orgNo").attr("disabled", false);
-    }
-    var tem = document.getElementById("tem");
-    if(tem.value != "null" && tem.value != "") {
-        selectSingleRow(document.getElementById(tem.value));
-    }
-    else {
-        var len = $(".tableContainer table>tbody>tr");
-        if(len.length > 1) {
-            var obj = len[0];
-            obj.onclick();
-        }
-    }
-}
+
+$(function(){
+	 var firstId = $("#dataBody>tr:first").attr("id");
+	 selectRow(firstId);
+	 
+})
 </script>
 </head>
-<body onload="init()">
-<div id="body">
-  <html:form action="/system/userAction">
-  <input type="hidden" name="action" value="getQuery" />
-  <input type="hidden" id="tem" name="tem" value="<%=request.getParameter("id")%>" />
-  <div id="tool">
-    <table border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td><bean:message bundle="system" key="user.ssdw" />：</td>
-        <td>
-          <input type="hidden" name="action" value="getQuery" />
-          <html:hidden property="sqlcode" />
-          <peis:selectlist styleId="orgNo" name="orgNo" sql="COMMON0029" extendProperty="class='mainSelect'" onChange="changeOrg()" />
-        </td>
-        <td colspan="2"><html:checkbox name="userForm" property="isAll" value="1" onclick="changeList()" />显示全部</td>
-      </tr>
-    </table>
-    <div class="clear"></div>
-  </div>
-  </html:form>
-  <div class="content">
-    <div id="cont_1">
-      <div id="tableContainer" class="tableContainer" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight)-64));">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th><bean:message bundle="system" key="user.xh" /></th>
-              <th><bean:message bundle="system" key="user.zh" /></th>
-              <th><bean:message bundle="system" key="user.mc" /></th>
-            </tr>
-          </thead>
-          <logic:present name="PG_QUERY_RESULT">
-            <logic:iterate id="datainfo" name="PG_QUERY_RESULT" indexId="number">
-              <tr id="<bean:write name="datainfo" property="col1"/>" onclick="selectRow('<bean:write name="datainfo" property="col1"/>', this)" style="cursor: pointer;">
-                <td><bean:write name="datainfo" property="rowNo" /></td>
-                <td><bean:write name="datainfo" property="col2" /></td>
-                <td><bean:write name="datainfo" property="col3" /></td>
-              </tr>
-            </logic:iterate>
-          </logic:present>
-        </table>
-      </div>
-      <div class="nullContainer"></div>
-    </div>
-  </div>
-</div>
+<body >
+<div id="body"><form:form action="/system/user" modelAttribute="user">
+	<div id="tool">
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td><spring:message code="system.user.ssdw" />：</td>
+			<td></td>
+			<td colspan="2"><input type="checkbox" name="isAll" value="1" onclick="changeList()" />显示全部</td>
+		</tr>
+	</table>
+	</div>
+	<div >
+	<div id="cont_1">
+	<div id="tableContainer"
+		style="height: expression(((     document.documentElement.clientHeight ||     document.body.clientHeight) -64 ) );">
+	<table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
+		<thead class="tableHeader">
+			<tr>
+				<th><spring:message code="system.user.xh" /></th>
+				<th><spring:message code="system.user.zh" /></th>
+				<th><spring:message code="system.user.mc" /></th>
+			</tr>
+		</thead>
+		<tbody id="dataBody">
+			<c:forEach items="${page.result}" var="item" varStatus="status">
+				<tr id="${item.empNo}" class="${status.count % 2 == 0 ? 'odd' : 'even'}" onclick="selectRow('${item.empNo}', this)"
+					style="cursor: pointer;">
+					<td>${page.thisPageFirstElementNumber + status.index}</td>
+					<td>${item.staffNo}&nbsp;</td>
+					<td>${item.name}&nbsp;</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+	</div>
+	</div>
+</form:form></div>
 </body>
 </html>

@@ -1,346 +1,236 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
-<meta http-equiv="Content-Language" content="zh-cn">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title><bean:message bundle="system" key="user.edit.title"/></title>
-<link href="<peis:contextPath/>/css/window.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/common/common.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/component.js"></script>
-<script type="text/javascript" src="<peis:contextPath/>/js/frame/tableEX.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><spring:message code="system.user.edit.title" /></title>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 </head>
-
 <body>
-<html:form action="/system/userAddAction" onsubmit="return submitDisposal(this);" method="post" target="hideframe">
-  <input type="hidden" name="action" value="saveOrUpdate"/>
-  <div id="divUser" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
-    <div class="tab3">
-      <ul class="e_title">
-        <li class="tab_on"><a href="javascript:showUsernfo();" onfocus="blur()"><bean:message bundle="system" key="user.czyxx"/></a></li>
-        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><bean:message bundle="system" key="user.ywfw"/></a></li>
-        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><bean:message bundle="system" key="user.gwjs"/></a></li>
-        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><bean:message bundle="system" key="user.czqx"/></a></li>
-      </ul>
-    </div>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="contentLeft"></td>
-        <td height="20" colspan="3">
-          <html:hidden property="userId"/>
-        </td>
-        <td class="contentRight"></td>
-      </tr>
-      <tr>
-        <td class="contentLeft"></td>
-        <td bgcolor="#FFFFFF" colspan="3">
-          <table width="99%" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="15%" height="30" align="right"><bean:message bundle="system" key="user.zh"/>：<font color="#ff0000">*</font></td>
-              <td width="30%" align="left">
-                <logic:equal name="userForm" property="userId" value="">
-                  <html:text property="userNo" style='width: 200px;'/>
-                </logic:equal>
-                <logic:notEqual name="userForm" property="userId" value="">
-                  <html:text property="userNo" style='width: 200px;' readonly="true"/>
-                </logic:notEqual>
-                <input type="hidden" name="oldUserNo" value='<bean:write name="userForm" property="userNo"/>'/>
-              </td>
-              <td width="15%" height="30" align="right"><bean:message bundle="system" key="user.mc"/>：<font color="#ff0000">*</font></td>
-              <td width="30%" align="left">
-                <html:text property="username" style='width: 200px;'/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right"><bean:message bundle="system" key="user.mm"/>：<font color="#ff0000">*</font></td>
-              <td align="left">
-                <logic:equal name="userForm" property="userId" value="">
-                  <html:password property="passwd" style='width: 200px;'/>
-                </logic:equal>
-                <logic:notEqual name="userForm" property="userId" value="">
-                  <html:password property="passwd" style='width: 200px;' readonly="true"/>
-                </logic:notEqual>
-              </td>
-              <td align="right"><bean:message bundle="system" key="user.qrmm"/>：<font color="#ff0000">*</font></td>
-              <td align="left">
-                <logic:equal name="userForm" property="userId" value="">
-                  <html:password property="passwd1" style='width: 200px;'/>
-                </logic:equal>
-                <logic:notEqual name="userForm" property="userId" value="">
-                  <html:password property="passwd1" style='width: 200px;' readonly="true"/>
-                </logic:notEqual>
-              </td>
-            </tr>
-            <tr>
-              <td align="right"><bean:message bundle="system" key="user.ssdw"/>：</td>
-              <td align="left">
-                <peis:selectlist styleId="orgNo" name="orgNo" sql="SL_COMMON_0001" />
-              </td>
-              <td align="right"><bean:message bundle="system" key="user.dh"/>：</td>
-              <td align="left">
-                <html:text property="phone" style='width: 200px;'/>
-              </td>
-            </tr>
-            <tr>
-              <td align="right"><bean:message bundle="system" key="user.zt"/>：</td>
-              <td align="left">
-                <peis:selectlist name="status" sql="COMMON0034" />
-              </td>
-            </tr>
-          </table>
-          <table align="center">
-            <tr>
-              <td width="100%" height="30" align="center">
-                <logic:notEqual name="isEdit" scope="request" value="false">
-                  <input type="submit" name="queding2" value='<bean:message bundle="system" key="button.qd"/>' class="input1"/> &nbsp;
-                </logic:notEqual>
-                <input type="button" name="cancel2" value='<bean:message bundle="system" key="button.qx"/>' class="input1" onclick="top.GB_hide()"/>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class="contentRight"></td>
-      </tr>
-    </table>
-  </div>
-  <div id="divFw" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
-    <div class="tab3">
-      <ul class="e_title">
-        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><bean:message bundle="system" key="user.czyxx"/></a></li>
-        <li class="tab_on"><a href="javascript:showFw();" onfocus="blur()"><bean:message bundle="system" key="user.ywfw"/></a></li>
-        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><bean:message bundle="system" key="user.gwjs"/></a></li>
-        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><bean:message bundle="system" key="user.czqx"/></a></li>
-      </ul>
-    </div>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="contentLeft"></td>
-        <td height="20" colspan="3"></td>
-        <td class="contentRight"></td>
-      </tr>
-      <tr>
-        <td class="contentLeft"></td>
-        <td bgcolor="#FFFFFF" colspan="3">
-          <div class="tableContainer" style="width: 99%;" align="center">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-              <thead>
-                <tr>
-                  <th width="20%"><bean:message bundle="system" key="user.xh"/></th> 
-                  <th width="40%"><bean:message bundle="system" key="user.dxmc"/></th>
-                  <th width="20%"><bean:message bundle="system" key="user.sq"/><input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole1')"/></th>
-                  <th width="20%"><bean:message bundle="system" key="user.ksq"/><input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole1')"/></th>
-                </tr> 
-              </thead>
-              <tbody>
-                <logic:present name="fw">
-                  <logic:iterate id="datainfo" name="fw" indexId="number" offset="1">
-                    <tr align="center" class="trmainstyle">
-                      <td height="20"><bean:write name="number" /></td>
-                      <td height="20"><bean:write name="datainfo" property="col2" /></td>
-                      <logic:equal name="datainfo" property="col4" value="0">
-                        <td>
-                          <input type="checkbox" id="sRole1" name="sRole1" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" />
-                        </td>
-                        <td>
-                          <input type="checkbox" id="rRole1" name="rRole1" value="<bean:write name="datainfo" property="col1"/>" disabled />
-                        </td>
-                      </logic:equal>
-                      <logic:equal name="datainfo" property="col4" value="1">
-                        <td>
-                          <input type="checkbox" id="sRole1" name="sRole1" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" checked />
-                        </td>
-                        <td>
-                          <logic:equal name="datainfo" property="col5" value="0">
-                            <input type="checkbox" id="rRole1" name="rRole1" value="<bean:write name="datainfo" property="col1"/>" />
-                          </logic:equal>
-                          <logic:equal name="datainfo" property="col5" value="1">
-                            <input type="checkbox" id="rRole1" name="rRole1" value="<bean:write name="datainfo" property="col1"/>" checked />
-                          </logic:equal>
-                        </td>
-                      </logic:equal>
-                    </tr>
-                  </logic:iterate>
-                </logic:present>
-              </tbody>
-            </table>
-          </div>
-          <table align="center">
-            <tr>
-              <td width="100%" height="30" align="center">
-                <logic:notEqual name="isEdit" scope="request" value="false">
-                  <input type="submit" name="queding2" value='<bean:message bundle="system" key="button.qd"/>' class="input1"/> &nbsp;
-                </logic:notEqual>
-                <input type="button" name="cancel2" value='<bean:message bundle="system" key="button.qx"/>' class="input1" onclick="top.GB_hide()"/>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class="contentRight"></td>
-      </tr>
-    </table>
-  </div>
-  <div id="divGw" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y:AUTO;">
-    <div class="tab3">
-      <ul class="e_title">
-        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><bean:message bundle="system" key="user.czyxx"/></a></li>
-        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><bean:message bundle="system" key="user.ywfw"/></a></li>
-        <li class="tab_on"><a href="javascript:showGw();" onfocus="blur()"><bean:message bundle="system" key="user.gwjs"/></a></li>
-        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><bean:message bundle="system" key="user.czqx"/></a></li>
-      </ul>
-    </div>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="contentLeft"></td>
-        <td height="20" colspan="3"></td>
-        <td class="contentRight"></td>
-      </tr>
-      <tr>
-        <td class="contentLeft"></td>
-        <td bgcolor="#FFFFFF" colspan="3">
-        <div class="tableContainer" style="width: 99%;">
-          <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <thead>
-              <tr class=trheadStyle>
-                <th width="10%"><bean:message bundle="system" key="user.xh"/></th> 
-                <th width="20%"><bean:message bundle="system" key="user.dxmc"/></th>
-                <th width="10%"><bean:message bundle="system" key="user.sq"/><input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole2')"/></th>
-                <th width="10%"><bean:message bundle="system" key="user.ksq"/><input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole2')"/></th>
-              </tr> 
-            </thead>
-            <tbody>
-              <logic:present name="gw">
-                <logic:iterate id="datainfo" name="gw" indexId="number" offset="1">
-                  <tr align="center" class="trmainstyle">
-                    <td height="20"><bean:write name="number" /></td>
-                    <td height="20"><bean:write name="datainfo" property="col2" /></td>
-                    <logic:equal name="datainfo" property="col4" value="0">
-                      <td>
-                        <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" />
-                      </td>
-                      <td>
-                        <input type="checkbox" id="rRole2" name="rRole2" value="<bean:write name="datainfo" property="col1"/>" disabled />
-                      </td>
-                    </logic:equal>
-                    <logic:equal name="datainfo" property="col4" value="1">
-                      <td>
-                        <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" checked />
-                      </td>
-                      <td>
-                        <logic:equal name="datainfo" property="col5" value="0">
-                          <input type="checkbox" id="rRole2" name="rRole2" value="<bean:write name="datainfo" property="col1"/>" />
-                        </logic:equal>
-                        <logic:equal name="datainfo" property="col5" value="1">
-                          <input type="checkbox" id="rRole2" name="rRole2" value="<bean:write name="datainfo" property="col1"/>" checked />
-                        </logic:equal>
-                      </td>
-                    </logic:equal>
-                  </tr>
-                </logic:iterate>
-              </logic:present>
-            </tbody>
-           </table>
-         </div>
-          <table align="center">
-            <tr>
-              <td width="100%" height="30" align="center">
-                <logic:notEqual name="isEdit" scope="request" value="false">
-                  <input type="submit" name="queding2" value='<bean:message bundle="system" key="button.qd"/>' class="input1"/> &nbsp;
-                </logic:notEqual>
-                <input type="button" name="cancel2" value='<bean:message bundle="system" key="button.qx"/>' class="input1" onclick="top.GB_hide()"/>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class="contentRight"></td>
-      </tr>
-    </table>
-  </div>
-  <div id="divQx" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y:AUTO;">
-    <div class="tab3">
-      <ul class="e_title">
-        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><bean:message bundle="system" key="user.czyxx"/></a></li>
-        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><bean:message bundle="system" key="user.ywfw"/></a></li>
-        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><bean:message bundle="system" key="user.gwjs"/></a></li>
-        <li class="tab_on"><a href="javascript:showQx();" onfocus="blur()"><bean:message bundle="system" key="user.czqx"/></a></li>
-      </ul>
-    </div>
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="contentLeft"></td>
-        <td height="20" colspan="3"></td>
-        <td class="contentRight"></td>
-      </tr>
-      <tr>
-        <td class="contentLeft"></td>
-        <td bgcolor="#FFFFFF" colspan="3">
-          <div class="tableContainer" style="width: 99%;">
-            <table width="100%" border="0" cellpadding="0" cellspacing="0">
-              <thead>
-                <tr class="trheadStyle">
-                  <th width="10%"><bean:message bundle="system" key="user.xh"/></th>
-                  <th width="20%"><bean:message bundle="system" key="user.dxmc"/></th>
-                  <th width="10%"><bean:message bundle="system" key="user.sq"/><input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole3')"/></th>
-                  <th width="10%"><bean:message bundle="system" key="user.ksq"/><input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole3')"/></th>
-                </tr>
-              </thead>
-              <tbody>
-                <logic:present name="qx">
-                  <logic:iterate id="datainfo" name="qx" indexId="number" offset="1">
-                    <tr align="center" class="trmainstyle">
-                      <td height="20"><bean:write name="number" /></td>
-                      <td height="20"><bean:write name="datainfo" property="col2" /></td>
-                      <logic:equal name="datainfo" property="col4" value="0">
-                        <td>
-                          <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" />
-                        </td>
-                        <td>
-                          <input type="checkbox" id="rRole3" name="rRole3" value="<bean:write name="datainfo" property="col1"/>" disabled />
-                        </td>
-                      </logic:equal>
-                      <logic:equal name="datainfo" property="col4" value="1">
-                        <td>
-                          <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,<bean:write name="number"/>)" value="<bean:write name="datainfo" property="col1"/>" checked />
-                        </td>
-                        <td>
-                          <logic:equal name="datainfo" property="col5" value="0">
-                            <input type="checkbox" id="rRole3" name="rRole3" value="<bean:write name="datainfo" property="col1"/>" />
-                          </logic:equal>
-                          <logic:equal name="datainfo" property="col5" value="1">
-                            <input type="checkbox" id="rRole3" name="rRole3" value="<bean:write name="datainfo" property="col1"/>" checked />
-                          </logic:equal>
-                        </td>
-                      </logic:equal>
-                    </tr>
-                  </logic:iterate>
-                </logic:present>
-              </tbody>
-            </table>
-          </div>
-          <table align="center">
-            <tr>
-              <td width="100%" height="30" align="center">
-                <logic:notEqual name="isEdit" scope="request" value="false">
-                  <input type="submit" name="queding2" value='<bean:message bundle="system" key="button.qd"/>' class="input1"/> &nbsp;
-                </logic:notEqual>
-                <input type="button" name="cancel2" value='<bean:message bundle="system" key="button.qx"/>' class="input1" onclick="top.GB_hide()"/>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class="contentRight"></td>
-      </tr>
-    </table>
-  </div>
-</html:form>
-<html:javascript formName="userForm" />
+<form:form action="/system/user" onsubmit="return submitDisposal(this);" method="post" target="hideframe" modelAttribute="user">
+	<div id="divUser" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
+	<div class="tab3">
+	<ul id=datamenu_Option class="cb font1">
+		<li class="tab_on"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
+			code="system.user.czyxx" /></a></li>
+		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	</ul>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="contentLeft"></td>
+			<td height="20" colspan="3"></td>
+			<td class="contentRight"></td>
+		</tr>
+		<tr>
+			<td class="contentLeft"></td>
+			<td bgcolor="#FFFFFF" colspan="3">
+			<table width="99%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="15%" height="30" align="right"><spring:message code="system.user.zh" />：<font color="#ff0000">*</font></td>
+					<td width="30%" align="left"><form:input path="staffNo" /></td>
+					<td width="15%" height="30" align="right"><spring:message code="system.user.mc" />：<font color="#ff0000">*</font></td>
+					<td width="30%" align="left"><form:input path="name" /></td>
+				</tr>
+				<tr>
+					<td align="right"><spring:message code="system.user.mm" />：<font color="#ff0000">*</font></td>
+					<td align="left"><form:password path="passwd" showPassword="true" /></td>
+					<td align="right"><spring:message code="system.user.qrmm" />：<font color="#ff0000">*</font></td>
+					<td align="left"><input type="password" name="passwd" id="passwd_rep" value="${user.passwd}"></td>
+				</tr>
+				<tr>
+					<td align="right"><spring:message code="system.user.ssdw" />：</td>
+					<td align="left"><form:select path="orgInfo.orgId" items="${orgInfo}" disabled="${disabled}" id="orgId"
+						itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
+					<td align="right"><spring:message code="system.user.dh" />：</td>
+					<td align="left"><form:input path="mobile"/> </td>
+				</tr>
+				<tr>
+					<td align="right"><spring:message code="system.user.zt" />：</td>
+					<td align="left"><form:select path="enable" items="${userStat}" disabled="${disabled}" id="enable"
+						itemLabel="name" itemValue="code" cssStyle="width:150px;" /></td>
+				</tr>
+			</table>
+			<table align="center">
+				<tr>
+					<td width="100%" height="30" align="center"><input type="submit" name="queding2"
+						value='<spring:message code="system.button.qd" />' "/> &nbsp; <input type="button" name="cancel2"
+						value='<spring:message code="system.button.qx" />' " onclick="top.GB_hide()" /></td>
+				</tr>
+			</table>
+			</td>
+			<td class="contentRight"></td>
+		</tr>
+	</table>
+	</div>
+	<div id="divFw" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
+	<div class="tab3">
+	<ul class="e_title">
+		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
+			code="system.user.czyxx" /></a></li>
+		<li class="tab_on"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	</ul>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="contentLeft"></td>
+			<td height="20" colspan="3"></td>
+			<td class="contentRight"></td>
+		</tr>
+		<tr>
+			<td class="contentLeft"></td>
+			<td bgcolor="#FFFFFF" colspan="3">
+			<div class="tableContainer" style="width: 99%;" align="center">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th width="20%"><spring:message code="system.user.xh" /></th>
+						<th width="40%"><spring:message code="system.user.dxmc" /></th>
+						<th width="20%"><spring:message code="system.user.sq" /><input type="checkbox" name="select1"
+							onclick="selectAllBox(this,'sRole1')" /></th>
+						<th width="20%"><spring:message code="system.user.ksq" /><input type="checkbox" name="select2"
+							onclick="selectAllBox(this,'rRole1')" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr align="center" class="trmainstyle">
+						<td height="20"></td>
+						<td height="20"></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<table align="center">
+				<tr>
+					<td width="100%" height="30" align="center"><input type="submit" name="queding2"
+						value='<spring:message code="system.button.qd" />' "/> &nbsp; <input type="button" name="cancel2"
+						value='<spring:message code="system.button.qx" />' " onclick="top.GB_hide()" /></td>
+				</tr>
+			</table>
+			</td>
+			<td class="contentRight"></td>
+		</tr>
+	</table>
+	</div>
+	<div id="divGw"
+		style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y: AUTO;">
+	<div class="tab3">
+	<ul class="e_title">
+		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
+			code="system.user.czyxx" /></a></li>
+		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li class="tab_on"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	</ul>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="contentLeft"></td>
+			<td height="20" colspan="3"></td>
+			<td class="contentRight"></td>
+		</tr>
+		<tr>
+			<td class="contentLeft"></td>
+			<td bgcolor="#FFFFFF" colspan="3">
+			<div class="tableContainer" style="width: 99%;">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr class=trheadStyle>
+						<th width="10%"><spring:message code="system.user.xh" /></th>
+						<th width="20%"><spring:message code="system.user.dxmc" /></th>
+						<th width="10%"><spring:message code="system.user.sq" /><input type="checkbox" name="select1"
+							onclick="selectAllBox(this,'sRole2')" /></th>
+						<th width="10%"><spring:message code="system.user.ksq" /><input type="checkbox" name="select2"
+							onclick="selectAllBox(this,'rRole2')" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr align="center" class="trmainstyle">
+						<td height="20"></td>
+						<td height="20"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<table align="center">
+				<tr>
+					<td width="100%" height="30" align="center"><input type="submit" name="queding2"
+						value='<spring:message code="system.button.qd" />' "/> &nbsp; <input type="button" name="cancel2"
+						value='<spring:message code="system.button.qx" />' " onclick="top.GB_hide()" /></td>
+				</tr>
+			</table>
+			</td>
+			<td class="contentRight"></td>
+		</tr>
+	</table>
+	</div>
+	<div id="divQx"
+		style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y: AUTO;">
+	<div class="tab3">
+	<ul class="e_title">
+		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
+			code="system.user.czyxx" /></a></li>
+		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li class="tab_on"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	</ul>
+	</div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="contentLeft"></td>
+			<td height="20" colspan="3"></td>
+			<td class="contentRight"></td>
+		</tr>
+		<tr>
+			<td class="contentLeft"></td>
+			<td bgcolor="#FFFFFF" colspan="3">
+			<div class="tableContainer" style="width: 99%;">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr class="trheadStyle">
+						<th width="10%"><spring:message code="system.user.xh" /></th>
+						<th width="20%"><spring:message code="system.user.dxmc" /></th>
+						<th width="10%"><spring:message code="system.user.sq" /><input type="checkbox" name="select1"
+							onclick="selectAllBox(this,'sRole3')" /></th>
+						<th width="10%"><spring:message code="system.user.ksq" /><input type="checkbox" name="select2"
+							onclick="selectAllBox(this,'rRole3')" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr align="center" class="trmainstyle">
+						<td height="20"></td>
+						<td height="20"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<table align="center">
+				<tr>
+					<td width="100%" height="30" align="center"><input type="submit" name="queding2"
+						value='<spring:message code="system.button.qd" />' "/> &nbsp; <input type="button" name="cancel2"
+						value='<spring:message code="system.button.qx" />' " onclick="top.GB_hide()" /></td>
+				</tr>
+			</table>
+			</td>
+			<td class="contentRight"></td>
+		</tr>
+	</table>
+	</div>
+</form:form>
 <iframe name="hideframe" src="" scrolling="no" width="0" height="0" frameborder="0"> </iframe>
 </body>
 <script type="text/javascript">
-var contextPath = "<peis:contextPath/>";
+var contextPath = "${ctx}";
 //
 function showUsernfo() {
     document.all.divUser.style.display = "";
@@ -405,15 +295,15 @@ function submitDisposal(form) {
     
     if(validateUserForm(form)){
         if(!fwIsChecked() && gwIsChecked()){
-            return confirm('<bean:message bundle="system" key="user.message.fw.null"/>');
+            return confirm('<spring:message code="system.user.message.fw.null" />');
         }
         
         if(fwIsChecked() && !gwIsChecked()){
-            return confirm('<bean:message bundle="system" key="user.message.gw.null"/>');
+            return confirm('<spring:message code="system.user.message.gw.null" />');
         }
         
         if(!fwIsChecked() && !gwIsChecked()){
-            return confirm('<bean:message bundle="system" key="user.message.fw.and.gw.null"/>');
+            return confirm('<spring:message code="system.user.message.fw.and.gw.null" />');
         }
     }
     else{
