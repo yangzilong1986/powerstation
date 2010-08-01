@@ -1,0 +1,597 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>账号编辑</title>
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+<script type="text/javascript" src="../../js/autorm/common.js"></script>
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+ 
+function showUsernfo() {
+    document.all.divUser.style.display = "";
+    document.all.divFw.style.display = "none";
+    document.all.divGw.style.display = "none";
+    document.all.divQx.style.display = "none";
+}
+function showQx() {
+    document.all.divUser.style.display = "none";
+    document.all.divFw.style.display = "none";
+    document.all.divGw.style.display = "none";
+    document.all.divQx.style.display = "";
+}
+function showFw() {
+    document.all.divUser.style.display = "none";
+    document.all.divFw.style.display = "";
+    document.all.divGw.style.display = "none";
+    document.all.divQx.style.display = "none";
+}
+function showGw() {
+    document.all.divUser.style.display = "none";
+    document.all.divFw.style.display = "none";
+    document.all.divGw.style.display = "";
+    document.all.divQx.style.display = "none";
+}
+ 
+// 判断岗位是否选择上
+ 
+function gwIsChecked()
+{
+    var th=document.forms[0];
+    for(var i=0;i<th.elements.length;i++)
+    {
+       var o=th.elements[i];
+       if(o.name=="sRole2" && o.checked)
+        {
+           return true;
+        }
+    }
+    return false;
+} 
+ 
+// 判断业务范围是否选择上
+ 
+function fwIsChecked()
+{
+    var th=document.forms[0];
+    for(var i=0;i<th.elements.length;i++)
+    {
+       var o=th.elements[i];
+       if(o.name=="sRole1" && o.checked)
+        {
+           return true;
+        }
+    }
+    return false;
+}
+ 
+//提交处理
+function submitDisposal(form) {
+    var password =document.getElementsByName("passwd");
+    var password1 =document.getElementsByName("passwd1");
+    
+    if(password[0].value!=password1[0].value) {
+       alert('两次输入密码不一致.');
+       return false;
+    }
+    
+    if(validateUserForm(form)){
+        if(!fwIsChecked() && gwIsChecked()){
+           return confirm('业务范围没有选择是否继续?');
+        }
+        
+        if(fwIsChecked() && !gwIsChecked()){
+           return confirm('岗位角色没有选择是否继续?');
+        }
+        
+        if(!fwIsChecked() && !gwIsChecked()){
+           return confirm('业务范围和岗位角色没有选择是否继续?');
+        }
+    }else{
+        return false;
+    }
+}
+ 
+function event(obj,no) {
+    var name=obj.name;
+    var rname = "r"+name.substring(1);
+    var box=document.getElementsByName(rname)[no-1];
+    if(obj.checked){
+        box.disabled=false;
+    }else{
+        if(box.checked){
+            box.click()
+        }
+        box.disabled=true;
+    }
+}
+</script>
+</head>
+ 
+<body>
+  <input type="hidden" name="action" value="saveOrUpdate"/>
+  <div id="divUser" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
+    <div class="tab3">
+      <ul class="e_title">
+        <li class="tab_on"><a href="javascript:showUsernfo();" onfocus="blur()">操作员信息</a></li>
+        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()">业务范围</a></li>
+        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()">岗位角色</a></li>
+        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()">操作权限</a></li>
+      </ul>
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="contentLeft"></td>
+        <td height="20" colspan="3">
+          <input type="hidden" name="userId" value="">
+        </td>
+        <td class="contentRight"></td>
+      </tr>
+      <tr>
+        <td class="contentLeft"></td>
+        <td bgcolor="#FFFFFF" colspan="3">
+          <table width="99%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td width="15%" height="30" align="right">账号：<font color="#ff0000">*</font></td>
+              <td width="30%" align="left">
+                <input type="text" name="userNo" value="" style="width: 200px;">
+                <input type="hidden" name="oldUserNo" value=''/>
+              </td>
+              <td width="15%" height="30" align="right">名称：<font color="#ff0000">*</font></td>
+              <td width="30%" align="left">
+                <input type="text" name="username" value="" style="width: 200px;">
+              </td>
+            </tr>
+            <tr>
+              <td align="right">密码：<font color="#ff0000">*</font></td>
+              <td align="left">
+                <input type="password" name="passwd" value="" style="width: 200px;">
+              </td>
+              <td align="right">确认密码：<font color="#ff0000">*</font></td>
+              <td align="left">
+                <input type="password" name="passwd1" value="" style="width: 200px;">
+              </td>
+            </tr>
+            <tr>
+              <td align="right">所属单位：</td>
+              <td align="left">
+                <select name="org_no" id="org_no" >
+                  <option value="44">广东省电力公司</option>
+                  <option value="4401"> -- 广州市电力公司</option>
+                  <option value="4402"> -- 韶关市电力公司</option>
+                  <option value="4403"> -- 深圳市电力公司</option>
+                  <option value="4404"> -- 珠海市电力公司</option>
+                  <option value="4405"> -- 汕头市电力公司</option>
+                  <option value="4406"> -- 佛山市电力公司</option>
+                  <option value="4407"> -- 江门市电力公司</option>
+                  <option value="4408"> -- 湛江市电力公司</option>
+                  <option value="440806"> -- -- 遂溪供电局</option>
+                  <option value="440807"> -- -- 徐闻供电局</option>
+                  <option value="440808"> -- -- 吴川供电局</option>
+                  <option value="440809"> -- -- 廉江供电局</option>
+                  <option value="440810"> -- -- 雷州供电局</option>
+                  <option value="4409"> -- 茂名市电力公司</option>
+                  <option value="4412"> -- 肇庆市电力公司</option>
+                  <option value="4413"> -- 惠州市电力公司</option>
+                  <option value="4414"> -- 梅州市电力公司</option>
+                  <option value="4415"> -- 汕尾市电力公司</option>
+                  <option value="4416"> -- 河源市电力公司</option>
+                  <option value="4417"> -- 阳江市电力公司</option>
+                  <option value="4418"> -- 清远市电力公司</option>
+                  <option value="4419"> -- 东莞市电力公司</option>
+                  <option value="4420"> -- 中山市电力公司</option>
+                  <option value="4421"> -- 潮州市电力公司</option>
+                  <option value="4422"> -- 揭阳市电力公司</option>
+                  <option value="4423"> -- 云浮市电力公司</option>
+                </select>
+                <script type="text/javascript">$("#org_no").val("44");</script>
+              </td>
+              <td align="right">电话：</td>
+              <td align="left">
+                <input type="text" name="phone" value="" style="width: 200px;">
+              </td>
+            </tr>
+            <tr>
+              <td align="right">状态：</td>
+              <td align="left">
+                <select name="status" id="status"  class='mainSelect'>
+                  <option value="1">正常</option>
+                  <option value="0">停用</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+          <table align="center">
+            <tr>
+              <td width="100%" height="30" align="center">
+                <input type="submit" name="queding2" value='确定' class="input1" onclick="parent.GB_hide()"/> &nbsp;
+                <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="contentRight"></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="divFw" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
+    <div class="tab3">
+      <ul class="e_title">
+        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()">操作员信息</a></li>
+        <li class="tab_on"><a href="javascript:showFw();" onfocus="blur()">业务范围</a></li>
+        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()">岗位角色</a></li>
+        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()">操作权限</a></li>
+      </ul>
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="contentLeft"></td>
+        <td height="20" colspan="3"></td>
+        <td class="contentRight"></td>
+      </tr>
+      <tr>
+        <td class="contentLeft"></td>
+        <td bgcolor="#FFFFFF" colspan="3">
+          <div class="tableContainer" style="width: 99%;" align="center">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <thead>
+                <tr>         
+                  <th width="20%">序号</th> 
+                  <th width="40%">对象名称</th>
+                  <th width="20%">授权<input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole1')"/></th>
+                  <th width="20%">可授权<input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole1')"/></th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr align="center" class="trmainstyle">
+                  <td height="20">1</td>
+                  <td height="20">专变(高压)用户</td>
+                  <td>
+                      <input type="checkbox" id="sRole1" name="sRole1" onclick="event(this,1)" value="1"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole1" name="rRole1" value="1" disabled/>
+                  </td>
+                </tr>
+              </tbody>  
+            </table>
+          </div>
+          <table align="center">
+            <tr>
+              <td width="100%" height="30" align="center">
+                <input type="submit" name="queding2" value='确定' class="input1" onclick="parent.GB_hide()"/> &nbsp;
+                <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="contentRight"></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="divGw" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y:AUTO;">
+    <div class="tab3">
+      <ul class="e_title">
+        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()">操作员信息</a></li>
+        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()">业务范围</a></li>
+        <li class="tab_on"><a href="javascript:showGw();" onfocus="blur()">岗位角色</a></li>
+        <li class="tab_off"><a href="javascript:showQx();" onfocus="blur()">操作权限</a></li>
+      </ul>
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="contentLeft"></td>
+        <td height="20" colspan="3"></td>
+        <td class="contentRight"></td>
+      </tr>
+      <tr>
+        <td class="contentLeft"></td>
+        <td bgcolor="#FFFFFF" colspan="3">
+        <div class="tableContainer" style="width: 99%;">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <thead>
+              <tr class=trheadStyle>       
+                <th width="10%">序号</th> 
+                <th width="20%">对象名称</th>
+                <th width="10%">授权<input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole2')"/></th>
+                <th width="10%">可授权<input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole2')"/></th>
+              </tr> 
+            </thead>
+            <tbody>  
+               <tr align="center" class="trmainstyle">
+                 <td height="20">1</td>
+                 <td height="20">管理员</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,1)" value="100"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="100" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">2</td>
+                 <td height="20">开发角色</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,2)" value="189"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="189" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">3</td>
+                 <td height="20">变电站站长</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,3)" value="249"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="249" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">4</td>
+                 <td height="20">操作员</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,4)" value="250"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="250" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">5</td>
+                 <td height="20">省公司主站管理员</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,5)" value="269"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="269" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">6</td>
+                 <td height="20">zhangyu test</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,6)" value="389"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="389" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">7</td>
+                 <td height="20">地市公司管理员</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,7)" value="409"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="409" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">8</td>
+                 <td height="20">地市公司领导</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,8)" value="429"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="429" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">9</td>
+                 <td height="20">liu</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,9)" value="449"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="449" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">10</td>
+                 <td height="20">超级用户</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,10)" value="469"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="469" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">11</td>
+                 <td height="20">A</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,11)" value="489"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="489" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">12</td>
+                 <td height="20">test</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,12)" value="549"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="549" disabled/>
+                 </td>
+               </tr>
+                
+               <tr align="center" class="trmainstyle">
+                 <td height="20">13</td>
+                 <td height="20">jinrui</td>
+                 <td>
+                     <input type="checkbox" id="sRole2" name="sRole2" onclick="event(this,13)" value="589"/>
+                 </td>
+                 <td>
+                     <input type="checkbox" id="rRole2" name="rRole2" value="589" disabled/>
+                 </td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+          <table align="center">
+            <tr>
+              <td width="100%" height="30" align="center">
+                <input type="submit" name="queding2" value='确定' class="input1" onclick="parent.GB_hide()"/> &nbsp;
+                <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="contentRight"></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="divQx" style="display: none;position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y:AUTO;">
+    <div class="tab3">
+      <ul class="e_title">
+        <li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()">操作员信息</a></li>
+        <li class="tab_off"><a href="javascript:showFw();" onfocus="blur()">业务范围</a></li>
+        <li class="tab_off"><a href="javascript:showGw();" onfocus="blur()">岗位角色</a></li>
+        <li class="tab_on"><a href="javascript:showQx();" onfocus="blur()">操作权限</a></li>
+      </ul>
+    </div>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="contentLeft"></td>
+        <td height="20" colspan="3"></td>
+        <td class="contentRight"></td>
+      </tr>
+      <tr>
+        <td class="contentLeft"></td>
+        <td bgcolor="#FFFFFF" colspan="3">
+          <div class="tableContainer" style="width: 99%;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <thead>
+                <tr class="trheadStyle">    
+                  <th width="10%">序号</th> 
+                  <th width="20%">对象名称</th>
+                  <th width="10%">授权<input type="checkbox" name="select1" onclick="selectAllBox(this,'sRole3')"/></th>
+                  <th width="10%">可授权<input type="checkbox" name="select2" onclick="selectAllBox(this,'rRole3')"/></th>
+                </tr> 
+              </thead>
+              <tbody>
+                <tr align="center" class="trmainstyle">
+                  <td height="20">1</td>
+                  <td height="20">供电单位信息维护</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,1)" value="10"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="10" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">2</td>
+                  <td height="20">输配电供电单位信息维护</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,2)" value="11"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="11" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">3</td>
+                  <td height="20">角色维护</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,3)" value="12"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="12" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">4</td>
+                  <td height="20">账号维护</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,4)" value="13"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="13" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">5</td>
+                  <td height="20">编码维护</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,5)" value="14"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="14" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">6</td>
+                  <td height="20">系统配置修改</td>
+                  <td>
+                      <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,6)" value="15"/>
+                  </td>
+                  <td>
+                      <input type="checkbox" id="rRole3" name="rRole3" value="15" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">7</td>
+                  <td height="20">档案维护</td>
+                  <td>
+                     <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,7)" value="20"/>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="rRole3" name="rRole3" value="20" disabled/>
+                  </td>
+                </tr>
+                  
+                <tr align="center" class="trmainstyle">
+                  <td height="20">8</td>
+                  <td height="20">编辑异常编码</td>
+                  <td>
+                     <input type="checkbox" id="sRole3" name="sRole3" onclick="event(this,8)" value="30"/>
+                  </td>
+                  <td>
+                     <input type="checkbox" id="rRole3" name="rRole3" value="30" disabled/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <table align="center">
+            <tr>
+              <td width="100%" height="30" align="center">
+                <input type="submit" name="queding2" value='确定' class="input1" onclick="parent.GB_hide()"/> &nbsp;
+                <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="contentRight"></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<html>
+  <head>   
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>帐号内容</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+    <script type="text/javascript" language="javascript">
+    var contextPath = "../..";
+    var errorUser='请选择要编辑的账号';
+    var errorDelUser='请选择要删除的账号';
+    var confirmDel='确定要删除吗?';
+    function newUser() {
+        var str_url = "../../jsp/system/userEdit.html";
+        //windowPopup(str_url, 650, 450);
+        top.showDialogBox("帐号编辑", str_url, 575, 900);
+    }
+    
+    //编辑账号
+    function editUser() {
+        var userId=parent.userList.sSelectedUserID;
+        if(userId == "") {
+            alert(errorUser);
+            return;
+        }
+        var str_url = "../../jsp/system/userEdit.html";
+        top.showDialogBox("帐号编辑", str_url, 575, 900);
+    }
+    
+    function viewUser() {
+        var userId=parent.userList.sSelectedUserID;
+        if(userId == "") {
+            alert(errorUser);
+            return;
+        }
+        var str_url = contextPath + "/system/userAction.do?action=beforeEdit&userId="+userId+"&isEdit=false&random=" + Math.random();
+        windowPopup(str_url, 650, 450);
+    }
+    
+    //删除账号
+    function deleteUser() {
+        var userId = parent.userList.sSelectedUserID;
+        if(userId == "") {
+            alert(errorDelUser);
+            return;
+        }
+        if(confirm(confirmDel)){
+            parent.userList.location.href = "../../jsp/system/userList.html";
+        }
+    }
+    function fresh(userId){
+        parent.userList.document.forms[0].submit();
+        parent.document.frames["userList"].location.href=contextPath+'/system/userAction.do?action=getQuery&id='+userId+'&random=' + Math.random();
+        parent.document.frames["userManager"].location.href=contextPath+'/system/userAction.do?action=detail&userId='+userId+'&random='+ Math.random();
+    }
+    </script>
+  </head>
+  
+  <body>
+  <div class="pad5">
+    <input type="button" id="new" class="input1" value='新增' onclick="newUser()"/>
+    <input type="button" id="edit" class="input1" value='编辑' onclick="editUser()"/>
+    <input type="button" id="delete" class="input1" value='删除' onclick="deleteUser()"/>
+  </div>
+  <div class="tab"><em>操作员信息</em></div>
+  <div class="tab_con">
+    <div class="main">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+          <td width="15%" class="label">账号：</td>
+          <td width="25%" class="dom">admin</td>
+          <td width="15%" class="label">名称：</td>
+          <td width="25%" class="dom">系统管理员</td>      
+        </tr>
+        <tr>
+          <td width="15%" class="label">所属单位：</td>
+          <td width="25%" class="dom">省电网公司</td>
+          <td width="15%" class="label">电话：</td>
+          <td width="25%" class="dom"></td>   
+        </tr>
+        <tr>
+          <td width="15%" class="label">状态：</td>
+          <td width="25%" class="dom">正常</td>
+          <td width="15%" class="label"></td>
+          <td width="25%" class="dom"></td>   
+        </tr>
+      </table>
+    </div>
+    <div class="data1"><span>操作员权限</span></div>
+    <div class="data1_con">
+      <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 204));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr align="center">
+            <td>
+             业务范围:
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+             专变(高压)用户;
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="center">
+             岗位角色:
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+             管理员;开发角色;
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="center">
+             操作权限:
+            </td>
+          </tr>
+          <tr align="center">
+            <td>
+             供电单位信息维护;输配电供电单位信息维护;角色维护;账号维护;编码维护;系统配置修改;档案维护;编辑异常编码;
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

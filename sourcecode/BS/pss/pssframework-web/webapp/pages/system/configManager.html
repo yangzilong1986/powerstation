@@ -1,0 +1,499 @@
+<html>
+  <head>   
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>参数编辑</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript" language="javascript">
+    var contextPath = "../..";      
+    function detail(PName, orgNo) {
+        var str_url = "../../jsp/system/paraEdit.html";
+        //windowPopup(str_url, 450, 250);
+        top.showDialogBox("参数编辑", str_url, 575, 900);
+    }
+    
+    function view(PName, orgNo) {
+    }
+    
+    function fresh(){
+        parent.content.location.href=contextPath+'/parameterAction.do?action=getQuery&sqlcode=PARAMETER0001&random='+ Math.random();
+    }
+    </script>
+  </head>
+  
+  <body>
+    <div id="body">
+      <div class="tab">
+        <ul>
+          <li id="tab_1" class="tab_on"><a href="javascript:void(0);" onfocus="blur()">配置管理</a></li>
+          <li class="clear"></li>
+        </ul>
+        <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <div id="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 42));">
+        <div class="content">
+          <div id="cont_1">
+            <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 90));">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>序号</th> 
+                    <th>参数名称</th>
+                    <th>单位名称</th>
+                    <th>参数值</th>
+                    <th>备注</th>
+                    <th></th>
+                  </tr> 
+                </thead>
+                <tbody>
+                  <tr align="center" class="trmainstyle">
+                    <td> 1</td>
+                    <td> CONTROL_NUM</td>
+                    <td> </td>
+                    <td> 5</td>
+                    <td> 控制执行返回结果读取次数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('CONTROL_NUM','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 2</td>
+                    <td> CYCLE_COUNT</td>
+                    <td> </td>
+                    <td> 5000</td>
+                    <td> CycleCoun</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('CYCLE_COUNT','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 3</td>
+                    <td> CYCLE_TIME</td>
+                    <td> </td>
+                    <td> 300</td>
+                    <td> CycleTime</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('CYCLE_TIME','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 4</td>
+                    <td> C_H_NUM</td>
+                    <td> </td>
+                    <td> 30</td>
+                    <td> 当前与历史数据区别天数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('C_H_NUM','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 5</td>
+                    <td> DATA_CNT</td>
+                    <td> </td>
+                    <td> 24</td>
+                    <td> 根据采样间隔，每天最多有几个点数据</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('DATA_CNT','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 6</td>
+                    <td> DATA_LG_LMT</td>
+                    <td> </td>
+                    <td> 999999</td>
+                    <td> 表码超大阀值</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('DATA_LG_LMT','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 7</td>
+                    <td> DL_ERROR_DAYS</td>
+                    <td> </td>
+                    <td> 3</td>
+                    <td> 月、年电量误差允许天数（由于漏点，计算电量起、末点日期平移最大天数）</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('DL_ERROR_DAYS','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 8</td>
+                    <td> D_EI_FREEZE</td>
+                    <td> </td>
+                    <td> transfer_tab</td>
+                    <td> 需转存的表</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('D_EI_FREEZE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 9</td>
+                    <td> D_POWER_CRUV_C</td>
+                    <td> </td>
+                    <td> transfer_tab</td>
+                    <td> 需转存的表</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('D_POWER_CRUV_C','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 10</td>
+                    <td> FETCH_NUM</td>
+                    <td> </td>
+                    <td> 10</td>
+                    <td> 抄表次数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('FETCH_NUM','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 11</td>
+                    <td> GATHER_NUM</td>
+                    <td> </td>
+                    <td> 5</td>
+                    <td> 任务模块数据读取次数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('GATHER_NUM','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 12</td>
+                    <td> JOB_DAY_EXANALYZE_RUN_DATE</td>
+                    <td> </td>
+                    <td> 2009-08-10 17:24:11</td>
+                    <td> 最近一次异常分析时间（日周期）</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('JOB_DAY_EXANALYZE_RUN_DATE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 13</td>
+                    <td> JOB_DAY_STAT_RUN_DATE</td>
+                    <td> </td>
+                    <td> 20060909</td>
+                    <td> 最近一次日电量\负荷统计日期</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('JOB_DAY_STAT_RUN_DATE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 14</td>
+                    <td> JOB_MON_STAT_RUN_DATE</td>
+                    <td> </td>
+                    <td> 200609</td>
+                    <td> 最近一次月电量\负荷统计月份</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('JOB_MON_STAT_RUN_DATE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 15</td>
+                    <td> JOB_YEAR_STAT_RUN_DATE</td>
+                    <td> </td>
+                    <td> 2009</td>
+                    <td> 最近一次年电量\负荷统计年份</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('JOB_YEAR_STAT_RUN_DATE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 16</td>
+                    <td> PARASET_NUM</td>
+                    <td> </td>
+                    <td> 5</td>
+                    <td> 读取参数设置返回结果11</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('PARASET_NUM','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 17</td>
+                    <td> POWER_DOWN_COE</td>
+                    <td> </td>
+                    <td> 1</td>
+                    <td> 当前功率下浮控－下浮系数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('POWER_DOWN_COE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 18</td>
+                    <td> POWER_DOWN_FREEZE</td>
+                    <td> </td>
+                    <td> 12</td>
+                    <td> 当前功率下浮控－控后冻结延时</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('POWER_DOWN_FREEZE','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 19</td>
+                    <td> POWER_DOWN_TIME</td>
+                    <td> </td>
+                    <td> 5</td>
+                    <td> 当前功率下浮控－定值滑差时间</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('POWER_DOWN_TIME','0')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 20</td>
+                    <td> SHOULD_CUST_CNT_INSTAL_CHAR1</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 333</td>
+                    <td> 已装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_INSTAL_CHAR1','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 21</td>
+                    <td> SHOULD_CUST_CNT_INSTAL_CHAR2</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_INSTAL_CHAR2','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 22</td>
+                    <td> SHOULD_CUST_CNT_INSTAL_CHAR3</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装用户数111</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_INSTAL_CHAR3','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 23</td>
+                    <td> SHOULD_CUST_CNT_INSTAL_CHAR4</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_INSTAL_CHAR4','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 24</td>
+                    <td> SHOULD_CUST_CNT_INSTAL_CHAR5</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_INSTAL_CHAR5','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 25</td>
+                    <td> SHOULD_CUST_CNT_RLDJ1</td>
+                    <td> 深圳市电力公司</td>
+                    <td> 100</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_RLDJ1','42')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 26</td>
+                    <td> SHOULD_CUST_CNT_RLDJ1</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 19999</td>
+                    <td> 应装用户数22</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_RLDJ1','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 27</td>
+                    <td> SHOULD_CUST_CNT_RLDJ2</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 19999</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_RLDJ2','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 28</td>
+                    <td> SHOULD_CUST_CNT_RLDJ3</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 19999</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_RLDJ3','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 29</td>
+                    <td> SHOULD_CUST_CNT_RLDJ4</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 19999</td>
+                    <td> 应装用户数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_CUST_CNT_RLDJ4','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 30</td>
+                    <td> SHOULD_TERM_CNT_INSTAL_CHAR1</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_INSTAL_CHAR1','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 31</td>
+                    <td> SHOULD_TERM_CNT_INSTAL_CHAR2</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_INSTAL_CHAR2','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 32</td>
+                    <td> SHOULD_TERM_CNT_INSTAL_CHAR3</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 已装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_INSTAL_CHAR3','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 33</td>
+                    <td> SHOULD_TERM_CNT_INSTAL_CHAR4</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 18888</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_INSTAL_CHAR4','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 34</td>
+                    <td> SHOULD_TERM_CNT_INSTAL_CHAR5</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 111</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_INSTAL_CHAR5','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 35</td>
+                    <td> SHOULD_TERM_CNT_RLDJ1</td>
+                    <td> 广州市电力公司</td>
+                    <td> 120</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_RLDJ1','42')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 36</td>
+                    <td> SHOULD_TERM_CNT_RLDJ1</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 20000</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_RLDJ1','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 37</td>
+                    <td> SHOULD_TERM_CNT_RLDJ2</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 20000</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_RLDJ2','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 38</td>
+                    <td> SHOULD_TERM_CNT_RLDJ3</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 20000</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_RLDJ3','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 39</td>
+                    <td> SHOULD_TERM_CNT_RLDJ4</td>
+                    <td> 湛江市电力公司</td>
+                    <td> 20000</td>
+                    <td> 应装终端数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SHOULD_TERM_CNT_RLDJ4','421')"/>         
+                    </td>
+                  </tr>
+                 
+                  <tr align="center" class="trmainstyle">
+                    <td> 40</td>
+                    <td> SYNCH_NUM</td>
+                    <td> </td>
+                    <td> 5</td>
+                    <td> 限电方案－同步组地址返回结果读取次数</td>         
+                    <td> 
+                      <input type="button" name="edit" class="input1" value='修改' onclick="detail('SYNCH_NUM','0')"/>         
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+           <div class="nullContainer"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+  </body>
+</html>

@@ -1,0 +1,300 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>群组管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript">
+var contextPath = "../..";
+var confirmDel='确定要删除吗?';
+var errorQzmc='群组名称不能为空!';
+var confirmDel = '确定要删除吗?';
+var errorUser = '请先选择要删除的用户!';
+function rowNum() {
+    var tabObj = document.getElementById("userList");
+    var num = tabObj.rows.length;
+    return num;
+}
+
+function setTableStyle(){
+    /**
+     * even/odd rows
+     */
+    setRows($(".tableContainer table>tbody>tr:odd"));
+    
+    /**
+     * mouseover/mouseout event
+     */
+    $(".tableContainer table>tbody>tr").each( function() {
+        $(this).mouseover( function() {
+            $(this).addClass("mouseover");
+        });
+        $(this).mouseout( function() {
+            $(this).removeClass("mouseover");
+        });
+    });
+}
+
+function doClickAll() {
+    var flag = document.getElementById("chooseAll").checked;
+    var items = document.getElementsByName("ItemID");
+    for(i = 0; i< items.length; i++) {
+        items[i].checked = flag;
+    }
+}
+
+function getAllId() {
+    var allIdArr = "";
+    var items = document.getElementsByName("ItemID");
+    for(i = 0; i < items.length; i++) {
+        allIdArr += ",";
+        allIdArr += items[i].value;
+    }
+    if(allIdArr.indexOf(",") != -1){
+        allIdArr = allIdArr.substring(1);
+    }
+    return allIdArr;
+}
+
+function getSelectedId() {
+    var allIdArr = "";
+    var items = document.getElementsByName("ItemID");
+    for(i = 0; i < items.length; i++) {
+        if(items[i].checked){
+            allIdArr += ",";
+            allIdArr += items[i].value;
+        }
+    }
+    if(allIdArr.indexOf(",") != -1){
+        allIdArr = allIdArr.substring(1);
+    }
+    return allIdArr;
+}
+
+function delUser() {
+    var userlist = "";
+    var items = document.getElementsByName("ItemID");
+    for(i = 0; i < items.length; i++) {
+        if(items[i].checked) {
+            userlist += "," + items[i].value;
+        }
+    }
+    if(userlist == ""){
+        alert(errorUser);
+    }
+    else{
+        delUserArr = userlist.substring(1).split(",");
+        if(window.confirm(confirmDel)) {
+            var objTable = document.getElementById("userList");
+            for(i = 0; i < delUserArr.length; i++) {
+                var oRow = document.getElementById("tr_" + delUserArr[i]);
+                var index = oRow.rowIndex;
+                objTable.deleteRow(index);
+            }
+        }
+    }
+} 
+
+function initEdit(){
+    var groupId=document.getElementsByName("groupId")[0].value;
+    var groupType=document.getElementsByName("groupType")[0].value;
+    var url = contextPath + "/jsp/system/schemeList.html";
+    //document.getElementsByName("SCHEME_LIST")[0].src = url;
+    method = "edit";
+    var groupName = document.getElementsByName("groupName")[0];
+    var shareFlag = document.getElementsByName("shareFlag")[0];
+    var groupType = document.getElementsByName("groupType")[0];
+    var remark = document.getElementsByName("remark")[0];
+    if(method == "add") {
+        document.getElementById("save").style.display = "";
+        groupName.disabled = false;       
+        shareFlag.disabled = false;
+        groupType.disabled = false;
+        remark.disabled = false;
+    }
+}
+
+//群组类型变化
+function changeGroupType(){
+    var groupId=document.getElementsByName("groupId")[0].value;
+    var groupType=document.getElementsByName("groupType")[0].value;
+    var url = contextPath+"/system/groupAction.do?action=getListByID&groupId="+groupId+"&groupType="+groupType;
+    document.getElementsByName("SCHEME_LIST")[0].src = url;
+}
+
+//编辑群组
+function editGroup() {
+    document.getElementsByName("groupName")[0].disabled=false;
+    document.getElementsByName("shareFlag")[0].disabled=false;
+    document.getElementsByName("remark")[0].disabled=false;
+    document.getElementById("save").style.display = "";
+    document.getElementById("addUser").style.display = "";
+    document.getElementById("delUser").style.display = "";
+    method = "edit";
+}
+    
+//删除群组
+function deleteGroup() {
+    var groupId = document.getElementById("groupId").value;
+    if(confirm(confirmDel)){
+        parent.groupList.deleteRow();
+    }
+}
+
+var method;
+//保存群组
+function saveGroup(){
+    if(method == "edit"){
+        var selectedRow = parent.groupList.selectedRow;
+        if(selectedRow == null){
+             return;
+        }
+        selectedRow.cells(1).innerHTML = document.getElementById("groupName").value;
+        selectedRow.cells(2).innerHTML = document.getElementById("shareFlag").checked ? "公有" : "私有";
+        selectedRow.cells(3).innerHTML = document.getElementById("groupType").value == "1" ? "专变群组" : "终端群组";
+        alert("修改成功!");
+        document.getElementsByName("groupName")[0].disabled = true;
+        document.getElementsByName("shareFlag")[0].disabled = true;
+        document.getElementsByName("remark")[0].disabled = true;
+        document.getElementById("save").style.display = "none";
+        document.getElementById("addUser").style.display = "none";
+        document.getElementById("delUser").style.display = "none";
+    }
+    else if(method == "add"){
+        var groupName = document.getElementById("groupName").value;
+        var shareFlag = document.getElementById("shareFlag").checked ? "公有" : "私有";
+        var groupType = document.getElementById("groupType").value == "1" ? "专变群组" : "终端群组";
+        if(groupName == null || groupName == ""){
+            alert("群组名称不能为空!");
+            return;
+        } 
+        parent.groupList.insertRow(groupName, shareFlag, groupType);
+        alert("增加成功!");
+        document.getElementsByName("groupName")[0].disabled = true;
+        document.getElementsByName("shareFlag")[0].disabled = true;
+        document.getElementsByName("remark")[0].disabled = true;
+        document.getElementsByName("groupType")[0].disabled = true;
+        document.getElementById("save").style.display = "none";
+        document.getElementById("addUser").style.display = "none";
+        document.getElementById("delUser").style.display = "none";
+    }
+}
+
+function submitDisposal() {
+    var groupName = trim(document.all.groupName.value);
+    if(groupName==""){
+        alert(errorQzmc);
+        return false;
+    }
+    
+    return true;
+}
+
+function authorize() {
+    var groupId = document.getElementById("groupId").value;
+    var str_url = "../../jsp/system/authorizeList.html";
+    //windowPopup(str_url, 650, 450);
+    top.showDialogBox("授权页面", str_url, 575, 900);
+}
+    
+function chooseUser() {
+    var url = "../../jsp/system/chooseUserList.html";
+    //openNewWindow(url, 800, 650);
+    top.showDialogBox("对象选择", url, 575, 900);
+}  
+
+function flusUserList() {
+    var groupId = document.getElementsByName("groupId")[0].value;
+    var groupType = document.getElementsByName("groupType")[0].value;
+    var url = contextPath+"/system/groupAction.do?action=getListByID&groupId="+groupId+"&groupType="+groupType;
+    document.getElementsByName("SCHEME_LIST")[0].src = url;
+}
+    
+    
+function deleteUser() {
+    delUser();
+}
+    
+function fresh(groupId){
+    if(typeof groupId == "undefined")
+        groupId="";
+    parent.groupList.location.href=contextPath+'/system/groupAction.do?action=getGroupList&sqlcode=AL_SYSTEM_0100&random='+ Math.random();
+    parent.groupContent.location.href=contextPath+"/system/groupAction.do?action=showGroup&mothed=edit&groupId="+groupId+"&random=" + Math.random();
+}
+</script>
+</head>
+ 
+<body onload="initEdit()">
+<input type="hidden" name="groupId" value="181">
+<input type="hidden" name="action" value="saveOrUpdate" />
+<div class="pad5" style="height: 35px;">
+  <input type="button" name="edit" id="edit" style="display:none" class="input2" value='编辑群组' onclick="editGroup()" />
+  <input type="button" name="delete" id="delete" style="display:none" class="input2" value='删除群组' onclick="deleteGroup()" />
+  <input type="button" name="authorize" id="authorize" style="display:none" class="input2" value='授权' onclick="authorize()" />
+</div>
+<div class="tab"><em>群组详细信息</em></div>
+<div class="tab_con">
+  <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td width="15%" class="label">群组名称：</td>
+        <td width="25%" class="dom">
+          <input type="text" name="groupName" id="groupName" value="" disabled="disabled">
+        </td>
+        <td width="15%">
+          <input type="checkbox" name="shareFlag" id="shareFlag" value="1" disabled="disabled">是否公开
+        </td>
+        <td width="15%" class="label">群组类别：</td>
+        <td width="25%">
+          <select name="groupType" id="groupType"  class='mainSelect' onChange="changeGroupType();" disabled="disabled">
+            <option value="1">专变群组</option>
+            <option value="4">终端群组</option>
+          </select>
+          <script type="text/javascript">document.all.groupType.value="1";</script>
+          <input type="hidden" name="groupType1" value="4" disabled="disabled">
+        </td>
+      </tr>
+      <tr>
+        <td width="15%" class="label">备注：</td>
+        <td colspan="4"><textarea name="remark" id="remark" cols="45" rows="5" disabled="disabled"></textarea></td>
+      </tr>
+    </table>
+  </div>
+  <div class="data1">
+    <span>对象列表</span>
+    <h1>
+      <input type="button" id="addUser" style="display:none" value='添加对象' class="input2" onclick="chooseUser()" /> 
+      <input type="button" id="delUser" style="display:none" value='删除对象' class="input2" onclick="deleteUser()" /> 
+      <input type="submit" id="save" style="display:none" value="保存群组" class="input2" onclick="saveGroup()" >
+    </h1>
+  </div>
+  <div class="data1_con">
+    <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 258));">
+      <table id="userList" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th><input type="checkbox" id="chooseAll" onclick="doClickAll()" checked/></th>
+            <th>序号</th>
+            <th>单位名称</th>
+            <th>资产编号</th>
+            <th>逻辑地址</th>
+            <th>规约</th>
+            <th>终端类型</th>
+            <th>所属对象编号</th>
+            <th>所属对象名称</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table> 
+    </div> 
+    <div class="pageContainer">
+      <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　┆　共<span class="orange">20</span>条　显示行数：<select id="pageRows" name="pageRows" size="1"><option value="10">10</option><option value="20" selected="selected">20</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="100">100</option><option value="200">200</option><option value="500">500</option></select>　第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a> 
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
