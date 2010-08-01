@@ -541,4 +541,34 @@ public class PmPacketData{
     public int restBytes(){
         return this.dataBuff.limit()-this.dataBuff.position();
     }
+
+    public long getBcdInt(int len){
+        byte [] intBytes = getBytes(len);
+        return BcdUtils.bcdToInt(intBytes, 0, len);
+    }
+
+    public PmPacketData putBcdInt(long value, int len){
+        return this.put(BcdUtils.intTobcd(value, len));
+    }
+
+    //dec 比表示小数位
+    public double getBcdFloat(int len, int dec){
+        long intValue = this.getBcdInt(len);
+        double floatValue = intValue;
+        for (int i=0; i<dec; i++)
+            floatValue /= 10;
+        return floatValue;
+    }
+
+    public PmPacketData putBcdFloat(double floatValue, int len, int dec){
+        long intValue = Math.round(floatValue*Math.pow(10, dec));
+        return putBcdInt(intValue, len);
+    }
+
+    public byte[] getBytes(int len){
+        byte[] bytes = new byte[len];
+        dataBuff.get(bytes);
+        return bytes;
+    }
+
 }
