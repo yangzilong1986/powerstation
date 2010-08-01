@@ -79,7 +79,7 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitData(collectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
