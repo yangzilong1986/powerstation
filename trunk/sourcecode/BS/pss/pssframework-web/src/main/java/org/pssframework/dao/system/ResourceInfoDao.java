@@ -4,7 +4,7 @@
 package org.pssframework.dao.system;
 
 import org.pssframework.dao.BaseHibernateDao;
-import org.pssframework.model.system.RoleInfo;
+import org.pssframework.model.system.ResourceInfo;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public class RoleInfoDao extends BaseHibernateDao<RoleInfo, Long> {
+public class ResourceInfoDao extends BaseHibernateDao<ResourceInfo, Long> {
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public Class getEntityClass() {
-		return RoleInfo.class;
+		// TODO Auto-generated method stub
+		return ResourceInfo.class;
 	}
 
 }
