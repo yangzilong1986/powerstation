@@ -39,15 +39,13 @@ public class RealTimeProxy376 implements ICollectInterface {
     private RTTaskService taskService;
     private Converter converter;
 
-
-        public void setTaskService(RTTaskService rtTaskService){
-    	this.taskService = rtTaskService;
+    public void setTaskService(RTTaskService rtTaskService) {
+        this.taskService = rtTaskService;
     }
 
-    public void setConverter(Converter converter){
-    	this.converter = converter;
+    public void setConverter(Converter converter) {
+        this.converter = converter;
     }
-
 
     private int getID() {
         return taskService.getSequnce();
@@ -84,7 +82,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     private List<RealTimeTaskDAO> Encode_TransMit(MessageTranObject MTO, int sequenceCode) {
         MTO_376 mto = (MTO_376) MTO;
         List<PmPacket376> packetList = new ArrayList<PmPacket376>();
-        
+
         List<RealTimeTaskDAO> tasks = new ArrayList<RealTimeTaskDAO>();
         ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
         StringBuffer gpMark = new StringBuffer();
@@ -122,23 +120,25 @@ public class RealTimeProxy376 implements ICollectInterface {
                     //645规约组帧
                     Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
                     pack.setControlCode(true, false, false, (byte) obj.getFuncode());
-                    byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8))) ;
+                    byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8)));
                     pack.getDataAsPmPacketData().put(DI);
                     Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
                     Map<String, String> dataItemMap = commandItem.getDatacellParam();
-                    Iterator iterator = DataItemMap_Config.keySet().iterator();
-                    while (iterator.hasNext()) {
-                        String DataItemCode = (String) iterator.next();
-                        ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
-                        String DataItemValue = dataItem.getDefaultValue();
-                        if (dataItemMap.containsKey(DataItemCode)) {
-                            DataItemValue = dataItemMap.get(DataItemCode);
+                    if (dataItemMap != null) {
+                        Iterator iterator = DataItemMap_Config.keySet().iterator();
+                        while (iterator.hasNext()) {
+                            String DataItemCode = (String) iterator.next();
+                            ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+                            String DataItemValue = dataItem.getDefaultValue();
+                            if ((dataItemMap != null) && (dataItemMap.containsKey(DataItemCode))) {
+                                DataItemValue = dataItemMap.get(DataItemCode);
+                            }
+                            String Format = dataItem.getFormat();
+                            String IsGroupEnd = dataItem.getIsGroupEnd();
+                            int Length = dataItem.getLength();
+                            int bitnumber = dataItem.getBitNumber();
+                            converter.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                         }
-                        String Format = dataItem.getFormat();
-                        String IsGroupEnd = dataItem.getIsGroupEnd();
-                        int Length = dataItem.getLength();
-                        int bitnumber = dataItem.getBitNumber();
-                        converter.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                     }
 
                     packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
@@ -163,7 +163,6 @@ public class RealTimeProxy376 implements ICollectInterface {
         }
         return tasks;
     }
-
 
     /**
      * 参数设置
@@ -363,7 +362,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     }
 
     @Override
-    public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception{
+    public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, String> results = new HashMap<String, String>();
@@ -371,7 +370,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             String logicAddress = task.getLogicAddress();
             String gpMark = task.getGpMark();
             String[] GpArray = null;
-            if(null!=gpMark){
+            if (null != gpMark) {
                 GpArray = task.getGpMark().split("#");
             }
 
@@ -394,16 +393,17 @@ public class RealTimeProxy376 implements ICollectInterface {
                     int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
                     Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
                     for (int i = 0; i < GpArray.length; i++) {
-                            for (int j = 0; j < CommandArray.length; j++) {
-                                String key = logicAddress + "#" + String.valueOf(GpArray[i]) + "#" + String.valueOf(CommandArray[i]);
-                                String value = "2";
-                                if(packet645.getControlCode().getValue() == 0x81)
-                                    value = String.valueOf(1);//确认
-                                else if (packet645.getControlCode().getValue() == 0xC1)
-                                    value = String.valueOf(2);//否认
-                                results.put(key, value);
+                        for (int j = 0; j < CommandArray.length; j++) {
+                            String key = logicAddress + "#" + String.valueOf(GpArray[i]) + "#" + String.valueOf(CommandArray[i]);
+                            String value = "2";
+                            if (packet645.getControlCode().getValue() == 0x81) {
+                                value = String.valueOf(1);//确认
+                            } else if (packet645.getControlCode().getValue() == 0xC1) {
+                                value = String.valueOf(2);//否认
                             }
+                            results.put(key, value);
                         }
+                    }
                 }
             }
         }
@@ -496,7 +496,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     }
 
     @Override
-    public Map<String, Map<String,String>> readTransmitPara(long appId) throws Exception{
+    public Map<String, Map<String, String>> readTransmitPara(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
@@ -516,7 +516,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     }
 
     @Override
-    public Map<String, Map<String,String>> readTransmitData(long appId) throws Exception{
+    public Map<String, Map<String, String>> readTransmitData(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
@@ -535,8 +535,7 @@ public class RealTimeProxy376 implements ICollectInterface {
         return Deal2DataMap(tempMap);
     }
 
-    private Map<String, Map<String, String>> Deal2DataMap(Map<String, Map<String, String>> sourceMap)
-    {
+    private Map<String, Map<String, String>> Deal2DataMap(Map<String, Map<String, String>> sourceMap) {
         String dataItemCode = "";
         Map<String, Map<String, String>> results = new TreeMap<String, Map<String, String>>();
         ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
@@ -553,14 +552,15 @@ public class RealTimeProxy376 implements ICollectInterface {
                 String dataValue = DataMap.get(dataItemCode);
                 ProtocolDataItem dataItem = config.getDataItemMap(CommandItemCode).get(dataItemCode);
                 String IsTd = dataItem.getIsTd();
-                if(IsTd.equals("1"))
+                if (IsTd.equals("1")) {
                     keyInner = dataValue;
-                else
-                    keyInner = DateFormatUtils.format(new Date(),"yyyy-MM-dd hh:mm:ss");
+                } else {
+                    keyInner = DateFormatUtils.format(new Date(), "yyyy-MM-dd hh:mm:ss");
+                }
                 resultMap.put(keyInner, dataValue);
-                results.put(key+"#"+dataItemCode, resultMap);
+                results.put(key + "#" + dataItemCode, resultMap);
             }
-            
+
         }
         return results;
     }
