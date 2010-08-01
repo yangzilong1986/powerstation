@@ -104,4 +104,38 @@ public class PmPacket376Factroy {
         
         return pack;
     }
+
+    public static PmPacket376 makeDirectCommunicationPacket(byte mstId,String rtua,
+           byte comPort, byte comControlByte, byte timeoutConst, byte timeoutBetweenByte,
+           byte[] MsgData){
+        PmPacket376 pack = new PmPacket376();
+        ControlCode ctrlCode = pack.getControlCode();
+        ctrlCode.setIsOrgniger(true);
+        ctrlCode.setIsUpDirect(false);
+        ctrlCode.setIsDownDirectFrameCountAvaliable(false);
+        ctrlCode.setFunctionKey(PmPacket376Factroy.getFunctionKey((byte) 0x0E));
+
+        Address address = pack.getAddress();
+        address.setIsGroupAddress(false);
+        address.setMastStationId(mstId);
+        address.setRtua(rtua);
+
+        Seq seq = pack.getSeq();
+        seq.setIsFirstFrame(true);
+        seq.setIsFinishFrame(true);
+        seq.setIsNeedCountersign(false);
+        seq.setIsTpvAvalibe(false);
+
+        pack.setAfn((byte) 0x10);
+
+        PmPacketData data = pack.getDataBuffer();
+        data.putDA(new PmPacket376DA(0));
+        data.putDT(new PmPacket376DT(1));
+
+        data.put(comPort).put(comControlByte).put(timeoutConst).put(timeoutBetweenByte);
+        data.putWord(MsgData.length);
+        data.put(MsgData);
+        
+        return pack;
+    }
 }
