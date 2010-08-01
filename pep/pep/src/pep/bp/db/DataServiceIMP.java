@@ -16,6 +16,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.Dto;
 import pep.bp.model.Dto.DtoItem;
+import pep.codec.protocol.gb.gb376.Packet376Event36;
+import pep.codec.protocol.gb.gb376.PmPacket376EventBase;
 
 /**
  *
@@ -63,6 +65,15 @@ public class DataServiceIMP implements DataService{
         }
      }
 
+    @Override
+    public void insertLBEvent(Packet376Event36 event){
+
+    }
+
+    @Override
+     public void insertEvent(PmPacket376EventBase event){
+        
+    }
 
 
     //当前正向有功电能示值

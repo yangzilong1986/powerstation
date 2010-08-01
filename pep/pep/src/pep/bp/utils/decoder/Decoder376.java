@@ -120,6 +120,7 @@ public class Decoder376 extends Decoder {
             }
             key = logicAddress + "#" + MeterAddress + "#" + commandItemCode;
             Map<String, String> dataItems = new TreeMap();
+            dataBuffer645.rewind();
             this.DecodeData2Map(commandItemCode, dataItems, dataBuffer645);
             if (!results.containsKey(key)) {
                 results.put(key, dataItems);
