@@ -60,8 +60,14 @@ public class UpLoadProcessor extends BaseProcessor {
             } catch (Exception ex) {
                 log.error(ex.getMessage());
             }
+<<<<<<< .mine
+            catch (Exception ex) {
+                log.error(ex.getMessage());
+            }
+=======
         }
     }
+>>>>>>> .r1060
 
     private void decodeAndSaveClassOneData(PmPacket376 packet) {
         Dto dto = new Dto(packet.getAddress().getRtua(),packet.getAfn());
