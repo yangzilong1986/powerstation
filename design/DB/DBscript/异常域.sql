@@ -6,9 +6,9 @@
 
 drop table E_EVENT_DATA cascade constraints;
 
-drop table "E_Loubao_ECode" cascade constraints;
+drop table E_Loubao_ECode cascade constraints;
 
-drop table "E_Loubao_event" cascade constraints;
+drop table E_Loubao_event cascade constraints;
 
 /*==============================================================*/
 /* Table: E_EVENT_DATA                                          */
@@ -25,72 +25,72 @@ create table E_EVENT_DATA  (
 );
 
 /*==============================================================*/
-/* Table: "E_Loubao_ECode"                                      */
+/* Table: E_Loubao_ECode                                      */
 /*==============================================================*/
-create table "E_Loubao_ECode"  (
-   "EventCode"          NUMBER(2)                       not null,
-   "EventName"          VARCHAR2(30)                    not null,
-   "ValueTitle"         VARCHAR2(40),
-   "ValueUnit"          VARCHAR2(10),
-   constraint PK_E_LOUBAO_ECODE primary key ("EventCode")
+create table E_Loubao_ECode  (
+   EventCode          NUMBER(2)                       not null,
+   EventName          VARCHAR2(30)                    not null,
+   ValueTitle         VARCHAR2(40),
+   ValueUnit          VARCHAR2(10),
+   constraint PK_E_LOUBAO_ECODE primary key (EventCode)
 );
 
-comment on table "E_Loubao_ECode" is
+comment on table E_Loubao_ECode is
 '漏保的事件代码';
 
-comment on column "E_Loubao_ECode"."EventName" is
+comment on column E_Loubao_ECode.EventName is
 '事件名称';
 
-comment on column "E_Loubao_ECode"."ValueTitle" is
+comment on column E_Loubao_ECode.ValueTitle is
 '伴随信息名称';
 
-comment on column "E_Loubao_ECode"."ValueUnit" is
+comment on column E_Loubao_ECode.ValueUnit is
 '伴随信息计量单位';
 
 /*==============================================================*/
-/* Table: "E_Loubao_event"                                      */
+/* Table: E_Loubao_event                                      */
 /*==============================================================*/
-create table "E_Loubao_event"  (
+create table E_Loubao_event  (
    LBSJ_ID              NUMBER                          not null,
    GP_SN                NUMBER,
-   "EventCode"          NUMBER(2)                       not null,
-   "TrigTime"           DATE,
-   "ReceiveTime"        DATE,
-   "Closed"             NUMBER(1)                       not null,
-   "Locked"             NUMBER(1)                       not null,
-   "Phase"              VARCHAR2(10)                    not null,
-   "CurrentValue"       NUMBER(10),
-   "ResetSent"          NUMBER(1)                      default 0 not null,
+   EventCode          NUMBER(2)                       not null,
+   TrigTime           DATE,
+   ReceiveTime        DATE,
+   Closed             NUMBER(1)                       not null,
+   Locked             NUMBER(1)                       not null,
+   Phase              VARCHAR2(10)                    not null,
+   CurrentValue       NUMBER(10),
+   ResetSent          NUMBER(1)                      default 0 not null,
    constraint PK_E_LOUBAO_EVENT primary key (LBSJ_ID)
 );
 
-comment on table "E_Loubao_event" is
+comment on table E_Loubao_event is
 '漏保事件记录，包括短消息远程操作状态的管理';
 
-comment on column "E_Loubao_event".LBSJ_ID is
+comment on column E_Loubao_event.LBSJ_ID is
 '漏保事件编号，同时用作短消息恢复操作时采用的回执码';
 
-comment on column "E_Loubao_event".GP_SN is
+comment on column E_Loubao_event.GP_SN is
 '测量点序号';
 
-comment on column "E_Loubao_event"."TrigTime" is
+comment on column E_Loubao_event.TrigTime is
 '事件发生时间';
 
-comment on column "E_Loubao_event"."ReceiveTime" is
+comment on column E_Loubao_event.ReceiveTime is
 '接收时间';
 
-comment on column "E_Loubao_event"."Closed" is
+comment on column E_Loubao_event.Closed is
 '合闸状态，0：分闸，1：合闸';
 
-comment on column "E_Loubao_event"."Locked" is
+comment on column E_Loubao_event.Locked is
 '锁死状态：1：锁死，0：未锁死';
 
-comment on column "E_Loubao_event"."Phase" is
+comment on column E_Loubao_event.Phase is
 '相位';
 
-comment on column "E_Loubao_event"."CurrentValue" is
+comment on column E_Loubao_event.CurrentValue is
 '事件发生时的伴随信息的值';
 
-comment on column "E_Loubao_event"."ResetSent" is
+comment on column E_Loubao_event.ResetSent is
 '已发送合闸命令，0：未发送 1：发送';
 
