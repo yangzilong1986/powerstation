@@ -34,6 +34,7 @@ public class MTO_376 extends MessageTranObject{
         this.getCollectObjects_Transmit().add(collectObject);
     }
 
+    @Override
     public String toJson(){
         Map map = new HashMap();
        // map.put("ID",this.getID());
@@ -42,6 +43,7 @@ public class MTO_376 extends MessageTranObject{
         return jsonObject.toString();
     }
     
+    @Override
     public  MTOType getType(){
         return MTOType.GW_376;
     }
