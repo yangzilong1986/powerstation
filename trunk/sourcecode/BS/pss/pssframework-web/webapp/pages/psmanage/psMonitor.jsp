@@ -41,7 +41,6 @@ StringBuffer.prototype.toString = function() {
 }
 
 function readB66F() {
-    alert("readB66F start");
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -76,13 +75,12 @@ function readB66F() {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            alert(data);
             //alert(data.collectId);
             //alert(data.fetchCount);
             setTimeout("fetchResultReadB66F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
+            //alert(errorThrown);
             setTimeout("readB66F()", 3000);
         }
     });
@@ -102,7 +100,7 @@ function fetchResultReadB66F(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showSetupResult(data.resultMap);
+            var b = showResultReadB66F(data.resultMap);
             if(!b && fetchCount > 0) {
                 setTimeout("fetchResultReadB66F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
@@ -114,6 +112,21 @@ function fetchResultReadB66F(collectId, fetchCount) {
             setTimeout("readB66F()", 3000);
         }
     });
+}
+
+function showResultReadB66F(resultMap) {
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    var result = resultMap[logicalAddr + '#' + meterAddr + "#" + "8000B66F"];
+    if(typeof result != "undefined") {
+        for(var i = 0; i < $("input[ci='8000B66F']").length; i++) {
+            $($("input[ci='8000B66F']")[i]).val(result[$($("input[ci='8000B66F']")[i]).attr("di")]);
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function readC04F() {
@@ -175,7 +188,7 @@ function fetchResultReadC04F(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showSetupResult(data.resultMap);
+            var b = showResultReadC04F(data.resultMap);
             if(!b && fetchCount > 0) {
                 setTimeout("fetchResultReadC04F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
@@ -187,6 +200,26 @@ function fetchResultReadC04F(collectId, fetchCount) {
             setTimeout("readC04F()", 3000);
         }
     });
+}
+
+function showResultReadC04F(resultMap) {
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    var result = resultMap[logicalAddr + '#' + meterAddr + "#" + "8000C04F"];
+    if(typeof result != "undefined") {
+        for(var i = 0; i < $("input[ci='8000C04F']").length; i++) {
+            if($($("input[ci='8000C04F']")[i]).attr("di") == "8000C04F0X") {
+                $($("input[ci='8000C04F']")[i]).val(result['8000C04F01'] + ";" + result['8000C04F02'] + ";" + result['8000C04F03'] + ";" + result['8000C04F04']);
+            }
+            else {
+                $($("input[ci='8000C04F']")[i]).val(result[$($("input[ci='8000C04F']")[i]).attr("di")]);
+            }
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 </script>
 </head>
@@ -256,13 +289,13 @@ function fetchResultReadC04F(collectId, fetchCount) {
         <div id="rtVoltage" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td height="22" align="center">A相电压：<input id="8000B66F#B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
+            <td height="22" align="center">A相电压：<input ci="8000B66F" di="B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
           <tr>
-            <td height="22" align="center">B相电压：<input id="8000B66F#B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
+            <td height="22" align="center">B相电压：<input ci="8000B66F" di="B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
           <tr>
-            <td height="22" align="center">C相电压：<input id="8000B66F#B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
+            <td height="22" align="center">C相电压：<input ci="8000B66F" di="B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
           </tr>
         </table>
         </div>
@@ -271,13 +304,13 @@ function fetchResultReadC04F(collectId, fetchCount) {
         <div id="rtEc" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td height="22" align="center">A相电流：<input id="8000B66F#B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+            <td height="22" align="center">A相电流：<input ci="8000B66F" di="B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
           <tr>
-            <td height="22" align="center">B相电流：<input id="8000B66F#B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+            <td height="22" align="center">B相电流：<input ci="8000B66F" di="B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
           <tr>
-            <td height="22" align="center">C相电流：<input id="8000B66F#B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+            <td height="22" align="center">C相电流：<input ci="8000B66F" di="B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
         </table>
         </div>
@@ -288,23 +321,23 @@ function fetchResultReadC04F(collectId, fetchCount) {
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
             <td align="right" width="45%" height="29">剩余电流：</td>
-            <td align="left" width="55%"><input id="8000B66F#B660" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
+            <td align="left" width="55%"><input ci="8000B66F" di="B660" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
           </tr>
           <tr>
             <td align="right" height="29">剩余电流动作值：</td>
-            <td align="left"><input rid="8000C04F#8000C04F07" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
+            <td align="left"><input ci="8000C04F" di="8000C04F07" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
           </tr>
           <tr>
             <td align="right" height="29">分断时间：</td>
-            <td align="left"><input id="8000C04F#8000C04F09" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> ms </td>
+            <td align="left"><input ci="8000C04F" di="8000C04F09" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> ms </td>
           </tr>
           <tr>
             <td align="right" height="29">额定负载电流：</td>
-            <td align="left"><input id="8000C04F#8000C04F05" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+            <td align="left"><input ci="8000C04F" di="8000C04F05" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
           </tr>
           <tr>
             <td align="right" height="29">设备状态：</td>
-            <td align="left"><input id="8000C04F#8000C04F0X" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
+            <td align="left"><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 115px; height: 20px;" /></td>
           </tr>
         </table>
       </div>

@@ -87,6 +87,9 @@ function fetchSetupResult(collectId, fetchCount) {
             if(!b && fetchCount > 0) {
                 setTimeout("fetchSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
+            else if(b) {
+                enableOperation();
+            }
             else {
                 initOpResult('试验跳超时');
                 enableOperation();
@@ -109,7 +112,6 @@ function showSetupResult(resultMap) {
         return false;
     }
 }
-
 
 function disableOperation() {
     $("#rmtTestBtn").attr("disabled", true);

@@ -218,7 +218,7 @@ function showSetupResult(resultMap, type) {
                     //sb_dto.append('"dataItemCode":"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '"').append(',');
                     //sb_dto.append('"dataItemValue":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
                     var dataitemCode = $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di");
-                    alert(dataitemCode);
+                    //alert(dataitemCode);
                     $("#diop" + dataitemCode).html(result[dataitemCode]);
                 }
             }
