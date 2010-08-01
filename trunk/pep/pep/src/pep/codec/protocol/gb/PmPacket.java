@@ -202,6 +202,8 @@ abstract public class PmPacket {
         StringBuilder buff = new StringBuilder();
         buff.append("控制域: ").append(controlCode.toString()).append("\n");
         buff.append("地址域: ").append(address.toString()).append("\n");
+        buff.append("序列域").append(this.seq.toString());
+        buff.append("afn=").append(this.afn);
         buff.append("数据域: ").append(dataBuff.toString()).append("\n");
         if ((!controlCode.getIsUpDirect()) && PmPacket.isNeedAuthorize(afn)) {
             buff.append("认证信息: ").append(authorize.toString()).append("\n");
