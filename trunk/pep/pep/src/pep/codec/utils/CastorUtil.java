@@ -335,23 +335,60 @@ public class CastorUtil {
         CommandItem31.AddDataItem(new ProtocolDataItem("010C", 5, "A14", 0,"费率12正向有功总电能示值",""));
 
         ProtocolCommandItem CommandItem68 = new ProtocolCommandItem();
-        CommandItem31.setCommandCode("100C0130");
-        CommandItem31.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
-        CommandItem31.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A000", 5, "A11", 0,"正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A001", 5, "A11", 0,"费率1正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率2正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率3正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率4正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率5正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率6正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率7正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率8正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率9正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率10正向无功（组合无功1）总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率11正向无功（组合无功1）总电能示值",""));
+        CommandItem68.setCommandCode("100C0130");
+        CommandItem68.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
+        CommandItem68.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A000", 5, "A11", 0,"正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A001", 5, "A11", 0,"费率1正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率3正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率4正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11正向无功（组合无功1）总电能示值",""));
+        CommandItem68.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12正向无功（组合无功1）总电能示值",""));
 
+
+        ProtocolCommandItem CommandItem72 = new ProtocolCommandItem();
+        CommandItem72.setCommandCode("100C0132");
+        CommandItem72.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
+        CommandItem72.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A000", 5, "A11", 0,"反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A001", 5, "A11", 0,"费率1反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率3反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率4反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8反向功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12反向无功总电能示值",""));
+
+
+        ProtocolCommandItem CommandItem73 = new ProtocolCommandItem();
+        CommandItem73.setCommandCode("100C0131");
+        CommandItem73.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
+        CommandItem73.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0200", 5, "A11", 0,"反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0201", 5, "A11", 0,"费率1反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0202", 5, "A11", 0,"费率2反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0203", 5, "A11", 0,"费率3反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0204", 5, "A11", 0,"费率4反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0205", 5, "A11", 0,"费率5反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0206", 5, "A11", 0,"费率6反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0207", 5, "A11", 0,"费率7反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0208", 5, "A11", 0,"费率8反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("0209", 5, "A11", 0,"费率9反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("020A", 5, "A11", 0,"费率10反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("020B", 5, "A11", 0,"费率11反向有功总电能示值",""));
+        CommandItem73.AddDataItem(new ProtocolDataItem("020C", 5, "A11", 0,"费率12反向有功总电能示值",""));
 
 
         //漏保数据项
@@ -674,6 +711,8 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem69);
         CommandItems.AddCommandItem(CommandItem70);
         CommandItems.AddCommandItem(CommandItem71);
+        CommandItems.AddCommandItem(CommandItem72);
+        CommandItems.AddCommandItem(CommandItem73);
         try {
 // write it out as XML
             Mapping map = new Mapping();
