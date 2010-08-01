@@ -17,7 +17,7 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 	@Override
 	public Class getEntityClass() {
 		// TODO Auto-generated method stub
-		return null;
+		return UserInfo.class;
 	}
 
 	/**
