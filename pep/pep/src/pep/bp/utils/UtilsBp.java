@@ -6,7 +6,7 @@
 package pep.bp.utils;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 /**
  *
@@ -14,8 +14,9 @@ import java.util.Date;
  */
 public class UtilsBp {
     public static String getNow(){
-        Date nowTime=new Date(System.currentTimeMillis()); //取系统时间
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
-        return sDateFormat.format(nowTime);
+        SimpleDateFormat sDateFormat   =   new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String date = sDateFormat.format(new java.util.Date());
+        return date;
+
     }
 }
