@@ -50,6 +50,10 @@ public class PsInfo extends BaseEntity {
 	// PS_ID NUMBER not null,is '漏点保护开关(leakage protection switch)';
 	private Long psId;
 
+	// PS_NAME VARCHAR2(256),is '名称';
+	@Column(name = "PS_NAME", length = 256)
+	private String psName;
+
 	@ManyToOne(targetEntity = TerminalInfo.class)
 	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
 	// TERM_ID NUMBER,is'终端号'
@@ -58,10 +62,6 @@ public class PsInfo extends BaseEntity {
 	// ASSET_NO VARCHAR2(20),is '资产号';
 	@Column(name = "ASSET_NO", length = 20)
 	private String assetNo;
-
-	// @Column(name = "TERM_ID")
-	// // TERM_ID NUMBER,is'终端号'
-	// private Long termId;
 
 	// MODEL_CODE VARCHAR2(5)is '漏保型号 : 见编码PS_MODEL';
 	@Column(name = "MODEL_CODE", length = 5)
@@ -444,5 +444,13 @@ public class PsInfo extends BaseEntity {
 		}
 		return strChecked;
 
+	}
+
+	public void setPsName(String psName) {
+		this.psName = psName;
+	}
+
+	public String getPsName() {
+		return psName;
 	}
 }
