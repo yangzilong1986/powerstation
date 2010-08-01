@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>权限管理</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+    <script type="text/javascript">
+    var lastQueryType = 2;
+    var contextPath = "../..";
+    
+    function changeType(obj) {
+        var lastTd = document.getElementById("query" + lastQueryType);
+        var nowTd = document.getElementById("query" + obj);
+        lastTd.className = 'tab_off';
+        nowTd.className = 'tab_on';
+    
+        lastQueryType = obj;
+        var url = contextPath;
+        if (lastQueryType == 2) {
+            url += "/jsp/system/roleManagerFrame.html";
+        }
+        if (lastQueryType == 3) {
+            url += "/jsp/system/userManagerFrame.html";
+        }
+        if (lastQueryType == 4) {
+            url += "/jsp/system/pwdManagerFrame.html";
+        }
+        document.getElementById("subContent").src = url;
+    }
+    </script>
+  </head>
+  
+  <body>
+    <div id="body">
+      <div class="tab">
+        <ul>
+          <li id="query2" class="tab_on"><a href="javascript:changeType(2);" onfocus="blur()">角色管理</a></li>
+          <li id="query3" class="tab_off"><a href="javascript:changeType(3);" onfocus="blur()">账号管理</a></li>
+          <li id="query4" class="tab_off"><a href="javascript:changeType(4);" onfocus="blur()">密码管理</a></li>
+          <li class="clear"></li>
+        </ul>
+        <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+      </div>
+      <iframe id="subContent" src="../../jsp/system/roleManagerFrame.html" frameborder="0" 
+        style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight))); width:expression(((document.documentElement.clientWidth||document.body.clientWidth)-18));"></iframe>
+    </div>
+  </body>
+</html>

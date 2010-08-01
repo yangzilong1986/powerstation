@@ -1,0 +1,293 @@
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="../../css/window.css"/>
+  <script type="text/javascript" src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="../../js/frame/component.js"></script>
+  <script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+  <script type="text/javascript"> 
+  var contextPath = "../..";
+  function init(){
+      var name=document.getElementById("orgNo").value;
+      var trs=document.getElementsByTagName("tr");
+      for(i=0;i<trs.length;i++){
+          if(trs[i].id==name){
+              trs[i].style.display="";
+          }
+      }
+      setSnByOrgNo(name);
+   }
+   
+   function setSnByOrgNo(orgNo){
+       var sn = 1;
+       var sns = document.getElementsByName("sn_" + orgNo);
+       if (sns != null && sns.length > 0){
+           for (i = 0; i < sns.length; i++){
+               sns[i].innerHTML = sn++;
+           }
+       }
+   }
+   
+   function changeOrg(name) {
+      document.all.selectAll1.checked=false;
+      document.all.selectAll2.checked=false;
+      var trs=document.getElementsByTagName("tr");
+      //trs.style.display="none";
+       for(i=2;i<trs.length-1;i++){
+           trs[i].style.display="none";
+           if(trs[i].id==name){
+               trs[i].style.display="";
+           }
+       }
+       setSnByOrgNo(name);
+   }  
+
+     
+  function event(obj) {
+      var obj1=obj.parentNode.parentNode;
+      var inputs=obj1.getElementsByTagName("input");
+      var box=inputs[1];
+      if(obj.checked){
+         box.disabled=false;
+      }
+      else {
+        if(box.checked){
+          box.click()
+        }
+        box.disabled=true;
+      }
+  }
+     
+  function doClickDeptAll(obj,indexId,id) {
+      var name=document.getElementById("orgNo").value;
+      var trs=document.getElementsByTagName("tr");
+      try {
+          var ItemID = document.getElementsByName(id);
+          if(typeof ItemID != "undefined" && typeof ItemID.length == "undefined") {
+              if(obj.checked) {
+                  if(!ItemID.checked) {
+                      for(i=0;i<trs.length;i++){
+                          if(trs[i].id==name){
+                              inputs=trs[i].getElementsByTagName("input");
+                              inputs[indexId].click();
+                          }
+                      }
+                  }
+              }
+              else {
+                  if(ItemID.checked) {
+                      for(i=0;i<trs.length;i++){
+                          if(trs[i].id==name){
+                              inputs=trs[i].getElementsByTagName("input");
+                              inputs[indexId].click();
+                          }
+                      }
+                  }
+              }
+          }
+          else if(typeof ItemID != "undefined" && typeof ItemID.length != "undefined") {
+              if(obj.checked) {
+                  for(i=0;i<trs.length;i++){
+                      if(trs[i].id==name){
+                          inputs=trs[i].getElementsByTagName("input");
+                          if(!inputs[indexId].checked) {
+                              inputs[indexId].click();
+                          }
+                      }
+                  }
+              }
+              else {
+                  for(i=0;i<trs.length;i++){
+                      if(trs[i].id==name){
+                          inputs=trs[i].getElementsByTagName("input");
+                          if(inputs[indexId].checked) {
+                              inputs[indexId].click();
+                          }
+                      }
+                  }
+              }
+          }
+      }
+      catch(e) {}
+  }
+  </script>
+  </head>
+  
+  <body onload="init()">
+    <div id="body">
+    <div class="tab">
+      <ul>
+        <li id="tab_1" class="tab_on">
+          <a href="#" onClick="return false;" onFocus="blur()">授权</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div id="main">
+      <div id="tool">
+      <table border="0" cellpadding="0" cellspacing="0">      
+        <tr>
+          <td>所属单位:</td>
+          <td>
+            <input type="hidden" name="groupId" value='181' />
+            <input type="hidden" name="action" value="saveAuthorize"/>
+            <select name="orgNo" id="orgNo"  class='mainSelect' onChange="changeOrg(this.options[this.options.selectedIndex].value)">
+              <option value="4">广东省电力公司</option>
+              <option value="42"> -- 广州市电力公司</option>
+              <option value="41"> -- 深圳市电力公司</option>
+              <option value="41010101"> -- 湛江市电力公司</option>
+              <option value="4101"> -- 汕头市电力公司</option>
+              <option value="410101"> -- 汕尾市电力公司</option>
+            </select>
+            <script type="text/javascript">document.all.orgNo.value="4";</script>
+          </td>
+        </tr>
+      </table>
+      <div class="clear"></div>
+    </div>
+    <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-190));">
+      <table id="userList" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>账号</th>
+            <th>名称</th>
+            <th>授权<input type="checkbox" id="selectAll1" onclick="doClickDeptAll(this,0,id)"/></th>
+            <th>可编辑<input type="checkbox" id="selectAll2" onclick="doClickDeptAll(this,1,id)"/></th>
+          </tr>
+        </thead>
+        <tbody align="center">
+          <tr id='41' style="display: none;">
+            <td id='sn_41' name='sn_41'></td>
+            <td>liuchaoyong</td>
+            <td>刘朝勇</td>
+            <td><input type="checkbox" name="read" value="384" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="384" disabled/></td>
+          </tr>
+          <tr id='411' style="display: none;">
+            <td id='sn_411' name='sn_411'></td>
+            <td>A-1</td>
+            <td>A-1</td>
+            <td><input type="checkbox" name="read" value="444" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="444" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>developer</td>
+            <td>开发者</td>
+            <td><input type="checkbox" name="read" value="204" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="204" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>sjadmin</td>
+            <td>省公司管理员</td>
+            <td><input type="checkbox" name="read" value="244" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="244" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>shenguohui</td>
+            <td>沈国辉</td>
+            <td><input type="checkbox" name="read" value="184" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="184" disabled/></td>
+          </tr>
+          <tr id='41' style="display: none;">
+            <td id='sn_41' name='sn_41'></td>
+            <td>testg</td>
+            <td>testg</td>
+            <td><input type="checkbox" name="read" value="524" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="524" disabled/></td>
+          </tr>
+          <tr id='41' style="display: none;">
+            <td id='sn_41' name='sn_41'></td>
+            <td>liu123</td>
+            <td>liu123</td>
+            <td><input type="checkbox" name="read" value="589" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="589" disabled/></td>
+          </tr>
+          <tr id='41' style="display: none;">
+            <td id='sn_41' name='sn_41'></td>
+            <td>test345</td>
+            <td>test345</td>
+            <td><input type="checkbox" name="read" value="590" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="590" disabled/></td>
+          </tr>
+          <tr id='42' style="display: none;">
+            <td id='sn_42' name='sn_42'></td>
+            <td>gdgdfg</td>
+            <td>dfgdfg</td>
+            <td><input type="checkbox" name="read" value="645" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="645" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>dingzj</td>
+            <td>丁宗镌</td> 
+            <td><input type="checkbox" name="read" value="264" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="264" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>yaoshu</td>
+            <td>姚舒</td>
+            <td><input type="checkbox" name="read" value="185" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="185" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>admin</td>
+            <td>系统管理员</td>
+            <td><input type="checkbox" name="read" value="1" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="1" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>zhangyu</td>
+            <td>张瑜2</td>
+            <td><input type="checkbox" name="read" value="284" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="284" disabled/></td>
+          </tr>
+          <tr id='4' style="display: none;">
+            <td id='sn_4' name='sn_4'></td>
+            <td>bao</td>
+            <td>bao</td>
+            <td><input type="checkbox" name="read" value="424" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="424" disabled/></td>
+          </tr>
+            <tr id='414' style="display: none;">
+            <td id='sn_414' name='sn_414'></td>
+            <td>dsleader</td>
+            <td>地市王局长</td>
+            <td><input type="checkbox" name="read" value="404" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="404" disabled/></td>
+          </tr>
+          <tr id='42' style="display: none;">
+            <td id='sn_42' name='sn_42'></td>
+            <td>liuyong</td>
+            <td>局级管理员</td>
+            <td><input type="checkbox" name="read" value="364" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="364" disabled/></td>
+          </tr>
+          <tr id='42' style="display: none;">
+            <td id='sn_42' name='sn_42'></td>
+            <td>liusdd</td>
+            <td>liusdd</td>
+            <td><input type="checkbox" name="read" value="644" onclick="event(this)"/></td>
+            <td><input type="checkbox" name="edit" value="644" disabled/></td>
+          </tr>
+        </tbody> 
+      </table>  
+    </div>  
+    <div class="nullContainer"></div>
+    <table align="center">
+      <tr>
+        <td width="100%" height="30" align="center">
+          <input type="submit" name="queding2" value='确定' class="input1" onclick="parent.GB_hide();"/> &nbsp;
+          <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide();"/>
+        </td>
+      </tr>
+    </table>
+    </div>
+  </div>
+  </body>  
+</html>
