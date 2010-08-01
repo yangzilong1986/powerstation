@@ -40,7 +40,6 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 	}
 
 	public List<MpInfo> findByPageRequest(Map mapRequest) {
-		// TODO Auto-generated method stub
 		return mpInfoDao.findByPageRequest(mapRequest);
 	}
 
