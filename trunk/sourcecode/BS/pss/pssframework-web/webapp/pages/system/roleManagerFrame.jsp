@@ -22,10 +22,10 @@ function fresh() {
   <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
     <tr>
       <td width="390" valign="top" class="pad10" style="border-right:1px solid #5d90d7;">
-        <iframe width="100%" height="100%" frameborder="0" id="roleList" name="roleList" src="${ctx}/system/role/query?roleType=1" ></iframe>
+        <iframe width="100%" height="100%" frameborder="0" id="roleList" name="roleList" src="${ctx}/system/role/list?roleType=1" ></iframe>
       </td>
       <td valign="top" class="pad5">
-        <iframe width="100%" height="100%" frameborder="0" id="roleDetail" name="roleDetail" src="${ctx}/system/role/detail?roleType=1" ></iframe>
+        <iframe width="100%" height="100%" frameborder="0" id="roleDetail" name="roleDetail" src="" ></iframe>
       </td>
     </tr>
   </table>
