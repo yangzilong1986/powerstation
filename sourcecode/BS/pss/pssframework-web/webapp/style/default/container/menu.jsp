@@ -91,7 +91,7 @@ function changeFod(obj) {
   <dl id="dl05" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a5001" href="#" onclick="selectMenu('5001', ''); return false;">权限管理</a></div>
+        <div onmouseover=changeFod(this)><a id="a5001" href="#" onclick="selectMenu('5001', '/system/permission');">权限管理</a></div>
         <div onmouseover=changeFod(this)><a id="a5002" href="#" onclick="selectMenu('5002', ''); return false;">单位管理</a></div>
         <div onmouseover=changeFod(this)><a id="a5003" href="#" onclick="selectMenu('5003', ''); return false;">编码管理</a></div>
         <div onmouseover=changeFod(this)><a id="a5004" href="#" onclick="selectMenu('5004', ''); return false;">异常编码管理</a></div>
