@@ -23,7 +23,7 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    readB66F();
+    //readB66F();
     readC04F();
 });
 
@@ -38,6 +38,21 @@ StringBuffer.prototype.append = function() {
 
 StringBuffer.prototype.toString = function() {
     return this.data.join("");
+}
+
+function fillTopsMeterAddr(meterAddr) {
+    var result = $.trim(meterAddr);
+    var lens = result.length;
+    if(lens < 12) {
+        for(var i = 0; i < (12 - lens); i++) {
+            result = '0' + result;
+        }
+    }
+    else {
+        result = result.substring(0, 12);
+    }
+
+    return result;
 }
 
 function readB66F() {
@@ -117,7 +132,8 @@ function fetchResultReadB66F(collectId, fetchCount) {
 function showResultReadB66F(resultMap) {
     var logicalAddr = $("#logicalAddr").val();
     var meterAddr = $("#meterAddr").val();
-    var result = resultMap[logicalAddr + '#' + meterAddr + "#" + "8000B66F"];
+    var result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000B66F"];
+    alert(result);
     if(typeof result != "undefined") {
         for(var i = 0; i < $("input[ci='8000B66F']").length; i++) {
             $($("input[ci='8000B66F']")[i]).val(result[$($("input[ci='8000B66F']")[i]).attr("di")]);
@@ -205,7 +221,7 @@ function fetchResultReadC04F(collectId, fetchCount) {
 function showResultReadC04F(resultMap) {
     var logicalAddr = $("#logicalAddr").val();
     var meterAddr = $("#meterAddr").val();
-    var result = resultMap[logicalAddr + '#' + meterAddr + "#" + "8000C04F"];
+    var result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C04F"];
     if(typeof result != "undefined") {
         for(var i = 0; i < $("input[ci='8000C04F']").length; i++) {
             if($($("input[ci='8000C04F']")[i]).attr("di") == "8000C04F0X") {
@@ -220,6 +236,18 @@ function showResultReadC04F(resultMap) {
     else {
         return false;
     }
+}
+
+function remoteTriping() {
+    
+}
+
+function remoteSwitching() {
+    
+}
+
+function remoteTest() {
+    
 }
 </script>
 </head>
@@ -276,10 +304,15 @@ function showResultReadC04F(resultMap) {
             <td height="90" align="center"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></td>
           </tr>
           <tr>
-            <td height="30"></td>
+            <td height="30" align="center">
+              <input type="button" id="rmtTestBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
+              <input type="button" id="rmtTestBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
+            </td>
           </tr>
           <tr>
-            <td height="30"></td>
+            <td height="30" align="center">
+              <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
+            </td>
           </tr>
         </table>
       </div>
@@ -357,13 +390,10 @@ function showResultReadC04F(resultMap) {
             <div id="timeSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td></td>
+                  <td>当前时钟：</td>
                 </tr>
                 <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
+                  <td>计算机时钟：</td>
                 </tr>
               </table>
             </div>

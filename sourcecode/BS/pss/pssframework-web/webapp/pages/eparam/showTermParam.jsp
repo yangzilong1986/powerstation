@@ -801,7 +801,6 @@ function getSelectedCheckboxs() {
                       <td>&nbsp;</td>
                     </tr>
                   <!-- /10040009 终端上行通信工作方式（以太专网或虚拟专网） -->
-                  <!-- 
                   <tr class="cicontent">
                     <td height="25">
                       <input align="middle" type="checkbox" name="itemId" value="10040010" checked="checked" />
@@ -811,8 +810,162 @@ function getSelectedCheckboxs() {
                     <td colspan="4">终端电能表/交流采样装置配置参数</td>
                     <td id="ciop10040010">&nbsp;</td>
                   </tr>
-                   -->
                   <!-- 10040010 终端电能表/交流采样装置配置参数 -->
+                    <tr ci="10040010" di="1004001001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次电能表/交流采样装置配置数量</td>
+                      <td>
+                        <input id="1004001001" value="1" />
+                      </td>
+                      <td id="diop1004001001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010020001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置序号</td>
+                      <td>
+                        <input id="10040010020001" value="1" />
+                      </td>
+                      <td id="diop10040010020001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010030001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属测量点号</td>
+                      <td>
+                        <input id="10040010030001" value="1" />
+                      </td>
+                      <td id="diop10040010030001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010040001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信波特率</td>
+                      <td>
+                        <select id="10040010040001">
+                          <option value="0">无需设置或使用默认</option>
+                          <option value="1">600</option>
+                          <option value="2">1200</option>
+                          <option value="3">2400</option>
+                          <option value="4">4800</option>
+                          <option value="5">7200</option>
+                          <option value="6">9600</option>
+                          <option value="7">19200</option>
+                        </select>
+                      </td>
+                      <td id="diop10040010040001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010050001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信端口号</td>
+                      <td>
+                        <input id="10040010050001" value="1" />
+                      </td>
+                      <td id="diop10040010050001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010060001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信协议类型</td>
+                      <td>
+                        <select id="10040010060001" style="width: 150px;">
+                          <option value="1">DL/T 645—1997</option>
+                          <option value="2">交流采样装置通信协议</option>
+                          <option value="30">DL/T 645—2007</option>
+                          <option value="31">“串行接口连接窄带低压载波通信模块”接口协议</option>
+                          <option value="100">漏保规约</option>
+                        </select>
+                      </td>
+                      <td id="diop10040010060001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010070001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信协议类型</td>
+                      <td>
+                        <input id="10040010070001" value="1" />
+                      </td>
+                      <td id="diop10040010070001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010080001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信密码</td>
+                      <td>
+                        <input id="10040010080001" value="1" />
+                      </td>
+                      <td id="diop10040010080001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010100001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置电能费率个数</td>
+                      <td>
+                        <input id="10040010100001" value="4" />
+                      </td>
+                      <td id="diop10040010100001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010120001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置有功电能示值的整数位个数</td>
+                      <td>
+                        <input id="10040010120001" value="6" />
+                      </td>
+                      <td id="diop10040010120001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010130001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置有功电能示值的小数位个数</td>
+                      <td>
+                        <input id="10040010130001" value="4" />
+                      </td>
+                      <td id="diop10040010130001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010140001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属采集器通信地址</td>
+                      <td>
+                        <input id="10040010140001" value="0" />
+                      </td>
+                      <td id="diop10040010140001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010150001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属的用户大类号</td>
+                      <td>
+                        <input id="10040010150001" value="0" />
+                      </td>
+                      <td id="diop10040010150001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040010" di="10040010160001" class="clz10040010" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属的用户小类号</td>
+                      <td>
+                        <input id="10040010160001" value="0" />
+                      </td>
+                      <td id="diop10040010160001">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
                   <!-- /10040010 终端电能表/交流采样装置配置参数 -->
                   <tr class="cicontent">
                     <td height="25">
