@@ -14,8 +14,11 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pep.bp.realinterface.mto.CircleDataItems;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
+import pep.bp.realinterface.mto.DataItem;
+import pep.bp.realinterface.mto.DataItemGroup;
 import pep.bp.realinterface.mto.MTOType;
 import pep.bp.realinterface.mto.MTO_376;
 import pep.bp.realinterface.mto.MessageTranObject;
@@ -196,18 +199,46 @@ public class ConverterUtils {
                 ci.setIdentifier(jnIdentifier.getTextValue());
             }
 
-            if(jnDatacellParam != null) {
-                Iterator<JsonNode> itDatacellParams = jnDatacellParam.getElements();
-                Map<String, String> datacellParam = new HashMap<String, String>();
-                while(itDatacellParams.hasNext()) {
-                    JsonNode jNode = itDatacellParams.next();
-                    JsonNode jnDataItemCode = jNode.get("dataItemCode");
-                    JsonNode jnDataItemValue = jNode.get("dataItemValue");
-                    if(jnDataItemCode != null && jnDataItemValue != null) {
-                        datacellParam.put(jnDataItemCode.getTextValue(), jnDataItemValue.getTextValue());
+            if("10040010".equals(ci.getIdentifier())) {
+                if(jnDatacellParam != null) {
+                    Iterator<JsonNode> itDatacellParams = jnDatacellParam.getElements();
+                    Map<String, String> datacellParam = new HashMap<String, String>();
+                    CircleDataItems circleDataItems = new CircleDataItems();
+                    DataItemGroup group = new DataItemGroup();
+                    while(itDatacellParams.hasNext()) {
+                        JsonNode jNode = itDatacellParams.next();
+                        JsonNode jnDataItemCode = jNode.get("dataItemCode");
+                        JsonNode jnDataItemValue = jNode.get("dataItemValue");
+                        if(jnDataItemCode != null && jnDataItemValue != null
+                                && "1004001001".equals(jnDataItemCode.getTextValue())) {
+                            datacellParam.put(jnDataItemCode.getTextValue(), jnDataItemValue.getTextValue());
+                        }
+                        else if(jnDataItemCode != null && jnDataItemValue != null
+                                && !"1004001001".equals(jnDataItemCode.getTextValue())) {
+                            DataItem dataItem = new DataItem(jnDataItemCode.getTextValue(), jnDataItemValue.getTextValue());
+                            group.AddDataItem(dataItem);
+                        }
                     }
+                    ci.setDatacellParam(datacellParam);
+                    ci.setCircleLevel(1);
+                    circleDataItems.AddDataItemGroup(group);
+                    ci.setCircleDataItems(circleDataItems);
                 }
-                ci.setDatacellParam(datacellParam);
+            }
+            else {
+                if(jnDatacellParam != null) {
+                    Iterator<JsonNode> itDatacellParams = jnDatacellParam.getElements();
+                    Map<String, String> datacellParam = new HashMap<String, String>();
+                    while(itDatacellParams.hasNext()) {
+                        JsonNode jNode = itDatacellParams.next();
+                        JsonNode jnDataItemCode = jNode.get("dataItemCode");
+                        JsonNode jnDataItemValue = jNode.get("dataItemValue");
+                        if(jnDataItemCode != null && jnDataItemValue != null) {
+                            datacellParam.put(jnDataItemCode.getTextValue(), jnDataItemValue.getTextValue());
+                        }
+                    }
+                    ci.setDatacellParam(datacellParam);
+                }
             }
 
             co.AddCommandItem(ci);
