@@ -78,7 +78,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
             }
             sb.append("相位").append(xiangwei).append(" ");
             sb.append(this.statusString());
-            sb.append("发生时间").append(BcdUtils.dateToString(eventTime, "MM-DD hh:mm"));
+            sb.append("发生时间").append(BcdUtils.dateToString(eventTime, "YY-MM-DD hh:mm:ss"));
             return sb.toString();
         }
     }
@@ -95,7 +95,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
         int count = eventData.getByte();
         len -= 2;
 
-        while ((eventData.restBytes() >= 13) && (len > 0)) {
+        while ((eventData.restBytes() >= 16) && (len > 0)) {
             try {
                 Meter event = new Meter();
                 event.meterAddress = Gb645Address.meterAddressToString(eventData.getBytes(6));
@@ -124,11 +124,11 @@ public class Packet376Event36 extends PmPacket376EventBase {
                     event.actValue = 0;
                 }
 
-                event.eventTime = eventData.getDate("MIHHDDMM");
+                event.eventTime = eventData.getDate("SSMIHHWWDDMMYY");
 
                 meters.add(event);
             } finally {
-                len -= 13;
+                len -= 16;
             }
         }
 
