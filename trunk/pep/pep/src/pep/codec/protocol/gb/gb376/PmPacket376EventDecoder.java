@@ -26,7 +26,7 @@ public class PmPacket376EventDecoder {
                     break;
                 }
                 Date eventTime = data.getDate("MIHHDDMMYY");
-                eventlen -= 7;
+                eventlen -= 5;
                 PmPacket376EventBase event;
                 if (erc == 36) {
                     event = new Packet376Event36();
