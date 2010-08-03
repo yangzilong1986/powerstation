@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import pep.codec.utils.BcdDataBuffer;
+import pep.codec.utils.BcdUtils;
 import pep.meter645.Gb645Address;
 
 /**
@@ -77,6 +78,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
             }
             sb.append("相位").append(xiangwei).append(" ");
             sb.append(this.statusString());
+            sb.append("发生时间").append(BcdUtils.dateToString(eventTime, "MM-DD hh:mm"));
             return sb.toString();
         }
     }
@@ -90,9 +92,10 @@ public class Packet376Event36 extends PmPacket376EventBase {
             return;
         }
         this.Tongxunduankou = (byte) (eventData.getByte() & 0x3F);
+        int count = eventData.getByte();
         len -= 2;
 
-        while ((eventData.restBytes() >= 8) && (len > 0)) {
+        while ((eventData.restBytes() >= 13) && (len > 0)) {
             try {
                 Meter event = new Meter();
                 event.meterAddress = Gb645Address.meterAddressToString(eventData.getBytes(6));
@@ -125,7 +128,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
 
                 meters.add(event);
             } finally {
-                len -= 8;
+                len -= 13;
             }
         }
 
