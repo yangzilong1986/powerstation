@@ -78,7 +78,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
             }
             sb.append("相位").append(xiangwei).append(" ");
             sb.append(this.statusString());
-            sb.append("发生时间").append(BcdUtils.dateToString(eventTime, "yyyy-MM-dd hh:mm:ss"));
+            sb.append("发生时间").append(BcdUtils.dateToString(eventTime, "yy-MM-dd HH:mm:ss"));
             return sb.toString();
         }
     }
