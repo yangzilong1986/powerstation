@@ -8,6 +8,7 @@ package pep.codec.utils;
  *
  * @author luxiaochung
  */
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Date;
 
@@ -420,6 +421,12 @@ public class BcdUtils {
 
     public static int byteToUnsigned(byte b){
         return (0x100+b)%0x100;
+    }
+
+    public static String dateToString(Date date,String format){
+        SimpleDateFormat sDateFormat   =   new SimpleDateFormat(format);
+        return sDateFormat.format(date);
+
     }
 
 }
