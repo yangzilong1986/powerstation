@@ -40,7 +40,7 @@ public class PmPacket376DA implements PmPacketDA{
         return value;
     }
     
-    public PmPacket376DA setPn(int pn){
+    public final PmPacket376DA setPn(int pn){
         if ((pn>=0) && (pn<=2040)){
             if (pn==0){
                 value[0] = 0;
@@ -62,7 +62,7 @@ public class PmPacket376DA implements PmPacketDA{
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("pn=").append(this.getPn());
         return buff.toString();
     }
