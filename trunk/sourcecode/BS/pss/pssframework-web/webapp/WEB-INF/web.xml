@@ -8,11 +8,11 @@
   </session-config>
 
   <!-- 默认首页定义 -->
-  <welcome-file-list>
-    <!-- <welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.html</welcome-file> -->
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
+   <!--<welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list> -->
 
   <!-- Error Page定义 -->
   <error-page>
@@ -111,6 +111,48 @@
     <filter-name>hibernateOpenSessionInViewFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <!-- SpringSide's JCaptcha filter -->
+	<filter>
+		<filter-name>jcaptchaFilter</filter-name>
+		<filter-class>org.springside.modules.security.jcaptcha.JCaptchaFilter</filter-class>
+		<init-param>
+			<param-name>failureUrl</param-name>
+			<param-value>/security/login?error=2</param-value>
+		</init-param>
+		<!-- 用于功能测试的设置54321自动通过验证码校验,在生产环境部署时移除该参数或将值设为invalid -->
+		<init-param>
+			<param-name>autoPassValue</param-name>
+			<param-value>RPWT54321</param-value>
+		</init-param>
+	</filter>
+  
+  	<!-- jcaptcha图片生成URL. -->
+	<filter-mapping>
+		<filter-name>jcaptchaFilter</filter-name>
+		<url-pattern>/security/jcaptcha.jpg</url-pattern>
+	</filter-mapping>
+
+	<!-- jcaptcha登录表单处理URL.
+	             必须放在springSecurityFilter的filter-mapping定义之前 -->
+	<filter-mapping>
+		<filter-name>jcaptchaFilter</filter-name>
+		<url-pattern>/j_spring_security_check</url-pattern>
+	</filter-mapping>
+  
+  <!-- SpringSecurity filter-->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+  
+  <filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
   <!-- SpringSecuirty 控制并发Session -->
   <listener>
     <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
