@@ -1,3 +1,12 @@
+//*************************打开窗口*****************************************************//
+var opwindow = null;     //记录打开浏览窗口的对象
+function windowPopup(url, wd, ht) {
+    if(opwindow != null) {
+        opwindow.close();
+    }
+    opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=auto, resizable=no, location=no, status=yes');
+}
+
 function disableSubmit(finalResult,submitButtonId) {
 	if(finalResult) {
 		document.getElementById(submitButtonId).disabled = true;
