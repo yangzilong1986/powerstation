@@ -9,15 +9,12 @@
 
 	<!-- http安全配置 -->
 	<s:http auto-config="true" use-expressions="true">
-		<s:intercept-url pattern="/css/**" filters="none" />
-		<s:intercept-url pattern="/img/**" filters="none" />
-		<s:intercept-url pattern="/js/**" filters="none" />
-
-		<s:intercept-url pattern="/common/user/*" access="isAuthenticated()" />
-
-		<s:form-login login-page="/security/login.action" default-target-url="/" authentication-failure-url="/security/login.action?error=1" />
+		<s:intercept-url pattern="/scripts/**" filters="none" />
+		<s:intercept-url pattern="/style/default/bgcorlor/**" filters="none" />
+		<s:intercept-url pattern="/style/default/container/*.jsp" access="isAuthenticated()" />
+		<s:form-login login-page="/security/login" default-target-url="/style/default/container/main.jsp" authentication-failure-url="/security/login?error=1" />
 		<s:logout logout-success-url="/" />
-		<s:session-management invalid-session-url="/security/login.action?error=3">
+		<s:session-management invalid-session-url="/security/login?error=3">
 			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</s:session-management>
 
