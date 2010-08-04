@@ -17,15 +17,12 @@ import org.springframework.jdbc.object.StoredProcedure;
  * @author Thinkpad
  */
 public class EventStoredProcedure extends StoredProcedure {
-    private static final String SPROC_NAME = "PRC_INSERT_P_ACT";
+    private static final String SPROC_NAME = "PRC_INSERT_EVENT";
     private static final String LOGICADDRESS_PARA = "p_logicAddress";
     private static final String SN_PARA = "p_sn";
-    private static final String DATETIME_PARA = "p_DateTime";
-    private static final String ACT_TOTAL_PARA = "p_act_total";
-    private static final String ACT_SHARP_PARA = "p_act_sharp";
-    private static final String ACT_PEAK_PARA = "p_act_peak";
-    private static final String ACT_LEVEL_PARA = "p_act_level";
-    private static final String ACT_VALLEY_PARA = "p_act_valley";
+    private static final String EX_CODE_PARA = "p_ex_code";
+    private static final String EX_TIME = "p_ex_time";
+    
     public EventStoredProcedure(){
 
     }
@@ -34,28 +31,19 @@ public class EventStoredProcedure extends StoredProcedure {
             super(dataSource, SPROC_NAME);
             declareParameter(new SqlParameter(LOGICADDRESS_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(SN_PARA,Types.NUMERIC));
-            declareParameter(new SqlParameter(DATETIME_PARA,Types.VARCHAR));
-            declareParameter(new SqlParameter(ACT_TOTAL_PARA,Types.VARCHAR));
-            declareParameter(new SqlParameter(ACT_SHARP_PARA,Types.VARCHAR));
-            declareParameter(new SqlParameter(ACT_PEAK_PARA,Types.VARCHAR));
-            declareParameter(new SqlParameter(ACT_LEVEL_PARA,Types.VARCHAR));
-            declareParameter(new SqlParameter(ACT_VALLEY_PARA,Types.VARCHAR));
+            declareParameter(new SqlParameter(EX_CODE_PARA,Types.VARCHAR));
+            declareParameter(new SqlParameter(EX_TIME,Types.VARCHAR));
+            
             compile();
     }
 
 
-    public Map execute(String logicalAddress,int gpSn,String dataDate,
-                        String p_act_total,String p_act_sharp,String p_act_peak
-                        ,String p_act_level,String p_act_valley) {
+    public Map execute(String logicalAddress,int gpSn,String ex_code,String ex_time) {
             Map inputs = new HashMap();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
-            inputs.put(DATETIME_PARA, dataDate);
-            inputs.put(ACT_TOTAL_PARA, p_act_total);
-            inputs.put(ACT_SHARP_PARA, p_act_sharp);
-            inputs.put(ACT_PEAK_PARA, p_act_peak);
-            inputs.put(ACT_LEVEL_PARA, p_act_level);
-            inputs.put(ACT_VALLEY_PARA, p_act_valley);
+            inputs.put(EX_CODE_PARA, ex_code);
+            inputs.put(EX_TIME, ex_time);
             return super.execute(inputs);
         }
 

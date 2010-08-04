@@ -98,11 +98,11 @@ public class UpLoadProcessor extends BaseProcessor {
 
     private void saveLoubaoEvent(String rtua, Packet376Event36 event36) {
         for (Packet376Event36.Meter meter : event36.meters) {
-            //todo save
+            this.dataService.insertLBEvent(rtua,event36);
         }
     }
     
     private void saveEvent(String rtua, int fn, int pn, PmPacket376EventBase event){
-        
+        this.dataService.insertEvent(rtua,event);
     }
 }

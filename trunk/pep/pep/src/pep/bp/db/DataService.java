@@ -17,7 +17,7 @@ public interface DataService {
 
     public void insertRecvData(Dto data);
 
-    public void insertLBEvent(Packet376Event36 event);
+    public void insertLBEvent(String rtua, Packet376Event36 event);
 
-    public void insertEvent(PmPacket376EventBase event);
+    public void insertEvent(String rtua, PmPacket376EventBase event);
 }
