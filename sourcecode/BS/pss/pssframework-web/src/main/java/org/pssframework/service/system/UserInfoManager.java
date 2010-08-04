@@ -79,7 +79,7 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 	@Transactional(readOnly = true)
 	public UserInfo findUserByLoginName(String loginName) {
-		return userInfoDao.findUniqueBy("loginName", loginName);
+		return userInfoDao.findUniqueBy("staffNo", loginName);
 	}
 
 	/**
