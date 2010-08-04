@@ -13,11 +13,10 @@
 		<s:intercept-url pattern="/style/default/bgcorlor/**" filters="none" />
 		<s:intercept-url pattern="/style/default/container/*.jsp" access="isAuthenticated()" />
 		<s:form-login login-page="/security/login" default-target-url="/style/default/container/main.jsp" authentication-failure-url="/security/login?error=1" />
-		<s:logout logout-success-url="/" />
+		<s:logout logout-success-url="/security/login" />
 		<s:session-management invalid-session-url="/security/login?error=3">
 			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
 		</s:session-management>
-
 		<s:custom-filter after="SECURITY_CONTEXT_FILTER" ref="autoLoginFilter" />
 	</s:http>
 
