@@ -42,8 +42,8 @@ function showBar(firstLevel) {
 </script>
 </head>
 <body>
-<div class="bg_top">
-  <div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo1.png" /></div>
+<div class="bg_top" style="min-width: 1000px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1004 ? '1000px' : '');">
+  <div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo1.png" width="541" height="59" /></div>
   <div id="top_r">
     <div id="top_r_t">
       <ul>

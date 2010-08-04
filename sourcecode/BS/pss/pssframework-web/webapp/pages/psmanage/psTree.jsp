@@ -75,7 +75,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body style="overflow: auto;">
 <div>
   <ul id="browser" class="filetree">
     <li><span class="folder">乾龙1#</span>

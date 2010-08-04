@@ -24,7 +24,7 @@ $(document).ready(function() {
     $("#paramsSetup").corner();
 
     //readB66F();
-    readC04F();
+    //readC04F();
 });
 
 function StringBuffer() {
@@ -133,7 +133,7 @@ function showResultReadB66F(resultMap) {
     var logicalAddr = $("#logicalAddr").val();
     var meterAddr = $("#meterAddr").val();
     var result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000B66F"];
-    alert(result);
+    //alert(result);
     if(typeof result != "undefined") {
         for(var i = 0; i < $("input[ci='8000B66F']").length; i++) {
             $($("input[ci='8000B66F']")[i]).val(result[$($("input[ci='8000B66F']")[i]).attr("di")]);
@@ -386,46 +386,85 @@ function remoteTest() {
     <div class="datamenu_lcon" id="datamenu_Con">
       <ul class=default id=datamenu_Con_0>
         <div class="content" style="border: 1px solid #85c0b4;">
-          <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-290));">
+          <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-296));">
             <div id="timeSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td>当前时钟：</td>
+                  <td align="right" width="25%" height="30">当前时钟：</td>
+                  <td align="left" width="55%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 24px;" /></td>
+                  <td align="center" width="20%"><input type="button" id="timeReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeRead()" /></td>
                 </tr>
                 <tr>
-                  <td>计算机时钟：</td>
+                  <td align="right" height="30">计算机时钟：</td>
+                  <td align="left"><input id="computerTime" type="text" value="" style="width: 240px; height: 24px;" /></td>
+                  <td align="center"><input type="button" id="timeSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeSetup()" /></td>
                 </tr>
               </table>
             </div>
             <div id="statusSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td></td>
+                  <td align="left" width="20%" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte1" name="funcSetupByte" /> 欠压保护功能 </td>
+                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte2" name="funcSetupByte" /> 过压保护功能 </td>
+                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte3" name="funcSetupByte" /> 突变保护功能 </td>
+                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte4" name="funcSetupByte" /> 缓变保护功能 </td>
+                  <td align="center" width="20%"><input type="button" id="funcSetupByteReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteRead()" /></td>
                 </tr>
                 <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
+                  <td align="left" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" /> 特波保护功能 </td>
+                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" /> 自动跟踪功能 </td>
+                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" /> 告警功能 </td>
+                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值  </td>
+                  <td align="center"><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteSetup()" /></td>
                 </tr>
               </table>
             </div>
             <div id="paramsSetup" style="width: 100%; height: 90; margin: 3px; background-color: #dff0f1;">
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td></td>
+                  <td align="right" width="22%" height="30">剩余电流档位：</td>
+                  <td align="left" width="28%">
+                    <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>自动挡</option>
+                    </select>
+                  </td>
+                  <td align="right" width="22%">漏电分断延迟档位：</td>
+                  <td align="left" width="28%">
+                    <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                  </td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td align="right" height="30">剩余电流当前档位值：</td>
+                  <td align="left">
+                    <select rci="8000C04F" rdi="8000C04F07" style="width: 120px; height: 24px;">
+                      <option>100</option>
+                      <option>300</option>
+                      <option>500</option>
+                      <option>800</option>
+                      <option>自动挡</option>
+                    </select>
+                  </td>
+                  <td align="right">漏电分断延迟时间值：</td>
+                  <td align="left">
+                    <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 100px; height: 20px;" /> ms
+                  </td>
                 </tr>
                 <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
+                  <td align="right" height="30">额定负载电流档位值：</td>
+                  <td align="left">
+                    <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="" style="width: 110px; height: 20px;" /> A
+                  </td>
+                  <td align="center" colspan="2">
+                    <input type="button" id="paramsSetupReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="paramsSetupRead()" />
+                    <input type="button" id="paramsSetupSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="paramsSetupSetup()" />
+                  </td>
                 </tr>
               </table>
             </div>
@@ -435,7 +474,7 @@ function remoteTest() {
       <ul class=disNone id=datamenu_Con_1>
         <div class="content">
           <div id="cont_1">
-            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-287));">
+            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-294));">
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>

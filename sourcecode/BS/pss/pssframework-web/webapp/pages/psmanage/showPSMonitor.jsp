@@ -42,7 +42,7 @@ function inquiry() {
             <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-75));">
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="180" height="100%">
+                  <td width="120" height="100%">
                     <iframe id="psTreeFrame" name="psTreeFrame" src="<pss:path type="webapp"/>/pages/psmanage/psTree.jsp?type=psmon" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                   <td width="3" height="100%" style="background-color: #bbdcd8;"></td>
