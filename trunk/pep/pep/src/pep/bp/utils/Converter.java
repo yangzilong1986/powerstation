@@ -4,10 +4,12 @@
 package pep.bp.utils;
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.model.Dto;
@@ -488,7 +490,14 @@ public class Converter {
             packetdata.putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
         }else if (Format.equals("A29")) {
             packetdata.putBcdInt(Long.parseLong(DataItemValue), 1);
+        }else if (Format.equals("DATE_LOUBAO")) {
+            try {
+                packetdata.put(UtilsBp.String2DateArray(DataItemValue, "yyyy-MM-dd hh:mm:ss"));
+            } catch (ParseException ex) {
+                log.error(ex.getMessage());
+            }
         }
+
     }
 
 

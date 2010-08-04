@@ -10,6 +10,7 @@ import pep.bp.model.Dto;
 import pep.bp.model.Dto.DtoItem;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
+import pep.bp.utils.UtilsBp;
 import pep.codec.protocol.gb.PmPacketData;
 
 /**
@@ -131,6 +132,8 @@ public abstract class Decoder {
                 dataItems.put(DataItemCode, String.valueOf(dataBuffer.getA27().getValue()));
             }else if (Format.equals("A29")) {
                 dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBcdInt(1)));
+            }else if (Format.equals("DATE_LOUBAO")) {
+                dataItems.put(DataItemCode, UtilsBp.DateArray2String(dataBuffer.getBytes(7)));
             }
         }
     }
@@ -241,8 +244,10 @@ public abstract class Decoder {
                 } else if (Format.equals("A27")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getA27()));
                 }else if (Format.equals("A29")) {
-                dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBcdInt(1)));
-            }
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBcdInt(1)));
+                }else if (Format.equals("DATE_LOUBAO")) {
+                    dataMap.put(DataItemCode, UtilsBp.DateArray2String(dataBuffer.getBytes(7)));
+                }
             }
     }
 
