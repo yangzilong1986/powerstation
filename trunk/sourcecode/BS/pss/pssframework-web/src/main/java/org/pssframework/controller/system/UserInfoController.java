@@ -50,6 +50,8 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	private static final String VIEW_QUERY = "/system/userList";
 	private static final String VIEW_DETAIL = "/system/userDetail";
 	private static final String VIEW_EDIT = "/system/editUserPage";
+
+
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
