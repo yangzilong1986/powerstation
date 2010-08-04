@@ -12,7 +12,7 @@
 		<s:intercept-url pattern="/scripts/**" filters="none" />
 		<s:intercept-url pattern="/style/default/bgcorlor/**" filters="none" />
 		<s:intercept-url pattern="/style/default/container/*.jsp" access="isAuthenticated()" />
-		<s:form-login login-page="/security/login" default-target-url="/style/default/container/main.jsp" authentication-failure-url="/security/login?error=1" />
+		<s:form-login login-page="/security/login" default-target-url="/homepage/main" authentication-failure-url="/security/login?error=1" />
 		<s:logout logout-success-url="/security/login" />
 		<s:session-management invalid-session-url="/security/login?error=3">
 			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
