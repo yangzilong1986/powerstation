@@ -140,7 +140,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                             converter.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                         }
                     }
-
+                    pack.getDataAsPmPacketData().rewind();
                     packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
                     packet.getDataBuffer().put(pack.getValue());
 
