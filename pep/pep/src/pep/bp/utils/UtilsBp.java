@@ -6,6 +6,7 @@
 package pep.bp.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -17,6 +18,13 @@ public class UtilsBp {
         SimpleDateFormat sDateFormat   =   new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String date = sDateFormat.format(new java.util.Date());
         return date;
+
+    }
+
+    public static String Date2String(Date date){
+        SimpleDateFormat sDateFormat   =   new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateStr = sDateFormat.format(date);
+        return dateStr;
 
     }
 }

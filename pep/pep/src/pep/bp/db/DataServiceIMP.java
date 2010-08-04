@@ -5,7 +5,6 @@
 
 package pep.bp.db;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.Dto;
 import pep.bp.model.Dto.DtoItem;
+import pep.bp.utils.UtilsBp;
 import pep.codec.protocol.gb.gb376.Packet376Event36;
 import pep.codec.protocol.gb.gb376.Packet376Event36.Meter;
 import pep.codec.protocol.gb.gb376.PmPacket376EventBase;
@@ -81,7 +81,7 @@ public class DataServiceIMP implements DataService{
 
     @Override
      public void insertEvent(String rtua, PmPacket376EventBase event){
-        this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), event.getEventTime());
+        this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), UtilsBp.Date2String(event.getEventTime()));
     }
 
 
