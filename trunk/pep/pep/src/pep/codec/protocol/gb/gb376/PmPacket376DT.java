@@ -42,7 +42,7 @@ public class PmPacket376DT implements PmPacketDT {
         return value;
     }
 
-    public PmPacket376DT setFn(int fn){
+    public final PmPacket376DT setFn(int fn){
         if (fn>0){
             value[0] = (byte)(1 << ((fn-1)%8));
             value[1] = (byte)(fn/8);
@@ -57,7 +57,7 @@ public class PmPacket376DT implements PmPacketDT {
 
     @Override
     public String toString(){
-        StringBuffer buff = new StringBuffer();
+        StringBuilder buff = new StringBuilder();
         buff.append("fn=").append(this.getFn());
         return buff.toString();
     }
