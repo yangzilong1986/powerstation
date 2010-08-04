@@ -187,7 +187,7 @@ var contextPath  = '${ctx}';
   
   <!-- 操作员信息 -->
     <div class="mgt10 da_top"><span>操作员信息</span>
-  <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+  <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
     height="16" style="cursor: pointer;" /></a></h1>
   </div>
   <div class="da_con">
@@ -497,5 +497,48 @@ updateTermInfo=function(termId){
      windowPopup(url, 960, 575);
 }
 /*******************************************************************/
+  //打开新增台区操作员页面
+ function openUser(tgId){
+    
+    if(!$("#tgId").val()){
+      alert("请先建台区");return;
+    }
+  var url = contextPath + "/archive/userinfo/new?tgId=" +$("#tgId").val();
+  windowPopup(url, 960, 575);
+} 
+ 
+deleteTermInfo=function(termId){
+   if(termId==null || termId ==""){
+     return;
+   } 
+
+   var url = "${ctx}/archive/terminalinfo/"+termId+".json?_method=delete";
+   if (confirm("确定要删除该集中器?")) {
+       $.ajax({
+           url: url,
+           dataType:'json',
+           type:'POST',
+           cache: false,
+           success: function(json) {
+               var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+               alert(msg);
+               if(isSucc){
+                $("#term_"+termId).remove();
+               }
+           },error:function(e) {
+               alert("delete error");
+               alert(e.message);
+           }
+       });
+   }
+  }
+
+updateTermInfo=function(termId){
+     var url = "${ctx}/archive/terminalinfo/"+termId+"/edit?tgId="+$("#tgId").val();
+     windowPopup(url, 960, 575);
+}
+/*******************************************************************/
+
 </script>
 </html>
