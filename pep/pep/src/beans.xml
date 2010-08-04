@@ -64,7 +64,15 @@
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
-    <bean id="eccurv_DataStoredProcedure" class="pep.bp.db.ECCURV_DataStoredProcedure">
+    <bean id="eccurvStoredProcedure" class="pep.bp.db.ECCURV_DataStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eventStoredProcedure" class="pep.bp.db.EventStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="louBaoEventStoredProcedure" class="pep.bp.db.LouBaoEventStoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
@@ -81,6 +89,9 @@
     <bean id="dataService" class="pep.bp.db.DataServiceIMP">
         <property name="dataSource" ref="dataSource" />
         <property name="actStoredProcedure" ref="actDataStoredProcedure" />
+        <property name="eccurvStoredProcedure" ref="eccurvStoredProcedure" />
+        <property name="eventStoredProcedure" ref="eventStoredProcedure" />
+        <property name="loubaoEventStoredProcedure" ref="louBaoEventStoredProcedure" />
 
     </bean>
 

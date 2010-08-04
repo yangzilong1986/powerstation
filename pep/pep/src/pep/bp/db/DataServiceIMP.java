@@ -6,6 +6,7 @@
 package pep.bp.db;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.Dto;
 import pep.bp.model.Dto.DtoItem;
 import pep.codec.protocol.gb.gb376.Packet376Event36;
+import pep.codec.protocol.gb.gb376.Packet376Event36.Meter;
 import pep.codec.protocol.gb.gb376.PmPacket376EventBase;
 
 /**
@@ -30,6 +32,9 @@ public class DataServiceIMP implements DataService{
 
     private ACTDataStoredProcedure actStoredProcedure;
     private ECCURV_DataStoredProcedure eccurvStoredProcedure;
+
+    private EventStoredProcedure eventStoredProcedure;
+    private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -66,13 +71,17 @@ public class DataServiceIMP implements DataService{
      }
 
     @Override
-    public void insertLBEvent(Packet376Event36 event){
-
+    public void insertLBEvent(String rtua, Packet376Event36 event){
+        List<Meter> Meters = event.meters;
+        for(Meter meter:Meters){
+            this.loubaoEventStoredProcedure.execute(rtua, meter.meterAddress,
+                    event.GetEventCode(), event.getEventTime(), new Date(), meter.isClosed, meter.isLocked, meter.xiangwei, meter.actValue);
+        }
     }
 
     @Override
-     public void insertEvent(PmPacket376EventBase event){
-        
+     public void insertEvent(String rtua, PmPacket376EventBase event){
+        this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), event.getEventTime());
     }
 
 
@@ -138,6 +147,34 @@ public class DataServiceIMP implements DataService{
      */
     public void setEccurvStoredProcedure(ECCURV_DataStoredProcedure eccurvStoredProcedure) {
         this.eccurvStoredProcedure = eccurvStoredProcedure;
+    }
+
+    /**
+     * @return the eventStoredProcedure
+     */
+    public EventStoredProcedure getEventStoredProcedure() {
+        return eventStoredProcedure;
+    }
+
+    /**
+     * @param eventStoredProcedure the eventStoredProcedure to set
+     */
+    public void setEventStoredProcedure(EventStoredProcedure eventStoredProcedure) {
+        this.eventStoredProcedure = eventStoredProcedure;
+    }
+
+    /**
+     * @return the loubaoEventStoredProcedure
+     */
+    public LouBaoEventStoredProcedure getLoubaoEventStoredProcedure() {
+        return loubaoEventStoredProcedure;
+    }
+
+    /**
+     * @param loubaoEventStoredProcedure the loubaoEventStoredProcedure to set
+     */
+    public void setLoubaoEventStoredProcedure(LouBaoEventStoredProcedure loubaoEventStoredProcedure) {
+        this.loubaoEventStoredProcedure = loubaoEventStoredProcedure;
     }
 
 }
