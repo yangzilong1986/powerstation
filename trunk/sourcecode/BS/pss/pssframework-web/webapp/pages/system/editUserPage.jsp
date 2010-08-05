@@ -12,15 +12,16 @@
 <script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 </head>
 <body>
-<form:form action="/system/user" onsubmit="return submitDisposal(this);" method="post" target="hideframe" modelAttribute="user">
+<form:form action="/system/user" onsubmit="return submitDisposal(this);" method="post" target="hideframe"
+	modelAttribute="user">
 	<div id="divUser" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
-	<div class="tab3">
+	<div id="bg">
 	<ul id=datamenu_Option class="cb font1">
-		<li class="tab_on"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
+		<li class="curr"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
 			code="system.user.czyxx" /></a></li>
-		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
-		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
-		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+		<li><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
 	</ul>
 	</div>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -31,26 +32,26 @@
 		</tr>
 		<tr>
 			<td class="contentLeft"></td>
-			<td bgcolor="#FFFFFF" colspan="3">
+			<td bgcolor="#FFFFFF" colspan="3" align="center">
 			<table width="99%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td width="15%" height="30" align="right"><spring:message code="system.user.zh" />：<font color="#ff0000">*</font></td>
-					<td width="30%" align="left"><form:input path="staffNo" /></td>
-					<td width="15%" height="30" align="right"><spring:message code="system.user.mc" />：<font color="#ff0000">*</font></td>
-					<td width="30%" align="left"><form:input path="name" /></td>
+					<td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.zh" />：</td>
+					<td width="30%" align="left"><form:input path="staffNo" cssStyle="width:150"/></td>
+					<td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.mc" />：</td>
+					<td width="30%" align="left"><form:input path="name" cssStyle="width:150"/></td>
 				</tr>
 				<tr>
-					<td align="right"><spring:message code="system.user.mm" />：<font color="#ff0000">*</font></td>
-					<td align="left"><form:password path="passwd" showPassword="true" /></td>
-					<td align="right"><spring:message code="system.user.qrmm" />：<font color="#ff0000">*</font></td>
-					<td align="left"><input type="password" name="passwd" id="passwd_rep" value="${user.passwd}"></td>
+					<td align="right"><font color="#ff0000">*</font><spring:message code="system.user.mm" />：</td>
+					<td align="left"><form:password path="passwd" showPassword="true" cssStyle="width:150"/></td>
+					<td align="right"><font color="#ff0000">*</font><spring:message code="system.user.qrmm" />：</td>
+					<td align="left"><input type="password" name="passwd" id="passwd_rep" value="${user.passwd}" style="width:150"></td>
 				</tr>
 				<tr>
 					<td align="right"><spring:message code="system.user.ssdw" />：</td>
 					<td align="left"><form:select path="orgInfo.orgId" items="${orgInfo}" disabled="${disabled}" id="orgId"
 						itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
 					<td align="right"><spring:message code="system.user.dh" />：</td>
-					<td align="left"><form:input path="mobile"/> </td>
+					<td align="left"><form:input path="mobile" cssStyle="width:150"/></td>
 				</tr>
 				<tr>
 					<td align="right"><spring:message code="system.user.zt" />：</td>
@@ -71,13 +72,12 @@
 	</table>
 	</div>
 	<div id="divFw" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;">
-	<div class="tab3">
-	<ul class="e_title">
-		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
-			code="system.user.czyxx" /></a></li>
-		<li class="tab_on"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
-		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
-		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	<div id="bg">
+	<ul id=datamenu_Option class="cb font1">
+		<li><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message code="system.user.czyxx" /></a></li>
+		<li class="curr"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
 	</ul>
 	</div>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -88,7 +88,7 @@
 		</tr>
 		<tr>
 			<td class="contentLeft"></td>
-			<td bgcolor="#FFFFFF" colspan="3">
+			<td bgcolor="#FFFFFF" colspan="3" align="center">
 			<div class="tableContainer" style="width: 99%;" align="center">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<thead>
@@ -124,13 +124,12 @@
 	</div>
 	<div id="divGw"
 		style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y: AUTO;">
-	<div class="tab3">
-	<ul class="e_title">
-		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
-			code="system.user.czyxx" /></a></li>
-		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
-		<li class="tab_on"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
-		<li class="tab_off"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	<div id="bg">
+	<ul id=datamenu_Option class="cb font1">
+		<li><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message code="system.user.czyxx" /></a></li>
+		<li><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li class="curr"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
 	</ul>
 	</div>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -141,8 +140,8 @@
 		</tr>
 		<tr>
 			<td class="contentLeft"></td>
-			<td bgcolor="#FFFFFF" colspan="3">
-			<div class="tableContainer" style="width: 99%;">
+			<td bgcolor="#FFFFFF" colspan="3" align="center">
+			<div class="tableContainer" style="width: 99%;" align="center">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr class=trheadStyle>
@@ -176,13 +175,12 @@
 	</div>
 	<div id="divQx"
 		style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; OVERFLOW-Y: AUTO;">
-	<div class="tab3">
-	<ul class="e_title">
-		<li class="tab_off"><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message
-			code="system.user.czyxx" /></a></li>
-		<li class="tab_off"><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
-		<li class="tab_off"><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
-		<li class="tab_on"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
+	<div id="bg">
+	<ul id=datamenu_Option class="cb font1">
+		<li><a href="javascript:showUsernfo();" onfocus="blur()"><spring:message code="system.user.czyxx" /></a></li>
+		<li><a href="javascript:showFw();" onfocus="blur()"><spring:message code="system.user.ywfw" /></a></li>
+		<li><a href="javascript:showGw();" onfocus="blur()"><spring:message code="system.user.gwjs" /></a></li>
+		<li class="curr"><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li>
 	</ul>
 	</div>
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -193,7 +191,7 @@
 		</tr>
 		<tr>
 			<td class="contentLeft"></td>
-			<td bgcolor="#FFFFFF" colspan="3">
+			<td bgcolor="#FFFFFF" colspan="3" align="center">
 			<div class="tableContainer" style="width: 99%;">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<thead>
