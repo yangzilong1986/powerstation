@@ -239,7 +239,7 @@ public class UserInfo extends BaseEntity {
 	//非持久化属性.
 	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.convertElementPropertyToString(roleInfoList, "name", ", ");
+		return ReflectionUtils.convertElementPropertyToString(roleInfoList, "roleName", ", ");
 	}
 
 	/**

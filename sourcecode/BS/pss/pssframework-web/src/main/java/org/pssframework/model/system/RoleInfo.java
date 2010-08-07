@@ -65,7 +65,7 @@ public class RoleInfo extends BaseEntity {
 
 	// ROLE_REMARK VARCHAR2(256),
 	@Column(length = 256, name = "ROLE_REMARK")
-	private String rolePemark;
+	private String roleRemark;
 
 	// ROLE_TYPE VARCHAR2(5), is '见编码ROLE_TYPE1 - 岗位角色（主要对应应用功能）2 -
 	// 操作权限（如档案查询，档案维护） 3 - 系统对象（所能操作系统对象）
@@ -93,10 +93,6 @@ public class RoleInfo extends BaseEntity {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<AuthorityInfo> authorityInfoList = Lists.newArrayList();
 
-	public List<AuthorityInfo> getAuthorityInfoList() {
-		return authorityInfoList;
-	}
-
 	@ManyToMany
 	@JoinTable(name = "O_ROLE_FUN", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "FUN_ID") })
 	@Fetch(FetchMode.SUBSELECT)
@@ -104,25 +100,27 @@ public class RoleInfo extends BaseEntity {
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<ResourceInfo> resourceInfoList = Lists.newArrayList();
 
+	@Transient
+	@SuppressWarnings("unchecked")
+	public List<Long> getAuthIds() {
+		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToList(authorityInfoList, "id");
+	}
+
+	@Transient
+	public String getAuthNames() {
+		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToString(authorityInfoList, "name",
+				", ");
+	}
+
+	public List<AuthorityInfo> getAuthorityInfoList() {
+		return authorityInfoList;
+	}
+
 	/**
 	 * @return the creator
 	 */
 	public String getCreator() {
 		return creator;
-	}
-
-	/**
-	 * @param authorityInfoList the authorityInfoList to set
-	 */
-	public void setAuthorityInfoList(List<AuthorityInfo> authorityInfoList) {
-		this.authorityInfoList = authorityInfoList;
-	}
-
-	/**
-	 * @param resourceInfoList the resourceInfoList to set
-	 */
-	public void setResourceInfoList(List<ResourceInfo> resourceInfoList) {
-		this.resourceInfoList = resourceInfoList;
 	}
 
 	/**
@@ -139,6 +137,10 @@ public class RoleInfo extends BaseEntity {
 		return lasttimeStamp;
 	}
 
+	public List<ResourceInfo> getResourceInfoList() {
+		return this.resourceInfoList;
+	}
+
 	/**
 	 * @return the roleId
 	 */
@@ -153,11 +155,8 @@ public class RoleInfo extends BaseEntity {
 		return roleName;
 	}
 
-	/**
-	 * @return the rolePemark
-	 */
-	public String getRolePemark() {
-		return rolePemark;
+	public String getRoleRemark() {
+		return roleRemark;
 	}
 
 	/**
@@ -170,6 +169,13 @@ public class RoleInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * @param authorityInfoList the authorityInfoList to set
+	 */
+	public void setAuthorityInfoList(List<AuthorityInfo> authorityInfoList) {
+		this.authorityInfoList = authorityInfoList;
 	}
 
 	/**
@@ -194,6 +200,13 @@ public class RoleInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param resourceInfoList the resourceInfoList to set
+	 */
+	public void setResourceInfoList(List<ResourceInfo> resourceInfoList) {
+		this.resourceInfoList = resourceInfoList;
+	}
+
+	/**
 	 * @param roleId the roleId to set
 	 */
 	public void setRoleId(Long roleId) {
@@ -207,11 +220,8 @@ public class RoleInfo extends BaseEntity {
 		this.roleName = roleName;
 	}
 
-	/**
-	 * @param rolePemark the rolePemark to set
-	 */
-	public void setRolePemark(String rolePemark) {
-		this.rolePemark = rolePemark;
+	public void setRoleRemark(String roleRemark) {
+		this.roleRemark = roleRemark;
 	}
 
 	/**
@@ -224,22 +234,6 @@ public class RoleInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	@Transient
-	public String getAuthNames() {
-		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToString(authorityInfoList, "name",
-				", ");
-	}
-
-	@Transient
-	@SuppressWarnings("unchecked")
-	public List<Long> getAuthIds() {
-		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToList(authorityInfoList, "id");
-	}
-
-	public List<ResourceInfo> getResourceInfoList() {
-		return this.resourceInfoList;
 	}
 
 }

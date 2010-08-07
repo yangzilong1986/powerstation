@@ -7,7 +7,8 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUC
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
-import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
 import java.util.HashMap;
@@ -22,9 +23,11 @@ import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.model.system.RoleInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.service.system.RoleInfoManager;
 import org.pssframework.service.system.UserInfoManager;
 import org.pssframework.support.system.SystemConst;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +113,8 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 
 		result.addAttribute("orgInfo", getOrgInfo());
 
+		result.addAttribute("roleNames", userInfo.getRoleNames());
+
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
 		return VIEW_DETAIL;
@@ -132,34 +137,74 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 
 		result.addAttribute("userStat", getCodeInfo(codeMap));
 
+		result.addAttribute("roleInfos", getTotalRoleInfos(id));
+
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
 		return VIEW_EDIT;
 	}
 
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap model, @Valid UserInfo userInfo, BindingResult errors, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		this.logger.debug("user.{}", "create");
+		boolean isSucc = true;
+		String msg = MSG_CREATED_SUCCESS;
+		Long userId = 0L;
+		try {
+
+			this.userInfoManager.saveOrUpdate(userInfo);
+
+			userId = userInfo.getEmpNo();
+
+		} catch (Exception e) {
+
+			isSucc = false;
+
+			msg = MSG_CREATED_FAIL;
+
+			logger.debug(e.getMessage());
+
+		}
+
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg)
+				.addAttribute("userId", userId);
+
+		return VIEW_DETAIL;
+	}
+
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(ModelMap modelMap, @Valid UserInfo userInfo, BindingResult errors, @PathVariable Long id,
+	public String update(ModelMap model, @PathVariable Long id, @Valid UserInfo userinfo, BindingResult errors,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
-		try {
-			logger.debug("bind userInfo {} from request", userInfo);
-
-			UserInfo userInfoDb = this.userInfoManager.getById(id);
-
-			bind(request, userInfoDb);
-
-			this.userInfoManager.saveOrUpdate(userInfoDb);
-
-		} catch (Exception e) {
-			this.logger.error(e.getMessage());
-			isSucc = false;
-			msg = MSG_UPDATE_FAIL;
+		if (errors.hasErrors()) {
+			model.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					errors.getObjectName());
+			return VIEW_DETAIL;
 		}
-		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
-		return VIEW_EDIT;
+		this.logger.debug("user.{},{}", "update", id);
+
+		try {
+			UserInfo userInfo = this.userInfoManager.getById(id);
+			bind(request, userInfo);
+			this.userInfoManager.saveOrUpdate(userInfo);
+			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
+		} catch (Exception e) {
+			this.logger.info(e.getMessage());
+			isSucc = false;
+			msg = e.getMessage();
+			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
+
+		}
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+
+		return VIEW_DETAIL;
+
 	}
 
 	private List<OrgInfo> getOrgInfo() {
@@ -172,4 +217,17 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		List<CodeInfo> codeInfo = codeInfoManager.findByPageRequest(mapCode);
 		return codeInfo;
 	}
+
+	private List<RoleInfo> getTotalRoleInfos(Long id) {
+
+		List<RoleInfo> roleInfos = this.roleInfoManager.findAll();
+		if (id != 0L) {
+			roleInfos.remove(0);
+		}
+		return roleInfos;
+	}
+
+	@Autowired
+	private RoleInfoManager roleInfoManager;
+
 }

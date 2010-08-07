@@ -55,6 +55,13 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 	@Override
 	public void saveOrUpdate(UserInfo entity) {
+		if (isSupervisor(entity.getEmpNo())) {
+			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
+			throw new ServiceException("不能修改超级管理员用户");
+		}
+
+		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
+		entity.setPasswd(shaPassword);
 		userInfoDao.saveOrUpdate(entity);
 	}
 
