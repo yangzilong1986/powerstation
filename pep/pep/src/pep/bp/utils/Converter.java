@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.model.Dto;
@@ -403,9 +402,12 @@ public class Converter {
     }
 
     public void FillDataBuffer(PmPacketData packetdata, String Format, String DataItemValue, String IsGroupEnd, int Length, int bitnumber) {
-        if (Format.equals("BIN")) {
+        if (Format.equals("HEX")) {
             packetdata.putBin(BcdUtils.stringToByte(UtilsBp.lPad(DataItemValue, "0", 2) ), Length);
-        } else if (Format.equals("IPPORT")) {
+        }else if (Format.equals("BIN")) {
+            packetdata.putBin(Integer.parseInt(DataItemValue), Length);
+        }
+        else if (Format.equals("IPPORT")) {
             packetdata.putIPPORT(DataItemValue);
         } else if (Format.equals("IP")) {
             packetdata.putIP(DataItemValue);

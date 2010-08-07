@@ -77,8 +77,32 @@ public class DataServiceIMP implements DataService{
             if(AFN == (byte)0X0D){                         //二类数据
                 if(commandItemCode.equals("100D0081"))
                     this.insert_POWER_CRUV_F81(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));
-
-
+                if(commandItemCode.equals("100D0082"))
+                    this.insert_POWER_CRUV_F82(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301"));
+                if(commandItemCode.equals("100D0083"))
+                    this.insert_POWER_CRUV_F83(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));
+                if(commandItemCode.equals("100D0084"))
+                    this.insert_POWER_CRUV_F84(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303"));
+                if(commandItemCode.equals("100D0085"))
+                    this.insert_POWER_CRUV_F85(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400"));
+                if(commandItemCode.equals("100D0086"))
+                    this.insert_POWER_CRUV_F86(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));
+                if(commandItemCode.equals("100D0087"))
+                    this.insert_POWER_CRUV_F87(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));
+                if(commandItemCode.equals("100D0088"))
+                    this.insert_POWER_CRUV_F88(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));
+                if(commandItemCode.equals("100D0089"))
+                    this.insertData_EC_CURV_F89(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));
+                if(commandItemCode.equals("100D0090"))
+                    this.insertData_EC_CURV_F90(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));
+                if(commandItemCode.equals("100D0091"))
+                    this.insertData_EC_CURV_F91(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));
+                if(commandItemCode.equals("100D0092"))
+                    this.insertData_EC_CURV_F92(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));
+                if(commandItemCode.equals("100D0093"))
+                    this.insertData_EC_CURV_F93(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));
+                if(commandItemCode.equals("100D0094"))
+                    this.insertData_EC_CURV_F94(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));
             }
         }
      }
@@ -155,6 +179,12 @@ public class DataServiceIMP implements DataService{
      private void insertData_EC_CURV_F94(String logicalAddress,int gpSn,String dataDate,
             String ECUR_C){
          this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", ECUR_C, "", "", "", "", "");
+
+     }
+
+     private void insertData_EC_CURV_F95(String logicalAddress,int gpSn,String dataDate,
+            String ECUR_L){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", ECUR_L, "", "", "", "");
 
      }
 
