@@ -38,7 +38,7 @@ public class PmPacket376Factroy {
         ControlCode originControlCode = originalityPack.getControlCode();
         byte funKey = PmPacket376Factroy.getRespFunctionKey(originControlCode.getFunctionKey());
         ControlCode controlCode = pack.getControlCode();
-        controlCode.setFunctionKey(funKey).setIsOrgniger(false).setIsUpDirect(!originControlCode.getIsUpDirect());
+        controlCode.setFunctionKey(funKey).setIsOrgniger(false).setIsUpDirect(false);//永远是下行帧
         if (controlCode.getIsUpDirect()) {
             controlCode.setUpDirectIsAppealCall(false);
         } else {
