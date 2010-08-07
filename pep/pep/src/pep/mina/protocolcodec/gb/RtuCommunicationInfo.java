@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.mina.core.session.IoSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pep.codec.protocol.gb.ControlCode;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.EventCountor;
@@ -38,9 +40,9 @@ public class RtuCommunicationInfo {
     private byte lastEc2;
     private static final byte EC_CALL_HOST_ID = 3;   //读取3类数据时使用的主站ID
     private static final long TIME_OUT = 30 * 1000;
+    private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
     private class SeqPacket {
-
         private int sequence;
         private PmPacket pack;
 
@@ -125,11 +127,14 @@ public class RtuCommunicationInfo {
 
     public void sendPacket(int sequence, PmPacket packet) {
         if (this.getSession() == null) {
+            LOGGER.info("Send packet: "+this.rtua+" not online");
             RtuRespPacketQueue.instance().addPacket(new SequencedPmPacket(sequence, packet, SequencedPmPacket.Status.NOT_ONLINE));
         } else {
             this.unsendPacket.add(new SeqPacket(sequence, packet));
             if (this.idle) {
                 sendNextPacket();
+            } else{
+               LOGGER.info("Send packet: "+this.rtua+" not idle"); 
             }
         }
     }
@@ -152,11 +157,14 @@ public class RtuCommunicationInfo {
         }
     }
 
-    private void doSendPacket() {
+    private synchronized void doSendPacket() {
         this.currentSendTicket = new Date();
         this.currentSendTimes++;
         if (this.currentSendTimes < maxRetryTimes) {
-            this.session.write(this.currentPacket);
+            if (this.session!=null)
+                this.session.write(this.currentPacket);
+            else
+                LOGGER.info("DoSend: "+rtua+" not online");
         } else {
             this.sendNextPacket();
         }
