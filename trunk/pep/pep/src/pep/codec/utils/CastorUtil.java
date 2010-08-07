@@ -112,7 +112,7 @@ public class CastorUtil {
         ProtocolCommandItem CommandItem4 = new ProtocolCommandItem();
         CommandItem4.setCommandCode("10040005");
         CommandItem4.AddDataItem(new ProtocolDataItem("1004000501", 1, "BIN", 0,"消息认证方案号","0"));
-        CommandItem4.AddDataItem(new ProtocolDataItem("1004000502", 2, "BIN", 0,"消息认证方案参数","1"));
+        CommandItem4.AddDataItem(new ProtocolDataItem("1004000502", 2, "HEX", 0,"消息认证方案参数","1"));
 
         ProtocolCommandItem CommandItem5 = new ProtocolCommandItem();
         CommandItem5.setCommandCode("10040007");
@@ -155,7 +155,7 @@ public class CastorUtil {
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001005", 1, "GROUP_BIN", 5,"电能表/交流采样装置通信端口号","1","1"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001006", 1, "BIN", 0,"电能表/交流采样装置通信协议类型","100"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001007", 6, "A12", 0,"电能表/交流采样装置通信地址","0"));
-        CommandItem10.AddDataItem(new ProtocolDataItem("1004001008", 6, "BIN", 0,"电能表/交流采样装置通信密码","0"));
+        CommandItem10.AddDataItem(new ProtocolDataItem("1004001008", 6, "HEX", 0,"电能表/交流采样装置通信密码","0"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001009", 1, "GROUP_BS8", 2,"备用","00","0"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001010", 1, "GROUP_BS8", 6,"电能表/交流采样装置电能费率个数","000001","1"));
         CommandItem10.AddDataItem(new ProtocolDataItem("1004001011", 1, "GROUP_BS8", 4,"备用","0000","0"));
@@ -414,7 +414,7 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem69 = new ProtocolCommandItem();
         CommandItem69.setCommandCode("8000C036");
-        CommandItem69.AddDataItem(new ProtocolDataItem("8000C03601", 1, "BIN", 1,"跳合闸操作","","0"));
+        CommandItem69.AddDataItem(new ProtocolDataItem("8000C03601", 1, "HEX", 1,"跳合闸操作","","0"));
 
         ProtocolCommandItem CommandItem70 = new ProtocolCommandItem();
         CommandItem70.setCommandCode("8000C037");
