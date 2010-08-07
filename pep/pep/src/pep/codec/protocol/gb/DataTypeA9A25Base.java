@@ -45,7 +45,7 @@ public class DataTypeA9A25Base {
     public byte[] getArray() {
         boolean s = this.value < 0;
         long base = s ? -this.value : this.value;
-        byte[] rslt = BcdUtils.intTobcd(this.value, 3);
+        byte[] rslt = BcdUtils.intTobcd(base, 3);
         if (s) {
             rslt[2] |= 0x80;
         }
