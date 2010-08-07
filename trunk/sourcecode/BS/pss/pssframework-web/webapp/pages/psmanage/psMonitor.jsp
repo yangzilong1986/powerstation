@@ -23,8 +23,8 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    //readB66F();
-    //readC04F();
+    readB66F();
+    readC04F();
 });
 
 function StringBuffer() {
@@ -238,15 +238,92 @@ function showResultReadC04F(resultMap) {
     }
 }
 
+// 开关跳闸
 function remoteTriping() {
     
 }
 
+// 开关合闸
 function remoteSwitching() {
     
 }
 
+// 开关试跳
 function remoteTest() {
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C037"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在试验跳...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发试验跳命令失败...');
+            enableOperation();
+        }
+    });
+}
+
+// 时钟读取
+function timeRead() {
+    
+}
+
+// 时钟设置
+function timeSetup() {
+    
+}
+
+// 功能设定字读取
+function funcSetupByteRead() {
+    
+}
+
+// 功能设定字设置
+function funcSetupByteSetup() {
+    
+}
+
+// 读开关全部参数
+function paramsSetupRead() {
+    
+}
+
+// 写开关全部参数
+function paramsSetupSetup() {
     
 }
 </script>
@@ -391,12 +468,12 @@ function remoteTest() {
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="right" width="25%" height="30">当前时钟：</td>
-                  <td align="left" width="55%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 24px;" /></td>
+                  <td align="left" width="55%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 22px;" /></td>
                   <td align="center" width="20%"><input type="button" id="timeReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeRead()" /></td>
                 </tr>
                 <tr>
                   <td align="right" height="30">计算机时钟：</td>
-                  <td align="left"><input id="computerTime" type="text" value="" style="width: 240px; height: 24px;" /></td>
+                  <td align="left"><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /></td>
                   <td align="center"><input type="button" id="timeSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeSetup()" /></td>
                 </tr>
               </table>

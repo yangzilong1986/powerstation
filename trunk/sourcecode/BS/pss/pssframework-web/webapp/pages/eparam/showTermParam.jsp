@@ -98,7 +98,7 @@ function setup() {
     sb_dto.append('{');
     sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"coList":').append('[{');
-    sb_dto.append('"logicalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
     sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
     sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
@@ -201,7 +201,7 @@ function fetchSetupResult(collectId, fetchCount, type) {
 
 function showSetupResult(resultMap, type) {
     var cilist = $("#opcilist").val();
-    var logicalAddr = $("#logicalAddr").val();
+    var logicalAddr = $("#cLogicalAddr").val();
     var mpSn = $("#mpSn").val();
     var ciarray = cilist.split(',');
     var cilistTemp = new StringBuffer();
@@ -242,7 +242,7 @@ function read() {
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects":').append('[{');
-    sb_dto.append('"logicalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
     sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
     sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
@@ -371,7 +371,7 @@ function getSelectedCheckboxs() {
         </div>
         <div style="display: none;">
           <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
-          <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" />
+          <!-- <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" /> -->
           <input type="hidden" id="channelType" name="channelType" value="1" />
           <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
           <input type="hidden" id="pwContent" name="pwContent" value="8888" />

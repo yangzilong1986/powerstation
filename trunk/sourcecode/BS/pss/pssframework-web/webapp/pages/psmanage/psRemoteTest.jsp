@@ -8,7 +8,7 @@
 <title>远程试验跳</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"><!--
 function StringBuffer() {
     this.data = [];
 }
@@ -43,7 +43,11 @@ function remoteTest() {
     sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
     sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C037"');
+    ////sb_dto.append('"identifier":').append('"8000C012"');
+    sb_dto.append('"identifier":').append('"8000C012"').append(',');
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"C012": "2010-08-04 20:34:25"');
+    sb_dto.append('}');
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
@@ -124,7 +128,7 @@ function enableOperation() {
 function initOpResult(msg) {
     $("#resultMsg").html(msg);
 }
-</script>
+--></script>
 </head>
 <body>
 <div style="background: #dbeaeb; border: 1px #add0d5 solid; height:expression((document.documentElement.clientHeight||document.body.clientHeight));">
