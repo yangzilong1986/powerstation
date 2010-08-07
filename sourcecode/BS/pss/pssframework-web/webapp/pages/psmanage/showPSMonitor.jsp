@@ -31,7 +31,7 @@ function inquiry() {
       </table>
     </div>
     <div id="bg" style="height: 30px; text-align: center;">
-      <ul id=”datamenu_Option“ class="cb font1">
+      <ul id="datamenu_Option" class="cb font1">
         <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">漏保监测</li>
       </ul>
     </div>
