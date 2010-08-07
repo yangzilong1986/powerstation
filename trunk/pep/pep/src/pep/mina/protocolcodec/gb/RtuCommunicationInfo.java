@@ -161,10 +161,14 @@ public class RtuCommunicationInfo {
         this.currentSendTicket = new Date();
         this.currentSendTimes++;
         if (this.currentSendTimes < maxRetryTimes) {
-            if (this.session!=null)
+            if (this.session != null) {
                 this.session.write(this.currentPacket);
-            else
-                LOGGER.info("DoSend: "+rtua+" not online");
+            } else {
+                LOGGER.info("DoSend: " + rtua + " not online");
+            }
+            if (!this.currentPacket.getControlCode().getIsOrgniger()) {
+                this.sendNextPacket();
+            }
         } else {
             this.sendNextPacket();
         }
