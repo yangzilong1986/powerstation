@@ -34,7 +34,7 @@ public class AuthorityInfo extends BaseEntity {
 	 */
 	public static final String AUTHORITY_PREFIX = "ROLE_AUTHORITY_";
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, name = "AUTHORITY_NAME")
 	private String authorityName;
 
 	@Column(nullable = false, unique = true, name = "AUTHORITY_ID")

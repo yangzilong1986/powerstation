@@ -62,7 +62,6 @@ import cn.org.rapid_framework.page.PageRequest;
 public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
 
 	private static final String VIEW_QUERY_TG = "/archive/addTgUserInfo";
-	private static final String VIEW = "/archive/userList";
 
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
@@ -92,16 +91,17 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 	@RequestMapping
 	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, TgInfo tgInfo) {
 
-		Long tgid = 0L;
-		if (tgInfo.getTgId() != null) {
-			tgid = tgInfo.getTgId();
-		}
+		tgInfo = this.tgInfoManager.getById(tgInfo.getTgId());
 
-		TgInfo tginfo = this.tgInfoManager.getById(tgid) == null ? new TgInfo() : this.tgInfoManager.getById(tgid);
+		Long orgId = tgInfo.getOrgInfo().getOrgId();
 
-		model.addAttribute("tginfo", tginfo);
+		TgUserQuery baseQuery = new TgUserQuery();
 
-		return VIEW;
+		baseQuery.setOrgId(orgId);
+
+		getUserList(model, request, response, baseQuery);
+
+		return VIEW_QUERY_TG;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -130,7 +130,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		return VIEW;
+		return VIEW_QUERY_TG;
 	}
 
 	/** 删除 */
@@ -149,7 +149,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
-		return VIEW;
+		return VIEW_QUERY_TG;
 	}
 
 	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
@@ -185,7 +185,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg)
 				.addAttribute("tgId", tgId);
 
-		return VIEW;
+		return VIEW_QUERY_TG;
 	}
 
 	/** 编辑 */
@@ -205,7 +205,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
-		return VIEW;
+		return VIEW_QUERY_TG;
 	}
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
@@ -237,7 +237,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
-		return VIEW;
+		return VIEW_QUERY_TG;
 	}
 
 	/** 显示 */
@@ -259,7 +259,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
 
-		return VIEW;
+		return VIEW_QUERY_TG;
 
 	}
 
@@ -279,16 +279,6 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 	public ModelAndView tgUserlist(@PathVariable Long tgid, ModelAndView modelAndView, HttpServletRequest request,
 			HttpServletResponse response, UserInfo userInfo) {
 
-		TgUserQuery baseQuery = new TgUserQuery();
-
-		TgInfo tgInfo = tgInfoManager.getById(tgid);
-
-		baseQuery.setOrgId(tgInfo.getOrgInfo().getOrgId());
-
-		getUserList(modelAndView, request, response, baseQuery);
-
-		modelAndView.setViewName(VIEW_QUERY_TG);
-
 		return modelAndView;
 	}
 
@@ -302,18 +292,18 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void getUserList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+	private void getUserList(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
 			BaseQuery baseQuery) {
 
 		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
 
 		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
 
-		modelAndView.addObject("orgInfo", getOrgInfo());
+		modelMap.addAttribute("orgInfo", getOrgInfo());
 
-		modelAndView.addObject("page", page);
+		modelMap.addAttribute("page", page);
 
-		modelAndView.addObject("pageRequest", pageRequest);
+		modelMap.addAttribute("pageRequest", pageRequest);
 
 	}
 
