@@ -404,7 +404,7 @@ public class Converter {
 
     public void FillDataBuffer(PmPacketData packetdata, String Format, String DataItemValue, String IsGroupEnd, int Length, int bitnumber) {
         if (Format.equals("BIN")) {
-            packetdata.putBin(BcdUtils.stringToByte(DataItemValue), Length);
+            packetdata.putBin(BcdUtils.stringToByte(UtilsBp.lPad(DataItemValue, "0", 2) ), Length);
         } else if (Format.equals("IPPORT")) {
             packetdata.putIPPORT(DataItemValue);
         } else if (Format.equals("IP")) {

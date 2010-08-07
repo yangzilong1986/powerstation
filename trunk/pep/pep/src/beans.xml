@@ -64,6 +64,10 @@
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
+    <bean id="powerCurvStoredProcedure" class="pep.bp.db.PowerCurv_DataStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
     <bean id="eccurvStoredProcedure" class="pep.bp.db.ECCURV_DataStoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
@@ -92,6 +96,8 @@
         <property name="eccurvStoredProcedure" ref="eccurvStoredProcedure" />
         <property name="eventStoredProcedure" ref="eventStoredProcedure" />
         <property name="loubaoEventStoredProcedure" ref="louBaoEventStoredProcedure" />
+        <property name="powerCurvStoredProcedure" ref="powerCurvStoredProcedure" />
+        
 
     </bean>
 
