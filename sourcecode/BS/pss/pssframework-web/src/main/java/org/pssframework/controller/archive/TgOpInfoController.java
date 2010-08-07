@@ -61,7 +61,7 @@ import cn.org.rapid_framework.page.PageRequest;
 @RequestMapping("/archive/tgopinfo")
 public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
 
-	private static final String VIEW_QUERY_TG = "/archive/userList";
+	private static final String VIEW_QUERY_TG = "/archive/addTgUserInfo";
 	private static final String VIEW = "/archive/userList";
 
 	// 默认多列排序,example: username desc,createTime asc
