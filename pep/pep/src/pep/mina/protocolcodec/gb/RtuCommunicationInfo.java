@@ -43,6 +43,7 @@ public class RtuCommunicationInfo {
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
     private class SeqPacket {
+
         private int sequence;
         private PmPacket pack;
 
@@ -127,15 +128,16 @@ public class RtuCommunicationInfo {
 
     public void sendPacket(int sequence, PmPacket packet) {
         //if (this.getSession() == null) {
-            //LOGGER.info("Send packet: "+this.rtua+" not online");
-            //RtuRespPacketQueue.instance().addPacket(new SequencedPmPacket(sequence, packet, SequencedPmPacket.Status.NOT_ONLINE));
+        //LOGGER.info("Send packet: "+this.rtua+" not online");
+        //RtuRespPacketQueue.instance().addPacket(new SequencedPmPacket(sequence, packet, SequencedPmPacket.Status.NOT_ONLINE));
         //} else {
-            this.unsendPacket.add(new SeqPacket(sequence, packet));
-            if (this.idle) {
-                sendNextPacket();
-            } else{
-               LOGGER.info("Send packet: "+this.rtua+" not idle"); 
-            }
+        this.unsendPacket.add(new SeqPacket(sequence, packet));
+        if (this.idle) {
+            sendNextPacket();
+        } else {
+            LOGGER.info("Send packet: " + this.rtua + " not idle, sequence="+sequence+
+                    ", pack="+packet.toString());
+        }
         //}
     }
 
@@ -158,20 +160,25 @@ public class RtuCommunicationInfo {
     }
 
     private synchronized void doSendPacket() {
-        this.currentSendTicket = new Date();
-        this.currentSendTimes++;
-        if (this.currentSendTimes < maxRetryTimes) {
-            if (this.session != null) {
-                this.session.write(this.currentPacket);
+        if (this.currentPacket == null) {
+            this.sendNextPacket();
+        } else {
+            this.currentSendTicket = new Date();
+            this.currentSendTimes++;
+            if (this.currentSendTimes < maxRetryTimes) {
+                if (this.session != null) {
+                    this.session.write(this.currentPacket);
+                } else {
+                    LOGGER.info("DoSend: " + rtua + " not online, sequence="+
+                            this.currentSequence+", pack="+this.currentPacket.toString());
+                }
+
+                if (!this.currentPacket.getControlCode().getIsOrgniger()) {
+                    this.sendNextPacket();
+                }
             } else {
-                LOGGER.info("DoSend: " + rtua + " not online");
-            }
-            
-            if (!this.currentPacket.getControlCode().getIsOrgniger()) {
                 this.sendNextPacket();
             }
-        } else {
-            this.sendNextPacket();
         }
     }
 
@@ -180,7 +187,9 @@ public class RtuCommunicationInfo {
      * 向所有Rtu通讯对象发送到达重复检查点消息
      */
     public void checkNotResponed(Date checkTime) {
-        if (this.currentSendTicket==null) return;
+        if (this.currentSendTicket == null) {
+            return;
+        }
         if (checkTime.getTime() - this.currentSendTicket.getTime() >= RtuCommunicationInfo.TIME_OUT) {
             if (this.currentSendTimes == this.maxRetryTimes) {
                 RtuRespPacketQueue.instance().addPacket(
