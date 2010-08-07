@@ -19,8 +19,9 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
-	private static final String PAGE_USER_INFO = "from UserInfo t ";
+	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 " + "/~ and t.orgInfo.orgId = '[orgId]' ~/";
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Class getEntityClass() {
 		// TODO Auto-generated method stub
@@ -39,6 +40,7 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 		return (object == null);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
 		return pageQuery(PAGE_USER_INFO, pageRequest);
 	}

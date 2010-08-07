@@ -51,7 +51,6 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	private static final String VIEW_DETAIL = "/system/userDetail";
 	private static final String VIEW_EDIT = "/system/editUserPage";
 
-
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
@@ -70,24 +69,33 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		return modelAndView;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "list")
-	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+	@RequestMapping(value = "/list")
+	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
 			UserInfo userInfo) {
 
 		BaseQuery baseQuery = new BaseQuery();
+
+		getUserList(modelAndView, request, response, baseQuery);
+
+		modelAndView.setViewName(VIEW_QUERY);
+
+		return modelAndView;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void getUserList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+			BaseQuery baseQuery) {
 
 		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
 
 		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
 
+		modelAndView.addObject("orgInfo", getOrgInfo());
+
 		modelAndView.addObject("page", page);
 
 		modelAndView.addObject("pageRequest", pageRequest);
 
-		modelAndView.setViewName(VIEW_QUERY);
-
-		return modelAndView;
 	}
 
 	/**显示
@@ -108,6 +116,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	}
 
 	/** 编辑 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
@@ -158,6 +167,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		return orgInfoList;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private List<CodeInfo> getCodeInfo(Map mapCode) {
 		List<CodeInfo> codeInfo = codeInfoManager.findByPageRequest(mapCode);
 		return codeInfo;
