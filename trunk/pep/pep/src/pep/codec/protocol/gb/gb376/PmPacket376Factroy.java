@@ -53,7 +53,7 @@ public class PmPacket376Factroy {
         Seq packSeq = pack.getSeq();
         packSeq.setIsFirstFrame(true).setIsFinishFrame(true).setIsNeedCountersign(false);
         packSeq.setIsTpvAvalibe(originSeq.getIsTpvAvalibe());
-        packSeq.setSeq(originSeq.getSeq());
+        packSeq.setSeq(originSeq.getSeq( ));
         if (originSeq.getIsTpvAvalibe()) {
             pack.setTpv(originalityPack.getTpv());
         }
