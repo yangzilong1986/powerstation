@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Date;
 import java.util.Timer;
+import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 //import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -37,6 +38,7 @@ public class Main {
         acceptor.setHandler(serverIoHandle);
         acceptor.bind();
         System.out.println("SG376 server is listenig at port " + PORT);
+        System.out.println("Idle Timeout "+acceptor.getSessionConfig().getIdleTime(IdleStatus.BOTH_IDLE));
 
         Timer checkTimer = new Timer();
         RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker(rtuMap);
