@@ -32,6 +32,7 @@ public class DataServiceIMP implements DataService{
 
     private ACTDataStoredProcedure actStoredProcedure;
     private ECCURV_DataStoredProcedure eccurvStoredProcedure;
+    private PowerCurv_DataStoredProcedure powerCurvStoredProcedure;
 
     private EventStoredProcedure eventStoredProcedure;
     private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
@@ -53,7 +54,7 @@ public class DataServiceIMP implements DataService{
             DtoItem  dtoItem = (DtoItem)dtoItems.get(i);
             String commandItemCode = dtoItem.commandItemCode;
             Map<String,String> dataItemMap = dtoItem.dataMap;
-            if(AFN == (byte)0X0C){
+            if(AFN == (byte)0X0C){                             //一类数据
                 if(commandItemCode.equals("100C0129")){
                     insertData_P_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("0100"),dataItemMap.get("0101"),
@@ -65,7 +66,19 @@ public class DataServiceIMP implements DataService{
                                      dataItemMap.get("2201"),dataItemMap.get("2202"),dataItemMap.get("2203"),
                                      dataItemMap.get("2204"),"",dataItemMap.get("2101"),
                                      dataItemMap.get("2102"),dataItemMap.get("2103"));
+
+                    this.insert_POWER_CRUV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                            dataItemMap.get("2300"),dataItemMap.get("2301"),dataItemMap.get("2302"),
+                            dataItemMap.get("2303"),dataItemMap.get("2400"),dataItemMap.get("2401"),
+                            dataItemMap.get("2402"),dataItemMap.get("2403"));
                 }
+            }
+
+            if(AFN == (byte)0X0D){                         //二类数据
+                if(commandItemCode.equals("100D0081"))
+                    this.insert_POWER_CRUV_F81(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));
+
+
             }
         }
      }
@@ -104,6 +117,89 @@ public class DataServiceIMP implements DataService{
     {
         try {
             this.eccurvStoredProcedure.execute(logicalAddress,gpSn, dataDate, ECUR_A, ECUR_B, ECUR_C, ECUR_L, ECUR_S, VOLT_A, VOLT_B, VOLT_C);
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+        }
+    }
+
+     private void insertData_EC_CURV_F89(String logicalAddress,int gpSn,String dataDate,
+            String VOLT_A){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", VOLT_A, "", "");
+
+     }
+
+     private void insertData_EC_CURV_F90(String logicalAddress,int gpSn,String dataDate,
+            String VOLT_B){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", VOLT_B, "");
+
+     }
+
+     private void insertData_EC_CURV_F91(String logicalAddress,int gpSn,String dataDate,
+            String VOLT_C){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", "", VOLT_C);
+
+     }
+
+     private void insertData_EC_CURV_F92(String logicalAddress,int gpSn,String dataDate,
+            String ECUR_A){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, ECUR_A, "", "", "", "", "", "", "");
+
+     }
+
+     private void insertData_EC_CURV_F93(String logicalAddress,int gpSn,String dataDate,
+            String ECUR_B){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", ECUR_B, "", "", "", "", "", "");
+
+     }
+
+     private void insertData_EC_CURV_F94(String logicalAddress,int gpSn,String dataDate,
+            String ECUR_C){
+         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", ECUR_C, "", "", "", "", "");
+
+     }
+
+    private void insert_POWER_CRUV_F81(String logicalAddress,int gpSn,String dataDate,String act_power_total){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, act_power_total, "", "", "", "", "", "", "");
+    }
+
+    private void insert_POWER_CRUV_F82(String logicalAddress,int gpSn,String dataDate,String act_power_a){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", act_power_a, "", "", "", "", "", "");
+    }
+
+    private void insert_POWER_CRUV_F83(String logicalAddress,int gpSn,String dataDate,String act_power_b){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", act_power_b, "", "", "", "", "");
+    }
+
+    private void insert_POWER_CRUV_F84(String logicalAddress,int gpSn,String dataDate,String act_power_c){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", act_power_c, "", "", "", "");
+    }
+
+    private void insert_POWER_CRUV_F85(String logicalAddress,int gpSn,String dataDate,String react_power_total){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", react_power_total, "", "", "");
+    }
+
+    private void insert_POWER_CRUV_F86(String logicalAddress,int gpSn,String dataDate,String react_power_a){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", react_power_a, "", "");
+    }
+
+    private void insert_POWER_CRUV_F87(String logicalAddress,int gpSn,String dataDate,String react_power_b){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", react_power_b, "");
+    }
+
+    private void insert_POWER_CRUV_F88(String logicalAddress,int gpSn,String dataDate,String react_power_c){
+        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", "", react_power_c);
+    }
+
+    //功率曲线
+    private void insert_POWER_CRUV(String logicalAddress,int gpSn,String dataDate,
+            String act_power_total,String act_power_a,String act_power_b,
+            String act_power_c,String react_power_total,String react_power_a,
+            String react_power_b,String react_power_c)
+    {
+        try {
+            this.powerCurvStoredProcedure.execute(logicalAddress,gpSn, dataDate,
+                    act_power_total, act_power_a, act_power_b, act_power_c,
+                    react_power_total, react_power_a, react_power_b, react_power_c);
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }
