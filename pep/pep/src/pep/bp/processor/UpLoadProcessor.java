@@ -39,7 +39,7 @@ public class UpLoadProcessor extends BaseProcessor {
         dataService = (DataService) cxt.getBean(SystemConst.DATASERVICE_BEAN);
         upLoadQueue = pepCommunicator.getRtuAutoUploadPacketQueueInstance();
         this.pepCommunicator = pepCommunicator;
-        this.converter = (Converter)cxt.getBean("converter");
+        this.converter = (Converter) cxt.getBean("converter");
     }
 
     @Override
@@ -56,19 +56,17 @@ public class UpLoadProcessor extends BaseProcessor {
                 } else {
                     log.error("收到不支持的主动上送报文类" + packet.toString());
                 }
-            } catch (InterruptedException ex){
+            } catch (InterruptedException ex) {
                 break;
             } catch (Exception ex) {
                 log.error(ex.getMessage());
             }
-
-
-    }
+        }
     }
 
     private void decodeAndSaveClassOneData(PmPacket376 packet) {
-        Dto dto = new Dto(packet.getAddress().getRtua(),packet.getAfn());
-        this.converter.decodeDataDB(packet,dto);
+        Dto dto = new Dto(packet.getAddress().getRtua(), packet.getAfn());
+        this.converter.decodeDataDB(packet, dto);
         dataService.insertRecvData(dto);
     }
 
@@ -101,11 +99,11 @@ public class UpLoadProcessor extends BaseProcessor {
 
     private void saveLoubaoEvent(String rtua, Packet376Event36 event36) {
         for (Packet376Event36.Meter meter : event36.meters) {
-            this.dataService.insertLBEvent(rtua,event36);
+            this.dataService.insertLBEvent(rtua, event36);
         }
     }
-    
-    private void saveEvent(String rtua, int fn, int pn, PmPacket376EventBase event){
-        this.dataService.insertEvent(rtua,event);
+
+    private void saveEvent(String rtua, int fn, int pn, PmPacket376EventBase event) {
+        this.dataService.insertEvent(rtua, event);
     }
 }
