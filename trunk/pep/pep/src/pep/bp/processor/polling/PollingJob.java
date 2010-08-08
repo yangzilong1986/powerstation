@@ -63,21 +63,20 @@ public class PollingJob implements Job {
     }
 
     private void DoTask(PepCommunicatorInterface pepCommunicator,TermTaskDAO task){
-        CollectObject object = new CollectObject();
-
         List<CommanddItemDAO> CommandItemList = task.getCommandItemList();
         for(CommanddItemDAO commandItemDao:CommandItemList){
+            CollectObject object = new CollectObject();
             CommandItem Item = new CommandItem();
             Item.setIdentifier(commandItemDao.getCommandItemCode());
             object.AddCommandItem(Item);
-        }
-        object.setLogicalAddr(task.getLogicAddress());
-        object.setMpSn(new int[]{task.getGp_sn()});
-        PmPacket376 packet = new PmPacket376();
-        packet.getAddress().setMastStationId((byte)2);
-        converter.CollectObject2Packet(object, packet,task.getAFN(),new StringBuffer(), new StringBuffer());
-        pepCommunicator.SendPacket(this.getsequenceCode(), packet);
-        log.info("下发轮召报文："+BcdUtils.binArrayToString(packet.getValue()) );
-        
+
+            object.setLogicalAddr(task.getLogicAddress());
+            object.setMpSn(new int[]{task.getGp_sn()});
+            PmPacket376 packet = new PmPacket376();
+            packet.getAddress().setMastStationId((byte)2);
+            converter.CollectObject2Packet(object, packet,task.getAFN(),new StringBuffer(), new StringBuffer());
+            pepCommunicator.SendPacket(this.getsequenceCode(), packet);
+            log.info("下发轮召报文（命令项;"+Item.getIdentifier()+"）："+BcdUtils.binArrayToString(packet.getValue()) );
+        }        
     }
 }

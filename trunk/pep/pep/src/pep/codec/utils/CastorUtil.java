@@ -231,7 +231,7 @@ public class CastorUtil {
         CommandItem12.AddDataItem(new ProtocolDataItem("1004002628", 2, "A5", 0,"三相电流不平衡限值","1"));
         CommandItem12.AddDataItem(new ProtocolDataItem("1004002629", 1, "BIN", 0,"越限持续时间","1"));
         CommandItem12.AddDataItem(new ProtocolDataItem("1004002630", 2, "A5", 0,"越限恢复系数","1"));
-        CommandItem12.AddDataItem(new ProtocolDataItem("1004002631", 2, "BIN", 0,"连续失压时间限值","1"));
+        CommandItem12.AddDataItem(new ProtocolDataItem("1004002631", 1, "BIN", 0,"连续失压时间限值","1"));
 
         ProtocolCommandItem CommandItem13 = new ProtocolCommandItem();
         CommandItem13.setCommandCode("10040061");

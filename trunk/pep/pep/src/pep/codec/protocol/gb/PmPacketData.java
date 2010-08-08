@@ -130,8 +130,8 @@ public class PmPacketData{
     public long getBin(int len){
         long value = 0;
         for(int i=0;i< len;i++){
-            byte data = dataBuff.get();
-            value +=  data << (8*i);
+            int data = BcdUtils.byteToUnsigned(dataBuff.get());
+            value +=  (data << (8*i));
         }
         return value;
     }
