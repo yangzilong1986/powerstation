@@ -85,7 +85,7 @@ public class Decoder376 extends Decoder {
 
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("错误信息：", e.fillInStackTrace());
         }
     }
 
@@ -132,7 +132,7 @@ public class Decoder376 extends Decoder {
                 results.put(key, dataItems);
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("错误信息：", e.fillInStackTrace());
         }
 
     }
