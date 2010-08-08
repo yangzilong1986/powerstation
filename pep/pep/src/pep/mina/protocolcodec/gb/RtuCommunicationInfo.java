@@ -82,7 +82,7 @@ public class RtuCommunicationInfo {
     public synchronized RtuCommunicationInfo setTcpSession(IoSession session) {
         this.isTcp = true;
         this.session = session;
-        this.sendNextPacket();
+        this.sendNextPacket(true);
         return this;
     }
 
@@ -100,7 +100,7 @@ public class RtuCommunicationInfo {
                         new SequencedPmPacket(this.currentSequence,
                         packet, SequencedPmPacket.Status.SUSSESS));
                 this.idle = true;
-                sendNextPacket();
+                sendNextPacket(false);
             } else {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
@@ -129,7 +129,7 @@ public class RtuCommunicationInfo {
         //} else {
         this.unsendPacket.add(new SeqPacket(sequence, packet));
         if (this.idle) {
-            sendNextPacket();
+            sendNextPacket(false);
         } else {
             LOGGER.info("Send packet: " + this.rtua + " not idle, sequence="+sequence+
                     ", pack="+packet.toString());
@@ -137,7 +137,7 @@ public class RtuCommunicationInfo {
         //}
     }
 
-    private void sendNextPacket() {
+    private void sendNextPacket(boolean forceSend) {
         if (this.idle) {
             SeqPacket seqPacket = unsendPacket.poll();
             if (seqPacket != null) {
@@ -153,11 +153,15 @@ public class RtuCommunicationInfo {
                 this.idle = true;
             }
         }
+        else{
+            if (forceSend)
+                this.doSendPacket();
+        }
     }
 
     private synchronized void doSendPacket() {
         if (this.currentPacket == null) {
-            this.sendNextPacket();
+            this.sendNextPacket(false);
         } else {
             this.currentSendTicket = new Date();
             this.currentSendTimes++;
@@ -170,10 +174,10 @@ public class RtuCommunicationInfo {
                 }
 
                 if (!this.currentPacket.getControlCode().getIsOrgniger()) {
-                    this.sendNextPacket();
+                    this.sendNextPacket(false);
                 }
             } else {
-                this.sendNextPacket();
+                this.sendNextPacket(false);
             }
         }
     }
@@ -192,7 +196,7 @@ public class RtuCommunicationInfo {
                         new SequencedPmPacket(this.currentSequence, this.currentPacket,
                         SequencedPmPacket.Status.TIME_OUT));
                 this.idle = true;
-                sendNextPacket();
+                sendNextPacket(false);
             } else {
                 doSendPacket();
             }
