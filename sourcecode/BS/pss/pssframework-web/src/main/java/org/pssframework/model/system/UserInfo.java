@@ -137,6 +137,9 @@ public class UserInfo extends BaseEntity {
 	@Transient
 	private List<Long> roleIds;
 
+	@Transient
+	private boolean showAllAccount;
+
 	/**
 	 * @return the accountNonExpired
 	 */
@@ -242,7 +245,9 @@ public class UserInfo extends BaseEntity {
 
 	@SuppressWarnings("unchecked")
 	public List<Long> getRoleIds() {
-		this.roleIds = ReflectionUtils.convertElementPropertyToList(roleInfoList, "roleId");
+		if (this.roleIds == null) {
+			this.roleIds = ReflectionUtils.convertElementPropertyToList(roleInfoList, "roleId");
+		}
 		return roleIds;
 	}
 
@@ -440,6 +445,14 @@ public class UserInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public void setShowAllAccount(boolean showAllAccount) {
+		this.showAllAccount = showAllAccount;
+	}
+
+	public boolean isShowAllAccount() {
+		return showAllAccount;
 	}
 
 }
