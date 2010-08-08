@@ -41,17 +41,23 @@ public class Decoder376 extends Decoder {
             PmPacket376DT dt = new PmPacket376DT();
             dataBuffer.getDA(da);
             dataBuffer.getDT(dt);
-            byte afn = packet.getAfn();           
-            if (afn == 0x0A) {
-                afn = 0x04;
+            byte afn = packet.getAfn();
+            if (afn > 0) {
+                if (afn == 0x0A) {
+                    afn = 0x04;
+                }
+                String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
+                key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
+                Map<String, String> dataItems = new TreeMap();
+                this.DecodeData2Map(commandItemCode, dataItems, dataBuffer);
+                if (!results.containsKey(key)) {
+                    results.put(key, dataItems);
+                }
             }
-            String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
-            key = logicAddress + "#" + String.valueOf(da.getPn()) + "#" + commandItemCode;
-            Map<String, String> dataItems = new TreeMap();
-            this.DecodeData2Map(commandItemCode, dataItems, dataBuffer);
-            if (!results.containsKey(key)) {
-                results.put(key, dataItems);
+            else if(afn ==0){
+
             }
+
         }
     }
 
@@ -105,7 +111,7 @@ public class Decoder376 extends Decoder {
                 dataBuffer.getRowIoBuffer().get(databuff);
                 int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
                 Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
-                MeterAddress =  packet645.getAddress().getAddress();
+                MeterAddress = packet645.getAddress().getAddress();
                 dataBuffer645 = packet645.getDataAsPmPacketData();
             }
 

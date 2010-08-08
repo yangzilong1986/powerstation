@@ -32,7 +32,9 @@ public class DataServiceIMP implements DataService{
 
     private ACTDataStoredProcedure actStoredProcedure;
     private ECCURV_DataStoredProcedure eccurvStoredProcedure;
+    private ECCURV_DataStoredProcedure2 eccurvStoredProcedure2;
     private PowerCurv_DataStoredProcedure powerCurvStoredProcedure;
+    private PowerCurv_DataStoredProcedure2 powerCurvStoredProcedure2;
 
     private EventStoredProcedure eventStoredProcedure;
     private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
@@ -76,33 +78,33 @@ public class DataServiceIMP implements DataService{
 
             if(AFN == (byte)0X0D){                         //二类数据
                 if(commandItemCode.equals("100D0081"))
-                    this.insert_POWER_CRUV_F81(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));
+                    this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));
                 if(commandItemCode.equals("100D0082"))
-                    this.insert_POWER_CRUV_F82(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301"));
+                    this.getPowerCurvStoredProcedure2().insert_act_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301"));
                 if(commandItemCode.equals("100D0083"))
-                    this.insert_POWER_CRUV_F83(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));
+                    this.getPowerCurvStoredProcedure2().insert_act_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));
                 if(commandItemCode.equals("100D0084"))
-                    this.insert_POWER_CRUV_F84(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303"));
+                    this.getPowerCurvStoredProcedure2().insert_act_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303"));
                 if(commandItemCode.equals("100D0085"))
-                    this.insert_POWER_CRUV_F85(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400"));
+                    this.getPowerCurvStoredProcedure2().insert_react_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400"));
                 if(commandItemCode.equals("100D0086"))
-                    this.insert_POWER_CRUV_F86(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));
+                    this.getPowerCurvStoredProcedure2().insert_react_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));
                 if(commandItemCode.equals("100D0087"))
-                    this.insert_POWER_CRUV_F87(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));
+                    this.getPowerCurvStoredProcedure2().insert_react_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));
                 if(commandItemCode.equals("100D0088"))
-                    this.insert_POWER_CRUV_F88(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));
+                    this.getPowerCurvStoredProcedure2().insert_react_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));
                 if(commandItemCode.equals("100D0089"))
-                    this.insertData_EC_CURV_F89(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));
+                    this.getEccurvStoredProcedure2().insertVoltA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));
                 if(commandItemCode.equals("100D0090"))
-                    this.insertData_EC_CURV_F90(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));
+                    this.getEccurvStoredProcedure2().insertVoltB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));
                 if(commandItemCode.equals("100D0091"))
-                    this.insertData_EC_CURV_F91(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));
+                    this.getEccurvStoredProcedure2().insertVoltC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));
                 if(commandItemCode.equals("100D0092"))
-                    this.insertData_EC_CURV_F92(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));
+                    this.getEccurvStoredProcedure2().insertEcurA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));
                 if(commandItemCode.equals("100D0093"))
-                    this.insertData_EC_CURV_F93(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));
+                    this.getEccurvStoredProcedure2().insertEcurB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));
                 if(commandItemCode.equals("100D0094"))
-                    this.insertData_EC_CURV_F94(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));
+                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));
             }
         }
      }
@@ -146,79 +148,8 @@ public class DataServiceIMP implements DataService{
         }
     }
 
-     private void insertData_EC_CURV_F89(String logicalAddress,int gpSn,String dataDate,
-            String VOLT_A){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", VOLT_A, "", "");
 
-     }
-
-     private void insertData_EC_CURV_F90(String logicalAddress,int gpSn,String dataDate,
-            String VOLT_B){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", VOLT_B, "");
-
-     }
-
-     private void insertData_EC_CURV_F91(String logicalAddress,int gpSn,String dataDate,
-            String VOLT_C){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", "", VOLT_C);
-
-     }
-
-     private void insertData_EC_CURV_F92(String logicalAddress,int gpSn,String dataDate,
-            String ECUR_A){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, ECUR_A, "", "", "", "", "", "", "");
-
-     }
-
-     private void insertData_EC_CURV_F93(String logicalAddress,int gpSn,String dataDate,
-            String ECUR_B){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", ECUR_B, "", "", "", "", "", "");
-
-     }
-
-     private void insertData_EC_CURV_F94(String logicalAddress,int gpSn,String dataDate,
-            String ECUR_C){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", ECUR_C, "", "", "", "", "");
-
-     }
-
-     private void insertData_EC_CURV_F95(String logicalAddress,int gpSn,String dataDate,
-            String ECUR_L){
-         this.insertData_EC_CURV(logicalAddress, gpSn, dataDate, "", "", "", ECUR_L, "", "", "", "");
-
-     }
-
-    private void insert_POWER_CRUV_F81(String logicalAddress,int gpSn,String dataDate,String act_power_total){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, act_power_total, "", "", "", "", "", "", "");
-    }
-
-    private void insert_POWER_CRUV_F82(String logicalAddress,int gpSn,String dataDate,String act_power_a){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", act_power_a, "", "", "", "", "", "");
-    }
-
-    private void insert_POWER_CRUV_F83(String logicalAddress,int gpSn,String dataDate,String act_power_b){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", act_power_b, "", "", "", "", "");
-    }
-
-    private void insert_POWER_CRUV_F84(String logicalAddress,int gpSn,String dataDate,String act_power_c){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", act_power_c, "", "", "", "");
-    }
-
-    private void insert_POWER_CRUV_F85(String logicalAddress,int gpSn,String dataDate,String react_power_total){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", react_power_total, "", "", "");
-    }
-
-    private void insert_POWER_CRUV_F86(String logicalAddress,int gpSn,String dataDate,String react_power_a){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", react_power_a, "", "");
-    }
-
-    private void insert_POWER_CRUV_F87(String logicalAddress,int gpSn,String dataDate,String react_power_b){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", react_power_b, "");
-    }
-
-    private void insert_POWER_CRUV_F88(String logicalAddress,int gpSn,String dataDate,String react_power_c){
-        this.insert_POWER_CRUV(logicalAddress, gpSn, dataDate, "", "", "", "", "", "", "", react_power_c);
-    }
+     
 
     //功率曲线
     private void insert_POWER_CRUV(String logicalAddress,int gpSn,String dataDate,
@@ -227,7 +158,7 @@ public class DataServiceIMP implements DataService{
             String react_power_b,String react_power_c)
     {
         try {
-            this.powerCurvStoredProcedure.execute(logicalAddress,gpSn, dataDate,
+            this.getPowerCurvStoredProcedure().execute(logicalAddress,gpSn, dataDate,
                     act_power_total, act_power_a, act_power_b, act_power_c,
                     react_power_total, react_power_a, react_power_b, react_power_c);
         } catch (DataAccessException dataAccessException) {
@@ -301,6 +232,48 @@ public class DataServiceIMP implements DataService{
      */
     public void setLoubaoEventStoredProcedure(LouBaoEventStoredProcedure loubaoEventStoredProcedure) {
         this.loubaoEventStoredProcedure = loubaoEventStoredProcedure;
+    }
+
+    /**
+     * @return the eccurvStoredProcedure2
+     */
+    public ECCURV_DataStoredProcedure2 getEccurvStoredProcedure2() {
+        return eccurvStoredProcedure2;
+    }
+
+    /**
+     * @param eccurvStoredProcedure2 the eccurvStoredProcedure2 to set
+     */
+    public void setEccurvStoredProcedure2(ECCURV_DataStoredProcedure2 eccurvStoredProcedure2) {
+        this.eccurvStoredProcedure2 = eccurvStoredProcedure2;
+    }
+
+    /**
+     * @return the powerCurvStoredProcedure2
+     */
+    public PowerCurv_DataStoredProcedure2 getPowerCurvStoredProcedure2() {
+        return powerCurvStoredProcedure2;
+    }
+
+    /**
+     * @param powerCurvStoredProcedure2 the powerCurvStoredProcedure2 to set
+     */
+    public void setPowerCurvStoredProcedure2(PowerCurv_DataStoredProcedure2 powerCurvStoredProcedure2) {
+        this.powerCurvStoredProcedure2 = powerCurvStoredProcedure2;
+    }
+
+    /**
+     * @return the powerCurvStoredProcedure
+     */
+    public PowerCurv_DataStoredProcedure getPowerCurvStoredProcedure() {
+        return powerCurvStoredProcedure;
+    }
+
+    /**
+     * @param powerCurvStoredProcedure the powerCurvStoredProcedure to set
+     */
+    public void setPowerCurvStoredProcedure(PowerCurv_DataStoredProcedure powerCurvStoredProcedure) {
+        this.powerCurvStoredProcedure = powerCurvStoredProcedure;
     }
 
 }

@@ -277,7 +277,7 @@ public class Converter {
                     FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
                     TempCode = Long.valueOf(DataItemCode);
                 }
-                if ((Index % ActualgroupNumber == 0) && (Index > 1) && (CanPacket)) {
+                if ((Index % ActualgroupNumber == 0)&& (CanPacket)) {
                     if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
                     {
                         packet.setAuthorize(new Authorize());
