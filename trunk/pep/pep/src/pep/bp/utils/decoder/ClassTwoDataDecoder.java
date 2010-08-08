@@ -16,6 +16,7 @@ public class ClassTwoDataDecoder {
     public static Dto Decode(PmPacket376 packet){
         Dto classTwodto = new Dto(packet.getAddress().getRtua(),packet.getAfn());
 
+
         
         return classTwodto;
     }
