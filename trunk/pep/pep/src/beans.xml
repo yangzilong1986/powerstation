@@ -124,9 +124,9 @@
 
     <bean id="protocolConfig" class="pep.bp.realinterface.conf.ProtocolConfig" scope="singleton">
         <constructor-arg index="0"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config-mapping.xml"></constructor-arg>
+                         value="protocol-data-config-mapping.xml"></constructor-arg>
         <constructor-arg index="1"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config.xml"></constructor-arg>
+                         value="protocol-data-config.xml"></constructor-arg>
     </bean>
 
 
