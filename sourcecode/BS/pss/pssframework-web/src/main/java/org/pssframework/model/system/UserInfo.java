@@ -128,6 +128,15 @@ public class UserInfo extends BaseEntity {
 	//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<RoleInfo> roleInfoList = Lists.newArrayList();//有序的关联对象集合
 
+	@Transient
+	private String[] roleNameArray;
+
+	@Transient
+	private String roleNames;
+
+	@Transient
+	private List<Long> roleIds;
+
 	/**
 	 * @return the accountNonExpired
 	 */
@@ -147,6 +156,10 @@ public class UserInfo extends BaseEntity {
 	 */
 	public Integer getCredentialsNonExpired() {
 		return credentialsNonExpired;
+	}
+
+	public Long getDeptNo() {
+		return deptNo;
 	}
 
 	/**
@@ -191,6 +204,10 @@ public class UserInfo extends BaseEntity {
 		return name;
 	}
 
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
+	}
+
 	/**
 	 * @return the passwd
 	 */
@@ -222,24 +239,33 @@ public class UserInfo extends BaseEntity {
 	/**
 	 * 用户拥有的角色id字符串, 多个角色id用','分隔.
 	 */
-	//非持久化属性.
-	@Transient
+
 	@SuppressWarnings("unchecked")
 	public List<Long> getRoleIds() {
-		return ReflectionUtils.convertElementPropertyToList(roleInfoList, "id");
+		this.roleIds = ReflectionUtils.convertElementPropertyToList(roleInfoList, "roleId");
+		return roleIds;
 	}
 
 	public List<RoleInfo> getRoleInfoList() {
 		return roleInfoList;
 	}
 
+	public String[] getRoleNameArray() {
+		String[] strRoleNameArray = new String[] {};
+		if (getRoleNames() != null) {
+			strRoleNameArray = getRoleNames().split(",");
+		}
+		this.roleNameArray = strRoleNameArray;
+		return roleNameArray;
+	}
+
 	/**
 	 * 用户拥有的角色名称字符串, 多个角色名称用','分隔.
 	 */
 	//非持久化属性.
-	@Transient
 	public String getRoleNames() {
-		return ReflectionUtils.convertElementPropertyToString(roleInfoList, "roleName", ", ");
+		this.roleNames = ReflectionUtils.convertElementPropertyToString(roleInfoList, "roleName", ", ");
+		return this.roleNames;
 	}
 
 	/**
@@ -280,6 +306,10 @@ public class UserInfo extends BaseEntity {
 	 */
 	public void setCredentialsNonExpired(Integer credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public void setDeptNo(Long deptNo) {
+		this.deptNo = deptNo;
 	}
 
 	/**
@@ -329,6 +359,10 @@ public class UserInfo extends BaseEntity {
 		this.name = name;
 	}
 
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
+	}
+
 	/**
 	 * @param passwd
 	 *            the passwd to set
@@ -362,10 +396,25 @@ public class UserInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param roleIds the roleIds to set
+	 */
+	public void setRoleIds(List<Long> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	/**
 	 * @param roleInfoList the roleInfoList to set
 	 */
 	public void setRoleInfoList(List<RoleInfo> roleInfoList) {
 		this.roleInfoList = roleInfoList;
+	}
+
+	public void setRoleNameArray(String[] roleNameArray) {
+		this.roleNameArray = roleNameArray;
+	}
+
+	public void setRoleNames(String roleNames) {
+		this.roleNames = roleNames;
 	}
 
 	/**
@@ -391,22 +440,6 @@ public class UserInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	public void setDeptNo(Long deptNo) {
-		this.deptNo = deptNo;
-	}
-
-	public Long getDeptNo() {
-		return deptNo;
-	}
-
-	public void setOrgInfo(OrgInfo orgInfo) {
-		this.orgInfo = orgInfo;
-	}
-
-	public OrgInfo getOrgInfo() {
-		return orgInfo;
 	}
 
 }

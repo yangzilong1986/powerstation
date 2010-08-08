@@ -36,7 +36,7 @@ public class ResourceInfoManager extends BaseManager<ResourceInfo, Long> {
 
 	@Override
 	public List<ResourceInfo> findAll() {
-		return resourceInfoDao.getAll("resourceId", true);
+		return resourceInfoDao.findBy("resourceId", true);
 	}
 
 	@Override
