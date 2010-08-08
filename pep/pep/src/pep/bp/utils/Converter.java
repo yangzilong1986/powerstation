@@ -111,6 +111,7 @@ public class Converter {
             gpMark.append(String.valueOf(MpSn[i]) + "#");
             List<CommandItem> CommandItems = obj.getCommandItems();
             for (CommandItem commandItem : CommandItems) {
+                
                 if (IsSeqValid(commandItem)) //针对类似F10的参数，按每帧最大长度进行自动分包处理
                 {
                     commandItem2PacketList(commandItem, AFN, obj.getLogicalAddr(), i, DataBuffLen, results);
@@ -242,6 +243,8 @@ public class Converter {
                 //生成一个报文
                 if (((Index - 1) % ActualgroupNumber == 0) && (!CanPacket)) {
                     packet = new PmPacket376();
+                    packet.setRemark1(commandItem.getIdentifier());//设置命令项标志
+                    packet.setRemark2(String.valueOf(MpSn));//设置测量点标志
                     preSetPacket(packet, AFN, Rtua);
                     PmPacket376DA da = new PmPacket376DA(MpSn);
                     PmPacket376DT dt = new PmPacket376DT(fn);
