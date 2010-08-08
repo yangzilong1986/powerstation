@@ -51,9 +51,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
         String rtua = pack.getAddress().getRtua();
         registRtua(session, rtua);
-        if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-            LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-        }
+        showReceivePacket(rtua,pack);
 
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
             PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
@@ -61,6 +59,12 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         }
 
         rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
+    }
+
+    private void showReceivePacket(String rtua, PmPacket376 pack){
+        if (!((pack.getAfn() == 2) && (!showActTestPack))) {
+            LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
+        }
     }
 
     private void registRtua(IoSession session, String rtua) {
