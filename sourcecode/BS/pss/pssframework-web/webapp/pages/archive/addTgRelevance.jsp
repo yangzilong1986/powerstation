@@ -26,7 +26,7 @@ var contextPath  = '${ctx}';
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((             document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -503,17 +503,17 @@ updateTermInfo=function(termId){
     if(!$("#tgId").val()){
       alert("请先建台区");return;
     }
-  var url = contextPath + "/archive/userinfo/new?tgId=" +$("#tgId").val();
+  var url = contextPath + "/archive/tgopinfo?tgId="+$("#tgId").val()
   windowPopup(url, 960, 575);
 } 
  
-deleteTermInfo=function(termId){
-   if(termId==null || termId ==""){
+deleteTgUser=function(userId){
+   if(userId==null || userId ==""){
      return;
    } 
 
-   var url = "${ctx}/archive/terminalinfo/"+termId+".json?_method=delete";
-   if (confirm("确定要删除该集中器?")) {
+   var url = "${ctx}/archive/tgopinfo/"+userId+".json?_method=delete";
+   if (confirm("确定要删除该操作员?")) {
        $.ajax({
            url: url,
            dataType:'json',
@@ -524,7 +524,7 @@ deleteTermInfo=function(termId){
                var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
-                $("#term_"+termId).remove();
+                $("#user_"+userId).remove();
                }
            },error:function(e) {
                alert("delete error");
@@ -534,8 +534,8 @@ deleteTermInfo=function(termId){
    }
   }
 
-updateTermInfo=function(termId){
-     var url = "${ctx}/archive/terminalinfo/"+termId+"/edit?tgId="+$("#tgId").val();
+updateTgOpInfo=function(userId){
+     var url = "${ctx}/archive/tgopinfo/"+userId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
 }
 /*******************************************************************/
