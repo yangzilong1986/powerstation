@@ -23,6 +23,8 @@ import cn.org.rapid_framework.page.PageRequest;
 @Service
 public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
+	private static final long ADMIN = 0L;
+
 	@Autowired(required = true)
 	private RoleInfoDao roleInfoDao;
 
@@ -43,6 +45,18 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	@Override
 	public List<RoleInfo> findAll() {
 		return roleInfoDao.findAll();
+	}
+
+	public List<RoleInfo> findAllExtAdmin(Long id) {
+		List<RoleInfo> roleInfos = com.google.common.collect.Lists.newLinkedList();
+		roleInfos = this.findAll();
+		if(roleInfos == null){
+			roleInfos = com.google.common.collect.Lists.newLinkedList();
+		}
+		if (ADMIN != id) {
+			roleInfos.remove(0);
+		}
+		return roleInfos;
 	}
 
 	@Override

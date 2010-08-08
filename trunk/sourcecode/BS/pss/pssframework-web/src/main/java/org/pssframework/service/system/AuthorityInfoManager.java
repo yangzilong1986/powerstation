@@ -34,7 +34,7 @@ public class AuthorityInfoManager extends BaseManager<AuthorityInfo, Long> {
 
 	@Override
 	public List<AuthorityInfo> findAll() {
-		return authorityInfoDao.getAll("authorityId", true);
+		return authorityInfoDao.findBy("authorityId", true);
 	}
 
 	@Override

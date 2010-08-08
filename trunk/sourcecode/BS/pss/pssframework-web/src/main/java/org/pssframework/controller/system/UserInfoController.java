@@ -220,10 +220,8 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 
 	private List<RoleInfo> getTotalRoleInfos(Long id) {
 
-		List<RoleInfo> roleInfos = this.roleInfoManager.findAll();
-		if (id != 0L) {
-			roleInfos.remove(0);
-		}
+		List<RoleInfo> roleInfos = this.roleInfoManager.findAllExtAdmin(id);
+
 		return roleInfos;
 	}
 

@@ -11,11 +11,14 @@ import java.util.Map;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.MpInfoDao;
+import org.pssframework.dao.archive.TgInfoDao;
 import org.pssframework.dao.system.CodeInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.MeterInfo;
 import org.pssframework.model.archive.MpInfo;
+import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.CodeInfo;
+import org.pssframework.model.system.OrgInfo;
 import org.pssframework.support.system.SystemConst;
 import org.pssframework.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,9 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 
 	@Autowired
 	private CodeInfoDao codeInfoDao;
+
+	@Autowired
+	private TgInfoDao tgInfoDao;
 
 	@Override
 	protected EntityDao getEntityDao() {
@@ -75,13 +81,27 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 	@Override
 	public void saveOrUpdate(MpInfo entity) throws org.springframework.dao.DataAccessException {
 		setTotalTimes(entity);
+
 		setOrgInfo(entity);
+
 		super.saveOrUpdate(entity);
 
 	}
 
+	/**
+	 * 设置orgId
+	 * @param entity
+	 */
 	private void setOrgInfo(MpInfo entity) {
-		entity.setOrgId(entity.getTgInfo().getOrgInfo().getOrgId());
+		TgInfo tgInfo = entity.getTgInfo();
+
+		Long tgId = tgInfo.getTgId();
+
+		tgInfo = tgInfoDao.getById(tgId);
+
+		OrgInfo orgInfo = tgInfo.getOrgInfo();
+
+		entity.setOrgId(orgInfo.getOrgId());
 	}
 
 	/**
@@ -90,7 +110,7 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 	 * @param entity
 	 */
 	@SuppressWarnings("rawtypes")
-	private void setTotalTimes(MpInfo entity) {
+	private void setTotalTimes(MpInfo entity) throws IndexOutOfBoundsException {
 		MeterInfo meterInfo = entity.getMeterInfo();
 		List<GpInfo> lstGpInfos = entity.getGpInfos();
 		Double ct = null;
@@ -101,11 +121,11 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		ctMap.put(CodeInfo.CODECATE, SystemConst.CODE_CT_RATIO);
 
 		Map ptMap = new HashMap();
-		ctMap.put(CodeInfo.CODECATE, SystemConst.CODE_PT_RATIO);
+		ptMap.put(CodeInfo.CODECATE, SystemConst.CODE_PT_RATIO);
 
 		for (GpInfo gpInfo : lstGpInfos) {
 			//ct
-			ctMap.put(CodeInfo.CODECATE, gpInfo.getCtTimes());
+			ctMap.put(CodeInfo.CODE, gpInfo.getCtTimes());
 			//pt
 			ptMap.put(CodeInfo.CODE, gpInfo.getPtTimes());
 
@@ -115,8 +135,8 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 			ct = Double.parseDouble(codeInfoCt.getValue());
 		}
 
-		if (codeInfoDao.findAll(ctMap) != null && codeInfoDao.findAll(ctMap).size() > 0) {
-			codeInfoPt = codeInfoDao.findAll(ctMap).get(0);
+		if (codeInfoDao.findAll(ptMap) != null && codeInfoDao.findAll(ptMap).size() > 0) {
+			codeInfoPt = codeInfoDao.findAll(ptMap).get(0);
 			pt = Double.parseDouble(codeInfoPt.getValue());
 		}
 

@@ -1,10 +1,13 @@
 package org.pssframework.service.system;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.UserInfoDao;
+import org.pssframework.model.system.RoleInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +65,9 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
 		entity.setPasswd(shaPassword);
+		
+		setRole(entity);
+		
 		userInfoDao.saveOrUpdate(entity);
 	}
 
@@ -108,6 +114,37 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
 		return userInfoDao.findByPageRequest(pageRequest);
+	}
+
+	/**
+	 * 设置角色列表
+	 * @param entity
+	 */
+	private void setRole(UserInfo entity) {
+		List<Long> roleIds = entity.getRoleIds();
+
+		List<RoleInfo> roleInfos = entity.getRoleInfoList();
+
+		List<RoleInfo> list = new ArrayList<RoleInfo>();
+
+		for (RoleInfo role : roleInfos) {
+
+			for (Long roleId : roleIds) {
+
+				if (role.getRoleId() == roleId) {
+					break;
+				} else {
+					list.add(new RoleInfo(roleId));
+				}
+
+			}
+		}
+
+		entity.getRoleInfoList().addAll(list);
+
+	}
+
+	public static void main(String[] args) {
 	}
 
 }
