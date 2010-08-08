@@ -7,7 +7,6 @@ package pep.bp.db;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 import javax.sql.DataSource;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
