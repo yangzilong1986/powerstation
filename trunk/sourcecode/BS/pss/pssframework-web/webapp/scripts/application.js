@@ -74,3 +74,13 @@ function getReferenceForm(elm) {
 	}
 	return null;
 }
+
+
+var pre_row = null;
+function selectSingleRow(row) {
+    row.className = 'selected'
+    if(pre_row != null && pre_row != row) {
+    	pre_row.className='';
+    }
+    pre_row = row;
+}
