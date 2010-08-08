@@ -79,9 +79,11 @@ public class RtuCommunicationInfo {
         return this.session;
     }
 
-    public synchronized RtuCommunicationInfo setTcpSession(IoSession session) {
+    public RtuCommunicationInfo setTcpSession(IoSession session) {
         this.isTcp = true;
-        this.session = session;
+        synchronized (this) {
+            this.session = session;
+        }
         this.sendNextPacket(true);
         return this;
     }
@@ -90,7 +92,7 @@ public class RtuCommunicationInfo {
         this.session = null;
     }
 
-    public synchronized void receiveRtuUploadPacket(PmPacket packet) {
+    public void receiveRtuUploadPacket(PmPacket packet) {
         ControlCode ctrlCode = packet.getControlCode();
         Seq seq = packet.getSeq();
         if ((!ctrlCode.getIsOrgniger()) && ctrlCode.getIsUpDirect()
@@ -99,20 +101,24 @@ public class RtuCommunicationInfo {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
                         packet, SequencedPmPacket.Status.SUSSESS));
-                this.idle = true;
+                synchronized (this) {
+                    this.idle = true;
+                }
                 sendNextPacket(false);
             } else {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
                         packet, SequencedPmPacket.Status.TO_BE_CONTINUE));
-                this.currentRespSeq++;
-                this.currentRespSeq &= 0x0F;
-                this.currentSendTicket = new Date();
+                synchronized (this) {
+                    this.currentRespSeq++;
+                    this.currentRespSeq &= 0x0F;
+                    this.currentSendTicket = new Date();
+                }
             }
         }
     }
 
-    public synchronized void callRtuEventRecord(EventCountor ec) {
+    public void callRtuEventRecord(EventCountor ec) {
         PmPacket376 pack1 = PmPacket376Factroy.makeCallEventRecordPacket(RtuCommunicationInfo.EC_CALL_HOST_ID,
                 this.rtua, 1, this.lastEc1, ec.getEc1());
         sendPacket(0, pack1);
@@ -131,8 +137,8 @@ public class RtuCommunicationInfo {
         if (this.idle) {
             sendNextPacket(false);
         } else {
-            LOGGER.info("Send packet: " + this.rtua + " not idle, sequence="+sequence+
-                    ", pack="+packet.toString());
+            LOGGER.info("Send packet: " + this.rtua + " not idle, sequence=" + sequence
+                    + ", pack=" + packet.toString());
         }
         //}
     }
@@ -152,25 +158,27 @@ public class RtuCommunicationInfo {
             } else {
                 this.idle = true;
             }
-        }
-        else{
-            if (forceSend)
+        } else {
+            if (forceSend) {
                 this.doSendPacket();
+            }
         }
     }
 
-    private synchronized void doSendPacket() {
+    private void doSendPacket() {
         if (this.currentPacket == null) {
             this.sendNextPacket(false);
         } else {
-            this.currentSendTicket = new Date();
-            this.currentSendTimes++;
+            synchronized (this) {
+                this.currentSendTicket = new Date();
+                this.currentSendTimes++;
+            }
             if (this.currentSendTimes < maxRetryTimes) {
                 if (this.session != null) {
                     this.session.write(this.currentPacket);
                 } else {
-                    LOGGER.info("DoSend: " + rtua + " not online, sequence="+
-                            this.currentSequence+", pack="+this.currentPacket.toString());
+                    LOGGER.info("DoSend: " + rtua + " not online, sequence="
+                            + this.currentSequence + ", pack=" + this.currentPacket.toString());
                 }
 
                 if (!this.currentPacket.getControlCode().getIsOrgniger()) {
