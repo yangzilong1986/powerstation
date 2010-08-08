@@ -6,7 +6,6 @@
 package pep.bp.realinterface;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import org.junit.Test;
@@ -94,25 +93,25 @@ public class RealTimeProxy376Test {
     /**
      * Test of writeEquipmentParameters method, of class RealTimeProxy376.
      */
-    //@Test
+   // @Test
     public void testWriteEquipmentParameters() throws Exception {
       // 测试F1
-//        Map datacellParams1 = new TreeMap();
-//        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
-//        datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
-//        datacellParams1.put("1004000103", "30");//终端等待从动站响应的超时时间
-//        datacellParams1.put("1004000104", "3");//终端等待从动站响应的重发次数
-//        datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
-//        datacellParams1.put("1004000107", "15");//心跳周期
-//        MTO_376 MTO1  = PutInCommandItem(datacellParams1,null,"10040001","96123456",0);
-//
-//        Map<String,String> resultMap1 = getTestResults(MTO1,"96123456#0#10040001");
-//        assertTrue(resultMap1.get("1004000101").equals("10"));
-//        assertTrue(resultMap1.get("1004000102").equals("20"));
-//        assertTrue(resultMap1.get("1004000103").equals("30"));
-//        assertTrue(resultMap1.get("1004000104").equals("3"));
-//        assertTrue(resultMap1.get("1004000106").equals("11100000"));
-//        assertTrue(resultMap1.get("1004000107").equals("15"));
+        Map datacellParams1 = new TreeMap();
+        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
+        datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
+        datacellParams1.put("1004000103", "30");//终端等待从动站响应的超时时间
+        datacellParams1.put("1004000104", "3");//终端等待从动站响应的重发次数
+        datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
+        datacellParams1.put("1004000107", "15");//心跳周期
+        MTO_376 MTO1  = PutInCommandItem(datacellParams1,null,"10040001","96123456",0);
+
+        Map<String,String> resultMap1 = getTestResults(MTO1,"96123456#0#10040001");
+        assertTrue(resultMap1.get("1004000101").equals("10"));
+        assertTrue(resultMap1.get("1004000102").equals("20"));
+        assertTrue(resultMap1.get("1004000103").equals("30"));
+        assertTrue(resultMap1.get("1004000104").equals("3"));
+        assertTrue(resultMap1.get("1004000106").equals("11100000"));
+        assertTrue(resultMap1.get("1004000107").equals("15"));
 
 //       //测试F3
 //        Map datacellParams3 = new TreeMap();
@@ -204,49 +203,49 @@ public class RealTimeProxy376Test {
 //        assertTrue(resultMap9.get("1004000902").equals("1111111111111111111111111111111111111111111111111111111111111111"));
 //
         //测试F10
-        Map datacellParams10 = new TreeMap();
-        datacellParams10.put("1004001001","1");//本次电能表/交流采样装置配置数量
-        CircleDataItems circleDataItems = new CircleDataItems();
-        for(int i=1;i<=9;i++)
-        {
-            DataItemGroup diGroup1 = new DataItemGroup();
-            diGroup1.AddDataItem(new DataItem("1004001002000"+i,String.valueOf(i)));//本次配置第0001块电能表/交流采样装置序号
-            diGroup1.AddDataItem(new DataItem("1004001003000"+i,String.valueOf(i)));//本次配置第0001块电能表/交流采样装置所属测量点号
-            diGroup1.AddDataItem(new DataItem("1004001004000"+i,"6"));//本次配置第0001块电能表/交流采样装置通信波特率
-            diGroup1.AddDataItem(new DataItem("1004001005000"+i,"1"));//本次配置第0001块电能表/交流采样装置通信端口号
-            diGroup1.AddDataItem(new DataItem("1004001006000"+i,"100"));//本次配置第0001块电能表/交流采样装置通信协议类型
-            diGroup1.AddDataItem(new DataItem("1004001007000"+i,"0"));//本次配置第0001块电能表/交流采样装置通信地址
-            diGroup1.AddDataItem(new DataItem("1004001008000"+i,"0"));//本次配置第0001块电能表/交流采样装置通信密码
-            diGroup1.AddDataItem(new DataItem("1004001010000"+i,"000001"));//本次配置第0001块电能表/交流采样装置电能费率个数
-            diGroup1.AddDataItem(new DataItem("1004001012000"+i,"00"));//本次配置第0001块电能表/交流采样装置有功电能示值的整数位个数
-            diGroup1.AddDataItem(new DataItem("1004001013000"+i,"00"));//本次配置第0001块电能表/交流采样装置有功电能示值的小数位个数
-            diGroup1.AddDataItem(new DataItem("1004001014000"+i,"999999999999"));//本次配置第0001块电能表/交流采样装置所属采集器通信地址
-            diGroup1.AddDataItem(new DataItem("1004001015000"+i,"0000"));//本次配置第0001块电能表/交流采样装置所属的用户大类号
-            diGroup1.AddDataItem(new DataItem("1004001016000"+i,"0000"));//本次配置第0001块电能表/交流采样装置所属的用户小类号
-            circleDataItems.AddDataItemGroup(diGroup1);
-        }
+//        Map datacellParams10 = new TreeMap();
+//        datacellParams10.put("1004001001","1");//本次电能表/交流采样装置配置数量
+//        CircleDataItems circleDataItems = new CircleDataItems();
+//        for(int i=1;i<=9;i++)
+//        {
+//            DataItemGroup diGroup1 = new DataItemGroup();
+//            diGroup1.AddDataItem(new DataItem("1004001002000"+i,String.valueOf(i)));//本次配置第0001块电能表/交流采样装置序号
+//            diGroup1.AddDataItem(new DataItem("1004001003000"+i,String.valueOf(i)));//本次配置第0001块电能表/交流采样装置所属测量点号
+//            diGroup1.AddDataItem(new DataItem("1004001004000"+i,"6"));//本次配置第0001块电能表/交流采样装置通信波特率
+//            diGroup1.AddDataItem(new DataItem("1004001005000"+i,"1"));//本次配置第0001块电能表/交流采样装置通信端口号
+//            diGroup1.AddDataItem(new DataItem("1004001006000"+i,"100"));//本次配置第0001块电能表/交流采样装置通信协议类型
+//            diGroup1.AddDataItem(new DataItem("1004001007000"+i,"0"));//本次配置第0001块电能表/交流采样装置通信地址
+//            diGroup1.AddDataItem(new DataItem("1004001008000"+i,"0"));//本次配置第0001块电能表/交流采样装置通信密码
+//            diGroup1.AddDataItem(new DataItem("1004001010000"+i,"000001"));//本次配置第0001块电能表/交流采样装置电能费率个数
+//            diGroup1.AddDataItem(new DataItem("1004001012000"+i,"00"));//本次配置第0001块电能表/交流采样装置有功电能示值的整数位个数
+//            diGroup1.AddDataItem(new DataItem("1004001013000"+i,"00"));//本次配置第0001块电能表/交流采样装置有功电能示值的小数位个数
+//            diGroup1.AddDataItem(new DataItem("1004001014000"+i,"999999999999"));//本次配置第0001块电能表/交流采样装置所属采集器通信地址
+//            diGroup1.AddDataItem(new DataItem("1004001015000"+i,"0000"));//本次配置第0001块电能表/交流采样装置所属的用户大类号
+//            diGroup1.AddDataItem(new DataItem("1004001016000"+i,"0000"));//本次配置第0001块电能表/交流采样装置所属的用户小类号
+//            circleDataItems.AddDataItemGroup(diGroup1);
+//        }
+//
+//        MTO_376 MTO10  = PutInCommandItem(datacellParams10,circleDataItems,"10040010","96123456",0);
+//        RealTimeProxy376 instance = proxy;
+//        long SequenceCode = instance.writeParameters(MTO10);
+//        List<RealTimeTaskDAO> taskList = taskService.getTasks(SequenceCode);
+//        assertTrue(taskList.size()>1);
 
-        MTO_376 MTO10  = PutInCommandItem(datacellParams10,circleDataItems,"10040010","96123456",0);
-        RealTimeProxy376 instance = proxy;
-        long SequenceCode = instance.writeParameters(MTO10);
-        List<RealTimeTaskDAO> taskList = taskService.getTasks(SequenceCode);
-        assertTrue(taskList.size()>1);
-
-        Map<String,String> resultMap10 = getTestResults(MTO10,"96123456#0#10040010");
-        assertTrue(resultMap10.get("1004001001").equals("1"));
-        assertTrue(resultMap10.get("1004001002").equals("1"));
-        assertTrue(resultMap10.get("1004001003").equals("1"));
-        assertTrue(resultMap10.get("1004001004").equals("6"));
-        assertTrue(resultMap10.get("1004001005").equals("1"));
-        assertTrue(resultMap10.get("1004001006").equals("100"));
-        assertTrue(resultMap10.get("1004001007").equals("0"));
-        assertTrue(resultMap10.get("1004001008").equals("0"));
-        assertTrue(resultMap10.get("1004001010").equals("000001"));
-        assertTrue(resultMap10.get("1004001012").equals("00"));
-        assertTrue(resultMap10.get("1004001013").equals("00"));
-        assertTrue(resultMap10.get("1004001014").equals("999999999999"));
-        assertTrue(resultMap10.get("1004001015").equals("0000"));
-        assertTrue(resultMap10.get("1004001016").equals("0000"));
+//        Map<String,String> resultMap10 = getTestResults(MTO10,"96123456#0#10040010");
+//        assertTrue(resultMap10.get("1004001001").equals("1"));
+//        assertTrue(resultMap10.get("1004001002").equals("1"));
+//        assertTrue(resultMap10.get("1004001003").equals("1"));
+//        assertTrue(resultMap10.get("1004001004").equals("6"));
+//        assertTrue(resultMap10.get("1004001005").equals("1"));
+//        assertTrue(resultMap10.get("1004001006").equals("100"));
+//        assertTrue(resultMap10.get("1004001007").equals("0"));
+//        assertTrue(resultMap10.get("1004001008").equals("0"));
+//        assertTrue(resultMap10.get("1004001010").equals("000001"));
+//        assertTrue(resultMap10.get("1004001012").equals("00"));
+//        assertTrue(resultMap10.get("1004001013").equals("00"));
+//        assertTrue(resultMap10.get("1004001014").equals("999999999999"));
+//        assertTrue(resultMap10.get("1004001015").equals("0000"));
+//        assertTrue(resultMap10.get("1004001016").equals("0000"));
 //
 ////        //测试F12
 //        Map datacellParams12 = new TreeMap();
@@ -470,13 +469,13 @@ public class RealTimeProxy376Test {
         assertEquals(expResult, result);
     }
 
-    //@Test
+    @Test
     public void testReadEquipmentParametersF10() throws Exception {
         Map datacellParams10 = new TreeMap();
         datacellParams10.put("1004001001", "1");//主用IP地址和端口
 
         CircleDataItems circleDataItems = new CircleDataItems();
-        for(int i=1;i<=9;i++)
+        for(int i=1;i<=3;i++)
         {
             DataItemGroup group = new DataItemGroup();
             group.AddDataItem(new DataItem("1004001002000"+i,String.valueOf(i)));//本次配置第0001块电能表/交流采样装置序号
@@ -499,8 +498,8 @@ public class RealTimeProxy376Test {
         RealTimeProxy376 instance = proxy;
         long SequenceCode = instance.readParameters(MTO3);
 
-        this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
-        this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
+//        this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
+//        this.taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 A2 00 A2 00 68 98 12 96 56 34 00 0A 60 00 00 04 00 C0 A8 00 01 90 1F C0 A8 00 02 90 1F 5A 4A 44 4C 2E 5A 4A 00 00 00 00 00 00 00 00 00 6F 16 55 ");
 
 //        Map datacellParams10 = new TreeMap();
 //        datacellParams10.put("1004001001","1");//本次电能表/交流采样装置配置数量
@@ -599,12 +598,12 @@ public class RealTimeProxy376Test {
      */
     //@Test
     public void testTransmitMsg() throws Exception {    
-       // Map datacellParams1 = new TreeMap();
-      //  datacellParams1.put("C041", "10");//负载电流动作档位
+       Map datacellParams1 = new TreeMap();
+       datacellParams1.put("C012", "2010-08-04 20:34:25");//漏电保护装置校时
         
         CommandItem commandItem = new CommandItem();
-        commandItem.setIdentifier("8000C037");
-     //   commandItem.setDatacellParam(datacellParams1);
+        commandItem.setIdentifier("8000C012");
+       // commandItem.setDatacellParam(datacellParams1);
         
         CollectObject_TransMit cob = new CollectObject_TransMit();
         cob.setFuncode((byte)4);
@@ -642,10 +641,10 @@ public class RealTimeProxy376Test {
         assertTrue(pack.getControlCode().getValue()==4);
         PmPacketData databuf = pack.getDataAsPmPacketData();
         databuf.rewind();
-        assertTrue(databuf.getA8().getValue()==10);
+        assertTrue(databuf.getA8().getValue()==36);
     }
 
-    @Test
+    //@Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
          Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(1652);
@@ -657,24 +656,24 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByWEP method, of class RealTimeProxy376.
      */
-   // @Test
+   @Test
     public void testGetReturnByWEP() throws Exception {
-        Map datacellParams1 = new TreeMap();
-        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
-        datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
-        datacellParams1.put("1004000103", "30");//终端等待从动站响应的超时时间
-        datacellParams1.put("1004000104", "3");//终端等待从动站响应的重发次数
-        datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
-        datacellParams1.put("1004000107", "15");//心跳周期
-        MTO_376 MTO1  = PutInCommandItem(datacellParams1,null,"10040001","96123456",0);
+//        Map datacellParams1 = new TreeMap();
+//        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
+//        datacellParams1.put("1004000102", "20");//终端作为启动站允许发送传输延时时间
+//        datacellParams1.put("1004000103", "30");//终端等待从动站响应的超时时间
+//        datacellParams1.put("1004000104", "3");//终端等待从动站响应的重发次数
+//        datacellParams1.put("1004000106", "11100000");//需要主站确认的通信服务（CON=1）的标志
+//        datacellParams1.put("1004000107", "15");//心跳周期
+//        MTO_376 MTO1  = PutInCommandItem(datacellParams1,null,"10040001","96123456",0);
         RealTimeProxy376 instance = proxy;
-        long SequenceCode = instance.writeParameters(MTO1);
-
-        taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 4A 00 4A 00 68 98 12 96 56 34 00 0A 60 00 00 01 00 0A 14 1E 03 07 0F 8A 16 55 ");
-        Map expResult = new HashMap();
-        expResult.put("96123456#0#10040001","1");
-        Map result = instance.getReturnByWriteParameter(SequenceCode);
-        assertEquals(expResult, result);
+//        long SequenceCode = instance.writeParameters(MTO1);
+//
+//        taskService.insertRecvMsg(SequenceCode, "96123456", "55 68 4A 00 4A 00 68 98 12 96 56 34 00 0A 60 00 00 01 00 0A 14 1E 03 07 0F 8A 16 55 ");
+//        Map expResult = new HashMap();
+//        expResult.put("96123456#0#10040001","1");
+        Map result = instance.getReturnByWriteParameter(3467);
+       // assertEquals(expResult, result);
 
           
 
@@ -697,7 +696,7 @@ public class RealTimeProxy376Test {
      */
     @Test
     public void testGetReturnByReadParameter() throws Exception {
-        Map result = proxy.getReturnByReadParameter(695);
+        Map result = proxy.getReturnByReadParameter(3467);
         assertTrue(result.size() > 0);
     }
 
@@ -709,7 +708,7 @@ public class RealTimeProxy376Test {
        RealTimeProxy376 instance = proxy;
         Map expResult = new HashMap();
         expResult.put("96123456#1#10040001","1");
-        Map result = instance.getReturnByReadData(228);
+        Map result = instance.getReturnByReadData(1722);
         assertEquals(expResult, result);
     }
 
