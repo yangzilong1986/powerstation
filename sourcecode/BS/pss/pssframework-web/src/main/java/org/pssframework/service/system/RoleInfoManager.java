@@ -8,6 +8,7 @@ import java.util.List;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.RoleInfoDao;
+import org.pssframework.model.system.ResourceInfo;
 import org.pssframework.model.system.RoleInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Administrator
@@ -31,7 +34,6 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
 		return roleInfoDao;
 	}
 
@@ -50,7 +52,7 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	public List<RoleInfo> findAllExtAdmin(Long id) {
 		List<RoleInfo> roleInfos = com.google.common.collect.Lists.newLinkedList();
 		roleInfos = this.findAll();
-		if(roleInfos == null){
+		if (roleInfos == null) {
 			roleInfos = com.google.common.collect.Lists.newLinkedList();
 		}
 		if (ADMIN != id) {
@@ -66,6 +68,26 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
 	@Override
 	public void saveOrUpdate(RoleInfo entity) {
+		List<ResourceInfo> resourceInfoList = Lists.newLinkedList();
+
+		String resources = entity.getResourceIds();
+
+		String[] resouceArray = new String[] {};
+
+		if (resources != null) {
+			resouceArray = resources.split(",");
+		}
+
+		for (String resouceId : resouceArray) {
+
+			resourceInfoList.add(new ResourceInfo(Long.parseLong(resouceId)));
+
+		}
+
+		entity.getResourceInfoList().clear();
+
+		entity.setResourceInfoList(resourceInfoList);
+
 		roleInfoDao.saveOrUpdate(entity);
 	}
 

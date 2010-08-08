@@ -25,6 +25,8 @@ import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.RoleInfo;
 import org.pssframework.model.system.UserInfo;
+import org.pssframework.query.system.UserQuery;
+import org.pssframework.security.OperatorDetails;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.system.RoleInfoManager;
@@ -38,6 +40,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -76,7 +79,29 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
 			UserInfo userInfo) {
 
-		BaseQuery baseQuery = new BaseQuery();
+		UserQuery baseQuery = new UserQuery();
+		//是否勾选全部
+		if (!userInfo.isShowAllAccount()) {
+			Long orgId = null;
+
+			OrgInfo orgInfo = userInfo.getOrgInfo();
+
+			if (orgInfo == null) {
+
+				OperatorDetails user = SpringSecurityUtils.getCurrentUser();
+
+				String staffNo = user.getUsername();
+
+				UserInfo userLogin = this.userInfoManager.findUserByLoginName(staffNo);
+
+				orgInfo = userLogin.getOrgInfo();
+
+			}
+
+			orgId = orgInfo.getOrgId();
+
+			baseQuery.setOrgId(orgId);
+		}
 
 		getUserList(modelAndView, request, response, baseQuery);
 

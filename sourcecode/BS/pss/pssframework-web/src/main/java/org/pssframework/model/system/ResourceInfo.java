@@ -168,6 +168,10 @@ public class ResourceInfo extends BaseEntity {
 	public ResourceInfo() {
 	}
 
+	public ResourceInfo(Long resourceId) {
+		this.resourceId = resourceId;
+	}
+
 	public ResourceInfo(Long resourceId, String resourceName) {
 		this.resourceId = resourceId;
 		this.resourceName = resourceName;

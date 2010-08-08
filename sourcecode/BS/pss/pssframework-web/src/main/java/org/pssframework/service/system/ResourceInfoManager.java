@@ -3,8 +3,6 @@
  */
 package org.pssframework.service.system;
 
-import java.util.List;
-
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.ResourceInfoDao;
@@ -32,11 +30,6 @@ public class ResourceInfoManager extends BaseManager<ResourceInfo, Long> {
 	@Override
 	public ResourceInfo getById(Long id) {
 		return resourceInfoDao.getById(id);
-	}
-
-	@Override
-	public List<ResourceInfo> findAll() {
-		return resourceInfoDao.findBy("resourceId", true);
 	}
 
 	@Override
