@@ -20,7 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.pssframework.model.system.OrgInfo;
-import org.pssframework.util.StringUtil;
+import org.pssframework.model.system.RoleInfo;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
@@ -62,9 +62,38 @@ public class JuintTest {
 
 	@Test
 	public void testString() {
-		System.out.println(StringUtil.lPad("11", "0", 12));
-		;
 		
+
+		List<RoleInfo> list = new ArrayList<RoleInfo>();
+		List<Long> listIds = new ArrayList<Long>();
+		listIds.add(1L);
+		listIds.add(2L);
+		listIds.add(3L);
+		listIds.add(4L);
+
+		List<RoleInfo> roleInfos = new ArrayList<RoleInfo>();
+		RoleInfo roleInfo = new RoleInfo(1L);
+		roleInfos.add(roleInfo);
+		roleInfo = new RoleInfo(2L);
+		roleInfos.add(roleInfo);
+		roleInfo = new RoleInfo(4L);
+		roleInfos.add(roleInfo);
+
+		for (RoleInfo role : roleInfos) {
+
+			for (Long roleId : listIds) {
+
+				if (role.getRoleId() == roleId) {
+					break;
+				} else {
+					list.add(new RoleInfo(roleId));
+				}
+
+			}
+		}
+
+		System.out.println(list);
+
 	}
 
 	@Test
