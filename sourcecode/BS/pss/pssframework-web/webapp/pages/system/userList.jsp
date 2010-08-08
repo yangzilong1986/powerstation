@@ -18,54 +18,111 @@ function selectRow(sUserID, oRow) {
     sSelectedUserID = sUserID;
     var url = contextPath + '/system/user/' + sSelectedUserID + '?random=' + Math.random();
     parent.document.frames["userManager"].location.href = url;
-   // selectSingleRow(oRow);
+    selectSingleRow(oRow);
 }
 
 //列表变更
 function changeList() {
-    $("#orgNo").attr("disabled", false);
+    $("#orgId").attr("disabled", false);
     document.forms[0].submit();
 }
 
 function changeOrg() {
-    $("#orgNo").attr("disabled", false);
+    $("#orgId").attr("disabled", false);
     document.forms[0].submit();
 }
 
 
 $(function(){
 	 var firstId = $("#dataBody>tr:first").attr("id");
+	 if(firstId != undefined)
 	 selectRow(firstId);
 	 
 })
+
+
+
+var contextPath = "${ctx}";
+var errorUser = '<spring:message code="system.user.errorUser" />';
+var errorDelUser = '<spring:message code="system.user.errorDelUser" />';
+var confirmDel = '<spring:message code="system.user.confirmDel" />';
+
+//新增操作员
+function newUser() {
+    var str_url = contextPath + "/system/user/new";
+    windowPopup(str_url, 800, 495);
+}
+
+//编辑操作员
+function editUser() {
+    var userId = sSelectedUserID;
+    if(userId == "") {
+        alert(errorUser);
+        return;
+    }
+    var str_url = contextPath + "/system/user/" + userId + "/edit";
+    windowPopup(str_url, 800, 495);
+}
+
+//查看操作员
+function viewUser() {
+    var userId = sSelectedUserID;
+    if(userId == "") {
+        alert(errorUser);
+        return;
+    }
+    var str_url = contextPath + "/system/user/" + userId ;
+    windowPopup(str_url, 800, 495);
+    //top.showDialogBox("查看操作员", str_url, 495, 800);
+}
+
+//删除账号
+function deleteUser() {
+    var userId = sSelectedUserID;
+    if(userId == "") {
+        alert(errorDelUser);
+        return;
+    }
+    if(confirm(confirmDel)) {
+        parent.hideframe.location.href = contextPath + "/system/user/" + userId + "?_method=delete&random=" + Math.random();
+    }
+}
 </script>
 </head>
-<body >
-<div id="body"><form:form action="/system/user" modelAttribute="user">
+<body>
+<form:form action="${ctx}/system/user/list" modelAttribute="userInfo" method="get">
 	<div id="tool">
 	<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
+		<tr height="25">
 			<td><spring:message code="system.user.ssdw" />：</td>
-			<td></td>
-			<td colspan="2"><input type="checkbox" name="isAll" value="1" onclick="changeList()" />显示全部</td>
+			<td><form:select path="orgInfo.orgId" items="${orgInfo}" id="orgId" itemLabel="orgName"
+				itemValue="orgId" cssStyle="width:150px;" onchange="changeOrg()"/></td>
+			<td colspan="2"><form:checkbox path="showAllAccount" onclick="changeList()"/>显示全部
+			</td>
+		</tr>
+		<tr height="25">
+			<td colspan="4"><input type="button" id="new" class="btnbg4" value=<spring:message code="system.button.xz" />
+				onclick="newUser()" /> <input type="button" id="edit" class="btnbg4"
+				value=<spring:message code="system.button.bj" /> onclick="editUser()" /> <input type="button" id="delete"
+				class="btnbg4" value=<spring:message code="system.button.sc" /> onclick="deleteUser()" /></td>
 		</tr>
 	</table>
 	</div>
-	<div >
+	<div class="content">
 	<div id="cont_1">
-	<div id="tableContainer"
-		style="height: expression(((     document.documentElement.clientHeight ||     document.body.clientHeight) -64 ) );">
+	<div class="tableContainer"
+		style="height: expression((( document.documentElement.clientHeight ||document.body.clientHeight) -50 ) )">
 	<table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
 		<thead class="tableHeader">
-			<tr>
-				<th><spring:message code="system.user.xh" /></th>
-				<th><spring:message code="system.user.zh" /></th>
-				<th><spring:message code="system.user.mc" /></th>
+			<tr style="height: 20px;">
+				<th ><spring:message code="system.user.xh" /></th>
+				<th ><spring:message code="system.user.zh" /></th>
+				<th ><spring:message code="system.user.mc" /></th>
 			</tr>
 		</thead>
 		<tbody id="dataBody">
 			<c:forEach items="${page.result}" var="item" varStatus="status">
-				<tr id="${item.empNo}" class="${status.count % 2 == 0 ? 'odd' : 'even'}" onclick="selectRow('${item.empNo}', this)"
+				<tr style="height: 20px;" id="${item.empNo}" class="${status.count % 2 == 0 ? 'odd' : 'even'}" onclick="selectRow('${item.empNo}', this)"
 					style="cursor: pointer;">
 					<td>${page.thisPageFirstElementNumber + status.index}</td>
 					<td>${item.staffNo}&nbsp;</td>
@@ -77,6 +134,12 @@ $(function(){
 	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 	</div>
 	</div>
-</form:form></div>
+</form:form>
 </body>
+<script type="text/javascript">
+		$(document).ready(function() {
+			// 分页需要依赖的初始化动作
+			window.simpleTable = new SimpleTable('userInfo','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
+		});
+	</script>
 </html>
