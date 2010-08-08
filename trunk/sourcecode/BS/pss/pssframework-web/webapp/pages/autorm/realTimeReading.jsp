@@ -392,7 +392,7 @@ function read() {
 <body>
 <div class="electric_lcon" id="electric_Con">
 <ul class=default id=electric_Con_1>
-	<div><form:form name="/autorm/realTimeReading" modelAttribute="pageRequest">
+	<div><form:form name="/autorm/realTimeReading" modelAttribute="userInfo">
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr height="30px">
 				<td width="100" class="green" align="right">单位：</td>

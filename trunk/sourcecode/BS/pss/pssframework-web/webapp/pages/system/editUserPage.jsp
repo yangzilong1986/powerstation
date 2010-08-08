@@ -251,7 +251,6 @@ $(function(){
 })
 updateUserInfo = function(){
 	 var psFormData = getData("update");
-	 alert(psFormData);
 	    var url="${ctx}/system/user/${user.empNo}.json?_method=put";
 	    if(confirm("确定要更新该用户?")){
 	      jQuery.ajax({
@@ -265,7 +264,7 @@ updateUserInfo = function(){
 	          	var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
 	             alert(msg);
 	             if(isSucc){
-	          	   opener.location.href ="${ctx}/system/user/${user.empNo}";
+	          	   opener.parent.userManager.location.href ="${ctx}/system/user/${user.empNo}";
 	          	   closeWin();
 	             }
 	           },
