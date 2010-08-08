@@ -17,7 +17,6 @@ public class ClassTwoDataDecoder {
         Dto classTwodto = new Dto(packet.getAddress().getRtua(),packet.getAfn());
 
 
-        
         return classTwodto;
     }
 }
