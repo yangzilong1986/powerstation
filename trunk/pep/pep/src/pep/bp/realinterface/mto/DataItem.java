@@ -12,6 +12,10 @@ package pep.bp.realinterface.mto;
 public class DataItem {
     private String dataItemCode;
     private String dataItemValue;
+    
+    public DataItem() {
+        
+    }
 
     public DataItem(String dataItemCode,String dataItemValue){
         this.dataItemCode = dataItemCode;

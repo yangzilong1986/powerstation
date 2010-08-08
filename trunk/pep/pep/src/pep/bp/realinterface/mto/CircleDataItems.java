@@ -33,4 +33,8 @@ public class CircleDataItems {
     public void AddDataItemGroup(DataItemGroup group){
         this.getDataItemGroups().add(group);
     }
+
+    public void setDataItemGroups(List<DataItemGroup> dataItemGroups) {
+        this.dataItemGroups = dataItemGroups;
+    }
 }

@@ -29,4 +29,8 @@ public class DataItemGroup {
     public List<DataItem> getDataItemList() {
         return dataItemList;
     }
+
+    public void setDataItemList(List<DataItem> dataItemList) {
+        this.dataItemList = dataItemList;
+    }
 }
