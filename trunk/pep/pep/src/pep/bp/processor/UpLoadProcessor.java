@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import pep.bp.db.DataService;
 import pep.bp.model.Dto;
 import pep.bp.utils.Converter;
+import pep.bp.utils.decoder.ClassTwoDataDecoder;
 import pep.codec.protocol.gb.PmPacketData;
 import pep.codec.protocol.gb.gb376.Packet376Event36;
 import pep.codec.protocol.gb.gb376.PmPacket376;
@@ -72,6 +73,8 @@ public class UpLoadProcessor extends BaseProcessor {
     }
 
     private void decodeAndSaveClassTwoData(PmPacket376 packet) {
+        Dto classTwoDto = ClassTwoDataDecoder.Decode(packet);
+        dataService.insertRecvData(classTwoDto);
     }
 
     private void DecodeEventAndSave(PmPacket376 packet) {
