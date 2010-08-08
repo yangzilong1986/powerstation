@@ -113,14 +113,22 @@ public class DataServiceIMP implements DataService{
     public void insertLBEvent(String rtua, Packet376Event36 event){
         List<Meter> Meters = event.meters;
         for(Meter meter:Meters){
-            this.loubaoEventStoredProcedure.execute(rtua, meter.meterAddress,
-                    event.GetEventCode(), event.getEventTime(), new Date(), meter.isClosed, meter.isLocked, meter.xiangwei, meter.actValue);
+            try {
+                this.loubaoEventStoredProcedure.execute(rtua, meter.meterAddress,
+                        event.GetEventCode(), event.getEventTime(), new Date(), meter.isClosed, meter.isLocked, meter.xiangwei, meter.actValue);
+            } catch (Exception e) {
+                log.error("错误信息：", e.fillInStackTrace());
+            }
         }
     }
 
     @Override
      public void insertEvent(String rtua, PmPacket376EventBase event){
-        this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), UtilsBp.Date2String(event.getEventTime()));
+        try {
+            this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), UtilsBp.Date2String(event.getEventTime()));
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
+        }
     }
 
 
@@ -128,11 +136,10 @@ public class DataServiceIMP implements DataService{
     private void insertData_P_ACT(String logicalAddress,int gpSn,String dataDate,
             String p_act_total,String p_act_sharp,String p_act_peak,String p_act_level,String p_act_valley)
     {
-        try {
+           try {
             this.actStoredProcedure.execute(logicalAddress, gpSn, dataDate, p_act_total, p_act_sharp, p_act_peak, p_act_level, p_act_valley);
-
-        } catch (DataAccessException dataAccessException) {
-            log.error(dataAccessException.getMessage());
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
         }
     }
 
@@ -141,10 +148,11 @@ public class DataServiceIMP implements DataService{
             String ECUR_A,String ECUR_B,String ECUR_C,String ECUR_L,String ECUR_S,
             String VOLT_A,String VOLT_B,String VOLT_C)
     {
+
         try {
-            this.eccurvStoredProcedure.execute(logicalAddress,gpSn, dataDate, ECUR_A, ECUR_B, ECUR_C, ECUR_L, ECUR_S, VOLT_A, VOLT_B, VOLT_C);
-        } catch (DataAccessException dataAccessException) {
-            log.error(dataAccessException.getMessage());
+            this.eccurvStoredProcedure.execute(logicalAddress, gpSn, dataDate, ECUR_A, ECUR_B, ECUR_C, ECUR_L, ECUR_S, VOLT_A, VOLT_B, VOLT_C);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
         }
     }
 
