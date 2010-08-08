@@ -81,21 +81,6 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         rtuConnectEventHandler.fireRtuDisconnect(rtua);
     }
 
-    private RtuCommunicationInfo rtuConnectted(String rtua, IoSession session) {
-        RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
-        if (rtu == null) {
-            rtu = new RtuCommunicationInfo(rtua, session);
-            putRtuCommunicationInfo(rtua, rtu);
-            rtuConnectEventHandler.fireRtuConnect(rtua);
-        } else {
-            if (rtu.getSession() == null) {
-                rtu.connectted(session);
-                rtuConnectEventHandler.fireRtuConnect(rtua);
-            }
-        }
-        return rtu;
-    }
-
     public void rtuReceiveTcpPacket(String rtua, IoSession session, PmPacket pack) {
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
@@ -105,17 +90,23 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
 
         if (!pack.getControlCode().getIsOrgniger()) {
             rtu.receiveRtuUploadPacket(pack);
-        } else if (pack.getAfn() != 2) //主动上送
-        {
-            autoUploadPacketQueue.addPacket(pack);
+        } else{
+            addAutoUploadPacket(pack);
         }
 
         if ((pack.getControlCode().getIsUpDirect()) && (pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
             rtu.callRtuEventRecord(pack.getEC());
         }
 
-        if (rtu.getSession() == null) {
+        if ((rtu.getSession() == null)||(rtu.getSession()!=session)) {
             rtu.setTcpSession(session);
+        }
+    }
+    
+    private void addAutoUploadPacket(PmPacket pack){
+        if (pack.getAfn() != 2) //主动上送
+        {
+            autoUploadPacketQueue.addPacket(pack);
         }
     }
 }
