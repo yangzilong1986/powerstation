@@ -10,14 +10,6 @@
 <script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript" src="${ctx}/scripts/json2.js"></script>
 <script type="text/javascript">
-var inputText = ""; 
-var inputLabel = "";
-var excelFlag=0; //导出EXCEL标记 1:各费率电能示值 2：当前功率 3:电压电流4：实时数据
-var otherDataFlag=0; //其他数据项标识  1：实时召测其他数据项 0：实时召测各费率电能示值，当前功率，电压电流，实时数据
-var timeData; //其他数据项页面中的数据时间
-var dataGap; //其他数据项页面中的数据间隔
-var points; //其他数据项页面中的点数
-var protocolNo;//其他数据项页面中的规约号
 
 function inputTextStyle() {
     $('#objectNo').attr({style: "color: #aaaaaa;"});
@@ -62,18 +54,24 @@ function initInputText() {
 <body>
 <div class="electric_lcon" id="electric_Con">
 <ul class=default id=electric_Con_1>
-	<div><form:form name="/system/user" modelAttribute="pageRequest">
+	<div><form:form name="/archive/tgopinfo" modelAttribute="pageRequest">
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr height="30px">
 				<td width="100" class="green" align="right">单位：</td>
 				<td width="120"><select name="orgId" style="width: 150px;">
-					<c:forEach var="item" items="${orglist}">
+					<c:forEach var="item" items="${orgInfo}">
 						<option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out
 							value="${item.orgName}" /></option>
 					</c:forEach>
 				</select></td>
-				<td><input class="btnbg4" type="submit" name="query" id="query" value="查询" /></td>
+				<td></td>
 			</tr>
+			<tr height="30px">
+				<td width="100" class="green" align="right">权限：</td>
+				<td width="120"><form:checkbox path="userInfo."/></td>
+				<td><input class="btnbg4" type="submit" name="ok" id="ok" value="确定" /></td>
+			</tr>
+	
 		</table>
 	</form:form></div>
 	<div id="bg" style="height: 30px; text-align: center;">
@@ -111,14 +109,13 @@ function initInputText() {
 	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </ul>
 </div>
-<iframe id="resultframe" src="${ctx}/jsp/autorm/fastReadingAction.jsp" width="0" height="0" frameborder="0"></iframe>
 </body>
 <script type="text/javascript">
 </script>
 <script type="text/javascript">
 		$(document).ready(function() {
 			// 分页需要依赖的初始化动作
-			window.simpleTable = new SimpleTable('model','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
+			window.simpleTable = new SimpleTable('pageRequest','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
 		});
 	</script>
 </html>
