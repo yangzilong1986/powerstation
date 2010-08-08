@@ -10,7 +10,7 @@ package pep.codec.protocol.gb;
  * @author luxiaochung
  */
 public class DataTypeA25 extends DataTypeA9A25Base {
-    public DataTypeA25(long value){
+    public DataTypeA25(double value){
         setValue(value);
     }
 
@@ -18,17 +18,17 @@ public class DataTypeA25 extends DataTypeA9A25Base {
         setArray(array,0);
     }
 
-    public final void setValue(long value){
-        this.value = value;
+    public final void setValue(double value){
+        this.value = (long) Math.round(value*1000);
     }
 
-    public long getValue(){
-        return this.value;
+    public double getValue(){
+        return this.value/1000.0;
     }
 
     @Override
     public String toString() {
         if (this.isNull) return "";
-        return (new Double(value/ 10.0)).toString();
+        return (new Double(this.getValue())).toString();
     }
 }
