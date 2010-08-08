@@ -67,67 +67,53 @@ function fresh(userId) {
 </script>
 </head>
 <body>
-	<div class="electric_lcon" id="electric_Con">
-	<ul class="default" id="electric_Con_1">
-		<div><input type="button" id="new" class="btnbg4" value=<spring:message code="system.button.xz" />
-			onclick="newUser()" /> <input type="button" id="edit" class="btnbg4"
-			value=<spring:message code="system.button.bj" /> onclick="editUser()" /> <input type="button" id="delete"
-			class="btnbg4" value=<spring:message code="system.button.sc" /> onclick="deleteUser()" /></div>
-		<br />
-		<div class="tab" id="detail_tile"><span><spring:message code="system.user.czyxx" /></span></div>
-		<div class="tab_con">
-		<div class="main">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height ="25px;">
-				<td width="15%" align="right" class="green"><spring:message code="system.user.zh" />：</td>
-				<td width="25%">${user.staffNo}</td>
-				<td width="15%" align="right" class="green"><spring:message code="system.user.mc" />：</td>
-				<td width="25%">${user.name}</td>
-			</tr>
-			<tr height ="25px;">
-				<td width="15%" align="right" class="green"><spring:message code="system.user.ssdw" />：</td>
-				<td width="25%">${user.orgInfo.orgName}</td>
-				<td width="15%" align="right" class="green"><spring:message code="system.user.dh" />：</td>
-				<td width="25%">${user.mobile}</td>
-			</tr>
-			<tr height ="25px;">
-				<td width="15%" align="right" class="green"><spring:message code="system.user.zt" />：</td>
-				<td width="25%">
-				<pss:code code="${user.enable}" codeCate="<%=SystemConst.CODE_USER_STATUS %>" />
-				</td>
-				<td width="15%" align="right" class="green"></td>
-				<td width="25%"></td>
-			</tr>
-		</table>
-		</div>
-		<div class="tab" id="detail_tile"><span><spring:message code="system.user.czyqx" /></span></div>
-		<div class="data1_con">
-		<div class="main"
-			style="height: expression((( document.documentElement.clientHeight ||document.body.clientHeight) -204 ) );">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height ="25px;">
-				<td align="left"><spring:message code="system.user.ywfw" />：</td>
-			</tr>
-			<tr height ="25px;">
-				<td style="padding-left: 10px;"></td>
-			</tr>
-			<tr height ="25px;">
-				<td align="left"><spring:message code="system.user.gwjs" />：</td>
-			</tr>
-			<tr height ="25px;">
-				<td style="padding-left: 10px;"></td>
-			</tr>
-			<tr height ="25px;">
-				<td align="left"><spring:message code="system.user.czqx" />：</td>
-			</tr>
-			<tr height ="25px;">
-				<td style="padding-left: 10px;"></td>
-			</tr>
-		</table>
-		</div>
-		</div>
-		</div>
-	</ul>
+<div class="electric_lcon" id="electric_Con">
+<ul class="default" id="electric_Con_1">
+	<div><input type="button" id="new" class="btnbg4" value=<spring:message code="system.button.xz" />
+		onclick="newUser()" /> <input type="button" id="edit" class="btnbg4" value=<spring:message code="system.button.bj" />
+		onclick="editUser()" /> <input type="button" id="delete" class="btnbg4"
+		value=<spring:message code="system.button.sc" /> onclick="deleteUser()" /></div>
+	<br />
+	<div class="tab" id="detail_tile"><span><spring:message code="system.user.czyxx" /></span></div>
+	<div class="tab_con">
+	<div class="main">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr height="25px;">
+			<td width="15%" align="right" class="green"><spring:message code="system.user.zh" />：</td>
+			<td width="25%">${user.staffNo}</td>
+			<td width="15%" align="right" class="green"><spring:message code="system.user.mc" />：</td>
+			<td width="25%">${user.name}</td>
+		</tr>
+		<tr height="25px;">
+			<td width="15%" align="right" class="green"><spring:message code="system.user.ssdw" />：</td>
+			<td width="25%">${user.orgInfo.orgName}</td>
+			<td width="15%" align="right" class="green"><spring:message code="system.user.dh" />：</td>
+			<td width="25%">${user.mobile}</td>
+		</tr>
+		<tr height="25px;">
+			<td width="15%" align="right" class="green"><spring:message code="system.user.zt" />：</td>
+			<td width="25%"><pss:code code="${user.enable}" codeCate="<%=SystemConst.CODE_USER_STATUS %>" /></td>
+			<td width="15%" align="right" class="green"></td>
+			<td width="25%"></td>
+		</tr>
+	</table>
 	</div>
+	<div class="tab" id="detail_tile"><span><spring:message code="system.user.czyjs" /></span></div>
+	<div class="data1_con">
+	<div class="main"
+		style="height: expression(((   document.documentElement.clientHeight || document.body.clientHeight) -204 ) );">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr height="25px;">
+			<td align="left"><spring:message code="system.user.gwjs" />：</td>
+		</tr>
+		<tr height="25px;">
+			<td style="padding-left: 10px;">${roleNames}</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+	</div>
+</ul>
+</div>
 </body>
 </html>
