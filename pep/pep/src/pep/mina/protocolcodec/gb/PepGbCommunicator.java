@@ -98,9 +98,9 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
             rtu.callRtuEventRecord(pack.getEC());
         }
 
-        if ((rtu.getSession() == null)||(rtu.getSession()!=session)) {
+        //if ((rtu.getSession() == null)||(rtu.getSession()!=session)) {
             rtu.setTcpSession(session);
-        }
+        //}
     }
     
     private void addAutoUploadPacket(PmPacket pack){
