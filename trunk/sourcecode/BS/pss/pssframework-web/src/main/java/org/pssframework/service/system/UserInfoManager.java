@@ -1,6 +1,5 @@
 package org.pssframework.service.system;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -65,9 +64,9 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
 		entity.setPasswd(shaPassword);
-		
+
 		setRole(entity);
-		
+
 		userInfoDao.saveOrUpdate(entity);
 	}
 
@@ -123,28 +122,15 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 	private void setRole(UserInfo entity) {
 		List<Long> roleIds = entity.getRoleIds();
 
-		List<RoleInfo> roleInfos = entity.getRoleInfoList();
+		List<RoleInfo> list = com.google.common.collect.Lists.newArrayList();
 
-		List<RoleInfo> list = new ArrayList<RoleInfo>();
+		entity.getRoleInfoList().clear();
+		for (Long roleId : roleIds) {
 
-		for (RoleInfo role : roleInfos) {
+			list.add(new RoleInfo(roleId));
 
-			for (Long roleId : roleIds) {
-
-				if (role.getRoleId() == roleId) {
-					break;
-				} else {
-					list.add(new RoleInfo(roleId));
-				}
-
-			}
 		}
-
 		entity.getRoleInfoList().addAll(list);
 
 	}
-
-	public static void main(String[] args) {
-	}
-
 }

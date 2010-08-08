@@ -42,7 +42,7 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 	private static final String VIEW_MANAGER = "/system/roleManagerFrame";
 	private static final String VIEW_QUERY = "/system/roleList";
 	private static final String VIEW_DETAIL = "/system/roleDetail";
-	private static final String VIEW_EDIT = "/system/roleEdit";
+	private static final String VIEW_EDIT = "/system/editRolePage";
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
@@ -89,7 +89,7 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 
 		RoleInfo roleInfo = this.roleInfoManager.getById(id);
 
-		result.addAttribute("roleInfo", roleInfo);
+		result.addAttribute("role", roleInfo);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 

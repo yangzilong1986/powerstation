@@ -28,6 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
+import org.springside.modules.utils.ReflectionUtils;
 
 import com.google.common.collect.Lists;
 
@@ -112,13 +113,30 @@ public class RoleInfo extends BaseEntity {
 	@Transient
 	@SuppressWarnings("unchecked")
 	public List<Long> getAuthIds() {
-		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToList(authorityInfoList, "id");
+		return ReflectionUtils.convertElementPropertyToList(authorityInfoList, "authorityId");
+	}
+
+	@Transient
+	private String resourceIds;
+
+	public String getResourceIds() {
+		if (this.resourceIds == null) {
+			resourceIds = ReflectionUtils.convertElementPropertyToString(resourceInfoList, "resourceId", ",");
+
+		}
+
+		return resourceIds;
+	}
+
+	public void setResourceIds(String resourceIds) {
+		this.resourceIds = resourceIds;
+
 	}
 
 	@Transient
 	public String getAuthNames() {
-		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToString(authorityInfoList, "name",
-				", ");
+		return org.springside.modules.utils.ReflectionUtils.convertElementPropertyToString(authorityInfoList,
+				"authorityName", ", ");
 	}
 
 	public List<AuthorityInfo> getAuthorityInfoList() {
