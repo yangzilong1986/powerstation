@@ -23,8 +23,8 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    readB66F();
-    readC04F();
+    //readB66F();
+    //readC04F();
 });
 
 function StringBuffer() {

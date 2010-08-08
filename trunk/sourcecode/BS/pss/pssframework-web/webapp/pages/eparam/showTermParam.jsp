@@ -8,6 +8,7 @@
 <title>终端参数设置</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/effects.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/application.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/json2.js"></script>
 <script type="text/javascript">
@@ -37,62 +38,7 @@ function folder(imgObj, itemId) {
     }
 }
 
-function setup() {
-    /*var dto = {
-            "mtoType": "100",
-            "coList": [{
-                "logicalAddr": "91010001",
-                "equipProtocol": "100",
-                "channelType": "1",
-                "pwAlgorith": "0",
-                "pwContent": "8888",
-                "mpExpressMode": "3",
-                "mpSn": "0",
-                "commandItems": [{
-                    "identifier": "10040001", 
-                    "datacellParam": [{"dataItemCode": "1004000101", "dataItemValue": "5"},
-                                      {"dataItemCode": "1004000102", "dataItemValue": "1"},
-                                      {"dataItemCode": "1004000103", "dataItemValue": "10"},
-                                      {"dataItemCode": "1004000104", "dataItemValue": "5"},
-                                      {"dataItemCode": "1004000106", "dataItemValue": "00100000"},
-                                      {"dataItemCode": "1004000107", "dataItemValue": "30"}]
-                },
-                {
-                    "identifier": "10040003", 
-                    "datacellParam": [{"dataItemCode": "1004000301", "dataItemValue": "192.168.1.100:1024"},
-                                      {"dataItemCode": "1004000302", "dataItemValue": "192.168.1.101:1024"},
-                                      {"dataItemCode": "1004000303", "dataItemValue": "0000000000000000"}]
-                }]
-            }]
-    };*/
-    /*var dto = {
-            "type": "GW_376",
-            "collectObjects": [{
-                "logicalAddr": "91010001",
-                "equipProtocol": "100",
-                "channelType": "1",
-                "pwAlgorith": "0",
-                "pwContent": "8888",
-                "mpExpressMode": "3",
-                "mpSn": [0],
-                "commandItems": [{
-                    "identifier": "10040001", 
-                    "datacellParam": {"1004000101": "5",
-                                      "1004000102": "1",
-                                      "1004000103": "10",
-                                      "1004000104": "5",
-                                      "1004000106": "00100000",
-                                      "1004000107": "30"}
-                },
-                {
-                    "identifier": "10040003", 
-                    "datacellParam": {"1004000301": "192.168.1.100:1024",
-                                      "1004000302": "192.168.1.101:1024",
-                                      "1004000303": "0000000000000000"}
-                }]
-            }]
-    };*/
-    //alert(escape(JSON.stringify(dto)));
+function setup(cate) {
     disableOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
@@ -104,9 +50,26 @@ function setup() {
     sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
     sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
     sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
-    sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+    if(cate == 1) {        // 终端参数
+        sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+    }
+    else if(cate == 2) {   // 测量点参数
+        sb_dto.append('"mpSn":"' + $("#gpSn").val() + '"').append(',');
+    }
+    else if(cate == 4) {   // 直流模拟量参数
+        sb_dto.append('"mpSn":"' + $("#agSn").val() + '"').append(',');
+    }
     sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = getSelectedCheckboxs();
+    var cilist = "";
+    if(cate == 1) {        // 终端参数
+        cilist = getSelectedCheckboxs1();
+    }
+    else if(cate == 2) {   // 测量点参数
+        cilist = getSelectedCheckboxs2();
+    }
+    else if(cate == 4) {   // 直流模拟量参数
+        cilist = getSelectedCheckboxs4();
+    }
     //alert(cilist);
     $("#opcilist").val(cilist);
     var ciarray = cilist.split(',');
@@ -157,7 +120,7 @@ function setup() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ", 'setup')", 3000);
+            setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'setup', " + cate + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
             initOpResult('下发失败...');
@@ -166,7 +129,7 @@ function setup() {
     });
 }
 
-function fetchSetupResult(collectId, fetchCount, type) {
+function fetchResult(collectId, fetchCount, type, cate) {
     //alert(collectId + "," + fetchCount);
     //alert($("#opcilist").val());
     var url = '<pss:path type="webapp"/>/eparam/termparam/up.json';
@@ -180,9 +143,9 @@ function fetchSetupResult(collectId, fetchCount, type) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showSetupResult(data.resultMap, type);
+            var b = showResult(data.resultMap, type, cate);
             if(!b && fetchCount > 0) {
-                setTimeout("fetchSetupResult(" + collectId + ", " + (fetchCount - 1) + ", '" + type + "')", 3000);
+                setTimeout("fetchResult(" + collectId + ", " + (fetchCount - 1) + ", '" + type + "', " + cate + ")", 3000);
             }
             else {
                 if(type == 'setup') {
@@ -199,10 +162,20 @@ function fetchSetupResult(collectId, fetchCount, type) {
     });
 }
 
-function showSetupResult(resultMap, type) {
+function showResult(resultMap, type, cate) {
     var cilist = $("#opcilist").val();
     var logicalAddr = $("#cLogicalAddr").val();
     var mpSn = $("#mpSn").val();
+    if(cate == 1) {        // 终端参数
+        mpSn = $("#mpSn").val();
+    }
+    else if(cate == 2) {   // 测量点参数
+        mpSn = $("#gpSn").val();
+    }
+    else if(cate == 4) {   // 直流模拟量参数
+        mpSn = $("#agSn").val();
+    }
+    
     var ciarray = cilist.split(',');
     var cilistTemp = new StringBuffer();
     for(var i = 0; i < ciarray.length; i++) {
@@ -237,7 +210,7 @@ function showSetupResult(resultMap, type) {
     }
 }
 
-function read() {
+function read(cate) {
     disableOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
@@ -248,9 +221,26 @@ function read() {
     sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
     sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
     sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
-    sb_dto.append('"mpSn":["' + $("#mpSn").val() + '"]').append(',');
+    if(cate == 1) {        // 终端参数
+        sb_dto.append('"mpSn":["' + $("#mpSn").val() + '"]').append(',');
+    }
+    else if(cate == 2) {   // 测量点参数
+        sb_dto.append('"mpSn":["' + $("#gpSn").val() + '"]').append(',');
+    }
+    else if(cate == 4) {   // 直流模拟量参数
+        sb_dto.append('"mpSn":["' + $("#agSn").val() + '"]').append(',');
+    }
     sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = getSelectedCheckboxs();
+    var cilist = "";
+    if(cate == 1) {        // 终端参数
+        cilist = getSelectedCheckboxs1();
+    }
+    else if(cate == 2) {   // 测量点参数
+        cilist = getSelectedCheckboxs2();
+    }
+    else if(cate == 4) {   // 直流模拟量参数
+        cilist = getSelectedCheckboxs4();
+    }
     //alert(cilist);
     $("#opcilist").val(cilist);
     var ciarray = cilist.split(',');
@@ -259,7 +249,26 @@ function read() {
         if(i > 0) {
             sb_dto.append('{');
         }
-        sb_dto.append('"identifier":"' + ciarray[i] + '"');
+        
+        if('10040010' == ciarray[i]) {
+            //sb_dto.append('"identifier":"' + ciarray[i] + '"');
+            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+            sb_dto.append('"datacellParam":').append('{');
+            sb_dto.append('"1004001001": "1"');
+            sb_dto.append('}').append(',');
+            sb_dto.append('"circleDataItems":').append('{');
+            sb_dto.append('"dataItemGroups":').append('[').append('{');
+            sb_dto.append('"dataItemList":').append('[').append('{');
+            sb_dto.append('"dataItemCode": "10040010020001"').append(',');
+            sb_dto.append('"dataItemValue": "1"');
+            sb_dto.append('}').append(']');
+            sb_dto.append('}').append(']');
+            sb_dto.append('}');
+        }
+        else {
+            sb_dto.append('"identifier":"' + ciarray[i] + '"');
+        }
+        
         if(i < ciarray.length - 1) {
             sb_dto.append('}').append(',');
         }
@@ -285,7 +294,7 @@ function read() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ", 'read')", 3000);
+            setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'read', " + cate + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
             initOpResult('下发失败...');
@@ -306,10 +315,24 @@ function disableOperation() {
     $("#bSetup").attr("disabled", true);
     $("#bRead").attr("disabled", true);
     
-    $("input[type=checkbox][name='selectAll']").each( function() {
+    $("input[type=checkbox][name='selectAll1']").each( function() {
         $(this).attr("disabled", true);
     });
-    $("input[type=checkbox][name='itemId']").each( function() {
+    $("input[type=checkbox][name='itemId1']").each( function() {
+        $(this).attr("disabled", true);
+    });
+
+    $("input[type=checkbox][name='selectAll2']").each( function() {
+        $(this).attr("disabled", true);
+    });
+    $("input[type=checkbox][name='itemId2']").each( function() {
+        $(this).attr("disabled", true);
+    });
+
+    $("input[type=checkbox][name='selectAll4']").each( function() {
+        $(this).attr("disabled", true);
+    });
+    $("input[type=checkbox][name='itemId4']").each( function() {
         $(this).attr("disabled", true);
     });
 }
@@ -318,10 +341,24 @@ function enableOperation() {
     $("#bSetup").attr("disabled", false);
     $("#bRead").attr("disabled", false);
     
-    $("input[type=checkbox][name='selectAll']").each( function() {
+    $("input[type=checkbox][name='selectAll1']").each( function() {
         $(this).attr("disabled", false);
     });
-    $("input[type=checkbox][name='itemId']").each( function() {
+    $("input[type=checkbox][name='itemId1']").each( function() {
+        $(this).attr("disabled", false);
+    });
+
+    $("input[type=checkbox][name='selectAll2']").each( function() {
+        $(this).attr("disabled", false);
+    });
+    $("input[type=checkbox][name='itemId2']").each( function() {
+        $(this).attr("disabled", false);
+    });
+
+    $("input[type=checkbox][name='selectAll4']").each( function() {
+        $(this).attr("disabled", false);
+    });
+    $("input[type=checkbox][name='itemId4']").each( function() {
         $(this).attr("disabled", false);
     });
 }
@@ -330,9 +367,29 @@ function selectAll(obj, name) {
     setAllCheckboxState(name, $(obj).attr("checked"));
 }
 
-function getSelectedCheckboxs() {
+function getSelectedCheckboxs1() {
     var selected_checkboxs = "";
-    $("input[type=checkbox][name='itemId']").each( function() {
+    $("input[type=checkbox][name='itemId1']").each( function() {
+        if($(this).attr("checked")) {
+            selected_checkboxs += "," + $(this).val();
+        }
+    });
+    return ($.trim(selected_checkboxs).length > 0 ? selected_checkboxs.substring(1) : "");
+}
+
+function getSelectedCheckboxs2() {
+    var selected_checkboxs = "";
+    $("input[type=checkbox][name='itemId2']").each( function() {
+        if($(this).attr("checked")) {
+            selected_checkboxs += "," + $(this).val();
+        }
+    });
+    return ($.trim(selected_checkboxs).length > 0 ? selected_checkboxs.substring(1) : "");
+}
+
+function getSelectedCheckboxs4() {
+    var selected_checkboxs = "";
+    $("input[type=checkbox][name='itemId4']").each( function() {
         if($(this).attr("checked")) {
             selected_checkboxs += "," + $(this).val();
         }
@@ -348,7 +405,7 @@ function getSelectedCheckboxs() {
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="100" height="30" align="right" class="green">终端逻辑地址：</td>
-          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="" style="width: 140px; height: 18px;"/></td>
+          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="96123455" style="width: 140px; height: 18px;"/></td>
           <td width="100" align="right">
             <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="test(); return false;" style="cursor: pointer;" />
           </td>
@@ -357,27 +414,28 @@ function getSelectedCheckboxs() {
     </div>
     <div id="bg" style="height: 30px; text-align: center;">
       <ul id=”datamenu_Option“ class="cb font1">
-        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">终端参数</li>
-        <!-- <li id=datamenu_Option_1 style="cursor: pointer;">测量点参数</li> -->
+        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',0,3)">终端参数</li>
+        <li id=datamenu_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',1,3)">测量点参数</li>
+        <li id=datamenu_Option_2 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',2,3)">直流模拟量参数</li>
       </ul>
+    </div>
+    <div style="display: none;">
+      <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
+      <!-- <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" /> -->
+      <input type="hidden" id="channelType" name="channelType" value="1" />
+      <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
+      <input type="hidden" id="pwContent" name="pwContent" value="8888" />
+      <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
+      <input type="hidden" id="mpSn" name="mpSn" value="0" />
+      <input type="hidden" id="opcilist" name="opcilist" value="" />
     </div>
     <div class="datamenu_lcon" id="datamenu_Con">
       <ul class=default id=datamenu_Con_0>
         <div id="bg2">
           <ul>
-            <li id="bSetup" onclick="setup()">设　置</li>
-            <li id="bRead" onclick="read()">读　取</li>
+            <li id="bSetup" onclick="setup(1)">设　置</li>
+            <li id="bRead" onclick="read(1)">读　取</li>
           </ul>
-        </div>
-        <div style="display: none;">
-          <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
-          <!-- <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" /> -->
-          <input type="hidden" id="channelType" name="channelType" value="1" />
-          <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
-          <input type="hidden" id="pwContent" name="pwContent" value="8888" />
-          <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
-          <input type="hidden" id="mpSn" name="mpSn" value="0" />
-          <input type="hidden" id="opcilist" name="opcilist" value="" />
         </div>
         <div class="content">
           <div id="cont_1">
@@ -386,7 +444,7 @@ function getSelectedCheckboxs() {
                 <thead>
                   <tr>
                     <th width="7%" height="30" class="bg01">
-                      <input align="middle" type="checkbox" name="selectAll" checked="checked" onclick="selectAll(this, 'itemId')" />
+                      <input align="middle" type="checkbox" name="selectAll1" onclick="selectAll(this, 'itemId1')" />
                     </th>
                     <th width="8%" class="bg01">参数类型</th>
                     <th width="30%" class="bg01">参数名称</th>
@@ -399,7 +457,7 @@ function getSelectedCheckboxs() {
                 <tbody class="tblcontent2">
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040001" checked="checked" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040001" />
                       <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040001');" />
                     </td>
                     <td>通信参数</td>
@@ -476,7 +534,7 @@ function getSelectedCheckboxs() {
                   <!-- /10040001 终端上行通信口通信参数设置  -->
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040003" checked="checked" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040003" />
                       <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040003');" />
                     </td>
                     <td>通信参数</td>
@@ -511,268 +569,7 @@ function getSelectedCheckboxs() {
                   <!-- /10040003 主站IP地址和端口 -->
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040004" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040004');" />
-                    </td>
-                    <td>通信参数</td>
-                    <td colspan="4">主站电话号码和短信中心号码</td>
-                    <td id="ciop10040004">&nbsp;</td>
-                  </tr>
-                  <!-- 10040004 主站电话号码和短信中心号码 -->
-                    <tr ci="10040004" di="1004000401" class="clz10040004" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">主站电话号码或主站手机号码</td>
-                      <td><input id="1004000401" value="13888888888" /></td>
-                      <td id="diop1004000401">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040004" di="1004000402" class="clz10040004" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">短信中心号码</td>
-                      <td><input id="1004000402" value="13800571000" /></td>
-                      <td id="diop1004000402">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  <!-- /10040004 主站电话号码和短信中心号码 -->
-                  <tr class="cicontent">
-                    <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040007" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040007');" />
-                    </td>
-                    <td>通信参数</td>
-                    <td colspan="4">终端IP地址和端口</td>
-                    <td id="ciop10040007">&nbsp;</td>
-                  </tr>
-                  <!-- 10040007 终端IP地址和端口 -->
-                    <tr ci="10040007" di="1004000701" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">终端IP地址</td>
-                      <td><input id="1004000701" value="107.7.7.77" /></td>
-                      <td id="diop1004000701">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000702" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">子网掩码地址</td>
-                      <td><input id="1004000702" value="255.128.0.0" /></td>
-                      <td id="diop1004000702">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000703" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">网关地址</td>
-                      <td><input id="1004000703" value="107.7.7.1" /></td>
-                      <td id="diop1004000703">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000704" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器代理类型</td>
-                      <td>
-                        <select id="1004000704">
-                          <option value="0">不使用代理</option>
-                          <option value="1">HTTP Connect代理</option>
-                          <option value="2">Socks4代理</option>
-                          <option value="3">Socks5代理</option>
-                        </select>
-                      </td>
-                      <td id="diop1004000704">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000705" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器地址和端口</td>
-                      <td><input id="1004000705" value="107.7.7.7:1024" /></td>
-                      <td id="diop1004000705">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000706" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器连接方式</td>
-                      <td>
-                        <select id="1004000706">
-                          <option value="0">无需验证</option>
-                          <option value="1">需要用户名/密码</option>
-                        </select>
-                      </td>
-                      <td id="diop1004000706">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000707" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器用户名长度</td>
-                      <td><input id="1004000707" value="5" /></td>
-                      <td id="diop1004000707">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000708" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器用户名</td>
-                      <td><input id="1004000708" value="admin" /></td>
-                      <td id="diop1004000708">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000709" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器密码长度</td>
-                      <td><input id="1004000709" value="5" /></td>
-                      <td id="diop1004000709">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000710" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">代理服务器密码</td>
-                      <td><input id="1004000710" value="admin" /></td>
-                      <td id="diop1004000710">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040007" di="1004000711" class="clz10040007" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">终端侦听端口</td>
-                      <td><input id="1004000711" value="7" /></td>
-                      <td id="diop1004000711">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  <!-- /10040007 终端IP地址和端口 -->
-                  <tr class="cicontent">
-                    <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040008" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040008');" />
-                    </td>
-                    <td>通信参数</td>
-                    <td colspan="4">终端上行通信工作方式（以太专网或虚拟专网）</td>
-                    <td id="ciop10040008">&nbsp;</td>
-                  </tr>
-                  <!-- 10040008 终端上行通信工作方式（以太专网或虚拟专网） -->
-                    <tr ci="10040008" di="1004000801" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">TCP/UDP</td>
-                      <td>
-                        <select id="1004000801">
-                          <option value="0">TCP</option>
-                          <option value="1">UDP</option>
-                        </select>
-                      </td>
-                      <td id="diop1004000801">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000803" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">终端工作模式</td>
-                      <td>
-                        <select id="1004000803">
-                          <option value="0">混合模式</option>
-                          <option value="1">客户机模式</option>
-                          <option value="2">服务器模式</option>
-                        </select>
-                      </td>
-                      <td id="diop1004000803">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000805" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">终端工作在客户机模式下的三种在线模式</td>
-                      <td>
-                        <select id="1004000805">
-                          <option value="1">永久在线模式</option>
-                          <option value="2">被动激活模式</option>
-                          <option value="3">时段在线模式</option>
-                        </select>
-                      </td>
-                      <td id="diop1004000805">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000806" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">客户机模式下永久在线、时段在线模式重拨间隔</td>
-                      <td>
-                        <input id="1004000806" value="10" />
-                      </td>
-                      <td id="diop1004000806">&nbsp;</td>
-                      <td>秒</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000807" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">客户机模式下被动激活模式重拨次数</td>
-                      <td>
-                        <input id="1004000807" value="5" />
-                      </td>
-                      <td id="diop1004000807">&nbsp;</td>
-                      <td>次</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000808" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">客户机模式下被动激活模式连续无通信自动断线时间</td>
-                      <td>
-                        <input id="1004000808" value="10" />
-                      </td>
-                      <td id="diop1004000808">&nbsp;</td>
-                      <td>min</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040008" di="1004000809" class="clz10040008" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">客户机模式下时段在线模式允许在线时段标志</td>
-                      <td>
-                        <input id="1004000809" value="000000000000000000000000" />
-                      </td>
-                      <td id="diop1004000809">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  <!-- /10040008 终端上行通信工作方式（以太专网或虚拟专网） -->
-                  <tr class="cicontent">
-                    <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040016" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040016');" />
-                    </td>
-                    <td>通信参数</td>
-                    <td colspan="4">虚拟专网用户名、密码</td>
-                    <td id="ciop10040016">&nbsp;</td>
-                  </tr>
-                  <!-- 10040016 虚拟专网用户名、密码 -->
-                    <tr ci="10040016" di="1004001601" class="clz10040016" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">虚拟专网用户名</td>
-                      <td>
-                        <input id="1004001601" value="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-                      </td>
-                      <td id="diop1004001601">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                    <tr ci="10040016" di="1004001602" class="clz10040016" style="display: none;">
-                      <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">虚拟专网密码</td>
-                      <td>
-                        <input id="1004001602" value="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
-                      </td>
-                      <td id="diop1004001602">&nbsp;</td>
-                      <td>&nbsp;</td>
-                      <td>&nbsp;</td>
-                    </tr>
-                  <!-- /10040016 虚拟专网用户名、密码 -->
-                  <tr class="cicontent">
-                    <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040009" checked="checked" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040009" />
                       <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040009');" />
                     </td>
                     <td>事件参数</td>
@@ -803,7 +600,7 @@ function getSelectedCheckboxs() {
                   <!-- /10040009 终端上行通信工作方式（以太专网或虚拟专网） -->
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040010" checked="checked" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040010" />
                       <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040010');" />
                     </td>
                     <td>电表配置</td>
@@ -969,7 +766,7 @@ function getSelectedCheckboxs() {
                   <!-- /10040010 终端电能表/交流采样装置配置参数 -->
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040012" checked="checked" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040012" />
                       <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040012');" />
                     </td>
                     <td>状态量参数</td>
@@ -1000,56 +797,606 @@ function getSelectedCheckboxs() {
                   <!-- /10040012 终端状态量输入参数 -->
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040017" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040017');" />
+                      <input align="middle" type="checkbox" name="itemId1" value="10040061" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040061');" />
                     </td>
-                    <td>控制参数</td>
-                    <td colspan="4">终端保安定值</td>
-                    <td id="ciop10040017">&nbsp;</td>
+                    <td>模拟量参数</td>
+                    <td colspan="4">直流模拟量接入参数</td>
+                    <td id="ciop10040061">&nbsp;</td>
                   </tr>
-                  <!-- 10040017 终端保安定值 -->
-                    <tr ci="10040017" di="1004001701" class="clz10040017" style="display: none;">
+                  <!-- 10040061 直流模拟量接入参数 -->
+                    <tr ci="10040061" di="1004006101" class="clz10040061" style="display: none;">
                       <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">保安定值</td>
+                      <td colspan="2" align="right">直流模拟量接入标志位</td>
                       <td>
-                        <input id="1004001701" value="1000" />
+                        <input id="1004006101" value="11111111" />
                       </td>
-                      <td id="diop1004001701">&nbsp;</td>
-                      <td>kW</td>
+                      <td id="diop1004006101">&nbsp;</td>
+                      <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
-                  <!-- /10040017 终端保安定值 -->
+                  <!-- /10040061 直流模拟量接入参数 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ul>
+      <ul class=disNone id=datamenu_Con_1>
+        <div id="bg2">
+          <ul>
+            <li id="bSetup" onclick="setup(2)">设　置</li>
+            <li id="bRead" onclick="read(2)">读　取</li>
+          </ul>
+          <div style="float: right; padding-right: 10px;">
+            <select id="gpSn" name="gpSn">
+              <option value="1">测量点1</option>
+            </select>
+          </div>
+        </div>
+        <div class="content">
+          <div id="cont_2">
+            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-99));">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th width="7%" height="30" class="bg01">
+                      <input align="middle" type="checkbox" name="selectAll2" onclick="selectAll(this, 'itemId2')" />
+                    </th>
+                    <th width="8%" class="bg01">参数类型</th>
+                    <th width="30%" class="bg01">参数名称</th>
+                    <th width="18%" class="bg01">待设值</th>
+                    <th width="18%" class="bg01">上次设置值</th>
+                    <th width="9%" class="bg01">单位</th>
+                    <th width="10%" class="bg01">操作结果</th>
+                  </tr>
+                </thead>
+                <tbody class="tblcontent2">
                   <tr class="cicontent">
                     <td height="25">
-                      <input align="middle" type="checkbox" name="itemId" value="10040005" checked="checked" />
-                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040005');" />
+                      <input align="middle" type="checkbox" name="itemId2" value="10040025" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040025');" />
                     </td>
-                    <td>终端属性</td>
-                    <td colspan="4">终端上行通信消息认证参数设置</td>
-                    <td id="ciop10040005">&nbsp;</td>
+                    <td>基本参数</td>
+                    <td colspan="4">测量点基本参数</td>
+                    <td id="ciop10040025">&nbsp;</td>
                   </tr>
-                  <!-- 10040005 终端上行通信消息认证参数设置 -->
-                    <tr ci="10040005" di="1004000501" class="clz10040005" style="display: none;">
+                  <!-- 10040025 测量点基本参数 -->
+                    <tr ci="10040025" di="1004002501" class="clz10040025" style="display: none;">
                       <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">消息认证方案号</td>
+                      <td colspan="2" align="right">电压互感器倍率</td>
                       <td>
-                        <input id="1004000501" value="0" />
+                        <input id="1004002501" value="1" />
                       </td>
-                      <td id="diop1004000501">&nbsp;</td>
+                      <td id="diop1004002501">&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
-                    <tr ci="10040005" di="1004000502" class="clz10040005" style="display: none;">
+                    <tr ci="10040025" di="1004002502" class="clz10040025" style="display: none;">
                       <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">消息认证方案参数</td>
+                      <td colspan="2" align="right">电流互感器倍率</td>
                       <td>
-                        <input id="1004000502" value="8888" />
+                        <input id="1004002502" value="1" />
                       </td>
-                      <td id="diop1004000502">&nbsp;</td>
+                      <td id="diop1004002502">&nbsp;</td>
                       <td>&nbsp;</td>
                       <td>&nbsp;</td>
                     </tr>
-                  <!-- /10040005 终端上行通信消息认证参数设置 -->
+                    <tr ci="10040025" di="1004002503" class="clz10040025" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">额定电压</td>
+                      <td>
+                        <input id="1004002503" value="220.0" />
+                      </td>
+                      <td id="diop1004002503">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040025" di="1004002504" class="clz10040025" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">额定电流</td>
+                      <td>
+                        <input id="1004002504" value="5.0" />
+                      </td>
+                      <td id="diop1004002504">&nbsp;</td>
+                      <td>A</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040025" di="1004002505" class="clz10040025" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">额定负荷</td>
+                      <td>
+                        <input id="1004002505" value="50.0000" />
+                      </td>
+                      <td id="diop1004002505">&nbsp;</td>
+                      <td>kVA</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040025" di="1004002507" class="clz10040025" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">单相表接线相</td>
+                      <td>
+                        <select id="1004002507">
+                          <option value="00">不确定</option>
+                          <option value="01">A相</option>
+                          <option value="10">B相</option>
+                          <option value="11">C相</option>
+                        </select>
+                      </td>
+                      <td id="diop1004002507">&nbsp;</td>
+                      <td>kVA</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040025" di="1004002508" class="clz10040025" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电源接线方式</td>
+                      <td>
+                        <select id="1004002508">
+                          <option value="00">不确定</option>
+                          <option value="01">三相三线</option>
+                          <option value="10">三相四线</option>
+                          <option value="11">单相表</option>
+                        </select>
+                      </td>
+                      <td id="diop1004002508">&nbsp;</td>
+                      <td>kVA</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  <!-- /10040025 测量点基本参数 -->
+                  <tr class="cicontent">
+                    <td height="25">
+                      <input align="middle" type="checkbox" name="itemId2" value="10040026" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040026');" />
+                    </td>
+                    <td>限值参数</td>
+                    <td colspan="4">测量点限值参数</td>
+                    <td id="ciop10040026">&nbsp;</td>
+                  </tr>
+                  <!-- 10040026 测量点限值参数 -->
+                    <tr ci="10040026" di="1004002601" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电压合格上限</td>
+                      <td>
+                        <input id="1004002601" value="300.00" />
+                      </td>
+                      <td id="diop1004002601">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002602" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电压合格下限</td>
+                      <td>
+                        <input id="1004002602" value="150.00" />
+                      </td>
+                      <td id="diop1004002602">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002603" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电压断相门限</td>
+                      <td>
+                        <input id="1004002603" value="100.00" />
+                      </td>
+                      <td id="diop1004002603">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002604" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电压上上限（过压门限）</td>
+                      <td>
+                        <input id="1004002604" value="360.00" />
+                      </td>
+                      <td id="diop1004002604">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002605" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">过压越限持续时间</td>
+                      <td>
+                        <input id="1004002605" value="10" />
+                      </td>
+                      <td id="diop1004002605">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002606" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">过压越限恢复系数</td>
+                      <td>
+                        <input id="1004002606" value="150.00" />
+                      </td>
+                      <td id="diop1004002606">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002607" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">电压下下限（欠压门限）</td>
+                      <td>
+                        <input id="1004002607" value="120.00" />
+                      </td>
+                      <td id="diop1004002607">&nbsp;</td>
+                      <td>V</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002608" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">欠压越限持续时间</td>
+                      <td>
+                        <input id="1004002608" value="10" />
+                      </td>
+                      <td id="diop1004002608">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002609" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">欠压越限恢复系数</td>
+                      <td>
+                        <input id="1004002609" value="50.0" />
+                      </td>
+                      <td id="diop1004002609">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002610" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">相电流上上限（过流门限）</td>
+                      <td>
+                        <input id="1004002610" value="8.000" />
+                      </td>
+                      <td id="diop1004002610">&nbsp;</td>
+                      <td>A</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002611" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">过流越限持续时间</td>
+                      <td>
+                        <input id="1004002611" value="10" />
+                      </td>
+                      <td id="diop1004002611">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002612" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">过流越限恢复系数</td>
+                      <td>
+                        <input id="1004002612" value="120.00" />
+                      </td>
+                      <td id="diop1004002612">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002613" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">相电流上限（额定电流门限）</td>
+                      <td>
+                        <input id="1004002613" value="6.000" />
+                      </td>
+                      <td id="diop1004002613">&nbsp;</td>
+                      <td>A</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002614" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">超额定电流越限持续时间</td>
+                      <td>
+                        <input id="1004002614" value="10" />
+                      </td>
+                      <td id="diop1004002614">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002615" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">超额定电流越限恢复系数</td>
+                      <td>
+                        <input id="1004002615" value="110.00" />
+                      </td>
+                      <td id="diop1004002615">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002616" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">零序电流上限</td>
+                      <td>
+                        <input id="1004002616" value="2.000" />
+                      </td>
+                      <td id="diop1004002616">&nbsp;</td>
+                      <td>A</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002617" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">零序电流超限越限持续时间</td>
+                      <td>
+                        <input id="1004002617" value="10" />
+                      </td>
+                      <td id="diop1004002617">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002618" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">零序电流超限越限恢复系数</td>
+                      <td>
+                        <input id="1004002618" value="120.00" />
+                      </td>
+                      <td id="diop1004002618">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002619" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率上上限</td>
+                      <td>
+                        <input id="1004002619" value="60.0000" />
+                      </td>
+                      <td id="diop1004002619">&nbsp;</td>
+                      <td>kVA</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002620" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率超上上限越限持续时间</td>
+                      <td>
+                        <input id="1004002620" value="10" />
+                      </td>
+                      <td id="diop1004002620">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002621" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率超上上限越限恢复系数</td>
+                      <td>
+                        <input id="1004002621" value="150.00" />
+                      </td>
+                      <td id="diop1004002621">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002622" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率上限</td>
+                      <td>
+                        <input id="1004002622" value="50.0000" />
+                      </td>
+                      <td id="diop1004002622">&nbsp;</td>
+                      <td>kVA</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002623" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率超上限越限持续时间</td>
+                      <td>
+                        <input id="1004002623" value="10" />
+                      </td>
+                      <td id="diop1004002623">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002624" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">视在功率超上限越限恢复系数</td>
+                      <td>
+                        <input id="1004002624" value="120.00" />
+                      </td>
+                      <td id="diop1004002624">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002625" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电压不平衡限值</td>
+                      <td>
+                        <input id="1004002625" value="120.00" />
+                      </td>
+                      <td id="diop1004002625">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002626" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电压不平衡越限持续时间</td>
+                      <td>
+                        <input id="1004002626" value="10" />
+                      </td>
+                      <td id="diop1004002626">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002627" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电压不平衡越限恢复系数</td>
+                      <td>
+                        <input id="1004002627" value="120.00" />
+                      </td>
+                      <td id="diop1004002627">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002628" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电流不平衡限值</td>
+                      <td>
+                        <input id="1004002628" value="120.00" />
+                      </td>
+                      <td id="diop1004002628">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002629" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电流不平衡越限持续时间</td>
+                      <td>
+                        <input id="1004002629" value="10" />
+                      </td>
+                      <td id="diop1004002629">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002630" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">三相电流不平衡越限恢复系数</td>
+                      <td>
+                        <input id="1004002630" value="120.00" />
+                      </td>
+                      <td id="diop1004002630">&nbsp;</td>
+                      <td>%</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040026" di="1004002631" class="clz10040026" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">连续失压时间限值</td>
+                      <td>
+                        <input id="1004002631" value="20" />
+                      </td>
+                      <td id="diop1004002631">&nbsp;</td>
+                      <td>min</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  <!-- /10040026 测量点限值参数 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </ul>
+      <ul class=disNone id=datamenu_Con_2>
+        <div id="bg2">
+          <ul>
+            <li id="bSetup" onclick="setup(4)">设　置</li>
+            <li id="bRead" onclick="read(4)">读　取</li>
+          </ul>
+          <div style="float: right; padding-right: 10px;">
+            <select id="agSn" name="agSn">
+              <option value="1">第1路直流模拟量</option>
+              <option value="2">第2路直流模拟量</option>
+              <option value="3">第3路直流模拟量</option>
+              <option value="4">第4路直流模拟量</option>
+              <option value="5">第5路直流模拟量</option>
+              <option value="6">第6路直流模拟量</option>
+              <option value="7">第7路直流模拟量</option>
+              <option value="8">第8路直流模拟量</option>
+            </select>
+          </div>
+        </div>
+        <div class="content">
+          <div id="cont_3">
+            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-99));">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th width="7%" height="30" class="bg01">
+                      <input align="middle" type="checkbox" name="selectAll4" onclick="selectAll(this, 'itemId4')" />
+                    </th>
+                    <th width="8%" class="bg01">参数类型</th>
+                    <th width="30%" class="bg01">参数名称</th>
+                    <th width="18%" class="bg01">待设值</th>
+                    <th width="18%" class="bg01">上次设置值</th>
+                    <th width="9%" class="bg01">单位</th>
+                    <th width="10%" class="bg01">操作结果</th>
+                  </tr>
+                </thead>
+                <tbody class="tblcontent2">
+                  <tr class="cicontent">
+                    <td height="25">
+                      <input align="middle" type="checkbox" name="itemId4" value="10040081" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040081');" />
+                    </td>
+                    <td>模拟量参数</td>
+                    <td colspan="4">直流模拟量输入变比</td>
+                    <td id="ciop10040081">&nbsp;</td>
+                  </tr>
+                  <!-- 10040081 直流模拟量输入变比 -->
+                    <tr ci="10040081" di="1004008101" class="clz10040081" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">直流模拟量量程起始值</td>
+                      <td>
+                        <input id="1004008101" value="0" />
+                      </td>
+                      <td id="diop1004008101">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040081" di="1004008102" class="clz10040081" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">直流模拟量量程终止值</td>
+                      <td>
+                        <input id="1004008102" value="100" />
+                      </td>
+                      <td id="diop1004008102">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  <!-- /10040081 直流模拟量输入变比 -->
+                  <tr class="cicontent">
+                    <td height="25">
+                      <input align="middle" type="checkbox" name="itemId4" value="10040082" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040082');" />
+                    </td>
+                    <td>模拟量参数</td>
+                    <td colspan="4">直流模拟量限值</td>
+                    <td id="ciop10040082">&nbsp;</td>
+                  </tr>
+                  <!-- 10040082 直流模拟量限值 -->
+                    <tr ci="10040082" di="1004008201" class="clz10040082" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">直流模拟量上限</td>
+                      <td>
+                        <input id="1004008201" value="5" />
+                      </td>
+                      <td id="diop1004008201">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr ci="10040082" di="1004008202" class="clz10040082" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">直流模拟量下限</td>
+                      <td>
+                        <input id="1004008202" value="50" />
+                      </td>
+                      <td id="diop1004008202">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  <!-- /10040082 直流模拟量限值 -->
+                  <tr class="cicontent">
+                    <td height="25">
+                      <input align="middle" type="checkbox" name="itemId4" value="10040083" />
+                      <img align="middle" lang="plus" src="<pss:path type="bgcolor"/>/img/plus1.gif" style="cursor: pointer;" onclick="folder(this, '10040083');" />
+                    </td>
+                    <td>模拟量参数</td>
+                    <td colspan="4">直流模拟量冻结参数</td>
+                    <td id="ciop10040083">&nbsp;</td>
+                  </tr>
+                  <!-- 10040083 直流模拟量冻结参数 -->
+                    <tr ci="10040083" di="1004008301" class="clz10040083" style="display: none;">
+                      <td height="25">&nbsp;</td>
+                      <td colspan="2" align="right">直流模拟量冻结密度</td>
+                      <td>
+                        <select id="1004008301">
+                          <option value="0">不冻结</option>
+                          <option value="1">15分钟</option>
+                          <option value="2">30分钟</option>
+                          <option value="3">60分钟</option>
+                          <option value="254">5分钟</option>
+                          <option value="255">1分钟</option>
+                        </select>
+                      </td>
+                      <td id="diop1004008301">&nbsp;</td>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  <!-- /10040083 直流模拟量冻结参数 -->
                 </tbody>
               </table>
             </div>
