@@ -97,6 +97,11 @@
 		<priority value="error" />
 	</category>
 
+
+	<category name="org.springframework.security">
+		<priority value="info" />
+	</category>
+	
 	<logger name="pss.trace" additivity="false">
 		<priority value="debug" />
 		<appender-ref ref="log.traceFile" />
