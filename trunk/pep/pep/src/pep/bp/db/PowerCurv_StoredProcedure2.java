@@ -16,8 +16,8 @@ import org.springframework.jdbc.object.StoredProcedure;
  *
  * @author Thinkpad
  */
-public class PowerCurv_DataStoredProcedure extends StoredProcedure {
-    private static final String SPROC_NAME = "PRC_INSERT_POWER_CRUV";
+public class PowerCurv_StoredProcedure2 extends StoredProcedure {
+    private static final String SPROC_NAME = "PRC_INSERT_POWER_CRUV_2";
     private static final String LOGICADDRESS_PARA = "p_logicAddress";
     private static final String SN_PARA = "p_sn";
     private static final String DATETIME_PARA = "p_DateTime";
@@ -31,12 +31,13 @@ public class PowerCurv_DataStoredProcedure extends StoredProcedure {
     private static final String REACT_POWER_A_PARA = "p_react_power_a";
     private static final String REACT_POWER_B_PARA = "p_react_power_b";
     private static final String REACT_POWER_C_PARA = "p_react_power_c";
+    private static final String FN_PARA = "p_fn";
 
-    public PowerCurv_DataStoredProcedure(){
+    public PowerCurv_StoredProcedure2(){
         
     }
 
-    public PowerCurv_DataStoredProcedure(DataSource dataSource) {
+    public PowerCurv_StoredProcedure2(DataSource dataSource) {
             super(dataSource, SPROC_NAME);
             declareParameter(new SqlParameter(LOGICADDRESS_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(SN_PARA,Types.NUMERIC));
@@ -49,11 +50,12 @@ public class PowerCurv_DataStoredProcedure extends StoredProcedure {
             declareParameter(new SqlParameter(REACT_POWER_A_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(REACT_POWER_B_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(REACT_POWER_C_PARA,Types.VARCHAR));
+            declareParameter(new SqlParameter(FN_PARA,Types.VARCHAR));
             compile();
     }
 
 
-    public Map execute(String logicalAddress,int gpSn,String dataDate,
+    private Map execute(String logicalAddress,int gpSn,String dataDate,
             String act_power_total,String act_power_a,String act_power_b,
             String act_power_c,String react_power_total,String react_power_a,
             String react_power_b,String react_power_c)
@@ -73,6 +75,45 @@ public class PowerCurv_DataStoredProcedure extends StoredProcedure {
             return super.execute(inputs);
      }
 
+    public Map insert_act_power_total(String logicalAddress,int gpSn,String dataDate,
+            String act_power_total){
+        return this.execute(logicalAddress,gpSn,dataDate,act_power_total,"","","","","","","");
+    }
+
+    public Map insert_act_power_a(String logicalAddress,int gpSn,String dataDate,
+            String act_power_a){
+        return this.execute(logicalAddress,gpSn,dataDate,"",act_power_a,"","","","","","");
+    }
+
+    public Map insert_act_power_b(String logicalAddress,int gpSn,String dataDate,
+            String act_power_b){
+        return this.execute(logicalAddress,gpSn,dataDate,"","",act_power_b,"","","","","");
+    }
+
+    public Map insert_act_power_c(String logicalAddress,int gpSn,String dataDate,
+            String act_power_c){
+        return this.execute(logicalAddress,gpSn,dataDate,"","","",act_power_c,"","","","");
+    }
+
+    public Map insert_react_power_total(String logicalAddress,int gpSn,String dataDate,
+            String react_power_total){
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","",react_power_total,"","","");
+    }
+
+    public Map insert_react_power_a(String logicalAddress,int gpSn,String dataDate,
+            String react_power_a){
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","",react_power_a,"","");
+    }
+
+    public Map insert_react_power_b(String logicalAddress,int gpSn,String dataDate,
+            String react_power_b){
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","",react_power_b,"");
+    }
+
+    public Map insert_react_power_c(String logicalAddress,int gpSn,String dataDate,
+            String react_power_c){
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","","",react_power_c);
+    }
 
 
 }

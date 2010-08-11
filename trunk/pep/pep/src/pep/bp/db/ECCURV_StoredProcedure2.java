@@ -16,7 +16,7 @@ import org.springframework.jdbc.object.StoredProcedure;
  *
  * @author Thinkpad
  */
-public class ECCURV_DataStoredProcedure2 extends StoredProcedure {
+public class ECCURV_StoredProcedure2 extends StoredProcedure {
     private static final String SPROC_NAME = "PRC_INSERT_EC_CURV_2";
     private static final String LOGICADDRESS_PARA = "p_logicAddress";
     private static final String SN_PARA = "p_sn";
@@ -33,11 +33,11 @@ public class ECCURV_DataStoredProcedure2 extends StoredProcedure {
     private static final String VOLT_C_PARA = "p_volt_c";
     private static final String FN_PARA = "p_fn";
 
-    public ECCURV_DataStoredProcedure2(){
+    public ECCURV_StoredProcedure2(){
         
     }
 
-    public ECCURV_DataStoredProcedure2(DataSource dataSource) {
+    public ECCURV_StoredProcedure2(DataSource dataSource) {
             super(dataSource, SPROC_NAME);
             declareParameter(new SqlParameter(LOGICADDRESS_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(SN_PARA,Types.NUMERIC));

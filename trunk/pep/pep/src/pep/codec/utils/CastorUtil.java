@@ -325,14 +325,14 @@ public class CastorUtil {
         CommandItem31.AddDataItem(new ProtocolDataItem("0102", 5, "A14", 0,"费率2正向有功总电能示值",""));
         CommandItem31.AddDataItem(new ProtocolDataItem("0103", 5, "A14", 0,"费率3正向有功总电能示值",""));
         CommandItem31.AddDataItem(new ProtocolDataItem("0104", 5, "A14", 0,"费率4正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("0105", 5, "A14", 0,"费率5正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("0106", 5, "A14", 0,"费率6正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("0107", 5, "A14", 0,"费率7正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("0108", 5, "A14", 0,"费率8正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("0109", 5, "A14", 0,"费率9正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("010A", 5, "A14", 0,"费率10正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("010B", 5, "A14", 0,"费率11正向有功总电能示值",""));
-        CommandItem31.AddDataItem(new ProtocolDataItem("010C", 5, "A14", 0,"费率12正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("0105", 5, "A14", 0,"费率5正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("0106", 5, "A14", 0,"费率6正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("0107", 5, "A14", 0,"费率7正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("0108", 5, "A14", 0,"费率8正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("0109", 5, "A14", 0,"费率9正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("010A", 5, "A14", 0,"费率10正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("010B", 5, "A14", 0,"费率11正向有功总电能示值",""));
+//        CommandItem31.AddDataItem(new ProtocolDataItem("010C", 5, "A14", 0,"费率12正向有功总电能示值",""));
 
         ProtocolCommandItem CommandItem68 = new ProtocolCommandItem();
         CommandItem68.setCommandCode("100C0130");
@@ -343,14 +343,14 @@ public class CastorUtil {
         CommandItem68.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2正向无功（组合无功1）总电能示值",""));
         CommandItem68.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率3正向无功（组合无功1）总电能示值",""));
         CommandItem68.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率4正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11正向无功（组合无功1）总电能示值",""));
-        CommandItem68.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11正向无功（组合无功1）总电能示值",""));
+//        CommandItem68.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12正向无功（组合无功1）总电能示值",""));
 
 
         ProtocolCommandItem CommandItem72 = new ProtocolCommandItem();
@@ -362,14 +362,14 @@ public class CastorUtil {
         CommandItem72.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2反向无功总电能示值",""));
         CommandItem72.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率3反向无功总电能示值",""));
         CommandItem72.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率4反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8反向功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A008", 5, "A11", 0,"费率8反向功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A009", 5, "A11", 0,"费率9反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A00A", 5, "A11", 0,"费率10反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A00B", 5, "A11", 0,"费率11反向无功总电能示值",""));
+//        CommandItem72.AddDataItem(new ProtocolDataItem("A00C", 5, "A11", 0,"费率12反向无功总电能示值",""));
 
 
         ProtocolCommandItem CommandItem73 = new ProtocolCommandItem();
@@ -381,14 +381,14 @@ public class CastorUtil {
         CommandItem73.AddDataItem(new ProtocolDataItem("0202", 5, "A11", 0,"费率2反向有功总电能示值",""));
         CommandItem73.AddDataItem(new ProtocolDataItem("0203", 5, "A11", 0,"费率3反向有功总电能示值",""));
         CommandItem73.AddDataItem(new ProtocolDataItem("0204", 5, "A11", 0,"费率4反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("0205", 5, "A11", 0,"费率5反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("0206", 5, "A11", 0,"费率6反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("0207", 5, "A11", 0,"费率7反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("0208", 5, "A11", 0,"费率8反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("0209", 5, "A11", 0,"费率9反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("020A", 5, "A11", 0,"费率10反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("020B", 5, "A11", 0,"费率11反向有功总电能示值",""));
-        CommandItem73.AddDataItem(new ProtocolDataItem("020C", 5, "A11", 0,"费率12反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("0205", 5, "A11", 0,"费率5反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("0206", 5, "A11", 0,"费率6反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("0207", 5, "A11", 0,"费率7反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("0208", 5, "A11", 0,"费率8反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("0209", 5, "A11", 0,"费率9反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("020A", 5, "A11", 0,"费率10反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("020B", 5, "A11", 0,"费率11反向有功总电能示值",""));
+//        CommandItem73.AddDataItem(new ProtocolDataItem("020C", 5, "A11", 0,"费率12反向有功总电能示值",""));
 
         ProtocolCommandItem CommandItem74 = new ProtocolCommandItem();
         CommandItem74.setCommandCode("100D0081");
