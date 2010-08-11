@@ -38,7 +38,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "O_STAFF")
-@SequenceGenerator(sequenceName = "SEQ_O_STAFF", name = "SEQ_O_STAFF", allocationSize = 1)
+@SequenceGenerator(sequenceName = "SEQ_O_STAFF", name = "SEQ_O_STAFF", allocationSize = 10)
 public class UserInfo extends BaseEntity {
 
 	/**

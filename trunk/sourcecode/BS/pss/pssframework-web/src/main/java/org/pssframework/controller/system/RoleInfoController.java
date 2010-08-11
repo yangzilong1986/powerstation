@@ -7,9 +7,13 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUC
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
+import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +22,9 @@ import javax.validation.Valid;
 
 import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.system.AuthorityInfo;
 import org.pssframework.model.system.RoleInfo;
+import org.pssframework.service.system.AuthorityInfoManager;
 import org.pssframework.service.system.RoleInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Administrator
  *
@@ -43,7 +51,7 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 	private static final String VIEW_QUERY = "/system/roleList";
 	private static final String VIEW_DETAIL = "/system/roleDetail";
 	private static final String VIEW_EDIT = "/system/editRolePage";
-	// 默认多列排序,example: username desc,createTime asc
+	// 默认多列排序,example: rolename desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
 	@Autowired
@@ -104,7 +112,23 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 
 		result.addAttribute("role", roleInfo);
 
+		result.addAttribute("authorityInfoList", getAllAuthority());
+
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+
+		return VIEW_EDIT;
+	}
+
+	/** 新建 */
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap result, RoleInfo roleInfo, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		result.addAttribute("role", roleInfo);
+
+		result.addAttribute("authorityInfoList", getAllAuthority());
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
 		return VIEW_EDIT;
 	}
@@ -133,5 +157,44 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW_EDIT;
 	}
+
+	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(ModelMap model, @Valid RoleInfo roleInfo, BindingResult errors, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		this.logger.debug("role.{}", "create");
+		boolean isSucc = true;
+		String msg = MSG_CREATED_SUCCESS;
+		Long roleId = 0L;
+		try {
+
+			this.roleInfoManager.saveOrUpdate(roleInfo);
+
+			roleId = roleInfo.getRoleId();
+
+		} catch (Exception e) {
+
+			isSucc = false;
+
+			msg = MSG_CREATED_FAIL;
+
+			logger.debug(e.getMessage());
+
+		}
+
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg)
+				.addAttribute("roleId", roleId);
+
+		return VIEW_DETAIL;
+	}
+
+	private List<AuthorityInfo> getAllAuthority() {
+		List<AuthorityInfo> authorityInfos = Lists.newArrayList();
+		authorityInfos = authorityInfoManager.findAll();
+		return authorityInfos;
+	}
+
+	@Autowired
+	private AuthorityInfoManager authorityInfoManager;
 
 }

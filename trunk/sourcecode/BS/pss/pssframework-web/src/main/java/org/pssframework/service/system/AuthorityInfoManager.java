@@ -3,18 +3,18 @@
  */
 package org.pssframework.service.system;
 
-import java.util.List;
-
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.AuthorityInfoDao;
 import org.pssframework.model.system.AuthorityInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Administrator
  *
  */
+@Service
 public class AuthorityInfoManager extends BaseManager<AuthorityInfo, Long> {
 
 	@Autowired
@@ -30,11 +30,6 @@ public class AuthorityInfoManager extends BaseManager<AuthorityInfo, Long> {
 	@Override
 	public AuthorityInfo getById(Long id) {
 		return authorityInfoDao.getById(id);
-	}
-
-	@Override
-	public List<AuthorityInfo> findAll() {
-		return authorityInfoDao.findBy("authorityId", true);
 	}
 
 	@Override

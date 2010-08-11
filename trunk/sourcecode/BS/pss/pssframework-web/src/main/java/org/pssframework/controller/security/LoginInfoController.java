@@ -25,9 +25,13 @@ public class LoginInfoController extends BaseSpringController {
 
 	@RequestMapping
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+
 		ModelAndView modelAndView = new ModelAndView(VIEW);
+
 		String errorId = request.getParameter(ERROR_ID);
+
 		modelAndView.addObject("error", errorId);
+
 		return modelAndView;
 	}
 }
