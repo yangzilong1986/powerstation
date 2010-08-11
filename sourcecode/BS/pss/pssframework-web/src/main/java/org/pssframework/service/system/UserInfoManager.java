@@ -22,7 +22,6 @@ import cn.org.rapid_framework.page.PageRequest;
 //Spring Bean的标识.
 @Service
 //默认将类中的所有函数纳入事务管理.
-@Transactional
 public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 	private PasswordEncoder encoder = new ShaPasswordEncoder();
@@ -44,10 +43,6 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 	@Override
 	public void save(UserInfo entity) {
-		if (isSupervisor(entity.getEmpNo())) {
-			logger.warn("操作员{}尝试修改超级管理员用户", SpringSecurityUtils.getCurrentUserName());
-			throw new ServiceException("不能修改超级管理员用户");
-		}
 
 		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
 		entity.setPasswd(shaPassword);

@@ -8,6 +8,7 @@ import java.util.List;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.RoleInfoDao;
+import org.pssframework.model.system.AuthorityInfo;
 import org.pssframework.model.system.ResourceInfo;
 import org.pssframework.model.system.RoleInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,12 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 	}
 
 	public List<RoleInfo> findAllExtAdmin(Long id) {
-		List<RoleInfo> roleInfos = com.google.common.collect.Lists.newLinkedList();
+		List<RoleInfo> roleInfos = Lists.newLinkedList();
 		roleInfos = this.findAll();
 		if (roleInfos == null) {
-			roleInfos = com.google.common.collect.Lists.newLinkedList();
+			roleInfos = Lists.newLinkedList();
 		}
-		if (ADMIN != id) {
+		if (id == null || ADMIN != id) {
 			roleInfos.remove(0);
 		}
 		return roleInfos;
@@ -68,6 +69,22 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
 	@Override
 	public void saveOrUpdate(RoleInfo entity) {
+		setResource(entity);
+		setAuthority(entity);
+		roleInfoDao.saveOrUpdate(entity);
+	}
+
+	@Override
+	public void removeById(Long id) {
+		roleInfoDao.delete(id);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Page findByPageRequest(PageRequest pageRequest) {
+		return roleInfoDao.findByPageRequest(pageRequest);
+	}
+
+	private void setResource(RoleInfo entity) {
 		List<ResourceInfo> resourceInfoList = Lists.newLinkedList();
 
 		String resources = entity.getResourceIds();
@@ -87,18 +104,29 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 		entity.getResourceInfoList().clear();
 
 		entity.setResourceInfoList(resourceInfoList);
-
-		roleInfoDao.saveOrUpdate(entity);
 	}
 
-	@Override
-	public void removeById(Long id) {
-		roleInfoDao.delete(id);
-	}
+	private void setAuthority(RoleInfo entity) {
 
-	@SuppressWarnings("rawtypes")
-	public Page findByPageRequest(PageRequest pageRequest) {
-		return roleInfoDao.findByPageRequest(pageRequest);
-	}
+		List<AuthorityInfo> authorityInfoList = Lists.newLinkedList();
 
+		String authoritys = entity.getAuthorityIds();
+
+		String[] authorityArray = new String[] {};
+
+		if (authoritys != null) {
+			authorityArray = authoritys.split(",");
+		}
+
+		for (String authorityId : authorityArray) {
+
+			authorityInfoList.add(new AuthorityInfo(Long.parseLong(authorityId)));
+
+		}
+
+		entity.getAuthorityInfoList().clear();
+
+		entity.setAuthorityInfoList(authorityInfoList);
+
+	}
 }

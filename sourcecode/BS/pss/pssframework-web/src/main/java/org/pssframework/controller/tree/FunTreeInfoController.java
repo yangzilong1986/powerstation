@@ -17,13 +17,17 @@ import net.jcreate.e3.tree.support.AbstractWebTreeModelCreator;
 import net.jcreate.e3.tree.support.DefaultTreeDirector;
 import net.jcreate.e3.tree.support.WebTreeNode;
 import net.jcreate.e3.tree.xtree.PrvCheckXTreeBuilder;
+import net.jcreate.e3.tree.xtree.XTreeBuilder;
 
 import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.system.ResourceInfo;
+import org.pssframework.model.system.RoleInfo;
 import org.pssframework.model.tree.ResourceUncoder;
 import org.pssframework.service.system.ResourceInfoManager;
+import org.pssframework.service.system.RoleInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,12 +39,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FunTreeInfoController extends BaseSpringController {
 
-	private static final String VIEW = "/tree/checkTree";
+	private static final String VIEW_CHECK = "/tree/checkTree";
+	private static final String VIEW_SIMPLE_ROLE = "/tree/simpleTree";
 
 	@Autowired
 	private ResourceInfoManager resourceInfoManager;
 
-	@RequestMapping
+	@Autowired
+	private RoleInfoManager roleInfoManager;
+
+	@RequestMapping("/checktree")
 	public ModelAndView showCheckTree(ModelAndView modelAndView, HttpServletRequest pRequest,
 			HttpServletResponse pResponse) throws Exception {
 
@@ -48,7 +56,7 @@ public class FunTreeInfoController extends BaseSpringController {
 
 		String checkedBox = pRequest.getParameter("checked");
 
-		UserDataUncoder orgUncoder = new ResourceUncoder();
+		UserDataUncoder resourceUncoder = new ResourceUncoder();
 
 		AbstractWebTreeModelCreator treeModelCreator = new AbstractWebTreeModelCreator() {
 			@Override
@@ -65,7 +73,7 @@ public class FunTreeInfoController extends BaseSpringController {
 		};
 		treeModelCreator.init(pRequest);
 
-		TreeModel treeModel = treeModelCreator.create(resourceInfos, orgUncoder);
+		TreeModel treeModel = treeModelCreator.create(resourceInfos, resourceUncoder);
 
 		TreeDirector director = new DefaultTreeDirector();
 
@@ -97,10 +105,76 @@ public class FunTreeInfoController extends BaseSpringController {
 
 		//pRequest.setAttribute("treeScript", treeScript);
 
-		modelAndView.setViewName(VIEW);
+		modelAndView.setViewName(VIEW_CHECK);
 
 		return modelAndView;
 
 	}
 
+	@RequestMapping("/simpleTree/{roleId}")
+	public ModelAndView showSimpleRoleTree(ModelAndView modelAndView, @PathVariable Long roleId,
+			HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+
+		RoleInfo roleInfo = this.roleInfoManager.getById(roleId);
+
+		List<ResourceInfo> resourceInfos = roleInfo.getResourceInfoList();
+
+		if (resourceInfos == null || resourceInfos.size() == 0) {
+			resourceInfos.add(new ResourceInfo(0L, "暂无"));
+		} else {
+			resourceInfos.add(new ResourceInfo(0L, "功能树"));
+		}
+
+		UserDataUncoder resourceUncoder = new ResourceUncoder();
+
+		AbstractWebTreeModelCreator treeModelCreator = new AbstractWebTreeModelCreator() {
+			@Override
+			protected Node createNode(Object pUserData, UserDataUncoder pUncoder) {
+
+				ResourceInfo resource = (ResourceInfo) pUserData;
+
+				WebTreeNode result = new WebTreeNode(resource.getResourceName(), "FUN_" + resource.getResourceId());
+
+				result.setValue(String.valueOf(resource.getResourceId()));
+
+				return result;
+			}
+		};
+
+		treeModelCreator.init(pRequest);
+
+		TreeModel treeModel = treeModelCreator.create(resourceInfos, resourceUncoder);
+
+		TreeDirector director = new DefaultTreeDirector();
+
+		director.setComparator(new AbstractNodeComparator() {
+			@SuppressWarnings("rawtypes")
+			@Override
+			protected Comparable getComparableProperty(Node pNode) {
+
+				ResourceInfo resource = (ResourceInfo) pNode.getUserData();
+
+				return resource.getResourceId().intValue();
+			}
+		});
+
+		XTreeBuilder treeBuilder = new XTreeBuilder();//构造树Builder
+
+		treeBuilder.init(pRequest);
+
+		treeBuilder.setRootExpand(true);
+
+		director.build(treeModel, treeBuilder);//执行构造		
+
+		String treeScript = treeBuilder.getTreeScript();
+
+		modelAndView.addObject("treeScript", treeScript);
+
+		//pRequest.setAttribute("treeScript", treeScript);
+
+		modelAndView.setViewName(VIEW_SIMPLE_ROLE);
+
+		return modelAndView;
+
+	}
 }

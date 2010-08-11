@@ -7,8 +7,10 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUC
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
 import java.util.HashMap;
@@ -169,6 +171,48 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		return VIEW_EDIT;
 	}
 
+	/** 新建 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@RequestMapping(value = "/new")
+	public String _new(ModelMap result, UserInfo user, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		Map codeMap = new HashMap();
+
+		codeMap.put(CodeInfo.CODECATE, SystemConst.CODE_USER_STATUS);
+
+		result.addAttribute("orgInfo", getOrgInfo());
+
+		result.addAttribute("userStat", getCodeInfo(codeMap));
+
+		result.addAttribute("roleInfos", getTotalRoleInfos(null));
+
+		result.addAttribute("user", user);
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+
+		return VIEW_EDIT;
+	}
+
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap model, @PathVariable Long id) {
+		this.logger.debug("user.{},{}", "delete", id);
+		boolean isSucc = true;
+		String msg = MSG_DELETE_SUCCESS;
+		try {
+			this.userInfoManager.removeById(id);
+			//Flash.current().success(msg);
+		} catch (Exception e) {
+			isSucc = false;
+			msg = e.getMessage();
+			//Flash.current().error(msg);
+
+		}
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW_QUERY;
+	}
+
 	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(ModelMap model, @Valid UserInfo userInfo, BindingResult errors, HttpServletRequest request,
@@ -179,7 +223,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		Long userId = 0L;
 		try {
 
-			this.userInfoManager.saveOrUpdate(userInfo);
+			this.userInfoManager.save(userInfo);
 
 			userId = userInfo.getEmpNo();
 
@@ -189,7 +233,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 
 			msg = MSG_CREATED_FAIL;
 
-			logger.debug(e.getMessage());
+			logger.info(e.getMessage());
 
 		}
 
