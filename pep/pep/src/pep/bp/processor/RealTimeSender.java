@@ -4,6 +4,7 @@
 package pep.bp.processor;
 
 import java.util.List;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,11 @@ public class RealTimeSender extends BaseProcessor {
     @Override
     public void run() {
         while (true) {
-            //做发送操作
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                java.util.logging.Logger.getLogger(RealTimeSender.class.getName()).log(Level.SEVERE, null, ex);
+            }
             List<RealTimeTaskDAO> tasks = taskService.getTasks();
             for (RealTimeTaskDAO task : tasks) {
                 PmPacket packet = new PmPacket376();

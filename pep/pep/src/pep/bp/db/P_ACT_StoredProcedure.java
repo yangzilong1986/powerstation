@@ -16,7 +16,7 @@ import org.springframework.jdbc.object.StoredProcedure;
  *
  * @author Thinkpad
  */
-public class ACTDataStoredProcedure extends StoredProcedure {
+public class P_ACT_StoredProcedure extends StoredProcedure {
     private static final String SPROC_NAME = "PRC_INSERT_P_ACT";
     private static final String LOGICADDRESS_PARA = "p_logicAddress";
     private static final String SN_PARA = "p_sn";
@@ -26,11 +26,11 @@ public class ACTDataStoredProcedure extends StoredProcedure {
     private static final String ACT_PEAK_PARA = "p_act_peak";
     private static final String ACT_LEVEL_PARA = "p_act_level";
     private static final String ACT_VALLEY_PARA = "p_act_valley";
-    public ACTDataStoredProcedure(){
+    public P_ACT_StoredProcedure(){
 
     }
     
-    public ACTDataStoredProcedure(DataSource dataSource) {
+    public P_ACT_StoredProcedure(DataSource dataSource) {
             super(dataSource, SPROC_NAME);
             declareParameter(new SqlParameter(LOGICADDRESS_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(SN_PARA,Types.NUMERIC));

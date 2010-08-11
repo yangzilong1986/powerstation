@@ -30,11 +30,16 @@ public class DataServiceIMP implements DataService{
     private final static Logger log = LoggerFactory.getLogger(DataServiceIMP.class);
     private JdbcTemplate jdbcTemplate;
 
-    private ACTDataStoredProcedure actStoredProcedure;
-    private ECCURV_DataStoredProcedure eccurvStoredProcedure;
-    private ECCURV_DataStoredProcedure2 eccurvStoredProcedure2;
-    private PowerCurv_DataStoredProcedure powerCurvStoredProcedure;
-    private PowerCurv_DataStoredProcedure2 powerCurvStoredProcedure2;
+    private P_ACT_StoredProcedure p_actStoredProcedure;
+    private P_REACT_StoredProcedure p_reactStoredProcedure;
+    private I_REACT_StoredProcedure i_reactStoredProcedure;
+    private I_ACT_StoredProcedure i_actStoredProcedure;
+
+
+    private ECCURV_StoredProcedure eccurvStoredProcedure;
+    private ECCURV_StoredProcedure2 eccurvStoredProcedure2;
+    private PowerCurv_StoredProcedure powerCurvStoredProcedure;
+    private PowerCurv_StoredProcedure2 powerCurvStoredProcedure2;
 
     private EventStoredProcedure eventStoredProcedure;
     private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
@@ -57,19 +62,40 @@ public class DataServiceIMP implements DataService{
             String commandItemCode = dtoItem.commandItemCode;
             Map<String,String> dataItemMap = dtoItem.dataMap;
             if(AFN == (byte)0X0C){                             //一类数据
-                if(commandItemCode.equals("100C0129")){
+                if(commandItemCode.equals("100C0129")){     //当前正向有功电能示值（总、费率1～M）
                     insertData_P_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("0100"),dataItemMap.get("0101"),
                                      dataItemMap.get("0102"),dataItemMap.get("0103"),
                                      dataItemMap.get("0104"));
                 }
-                if(commandItemCode.equals("100C0025")){
-                    insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                if(commandItemCode.equals("100C0130")){   //当前正向无功（组合无功1）电能示值（总、费率1～M）
+                    insertData_P_REACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                                     dataItemMap.get("A000"),dataItemMap.get("A001"),
+                                     dataItemMap.get("A002"),dataItemMap.get("A003"),
+                                     dataItemMap.get("A004"));
+                }
+
+                if(commandItemCode.equals("100C0131")){   //当前反向有功电能示值（总、费率1～M）
+                    insertData_I_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                                     dataItemMap.get("0200"),dataItemMap.get("0201"),
+                                     dataItemMap.get("0202"),dataItemMap.get("0203"),
+                                     dataItemMap.get("0204"));
+                }
+
+                if(commandItemCode.equals("100C0132")){   //当前反向无功（组合无功1）电能示值（总、费率1～M）
+                    insertData_I_REACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                                     dataItemMap.get("A100"),dataItemMap.get("A101"),
+                                     dataItemMap.get("A102"),dataItemMap.get("A103"),
+                                     dataItemMap.get("A104"));
+                }
+
+                if(commandItemCode.equals("100C0025")){//当前三相及总有/无功功率、功率因数，三相电压、电流、零序电流、视在功率
+                    insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //電壓/電流曲線
                                      dataItemMap.get("2201"),dataItemMap.get("2202"),dataItemMap.get("2203"),
                                      dataItemMap.get("2204"),"",dataItemMap.get("2101"),
                                      dataItemMap.get("2102"),dataItemMap.get("2103"));
 
-                    this.insert_POWER_CRUV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                    this.insert_POWER_CRUV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,  //功率曲線
                             dataItemMap.get("2300"),dataItemMap.get("2301"),dataItemMap.get("2302"),
                             dataItemMap.get("2303"),dataItemMap.get("2400"),dataItemMap.get("2401"),
                             dataItemMap.get("2402"),dataItemMap.get("2403"));
@@ -137,7 +163,40 @@ public class DataServiceIMP implements DataService{
             String p_act_total,String p_act_sharp,String p_act_peak,String p_act_level,String p_act_valley)
     {
            try {
-            this.actStoredProcedure.execute(logicalAddress, gpSn, dataDate, p_act_total, p_act_sharp, p_act_peak, p_act_level, p_act_valley);
+            this.p_actStoredProcedure.execute(logicalAddress, gpSn, dataDate, p_act_total, p_act_sharp, p_act_peak, p_act_level, p_act_valley);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
+        }
+    }
+
+    //当前正向無功电能示值
+    private void insertData_P_REACT(String logicalAddress,int gpSn,String dataDate,
+            String p_react_total,String p_react_sharp,String p_react_peak,String p_react_level,String p_react_valley)
+    {
+           try {
+            this.p_reactStoredProcedure.execute(logicalAddress, gpSn, dataDate, p_react_total, p_react_sharp, p_react_peak, p_react_level, p_react_valley);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
+        }
+    }
+
+    //当前反向有功电能示值
+    private void insertData_I_ACT(String logicalAddress,int gpSn,String dataDate,
+            String i_act_total,String i_act_sharp,String i_act_peak,String i_act_level,String i_act_valley)
+    {
+           try {
+            this.i_actStoredProcedure.execute(logicalAddress, gpSn, dataDate, i_act_total, i_act_sharp, i_act_peak, i_act_level, i_act_valley);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
+        }
+    }
+
+    //当前反向無功电能示值
+    private void insertData_I_REACT(String logicalAddress,int gpSn,String dataDate,
+            String i_react_total,String i_react_sharp,String i_react_peak,String i_react_level,String i_react_valley)
+    {
+           try {
+            this.i_reactStoredProcedure.execute(logicalAddress, gpSn, dataDate, i_react_total, i_react_sharp, i_react_peak, i_react_level, i_react_valley);
         } catch (Exception e) {
             log.error("错误信息：", e.fillInStackTrace());
         }
@@ -187,30 +246,16 @@ public class DataServiceIMP implements DataService{
     }
 
     /**
-     * @return the actStoredProcedure
-     */
-    public ACTDataStoredProcedure getActStoredProcedure() {
-        return actStoredProcedure;
-    }
-
-    /**
-     * @param actStoredProcedure the actStoredProcedure to set
-     */
-    public void setActStoredProcedure(ACTDataStoredProcedure actStoredProcedure) {
-        this.actStoredProcedure = actStoredProcedure;
-    }
-
-    /**
      * @return the eccurvStoredProcedure
      */
-    public ECCURV_DataStoredProcedure getEccurvStoredProcedure() {
+    public ECCURV_StoredProcedure getEccurvStoredProcedure() {
         return eccurvStoredProcedure;
     }
 
     /**
      * @param eccurvStoredProcedure the eccurvStoredProcedure to set
      */
-    public void setEccurvStoredProcedure(ECCURV_DataStoredProcedure eccurvStoredProcedure) {
+    public void setEccurvStoredProcedure(ECCURV_StoredProcedure eccurvStoredProcedure) {
         this.eccurvStoredProcedure = eccurvStoredProcedure;
     }
 
@@ -245,43 +290,99 @@ public class DataServiceIMP implements DataService{
     /**
      * @return the eccurvStoredProcedure2
      */
-    public ECCURV_DataStoredProcedure2 getEccurvStoredProcedure2() {
+    public ECCURV_StoredProcedure2 getEccurvStoredProcedure2() {
         return eccurvStoredProcedure2;
     }
 
     /**
      * @param eccurvStoredProcedure2 the eccurvStoredProcedure2 to set
      */
-    public void setEccurvStoredProcedure2(ECCURV_DataStoredProcedure2 eccurvStoredProcedure2) {
+    public void setEccurvStoredProcedure2(ECCURV_StoredProcedure2 eccurvStoredProcedure2) {
         this.eccurvStoredProcedure2 = eccurvStoredProcedure2;
     }
 
     /**
      * @return the powerCurvStoredProcedure2
      */
-    public PowerCurv_DataStoredProcedure2 getPowerCurvStoredProcedure2() {
+    public PowerCurv_StoredProcedure2 getPowerCurvStoredProcedure2() {
         return powerCurvStoredProcedure2;
     }
 
     /**
      * @param powerCurvStoredProcedure2 the powerCurvStoredProcedure2 to set
      */
-    public void setPowerCurvStoredProcedure2(PowerCurv_DataStoredProcedure2 powerCurvStoredProcedure2) {
+    public void setPowerCurvStoredProcedure2(PowerCurv_StoredProcedure2 powerCurvStoredProcedure2) {
         this.powerCurvStoredProcedure2 = powerCurvStoredProcedure2;
     }
 
     /**
      * @return the powerCurvStoredProcedure
      */
-    public PowerCurv_DataStoredProcedure getPowerCurvStoredProcedure() {
+    public PowerCurv_StoredProcedure getPowerCurvStoredProcedure() {
         return powerCurvStoredProcedure;
     }
 
     /**
      * @param powerCurvStoredProcedure the powerCurvStoredProcedure to set
      */
-    public void setPowerCurvStoredProcedure(PowerCurv_DataStoredProcedure powerCurvStoredProcedure) {
+    public void setPowerCurvStoredProcedure(PowerCurv_StoredProcedure powerCurvStoredProcedure) {
         this.powerCurvStoredProcedure = powerCurvStoredProcedure;
+    }
+
+    /**
+     * @return the p_actStoredProcedure
+     */
+    public P_ACT_StoredProcedure getP_actStoredProcedure() {
+        return p_actStoredProcedure;
+    }
+
+    /**
+     * @param p_actStoredProcedure the p_actStoredProcedure to set
+     */
+    public void setP_actStoredProcedure(P_ACT_StoredProcedure p_actStoredProcedure) {
+        this.p_actStoredProcedure = p_actStoredProcedure;
+    }
+
+    /**
+     * @return the p_reactStoredProcedure
+     */
+    public P_REACT_StoredProcedure getP_reactStoredProcedure() {
+        return p_reactStoredProcedure;
+    }
+
+    /**
+     * @param p_reactStoredProcedure the p_reactStoredProcedure to set
+     */
+    public void setP_reactStoredProcedure(P_REACT_StoredProcedure p_reactStoredProcedure) {
+        this.p_reactStoredProcedure = p_reactStoredProcedure;
+    }
+
+    /**
+     * @return the i_reactStoredProcedure
+     */
+    public I_REACT_StoredProcedure getI_reactStoredProcedure() {
+        return i_reactStoredProcedure;
+    }
+
+    /**
+     * @param i_reactStoredProcedure the i_reactStoredProcedure to set
+     */
+    public void setI_reactStoredProcedure(I_REACT_StoredProcedure i_reactStoredProcedure) {
+        this.i_reactStoredProcedure = i_reactStoredProcedure;
+    }
+
+    /**
+     * @return the i_actStoredProcedure
+     */
+    public I_ACT_StoredProcedure getI_actStoredProcedure() {
+        return i_actStoredProcedure;
+    }
+
+    /**
+     * @param i_actStoredProcedure the i_actStoredProcedure to set
+     */
+    public void setI_actStoredProcedure(I_ACT_StoredProcedure i_actStoredProcedure) {
+        this.i_actStoredProcedure = i_actStoredProcedure;
     }
 
 }

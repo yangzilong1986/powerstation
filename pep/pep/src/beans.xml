@@ -60,23 +60,35 @@
         <property name="config" ref="protocolConfig"/>
     </bean>
 
-    <bean id="actDataStoredProcedure" class="pep.bp.db.ACTDataStoredProcedure">
+    <bean id="p_actDataStoredProcedure" class="pep.bp.db.P_ACT_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
-    <bean id="powerCurvStoredProcedure" class="pep.bp.db.PowerCurv_DataStoredProcedure">
+    <bean id="p_reactDataStoredProcedure" class="pep.bp.db.P_REACT_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
-    <bean id="powerCurvStoredProcedure2" class="pep.bp.db.PowerCurv_DataStoredProcedure2">
+    <bean id="i_actDataStoredProcedure" class="pep.bp.db.I_ACT_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+    
+    <bean id="i_reactDataStoredProcedure" class="pep.bp.db.I_REACT_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
-    <bean id="eccurvStoredProcedure" class="pep.bp.db.ECCURV_DataStoredProcedure">
+    <bean id="powerCurvStoredProcedure" class="pep.bp.db.PowerCurv_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
-    <bean id="eccurvStoredProcedure2" class="pep.bp.db.ECCURV_DataStoredProcedure2">
+    <bean id="powerCurvStoredProcedure2" class="pep.bp.db.PowerCurv_StoredProcedure2">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eccurvStoredProcedure" class="pep.bp.db.ECCURV_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eccurvStoredProcedure2" class="pep.bp.db.ECCURV_StoredProcedure2">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
@@ -100,15 +112,16 @@
 
     <bean id="dataService" class="pep.bp.db.DataServiceIMP">
         <property name="dataSource" ref="dataSource" />
-        <property name="actStoredProcedure" ref="actDataStoredProcedure" />
+        <property name="p_actStoredProcedure" ref="p_actDataStoredProcedure" />
+        <property name="p_reactStoredProcedure" ref="p_reactDataStoredProcedure" />
+        <property name="i_actStoredProcedure" ref="i_actDataStoredProcedure" />
+        <property name="i_reactStoredProcedure" ref="i_reactDataStoredProcedure" />
         <property name="eccurvStoredProcedure" ref="eccurvStoredProcedure" />
         <property name="eccurvStoredProcedure2" ref="eccurvStoredProcedure2" />
         <property name="eventStoredProcedure" ref="eventStoredProcedure" />
         <property name="loubaoEventStoredProcedure" ref="louBaoEventStoredProcedure" />
         <property name="powerCurvStoredProcedure" ref="powerCurvStoredProcedure" />
         <property name="powerCurvStoredProcedure2" ref="powerCurvStoredProcedure2" />
-        
-
     </bean>
 
     <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">

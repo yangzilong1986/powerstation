@@ -497,7 +497,7 @@ public class Converter {
             packetdata.putBcdInt(Long.parseLong(DataItemValue), 1);
         }else if (Format.equals("DATE_LOUBAO")) {
             try {
-                packetdata.put(UtilsBp.String2DateArray(DataItemValue, "yyyy-MM-dd hh:mm:ss"));
+                packetdata.put(UtilsBp.String2DateArray(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
             } catch (ParseException ex) {
                 log.error(ex.getMessage());
             }
