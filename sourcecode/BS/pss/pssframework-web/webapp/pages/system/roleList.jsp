@@ -18,7 +18,7 @@ function selectRow(sRoleID, oRow) {
     parent.document.frames["roleDetail"].location.href = contextPath
             + '/system/role/'+ sSelectedRoleID 
             + '?random=' + Math.random();
-    selectSingleRow(oRow);
+   // selectSingleRow(oRow);
 }
 
 //列表变更

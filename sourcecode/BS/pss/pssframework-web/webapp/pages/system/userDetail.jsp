@@ -25,7 +25,7 @@ function fresh(userId) {
 <body>
 <div class="electric_lcon" id="electric_Con">
 <ul class=default id=electric_Con_1>
-	<div class="mgt10 da_top"><span><spring:message code="system.user.czyxx" /></span></span></div>
+	<div class="mgt10 da_top"><span><spring:message code="system.user.czyxx" /></span></div>
 	<div>
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr height="25px;">

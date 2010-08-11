@@ -29,7 +29,6 @@ function submitDisposal(form) {
 
 saveRole  = function(){
  document.getElementById("resourceIds").value = menuFunctionFrame.getCheckValues();
- alert(document.getElementById("resourceIds").value);
  updateRoleInfo();
 }
 
@@ -48,7 +47,7 @@ updateRoleInfo = function(){
               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
-                 opener.parent.userManager.location.href ="${ctx}/system/role/${role.roleId}";
+                 opener.parent.roleDetail.location.href ="${ctx}/system/role/${role.roleId}";
                  closeWin();
                }
              },
@@ -74,53 +73,104 @@ function   closeWin()
 
 
 
+function showRole() {
+    document.all.roleInfo.style.display = "";
+    document.all.resources.style.display = "none";
+    document.all.authority.style.display = "none";
+}
+function showResources() {
+    document.all.roleInfo.style.display = "none";
+    document.all.resources.style.display = "";
+    document.all.authority.style.display = "none";
+}
+function showAuthority() {
+    document.all.roleInfo.style.display = "none";
+    document.all.resources.style.display = "none";
+    document.all.authority.style.display = "";
+}
+
+var lastQueryType = 2;
+
+function changeType(obj) {
+    var lastTd = document.getElementById("query" + lastQueryType);
+    var nowTd = document.getElementById("query" + obj);
+    lastTd.className = 'none';
+    nowTd.className = 'curr';
+    lastQueryType = obj;
+    var url = contextPath;
+    
+    if(lastQueryType == 2) {
+    	showRole()
+    }
+    if(lastQueryType == 3) {
+    	showResources()
+    }
+    if(lastQueryType == 4) {
+    	showAuthority()
+    }
+}
+
 </script>
 </head>
 <body>
 <form:form action="/system/role" method="post" modelAttribute="role">
-  <form:hidden path="roleId"/>
-  <form:hidden path="roleType"/>
-  <div class="tab">
-  <ul>
-    <li id="tab_1" class="tab_on"><a href="#" onClick="return false;" onFocus="blur()"><spring:message code="system.role.edit.title" /></a></li>
+  <form:hidden path="roleId" />
+  <form:hidden path="roleType" />
+  <div style="padding: 2 2 2 2">
+  <div id="bg">
+  <ul id=datamenu_Option class="cb font1">
+    <li class="curr" id="query2"><a href="javascript:changeType(2);" onfocus="blur()">角色信息</a></li>
+    <li id="query3"><a href="javascript:changeType(3);" onfocus="blur()">功能信息</a></li>
+    <li id="query4"><a href="javascript:changeType(4);" onfocus="blur()">权限列表</a></li>
+    <!-- <li><a href="javascript:showQx();" onfocus="blur()"><spring:message code="system.user.czqx" /></a></li> -->
   </ul>
   </div>
-  <div style="width: expression(((document.documentElement.clientWidth ||   document.body.clientWidth) -18 ) );">
-  <div id="tool">
-  <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <td width="15%"><spring:message code="system.role.jsmc" /><font color="#ff0000">*</font>：</td>
+  <div class="content">
+  <div id="cont_1">
+  <div class="tableContainer"
+    style="height: expression(((   document.documentElement.clientHeight || document.body.clientHeight) -70 ) )">
+  <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" id="roleInfo">
+    <tr style="height: 20px;">
+      <td width="15%" align="right" class="green"><spring:message code="system.role.jsmc" /><font color="#ff0000">*</font>：</td>
       <td><form:input path="roleName" /></td>
     </tr>
-    <tr>
-      <td width="15%"><spring:message code="system.role.jssm" /><font color="#ff0000">*</font>：</td>
+    <tr style="height: 20px;">
+      <td width="15%" align="right" class="green"><spring:message code="system.role.jssm" /><font color="#ff0000">*</font>：</td>
       <td><form:textarea path="roleRemark" cols="49" rows="5" /></td>
     </tr>
+  </table>
+  <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" id="resources" style="display: none">
     <tr>
-      <td colspan="2" style="height: 10px;"></td>
-    </tr>
-    <tr>
-      <td width="100%" style="height: 280px; margin-top: 10px; margin-bottom: 10px;" colspan="2" align="center">
-      <form:hidden path="resourceIds" id="resourceIds"/>
-      <iframe style="border: opx solid #5d90d7;" name="menuFunctionFrame" src="${ctx}/tree/fun?checked=${role.resourceIds}"
-      
-        scrolling="auto" width="98%" height="100%" frameborder="1" align="middle"> </iframe></td>
-    </tr>
-    <tr>
-      <td colspan="2" style="height: 10px;"></td>
-    </tr>
-    <tr>
-      <td width="100%" height="30" colspan="2" align="center">
-      
-      <input
-        type="button" name="cancel2" value='<spring:message code="system.button.qd" />' 
-        onclick="saveRole()" />
-        
-       <input
-        type="button" name="cancel2" value='<spring:message code="system.button.qx"/>' 
-        onclick="top.GB_hide()" /></td>
+      <td width="100%" style="height: 280px; margin-top: 10px;" colspan="2" align="center"><form:hidden
+        path="resourceIds" id="resourceIds" /> <iframe style="border: opx solid #5d90d7;" name="menuFunctionFrame"
+        src="${ctx}/tree/fun/checktree?checked=${role.resourceIds}" scrolling="auto" width="98%" height="100%"
+        frameborder="0" align="middle"> </iframe></td>
     </tr>
   </table>
+  <table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" id="authority" style="display: none">
+    <thead>
+      <tr>
+        <th>权限名称</th>
+        <th>权限说明</th>
+        <th><input type="checkbox" name="select1" onclick="setAllCheckboxState('authorityIds',this.checked)" /></th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${authorityInfoList}" var="item" varStatus="status">
+        <tr height="20" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>${item.authorityName}</td>
+          <td>${item.authorityRemark}</td>
+          <td><form:checkbox path="authorityIds" value="${item.authorityId}" /></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  <div style="height: 2px;"></div>
+  <div align="center"><input type="button" name="cancel2" class="btnbg4"
+    value='<spring:message code="system.button.qd" />' onclick="saveRole()" /> <input type="button" name="cancel2"
+    value='<spring:message code="system.button.qx"/>' onclick="closeWin()" class="btnbg4" /></div>
   </div>
   </div>
 </form:form>

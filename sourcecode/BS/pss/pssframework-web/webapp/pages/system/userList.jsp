@@ -35,11 +35,10 @@ function changeOrg() {
 
 $(function(){
 	 var firstId = $("#dataBody>tr:first").attr("id");
-	 if(firstId != undefined)
-	 selectRow(firstId);
-	 
+	 if(firstId != 'undefined'){
+	   selectRow(firstId,firstId);
+	 }
 })
-
 
 
 var contextPath = "${ctx}";
@@ -73,19 +72,35 @@ function viewUser() {
     }
     var str_url = contextPath + "/system/user/" + userId ;
     windowPopup(str_url, 800, 495);
-    //top.showDialogBox("查看操作员", str_url, 495, 800);
 }
 
 //删除账号
-function deleteUser() {
-    var userId = sSelectedUserID;
-    if(userId == "") {
-        alert(errorDelUser);
-        return;
-    }
-    if(confirm(confirmDel)) {
-        parent.hideframe.location.href = contextPath + "/system/user/" + userId + "?_method=delete&random=" + Math.random();
-    }
+deleteUser = function(){
+	     if(sSelectedUserID==null || sSelectedUserID ==""){
+            alert("请选择要删除的账号")
+		   return;
+		 } 
+
+		 var url = "${ctx}/system/user/"+sSelectedUserID+".json?_method=delete";
+		 if (confirm("确定要删除该账号?")) {
+		     $.ajax({
+		         url: url,
+		         dataType:'json',
+		         type:'POST',
+		         cache: false,
+		         success: function(json) {
+		    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+		           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+		             if(isSucc){
+		              alert(msg);
+		              $("#"+sSelectedUserID).remove();
+		             }
+		         },error:function(e) {
+		             alert("delete error");
+		             alert(e.message);
+		         }
+		     });
+		 }
 }
 </script>
 </head>
