@@ -106,29 +106,32 @@ function refreshCaptcha() {
 <div class="login_bg1">
 <div class="pt30 tc"><img src="<pss:path type="bgcolor"/>/img/login_logo1.png" /></div>
 <div class="pt40"><c:choose>
-	<c:when test="${error == 1}">
-		<div class="error"><font color="white">用户名密码错误,请重试.</font></div>
-	</c:when>
-	<c:when test="${error == 2}">
-		<div class="error"><font color="white">验证码错误,请重试.</font></div>
-	</c:when>
-	<c:when test="${error == 3}">
-		<div class="error"><font color="white">此帐号已从别处登录.</font></div>
-	</c:when>
-	<c:otherwise></c:otherwise>
+  <c:when test="${error == 1}">
+    <div class="error"><font color="white">用户名密码错误,请重试.</font></div>
+  </c:when>
+  <c:when test="${error == 2}">
+    <div class="error"><font color="white">验证码错误,请重试.</font></div>
+  </c:when>
+  <c:when test="${error == 3}">
+    <div class="error"><font color="white">此帐号已从别处登录.</font></div>
+  </c:when>
+  <c:when test="${error == 4}">
+    <div class="error"><font color="white">会话超时.</font></div>
+  </c:when>
+  <c:otherwise></c:otherwise>
 </c:choose>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td width="39%" height="30" align="right" class="fontw">用户名：</td>
-		<td width="61%" align="left" style="position: relative;"><input type="text" name="j_username" id="j_username"
-			class="input1 required" style="width: 180px;" /></td>
-	</tr>
-	<tr>
-		<td height="30" align="right" class="fontw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
-		<td align="left" style="position: relative;"><input type="password" name="j_password" id="j_password"
-			class="input1 required" style="width: 180px;" /></td>
-	</tr>
-	<!-- 
+  <tr>
+    <td width="39%" height="30" align="right" class="fontw">用户名：</td>
+    <td width="61%" align="left" style="position: relative;"><input type="text" name="j_username" id="j_username"
+      class="input1 required" style="width: 180px;" /></td>
+  </tr>
+  <tr>
+    <td height="30" align="right" class="fontw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+    <td align="left" style="position: relative;"><input type="password" name="j_password" id="j_password"
+      class="input1 required" style="width: 180px;" /></td>
+  </tr>
+  <!-- 
           <tr>
             <td height="30" align="right" class="fontw">单&nbsp;&nbsp;&nbsp;&nbsp;位：</td>
             <td>
@@ -139,23 +142,23 @@ function refreshCaptcha() {
             </td>
           </tr>
            -->
-	<tr>
-		<td align="right" class="fontw">验证码：</td>
-		<td height="30" align="left" style="position: relative;"><input type='text' name='j_captcha' id="j_captcha"
-			style="width: 63px;" class="input1 required" />&nbsp; <span> <img id="captchaImg"
-			src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
-			onclick="javascript:refreshCaptcha()" /></span></td>
-	</tr>
-	<tr>
-		<td height="30"></td>
-		<td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>
-	</tr>
-	<tr>
-		<td height="50">&nbsp;</td>
-		<td align="left" style="position: relative;"><a href="#"><img id="submit1"
-			src="<pss:path type="bgcolor"/>/img/login_bt1.png" width="75" height="42" /></a><a href="#"><img
-			src="<pss:path type="bgcolor"/>/img/login_bt2.png" width="75" height="42" class="mgl15" /></a></td>
-	</tr>
+  <tr>
+    <td align="right" class="fontw">验证码：</td>
+    <td height="30" align="left" style="position: relative;"><input type='text' name='j_captcha' id="j_captcha"
+      style="width: 63px;" class="input1 required" />&nbsp; <span> <img id="captchaImg"
+      src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
+      onclick="javascript:refreshCaptcha()" /></span></td>
+  </tr>
+  <tr>
+    <td height="30"></td>
+    <td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>
+  </tr>
+  <tr>
+    <td height="50">&nbsp;</td>
+    <td align="left" style="position: relative;"><a href="#"><img id="submit1"
+      src="<pss:path type="bgcolor"/>/img/login_bt1.png" width="75" height="42" /></a><a href="#"><img
+      src="<pss:path type="bgcolor"/>/img/login_bt2.png" width="75" height="42" class="mgl15" /></a></td>
+  </tr>
 </table>
 </div>
 </div>
