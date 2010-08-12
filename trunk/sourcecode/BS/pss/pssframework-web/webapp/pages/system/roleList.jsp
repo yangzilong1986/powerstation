@@ -18,7 +18,7 @@ function selectRow(sRoleID, oRow) {
     parent.document.frames["roleDetail"].location.href = contextPath
             + '/system/role/'+ sSelectedRoleID 
             + '?random=' + Math.random();
-   // selectSingleRow(oRow);
+    selectSingleRow(sRoleID);
 }
 
 //列表变更
@@ -79,16 +79,31 @@ function viewRole() {
     windowPopup(str_url, 800, 495);
 }
 //删除角色
-function deleteRole() {
-    var roleId = sSelectedRoleID;
-    if(roleId == "") {
-        alert(errorDelRole);
-        return;
-    }
-    if(confirm(confirmDel)) {
-        var roleType = parent.roleList.roleForm.roleType.value;
-        parent.hideframe.location.href = contextPath + "/system/role?action=delete&roleId=" + roleId + "&roleType=" + roleType + "&random=" + Math.random();
-    }
+deleteRole = function(){
+       if(sSelectedRoleID==null || sSelectedRoleID ==""){
+            alert("请选择要删除的角色")
+       return;
+     } 
+     var url = "${ctx}/system/role/"+sSelectedRoleID+".json?_method=delete";
+     if (confirm("确定要删除该角色?")) {
+         $.ajax({
+             url: url,
+             dataType:'json',
+             type:'POST',
+             cache: false,
+             success: function(json) {
+             var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+                 if(isSucc){
+                  alert(msg);
+                  $("#"+sSelectedRoleID).remove();
+                 }
+             },error:function(e) {
+                 alert("delete error");
+                 alert(e.message);
+             }
+         });
+     }
 }
 function fresh(Id) {
     var roleType = parent.roleList.roleForm.roleType.value;

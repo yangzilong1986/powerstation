@@ -120,6 +120,7 @@ function refreshCaptcha() {
   </c:when>
   <c:otherwise></c:otherwise>
 </c:choose>
+${SPRING_SECURITY_LAST_EXCEPTION.message}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td width="39%" height="30" align="right" class="fontw">用户名：</td>
