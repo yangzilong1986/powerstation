@@ -21,7 +21,7 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "O_AUTHORITY")
-@SequenceGenerator(sequenceName = "SEQ_O_AUTHORITY", name = "SEQ_O_AUTHORITY", allocationSize = 10)
+@SequenceGenerator(sequenceName = "SEQ_O_AUTHORITY", name = "SEQ_O_AUTHORITY", allocationSize = 1, initialValue = 10)
 public class AuthorityInfo extends BaseEntity {
 
 	/**

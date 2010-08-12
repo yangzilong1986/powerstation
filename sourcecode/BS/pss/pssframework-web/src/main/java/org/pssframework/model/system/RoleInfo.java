@@ -38,7 +38,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "O_ROLE")
-@SequenceGenerator(sequenceName = "SEQ_O_ROLE", name = "SEQ_O_ROLE", allocationSize = 10)
+@SequenceGenerator(sequenceName = "SEQ_O_ROLE", name = "SEQ_O_ROLE", allocationSize = 1, initialValue = 10)
 public class RoleInfo extends BaseEntity {
 
 	public RoleInfo(Long roleId, String roleName) {
@@ -96,14 +96,14 @@ public class RoleInfo extends BaseEntity {
 	// LASTTIME_STAMP DATE default SYSDATE is '最后表结构修改时间戳';
 	private Date lasttimeStamp;
 
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(name = "O_ROLE_AUTHORITY", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHORITY_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("authorityId")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<AuthorityInfo> authorityInfoList = Lists.newArrayList();
 
-	@ManyToMany
+	@ManyToMany()
 	@JoinTable(name = "O_ROLE_FUN", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "FUN_ID") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("resourceId")
@@ -112,15 +112,25 @@ public class RoleInfo extends BaseEntity {
 
 	@Transient
 	@SuppressWarnings("unchecked")
-	public List<Long> getAuthIds() {
-		return ReflectionUtils.convertElementPropertyToList(authorityInfoList, "authorityId");
+	public List<Long> getAuthorityIds() {
+		if (authorityIds == null) {
+			authorityIds = ReflectionUtils.convertElementPropertyToList(authorityInfoList, "authorityId");
+		}
+		return authorityIds;
+	}
+
+	/**
+	 * @param authorityIds the authorityIds to set
+	 */
+	public void setAuthorityIds(List<Long> authorityIds) {
+		this.authorityIds = authorityIds;
 	}
 
 	@Transient
 	private String resourceIds;
 
 	@Transient
-	private String authorityIds;
+	private List<Long> authorityIds;
 
 	/**
 	 * @return the resourceIds
@@ -268,18 +278,6 @@ public class RoleInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	public void setAuthorityIds(String authorityIds) {
-		this.authorityIds = authorityIds;
-	}
-
-	public String getAuthorityIds() {
-
-		if (authorityIds != null) {
-			authorityIds = ReflectionUtils.convertElementPropertyToString(authorityInfoList, "authorityId", ",");
-		}
-		return authorityIds;
 	}
 
 }

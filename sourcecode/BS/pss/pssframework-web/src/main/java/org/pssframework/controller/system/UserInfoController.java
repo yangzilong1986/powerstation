@@ -206,6 +206,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
+			logger.error(msg);
 			//Flash.current().error(msg);
 
 		}

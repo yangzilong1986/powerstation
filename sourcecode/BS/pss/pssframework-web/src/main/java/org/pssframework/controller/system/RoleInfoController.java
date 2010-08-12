@@ -10,6 +10,7 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
+import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
@@ -47,77 +48,20 @@ import com.google.common.collect.Lists;
 @Controller
 @RequestMapping("/system/role")
 public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long> {
+
 	private static final String VIEW_MANAGER = "/system/roleManagerFrame";
 	private static final String VIEW_QUERY = "/system/roleList";
 	private static final String VIEW_DETAIL = "/system/roleDetail";
 	private static final String VIEW_EDIT = "/system/editRolePage";
+
 	// 默认多列排序,example: rolename desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
 
 	@Autowired
 	private RoleInfoManager roleInfoManager;
 
-	@RequestMapping(value = "/manager")
-	public ModelAndView manager(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
-		modelAndView.setViewName(VIEW_MANAGER);
-		return modelAndView;
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@RequestMapping(value = "list")
-	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			RoleInfo roleInfo) {
-
-		BaseQuery baseQuery = new BaseQuery();
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.roleInfoManager.findByPageRequest(pageRequest);//获取数据模型
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		modelAndView.setViewName(VIEW_QUERY);
-
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "detail")
-	public ModelAndView detail(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
-		modelAndView.setViewName(VIEW_DETAIL);
-		return modelAndView;
-	}
-
-	/**显示
-	 * 
-	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String show(ModelMap result, @PathVariable Long id) throws Exception {
-
-		RoleInfo roleInfo = this.roleInfoManager.getById(id);
-
-		result.addAttribute("role", roleInfo);
-
-		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
-
-		return VIEW_DETAIL;
-	}
-
-	/** 编辑 */
-	@RequestMapping(value = "/{id}/edit")
-	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
-
-		RoleInfo roleInfo = this.roleInfoManager.getById(id);
-
-		result.addAttribute("role", roleInfo);
-
-		result.addAttribute("authorityInfoList", getAllAuthority());
-
-		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
-
-		return VIEW_EDIT;
-	}
+	@Autowired
+	private AuthorityInfoManager authorityInfoManager;
 
 	/** 新建 */
 	@RequestMapping(value = "/new")
@@ -130,31 +74,6 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
-		return VIEW_EDIT;
-	}
-
-	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(ModelMap modelMap, @Valid RoleInfo roleInfo, BindingResult errors, @PathVariable Long id,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		boolean isSucc = true;
-		String msg = MSG_UPDATE_SUCCESS;
-
-		try {
-			logger.debug("bind roleInfo {} from request", roleInfo);
-
-			RoleInfo roleInfoDb = this.roleInfoManager.getById(id);
-
-			bind(request, roleInfoDb);
-
-			this.roleInfoManager.saveOrUpdate(roleInfoDb);
-
-		} catch (Exception e) {
-			this.logger.error(e.getMessage());
-			isSucc = false;
-			msg = MSG_UPDATE_FAIL;
-		}
-		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 		return VIEW_EDIT;
 	}
 
@@ -188,13 +107,117 @@ public class RoleInfoController extends BaseRestSpringController<RoleInfo, Long>
 		return VIEW_DETAIL;
 	}
 
+	/** 删除 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap model, @PathVariable Long id) {
+		this.logger.debug("role.{},{}", "delete", id);
+		boolean isSucc = true;
+		String msg = MSG_DELETE_SUCCESS;
+		try {
+			this.roleInfoManager.removeById(id);
+			//Flash.current().success(msg);
+		} catch (Exception e) {
+			isSucc = false;
+			msg = e.getMessage();
+			logger.error(e.getMessage());
+			//Flash.current().error(msg);
+
+		}
+		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW_QUERY;
+	}
+
+	@RequestMapping(value = "detail")
+	public ModelAndView detail(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+		modelAndView.setViewName(VIEW_DETAIL);
+		return modelAndView;
+	}
+
+	/** 编辑 */
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
+
+		RoleInfo roleInfo = this.roleInfoManager.getById(id);
+
+		result.addAttribute("role", roleInfo);
+
+		result.addAttribute("authorityInfoList", getAllAuthority());
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+
+		return VIEW_EDIT;
+	}
+
 	private List<AuthorityInfo> getAllAuthority() {
 		List<AuthorityInfo> authorityInfos = Lists.newArrayList();
 		authorityInfos = authorityInfoManager.findAll();
 		return authorityInfos;
 	}
 
-	@Autowired
-	private AuthorityInfoManager authorityInfoManager;
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "list")
+	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+			RoleInfo roleInfo) {
+
+		BaseQuery baseQuery = new BaseQuery();
+
+		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
+
+		Page page = this.roleInfoManager.findByPageRequest(pageRequest);//获取数据模型
+
+		modelAndView.addObject("page", page);
+
+		modelAndView.addObject("pageRequest", pageRequest);
+
+		modelAndView.setViewName(VIEW_QUERY);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/manager")
+	public ModelAndView manager(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+		modelAndView.setViewName(VIEW_MANAGER);
+		return modelAndView;
+	}
+
+	/**显示
+	 * 
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String show(ModelMap result, @PathVariable Long id) throws Exception {
+
+		RoleInfo roleInfo = this.roleInfoManager.getById(id);
+
+		result.addAttribute("role", roleInfo);
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+
+		return VIEW_DETAIL;
+	}
+
+	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap modelMap, @Valid RoleInfo role, BindingResult errors, @PathVariable Long id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		boolean isSucc = true;
+		String msg = MSG_UPDATE_SUCCESS;
+
+		try {
+			logger.debug("bind roleInfo {} from request", role);
+
+			RoleInfo roleInfoDb = this.roleInfoManager.getById(id);
+
+			bind(request, roleInfoDb);
+
+			this.roleInfoManager.saveOrUpdate(roleInfoDb);
+
+		} catch (Exception e) {
+			this.logger.error(e.getMessage());
+			isSucc = false;
+			msg = MSG_UPDATE_FAIL;
+		}
+		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
+		return VIEW_EDIT;
+	}
 
 }
