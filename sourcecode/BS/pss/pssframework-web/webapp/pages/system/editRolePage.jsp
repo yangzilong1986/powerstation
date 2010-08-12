@@ -29,7 +29,14 @@ function submitDisposal(form) {
 
 saveRole  = function(){
  document.getElementById("resourceIds").value = menuFunctionFrame.getCheckValues();
- updateRoleInfo();
+
+ var type ='${_type}';
+ if(type=='update' || type=='edit'){
+	 updateRoleInfo();
+ }else if(type=='new'){
+	  newRoleInfo();
+ }
+ 
 }
 
 updateRoleInfo = function(){
@@ -47,7 +54,8 @@ updateRoleInfo = function(){
               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
-                 opener.parent.roleDetail.location.href ="${ctx}/system/role/${role.roleId}";
+            	 opener.parent.parent.changeType(2)
+                 //opener.parent.roleDetail.location.href ="${ctx}/system/role/${role.roleId}";
                  closeWin();
                }
              },
@@ -59,6 +67,38 @@ updateRoleInfo = function(){
       }
 
 }
+
+
+newRoleInfo = function(){
+     var FormData = getData("new");
+        var url="${ctx}/system/role.json";
+        if(confirm("确定要新建角色?")){
+          jQuery.ajax({
+               url: url,
+               data:FormData,
+               dataType:'json',
+               type:'post',
+               cache: false,
+               success: function(json){
+                var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+                var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+                 alert(msg);
+                 if(isSucc){
+                	 opener.parent.parent.changeType(2)
+                   //opener.parent.roleDetail.location.href ="${ctx}/system/role/"+json['roleId'];
+                   closeWin();
+                 }
+               },
+               error:function(XmlHttpRequest)
+               {
+               alert("更新失败;"+XmlHttpRequest.responseText +  XmlHttpRequest.statusText);
+               }
+             });
+        }
+
+  }
+
+
 
 getData= function(type){
   var data;
@@ -114,8 +154,6 @@ function changeType(obj) {
 </head>
 <body>
 <form:form action="/system/role" method="post" modelAttribute="role">
-  <form:hidden path="roleId" />
-  <form:hidden path="roleType" />
   <div style="padding: 2 2 2 2">
   <div id="bg">
   <ul id=datamenu_Option class="cb font1">
