@@ -240,6 +240,8 @@ checkPassword=function(){
     if(!hasOneChecked('roleIds')){
     	return confirm('<spring:message code="system.user.message.gw.null" />');
     }
+
+    return true
 }
 
 $(function(){
@@ -250,14 +252,17 @@ $(function(){
 
 		
 		if(val.validate()){
-		      jQuery(this).attr("disabled","disabled");
-
+		   
+		      $(this).attr("disabled","disabled");
+		      
 	          if( checkPassword()){
                   if(type=='update' || type=='edit'){
                 	  updateUserInfo();
                   }else if(type=='new'){
                 	  newUserInfo();
                   }
+	          }else{
+             
 	          }
 		      
 		      jQuery(this).attr("disabled","");
@@ -281,7 +286,8 @@ updateUserInfo = function(){
 	          	var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
 	             alert(msg);
 	             if(isSucc){
-	          	   opener.parent.userManager.location.href ="${ctx}/system/user/${user.empNo}";
+	            	 opener.parent.parent.changeType(3)
+	          	   //opener.parent.userManager.location.href ="${ctx}/system/user/${user.empNo}";
 	          	   closeWin();
 	             }
 	           },
@@ -310,7 +316,8 @@ newUserInfo = function(){
 	          	var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
 	             alert(msg);
 	             if(isSucc){
-	          	   opener.parent.userManager.location.href ="${ctx}/system/user/"+json['userId'];
+                 opener.parent.parent.changeType(3)
+		          	   //opener.parent.userManager.location.href ="${ctx}/system/user/"+json['userId'];
 	          	   closeWin();
 	             }
 	           },
