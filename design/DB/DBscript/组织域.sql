@@ -1,11 +1,20 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-6-3 21:28:45                            */
+/* Created on:     2010-7-30 20:04:40                           */
 /*==============================================================*/
 
 
 alter table O_DEPT
    drop constraint FK_O_DEPT_OG_COMPAN_O_ORG;
+
+alter table O_ROLE_AUTHORITY
+   drop constraint FK_O_AUTHORITY_A_ROLE;
+
+alter table O_ROLE_AUTHORITY
+   drop constraint FK_O_ROLE_A_AUTHORITY;
+
+alter table O_ROLE_AUTHORITY
+   drop constraint FK_O_ROLE_A_OR_ROLE_A_O_ROLE;
 
 alter table O_STAFF
    drop constraint FK_O_STAFF_OG_DEPT_P_O_DEPT;
@@ -16,11 +25,15 @@ alter table O_USER_ROLE
 alter table O_USER_ROLE
    drop constraint FK_O_USER_R_OR_EMP_RO_O_STAFF;
 
+drop table O_AUTHORITY cascade constraints;
+
 drop table O_DEPT cascade constraints;
 
 drop table O_ORG cascade constraints;
 
 drop table O_ROLE cascade constraints;
+
+drop table O_ROLE_AUTHORITY cascade constraints;
 
 drop table O_STAFF cascade constraints;
 
@@ -51,9 +64,9 @@ start with 1
 create sequence SEQ_O_STAFF
 increment by 1
 start with 1
+ maxvalue 99999999
  minvalue 1
-cache 20
- maxvalue 99999999;
+ cache 20;
 
 create sequence SEQ_O_USER_ROLE
 increment by 1
@@ -62,6 +75,24 @@ start with 1
 nocycle
  cache 20
  maxvalue 99999999;
+
+/*==============================================================*/
+/* Table: O_AUTHORITY                                           */
+/*==============================================================*/
+create table O_AUTHORITY  (
+   AUTHORITY_ID         NUMBER                          not null,
+   AUTHORITY_NAME       VARCHAR2(50)                    not null,
+   AUTHORITY_REMARK     VARCHAR2(256),
+   LASTTIME_STAMP       DATE                           default SYSDATE,
+   constraint PK_O_AUTHORITY primary key (AUTHORITY_ID)
+)
+tablespace TABS_ARCHIVE;
+
+comment on column O_AUTHORITY.AUTHORITY_ID is
+'PK，有序列SEQ_ROLE生成';
+
+comment on column O_AUTHORITY.LASTTIME_STAMP is
+'最后表结构修改时间戳';
 
 /*==============================================================*/
 /* Table: O_DEPT                                                */
@@ -106,10 +137,10 @@ comment on column O_DEPT.DISP_SN is
 /* Table: O_ORG                                                 */
 /*==============================================================*/
 create table O_ORG  (
-   ORG_ID               NUMBER(16)                      not null,
+   ORG_ID               NUMBER                          not null,
    ORG_NO               VARCHAR2(16)                    not null,
    ORG_NAME             VARCHAR2(256),
-   P_ORG_ID             NUMBER(16),
+   P_ORG_NO             VARCHAR2(16),
    ORG_TYPE             VARCHAR2(8),
    SORT_NO              NUMBER(5),
    LASTTIME_STAMP       DATE                           default SYSDATE,
@@ -125,7 +156,7 @@ comment on column O_ORG.ORG_NO is
 comment on column O_ORG.ORG_NAME is
 '供电单位详细的名称';
 
-comment on column O_ORG.P_ORG_ID is
+comment on column O_ORG.P_ORG_NO is
 '直接上级供电单位编号';
 
 comment on column O_ORG.ORG_TYPE is
@@ -171,6 +202,25 @@ comment on column O_ROLE.LASTTIME_STAMP is
 '最后表结构修改时间戳';
 
 /*==============================================================*/
+/* Table: O_ROLE_AUTHORITY                                      */
+/*==============================================================*/
+create table O_ROLE_AUTHORITY  (
+   ROLE_ID              NUMBER,
+   AUTHORITY_ID         NUMBER,
+   constraint PK_O_ROLE_AUTHORITY primary key ()
+)
+tablespace TABS_ARCHIVE;
+
+comment on table O_ROLE_AUTHORITY is
+'角色权限关系';
+
+comment on column O_ROLE_AUTHORITY.ROLE_ID is
+'PK，有序列SEQ_ROLE生成';
+
+comment on column O_ROLE_AUTHORITY.AUTHORITY_ID is
+'PK，有序列SEQ_ROLE生成';
+
+/*==============================================================*/
 /* Table: O_STAFF                                               */
 /*==============================================================*/
 create table O_STAFF  (
@@ -186,6 +236,10 @@ create table O_STAFF  (
    MOBILE               VARCHAR2(32),
    REMARK               VARCHAR2(256),
    LASTTIME_STAMP       DATE                           default SYSDATE,
+   ENABLE               INT,
+   ACCOUNT_NON_EXPIRED  int,
+   CREDENTIALS_NON_EXPIRED int,
+   ACCOUNT_NON_LOCKED   int,
    constraint PK_O_STAFF primary key (EMP_NO)
 )
 tablespace TABS_ARCHIVE;
@@ -230,20 +284,16 @@ comment on column O_STAFF.LASTTIME_STAMP is
 /* Table: O_USER_ROLE                                           */
 /*==============================================================*/
 create table O_USER_ROLE  (
-   EMP_ROLE_ID          NUMBER                          not null,
    EMP_NO               VARCHAR2(16),
    ROLE_ID              NUMBER,
    GRANTABLE            NUMBER,
    LASTTIME_STAMP       DATE                           default SYSDATE,
-   constraint PK_O_USER_ROLE primary key (EMP_ROLE_ID)
+   constraint PK_O_USER_ROLE primary key ()
 )
 tablespace TABS_ARCHIVE;
 
 comment on table O_USER_ROLE is
 '维护操作员与角色的多对多的关系';
-
-comment on column O_USER_ROLE.EMP_ROLE_ID is
-'PK，由SEQ_ROLE生成';
 
 comment on column O_USER_ROLE.EMP_NO is
 '本实体记录的唯一标识';
@@ -260,6 +310,18 @@ comment on column O_USER_ROLE.LASTTIME_STAMP is
 alter table O_DEPT
    add constraint FK_O_DEPT_OG_COMPAN_O_ORG foreign key (ORG_ID)
       references O_ORG (ORG_ID);
+
+alter table O_ROLE_AUTHORITY
+   add constraint FK_O_AUTHORITY_A_ROLE foreign key (AUTHORITY_ID)
+      references O_AUTHORITY (AUTHORITY_ID);
+
+alter table O_ROLE_AUTHORITY
+   add constraint FK_O_ROLE_A_AUTHORITY foreign key (ROLE_ID)
+      references O_ROLE (ROLE_ID);
+
+alter table O_ROLE_AUTHORITY
+   add constraint FK_O_ROLE_A_OR_ROLE_A_O_ROLE foreign key (ROLE_ID)
+      references O_ROLE (ROLE_ID);
 
 alter table O_STAFF
    add constraint FK_O_STAFF_OG_DEPT_P_O_DEPT foreign key (DEPT_NO)

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-7-10 16:13:15                           */
+/* Created on:     2010-7-29 20:55:32                           */
 /*==============================================================*/
 
 
@@ -111,7 +111,8 @@ create table R_DATAITEM  (
    DATAITEM_VALUE_TYPE  VARCHAR2(5),
    DATAITEM_VALUE_CODE  VARCHAR2(20),
    constraint PK_R_DATAITEM primary key (PROTOCOL_NO, COMMANDITEM_CODE, DATAITEM_CODE)
-);
+)
+tablespace TABS_GATHER;
 
 comment on column R_DATAITEM.PROTOCOL_NO is
 'PK，见编码PROTOCOL_TERM';
@@ -173,7 +174,8 @@ create table R_TASK  (
    PRI_MASTER           NUMBER,
    AFN                  NUMBER,
    constraint PK_R_TASK primary key (TASK_ID, PROTOCOL_NO, SYS_OBJECT)
-);
+)
+tablespace TABS_GATHER;
 
 comment on column R_TASK.PROTOCOL_NO is
 'PK，见编码PROTOCOL_TERM';
@@ -214,7 +216,8 @@ create table R_TASK_DATAITEM  (
    COMMANDITEM_CODE     VARCHAR2(20)                    not null,
    SEQUENCE             NUMBER,
    constraint PK_R_TASK_DATAITEM primary key (TASK_ID, PROTOCOL_NO, SYS_OBJECT, COMMANDITEM_CODE)
-);
+)
+tablespace TABS_GATHER;
 
 comment on column R_TASK_DATAITEM.PROTOCOL_NO is
 'PK，见编码PROTOCOL_TERM';
@@ -234,7 +237,8 @@ create table R_TASK_TACTIC  (
    GP_SN                NUMBER                          not null,
    TASK_ID              NUMBER                          not null,
    constraint PK_R_TASK_TACTIC primary key (TACTIC_ID)
-);
+)
+tablespace TABS_GATHER;
 
 comment on column R_TASK_TACTIC.TASK_TYPE is
 '见编码TASK_TYPE，NOT NULL';
@@ -354,7 +358,8 @@ create table R_TERM_TASK  (
    SENDUP_UNIT_GW       NUMBER,
    EXT_CNT_GW           NUMBER,
    constraint PK_R_TERM_TASK primary key (LOGICAL_ADDR, GP_CHAR, GP_SN, TASK_ID, PROTOCOL_NO, SYS_OBJECT)
-);
+)
+tablespace TABS_GATHER;
 
 comment on table R_TERM_TASK is
 '记录每个终端已经配置的任务信息。';
@@ -396,3 +401,4 @@ alter table R_REALTIME_TASK_RECV
 alter table R_TASK_TACTIC
    add constraint FK_R_TASK_T_R_TASK_TA_R_TASK foreign key (TASK_ID, PROTOCOL_NO, SYS_OBJECT)
       references R_TASK (TASK_ID, PROTOCOL_NO, SYS_OBJECT);
+

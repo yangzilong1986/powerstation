@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 10gR2                         */
-/* Created on:     2010-7-18 14:29:21                           */
+/* Created on:     2010-7-28 18:10:54                           */
 /*==============================================================*/
 
 
@@ -43,7 +43,8 @@ create table D_EC_CURV_C  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_EC_CURV_C primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EC_CURV_C is
 '数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
@@ -86,7 +87,8 @@ create table D_EC_CURV_H  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_EC_CURV_H primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EC_CURV_H is
 '数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
@@ -144,7 +146,8 @@ create table D_EI_CURV_C  (
    I_REACT_LEVEL        NUMBER,
    I_REACT_PEAK         NUMBER,
    constraint PK_D_EI_CURV_C primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EI_CURV_C is
 '用于放（15）分钟（日以内）数据（当前日的/或者前7日，可配）
@@ -203,7 +206,8 @@ create table D_EI_CURV_H  (
    I_REACT_LEVEL        NUMBER,
    I_REACT_PEAK         NUMBER,
    constraint PK_D_EI_CURV_H primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EI_CURV_H is
 '
@@ -269,7 +273,8 @@ create table D_EI_FREEZE_DAY  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_EI_FREEZE_DAY primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EI_FREEZE_DAY is
 '用于放冻结数据（日冻结，保留7天或者1月，可配），电量数据按年自动归档 。
@@ -336,7 +341,8 @@ create table D_EI_FREEZE_DAY_H  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_EI_FREEZE_DAY_H primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_EI_FREEZE_DAY_H is
 '
@@ -378,7 +384,8 @@ create table D_POWER_CRUV_C  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_POWER_CRUV_C primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on table D_POWER_CRUV_C is
 '系统当前功率数据（当前日/或者前7日以前的），历史自动归档为历史数据。
@@ -421,7 +428,8 @@ create table D_POWER_CRUV_H  (
    DATA_FLAG            VARCHAR2(5),
    DATA_SOURCE          VARCHAR2(5),
    constraint PK_D_POWER_CRUV_H primary key (GP_ID, DATA_TIME)
-);
+)
+tablespace TABS_DATA;
 
 comment on column D_POWER_CRUV_H.ASSET_NO is
 '电表资产编号';
