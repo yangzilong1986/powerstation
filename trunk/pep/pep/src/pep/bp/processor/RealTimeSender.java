@@ -29,8 +29,7 @@ public class RealTimeSender extends BaseProcessor {
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuRespPacketQueue respQueue;//返回报文队列
 
-
-    public RealTimeSender( PepCommunicatorInterface pepCommunicator) {
+    public RealTimeSender(PepCommunicatorInterface pepCommunicator) {
         super();
         taskService = (RTTaskService) cxt.getBean(SystemConst.REALTIMETASK_BEAN);
         respQueue = pepCommunicator.getRtuRespPacketQueueInstance();
@@ -46,14 +45,14 @@ public class RealTimeSender extends BaseProcessor {
                 java.util.logging.Logger.getLogger(RealTimeSender.class.getName()).log(Level.SEVERE, null, ex);
             }
             List<RealTimeTaskDAO> tasks = taskService.getTasks();
-            for (RealTimeTaskDAO task : tasks) {
-                PmPacket packet = new PmPacket376();
-                packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
-                pepCommunicator.SendPacket(task.getTaskId() , packet);
+            if (null != tasks) {
+                for (RealTimeTaskDAO task : tasks) {
+                    PmPacket packet = new PmPacket376();
+                    packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
+                    pepCommunicator.SendPacket(task.getTaskId(), packet);
+                }
             }
         }
 
     }
-
-
 }
