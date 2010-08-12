@@ -15,7 +15,7 @@
 		<s:intercept-url pattern="/archive/**" access="isAuthenticated()" />
 		<s:intercept-url pattern="/tree/**" access="isAuthenticated()" />
 		<s:intercept-url pattern="/autorm/**" access="isAuthenticated()" />
-		<s:form-login login-page="/security/login" default-target-url="/homepage/main" authentication-failure-url="/security/login?error=1" />
+		<s:form-login login-page="/security/login" default-target-url="/homepage/main" authentication-failure-url="/security/login?error=1"/>
 		<s:logout logout-success-url="/security/login" />
 		<s:session-management invalid-session-url="/security/login?error=4" session-authentication-error-url="/security/login?error=3">
 			<s:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" expired-url="/security/login?error=3" />
@@ -30,6 +30,8 @@
 			<s:password-encoder hash="sha" />
 		</s:authentication-provider>
 	</s:authentication-manager>
+	
+	
 	<!-- 项目实现的用户查询服务 -->
 	<bean id="userDetailsService" class="org.pssframework.security.UserDetailsServiceImpl" />
 	<!-- 开发时自动登录的filter -->
