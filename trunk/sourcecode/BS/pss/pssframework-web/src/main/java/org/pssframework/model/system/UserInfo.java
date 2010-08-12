@@ -140,6 +140,40 @@ public class UserInfo extends BaseEntity {
 	@Transient
 	private boolean showAllAccount;
 
+	@Transient
+	private String oldPasswd;
+
+	/**
+	 * @return the oldPasswd
+	 */
+	public String getOldPasswd() {
+		return oldPasswd;
+	}
+
+	/**
+	 * @param oldPasswd the oldPasswd to set
+	 */
+	public void setOldPasswd(String oldPasswd) {
+		this.oldPasswd = oldPasswd;
+	}
+
+	/**
+	 * @return the newPasswd
+	 */
+	public String getNewPasswd() {
+		return newPasswd;
+	}
+
+	/**
+	 * @param newPasswd the newPasswd to set
+	 */
+	public void setNewPasswd(String newPasswd) {
+		this.newPasswd = newPasswd;
+	}
+
+	@Transient
+	private String newPasswd;
+
 	/**
 	 * @return the accountNonExpired
 	 */

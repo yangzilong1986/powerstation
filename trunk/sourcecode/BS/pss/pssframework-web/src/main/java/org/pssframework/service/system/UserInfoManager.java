@@ -119,13 +119,31 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		List<RoleInfo> list = com.google.common.collect.Lists.newArrayList();
 
-		entity.getRoleInfoList().clear();
-		for (Long roleId : roleIds) {
+		if (roleIds != null && roleIds.size() > 0) {
+			entity.getRoleInfoList().clear();
 
-			list.add(new RoleInfo(roleId));
+			for (Long roleId : roleIds) {
 
+				list.add(new RoleInfo(roleId));
+
+			}
 		}
+
 		entity.getRoleInfoList().addAll(list);
 
+	}
+
+	public void changePassWord(UserInfo userInfo) {
+
+		String shaPassword = encoder.encodePassword(userInfo.getOldPasswd(), null);
+
+		if (!shaPassword.equals(userInfo.getPasswd())) {
+			logger.info("操作员{}尝试删除用户", SpringSecurityUtils.getCurrentUserName());
+			throw new ServiceException("输入的老密码不正确");
+		} else {
+			userInfo.setPasswd(userInfo.getNewPasswd());
+		}
+
+		this.saveOrUpdate(userInfo);
 	}
 }
