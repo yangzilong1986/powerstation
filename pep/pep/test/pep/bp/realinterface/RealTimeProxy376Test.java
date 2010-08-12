@@ -469,7 +469,7 @@ public class RealTimeProxy376Test {
         assertEquals(expResult, result);
     }
 
-    @Test
+   //@Test
     public void testReadEquipmentParametersF10() throws Exception {
         Map datacellParams10 = new TreeMap();
         datacellParams10.put("1004001001", "1");//主用IP地址和端口
@@ -522,6 +522,26 @@ public class RealTimeProxy376Test {
 //        expResult.put("96123456#0#10040010",MapDataItem);
 //        Map result = instance.getReturnByREP(SequenceCode);
 //        assertEquals(expResult, result);
+    }
+
+    //@Test
+    public void testReadEquipmentParametersF26() throws Exception {
+        CommandItem commandItem = new CommandItem();
+        commandItem.setIdentifier("10040026");
+
+        CollectObject obj= new CollectObject();
+        obj.setLogicalAddr("96123455");
+        obj.setMpSn(new int[]{0});
+        obj.AddCommandItem(commandItem);
+
+        MTO_376 MTO3 = new MTO_376();
+        MTO3.addCollectObject(obj);
+
+        RealTimeProxy376 instance = proxy;
+    //    long SequenceCode = instance.readParameters(MTO3);
+
+        Map result = instance.getReturnByReadParameter(3616);
+        //assertEquals(expResult, result);
     }
 
 
@@ -696,7 +716,7 @@ public class RealTimeProxy376Test {
      */
     @Test
     public void testGetReturnByReadParameter() throws Exception {
-        Map result = proxy.getReturnByReadParameter(3467);
+        Map result = proxy.getReturnByReadParameter(3623);
         assertTrue(result.size() > 0);
     }
 
