@@ -685,9 +685,9 @@ function getSelectedCheckboxs4() {
                     </tr>
                     <tr ci="10040010" di="10040010070001" class="clz10040010" style="display: none;">
                       <td height="25">&nbsp;</td>
-                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信协议类型</td>
+                      <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信地址</td>
                       <td>
-                        <input id="10040010070001" value="1" />
+                        <input id="10040010070001" value="000000000001" />
                       </td>
                       <td id="diop10040010070001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -697,7 +697,7 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置通信密码</td>
                       <td>
-                        <input id="10040010080001" value="1" />
+                        <input id="10040010080001" value="000000000000" />
                       </td>
                       <td id="diop10040010080001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -707,7 +707,56 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置电能费率个数</td>
                       <td>
-                        <input id="10040010100001" value="4" />
+                        <select id="10040010100001">
+                          <option value="000001">1个</option>
+                          <option value="000010">2个</option>
+                          <option value="000011">3个</option>
+                          <option value="000100">4个</option>
+                          <option value="000101">5个</option>
+                          <option value="000110">6个</option>
+                          <option value="000111">7个</option>
+                          <option value="001000">8个</option>
+                          <option value="001001">9个</option>
+                          <option value="001010">10个</option>
+                          <option value="001011">11个</option>
+                          <option value="001100">12个</option>
+                          <option value="001101">13个</option>
+                          <option value="001110">14个</option>
+                          <option value="001111">15个</option>
+                          <option value="010000">16个</option>
+                          <option value="010001">17个</option>
+                          <option value="010010">18个</option>
+                          <option value="010011">19个</option>
+                          <option value="010100">20个</option>
+                          <option value="010101">21个</option>
+                          <option value="010110">22个</option>
+                          <option value="010111">23个</option>
+                          <option value="011000">24个</option>
+                          <option value="011001">25个</option>
+                          <option value="011010">26个</option>
+                          <option value="011011">27个</option>
+                          <option value="011100">28个</option>
+                          <option value="011101">29个</option>
+                          <option value="011110">30个</option>
+                          <option value="011111">31个</option>
+                          <option value="100000">32个</option>
+                          <option value="100001">33个</option>
+                          <option value="100010">34个</option>
+                          <option value="100011">35个</option>
+                          <option value="100100">36个</option>
+                          <option value="100101">37个</option>
+                          <option value="100110">38个</option>
+                          <option value="100111">39个</option>
+                          <option value="101000">40个</option>
+                          <option value="101001">41个</option>
+                          <option value="101010">42个</option>
+                          <option value="101011">43个</option>
+                          <option value="101100">44个</option>
+                          <option value="101101">45个</option>
+                          <option value="101110">46个</option>
+                          <option value="101111">47个</option>
+                          <option value="110000">48个</option>
+                        </select>
                       </td>
                       <td id="diop10040010100001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -717,7 +766,12 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置有功电能示值的整数位个数</td>
                       <td>
-                        <input id="10040010120001" value="6" />
+                        <select id="10040010120001">
+                          <option value="00">4位</option>
+                          <option value="01">5位</option>
+                          <option value="10">6位</option>
+                          <option value="11">7位</option>
+                        </select>
                       </td>
                       <td id="diop10040010120001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -727,7 +781,12 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置有功电能示值的小数位个数</td>
                       <td>
-                        <input id="10040010130001" value="4" />
+                        <select id="10040010130001">
+                          <option value="00">1位</option>
+                          <option value="01">2位</option>
+                          <option value="10">3位</option>
+                          <option value="11">4位</option>
+                        </select>
                       </td>
                       <td id="diop10040010130001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -737,7 +796,7 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属采集器通信地址</td>
                       <td>
-                        <input id="10040010140001" value="0" />
+                        <input id="10040010140001" value="000000000000" />
                       </td>
                       <td id="diop10040010140001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -747,7 +806,7 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属的用户大类号</td>
                       <td>
-                        <input id="10040010150001" value="0" />
+                        <input id="10040010150001" value="0000" />
                       </td>
                       <td id="diop10040010150001">&nbsp;</td>
                       <td>&nbsp;</td>
@@ -757,7 +816,7 @@ function getSelectedCheckboxs4() {
                       <td height="25">&nbsp;</td>
                       <td colspan="2" align="right">本次配置第1块电能表/交流采样装置所属的用户小类号</td>
                       <td>
-                        <input id="10040010160001" value="0" />
+                        <input id="10040010160001" value="0000" />
                       </td>
                       <td id="diop10040010160001">&nbsp;</td>
                       <td>&nbsp;</td>
