@@ -20,14 +20,14 @@ import pep.bp.utils.UtilsBp;
  */
 public class DataServiceIMPTest {
     private DataServiceIMP dataService;
-    private ACTDataStoredProcedure actStoredProcedure;
-    private ECCURV_DataStoredProcedure eccurv_DataStoredProcedure;
+    private P_ACT_StoredProcedure actStoredProcedure;
+    private ECCURV_StoredProcedure eccurv_DataStoredProcedure;
     public DataServiceIMPTest() {
         ApplicationContext app =    new  ClassPathXmlApplicationContext("beans.xml");
         dataService = (DataServiceIMP)app.getBean("dataService");
-        actStoredProcedure = (ACTDataStoredProcedure)app.getBean("actDataStoredProcedure");
-        eccurv_DataStoredProcedure = (ECCURV_DataStoredProcedure)app.getBean("eccurv_DataStoredProcedure");
-        dataService.setActStoredProcedure(actStoredProcedure);
+        actStoredProcedure = (P_ACT_StoredProcedure)app.getBean("actDataStoredProcedure");
+        eccurv_DataStoredProcedure = (ECCURV_StoredProcedure)app.getBean("eccurv_DataStoredProcedure");
+        dataService.setP_actStoredProcedure(actStoredProcedure);
         dataService.setEccurvStoredProcedure(eccurv_DataStoredProcedure);
     }
 
