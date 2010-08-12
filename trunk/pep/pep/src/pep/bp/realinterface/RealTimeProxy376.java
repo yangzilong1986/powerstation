@@ -555,7 +555,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                 if (IsTd.equals("1")) {
                     keyInner = dataValue;
                 } else {
-                    keyInner = DateFormatUtils.format(new Date(), "yyyy-MM-dd hh:mm:ss");
+                    keyInner = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
                 }
                 resultMap.put(keyInner, dataValue);
                 results.put(key + "#" + dataItemCode, resultMap);
