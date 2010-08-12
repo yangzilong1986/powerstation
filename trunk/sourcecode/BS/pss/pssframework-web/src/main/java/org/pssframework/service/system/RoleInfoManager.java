@@ -74,11 +74,6 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 		roleInfoDao.saveOrUpdate(entity);
 	}
 
-	@Override
-	public void removeById(Long id) {
-		roleInfoDao.delete(id);
-	}
-
 	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest pageRequest) {
 		return roleInfoDao.findByPageRequest(pageRequest);
@@ -91,13 +86,14 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
 		String[] resouceArray = new String[] {};
 
-		if (resources != null) {
+		if (resources != null && !"".equals(resources)) {
 			resouceArray = resources.split(",");
-		}
 
-		for (String resouceId : resouceArray) {
+			for (String resouceId : resouceArray) {
 
-			resourceInfoList.add(new ResourceInfo(Long.parseLong(resouceId)));
+				resourceInfoList.add(new ResourceInfo(Long.parseLong(resouceId)));
+
+			}
 
 		}
 
@@ -108,25 +104,18 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 
 	private void setAuthority(RoleInfo entity) {
 
-		List<AuthorityInfo> authorityInfoList = Lists.newLinkedList();
+		List<Long> authorityIds = entity.getAuthorityIds();
 
-		String authoritys = entity.getAuthorityIds();
+		List<AuthorityInfo> list = Lists.newArrayList();
 
-		String[] authorityArray = new String[] {};
+		for (Long authorityId : authorityIds) {
 
-		if (authoritys != null) {
-			authorityArray = authoritys.split(",");
-		}
-
-		for (String authorityId : authorityArray) {
-
-			authorityInfoList.add(new AuthorityInfo(Long.parseLong(authorityId)));
+			list.add(new AuthorityInfo(authorityId));
 
 		}
-
 		entity.getAuthorityInfoList().clear();
 
-		entity.setAuthorityInfoList(authorityInfoList);
+		entity.setAuthorityInfoList(list);
 
 	}
 }

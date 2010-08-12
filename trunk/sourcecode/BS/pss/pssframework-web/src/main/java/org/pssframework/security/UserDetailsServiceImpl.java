@@ -39,9 +39,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);
 
 		boolean enabled = (user.getEnable() == 1);
-		boolean accountNonExpired = (user.getAccountNonExpired() == 1);
-		boolean credentialsNonExpired = (user.getCredentialsNonExpired() == 1);
-		boolean accountNonLocked = (user.getAccountNonLocked() == 1);
+
+		//简单实现
+		boolean accountNonExpired = true;//(user.getAccountNonExpired() == 1);
+		boolean credentialsNonExpired = true;//(user.getCredentialsNonExpired() == 1);
+		boolean accountNonLocked = true;//(user.getAccountNonLocked() == 1);
 
 		OperatorDetails userdetails = new OperatorDetails(user.getStaffNo(), user.getPasswd(), enabled,
 				accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
