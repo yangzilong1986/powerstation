@@ -96,13 +96,13 @@ public class Dto {
     }
 
 
-    public DtoItem AddDataItem(String meterAddress, String dataTime, String commandItemCode){
+    public DtoItem addDataItem(String meterAddress, String dataTime, String commandItemCode){
         DtoItem dtoItem = new DtoItem(meterAddress,dataTime,commandItemCode);
         this.dataItems.add(dtoItem);
         return dtoItem;
     }
 
-    public DtoItem AddDataItem(int gp, String dataTime, String commandItemCode){
+    public DtoItem addDataItem(int gp, String dataTime, String commandItemCode){
         DtoItem dtoItem = new DtoItem(gp,dataTime,commandItemCode);
         this.dataItems.add(dtoItem);
         return dtoItem;
