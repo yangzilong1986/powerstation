@@ -80,7 +80,7 @@ public class Decoder376 extends Decoder {
                 dto.setAfn(afn);
                 String CurrentTime = UtilsBp.getNow();
                 String commandItemCode = "10" + BcdUtils.byteToString(afn) + String.format("%04d", dt.getFn());
-                DtoItem dtoItem = dto.AddDataItem(gp, CurrentTime, commandItemCode);
+                DtoItem dtoItem = dto.addDataItem(gp, CurrentTime, commandItemCode);
                 this.DecodeData2Dto(gp, commandItemCode, dtoItem, dataBuffer);
 
             }
