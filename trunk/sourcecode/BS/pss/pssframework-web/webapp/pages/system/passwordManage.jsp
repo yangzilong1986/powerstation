@@ -66,7 +66,7 @@ updatePassWord = function(){
                    if(isSucc){
                   	 parent.changeType(4)
                 	   //opener.parent.userManager.location.href ="${ctx}/system/user/${user.empNo}";
-                	   closeWin();
+                	  // closeWin();
                    }
                  },
                  error:function(XmlHttpRequest)
