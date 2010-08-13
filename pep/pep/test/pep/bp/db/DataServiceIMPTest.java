@@ -35,7 +35,7 @@ public class DataServiceIMPTest {
     public void testInsertRecvData() {
         Dto dto = new Dto("96123456",(byte)12);
 
-        DtoItem dtoItem = dto.AddDataItem(5, UtilsBp.getNow(), "100C0025");
+        DtoItem dtoItem = dto.addDataItem(5, UtilsBp.getNow(), "100C0025");
         Map<String,String> dataMap = dtoItem.dataMap;
         dataMap.put("F000", "20100723");
         dataMap.put("2300", "4");
