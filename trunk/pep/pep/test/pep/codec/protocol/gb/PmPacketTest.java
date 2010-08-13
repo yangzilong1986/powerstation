@@ -150,6 +150,7 @@ public class PmPacketTest {
      @Test
     public void testPmPacketDataToString() {
         PmPacketData databuf = new PmPacketData();
+        databuf.put(new byte[] {(byte)0x01,(byte)0x02,(byte)0xf1,(byte)0x80,(byte)0x7f});
         String packStr1 = databuf.toString();
 
         String packStr2 = databuf.toString();
