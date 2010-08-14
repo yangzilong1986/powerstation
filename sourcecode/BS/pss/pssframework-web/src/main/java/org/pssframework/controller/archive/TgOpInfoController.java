@@ -33,6 +33,8 @@ import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.query.archive.TgUserQuery;
+import org.pssframework.query.system.UserQuery;
+import org.pssframework.security.OperatorDetails;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.archive.TgOpInfoManager;
 import org.pssframework.service.system.CodeInfoManager;
@@ -49,6 +51,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -62,6 +65,8 @@ import cn.org.rapid_framework.page.PageRequest;
 public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
 
 	private static final String VIEW_QUERY_TG = "/archive/addTgUserInfo";
+
+	private static final String VIEW_QUERY = "/archive/userList";
 
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
@@ -131,6 +136,57 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
 
 		return VIEW_QUERY_TG;
+	}
+
+	@RequestMapping(value = "/list")
+	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+			UserInfo userInfo) {
+
+		UserQuery baseQuery = new UserQuery();
+		//是否勾选全部
+		if (!userInfo.isShowAllAccount()) {
+			Long orgId = null;
+
+			OrgInfo orgInfo = userInfo.getOrgInfo();
+
+			if (orgInfo == null) {
+
+				OperatorDetails user = SpringSecurityUtils.getCurrentUser();
+
+				String staffNo = user.getUsername();
+
+				UserInfo userLogin = this.userInfoManager.findUserByLoginName(staffNo);
+
+				orgInfo = userLogin.getOrgInfo();
+
+			}
+
+			orgId = orgInfo.getOrgId();
+
+			baseQuery.setOrgId(orgId);
+		}
+
+		getUserList(modelAndView, request, response, baseQuery);
+
+		modelAndView.setViewName(VIEW_QUERY);
+
+		return modelAndView;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void getUserList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+			BaseQuery baseQuery) {
+
+		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
+
+		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
+
+		modelAndView.addObject("orgInfo", getOrgInfo());
+
+		modelAndView.addObject("page", page);
+
+		modelAndView.addObject("pageRequest", pageRequest);
+
 	}
 
 	/** 删除 */
@@ -291,7 +347,6 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		return modelAndView;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void getUserList(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
 			BaseQuery baseQuery) {
 
