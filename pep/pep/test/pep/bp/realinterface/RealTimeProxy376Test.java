@@ -616,17 +616,17 @@ public class RealTimeProxy376Test {
     /**
      * Test of transmitMsg method, of class RealTimeProxy376.
      */
-    //@Test
+    @Test
     public void testTransmitMsg() throws Exception {    
-       Map datacellParams1 = new TreeMap();
-       datacellParams1.put("C012", "2010-08-04 20:34:25");//漏电保护装置校时
+//       Map datacellParams1 = new TreeMap();
+//       datacellParams1.put("C012", "2010-08-04 20:34:25");//漏电保护装置校时
         
         CommandItem commandItem = new CommandItem();
-        commandItem.setIdentifier("8000C012");
+        commandItem.setIdentifier("8000B66F");
        // commandItem.setDatacellParam(datacellParams1);
         
         CollectObject_TransMit cob = new CollectObject_TransMit();
-        cob.setFuncode((byte)4);
+        cob.setFuncode((byte)1);
         cob.setMeterAddr("1");
         cob.setMeterType(MeterType.Meter645);
         cob.setPort((byte)1);
