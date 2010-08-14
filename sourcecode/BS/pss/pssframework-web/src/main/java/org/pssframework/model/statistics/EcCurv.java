@@ -11,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  *        数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
  *     
 */
-public class DEcCurv implements Serializable {
+public class EcCurv implements Serializable {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

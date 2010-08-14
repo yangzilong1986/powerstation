@@ -12,7 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
  *     
 */
-public class DEiFreezeDay implements Serializable {
+public class EiFreezeDay implements Serializable {
 
 	/**
 	 * 
@@ -143,7 +143,7 @@ public class DEiFreezeDay implements Serializable {
 	private String dataSource;
 
 	/** default constructor */
-	public DEiFreezeDay() {
+	public EiFreezeDay() {
 	}
 
 	public Date getAcceptTime() {
