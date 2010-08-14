@@ -1,13 +1,55 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>总表数据查询</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
-<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
-<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/effects.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
+<script type="text/javascript">
+var type='{_type}';
+$(function(){
+	changeType(0);
+})
+
+var contextPath = "${ctx}";
+
+getFrom = function(){
+    var data = $("form[0]").serialize(); 
+    return data;
+}
+
+var lastQueryType =0;
+function changeType(obj) {
+    if(obj == undefined){
+  	  obj = lastQueryType;
+    }
+    var lastTd = document.getElementById("datamenu_Option_" + lastQueryType);
+    var nowTd = document.getElementById("datamenu_Option_" + obj);
+    lastTd.className = 'none';
+    nowTd.className = 'curr';
+    lastQueryType = obj;
+    var url = contextPath;
+    if(lastQueryType == 0){
+    	url += "/statistics/eicurv?"+getFrom();
+    }
+    if(lastQueryType == 1) {
+        url += "/statistics/powercruv?"+getFrom();
+    }
+    if(lastQueryType == 2) {
+        url += "/statistics/eccurv/vt?"+getFrom();
+    }
+    if(lastQueryType == 3) {
+        url += "/statistics/eccurv/ec?"+getFrom();
+    }
+   
+    document.getElementById("data").src = url;
+}
+
+</script>
 </head>
 <body>
 <div class="electric_lcon" id="electric_Con">
@@ -24,154 +66,24 @@
         <td width="120" align="left"><select id="tgId" name="tgId" style="width: 140px; height: 18px;">
           <option value="3">乾龙1#</option>
         </select></td>
+        <td width="100" align="right" class="green">时间：</td>
+        <td><input type="text" class="input_time" name="ddate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+          readonly="readonly" style="height: 23px; width: 150px;" /></td>
         <td width="100" align="center"><img src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21"
-          style="cursor: pointer;" /></td>
+          style="cursor: pointer;" onclick="changeType()" /></td>
         <td>&nbsp;</td>
       </tr>
     </table>
     </div>
     <div id="bg" style="height: 30px; text-align: center;">
-    <ul id=”datamenu_Option“ class="cb font1">
-      <li class="curr" id=datamenu_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',0,4)">表码数据</li>
-      <li id=datamenu_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',1,4)">功率数据</li>
-      <li id=datamenu_Option_2 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',2,4)">电压数据</li>
-      <li id=datamenu_Option_3 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',3,4)">电流数据</li>
+    <ul id="datamenu_Option" class="cb font1">
+      <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">表码数据</li>
+      <li id=datamenu_Option_1 style="cursor: pointer;" onclick="changeType(1)">功率数据</li>
+      <li id=datamenu_Option_2 style="cursor: pointer;" onclick="changeType(2)">电压数据</li>
+      <li id=datamenu_Option_3 style="cursor: pointer;" onclick="changeType(3)">电流数据</li>
     </ul>
     </div>
-    <div class="datamenu_lcon" id="datamenu_Con">
-    <ul class="default" id="datamenu_Con_0">
-      <div class="content">
-      <div id="cont_1">
-      <div class="tableContainer"
-        style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -75 ) );">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th width="7%" class="bg01" height="30">序号</th>
-            <th width="8%" class="bg01">参数类型</th>
-            <th width="30%" class="bg01">参数名称</th>
-            <th width="18%" class="bg01">待设值</th>
-            <th width="18%" class="bg01">上次设置值</th>
-            <th width="9%" class="bg01">单位</th>
-            <th width="10%" class="bg01">操作结果</th>
-          </tr>
-        </thead>
-        <tbody class="tblcontent2">
-          <tr class="cicontent">
-            <td height="20">&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
-      </div>
-    </ul>
-    <ul class="disNone" id="datamenu_Con_1">
-      <div class="content">
-      <div id="cont_2">
-      <div class="tableContainer"
-        style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -75 ) );">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th width="7%" class="bg01" height="30">序号</th>
-            <th width="8%" class="bg01">参数类型</th>
-            <th width="30%" class="bg01">参数名称</th>
-            <th width="18%" class="bg01">待设值</th>
-            <th width="18%" class="bg01">上次设置值</th>
-            <th width="9%" class="bg01">单位</th>
-            <th width="10%" class="bg01">操作结果</th>
-          </tr>
-        </thead>
-        <tbody class="tblcontent2">
-          <tr class="cicontent">
-            <td height="20">&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
-      </div>
-    </ul>
-    <ul class="disNone" id="datamenu_Con_2">
-      <div class="content">
-      <div id="cont_3">
-      <div class="tableContainer"
-        style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -75 ) );">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th width="7%" class="bg01" height="30">序号</th>
-            <th width="8%" class="bg01">参数类型</th>
-            <th width="30%" class="bg01">参数名称</th>
-            <th width="18%" class="bg01">待设值</th>
-            <th width="18%" class="bg01">上次设置值</th>
-            <th width="9%" class="bg01">单位</th>
-            <th width="10%" class="bg01">操作结果</th>
-          </tr>
-        </thead>
-        <tbody class="tblcontent2">
-          <tr class="cicontent">
-            <td height="20">&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
-      </div>
-    </ul>
-    <ul class="disNone" id="datamenu_Con_3">
-      <div class="content">
-      <div id="cont_4">
-      <div class="tableContainer"
-        style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -75 ) );">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th width="7%" class="bg01" height="30">序号</th>
-            <th width="8%" class="bg01">参数类型</th>
-            <th width="30%" class="bg01">参数名称</th>
-            <th width="18%" class="bg01">待设值</th>
-            <th width="18%" class="bg01">上次设置值</th>
-            <th width="9%" class="bg01">单位</th>
-            <th width="10%" class="bg01">操作结果</th>
-          </tr>
-        </thead>
-        <tbody class="tblcontent2">
-          <tr class="cicontent">
-            <td height="20">&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-      </div>
-      </div>
-    </ul>
-    </div>
+    <div align="center"><iframe id="data" scrolling="auto" width="100%" height="100%"></iframe></div>
   </form:form>
 </ul>
 </div>
