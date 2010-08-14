@@ -392,137 +392,129 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem74 = new ProtocolCommandItem();
         CommandItem74.setCommandCode("100D0081");
-        CommandItem74.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
+        CommandItem74.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
         CommandItem74.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
         CommandItem74.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem74.AddDataItem(new ProtocolDataItem("2300", 3, "A9", 0,"有功功率",""));
 
         ProtocolCommandItem CommandItem75 = new ProtocolCommandItem();
         CommandItem75.setCommandCode("100D0082");
-        CommandItem75.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem75.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem75.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem75.AddDataItem(new ProtocolDataItem("2301", 3, "A9", 0,"A相有功功率",""));
+        CommandItem75.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem75.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem75.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem76 = new ProtocolCommandItem();
         CommandItem76.setCommandCode("100D0083");
-        CommandItem76.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem76.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem76.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem76.AddDataItem(new ProtocolDataItem("2302", 3, "A9", 0,"B相有功功率",""));
+        CommandItem76.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem76.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem76.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem77 = new ProtocolCommandItem();
         CommandItem77.setCommandCode("100D0084");
         CommandItem77.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem77.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem77.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem77.AddDataItem(new ProtocolDataItem("2303", 3, "A9", 0,"C相有功功率",""));
+        CommandItem77.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem77.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem78 = new ProtocolCommandItem();
         CommandItem78.setCommandCode("100D0085");
-        CommandItem78.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem78.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem78.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem78.AddDataItem(new ProtocolDataItem("2400", 3, "A9", 0,"无功功率",""));
+        CommandItem78.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem78.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem78.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem79 = new ProtocolCommandItem();
         CommandItem79.setCommandCode("100D0086");
-        CommandItem79.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem79.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem79.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem79.AddDataItem(new ProtocolDataItem("2401", 3, "A9", 0,"A相无功功率",""));
+        CommandItem79.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem79.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem79.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem80 = new ProtocolCommandItem();
         CommandItem80.setCommandCode("100D0087");
-        CommandItem80.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem80.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem80.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem80.AddDataItem(new ProtocolDataItem("2401", 3, "A9", 0,"B相无功功率",""));
+        CommandItem80.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem80.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem80.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem81 = new ProtocolCommandItem();
         CommandItem81.setCommandCode("100D0088");
-        CommandItem81.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem81.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem81.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem81.AddDataItem(new ProtocolDataItem("2401", 3, "A9", 0,"C相无功功率",""));
+        CommandItem81.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem81.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem81.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem82 = new ProtocolCommandItem();
         CommandItem82.setCommandCode("100D0089");
-        CommandItem82.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem82.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem82.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem82.AddDataItem(new ProtocolDataItem("2101", 3, "A7", 0,"A相电压",""));
+        CommandItem82.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem82.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem82.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem83 = new ProtocolCommandItem();
         CommandItem83.setCommandCode("100D0090");
-        CommandItem83.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem83.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem83.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem83.AddDataItem(new ProtocolDataItem("2102", 3, "A7", 0,"B相电压",""));
+        CommandItem83.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem83.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem83.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem84 = new ProtocolCommandItem();
         CommandItem84.setCommandCode("100D0091");
-        CommandItem84.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem84.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem84.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem84.AddDataItem(new ProtocolDataItem("2103", 3, "A7", 0,"C相电压",""));
+        CommandItem84.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem84.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem84.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem85 = new ProtocolCommandItem();
         CommandItem85.setCommandCode("100D0092");
-        CommandItem85.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem85.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem85.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem85.AddDataItem(new ProtocolDataItem("2201", 3, "A25", 0,"A相电流",""));
+        CommandItem85.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem85.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem85.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem86 = new ProtocolCommandItem();
         CommandItem86.setCommandCode("100D0093");
-        CommandItem86.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem86.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem86.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem86.AddDataItem(new ProtocolDataItem("2202", 3, "A25", 0,"B相电流",""));
+        CommandItem86.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem86.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem86.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem87 = new ProtocolCommandItem();
         CommandItem87.setCommandCode("100D0094");
-        CommandItem87.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem87.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem87.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem87.AddDataItem(new ProtocolDataItem("2203", 3, "A25", 0,"C相电流",""));
+        CommandItem87.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem87.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem87.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem88 = new ProtocolCommandItem();
         CommandItem88.setCommandCode("100D0095");
-        CommandItem88.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem88.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem88.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem88.AddDataItem(new ProtocolDataItem("2204", 3, "A25", 0,"零序电流",""));
+        CommandItem88.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem88.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem88.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem89 = new ProtocolCommandItem();
         CommandItem89.setCommandCode("100D0097");
-        CommandItem89.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem89.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem89.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem89.AddDataItem(new ProtocolDataItem("A200", 3, "A13", 0,"正向有功总电能量",""));
+        CommandItem89.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem89.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem89.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem90 = new ProtocolCommandItem();
         CommandItem90.setCommandCode("100D0098");
-        CommandItem90.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem90.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem90.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem90.AddDataItem(new ProtocolDataItem("A400", 3, "A13", 0,"正向无功总电能量",""));
+        CommandItem90.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem90.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem90.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem91 = new ProtocolCommandItem();
         CommandItem91.setCommandCode("100D0099");
-        CommandItem91.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem91.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem91.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem91.AddDataItem(new ProtocolDataItem("A300", 3, "A13", 0,"反向有功总电能量",""));
+        CommandItem91.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem91.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem91.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
         ProtocolCommandItem CommandItem92 = new ProtocolCommandItem();
         CommandItem92.setCommandCode("100D0100");
-        CommandItem92.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
-        CommandItem92.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度",""));
-        CommandItem92.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数",""));
-        CommandItem92.AddDataItem(new ProtocolDataItem("A500", 3, "A13", 0,"反向无功总电能量",""));
+        CommandItem92.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem92.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem92.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
+        ProtocolCommandItem CommandItem93 = new ProtocolCommandItem();
+        CommandItem93.setCommandCode("100D0027");
+        CommandItem93.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+
+        ProtocolCommandItem CommandItem94 = new ProtocolCommandItem();
+        CommandItem94.setCommandCode("100D0028");
+        CommandItem94.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+
+        ProtocolCommandItem CommandItem95 = new ProtocolCommandItem();
+        CommandItem95.setCommandCode("100D0029");
+        CommandItem95.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
         //漏保数据项
         ProtocolCommandItem CommandItem32 = new ProtocolCommandItem("8000B611",new ProtocolDataItem("B611", 2, "A8", 0,"当前A相电压",""));
         ProtocolCommandItem CommandItem33 = new ProtocolCommandItem("8000B612",new ProtocolDataItem("B612", 2, "A8", 0,"当前B相电压",""));
@@ -864,6 +856,9 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem90);
         CommandItems.AddCommandItem(CommandItem91);
         CommandItems.AddCommandItem(CommandItem92);
+        CommandItems.AddCommandItem(CommandItem93);
+        CommandItems.AddCommandItem(CommandItem94);
+        CommandItems.AddCommandItem(CommandItem95);
         try {
 // write it out as XML
             Mapping map = new Mapping();

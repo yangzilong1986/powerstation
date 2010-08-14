@@ -23,6 +23,7 @@ import pep.bp.model.CommanddItemDAO;
 import pep.bp.model.TermTaskDAO;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
+import pep.bp.utils.AFNType;
 import pep.bp.utils.Converter;
 import pep.codec.utils.BcdUtils;
 import pep.system.SystemConst;
@@ -69,16 +70,30 @@ public class PollingJob implements Job {
         for (CommanddItemDAO commandItemDao : CommandItemList) {
             CollectObject object = new CollectObject();
             CommandItem Item = new CommandItem();
-            Item.setIdentifier(commandItemDao.getCommandItemCode());
+            String CommandCode = commandItemDao.getCommandItemCode();
+            Item.setIdentifier(CommandCode);
             object.AddCommandItem(Item);
 
             object.setLogicalAddr(task.getLogicAddress());
             object.setMpSn(new int[]{task.getGp_sn()});
-            PmPacket376 packet = new PmPacket376();
-            packet.getAddress().setMastStationId((byte) 2);
-            converter.CollectObject2Packet(object, packet, task.getAFN(), new StringBuffer(), new StringBuffer());
-            pepCommunicator.SendPacket(this.getsequenceCode(), packet);
-            log.info("下发轮召报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(packet.getValue()));
+            
+            if(task.getAFN() == AFNType.AFN_TRANSMIT){  //中继任务
+                List<PmPacket376> packetList =  converter.CollectObject_TransMit2PacketList(object,  new StringBuffer());
+                if(null != packetList){
+                    for(PmPacket376 pack:packetList){
+                        pepCommunicator.SendPacket(this.getsequenceCode(), pack);
+                        log.info("下发轮召报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(pack.getValue()));
+                    }
+                }
+            }
+                
+            else {
+                PmPacket376 packet = new PmPacket376();
+                packet.getAddress().setMastStationId((byte) 2);
+                converter.CollectObject2Packet(object, packet, task.getAFN(), new StringBuffer(), new StringBuffer());
+                pepCommunicator.SendPacket(this.getsequenceCode(), packet);
+                log.info("下发轮召报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(packet.getValue()));
+            }            
         }
     }
 }
