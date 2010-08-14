@@ -27,7 +27,7 @@ import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
- *
+ *功率
  */
 @Controller
 @RequestMapping("/statistics/powercruv")
@@ -35,7 +35,7 @@ public class PowerCruvController extends BaseSpringController {
 
 	private static final String VIEW_NAME = "/statistics/powerCruvQuery";
 	@Autowired
-	private StatisticsManager powerCruvManager;
+	private StatisticsManager statisticsManager;
 
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
@@ -53,7 +53,7 @@ public class PowerCruvController extends BaseSpringController {
 
 		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
 
-		Page page = this.powerCruvManager.findByPageRequest(pageRequest, StatisticsType.PowerCruv);//获取数据模型
+		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.PowerCruv);//获取数据模型
 
 		modelAndView.setViewName(VIEW_NAME);
 

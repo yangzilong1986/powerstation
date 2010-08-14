@@ -36,13 +36,12 @@ public class StatisticsDao extends BaseIbatis3Dao {
 	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
 
-		if (statisticsType == StatisticsType.PowerCruv) {
-			pre = StatisticsType.PowerCruv.toString();
-
-		} else if (statisticsType == StatisticsType.EcCurv) {
-
-		}
+		setPreFix(statisticsType);
 
 		return pageQuery("pageSelect", pageRequest);
+	}
+
+	private void setPreFix(StatisticsType statisticsType) {
+		pre = statisticsType.toString();
 	}
 }
