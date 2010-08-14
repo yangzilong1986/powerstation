@@ -78,35 +78,52 @@ function changeFod(obj) {
   <dl id="dl03" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a3001" href="#" onclick="selectMenu('3001', '/archive/tginfo'); return false;">台区档案</a></div>
-        <div onmouseover=changeFod(this)><a id="a3002" href="#" onclick="selectMenu('3002', '/eparam/termparam'); return false;">终端参数</a></div>
-        <div onmouseover=changeFod(this)><a id="a3003" href="#" onclick="selectMenu('3003', ''); return false;">设备校时</a></div>
-        <div onmouseover=changeFod(this)><a id="a3004" href="#" onclick="selectMenu('3004', ''); return false;">终端复位</a></div>
-        <div onmouseover=changeFod(this)><a id="a3005" href="#" onclick="selectMenu('3005', ''); return false;">异常处理</a></div>
-        <div onmouseover=changeFod(this)><a id="a3006" href="#" onclick="selectMenu('3006', ''); return false;">日志查询</a></div>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_3001">
+        <div onmouseover=changeFod(this)><a id="a3001" href="#" onclick="selectMenu('3001', '/archive/tginfo'); return false;">台区档案</a></div></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_3002">
+        <div onmouseover=changeFod(this)><a id="a3002" href="#" onclick="selectMenu('3002', '/eparam/termparam'); return false;">终端参数</a></div></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_3003">
+        <div onmouseover=changeFod(this)><a id="a3003" href="#" onclick="selectMenu('3003', ''); return false;">设备校时</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_3004">
+        <div onmouseover=changeFod(this)><a id="a3004" href="#" onclick="selectMenu('3004', ''); return false;">终端复位</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_3005">
+        <div onmouseover=changeFod(this)><a id="a3005" href="#" onclick="selectMenu('3005', ''); return false;">异常处理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_3006">
+        <div onmouseover=changeFod(this)><a id="a3006" href="#" onclick="selectMenu('3006', ''); return false;">日志查询</a></div></security:authorize>
       </div>
     </dt>
   </dl>
   <dl id="dl04" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a4001" href="#" onclick="selectMenu('4001', ''); return false;">跳闸信息</a></div>
-        <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', ''); return false;">总表数据</a></div>
-        <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', ''); return false;">开关数据</a></div>
-        <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', ''); return false;">台区综合</a></div>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_4001">
+        <div onmouseover=changeFod(this)><a id="a4001" href="#" onclick="selectMenu('4001', ''); return false;">跳闸信息</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_4002">
+        <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', ''); return false;">总表数据</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_4003">
+        <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', ''); return false;">开关数据</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
+        <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', ''); return false;">台区综合</a></div></security:authorize>
       </div>
     </dt>
   </dl>
   <dl id="dl05" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a5001" href="#" onclick="selectMenu('5001', '/system/permission');">权限管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5002" href="#" onclick="selectMenu('5002', ''); return false;">单位管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5003" href="#" onclick="selectMenu('5003', ''); return false;">编码管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5004" href="#" onclick="selectMenu('5004', ''); return false;">异常编码管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5005" href="#" onclick="selectMenu('5005', ''); return false;">参数模板管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5006" href="#" onclick="selectMenu('5006', ''); return false;">配置管理</a></div>
-        <div onmouseover=changeFod(this)><a id="a5007" href="#" onclick="selectMenu('5007', ''); return false;">群组管理</a></div>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_5001">
+        <div onmouseover=changeFod(this)><a id="a5001" href="#" onclick="selectMenu('5001', '/system/permission');">权限管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5002">
+        <div onmouseover=changeFod(this)><a id="a5002" href="#" onclick="selectMenu('5002', ''); return false;">单位管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5003">
+        <div onmouseover=changeFod(this)><a id="a5003" href="#" onclick="selectMenu('5003', ''); return false;">编码管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5004">
+        <div onmouseover=changeFod(this)><a id="a5004" href="#" onclick="selectMenu('5004', ''); return false;">异常编码管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5005">
+        <div onmouseover=changeFod(this)><a id="a5005" href="#" onclick="selectMenu('5005', ''); return false;">参数模板管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5006">
+        <div onmouseover=changeFod(this)><a id="a5006" href="#" onclick="selectMenu('5006', ''); return false;">配置管理</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_5007">
+        <div onmouseover=changeFod(this)><a id="a5007" href="#" onclick="selectMenu('5007', ''); return false;">群组管理</a></div></security:authorize>
       </div>
     </dt>
   </dl>
