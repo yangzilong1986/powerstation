@@ -64,7 +64,7 @@ img { border: 0; }
 .bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 10px; }
 #logo { float: left; padding-top: 13px; }
 #top_r { float: right; width: 455px; padding-top: 6px; }
-#top_r_t { height: 55px; }
+#top_r_t { float: right; height: 55px; padding-right: 7px; }
 #top_r_t ul { overflow: hidden; }
 #top_r_t ul li { float: left; width: 65px; height: 55px; text-align: center; font-family: "宋体"; font-size: 14px; font-weight: bold; margin-left: 25px; }
 #top_r_t ul li a { color: #fff; display: block; margin-top: 5px; line-height: 15px; }
