@@ -6,8 +6,8 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<resultMap id="DPowerCruvResult" type="org.pssframework.model.statistics.DPowerCruv">
 	</resultMap>
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="realDPowerCruvColumns"> *</sql>
-	<sql id="realDPowerCruvDynamicWhere">
+	<sql id="DPowerCruvColumns"> *</sql>
+	<sql id="DPowerCruvDynamicWhere">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<choose>
 			<when test="orgId != null">and m.orgId = #{orgId}</when>
@@ -18,14 +18,14 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	</sql>
 	<select id="count" resultType="long">
 		<![CDATA[select count(1) from D_POWER_CRUV_C d, c_meter m]]>
-		<include refid="realDPowerCruvDynamicWhere" />
+		<include refid="DPowerCruvDynamicWhere" />
 	</select>
 	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
 	<select id="pageSelect" resultMap="DPowerCruvResult">
 		select
-		<include refid="realDPowerCruvColumns" />
+		<include refid="DPowerCruvColumns" />
 		<![CDATA[from D_POWER_CRUV_C d, c_meter m]]>
-		<include refid="realDPowerCruvDynamicWhere" />
+		<include refid="DPowerCruvDynamicWhere" />
 		<if test="sortColumns != null and sortColumns.length() != 0"> ${sortColumns}</if>
 	</select>
 </mapper>
