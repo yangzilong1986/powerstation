@@ -50,8 +50,9 @@ public class TaskServiceIMP implements  TaskService{
             List<TermTaskDAO> results = (List<TermTaskDAO>) jdbcTemplate.query(SQL, new TermTaskRowMapper());
 
             //获取任务命令项
-            sbSQL.delete(0,sbSQL.length());
+            
             for (TermTaskDAO task : results) {
+                sbSQL.delete(0,sbSQL.length());
                 sbSQL.append("select PROTOCOL_NO,COMMANDITEM_CODE");
                 sbSQL.append(" from R_TASK_DATAITEM");
                 sbSQL.append(" where protocol_no = ?");

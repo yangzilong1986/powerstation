@@ -21,6 +21,15 @@ public class UtilsBp {
         return date;
 
     }
+    
+    public static String getYeasterday() {
+        Calendar   cal   =   Calendar.getInstance();
+        cal.add(Calendar.DATE,   -1);
+        String yesterday = new SimpleDateFormat( "yyyy-MM-dd").format(cal.getTime());
+        return yesterday + " 00:00:00";
+    }
+
+
 
     public static String Date2String(Date date) {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

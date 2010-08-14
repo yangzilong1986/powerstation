@@ -58,7 +58,7 @@ public class PowerCurv_StoredProcedure2 extends StoredProcedure {
     private Map execute(String logicalAddress,int gpSn,String dataDate,
             String act_power_total,String act_power_a,String act_power_b,
             String act_power_c,String react_power_total,String react_power_a,
-            String react_power_b,String react_power_c)
+            String react_power_b,String react_power_c,String FN)
     {
             Map inputs = new HashMap();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
@@ -72,47 +72,48 @@ public class PowerCurv_StoredProcedure2 extends StoredProcedure {
             inputs.put(REACT_POWER_A_PARA, react_power_a);
             inputs.put(REACT_POWER_B_PARA, react_power_b);
             inputs.put(REACT_POWER_C_PARA, react_power_c);
+            inputs.put(FN_PARA, FN);
             return super.execute(inputs);
      }
 
     public Map insert_act_power_total(String logicalAddress,int gpSn,String dataDate,
             String act_power_total){
-        return this.execute(logicalAddress,gpSn,dataDate,act_power_total,"","","","","","","");
+        return this.execute(logicalAddress,gpSn,dataDate,act_power_total,"","","","","","","","100D0081");
     }
 
     public Map insert_act_power_a(String logicalAddress,int gpSn,String dataDate,
             String act_power_a){
-        return this.execute(logicalAddress,gpSn,dataDate,"",act_power_a,"","","","","","");
+        return this.execute(logicalAddress,gpSn,dataDate,"",act_power_a,"","","","","","","100D0082");
     }
 
     public Map insert_act_power_b(String logicalAddress,int gpSn,String dataDate,
             String act_power_b){
-        return this.execute(logicalAddress,gpSn,dataDate,"","",act_power_b,"","","","","");
+        return this.execute(logicalAddress,gpSn,dataDate,"","",act_power_b,"","","","","","100D0083");
     }
 
     public Map insert_act_power_c(String logicalAddress,int gpSn,String dataDate,
             String act_power_c){
-        return this.execute(logicalAddress,gpSn,dataDate,"","","",act_power_c,"","","","");
+        return this.execute(logicalAddress,gpSn,dataDate,"","","",act_power_c,"","","","","100D0084");
     }
 
     public Map insert_react_power_total(String logicalAddress,int gpSn,String dataDate,
             String react_power_total){
-        return this.execute(logicalAddress,gpSn,dataDate,"","","","",react_power_total,"","","");
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","",react_power_total,"","","","100D0085");
     }
 
     public Map insert_react_power_a(String logicalAddress,int gpSn,String dataDate,
             String react_power_a){
-        return this.execute(logicalAddress,gpSn,dataDate,"","","","","",react_power_a,"","");
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","",react_power_a,"","","100D0086");
     }
 
     public Map insert_react_power_b(String logicalAddress,int gpSn,String dataDate,
             String react_power_b){
-        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","",react_power_b,"");
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","",react_power_b,"","100D0087");
     }
 
     public Map insert_react_power_c(String logicalAddress,int gpSn,String dataDate,
             String react_power_c){
-        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","","",react_power_c);
+        return this.execute(logicalAddress,gpSn,dataDate,"","","","","","","",react_power_c,"100D0088");
     }
 
 
