@@ -99,9 +99,9 @@ function changeFod(obj) {
       <security:authorize ifAnyGranted="ROLE_RESOURCE_4001">
         <div onmouseover=changeFod(this)><a id="a4001" href="#" onclick="selectMenu('4001', ''); return false;">跳闸信息</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4002">
-        <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', '/query/sumMeterDataQuery'); return false;">总表数据</a></div></security:authorize>
+        <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', '/statistics/sumMeterDataQuery'); return false;">总表数据</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4003">
-        <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', '/query/psDataQuery'); return false;">开关数据</a></div></security:authorize>
+        <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', '/statistics/psDataQuery'); return false;">开关数据</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
         <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', ''); return false;">台区综合</a></div></security:authorize>
       </div>
