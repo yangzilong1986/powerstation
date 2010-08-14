@@ -48,21 +48,30 @@ function changeFod(obj) {
   <dl id="dl01" style="display: block;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div>
-        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon'); return false;">漏保监测</a></div>
-        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', '/psmanage/rmttpsw'); return false;">远程跳合闸</a></div>
-        <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', '/psmanage/rmttest'); return false;">远程试验跳</a></div>
-        <div onmouseover=changeFod(this)><a id="a1005" href="#" onclick="selectMenu('1005', ''); return false;">数据检查</a></div>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_1001">
+        <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_1002">
+        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon'); return false;">漏保监测</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_1003">
+        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', '/psmanage/rmttpsw'); return false;">远程跳合闸</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_1004">
+        <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', '/psmanage/rmttest'); return false;">远程试验跳</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_1005">
+        <div onmouseover=changeFod(this)><a id="a1005" href="#" onclick="selectMenu('1005', ''); return false;">数据检查</a></div></security:authorize>
       </div>
     </dt>
   </dl>
   <dl id="dl02" style="display: none;">
     <dt>
       <div id="Fod">
-        <div onmouseover=changeFod(this)><a id="a2001" href="#" onclick="selectMenu('2001', ''); return false;">电量分析</a></div>
-        <div onmouseover=changeFod(this)><a id="a2002" href="#" onclick="selectMenu('2002', ''); return false;">极值分析</a></div>
-        <div onmouseover=changeFod(this)><a id="a2003" href="#" onclick="selectMenu('2003', ''); return false;">三相不平衡</a></div>
-        <div onmouseover=changeFod(this)><a id="a2004" href="#" onclick="selectMenu('2004', ''); return false;">增值服务</a></div>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_2001">
+        <div onmouseover=changeFod(this)><a id="a2001" href="#" onclick="selectMenu('2001', ''); return false;">电量分析</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_2002">
+        <div onmouseover=changeFod(this)><a id="a2002" href="#" onclick="selectMenu('2002', ''); return false;">极值分析</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_2003">
+        <div onmouseover=changeFod(this)><a id="a2003" href="#" onclick="selectMenu('2003', ''); return false;">三相不平衡</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_2004">
+        <div onmouseover=changeFod(this)><a id="a2004" href="#" onclick="selectMenu('2004', ''); return false;">增值服务</a></div></security:authorize>
       </div>
     </dt>
   </dl>
