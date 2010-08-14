@@ -18,11 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class SumMeterDataQueryController extends BaseSpringController {
 	private static final String VIEW_NAME = "/statistics/sumMeterDataQuery";
 
-    @SuppressWarnings("unchecked")
-    @RequestMapping
-    public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
-        modelAndView.setViewName(VIEW_NAME);
+	@RequestMapping
+	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+		modelAndView.setViewName(VIEW_NAME);
 
-        return modelAndView;
-    }
+		return modelAndView;
+	}
+
+
 }
