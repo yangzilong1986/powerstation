@@ -12,7 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
  *     
 */
-public class DPowerCruv implements Serializable {
+public class PowerCruv implements Serializable {
 
 	/**
 	 * 
@@ -74,7 +74,7 @@ public class DPowerCruv implements Serializable {
 	private String dataSource;
 
 	/** default constructor */
-	public DPowerCruv() {
+	public PowerCruv() {
 	}
 
 	public Date getAcceptTime() {

@@ -12,7 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * 数据产生：由采集平台直接写上送数据进来；业务平台负责使用及转到历史表；
  *     
 */
-public class DEiCurv implements Serializable {
+public class EiCurv implements Serializable {
 	/**
 	 * 
 	 */
@@ -156,7 +156,7 @@ public class DEiCurv implements Serializable {
 	private BigDecimal IReactPeak;
 
 	/** default constructor */
-	public DEiCurv() {
+	public EiCurv() {
 	}
 
 	public String getAssetNo() {
