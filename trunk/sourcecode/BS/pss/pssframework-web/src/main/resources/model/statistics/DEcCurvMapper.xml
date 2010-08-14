@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
 PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-<mapper namespace="DEiFreezeDay">
-	<resultMap id="DEiFreezeDayResult" type="org.pssframework.model.statistics.DEiFreezeDay">
+<mapper namespace="DEcCurv">
+	<resultMap id="DEcCurvResult" type="org.pssframework.model.statistics.DEcCurv">
 	</resultMap>
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="DEiFreezeDayColumns"> *</sql>
-	<sql id="DEiFreezeDayDynamicWhere">
+	<sql id="DEcCurvColumns"> *</sql>
+	<sql id="DEcCurvDynamicWhere">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<choose>
 			<when test="orgId != null">and m.orgId = #{orgId}</when>
@@ -17,15 +17,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</choose>
 	</sql>
 	<select id="count" resultType="long">
-		<![CDATA[select count(1) from D_EI_FREEZE_DAY d, c_meter m]]>
-		<include refid="DEiFreezeDayDynamicWhere" />
+		<![CDATA[select count(1) from D_EC_CURV_C d, c_meter m]]>
+		<include refid="DEcCurvDynamicWhere" />
 	</select>
 	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
-	<select id="pageSelect" resultMap="DEiFreezeDayResult">
+	<select id="pageSelect" resultMap="DEcCurvResult">
 		select
-		<include refid="DEiFreezeDayColumns" />
-		<![CDATA[from D_EI_FREEZE_DAY d, c_meter m]]>
-		<include refid="DEiFreezeDayDynamicWhere" />
+		<include refid="DEcCurvColumns" />
+		<![CDATA[from D_EC_CURV_C d, c_meter m]]>
+		<include refid="DEcCurvDynamicWhere" />
 		<if test="sortColumns != null and sortColumns.length() != 0"> ${sortColumns}</if>
 	</select>
 </mapper>
