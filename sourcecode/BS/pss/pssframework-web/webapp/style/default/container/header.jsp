@@ -47,11 +47,16 @@ function showBar(firstLevel) {
   <div id="top_r">
     <div id="top_r_t">
       <ul>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#" onclick="showBar(1); return false;">基本应用</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#" onclick="showBar(2); return false;">高级应用</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#" onclick="showBar(3); return false;">运行管理</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#" onclick="showBar(4); return false;">统计查询</a></li>
-        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#" onclick="showBar(5); return false;">系统管理</a></li>
+      <security:authorize ifAnyGranted="ROLE_RESOURCE_10">
+        <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#" onclick="showBar(1); return false;">基本应用</a></li></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_20">
+        <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#" onclick="showBar(2); return false;">高级应用</a></li></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_30">
+        <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#" onclick="showBar(3); return false;">运行管理</a></li></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_40">
+        <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#" onclick="showBar(4); return false;">统计查询</a></li></security:authorize>
+       <security:authorize ifAnyGranted="ROLE_RESOURCE_50">
+        <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#" onclick="showBar(5); return false;">系统管理</a></li></security:authorize>
       </ul>
     </div>
     <div id="top_menu">
