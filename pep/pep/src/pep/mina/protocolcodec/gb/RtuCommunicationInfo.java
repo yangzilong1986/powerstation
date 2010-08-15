@@ -39,7 +39,7 @@ public class RtuCommunicationInfo {
     private byte lastEc1;
     private byte lastEc2;
     private static final byte EC_CALL_HOST_ID = 3;   //读取3类数据时使用的主站ID
-    private static final long TIME_OUT = 20 * 1000;
+    private static final long TIME_OUT = 5 * 1000;
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
     private class SeqPacket {
@@ -57,7 +57,7 @@ public class RtuCommunicationInfo {
         super();
         this.rtua = rtua;
         currentSeq = 0;
-        maxRetryTimes = 2;
+        maxRetryTimes = 1;
         session = null;
         idle = true;
         lastEc1 = 0;

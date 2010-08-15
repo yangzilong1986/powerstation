@@ -103,34 +103,54 @@ public class DataServiceIMP implements DataService{
             }
 
             if(AFN == (byte)0X0D){                         //二类数据
-                if(commandItemCode.equals("100D0081"))
-                    this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));
-                if(commandItemCode.equals("100D0082"))
-                    this.getPowerCurvStoredProcedure2().insert_act_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301"));
-                if(commandItemCode.equals("100D0083"))
-                    this.getPowerCurvStoredProcedure2().insert_act_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));
-                if(commandItemCode.equals("100D0084"))
-                    this.getPowerCurvStoredProcedure2().insert_act_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303"));
-                if(commandItemCode.equals("100D0085"))
-                    this.getPowerCurvStoredProcedure2().insert_react_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400"));
-                if(commandItemCode.equals("100D0086"))
-                    this.getPowerCurvStoredProcedure2().insert_react_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));
-                if(commandItemCode.equals("100D0087"))
-                    this.getPowerCurvStoredProcedure2().insert_react_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));
-                if(commandItemCode.equals("100D0088"))
-                    this.getPowerCurvStoredProcedure2().insert_react_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));
-                if(commandItemCode.equals("100D0089"))
-                    this.getEccurvStoredProcedure2().insertVoltA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));
-                if(commandItemCode.equals("100D0090"))
-                    this.getEccurvStoredProcedure2().insertVoltB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));
-                if(commandItemCode.equals("100D0091"))
-                    this.getEccurvStoredProcedure2().insertVoltC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));
-                if(commandItemCode.equals("100D0092"))
-                    this.getEccurvStoredProcedure2().insertEcurA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));
-                if(commandItemCode.equals("100D0093"))
-                    this.getEccurvStoredProcedure2().insertEcurB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));
-                if(commandItemCode.equals("100D0094"))
-                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));
+                if(commandItemCode.equals("100D0081")){
+                    this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));break;
+                }
+                if(commandItemCode.equals("100D0082")){
+                    this.getPowerCurvStoredProcedure2().insert_act_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301")); break;
+                }
+                if(commandItemCode.equals("100D0083")){
+                    this.getPowerCurvStoredProcedure2().insert_act_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));break;
+                }
+                if(commandItemCode.equals("100D0084")){
+                    this.getPowerCurvStoredProcedure2().insert_act_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303")); break;
+                }
+                if(commandItemCode.equals("100D0085")){
+                    this.getPowerCurvStoredProcedure2().insert_react_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400")); break;
+                }
+                if(commandItemCode.equals("100D0086")){
+                    this.getPowerCurvStoredProcedure2().insert_react_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));break;
+                }
+                if(commandItemCode.equals("100D0087")){
+                    this.getPowerCurvStoredProcedure2().insert_react_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));break;
+                }
+                if(commandItemCode.equals("100D0088")){
+                    this.getPowerCurvStoredProcedure2().insert_react_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));break;
+                }
+                if(commandItemCode.equals("100D0089")){
+                    this.getEccurvStoredProcedure2().insertVoltA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));break;
+                }
+                if(commandItemCode.equals("100D0090")){
+                    this.getEccurvStoredProcedure2().insertVoltB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));break;
+                }
+                if(commandItemCode.equals("100D0091")){
+                    this.getEccurvStoredProcedure2().insertVoltC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));break;
+                }
+                if(commandItemCode.equals("100D0092")){
+                    this.getEccurvStoredProcedure2().insertEcurA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));break;
+                }
+                if(commandItemCode.equals("100D0093")){
+                    this.getEccurvStoredProcedure2().insertEcurB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));break;
+                }
+                if(commandItemCode.equals("100D0094")){
+                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));break;
+                }
+                if(commandItemCode.equals("100D0095")){
+                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));break;
+                }
+                if(commandItemCode.equals("100D0101")){
+                    this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));break;
+                }
             }
         }
      }
