@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import pep.codec.utils.BcdUtils;
 
 /**
  *
@@ -68,12 +69,12 @@ public class UtilsBp {
     public static String DateArray2String(byte[] date) {
         String result = "";
         if (date.length >= 7) {
-            int second = date[0];
-            int minute = date[1];
-            int hourOfDay = date[2];
-            int day = date[4];
-            int month = date[5];
-            int year = date[6] + 2000;
+            int second = BcdUtils.bcdToInt(date[0]);
+            int minute = BcdUtils.bcdToInt(date[1]);
+            int hourOfDay = BcdUtils.bcdToInt(date[2]);
+            int day = BcdUtils.bcdToInt(date[4]);
+            int month = BcdUtils.bcdToInt(date[5]);
+            int year = BcdUtils.bcdToInt(date[6])  + 2000;
 
             Calendar CD = Calendar.getInstance();
             CD.set(year, month, day, hourOfDay, minute, second);
