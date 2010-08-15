@@ -410,7 +410,7 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem77 = new ProtocolCommandItem();
         CommandItem77.setCommandCode("100D0084");
-        CommandItem77.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","","1"));
+        CommandItem77.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
         CommandItem77.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
         CommandItem77.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
