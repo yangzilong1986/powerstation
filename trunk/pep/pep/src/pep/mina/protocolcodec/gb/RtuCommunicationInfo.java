@@ -175,6 +175,8 @@ public class RtuCommunicationInfo {
             }
             if (this.currentSendTimes <= maxRetryTimes) {
                 if (this.session != null) {
+                    LOGGER.info("DoSend: " + rtua + " sequence="
+                            + this.currentSequence + ", pack=" + this.currentPacket.toString());
                     this.session.write(this.currentPacket);
                 } else {
                     LOGGER.info("DoSend: " + rtua + " not online, sequence="
