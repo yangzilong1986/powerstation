@@ -619,7 +619,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testTransmitMsg() throws Exception {    
        Map datacellParams1 = new TreeMap();
-       datacellParams1.put("C012", "2010-08-15 16:39:30");//漏电保护装置校时
+       datacellParams1.put("C012", "2010-08-15 22:39:30");//漏电保护装置校时
         
         CommandItem commandItem = new CommandItem();
         commandItem.setIdentifier("8000C012");
