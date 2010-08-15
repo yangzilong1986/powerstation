@@ -5,18 +5,15 @@
 <%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
-<title>功率曲线</title>
+<title>电量曲线</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
 <script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript">
-
-
-
 </script>
 </head>
 <body>
-<form:form action="${ctx}/statistics/powercruv" modelAttribute="statisticsQuery">
+<form:form action="${ctx}/statistics/eicurv" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
   <form:hidden path="ddate" />
