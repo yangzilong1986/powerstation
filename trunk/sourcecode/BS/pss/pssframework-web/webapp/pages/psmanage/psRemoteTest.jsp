@@ -43,11 +43,11 @@ function remoteTest() {
     sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
     sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
     sb_dto.append('"commandItems":').append('[').append('{');
-    ////sb_dto.append('"identifier":').append('"8000C012"');
-    sb_dto.append('"identifier":').append('"8000C012"').append(',');
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"C012": "2010-08-04 20:34:25"');
-    sb_dto.append('}');
+    sb_dto.append('"identifier":').append('"8000C012"');
+    ////sb_dto.append('"identifier":').append('"8000C012"').append(',');
+    ////sb_dto.append('"datacellParam":').append('{');
+    ////sb_dto.append('"C012": "2010-08-04 20:34:25"');
+    ////sb_dto.append('}');
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');

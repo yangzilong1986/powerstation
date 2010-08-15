@@ -407,7 +407,7 @@ function getSelectedCheckboxs4() {
           <td width="100" height="30" align="right" class="green">终端逻辑地址：</td>
           <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="96123455" style="width: 140px; height: 18px;"/></td>
           <td width="100" align="right">
-            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="test(); return false;" style="cursor: pointer;" />
+            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" />
           </td>
         </tr>
       </table>
@@ -439,7 +439,7 @@ function getSelectedCheckboxs4() {
         </div>
         <div class="content">
           <div id="cont_1">
-            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-99));">
+            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-89));">
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
@@ -895,7 +895,7 @@ function getSelectedCheckboxs4() {
         </div>
         <div class="content">
           <div id="cont_2">
-            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-99));">
+            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-89));">
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>

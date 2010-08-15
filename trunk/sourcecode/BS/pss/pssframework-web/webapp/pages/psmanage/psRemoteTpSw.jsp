@@ -23,11 +23,11 @@ StringBuffer.prototype.toString = function() {
 }
 
 function remoteTripping() {
-    alert("remoteTripping");
+    ////alert("remoteTripping");
 }
 
 function remoteSwitching() {
-    alert("remoteSwitching");
+    ////alert("remoteSwitching");
 }
 </script>
 </head>

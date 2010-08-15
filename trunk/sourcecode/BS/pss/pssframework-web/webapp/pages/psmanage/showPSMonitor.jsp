@@ -22,7 +22,7 @@ function inquiry() {
         <tr>
           <td width="100" height="30" align="right" class="green">台区编号：</td>
           <td width="120"><input id="tgNo" name="tgNo" class="input2" value="" style="width: 140px; height: 18px;"/></td>
-          <td width="100" height="30" align="right" class="green">台区名称：</td>
+          <td width="100" align="right" class="green">台区名称：</td>
           <td width="120"><input id="tgName" name="tgName" class="input2" value="" style="width: 140px; height: 18px;"/></td>
           <td width="100" align="right">
             <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="inquiry(); return false;" style="cursor: pointer;" />
@@ -39,7 +39,7 @@ function inquiry() {
       <ul class=default id=datamenu_Con_0>
         <div class="content">
           <div id="cont_1">
-            <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-75));">
+            <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-65));">
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="120" height="100%">

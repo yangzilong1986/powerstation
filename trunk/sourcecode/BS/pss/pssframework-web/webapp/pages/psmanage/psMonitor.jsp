@@ -63,7 +63,7 @@ function readB66F() {
     sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
     sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"funcode":"1"').append(',');
     sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
     sb_dto.append('"serialPortPara":').append('{');
     sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
@@ -153,7 +153,7 @@ function readC04F() {
     sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
     sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"funcode":"1"').append(',');
     sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
     sb_dto.append('"serialPortPara":').append('{');
     sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
@@ -240,12 +240,106 @@ function showResultReadC04F(resultMap) {
 
 // 开关跳闸
 function remoteTriping() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C036"').append(',');
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"8000C03601": "50"');
+    sb_dto.append('}');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在开关跳闸...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发开关跳闸命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 开关合闸
 function remoteSwitching() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C036"').append(',');
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"8000C03601": "5F"');
+    sb_dto.append('}');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在开关合闸...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发开关合闸命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 开关试跳
@@ -258,7 +352,7 @@ function remoteTest() {
     sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
     sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
     sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"' + $("#funcode").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
     sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
     sb_dto.append('"serialPortPara":').append('{');
     sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
@@ -299,32 +393,315 @@ function remoteTest() {
 
 // 时钟读取
 function timeRead() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"1"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C012"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在读取时钟...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发读取时钟命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 时钟设置
 function timeSetup() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C012"').append(',');
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"C012": "' + $("#computerTime").val() + '"');
+    sb_dto.append('}');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在校时...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发校时命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 功能设定字读取
 function funcSetupByteRead() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"1"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C04F"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在读取功能设定字...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发读取功能设定字命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 功能设定字设置
 function funcSetupByteSetup() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8001C04F"').append(',');
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');   // 保护器型号ID
+    sb_dto.append('"8001C04F02": "00000001"').append(',');                      // 有效定义
+    sb_dto.append('"8001C04F03": "0"').append(',');                             //
+    sb_dto.append('"8001C04F04": "0"').append(',');                             //
+    sb_dto.append('"8001C04F05": "0"').append(',');                             //
+    sb_dto.append('"8001C04F06": "11111111"').append(',');                      // 开关功能设定字
+    sb_dto.append('}');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在设置功能设定字...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发设置功能设定字命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 读开关全部参数
 function paramsSetupRead() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"1"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8000C04F"');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在读开关全部参数...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发读开关全部参数命令失败...');
+            enableOperation();
+        }
+    });
 }
 
 // 写开关全部参数
 function paramsSetupSetup() {
-    
+    disableOperation();
+    var sb_dto = new StringBuffer();
+    sb_dto.append('{');
+    sb_dto.append('"collectObjects_Transmit":').append('[{');
+    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+    sb_dto.append('"funcode":"4"').append(',');
+    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+    sb_dto.append('"serialPortPara":').append('{');
+    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+    sb_dto.append('"databit":"' + $("#databit").val() + '"');
+    sb_dto.append('}').append(',');
+    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+    sb_dto.append('"commandItems":').append('[').append('{');
+    sb_dto.append('"identifier":').append('"8001C04F"').append(',');//$("input[type=checkbox][name='itemId2']")
+    sb_dto.append('"datacellParam":').append('{');
+    sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');                                   // 保护器型号ID
+    sb_dto.append('"8001C04F02": "11100000"').append(',');                                                      // 有效定义
+    sb_dto.append('"8001C04F03": "' + $("input[sci='8001C04F'][sdi='8001C04F03']").val() + '"').append(',');    // 额定负载电流档位值
+    sb_dto.append('"8001C04F04": "' + $("input[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');    // 剩余电流档位
+    sb_dto.append('"8001C04F05": "' + $("input[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');    // 漏电分断延迟档位
+    sb_dto.append('"8001C04F06": "00000000"').append(',');                                                      // 
+    sb_dto.append('}');
+    sb_dto.append('}').append(']');
+    sb_dto.append('}]');
+    sb_dto.append('}');
+    initOpResult('正在写开关全部参数...');
+    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var params = {
+            "dto": sb_dto.toString(),
+            "mtoType": $("#protocolNo").val()
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            //alert(data.collectId);
+            //alert(data.fetchCount);
+            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+        },
+        error: function(XmlHttpRequest, textStatus, errorThrown){
+            initOpResult('下发写开关全部参数命令失败...');
+            enableOperation();
+        }
+    });
 }
 </script>
 </head>
@@ -335,7 +712,6 @@ function paramsSetupSetup() {
     <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" />
     <input type="hidden" id="meterAddr" name="meterAddr" value="1" />
     <input type="hidden" id="meterType" name="meterType" value="100" />
-    <input type="hidden" id="funcode" name="funcode" value="1" />
     <input type="hidden" id="port" name="port" value="1" />
     <input type="hidden" id="baudrate" name="baudrate" value="110" />
     <input type="hidden" id="stopbit" name="stopbit" value="1" />
@@ -428,6 +804,7 @@ function paramsSetupSetup() {
     </div>
     <div style="width: 40%; height: 150; float: left;">
       <div id="rtPsParam" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
+        <input type="hidden" id="psModel" name="psModel" value="01" />
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
             <td align="right" width="45%" height="29">剩余电流：</td>
@@ -468,8 +845,8 @@ function paramsSetupSetup() {
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="right" width="25%" height="30">当前时钟：</td>
-                  <td align="left" width="55%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 22px;" /></td>
-                  <td align="center" width="20%"><input type="button" id="timeReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeRead()" /></td>
+                  <td align="left" width="60%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 22px;" /></td>
+                  <td align="center" width="15%"><input type="button" id="timeReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeRead()" /></td>
                 </tr>
                 <tr>
                   <td align="right" height="30">计算机时钟：</td>
@@ -484,14 +861,14 @@ function paramsSetupSetup() {
                   <td align="left" width="20%" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte1" name="funcSetupByte" /> 欠压保护功能 </td>
                   <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte2" name="funcSetupByte" /> 过压保护功能 </td>
                   <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte3" name="funcSetupByte" /> 突变保护功能 </td>
-                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte4" name="funcSetupByte" /> 缓变保护功能 </td>
-                  <td align="center" width="20%"><input type="button" id="funcSetupByteReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteRead()" /></td>
+                  <td align="left" width="25%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte4" name="funcSetupByte" /> 缓变保护功能 </td>
+                  <td align="center" width="15%"><input type="button" id="funcSetupByteReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteRead()" /></td>
                 </tr>
                 <tr>
                   <td align="left" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" /> 特波保护功能 </td>
                   <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" /> 自动跟踪功能 </td>
                   <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" /> 告警功能 </td>
-                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值  </td>
+                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值<span id="funcSetupByte8_additional">30mA</span> </td>
                   <td align="center"><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteSetup()" /></td>
                 </tr>
               </table>
