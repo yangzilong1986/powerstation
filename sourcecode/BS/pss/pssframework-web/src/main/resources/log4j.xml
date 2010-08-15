@@ -102,6 +102,10 @@
 		<priority value="info" />
 	</category>
 	
+	<category name="net.jcreate.e3">
+		<priority value="error" />
+	</category>
+	
 	<logger name="pss.trace" additivity="false">
 		<priority value="debug" />
 		<appender-ref ref="log.traceFile" />
