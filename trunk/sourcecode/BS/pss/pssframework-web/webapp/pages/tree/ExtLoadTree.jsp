@@ -10,6 +10,12 @@
 function openURL(pURL){
  parent.rightFrame.location.href = pURL;
 }
+
+function showTg(tdId) {
+	 var url = "${ctx}/archive/tginfo/"+tdId;
+	  parent.parent.tabscontainermain.showTab("台区档案", url);
+}
+
 //当节点对象和树对象构造完了、执行render之前，会调用该方法
 //所以可以在这做函数注册处理.
 function treeRenderBeforeHandler(pTree){
