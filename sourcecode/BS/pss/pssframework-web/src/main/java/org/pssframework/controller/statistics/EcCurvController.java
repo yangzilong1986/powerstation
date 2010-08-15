@@ -33,8 +33,8 @@ import cn.org.rapid_framework.page.PageRequest;
 @RequestMapping("/statistics/eccurv")
 public class EcCurvController extends BaseSpringController {
 
-	private static final String VIEW_EC = "/statistics/ecCruvQuery";
-	private static final String VIEW_VT = "/statistics/vtCruvQuery";
+	private static final String VIEW_EC = "/statistics/ecCurvQuery";
+	private static final String VIEW_VT = "/statistics/vtCurvQuery";
 	@Autowired
 	private StatisticsManager statisticsManager;
 
