@@ -616,7 +616,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of transmitMsg method, of class RealTimeProxy376.
      */
-    @Test
+   // @Test
     public void testTransmitMsg() throws Exception {    
 //       Map datacellParams1 = new TreeMap();
 //       datacellParams1.put("C012", "2010-08-04 20:34:25");//漏电保护装置校时
@@ -664,10 +664,10 @@ public class RealTimeProxy376Test {
         assertTrue(databuf.getA8().getValue()==36);
     }
 
-    //@Test
+    @Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(1652);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(4239);
          assertTrue(resultMap.size() > 0 );
     }
 
