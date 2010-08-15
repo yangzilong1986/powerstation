@@ -33,7 +33,7 @@ import cn.org.rapid_framework.page.PageRequest;
 @RequestMapping("/statistics/powercruv")
 public class PowerCruvController extends BaseSpringController {
 
-	private static final String VIEW_NAME = "/statistics/powerCruvQuery";
+	private static final String VIEW_NAME = "/statistics/powerCurvQuery";
 	@Autowired
 	private StatisticsManager statisticsManager;
 
