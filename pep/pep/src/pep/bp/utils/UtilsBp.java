@@ -47,7 +47,7 @@ public class UtilsBp {
         CD.setTime(date);
         byte ss = (byte) CD.get(Calendar.SECOND);
         byte mm = (byte) CD.get(Calendar.MINUTE);
-        byte hh = (byte) CD.get(Calendar.HOUR);
+        byte hh = (byte) CD.get(Calendar.HOUR_OF_DAY);
         byte WW = (byte) CD.get(Calendar.DAY_OF_WEEK);
         byte DD = (byte) CD.get(Calendar.DAY_OF_MONTH);
         byte MM = (byte) (CD.get(Calendar.MONTH)+1);//月份从0开始
