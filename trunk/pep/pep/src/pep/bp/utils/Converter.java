@@ -15,6 +15,7 @@ import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 import pep.bp.realinterface.mto.CircleDataItems;
 import pep.bp.realinterface.mto.CollectObject;
+import pep.bp.realinterface.mto.CollectObject_TransMit;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.bp.realinterface.mto.DataItem;
 import pep.bp.realinterface.mto.DataItemGroup;
@@ -53,6 +54,7 @@ import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376DA;
 import pep.codec.protocol.gb.gb376.PmPacket376DT;
 import pep.codec.utils.BcdUtils;
+import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**
@@ -85,7 +87,7 @@ public class Converter {
                     dt.setFn(fn);
                     packet.getDataBuffer().putDA(da);
                     packet.getDataBuffer().putDT(dt);
-                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA)||(AFN == AFNType.AFN_READDATA2)) {
+                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA2)) {
                         putDataBuf_withConfig(packet, commandItem);
                     }
                 }
@@ -130,7 +132,7 @@ public class Converter {
                     if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA)) {
                         putDataBuf_withConfig(packet, commandItem);
                     }
-                    if ((AFN == AFNType.AFN_READDATA1)||(AFN == AFNType.AFN_READDATA2)) {
+                    if ((AFN == AFNType.AFN_READDATA1) || (AFN == AFNType.AFN_READDATA2)) {
                         putDataBuf_withInput(packet, commandItem);
                     }
                     if (Index % CmdItemNum == 0) {
@@ -151,28 +153,63 @@ public class Converter {
         return results;
     }
 
-    public List<PmPacket376> CollectObject_TransMit2PacketList(CollectObject obj, StringBuffer commandMark) {
+    public List<PmPacket376> CollectObject_TransMit2PacketList(CollectObject_TransMit obj, StringBuffer commandMark) {
         List<PmPacket376> results = new ArrayList<PmPacket376>();
-        PmPacket376 packet = new PmPacket376();
-        int Index = 0;
-        int DataBuffLen = SystemConst.MAX_PACKET_LEN - 16 - 22;//[68+L+L+68+C+A+AFN+SEQ+TP+PW+CS+16]
         List<CommandItem> CommandItems = obj.getCommandItems();
         for (CommandItem commandItem : CommandItems) {
-            preSetPacket(packet, AFNType.AFN_TRANSMIT, obj.getLogicalAddr());
+
+            PmPacket376 packet = new PmPacket376();
+            packet.setAfn(AFNType.AFN_TRANSMIT);//AFN
+            packet.getAddress().setRtua(obj.getTerminalAddr()); //逻辑地址
+            packet.getControlCode().setIsUpDirect(false);
+            packet.getControlCode().setIsOrgniger(true);
+            packet.getControlCode().setFunctionKey((byte) 1);
+            packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+            packet.getControlCode().setDownDirectFrameCount((byte) 0);
+            packet.getSeq().setIsTpvAvalibe(true);
+
             commandMark.append(commandItem.getIdentifier() + "#");
             PmPacket376DA da = new PmPacket376DA(0);
-            PmPacket376DT dt = new PmPacket376DT();
-            int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
-            dt.setFn(fn);
+            PmPacket376DT dt = new PmPacket376DT(1);
+
+            //376规约组帧
             packet.getDataBuffer().putDA(da);
             packet.getDataBuffer().putDT(dt);
-            putDataBuf_withConfig(packet, commandItem);
+            packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
+            packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
+            packet.getDataBuffer().put((byte) obj.getWaitforPacket());//透明转发接收等待报文超时时间
+            packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
+
+            //645规约组帧
+            Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
+            pack.setControlCode(true, false, false, (byte) obj.getFuncode());
+            byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8)));
+            pack.getDataAsPmPacketData().put(DI);
+            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+            Map<String, String> dataItemMap = commandItem.getDatacellParam();
+            if (dataItemMap != null) {
+                Iterator iterator = DataItemMap_Config.keySet().iterator();
+                while (iterator.hasNext()) {
+                    String DataItemCode = (String) iterator.next();
+                    ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+                    String DataItemValue = dataItem.getDefaultValue();
+                    if ((dataItemMap != null) && (dataItemMap.containsKey(DataItemCode))) {
+                        DataItemValue = dataItemMap.get(DataItemCode);
+                    }
+                    String Format = dataItem.getFormat();
+                    String IsGroupEnd = dataItem.getIsGroupEnd();
+                    int Length = dataItem.getLength();
+                    int bitnumber = dataItem.getBitNumber();
+                    this.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                }
+            }
+            // pack.getDataAsPmPacketData().rewind();
+            packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
+            packet.getDataBuffer().put(pack.getValue());
 
             packet.setAuthorize(new Authorize());
             packet.setTpv(new TimeProtectValue());//时间标签
             results.add(packet);
-
-            Index++;
         }
         return results;
     }
@@ -376,23 +413,24 @@ public class Converter {
         long TempCode = 0;
         List<ProtocolDataItem> DataItemList_Config = config.getDataItemList(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
-        for (ProtocolDataItem dataItem : DataItemList_Config) {
-            String DataItemCode = dataItem.getDataItemCode();
-            DataItemValue = dataItem.getDefaultValue();
-            if (DataItemValue.equals("YESTERDAY")) //抄上一天
-            {
-                DataItemValue = UtilsBp.getYeasterday();
-            }
-            if (dataItemMap != null) {
+        if (dataItemMap != null) {
+            for (ProtocolDataItem dataItem : DataItemList_Config) {
+                String DataItemCode = dataItem.getDataItemCode();
+                DataItemValue = dataItem.getDefaultValue();
+                if (DataItemValue.equals("YESTERDAY")) //抄上一天
+                {
+                    DataItemValue = UtilsBp.getYeasterday();
+                }
+
                 if (dataItemMap.containsKey(DataItemCode)) {
                     DataItemValue = dataItemMap.get(DataItemCode);
                 }
+                Format = dataItem.getFormat();
+                Length = dataItem.getLength();
+                IsGroupEnd = dataItem.getIsGroupEnd();
+                bitnumber = dataItem.getBitNumber();
+                FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
             }
-            Format = dataItem.getFormat();
-            Length = dataItem.getLength();
-            IsGroupEnd = dataItem.getIsGroupEnd();
-            bitnumber = dataItem.getBitNumber();
-            FillDataBuffer(packet.getDataBuffer(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
         }
     }
 
