@@ -13,7 +13,6 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
-import static org.pssframework.support.system.SystemConst.MSG_UPDATE_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
 import java.text.SimpleDateFormat;
@@ -29,15 +28,11 @@ import javax.validation.Valid;
 import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.TgInfo;
-import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
-import org.pssframework.query.archive.TgUserQuery;
 import org.pssframework.query.system.UserQuery;
-import org.pssframework.security.OperatorDetails;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.archive.TgOpInfoManager;
-import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.system.UserInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +46,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Baocj
@@ -62,11 +58,9 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 @Controller
 @RequestMapping("/archive/tgopinfo")
-public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.lang.Long> {
+public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.lang.Long> {
 
 	private static final String VIEW_QUERY_TG = "/archive/addTgUserInfo";
-
-	private static final String VIEW_QUERY = "/archive/userList";
 
 	// 默认多列排序,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null;
@@ -81,42 +75,12 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 	private OrgInfoManager orgInfoManager;
 
 	@Autowired
-	private CodeInfoManager codeInfoManager;
-
-	@Autowired
 	private UserInfoManager userInfoManager;
 
 	/** binder用于bean属性的设置 */
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
-
-	/** 列表 */
-	@RequestMapping
-	public String index(ModelMap model, HttpServletRequest request, HttpServletResponse response, TgInfo tgInfo) {
-
-		tgInfo = this.tgInfoManager.getById(tgInfo.getTgId());
-
-		Long orgId = tgInfo.getOrgInfo().getOrgId();
-
-		TgUserQuery baseQuery = new TgUserQuery();
-
-		baseQuery.setOrgId(orgId);
-
-		getUserList(model, request, response, baseQuery);
-
-		return VIEW_QUERY_TG;
-	}
-
-	@SuppressWarnings("rawtypes")
-	private List<OrgInfo> getOrgOptions(Map mapRequest) {
-		return this.orgInfoManager.findByPageRequest(mapRequest);
-	}
-
-	@SuppressWarnings("rawtypes")
-	private List<CodeInfo> getStatusOptions(Map mapRequest) {
-		return this.codeInfoManager.findByPageRequest(mapRequest);
 	}
 
 	/** 进入新增 */
@@ -138,37 +102,28 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		return VIEW_QUERY_TG;
 	}
 
-	@RequestMapping(value = "/list")
+	@RequestMapping
 	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			UserInfo userInfo) {
+			UserQuery tgUserQuery) {
 
-		UserQuery baseQuery = new UserQuery();
 		//是否勾选全部
-		if (!userInfo.isShowAllAccount()) {
+		if (!tgUserQuery.isShowAllAccount()) {
+
 			Long orgId = null;
 
-			OrgInfo orgInfo = userInfo.getOrgInfo();
+			TgInfo tgInfo = tgInfoManager.getById(tgUserQuery.getTgId());
 
-			if (orgInfo == null) {
-
-				OperatorDetails user = SpringSecurityUtils.getCurrentUser();
-
-				String staffNo = user.getUsername();
-
-				UserInfo userLogin = this.userInfoManager.findUserByLoginName(staffNo);
-
-				orgInfo = userLogin.getOrgInfo();
-
-			}
+			OrgInfo orgInfo = tgInfo.getOrgInfo();
 
 			orgId = orgInfo.getOrgId();
 
-			baseQuery.setOrgId(orgId);
+			tgUserQuery.setOrgId(orgId);
+
 		}
 
-		getUserList(modelAndView, request, response, baseQuery);
+		getUserList(modelAndView, request, response, tgUserQuery);
 
-		modelAndView.setViewName(VIEW_QUERY);
+		modelAndView.setViewName(VIEW_QUERY_TG);
 
 		return modelAndView;
 	}
@@ -185,18 +140,34 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 		modelAndView.addObject("page", page);
 
+		modelAndView.addObject("tgUserQuery", baseQuery);
+
 		modelAndView.addObject("pageRequest", pageRequest);
 
 	}
 
 	/** 删除 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String delete(ModelMap model, @PathVariable Long id) {
+	public String delete(ModelMap model, @PathVariable Long id, UserQuery userQuery) {
 		this.logger.debug("tgop.{},{}", "delete", id);
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
-			this.tgInfoManager.removeById(id);
+			TgInfo tgInfo = this.tgInfoManager.getById(userQuery.getTgId());
+
+			List<UserInfo> listUser = tgInfo.getUserInfoList();
+
+			for (UserInfo userInfoI : listUser) {
+				if (id == userInfoI.getEmpNo()) {
+					tgInfo.getUserInfoList().remove(userInfoI);
+				}
+			}
+
+			//listUser.remove(userInfo);
+
+			//tgInfo.setUserInfoList(listUser);
+
+			this.tgInfoManager.update(tgInfo);
 			//Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
@@ -246,7 +217,7 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 	/** 编辑 */
 	@RequestMapping(value = "/{id}/edit")
-	public String edit(ModelMap model, @PathVariable Long id) throws Exception {
+	public String edit(ModelMap model, @PathVariable Long id, UserQuery tgUserQuery) throws Exception {
 		this.logger.debug("tgop.{},{}", "edit", id);
 
 		TgInfo tginfo = this.tgInfoManager.getById(id) == null ? new TgInfo() : this.tgInfoManager.getById(id);
@@ -266,28 +237,34 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(ModelMap model, @PathVariable Long id, @Valid TgInfo tginfo, BindingResult errors,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String update(ModelMap model, @PathVariable Long id, HttpServletRequest request,
+			HttpServletResponse response, UserQuery userQuery) throws Exception {
 
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
-		if (errors.hasErrors()) {
-			model.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-					errors.getObjectName());
-			return "/archive/tginfo/" + id + "/edit";
-		}
 		this.logger.debug("tgop.{},{}", "update", id);
 
 		try {
-			tginfo = this.tgInfoManager.getById(id);
-			tginfo.setChaDate(new Date());
+			TgInfo tginfo = this.tgInfoManager.getById(id);
+
+			List<UserInfo> listUser = Lists.newArrayList();
+
+			for (String userId : userQuery.getCheckedUser()) {
+				listUser.add(new UserInfo(Long.parseLong(userId)));
+			}
+
+			tginfo.setUserInfoList(listUser);
+
 			this.tgInfoManager.update(tginfo);
+
 			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.info(e.getMessage());
+
 			isSucc = false;
-			msg = MSG_UPDATE_FAIL;
+
+			msg = e.getMessage();
 			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 
 		}
@@ -319,18 +296,6 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 
 	}
 
-	/**
-	 * 下拉框
-	 * 
-	 * @param model
-	 * @param mapRequest
-	 */
-	private void getInitOption(ModelMap model, Map<String, ?> mapRequest) {
-		model.addAttribute("orglist", this.getOrgOptions(mapRequest));
-		model.addAttribute("statuslist", this.getStatusOptions(mapRequest));
-
-	}
-
 	@RequestMapping(value = "/tguserlist/{tgid}")
 	public ModelAndView tgUserlist(@PathVariable Long tgid, ModelAndView modelAndView, HttpServletRequest request,
 			HttpServletResponse response, UserInfo userInfo) {
@@ -347,30 +312,9 @@ public class TgOpInfoController extends BaseRestSpringController<TgInfo, java.la
 		return modelAndView;
 	}
 
-	private void getUserList(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-			BaseQuery baseQuery) {
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
-
-		modelMap.addAttribute("orgInfo", getOrgInfo());
-
-		modelMap.addAttribute("page", page);
-
-		modelMap.addAttribute("pageRequest", pageRequest);
-
-	}
-
 	private List<OrgInfo> getOrgInfo() {
 		List<OrgInfo> orgInfoList = orgInfoManager.findAll();
 		return orgInfoList;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private List<CodeInfo> getCodeInfo(Map mapCode) {
-		List<CodeInfo> codeInfo = codeInfoManager.findByPageRequest(mapCode);
-		return codeInfo;
 	}
 
 }

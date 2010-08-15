@@ -19,7 +19,8 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
-	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 " + "/~ and t.orgInfo.orgId = '[orgId]' ~/";
+	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 "
+			+ "/~ and ('[showAllAccount]'= 'true' or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/";
 
 	@SuppressWarnings("rawtypes")
 	@Override

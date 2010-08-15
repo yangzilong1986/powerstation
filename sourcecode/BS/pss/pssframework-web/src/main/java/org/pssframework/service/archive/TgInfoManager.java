@@ -13,6 +13,7 @@ import org.pssframework.dao.archive.TgInfoDao;
 import org.pssframework.model.archive.TgInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 /**
  * @author Administrator
@@ -31,6 +32,7 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
 	@Override
 	public TgInfo getById(Long id) {
+		Assert.notNull(id, "Id can't null");
 		return tgInfoDao.getById(id);
 	}
 

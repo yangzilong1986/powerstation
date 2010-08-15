@@ -23,6 +23,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
@@ -45,6 +46,14 @@ public class UserInfo extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 3676801718128622302L;
+
+	public UserInfo() {
+
+	}
+
+	public UserInfo(Long empNo) {
+		this.empNo = empNo;
+	}
 
 	/*
 	 * EMP_NO NUMBER(16) not null, is '本实体记录的唯一标识'
@@ -139,6 +148,23 @@ public class UserInfo extends BaseEntity {
 
 	@Transient
 	private boolean showAllAccount;
+
+	@Transient
+	private Long tgId;
+
+	/**
+	 * @return the tgId
+	 */
+	public Long getTgId() {
+		return tgId;
+	}
+
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(Long tgId) {
+		this.tgId = tgId;
+	}
 
 	@Transient
 	private String oldPasswd;
@@ -487,6 +513,21 @@ public class UserInfo extends BaseEntity {
 
 	public boolean isShowAllAccount() {
 		return showAllAccount;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final UserInfo UserInfoObj = (UserInfo) obj;
+
+		return new EqualsBuilder().append(this.getStaffNo(), UserInfoObj.getStaffNo()).isEquals();
+
 	}
 
 }
