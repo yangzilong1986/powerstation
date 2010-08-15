@@ -53,13 +53,13 @@ public class UtilsBp {
         byte MM = (byte) CD.get(Calendar.MONTH);
         byte YY = (byte) (CD.get(Calendar.YEAR) % 2000);
 
-        result[0] = ss;
-        result[1] = mm;
-        result[2] = hh;
-        result[3] = WW;
-        result[4] = DD;
-        result[5] = MM;
-        result[6] = YY;
+        result[0] = BcdUtils.intToBcd(ss);
+        result[1] = BcdUtils.intToBcd(mm);
+        result[2] = BcdUtils.intToBcd(hh);
+        result[3] = BcdUtils.intToBcd(WW);
+        result[4] = BcdUtils.intToBcd(DD);
+        result[5] = BcdUtils.intToBcd(MM);
+        result[6] = BcdUtils.intToBcd(YY);
 
         return result;
     }
