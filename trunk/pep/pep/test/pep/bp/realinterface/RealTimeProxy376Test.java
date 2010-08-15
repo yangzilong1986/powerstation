@@ -616,17 +616,17 @@ public class RealTimeProxy376Test {
     /**
      * Test of transmitMsg method, of class RealTimeProxy376.
      */
-   // @Test
+    @Test
     public void testTransmitMsg() throws Exception {    
-//       Map datacellParams1 = new TreeMap();
-//       datacellParams1.put("C012", "2010-08-04 20:34:25");//漏电保护装置校时
+       Map datacellParams1 = new TreeMap();
+       datacellParams1.put("C012", "2010-08-15 16:39:30");//漏电保护装置校时
         
         CommandItem commandItem = new CommandItem();
-        commandItem.setIdentifier("8000B66F");
-       // commandItem.setDatacellParam(datacellParams1);
+        commandItem.setIdentifier("8000C012");
+        commandItem.setDatacellParam(datacellParams1);
         
         CollectObject_TransMit cob = new CollectObject_TransMit();
-        cob.setFuncode((byte)1);
+        cob.setFuncode((byte)4);
         cob.setMeterAddr("1");
         cob.setMeterType(MeterType.Meter645);
         cob.setPort((byte)1);
@@ -639,7 +639,7 @@ public class RealTimeProxy376Test {
         cob.setSerialPortPara(spp);
         cob.setTerminalAddr("96123456");
         cob.setWaitforByte((byte)5);
-        cob.setWaitforPacket((byte)10);       
+        cob.setWaitforPacket((byte)10);
         cob.addCommandItem(commandItem);
         
         MTO_376 MTO = new MTO_376();   
@@ -667,7 +667,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(4239);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(4271);
          assertTrue(resultMap.size() > 0 );
     }
 

@@ -72,18 +72,7 @@ public class ConverterTest {
     /**
      * Test of CollectObject_TransMit2PacketList method, of class Converter.
      */
-  //  @Test
-    public void testCollectObject_TransMit2PacketList() {
-        System.out.println("CollectObject_TransMit2PacketList");
-        CollectObject obj = null;
-        StringBuffer commandMark = null;
-        Converter instance = new Converter();
-        List expResult = null;
-        List result = instance.CollectObject_TransMit2PacketList(obj, commandMark);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of putDataBuf method, of class Converter.
