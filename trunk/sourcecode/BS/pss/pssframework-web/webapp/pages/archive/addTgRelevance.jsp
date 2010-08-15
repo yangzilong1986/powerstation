@@ -196,18 +196,15 @@ var contextPath  = '${ctx}';
       <tr>
         <th>姓名</th>
         <th>电话号码</th>
-        <th>权限</th>
         <th>操作</th>
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${userList}" var="user" varStatus="status">
+      <c:forEach items="${tginfo.userInfoList}" var="user" varStatus="status">
         <tr id="user_${user.empNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${user.name}</td>
           <td>&nbsp;${user.mobile}</td>
-          <td>&nbsp;</td>
-          <td><a onclick="deleteUserInfo('${user.empNo}')">删除</a>&nbsp;/&nbsp;<a
-            onclick="updateUserInfo('${user.empNo}')">修改</a></td>
+          <td><a onclick="deleteUserInfo('${user.empNo}')">删除</a></td>
         </tr>
       </c:forEach>
     </tbody>
@@ -507,11 +504,10 @@ updateTermInfo=function(termId){
   windowPopup(url, 960, 575);
 } 
  
-deleteTgUser=function(userId){
+ deleteUserInfo=function(userId){
    if(userId==null || userId ==""){
      return;
    } 
-
    var url = "${ctx}/archive/tgopinfo/"+userId+".json?_method=delete";
    if (confirm("确定要删除该操作员?")) {
        $.ajax({
@@ -519,6 +515,7 @@ deleteTgUser=function(userId){
            dataType:'json',
            type:'POST',
            cache: false,
+           data:"tgId="+$("#tgId").val(),
            success: function(json) {
                var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
                var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
@@ -528,7 +525,6 @@ deleteTgUser=function(userId){
                }
            },error:function(e) {
                alert("delete error");
-               alert(e.message);
            }
        });
    }
