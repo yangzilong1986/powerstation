@@ -101,23 +101,30 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 	@RequestMapping
 	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
 			UserQuery tgUserQuery) {
-
+		TgInfo tgInfo = null;
 		//是否勾选全部
 		if (!tgUserQuery.isShowAllAccount()) {
 
-			Long orgId = null;
 
-			TgInfo tgInfo = tgInfoManager.getById(tgUserQuery.getTgId());
+		} else {
+
+		}
+
+		Long orgId = null;
+
+		tgInfo = tgInfoManager.getById(tgUserQuery.getTgId());
+
+		if (tgUserQuery.getOrgId() == null) {
 
 			OrgInfo orgInfo = tgInfo.getOrgInfo();
 
 			orgId = orgInfo.getOrgId();
 
 			tgUserQuery.setOrgId(orgId);
-
-			tgUserQuery.setEmpNos(tgInfo.getEmpNos());
-
 		}
+
+
+		tgUserQuery.setEmpNos(tgInfo.getEmpNos());
 
 		getUserList(modelAndView, request, response, tgUserQuery);
 
@@ -155,17 +162,21 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 			List<UserInfo> listUser = tgInfo.getUserInfoList();
 
+			List<UserInfo> delUser = Lists.newArrayList();
+
 			for (UserInfo userInfoI : listUser) {
 				if (id.equals(userInfoI.getEmpNo())) {
-					tgInfo.getUserInfoList().remove(userInfoI);
+					delUser.add(userInfoI);
 				}
 			}
+			tgInfo.getUserInfoList().removeAll(delUser);
 
 			this.tgInfoManager.update(tgInfo);
 			//Flash.current().success(msg);
 		} catch (Exception e) {
 			isSucc = false;
 			msg = e.getMessage();
+			logger.error(e.getMessage());
 			//Flash.current().error(msg);
 
 		}
@@ -248,7 +259,7 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 				listUser.add(new UserInfo(Long.parseLong(userId)));
 			}
 
-			tginfo.setUserInfoList(listUser);
+			tginfo.getUserInfoList().addAll(listUser);
 
 			this.tgInfoManager.update(tginfo);
 
@@ -288,22 +299,6 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 		return VIEW_QUERY_TG;
 
-	}
-
-	@RequestMapping(value = "/tguserlist/{tgid}")
-	public ModelAndView tgUserlist(@PathVariable Long tgid, ModelAndView modelAndView, HttpServletRequest request,
-			HttpServletResponse response, UserInfo userInfo) {
-
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/tguser/{userid}")
-	public ModelAndView deleteTgUser(@PathVariable Long userid, ModelAndView modelAndView, HttpServletRequest request,
-			HttpServletResponse response) {
-
-		modelAndView.setViewName(VIEW_QUERY_TG);
-
-		return modelAndView;
 	}
 
 	private List<OrgInfo> getOrgInfo() {
