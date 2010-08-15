@@ -12,7 +12,7 @@
   <frame id="header" name="header" src="<pss:path type="style"/>/container/header.jsp" noresize="noresize" scrolling="no" frameborder="0" />
   <frame id="panelupdown" name="panelupdown" src="<pss:path type="style"/>/container/panelupdown.jsp" noresize="noresize" scrolling="no" frameborder="0" />
   <frame id="menu" name="menu" src="<pss:path type="style"/>/container/menu.jsp" noresize="noresize" scrolling="no" frameborder="0" />
-  <frameset id="centerframeset" name="centerframeset" cols="8,240,8,*,8" frameborder="1" border="0" framespacing="0">
+  <frameset id="centerframeset" name="centerframeset" cols="8,200,8,*,8" frameborder="1" border="0" framespacing="0">
     <frame id="borderleft" name="borderleft" src="<pss:path type="style"/>/container/borderleft.jsp" noresize="noresize" scrolling="no" frameborder="0" />
     <frame id="tabscontainerleft" name="tabscontainerleft" src="<pss:path type="style"/>/container/tabscontainerleft.jsp" noresize="noresize" scrolling="no" frameborder="0" />
     <frame id="panelleftright" name="panelleftright" src="<pss:path type="style"/>/container/panelleftright.jsp" noresize="noresize" scrolling="no" frameborder="0" />

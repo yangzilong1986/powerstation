@@ -120,11 +120,11 @@ function fetchResultReadB66F(collectId, fetchCount) {
                 setTimeout("fetchResultReadB66F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
             else {
-                setTimeout("readB66F()", 3000);
+                setTimeout("readB66F()", 5000);
             }
         },
         error: function() {
-            setTimeout("readB66F()", 3000);
+            setTimeout("readB66F()", 5000);
         }
     });
 }
@@ -209,11 +209,11 @@ function fetchResultReadC04F(collectId, fetchCount) {
                 setTimeout("fetchResultReadC04F(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
             else {
-                setTimeout("readC04F()", 3000);
+                setTimeout("readC04F()", 5000);
             }
         },
         error: function() {
-            setTimeout("readC04F()", 3000);
+            setTimeout("readC04F()", 5000);
         }
     });
 }
@@ -238,9 +238,29 @@ function showResultReadC04F(resultMap) {
     }
 }
 
+function disableRemoteOperation() {
+    $("#rmtTripBtn").attr("disabled", true);
+    $("#rmtSwitchBtn").attr("disabled", true);
+    $("#rmtTestBtn").attr("disabled", true);
+}
+
+function enableRemoteOperation() {
+    $("#rmtTripBtn").attr("disabled", false);
+    $("#rmtSwitchBtn").attr("disabled", false);
+    $("#rmtTestBtn").attr("disabled", false);
+}
+
+function initOpResultRemote(msg) {
+    alert(msg);
+}
+
+function showResultRemote(resultMap) {
+    //alert(resultMap);
+}
+
 // 开关跳闸
 function remoteTriping() {
-    disableOperation();
+    disableRemoteOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -267,8 +287,8 @@ function remoteTriping() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在开关跳闸...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultRemote('正在开关跳闸...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -281,18 +301,43 @@ function remoteTriping() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发开关跳闸命令失败...');
-            enableOperation();
+            initOpResultRemote('下发开关跳闸命令失败...');
+            enableRemoteOperation();
+        }
+    });
+}
+
+function fetchRemoteTripingResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "RemoteTriping"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultRemote(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchRemoteTripingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultRemote('下发开关跳闸命令超时');
+            }
+        },
+        error: function() {
         }
     });
 }
 
 // 开关合闸
 function remoteSwitching() {
-    disableOperation();
+    disableRemoteOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -319,8 +364,8 @@ function remoteSwitching() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在开关合闸...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultRemote('正在开关合闸...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -333,18 +378,43 @@ function remoteSwitching() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发开关合闸命令失败...');
-            enableOperation();
+            initOpResultRemote('下发开关合闸命令失败...');
+            enableRemoteOperation();
+        }
+    });
+}
+
+function fetchRemoteSwitchingResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "RemoteSwitching"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultRemote(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultRemote('下发开关合闸命令超时');
+            }
+        },
+        error: function() {
         }
     });
 }
 
 // 开关试跳
 function remoteTest() {
-    disableOperation();
+    disableRemoteOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -368,8 +438,8 @@ function remoteTest() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在试验跳...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultRemote('正在试验跳...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -382,18 +452,61 @@ function remoteTest() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchRemoteTestResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发试验跳命令失败...');
-            enableOperation();
+            initOpResultRemote('下发试验跳命令失败...');
+            enableRemoteOperation();
         }
     });
 }
 
+function fetchRemoteTestResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "RemoteTest"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultRemote(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultRemote('下发试验跳命令超时');
+            }
+        },
+        error: function() {
+        }
+    });
+}
+
+function disableTimeOperation() {
+    $("#timeReadBtn").attr("disabled", true);
+    $("#timeSetupBtn").attr("disabled", true);
+}
+
+function enableTimeOperation() {
+    $("#timeReadBtn").attr("disabled", false);
+    $("#timeSetupBtn").attr("disabled", false);
+}
+
+function initOpResultTime(msg) {
+    alert(msg);
+}
+
+function showResultTime(resultMap) {
+    //alert(resultMap);
+}
+
 // 时钟读取
 function timeRead() {
-    disableOperation();
+    disableTimeOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -417,8 +530,8 @@ function timeRead() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在读取时钟...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultTime('正在读取时钟...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -431,18 +544,43 @@ function timeRead() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchTimeReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发读取时钟命令失败...');
-            enableOperation();
+            initOpResultTime('下发读取时钟命令失败...');
+            enableTimeOperation();
+        }
+    });
+}
+
+function fetchTimeReadResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "TimeRead"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultTime(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchTimeReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultRemote('读取时钟超时');
+            }
+        },
+        error: function() {
         }
     });
 }
 
 // 时钟设置
 function timeSetup() {
-    disableOperation();
+    disableTimeOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -469,8 +607,8 @@ function timeSetup() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在校时...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultTime('正在校时...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -483,18 +621,61 @@ function timeSetup() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchTimeSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发校时命令失败...');
-            enableOperation();
+            initOpResultTime('下发校时命令失败...');
+            enableTimeOperation();
         }
     });
 }
 
+function fetchTimeSetupResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "TimeSetup"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultTime(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchTimeSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultRemote('校时超时');
+            }
+        },
+        error: function() {
+        }
+    });
+}
+
+function disableFuncSetupByteOperation() {
+    $("#funcSetupByteReadBtn").attr("disabled", true);
+    $("#funcSetupByteSetupBtn").attr("disabled", true);
+}
+
+function enableFuncSetupByteOperation() {
+    $("#funcSetupByteReadBtn").attr("disabled", false);
+    $("#funcSetupByteSetupBtn").attr("disabled", false);
+}
+
+function initOpResultFuncSetupByte(msg) {
+    alert(msg);
+}
+
+function showResultFuncSetupByte(resultMap) {
+    //alert(resultMap);
+}
+
 // 功能设定字读取
 function funcSetupByteRead() {
-    disableOperation();
+    disableFuncSetupByteOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -518,8 +699,8 @@ function funcSetupByteRead() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在读取功能设定字...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultFuncSetupByte('正在读取功能设定字...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -532,18 +713,44 @@ function funcSetupByteRead() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchFuncSetupByteReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发读取功能设定字命令失败...');
-            enableOperation();
+            initOpResultFuncSetupByte('下发读取功能设定字命令失败...');
+            enableFuncSetupByteOperation();
+        }
+    });
+}
+
+function fetchFuncSetupByteReadResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "FuncSetupByteRead"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultFuncSetupByte(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchFuncSetupByteReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultFuncSetupByte('读取功能设定字超时');
+                enableFuncSetupByteOperation();
+            }
+        },
+        error: function() {
         }
     });
 }
 
 // 功能设定字设置
 function funcSetupByteSetup() {
-    disableOperation();
+    disableFuncSetupByteOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -576,7 +783,7 @@ function funcSetupByteSetup() {
     sb_dto.append('}]');
     sb_dto.append('}');
     initOpResult('正在设置功能设定字...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -589,18 +796,36 @@ function funcSetupByteSetup() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchFuncSetupByteSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
             initOpResult('下发设置功能设定字命令失败...');
-            enableOperation();
+            enableFuncSetupByteOperation();
         }
     });
 }
 
+function disablePSTotalParamsOperation() {
+    $("#psTotalParamsReadBtn").attr("disabled", true);
+    $("#psTotalParamsSetupBtn").attr("disabled", true);
+}
+
+function enablePSTotalParamsOperation() {
+    $("#psTotalParamsReadBtn").attr("disabled", false);
+    $("#psTotalParamsSetupBtn").attr("disabled", false);
+}
+
+function initOpResultPSTotalParams(msg) {
+    alert(msg);
+}
+
+function showResultPSTotalParams(resultMap) {
+    //alert(resultMap);
+}
+
 // 读开关全部参数
-function paramsSetupRead() {
-    disableOperation();
+function psTotalParamsRead() {
+    disablePSTotalParamsOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -624,8 +849,8 @@ function paramsSetupRead() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在读开关全部参数...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultPSTotalParams('正在读开关全部参数...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -638,18 +863,44 @@ function paramsSetupRead() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchPSTotalParamsReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发读开关全部参数命令失败...');
-            enableOperation();
+            initOpResultPSTotalParams('下发读开关全部参数命令失败...');
+            enablePSTotalParamsOperation();
+        }
+    });
+}
+
+function fetchPSTotalParamsReadResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "PSTotalParamsRead"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultPSTotalParams(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchPSTotalParamsReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultPSTotalParams('读开关全部参数超时');
+                enablePSTotalParamsOperation();
+            }
+        },
+        error: function() {
         }
     });
 }
 
 // 写开关全部参数
-function paramsSetupSetup() {
-    disableOperation();
+function psTotalParamsSetup() {
+    disablePSTotalParamsOperation();
     var sb_dto = new StringBuffer();
     sb_dto.append('{');
     sb_dto.append('"collectObjects_Transmit":').append('[{');
@@ -681,8 +932,8 @@ function paramsSetupSetup() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在写开关全部参数...');
-    var url = '<pss:path type="webapp"/>/psmanage/rmttest/down.json';
+    initOpResultPSTotalParams('正在写开关全部参数...');
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
             "mtoType": $("#protocolNo").val()
@@ -695,11 +946,11 @@ function paramsSetupSetup() {
         success: function(data) {
             //alert(data.collectId);
             //alert(data.fetchCount);
-            setTimeout("fetchSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            setTimeout("fetchPSTotalParamsSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发写开关全部参数命令失败...');
-            enableOperation();
+            initOpResultPSTotalParams('下发写开关全部参数命令失败...');
+            enablePSTotalParamsOperation();
         }
     });
 }
@@ -758,8 +1009,8 @@ function paramsSetupSetup() {
           </tr>
           <tr>
             <td height="30" align="center">
-              <input type="button" id="rmtTestBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
-              <input type="button" id="rmtTestBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
+              <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
+              <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
             </td>
           </tr>
           <tr>
@@ -856,6 +1107,7 @@ function paramsSetupSetup() {
               </table>
             </div>
             <div id="statusSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
+              <input type="hidden" id="funcSetupByteString" name="funcSetupByteString" value="" />
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="left" width="20%" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte1" name="funcSetupByte" /> 欠压保护功能 </td>
@@ -868,7 +1120,7 @@ function paramsSetupSetup() {
                   <td align="left" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" /> 特波保护功能 </td>
                   <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" /> 自动跟踪功能 </td>
                   <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" /> 告警功能 </td>
-                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值<span id="funcSetupByte8_additional">30mA</span> </td>
+                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
                   <td align="center"><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteSetup()" /></td>
                 </tr>
               </table>
@@ -916,8 +1168,8 @@ function paramsSetupSetup() {
                     <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="" style="width: 110px; height: 20px;" /> A
                   </td>
                   <td align="center" colspan="2">
-                    <input type="button" id="paramsSetupReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="paramsSetupRead()" />
-                    <input type="button" id="paramsSetupSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="paramsSetupSetup()" />
+                    <input type="button" id="psTotalParamsReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="psTotalParamsRead()" />
+                    <input type="button" id="psTotalParamsSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="psTotalParamsSetup()" />
                   </td>
                 </tr>
               </table>
