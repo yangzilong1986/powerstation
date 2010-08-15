@@ -68,7 +68,7 @@ function initInputText() {
 			</tr>
 			<tr height="30px">
 				<td width="100" class="green" align="right">权限：</td>
-				<td width="120"><form:checkbox path="userInfo."/></td>
+				<td width="120"><form:checkbox path="userInfo"/></td>
 				<td><input class="btnbg4" type="submit" name="ok" id="ok" value="确定" /></td>
 			</tr>
 	
