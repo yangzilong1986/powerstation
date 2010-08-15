@@ -34,6 +34,7 @@ public class TermTaskRowMapper implements RowMapper{
         task.setExec_circle_master(rs.getInt("EXEC_CYCLE_MASTER"));
         task.setExec_unit_master(rs.getInt("EXEC_UNIT_MASTER"));
         task.setAFN((byte)rs.getInt("AFN"));
+        task.setGp_addr(rs.getString("gp_addr"));
         return task;
     }
 }

@@ -31,6 +31,7 @@ public class TermTaskDAO {
     private int exec_circle_master;
     private int exec_unit_master;
     private byte aFN;
+    private String gp_addr;
     private List<CommanddItemDAO> commandItemList;
 
 
@@ -279,14 +280,42 @@ public class TermTaskDAO {
      * @return the AFN
      */
     public byte getAFN() {
-        return aFN;
+        return getaFN();
     }
 
     /**
      * @param AFN the AFN to set
      */
     public void setAFN(byte AFN) {
-        this.aFN = AFN;
+        this.setaFN(AFN);
+    }
+
+    /**
+     * @return the aFN
+     */
+    public byte getaFN() {
+        return aFN;
+    }
+
+    /**
+     * @param aFN the aFN to set
+     */
+    public void setaFN(byte aFN) {
+        this.aFN = aFN;
+    }
+
+    /**
+     * @return the gp_addr
+     */
+    public String getGp_addr() {
+        return gp_addr;
+    }
+
+    /**
+     * @param gp_addr the gp_addr to set
+     */
+    public void setGp_addr(String gp_addr) {
+        this.gp_addr = gp_addr;
     }
 
 
