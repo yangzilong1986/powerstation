@@ -32,7 +32,6 @@ import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.query.system.UserQuery;
 import org.pssframework.service.archive.TgInfoManager;
-import org.pssframework.service.archive.TgOpInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.service.system.UserInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +66,6 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 	@Autowired
 	private TgInfoManager tgInfoManager;
-
-	@Autowired
-	private TgOpInfoManager tgOpInfoManager;
 
 	@Autowired
 	private OrgInfoManager orgInfoManager;
@@ -119,6 +115,8 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 			tgUserQuery.setOrgId(orgId);
 
+			tgUserQuery.setEmpNos(tgInfo.getEmpNos());
+
 		}
 
 		getUserList(modelAndView, request, response, tgUserQuery);
@@ -149,7 +147,7 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 	/** 删除 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public String delete(ModelMap model, @PathVariable Long id, UserQuery userQuery) {
-		this.logger.debug("tgop.{},{}", "delete", id);
+		this.logger.info("tgop.{},{}", "delete", id);
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 		try {
@@ -158,14 +156,10 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 			List<UserInfo> listUser = tgInfo.getUserInfoList();
 
 			for (UserInfo userInfoI : listUser) {
-				if (id == userInfoI.getEmpNo()) {
+				if (id.equals(userInfoI.getEmpNo())) {
 					tgInfo.getUserInfoList().remove(userInfoI);
 				}
 			}
-
-			//listUser.remove(userInfo);
-
-			//tgInfo.setUserInfoList(listUser);
 
 			this.tgInfoManager.update(tgInfo);
 			//Flash.current().success(msg);

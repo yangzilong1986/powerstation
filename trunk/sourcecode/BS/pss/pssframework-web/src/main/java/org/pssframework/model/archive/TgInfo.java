@@ -23,6 +23,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -33,6 +34,7 @@ import org.hibernate.annotations.FetchMode;
 import org.pssframework.base.BaseEntity;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
+import org.springside.modules.utils.ReflectionUtils;
 
 import com.google.common.collect.Lists;
 
@@ -114,6 +116,25 @@ public class TgInfo extends BaseEntity {
 	@OrderBy("empNo")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<UserInfo> userInfoList = Lists.newArrayList();
+
+	@Transient
+	private String empNos;
+
+	/**
+	 * @return the empNos
+	 */
+	public String getEmpNos() {
+		this.empNos = ReflectionUtils.convertElementPropertyToString(userInfoList, "empNo", ",");
+
+		return empNos;
+	}
+
+	/**
+	 * @param empNos the empNos to set
+	 */
+	public void setEmpNos(String empNos) {
+		this.empNos = empNos;
+	}
 
 	public List<UserInfo> getUserInfoList() {
 		return userInfoList;
