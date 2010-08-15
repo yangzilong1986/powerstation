@@ -9,10 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -98,7 +94,7 @@ public class ConverterTest {
         PmPacket376 packet = null;
         CommandItem commandItem = null;
         Converter instance = new Converter();
-        instance.putDataBuf(packet, commandItem);
+        instance.putDataBuf_withConfig(packet, commandItem);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
