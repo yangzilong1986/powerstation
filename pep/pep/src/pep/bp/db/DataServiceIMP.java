@@ -161,7 +161,7 @@ public class DataServiceIMP implements DataService{
         for(Meter meter:Meters){
             try {
                 this.loubaoEventStoredProcedure.execute(rtua, meter.meterAddress,
-                        event.GetEventCode(), event.getEventTime(), new Date(), meter.isClosed, meter.isLocked, meter.xiangwei, meter.actValue);
+                        meter.status, meter.eventTime, new Date(), (meter.isClosed ? 1 :0), (meter.isLocked ? 1 : 0), meter.xiangwei, meter.actValue);
             } catch (Exception e) {
                 log.error("错误信息：", e.fillInStackTrace());
             }
