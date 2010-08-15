@@ -49,6 +49,8 @@ public class UpLoadProcessor extends BaseProcessor {
                 PmPacket376 packet = (PmPacket376) upLoadQueue.PollPacket();
                 if (packet.getAfn() == 0x0C) {
                     decodeAndSaveClassOneData(packet);
+                } else if(packet.getAfn() == 0x10){
+                    decodeAndSaveClasTransMitData(packet);
                 } else if (packet.getAfn() == 0x0D) {
                     decodeAndSaveClassTwoData(packet);
                 } else if (packet.getAfn() == 0x0E) {
@@ -68,6 +70,10 @@ public class UpLoadProcessor extends BaseProcessor {
         Dto dto = new Dto(packet.getAddress().getRtua(), packet.getAfn());
         this.converter.decodeDataDB(packet, dto);
         dataService.insertRecvData(dto);
+    }
+
+    private void decodeAndSaveClasTransMitData(PmPacket376 packet) {
+        decodeAndSaveClassOneData(packet);
     }
 
     private void decodeAndSaveClassTwoData(PmPacket376 packet) {
