@@ -52,7 +52,6 @@ SimpleTable.prototype = {
 		var pair = function(k,v) {return ' <input type="hidden" name="'+k+'" value="'+v+'" />'};
 		var params = pair(this.pageNumberKey,this.pageNumber)+pair(this.pageSizeKey,this.pageSize)+pair(this.sortColumnsKey,this.sortColumns)
 		$('#'+this.form).append(params);
-		alert(params);
 		SimpleTableUtils.fireSubmit(this.form);
 	},
 	togglePage : function(pageNumber) {
