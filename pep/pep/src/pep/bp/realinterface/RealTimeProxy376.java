@@ -85,8 +85,8 @@ public class RealTimeProxy376 implements ICollectInterface {
 
         List<RealTimeTaskDAO> tasks = new ArrayList<RealTimeTaskDAO>();
         ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
-        StringBuffer gpMark = new StringBuffer();
-        StringBuffer commandMark = new StringBuffer();
+        StringBuilder gpMark = new StringBuilder();
+        StringBuilder commandMark = new StringBuilder();
         try {
             for (CollectObject_TransMit obj : mto.getCollectObjects_Transmit()) {
                 gpMark.delete(0, gpMark.length());
@@ -105,7 +105,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                     packet.getControlCode().setDownDirectFrameCount((byte) 0);
                     packet.getSeq().setIsTpvAvalibe(true);
 
-                    commandMark.append(commandItem.getIdentifier() + "#");
+                    commandMark.append(commandItem.getIdentifier()).append("#");
                     PmPacket376DA da = new PmPacket376DA(0);
                     PmPacket376DT dt = new PmPacket376DT(1);
 
