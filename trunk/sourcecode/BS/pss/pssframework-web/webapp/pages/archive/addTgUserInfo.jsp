@@ -53,6 +53,7 @@ save = function(){
                var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
                var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                  if(isSucc){
+                     alert(msg);
                   opener.location.href ="${ctx}/archive/tginfo/${tgUserQuery.tgId}/edit";
                   closeWin();
                  }
