@@ -38,10 +38,13 @@ public class TaskServiceIMP implements  TaskService{
             StringBuffer sbSQL = new StringBuffer();
             sbSQL.append("select a.logical_addr,a.gp_char,a.gp_sn,a.task_id,a.protocol_no,a.sys_object,a.startup_flag,");
             sbSQL.append("a.time_interval,a.base_time_gw,a.sendup_cycle_gw,a.sendup_unit_gw,a.ext_cnt_gw,");
-            sbSQL.append("b.start_time_master,b.end_time_master,b.exec_cycle_master,b.exec_unit_master,b.AFN");
-            sbSQL.append(" from r_term_task a,r_task b");
+            sbSQL.append("b.start_time_master,b.end_time_master,b.exec_cycle_master,b.exec_unit_master,b.AFN,c.gp_addr");
+            sbSQL.append(" from r_term_task a,r_task b, c_gp c , c_terminal d");
             sbSQL.append(" where a.task_id = b.task_id");
             sbSQL.append(" and a.protocol_no = b.protocol_no");
+            sbSQL.append(" and c.term_id = d.term_id");
+            sbSQL.append(" and a.logical_addr = d.logical_addr");
+            sbSQL.append(" and a.gp_sn = c.gp_sn");
             sbSQL.append(" and b.task_type = '2'");//主站轮召
             sbSQL.append(" and a.startup_flag = '1'");//启用
             sbSQL.append(" and b.exec_unit_master = "+CircleUnit);//周期单位
