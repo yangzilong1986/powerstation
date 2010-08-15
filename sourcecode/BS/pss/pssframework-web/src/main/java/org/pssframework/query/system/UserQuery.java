@@ -17,6 +17,22 @@ public class UserQuery extends BaseQuery {
 
 	private String[] checkedUser;
 
+	private String empNos;
+
+	/**
+	 * @return the empNos
+	 */
+	public String getEmpNos() {
+		return empNos;
+	}
+
+	/**
+	 * @param empNos the empNos to set
+	 */
+	public void setEmpNos(String empNos) {
+		this.empNos = empNos;
+	}
+
 	/**
 	 * @return the checkedUser
 	 */
