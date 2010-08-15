@@ -115,7 +115,7 @@ public class TgInfo extends BaseEntity {
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("empNo")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<UserInfo> userInfoList = Lists.newArrayList();
+	private List<UserInfo> userInfoList = Lists.newLinkedList();
 
 	@Transient
 	private String empNos;
