@@ -54,7 +54,7 @@ abstract public class PmPacket {
     abstract protected byte getProtocolVersion();
 
     public PmPacketData getDataBuffer() {
-        return dataBuff;
+         return dataBuff;
     }
 
     public byte getAfn() {
