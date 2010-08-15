@@ -61,7 +61,7 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
         long collectId = realTimeProxy376.transmitMsg(mto);
         logger.info("collectId : " + collectId);
         result.addObject("collectId", collectId);
-        result.addObject("fetchCount", 5);
+        result.addObject("fetchCount", 10);
         return result;
     }
 
@@ -85,6 +85,24 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
             }
         }
         else if("ReadC04F".equals(type)) { // ReadC04F
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("TimeRead".equals(type)) { // TimeRead C012
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("FuncSetupByteRead".equals(type)) { // FuncSetupByteRead C04F
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
