@@ -173,7 +173,7 @@ public class RtuCommunicationInfo {
                 this.currentSendTicket = new Date();
                 this.currentSendTimes++;
             }
-            if (this.currentSendTimes < maxRetryTimes) {
+            if (this.currentSendTimes <= maxRetryTimes) {
                 if (this.session != null) {
                     this.session.write(this.currentPacket);
                 } else {
@@ -199,7 +199,7 @@ public class RtuCommunicationInfo {
             return;
         }
         if (checkTime.getTime() - this.currentSendTicket.getTime() >= RtuCommunicationInfo.TIME_OUT) {
-            if (this.currentSendTimes == this.maxRetryTimes) {
+            if (this.currentSendTimes > this.maxRetryTimes) {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence, this.currentPacket,
                         SequencedPmPacket.Status.TIME_OUT));
