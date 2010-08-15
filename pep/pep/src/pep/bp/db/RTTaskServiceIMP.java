@@ -68,14 +68,13 @@ public class RTTaskServiceIMP implements RTTaskService {
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
             List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
-
             //更新任务状态
             for (RealTimeTaskDAO task : results) {
-                SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
-                SQL += " from R_REALTIME_TASK_RECV";
-                SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
-                task.setRecvMsgs(recvs);
+//                SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
+//                SQL += " from R_REALTIME_TASK_RECV";
+//                SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
+//                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
+//                task.setRecvMsgs(recvs);
                 jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
                         new Object[]{"1", task.getTaskId()});
             }
@@ -101,11 +100,6 @@ public class RTTaskServiceIMP implements RTTaskService {
                 SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
                 List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
-                
-                //更新任务状态
-                jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
-                        new Object[]{"1", task.getTaskId()});
-
                 return task;
             } else {
                 return null;
@@ -131,8 +125,6 @@ public class RTTaskServiceIMP implements RTTaskService {
                 SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
                 List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
-                jdbcTemplate.update("update R_REALTIME_TASK set TASK_STATUS=? where TASK_ID=?",
-                        new Object[]{"1", task.getTaskId()});
             }
 
             return results;
