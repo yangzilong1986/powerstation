@@ -61,9 +61,9 @@ img { border: 0; }
 .panel_upanddown { background: url(../img/cexpandbtn_top_bg.gif) repeat-x; clear: both; height: 8px; }
 .panel_upanddown p { text-align: center; padding-top: 2px; }
 
-.bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 10px; }
+.bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 1px; }
 #logo { float: left; padding-top: 13px; }
-#top_r { float: right; width: 462px; padding-top: 6px; }
+#top_r { float: right; width: 465px; padding-top: 6px; }
 #top_r_t { float: right; height: 55px; padding-right: 7px; }
 #top_r_t ul { overflow: hidden; }
 #top_r_t ul li { float: left; width: 65px; height: 55px; text-align: center; font-family: "宋体"; font-size: 14px; font-weight: bold; margin-left: 25px; }
