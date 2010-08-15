@@ -45,13 +45,14 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
+        String rtua = pack.getAddress().getRtua();
+        showReceivePacket(rtua,pack);
+
         if (!pack.getControlCode().getIsUpDirect()) {
             return;
         }
 
-        String rtua = pack.getAddress().getRtua();
         registRtua(session, rtua);
-        showReceivePacket(rtua,pack);
 
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
             PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
@@ -61,8 +62,16 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
     }
 
+    private boolean isActiveTestPack(PmPacket376 pack){
+        return pack.getAfn()==2;
+    }
+
+    private boolean needNotShow(PmPacket376 pack){
+        return isActiveTestPack(pack)&&(!showActTestPack);
+    }
+
     private void showReceivePacket(String rtua, PmPacket376 pack){
-        if (!((pack.getAfn() == 2) && (!showActTestPack))) {
+        if (!needNotShow(pack)){
             LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
         }
     }
@@ -83,7 +92,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     public void messageSent(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
         if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-            LOGGER.info("Send to rtua<" + pack.getAddress().getRtua() + ">: "
+            LOGGER.info("Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
         }
     }
