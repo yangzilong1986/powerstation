@@ -558,7 +558,7 @@ public class Converter {
         } else if (Format.equals("A24")) {
             packetdata.putA24(new DataTypeA24(DataItemValue, "dd HH"));
         } else if (Format.equals("A25")) {
-            packetdata.putA25(new DataTypeA25(Long.parseLong(DataItemValue)));
+            packetdata.putA25(new DataTypeA25(Double.parseDouble(DataItemValue)));
         } else if (Format.equals("A26")) {
             packetdata.putA26(new DataTypeA26(Float.parseFloat(DataItemValue)));
         } else if (Format.equals("A27")) {
