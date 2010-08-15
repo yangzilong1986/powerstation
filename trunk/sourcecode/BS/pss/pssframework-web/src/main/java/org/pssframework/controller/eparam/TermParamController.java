@@ -72,7 +72,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
             long collectId = realTimeProxy376.writeParameters(mto);
             logger.info("collectId : " + collectId);
             result.addObject("collectId", collectId);
-            result.addObject("fetchCount", 5);
+            result.addObject("fetchCount", 10);
         }
         else {                     // 读取
             String dtoJSONString = request.getParameter("dto");
@@ -82,7 +82,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
             long collectId = realTimeProxy376.readParameters(mto);
             logger.info("collectId : " + collectId);
             result.addObject("collectId", collectId);
-            result.addObject("fetchCount", 5);
+            result.addObject("fetchCount", 10);
         }
         return result;
     }
