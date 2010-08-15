@@ -72,6 +72,7 @@ public class Gb645MeterPacket {
     public byte[] getValue(){
         byte[] dataBytes = this.getDataBytes();
         IoBuffer bf = IoBuffer.allocate(20,false);
+        bf.setAutoExpand(true);
         bf.put((byte)0x68);
         bf.put(this.address.getValue());
         bf.put((byte)0x68);
