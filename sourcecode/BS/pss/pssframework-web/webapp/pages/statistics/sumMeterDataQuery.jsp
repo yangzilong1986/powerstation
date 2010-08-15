@@ -59,12 +59,18 @@ function changeType(obj) {
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td width="100" align="right" class="green" height="30">单 位：</td>
-        <td width="120" align="left"><select id="orgId" name="orgId" style="width: 140px; height: 18px;">
-          <option value="4">乾龙托管</option>
+        <td width="120" align="left"><select name="orgId" style="width: 140px;">
+          <c:forEach var="item" items="${orglist}">
+            <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if>
+              value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
+          </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">台 区：</td>
-        <td width="120" align="left"><select id="tgId" name="tgId" style="width: 140px; height: 18px;">
-          <option value="3">乾龙1#</option>
+        <td width="120" align="left"><select name="tgId" style="width: 140px;">
+          <c:forEach var="item" items="${tglist}">
+            <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out
+              value="${item.tgName}" /></option>
+          </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">时间：</td>
         <td><input type="text" class="input_time" name="ddate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
@@ -83,7 +89,7 @@ function changeType(obj) {
       <li id=datamenu_Option_3 style="cursor: pointer;" onclick="changeType(3)">电流数据</li>
     </ul>
     </div>
-    <div align="center"><iframe id="data" scrolling="auto" width="100%" height="100%"></iframe></div>
+    <div align="center" ><iframe id="data" scrolling="auto" width="100%" height="100%"></iframe></div>
   </form:form>
 </ul>
 </div>
