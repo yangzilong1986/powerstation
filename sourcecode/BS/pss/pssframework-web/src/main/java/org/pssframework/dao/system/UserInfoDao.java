@@ -21,7 +21,7 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 "
 			+ "/~ and ('[showAllAccount]'= 'true' or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/"
-			+ "/~ and t.empNo in ([empNos]) ~/";
+			+ "/~ and t.empNo not in ([empNos]) ~/";
 
 	@SuppressWarnings("rawtypes")
 	@Override
