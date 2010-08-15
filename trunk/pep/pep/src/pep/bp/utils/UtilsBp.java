@@ -50,7 +50,7 @@ public class UtilsBp {
         byte hh = (byte) CD.get(Calendar.HOUR);
         byte WW = (byte) CD.get(Calendar.DAY_OF_WEEK);
         byte DD = (byte) CD.get(Calendar.DAY_OF_MONTH);
-        byte MM = (byte) CD.get(Calendar.MONTH);
+        byte MM = (byte) (CD.get(Calendar.MONTH)+1);//月份从0开始
         byte YY = (byte) (CD.get(Calendar.YEAR) % 2000);
 
         result[0] = BcdUtils.intToBcd(ss);
@@ -73,7 +73,7 @@ public class UtilsBp {
             int minute = BcdUtils.bcdToInt(date[1]);
             int hourOfDay = BcdUtils.bcdToInt(date[2]);
             int day = BcdUtils.bcdToInt(date[4]);
-            int month = BcdUtils.bcdToInt(date[5]);
+            int month = BcdUtils.bcdToInt(date[5])-1;
             int year = BcdUtils.bcdToInt(date[6])  + 2000;
 
             Calendar CD = Calendar.getInstance();
