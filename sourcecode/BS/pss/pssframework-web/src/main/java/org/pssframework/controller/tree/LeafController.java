@@ -26,9 +26,12 @@ import net.jcreate.e3.tree.support.WebTreeDynamicNode;
 import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.model.system.UserInfo;
 import org.pssframework.model.tree.LeafInfo;
-import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.security.OperatorDetails;
+import org.pssframework.service.system.UserInfoManager;
 import org.pssframework.service.tree.LeafInfoManager;
+import org.pssframework.support.system.SystemConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +40,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -64,8 +68,12 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 	private final static String TG_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon08.gif";
 
+	private OperatorDetails user;
+
+	private UserInfo userInfo;
+
 	@Autowired
-	private OrgInfoManager orgInfoManager;
+	private UserInfoManager userInfoManager;
 
 	/** 
 	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
@@ -125,26 +133,33 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	private String showExtLoadTree(final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
-		//TODO
-		final String parentID = "4";
+		Long parentID = 4L;
 
-		OrgInfo orginfo = orgInfoManager.getById(Long.parseLong(parentID));
+		user = SpringSecurityUtils.getCurrentUser();
 
-		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), "ORG_" + orginfo.getOrgId(),
-				new UserDataUncoder() {
+		userInfo = userInfoManager.findUserByLoginName(user.getUsername());
 
-					public Object getParentID(Object arg0) throws UncodeException {
-						// TODO Auto-generated method stub
-						return null;
-					}
+		OrgInfo orginfo = userInfo.getOrgInfo();
 
-					public Object getID(Object arg0) throws UncodeException {
-						// TODO Auto-generated method stub
-						return ((OrgInfo) arg0).getOrgId();
-					}
-				});
+		if (orginfo != null) {
+			parentID = orginfo.getOrgId();
+		}
+
+		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), SystemConst.TREE_ORG + "_"
+				+ orginfo.getOrgId(), new UserDataUncoder() {
+
+			public Object getParentID(Object arg0) throws UncodeException {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			public Object getID(Object arg0) throws UncodeException {
+				// TODO Auto-generated method stub
+				return ((OrgInfo) arg0).getOrgId();
+			}
+		});
 		rootNode.setSubTreeURL(RequestUtil.getUrl("/tree/" + parentID + "?" + PARENT_ID + "=" + parentID + "&"
-				+ PARENT_TYPE + "=ORG", pRequest));
+				+ PARENT_TYPE + "=" + SystemConst.TREE_ORG, pRequest));
 
 		rootNode.setIcon(RequestUtil.getUrl(ROOT_IMG, pRequest));
 
@@ -162,7 +177,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	public void loadExtSubOrgs(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+	public void loadExtSubOrgs(final HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
 		final String parentID = pRequest.getParameter(PARENT_ID);
 		final String parentTYPE = pRequest.getParameter(PARENT_TYPE);
@@ -183,8 +198,13 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 						+ "&" + PARENT_TYPE + "=" + leaf.getLeafType() + "&random=" + Math.random()));
 
 				result.setValue(leaf.getLeafId());
+				result.setTip(leaf.getLeafName());
 
-				result.setIcon(getUrl(TG_IMG));
+				//台区
+				if (SystemConst.TREE_TG.equals(leaf.getLeafType())) {
+					result.setIcon(getUrl(TG_IMG));
+					result.setAction("javascript:showTg(" + leaf.getLeafId() + ")");
+				}
 
 				return result;
 			}

@@ -18,6 +18,22 @@ public class TgUserQuery extends BaseQuery {
 
 	private Long orgId;
 
+	private Long tgId;
+
+	/**
+	 * @return the tgId
+	 */
+	public Long getTgId() {
+		return tgId;
+	}
+
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(Long tgId) {
+		this.tgId = tgId;
+	}
+
 	/**
 	 * @return the orgId
 	 */

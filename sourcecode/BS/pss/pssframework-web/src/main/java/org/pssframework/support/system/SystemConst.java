@@ -11,6 +11,13 @@ public final class SystemConst {
 	/**
 	 * ******************************SYSTEM*******************************************
 	 */
+
+	// 台区
+	public final static String TREE_TG = "TG";
+
+	// 部门
+	public final static String TREE_ORG = "ORG";
+
 	// 大用户
 	public final static String SYSTEM_BIG_CUSTOMER = "1";
 
