@@ -6,7 +6,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<resultMap id="EiCurvResult" type="org.pssframework.model.statistics.EiCurv">
 	</resultMap>
 	<!-- 用于select查询公用抽取的列 -->
-	<sql id="EiCurvColumns"><![CDATA[m.GP_ID gpId,d.DATA_TIME dataTime,d.ASSET_NO assetNo]]></sql>
+	<sql id="EiCurvColumns"><![CDATA[m.GP_ID gpId,d.DATA_TIME dataTime,d.ASSET_NO assetNo,
+	P_ACT_TOTAL PActTotal, P_ACT_SHARP PActSharp,P_ACT_PEAK PActPeak,P_ACT_LEVEL PActLevel,P_ACT_VALLEY PActValley,
+	I_ACT_TOTAL IActTotal, I_ACT_SHARP IActSharp,I_ACT_PEAK IActPeak,I_ACT_LEVEL IActLevel,I_ACT_VALLEY IActValley,
+	P_REACT_TOTAL PReactTotal,P_REACT_SHARP PReactSharp, P_REACT_PEAK PReactPeak,P_REACT_LEVEL PReactLevel,P_REACT_VALLEY PReactValley,
+	I_REACT_TOTAL IReactTotal,I_REACT_SHARP IReactSharp,I_REACT_PEAK IReactPeak,I_REACT_LEVEL IReactLevel,I_REACT_VALLEY IReactValley
+	
+	]]></sql>
 	<sql id="EiCurvDynamicWhere">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<choose>
