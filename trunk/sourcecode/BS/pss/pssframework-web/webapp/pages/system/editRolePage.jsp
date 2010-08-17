@@ -59,6 +59,9 @@ updateRoleInfo = function(){
                  closeWin();
                }
              },
+             ajaxSend:function(){
+                 
+             },
              error:function(XmlHttpRequest)
              {
              alert("更新失败;"+XmlHttpRequest.responseText +  XmlHttpRequest.statusText);
