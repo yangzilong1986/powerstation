@@ -114,6 +114,7 @@ function meterState(){
 				<td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
 					cssStyle="width:155px;" disabled="${disabled}" /></td>
 			</tr>
+          <!--  
 			<tr height="30px">
 				<td align="right" class="green">CT：</td>
 				<td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
@@ -121,7 +122,7 @@ function meterState(){
 				<td align="right" class="green">PT：</td>
 				<td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
 					cssStyle="width:155px;" disabled="${disabled}" /></td>
-			</tr>
+			</tr>-->
 			<tr height="30px">
 				<td align="right" class="green">功能状态设置：</td>
 				<td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
