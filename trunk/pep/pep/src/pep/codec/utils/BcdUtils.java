@@ -192,8 +192,8 @@ public class BcdUtils {
             return 6;
         } else if (b == 0x40) {
             return 7;
-        } else if (b == 0x80) {
-            return 0;
+        } else if (b == (byte) 0x80) {
+            return 8;
         } else {
             throw new IllegalArgumentException();
         }
