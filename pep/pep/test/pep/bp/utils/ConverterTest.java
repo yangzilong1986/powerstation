@@ -83,7 +83,7 @@ public class ConverterTest {
         PmPacket376 packet = null;
         CommandItem commandItem = null;
         Converter instance = new Converter();
-        instance.putDataBuf_withConfig(packet, commandItem);
+      //  instance.putDataBuf_withConfig(packet, commandItem);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
