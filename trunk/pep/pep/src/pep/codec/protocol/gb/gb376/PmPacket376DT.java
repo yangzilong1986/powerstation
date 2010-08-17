@@ -45,7 +45,7 @@ public class PmPacket376DT implements PmPacketDT {
     public final PmPacket376DT setFn(int fn){
         if (fn>0){
             value[0] = (byte)(1 << ((fn-1)%8));
-            value[1] = (byte)(fn/8);
+            value[1] = (byte)((fn-1)/8);
         }
         else throw  new IllegalArgumentException();
         return this;
