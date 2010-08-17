@@ -45,12 +45,12 @@ public class RealTimeSender extends BaseProcessor {
                 java.util.logging.Logger.getLogger(RealTimeSender.class.getName()).log(Level.SEVERE, null, ex);
             }
             List<RealTimeTaskDAO> tasks = taskService.getTasks();
-            log.info("读到任务："+tasks.size()); 
+            //log.info("读到任务："+tasks.size());
             if (null != tasks) {
                 for (RealTimeTaskDAO task : tasks) {
                     PmPacket packet = new PmPacket376();
                     packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
-                    log.info("开始往下发队列中发送报文："+task.getSendmsg());
+                //    log.info("开始往下发队列中发送报文："+task.getSendmsg());
                     pepCommunicator.SendPacket(task.getTaskId(), packet);
                     log.info("往下发队列中发送报文完成："+task.getSendmsg());
                 }
