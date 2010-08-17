@@ -57,6 +57,7 @@ public class RoleInfoManager extends BaseManager<RoleInfo, Long> {
 			roleInfos = Lists.newLinkedList();
 		}
 		if (id == null || ADMIN != id) {
+
 			roleInfos.remove(0);
 		}
 		return roleInfos;
