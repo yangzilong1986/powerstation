@@ -5,6 +5,8 @@
 
 package pep.codec.protocol.gb.gb376;
 
+import java.util.Map.Entry;
+import pep.codec.utils.BcdUtils;
 import java.util.Map;
 import pep.bp.model.Dto;
 import pep.codec.protocol.gb.DataTypeA5;
@@ -80,10 +82,27 @@ public class ClassTwoDataDecoderTest {
 
      @Test
      public void testSth(){
-         for (int rateIdx=0; rateIdx<16; rateIdx++){
-            String subItemId = "BF04";
-            subItemId = String.format("%04x", Integer.parseInt(subItemId, 16)+rateIdx).toUpperCase();
-            System.out.println(subItemId);
+         byte[] data = BcdUtils.stringToByteArray("68 7E 01 7E 01 68 98 12 96 56 34 04 0D 60 01 01 01 0A"+
+                 " 00 00 16 08 10 03 18 FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE"+
+                 " FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE FE 85 07 01"+
+                 " 21 08 01 04 10 01 63 09 01 91 09 01 FE FE FE FE FE FE FE FE FE 00 00 00 00 F3 16 55");
+         PmPacket376 pack = new PmPacket376();
+         pack.setValue(data, 0);
+         Dto rsltDto = ClassTwoDataDecoder.Decode(pack);
+         System.out.print("rtua="+rsltDto.getLogicAddress());
+         System.out.println(" ,afn="+new Integer(rsltDto.getAfn()).toString());
+
+         for (Dto.DtoItem ditem : rsltDto.getDataItems()){
+            System.out.print("    commandItemCode=");
+            System.out.print(ditem.commandItemCode);
+            System.out.print(", dataTime=");
+            System.out.print(ditem.dataTime);
+            System.out.print(", gp=");
+            System.out.println(ditem.gp);
+            for (Entry<String,String> subItem: ditem.dataMap.entrySet()){
+                System.out.println("      "+subItem.getKey()+"="+subItem.getValue());
+            }
+            System.out.println();
          }
      }
 }
