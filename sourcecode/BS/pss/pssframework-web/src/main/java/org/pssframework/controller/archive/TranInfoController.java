@@ -97,7 +97,7 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 		}
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
 
-		return null;
+		return VIEW;
 	}
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
@@ -118,7 +118,6 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 		}
 
-
 		model.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc);
 
 		model.addAttribute(CONTROLLER_AJAX_MESSAGE, msg);
@@ -129,7 +128,7 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	@RequestMapping(value = "/{id}")
 	public String show(ModelMap model, @PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		model = this.getCommonModelMap();
+		this.getCommonModelMap(model);
 
 		model.addAttribute("tranInfo", this.tranInfoManager.getById(id));
 
@@ -140,11 +139,13 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 	/** 编辑 */
 	@RequestMapping(value = "/{id}/edit")
-	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		result = this.getCommonModelMap();
+	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request,
+			HttpServletResponse response, TranInfo tranInfo) throws Exception {
+		this.getCommonModelMap(result);
 
-		result.addAttribute("tranInfo", this.tranInfoManager.getById(id));
+		tranInfo = this.tranInfoManager.getById(id);
+
+		result.addAttribute("tranInfo", tranInfo);
 
 		result.addAttribute(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
 
@@ -154,9 +155,12 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	/** 进入新增 */
 	@RequestMapping(value = "/new")
 	public String _new(ModelMap result, HttpServletRequest request, HttpServletResponse response, TranInfo model) {
-		result = this.getCommonModelMap();
+		this.getCommonModelMap(result);
+
 		result.addAttribute("tranInfo", model);
+
 		result.addAttribute(TranInfoController.METHOD_TYPE, CONTROLLER_METHOD_TYPE_NEW);
+
 		return VIEW;
 	}
 
@@ -168,8 +172,7 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 	}
 
 	@SuppressWarnings("unchecked")
-	private ModelMap getCommonModelMap() {
-		ModelMap result = new ModelMap();
+	private void getCommonModelMap(ModelMap result) {
 
 		Map mapRequest = new HashMap();
 
@@ -189,7 +192,6 @@ public class TranInfoController extends BaseRestSpringController<TranInfo, java.
 
 		result.addAttribute("ratedlist", this.getOptionList(mapRequest));
 
-		return result;
 	}
 
 	/** 删除 */
