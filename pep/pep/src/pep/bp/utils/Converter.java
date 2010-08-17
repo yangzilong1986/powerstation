@@ -87,8 +87,11 @@ public class Converter {
                     dt.setFn(fn);
                     packet.getDataBuffer().putDA(da);
                     packet.getDataBuffer().putDT(dt);
-                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA) || (AFN == AFNType.AFN_READDATA2)) {
-                        putDataBuf_withConfig(packet, commandItem);
+                    if (AFN == AFNType.AFN_READDATA2) {
+                        putDataBuf_readWithConfig(packet, commandItem);
+                    }
+                    if ((AFN == AFNType.AFN_SETPARA)) {
+                        putDataBuf_withValue(packet, commandItem);
                     }
                 }
                 if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
@@ -129,11 +132,11 @@ public class Converter {
                     dt.setFn(fn);
                     packet.getDataBuffer().putDA(da);
                     packet.getDataBuffer().putDT(dt);
-                    if ((AFN == AFNType.AFN_GETPARA) || (AFN == AFNType.AFN_SETPARA)) {
-                        putDataBuf_withConfig(packet, commandItem);
+                    if ((AFN == AFNType.AFN_SETPARA)) {
+                        putDataBuf_withValue(packet, commandItem);
                     }
-                    if ((AFN == AFNType.AFN_READDATA1) || (AFN == AFNType.AFN_READDATA2)) {
-                        putDataBuf_withInput(packet, commandItem);
+                    if ((AFN == AFNType.AFN_READDATA2)) {
+                        putDataBuf_readWithConfig(packet, commandItem);
                     }
                     if (Index % CmdItemNum == 0) {
                         if (AFN == AFNType.AFN_RESET || AFN == AFNType.AFN_SETPARA || AFN == AFNType.AFN_TRANSMIT)//消息认证码字段PW
@@ -376,19 +379,14 @@ public class Converter {
 
     }
 
-    public void putDataBuf_withInput(PmPacket376 packet, CommandItem commandItem) {
+    public void putDataBuf_readWithConfig(PmPacket376 packet, CommandItem commandItem) {
         String DataItemValue, Format, IsGroupEnd = "";
         int Length, bitnumber = 0;
         long TempCode = 0;
-        Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+        List<ProtocolDataItem> DataItemList_Config = config.getDataItemList(commandItem.getIdentifier());
         Map<String, String> dataItemMap = commandItem.getDatacellParam();
-
-
-        Iterator iterator = dataItemMap.keySet().iterator();
-        while (iterator.hasNext()) {
-            ProtocolDataItem dataItem;
-            String DataItemCode = (String) iterator.next();
-            dataItem = DataItemMap_Config.get(DataItemCode);
+        for (ProtocolDataItem dataItem : DataItemList_Config) {
+            String DataItemCode = dataItem.getDataItemCode();
             DataItemValue = dataItem.getDefaultValue();
             if (DataItemValue.equals("YESTERDAY")) //抄上一天
             {
@@ -407,7 +405,7 @@ public class Converter {
         }
     }
 
-    public void putDataBuf_withConfig(PmPacket376 packet, CommandItem commandItem) {
+    public void putDataBuf_withValue(PmPacket376 packet, CommandItem commandItem) {
         String DataItemValue, Format, IsGroupEnd = "";
         int Length, bitnumber = 0;
         long TempCode = 0;
@@ -581,6 +579,10 @@ public class Converter {
 
     public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results) {
         this.decoder.decode_TransMit(packet, results);
+    }
+
+    public void decodeData_TransMit(PmPacket376 packet, Dto postData) {
+        this.decoder.decode_TransMit(packet, postData);
     }
 
     public void decodeDataDB(PmPacket376 packet, Dto postData) {
