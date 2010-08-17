@@ -67,10 +67,10 @@ public class UpLoadProcessorTest {
         DecodeEventAndSave(packet);
     }
 
-    //@Test
+    @Test
     public void testData1() {
         //String Msg = "68, A6, 00, A6, 00, 68, C4, 12, 96, 56, 34, 00, 0E, 71, 00, 00, 01, 00, 03, 00, 00, 01, 24, 17, 18, 14, 02, 08, 10, 00, 01, 01, 00, 00, 00, 00, 00, 88, FF, FF, 54, 17, 14, 01, 02, 08, 10, 1D, 16";
-        String Msg = "68AE00AE00689812965634040C6B01010410062208081004002003000000320000000031010000000000000000570100008616";
+        String Msg = " 68B200B20068981296563404106300000100001D0068010000000000688111A2E9336B353333333333333333333333332516BF16";
 
         byte[] msg = BcdUtils.stringToByteArray(Msg);
 
