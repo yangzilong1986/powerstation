@@ -73,7 +73,9 @@ public class UpLoadProcessor extends BaseProcessor {
     }
 
     private void decodeAndSaveClasTransMitData(PmPacket376 packet) {
-        decodeAndSaveClassOneData(packet);
+        Dto dto = new Dto(packet.getAddress().getRtua(), packet.getAfn());
+        this.converter.decodeData_TransMit(packet, dto);
+        dataService.insertRecvData(dto);
     }
 
     private void decodeAndSaveClassTwoData(PmPacket376 packet) {

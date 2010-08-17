@@ -136,4 +136,51 @@ public class Decoder376 extends Decoder {
         }
 
     }
+
+    @Override
+    public void decode_TransMit(Object pack, Dto dto){
+        try {
+            PmPacket376 packet = (PmPacket376) pack;
+            String key = "";
+            String MeterAddress = "";
+            String logicAddress = packet.getAddress().getRtua();
+            dto.setLogicAddress(logicAddress);
+            PmPacketData dataBuffer = packet.getDataBuffer();
+            PmPacketData dataBuffer645 = null;
+            dataBuffer.rewind();
+            PmPacket376DA da = new PmPacket376DA();
+            PmPacket376DT dt = new PmPacket376DT();
+            dataBuffer.getDA(da);
+            dataBuffer.getDT(dt);
+            byte afn = packet.getAfn();
+            int gp = da.getPn();
+            String CurrentTime = UtilsBp.getNow();
+            dto.setAfn(afn);
+            if (afn == 0X10) {  //透明转发，特殊处理
+                long port = dataBuffer.getBin(1);//终端通信端口号
+                long len = dataBuffer.getBin(2);//透明转发内容字节数k
+                byte[] databuff = new byte[(int) len];
+                dataBuffer.getRowIoBuffer().get(databuff);
+                int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
+                Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
+                MeterAddress = packet645.getAddress().getAddress();
+                dataBuffer645 = packet645.getDataAsPmPacketData();
+            }
+
+            byte[] commandItem = new byte[2];
+            dataBuffer645.getRowIoBuffer().rewind();
+            dataBuffer645.getRowIoBuffer().get(commandItem);
+            String commandItemCode = "8000" + BcdUtils.binArrayToString(BcdUtils.reverseBytes(commandItem));
+            if (!commandItemCode.equals("8000C040"))//除读保护器状态
+            {
+                dataBuffer645.get();//将附带的开关信息状态读掉
+
+            }
+
+            DtoItem dtoItem = dto.addDataItem(gp, CurrentTime, commandItemCode);
+            this.DecodeData2Dto(gp, commandItemCode, dtoItem, dataBuffer645);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
+        }
+    }
 }

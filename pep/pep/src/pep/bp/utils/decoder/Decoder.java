@@ -265,10 +265,11 @@ public abstract class Decoder {
 
     public abstract void decode(Object pack, Map<String, Map<String, String>> results);
 
-    public abstract void decode(Object pack, Dto postData);
+    public abstract void decode(Object pack, Dto dto);
 
     public abstract void decode_TransMit(Object pack, Map<String, Map<String, String>> results);
 
+    public abstract void decode_TransMit(Object pack, Dto dto);
     /**
      * @return the config
      */
