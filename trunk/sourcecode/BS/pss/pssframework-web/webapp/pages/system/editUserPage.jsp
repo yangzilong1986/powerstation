@@ -27,9 +27,9 @@
   <table width="99%" border="0" cellpadding="0" cellspacing="0">
     <tr>
       <td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.zh" />：</td>
-      <td width="30%" align="left"><form:input path="staffNo" cssStyle="width:150" cssClass="required input2"/></td>
+      <td width="30%" align="left"><form:input path="staffNo" cssStyle="width:150" cssClass="required input2 min-length-5"/></td>
       <td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.mc" />：</td>
-      <td width="30%" align="left"><form:input path="name" cssStyle="width:150" cssClass="required input2"/></td>
+      <td width="30%" align="left"><form:input path="name" cssStyle="width:150" cssClass="required input2 min-length-5"/></td>
     </tr>
     <tr>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.mm" />：</td>
