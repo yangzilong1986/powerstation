@@ -33,9 +33,9 @@
     </tr>
     <tr>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.mm" />：</td>
-      <td align="left"><form:password path="passwd" showPassword="true" cssStyle="width:150" cssClass="required input2" /></td>
+      <td align="left"><form:password path="passwd" id="passwd"  showPassword="true" cssStyle="width:150" cssClass="required input2" /></td>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.qrmm" />：</td>
-      <td align="left"><input type="password" name="passwd" id="passwd_rep" value="${user.passwd}" class="required input2"
+      <td align="left"><input type="password" name="passwd_rep" id="passwd_rep" value="${user.passwd}" class="required input2"
         style="width: 150"></td>
     </tr>
     <tr>
@@ -231,8 +231,10 @@ function fwIsChecked() {
 
 //提交处理
 checkPassword=function(){
-	var password =document.getElementsByName("passwd");
-    if(password[0].value!=password[1].value) {
+	var password = $("#passwd").val();
+	var password_rep = $("#passwd_rep").val();
+
+    if(password!=password_rep) {
         alert('<spring:message code="system.errors.passwd.different"/>');
         return false;
     }
