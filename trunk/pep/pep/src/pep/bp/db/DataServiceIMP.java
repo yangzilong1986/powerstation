@@ -66,27 +66,27 @@ public class DataServiceIMP implements DataService{
                     insertData_P_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("0100"),dataItemMap.get("0101"),
                                      dataItemMap.get("0102"),dataItemMap.get("0103"),
-                                     dataItemMap.get("0104"));
+                                     dataItemMap.get("0104"));continue;
                 }
                 if(commandItemCode.equals("100C0130")){   //当前正向无功（组合无功1）电能示值（总、费率1～M）
                     insertData_P_REACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("A000"),dataItemMap.get("A001"),
                                      dataItemMap.get("A002"),dataItemMap.get("A003"),
-                                     dataItemMap.get("A004"));
+                                     dataItemMap.get("A004"));continue;
                 }
 
                 if(commandItemCode.equals("100C0131")){   //当前反向有功电能示值（总、费率1～M）
                     insertData_I_ACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("0200"),dataItemMap.get("0201"),
                                      dataItemMap.get("0202"),dataItemMap.get("0203"),
-                                     dataItemMap.get("0204"));
+                                     dataItemMap.get("0204"));continue;
                 }
 
                 if(commandItemCode.equals("100C0132")){   //当前反向无功（组合无功1）电能示值（总、费率1～M）
                     insertData_I_REACT(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
                                      dataItemMap.get("A100"),dataItemMap.get("A101"),
                                      dataItemMap.get("A102"),dataItemMap.get("A103"),
-                                     dataItemMap.get("A104"));
+                                     dataItemMap.get("A104"));continue;
                 }
 
                 if(commandItemCode.equals("100C0025")){//当前三相及总有/无功功率、功率因数，三相电压、电流、零序电流、视在功率
@@ -98,58 +98,58 @@ public class DataServiceIMP implements DataService{
                     this.insert_POWER_CRUV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,  //功率曲線
                             dataItemMap.get("2300"),dataItemMap.get("2301"),dataItemMap.get("2302"),
                             dataItemMap.get("2303"),dataItemMap.get("2400"),dataItemMap.get("2401"),
-                            dataItemMap.get("2402"),dataItemMap.get("2403"));
+                            dataItemMap.get("2402"),dataItemMap.get("2403"));continue;
                 }
             }
 
             if(AFN == (byte)0X0D){                         //二类数据
                 if(commandItemCode.equals("100D0081")){
-                    this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));break;
+                    this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));continue;
                 }
                 if(commandItemCode.equals("100D0082")){
-                    this.getPowerCurvStoredProcedure2().insert_act_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301")); break;
+                    this.getPowerCurvStoredProcedure2().insert_act_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2301")); continue;
                 }
                 if(commandItemCode.equals("100D0083")){
-                    this.getPowerCurvStoredProcedure2().insert_act_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));break;
+                    this.getPowerCurvStoredProcedure2().insert_act_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2302"));continue;
                 }
                 if(commandItemCode.equals("100D0084")){
-                    this.getPowerCurvStoredProcedure2().insert_act_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303")); break;
+                    this.getPowerCurvStoredProcedure2().insert_act_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2303")); continue;
                 }
                 if(commandItemCode.equals("100D0085")){
-                    this.getPowerCurvStoredProcedure2().insert_react_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400")); break;
+                    this.getPowerCurvStoredProcedure2().insert_react_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2400")); continue;
                 }
                 if(commandItemCode.equals("100D0086")){
-                    this.getPowerCurvStoredProcedure2().insert_react_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));break;
+                    this.getPowerCurvStoredProcedure2().insert_react_power_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2401"));continue;
                 }
                 if(commandItemCode.equals("100D0087")){
-                    this.getPowerCurvStoredProcedure2().insert_react_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));break;
+                    this.getPowerCurvStoredProcedure2().insert_react_power_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2402"));continue;
                 }
                 if(commandItemCode.equals("100D0088")){
-                    this.getPowerCurvStoredProcedure2().insert_react_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));break;
+                    this.getPowerCurvStoredProcedure2().insert_react_power_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2403"));continue;
                 }
                 if(commandItemCode.equals("100D0089")){
-                    this.getEccurvStoredProcedure2().insertVoltA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));break;
+                    this.getEccurvStoredProcedure2().insertVoltA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2101"));continue;
                 }
                 if(commandItemCode.equals("100D0090")){
-                    this.getEccurvStoredProcedure2().insertVoltB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));break;
+                    this.getEccurvStoredProcedure2().insertVoltB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2102"));continue;
                 }
                 if(commandItemCode.equals("100D0091")){
-                    this.getEccurvStoredProcedure2().insertVoltC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));break;
+                    this.getEccurvStoredProcedure2().insertVoltC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2103"));continue;
                 }
                 if(commandItemCode.equals("100D0092")){
-                    this.getEccurvStoredProcedure2().insertEcurA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));break;
+                    this.getEccurvStoredProcedure2().insertEcurA(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2201"));continue;
                 }
                 if(commandItemCode.equals("100D0093")){
-                    this.getEccurvStoredProcedure2().insertEcurB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));break;
+                    this.getEccurvStoredProcedure2().insertEcurB(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2202"));continue;
                 }
                 if(commandItemCode.equals("100D0094")){
-                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));break;
+                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2203"));continue;
                 }
                 if(commandItemCode.equals("100D0095")){
-                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));break;
+                    this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));continue;
                 }
                 if(commandItemCode.equals("100D0101")){
-                    this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));break;
+                    this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));continue;
                 }
             }
         }
