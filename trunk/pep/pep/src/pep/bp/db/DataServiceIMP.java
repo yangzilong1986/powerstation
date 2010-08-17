@@ -152,6 +152,14 @@ public class DataServiceIMP implements DataService{
                     this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));continue;
                 }
             }
+            if(AFN == (byte)0X10){                         //透明转发数据
+                if(commandItemCode.equals("8000B66F")){
+                    this.insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //電壓/電流曲線
+                                     dataItemMap.get("B621"),dataItemMap.get("B622"),dataItemMap.get("B623"),"",
+                                     dataItemMap.get("B660"),dataItemMap.get("B611"),
+                                     dataItemMap.get("B612"),dataItemMap.get("B613"));
+                }
+            }
         }
      }
 
