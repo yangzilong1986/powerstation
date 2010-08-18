@@ -22,6 +22,7 @@ public class LoginInfoController extends BaseSpringController {
 	private static final String VIEW = "/security/login";
 
 	private static final String ERROR_ID = "error";
+	private static final String SUCC_ID = "succ";
 
 	@RequestMapping
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
@@ -29,8 +30,10 @@ public class LoginInfoController extends BaseSpringController {
 		ModelAndView modelAndView = new ModelAndView(VIEW);
 
 		String errorId = request.getParameter(ERROR_ID);
+		String succId = request.getParameter(SUCC_ID);
 
 		modelAndView.addObject("error", errorId);
+		modelAndView.addObject("succ", succId);
 
 		return modelAndView;
 	}
