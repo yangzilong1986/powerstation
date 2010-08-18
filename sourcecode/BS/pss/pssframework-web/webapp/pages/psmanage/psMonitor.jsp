@@ -23,8 +23,8 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    //readB66F();
-    //readC04F();
+    readB66F();
+    readC04F();
 });
 
 function StringBuffer() {
@@ -328,6 +328,7 @@ function fetchRemoteTripingResult(collectId, fetchCount) {
             }
             else {
                 initOpResultRemote('下发开关跳闸命令超时');
+                enableRemoteOperation();
             }
         },
         error: function() {
@@ -405,6 +406,7 @@ function fetchRemoteSwitchingResult(collectId, fetchCount) {
             }
             else {
                 initOpResultRemote('下发开关合闸命令超时');
+                enableRemoteOperation();
             }
         },
         error: function() {
@@ -479,6 +481,7 @@ function fetchRemoteTestResult(collectId, fetchCount) {
             }
             else {
                 initOpResultRemote('下发试验跳命令超时');
+                enableRemoteOperation();
             }
         },
         error: function() {
@@ -571,6 +574,7 @@ function fetchTimeReadResult(collectId, fetchCount) {
             }
             else {
                 initOpResultRemote('读取时钟超时');
+                enableTimeOperation();
             }
         },
         error: function() {
@@ -648,6 +652,7 @@ function fetchTimeSetupResult(collectId, fetchCount) {
             }
             else {
                 initOpResultRemote('校时超时');
+                enableTimeOperation();
             }
         },
         error: function() {
@@ -782,7 +787,7 @@ function funcSetupByteSetup() {
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
     sb_dto.append('}');
-    initOpResult('正在设置功能设定字...');
+    initOpResultFuncSetupByte('正在设置功能设定字...');
     var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
     var params = {
             "dto": sb_dto.toString(),
@@ -799,8 +804,34 @@ function funcSetupByteSetup() {
             setTimeout("fetchFuncSetupByteSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
         error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发设置功能设定字命令失败...');
+            initOpResultFuncSetupByte('下发设置功能设定字命令失败...');
             enableFuncSetupByteOperation();
+        }
+    });
+}
+
+function fetchFuncSetupByteSetupResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "FuncSetupByteSetup"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultFuncSetupByte(data.resultMap);
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchFuncSetupByteSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else {
+                initOpResultFuncSetupByte('设置功能设定字字超时');
+                enableFuncSetupByteOperation();
+            }
+        },
+        error: function() {
         }
     });
 }

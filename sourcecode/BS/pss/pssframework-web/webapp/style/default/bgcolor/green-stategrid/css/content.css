@@ -215,6 +215,10 @@ img {
     margin-left: 10px;
 }
 
+/*index.htm*/
+.index_con { line-height: 24px; padding-top: 30px; }
+.index_con p { text-indent: 24px; }
+
 /*Index Style Info*/
 #body {
     min-width: 1004px;

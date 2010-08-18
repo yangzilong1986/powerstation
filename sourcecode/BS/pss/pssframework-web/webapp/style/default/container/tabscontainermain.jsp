@@ -26,7 +26,7 @@ function showTab(tabTitle, url) {
 }
 
 $().ready(function() {
-    var url = '<pss:path type="webapp"/>' + '/commons/inmaking.jsp';
+    var url = '<pss:path type="webapp"/>' + '/homepage/homepage';
     $('#MultiTaskTabs').tabs('add', {
         title: '首页',
         content: '<iframe scrolling="auto" frameborder="0" src="' + url + '" width="100%" height="100%"></iframe>',
