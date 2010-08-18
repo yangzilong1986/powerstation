@@ -43,6 +43,8 @@ public class DataServiceIMP implements DataService{
 
     private EventStoredProcedure eventStoredProcedure;
     private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
+    private DAY_ECUR_STATIS_StoredProcedure ecurStatisStoredProcedur;
+    private DAY_VOLT_STATIS_StoredProcedure voltStatisStoredProcedur;
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -103,6 +105,29 @@ public class DataServiceIMP implements DataService{
             }
 
             if(AFN == (byte)0X0D){                         //二类数据
+                if(commandItemCode.equals("100D0027")){
+                    this.voltStatisStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
+                                                            dataItemMap.get("BE40"),dataItemMap.get("BE41"),
+                                                            dataItemMap.get("BE42"),dataItemMap.get("BE43"),
+                                                            dataItemMap.get("BE44"),dataItemMap.get("BE45"),
+                                                            dataItemMap.get("BE46"),dataItemMap.get("BE47"),
+                                                            dataItemMap.get("BE48"),dataItemMap.get("BE49"),dataItemMap.get("BE4A"),
+                                                            dataItemMap.get("BE4B"),dataItemMap.get("BE4C"),dataItemMap.get("BE4D"),
+                                                            dataItemMap.get("BE4E"),dataItemMap.get("BE4F"),dataItemMap.get("BE50"),
+                                                            dataItemMap.get("BE51"),dataItemMap.get("BE52"),dataItemMap.get("BE53"),
+                                                            dataItemMap.get("BE54"),dataItemMap.get("BE55"),dataItemMap.get("BE56"),
+                                                            dataItemMap.get("BE57"),dataItemMap.get("BE58"),dataItemMap.get("BE59"),
+                                                            dataItemMap.get("BE5A"),dataItemMap.get("BE5B"),dataItemMap.get("BE5C"),
+                                                            dataItemMap.get("BE5D"));continue;
+                }
+                if(commandItemCode.equals("100D0029")){
+                    this.ecurStatisStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("BE60"),
+                                                            dataItemMap.get("BE61"),dataItemMap.get("BE62"),dataItemMap.get("BE63"),
+                                                            dataItemMap.get("BE64"),dataItemMap.get("BE65"),dataItemMap.get("BE66"),
+                                                            dataItemMap.get("BE67"),dataItemMap.get("BE68"),dataItemMap.get("BE69"),
+                                                            dataItemMap.get("BE6A"),dataItemMap.get("BE6B"),dataItemMap.get("BE6C"),
+                                                            dataItemMap.get("BE6D"),dataItemMap.get("BE6E"));continue;
+                }
                 if(commandItemCode.equals("100D0081")){
                     this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));continue;
                 }
@@ -420,6 +445,34 @@ public class DataServiceIMP implements DataService{
      */
     public void setI_actStoredProcedure(I_ACT_StoredProcedure i_actStoredProcedure) {
         this.i_actStoredProcedure = i_actStoredProcedure;
+    }
+
+    /**
+     * @return the ecurStatisStoredProcedur
+     */
+    public DAY_ECUR_STATIS_StoredProcedure getEcurStatisStoredProcedur() {
+        return ecurStatisStoredProcedur;
+    }
+
+    /**
+     * @param ecurStatisStoredProcedur the ecurStatisStoredProcedur to set
+     */
+    public void setEcurStatisStoredProcedur(DAY_ECUR_STATIS_StoredProcedure ecurStatisStoredProcedur) {
+        this.ecurStatisStoredProcedur = ecurStatisStoredProcedur;
+    }
+
+    /**
+     * @return the voltStatisStoredProcedur
+     */
+    public DAY_VOLT_STATIS_StoredProcedure getVoltStatisStoredProcedur() {
+        return voltStatisStoredProcedur;
+    }
+
+    /**
+     * @param voltStatisStoredProcedur the voltStatisStoredProcedur to set
+     */
+    public void setVoltStatisStoredProcedur(DAY_VOLT_STATIS_StoredProcedure voltStatisStoredProcedur) {
+        this.voltStatisStoredProcedur = voltStatisStoredProcedur;
     }
 
 }
