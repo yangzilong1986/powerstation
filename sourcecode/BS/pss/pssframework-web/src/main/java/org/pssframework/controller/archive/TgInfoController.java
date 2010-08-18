@@ -253,13 +253,21 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 		try {
 			tginfo = this.tgInfoManager.getById(id);
+
 			tginfo.setChaDate(new Date());
+			
+			bind(request, tginfo);
+
 			this.tgInfoManager.update(tginfo);
+
 			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.info(e.getMessage());
+
 			isSucc = false;
+
 			msg = MSG_UPDATE_FAIL;
+
 			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, msg);
 
 		}
