@@ -93,6 +93,33 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
                 logger.info("resultMap : " + resultMap.toString());
             }
         }
+        else if("RemoteTriping".equals(type)) { // RemoteTriping C036 50
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("RemoteSwitching".equals(type)) { // RemoteSwitching C036 5F
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("RemoteTest".equals(type)) { // RemoteTest C037
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
         else if("TimeRead".equals(type)) { // TimeRead C012
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
@@ -102,7 +129,25 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
                 logger.info("resultMap : " + resultMap.toString());
             }
         }
+        else if("TimeSetup".equals(type)) { // TimeSetup C012
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
         else if("FuncSetupByteRead".equals(type)) { // FuncSetupByteRead C04F
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("FuncSetupByteSetup".equals(type)) { // FuncSetupByteSetup C04F
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
