@@ -149,7 +149,16 @@ public class DataServiceIMP implements DataService{
                     this.getEccurvStoredProcedure2().insertEcurC(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));continue;
                 }
                 if(commandItemCode.equals("100D0101")){
-                    this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2204"));continue;
+                    this.p_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("0100"),"","","","");continue;
+                }
+                if(commandItemCode.equals("100D0102")){
+                    this.i_actStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("A000"),"","","","");continue;
+                }
+                if(commandItemCode.equals("100D0103")){
+                    this.p_reactStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("0200"),"","","","");continue;
+                }
+                if(commandItemCode.equals("100D0104")){
+                    this.i_reactStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("A000"),"","","","");continue;
                 }
             }
             if(AFN == (byte)0X10){                         //透明转发数据
