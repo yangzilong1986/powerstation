@@ -117,60 +117,36 @@ public class PsInfo extends BaseEntity {
 	@JoinColumn(name = "GP_ID")
 	private GpInfo gpInfo;
 
+	// TEST_DAY VARCHAR2(2)
+	@Column(name = "TEST_DAY", length = 2)
+	private String testDay;
+
+	// TEST_TIME VARCHAR2(2)
+	@Column(name = "TEST_TIME", length = 2)
+	private String testTime;
+
+	// AUTO_TEST VARCHAR2(1)
+	@Column(name = "AUTO_TEST", length = 1)
+	private String autoTest;
+
 	@Transient
 	private Map<String, Integer> functionMap;
 
 	@Transient
 	private int[] functionsChecked;
 
-	/*
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_ID") })
-	@Fetch(FetchMode.SUBSELECT)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<SmsNoInfo> smsNoInfoList;
-
-	public List<SmsNoInfo> getSmsNoInfoList() {
-
-		return smsNoInfoList;
-	}
-
-	public void setSmsNoInfoList(List<SmsNoInfo> smsNoInfoList) {
-		this.smsNoInfoList = smsNoInfoList;
-	}
-	*/
-
-	/**
-	 * @return the functionMap
-	 */
-	public Map<String, Integer> getFunctionMap() {
-
-		Map<String, Integer> functionMap = new LinkedHashMap<String, Integer>();
-		functionMap.put("欠压保护", 0);
-		functionMap.put("过压保护", 1);
-		functionMap.put("突变保护", 2);
-		functionMap.put("缓变保护 ", 3);
-		functionMap.put("特波保护", 4);
-		functionMap.put("自动跟踪", 5);
-		functionMap.put("告警功能", 6);
-		functionMap.put("特波30mA", 7);
-
-		return functionMap;
-	}
-
-	/**
-	 * @param functionMap the functionMap to set
-	 */
-	public void setFunctionMap(Map<String, Integer> functionMap) {
-
-		this.functionMap = functionMap;
-	}
-
 	/**
 	 * @return the assetNo
 	 */
 	public String getAssetNo() {
 		return assetNo;
+	}
+
+	/**
+	 * @return the autoTest
+	 */
+	public String getAutoTest() {
+		return autoTest;
 	}
 
 	/**
@@ -192,6 +168,62 @@ public class PsInfo extends BaseEntity {
 	 */
 	public String getFunctionCode() {
 		return functionCode;
+	}
+
+	/**
+	 * @return the functionMap
+	 */
+	public Map<String, Integer> getFunctionMap() {
+
+		Map<String, Integer> functionMap = new LinkedHashMap<String, Integer>();
+		functionMap.put("欠压保护", 0);
+		functionMap.put("过压保护", 1);
+		functionMap.put("突变保护", 2);
+		functionMap.put("缓变保护 ", 3);
+		functionMap.put("特波保护", 4);
+		functionMap.put("自动跟踪", 5);
+		functionMap.put("告警功能", 6);
+		functionMap.put("特波30mA", 7);
+
+		return functionMap;
+	}
+
+	/*
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "C_PS_SMS_RELA", joinColumns = { @JoinColumn(name = "PS_ID") }, inverseJoinColumns = { @JoinColumn(name = "SMS_ID") })
+	@Fetch(FetchMode.SUBSELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<SmsNoInfo> smsNoInfoList;
+
+	public List<SmsNoInfo> getSmsNoInfoList() {
+
+		return smsNoInfoList;
+	}
+
+	public void setSmsNoInfoList(List<SmsNoInfo> smsNoInfoList) {
+		this.smsNoInfoList = smsNoInfoList;
+	}
+	*/
+
+	/**
+	 * @return the functionsChecked
+	 */
+	public int[] getFunctionsChecked() {
+		if (this.functionsChecked != null && this.functionsChecked.length > 0)
+			return this.functionsChecked;
+
+		int[] strChecked = new int[] { -1, -1, -1, -1, -1, -1, -1, -1 };
+		if (this.getFunctionCode() != null && this.getFunctionCode().length() > 0) {
+			char[] by = this.getFunctionCode().toCharArray();
+			for (int i = 0; i < by.length; i++) {
+				char j = by[i];
+				if ('1' == j) {
+					strChecked[i] = i;
+				}
+			}
+		}
+		return strChecked;
+
 	}
 
 	/**
@@ -243,6 +275,10 @@ public class PsInfo extends BaseEntity {
 		return psId;
 	}
 
+	public String getPsName() {
+		return psName;
+	}
+
 	/**
 	 * @return the psType
 	 */
@@ -278,6 +314,20 @@ public class PsInfo extends BaseEntity {
 		return terminalInfo;
 	}
 
+	/**
+	 * @return the testDay
+	 */
+	public String getTestDay() {
+		return testDay;
+	}
+
+	/**
+	 * @return the testTime
+	 */
+	public String getTestTime() {
+		return testTime;
+	}
+
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
@@ -289,6 +339,13 @@ public class PsInfo extends BaseEntity {
 	 */
 	public void setAssetNo(String assetNo) {
 		this.assetNo = assetNo;
+	}
+
+	/**
+	 * @param autoTest the autoTest to set
+	 */
+	public void setAutoTest(String autoTest) {
+		this.autoTest = autoTest;
 	}
 
 	/**
@@ -313,6 +370,22 @@ public class PsInfo extends BaseEntity {
 	 */
 	public void setFunctionCode(String functionCode) {
 		this.functionCode = functionCode;
+	}
+
+	/**
+	 * @param functionMap the functionMap to set
+	 */
+	public void setFunctionMap(Map<String, Integer> functionMap) {
+
+		this.functionMap = functionMap;
+	}
+
+	/**
+	 * @param functionsChecked the functionsChecked to set
+	 */
+	public void setFunctionsChecked(int[] functionsChecked) {
+
+		this.functionsChecked = functionsChecked;
 	}
 
 	/**
@@ -371,6 +444,10 @@ public class PsInfo extends BaseEntity {
 		this.psId = psId;
 	}
 
+	public void setPsName(String psName) {
+		this.psName = psName;
+	}
+
 	/**
 	 * @param psType
 	 *            the psType to set
@@ -411,46 +488,23 @@ public class PsInfo extends BaseEntity {
 		this.terminalInfo = terminalInfo;
 	}
 
+	/**
+	 * @param testDay the testDay to set
+	 */
+	public void setTestDay(String testDay) {
+		this.testDay = testDay;
+	}
+
+	/**
+	 * @param testTime the testTime to set
+	 */
+	public void setTestTime(String testTime) {
+		this.testTime = testTime;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 
-	}
-
-	/**
-	 * @param functionsChecked the functionsChecked to set
-	 */
-	public void setFunctionsChecked(int[] functionsChecked) {
-
-		this.functionsChecked = functionsChecked;
-	}
-
-	/**
-	 * @return the functionsChecked
-	 */
-	public int[] getFunctionsChecked() {
-		if (this.functionsChecked != null && this.functionsChecked.length > 0)
-			return this.functionsChecked;
-
-		int[] strChecked = new int[] { -1, -1, -1, -1, -1, -1, -1, -1 };
-		if (this.getFunctionCode() != null && this.getFunctionCode().length() > 0) {
-			char[] by = this.getFunctionCode().toCharArray();
-			for (int i = 0; i < by.length; i++) {
-				char j = by[i];
-				if ('1' == j) {
-					strChecked[i] = i;
-				}
-			}
-		}
-		return strChecked;
-
-	}
-
-	public void setPsName(String psName) {
-		this.psName = psName;
-	}
-
-	public String getPsName() {
-		return psName;
 	}
 }

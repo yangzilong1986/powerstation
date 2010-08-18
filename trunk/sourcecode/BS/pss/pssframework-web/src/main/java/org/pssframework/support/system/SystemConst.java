@@ -8,9 +8,7 @@ package org.pssframework.support.system;
  */
 public final class SystemConst {
 
-	/**
-	 * ******************************SYSTEM*******************************************
-	 */
+	/*******************************SYSTEM*******************************************/
 
 	// 台区
 	public final static String TREE_TG = "TG";
@@ -30,9 +28,7 @@ public final class SystemConst {
 	// 低压集抄
 	public final static String SYSTEM_LOW_PRESSURE = "4";
 
-	/**
-	 * ******************************MESSAGE*******************************************
-	 */
+	/*******************************MESSAGE********************************************/
 
 	public final static String MSG_CREATED_SUCCESS = "创建成功";
 
@@ -215,5 +211,16 @@ public final class SystemConst {
 	 * 用户状态
 	 */
 	public static final String CODE_USER_STATUS = "USER_STATUS";
+
+	/**
+	 * 时
+	 */
+	public static final String CODE_CLOCK_LIST = "CLOCK_LIST";
+
+	/**
+	 * 日
+	 */
+	public static final String CODE_DAY_LIST = "DAY_LIST";
+
 	/***********************************************************************************/
 }
