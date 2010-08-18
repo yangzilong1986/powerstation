@@ -4,8 +4,10 @@
 package org.pssframework.controller.archive;
 
 import static org.pssframework.support.system.SystemConst.CODE_BTL;
+import static org.pssframework.support.system.SystemConst.CODE_CLOCK_LIST;
 import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE_GM;
 import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
+import static org.pssframework.support.system.SystemConst.CODE_DAY_LIST;
 import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
 import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
 import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
@@ -299,6 +301,16 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		mapRequest.put("codecate", CODE_PROTOCOL_METER);
 
 		result.addAttribute("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
+
+		// 日
+		mapRequest.put("codecate", CODE_DAY_LIST);
+
+		result.addAttribute("dayList", this.codeInfoManager.findByPageRequest(mapRequest));
+
+		// 时
+		mapRequest.put("codecate", CODE_CLOCK_LIST);
+
+		result.addAttribute("clockList", this.codeInfoManager.findByPageRequest(mapRequest));
 
 	}
 

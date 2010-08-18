@@ -46,6 +46,8 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		// 台区
 		model.getGpInfo().setGpType("2");
 
+		setCheckboxAutoTest(model);
+
 		GpInfo gpInfo = model.getGpInfo();
 
 		gpInfo.setTerminalInfo(model.getTerminalInfo());
@@ -55,6 +57,8 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	@Override
 	public void update(PsInfo model) throws DataAccessException {
+
+		setCheckboxAutoTest(model);
 
 		super.saveOrUpdate(model);
 	}
@@ -93,4 +97,9 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		return bolRep;
 	}
 
+	private void setCheckboxAutoTest(PsInfo model) {
+		if (model.getAutoTest() == null || "".equals(model.getAutoTest())) {
+			model.setAutoTest("0");
+		}
+	}
 }
