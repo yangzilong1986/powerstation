@@ -49,72 +49,77 @@ function meterState(){
 <body>
 <div class="electric_lcon" id="electric_Con">
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
-	<div class="tab"><span>漏电保护器</span></div>
-	<div class="da_mid"
-		style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||   document.body.clientWidth) -10 ); height: expression(((   document.documentElement.clientHeight ||   document.body.clientHeight) -35 ) );">
-	<div><form:form action="/archive/psinfo" modelAttribute="psinfo">
-		<input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
-			value="${_type}" />
-		<form:hidden path="gpInfo.objectId" />
-		<div id="main">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height="30px">
-				<td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
-				<td width="30%"><form:input path="assetNo" cssClass="required input2" /></td>
-				<td width="20%" align="right" class="green">集中器地址：</td>
-				<td width="30%"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
-					itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></td>
-			</tr>
-			<tr height="30px">
-				<td align="right" class="green"><font color="red">* </font>漏保地址：</td>
-				<td><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></td>
-				<td align="right" class="green"><font color="red">* </font>测量点序号：</td>
-				<td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
-			</tr>
-			<tr height="30px">
-				<td align="right" class="green">漏保名称：</td>
-				<td ><form:input path="psName" cssClass="required input2" /></td>
-				<td align="right" class="green">安装地址：</td>
-				<td >${istAddr}</td>
-			</tr>
-		</table>
-		<c:set var="disabled" value="true"></c:set></div>
-		<div class="tab" id="detail_tile"><span>当前状态</span></div>
-		<div id="detail" class="da_mid" style="width: expression(document.body.clientWidth-32)">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height="30px">
-				<td align="right" class="green">通信方式：</td>
-				<td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-				<td align="right" class="green">漏保型号：</td>
-				<td><form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-			</tr>
-			<tr height="30px">
-				<td align="right" class="green">波特率：</td>
-				<td><form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-				<td align="right" class="green">额定电流：</td>
-				<td><form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-			</tr>
-			<tr height="30px">
-				<td align="right" class="green">剩余电流档位：</td>
-				<td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-				<td align="right" class="green">规约：</td>
-				<td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
-					itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
-			</tr>
-			<tr height="30px">
-				<td align="right" class="green">漏电分断延迟档位：</td>
-				<td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
-					itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
-				<td align="right" class="green">漏保类型：</td>
-				<td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
-			</tr>
-          <!--  
+  <div class="tab"><span>漏电保护器</span></div>
+  <div class="da_mid"
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((         document.documentElement.clientHeight ||         document.body.clientHeight) -35 ) );">
+  <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
+    <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
+      value="${_type}" />
+    <form:hidden path="gpInfo.objectId" />
+    <div id="main">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr height="30px">
+        <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
+        <td width="30%"><form:input path="assetNo" cssClass="required input2" /></td>
+        <td width="20%" align="right" class="green">集中器地址：</td>
+        <td width="30%"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
+          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
+        <td><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></td>
+        <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
+        <td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">漏保名称：</td>
+        <td><form:input path="psName" cssClass="required input2" /></td>
+        <td align="right" class="green">安装地址：</td>
+        <td>${istAddr}</td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">试跳时间：</td>
+        <td><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code" />日&nbsp;<form:select
+          path="testTime" items="${clockList}" id="testTime" itemLabel="name" itemValue="code" />点 &nbsp;<form:checkbox path="autoTest" title="是否自动跳" value="1" />是否自动跳</td>
+      </tr>
+    </table>
+    <c:set var="disabled" value="true"></c:set></div>
+    <div class="tab" id="detail_tile"><span>当前状态</span></div>
+    <div id="detail" class="da_mid" style="width: expression(document.body.clientWidth-32)">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr height="30px">
+        <td align="right" class="green">通信方式：</td>
+        <td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td align="right" class="green">漏保型号：</td>
+        <td><form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">波特率：</td>
+        <td><form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td align="right" class="green">额定电流：</td>
+        <td><form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">剩余电流档位：</td>
+        <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td align="right" class="green">规约：</td>
+        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+      </tr>
+      <tr height="30px">
+        <td align="right" class="green">漏电分断延迟档位：</td>
+        <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
+          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td align="right" class="green">漏保类型：</td>
+        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
+      </tr>
+      <!--  
 			<tr height="30px">
 				<td align="right" class="green">CT：</td>
 				<td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
@@ -123,18 +128,18 @@ function meterState(){
 				<td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
 					cssStyle="width:155px;" disabled="${disabled}" /></td>
 			</tr>-->
-			<tr height="30px">
-				<td align="right" class="green">功能状态设置：</td>
-				<td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
-					<form:checkbox path="functionsChecked" value="${function.value}" disabled="${disabled}" />${function.key}
+      <tr height="30px">
+        <td align="right" class="green">功能状态设置：</td>
+        <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
+          <form:checkbox path="functionsChecked" value="${function.value}" disabled="${disabled}" />${function.key}
  </c:forEach></td>
-			</tr>
-		</table>
-		</div>
-	</form:form></div>
-	<div style="text-align: center"><br></br>
-	<input type="button" id="save" value="保 存" class="btnbg4" /></div>
-	</div>
+      </tr>
+    </table>
+    </div>
+  </form:form></div>
+  <div style="text-align: center"><br></br>
+  <input type="button" id="save" value="保 存" class="btnbg4" /></div>
+  </div>
 </ul>
 </div>
 </body>

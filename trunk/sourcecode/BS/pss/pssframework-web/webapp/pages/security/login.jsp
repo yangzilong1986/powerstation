@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
+<%@include file="/commons/meta.jsp"%>
 <%@ page import="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"%>
 <%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"%>
 <%@ page import="org.springframework.security.core.AuthenticationException"%>
@@ -150,7 +151,6 @@ ${SPRING_SECURITY_LAST_EXCEPTION.message}
       src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
       onclick="javascript:refreshCaptcha()" /></span></td>
   </tr>
-  <tr>
     <td height="30"></td>
     <td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>
   </tr>
