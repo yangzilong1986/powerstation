@@ -504,6 +504,54 @@ public class CastorUtil {
         CommandItem92.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
         CommandItem92.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
 
+        ProtocolCommandItem CommandItem96 = new ProtocolCommandItem();
+        CommandItem96.setCommandCode("100D0101");
+        CommandItem96.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem96.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem96.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem97 = new ProtocolCommandItem();
+        CommandItem97.setCommandCode("100D0102");
+        CommandItem97.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem97.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem97.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem98 = new ProtocolCommandItem();
+        CommandItem98.setCommandCode("100D0103");
+        CommandItem98.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem98.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem98.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem99 = new ProtocolCommandItem();
+        CommandItem99.setCommandCode("100D0104");
+        CommandItem99.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem99.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem99.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem100 = new ProtocolCommandItem();
+        CommandItem100.setCommandCode("100D0105");
+        CommandItem100.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem100.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem100.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem101 = new ProtocolCommandItem();
+        CommandItem101.setCommandCode("100D0106");
+        CommandItem101.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem101.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem101.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem102 = new ProtocolCommandItem();
+        CommandItem102.setCommandCode("100D0107");
+        CommandItem102.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem102.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem102.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
+        ProtocolCommandItem CommandItem103 = new ProtocolCommandItem();
+        CommandItem103.setCommandCode("100D0108");
+        CommandItem103.AddDataItem(new ProtocolDataItem("F011", 5, "A15", 0,"曲线类数据时标","YESTERDAY","1"));
+        CommandItem103.AddDataItem(new ProtocolDataItem("F002", 1, "BIN", 0,"曲线类数据密度","3"));
+        CommandItem103.AddDataItem(new ProtocolDataItem("F003", 1, "BIN", 0,"曲线类数据点数","24"));
+
         ProtocolCommandItem CommandItem93 = new ProtocolCommandItem();
         CommandItem93.setCommandCode("100D0027");
         CommandItem93.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
@@ -515,6 +563,9 @@ public class CastorUtil {
         ProtocolCommandItem CommandItem95 = new ProtocolCommandItem();
         CommandItem95.setCommandCode("100D0029");
         CommandItem95.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+
+
+
         //漏保数据项
         ProtocolCommandItem CommandItem32 = new ProtocolCommandItem("8000B611",new ProtocolDataItem("B611", 2, "A8", 0,"当前A相电压",""));
         ProtocolCommandItem CommandItem33 = new ProtocolCommandItem("8000B612",new ProtocolDataItem("B612", 2, "A8", 0,"当前B相电压",""));
@@ -859,6 +910,14 @@ public class CastorUtil {
         CommandItems.AddCommandItem(CommandItem93);
         CommandItems.AddCommandItem(CommandItem94);
         CommandItems.AddCommandItem(CommandItem95);
+        CommandItems.AddCommandItem(CommandItem96);
+        CommandItems.AddCommandItem(CommandItem97);
+        CommandItems.AddCommandItem(CommandItem98);
+        CommandItems.AddCommandItem(CommandItem99);
+        CommandItems.AddCommandItem(CommandItem100);
+        CommandItems.AddCommandItem(CommandItem101);
+        CommandItems.AddCommandItem(CommandItem102);
+        CommandItems.AddCommandItem(CommandItem103);
         try {
 // write it out as XML
             Mapping map = new Mapping();
