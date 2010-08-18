@@ -26,7 +26,7 @@ var contextPath  = '${ctx}';
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||               document.body.clientWidth) -10 ); height: expression(((               document.documentElement.clientHeight ||               document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -135,7 +135,7 @@ var contextPath  = '${ctx}';
       <tr>
         <th>资产编号</th>
         <th>漏保地址</th>
-        <th>漏保型号</th>
+        <th>计划试跳</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -144,14 +144,20 @@ var contextPath  = '${ctx}';
         <tr id="ps_${ps.psId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${ps.assetNo}</td>
           <td>&nbsp;${ps.gpInfo.gpAddr}</td>
-          <td>&nbsp;<pss:code code="${ps.modelCode}" codeCate="<%=SystemConst.CODE_PS_MODEL %>" /></td>
+          <td><c:choose>
+            <c:when test="${ps.autoTest==1}">
+          ${ps.testDay}日${ps.testTime}时
+          </c:when>
+            <c:otherwise>
+                          无
+          </c:otherwise>
+          </c:choose></td>
           <td><a onclick="deletePsInfo('${ps.psId}')">删除</a>&nbsp;/&nbsp;<a onclick="updatePsInfo('${ps.psId}')">修改</a></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
-  
   <!-- 集中器信息 -->
   <div class="mgt10 da_top"><span>集中器信息</span>
   <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
@@ -184,9 +190,8 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  
   <!-- 操作员信息 -->
-    <div class="mgt10 da_top"><span>操作员信息</span>
+  <div class="mgt10 da_top"><span>操作员信息</span>
   <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
     height="16" style="cursor: pointer;" /></a></h1>
   </div>
@@ -210,7 +215,6 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  
   </div>
   </div>
 </ul>
