@@ -616,7 +616,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of transmitMsg method, of class RealTimeProxy376.
      */
-    @Test
+   // @Test
     public void testTransmitMsg() throws Exception {    
        Map datacellParams1 = new TreeMap();
        datacellParams1.put("C012", "2010-08-15 22:39:30");//漏电保护装置校时
@@ -664,7 +664,7 @@ public class RealTimeProxy376Test {
         assertTrue(databuf.getA8().getValue()==36);
     }
 
-    @Test
+    //@Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
          Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(4326);
@@ -676,7 +676,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByWEP method, of class RealTimeProxy376.
      */
-   @Test
+   //@Test
     public void testGetReturnByWEP() throws Exception {
 //        Map datacellParams1 = new TreeMap();
 //        datacellParams1.put("1004000101", "10");//终端数传机延时时间RTS
@@ -714,7 +714,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByREP method, of class RealTimeProxy376.
      */
-    @Test
+    //@Test
     public void testGetReturnByReadParameter() throws Exception {
         Map result = proxy.getReturnByReadParameter(3623);
         assertTrue(result.size() > 0);
@@ -723,12 +723,12 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByRRD method, of class RealTimeProxy376.
      */
-   // @Test
+   @Test
     public void testGetReturnByRRD() throws Exception {
        RealTimeProxy376 instance = proxy;
         Map expResult = new HashMap();
         expResult.put("96123456#1#10040001","1");
-        Map result = instance.getReturnByReadData(1722);
+        Map result = instance.getReturnByReadData(4710);
         assertEquals(expResult, result);
     }
 
