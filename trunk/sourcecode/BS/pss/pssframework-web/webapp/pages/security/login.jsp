@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/taglibs.jsp"%>
-<%@include file="/commons/meta.jsp"%>
 <%@ page import="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter"%>
 <%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"%>
 <%@ page import="org.springframework.security.core.AuthenticationException"%>
@@ -120,8 +119,12 @@ function refreshCaptcha() {
     <div class="error"><font color="white">会话超时.</font></div>
   </c:when>
   <c:otherwise></c:otherwise>
-</c:choose>
-${SPRING_SECURITY_LAST_EXCEPTION.message}
+</c:choose> <c:choose>
+  <c:when test="${succ == 1}">
+    <div class="error"><font color="white">成功注销.</font></div>
+  </c:when>
+  <c:otherwise></c:otherwise>
+</c:choose> ${SPRING_SECURITY_LAST_EXCEPTION.message}
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td width="39%" height="30" align="right" class="fontw">用户名：</td>
@@ -151,6 +154,7 @@ ${SPRING_SECURITY_LAST_EXCEPTION.message}
       src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
       onclick="javascript:refreshCaptcha()" /></span></td>
   </tr>
+  <tr>
     <td height="30"></td>
     <td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>
   </tr>
