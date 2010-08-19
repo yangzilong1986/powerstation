@@ -554,15 +554,15 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem93 = new ProtocolCommandItem();
         CommandItem93.setCommandCode("100D0027");
-        CommandItem93.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+        CommandItem93.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","YESTERDAY","1"));
 
         ProtocolCommandItem CommandItem94 = new ProtocolCommandItem();
         CommandItem94.setCommandCode("100D0028");
-        CommandItem94.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+        CommandItem94.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","YESTERDAY","1"));
 
         ProtocolCommandItem CommandItem95 = new ProtocolCommandItem();
         CommandItem95.setCommandCode("100D0029");
-        CommandItem95.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","","1"));
+        CommandItem95.AddDataItem(new ProtocolDataItem("F012", 5, "A15", 0,"日冻结类数据时标","YESTERDAY","1"));
 
 
 
