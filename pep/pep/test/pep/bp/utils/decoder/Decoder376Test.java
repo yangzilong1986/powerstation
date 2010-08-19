@@ -70,7 +70,7 @@ public class Decoder376Test {
         Object pack = null;
         Map<String, Map<String, String>> results = null;
         Decoder376 instance = new Decoder376();
-        instance.decode_TransMit(pack, results);
+        instance.decode_TransMit(pack, results,false);
         fail("The test case is a prototype.");
     }
 
