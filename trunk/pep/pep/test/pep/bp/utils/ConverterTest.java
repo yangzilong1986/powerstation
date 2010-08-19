@@ -117,7 +117,7 @@ public class ConverterTest {
         PmPacket376 packet = new PmPacket376();
         packet.setValue(msg, 0);
         Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
-        this.converter.decodeData_TransMit(packet, resultMap);
+        this.converter.decodeData_TransMit(packet, resultMap,false);
         Iterator iterator1 = resultMap.keySet().iterator();
         while (iterator1.hasNext()) {
             String key = (String) iterator1.next();
