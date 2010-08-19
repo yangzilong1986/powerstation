@@ -577,8 +577,8 @@ public class Converter {
         this.decoder.decode(packet, results);
     }
 
-    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results) {
-        this.decoder.decode_TransMit(packet, results);
+    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results,boolean IsWriteBack) {
+        this.decoder.decode_TransMit(packet, results,IsWriteBack);
     }
 
     public void decodeData_TransMit(PmPacket376 packet, Dto postData) {

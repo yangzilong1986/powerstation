@@ -508,11 +508,33 @@ public class RealTimeProxy376 implements ICollectInterface {
             for (RTTaskRecvDAO recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
-                converter.decodeData_TransMit(packet, tempMap);
+                converter.decodeData_TransMit(packet, tempMap,false);
             }
         }
         return tempMap;
     }
+
+    @Override
+    public Map<String, Map<String, String>> readTransmitWriteBack(long appId) throws Exception {
+        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        StringBuffer sb = new StringBuffer();
+        Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
+        for (RealTimeTaskDAO task : tasks) {
+            String logicAddress = task.getLogicAddress();
+            String[] GpArray = task.getGpMark().split("#");
+            String[] CommandArray = task.getCommandMark().split("#");
+            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            PmPacket376 packet = new PmPacket376();
+            for (RTTaskRecvDAO recv : recvs) {
+                byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
+                packet.setValue(msg, 0);
+                converter.decodeData_TransMit(packet, tempMap,true);
+            }
+        }
+        return tempMap;
+    }
+
+
 
     @Override
     public Map<String, Map<String, String>> readTransmitData(long appId) throws Exception {
