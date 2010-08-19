@@ -90,7 +90,7 @@ public class Decoder376 extends Decoder {
     }
 
     @Override
-    public void decode_TransMit(Object pack, Map<String, Map<String, String>> results) {
+    public void decode_TransMit(Object pack, Map<String, Map<String, String>> results,boolean IsWriteBack) {
         try {
             PmPacket376 packet = (PmPacket376) pack;
             String key = "";
@@ -119,12 +119,15 @@ public class Decoder376 extends Decoder {
             dataBuffer645.getRowIoBuffer().rewind();
             dataBuffer645.getRowIoBuffer().get(commandItem);
             String commandItemCode = "8000" + BcdUtils.binArrayToString(BcdUtils.reverseBytes(commandItem));
+            key = logicAddress + "#" + MeterAddress + "#" + commandItemCode;
+            if(IsWriteBack)
+                commandItemCode = "8000C040";
             if (!commandItemCode.equals("8000C040"))//除读保护器状态
             {
                 dataBuffer645.get();//将附带的开关信息状态读掉
 
             }
-            key = logicAddress + "#" + MeterAddress + "#" + commandItemCode;
+            
             Map<String, String> dataItems = new TreeMap();
             //dataBuffer645.rewind();
             this.DecodeData2Map(commandItemCode, dataItems, dataBuffer645);

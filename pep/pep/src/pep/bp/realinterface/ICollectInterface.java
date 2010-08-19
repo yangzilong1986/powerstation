@@ -60,6 +60,15 @@ public interface ICollectInterface {
      */
     public Map<String, Map<String,String>> readTransmitPara(long appId) throws Exception;
 
+
+    /**
+     * 透明转发写数据返回
+     * @param appId 回执码
+     * @return 返回结果<"zdljdz#cldxh#commanditem", <dataItem,value>>
+     * @throws Exception
+     */
+    public Map<String, Map<String,String>> readTransmitWriteBack(long appId) throws Exception;
+
     /**
      * 透明转发召测（数据类）
      * @param appId 回执码
