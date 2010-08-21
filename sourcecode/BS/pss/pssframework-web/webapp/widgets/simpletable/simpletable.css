@@ -1,77 +1,82 @@
 .gridTable {
-	margin: 0;
-	padding: 0;
-	font-size: 12px;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
 }
 
 /** grid body */
 .gridBody {
-	border-right: 1px solid silver;
-	border-top: 1px solid silver;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 .gridBody th {
-	border-left: 1px solid silver;
-	border-bottom: 1px solid silver;
-	vertical-align: middle;
-	background-color: #E5E5E5;
-	padding:0 10px 0 0;
-	text-align: center;
-	height: 20px;
+    background: url(images/thbg01.gif) repeat-x;
+    border-bottom: 1px solid #c3c3c3;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #d8d8d8;
+    vertical-align: middle;
+    padding:0 10px 0 0;
+    text-align: center;
+    height: 30px;
 }
-.gridBody td {
-	height: 20px;
-	border-left: 1px solid silver;
-	border-bottom: 1px solid silver;
-	color: black;
-	text-align: center;
+.gridBody tbody tr {
+    background-color:expression((this.sectionRowIndex%2==0)?"#eff5f8":"#fff");
+}
+.gridBody tbody tr td {
+    border-bottom:1px solid #d9e4ee; border-right:1px solid #d9e4ee; padding-left:10px;
 }
 
 /** grid header sort */
 .gridBody th.sort {
 }
 .gridBody th.sort.desc {
-	background:#c5c5c5 url(images/sort_desc.gif) center right no-repeat
+    background:#c5c5c5 url(images/sort_desc.gif) center right no-repeat
 }
 .gridBody th.sort.asc {
-	background:#c5c5c5 url(images/sort_asc.gif) center right no-repeat
+    background:#c5c5c5 url(images/sort_asc.gif) center right no-repeat
 }
 
 /** mouse hove over sort header */
 .gridBody .tableHeaderSortHover {
-	background-color: #f5f5f5 !important;
-	text-decoration: underline;
-	cursor: pointer;
+    background-color: #f5f5f5 !important;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 /** gridBody row colors */
 .gridBody .odd {
-	background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 .gridBody .even {
-	background-color: #F8F8F8;
+    background-color: #F8F8F8;
 }
 .gridBody .highlight {
-	background-color: #fdeccf !important;
+    background-color: #fdeccf !important;
 }
 
 /** grid toolbar */
 .gridToolbar .leftControls {
 }
 .gridToolbar .paginationControls .buttonLabel{
-	margin:0 0 0 12px
+    margin:0 0 0 12px
 }
 .gridToolbar .box div {
-	display:inline;
-	float:left;
+    display:inline;
+    float:left;
 }
 .gridToolbar .box .paginationControls {
-	float:right;
+    float:right;
 }
 .gridToolbar td{
-	background-color: #F4F4F4;
+    background-color: #D9EAEB;
+    height: 30px;
+    padding-right: 5px;
 }
 
 .gridBody .odd a, .even a {
-	font-size: 12px;
-	color: 005C9C !important;
+    font-size: 12px;
+    color: 005C9C !important;
 }
