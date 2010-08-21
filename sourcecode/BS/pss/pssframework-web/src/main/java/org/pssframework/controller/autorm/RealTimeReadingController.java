@@ -137,13 +137,14 @@ public class RealTimeReadingController extends BaseSpringController {
 	 * @param response
 	 * @throws Exception
 	 */
-	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/up")
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/up")
 	public ModelAndView up(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Long collectionId = Long.parseLong(request.getParameter("collectId"));
 
-		Map mto = realTimeReadingManager.getReturnByRRTD(new Long[] { collectionId });
+        Map<String, Map<String, String>> mto = realTimeReadingManager.getReturnByRRTD(new Long[] { collectionId });
+        logger.info(mto.toString());
 
 		ObjectMapper holder = new ObjectMapper();
 
