@@ -118,6 +118,11 @@
 
     </bean>
 
+    <bean id="psService" class="pep.bp.db.PSServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+
+    </bean>
+
     <bean id="dataService" class="pep.bp.db.DataServiceIMP">
         <property name="dataSource" ref="dataSource" />
         <property name="p_actStoredProcedure" ref="p_actDataStoredProcedure" />
