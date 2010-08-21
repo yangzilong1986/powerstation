@@ -50,8 +50,8 @@ public class PollingProcessor implements Runnable{
             //小时任务
             JobDetail jobDetailHour = new JobDetail("PollingJobHour", null, PollingJobProxy.class);
             jobDetailHour.getJobDataMap().put("PollingJob",new PollingJob(pepCommunicator,CIRCLE_UNIT_HOUR));
-            //triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
-            triggerHour = TriggerUtils.makeMinutelyTrigger(3);
+            triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
+            //triggerHour = TriggerUtils.makeMinutelyTrigger(3);
             triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
             triggerHour.setName("triggerHour");
 //            JobDetail jobDetailDay = new JobDetail("PollingJobDay", null, PollingJob.class);
