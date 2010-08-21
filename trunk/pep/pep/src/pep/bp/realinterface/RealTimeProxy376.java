@@ -567,8 +567,9 @@ public class RealTimeProxy376 implements ICollectInterface {
             String CommandItemCode = key.split("#")[2];
             Map<String, String> DataMap = sourceMap.get(key);
             Iterator iterator2 = DataMap.keySet().iterator();
-            Map<String, String> resultMap = new TreeMap<String, String>();
+            
             while (iterator2.hasNext()) {
+                Map<String, String> resultMap = new TreeMap<String, String>();
                 dataItemCode = (String) iterator2.next();
                 String dataValue = DataMap.get(dataItemCode);
                 ProtocolDataItem dataItem = config.getDataItemMap(CommandItemCode).get(dataItemCode);
