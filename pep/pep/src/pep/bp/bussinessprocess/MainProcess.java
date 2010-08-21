@@ -24,10 +24,11 @@ public class MainProcess {
     private static int rtResponseDealerMaxNumber = 1;
     private static int pollingProcessorMaxNumber = 1;
     private LeakPointProcessor lpProcessor;
-    private SMSNoticeProcessor sMSProcessor;
+    private SMSCheckProcessor smsProcessor;
     private PollingProcessor pollingProcessor;
     private UpLoadProcessor upLoadProcessor;
     private PlanManager planManager;
+
     private final static Logger log = LoggerFactory.getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private ThreadPoolExecutor threadPool;
@@ -91,6 +92,15 @@ public class MainProcess {
 
     }
 
+    private void runsmsCheckProcessor() {
+        if (this.smsProcessor == null) {
+            this.smsProcessor = new SMSCheckProcessor();
+        }
+        log.info("启动短信回复检查处理器 ");
+        smsProcessor.run();
+
+    }
+
     public MainProcess(PepCommunicatorInterface pepCommunicator) {
         this.threadPool = new ThreadPoolExecutor(2, 4, 3,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3),
@@ -106,6 +116,7 @@ public class MainProcess {
         runResponseDealer();
         runPollingProcessor();
         runPlanManager();
+        runsmsCheckProcessor();
         runupLoadProcessor();
         
     }
