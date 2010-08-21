@@ -730,12 +730,12 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByRRD method, of class RealTimeProxy376.
      */
-  // @Test
+  @Test
     public void testGetReturnByRRD() throws Exception {
        RealTimeProxy376 instance = proxy;
         Map expResult = new HashMap();
         expResult.put("96123456#1#10040001","1");
-        Map result = instance.getReturnByReadData(4710);
+        Map result = instance.getReturnByReadData(4758);
         assertEquals(expResult, result);
     }
 
