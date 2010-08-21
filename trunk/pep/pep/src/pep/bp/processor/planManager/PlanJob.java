@@ -20,8 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.PSService;
+import pep.bp.db.RTTaskService;
 
 import pep.bp.model.PSDAO;
+import pep.bp.model.RealTimeTaskDAO;
 
 import pep.bp.realinterface.mto.CollectObject_TransMit;
 import pep.bp.realinterface.mto.CommandItem;
@@ -42,6 +44,7 @@ public class PlanJob implements Job {
 
     private final static Logger log = LoggerFactory.getLogger(PlanJob.class);
     private PSService psService;
+    private RTTaskService rtTaskService;
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private RtuRespPacketQueue respQueue;//返回报文队列
     private ApplicationContext cxt;
@@ -56,6 +59,7 @@ public class PlanJob implements Job {
     public PlanJob(PepCommunicatorInterface pepCommunicator, int circleUnit) {
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
         psService = (PSService) cxt.getBean("psService");
+        rtTaskService = (RTTaskService) cxt.getBean("rtTaskService");
         converter = (Converter) cxt.getBean("converter");
         this.pepCommunicator = pepCommunicator;
         this.circleUnit = circleUnit;
@@ -82,7 +86,7 @@ public class PlanJob implements Job {
         Item.setIdentifier("800C037");
         CollectObject_TransMit object_trans = new CollectObject_TransMit();
         object_trans.setFuncode((byte) 4);//写数据（试跳）
-        object_trans.setMeterAddr(ps.getMp_addr()); //表地址
+        object_trans.setMeterAddr(ps.getGp_addr()); //表地址
         object_trans.setMeterType(MeterType.Meter645);
         object_trans.setPort((byte) 1);
         SerialPortPara spp = new SerialPortPara();
@@ -100,7 +104,15 @@ public class PlanJob implements Job {
         if (null != packetList) {
             for (PmPacket376 pack : packetList) {
                 pack.getAddress().setMastStationId((byte) 2);
-                pepCommunicator.SendPacket(this.getsequenceCode(), pack);
+
+                RealTimeTaskDAO task = new RealTimeTaskDAO();
+                task.setSendmsg(BcdUtils.binArrayToString(pack.getValue()));
+                task.setSequencecode(-1);
+                task.setLogicAddress(ps.getLogicAddress());
+                task.setTask_type("2");
+                this.rtTaskService.insertTask(task);
+
+               // pepCommunicator.SendPacket(this.getsequenceCode(), pack);
                 log.info("向终端：[" + ps.getLogicAddress() + "] 下发计划试跳报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(pack.getValue()));
             }
         }
