@@ -15,6 +15,7 @@ public class SystemConst {
     public static final String REALTIMETASK_BEAN = "rtTaskService";
     public static final String TERMTASK_BEAN = "taskService";
     public static final String DATASERVICE_BEAN = "dataService";
+    public static final String SMSSERVICE_BEAN = "smsService";
 
 
     //----------------------------------------------Parse Parameters ------------------
