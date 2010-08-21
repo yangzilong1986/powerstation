@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pep.bp.processor.*;
+import pep.bp.processor.planManager.PlanManager;
 import pep.mina.common.PepCommunicatorInterface;
 
 /**
@@ -26,6 +27,7 @@ public class MainProcess {
     private SMSNoticeProcessor sMSProcessor;
     private PollingProcessor pollingProcessor;
     private UpLoadProcessor upLoadProcessor;
+    private PlanManager planManager;
     private final static Logger log = LoggerFactory.getLogger(MainProcess.class);
     private PepCommunicatorInterface pepCommunicator;//通信代理器
     private ThreadPoolExecutor threadPool;
@@ -67,6 +69,19 @@ public class MainProcess {
 
     }
 
+    private void runPlanManager() {
+        try {
+            if (this.planManager == null) {
+                this.planManager = new PlanManager(this.pepCommunicator);
+            }
+            planManager.run();
+            log.info("启动漏保试跳计划管理器 ");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void runupLoadProcessor() {
         if (this.upLoadProcessor == null) {
             this.upLoadProcessor = new UpLoadProcessor(this.pepCommunicator);
@@ -90,6 +105,8 @@ public class MainProcess {
         runRealTimeTaskSender();
         runResponseDealer();
         runPollingProcessor();
+        runPlanManager();
         runupLoadProcessor();
+        
     }
 }

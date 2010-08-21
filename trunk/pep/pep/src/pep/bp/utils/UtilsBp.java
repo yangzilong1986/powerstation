@@ -22,6 +22,18 @@ public class UtilsBp {
         return date;
 
     }
+
+    @SuppressWarnings("static-access")
+    public static String getThisDay(){
+        Calendar   cal   =   Calendar.getInstance();
+        return lPad(String.valueOf(cal.DAY_OF_MONTH),"0",2);
+    }
+
+    @SuppressWarnings("static-access")
+    public static String getThisHour(){
+        Calendar   cal   =   Calendar.getInstance();
+        return lPad(String.valueOf(cal.HOUR_OF_DAY),"0",2);
+    }
     
     public static String getYeasterday() {
         Calendar   cal   =   Calendar.getInstance();

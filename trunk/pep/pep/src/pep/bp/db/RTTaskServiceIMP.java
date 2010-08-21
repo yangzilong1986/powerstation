@@ -33,8 +33,8 @@ public class RTTaskServiceIMP implements RTTaskService {
     @Override
     public void insertTask(RealTimeTaskDAO task) {
         try {
-            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?)",
-                    new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark()});
+            jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK,TASK_TYPE) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?,?)",
+                    new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark(),task.getTask_type()});
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
         }
@@ -48,8 +48,8 @@ public class RTTaskServiceIMP implements RTTaskService {
     public void insertTasks(List<RealTimeTaskDAO> Tasks) {
         for (RealTimeTaskDAO task : Tasks) {
             try {
-                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?)",
-                        new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark()});
+                jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK,TASK_TYPE) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?,?)",
+                        new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark(),task.getTask_type()});
             } catch (DataAccessException dataAccessException) {
                 log.error(dataAccessException.getMessage());
             }
