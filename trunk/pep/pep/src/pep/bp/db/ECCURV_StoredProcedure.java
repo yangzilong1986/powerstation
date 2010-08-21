@@ -57,7 +57,7 @@ public class ECCURV_StoredProcedure extends StoredProcedure {
                         String ECUR_A,String ECUR_B,String ECUR_C,String ECUR_L,String ECUR_S,
                         String VOLT_A,String VOLT_B,String VOLT_C)
     {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);

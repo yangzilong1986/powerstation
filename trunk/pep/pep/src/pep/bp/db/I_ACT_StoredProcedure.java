@@ -47,7 +47,7 @@ public class I_ACT_StoredProcedure extends StoredProcedure {
     public Map execute(String logicalAddress,int gpSn,String dataDate,
                         String p_i_react_total,String p_i_react_sharp,String p_i_react_peak
                         ,String p_i_react_level,String p_i_react_valley) {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);

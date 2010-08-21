@@ -52,7 +52,7 @@ public class LouBaoEventStoredProcedure extends StoredProcedure {
     public Map execute(String logicalAddress,String loubaoAddress,int ex_code,
                         Date trig_time,Date receive_Time,int closed,int locked,
                         String phase,int currentValue) {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(LOUBAOADDRESS__PARA, loubaoAddress);
             inputs.put(EX_CODE_PARA, ex_code);

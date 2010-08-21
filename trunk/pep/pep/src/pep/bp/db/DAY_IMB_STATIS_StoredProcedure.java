@@ -54,7 +54,7 @@ public class DAY_IMB_STATIS_StoredProcedure extends StoredProcedure {
                         String p_ecur_imbal_max_time,
                         String p_volt_imbal_max,
                         String p_volt_imbal_max_time) {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
