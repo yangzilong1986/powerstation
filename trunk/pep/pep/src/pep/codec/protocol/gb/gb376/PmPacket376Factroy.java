@@ -20,6 +20,7 @@ public class PmPacket376Factroy {
     }
 
     private static byte getFunctionKey(byte afn) {
+
         return 0;
     }
 
