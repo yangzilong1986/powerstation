@@ -35,7 +35,7 @@ public class PSServiceIMP implements  PSService{
          try {
             //主站轮召任务
             StringBuffer sbSQL = new StringBuffer();
-            sbSQL.append("select logical_addr,gp_sn,mp_addr,test_day,test_time");
+            sbSQL.append("select logical_addr,gp_sn,gp_addr,test_day,test_time");
             sbSQL.append(" from V_PS");
             sbSQL.append(" where test_day = ?");
             sbSQL.append(" and test_time = ?");

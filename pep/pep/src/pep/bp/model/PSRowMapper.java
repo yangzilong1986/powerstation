@@ -19,7 +19,7 @@ public class PSRowMapper implements RowMapper {
         PSDAO ps = new PSDAO();
         ps.setGp_sn(rs.getInt("gp_sn"));
         ps.setLogicAddress(rs.getString("LOGICAL_ADDR"));
-        ps.setMp_addr(rs.getString("mp_addr"));
+        ps.setGp_addr(rs.getString("gp_addr"));
         ps.setTest_day(rs.getString("test_day"));
         ps.setTest_hour(rs.getString("test_time"));
         return ps;

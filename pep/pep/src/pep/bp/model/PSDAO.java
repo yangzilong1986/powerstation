@@ -13,7 +13,7 @@ package pep.bp.model;
 public class PSDAO {
     private String logicAddress;
     private int gp_sn;
-    private String mp_addr;
+    private String gp_addr;
     private String test_day;
     private String test_hour;
 
@@ -53,15 +53,15 @@ public class PSDAO {
     /**
      * @return the mp_addr
      */
-    public String getMp_addr() {
-        return mp_addr;
+    public String getGp_addr() {
+        return gp_addr;
     }
 
     /**
      * @param mp_addr the mp_addr to set
      */
-    public void setMp_addr(String mp_addr) {
-        this.mp_addr = mp_addr;
+    public void setGp_addr(String gp_addr) {
+        this.gp_addr = gp_addr;
     }
 
     /**
