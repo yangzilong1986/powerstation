@@ -16,4 +16,8 @@ public class SmsRespProcessor {
     public static void receiveRtuPacket(PmPacket pack){
         
     }
+    
+    public static void receiveLoubaoOperateMsg(long id, String rtua, String lbAddress){
+        
+    }
 }
