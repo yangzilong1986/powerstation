@@ -515,9 +515,10 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
 						Iterator iterator = mapReturn.keySet().iterator();
 						while (iterator.hasNext()) {
 							String key = null;
-							HashMap value = null;
+                            // HashMap value = null;
+                            TreeMap value = null;
 							key = (String) iterator.next();
-							value = (HashMap) mapReturn.get(key);
+                            value = (TreeMap) mapReturn.get(key);
 							Iterator valueiterator = value.keySet().iterator();
 							logger.info("  [key, valuemap] : " + "[" + key + " , " + value + "]");
 							String[] keys = key.split("#");
