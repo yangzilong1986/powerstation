@@ -14,6 +14,7 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import pep.bp.bussinessprocess.MainProcess;
+import pep.bp.processor.SmsRespProcessor;
 import pep.mina.common.RtuUnrespPacketChecker;
 import pep.mina.protocolcodec.gb.PepGbCommunicator;
 import pep.mina.protocolcodec.gb.gb376.PmPacket376CodecFactory;
@@ -46,6 +47,7 @@ public class Main {
         checkTimer.schedule(checker, timestamp,timestamp);
 
         //启动业务处理器
+        SmsRespProcessor.setRtuMap(rtuMap);
         MainProcess PBProcessor = new MainProcess(rtuMap);
         PBProcessor.run();
     }
