@@ -42,7 +42,19 @@ public class UtilsBp {
         return yesterday + " 00:00:00";
     }
 
+    @SuppressWarnings("static-access")
+    public static String getThisDay(){
+        Calendar   cal   =   Calendar.getInstance();
+        int Day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        return lPad(String.valueOf(Day),"0",2);
+    }
 
+    @SuppressWarnings("static-access")
+    public static String getThisHour(){
+        Calendar   cal   =   Calendar.getInstance();
+        int Hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        return lPad(String.valueOf(Hour),"0",2);
+    }
 
     public static String Date2String(Date date) {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
