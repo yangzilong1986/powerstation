@@ -59,7 +59,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
                         String ECUR_A,String ECUR_B,String ECUR_C,String ECUR_L,String ECUR_S,
                         String VOLT_A,String VOLT_B,String VOLT_C,String FN)
     {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -76,7 +76,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
      }
 
     public Map insertVoltA(String logicalAddress,int gpSn,String dataDate,String VOLT_A){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -93,7 +93,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertVoltB(String logicalAddress,int gpSn,String dataDate,String VOLT_B){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -110,7 +110,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertVoltC(String logicalAddress,int gpSn,String dataDate,String VOLT_C){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -127,7 +127,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertEcurA(String logicalAddress,int gpSn,String dataDate,String Ecur_A){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -144,7 +144,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertEcurB(String logicalAddress,int gpSn,String dataDate,String Ecur_B){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -161,7 +161,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertEcurC(String logicalAddress,int gpSn,String dataDate,String Ecur_C){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
@@ -178,7 +178,7 @@ public class ECCURV_StoredProcedure2 extends StoredProcedure {
     }
 
     public Map insertEcurL(String logicalAddress,int gpSn,String dataDate,String Ecur_L){
-        Map inputs = new HashMap();
+        Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);

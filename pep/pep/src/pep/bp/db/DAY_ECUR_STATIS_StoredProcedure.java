@@ -73,7 +73,7 @@ public class DAY_ECUR_STATIS_StoredProcedure extends StoredProcedure {
                         String p_ecur_peak_b,String p_ecur_peak_b_time,
                         String p_ecur_peak_c,String p_ecur_peak_c_time,
                         String p_ecur_peak_o,String p_ecur_peak_o_time) {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);

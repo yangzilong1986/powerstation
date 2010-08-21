@@ -60,7 +60,7 @@ public class PowerCurv_StoredProcedure2 extends StoredProcedure {
             String act_power_c,String react_power_total,String react_power_a,
             String react_power_b,String react_power_c,String FN)
     {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);

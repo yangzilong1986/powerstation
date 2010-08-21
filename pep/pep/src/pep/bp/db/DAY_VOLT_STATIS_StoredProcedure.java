@@ -111,7 +111,7 @@ public class DAY_VOLT_STATIS_StoredProcedure extends StoredProcedure {
                         String p_VALLEY_C,String p_VALLEY_C_TIME,
                         String p_AVERAGE_VOLT_A,String p_AVERAGE_VOLT_B,
                         String p_AVERAGE_VOLT_C) {
-            Map inputs = new HashMap();
+            Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
             inputs.put(SN_PARA, gpSn);
             inputs.put(DATETIME_PARA, dataDate);
