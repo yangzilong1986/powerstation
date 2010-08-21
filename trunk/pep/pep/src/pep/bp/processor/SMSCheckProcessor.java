@@ -4,6 +4,9 @@
 
 package pep.bp.processor;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Thinkpad
@@ -19,13 +22,13 @@ public class SMSCheckProcessor implements Runnable{
     private final String deleteSql = "delete a_sms_receive where id=:id";
     
     @Override
-    public void run(){
-        for (;;){
-            try {
-                for(){
+    public void run() {
+        for (;;) {
+            for (;;) {
                 //SmsRespProcessor.receiveLoubaoOperateMsg(id, rtua, lbAddress);
                 //delete 
-                }
+            }
+            try {
                 Thread.sleep(TIME_BETWEEN_CHECKING);
             } catch (InterruptedException ex) {
                 break;
