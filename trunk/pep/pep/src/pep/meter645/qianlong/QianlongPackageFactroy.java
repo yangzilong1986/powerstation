@@ -18,4 +18,11 @@ public class QianlongPackageFactroy {
         pack.getData().putWord(dataId);
         return pack;
     }
+    
+    public static Gb645MeterPacket makeSetPacket(String address, int dataId){
+        Gb645MeterPacket pack = new Gb645MeterPacket(address);
+        pack.getControlCode().isFromMast(true).isHasHouxuzhen(false).isYichang(false).setFuncCode((byte)4);
+        pack.getData().putWord(dataId);
+        return pack;
+    }
 }
