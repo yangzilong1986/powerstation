@@ -30,7 +30,7 @@ public abstract class Decoder {
         try {
             String GroupValue = "";
             if (dataItems == null) {
-                dataItems = new TreeMap();
+                dataItems = new TreeMap<String,String>();
             }
             List<ProtocolDataItem> DataItemList_Config = config.getDataItemList(commandItemCode);
 
