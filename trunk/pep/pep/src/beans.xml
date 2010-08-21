@@ -50,7 +50,7 @@
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
+
     <bean id="converter" class="pep.bp.utils.Converter">
 	 <property name="config" ref="protocolConfig"/>
          <property name="decoder" ref="decoder"/>
@@ -71,7 +71,7 @@
     <bean id="i_actDataStoredProcedure" class="pep.bp.db.I_ACT_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
-    
+
     <bean id="i_reactDataStoredProcedure" class="pep.bp.db.I_REACT_StoredProcedure">
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
