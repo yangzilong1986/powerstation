@@ -37,10 +37,14 @@ public class UtilsBp {
 
      @SuppressWarnings("static-access")
     public static String getYeasterday() {
+        return getYeasterday_YYMMDD() + " 00:00:00";
+    }
+
+    @SuppressWarnings("static-access")
+    public static String getYeasterday_YYMMDD() {
         Calendar   cal   =   Calendar.getInstance();
         cal.add(Calendar.DATE,   -1);
-        String yesterday = new SimpleDateFormat( "yyyy-MM-dd").format(cal.getTime());
-        return yesterday + " 00:00:00";
+        return new SimpleDateFormat( "yyyy-MM-dd").format(cal.getTime());
     }
 
 

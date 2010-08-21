@@ -389,9 +389,8 @@ public class Converter {
             String DataItemCode = dataItem.getDataItemCode();
             DataItemValue = dataItem.getDefaultValue();
             if (DataItemValue.equals("YESTERDAY")) //抄上一天
-            {
                 DataItemValue = UtilsBp.getYeasterday();
-            }
+
             if (dataItemMap != null) {
                 if (dataItemMap.containsKey(DataItemCode)) {
                     DataItemValue = dataItemMap.get(DataItemCode);
