@@ -404,8 +404,8 @@ function getSelectedCheckboxs4() {
     <div id="inquiry" style="margin-top: 5px;">
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td width="100" height="30" align="right" class="green">终端逻辑地址：</td>
-          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="96123455" style="width: 140px; height: 18px;"/></td>
+          <td width="100" height="30" align="right" class="green">逻辑地址：</td>
+          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="96123455" style="width: 140px; height: 20px;"/></td>
           <td width="100" align="right">
             <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" />
           </td>

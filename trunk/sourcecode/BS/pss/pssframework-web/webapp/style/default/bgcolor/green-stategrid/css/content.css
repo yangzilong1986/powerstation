@@ -861,7 +861,7 @@ div.tableContainer {
     padding: 0;
     clear: both;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 div.tableContainer table thead tr {

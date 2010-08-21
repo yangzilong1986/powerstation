@@ -52,10 +52,6 @@ function changeFod(obj) {
         <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_1002">
         <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon'); return false;">漏保监测</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_1003">
-        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', '/psmanage/rmttpsw'); return false;">远程跳合闸</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_1004">
-        <div onmouseover=changeFod(this)><a id="a1004" href="#" onclick="selectMenu('1004', '/psmanage/rmttest'); return false;">远程试验跳</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_1005">
         <div onmouseover=changeFod(this)><a id="a1005" href="#" onclick="selectMenu('1005', ''); return false;">数据检查</a></div></security:authorize>
       </div>
