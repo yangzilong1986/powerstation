@@ -39,6 +39,8 @@ public class RtuCommunicationInfo {
     private byte lastEc1;
     private byte lastEc2;
     private static final byte EC_CALL_HOST_ID = 3;   //读取3类数据时使用的主站ID
+    public final static byte AUTO_CALL_TASK_HOSTID = 2;
+    public final static byte LOUBAO_OPRATE_HOSTID = 4;
     private static final long TIME_OUT = 10 * 1000;
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
