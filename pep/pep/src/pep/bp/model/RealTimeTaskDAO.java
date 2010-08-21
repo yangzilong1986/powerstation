@@ -24,6 +24,7 @@ public class RealTimeTaskDAO {
     private String taskStatus = "0"; //默认未处理
     private String gpMark;//测量点标志：1#2#3#
     private String commandMark;//命令项标志：10040009#10040010
+    private String task_type;
 
     public RealTimeTaskDAO(){
         this.recvMsgs = new ArrayList<RTTaskRecvDAO>();
@@ -125,6 +126,20 @@ public class RealTimeTaskDAO {
      */
     public void setCommandMark(String commandMark) {
         this.commandMark = commandMark;
+    }
+
+    /**
+     * @return the task_type
+     */
+    public String getTask_type() {
+        return task_type;
+    }
+
+    /**
+     * @param task_type the task_type to set
+     */
+    public void setTask_type(String task_type) {
+        this.task_type = task_type;
     }
 
 
