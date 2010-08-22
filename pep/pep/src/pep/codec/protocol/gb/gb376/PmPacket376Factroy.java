@@ -20,8 +20,29 @@ public class PmPacket376Factroy {
     }
 
     private static byte getFunctionKey(byte afn) {
-
-        return 0;
+        switch (afn) {
+            case 0x01:
+                return 1;
+            case 0x02:
+                return 9;
+            case 0x04:
+            case 0x05:
+                return 10;
+            case 0x03:
+            case 0x06:
+            case 0x08:
+            case 0x09:
+            case 0x0A:
+            case 0x0B:
+            case 0x0C:
+            case 0x0D:
+            case 0x0E:
+            case 0x0F:
+            case 0x10:
+                return 11;
+            default:
+                return 0;
+        }
     }
 
     private static byte getRespFunctionKey(byte originalityKey) {
