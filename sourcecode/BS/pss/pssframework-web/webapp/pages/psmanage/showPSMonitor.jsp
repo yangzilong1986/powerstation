@@ -9,9 +9,15 @@
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
-function inquiry() {
-    
-}
+$(document).ready(function() {
+    $("#inquiryBtn").click( function() {
+        var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
+        $("#psTreeFrame").attr("src", urlInquiry);
+    });
+
+    var urlTree = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
+    $("#psTreeFrame").attr("src", urlTree);
+});
 </script>
 </head>
 <body>
@@ -20,12 +26,26 @@ function inquiry() {
     <div id="inquiry" style="margin-top: 5px;">
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td width="100" height="30" align="right" class="green">台区编号：</td>
-          <td width="120"><input id="tgNo" name="tgNo" class="input2" value="" style="width: 140px; height: 18px;"/></td>
-          <td width="100" align="right" class="green">台区名称：</td>
-          <td width="120"><input id="tgName" name="tgName" class="input2" value="" style="width: 140px; height: 18px;"/></td>
+          <td width="100" height="30" class="green" align="right">单 位：</td>
+          <td width="120">
+            <select name="orgId" style="width: 140px;">
+              <c:forEach var="item" items="${orglist}">
+                <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
+              </c:forEach>
+            </select>
+          </td>
+          <td width="100" class="green" align="right">台 区：</td>
+          <td width="120">
+            <select id="objId" name="objId" style="width: 140px;">
+              <c:set value="${model.objId}" var="tg"></c:set>
+              <option value="-1">请选择台区</option>
+              <c:forEach var="item" items="${tglist}">
+                <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
+              </c:forEach>
+            </select>
+          </td>
           <td width="100" align="right">
-            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="inquiry(); return false;" style="cursor: pointer;" />
+            <img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" />
           </td>
         </tr>
       </table>
@@ -43,11 +63,11 @@ function inquiry() {
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="120" height="100%">
-                    <iframe id="psTreeFrame" name="psTreeFrame" src="<pss:path type="webapp"/>/pages/psmanage/psTree.jsp?type=psmon" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+                    <iframe id="psTreeFrame" name="psTreeFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                   <td width="3" height="100%" style="background-color: #bbdcd8;"></td>
                   <td>
-                    <iframe id="psMonitorFrame" name="psMonitorFrame" src="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+                    <iframe id="psMonitorFrame" name="psMonitorFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                 </tr>
               </table>

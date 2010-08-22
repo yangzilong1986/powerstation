@@ -179,7 +179,7 @@ $(document).ready(function() {
             </select>
           </td>
           <td width="100" class="green" align="right">台 区：</td>
-          <td width="150">
+          <td width="120">
             <select name="objId" style="width: 140px;">
               <c:set value="${model.objId}" var="tg"></c:set>
               <c:forEach var="item" items="${tglist}">

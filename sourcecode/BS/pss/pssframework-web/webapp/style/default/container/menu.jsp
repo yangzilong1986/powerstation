@@ -51,9 +51,7 @@ function changeFod(obj) {
       <security:authorize ifAnyGranted="ROLE_RESOURCE_1001">
         <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_1002">
-        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon'); return false;">漏保监测</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_1005">
-        <div onmouseover=changeFod(this)><a id="a1005" href="#" onclick="selectMenu('1005', ''); return false;">数据检查</a></div></security:authorize>
+        <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon/frame'); return false;">漏保监测</a></div></security:authorize>
       </div>
     </dt>
   </dl>
@@ -98,8 +96,6 @@ function changeFod(obj) {
         <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', '/statistics/sumMeterDataQuery'); return false;">总表数据</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4003">
         <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', '/statistics/psDataQuery'); return false;">开关数据</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
-        <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', ''); return false;">台区综合</a></div></security:authorize>
       </div>
     </dt>
   </dl>

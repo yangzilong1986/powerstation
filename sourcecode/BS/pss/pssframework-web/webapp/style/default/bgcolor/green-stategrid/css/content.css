@@ -90,6 +90,14 @@ img {
     color: #0c6051;
 }
 
+.green1 {
+    color: #104f4f;
+}
+
+.red {
+    color: #b50000;
+}
+
 /*padding margin text-align line-height*/
 .tc {
     text-align: center;
@@ -1131,3 +1139,26 @@ tr.dicontent {
     border-right: 1px #c3cfd4 solid;
     border-bottom: 1px #c3cfd4 solid;
 }
+
+/*index.htm*/
+.index_con{line-height:24px; padding-top:30px;}
+.index_con p{text-indent:24px;}
+
+/*page3*/
+.info_top{border-bottom:1px #d2d2d2 solid; height:24px;}
+.info_top span{border-left:1px #d2d2d2 solid; border-right:1px #d2d2d2 solid; border-top:1px #d2d2d2 solid; padding-left:10px; padding-right:25px; margin-bottom:-1px; background:#fff; color:#104f4f; font-weight:bold; height:24px; line-height:24px; float:left;}
+.info_con{border-left:1px #d2d2d2 solid; border-right:1px #d2d2d2 solid; border-bottom:1px #d2d2d2 solid; padding:10px; width:auto;}
+
+
+.twidth{background:#4fa599;}
+.td1{border-left:1px #fff solid; border-right:1px #fff solid; background:#e4f0f1; padding:10px 15px;}
+
+.jc_tab{background:url(../img/page_bg11.gif) repeat-x; height:25px; padding-top:4px;}
+.jc_tab ul{overflow:hidden;}
+.jc_tab ul li{float:left; background:url(../img/jc_tab.gif) no-repeat; width:95px; height:22px; margin-left:3px; line-height:22px; text-align:center; color:#104f4f;}
+.jc_tab .curr{background:url(../img/jc_tab_on.gif) no-repeat; width:95px; height:22px; font-weight:bold;}
+.jc_con{padding:10px 10px 0 10px;}
+.jc_con .default{display:block;}
+.jc_sub{background:url(../img/jc_sub.gif) no-repeat; width:69px; height:23px; color:#333; text-align:center; line-height:23px; cursor:pointer; border:0;}
+
+.input_nostyle{border:0; height:13px; vertical-align:middle; width:13px; background:none;}
