@@ -1,12 +1,24 @@
 package org.pssframework.controller.psmanage;
 
+import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.PsInfo;
+import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.system.OrgInfo;
+import org.pssframework.service.archive.PsInfoManger;
+import org.pssframework.service.archive.TgInfoManager;
+import org.pssframework.service.psmanage.PSTreeManager;
+import org.pssframework.service.system.CodeInfoManager;
+import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.util.ConverterUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,25 +35,104 @@ import pep.bp.realinterface.mto.MessageTranObject;
  */
 @Controller
 @RequestMapping("/psmanage/psmon")
-public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> {
+public class PSMonitorController extends BaseSpringController {
+    private static final String VIEW_NAME_FRM = "/psmanage/showPSMonitor";
+    private static final String VIEW_NAME_MON = "/psmanage/psMonitor";
+    private static final String VIEW_NAME_TRE = "/psmanage/psTree";
+
+    @Autowired
+    private OrgInfoManager orgInfoManager;
+
+    @Autowired
+    private TgInfoManager tgInfoManager;
+
+    @Autowired
+    private PSTreeManager psTreeManager;
+
+    @Autowired
+    private PsInfoManger psInfoManger;
+
+    @Autowired
+    private CodeInfoManager codeInfoManager;
+
     @Autowired
     private ICollectInterface realTimeProxy376;
 
-    @RequestMapping
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, PsInfo model) {
-        ModelAndView result = new ModelAndView();
-        result.addObject("psInfo", model);
-        result.setViewName("/psmanage/showPSMonitor");
-        return result;
+    /**
+     * 
+     * @param mav
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/frame")
+    public ModelAndView _frame(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME_FRM);
+        Map mapRequest = new LinkedHashMap();
+        getInitOption(mav, mapRequest);
+        return mav;
     }
 
-    public ModelAndView show(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        PsInfo psInfo = new PsInfo();
-        ModelAndView result = new ModelAndView();
-        result.addObject("psInfo", psInfo);
-        result.setViewName("/psmanage/showPSMonitor");
-        return result;
+    /**
+     * 漏保对象树
+     * 
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/pstree/{id}")
+    public ModelAndView _pstree(ModelAndView mav, @PathVariable Long id) throws Exception {
+        logger.info("tdId : " + id);
+        mav.setViewName(VIEW_NAME_TRE);
+        mav.addObject("tree", psTreeManager.findPSTreeByTgId(id));
+        return mav;
+    }
+
+    /**
+     * 漏保监测
+     * 
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/psmonitor/{id}")
+    public ModelAndView _psmonitor(ModelAndView mav, @PathVariable Long id) throws Exception {
+        mav.setViewName(VIEW_NAME_MON);
+        logger.info("psId : " + id);
+        PsInfo psInfo = psInfoManger.getById(id);
+        mav.addObject("psInfo", psInfo);
+
+        Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
+
+        // 漏保型号
+        requestMap.put("codecate", CODE_PS_MODEL);
+        mav.addObject("psModelList", this.codeInfoManager.findByPageRequest(requestMap));
+
+        return mav;
+    }
+
+    /**
+     * 下拉框
+     * 
+     * @param model
+     * @param mapRequest
+     */
+    private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+        model.addObject("orglist", this.getOrgOptions(mapRequest));
+        model.addObject("tglist", this.getTgOrgOptions(mapRequest));
+    }
+
+    private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
+        return this.orgInfoManager.findByPageRequest(mapRequest);
+    }
+
+    private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
+        return tgInfoManager.findByPageRequest(mapRequest);
     }
 
     /**
@@ -156,137 +247,6 @@ public class PSMonitorController extends BaseRestSpringController<PsInfo, Long> 
                 logger.info("resultMap : " + resultMap.toString());
             }
         }
-        return result;
-    }
-
-    /**
-     * 漏保对象树
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstree")
-    public ModelAndView _pstree(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-
-        return result;
-    }
-
-    /**
-     * 漏保数据（电压、电流、剩余电流、参数值）
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/psdatainfo")
-    public ModelAndView _psdatainfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保跳合闸
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstrip")
-    public ModelAndView _pstrip(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保试验跳
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstest")
-    public ModelAndView _pstest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保时间设置
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstimeSetup")
-    public ModelAndView _pstimeSetup(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        // String dtoJSONString = request.getParameter("dto");
-        String dtoJSONString = "{\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"10040001\"}]}]}";
-        logger.info("dtoJSONString : " + dtoJSONString);
-
-        return result;
-    }
-
-    /**
-     * 漏保时间读取
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstimeRead")
-    public ModelAndView _pstimeRead(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保状态读设
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/psstatusSetup")
-    public ModelAndView _psstatusSetup(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保参数读设
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/psparamsSetup")
-    public ModelAndView _psparamsSetup(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
-        return result;
-    }
-
-    /**
-     * 漏保跳闸信息
-     * 
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/pstripInfo")
-    public ModelAndView _pstripInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView result = new ModelAndView();
         return result;
     }
 }
