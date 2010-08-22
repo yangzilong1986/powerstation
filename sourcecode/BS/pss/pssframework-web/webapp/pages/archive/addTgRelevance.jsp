@@ -11,9 +11,9 @@
 //弹出式窗口
 var opwindow = null;     //记录打开浏览窗口的对象
 function windowPopup(url, wd, ht) {
-    if(opwindow != null) {
+    /*if(opwindow != null) {
         opwindow.close();
-    }
+    }*/
     opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
 }
 
