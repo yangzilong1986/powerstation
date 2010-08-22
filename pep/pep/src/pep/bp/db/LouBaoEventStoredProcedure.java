@@ -38,8 +38,8 @@ public class LouBaoEventStoredProcedure extends StoredProcedure {
             declareParameter(new SqlParameter(LOGICADDRESS_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(LOUBAOADDRESS__PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(EX_CODE_PARA,Types.NUMERIC));
-            declareParameter(new SqlParameter(TRIG_TIME_PARA,Types.DATE));
-            declareParameter(new SqlParameter(RECEIVE_TIME_PARA,Types.DATE));
+            declareParameter(new SqlParameter(TRIG_TIME_PARA,Types.TIME));
+            declareParameter(new SqlParameter(RECEIVE_TIME_PARA,Types.TIME));
             declareParameter(new SqlParameter(CLOSED_PARA,Types.NUMERIC));
             declareParameter(new SqlParameter(LOCKED_PARA,Types.NUMERIC));
             declareParameter(new SqlParameter(PHASE_PARA,Types.VARCHAR));
