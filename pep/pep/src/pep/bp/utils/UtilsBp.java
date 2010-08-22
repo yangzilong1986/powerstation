@@ -26,13 +26,15 @@ public class UtilsBp {
     @SuppressWarnings("static-access")
     public static String getThisDay(){
         Calendar   cal   =   Calendar.getInstance();
-        return lPad(String.valueOf(cal.DAY_OF_MONTH),"0",2);
+        int Day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        return lPad(String.valueOf(Day),"0",2);
     }
 
     @SuppressWarnings("static-access")
     public static String getThisHour(){
         Calendar   cal   =   Calendar.getInstance();
-        return lPad(String.valueOf(cal.HOUR_OF_DAY),"0",2);
+        int Hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        return lPad(String.valueOf(Hour),"0",2);
     }
 
      @SuppressWarnings("static-access")
