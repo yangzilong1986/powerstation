@@ -121,25 +121,18 @@ public class DataServiceIMP implements DataService{
                                                             dataItemMap.get("BE5A"),dataItemMap.get("BE5B"),dataItemMap.get("BE5C"),
                                                             dataItemMap.get("BE5D"));continue;
                 }
-                if(commandItemCode.equals("100D0027")){
-                    this.voltStatisStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,
-                                                            dataItemMap.get("BE40"),dataItemMap.get("BE41"),
-                                                            dataItemMap.get("BE42"),dataItemMap.get("BE43"),
-                                                            dataItemMap.get("BE44"),dataItemMap.get("BE45"),
-                                                            dataItemMap.get("BE46"),dataItemMap.get("BE47"),
-                                                            dataItemMap.get("BE48"),dataItemMap.get("BE49"),dataItemMap.get("BE4A"),
-                                                            dataItemMap.get("BE4B"),dataItemMap.get("BE4C"),dataItemMap.get("BE4D"),
-                                                            dataItemMap.get("BE4E"),dataItemMap.get("BE4F"),dataItemMap.get("BE50"),
-                                                            dataItemMap.get("BE51"),dataItemMap.get("BE52"),dataItemMap.get("BE53"),
-                                                            dataItemMap.get("BE54"),dataItemMap.get("BE55"),dataItemMap.get("BE56"),
-                                                            dataItemMap.get("BE57"),dataItemMap.get("BE58"),dataItemMap.get("BE59"),
-                                                            dataItemMap.get("BE5A"),dataItemMap.get("BE5B"),dataItemMap.get("BE5C"),
-                                                            dataItemMap.get("BE5D"));continue;
-                }
                 if(commandItemCode.equals("100D0028")){
                     this.imbStatisStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("BE5E"),
                                                             dataItemMap.get("BE5F"),dataItemMap.get("2D01"),dataItemMap.get("2D02"),
                                                             dataItemMap.get("2D03"),dataItemMap.get("2D04"));continue;
+                }
+                if(commandItemCode.equals("100D0029")){
+                    this.ecurStatisStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("BE60"),
+                                                            dataItemMap.get("BE61"),dataItemMap.get("BE62"),dataItemMap.get("BE63"),
+                                                            dataItemMap.get("BE64"),dataItemMap.get("BE65"),dataItemMap.get("BE66"),
+                                                            dataItemMap.get("BE67"),dataItemMap.get("BE68"),dataItemMap.get("BE69"),
+                                                            dataItemMap.get("BE6A"),dataItemMap.get("BE6B"),dataItemMap.get("BE6C"),
+                                                            dataItemMap.get("BE6D"),dataItemMap.get("BE6E"));continue;
                 }
                 if(commandItemCode.equals("100D0081")){
                     this.getPowerCurvStoredProcedure2().insert_act_power_total(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2300"));continue;
