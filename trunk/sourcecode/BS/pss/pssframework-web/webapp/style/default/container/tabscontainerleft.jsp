@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<title>Object View Container</title>
 </head>
 <body>
 <iframe id="tree" name="tree" height="730" src='${ctx}/tree'></iframe>

@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<!-- session超时定义,单位为分钟 -->
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 	<!-- log4j在spring中的配置 -->
 	<!--然后加上这个Spring的Log4j侦听类,注意在JBOSS里面,不需要这个类,注释掉,不然会冲突, -->

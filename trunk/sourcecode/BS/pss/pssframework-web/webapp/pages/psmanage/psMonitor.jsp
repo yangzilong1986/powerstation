@@ -23,8 +23,8 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    readB66F();
-    readC04F();
+    //readB66F();
+    //readC04F();
 });
 
 function StringBuffer() {
@@ -987,256 +987,217 @@ function psTotalParamsSetup() {
 }
 </script>
 </head>
-<body style="overflow-x: hidden; overflow-y: auto;">
-<div>
-  <div style="display: none;">
-    <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
-    <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" />
-    <input type="hidden" id="meterAddr" name="meterAddr" value="1" />
-    <input type="hidden" id="meterType" name="meterType" value="100" />
-    <input type="hidden" id="port" name="port" value="1" />
-    <input type="hidden" id="baudrate" name="baudrate" value="110" />
-    <input type="hidden" id="stopbit" name="stopbit" value="1" />
-    <input type="hidden" id="checkbit" name="checkbit" value="0" />
-    <input type="hidden" id="odd_even_bit" name="odd_even_bit" value="1" />
-    <input type="hidden" id="databit" name="databit" value="8" />
-    <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
-    <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
-  </div>
-  <div id="psInfo" style="margin: 3px; background-color: #dff0f1;">
-    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="18%" height="30" align="right">资产编号：</td>
-        <td width="15%" align="left">资产122</td>
-        <td width="18%" height="30" align="right">漏保型号：</td>
-        <td width="15%" align="left">QLL1-Z(250)</td>
-        <td width="18%" height="30" align="right">漏保地址：</td>
-        <td width="16%" align="left">12345678</td>
-      </tr>
-      <tr>
-        <td width="18%" height="30" align="right">漏保类型：</td>
-        <td width="15%" align="left">总保</td>
-        <td width="18%" height="30" align="right">测量点序号：</td>
-        <td width="15%" align="left">2</td>
-        <td width="18%" height="30" align="right">通信方式：</td>
-        <td width="16%" align="left">485</td>
-      </tr>
-      <tr>
-        <td width="18%" height="30" align="right">剩余电流档位：</td>
-        <td width="15%" align="left">自动挡</td>
-        <td width="18%" height="30" align="right">额定负载电流档位：</td>
-        <td width="15%" align="left">20</td>
-        <td width="18%" height="30" align="right">剩余电流当前档位：</td>
-        <td width="16%" align="left">200</td>
-      </tr>
-    </table>
-  </div>
-  <div style="width: 100%; height: 150;">
-    <div style="width: 30%; height: 150; float: left;">
-      <div id="rmtTrip" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td height="90" align="center"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></td>
-          </tr>
-          <tr>
-            <td height="30" align="center">
+<body style="overflow: auto;">
+<div style="display: none;">
+  <input type="hidden" id="protocolNo" name="protocolNo" value="${psInfo.terminalInfo.protocolNo}" />
+  <input type="hidden" id="logicalAddr" name="logicalAddr" value="${psInfo.terminalInfo.logicalAddr}" />
+  <input type="hidden" id="meterAddr" name="meterAddr" value="${psInfo.gpInfo.gpAddr}" />
+  <input type="hidden" id="meterType" name="meterType" value="100" />
+  <input type="hidden" id="port" name="port" value="1" />
+  <input type="hidden" id="baudrate" name="baudrate" value="110" />
+  <input type="hidden" id="stopbit" name="stopbit" value="1" />
+  <input type="hidden" id="checkbit" name="checkbit" value="0" />
+  <input type="hidden" id="odd_even_bit" name="odd_even_bit" value="1" />
+  <input type="hidden" id="databit" name="databit" value="8" />
+  <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
+  <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
+</div>
+<div style="padding:10px 0px;">
+  <div style="padding:0 10px; width:100%;">
+    <div class="info_top"><span>基本信息</span></div>
+    <div class="info_con">
+      <table width="90%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="35%" height="25">资产编号：<strong>${psInfo.assetNo}</strong></td>
+          <td width="35%">漏保型号：<strong>QLL1-Z(250) - 0.2s、0.3s</strong></td>
+          <td width="30%">漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
+        </tr>
+        <tr>
+          <td height="25">漏保类型：<strong>总保</strong></td>
+          <td>测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
+          <td>通信方式：<strong>485</strong></td>
+        </tr>
+        <tr>
+          <td height="25">剩余电流档位：<strong>自动挡</strong></td>
+          <td>额定负载电流档位：<strong>20</strong></td>
+          <td>剩余电流当前档位：<strong>200</strong></td>
+        </tr>
+      </table>
+    </div>
+    <div class="mgt10">
+      <table width="100%" border="0" cellspacing="1" cellpadding="0" class="twidth">
+        <tr>
+          <td width="28%" class="td1" valign="top">
+            <div class="green1"><strong>合闸/分闸操作</strong></div>
+            <div class="mgt10" style="text-align: center; height: 90px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></div>
+            <div class="mgt10 tc" style="height: 30px;">
               <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
               <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
-            </td>
-          </tr>
-          <tr>
-            <td height="30" align="center">
+            </div>
+            <div class="mgt5 tc" style="height: 30px;">
               <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div style="width: 30%; height: 150; float: left;">
-      <div style="width: 100%; height: 72;">
-        <div id="rtVoltage" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td height="22" align="center">A相电压：<input ci="8000B66F" di="B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
-          </tr>
-          <tr>
-            <td height="22" align="center">B相电压：<input ci="8000B66F" di="B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
-          </tr>
-          <tr>
-            <td height="22" align="center">C相电压：<input ci="8000B66F" di="B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> V </td>
-          </tr>
-        </table>
-        </div>
-      </div>
-      <div style="width: 100%; height: 72;">
-        <div id="rtEc" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td height="22" align="center">A相电流：<input ci="8000B66F" di="B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
-          </tr>
-          <tr>
-            <td height="22" align="center">B相电流：<input ci="8000B66F" di="B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
-          </tr>
-          <tr>
-            <td height="22" align="center">C相电流：<input ci="8000B66F" di="B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
-          </tr>
-        </table>
-        </div>
-      </div>
-    </div>
-    <div style="width: 40%; height: 150; float: left;">
-      <div id="rtPsParam" style="width: 100%; height: 100%; margin: 3px; background-color: #dff0f1;">
-        <input type="hidden" id="psModel" name="psModel" value="01" />
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-          <tr>
-            <td align="right" width="45%" height="29">剩余电流：</td>
-            <td align="left" width="55%"><input ci="8000B66F" di="B660" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
-          </tr>
-          <tr>
-            <td align="right" height="29">剩余电流动作值：</td>
-            <td align="left"><input ci="8000C04F" di="8000C04F07" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> mA </td>
-          </tr>
-          <tr>
-            <td align="right" height="29">分断时间：</td>
-            <td align="left"><input ci="8000C04F" di="8000C04F09" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> ms </td>
-          </tr>
-          <tr>
-            <td align="right" height="29">额定负载电流：</td>
-            <td align="left"><input ci="8000C04F" di="8000C04F05" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> A </td>
-          </tr>
-          <tr>
-            <td align="right" height="29">设备状态：</td>
-            <td align="left"><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 115px; height: 20px;" /></td>
-          </tr>
-        </table>
-      </div>
+            </div>
+          </td>
+          <td width="35%" class="td1" valign="top">
+            <div class="green1"><strong>实时电压</strong></div>
+            <div class="mgt5">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="35%" height="25" align="right">A相电压：</td>
+                  <td width="65%"><input ci="8000B66F" di="B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">B相电压：</td>
+                  <td><input ci="8000B66F" di="B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">C相电压：</td>
+                  <td><input ci="8000B66F" di="B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                </tr>
+              </table>
+            </div>
+            <div class="green1 mgt10"><strong>负载电流</strong></div>
+            <div class="mgt5">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="35%" height="25" align="right">A相电流：</td>
+                  <td width="65%"><input ci="8000B66F" di="B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">B相电流：</td>
+                  <td><input ci="8000B66F" di="B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">C相电流：</td>
+                  <td><input ci="8000B66F" di="B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+          <td width="37%" class="td1" valign="top">
+            <div class="green1"><strong>漏保信息</strong></div>
+            <div class="mgt10">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="48%" height="25" align="right">剩余电流：</td>
+                  <td width="52%"><input ci="8000B66F" di="B660" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">剩余电流动作值：</td>
+                  <td><input ci="8000C04F" di="8000C04F07" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">分断时间：</td>
+                  <td><input ci="8000C04F" di="8000C04F09" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>ms</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">额定负载电流：</td>
+                  <td><input ci="8000C04F" di="8000C04F05" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                </tr>
+                <tr>
+                  <td height="25" align="right">设备状态：</td>
+                  <td><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 95px; height: 20px;" /></td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
-  <div style="margin: 3px;">
-    <div id="bg" style="height: 30px; text-align: center;">
-      <ul id=”datamenu_Option“ class="cb font1">
-        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',0,2)">参数设置</li>
-        <li id=datamenu_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',1,2)">跳闸信息查询</li>
-      </ul>
-    </div>
-    <div class="datamenu_lcon" id="datamenu_Con">
-      <ul class=default id=datamenu_Con_0>
-        <div class="content" style="border: 1px solid #85c0b4;">
-          <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-296));">
-            <div id="timeSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="right" width="25%" height="30">当前时钟：</td>
-                  <td align="left" width="60%"><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 22px;" /></td>
-                  <td align="center" width="15%"><input type="button" id="timeReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeRead()" /></td>
-                </tr>
-                <tr>
-                  <td align="right" height="30">计算机时钟：</td>
-                  <td align="left"><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /></td>
-                  <td align="center"><input type="button" id="timeSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="timeSetup()" /></td>
-                </tr>
-              </table>
-            </div>
-            <div id="statusSetup" style="width: 100%; height: 60; margin: 3px; background-color: #dff0f1;">
-              <input type="hidden" id="funcSetupByteString" name="funcSetupByteString" value="" />
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="left" width="20%" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte1" name="funcSetupByte" /> 欠压保护功能 </td>
-                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte2" name="funcSetupByte" /> 过压保护功能 </td>
-                  <td align="left" width="20%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte3" name="funcSetupByte" /> 突变保护功能 </td>
-                  <td align="left" width="25%" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte4" name="funcSetupByte" /> 缓变保护功能 </td>
-                  <td align="center" width="15%"><input type="button" id="funcSetupByteReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteRead()" /></td>
-                </tr>
-                <tr>
-                  <td align="left" height="30" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" /> 特波保护功能 </td>
-                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" /> 自动跟踪功能 </td>
-                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" /> 告警功能 </td>
-                  <td align="left" style="padding-left: 20px;"><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
-                  <td align="center"><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="funcSetupByteSetup()" /></td>
-                </tr>
-              </table>
-            </div>
-            <div id="paramsSetup" style="width: 100%; height: 90; margin: 3px; background-color: #dff0f1;">
-              <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td align="right" width="22%" height="30">剩余电流档位：</td>
-                  <td align="left" width="28%">
-                    <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>自动挡</option>
-                    </select>
-                  </td>
-                  <td align="right" width="22%">漏电分断延迟档位：</td>
-                  <td align="left" width="28%">
-                    <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;">
-                      <option>1</option>
-                      <option>2</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right" height="30">剩余电流当前档位值：</td>
-                  <td align="left">
-                    <select rci="8000C04F" rdi="8000C04F07" style="width: 120px; height: 24px;">
-                      <option>100</option>
-                      <option>300</option>
-                      <option>500</option>
-                      <option>800</option>
-                      <option>自动挡</option>
-                    </select>
-                  </td>
-                  <td align="right">漏电分断延迟时间值：</td>
-                  <td align="left">
-                    <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 100px; height: 20px;" /> ms
-                  </td>
-                </tr>
-                <tr>
-                  <td align="right" height="30">额定负载电流档位值：</td>
-                  <td align="left">
-                    <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="" style="width: 110px; height: 20px;" /> A
-                  </td>
-                  <td align="center" colspan="2">
-                    <input type="button" id="psTotalParamsReadBtn" value=" 读 取 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="psTotalParamsRead()" />
-                    <input type="button" id="psTotalParamsSetupBtn" value=" 设 置 " style="width: 70px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="psTotalParamsSetup()" />
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </ul>
-      <ul class=disNone id=datamenu_Con_1>
-        <div class="content">
-          <div id="cont_1">
-            <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-294));">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <thead>
-                  <tr>
-                    <th width="8%" class="bg01">序号</th>
-                    <th width="30%" class="bg01">跳闸时间</th>
-                    <th width="20%" class="bg01">跳闸类型</th>
-                    <th width="15%" class="bg01">故障相位</th>
-                    <th width="27%" class="bg01">跳闸电参数</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </ul>
-    </div>
+  <div class="mgt10 jc_tab">
+    <ul id=jc_Option>
+      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('jc_',0,2)">参数设置</li>
+      <li id=jc_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('jc_',1,2)">跳闸信息查询</li>
+    </ul>
+  </div>
+  <div class="jc_con" id=jc_Con>
+    <ul class=default id=jc_Con_0>
+      <div class="info_top"><span>时钟设定</span></div>
+      <div class="info_con">
+        <table width="90%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="80" height="30" align="right">当前时钟：</td>
+            <td><input ci="8000C012" di="C012" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeReadBtn" value=" 读 取 " class="jc_sub mgl10" onclick="timeRead()" /></td>
+          </tr>
+          <tr>
+            <td height="30" align="right">计算机时钟：</td>
+            <td><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></td>
+          </tr>
+        </table>
+      </div>
+      <div class="info_top mgt10"><span>功能状态设置</span></div>
+      <div class="info_con">
+        <table width="90%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="20%" height="30"><input type="checkbox" id="funcSetupByte1" name="funcSetupByte" class="input_nostyle" /> 欠压保护功能 </td>
+            <td width="20%"><input type="checkbox" id="funcSetupByte2" name="funcSetupByte" class="input_nostyle" /> 过压保护功能 </td>
+            <td width="20%"><input type="checkbox" id="funcSetupByte3" name="funcSetupByte" class="input_nostyle" /> 突变保护功能 </td>
+            <td width="25%"><input type="checkbox" id="funcSetupByte4" name="funcSetupByte" class="input_nostyle" /> 缓变保护功能 </td>
+            <td width="15%"><input type="button" id="funcSetupByteReadBtn" value=" 读 取 " class="jc_sub" onclick="funcSetupByteRead()" /></td>
+          </tr>
+          <tr>
+            <td height="30"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" class="input_nostyle" /> 特波保护功能 </td>
+            <td><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" class="input_nostyle" /> 自动跟踪功能 </td>
+            <td><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" class="input_nostyle" /> 告警功能 </td>
+            <td><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" class="input_nostyle" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
+            <td><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " class="jc_sub" onclick="funcSetupByteSetup()" /></td>
+          </tr>
+        </table>
+      </div>
+      <div class="info_top mgt10"><span>参数设定</span></div>
+      <div class="info_con">
+        <table width="90%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="20%" height="30" align="right">剩余电流档位：</td>
+            <td width="30%">
+              <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>自动挡</option>
+              </select>
+            </td>
+            <td width="20%" align="right">漏电分断延迟档位：</td>
+            <td width="30%">
+              <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;">
+                <option>1</option>
+                <option>2</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td height="30" align="right">剩余电流当前档位值：</td>
+            <td>
+              <select rci="8000C04F" rdi="8000C04F07" style="width: 120px; height: 24px;">
+                <option>100</option>
+                <option>300</option>
+                <option>500</option>
+                <option>800</option>
+                <option>自动挡</option>
+              </select>
+            </td>
+            <td align="right">漏电分断延迟时间值：</td>
+            <td>
+              <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 100px; height: 20px;" /> ms
+            </td>
+          </tr>
+          <tr>
+            <td height="30" align="right">额定负载电流档位值：</td>
+            <td>
+              <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="" style="width: 110px; height: 20px;" /> A
+            </td>
+            <td colspan="2" align="center">
+              <input type="button" id="psTotalParamsReadBtn" value=" 读 取 " class="jc_sub" onclick="psTotalParamsRead()" />
+              <input type="button" id="psTotalParamsSetupBtn" value=" 设 置 " class="jc_sub" onclick="psTotalParamsSetup()" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ul>
+    <ul class=disNone id=jc_Con_1>
+    </ul>
   </div>
 </div>
 </body>

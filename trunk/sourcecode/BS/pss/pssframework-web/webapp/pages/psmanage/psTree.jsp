@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>psTree</title>
+<style type="text/css">
+li {white-space: nowrap;}
+</style>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/plugin/treeview/jquery.treeview.css" />
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/plugin/treeview/screen.css" />
@@ -78,15 +81,21 @@ $(document).ready(function(){
 <body style="overflow: auto;">
 <div>
   <ul id="browser" class="filetree">
-    <li><span class="folder">乾龙1#</span>
+    <c:forEach items="${tree}" var="item" varStatus="status">
+    <li><span class="folder"><c:out value='${item.treeNodeName}'/></span>
       <ul>
-        <li><span class="folder">96123456</span>
-          <ul id="folder21">
-            <li><span class="file"><a class="psobj" href="<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1" target="psMonitorFrame">资产121</a></span></li>
+        <c:forEach items="${item.children}" var="cItem" varStatus="cStatus">
+        <li><span class="folder"><c:out value='${cItem.treeNodeName}'/></span>
+          <ul>
+            <c:forEach items="${cItem.children}" var="ccItem" varStatus="ccStatus">
+            <li><span class="file"><a class="psobj" href="<pss:path type="webapp"/>/psmanage/psmon/psmonitor/<c:out value='${ccItem.treeNodeId}'/>" target="psMonitorFrame"><c:out value='${ccItem.treeNodeName}'/></a></span></li>
+            </c:forEach>
           </ul>
         </li>
+        </c:forEach>
       </ul>
     </li>
+    </c:forEach>
   </ul>
 </div>
 </body>
