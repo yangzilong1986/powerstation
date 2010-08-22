@@ -14,6 +14,31 @@ import pep.codec.protocol.gb.Seq;
  * @author luxiaochung
  */
 public class PmPacket376Factroy {
+    private static final byte DIRECT_CALL_AFN = 0x10;
+    private static final byte READ_EVENT_AFN = 0x0E;
+
+    private static PmPacket376 makeDownDirectPacket(byte afn, byte mstId, String rtua) {
+        PmPacket376 pack = new PmPacket376();
+        ControlCode ctrlCode = pack.getControlCode();
+        ctrlCode.setIsOrgniger(true);
+        ctrlCode.setIsUpDirect(false);
+        ctrlCode.setIsDownDirectFrameCountAvaliable(false);
+        ctrlCode.setFunctionKey(PmPacket376Factroy.getFunctionKey(afn));
+        
+        Address address = pack.getAddress();
+        address.setIsGroupAddress(false);
+        address.setMastStationId(mstId);
+        address.setRtua(rtua);
+        
+        Seq seq = pack.getSeq();
+        seq.setIsFirstFrame(true);
+        seq.setIsFinishFrame(true);
+        seq.setIsNeedCountersign(false);
+        seq.setIsTpvAvalibe(false);
+        
+        pack.setAfn(afn);
+        return pack;
+    }
 
     private PmPacket376Factroy() {
         //nothing to do;
@@ -46,12 +71,18 @@ public class PmPacket376Factroy {
     }
 
     private static byte getRespFunctionKey(byte originalityKey) {
-        // Todo Add Mapping
-        return originalityKey;
+        switch (originalityKey) {
+            case 1:
+                return 0;
+            case 9:
+                return 11;
+            default:
+                return 8;
+        }
     }
 
     /**
-     * 创建链路检测返回帧
+     * 创建主动上送响应帧
      */
     public static PmPacket376 makeAcKnowledgementPack(PmPacket376 originalityPack,
             int fn, byte ackValue) {
@@ -82,8 +113,10 @@ public class PmPacket376Factroy {
 
         PmPacketData data = pack.getDataBuffer();
         PmPacketData orginData = originalityPack.getDataBuffer();
+        orginData.rewind();
         data.rewind();
-        data.putDA(new PmPacket376DA(0)).putDT(new PmPacket376DT(fn));
+        data.putDA(new PmPacket376DA(0));
+        data.putDT(new PmPacket376DT(fn));
         if (fn == 3) {
             orginData.rewind();
             PmPacket376DT orginDT = new PmPacket376DT();
@@ -98,25 +131,7 @@ public class PmPacket376Factroy {
 
     public static PmPacket376 makeCallEventRecordPacket(byte mstId, String rtua,
             int fn, byte beginPosition, byte endPosition) {
-        PmPacket376 pack = new PmPacket376();
-        ControlCode ctrlCode = pack.getControlCode();
-        ctrlCode.setIsOrgniger(true);
-        ctrlCode.setIsUpDirect(false);
-        ctrlCode.setIsDownDirectFrameCountAvaliable(false);
-        ctrlCode.setFunctionKey(PmPacket376Factroy.getFunctionKey((byte) 0x0E));
-
-        Address address = pack.getAddress();
-        address.setIsGroupAddress(false);
-        address.setMastStationId(mstId);
-        address.setRtua(rtua);
-
-        Seq seq = pack.getSeq();
-        seq.setIsFirstFrame(true);
-        seq.setIsFinishFrame(true);
-        seq.setIsNeedCountersign(false);
-        seq.setIsTpvAvalibe(false);
-
-        pack.setAfn((byte) 0x0E);
+        PmPacket376 pack = makeDownDirectPacket(READ_EVENT_AFN, mstId, rtua);
 
         PmPacketData data = pack.getDataBuffer();
         data.putDA(new PmPacket376DA(0));
@@ -130,25 +145,7 @@ public class PmPacket376Factroy {
     public static PmPacket376 makeDirectCommunicationPacket(byte mstId,String rtua,
            byte comPort, byte comControlByte, byte timeoutConst, byte timeoutBetweenByte,
            byte[] MsgData){
-        PmPacket376 pack = new PmPacket376();
-        ControlCode ctrlCode = pack.getControlCode();
-        ctrlCode.setIsOrgniger(true);
-        ctrlCode.setIsUpDirect(false);
-        ctrlCode.setIsDownDirectFrameCountAvaliable(false);
-        ctrlCode.setFunctionKey(PmPacket376Factroy.getFunctionKey((byte) 0x0E));
-
-        Address address = pack.getAddress();
-        address.setIsGroupAddress(false);
-        address.setMastStationId(mstId);
-        address.setRtua(rtua);
-
-        Seq seq = pack.getSeq();
-        seq.setIsFirstFrame(true);
-        seq.setIsFinishFrame(true);
-        seq.setIsNeedCountersign(false);
-        seq.setIsTpvAvalibe(false);
-
-        pack.setAfn((byte) 0x10);
+        PmPacket376 pack = makeDownDirectPacket(DIRECT_CALL_AFN, mstId, rtua);
 
         PmPacketData data = pack.getDataBuffer();
         data.putDA(new PmPacket376DA(0));
