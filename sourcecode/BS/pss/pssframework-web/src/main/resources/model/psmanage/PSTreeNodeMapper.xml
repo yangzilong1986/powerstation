@@ -6,25 +6,42 @@
     
     <sql id="TgNodesSQL">
         <![CDATA[
-		select 'TG' as treeNodeType, t.TG_ID as treeNodeId, t.TG_NAME as treeNodeName
-		  from G_TG t
-		 where t.TG_NO like '%' | #{tgNo} | '%'
-		    or t.TG_NAME like '%' | #{tgName} | '%'
+        select 'TG' as treeNodeType, T.TG_ID as treeNodeId, T.TG_NAME as treeNodeName
+          from G_TG T
+          where T.TG_ID = #{tgId}
+        ]]>
+    </sql>
+    
+    <sql id="TerminalNodesSQL">
+        <![CDATA[
+        select 'TERM' as treeNodeType, T.TERM_ID as treeNodeId, T.LOGICAL_ADDR as treeNodeName
+          from C_TERMINAL T, C_TERM_OBJ_RELA R
+         where T.TERM_ID = R.TERM_ID
+           and R.OBJ_TYPE = '2'
+           and R.OBJ_ID = #{tgId}
+        ]]>
+    </sql>
+    
+    <sql id="PsNodesSQL">
+        <![CDATA[
+        select 'PS' as treeNodeType, T.PS_ID as treeNodeId, t.PS_NAME as treeNodeName
+          from C_PS T
+         where T.TERM_ID = #{termId}
         ]]>
     </sql>
     
     <!-- 查询台区节点 -->
-    <select id="getTgNodesByNoOrName" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
-    	<include refid="TgNodesSQL" />
-		<![CDATA[
-		order by treeNodeName
-		]]>
+    <select id="getTgNodesByTgId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+        <include refid="TgNodesSQL" />
     </select>
-	
-	<!-- -->
-	<select id="countTgNodesByNoOrName" resultType="long">
-		select count(1) from (
-		<include refid="TgNodesSQL" />
-		)
-	</select>
+    
+    <!-- 查询终端节点 -->
+    <select id="getTerminalNodesByTgId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+        <include refid="TerminalNodesSQL" />
+    </select>
+    
+    <!-- 查询终端节点 -->
+    <select id="getPsNodesByTermId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+        <include refid="PsNodesSQL" />
+    </select>
 </mapper>
