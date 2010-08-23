@@ -161,7 +161,8 @@ public class RtuCommunicationInfo {
                 this.idle = true;
             }
         } else {
-            if (forceSend) {
+            boolean firstSent = this.currentSendTimes==1;
+            if ((forceSend)&&(!firstSent)&&(new Date().getTime() - this.currentSendTicket.getTime()>1000)) {
                 this.doSendPacket();
             }
         }
@@ -207,7 +208,9 @@ public class RtuCommunicationInfo {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence, this.currentPacket,
                         SequencedPmPacket.Status.TIME_OUT));
-                this.idle = true;
+                synchronized (this) {
+                    this.idle = true;
+                }
                 sendNextPacket(false);
             } else {
                 doSendPacket();
