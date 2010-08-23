@@ -12,6 +12,9 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.query.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.corner.js"></script>
 <script type="text/javascript">
+var cntMonitorB66F = 10;
+var cntMonitorC04F = 10;
+
 $(document).ready(function() {
     var psId = $.query.get('psId');
     $("#psInfo").corner();
@@ -23,8 +26,8 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    //readB66F();
-    //readC04F();
+    readB66F();
+    readC04F();
 });
 
 function StringBuffer() {
@@ -56,49 +59,53 @@ function fillTopsMeterAddr(meterAddr) {
 }
 
 function readB66F() {
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"1"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000B66F"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchResultReadB66F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            //alert(errorThrown);
-            setTimeout("readB66F()", 3000);
-        }
-    });
+    if(cntMonitorB66F > 0) {
+        //alert(cntMonitorB66F);
+        cntMonitorB66F--;
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"1"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000B66F"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchResultReadB66F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                //alert(errorThrown);
+                setTimeout("readB66F()", 3000);
+            }
+        });
+    }
 }
 
 function fetchResultReadB66F(collectId, fetchCount) {
@@ -146,48 +153,52 @@ function showResultReadB66F(resultMap) {
 }
 
 function readC04F() {
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"1"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C04F"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchResultReadC04F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            setTimeout("readC04F()", 3000);
-        }
-    });
+    if(cntMonitorC04F > 0) {
+        //alert(cntMonitorC04F);
+        cntMonitorC04F--;
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"1"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C04F"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchResultReadC04F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                setTimeout("readC04F()", 3000);
+            }
+        });
+    }
 }
 
 function fetchResultReadC04F(collectId, fetchCount) {
@@ -238,7 +249,9 @@ function showResultReadC04F(resultMap) {
     }
 }
 
+var bResultRemote = false;
 function disableRemoteOperation() {
+    bResultRemote = false;
     $("#rmtTripBtn").attr("disabled", true);
     $("#rmtSwitchBtn").attr("disabled", true);
     $("#rmtTestBtn").attr("disabled", true);
@@ -251,11 +264,44 @@ function enableRemoteOperation() {
 }
 
 function initOpResultRemote(msg) {
-    alert(msg);
+    //alert(msg);
+    $("#resultRemote").html(msg);
 }
 
 function showResultRemote(resultMap) {
     //alert(resultMap);
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    var result = null;
+    result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C037"];
+    if(typeof result != "undefined") {
+        if(result == "1") {
+            result = "开关试验跳成功";
+        }
+        else if(result == "2") {
+            result = "开关试验跳失败";
+        }
+        $("#resultRemote").html(result);
+        bResultRemote = true;
+        return true;
+    }
+    else {
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C036"];
+        if(typeof result != "undefined") {
+            if(result == "1") {
+                result = "开关跳合闸成功";
+            }
+            else if(result == "2") {
+                result = "开关跳合闸失败";
+            }
+            $("#resultRemote").html(result);
+            bResultRemote = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 // 开关跳闸
@@ -325,6 +371,9 @@ function fetchRemoteTripingResult(collectId, fetchCount) {
             var b = showResultRemote(data.resultMap);
             if(!b && fetchCount > 0) {
                 setTimeout("fetchRemoteTripingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else if(b) {
+                enableRemoteOperation();
             }
             else {
                 initOpResultRemote('下发开关跳闸命令超时');
@@ -404,6 +453,9 @@ function fetchRemoteSwitchingResult(collectId, fetchCount) {
             if(!b && fetchCount > 0) {
                 setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
+            else if(b) {
+                enableRemoteOperation();
+            }
             else {
                 initOpResultRemote('下发开关合闸命令超时');
                 enableRemoteOperation();
@@ -478,6 +530,9 @@ function fetchRemoteTestResult(collectId, fetchCount) {
             var b = showResultRemote(data.resultMap);
             if(!b && fetchCount > 0) {
                 setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else if(b) {
+                enableRemoteOperation();
             }
             else {
                 initOpResultRemote('下发试验跳命令超时');
@@ -1002,117 +1057,121 @@ function psTotalParamsSetup() {
   <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
   <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
 </div>
-<div style="padding:10px 0px;">
-  <div style="padding:0 10px; width:100%;">
-    <div class="info_top"><span>基本信息</span></div>
-    <div class="info_con">
-      <table width="90%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="35%" height="25">资产编号：<strong>${psInfo.assetNo}</strong></td>
-          <td width="35%">漏保型号：<strong>QLL1-Z(250) - 0.2s、0.3s</strong></td>
-          <td width="30%">漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
-        </tr>
-        <tr>
-          <td height="25">漏保类型：<strong>总保</strong></td>
-          <td>测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
-          <td>通信方式：<strong>485</strong></td>
-        </tr>
-        <tr>
-          <td height="25">剩余电流档位：<strong>自动挡</strong></td>
-          <td>额定负载电流档位：<strong>20</strong></td>
-          <td>剩余电流当前档位：<strong>200</strong></td>
-        </tr>
-      </table>
-    </div>
-    <div class="mgt10">
-      <table width="100%" border="0" cellspacing="1" cellpadding="0" class="twidth">
-        <tr>
-          <td width="28%" class="td1" valign="top">
-            <div class="green1"><strong>合闸/分闸操作</strong></div>
-            <div class="mgt10" style="text-align: center; height: 90px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></div>
-            <div class="mgt10 tc" style="height: 30px;">
-              <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
-              <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
-            </div>
-            <div class="mgt5 tc" style="height: 30px;">
-              <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
-            </div>
-          </td>
-          <td width="35%" class="td1" valign="top">
-            <div class="green1"><strong>实时电压</strong></div>
-            <div class="mgt5">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="35%" height="25" align="right">A相电压：</td>
-                  <td width="65%"><input ci="8000B66F" di="B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">B相电压：</td>
-                  <td><input ci="8000B66F" di="B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">C相电压：</td>
-                  <td><input ci="8000B66F" di="B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
-                </tr>
-              </table>
-            </div>
-            <div class="green1 mgt10"><strong>负载电流</strong></div>
-            <div class="mgt5">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="35%" height="25" align="right">A相电流：</td>
-                  <td width="65%"><input ci="8000B66F" di="B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">B相电流：</td>
-                  <td><input ci="8000B66F" di="B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">C相电流：</td>
-                  <td><input ci="8000B66F" di="B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
-                </tr>
-              </table>
-            </div>
-          </td>
-          <td width="37%" class="td1" valign="top">
-            <div class="green1"><strong>漏保信息</strong></div>
-            <div class="mgt10">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="48%" height="25" align="right">剩余电流：</td>
-                  <td width="52%"><input ci="8000B66F" di="B660" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">剩余电流动作值：</td>
-                  <td><input ci="8000C04F" di="8000C04F07" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">分断时间：</td>
-                  <td><input ci="8000C04F" di="8000C04F09" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>ms</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">额定负载电流：</td>
-                  <td><input ci="8000C04F" di="8000C04F05" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
-                </tr>
-                <tr>
-                  <td height="25" align="right">设备状态：</td>
-                  <td><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 95px; height: 20px;" /></td>
-                </tr>
-              </table>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="mgt10 jc_tab">
+<div>
+  <div class="jc_tab">
     <ul id=jc_Option>
-      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('jc_',0,2)">参数设置</li>
-      <li id=jc_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('jc_',1,2)">跳闸信息查询</li>
+      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('jc_',0,3)">基本信息</li>
+      <li id=jc_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('jc_',1,3)">参数设置</li>
+      <li id=jc_Option_2 style="cursor: pointer;" onmouseover="SwitchTab('jc_',2,3)">跳闸信息查询</li>
     </ul>
   </div>
   <div class="jc_con" id=jc_Con>
     <ul class=default id=jc_Con_0>
+      <div style="width: 100%;">
+        <div class="info_top"><span>基本信息</span></div>
+        <div class="info_con">
+          <table width="90%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="35%" height="25">资产编号：<strong>${psInfo.assetNo}</strong></td>
+              <td width="35%">漏保型号：<strong>QLL1-Z(250) - 0.2s、0.3s</strong></td>
+              <td width="30%">漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
+            </tr>
+            <tr>
+              <td height="25">漏保类型：<strong>总保</strong></td>
+              <td>测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
+              <td>通信方式：<strong>485</strong></td>
+            </tr>
+            <tr>
+              <td height="25">剩余电流档位：<strong>自动挡</strong></td>
+              <td>额定负载电流档位：<strong>20</strong></td>
+              <td>剩余电流当前档位：<strong>200</strong></td>
+            </tr>
+          </table>
+        </div>
+        <div class="mgt10">
+          <table width="100%" border="0" cellspacing="1" cellpadding="0" class="twidth">
+            <tr>
+              <td width="28%" class="td1" valign="top">
+                <div class="green1"><strong>合闸/分闸操作</strong></div>
+                <div class="mgt10" style="text-align: center; height: 80px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></div>
+                <div class="mgt10 tc" style="height: 30px;">
+                  <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
+                  <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
+                </div>
+                <div class="mgt5 tc" style="height: 30px;">
+                  <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
+                </div>
+                <div id="resultRemote" style="text-align: right;"></div>
+              </td>
+              <td width="35%" class="td1" valign="top">
+                <div class="green1"><strong>实时电压</strong></div>
+                <div class="mgt5">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="35%" height="25" align="right">A相电压：</td>
+                      <td width="65%"><input ci="8000B66F" di="B611" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">B相电压：</td>
+                      <td><input ci="8000B66F" di="B612" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">C相电压：</td>
+                      <td><input ci="8000B66F" di="B613" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>V</strong></span></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="green1 mgt10"><strong>负载电流</strong></div>
+                <div class="mgt5">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="35%" height="25" align="right">A相电流：</td>
+                      <td width="65%"><input ci="8000B66F" di="B621" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">B相电流：</td>
+                      <td><input ci="8000B66F" di="B622" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">C相电流：</td>
+                      <td><input ci="8000B66F" di="B623" type="text" value="" style="width: 95px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+              <td width="37%" class="td1" valign="top">
+                <div class="green1"><strong>漏保信息</strong></div>
+                <div class="mgt10">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="48%" height="25" align="right">剩余电流：</td>
+                      <td width="52%"><input ci="8000B66F" di="B660" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">剩余电流动作值：</td>
+                      <td><input ci="8000C04F" di="8000C04F07" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>mA</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">分断时间：</td>
+                      <td><input ci="8000C04F" di="8000C04F09" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>ms</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">额定负载电流：</td>
+                      <td><input ci="8000C04F" di="8000C04F05" type="text" value="" style="width: 75px; height: 20px; text-align: right;" /> <span class="red"><strong>A</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td height="25" align="right">设备状态：</td>
+                      <td><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 95px; height: 20px;" /></td>
+                    </tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </ul>
+    <ul class=disNone id=jc_Con_1>
       <div class="info_top"><span>时钟设定</span></div>
       <div class="info_con">
         <table width="90%" border="0" cellspacing="0" cellpadding="0">
@@ -1196,7 +1255,33 @@ function psTotalParamsSetup() {
         </table>
       </div>
     </ul>
-    <ul class=disNone id=jc_Con_1>
+    <ul class=disNone id=jc_Con_2>
+      <div class="content">
+        <div id="cont_1">
+          <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-45));">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <thead>
+                <tr>
+                  <th width="8%" class="bg01" height="30">序号</th>
+                  <th width="30%" class="bg01">跳闸时间</th>
+                  <th width="20%" class="bg01">跳闸类型</th>
+                  <th width="15%" class="bg01">故障相位</th>
+                  <th width="27%" class="bg01">跳闸电参数</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </ul>
   </div>
 </div>
