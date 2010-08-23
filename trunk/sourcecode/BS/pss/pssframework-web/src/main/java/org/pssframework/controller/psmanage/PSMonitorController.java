@@ -100,6 +100,7 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/psmonitor/{id}")
     public ModelAndView _psmonitor(ModelAndView mav, @PathVariable Long id) throws Exception {
         mav.setViewName(VIEW_NAME_MON);
@@ -188,7 +189,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -197,7 +198,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -206,7 +207,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -224,7 +225,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -242,7 +243,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
