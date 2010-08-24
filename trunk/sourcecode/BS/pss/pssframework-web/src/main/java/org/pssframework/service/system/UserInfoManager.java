@@ -46,7 +46,7 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
 		entity.setPasswd(shaPassword);
-
+		setRole(entity);
 		userInfoDao.save(entity);
 	}
 
@@ -59,7 +59,6 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
 		entity.setPasswd(shaPassword);
-
 		setRole(entity);
 
 		userInfoDao.saveOrUpdate(entity);
