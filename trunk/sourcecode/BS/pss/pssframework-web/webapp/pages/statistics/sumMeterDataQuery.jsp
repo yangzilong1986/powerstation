@@ -73,7 +73,7 @@ function changeType(obj) {
           </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">时间：</td>
-        <td><input type="text" class="input_time" name="ddate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+        <td><input type="text" class="input_time" name="ddate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})"
           readonly="readonly" style="height: 23px; width: 150px;" /></td>
         <td width="100" align="center"><img src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21"
           style="cursor: pointer;" onclick="changeType()" /></td>
