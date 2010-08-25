@@ -85,10 +85,10 @@ var contextPath  = '${ctx}';
     <tbody>
       <c:forEach items="${tginfo.tranInfos}" var="tran" varStatus="status">
         <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>${tran.tranName}</td>
-          <td>${tran.plateCap}</td>
-          <td><pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
-          <td>${tran.instAddr}</td>
+          <td>&nbsp;${tran.tranName}</td>
+          <td>&nbsp;${tran.plateCap}</td>
+          <td>&nbsp;<pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
+          <td>&nbsp;${tran.instAddr}</td>
           <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
         </tr>
@@ -114,10 +114,10 @@ var contextPath  = '${ctx}';
     <tbody>
       <c:forEach items="${tginfo.mpInfos}" var="mpInfo" varStatus="status">
         <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>${mpInfo.mpName}</td>
-          <td>${mpInfo.gpInfos[0].gpAddr}</td>
-          <td>${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
-          <td><pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
+          <td>&nbsp;${mpInfo.mpName}</td>
+          <td>&nbsp;${mpInfo.gpInfos[0].gpAddr}</td>
+          <td>&nbsp;${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
+          <td>&nbsp;<pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
           <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a
             onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
         </tr>
