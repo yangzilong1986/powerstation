@@ -92,9 +92,11 @@ deleteUser = function(){
 		    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
 		           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
 		             if(isSucc){
-		              alert(msg);
 		              $("#"+sSelectedUserID).remove();
+		             }else{
 		             }
+
+		             alert(msg);
 		         },error:function(e) {
 		             alert("delete error");
 		             alert(e.message);
