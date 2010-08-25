@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
 <HTML>
 <HEAD>
 <link type="text/css" rel="stylesheet" href='<c:url value="/e3/commons/ext/resources/css/ext-all.css"/>' />
@@ -189,8 +190,10 @@ function treeRenderBeforeHandler(pTree){
                     	  node = selectedNode.id;
                     	  type = node.split("_")[0];
                     	  uid  = node.split("_")[1]; 
-                      	  deletetginfo(uid);
-                      	  refreshParentNode(selectedNode)
+                      	 deletetginfo(uid,selectedNode)
+                      		
+                      	
+                        
                      }
                 },
                 {
@@ -209,8 +212,6 @@ function treeRenderBeforeHandler(pTree){
             });
         }
         
-
-        
         rightClick.showAt(pEventObj.getXY());
         
         selectedNode = node;
@@ -223,7 +224,8 @@ searchNode = function(){
  
 }
 
-deletetginfo = function(id){
+deletetginfo = function(id,selectedNode){
+  var ret = false;
     var url="${ctx}/archive/tginfo/"+id+'.json?_method=delete';
     if(confirm("确定删除该台区?")){
       jQuery.ajax({
@@ -232,16 +234,24 @@ deletetginfo = function(id){
            type:'post',
            cache: false,
            success: function(json){
-             var msg=json['msg'];
-             var isSucc = json['isSucc'];
+   	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+       var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
               alert(msg);
+              if(isSucc){
+              refreshParentNode(selectedNode)
+              }
            },error:function(e){
                alert(e.getMessage());
            }
          });
     }
+    return ret;
 }
 
+
+remove = function(){
+	parent.parent.tabscontainermain.$('#MultiTaskTabs').tabs('remove',1); 
+}
 </script>
 </HEAD>
 <BODY>
@@ -251,7 +261,7 @@ deletetginfo = function(id){
 <input type="button" value="刷新当前节点" onclick="refreshNode()" />
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
-<input type="button" value="查找节点" onclick="searchNode()" />-->
+<input type="button" value="查找节点" onclick="remove()" />-->
 <div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
 ${leafInfo}
 </BODY>
