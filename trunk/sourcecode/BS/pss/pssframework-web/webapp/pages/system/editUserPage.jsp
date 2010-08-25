@@ -27,15 +27,15 @@
   <table width="99%" border="0" cellpadding="0" cellspacing="0">
     <tr>
       <td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.zh" />：</td>
-      <td width="30%" align="left"><form:input path="staffNo" cssStyle="width:150" cssClass="required input2 min-length-5"/></td>
+      <td width="30%" align="left"><form:input path="staffNo" cssStyle="width:150" cssClass="required input2"/></td>
       <td width="15%" height="30" align="right"><font color="#ff0000">*</font><spring:message code="system.user.mc" />：</td>
-      <td width="30%" align="left"><form:input path="name" cssStyle="width:150" cssClass="required input2 min-length-5"/></td>
+      <td width="30%" align="left"><form:input path="name" cssStyle="width:150" cssClass="required input2"/></td>
     </tr>
     <tr>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.mm" />：</td>
-      <td align="left"><form:password path="passwd" id="passwd"  showPassword="true" cssStyle="width:150" cssClass="required input2" /></td>
+      <td align="left"><form:password path="passwd" id="passwd"  showPassword="true" cssStyle="width:150" cssClass="required input2 min-length-5" /></td>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.qrmm" />：</td>
-      <td align="left"><input type="password" name="passwd_rep" id="passwd_rep" value="${user.passwd}" class="required input2"
+      <td align="left"><input type="password" name="passwd_rep" id="passwd_rep" value="${user.passwd}" class="required input2 min-length-5"
         style="width: 150"></td>
     </tr>
     <tr>
