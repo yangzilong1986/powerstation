@@ -1,5 +1,6 @@
 package org.pssframework.security;
 
+import java.util.Date;
 import java.util.Set;
 
 import org.pssframework.model.system.AuthorityInfo;
@@ -45,10 +46,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean credentialsNonExpired = true;//(user.getCredentialsNonExpired() == 1);
 		boolean accountNonLocked = true;//(user.getAccountNonLocked() == 1);
 
-		OperatorDetails userdetails = new OperatorDetails(user.getStaffNo(), user.getPasswd(), enabled,
+		OperatorDetails userDetails = new OperatorDetails(user.getStaffNo(), user.getPasswd(), enabled,
 				accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuths);
-
-		return userdetails;
+		//加入登录时间信息和用户角色
+		userDetails.setLoginTime(new Date());
+		userDetails.setRoleInfoList(user.getRoleInfoList());
+		return userDetails;
 	}
 
 	/**
