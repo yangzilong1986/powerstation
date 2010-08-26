@@ -73,7 +73,7 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 			logger.warn("操作员{}尝试删除超级管理员用户", SpringSecurityUtils.getCurrentUserName());
 			throw new ServiceException("不能删除超级管理员用户");
 		}
-		userInfoDao.delete(id);
+		userInfoDao.deleteById(id);
 	}
 
 	/**
