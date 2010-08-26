@@ -13,6 +13,7 @@ import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_UPDATE_SUCCESS;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -285,6 +286,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private List<CodeInfo> getCodeInfo(Map mapCode) {
 		List<CodeInfo> codeInfo = codeInfoManager.findByPageRequest(mapCode);
+		Collections.reverse(codeInfo);
 		return codeInfo;
 	}
 
