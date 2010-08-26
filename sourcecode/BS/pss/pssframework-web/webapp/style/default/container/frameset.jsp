@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>frameset container</title>
 </head>
-<frameset id="mainframeset" name="mainframeset" rows="81,8,26,*,20" frameborder="0" border="0" framespacing="0">
+<frameset id="mainframeset" name="mainframeset" rows="81,8,26,*,24" frameborder="0" border="0" framespacing="0">
   <frame id="header" name="header" src="<pss:path type="style"/>/container/header.jsp" noresize="noresize" scrolling="no" frameborder="0" />
   <frame id="panelupdown" name="panelupdown" src="<pss:path type="style"/>/container/panelupdown.jsp" noresize="noresize" scrolling="no" frameborder="0" />
   <frame id="menu" name="menu" src="<pss:path type="style"/>/container/menu.jsp" noresize="noresize" scrolling="no" frameborder="0" />
