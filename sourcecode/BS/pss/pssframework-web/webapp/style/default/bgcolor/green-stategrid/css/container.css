@@ -100,3 +100,8 @@ img { border: 0; }
 .menu8 {z-index: 99; position: absolute; left: 697px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
 .menu9 {z-index: 99; position: absolute; left: 797px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
 /*菜单CSS结束*/
+
+.footer{height:23px; background:url(../img/footer_bg.gif) repeat-x; border-top:#104f4f 1px solid; border-right:#104f4f 1px solid;  border-left:#104f4f 1px solid; border-bottom:#358989 1px solid; color:#fff; line-height:23px; font-family:"宋体"; }
+.footer p{padding-left:15px;}
+.footer p span,.footer p span a{ color:#95ef34; padding-left:5px;}
+.footer p span a:hover{ text-decoration:underline;}
