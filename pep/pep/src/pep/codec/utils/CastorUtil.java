@@ -357,11 +357,11 @@ public class CastorUtil {
         CommandItem72.setCommandCode("100C0132");
         CommandItem72.AddDataItem(new ProtocolDataItem("F000", 5, "A15", 0,"终端抄表时间","","1"));
         CommandItem72.AddDataItem(new ProtocolDataItem("F001", 1, "BIN", 0,"费率数M",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A000", 5, "A11", 0,"反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A001", 5, "A11", 0,"费率1反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A002", 5, "A11", 0,"费率2反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A003", 5, "A11", 0,"费率3反向无功总电能示值",""));
-        CommandItem72.AddDataItem(new ProtocolDataItem("A004", 5, "A11", 0,"费率4反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A100", 5, "A11", 0,"反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A101", 5, "A11", 0,"费率1反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A102", 5, "A11", 0,"费率2反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A103", 5, "A11", 0,"费率3反向无功总电能示值",""));
+        CommandItem72.AddDataItem(new ProtocolDataItem("A104", 5, "A11", 0,"费率4反向无功总电能示值",""));
 //        CommandItem72.AddDataItem(new ProtocolDataItem("A005", 5, "A11", 0,"费率5反向无功总电能示值",""));
 //        CommandItem72.AddDataItem(new ProtocolDataItem("A006", 5, "A11", 0,"费率6反向无功总电能示值",""));
 //        CommandItem72.AddDataItem(new ProtocolDataItem("A007", 5, "A11", 0,"费率7反向无功总电能示值",""));
