@@ -2,6 +2,8 @@ package org.pssframework.controller.psmanage;
 
 import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -248,6 +250,25 @@ public class PSMonitorController extends BaseSpringController {
                 logger.info("resultMap : " + resultMap.toString());
             }
         }
+        return result;
+    }
+
+    /**
+     * 
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/time")
+    public ModelAndView _time(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView result = new ModelAndView();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String computerTime = sdf.format(new Date());
+
+        result.addObject("computerTime", computerTime);
+
         return result;
     }
 }

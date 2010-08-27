@@ -130,6 +130,34 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
 
             list.add(psTreeNode1);
         }
+        if((new Long(62)).equals(tgId)) {
+            // TG 1
+            PSTreeNode psTreeNode1 = new PSTreeNode();
+            psTreeNode1.setTreeNodeType("TG");
+            psTreeNode1.setTreeNodeId("3");
+            psTreeNode1.setTreeNodeName("乾龙2#（96123457）");
+            List<PSTreeNode> list1Children = new LinkedList<PSTreeNode>();
+            // Terminal 11
+            PSTreeNode psTreeNode11 = new PSTreeNode();
+            psTreeNode11.setTreeNodeType("TERM");
+            psTreeNode11.setTreeNodeId("61");
+            psTreeNode11.setTreeNodeName("96123457");
+            List<PSTreeNode> list11Children = new LinkedList<PSTreeNode>();
+            // PS 111
+            PSTreeNode psTreeNode111 = new PSTreeNode();
+            psTreeNode111.setTreeNodeType("PS");
+            psTreeNode111.setTreeNodeId("81");
+            psTreeNode111.setTreeNodeName("JD6-6");
+            psTreeNode111.setChildren(null);
+
+            list11Children.add(psTreeNode111);
+            psTreeNode11.setChildren(list11Children);
+
+            list1Children.add(psTreeNode11);
+            psTreeNode1.setChildren(list1Children);
+
+            list.add(psTreeNode1);
+        }
 
         return list;
     }
