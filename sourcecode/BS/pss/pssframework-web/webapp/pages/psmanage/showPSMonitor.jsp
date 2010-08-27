@@ -18,6 +18,11 @@ $(document).ready(function() {
     var urlTree = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
     $("#psTreeFrame").attr("src", urlTree);
 });
+
+function changeTg() {
+    var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
+    $("#psTreeFrame").attr("src", urlInquiry);
+}
 </script>
 </head>
 <body>
@@ -36,7 +41,7 @@ $(document).ready(function() {
           </td>
           <td width="100" class="green" align="right">台 区：</td>
           <td width="120">
-            <select id="objId" name="objId" style="width: 140px;">
+            <select id="objId" name="objId" style="width: 140px;" onchange="changeTg();">
               <c:set value="${model.objId}" var="tg"></c:set>
               <option value="-1">请选择台区</option>
               <c:forEach var="item" items="${tglist}">
