@@ -9,6 +9,16 @@
 <title>psTree</title>
 <style type="text/css">
 li {white-space: nowrap;}
+
+a.selected:link {background-color: #72CE28; color: #104F4F; font-weight: bold;}
+a.selected:hover {background-color: #72CE28; color: #104F4F; font-weight: bold;}
+a.selected:visited {background-color: #72CE28; color: #104F4F; font-weight: bold;}
+a.selected:active {background-color: #72CE28; color: #104F4F; font-weight: bold;}
+
+a:link {background-color: #FFFFFF; color: #000000;}
+a:hover {background-color: #FFFFFF; color: #000000;}
+a:visited {background-color: #FFFFFF; color: #000000;}
+a:active {background-color: #FFFFFF; color: #000000;}
 </style>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/plugin/treeview/jquery.treeview.css" />
@@ -60,7 +70,7 @@ $(document).ready(function(){
         cookieId: "treeview-black"
     });
 
-    var psType = $.query.get('type');
+    /*var psType = $.query.get('type');
     $("a.psobj").each( function() {
         if("psmon" == psType) {
             $(this).attr('href', '<pss:path type="webapp"/>/pages/psmanage/psMonitor.jsp?psId=1&random=' + Math.random());
@@ -74,8 +84,24 @@ $(document).ready(function(){
             $(this).attr('href', '<pss:path type="webapp"/>/pages/psmanage/psRemoteTpSw.jsp?psId=1&random=' + Math.random());
             $(this).attr('target', 'psRemoteTpSwFrame');
         }
+    });*/
+
+    $("a.psobj").click( function() {
+        selectSingleRow(this);
     });
 });
+
+/**
+ * 
+ */
+var pre_row = null;
+function selectSingleRow(row) {
+    $(row).addClass("selected");
+    if(pre_row != null && pre_row != row) {
+        $(pre_row).removeClass("selected");
+    }
+    pre_row = row;
+}
 </script>
 </head>
 <body style="overflow: auto;">
@@ -88,7 +114,7 @@ $(document).ready(function(){
         <li><span class="folder"><c:out value='${cItem.treeNodeName}'/></span>
           <ul>
             <c:forEach items="${cItem.children}" var="ccItem" varStatus="ccStatus">
-            <li><span class="file"><a class="psobj" href="<pss:path type="webapp"/>/psmanage/psmon/psmonitor/<c:out value='${ccItem.treeNodeId}'/>" target="psMonitorFrame"><c:out value='${ccItem.treeNodeName}'/></a></span></li>
+            <li><span class="file"><a id="a_${ccStatus.index}" class="psobj" href="<pss:path type="webapp"/>/psmanage/psmon/psmonitor/<c:out value='${ccItem.treeNodeId}'/>" target="psMonitorFrame"><c:out value='${ccItem.treeNodeName}'/></a></span></li>
             </c:forEach>
           </ul>
         </li>

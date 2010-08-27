@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>电力用户用电信息采集系统</title>
+<title>低压漏保及配变管理系统</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 </head>
 <body style="min-width: 1004px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1004 ? '1004px' : '');">

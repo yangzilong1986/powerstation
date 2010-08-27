@@ -12,8 +12,45 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.query.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.corner.js"></script>
 <script type="text/javascript">
-var cntMonitorB66F = 10;
-var cntMonitorC04F = 10;
+var setupFlag = false;
+
+function mySwitchTab(prefix, order, cnts) {
+    if(cntMonitorB66F > 0 || cntMonitorC04F >0) {
+        alert("正在监测中...");
+        return false;
+    }
+    
+    if(order == 1) {
+        setupFlag = true;
+    }
+    else {
+        setupFlag = false;
+    }
+    
+    SwitchTab(prefix, order, cnts);
+    return true;
+}
+
+var cntMonitorB66F = 0;
+var cntMonitorC04F = 0;
+// 开始监测
+function startMonitoring() {
+    cntMonitorB66F = 10;
+    cntMonitorC04F = 10;
+    $("#startMonitoringBtn").attr("disabled", true);
+    $("#endMonitoringBtn").attr("disabled", false);
+    $("#monitoring").css("display", "block");
+    readB66F();
+    readC04F();
+}
+// 结束监测
+function endMonitoring() {
+    cntMonitorB66F = 0;
+    cntMonitorC04F = 0;
+    $("#startMonitoringBtn").attr("disabled", false);
+    $("#endMonitoringBtn").attr("disabled", true);
+    $("#monitoring").css("display", "none");
+}
 
 $(document).ready(function() {
     var psId = $.query.get('psId');
@@ -26,9 +63,37 @@ $(document).ready(function() {
     $("#statusSetup").corner();
     $("#paramsSetup").corner();
 
-    readB66F();
-    readC04F();
+    $("#startMonitoringBtn").attr("disabled", false);
+    $("#endMonitoringBtn").attr("disabled", true);
+    $("#monitoring").css("display", "none");
+    //readB66F();
+    //readC04F();
+
+    readComputerTime();
 });
+
+function readComputerTime() {
+    if(setupFlag) {
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/time.json';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.computerTime);
+                $("#computerTime").val(data.computerTime);
+                setTimeout("readComputerTime()", 1000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                //alert(errorThrown);
+                setTimeout("readComputerTime()", 1000);
+            }
+        });
+    }
+    else {
+        setTimeout("readComputerTime()", 1000);
+    }
+}
 
 function StringBuffer() {
     this.data = [];
@@ -105,6 +170,11 @@ function readB66F() {
                 setTimeout("readB66F()", 3000);
             }
         });
+    }
+    else {
+        if(cntMonitorC04F == 0) {
+            endMonitoring();
+        }
     }
 }
 
@@ -198,6 +268,11 @@ function readC04F() {
                 setTimeout("readC04F()", 3000);
             }
         });
+    }
+    else {
+        if(cntMonitorB66F == 0) {
+            endMonitoring();
+        }
     }
 }
 
@@ -544,6 +619,7 @@ function fetchRemoteTestResult(collectId, fetchCount) {
     });
 }
 
+var bResultTime = false;
 function disableTimeOperation() {
     $("#timeReadBtn").attr("disabled", true);
     $("#timeSetupBtn").attr("disabled", true);
@@ -555,11 +631,45 @@ function enableTimeOperation() {
 }
 
 function initOpResultTime(msg) {
-    alert(msg);
+    //alert(msg);
+    $("#resultTime").html(msg);
 }
 
-function showResultTime(resultMap) {
+function showResultTime(resultMap, type) {
     //alert(resultMap);
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    if(type == 'setup') {  // 设置时钟
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C012"];
+        if(typeof result != "undefined") {
+            if(result == "1") {
+                result = "校时成功";
+            }
+            else if(result == "2") {
+                result = "校时失败";
+            }
+            $("#resultTime").html(result);
+            bResultTime = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {                // 读取时钟
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C012"];
+        if(typeof result != "undefined") {
+            $("input[ci='8000C012'][di='C012']").val(result['C012']);
+            $("#resultTime").html("读取时钟成功");
+            bResultTime = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 // 时钟读取
@@ -623,12 +733,15 @@ function fetchTimeReadResult(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showResultTime(data.resultMap);
+            var b = showResultTime(data.resultMap, 'read');
             if(!b && fetchCount > 0) {
                 setTimeout("fetchTimeReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
+            else if(b) {
+                enableTimeOperation();
+            }
             else {
-                initOpResultRemote('读取时钟超时');
+                initOpResultTime('读取时钟超时');
                 enableTimeOperation();
             }
         },
@@ -701,12 +814,15 @@ function fetchTimeSetupResult(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showResultTime(data.resultMap);
+            var b = showResultTime(data.resultMap, 'setup');
             if(!b && fetchCount > 0) {
                 setTimeout("fetchTimeSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
+            else if(b) {
+                enableTimeOperation();
+            }
             else {
-                initOpResultRemote('校时超时');
+                initOpResultTime('校时超时');
                 enableTimeOperation();
             }
         },
@@ -1060,29 +1176,39 @@ function psTotalParamsSetup() {
 <div>
   <div class="jc_tab">
     <ul id=jc_Option>
-      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('jc_',0,3)">基本信息</li>
-      <li id=jc_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('jc_',1,3)">参数设置</li>
-      <li id=jc_Option_2 style="cursor: pointer;" onmouseover="SwitchTab('jc_',2,3)">跳闸信息查询</li>
+      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onclick="return mySwitchTab('jc_',0,3)">基本信息</li>
+      <li id=jc_Option_1 style="cursor: pointer;" onclick="return mySwitchTab('jc_',1,3)">参数设置</li>
+      <li id=jc_Option_2 style="cursor: pointer;" onclick="return mySwitchTab('jc_',2,3)">跳闸信息查询</li>
     </ul>
   </div>
   <div class="jc_con" id=jc_Con>
     <ul class=default id=jc_Con_0>
-      <div style="width: 100%;">
-        <div class="info_top"><span>基本信息</span></div>
+      <div style="width: 100%">
+        <div id="monitoring" style="text-align:center; width: 90px; height: 100px; position: absolute; top: 63px; right: 32px; float: right;">
+          <img src="<pss:path type="bgcolor"/>/img/monitoring.gif" alt="正在监测中..." width="85" height="81" />
+          <span>正在监测中...</span>
+        </div>
+        <div class="info_top">
+          <span>基本信息</span>
+          <div id="bngMonitor" style="float: right;">
+            <input type="button" id="startMonitoringBtn" value="开始监测" class="jc_sub mgl10" onclick="startMonitoring()" />
+            <input type="button" id="endMonitoringBtn" value="结束监测" class="jc_sub mgl10" onclick="endMonitoring()" />
+          </div>
+        </div>
         <div class="info_con">
           <table width="90%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="35%" height="25">资产编号：<strong>${psInfo.assetNo}</strong></td>
+              <td width="35%" height="30">资产编号：<strong>${psInfo.assetNo}</strong></td>
               <td width="35%">漏保型号：<strong>QLL1-Z(250) - 0.2s、0.3s</strong></td>
               <td width="30%">漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
             </tr>
             <tr>
-              <td height="25">漏保类型：<strong>总保</strong></td>
+              <td height="30">漏保类型：<strong>总保</strong></td>
               <td>测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
               <td>通信方式：<strong>485</strong></td>
             </tr>
             <tr>
-              <td height="25">剩余电流档位：<strong>自动挡</strong></td>
+              <td height="30">剩余电流档位：<strong>自动挡</strong></td>
               <td>额定负载电流档位：<strong>20</strong></td>
               <td>剩余电流当前档位：<strong>200</strong></td>
             </tr>
@@ -1101,7 +1227,7 @@ function psTotalParamsSetup() {
                 <div class="mgt5 tc" style="height: 30px;">
                   <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
                 </div>
-                <div id="resultRemote" style="text-align: right;"></div>
+                <div id="resultRemote" style="text-align: left;"></div>
               </td>
               <td width="35%" class="td1" valign="top">
                 <div class="green1"><strong>实时电压</strong></div>
@@ -1184,6 +1310,7 @@ function psTotalParamsSetup() {
             <td><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></td>
           </tr>
         </table>
+        <div id="resultTime" style="text-align: left;"></div>
       </div>
       <div class="info_top mgt10"><span>功能状态设置</span></div>
       <div class="info_con">
@@ -1203,13 +1330,14 @@ function psTotalParamsSetup() {
             <td><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " class="jc_sub" onclick="funcSetupByteSetup()" /></td>
           </tr>
         </table>
+        <div id="resultFuncSetupByte" style="text-align: left;"></div>
       </div>
       <div class="info_top mgt10"><span>参数设定</span></div>
       <div class="info_con">
         <table width="90%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="20%" height="30" align="right">剩余电流档位：</td>
-            <td width="30%">
+            <td width="22%" height="30" align="right">剩余电流档位：</td>
+            <td width="28%">
               <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;">
                 <option>1</option>
                 <option>2</option>
@@ -1218,8 +1346,8 @@ function psTotalParamsSetup() {
                 <option>自动挡</option>
               </select>
             </td>
-            <td width="20%" align="right">漏电分断延迟档位：</td>
-            <td width="30%">
+            <td width="22%" align="right">漏电分断延迟档位：</td>
+            <td width="28%">
               <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;">
                 <option>1</option>
                 <option>2</option>
@@ -1253,6 +1381,7 @@ function psTotalParamsSetup() {
             </td>
           </tr>
         </table>
+        <div id="resultPSTotalParams" style="text-align: left;"></div>
       </div>
     </ul>
     <ul class=disNone id=jc_Con_2>
