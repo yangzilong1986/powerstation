@@ -395,9 +395,9 @@ public class RealTimeProxy376 implements ICollectInterface {
                         for (int j = 0; j < CommandArray.length; j++) {
                             String key = logicAddress + "#" + String.valueOf(GpArray[i]) + "#" + String.valueOf(CommandArray[i]);
                             String value = "2";
-                            if (packet645.getControlCode().getValue() == 0x81) {
+                            if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue())  == 0x84) {
                                 value = String.valueOf(1);//确认
-                            } else if (packet645.getControlCode().getValue() == 0xC1) {
+                            } else if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0xC1) {
                                 value = String.valueOf(2);//否认
                             }
                             results.put(key, value);
