@@ -46,6 +46,7 @@ public class DataServiceIMP implements DataService{
     private DAY_ECUR_STATIS_StoredProcedure ecurStatisStoredProcedur;
     private DAY_VOLT_STATIS_StoredProcedure voltStatisStoredProcedur;
     private DAY_IMB_STATIS_StoredProcedure imbStatisStoredProcedur;
+    private PFCURV_StoredProcedure pfcurvStoredProcedur;
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -190,6 +191,22 @@ public class DataServiceIMP implements DataService{
                 }
                 if(commandItemCode.equals("100D0104")){
                     this.i_reactStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("A000"),"","","","");continue;
+                }
+
+                if(commandItemCode.equals("100D0105")){
+                    this.pfcurvStoredProcedur.insert_power_factor(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2600"));continue;
+                }
+
+                if(commandItemCode.equals("100D0106")){
+                    this.pfcurvStoredProcedur.insert_power_factor_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2601"));continue;
+                }
+
+                if(commandItemCode.equals("100D0107")){
+                    this.pfcurvStoredProcedur.insert_power_factor_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2602"));continue;
+                }
+
+                if(commandItemCode.equals("100D0108")){
+                    this.pfcurvStoredProcedur.insert_power_factor_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2603"));continue;
                 }
             }
             if(AFN == (byte)0X10){                         //透明转发数据
