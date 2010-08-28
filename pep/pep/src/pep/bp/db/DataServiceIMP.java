@@ -194,19 +194,19 @@ public class DataServiceIMP implements DataService{
                 }
 
                 if(commandItemCode.equals("100D0105")){
-                    this.pfcurvStoredProcedur.insert_power_factor(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2600"));continue;
+                    this.getPfcurvStoredProcedur().insert_power_factor(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2600"));continue;
                 }
 
                 if(commandItemCode.equals("100D0106")){
-                    this.pfcurvStoredProcedur.insert_power_factor_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2601"));continue;
+                    this.getPfcurvStoredProcedur().insert_power_factor_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2601"));continue;
                 }
 
                 if(commandItemCode.equals("100D0107")){
-                    this.pfcurvStoredProcedur.insert_power_factor_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2602"));continue;
+                    this.getPfcurvStoredProcedur().insert_power_factor_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2602"));continue;
                 }
 
                 if(commandItemCode.equals("100D0108")){
-                    this.pfcurvStoredProcedur.insert_power_factor_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2603"));continue;
+                    this.getPfcurvStoredProcedur().insert_power_factor_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2603"));continue;
                 }
             }
             if(AFN == (byte)0X10){                         //透明转发数据
@@ -510,6 +510,20 @@ public class DataServiceIMP implements DataService{
      */
     public void setImbStatisStoredProcedur(DAY_IMB_STATIS_StoredProcedure imbStatisStoredProcedur) {
         this.imbStatisStoredProcedur = imbStatisStoredProcedur;
+    }
+
+    /**
+     * @return the pfcurvStoredProcedur
+     */
+    public PFCURV_StoredProcedure getPfcurvStoredProcedur() {
+        return pfcurvStoredProcedur;
+    }
+
+    /**
+     * @param pfcurvStoredProcedur the pfcurvStoredProcedur to set
+     */
+    public void setPfcurvStoredProcedur(PFCURV_StoredProcedure pfcurvStoredProcedur) {
+        this.pfcurvStoredProcedur = pfcurvStoredProcedur;
     }
 
 }
