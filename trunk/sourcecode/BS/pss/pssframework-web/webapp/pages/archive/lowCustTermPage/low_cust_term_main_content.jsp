@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="/../common/taglib.jsp"%>
 <div id="form">
  <div class="tab_con" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight) - 0 ) );">
   <input type="hidden" name="tgId" value="${tgId}" />

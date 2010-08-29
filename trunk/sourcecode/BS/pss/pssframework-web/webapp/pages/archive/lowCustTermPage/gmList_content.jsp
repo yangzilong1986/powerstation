@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="/../common/taglib.jsp"%>
 <!-- 采集器信息 -->
 <div class="tab_con" style="height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -50 ) );">
  <div class="data2">

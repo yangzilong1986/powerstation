@@ -1,7 +1,6 @@
 <!-- 集中器维护私有JS -->
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
-<%@include file="../../common/loading.jsp"%>
+<%@include file="../common/taglibs.jsp"%>
 <script type="text/javascript">
   var contextPath = '<peis:contextPath/>';
   var tgId=$.url.param("tgId");
