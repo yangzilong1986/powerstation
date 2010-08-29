@@ -622,7 +622,7 @@ public class CastorUtil {
         CommandItem47.AddDataItem(new ProtocolDataItem("8000C04F09", 2, "A8", 0,"漏电分断延迟时间值",""));
         CommandItem47.AddDataItem(new ProtocolDataItem("8000C04F10", 2, "BS8", 0,"开关功能设定字",""));
         CommandItem47.AddDataItem(new ProtocolDataItem("8000C04F11", 1, "A29", 0,"保护器型号ID",""));
-        CommandItem47.AddDataItem(new ProtocolDataItem("8000C04F12", 1, "BIN", 0,"保留字节",""));
+       // CommandItem47.AddDataItem(new ProtocolDataItem("8000C04F12", 1, "BIN", 0,"保留字节",""));
 
 
         ProtocolCommandItem CommandItem71 = new ProtocolCommandItem();
@@ -633,7 +633,7 @@ public class CastorUtil {
         CommandItem71.AddDataItem(new ProtocolDataItem("8001C04F04", 1, "A29", 0,"剩余电流档位",""));
         CommandItem71.AddDataItem(new ProtocolDataItem("8001C04F05", 1, "A29", 0,"漏电分断延迟档位",""));
         CommandItem71.AddDataItem(new ProtocolDataItem("8001C04F06", 1, "BS8", 0,"开关功能设定字",""));
-        CommandItem71.AddDataItem(new ProtocolDataItem("8001C04F07", 1, "BIN", 0,"保留字节",""));
+     //   CommandItem71.AddDataItem(new ProtocolDataItem("8001C04F07", 1, "BIN", 0,"保留字节",""));
 
 
         //最近一次跳闸类型动作值及时间
