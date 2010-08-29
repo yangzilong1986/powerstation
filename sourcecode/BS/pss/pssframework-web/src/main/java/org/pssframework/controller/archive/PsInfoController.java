@@ -22,6 +22,7 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAG
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
@@ -143,6 +144,28 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		this.CommonPart(result, requestMap);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
+
+		return VIEW;
+	}
+
+	/** 查看 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/{id}")
+	public String show(ModelMap result, @PathVariable Long id) throws Exception {
+
+		PsInfo psInfo = this.psInfoManager.getById(id);
+
+		Map requestMap = new HashMap();
+
+		requestMap.put("tgid", psInfo.getGpInfo().getObjectId());
+
+		result.addAttribute("istAddr", getPsAddr(psInfo.getGpInfo().getObjectId()));
+
+		result.addAttribute("psinfo", psInfo);
+
+		this.CommonPart(result, requestMap);
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
 
 		return VIEW;
 	}

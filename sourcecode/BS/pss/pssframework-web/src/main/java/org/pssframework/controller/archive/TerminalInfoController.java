@@ -16,6 +16,7 @@ import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAG
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_EDIT;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_NEW;
+import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE_SHOW;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_FAIL;
 import static org.pssframework.support.system.SystemConst.MSG_CREATED_SUCCESS;
 import static org.pssframework.support.system.SystemConst.MSG_DELETE_FAIL;
@@ -168,7 +169,6 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 	/**
 	 * 编辑
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id, HttpServletRequest request) throws Exception {
 		this.getCommPart(result, new HashMap());
@@ -182,7 +182,22 @@ public class TerminalInfoController extends BaseRestSpringController<TerminalInf
 		return VIEW;
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * 显示
+	 */
+	@RequestMapping(value = "/{id}")
+	public String show(ModelMap result, @PathVariable Long id, HttpServletRequest request) throws Exception {
+		this.getCommPart(result, new HashMap());
+
+		result.addAttribute("terminalinfo", this.terminalInfoManger.getById(id));
+
+		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
+
+		result.addAttribute("tgId", request.getParameter("tgId"));
+
+		return VIEW;
+	}
+
 	/** 进入新增 */
 	@RequestMapping(value = "/new")
 	public String _new(ModelMap model, HttpServletRequest request, HttpServletResponse response,
