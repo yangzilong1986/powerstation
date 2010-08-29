@@ -3,6 +3,7 @@
  */
 package org.pssframework.service.system;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,5 +42,18 @@ public class CodeInfoManager extends BaseManager<CodeInfo, Long> {
 	public List<CodeInfo> findByPageRequest(Map<String, ?> mapRequest) {
 		return codeInfoDao.findAll(mapRequest);
 	}
-
+	
+    @SuppressWarnings("unchecked")
+    public CodeInfo getCodeInfo(String codeCate, String code) {
+        Map map = new HashMap();
+        map.put("codecate", codeCate);
+        map.put("code", code);
+        List<CodeInfo> codeInfos = findByPageRequest(map);
+        if(codeInfos.size() > 0) {
+            return codeInfos.get(0);
+        }
+        else {
+            return new CodeInfo();
+        }
+    }
 }

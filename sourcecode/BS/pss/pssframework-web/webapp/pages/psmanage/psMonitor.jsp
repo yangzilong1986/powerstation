@@ -2,11 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/meta.jsp"%>
+<%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>漏保监测</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="webapp"/>/widgets/simpletable/simpletable.css" />
+<script type="text/javascript" src="<pss:path type="webapp"/>/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/effects.js"></script>
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.query.js"></script>
@@ -1198,19 +1202,18 @@ function psTotalParamsSetup() {
         <div class="info_con">
           <table width="90%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="35%" height="30">资产编号：<strong>${psInfo.assetNo}</strong></td>
-              <td width="35%">漏保型号：<strong>QLL1-Z(250) - 0.2s、0.3s</strong></td>
-              <td width="30%">漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
+              <td width="30%" height="30">资产编号：<strong>${psInfo.assetNo}</strong></td>
+              <td width="30%">漏保名称：<strong>${psInfo.psName}</strong></td>
+              <td width="40%">漏保型号：<strong>${psModel.name}</strong></td>
             </tr>
             <tr>
-              <td height="30">漏保类型：<strong>总保</strong></td>
-              <td>测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
-              <td>通信方式：<strong>485</strong></td>
+              <td height="30">测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
+              <td>漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
+              <td>漏保类型：<strong>${psType.name}</strong></td>
             </tr>
             <tr>
-              <td height="30">剩余电流档位：<strong>自动挡</strong></td>
-              <td>额定负载电流档位：<strong>20</strong></td>
-              <td>剩余电流当前档位：<strong>200</strong></td>
+              <td height="30">通信方式：<strong>${commModeGm.name}</strong></td>
+              <td colspan="2">安装地址：<strong>${tranInfo.instAddr}</strong></td>
             </tr>
           </table>
         </div>
@@ -1385,32 +1388,28 @@ function psTotalParamsSetup() {
       </div>
     </ul>
     <ul class=disNone id=jc_Con_2>
+      <form:form name="psEventQueryForm" modelAttribute="psdata">
+      <div style="vertical-align:middle; height: 30px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="50" height="30" align="right" class="green">时 间：</td>
+            <td width="120" align="left">
+              <input type="hidden" id="psId" name="psId" value="${psInfo.psId}" />
+              <input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+            </td>
+            <td width="100" align="center">
+              <img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </div>
       <div class="content">
-        <div id="cont_1">
-          <div class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-45));">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-              <thead>
-                <tr>
-                  <th width="8%" class="bg01" height="30">序号</th>
-                  <th width="30%" class="bg01">跳闸时间</th>
-                  <th width="20%" class="bg01">跳闸类型</th>
-                  <th width="15%" class="bg01">故障相位</th>
-                  <th width="27%" class="bg01">跳闸电参数</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div id="cont_1" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-75));">
+          <iframe id="fdata" scrolling="no" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe>
         </div>
       </div>
+      </form:form>
     </ul>
   </div>
 </div>
