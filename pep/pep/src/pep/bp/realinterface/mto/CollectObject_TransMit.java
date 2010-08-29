@@ -15,6 +15,7 @@ import pep.common.exception.BPException;
  */
 public class CollectObject_TransMit {
     private String terminalAddr;            //终端逻辑地址
+    private int mpSn;//测量点序号
     private String equipProtocol;           //设备规约号
     private String meterAddr;              //表地址
     private int meterType;            //表计规约
@@ -189,5 +190,19 @@ public class CollectObject_TransMit {
      */
     public void setFuncode(byte funcode) {
         this.funcode = funcode;
+    }
+
+    /**
+     * @return the mpSn
+     */
+    public int getMpSn() {
+        return mpSn;
+    }
+
+    /**
+     * @param mpSn the mpSn to set
+     */
+    public void setMpSn(int mpSn) {
+        this.mpSn = mpSn;
     }
 }
