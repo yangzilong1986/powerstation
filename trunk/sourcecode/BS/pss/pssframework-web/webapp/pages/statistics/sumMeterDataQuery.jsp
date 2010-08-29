@@ -89,7 +89,9 @@ function changeType(obj) {
       <li id=datamenu_Option_3 style="cursor: pointer;" onclick="changeType(3)">电流数据</li>
     </ul>
     </div>
-    <div align="center" ><iframe id="data" scrolling="auto"  style="display: block; overflow-y: auto; overflow-x: auto; width: expression(( document.documentElement.clientWidth || document.body.clientWidth) -5 ); height: expression((( document.documentElement.clientHeight || document.body.clientHeight) -80 ) );"></iframe></div>
+    <div align="center" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-65));">
+      <iframe id="data" scrolling="auto" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%;"></iframe>
+    </div>
   </form:form>
 </ul>
 </div>

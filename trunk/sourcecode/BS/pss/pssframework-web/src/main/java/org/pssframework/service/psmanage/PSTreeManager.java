@@ -79,8 +79,15 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
             psTreeNode111.setTreeNodeId("61");
             psTreeNode111.setTreeNodeName("test");
             psTreeNode111.setChildren(null);
+            // PS 112
+            PSTreeNode psTreeNode112 = new PSTreeNode();
+            psTreeNode112.setTreeNodeType("PS");
+            psTreeNode112.setTreeNodeId("101");
+            psTreeNode112.setTreeNodeName("JD6-6");
+            psTreeNode112.setChildren(null);
 
             list11Children.add(psTreeNode111);
+            list11Children.add(psTreeNode112);
             psTreeNode11.setChildren(list11Children);
 
             list1Children.add(psTreeNode11);

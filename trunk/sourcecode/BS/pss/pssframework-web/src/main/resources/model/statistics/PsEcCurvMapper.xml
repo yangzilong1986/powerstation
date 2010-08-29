@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="PsEcCurv">
+	<resultMap id="PsEcCurvResult" type="org.pssframework.model.statistics.EcCurv"></resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="PsEcCurvColumns"><![CDATA[m.GP_ID gpId, d.DATA_TIME dataTime, d.ASSET_NO assetNo, d.ECUR_A ecurA, d.ECUR_B ecurB, d.ECUR_C ecurC, d.ECUR_L ecurL, d.ECUR_S ecurS, d.VOLT_B voltB, d.VOLT_A voltA, d.VOLT_C voltC]]></sql>
+	<sql id="PsEcCurvDynamicWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<choose>
+			<when test="orgId != null">and m.org_Id = #{orgId}</when>
+		</choose>
+		<choose>
+			<when test="tgId != null">and m.object_Id = #{tgId} and m.gp_type='2'</when>
+		</choose>
+		<choose>
+			<when test="ddate != null">and d.ddate = to_char(to_date(#{ddate},'yyyy-mm-dd'),'yyyymmdd')</when>
+			<otherwise>and d.ddate is null</otherwise>
+		</choose>
+	</sql>
+	<select id="count" resultType="long">
+		<![CDATA[select count(1) from D_EC_CURV_C d, V_PS m where m.gp_id= d.gp_id]]>
+		<include refid="PsEcCurvDynamicWhere" />
+	</select>
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="pageSelect" resultMap="PsEcCurvResult">
+		select
+		<include refid="PsEcCurvColumns" />
+		<![CDATA[from D_EC_CURV_C d, V_PS m where m.GP_ID= d.GP_ID ]]>
+		<include refid="PsEcCurvDynamicWhere" />
+		<if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+	</select>
+</mapper>
