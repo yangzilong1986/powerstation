@@ -100,7 +100,7 @@ public class Packet376Event36 extends PmPacket376EventBase {
                 Meter event = new Meter();
                 event.meterAddress = Gb645Address.meterAddressToString(eventData.getBytes(6));
                 byte s = (byte) eventData.getByte();
-                event.isClosed = ((s & 0x80) == 0x80);
+                event.isClosed = ((s & 0x80) == 0x00);
                 event.isLocked = ((s & 0x40) == 0x40);
                 switch ((s & 0x30) >> 4) {
                     case 0:
