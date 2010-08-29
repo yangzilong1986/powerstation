@@ -1195,8 +1195,10 @@ function psTotalParamsSetup() {
         <div class="info_top">
           <span>基本信息</span>
           <div id="bngMonitor" style="float: right;">
+          <security:authorize ifAnyGranted="ROLE_AUTHORITY_7">
             <input type="button" id="startMonitoringBtn" value="开始监测" class="jc_sub mgl10" onclick="startMonitoring()" />
             <input type="button" id="endMonitoringBtn" value="结束监测" class="jc_sub mgl10" onclick="endMonitoring()" />
+          </security:authorize>
           </div>
         </div>
         <div class="info_con">
@@ -1224,8 +1226,10 @@ function psTotalParamsSetup() {
                 <div class="green1"><strong>合闸/分闸操作</strong></div>
                 <div class="mgt10" style="text-align: center; height: 80px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></div>
                 <div class="mgt10 tc" style="height: 30px;">
+                <security:authorize ifAnyGranted="ROLE_AUTHORITY_8">
                   <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
                   <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
+               </security:authorize>
                 </div>
                 <div class="mgt5 tc" style="height: 30px;">
                   <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
