@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%> 
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+
+
 
 <logic:notEmpty name="CONTROL_GRATHERID">
 <script type="text/javascript">
