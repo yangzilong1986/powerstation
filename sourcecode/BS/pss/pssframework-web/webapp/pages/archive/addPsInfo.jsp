@@ -51,96 +51,167 @@ function meterState(){
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((         document.documentElement.clientHeight ||         document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression(((  document.documentElement.clientHeight ||document.body.clientHeight) -35));">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
       value="${_type}" />
+    <c:choose>
+      <c:when test="${_type=='edit' || _type=='new'}">
+        <c:set var="disabled" value="false"></c:set>
+      </c:when>
+      <c:otherwise>
+        <c:set var="disabled" value="true"></c:set>
+      </c:otherwise>
+    </c:choose>
     <form:hidden path="gpInfo.objectId" />
     <div id="main">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
-        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="assetNo" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="assetNo" cssClass="required input2" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="assetNo" cssClass="required input2" disabled="${disabled}" />
+        </security:authorize></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
-        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
-          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
+        </security:authorize></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏保名称：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="psName" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="psName" cssClass="required input2" disabled="${disabled}"/>
+        </security:authorize></td>
         <td align="right" class="green">安装地址：</td>
         <td>${istAddr}</td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">试跳时间：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code" />日&nbsp;<form:select
-          path="testTime" items="${clockList}" id="testTime" itemLabel="name" itemValue="code" />点 &nbsp;<form:checkbox path="autoTest" title="是否自动跳" value="1" />是否自动跳</security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code"
+            disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}" id="testTime"
+            itemLabel="name" itemValue="code" disabled="${disabled}" />点 &nbsp;<form:checkbox path="autoTest"
+            title="是否自动跳" value="1" disabled="${disabled}" />是否自动跳</security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code"
+            disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}" id="testTime"
+            itemLabel="name" itemValue="code" disabled="${disabled}" />点 &nbsp;<form:checkbox path="autoTest"
+            title="是否自动跳" value="1" disabled="${disabled}" />是否自动跳</security:authorize></td>
       </tr>
     </table>
-    <c:set var="disabled" value="true"></c:set></div>
+    </div>
     <div class="tab" id="detail_tile"><span>当前状态</span></div>
     <div class="da_mid" style="width: expression(document.body.clientWidth-32)">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
-        <td><form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
         <td align="right" class="green">漏保型号：</td>
-        <td><form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">波特率：</td>
-        <td><form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code" cssStyle="width:155px;"
+            disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code" cssStyle="width:155px;"
+            disabled="${disabled}" />
+        </security:authorize></td>
         <td align="right" class="green">额定电流：</td>
-        <td><form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">规约：</td>
-        <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
-                  <td align="right" class="green">漏保类型：</td>
-        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
+        <td align="right" class="green">漏保类型：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
-      </table>
-      <table id="detail">
+    </table>
+    <table id="detail" border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td align="right" class="green">漏电分断延迟档位：</td>
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
-          itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+          itemValue="code" cssStyle="width:145px;" disabled="true" /></td>
         <td align="right" class="green">剩余电流档位：</td>
         <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
+          cssStyle="width:165px;" disabled="true" /></td>
       </tr>
       <!--  
 			<tr height="30px">
 				<td align="right" class="green">CT：</td>
 				<td><form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
+					cssStyle="width:155px;"  /></td>
 				<td align="right" class="green">PT：</td>
 				<td><form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" disabled="${disabled}" /></td>
+					cssStyle="width:155px;"  /></td>
 			</tr>-->
       <tr height="30px">
         <td align="right" class="green">功能状态设置：</td>
         <td colspan="3"><c:forEach items="${psinfo.functionMap}" var="function">
-          <form:checkbox path="functionsChecked" value="${function.value}" disabled="${disabled}" />${function.key}
+          <form:checkbox path="functionsChecked" value="${function.value}" disabled="true" />${function.key}
  </c:forEach></td>
       </tr>
     </table>
     </div>
   </form:form></div>
   <div style="text-align: center"><br></br>
-  <input type="button" id="save" value="保 存" class="btnbg4" /></div>
+  <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+    <c:if test="${_type!='show'}">
+      <input type="button" id="save" value="保 存" class="btnbg4" />
+    </c:if>
+  </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
   </div>
 </ul>
 </div>
@@ -171,10 +242,9 @@ jQuery("#save").click(function(){
     }else{
       jQuery(this).attr("disabled","");
     }
-    })
-
+    });
       
-})
+});
 
 
 
@@ -186,7 +256,7 @@ if(type == "add"){
   data = jQuery("form[id=psinfo]").serialize(); 
 }
 return data;
-}
+};
 
 
 
@@ -206,14 +276,14 @@ addpsinfo = function(){
            alert(msg);
            if(isSucc){
         	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
-        	   closeWin() 
+        	   closeWin();
            }
          },error:function(XmlHttpRequest,textStatus, errorThrown){
         	 alert("新建失败;"+XmlHttpRequest.responseText);
          }
        });
   }
-}
+};
 
 updatepsinfo = function(){
   var psFormData = getData("update");
@@ -240,11 +310,10 @@ updatepsinfo = function(){
            }
          });
     }
-}
-
+};
 function   closeWin() 
 { 
         window.close(); 
-} 
+} ;
 </script>
 </html>

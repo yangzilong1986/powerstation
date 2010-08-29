@@ -82,6 +82,14 @@ function meterState(){
 <form:form action="/archive/mpinfo" modelAttribute="mpinfo">
   <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
     value="${_type}"></input>
+  <c:choose>
+    <c:when test="${_type=='edit' || _type=='new'}">
+      <c:set var="disabled" value="false"></c:set>
+    </c:when>
+    <c:otherwise>
+      <c:set var="disabled" value="true"></c:set>
+    </c:otherwise>
+  </c:choose>
   <form:hidden path="tgInfo.tgId" />
   <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
   <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
@@ -89,80 +97,77 @@ function meterState(){
   <ul class=default id=electric_Con_1>
     <div class="tab"><span>总表信息</span></div>
     <div class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((                                           document.documentElement.clientHeight ||                                           document.body.clientHeight) -35 ) );"">
+      style="display: block; overflow-y: auto; overflow-x: auto; width: expression((document.documentElement.clientWidth ||document.body.clientWidth) -10 ); height: expression(((document.documentElement.clientHeight ||document.body.clientHeight) -35 ) );">
     <div class="tab"><span>重要信息</span></div>
     <div id="485Show" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((                document.documentElement.clientHeight |               document.body.clientHeight) -                                 700 ) );">
+      style="display: block; overflow-y: auto; overflow-x: auto; height: expression((( document.documentElement.clientHeight | document.body.clientHeight) - 700 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="true" />
+          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" />
+          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="${disabled}" />
         </security:authorize></td>
         <td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpName" cssClass="required" disabled="true" />
+          <form:input path="mpName" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpName" cssClass="required" />
-        </security:authorize></td>
-        <td width="20%"><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpName" cssClass="required" />
+          <form:input path="mpName" cssClass="required" disabled="${disabled}" />
         </security:authorize></td>
         <td width="13%" class="green" align="right"><font color="red">* </font>计量点编号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpNo" cssClass="required" disabled="true" />
+          <form:input path="mpNo" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpNo" cssClass="required" />
+          <form:input path="mpNo" cssClass="required" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">CT变比：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">PT变比：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right"><font color="red">* </font>表 地 址：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="true" />
+          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].gpAddr" cssClass="required" />
+          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">表 规 约：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name" disabled="true"
-            itemValue="code" cssStyle="width:155px;" />
+          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+            itemValue="code" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
-            itemValue="code" cssStyle="width:155px;" />
+            itemValue="code" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">所属终端：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" disabled="true" />
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" />
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right"><font color="red">* </font>资产号：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="meterInfo.assertNo" cssClass="required" disabled="true" />
+          <form:input path="meterInfo.assertNo" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="meterInfo.assertNo" cssClass="required" />
+          <form:input path="meterInfo.assertNo" cssClass="required" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
     </table>
@@ -176,102 +181,106 @@ function meterState(){
             }else{
               obj.value = '1';
             }
-            return obj
+            return obj;
           }
       }
       </script>
     <div class="tab"><span>一般信息</span></div>
     <div id="pulseShow" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                               document.documentElement.clientHeight ||                               document.body.clientHeight) -                                 600 ) );">
+      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                                 document.documentElement.clientHeight ||                                 document.body.clientHeight) -                                   600 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="13%" class="green" align="right">计量方式：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td width="13%" class="green" align="right">端 口 号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].port" disabled="true"></form:input>
+          <form:input path="gpInfos[0].port" disabled="${disabled}"></form:input>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="gpInfos[0].port"></form:input>
+          <form:input path="gpInfos[0].port" disabled="${disabled}"></form:input>
         </security:authorize></td>
         <td width="13%" class="green" align="right">波 特 率：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">申请日期：</td>
         <td class="dom_date"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="appDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="true" />
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="appDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-            readonly="readonly" cssStyle="height:23px;width:150px;" />
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">投运日期：</td>
         <td class="dom_date"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="runDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="true" />
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="runDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-            readonly="readonly" cssStyle="height:23px;width:150px;" />
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">供电线路：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">运行状态：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">接线方式：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="true" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" />
+            cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">安装位置：</td>
         <td colspan=3><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpAddr" size="60" disabled="true"></form:input>
+          <form:input path="mpAddr" size="60" disabled="${disabled}"></form:input>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="mpAddr" size="60"></form:input>
+          <form:input path="mpAddr" size="60" disabled="${disabled}"></form:input>
         </security:authorize></td>
         <td colspan="2"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:checkbox path="gpInfos[0].sucratCptId" value="0" disabled="true" />
+          <form:checkbox path="gpInfos[0].sucratCptId" value="1" disabled="${disabled}" />
         </security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:checkbox path="gpInfos[0].sucratCptId" value="1" />
+          <form:checkbox path="gpInfos[0].sucratCptId" value="1" disabled="${disabled}" />
         </security:authorize>功率累计 <security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:checkbox path="gpInfos[0].computeFlag" value="1" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize>电量计算</td>
+          <form:checkbox path="gpInfos[0].computeFlag" value="1" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:checkbox disabled="${disabled}" path="gpInfos[0].computeFlag" value="1" />
+        </security:authorize>电量计算</td>
       </tr>
     </table>
     </div>
     <div style="text-align: center"><br />
     <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-      <input type="button" id="save" value="保 存" class="btnbg4" />
+      <c:if test="${_type!='show'}">
+        <input type="button" id="save" value="保 存" class="btnbg4" />
+      </c:if>
     </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
     </div>
   </ul>
