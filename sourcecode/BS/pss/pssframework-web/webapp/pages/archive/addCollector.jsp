@@ -22,7 +22,7 @@ $(function(){
 })
 //保存采集器信息
 function save(){
-<<<<<<< .mine
+
     var url=contextPath+"/archive/gmAction.do?action=addGm2ByLowCustNew";
 =======
     var url=contextPath+"/archive/gmInfoAction.do?action=saveOrUpdateGm&r=" + parseInt(Math.random() * 1000);

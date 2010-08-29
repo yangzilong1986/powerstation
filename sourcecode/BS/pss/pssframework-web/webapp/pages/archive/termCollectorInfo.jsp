@@ -408,7 +408,7 @@
        <td class="label">
         终端型号：
 
-<<<<<<< .mine
+
 
 
 
@@ -439,7 +439,7 @@
        <td class="label">
         物理地址：
 
-<<<<<<< .mine
+
 
        </td>
        <td class="dom">

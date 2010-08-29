@@ -2,8 +2,8 @@
 
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/taglibs.jsp"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
+
+
 
 
 <html:html lang="true">

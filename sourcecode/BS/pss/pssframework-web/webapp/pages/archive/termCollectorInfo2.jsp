@@ -160,7 +160,7 @@
                     var msg=json['msg'];
                     if(msg=="1"){
                        alert("保存成功");
-<<<<<<< .mine
+
                        if(confirm("是否继续新增集中器")==true){
                            var url1=contextPath+"/archive/commAction.do?action=clearSessionByTerm";
                            $.ajax({
@@ -181,7 +181,7 @@
                          }else{
 >>>>>>> .r837
                            top.getMainFrameObj().location.href=contextPath+"/archive/commAction.do?action=forwardSelectType&jspName=lowVoltCustType&selectType=1";
-<<<<<<< .mine
+
 =======
                          }
                        }else if(tgTermCollectFlag =="0"){ //维护集中器页面
@@ -260,7 +260,7 @@
       success: function(data) {
            if(tgId==""){//如果没有所属台区
 
-<<<<<<< .mine
+
 
 
 
@@ -598,8 +598,8 @@ function comfirmAfterQuery(data){
        <td colspan="3" class="dom">
         <input type="text" id="physicsAddr" name="physicsAddr" style="width: 390px" value="${object_term.physicsAddr}" />
        </td>
-<<<<<<< .mine
-<<<<<<< .mine
+
+
        <td  class="label">SIM卡号：</td>
        <td  class="dom">
             <input type="text" id="simNo" name="simNo" value="${object_term.simNo}" />
@@ -637,7 +637,7 @@ function comfirmAfterQuery(data){
 
         </td>
         <td width="15%" class="dom">
-<<<<<<< .mine
+
          <peis:selectlist name="lineId" sql="SL_ARCHIVE_0018" associate="true"/>
 =======
          <peis:selectlist name="lineId" sql="SL_ARCHIVE_0018" />
@@ -650,7 +650,7 @@ function comfirmAfterQuery(data){
          电量累计 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          变压器：
          <select name="tranId" id="tranId">
-<<<<<<< .mine
+
            <option value="">未接变压器</option>
           </select>
 =======

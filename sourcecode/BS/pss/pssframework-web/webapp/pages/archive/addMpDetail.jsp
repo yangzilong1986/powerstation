@@ -97,7 +97,7 @@ function change(){
 	      loadLines('');//下拉框线路
 	      $('#oneLine').attr("disabled",false);
 	      loadsUmp('06');//电表用途
-<<<<<<< .mine
+
 	     } 
 }
 
@@ -436,7 +436,7 @@ function specialCust(){
         <td width="2%" class="label">
 >>>>>>> .r837
           <input type="checkbox" name="isPulse" id="isPulse"/>接脉冲
-<<<<<<< .mine
+
         </td>
         <td width="4%" class="label">
           <input type="checkbox" name="oneLine" id="oneLine"/>专线用户

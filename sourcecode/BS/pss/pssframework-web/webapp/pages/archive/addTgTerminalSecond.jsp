@@ -86,7 +86,7 @@ function showDevice(){
 function lastStep(){
   var tgTermFlag=$("input[name='tgTermFlag']").val();
   if(tgTermFlag=="1"){
-<<<<<<< .mine
+
      //window.location.href = contextPath + "/archive/tgTermQuery.do?action=normalMode&sqlCode=AL_ARCHIVE_0049&pageRows=20";
      window.location.href = contextPath + "/jsp/archive/selectTgTerm.jsp";
 =======

@@ -15,7 +15,7 @@
   <script type="text/javascript">
    var contextPath='<peis:contextPath/>';
    
-<<<<<<< .mine
+
    function forwardTerm(){
       //alert(termId);
       var termId=$("input[name='termId']").val();

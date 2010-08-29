@@ -16,7 +16,7 @@
     var termId=$.url.param("termId");
     var gpId=$.url.param("gpId");
     var contextPath='<peis:contextPath/>';
-<<<<<<< .mine
+
    $(document).ready(function(){
       $("input[name='termId']").val(termId);
       $("input[name='gpId']").val(gpId);
@@ -32,7 +32,7 @@
       //alert(termId);
       window.location.href=contextPath+"/archive/terminalAction1.do?action=showTerm2&termId="+termId+"&gpId="+gpId+"";
    }
-<<<<<<< .mine
+
    
    //打开采集器页面=======
    //打开采集器页面
@@ -75,7 +75,7 @@
      }
    }
   </script>
-<<<<<<< .mine
+
 </head>
 <body>
  <!-- 采集器信息 -->

@@ -38,7 +38,7 @@
  
 //上一步
 function lastStep(){
-<<<<<<< .mine
+
    //window.location.href=contextPath+"/jsp/archive/lowVoltCustType.jsp";
    var url=contextPath+"/archive/commAction.do?action=forwardSelectType&jspName=lowVoltCustType&selectType=1";
    window.location.href=url;

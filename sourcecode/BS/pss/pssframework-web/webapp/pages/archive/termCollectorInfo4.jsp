@@ -476,8 +476,8 @@ var contextPath = '<peis:contextPath/>';
        <td colspan="3" class="dom">
         <input type="text" id="physicsAddr" name="physicsAddr" style="width: 390px" value="${object_term.physicsAddr}" />
        </td>
-<<<<<<< .mine
-<<<<<<< .mine
+
+
        <td  class="label">SIM卡号：</td>
        <td  class="dom">
             <input type="text" id="simNo" name="simNo" value="${object_term.simNo}" />
@@ -514,7 +514,7 @@ var contextPath = '<peis:contextPath/>';
 
         </td>
         <td class="dom">
-<<<<<<< .mine
+
          <peis:selectlist name="lineId" sql="SL_ARCHIVE_0018" associate="true"/>
 =======
          <peis:selectlist name="lineId" sql="SL_ARCHIVE_0018"/>
