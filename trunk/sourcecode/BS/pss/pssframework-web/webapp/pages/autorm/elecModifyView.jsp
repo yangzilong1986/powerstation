@@ -1,9 +1,9 @@
 <%/** 数据修正页面  */ %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%> 
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

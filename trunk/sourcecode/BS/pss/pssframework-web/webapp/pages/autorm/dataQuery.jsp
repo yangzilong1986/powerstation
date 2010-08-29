@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%> 
+
+<%@include file="../../commons/taglibs.jsp"%>
 <html>
   <head>
   <meta http-equiv="pragma" content="no-cache"/>

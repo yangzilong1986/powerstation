@@ -1,9 +1,9 @@
 <% /** 单用户查询页面  */  %>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@taglib uri="/WEB-INF/peis-tag.tld" prefix="peis"%>
+<%@include file="../../commons/taglibs.jsp"%>
+
+
+
 <%@page import="peis.util.StringHelper"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>

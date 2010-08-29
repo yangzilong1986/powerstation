@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../common/blockloading.jsp"%>
 
 

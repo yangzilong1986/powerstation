@@ -1,9 +1,9 @@
 <%/** 电量单用户查询    */%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%> 
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
+<%@include file="../../commons/taglibs.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+
 <%@ page import="peis.common.CommDataDisposal" %>
 <html>
   <head>
