@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">

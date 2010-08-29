@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
 <div id="tab" class="tab1">
 <ul>
    <li id="tab_1" class="tab_on"><a href="javascript:changeTab(1);" onfocus="blur()">专变用户</a></li>

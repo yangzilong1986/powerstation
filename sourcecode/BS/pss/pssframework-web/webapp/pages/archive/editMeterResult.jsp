@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%> 
+<%@include file="../../commons/taglibs.jsp"%>
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 <%@	taglib uri="/WEB-INF/peis-tag.tld" prefix="peis"%>
 <script type="text/javascript" language="javascript">
