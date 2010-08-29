@@ -37,7 +37,7 @@ public class MainProcess {
                 log.info(task);
                 threadPool.execute(bp);
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
     }
@@ -52,7 +52,7 @@ public class MainProcess {
             pollingProcessor.run();
             log.info("启动主动轮召任务调度器 ");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -64,15 +64,10 @@ public class MainProcess {
             planManager.run();
             log.info("启动漏保试跳计划调度器 ");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }
-
-
-
-
-
 
     public MainProcess(PepCommunicatorInterface pepCommunicator) {
         this.threadPool = new ThreadPoolExecutor(4, 5, 3,
