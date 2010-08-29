@@ -159,6 +159,7 @@ public class Converter {
     public List<PmPacket376> CollectObject_TransMit2PacketList(CollectObject_TransMit obj, StringBuffer commandMark) {
         List<PmPacket376> results = new ArrayList<PmPacket376>();
         List<CommandItem> CommandItems = obj.getCommandItems();
+
         for (CommandItem commandItem : CommandItems) {
 
             PmPacket376 packet = new PmPacket376();
@@ -172,7 +173,7 @@ public class Converter {
             packet.getSeq().setIsTpvAvalibe(true);
 
             commandMark.append(commandItem.getIdentifier() + "#");
-            PmPacket376DA da = new PmPacket376DA(0);
+            PmPacket376DA da = new PmPacket376DA(obj.getMpSn());
             PmPacket376DT dt = new PmPacket376DT(1);
 
             //376规约组帧
