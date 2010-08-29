@@ -84,6 +84,8 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 
 		setOrgInfo(entity);
 
+		setCheckbox(entity);
+
 		super.saveOrUpdate(entity);
 
 	}
@@ -150,6 +152,25 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		if (gpAddr != null && gpAddr.length() < 12) {
 			gpAddr = StringUtil.lPad(gpAddr, "0", 12);
 			gpInfo.setGpAddr(gpAddr);
+		}
+
+	}
+
+	/**
+	 * 电量计算
+	 * 功率累计
+	 * @param model
+	 */
+	private void setCheckbox(MpInfo model) {
+
+		for (GpInfo gpInfo : model.getGpInfos()) {
+
+			if (gpInfo.getSucratCptId() == null || "".equals(gpInfo.getSucratCptId())) {
+				gpInfo.setSucratCptId("0");
+			}
+			if (gpInfo.getComputeFlag() == null || "".equals(gpInfo.getComputeFlag())) {
+				gpInfo.setComputeFlag("0");
+			}
 		}
 
 	}
