@@ -60,32 +60,32 @@ function meterState(){
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
-        <td width="30%"><form:input path="assetNo" cssClass="required input2" /></td>
+        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="assetNo" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
-        <td width="30%"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
-          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></td>
+        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:select path="terminalInfo.termId" items="${termList}" id="termAddr"
+          itemLabel="logicalAddr" itemValue="termId" cssStyle="width:155px;" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
-        <td><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
-        <td><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏保名称：</td>
-        <td><form:input path="psName" cssClass="required input2" /></td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:input path="psName" cssClass="required input2" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
         <td align="right" class="green">安装地址：</td>
         <td>${istAddr}</td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">试跳时间：</td>
-        <td><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code" />日&nbsp;<form:select
-          path="testTime" items="${clockList}" id="testTime" itemLabel="name" itemValue="code" />点 &nbsp;<form:checkbox path="autoTest" title="是否自动跳" value="1" />是否自动跳</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code" />日&nbsp;<form:select
+          path="testTime" items="${clockList}" id="testTime" itemLabel="name" itemValue="code" />点 &nbsp;<form:checkbox path="autoTest" title="是否自动跳" value="1" />是否自动跳</security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize></td>
       </tr>
     </table>
     <c:set var="disabled" value="true"></c:set></div>
     <div class="tab" id="detail_tile"><span>当前状态</span></div>
-    <div id="detail" class="da_mid" style="width: expression(document.body.clientWidth-32)">
+    <div class="da_mid" style="width: expression(document.body.clientWidth-32)">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
@@ -104,19 +104,21 @@ function meterState(){
           cssStyle="width:155px;" disabled="${disabled}" /></td>
       </tr>
       <tr height="30px">
-        <td align="right" class="green">剩余电流档位：</td>
-        <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
-          cssStyle="width:155px;" disabled="${disabled}" /></td>
         <td align="right" class="green">规约：</td>
         <td><form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
+                  <td align="right" class="green">漏保类型：</td>
+        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+          cssStyle="width:155px;" disabled="${disabled}" /></td>
       </tr>
+      </table>
+      <table id="detail">
       <tr height="30px">
         <td align="right" class="green">漏电分断延迟档位：</td>
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
           itemValue="code" cssStyle="width:155px;" disabled="${disabled}" /></td>
-        <td align="right" class="green">漏保类型：</td>
-        <td><form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
+        <td align="right" class="green">剩余电流档位：</td>
+        <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
           cssStyle="width:155px;" disabled="${disabled}" /></td>
       </tr>
       <!--  
@@ -152,7 +154,7 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 $(function(){
 
 if('${_type}' == "new"){
-	$("#detail_tile").hide();
+	//$("#detail_tile").hide();
 	$("#detail").hide();
 }
 	
