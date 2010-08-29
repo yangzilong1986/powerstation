@@ -1,6 +1,6 @@
-<<<<<<< .mine
+
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../archive/include/page.htm" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -373,7 +373,7 @@ function deleteRow(selectedDate){
 </html>
 =======
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../archive/include/page.htm" %>
+
 <%@include file="../common/blockloading.jsp"%>
 
 <html>

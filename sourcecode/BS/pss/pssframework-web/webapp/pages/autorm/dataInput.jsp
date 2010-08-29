@@ -1,6 +1,6 @@
-<<<<<<< .mine
+
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../archive/include/page.htm" %>
+
 
 <html>
 <head>
@@ -515,7 +515,7 @@ function clearDataInfo(){
 </html>
 =======
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="../archive/include/page.htm" %>
+
 <%@include file="../common/blockloading.jsp"%>
 
 <html>
