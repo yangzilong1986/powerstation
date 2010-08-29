@@ -26,7 +26,7 @@ var contextPath  = '${ctx}';
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||                 document.body.clientWidth) -10 ); height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((                       document.documentElement.clientHeight ||                       document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -40,39 +40,72 @@ var contextPath  = '${ctx}';
           </c:otherwise>
         </c:choose>
         <td width="15%" align="right" class="green"><font color="red"><form:hidden path="tgId" />* </font>台区编号：</td>
-        <td width="20%"><form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16"
-          disabled="${disabled}" cssStyle="width:145px;" /></td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" disabled="${disabled}"
+            cssStyle="width:145px;" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" disabled="${disabled}"
+            cssStyle="width:145px;" />
+        </security:authorize></td>
         <td width="10%" align="right" class="green">台区名称：</td>
-        <td width="20%"><form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
-          disabled="${disabled}" /></td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
+            disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
+            disabled="${disabled}" />
+        </security:authorize></td>
         <td width="10%" align="right" class="green">管理单位：</td>
-        <td width="25%"><form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId"
-          itemLabel="orgName" itemValue="orgId" cssStyle="width:150px;" /></td>
+        <td width="25%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId" itemLabel="orgName"
+            itemValue="orgId" cssStyle="width:150px;" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="orgInfo.orgId" items="${orglist}" disabled="${disabled}" id="orgId" itemLabel="orgName"
+            itemValue="orgId" cssStyle="width:150px;" />
+        </security:authorize></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
-        <td width="20%"><form:input path="tgCap" id="tgCap" cssClass="validate-number input2"
-          cssStyle="width:125px;" disabled="${disabled}" /> kVA</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;"
+            disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;"
+            disabled="${disabled}" />
+        </security:authorize> kVA</td>
         <td width="10%" align="right" class="green">运行状态：</td>
-        <td width="20%"><form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code"
-          items="${statuslist}" cssStyle="width:145px;" disabled="${disabled}" /></td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" items="${statuslist}"
+            cssStyle="width:145px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" items="${statuslist}"
+            cssStyle="width:145px;" disabled="${disabled}" />
+        </security:authorize></td>
         <td width="15%" align="right" class="green">地 址：</td>
-        <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}" /></td>
+        <td width="25%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}" />
+        </security:authorize></td>
       </tr>
       <tr>
         <td width="100%" colspan="6" align="right"><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2">
-          <input id="save" name="save" type="button" class="btnbg4" value="保存">
+          <c:if test="${_type!='show'}">
+            <input id="save" name="save" type="button" class="btnbg4" value="保存">
+          </c:if>
         </security:authorize></td>
       </tr>
     </table>
   </form:form></div>
   <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
   <div class="mgt10">
-  <div class="mgt10 da_top"><span>变压器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-      width="16" height="16" style="cursor: pointer;" /></a></h1>
-  </security:authorize></div>
+  <div class="mgt10 da_top"><span>变压器信息</span> <c:if test="${_type!='show'}">
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+      <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+        width="16" height="16" style="cursor: pointer;" /></a></h1>
+    </security:authorize>
+  </c:if></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tranInfo">
     <thead>
@@ -91,11 +124,13 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${tran.plateCap}</td>
           <td>&nbsp;<pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
           <td>&nbsp;${tran.instAddr}</td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deleteTranInfo('${tran.equipId}')">删除</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-              onclick="updateTranInfo('${tran.equipId}')">修改</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td><c:if test="${_type!='show'}">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+              <a onclick="deleteTranInfo('${tran.equipId}')">删除</a>
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;
+          <a onclick="updateTranInfo('${tran.equipId}')">修改</a>
+            </security:authorize>
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showTranInfo('${tran.equipId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -103,10 +138,12 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>台区考核表信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-      width="16" height="16" /></a></h1>
-  </security:authorize></div>
+  <div class="mgt10 da_top"><span>台区考核表信息</span><c:if test="${_type!='show'}">
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+      <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+        width="16" height="16" /></a></h1>
+    </security:authorize>
+  </c:if></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -125,21 +162,26 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${mpInfo.gpInfos[0].gpAddr}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
           <td>&nbsp;<pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-              onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
-              onclick="showMpInfo('${mpInfo.mpId}')">查看</a></security:authorize></td>
+          <td><c:if test="${_type!='show'}">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+              <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+                onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
+            </security:authorize>
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showMpInfo('${mpInfo.mpId}')">查看</a>
+          </security:authorize></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>保护开关信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-      width="16" height="16" /></a></h1>
-  </security:authorize></div>
+  <div class="mgt10 da_top"><span>保护开关信息</span> <c:if test="${_type!='show'}">
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+      <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+        width="16" height="16" /></a></h1>
+    </security:authorize>
+  </c:if></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -163,11 +205,13 @@ var contextPath  = '${ctx}';
                           无
           </c:otherwise>
           </c:choose></td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deletePsInfo('${ps.psId}')">删除</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-              onclick="updatePsInfo('${ps.psId}')">修改</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td><c:if test="${_type!='show'}">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+              <a onclick="deletePsInfo('${ps.psId}')">删除</a>
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+                onclick="updatePsInfo('${ps.psId}')">修改</a>
+            </security:authorize>
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showPsInfo('${ps.psId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -176,10 +220,12 @@ var contextPath  = '${ctx}';
   </table>
   </div>
   <!-- 集中器信息 -->
-  <div class="mgt10 da_top"><span>集中器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-      height="16" style="cursor: pointer;" /></a></h1>
-  </security:authorize></div>
+  <div class="mgt10 da_top"><span>集中器信息</span> <c:if test="${_type!='show'}">
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+      <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+        width="16" height="16" style="cursor: pointer;" /></a></h1>
+    </security:authorize>
+  </c:if></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -200,11 +246,13 @@ var contextPath  = '${ctx}';
           <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
           <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
           <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deleteTermInfo('${term.termId}')">删除</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-              onclick="updateTermInfo('${term.termId}')">修改</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td><c:if test="${_type!='show'}">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+              <a onclick="deleteTermInfo('${term.termId}')">删除</a>
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+                onclick="updateTermInfo('${term.termId}')">修改</a>
+            </security:authorize>
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showTermInfo('${term.termId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -213,10 +261,12 @@ var contextPath  = '${ctx}';
   </table>
   </div>
   <!-- 操作员信息 -->
-  <div class="mgt10 da_top"><span>操作员信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-      height="16" style="cursor: pointer;" /></a></h1>
-  </security:authorize></div>
+  <div class="mgt10 da_top"><span>操作员信息</span> <c:if test="${_type!='show'}">
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+      <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+        width="16" height="16" style="cursor: pointer;" /></a></h1>
+    </security:authorize>
+  </c:if></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -231,9 +281,11 @@ var contextPath  = '${ctx}';
         <tr id="user_${user.empNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${user.name}</td>
           <td>&nbsp;${user.mobile}</td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deleteUserInfo('${user.empNo}')">删除</a>
-          </security:authorize>&nbsp;</td>
+          <td><c:if test="${_type!='show'}">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+              <a onclick="deleteUserInfo('${user.empNo}')">删除</a>
+            </security:authorize>
+          </c:if>&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
