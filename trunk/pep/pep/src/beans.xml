@@ -108,6 +108,14 @@
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
+    <bean id="dayimbStatisStoredProcedur" class="pep.bp.db.DAY_IMB_STATIS_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="pfcurvStoredProcedur" class="pep.bp.db.PFCURV_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
     <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource" />
 
@@ -120,7 +128,10 @@
 
     <bean id="psService" class="pep.bp.db.PSServiceIMP">
         <property name="dataSource" ref="dataSource" />
+    </bean>
 
+    <bean id="smsService" class="pep.bp.db.SMSServiceIMP">
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
     <bean id="dataService" class="pep.bp.db.DataServiceIMP">
@@ -137,6 +148,9 @@
         <property name="powerCurvStoredProcedure2" ref="powerCurvStoredProcedure2" />
         <property name="ecurStatisStoredProcedur" ref="dayEcurStatisStoredProcedur" />
         <property name="voltStatisStoredProcedur" ref="dayVoltStatisStoredProcedur" />
+        <property name="imbStatisStoredProcedur" ref="dayimbStatisStoredProcedur" />
+        <property name="pfcurvStoredProcedur" ref="pfcurvStoredProcedur" />
+
     </bean>
 
     <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
