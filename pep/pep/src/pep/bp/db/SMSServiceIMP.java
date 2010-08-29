@@ -32,11 +32,11 @@ public class SMSServiceIMP implements SmsService {
     public List<SMSDAO> getRecvSMS() {
 
         try {
-            StringBuffer sbSQL = new StringBuffer();
+            StringBuilder sbSQL = new StringBuilder();
             sbSQL.append("select a.id, d.logical_addr, e.gp_addr");
             sbSQL.append(" from a_sms_receive a, a_sms_send b, e_loubao_event c, c_terminal d, c_gp e");
             sbSQL.append(" where a.telecode=b.telecode and a.msg=b.tag and to_number(b.tag)=c.lbsj_id");
-            sbSQL.append(" and c.gp_sn=e.gp_sn and e.term_id=d.term_id");
+            sbSQL.append(" and c.gp_id=e.gp_id and e.term_id=d.term_id");
             return (List<SMSDAO>) jdbcTemplate.query(sbSQL.toString(), new SMSRowMapper());
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
@@ -48,7 +48,7 @@ public class SMSServiceIMP implements SmsService {
 
     public void deleteRecvSMS(int smsid) {
         try {
-            StringBuffer sbSQL = new StringBuffer();
+            StringBuilder sbSQL = new StringBuilder();
             sbSQL.append("delete from a_sms_receive where id=?");
 
             jdbcTemplate.update(sbSQL.toString(),
