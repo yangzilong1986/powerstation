@@ -68,9 +68,7 @@
             <bean:define id="userNo"><bean:write name="SE_SYS_USER_NO" scope="session"/></bean:define>  
           </td>
           <td align="center">
-            <logic:equal name='datainfo' property="col6" value="<%=userNo%>">&nbsp;&nbsp;
             <input type="button" name="delete" class="input2" value='删除' onclick="delNotice('<bean:write name="datainfo" property="col7"/>')"/>         
-          </logic:equal>
           </td>
           </tr>
         </logic:iterate>
