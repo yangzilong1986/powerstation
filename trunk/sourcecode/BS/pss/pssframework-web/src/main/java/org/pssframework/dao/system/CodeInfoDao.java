@@ -24,7 +24,6 @@ public class CodeInfoDao extends BaseHibernateDao<CodeInfo, Long> {
 	}
 
 	public List<CodeInfo> findAll(Map<String, ?> filters) {
-
 		return super.findAll(hql, filters);
 	}
 }

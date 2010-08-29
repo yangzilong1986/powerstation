@@ -1,10 +1,7 @@
 package org.pssframework.controller.psmanage;
 
-import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseSpringController;
+import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TgInfo;
+import org.pssframework.model.archive.TranInfo;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.query.psmanage.PSMonitorQuery;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.psmanage.PSTreeManager;
+import org.pssframework.service.statistics.StatisticsManager;
+import org.pssframework.service.statistics.StatisticsType;
 import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.util.ConverterUtils;
+import org.pssframework.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +33,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pep.bp.realinterface.ICollectInterface;
 import pep.bp.realinterface.mto.MessageTranObject;
+import cn.org.rapid_framework.page.Page;
+import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Zhangyu
@@ -41,6 +46,7 @@ public class PSMonitorController extends BaseSpringController {
     private static final String VIEW_NAME_FRM = "/psmanage/showPSMonitor";
     private static final String VIEW_NAME_MON = "/psmanage/psMonitor";
     private static final String VIEW_NAME_TRE = "/psmanage/psTree";
+    private static final String VIEW_EVENT_QUERY = "/psmanage/eventQuery";
 
     @Autowired
     private OrgInfoManager orgInfoManager;
@@ -59,6 +65,12 @@ public class PSMonitorController extends BaseSpringController {
 
     @Autowired
     private ICollectInterface realTimeProxy376;
+
+    @Autowired
+    private StatisticsManager statisticsManager;
+
+    // 默认多列排序,example: username desc,createTime asc
+    protected static final String DEFAULT_SORT_COLUMNS = null;
 
     /**
      * 
@@ -102,19 +114,30 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/psmonitor/{id}")
     public ModelAndView _psmonitor(ModelAndView mav, @PathVariable Long id) throws Exception {
         mav.setViewName(VIEW_NAME_MON);
-        logger.info("psId : " + id);
+        // logger.info("psId : " + id);
+
         PsInfo psInfo = psInfoManger.getById(id);
         mav.addObject("psInfo", psInfo);
 
-        Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
+        GpInfo gpInfo = psInfo.getGpInfo();
+        TranInfo tranInfo = null;
+        if(gpInfo != null) {
+            Long tgId = gpInfo.getObjectId();
+            if(tgId != null) {
+                tranInfo = getTranInfo(tgId);
+            }
+        }
+        if(tranInfo == null) {
+            tranInfo = new TranInfo();
+        }
+        mav.addObject("tranInfo", tranInfo);
 
-        // 漏保型号
-        requestMap.put("codecate", CODE_PS_MODEL);
-        mav.addObject("psModelList", this.codeInfoManager.findByPageRequest(requestMap));
+        mav.addObject("psModel", codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode()));
+        mav.addObject("commModeGm", codeInfoManager.getCodeInfo("COMM_MODE_GM", psInfo.getCommModeGm()));
+        mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
 
         return mav;
     }
@@ -128,6 +151,7 @@ public class PSMonitorController extends BaseSpringController {
     private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
         model.addObject("orglist", this.getOrgOptions(mapRequest));
         model.addObject("tglist", this.getTgOrgOptions(mapRequest));
+        model.addObject("qdate", DateUtils.getCurrentDate());
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
@@ -136,6 +160,15 @@ public class PSMonitorController extends BaseSpringController {
 
     private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
         return tgInfoManager.findByPageRequest(mapRequest);
+    }
+
+    private TranInfo getTranInfo(Long tgId) {
+        TgInfo tgInfo = tgInfoManager.getById(tgId);
+        List<TranInfo> tranInfoList = tgInfo.getTranInfos();
+        if(tranInfoList.size() > 0)
+            return tranInfoList.get(0);
+        else
+            return new TranInfo();
     }
 
     /**
@@ -270,5 +303,26 @@ public class PSMonitorController extends BaseSpringController {
         result.addObject("computerTime", computerTime);
 
         return result;
+    }
+
+    /**
+     * 
+     * @param mav
+     * @param request
+     * @param response
+     * @param psMonitorQuery
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/eventQuery")
+    public ModelAndView _eventQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
+            PSMonitorQuery psMonitorQuery) throws Exception {
+        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS);
+        Page page = statisticsManager.findByPageRequest(pageRequest, StatisticsType.PsEvent);// 获取数据模型
+        mav.addObject("page", page);
+        mav.addObject("pageRequest", pageRequest);
+        mav.setViewName(VIEW_EVENT_QUERY);
+        return mav;
     }
 }
