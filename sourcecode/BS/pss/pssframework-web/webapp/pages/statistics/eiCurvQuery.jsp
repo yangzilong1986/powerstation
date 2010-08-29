@@ -13,6 +13,7 @@
 </script>
 </head>
 <body>
+<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-31));">
 <form:form action="${ctx}/statistics/eicurv" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
@@ -44,7 +45,8 @@
     </tbody>
   </table>
 </form:form>
-<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar>
+</div>
+<div style="height: 30px; background: #DBEAEB; vertical-align: middle; text-align: right; border-left: 1px #85C0B4 solid; border-right: 1px #85C0B4 solid; border-bottom: 1px #85C0B4 solid;"><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
     $(document).ready(function() {

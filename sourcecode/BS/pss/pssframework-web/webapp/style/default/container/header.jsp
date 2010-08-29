@@ -46,43 +46,36 @@ function logout(){
 </script>
 </head>
 <body>
-<div class="bg_top"
-  style="min-width: 1004px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1004 ? '1004px' : '');">
-<div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo1.png" width="541" height="59" /></div>
-<div id="top_r">
-<div id="top_r_t">
-<ul>
-  <security:authorize ifAnyGranted="ROLE_RESOURCE_10">
-    <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#"
-      onclick="showBar(1); return false;">基本应用</a></li>
-  </security:authorize>
-  <security:authorize ifAnyGranted="ROLE_RESOURCE_20">
-    <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#"
-      onclick="showBar(2); return false;">高级应用</a></li>
-  </security:authorize>
-  <security:authorize ifAnyGranted="ROLE_RESOURCE_30">
-    <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#"
-      onclick="showBar(3); return false;">运行管理</a></li>
-  </security:authorize>
-  <security:authorize ifAnyGranted="ROLE_RESOURCE_40">
-    <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#"
-      onclick="showBar(4); return false;">统计查询</a></li>
-  </security:authorize>
-  <security:authorize ifAnyGranted="ROLE_RESOURCE_50">
-    <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#"
-      onclick="showBar(5); return false;">系统管理</a></li>
-  </security:authorize>
-</ul>
-</div>
-<div id="top_menu">
-<ul>
-  <li><a title="帮助" href="#"><img src="<pss:path type="bgcolor"/>/img/top_menu3.gif" width="16" height="16" /></a></li>
-  <li><a title="返回" href="#"> <img onclick="logout()" src="<pss:path type="bgcolor"/>/img/top_menu2.gif"
-    width="16" height="16" /></a></li>
-  <li><a title="主页" href="#"><img src="<pss:path type="bgcolor"/>/img/top_menu1.gif" width="16" height="16" /></a></li>
-</ul>
-</div>
-</div>
+<div class="bg_top" style="min-width: 1014px; _width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1014 ? '1014px' : '');">
+  <div id="logo"><img src="<pss:path type="bgcolor"/>/img/logo1.png" width="541" height="59" /></div>
+  <div id="top_r">
+    <div id="top_r_t">
+      <ul>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_10">
+          <li><img src="<pss:path type="bgcolor"/>/img/icon01.png" width="65" height="30" /><a href="#" onclick="showBar(1); return false;">基本应用</a></li>
+        </security:authorize>
+        <!-- <security:authorize ifAnyGranted="ROLE_RESOURCE_20">
+          <li><img src="<pss:path type="bgcolor"/>/img/icon02.png" width="65" height="31" /><a href="#" onclick="showBar(2); return false;">高级应用</a></li>
+        </security:authorize> -->
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_30">
+          <li><img src="<pss:path type="bgcolor"/>/img/icon03.png" width="65" height="30" /><a href="#" onclick="showBar(3); return false;">运行管理</a></li>
+        </security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_40">
+          <li><img src="<pss:path type="bgcolor"/>/img/icon04.png" width="65" height="30" /><a href="#" onclick="showBar(4); return false;">统计查询</a></li>
+        </security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_50">
+          <li><img src="<pss:path type="bgcolor"/>/img/icon05.png" width="65" height="30" /><a href="#" onclick="showBar(5); return false;">系统管理</a></li>
+        </security:authorize>
+      </ul>
+    </div>
+    <div id="top_menu">
+      <ul>
+        <li><a title="帮助" href="#"><img src="<pss:path type="bgcolor"/>/img/top_menu3.gif" width="16" height="16" /></a></li>
+        <li><a title="退出" href="#"><img onclick="logout()" src="<pss:path type="bgcolor"/>/img/top_menu2.gif" width="16" height="16" /></a></li>
+        <li><a title="主页" href="#"><img src="<pss:path type="bgcolor"/>/img/top_menu1.gif" width="16" height="16" /></a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 </body>
 </html>
