@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%>
-<%@include file="../common/loading.jsp"%>
+<%@include file="../../commons/taglibs.jsp"%>
+
 
 <html>
 <head>

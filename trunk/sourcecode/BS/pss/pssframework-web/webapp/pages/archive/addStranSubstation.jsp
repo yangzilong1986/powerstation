@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@ include file="include/page.htm" %>
+
 <%@include file="../common/blockloading.jsp"%>
 <html>
 <head>

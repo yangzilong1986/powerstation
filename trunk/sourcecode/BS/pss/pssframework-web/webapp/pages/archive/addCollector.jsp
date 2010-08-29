@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../common/taglib.jsp"%><html>
+<%@include file="../../commons/taglibs.jsp"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>采集器信息</title>

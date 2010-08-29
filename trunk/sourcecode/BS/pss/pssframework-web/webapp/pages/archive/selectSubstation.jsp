@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.io.*,java.net.*" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.apache.commons.lang.*,org.apache.commons.lang.time.*" %>
-<%@ include file="include/page.htm" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
