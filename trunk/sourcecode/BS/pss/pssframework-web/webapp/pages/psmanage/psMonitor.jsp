@@ -30,9 +30,29 @@ function mySwitchTab(prefix, order, cnts) {
     else {
         setupFlag = false;
     }
+
+    if(order == 2) {
+        queryEvent();
+    }
+
+    if(order == 3) {
+        queryEcCurv();
+    }
     
     SwitchTab(prefix, order, cnts);
     return true;
+}
+
+function queryEvent() {
+    var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/eventQuery?psId=' + $("#psId").val() + '&ddate=' + $("#ddate").val();
+    //alert(url);
+    document.getElementById("fdata").src = url;
+}
+
+function queryEcCurv() {
+    var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery?psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
+    //alert(url);
+    document.getElementById("fdata1").src = url;
 }
 
 var cntMonitorB66F = 0;
@@ -57,7 +77,6 @@ function endMonitoring() {
 }
 
 $(document).ready(function() {
-    var psId = $.query.get('psId');
     $("#psInfo").corner();
     $("#rmtTrip").corner();
     $("#rtVoltage").corner();
@@ -74,6 +93,10 @@ $(document).ready(function() {
     //readC04F();
 
     readComputerTime();
+
+    $("#eventInquiryBtn").click( function() {
+        queryEvent();
+    });
 });
 
 function readComputerTime() {
@@ -1180,9 +1203,10 @@ function psTotalParamsSetup() {
 <div>
   <div class="jc_tab">
     <ul id=jc_Option>
-      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onclick="return mySwitchTab('jc_',0,3)">基本信息</li>
-      <li id=jc_Option_1 style="cursor: pointer;" onclick="return mySwitchTab('jc_',1,3)">参数设置</li>
-      <li id=jc_Option_2 style="cursor: pointer;" onclick="return mySwitchTab('jc_',2,3)">跳闸信息查询</li>
+      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onclick="return mySwitchTab('jc_',0,4)">基本信息</li>
+      <li id=jc_Option_1 style="cursor: pointer;" onclick="return mySwitchTab('jc_',1,4)">参数设置</li>
+      <li id=jc_Option_2 style="cursor: pointer;" onclick="return mySwitchTab('jc_',2,4)">跳闸信息查询</li>
+      <li id=jc_Option_3 style="cursor: pointer;" onclick="return mySwitchTab('jc_',3,4)">漏保数据查询</li>
     </ul>
   </div>
   <div class="jc_con" id=jc_Con>
@@ -1392,7 +1416,6 @@ function psTotalParamsSetup() {
       </div>
     </ul>
     <ul class=disNone id=jc_Con_2>
-      <form:form name="psEventQueryForm" modelAttribute="psdata">
       <div style="vertical-align:middle; height: 30px;">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr>
@@ -1402,7 +1425,7 @@ function psTotalParamsSetup() {
               <input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
             </td>
             <td width="100" align="center">
-              <img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
+              <img id="eventInquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
             </td>
             <td>&nbsp;</td>
           </tr>
@@ -1410,10 +1433,31 @@ function psTotalParamsSetup() {
       </div>
       <div class="content">
         <div id="cont_1" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-75));">
-          <iframe id="fdata" scrolling="no" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe>
+          <iframe id="fdata" name="fdata" scrolling="no" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe>
         </div>
       </div>
-      </form:form>
+    </ul>
+    <ul class=disNone id=jc_Con_3>
+      <div style="vertical-align:middle; height: 30px;">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="50" height="30" align="right" class="green">时 间：</td>
+            <td width="120" align="left">
+              <input type="hidden" id="psId1" name="psId1" value="${psInfo.psId}" />
+              <input type="text" class="input_time" id="ddate1" name="ddate1" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+            </td>
+            <td width="100" align="center">
+              <img id="ecCurvInquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+      <div class="content">
+        <div id="cont_1" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-75));">
+          <iframe id="fdata1" name="fdata1" scrolling="no" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe>
+        </div>
+      </div>
     </ul>
   </div>
 </div>
