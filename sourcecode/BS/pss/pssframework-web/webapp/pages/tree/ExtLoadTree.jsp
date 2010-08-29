@@ -126,6 +126,7 @@ function treeRenderBeforeHandler(pTree){
                       },
                       id:'newTg',
                       text:'新增台区'
+                      <security:authorize ifNotGranted="ROLE_AUTHORITY_3"> ,disabled:true</security:authorize>
                  },
                       
                 { 
@@ -181,6 +182,7 @@ function treeRenderBeforeHandler(pTree){
           	          url = "${ctx}/archive/tginfo/"+uid+"/edit";
                	      parent.parent.tabscontainermain.showTab("台区档案", url);
                     }
+                <security:authorize ifNotGranted="ROLE_AUTHORITY_2"> ,disabled:true</security:authorize>
                     
                 },                  
                 {
@@ -190,11 +192,9 @@ function treeRenderBeforeHandler(pTree){
                     	  node = selectedNode.id;
                     	  type = node.split("_")[0];
                     	  uid  = node.split("_")[1]; 
-                      	 deletetginfo(uid,selectedNode)
-                      		
-                      	
-                        
+                      	 deletetginfo(uid,selectedNode);
                      }
+                <security:authorize ifNotGranted="ROLE_AUTHORITY_1"> ,disabled:true</security:authorize>
                 },
                 {
                     id:'view',
@@ -207,6 +207,7 @@ function treeRenderBeforeHandler(pTree){
                     	  parent.parent.tabscontainermain.showTab("台区档案", url);
                        
                     }
+                <security:authorize ifNotGranted="ROLE_AUTHORITY_4"> ,disabled:true</security:authorize>
                 }
                 ]
             });
