@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
-<%@taglib uri="/WEB-INF/struts-tiles.tld" prefix="tiles"%>
+
+<%@include file="/../common/taglib.jsp"%><%@taglib uri="/WEB-INF/struts-tiles.tld" prefix="tiles"%>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

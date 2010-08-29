@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="/../common/taglib.jsp"%>
 <div id="main" style="height: 100%;">
  <div class="tab">
   <em>采集器信息</em>

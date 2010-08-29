@@ -1,6 +1,6 @@
 <!-- 采集器列表私有JS -->
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../../common/taglib.jsp"%>
+<%@include file="/../common/taglib.jsp"%>
 <script type="text/javascript">
 var contextPath = '<peis:contextPath/>';
 var termId=parent.contentArea.termId;//取父页面的终端ID
