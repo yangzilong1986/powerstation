@@ -93,6 +93,7 @@ public class PollingJob implements Job {
                 object_trans.setMeterAddr(task.getGp_addr()); //表地址
                 object_trans.setMeterType(MeterType.Meter645);
                 object_trans.setPort((byte)1);
+                object_trans.setMpSn(task.getGp_sn());
                 SerialPortPara spp = new SerialPortPara();
                 spp.setBaudrate(BaudRate.bps_9600);
                 spp.setCheckbit(0);
