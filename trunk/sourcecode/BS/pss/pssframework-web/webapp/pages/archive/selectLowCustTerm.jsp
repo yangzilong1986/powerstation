@@ -1,8 +1,8 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/peis-tag.tld" prefix="peis"%>
+
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/taglibs.jsp"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+
 
 <html>
 <head>

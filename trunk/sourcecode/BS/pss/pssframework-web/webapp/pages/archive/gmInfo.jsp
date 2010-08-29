@@ -14,7 +14,7 @@
   <script type="text/javascript" src="<peis:contextPath/>/js/frame/jquery.url.js"></script>
   <script type="text/javascript">
    var contextPath='<peis:contextPath/>';
-<<<<<<< .mine
+
    
    function forwardTerm(){
       //alert(termId);
@@ -30,7 +30,7 @@
       window.location.href=contextPath+"/archive/lowCustTermAndTgTermAction.do?action=forward2LowCustTerm&termId="+termId+"";
 >>>>>>> .r1071
    }
-<<<<<<< .mine
+
    
    //打开采集器页面=======
    //打开采集器页面
