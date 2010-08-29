@@ -10,11 +10,21 @@ public class PSMonitorQuery extends BaseQuery {
 
     private Long psId;
 
+    private String ddate;
+
     public Long getPsId() {
         return psId;
     }
 
     public void setPsId(Long psId) {
         this.psId = psId;
+    }
+
+    public String getDdate() {
+        return ddate;
+    }
+
+    public void setDdate(String ddate) {
+        this.ddate = ddate;
     }
 }

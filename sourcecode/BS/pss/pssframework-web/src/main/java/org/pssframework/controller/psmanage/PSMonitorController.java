@@ -47,6 +47,7 @@ public class PSMonitorController extends BaseSpringController {
     private static final String VIEW_NAME_MON = "/psmanage/psMonitor";
     private static final String VIEW_NAME_TRE = "/psmanage/psTree";
     private static final String VIEW_EVENT_QUERY = "/psmanage/eventQuery";
+    private static final String VIEW_ECCURV_QUERY = "/psmanage/ecCurvQuery";
 
     @Autowired
     private OrgInfoManager orgInfoManager;
@@ -100,7 +101,7 @@ public class PSMonitorController extends BaseSpringController {
      */
     @RequestMapping(value = "/pstree/{id}")
     public ModelAndView _pstree(ModelAndView mav, @PathVariable Long id) throws Exception {
-        logger.info("tdId : " + id);
+        // logger.info("tdId : " + id);
         mav.setViewName(VIEW_NAME_TRE);
         mav.addObject("tree", psTreeManager.findPSTreeByTgId(id));
         return mav;
@@ -138,6 +139,7 @@ public class PSMonitorController extends BaseSpringController {
         mav.addObject("psModel", codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode()));
         mav.addObject("commModeGm", codeInfoManager.getCodeInfo("COMM_MODE_GM", psInfo.getCommModeGm()));
         mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
+        mav.addObject("qdate", DateUtils.getCurrentDate());
 
         return mav;
     }
@@ -322,7 +324,30 @@ public class PSMonitorController extends BaseSpringController {
         Page page = statisticsManager.findByPageRequest(pageRequest, StatisticsType.PsEvent);// 获取数据模型
         mav.addObject("page", page);
         mav.addObject("pageRequest", pageRequest);
+        mav.addObject("psMonitorQuery", psMonitorQuery);
         mav.setViewName(VIEW_EVENT_QUERY);
+        return mav;
+    }
+
+    /**
+     * 
+     * @param mav
+     * @param request
+     * @param response
+     * @param psMonitorQuery
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/ecCurvQuery")
+    public ModelAndView _ecCurvQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
+            PSMonitorQuery psMonitorQuery) throws Exception {
+        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS);
+        Page page = statisticsManager.findByPageRequest(pageRequest, StatisticsType.PsEcCurv);// 获取数据模型
+        mav.addObject("page", page);
+        mav.addObject("pageRequest", pageRequest);
+        mav.addObject("psMonitorQuery", psMonitorQuery);
+        mav.setViewName(VIEW_ECCURV_QUERY);
         return mav;
     }
 }

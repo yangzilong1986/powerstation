@@ -29,6 +29,7 @@ public class PsEvent implements Serializable {
     private String psName;
     private String assetNo;
     private int eventCode;
+    private String eventName;
     private Date trigTime;
     private Date receiveTime;
     private int closed;
@@ -83,6 +84,14 @@ public class PsEvent implements Serializable {
 
     public void setEventCode(int eventCode) {
         this.eventCode = eventCode;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public Date getTrigTime() {

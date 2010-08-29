@@ -7,13 +7,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <!-- 用于select查询公用抽取的列 -->
     <sql id="PsEventColumns">
         <![CDATA[
-        e.LBSJ_ID lbsjId, e.GP_ID gpId, p.PS_ID psId, p.PS_NAME psName, p.ASSET_NO assetNo, e.EVENTCODE eventCode, e.TRIGTIME trigTime, e.RECEIVETIME receiveTime, e.CLOSED closed, e.LOCKED locked, e.PHASE phase, e.CURRENTVALUE currentValue, e.RESETSENT resetSent
+        e.LBSJ_ID lbsjId, e.GP_ID gpId, p.PS_ID psId, p.PS_NAME psName, p.ASSET_NO assetNo, e.EVENTCODE eventCode, c.EVENTNAME eventName, e.TRIGTIME trigTime, e.RECEIVETIME receiveTime, e.CLOSED closed, e.LOCKED locked, e.PHASE phase, e.CURRENTVALUE currentValue, e.RESETSENT resetSent
         ]]>
     </sql>
     <sql id="PsEventDynamicWhere">
         <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
         <choose>
-            <when test="psId != null"><![CDATA[and p.GP_ID = #{psId}]]></when>
+            <when test="psId != null"><![CDATA[and p.PS_ID = #{psId}]]></when>
         </choose>
         <choose>
             <when test="orgId != null"><![CDATA[and p.ORG_ID = #{orgId}]]></when>
