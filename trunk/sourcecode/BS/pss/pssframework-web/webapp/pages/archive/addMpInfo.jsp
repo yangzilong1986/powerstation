@@ -64,34 +64,6 @@ function save(){
         }
       }
 }
-//select框初始化
-function selectInit(){
-    $("#ctRatio").val(${object_meter.ctRatio});
-    $("#ptRatio").val(${object_meter.ptRatio});
-    $("#protocolNo").val(${object_gp.protocolNo});
-    $("#termId").val('${object_gp.termId}');
-    $("#tranId").val('${object_gp.tranId}');
-    $("#madeFactory").val('${object_meter.madeFactory}');
-    $("#btl").val(${object_meter.btl});
-    $("#meterType").val(${object_meter.meterType});
-    $("#ratedVolt").val(${object_meter.ratedVolt});
-    $("#ratedEc").val(${object_meter.ratedEc});
-    $("#wiringMode").val(${object_meter.wiringMode});
-    //$("#lineId").val(${object_meter.lineId});
-    lineIdComboBox.setValue('${object_meter.lineId}');
-    $("#modelCode").val(${object_meter.modelCode});
-    $("#measMode").val(${object_meter.measMode});
-    
-  var mpId = $("input[name='mpId']").val();
-  var meterType = $("select[name='meterType']").val();
-  if(mpId!=''){ //编辑电表的时候
-     if(meterType == '1'){ //远传表
-       $("#meterType > option[value!='1']").remove();
-     }else{
-       $("#meterType > option[value='1']").remove();
-     }
-  }
-}
 
 //连接远传表
 function meterState(){
@@ -108,52 +80,95 @@ function meterState(){
 </head>
 <body>
 <form:form action="/archive/mpinfo" modelAttribute="mpinfo">
-	<input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
-		value="${_type}"></input>
-	<form:hidden path="tgInfo.tgId" />
-	<input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
-	<input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
-	<div class="electric_lcon" id="electric_Con" style="margin: 5px;">
-	<ul class=default id=electric_Con_1>
-		<div class="tab"><span>总表信息</span></div>
-		<div class="da_mid"
-			style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||   document.body.clientWidth) -10 ); height: expression(((                             document.documentElement.clientHeight ||                             document.body.clientHeight) -35 ) );"">
-		<div class="tab"><span>重要信息</span></div>
-		<div id="485Show" class="da_mid"
-			style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -                   700 ) );">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height="30px">
-				<td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
-				<td width="20%"><form:input path="gpInfos[0].gpSn" cssClass="required validate-number" /></td>
-				<td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
-				<td width="20%"><form:input path="mpName" cssClass="required" /></td>
-				<td width="13%" class="green" align="right"><font color="red">* </font>计量点编号：</td>
-				<td width="20%"><form:input path="mpNo" cssClass="required" /></td>
-			</tr>
-			<tr height="30px">
-				<td class="green" align="right">CT变比：</td>
-				<td><form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" /></td>
-				<td class="green" align="right">PT变比：</td>
-				<td><form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" /></td>
-				<td class="green" align="right"><font color="red">* </font>表 地 址：</td>
-				<td><form:input path="gpInfos[0].gpAddr" cssClass="required" /></td>
-			</tr>
-			<tr height="30px">
-				<td class="green" align="right">表 规 约：</td>
-				<td><form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
-					itemValue="code" cssStyle="width:155px;" /></td>
-				<td class="green" align="right">所属终端：</td>
-				<td><form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-					itemValue="termId" cssStyle="width:155px;" /></td>
-				<td class="green" align="right"><font color="red">* </font>资产号：</td>
-				<td><form:input path="meterInfo.assertNo" cssClass="required" /></td>
-			</tr>
-		</table>
-		</div>
-		<br></br>
-		<script>
+  <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
+    value="${_type}"></input>
+  <form:hidden path="tgInfo.tgId" />
+  <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
+  <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
+  <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
+  <ul class=default id=electric_Con_1>
+    <div class="tab"><span>总表信息</span></div>
+    <div class="da_mid"
+      style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((                                           document.documentElement.clientHeight ||                                           document.body.clientHeight) -35 ) );"">
+    <div class="tab"><span>重要信息</span></div>
+    <div id="485Show" class="da_mid"
+      style="display: block; overflow-y: auto; overflow-x: auto; height: expression(((                document.documentElement.clientHeight |               document.body.clientHeight) -                                 700 ) );">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr height="30px">
+        <td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" />
+        </security:authorize></td>
+        <td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpName" cssClass="required" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpName" cssClass="required" />
+        </security:authorize></td>
+        <td width="20%"><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpName" cssClass="required" />
+        </security:authorize></td>
+        <td width="13%" class="green" align="right"><font color="red">* </font>计量点编号：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpNo" cssClass="required" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpNo" cssClass="required" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30px">
+        <td class="green" align="right">CT变比：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td class="green" align="right">PT变比：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td class="green" align="right"><font color="red">* </font>表 地 址：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].gpAddr" cssClass="required" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30px">
+        <td class="green" align="right">表 规 约：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name" disabled="true"
+            itemValue="code" cssStyle="width:155px;" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+            itemValue="code" cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td class="green" align="right">所属终端：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
+            itemValue="termId" cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
+            itemValue="termId" cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td class="green" align="right"><font color="red">* </font>资产号：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="meterInfo.assertNo" cssClass="required" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="meterInfo.assertNo" cssClass="required" />
+        </security:authorize></td>
+      </tr>
+    </table>
+    </div>
+    <br></br>
+    <script>
       function setCheckBox(obj){
           if(obj.type=='checkbox'){
             if(obj.checked==true){
@@ -165,52 +180,102 @@ function meterState(){
           }
       }
       </script>
-		<div class="tab"><span>一般信息</span></div>
-		<div id="pulseShow" class="da_mid"
-			style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -                   600 ) );">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr height="30px">
-				<td width="13%" class="green" align="right">计量方式：</td>
-				<td width="20%"><form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name"
-					itemValue="code" cssStyle="width:155px;" /></td>
-				<td width="13%" class="green" align="right">端 口 号：</td>
-				<td width="20%"><form:input path="gpInfos[0].port"></form:input></td>
-				<td width="13%" class="green" align="right">波 特 率：</td>
-				<td width="20%"><form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name"
-					itemValue="code" cssStyle="width:155px;" /></td>
-			</tr>
-			<tr height="30px">
-				<td class="green" align="right">申请日期：</td>
-				<td class="dom_date"><form:input path="appDate" cssClass="input_time"
-					onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
-				<td class="green" align="right">投运日期：</td>
-				<td class="dom_date"><form:input path="runDate" cssClass="input_time"
-					onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" cssStyle="height:23px;width:150px;" /></td>
-				<td class="green" align="right">供电线路：</td>
-				<td><form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" /></td>
-			</tr>
-			<tr height="30px">
-				<td class="green" align="right">运行状态：</td>
-				<td><form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" /></td>
-				<td class="green" align="right">接线方式：</td>
-				<td><form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
-					cssStyle="width:155px;" /></td>
-			</tr>
-			<tr height="30px">
-				<td class="green" align="right">安装位置：</td>
-				<td colspan=3><form:input path="mpAddr" size="60"></form:input></td>
-				<td colspan="2"><form:checkbox path="gpInfos[0].sucratCptId" value="0" onclick="setCheckBox(this)" /> 功率累计 <form:checkbox
-					path="gpInfos[0].computeFlag" value="0" onclick="setCheckBox(this)" /> 电量计算</td>
-			</tr>
-		</table>
-		</div>
-		<div style="text-align: center"><br />
-		<input type="button" id="save" value="保 存" class="btnbg4" /></div>
-		</div>
-	</ul>
-	</div>
+    <div class="tab"><span>一般信息</span></div>
+    <div id="pulseShow" class="da_mid"
+      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                               document.documentElement.clientHeight ||                               document.body.clientHeight) -                                 600 ) );">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr height="30px">
+        <td width="13%" class="green" align="right">计量方式：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td width="13%" class="green" align="right">端 口 号：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].port" disabled="true"></form:input>
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="gpInfos[0].port"></form:input>
+        </security:authorize></td>
+        <td width="13%" class="green" align="right">波 特 率：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="meterInfo.baudrate" items="${btlList}" id="btl" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30px">
+        <td class="green" align="right">申请日期：</td>
+        <td class="dom_date"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="appDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="appDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+            readonly="readonly" cssStyle="height:23px;width:150px;" />
+        </security:authorize></td>
+        <td class="green" align="right">投运日期：</td>
+        <td class="dom_date"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="runDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+            readonly="readonly" cssStyle="height:23px;width:150px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="runDate" cssClass="input_time" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+            readonly="readonly" cssStyle="height:23px;width:150px;" />
+        </security:authorize></td>
+        <td class="green" align="right">供电线路：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="gpInfos[0].lineId" items="${lineList}" id="lineId" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30px">
+        <td class="green" align="right">运行状态：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="statusCode" items="${runStatusList}" id="statusCode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+        <td class="green" align="right">接线方式：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="wiringMode" items="${wiringModeList}" id="wiringMode" itemLabel="name" itemValue="code"
+            cssStyle="width:155px;" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30px">
+        <td class="green" align="right">安装位置：</td>
+        <td colspan=3><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpAddr" size="60" disabled="true"></form:input>
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="mpAddr" size="60"></form:input>
+        </security:authorize></td>
+        <td colspan="2"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:checkbox path="gpInfos[0].sucratCptId" value="0" disabled="true" />
+        </security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:checkbox path="gpInfos[0].sucratCptId" value="1" />
+        </security:authorize>功率累计 <security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:checkbox path="gpInfos[0].computeFlag" value="1" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1"></security:authorize>电量计算</td>
+      </tr>
+    </table>
+    </div>
+    <div style="text-align: center"><br />
+    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+      <input type="button" id="save" value="保 存" class="btnbg4" />
+    </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
+    </div>
+  </ul>
+  </div>
 </form:form>
 </body>
 <script>

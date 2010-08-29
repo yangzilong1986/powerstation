@@ -11,9 +11,9 @@
 //弹出式窗口
 var opwindow = null;     //记录打开浏览窗口的对象
 function windowPopup(url, wd, ht) {
-    /*if(opwindow != null) {
+    if(opwindow != null) {
         opwindow.close();
-    }*/
+    }
     opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
 }
 
@@ -26,7 +26,7 @@ var contextPath  = '${ctx}';
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||               document.body.clientWidth) -10 ); height: expression(((               document.documentElement.clientHeight ||               document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||                 document.body.clientWidth) -10 ); height: expression(((                 document.documentElement.clientHeight ||                 document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -60,17 +60,19 @@ var contextPath  = '${ctx}';
         <td width="25%"><form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="${disabled}" /></td>
       </tr>
       <tr>
-        <td width="100%" colspan="6" align="right"><input id="save" name="save" type="button" class="btnbg4"
-          value="保存" <c:if test="${disabled == 'true'}">disabled</c:if>></td>
+        <td width="100%" colspan="6" align="right"><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2">
+          <input id="save" name="save" type="button" class="btnbg4" value="保存">
+        </security:authorize></td>
       </tr>
     </table>
   </form:form></div>
   <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
   <div class="mgt10">
-  <div class="mgt10 da_top"><span>变压器信息</span>
-  <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-    width="16" height="16" style="cursor: pointer;" /></a></h1>
-  </div>
+  <div class="mgt10 da_top"><span>变压器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tranInfo">
     <thead>
@@ -89,17 +91,22 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${tran.plateCap}</td>
           <td>&nbsp;<pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
           <td>&nbsp;${tran.instAddr}</td>
-          <td><a onclick="deleteTranInfo('${tran.equipId}')">删除</a>&nbsp;/&nbsp;<a
-            onclick="updateTranInfo('${tran.equipId}')">修改</a></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteTranInfo('${tran.equipId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updateTranInfo('${tran.equipId}')">修改</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showTranInfo('${tran.equipId}')">查看</a>
+          </security:authorize></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>台区考核表信息</span>
-  <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-    width="16" height="16" /></a></h1>
-  </div>
+  <div class="mgt10 da_top"><span>台区考核表信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -118,17 +125,21 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${mpInfo.gpInfos[0].gpAddr}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
           <td>&nbsp;<pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
-          <td><a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>&nbsp;/&nbsp;<a
-            onclick="updateMpInfo('${mpInfo.mpId}')">修改</a></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showMpInfo('${mpInfo.mpId}')">查看</a></security:authorize></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>保护开关信息</span>
-  <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-    height="16" /></a></h1>
-  </div>
+  <div class="mgt10 da_top"><span>保护开关信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -152,17 +163,23 @@ var contextPath  = '${ctx}';
                           无
           </c:otherwise>
           </c:choose></td>
-          <td><a onclick="deletePsInfo('${ps.psId}')">删除</a>&nbsp;/&nbsp;<a onclick="updatePsInfo('${ps.psId}')">修改</a></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deletePsInfo('${ps.psId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updatePsInfo('${ps.psId}')">修改</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showPsInfo('${ps.psId}')">查看</a>
+          </security:authorize></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
   <!-- 集中器信息 -->
-  <div class="mgt10 da_top"><span>集中器信息</span>
-  <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-    height="16" style="cursor: pointer;" /></a></h1>
-  </div>
+  <div class="mgt10 da_top"><span>集中器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+      height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -183,18 +200,23 @@ var contextPath  = '${ctx}';
           <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
           <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
           <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
-          <td><a onclick="deleteTermInfo('${term.termId}')">删除</a>&nbsp;/&nbsp;<a
-            onclick="updateTermInfo('${term.termId}')">修改</a></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteTermInfo('${term.termId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updateTermInfo('${term.termId}')">修改</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showTermInfo('${term.termId}')">查看</a>
+          </security:authorize></td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
   <!-- 操作员信息 -->
-  <div class="mgt10 da_top"><span>操作员信息</span>
-  <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-    height="16" style="cursor: pointer;" /></a></h1>
-  </div>
+  <div class="mgt10 da_top"><span>操作员信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+      height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
@@ -209,7 +231,9 @@ var contextPath  = '${ctx}';
         <tr id="user_${user.empNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${user.name}</td>
           <td>&nbsp;${user.mobile}</td>
-          <td><a onclick="deleteUserInfo('${user.empNo}')">删除</a></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteUserInfo('${user.empNo}')">删除</a>
+          </security:authorize>&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
@@ -247,7 +271,7 @@ jQuery(function(){
 		}else{
 			jQuery(this).attr("disabled","");
 		}
-	  })
+	  });
 
   jQuery("#save").click(function(){
     if(val.validate()){
@@ -263,9 +287,9 @@ jQuery(function(){
     }else{
       jQuery(this).attr("disabled","");
     }
-    })
+    });
 	    
-})
+});
 
 
 getData= function(type){
@@ -276,7 +300,7 @@ if(type == "add"){
 	data = jQuery("form[id=tginfo]").serialize(); 
 }
 return data;
-}
+};
 /*******************************************************************/
 addtginfo = function(){
   var tgFromData = getData('add');
@@ -300,7 +324,7 @@ addtginfo = function(){
          }
        });
   }
-}
+};
 
 updatetginfo = function(){
 	var tgFromData = getData("update");
@@ -318,12 +342,12 @@ updatetginfo = function(){
 	            alert(msg);
 	            parent.parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
 	         },error:function(e){
-                  alert("error")
+                  alert("error");
 	             alert(e.getMessage());
 	         }
 	       });
 	  }
-}
+};
 /*******************************************************************/
 
 //打开新增变压器页面
@@ -361,12 +385,17 @@ deleteTranInfo=function(tranId){
          }
      });
  }
-}
+};
 
 updateTranInfo=function(tranId){
 	   var url = "${ctx}/archive/tranInfo/"+tranId+"/edit";
 	   windowPopup(url, 960, 575);
-}
+};
+
+showTranInfo=function(tranId){
+     var url = "${ctx}/archive/tranInfo/"+tranId;
+     windowPopup(url, 960, 575);
+};
 
 /*******************************************************************/
   //打开漏保
@@ -404,24 +433,25 @@ deletePsInfo=function(psId){
            }
        });
    }
-  }
+  };
 
 updatePsInfo=function(psId){
      var url = "${ctx}/archive/psinfo/"+psId+"/edit?gpInfo.objectId="+$("#tgId").val();
      windowPopup(url, 960, 575);
-}
-
+};
+showPsInfo=function(psId){
+    var url = "${ctx}/archive/psinfo/"+psId+"?gpInfo.objectId="+$("#tgId").val();
+    windowPopup(url, 960, 575);
+};
 /*******************************************************************/
  
 function openMeterInfo(tgId){
 
-	  
 	  if(!$("#tgId").val()){
 	    alert("请先建台区");return;
 	  }
 	   var url = "${ctx}/archive/mpinfo/new?tgInfo.tgId="+$("#tgId").val();
 	   windowPopup(url, 960, 575);
-     
 }
 
 deleteMpInfo=function(mpId){
@@ -449,12 +479,17 @@ deleteMpInfo=function(mpId){
              }
          });
      }
-    }
+};
 
-  updateMpInfo=function(mpId){
-       var url = "${ctx}/archive/mpinfo/"+mpId+"/edit?tgInfo.tgId="+$("#tgId").val();
-       windowPopup(url, 960, 575);
-  }
+updateMpInfo=function(mpId){
+     var url = "${ctx}/archive/mpinfo/"+mpId+"/edit?tgInfo.tgId="+$("#tgId").val();
+     windowPopup(url, 960, 575);
+};
+
+showMpInfo=function(mpId){
+    var url = "${ctx}/archive/mpinfo/"+mpId+"?tgInfo.tgId="+$("#tgId").val();
+    windowPopup(url, 960, 575);
+};
 /*******************************************************************/
   //打开新增终端页面
  function openTerm(tgId){
@@ -464,7 +499,7 @@ deleteMpInfo=function(mpId){
     }
   var url = contextPath + "/archive/terminalinfo/new?tgId=" +$("#tgId").val();
   windowPopup(url, 960, 575);
-} 
+} ;
  
 deleteTermInfo=function(termId){
    if(termId==null || termId ==""){
@@ -491,12 +526,17 @@ deleteTermInfo=function(termId){
            }
        });
    }
-  }
+  };
 
 updateTermInfo=function(termId){
      var url = "${ctx}/archive/terminalinfo/"+termId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
-}
+};
+
+showTermInfo=function(termId){
+    var url = "${ctx}/archive/terminalinfo/"+termId+"?tgId="+$("#tgId").val();
+    windowPopup(url, 960, 575);
+};
 /*******************************************************************/
   //打开新增台区操作员页面
  function openUser(tgId){
@@ -532,12 +572,12 @@ updateTermInfo=function(termId){
            }
        });
    }
-  }
+  };
 
 updateTgOpInfo=function(userId){
      var url = "${ctx}/archive/tgopinfo/"+userId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
-}
+};
 /*******************************************************************/
 
 </script>
