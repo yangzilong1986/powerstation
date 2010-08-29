@@ -664,18 +664,25 @@ public class RealTimeProxy376Test {
         assertTrue(databuf.getA8().getValue()==36);
     }
 
-    //@Test
+    @Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(4678);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(7014);
          assertTrue(resultMap.size() > 0 );
     }
 
-     @Test
+    // @Test
     public void testreadTransmitWriteBack() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitWriteBack(4678);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitWriteBack(6617);
          assertTrue(resultMap.size() > 0 );
+    }
+
+    //@Test
+    public void testgetReturnByWriteParameter_TransMit()throws Exception {
+        @SuppressWarnings("static-access")
+        Map<String, String> resultMap = this.proxy.getReturnByWriteParameter_TransMit(6617);
+        assertTrue(resultMap.size() > 0 );
     }
 
 
@@ -730,7 +737,7 @@ public class RealTimeProxy376Test {
     /**
      * Test of getReturnByRRD method, of class RealTimeProxy376.
      */
-  @Test
+  //@Test
     public void testGetReturnByRRD() throws Exception {
        RealTimeProxy376 instance = proxy;
         Map expResult = new HashMap();
