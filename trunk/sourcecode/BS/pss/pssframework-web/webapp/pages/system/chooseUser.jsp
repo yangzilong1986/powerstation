@@ -1,4 +1,4 @@
-<<<<<<< .mine
+
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/taglibs.jsp"%>
