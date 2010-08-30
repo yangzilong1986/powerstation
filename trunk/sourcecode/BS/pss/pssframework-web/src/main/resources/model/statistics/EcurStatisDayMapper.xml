@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="EcurStatisDay">
+    <resultMap id="EcurStatisDayResult" type="org.pssframework.model.statistics.EcurStatisDay">
+    </resultMap>
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="EcurStatisDayColumns">
+        <![CDATA[
+            m.GP_ID gpId, d.DATA_TIME dataTime, d.ASSET_NO assetNo, ECUR_PEAK_A ecurPeakA, ECUR_PEAK_A_TIME ecurPeakATime, ECUR_PEAK_B ecurPeakB, ECUR_PEAK_B_TIME ecurPeakBTime, ECUR_PEAK_C ecurPeakC, ECUR_PEAK_C_TIME ecurPeakCTime, ECUR_PEAK_O ecurPeakO, ECUR_PEAK_O_TIME ecurPeakOTime, ECUR_OVER_UPLIMIT_TIME_A ecurOverUplimitTimeA, ECUR_OVER_UPUPLIMIT_TIME_A ecurOverUpuplimitTimeA, ECUR_OVER_UPLIMIT_TIME_B ecurOverUplimitTimeB, ECUR_OVER_UPUPLIMIT_TIME_B ecurOverUpuplimitTimeB, ECUR_OVER_UPLIMIT_TIME_C ecurOverUplimitTimeC, ECUR_OVER_UPUPLIMIT_TIME_C ecurOverUpuplimitTimeC, ECUR_OVER_UPLIMIT_TIME_O ecurOverUplimitTimeO, ECUR_OVER_UPUPLIMIT_TIME_O ecurOverUpuplimitTimeO, ECUR_OVER_IMBAL_TIME ecurOverImbalTime
+        ]]>
+    </sql>
+    <sql id="EcurStatisDayDynamicWhere">
+        <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+        <choose>
+        <when test="orgId != null">and m.org_Id = #{orgId}</when>
+        </choose>
+        <choose>
+        <when test="tgId != null">and object_Id = #{tgId} and gp_type='2'</when>
+        </choose>
+        <choose>
+            <when test="ddate != null">and d.ddate = to_char(to_date(#{ddate},'yyyy-mm-dd'),'yyyymmdd')</when>
+            <otherwise>and d.ddate is null</otherwise>
+        </choose>
+    </sql>
+    <select id="count" resultType="long">
+        <![CDATA[select count(1) from D_DAY_ECUR_STATIS d, v_meter m where m.gp_id= d.gp_id]]>
+        <include refid="EcurStatisDayDynamicWhere" />
+    </select>
+    <!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+    <select id="pageSelect" resultMap="EcurStatisDayResult">
+        select
+        <include refid="EcurStatisDayColumns" />
+        <![CDATA[from D_DAY_ECUR_STATIS d, v_meter m where m.gp_id= d.gp_id ]]>
+        <include refid="EcurStatisDayDynamicWhere" />
+        <if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+    </select>
+</mapper>
