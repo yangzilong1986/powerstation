@@ -47,6 +47,7 @@ public class DataServiceIMP implements DataService{
     private DAY_VOLT_STATIS_StoredProcedure voltStatisStoredProcedur;
     private DAY_IMB_STATIS_StoredProcedure imbStatisStoredProcedur;
     private PFCURV_StoredProcedure pfcurvStoredProcedur;
+    private PSStatus_StoredProcedure psStatusStoredProcedur;
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -215,6 +216,9 @@ public class DataServiceIMP implements DataService{
                                      dataItemMap.get("B621"),dataItemMap.get("B622"),dataItemMap.get("B623"),"",
                                      dataItemMap.get("B660"),dataItemMap.get("B611"),
                                      dataItemMap.get("B612"),dataItemMap.get("B613"));
+                    this.psStatusStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //漏保状态
+                                     dataItemMap.get("8000B66F01"),dataItemMap.get("8000B66F02"),
+                                     dataItemMap.get("8000B66F03"),dataItemMap.get("8000B66F04"));
                 }
             }
         }
@@ -524,6 +528,20 @@ public class DataServiceIMP implements DataService{
      */
     public void setPfcurvStoredProcedur(PFCURV_StoredProcedure pfcurvStoredProcedur) {
         this.pfcurvStoredProcedur = pfcurvStoredProcedur;
+    }
+
+    /**
+     * @return the psStatusStoredProcedur
+     */
+    public PSStatus_StoredProcedure getPsStatusStoredProcedur() {
+        return psStatusStoredProcedur;
+    }
+
+    /**
+     * @param psStatusStoredProcedur the psStatusStoredProcedur to set
+     */
+    public void setPsStatusStoredProcedur(PSStatus_StoredProcedure psStatusStoredProcedur) {
+        this.psStatusStoredProcedur = psStatusStoredProcedur;
     }
 
 }
