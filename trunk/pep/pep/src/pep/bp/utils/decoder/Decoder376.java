@@ -122,7 +122,9 @@ public class Decoder376 extends Decoder {
             key = logicAddress + "#" + MeterAddress + "#" + commandItemCode;
             if(IsWriteBack)
                 commandItemCode = "8000C040";
-            if ((!commandItemCode.equals("8000C040") )&&(!commandItemCode.equals("8000C04F") ))//除读保护器状态
+            if ((!commandItemCode.equals("8000C040"))&&
+                    (!commandItemCode.equals("8000C04F"))&&
+                    (!commandItemCode.equals("8000B66F")))//除读保护器状态
             {
                 dataBuffer645.get();//将附带的开关信息状态读掉
 
@@ -174,7 +176,9 @@ public class Decoder376 extends Decoder {
             dataBuffer645.getRowIoBuffer().rewind();
             dataBuffer645.getRowIoBuffer().get(commandItem);
             String commandItemCode = "8000" + BcdUtils.binArrayToString(BcdUtils.reverseBytes(commandItem));
-            if (!commandItemCode.equals("8000C040"))//除读保护器状态
+            if ((!commandItemCode.equals("8000C040"))&&
+                    (!commandItemCode.equals("8000C04F"))&&
+                    (!commandItemCode.equals("8000B66F")))//除读保护器状态
             {
                 dataBuffer645.get();//将附带的开关信息状态读掉
 

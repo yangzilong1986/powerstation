@@ -116,6 +116,11 @@
         <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
     </bean>
 
+    <bean id="psStatusStoredProcedur" class="pep.bp.db.PSStatus_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+
     <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource" />
 
@@ -150,6 +155,8 @@
         <property name="voltStatisStoredProcedur" ref="dayVoltStatisStoredProcedur" />
         <property name="imbStatisStoredProcedur" ref="dayimbStatisStoredProcedur" />
         <property name="pfcurvStoredProcedur" ref="pfcurvStoredProcedur" />
+        <property name="psStatusStoredProcedur" ref="psStatusStoredProcedur" />
+
 
     </bean>
 

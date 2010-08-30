@@ -577,6 +577,11 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem39 = new ProtocolCommandItem();
         CommandItem39.setCommandCode("8000B66F");
+
+        CommandItem39.AddDataItem(new ProtocolDataItem("8000B66F01", 1, "GROUP_BS8", 1,"合闸/分闸","","0"));
+        CommandItem39.AddDataItem(new ProtocolDataItem("8000B66F02", 1, "GROUP_BS8", 1,"是否锁死","","0"));
+        CommandItem39.AddDataItem(new ProtocolDataItem("8000B66F03", 1, "GROUP_BS8", 2,"相位","","0"));
+        CommandItem39.AddDataItem(new ProtocolDataItem("8000B66F04", 1, "GROUP_BS8", 4,"动作类型","","1"));
         CommandItem39.AddDataItem(new ProtocolDataItem("B611", 2, "A8", 0,"当前A相电压",""));
         CommandItem39.AddDataItem(new ProtocolDataItem("B612", 2, "A8", 0,"当前B相电压",""));
         CommandItem39.AddDataItem(new ProtocolDataItem("B613", 2, "A8", 0,"当前C相电压",""));
