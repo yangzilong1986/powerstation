@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="VoltStatisDay">
+    <resultMap id="VoltStatisDayResult" type="org.pssframework.model.statistics.VoltStatisDay">
+    </resultMap>
+    <!-- 用于select查询公用抽取的列 -->
+    <sql id="VoltStatisDayColumns">
+        <![CDATA[
+            m.GP_ID gpId, d.DATA_TIME dataTime, d.ASSET_NO assetNo, VOLT_PEAK_A voltPeakA, VOLT_PEAK_A_TIME voltPeakATime, VOLT_VALLEY_A voltValleyA, VOLT_VALLEY_A_TIME voltValleyATime, VOLT_PEAK_B voltPeakB, VOLT_PEAK_B_TIME voltPeakBTime, VOLT_VALLEY_B voltValleyB, VOLT_VALLEY_B_TIME voltValleyBTime, VOLT_PEAK_C voltPeakC, VOLT_PEAK_C_TIME voltPeakCTime, VOLT_VALLEY_C voltValleyC, VOLT_VALLEY_C_TIME voltValleyCTime, VOLT_OVER_UPLIMIT_TIME_A voltOverUplimitTimeA, VOLT_OVER_UPUPLIMIT_TIME_A voltOverUpuplimitTimeA, VOLT_OVER_DOWNLIMIT_TIME_A voltOverDownlimitTimeA, VOLT_OVER_DOWNDOWNLIMIT_TIME_A voltOverDowndownlimitTimeA, VOLT_QUALIFY_TIME_A voltQualifyTimeA, VOLT_OVER_UPLIMIT_TIME_B voltOverUplimitTimeB, VOLT_OVER_UPUPLIMIT_TIME_B voltOverUpuplimitTimeB, VOLT_OVER_DOWNLIMIT_TIME_B voltOverDownlimitTimeB, VOLT_OVER_DOWNDOWNLIMIT_TIME_B voltOverDowndownlimitTimeB, VOLT_QUALIFY_TIME_B voltQualifyTimeB, VOLT_OVER_UPLIMIT_TIME_C voltOverUplimitTimeC, VOLT_OVER_UPUPLIMIT_TIME_C voltOverUpuplimitTimeC, VOLT_OVER_DOWNLIMIT_TIME_C voltOverDownlimitTimeC, VOLT_OVER_DOWNDOWNLIMIT_TIME_C voltOverDowndownlimitTimeC, VOLT_QUALIFY_TIME_C voltQualifyTimeC, AVERAGE_VOLT_A averageVoltA, AVERAGE_VOLT_B averageVoltB, AVERAGE_VOLT_C averageVoltC, VOLT_MONITOR_TIME_A voltMonitorTimeA, VOLT_QUALIFY_RAT_A voltQualifyRatA, VOLT_OVER_UPLIMIT_RAT_A voltOverUplimitRatA, VOLT_OVER_DOWNLIMIT_RAT_A voltOverDownlimitRatA, VOLT_MONITOR_TIME_B voltMonitorTimeB, VOLT_QUALIFY_RAT_B voltQualifyRatB, VOLT_OVER_UPLIMIT_RAT_B voltOverUplimitRatB, VOLT_OVER_DOWNLIMIT_RAT_B voltOverDownlimitRatB, VOLT_MONITOR_TIME_C voltMonitorTimeC, VOLT_QUALIFY_RAT_C voltQualifyRatC, VOLT_OVER_UPLIMIT_RAT_C voltOverUplimitRatC, VOLT_OVER_DOWNLIMIT_RAT_C voltOverDownlimitRatC, VOLT_MONITOR_TIME voltMonitorTime, VOLT_OVER_DOWNLIMIT_CNT voltOverDownlimitCnt, VOLT_OVER_UPLIMIT_TIME voltOverUplimitTime, VOLT_OVER_DOWNLIMIT_TIME voltOverDownlimitTime, VOLT_QUALIFY_RAT voltQualifyRat, VOLT_OVER_UPLIMIT_RAT voltOverUplimitRat, VOLT_OVER_DOWNLIMIT_RAT voltOverDownlimitRat, VOLT_OVER_DOWNLIMIT_CNT_A voltOverDownlimitCntA, VOLT_OVER_DOWNLIMIT_CNT_B voltOverDownlimitCntB, VOLT_OVER_DOWNLIMIT_CNT_C voltOverDownlimitCntC
+        ]]>
+    </sql>
+    <sql id="VoltStatisDayDynamicWhere">
+        <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+        <choose>
+        <when test="orgId != null">and m.org_Id = #{orgId}</when>
+        </choose>
+        <choose>
+        <when test="tgId != null">and object_Id = #{tgId} and gp_type='2'</when>
+        </choose>
+        <choose>
+            <when test="ddate != null">and d.ddate = to_char(to_date(#{ddate},'yyyy-mm-dd'),'yyyymmdd')</when>
+            <otherwise>and d.ddate is null</otherwise>
+        </choose>
+    </sql>
+    <select id="count" resultType="long">
+        <![CDATA[select count(1) from D_DAY_VOLT_STATIS d, v_meter m where m.gp_id= d.gp_id]]>
+        <include refid="VoltStatisDayDynamicWhere" />
+    </select>
+    <!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+    <select id="pageSelect" resultMap="VoltStatisDayResult">
+        select
+        <include refid="VoltStatisDayColumns" />
+        <![CDATA[from D_DAY_VOLT_STATIS d, v_meter m where m.gp_id= d.gp_id ]]>
+        <include refid="VoltStatisDayDynamicWhere" />
+        <if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+    </select>
+</mapper>

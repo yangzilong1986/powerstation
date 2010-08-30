@@ -32,7 +32,7 @@
     <tbody class="tableBody" id="dataBody">
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
-          <td>${page.thisPageFirstElementNumber + status.index}</td>
+          <td height="20">${page.thisPageFirstElementNumber + status.index}</td>
           <td><c:out value='${item.assetNo}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.dataTime}"></fmt:formatDate> &nbsp;</td>
           <td><c:out value='${item.voltA}' />&nbsp;</td>

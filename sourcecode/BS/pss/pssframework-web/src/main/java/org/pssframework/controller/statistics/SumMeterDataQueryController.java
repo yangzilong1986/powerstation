@@ -12,6 +12,7 @@ import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
+import org.pssframework.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,7 @@ public class SumMeterDataQueryController extends BaseSpringController {
 		Map mapRequest = new LinkedHashMap();
 
 		getInitOption(modelAndView, mapRequest);
+        modelAndView.addObject("qdate", DateUtils.getCurrentDate());
 
 		return modelAndView;
 	}
