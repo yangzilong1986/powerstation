@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="tableContainer" style="width: 100%; height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
-<form:form action="${ctx}/psmanage/psmon/eventQuery" modelAttribute="psMonitorQuery">
+<form:form action="${ctx}/psmanage/psmon/ecCurvQuery" modelAttribute="psMonitorQuery">
   <input type="hidden" id="psId" name="psId" value="${psMonitorQuery.psId}" />
   <input type="hidden" id="ddate" name="ddate" value="${psMonitorQuery.ddate}" />
   <table style="width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1000?'1000px':((document.documentElement.clientWidth||document.body.clientWidth)-2));" border="0" cellspacing="0" class="gridBody" id="object_table">
