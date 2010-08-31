@@ -2,6 +2,7 @@ package org.pssframework.controller.psmanage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,8 @@ public class PSMonitorController extends BaseSpringController {
     private StatisticsManager statisticsManager;
 
     // 默认多列排序,example: username desc,createTime asc
-    protected static final String DEFAULT_SORT_COLUMNS = null;
+    protected static final String DEFAULT_SORT_COLUMNS_EVENT = "trigTime desc";
+    protected static final String DEFAULT_SORT_COLUMNS_PSDATA = "dataTime asc";
 
     /**
      * 
@@ -320,7 +322,7 @@ public class PSMonitorController extends BaseSpringController {
     @RequestMapping(value = "/eventQuery")
     public ModelAndView _eventQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             PSMonitorQuery psMonitorQuery) throws Exception {
-        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS);
+        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS_EVENT);
         Page page = statisticsManager.findByPageRequest(pageRequest, StatisticsType.PsEvent);// 获取数据模型
         mav.addObject("page", page);
         mav.addObject("pageRequest", pageRequest);
@@ -342,12 +344,36 @@ public class PSMonitorController extends BaseSpringController {
     @RequestMapping(value = "/ecCurvQuery")
     public ModelAndView _ecCurvQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             PSMonitorQuery psMonitorQuery) throws Exception {
-        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS);
+        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS_PSDATA);
         Page page = statisticsManager.findByPageRequest(pageRequest, StatisticsType.PsEcCurv);// 获取数据模型
         mav.addObject("page", page);
         mav.addObject("pageRequest", pageRequest);
         mav.addObject("psMonitorQuery", psMonitorQuery);
+        initActionType(mav);
         mav.setViewName(VIEW_ECCURV_QUERY);
         return mav;
+    }
+    
+    /**
+     * 
+     * @param mav
+     */
+    private void initActionType(ModelAndView mav) {
+        Map<String, String> actionTypeMap = new HashMap<String, String>();
+        actionTypeMap.put("0000", "漏电跳闸");
+        actionTypeMap.put("0001", "突变跳闸");
+        actionTypeMap.put("0010", "特波跳闸");
+        actionTypeMap.put("0011", "过载跳闸");
+        actionTypeMap.put("0100", "过压跳闸");
+        actionTypeMap.put("0101", "欠压跳闸");
+        actionTypeMap.put("0110", "短路跳闸");
+        actionTypeMap.put("0111", "手动跳闸");
+        actionTypeMap.put("1000", "停电跳闸");
+        actionTypeMap.put("1001", "互感器故障跳闸");
+        actionTypeMap.put("1010", "远程跳闸");
+        actionTypeMap.put("1011", "其它原因跳闸");
+        actionTypeMap.put("1100", "合闸过程中");
+        actionTypeMap.put("1101", "合闸失败");
+        mav.addObject("actionTypeMap", actionTypeMap);
     }
 }

@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-31));">
+<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/statistics/psEventQuery/event" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
@@ -24,31 +24,31 @@
         <th>序号</th>
         <th sortColumn="assetNo">资产编号</th>
         <th sortColumn="trigTime">跳闸时间</th>
-        <th sortColumn="eventName">跳闸类型</th>
+        <th sortColumn="eventName">动作类型</th>
         <th sortColumn="phase">故障相位</th>
-        <th sortColumn="closed">合闸状态</th>
-        <th sortColumn="locked">锁死状态</th>
-        <th sortColumn="currentValue">跳闸电参数值</th>
+        <th sortColumn="closed">开关状态</th>
+        <th sortColumn="locked">是否锁死</th>
+        <th sortColumn="currentValue">动作值</th>
       </tr>
     </thead>
     <tbody class="tableBody" id="dataBody">
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
-          <td height="20">${page.thisPageFirstElementNumber + status.index}</td>
+          <td>${page.thisPageFirstElementNumber + status.index}</td>
           <td><c:out value='${item.assetNo}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate> &nbsp;</td>
-          <td><c:out value='${item.eventName}' />&nbsp;</td>
-          <td><c:out value='${item.phase}' />&nbsp;</td>
+          <td><c:if test="${item.closed eq 1}">合闸成功</c:if><c:if test="${item.closed eq 0}"><c:out value='${item.eventName}' /></c:if>&nbsp;</td>
+          <td><c:if test="${item.closed eq 0}"><c:out value='${item.phase}' /></c:if>&nbsp;</td>
           <td><c:if test="${item.closed eq 1}">合闸</c:if><c:if test="${item.closed eq 0}">分闸</c:if>&nbsp;</td>
-          <td><c:if test="${item.locked eq 1}">锁死</c:if><c:if test="${item.locked eq 0}">未锁死</c:if>&nbsp;</td>
-          <td><c:out value='${item.currentValue}' />&nbsp;</td>
+          <td><c:if test="${item.closed eq 0}"><c:if test="${item.locked eq 1}">锁死</c:if><c:if test="${item.locked eq 0}">未锁死</c:if></c:if>&nbsp;</td>
+          <td><c:if test="${item.closed eq 0}"><c:out value='${item.currentValue}' /></c:if>&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
   </table>
 </form:form>
 </div>
-<div style="height: 30px; background: #DBEAEB; vertical-align: middle; text-align: right; border-left: 1px #85C0B4 solid; border-right: 1px #85C0B4 solid; border-bottom: 1px #85C0B4 solid;"><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+<div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
 $(document).ready(function() {

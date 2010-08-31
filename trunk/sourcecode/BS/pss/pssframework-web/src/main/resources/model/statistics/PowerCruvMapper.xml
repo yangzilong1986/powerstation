@@ -15,7 +15,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<when test="orgId != null">and m.org_Id = #{orgId}</when>
 		</choose>
 		<choose>
-			<when test="tgId != null">and object_Id = #{tgId} and gp_type='2'</when>
+			<when test="tgId != null and tgId != -1">and object_Id = #{tgId} and gp_type='2'</when>
 		</choose>
 		<choose>
 			<when test="ddate != null">and d.ddate = to_char(to_date(#{ddate},'yyyy-mm-dd'),'yyyymmdd')</when>

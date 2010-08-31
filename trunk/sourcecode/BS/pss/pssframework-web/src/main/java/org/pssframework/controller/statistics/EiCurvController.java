@@ -38,7 +38,7 @@ public class EiCurvController extends BaseSpringController {
 	private StatisticsManager statisticsManager;
 
 	// 默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = null;
+    protected static final String DEFAULT_SORT_COLUMNS = "dataTime asc";
 
 	/** binder用于bean属性的设置 */
 	@InitBinder

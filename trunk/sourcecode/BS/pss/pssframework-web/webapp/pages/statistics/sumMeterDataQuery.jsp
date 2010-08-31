@@ -78,12 +78,13 @@ function changeType(obj) {
         </select></td>
         <td width="100" align="right" class="green">台 区：</td>
         <td width="120" align="left"><select name="tgId" style="width: 140px;">
+          <option value="-1">所有台区</option>
           <c:forEach var="item" items="${tglist}">
             <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
           </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">时间：</td>
-        <td><input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="height: 23px; width: 150px;" /></td>
+        <td width="120"><input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 23px; width: 152px;" /></td>
         <td width="100" align="center">
           <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" onclick="changeType()" />
         </td>

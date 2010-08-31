@@ -26,17 +26,17 @@
     background-color:expression((this.sectionRowIndex%2==0)?"#eff5f8":"#fff");
 }
 .gridBody tbody tr td {
-    border-bottom:1px solid #d9e4ee; border-right:1px solid #d9e4ee; padding-left:10px;
+    border-bottom:1px solid #d9e4ee; border-right:1px solid #d9e4ee; padding-left:7px; padding-top: 2px; padding-bottom: 2px; line-height: 18px;
 }
 
 /** grid header sort */
 .gridBody th.sort {
 }
 .gridBody th.sort.desc {
-    background:#c5c5c5 url(images/sort_desc.gif) center right no-repeat
+    background:#F0F0F0 url(images/sort_desc.gif) center right no-repeat
 }
 .gridBody th.sort.asc {
-    background:#c5c5c5 url(images/sort_asc.gif) center right no-repeat
+    background:#F0F0F0 url(images/sort_asc.gif) center right no-repeat
 }
 
 /** mouse hove over sort header */
