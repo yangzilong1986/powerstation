@@ -97,6 +97,10 @@ $(document).ready(function() {
     $("#eventInquiryBtn").click( function() {
         queryEvent();
     });
+
+    $("#ecCurvInquiryBtn").click( function() {
+        queryEcCurv();
+    });
 });
 
 function readComputerTime() {

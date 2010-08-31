@@ -45,8 +45,8 @@ function queryData() {
           </td>
           <td width="100" align="right" class="green">台 区：</td>
           <td width="120" align="left">
-            <select name="tgId" style="width: 140px;" onchange="queryData()">
-              <option value="-1">请选择台区</option>
+            <select name="tgId" style="width: 140px;">
+              <option value="-1">所有台区</option>
               <c:forEach var="item" items="${tglist}">
               <option <c:if test="${item.tgId eq pageRequest.tgId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
               </c:forEach>

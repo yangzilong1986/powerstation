@@ -181,6 +181,7 @@ $(document).ready(function() {
           <td width="100" class="green" align="right">台 区：</td>
           <td width="120">
             <select name="objId" style="width: 140px;">
+              <option value="-1">所有台区</option>
               <c:set value="${model.objId}" var="tg"></c:set>
               <c:forEach var="item" items="${tglist}">
                 <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
@@ -208,16 +209,16 @@ $(document).ready(function() {
       <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
       <input type="hidden" id="mpSn" name="mpSn" value="0" />
     </div>
-    <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-135));">
+    <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-133));">
       <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
         <thead class="tableHeader">
           <tr>
             <th width="5" align="center"><input type="checkbox" onclick="setAllCheckboxState('ItemID',this.checked)"></th>
             <th width="25" align="center">序号</th>
             <!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; -->
-            <th sortColumn="objNo" >对象编号</th>
-            <th sortColumn="objName" >对象名称</th>
-            <th sortColumn="objType" >对象类型</th>
+            <th sortColumn="objNo" >台区编号</th>
+            <th sortColumn="objName" >台区名称</th>
+            <!-- <th sortColumn="objType" >对象类型</th> -->
             <th sortColumn="logicalAddr" >终端地址</th>
             <th sortColumn="mpNo" >电表局号</th>
             <th sortColumn="gpSn" >测量点序号</th>
@@ -230,7 +231,7 @@ $(document).ready(function() {
             <td align="center">${page.thisPageFirstElementNumber + status.index}<input type="hidden" name="tdID" value="<c:out value="${item.logicalAddr}"/>_<c:out value="${item.gpSn}"/>"/></td>
             <td><c:out value='${item.objNo}' />&nbsp;</td>
             <td><c:out value='${item.objName}' />&nbsp;</td>
-            <td><c:out value='${item.objType}' />&nbsp;</td>
+            <!-- <td><c:out value='${item.objType}' />&nbsp;</td> -->
             <td><c:out value='${item.logicalAddr}' />&nbsp;</td>
             <td><c:out value='${item.mpNo}' />&nbsp;</td>
             <td><c:out value='${item.gpSn}' />&nbsp;</td>
@@ -239,8 +240,8 @@ $(document).ready(function() {
         </tbody>
       </table>
     </div>
-    <div style="height: 30px; background: #DBEAEB; vertical-align: middle; text-align: right; border-left: 1px #85C0B4 solid; border-right: 1px #85C0B4 solid; border-bottom: 1px #85C0B4 solid;"><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
-    <div style="height: 40px; background: #CBEEEC; text-align: center; padding-top: 10px;">
+    <div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+    <div style="height: 40px; background: #FEFEFE; text-align: center; padding-top: 10px;">
       <input type="button" id="dqgflData" name="dqgflData" value="表码示值" onclick="readDqgflData()" class="btnbg4" />
       &nbsp;&nbsp;
       <input type="button" id="dqglData" name="dqglData" value="当前功率" onclick="readDqglData()" class="btnbg4" />

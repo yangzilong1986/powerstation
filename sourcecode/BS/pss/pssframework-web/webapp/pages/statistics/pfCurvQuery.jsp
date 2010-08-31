@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<div class="tableContainer" style="width: 100%; height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-31));">
+<div class="tableContainer" style="width: 100%; height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/statistics/pfcruv" modelAttribute="statisticsQuery">
 <form:hidden path="tgId"/>
 <form:hidden path="orgId"/>
@@ -33,7 +33,7 @@
   <tbody class="tableBody" id="dataBody">
     <c:forEach items="${page.result}" var="item" varStatus="status">
       <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
-        <td height="20">${page.thisPageFirstElementNumber + status.index}</td>
+        <td>${page.thisPageFirstElementNumber + status.index}</td>
         <td><c:out value='${item.assetNo}' />&nbsp;</td>
         <td><fmt:formatDate pattern ="yyyy-MM-dd HH:mm:ss" value="${item.dataTime}"></fmt:formatDate> &nbsp;</td>
         <td><c:out value='${item.powerFactor}' />&nbsp;</td>
@@ -46,7 +46,7 @@
 </table>
 </form:form>
 </div>
-<div style="height: 30px; background: #DBEAEB; vertical-align: middle; text-align: right; border-left: 1px #85C0B4 solid; border-right: 1px #85C0B4 solid; border-bottom: 1px #85C0B4 solid;"><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+<div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
     $(document).ready(function() {

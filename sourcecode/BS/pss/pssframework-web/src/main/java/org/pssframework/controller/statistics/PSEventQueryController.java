@@ -48,7 +48,7 @@ public class PSEventQueryController extends BaseSpringController {
     private StatisticsManager statisticsManager;
 
     // 默认多列排序,example: username desc,createTime asc
-    protected static final String DEFAULT_SORT_COLUMNS = null;
+    protected static final String DEFAULT_SORT_COLUMNS = "trigTime desc";
 
     /**
      * 
