@@ -40,8 +40,11 @@
 		<field name="DefaultValue">
             <bind-xml name="DefaultValue" node="attribute"/>
         </field>
-    <field name="IsGroupEnd">
+		<field name="IsGroupEnd">
             <bind-xml name="IsGroupEnd" node="attribute"/>
+        </field>
+		<field name="LowBitBefore">
+            <bind-xml name="LowBitBefore" node="attribute"/>
         </field>
     </class>
 </mapping>
