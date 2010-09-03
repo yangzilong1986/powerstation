@@ -667,7 +667,7 @@ public class RealTimeProxy376Test {
     @Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(7014);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(7789);
          assertTrue(resultMap.size() > 0 );
     }
 
