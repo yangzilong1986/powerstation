@@ -464,10 +464,13 @@ public class PmPacketData{
         return this;
     }
 
-    public String getBS8(){
+    public String getBS8(boolean LowBitBefore){
         byte[] bytes = new byte[1];
         dataBuff.get(bytes);
-        return BcdUtils.bytesToBitSetString(bytes);
+        if(LowBitBefore)
+          return BcdUtils.bytesToBitSetString(bytes);
+        else
+          return  BcdUtils.bytesToBitSetString_HighBefore(bytes);
     }
 
     public PmPacketData putBS24(String bs8){

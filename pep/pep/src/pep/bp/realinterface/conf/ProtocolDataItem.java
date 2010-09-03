@@ -17,6 +17,7 @@ public class ProtocolDataItem {
     private String groupValue;//针对数据位定义数据项的情况
     private String isGroupEnd="0";
     private String isTd = "0";//0,1 表示是否是数据时标
+    private String LowBitBefore = "1";//低位在前
 
 
     public ProtocolDataItem(){
@@ -45,7 +46,8 @@ public class ProtocolDataItem {
 
     }
 
-    public ProtocolDataItem(String DataItemCode,int Length,String Format,int BitNumber,String Description,String DefaultValue,String IsGroupEnd,String IsTd){
+    public ProtocolDataItem(String DataItemCode,int Length,String Format,int BitNumber,
+            String Description,String DefaultValue,String IsGroupEnd,String LowBitBefore){
         super();
         this.dataItemCode = DataItemCode;
         this.length = Length;
@@ -54,7 +56,7 @@ public class ProtocolDataItem {
         this.description = Description;
         this.defaultValue = DefaultValue;
         this.isGroupEnd = IsGroupEnd;
-        this.isTd = IsTd;
+        this.LowBitBefore = LowBitBefore;
 
     }
     /**
@@ -181,5 +183,19 @@ public class ProtocolDataItem {
      */
     public void setIsTd(String IsTd) {
         this.isTd = IsTd;
+    }
+
+    /**
+     * @return the LowBitBefore
+     */
+    public String getLowBitBefore() {
+        return LowBitBefore;
+    }
+
+    /**
+     * @param LowBitBefore the LowBitBefore to set
+     */
+    public void setLowBitBefore(String LowBitBefore) {
+        this.LowBitBefore = LowBitBefore;
     }
 }
