@@ -1583,7 +1583,7 @@ function chg8000C04F08(obj) {
           </tr>
           <tr>
             <td height="30" align="right">计算机时钟：</td>
-            <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_9"><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></security:authorize></td>
+            <td><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><security:authorize ifAnyGranted="ROLE_AUTHORITY_9"><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></security:authorize></td>
           </tr>
         </table>
         <div id="resultTime" style="text-align: left;"></div>
@@ -1603,7 +1603,7 @@ function chg8000C04F08(obj) {
             <td><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" class="input_nostyle" /> 自动跟踪功能 </td>
             <td><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" class="input_nostyle" /> 告警功能 </td>
             <td><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" class="input_nostyle" onclick="clkFuncSetupByte(8)" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
-            <td><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " class="jc_sub" onclick="funcSetupByteSetup()" /></td>
+            <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_9"><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " class="jc_sub" onclick="funcSetupByteSetup()" /></security:authorize></td>
           </tr>
         </table>
         <div id="resultFuncSetupByte" style="text-align: left;"></div>
