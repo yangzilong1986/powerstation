@@ -8,5 +8,5 @@ package org.pssframework.service.statistics;
  *
  */
 public enum StatisticsType {
-    PowerCruv, PfCruv, EiFreezeDay, EcurStatisDay, ImbStatisDay, VoltStatisDay, EiCurv, EcCurv, PsEcCurv, PsEvent
+	PowerCruv, PfCruv, EiFreezeDay, EcurStatisDay, ImbStatisDay, VoltStatisDay, EiCurv, EcCurv, PsEcCurv, PsEvent, TermEvent
 }
