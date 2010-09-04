@@ -1583,7 +1583,7 @@ function chg8000C04F08(obj) {
           </tr>
           <tr>
             <td height="30" align="right">计算机时钟：</td>
-            <td><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></td>
+            <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_9"><input id="computerTime" type="text" value="" style="width: 240px; height: 22px;" /><input type="button" id="timeSetupBtn" value=" 设 置 " class="jc_sub mgl10" onclick="timeSetup()" /></security:authorize></td>
           </tr>
         </table>
         <div id="resultTime" style="text-align: left;"></div>
@@ -1653,7 +1653,7 @@ function chg8000C04F08(obj) {
             </td>
             <td colspan="2" align="center">
               <input type="button" id="psTotalParamsReadBtn" value=" 读 取 " class="jc_sub" onclick="psTotalParamsRead()" />
-              <input type="button" id="psTotalParamsSetupBtn" value=" 设 置 " class="jc_sub" onclick="psTotalParamsSetup()" />
+              <security:authorize ifAnyGranted="ROLE_AUTHORITY_9"><input type="button" id="psTotalParamsSetupBtn" value=" 设 置 " class="jc_sub" onclick="psTotalParamsSetup()" /></security:authorize>
             </td>
           </tr>
         </table>
