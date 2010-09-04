@@ -26,6 +26,7 @@ import org.pssframework.service.system.CodeInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.util.ConverterUtils;
 import org.pssframework.util.DateUtils;
+import org.pssframework.util.FusionChartsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,7 @@ public class PSMonitorController extends BaseSpringController {
     private static final String VIEW_NAME_TRE = "/psmanage/psTree";
     private static final String VIEW_EVENT_QUERY = "/psmanage/eventQuery";
     private static final String VIEW_ECCURV_QUERY = "/psmanage/ecCurvQuery";
+    private static final String VIEW_ECCURV_QUERY_CHART = "/psmanage/ecCurvQuery_Chart";
 
     @Autowired
     private OrgInfoManager orgInfoManager;
@@ -74,6 +76,7 @@ public class PSMonitorController extends BaseSpringController {
     // 默认多列排序,example: username desc,createTime asc
     protected static final String DEFAULT_SORT_COLUMNS_EVENT = "trigTime desc";
     protected static final String DEFAULT_SORT_COLUMNS_PSDATA = "dataTime asc";
+    protected static final String DEFAULT_SORT_COLUMNS_PSDATA_CHART = "dataTime asc";
 
     /**
      * 
@@ -228,7 +231,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitWriteBack(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -237,7 +240,7 @@ public class PSMonitorController extends BaseSpringController {
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
-                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitWriteBack(collectId);
                 result.addObject("resultMap", resultMap);
                 logger.info("resultMap : " + resultMap.toString());
             }
@@ -279,6 +282,24 @@ public class PSMonitorController extends BaseSpringController {
             }
         }
         else if("FuncSetupByteSetup".equals(type)) { // FuncSetupByteSetup C04F
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter_TransMit(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("PSTotalParamsRead".equals(type)) { // PSTotalParamsRead C04F
+            String strCollectId = request.getParameter("collectId");
+            if(strCollectId != null) {
+                long collectId = Integer.parseInt(strCollectId);
+                Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+                result.addObject("resultMap", resultMap);
+                logger.info("resultMap : " + resultMap.toString());
+            }
+        }
+        else if("PSTotalParamsSetup".equals(type)) { // PSTotalParamsSetup C04F
             String strCollectId = request.getParameter("collectId");
             if(strCollectId != null) {
                 long collectId = Integer.parseInt(strCollectId);
@@ -353,7 +374,7 @@ public class PSMonitorController extends BaseSpringController {
         mav.setViewName(VIEW_ECCURV_QUERY);
         return mav;
     }
-    
+
     /**
      * 
      * @param mav
@@ -375,5 +396,59 @@ public class PSMonitorController extends BaseSpringController {
         actionTypeMap.put("1100", "合闸过程中");
         actionTypeMap.put("1101", "合闸失败");
         mav.addObject("actionTypeMap", actionTypeMap);
+    }
+
+    /**
+     * 
+     * @param mav
+     * @param request
+     * @param response
+     * @param psMonitorQuery
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/ecCurvQuery_Chart")
+    public ModelAndView _ecCurvQuery_Chart(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
+            PSMonitorQuery psMonitorQuery) throws Exception {
+        PageRequest<Map> pageRequest = bindPageRequest(request, psMonitorQuery, DEFAULT_SORT_COLUMNS_PSDATA_CHART);
+        Page page = statisticsManager.findChartByPageRequest(pageRequest, StatisticsType.PsEcCurv);// 获取数据模型
+        mav.addObject("page", page);
+        mav.addObject("pageRequest", pageRequest);
+        mav.addObject("psMonitorQuery", psMonitorQuery);
+
+        String chartCategory = request.getParameter("chartCategory");
+        Map<String, String> mapSeriesNames = new HashMap<String, String>();
+        initChartSeriesNames(mapSeriesNames, chartCategory);
+
+        String chartType = request.getParameter("chartType");
+        String width = request.getParameter("width");
+        String height = request.getParameter("height");
+        Map<String, String> mapParams = new HashMap<String, String>();
+        mapParams.put("caption", "漏保数据曲线");
+        mapParams.put("contextPath", request.getContextPath());
+        mapParams.put("chartType", chartType);
+        mapParams.put("width", width);
+        mapParams.put("height", height);
+        mav.addObject("chart", FusionChartsUtils.getChart(page.getResult(), mapSeriesNames, mapParams,
+                                                          "org.pssframework.model.statistics.PsEcCurv"));
+        mav.setViewName(VIEW_ECCURV_QUERY_CHART);
+        return mav;
+    }
+
+    private void initChartSeriesNames(Map<String, String> mapSeriesNames, String chartCategory) {
+        if("1".equals(chartCategory)) {      // 电压数据
+            mapSeriesNames.put("voltA", "A相电压#FF0000");
+            mapSeriesNames.put("voltB", "B相电压#FFFF00");
+            mapSeriesNames.put("voltC", "C相电压#0000FF");
+        }
+        else if("2".equals(chartCategory)) { // 电流数据
+            mapSeriesNames.put("ecurA", "A相电流#FF0000");
+            mapSeriesNames.put("ecurB", "B相电流#FFFF00");
+            mapSeriesNames.put("ecurC", "C相电流#0000FF");
+        }
+        else if("3".equals(chartCategory)) { // 剩余电流
+            mapSeriesNames.put("ecurS", "剩余电流#FF0000");
+        }
     }
 }

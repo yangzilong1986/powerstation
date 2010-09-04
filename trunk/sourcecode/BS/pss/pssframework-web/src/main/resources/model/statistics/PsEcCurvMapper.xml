@@ -5,7 +5,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 <mapper namespace="PsEcCurv">
     <resultMap id="PsEcCurvResult" type="org.pssframework.model.statistics.PsEcCurv"></resultMap>
     <!-- 用于select查询公用抽取的列 -->
-    <sql id="PsEcCurvColumns"><![CDATA[m.GP_ID gpId, m.PS_ID psId, m.PS_NAME psName, d.DATA_TIME dataTime, d.ASSET_NO assetNo, d.ECUR_A ecurA, d.ECUR_B ecurB, d.ECUR_C ecurC, d.ECUR_L ecurL, d.ECUR_S ecurS, d.VOLT_B voltB, d.VOLT_A voltA, d.VOLT_C voltC, s.OPENED opened, s.LOCKED locked, s.PHASE phase, s.ACTIONTYPE actionType]]></sql>
+    <sql id="PsEcCurvColumns"><![CDATA[m.GP_ID gpId, m.PS_ID psId, m.PS_NAME psName, d.DATA_TIME dataTime, d.ASSET_NO assetNo, d.ECUR_A ecurA, d.ECUR_B ecurB, d.ECUR_C ecurC, d.ECUR_L ecurL, d.ECUR_S ecurS, d.VOLT_A voltA, d.VOLT_B voltB, d.VOLT_C voltC, s.OPENED opened, s.LOCKED locked, s.PHASE phase, s.ACTIONTYPE actionType]]></sql>
     <sql id="PsEcCurvDynamicWhere">
         <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
         <choose>
@@ -33,5 +33,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         <![CDATA[from D_EC_CURV_C d, D_PS_STATUS s, V_PS m where d.GP_ID = s.GP_ID(+) and d.DATA_TIME = s.DATA_TIME(+) and m.GP_ID= d.GP_ID ]]>
         <include refid="PsEcCurvDynamicWhere" />
         <if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+    </select>
+    <select id="chartSelect" resultMap="PsEcCurvResult">
+        select rownum ROWNO, mod(rownum, 10) INTRVL, T.* from ( select
+        <include refid="PsEcCurvColumns" />
+        <![CDATA[from D_EC_CURV_C d, D_PS_STATUS s, V_PS m where d.GP_ID = s.GP_ID(+) and d.DATA_TIME = s.DATA_TIME(+) and m.GP_ID= d.GP_ID ]]>
+        <include refid="PsEcCurvDynamicWhere" />
+        <if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+        ) T
     </select>
 </mapper>
