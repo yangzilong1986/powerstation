@@ -98,11 +98,24 @@ public class StringUtil {
 	 * @param array 字符串
 	 * @return boolean
 	 */
-	public static boolean isNull(String s) {
+	public static boolean notNull(String s) {
 		if (null != s && s.length() > 0)
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * 判断是否为空
+	 * 
+	 * @param array 字符串
+	 * @return boolean
+	 */
+	public static boolean isNull(String s) {
+		if (null != s && s.length() > 0)
+			return false;
+		else
+			return true;
 	}
 
 	/**
