@@ -24,7 +24,6 @@ public class StatisticsDao extends BaseIbatis3Dao {
 
 	@Override
 	public void saveOrUpdate(Object entity) throws DataAccessException {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -35,11 +34,16 @@ public class StatisticsDao extends BaseIbatis3Dao {
 
 	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
-
 		setPreFix(statisticsType);
-
 		return pageQuery("pageSelect", pageRequest);
 	}
+
+    @SuppressWarnings("rawtypes")
+    public Page findChartByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
+        setPreFix(statisticsType);
+        pageRequest.setPageSize(Integer.MAX_VALUE);
+        return pageQuery("chartSelect", pageRequest);
+    }
 
 	private void setPreFix(StatisticsType statisticsType) {
 		pre = statisticsType.toString();

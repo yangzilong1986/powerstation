@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
 <%@ taglib tagdir="/WEB-INF/tags/simpletable" prefix="simpletable"%>
@@ -50,9 +48,16 @@ function queryEvent() {
 }
 
 function queryEcCurv() {
-    var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery?psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
-    //alert(url);
-    document.getElementById("fdata1").src = url;
+    if(showMode3 == "grids") {
+        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery?psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
+        //alert(url);
+        document.getElementById("fdata1").src = url;
+    }
+    else if(showMode3 == "chart") {
+        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery_Chart?caption=漏保数据曲线&chartType=1&chartCategory=3&width=0&height=0&psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
+        //alert(url);
+        document.getElementById("fdata1").src = url;
+    }
 }
 
 var cntMonitorB66F = 0;
@@ -196,7 +201,7 @@ function readB66F() {
                 //alert(data.fetchCount);
                 setTimeout("fetchResultReadB66F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
             },
-            error: function(XmlHttpRequest, textStatus, errorThrown){
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
                 //alert(errorThrown);
                 setTimeout("readB66F()", 3000);
             }
@@ -295,7 +300,7 @@ function readC04F() {
                 //alert(data.fetchCount);
                 setTimeout("fetchResultReadC04F(" + data.collectId + ", " + data.fetchCount + ")", 3000);
             },
-            error: function(XmlHttpRequest, textStatus, errorThrown){
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
                 setTimeout("readC04F()", 3000);
             }
         });
@@ -341,13 +346,80 @@ function showResultReadC04F(resultMap) {
     var result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C04F"];
     if(typeof result != "undefined") {
         for(var i = 0; i < $("input[ci='8000C04F']").length; i++) {
-            if($($("input[ci='8000C04F']")[i]).attr("di") == "8000C04F0X") {
-                $($("input[ci='8000C04F']")[i]).val(result['8000C04F01'] + ";" + result['8000C04F02'] + ";" + result['8000C04F03'] + ";" + result['8000C04F04']);
+            $($("input[ci='8000C04F']")[i]).val(result[$($("input[ci='8000C04F']")[i]).attr("di")]);
+        }
+        
+        var msgStatus = "";
+        if(result['8000C04F01'] == '0') {
+            msgStatus += "合闸；\r";
+        }
+        else if(result['8000C04F01'] == '1') {
+            msgStatus += "分闸；\r";
+            if(result['8000C04F02'] == '0') {
+                msgStatus += "未锁死；\r";
             }
-            else {
-                $($("input[ci='8000C04F']")[i]).val(result[$($("input[ci='8000C04F']")[i]).attr("di")]);
+            else if(result['8000C04F02'] == '1') {
+                msgStatus += "锁死；\r";
+            }
+
+            if(result['8000C04F03'] == '00') {
+                msgStatus += "相位：无效；\r";
+            }
+            else if(result['8000C04F03'] == '01') {
+                msgStatus += "相位：A相；\r";
+            }
+            else if(result['8000C04F03'] == '10') {
+                msgStatus += "相位：B相；\r";
+            }
+            else if(result['8000C04F03'] == '11') {
+                msgStatus += "相位：C相；\r";
+            }
+
+            if(result['8000C04F04'] == '0000') {
+                msgStatus += "漏电跳闸";
+            }
+            else if(result['8000C04F04'] == '0001') {
+                msgStatus += "突变跳闸";
+            }
+            else if(result['8000C04F04'] == '0010') {
+                msgStatus += "特波跳闸";
+            }
+            else if(result['8000C04F04'] == '0011') {
+                msgStatus += "过载跳闸";
+            }
+            else if(result['8000C04F04'] == '0100') {
+                msgStatus += "过压跳闸";
+            }
+            else if(result['8000C04F04'] == '0101') {
+                msgStatus += "欠压跳闸";
+            }
+            else if(result['8000C04F04'] == '0110') {
+                msgStatus += "短路跳闸";
+            }
+            else if(result['8000C04F04'] == '0111') {
+                msgStatus += "手动跳闸";
+            }
+            else if(result['8000C04F04'] == '1000') {
+                msgStatus += "停电跳闸";
+            }
+            else if(result['8000C04F04'] == '1001') {
+                msgStatus += "互感器故障跳闸";
+            }
+            else if(result['8000C04F04'] == '1010') {
+                msgStatus += "远程跳闸";
+            }
+            else if(result['8000C04F04'] == '1011') {
+                msgStatus += "其它原因跳闸";
+            }
+            else if(result['8000C04F04'] == '1100') {
+                msgStatus += "合闸过程中";
+            }
+            else if(result['8000C04F04'] == '1101') {
+                msgStatus += "合闸失败";
             }
         }
+        $("textarea[ci='8000C04F'][di='8000C04F0X']").val(msgStatus);
+        
         return true;
     }
     else {
@@ -455,7 +527,7 @@ function remoteTriping() {
             //alert(data.fetchCount);
             setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
             initOpResultRemote('下发开关跳闸命令失败...');
             enableRemoteOperation();
         }
@@ -536,7 +608,7 @@ function remoteSwitching() {
             //alert(data.fetchCount);
             setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
             initOpResultRemote('下发开关合闸命令失败...');
             enableRemoteOperation();
         }
@@ -614,7 +686,7 @@ function remoteTest() {
             //alert(data.fetchCount);
             setTimeout("fetchRemoteTestResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
             initOpResultRemote('下发试验跳命令失败...');
             enableRemoteOperation();
         }
@@ -745,7 +817,7 @@ function timeRead() {
             //alert(data.fetchCount);
             setTimeout("fetchTimeReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
             initOpResultTime('下发读取时钟命令失败...');
             enableTimeOperation();
         }
@@ -826,7 +898,7 @@ function timeSetup() {
             //alert(data.fetchCount);
             setTimeout("fetchTimeSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
         },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
+        error: function(XmlHttpRequest, textStatus, errorThrown) {
             initOpResultTime('下发校时命令失败...');
             enableTimeOperation();
         }
@@ -862,6 +934,7 @@ function fetchTimeSetupResult(collectId, fetchCount) {
     });
 }
 
+var bResultFuncSetupByte = false;
 function disableFuncSetupByteOperation() {
     $("#funcSetupByteReadBtn").attr("disabled", true);
     $("#funcSetupByteSetupBtn").attr("disabled", true);
@@ -873,11 +946,49 @@ function enableFuncSetupByteOperation() {
 }
 
 function initOpResultFuncSetupByte(msg) {
-    alert(msg);
+    //alert(msg);
+    $("#resultFuncSetupByte").html(msg);
 }
 
-function showResultFuncSetupByte(resultMap) {
-    //alert(resultMap);
+function showResultFuncSetupByte(resultMap, type) {
+    //alert(resultMap + "," + type);
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    if(type == 'setup') {  // 设置功能状态字
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8001C04F"];
+        if(typeof result != "undefined") {
+            if(result == "1") {
+                result = "设置功能状态字成功";
+            }
+            else if(result == "2") {
+                result = "设置功能状态字失败";
+            }
+            $("#resultFuncSetupByte").html(result);
+            bResultFuncSetupByte = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {                // 读取功能状态字
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C04F"];
+        if(typeof result != "undefined") {
+            //$("input[ci='8000C012'][di='C012']").val(result['C012']);
+            var strFuncSetupByte = result['8000C04F10'];
+            //alert(strFuncSetupByte);
+            showFuncSetupBytes(strFuncSetupByte);
+            $("#psModel").val(result['8000C04F11']);
+            $("#resultFuncSetupByte").html("读取功能状态字成功");
+            bResultFuncSetupByte = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 // 功能设定字读取
@@ -941,9 +1052,12 @@ function fetchFuncSetupByteReadResult(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showResultFuncSetupByte(data.resultMap);
+            var b = showResultFuncSetupByte(data.resultMap, 'read');
             if(!b && fetchCount > 0) {
                 setTimeout("fetchFuncSetupByteReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else if(b) {
+                enableFuncSetupByteOperation();
             }
             else {
                 initOpResultFuncSetupByte('读取功能设定字超时');
@@ -984,7 +1098,7 @@ function funcSetupByteSetup() {
     sb_dto.append('"8001C04F03": "0"').append(',');                             //
     sb_dto.append('"8001C04F04": "0"').append(',');                             //
     sb_dto.append('"8001C04F05": "0"').append(',');                             //
-    sb_dto.append('"8001C04F06": "11111111"').append(',');                      // 开关功能设定字
+    sb_dto.append('"8001C04F06": "' + getFuncSetupBytes() + '"');               // 开关功能设定字
     sb_dto.append('}');
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
@@ -1024,12 +1138,15 @@ function fetchFuncSetupByteSetupResult(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showResultFuncSetupByte(data.resultMap);
+            var b = showResultFuncSetupByte(data.resultMap, 'setup');
             if(!b && fetchCount > 0) {
                 setTimeout("fetchFuncSetupByteSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
+            else if(b) {
+                enableFuncSetupByteOperation();
+            }
             else {
-                initOpResultFuncSetupByte('设置功能设定字字超时');
+                initOpResultFuncSetupByte('设置功能设定字超时');
                 enableFuncSetupByteOperation();
             }
         },
@@ -1038,6 +1155,49 @@ function fetchFuncSetupByteSetupResult(collectId, fetchCount) {
     });
 }
 
+function clkFuncSetupByte(bytes) {
+    if(bytes == 8) {
+        var bChk = $("#funcSetupByte" + bytes).attr("checked");
+        if(bChk) {
+            $("#funcSetupByte" + bytes + "_additional").html("30mA");
+        }
+        else {
+            $("#funcSetupByte" + bytes + "_additional").html("50mA");
+        }
+    }
+}
+
+function getFuncSetupBytes() {
+    var funcSetupBytes = "";
+    for(var i = 8; i >= 1; i--) {
+        //funcSetupByte
+        if($("#funcSetupByte" + i).attr("checked")) {
+            funcSetupBytes += "1";
+        }
+        else {
+            funcSetupBytes += "0";
+        }
+    }
+    return funcSetupBytes;
+}
+
+function showFuncSetupBytes(funcSetupBytes) {
+    //alert("showFuncSetupBytes");
+    funcSetupBytes = $.trim(funcSetupBytes);
+    //alert(funcSetupBytes);
+    for(var i = 8; i >= 1; i--) {
+        //alert(funcSetupBytes.charAt(8 - i));
+        if(funcSetupBytes.charAt(8 - i) == '1') {
+            $("#funcSetupByte" + i).attr("checked", true);
+        }
+        else {
+            $("#funcSetupByte" + i).attr("checked", false);
+        }
+        clkFuncSetupByte(8);
+    }
+}
+
+var bResultPSTotalParams = false;
 function disablePSTotalParamsOperation() {
     $("#psTotalParamsReadBtn").attr("disabled", true);
     $("#psTotalParamsSetupBtn").attr("disabled", true);
@@ -1049,11 +1209,50 @@ function enablePSTotalParamsOperation() {
 }
 
 function initOpResultPSTotalParams(msg) {
-    alert(msg);
+    //alert(msg);
+    $("#resultPSTotalParams").html(msg);
 }
 
-function showResultPSTotalParams(resultMap) {
-    //alert(resultMap);
+function showResultPSTotalParams(resultMap, type) {
+    //alert(resultMap + "," + type);
+    var logicalAddr = $("#logicalAddr").val();
+    var meterAddr = $("#meterAddr").val();
+    if(type == 'setup') {  // 设置开关全部参数
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8001C04F"];
+        if(typeof result != "undefined") {
+            if(result == "1") {
+                result = "设置开关全部参数成功";
+            }
+            else if(result == "2") {
+                result = "设置开关全部参数失败";
+            }
+            $("#resultPSTotalParams").html(result);
+            bResultPSTotalParams = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    else {                // 读取开关全部参数
+        var result = null;
+        result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C04F"];
+        if(typeof result != "undefined") {
+            $("input[rci='8000C04F'][rdi='8000C04F05']").val(result['8000C04F05']);
+            $("select[rci='8000C04F'][rdi='8000C04F06']").val(result['8000C04F06']);
+            $("select[rci='8000C04F'][rdi='8000C04F07']").val(result['8000C04F07']);
+            $("select[rci='8000C04F'][rdi='8000C04F08']").val(result['8000C04F08']);
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val(result['8000C04F09']);
+            $("#psModel").val(result['8000C04F11']);
+            $("#resultPSTotalParams").html("读取开关全部参数成功");
+            bResultPSTotalParams = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
 
 // 读开关全部参数
@@ -1117,9 +1316,12 @@ function fetchPSTotalParamsReadResult(collectId, fetchCount) {
         data: jQuery.param(params),
         dataType: 'json',
         success: function(data) {
-            var b = showResultPSTotalParams(data.resultMap);
+            var b = showResultPSTotalParams(data.resultMap, 'read');
             if(!b && fetchCount > 0) {
                 setTimeout("fetchPSTotalParamsReadResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else if(b) {
+                enablePSTotalParamsOperation();
             }
             else {
                 initOpResultPSTotalParams('读开关全部参数超时');
@@ -1156,7 +1358,7 @@ function psTotalParamsSetup() {
     sb_dto.append('"identifier":').append('"8001C04F"').append(',');//$("input[type=checkbox][name='itemId2']")
     sb_dto.append('"datacellParam":').append('{');
     sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');                                   // 保护器型号ID
-    sb_dto.append('"8001C04F02": "11100000"').append(',');                                                      // 有效定义
+    sb_dto.append('"8001C04F02": "00000111"').append(',');                                                      // 有效定义
     sb_dto.append('"8001C04F03": "' + $("input[sci='8001C04F'][sdi='8001C04F03']").val() + '"').append(',');    // 额定负载电流档位值
     sb_dto.append('"8001C04F04": "' + $("input[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');    // 剩余电流档位
     sb_dto.append('"8001C04F05": "' + $("input[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');    // 漏电分断延迟档位
@@ -1187,6 +1389,42 @@ function psTotalParamsSetup() {
         }
     });
 }
+
+function fetchPSTotalParamsSetupResult(collectId, fetchCount) {
+    var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+    var params = {
+            "collectId": collectId,
+            "type": "PSTotalParamsSetup"
+    };
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: jQuery.param(params),
+        dataType: 'json',
+        success: function(data) {
+            var b = showResultPSTotalParams(data.resultMap, 'setup');
+            if(!b && fetchCount > 0) {
+                setTimeout("fetchPSTotalParamsSetupResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+            }
+            else if(b) {
+                enablePSTotalParamsOperation();
+            }
+            else {
+                initOpResultPSTotalParams('设置开关全部参数超时');
+                enablePSTotalParamsOperation();
+            }
+        },
+        error: function() {
+        }
+    });
+}
+
+function chg8000C04F06(obj) {
+    $("select[rci='8000C04F'][rdi='8000C04F07']").val($(obj).val());
+}
+
+function chg8000C04F08(obj) {
+}
 </script>
 </head>
 <body style="overflow: auto;">
@@ -1203,6 +1441,7 @@ function psTotalParamsSetup() {
   <input type="hidden" id="databit" name="databit" value="8" />
   <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
   <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
+  <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
 <div>
   <div class="jc_tab">
@@ -1322,7 +1561,9 @@ function psTotalParamsSetup() {
                     </tr>
                     <tr>
                       <td height="25" align="right">设备状态：</td>
-                      <td><input ci="8000C04F" di="8000C04F0X" type="text" value="" style="width: 95px; height: 20px;" /></td>
+                      <td>
+                        <textarea ci="8000C04F" di="8000C04F0X" rows="5" cols="10" style="overflow: auto;"></textarea>
+                      </td>
                     </tr>
                   </table>
                 </div>
@@ -1361,7 +1602,7 @@ function psTotalParamsSetup() {
             <td height="30"><input type="checkbox" id="funcSetupByte5" name="funcSetupByte" class="input_nostyle" /> 特波保护功能 </td>
             <td><input type="checkbox" id="funcSetupByte6" name="funcSetupByte" class="input_nostyle" /> 自动跟踪功能 </td>
             <td><input type="checkbox" id="funcSetupByte7" name="funcSetupByte" class="input_nostyle" /> 告警功能 </td>
-            <td><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" class="input_nostyle" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
+            <td><input type="checkbox" id="funcSetupByte8" name="funcSetupByte" class="input_nostyle" onclick="clkFuncSetupByte(8)" /> 特波动作值<span id="funcSetupByte8_additional">50mA</span> </td>
             <td><input type="button" id="funcSetupByteSetupBtn" value=" 设 置 " class="jc_sub" onclick="funcSetupByteSetup()" /></td>
           </tr>
         </table>
@@ -1373,19 +1614,19 @@ function psTotalParamsSetup() {
           <tr>
             <td width="22%" height="30" align="right">剩余电流档位：</td>
             <td width="28%">
-              <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>自动挡</option>
+              <select rci="8000C04F" rdi="8000C04F06" sci="8001C04F" sdi="8001C04F04" style="width: 120px; height: 24px;" onchange="chg8000C04F06(this)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">自动挡</option>
               </select>
             </td>
             <td width="22%" align="right">漏电分断延迟档位：</td>
             <td width="28%">
-              <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;">
-                <option>1</option>
-                <option>2</option>
+              <select rci="8000C04F" rdi="8000C04F08" sci="8001C04F" sdi="8001C04F05" style="width: 120px; height: 24px;" onchange="chg8000C04F08(this)">
+                <option value="1">1</option>
+                <option value="2">2</option>
               </select>
             </td>
           </tr>
@@ -1393,11 +1634,11 @@ function psTotalParamsSetup() {
             <td height="30" align="right">剩余电流当前档位值：</td>
             <td>
               <select rci="8000C04F" rdi="8000C04F07" style="width: 120px; height: 24px;">
-                <option>100</option>
-                <option>300</option>
-                <option>500</option>
-                <option>800</option>
-                <option>自动挡</option>
+                <option value="1">100</option>
+                <option value="2">300</option>
+                <option value="3">500</option>
+                <option value="4">800</option>
+                <option value="5">自动档位值</option>
               </select>
             </td>
             <td align="right">漏电分断延迟时间值：</td>
@@ -1443,7 +1684,7 @@ function psTotalParamsSetup() {
     </ul>
     <ul class=disNone id=jc_Con_3>
       <div style="vertical-align:middle; height: 30px;">
-        <table border="0" cellpadding="0" cellspacing="0">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
             <td width="50" height="30" align="right" class="green">时 间：</td>
             <td width="120" align="left">
@@ -1453,7 +1694,11 @@ function psTotalParamsSetup() {
             <td width="100" align="center">
               <img id="ecCurvInquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
             </td>
-            <td>&nbsp;</td>
+            <td align="right">
+              <img src="<pss:path type="bgcolor"/>/img/grids.png" onclick="showGridMode(3)" width="16" height="16" alt="表格" style="cursor: pointer; border: 1px #DBDBDB solid;" />
+              &nbsp;&nbsp;&nbsp; 
+              <img src="<pss:path type="bgcolor"/>/img/chart.png" onclick="showPictMode(3)" width="16" height="16" alt="图形" style="cursor: pointer; border: 0px #DBDBDB solid;" />
+            </td>
           </tr>
         </table>
       </div>
@@ -1465,5 +1710,21 @@ function psTotalParamsSetup() {
     </ul>
   </div>
 </div>
+<script type="text/javascript">
+var showMode3 = "grids";
+function showGridMode(jcIndex) {
+    if(jcIndex == 3) {
+        showMode3 = "grids";
+        queryEcCurv();
+    }
+}
+
+function showPictMode(jcIndex) {
+    if(jcIndex == 3) {
+        showMode3 = "chart";
+        queryEcCurv();
+    }
+}
+</script>
 </body>
 </html>

@@ -16,23 +16,25 @@ import cn.org.rapid_framework.page.PageRequest;
 
 /**
  * @author Administrator
- *
+ * 
  */
+@SuppressWarnings("unchecked")
 @Service
 public class StatisticsManager extends BaseManager {
 
-	@Autowired
-	private StatisticsDao statisticsDao;
+    @Autowired
+    private StatisticsDao statisticsDao;
 
-	@Override
-	protected EntityDao getEntityDao() {
-		// TODO Auto-generated method stub
-		return statisticsDao;
-	}
+    @Override
+    protected EntityDao getEntityDao() {
+        return statisticsDao;
+    }
 
-	public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType powercruv) {
-		// TODO Auto-generated method stub
-		return statisticsDao.findByPageRequest(pageRequest, powercruv);
-	}
-
+    public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType powercruv) {
+        return statisticsDao.findByPageRequest(pageRequest, powercruv);
+    }
+    
+    public Page findChartByPageRequest(PageRequest<Map> pageRequest, StatisticsType powercruv) {
+        return statisticsDao.findChartByPageRequest(pageRequest, powercruv);
+    }
 }
