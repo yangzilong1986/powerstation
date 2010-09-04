@@ -44,6 +44,9 @@ function meterState(){
    }
 }
 
+
+
+
 </script>
 </head>
 <body>
@@ -51,7 +54,7 @@ function meterState(){
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression(((  document.documentElement.clientHeight ||document.body.clientHeight) -35));">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression(((      document.documentElement.clientHeight ||   document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
       value="${_type}" />
@@ -101,7 +104,7 @@ function meterState(){
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="psName" cssClass="required input2" disabled="${disabled}"/>
+          <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">安装地址：</td>
         <td>${istAddr}</td>
@@ -109,15 +112,16 @@ function meterState(){
       <tr height="30px">
         <td align="right" class="green">试跳时间：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code"
-            disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}" id="testTime"
-            itemLabel="name" itemValue="code" disabled="${disabled}" />点 &nbsp;<form:checkbox path="autoTest"
-            title="是否自动跳" value="1" disabled="${disabled}" />是否自动跳</security:authorize><security:authorize
-          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name" itemValue="code"
-            disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}" id="testTime"
-            itemLabel="name" itemValue="code" disabled="${disabled}" />点 &nbsp;<form:checkbox path="autoTest"
-            title="是否自动跳" value="1" disabled="${disabled}" />是否自动跳</security:authorize></td>
+          <span><form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;</span><span
+            id="time"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name"
+            itemValue="code" disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}"
+            id="testTime" itemLabel="name" itemValue="code" disabled="${disabled}" />点</span>
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <span><form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;<span
+            id="time"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name"
+            itemValue="code" disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}"
+            id="testTime" itemLabel="name" itemValue="code" disabled="${disabled}" />点</span>
+        </security:authorize></td>
       </tr>
     </table>
     </div>
@@ -222,8 +226,25 @@ val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function
 }}
 );
 
-$(function(){
+checkBox  = function(){
+   if($("#autoTest").attr("checked")){
+     $("#time").show();
+   }else{
+	 $("#time").hide();
+   }
+};
 
+$(function(){
+  checkBox();
+
+  $("#autoTest").click(function(){
+      if($(this).attr("checked")){
+    	  $("#time").show();
+      }else
+      {
+    	  $("#time").hide();
+      }
+    });
 if('${_type}' == "new"){
 	//$("#detail_tile").hide();
 	$("#detail").hide();
