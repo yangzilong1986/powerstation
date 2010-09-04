@@ -54,10 +54,13 @@ public class JuintTest {
 
 	}
 
+	@Test
 	public void fuck() {
 		char[] init = new char[]{'0', '0', '0', '0', '0', '0', '0', '0'};
 		System.out.println(String.valueOf(init));
-
+		Boolean a = false;
+		int b;
+		System.out.println();
 	}
 
 	@Test
