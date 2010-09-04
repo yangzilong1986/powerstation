@@ -118,10 +118,12 @@ deleteUser = function(){
 			</td>
 		</tr>
 		<tr height="25">
-			<td colspan="4"><input type="button" id="new" class="btnbg4" value=<spring:message code="system.button.xz" />
-				onclick="newUser()" /> <input type="button" id="edit" class="btnbg4"
-				value=<spring:message code="system.button.bj" /> onclick="editUser()" /> <input type="button" id="delete"
-				class="btnbg4" value=<spring:message code="system.button.sc" /> onclick="deleteUser()" /></td>
+			<td colspan="4">
+       <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+      <input type="button" id="new" class="btnbg4" value=<spring:message code="system.button.xz" />
+				onclick="newUser()" /></security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_2"> <input type="button" id="edit" class="btnbg4"
+				value=<spring:message code="system.button.bj" /> onclick="editUser()" /></security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3"> <input type="button" id="delete"
+				class="btnbg4" value=<spring:message code="system.button.sc" /> onclick="deleteUser()" /></security:authorize></td>
 		</tr>
 	</table>
 	</div>
