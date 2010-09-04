@@ -165,10 +165,10 @@ var contextPath  = '${ctx}';
           <td><c:if test="${_type!='show'}">
             <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
               <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_10">/&nbsp;<a
                 onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
             </security:authorize>
-          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4,ROLE_AUTHORITY_10">/&nbsp;<a
               onclick="showMpInfo('${mpInfo.mpId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -206,12 +206,12 @@ var contextPath  = '${ctx}';
           </c:otherwise>
           </c:choose></td>
           <td><c:if test="${_type!='show'}">
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1,ROLE_AUTHORITY_12">
               <a onclick="deletePsInfo('${ps.psId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
                 onclick="updatePsInfo('${ps.psId}')">修改</a>
             </security:authorize>
-          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          </c:if>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
               onclick="showPsInfo('${ps.psId}')">查看</a>
           </security:authorize></td>
         </tr>
