@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="TermEvent">
+	<resultMap id="TermEventResult" type="org.pssframework.model.statistics.TermEvent"></resultMap>
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="TermEventColumns">
+        <![CDATA[
+        e.ED_ID edId, e.LOGICAL_ADDR logicalAddr, e.GP_SN gpSn,e.GP_CHAR gpChar,e.EX_CODE_FEP exCode, e.EX_TIME exTime, co.ex_name exName,term.tg_name tgName
+        ]]>
+	</sql>
+	<sql id="TermEventDynamicWhere">
+		<choose>
+			<when test="logicalAddr != null"><![CDATA[ and term.LOGICAL_ADDR like  '%'||#{logicalAddr}||'%']]></when>
+		</choose>
+		<choose>
+			<when test="orgId != null"><![CDATA[ and term.ORG_ID = #{orgId}]]></when>
+		</choose>
+		<choose>
+			<when test="tgId != null and tgId != -1"><![CDATA[ and term.tg_id = #{tgId}]]></when>
+		</choose>
+		<choose>
+			<when test="sdate != null"><![CDATA[ AND e.ex_time BETWEEN to_date(#{sdate},'yyyy-mm-dd') ]]></when>
+			<otherwise><![CDATA[ AND e.ex_time BETWEEN null]]></otherwise>
+		</choose>
+		<choose>
+			<when test="edate != null"><![CDATA[ AND to_date(#{edate},'yyyy-mm-dd') ]]></when>
+			<otherwise><![CDATA[ and null]]></otherwise>
+		</choose>
+	</sql>
+	<select id="count" resultType="long">
+        <![CDATA[select count(1)]]>
+        <include refid="TermEventFrom" />
+		<include refid="TermEventDynamicWhere" />
+	</select>
+	<!-- 分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页 因为分页查询将传 #offset#,#pageSize#,#lastRows# 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现 -->
+	<select id="pageSelect" resultMap="TermEventResult">
+		select
+		<include refid="TermEventColumns" />
+        <include refid="TermEventFrom" />
+		<include refid="TermEventDynamicWhere" />
+		<if test="sortColumns != null and sortColumns.length() != 0">order by ${sortColumns}</if>
+	</select>
+	<sql id="TermEventFrom">
+	from e_event_data e,
+       (SELECT c.LOGICAL_ADDR,g.org_id,t.tg_id,t.tg_name
+          FROM c_term_obj_rela r, g_tg t, c_terminal c, o_org g
+         WHERE r.obj_type = 2
+           AND c.term_id = r.term_id
+           AND r.obj_id = t.tg_id
+           AND g.org_id = t.org_id
+        ) term,
+       e_term_ecode co
+       where e.ex_code_fep = co.ex_code(+)
+   AND term.LOGICAL_ADDR = e.logical_addr
+   AND gp_char = 6
+	</sql>
+</mapper>
