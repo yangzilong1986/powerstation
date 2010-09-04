@@ -157,7 +157,7 @@ function fresh(Id) {
 			</c:forEach>
 		</tbody>
 	</table>
-	<simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
+	<simpletable:pageToolbarNoRight page="${page}"></simpletable:pageToolbarNoRight></div>
 	</div>
 	</div>
 </form:form></div>
