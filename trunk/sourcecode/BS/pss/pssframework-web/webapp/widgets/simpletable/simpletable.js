@@ -16,8 +16,9 @@ var SimpleTable = function(formId,pageNumber,pageSize,sortColumns,pageNumberKey,
 	$("#"+formId+" .gridBody th[sortColumn]").click(function() {
 		//handle click sort header
 		var column = $(this).attr('sortColumn');
+		//alert(SimpleTableUtils.getSortDirection(sortColumns,column));
 		if(SimpleTableUtils.getSortDirection(sortColumns,column) == 'asc') {
-			_this.toggleSort("");
+			_this.toggleSort(column + " desc");
 		}else if(SimpleTableUtils.getSortDirection(sortColumns,column) == 'desc') {
 			_this.toggleSort(column + " asc");
 		}else {
