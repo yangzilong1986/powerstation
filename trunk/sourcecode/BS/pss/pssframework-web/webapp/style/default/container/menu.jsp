@@ -97,7 +97,7 @@ function changeFod(obj) {
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4003">
         <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', '/statistics/psDataQuery'); return false;">开关数据</a></div></security:authorize>
               <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
-        <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', '/statistics/termDataQuery'); return false;">终端事件</a></div></security:authorize>
+        <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', '/statistics/termEvent'); return false;">终端事件</a></div></security:authorize>
       </div>
     </dt>
   </dl>
