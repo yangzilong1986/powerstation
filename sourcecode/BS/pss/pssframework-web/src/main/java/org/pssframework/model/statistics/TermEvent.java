@@ -8,10 +8,11 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class TermEvent implements Serializable {
+
 	/**
-	 * serialVersionUID
+	 * 
 	 */
-	private static final long serialVersionUID = 1191218069819208203L;
+	private static final long serialVersionUID = -8097081710106346022L;
 
 	@Override
 	public String toString() {
