@@ -123,10 +123,12 @@ function fresh(Id) {
 	<div id="tool">
 	<table>
 		<tr>
-			<td><input type="button" id="new" class="btnbg4" value='<spring:message code="system.button.xz"/>'
-				onclick="newRole()" /> <input type="button" class="btnbg4" id="edit"
-				value='<spring:message code="system.button.bj"/>' onclick="editRole()" /> <input type="button" class="btnbg4"
-				id="delete" value='<spring:message code="system.button.sc"/>' onclick="deleteRole()" /></td>
+			<td>
+     <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+      <input type="button" id="new" class="btnbg4" value='<spring:message code="system.button.xz"/>'
+				onclick="newRole()" /></security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_2"><input type="button" class="btnbg4" id="edit"
+				value='<spring:message code="system.button.bj"/>' onclick="editRole()" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3"> <input type="button" class="btnbg4"
+				id="delete" value='<spring:message code="system.button.sc"/>' onclick="deleteRole()" /></security:authorize></td>
 		</tr>
 	</table>
 	</div>
