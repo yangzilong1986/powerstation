@@ -39,12 +39,43 @@ public class TermEvent implements Serializable {
 	//EX_CODE_FEP
 	private String exCode;
 
+	private String exName;
+
+	private String tgName;
+
+	/**
+	 * @return the tgName
+	 */
+	public String getTgName() {
+		return tgName;
+	}
+
 	//EX_TIME
 	private Date exTime;
 
 	//ACCEPT_TIME
 	private Date acceptTime;
 
+	/**
+	 * @param tgName the tgName to set
+	 */
+	public void setTgName(String tgName) {
+		this.tgName = tgName;
+	}
+
+	/**
+	 * @return the exName
+	 */
+	public String getExName() {
+		return exName;
+	}
+
+	/**
+	 * @param exName the exName to set
+	 */
+	public void setExName(String exName) {
+		this.exName = exName;
+	}
 	/**
 	 * @return the edId
 	 */
