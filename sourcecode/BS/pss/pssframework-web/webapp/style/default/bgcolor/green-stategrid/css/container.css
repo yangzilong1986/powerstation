@@ -13,6 +13,7 @@ body {
 ul { margin: 0; padding: 0; }
 ul, li { list-style-type: none; }
 a { text-decoration: none; }
+table a { text-decoration: none; cursor: hand}
 img { border: 0; }
 .disNone { display: none; }
 .cb { clear: both; }
