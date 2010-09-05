@@ -3,6 +3,7 @@
  */
 package org.pssframework.dao.system;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,12 @@ public class ResourceInfoDao extends BaseHibernateDao<ResourceInfo, Long> {
 		List<ResourceInfo> list = Lists.newLinkedList();
 
 		return list;
+	}
+	
+	private static final String validfunHql = "from ResourceInfo t where t.valid = 1";
+
+	public List<ResourceInfo> findAllValid() {
+		return this.findAll(validfunHql, new HashMap());
 	}
 
 }

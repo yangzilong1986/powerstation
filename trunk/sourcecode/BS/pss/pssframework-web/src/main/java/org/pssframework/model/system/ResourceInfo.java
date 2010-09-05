@@ -37,32 +37,49 @@ public class ResourceInfo extends BaseEntity {
 	@Column(nullable = false, name = "FUN_NAME")
 	private String resourceName;
 
-	@Column(nullable = false, name = "FUN_COMMENT")
+	@Column(name = "FUN_COMMENT")
 	private String resourceComment;
 
-	@Column(nullable = false, name = "FUN_TYPE")
+	@Column(name = "FUN_TYPE")
 	private String resourceType;
 
 	/**
 	 * 操作URL
 	 */
-	@Column(nullable = false, name = "OP_URL")
+	@Column(name = "OP_URL")
 	private String opUrl;
 
 	/**
 	 * 功能URL
 	 */
-	@Column(nullable = false, name = "FUN_URL")
+	@Column(name = "FUN_URL")
 	private String funUrl;
 
 	/**
 	 * 调用方式
 	 */
-	@Column(nullable = false, name = "OP_WAY")
+	@Column(name = "OP_WAY")
 	private String opWay;
 
-	@Column(nullable = false, name = "FUN_UPPER")
+	@Column(name = "FUN_UPPER")
 	private Long resourceUpperId;
+
+	@Column(name = "VALID")
+	private String valid;
+
+	/**
+	 * @return the valid
+	 */
+	public String getValid() {
+		return valid;
+	}
+
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(String valid) {
+		this.valid = valid;
+	}
 
 	/**
 	 * @return the resourceComment
