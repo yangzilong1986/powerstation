@@ -861,6 +861,15 @@ img {
 .electric_lcon .default{display:block;}
 .datamenu_lcon .default{display:block;}
 
+div.graphContainer {
+    border: 1px #85C0B4 solid;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
 div.tableContainer {
     border: 1px #85C0B4 solid;
     margin: 0;

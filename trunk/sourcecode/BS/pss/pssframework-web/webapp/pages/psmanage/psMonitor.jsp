@@ -106,6 +106,8 @@ $(document).ready(function() {
     $("#ecCurvInquiryBtn").click( function() {
         queryEcCurv();
     });
+
+    chg8000C04F08($("select[rci='8000C04F'][rdi='8000C04F08']"));
 });
 
 function readComputerTime() {
@@ -351,9 +353,11 @@ function showResultReadC04F(resultMap) {
         
         var msgStatus = "";
         if(result['8000C04F01'] == '0') {
+            $("#rmtTripImg").attr('src', '<pss:path type="bgcolor"/>/img/pss-on.png');
             msgStatus += "合闸；\r";
         }
         else if(result['8000C04F01'] == '1') {
+            $("#rmtTripImg").attr('src', '<pss:path type="bgcolor"/>/img/pss-off.png');
             msgStatus += "分闸；\r";
             if(result['8000C04F02'] == '0') {
                 msgStatus += "未锁死；\r";
@@ -1169,7 +1173,7 @@ function clkFuncSetupByte(bytes) {
 
 function getFuncSetupBytes() {
     var funcSetupBytes = "";
-    for(var i = 8; i >= 1; i--) {
+    for(var i = 1; i <= 8; i++) {
         //funcSetupByte
         if($("#funcSetupByte" + i).attr("checked")) {
             funcSetupBytes += "1";
@@ -1185,9 +1189,9 @@ function showFuncSetupBytes(funcSetupBytes) {
     //alert("showFuncSetupBytes");
     funcSetupBytes = $.trim(funcSetupBytes);
     //alert(funcSetupBytes);
-    for(var i = 8; i >= 1; i--) {
+    for(var i = 1; i <= 8; i++) {
         //alert(funcSetupBytes.charAt(8 - i));
-        if(funcSetupBytes.charAt(8 - i) == '1') {
+        if(funcSetupBytes.charAt(i - 1) == '1') {
             $("#funcSetupByte" + i).attr("checked", true);
         }
         else {
@@ -1241,7 +1245,7 @@ function showResultPSTotalParams(resultMap, type) {
         if(typeof result != "undefined") {
             $("input[rci='8000C04F'][rdi='8000C04F05']").val(result['8000C04F05']);
             $("select[rci='8000C04F'][rdi='8000C04F06']").val(result['8000C04F06']);
-            $("select[rci='8000C04F'][rdi='8000C04F07']").val(result['8000C04F07']);
+            $("select[rci='8000C04F'][rdi='8000C04F07']").val(result['8000C04F06']);
             $("select[rci='8000C04F'][rdi='8000C04F08']").val(result['8000C04F08']);
             $("input[rci='8000C04F'][rdi='8000C04F09']").val(result['8000C04F09']);
             $("#psModel").val(result['8000C04F11']);
@@ -1358,11 +1362,11 @@ function psTotalParamsSetup() {
     sb_dto.append('"identifier":').append('"8001C04F"').append(',');//$("input[type=checkbox][name='itemId2']")
     sb_dto.append('"datacellParam":').append('{');
     sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');                                   // 保护器型号ID
-    sb_dto.append('"8001C04F02": "00000111"').append(',');                                                      // 有效定义
+    sb_dto.append('"8001C04F02": "11100000"').append(',');                                                      // 有效定义
     sb_dto.append('"8001C04F03": "' + $("input[sci='8001C04F'][sdi='8001C04F03']").val() + '"').append(',');    // 额定负载电流档位值
-    sb_dto.append('"8001C04F04": "' + $("input[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');    // 剩余电流档位
-    sb_dto.append('"8001C04F05": "' + $("input[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');    // 漏电分断延迟档位
-    sb_dto.append('"8001C04F06": "00000000"').append(',');                                                      // 
+    sb_dto.append('"8001C04F04": "' + $("select[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');   // 剩余电流档位
+    sb_dto.append('"8001C04F05": "' + $("select[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');   // 漏电分断延迟档位
+    sb_dto.append('"8001C04F06": "00000000"');                                                      // 
     sb_dto.append('}');
     sb_dto.append('}').append(']');
     sb_dto.append('}]');
@@ -1424,6 +1428,31 @@ function chg8000C04F06(obj) {
 }
 
 function chg8000C04F08(obj) {
+    var iPsModel = parseInt($("#psModel").val());
+    if(1 == iPsModel || 3 == iPsModel || 5 == iPsModel || 7 == iPsModel) {
+        if("1" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("200");
+        }
+        else if("2" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("300");
+        }
+    }
+    else if(2 == iPsModel || 4 == iPsModel || 6 == iPsModel || 8 == iPsModel) {
+        if("1" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("300");
+        }
+        else if("2" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("500");
+        }
+    }
+    else if(101 == iPsModel) {
+        if("1" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("200");
+        }
+        else if("2" == $(obj).val()) {
+            $("input[rci='8000C04F'][rdi='8000C04F09']").val("500");
+        }
+    }
 }
 </script>
 </head>
@@ -1476,7 +1505,7 @@ function chg8000C04F08(obj) {
               <td width="40%">漏保型号：<strong>${psModel.name}</strong></td>
             </tr>
             <tr>
-              <td height="30">测量点序号：<strong>${psInfo.gpInfo.gpChar}</strong></td>
+              <td height="30">测量点序号：<strong>${psInfo.gpInfo.gpSn}</strong></td>
               <td>漏保地址：<strong>${psInfo.gpInfo.gpAddr}</strong></td>
               <td>漏保类型：<strong>${psType.name}</strong></td>
             </tr>
@@ -1491,7 +1520,7 @@ function chg8000C04F08(obj) {
             <tr>
               <td width="28%" class="td1" valign="top">
                 <div class="green1"><strong>合闸/分闸操作</strong></div>
-                <div class="mgt10" style="text-align: center; height: 80px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-on.png" alt="" style="width: 101px; height: 70px;" /></div>
+                <div class="mgt10" style="text-align: center; height: 80px;"><img id="rmtTripImg" src="<pss:path type="bgcolor"/>/img/ps-unkonwn.jpg" alt="" style="width: 101px; height: 70px;" /></div>
                 <div class="mgt10 tc" style="height: 30px;">
                 <security:authorize ifAnyGranted="ROLE_AUTHORITY_8">
                   <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
@@ -1643,7 +1672,7 @@ function chg8000C04F08(obj) {
             </td>
             <td align="right">漏电分断延迟时间值：</td>
             <td>
-              <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 100px; height: 20px;" /> ms
+              <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 100px; height: 20px;" /> mS
             </td>
           </tr>
           <tr>
