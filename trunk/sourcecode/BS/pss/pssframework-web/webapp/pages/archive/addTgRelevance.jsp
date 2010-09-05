@@ -8,17 +8,29 @@
 <title>台区档案录入</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
-//弹出式窗口
-var opwindow = null;     //记录打开浏览窗口的对象
-function windowPopup(url, wd, ht) {
-    if(opwindow != null) {
-        opwindow.close();
-    }
-    opwindow = open(url,'','height='+ht+',width='+wd+',top='+(screen.availHeight-ht)/2+', left='+(screen.availWidth-wd)/2+', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
-}
+	//弹出式窗口
+	var opwindow = null; //记录打开浏览窗口的对象
+	function windowPopup(url, wd, ht) {
+		if (opwindow != null) {
+			opwindow.close();
+		}
+		opwindow = open(
+				url,
+				'',
+				'height='
+						+ ht
+						+ ',width='
+						+ wd
+						+ ',top='
+						+ (screen.availHeight - ht)
+						/ 2
+						+ ', left='
+						+ (screen.availWidth - wd)
+						/ 2
+						+ ', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
+	}
 
-var contextPath  = '${ctx}';
-
+	var contextPath = '${ctx}';
 </script>
 </head>
 <body>
@@ -26,7 +38,7 @@ var contextPath  = '${ctx}';
 <ul class=default id=electric_Con_1>
   <div class="tab"><span>台区信息</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((       document.documentElement.clientWidth ||       document.body.clientWidth) -10 ); height: expression(((                       document.documentElement.clientHeight ||                       document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((         document.documentElement.clientWidth ||         document.body.clientWidth) -10 ); height: expression(((                         document.documentElement.clientHeight ||                         document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/tginfo" modelAttribute="tginfo">
     <table width="95%" border="0" cellspacing="0" cellpadding="0">
       <tr height="30">
@@ -44,34 +56,29 @@ var contextPath  = '${ctx}';
           <form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" disabled="true"
             cssStyle="width:145px;" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" 
-            cssStyle="width:145px;" />
+          <form:input path="tgNo" id="tgNo" cssClass="required input2" maxlength="16" cssStyle="width:145px;" />
         </security:authorize></td>
         <td width="10%" align="right" class="green">台区名称：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" disabled="true"
-             />
+          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" disabled="true" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;"
-             />
+          <form:input path="tgName" id="tgName" cssClass="required input2" cssStyle="width:145px;" />
         </security:authorize></td>
         <td width="10%" align="right" class="green">管理单位：</td>
         <td width="25%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:select path="orgInfo.orgId" items="${orglist}"  id="orgId" itemLabel="orgName" disabled="true"
+          <form:select path="orgInfo.orgId" items="${orglist}" id="orgId" itemLabel="orgName" disabled="true"
             itemValue="orgId" cssStyle="width:150px;" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:select path="orgInfo.orgId" items="${orglist}"  id="orgId" itemLabel="orgName"
-            itemValue="orgId" cssStyle="width:150px;" />
+          <form:select path="orgInfo.orgId" items="${orglist}" id="orgId" itemLabel="orgName" itemValue="orgId"
+            cssStyle="width:150px;" />
         </security:authorize></td>
       </tr>
       <tr height="30">
         <td width="15%" align="right" class="green">容 量：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;" disabled="true"
-             />
+          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;" disabled="true" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;"
-             />
+          <form:input path="tgCap" id="tgCap" cssClass="validate-number input2" cssStyle="width:125px;" />
         </security:authorize> kVA</td>
         <td width="10%" align="right" class="green">运行状态：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
@@ -79,41 +86,39 @@ var contextPath  = '${ctx}';
             cssStyle="width:145px;" disabled="true" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:select path="runStatusCode" id="runStatusCode" itemLabel="name" itemValue="code" items="${statuslist}"
-            cssStyle="width:145px;"  />
+            cssStyle="width:145px;" />
         </security:authorize></td>
         <td width="15%" align="right" class="green">地 址：</td>
         <td width="25%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
           <form:input path="instAddr" id="instAddr" cssStyle="width:150px;" disabled="true" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
-          <form:input path="instAddr" id="instAddr" cssStyle="width:150px;"  />
+          <form:input path="instAddr" id="instAddr" cssStyle="width:150px;" />
         </security:authorize></td>
       </tr>
       <tr>
         <td width="100%" colspan="6" align="right"><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2">
-          
-            <input id="save" name="save" type="button" class="btnbg4" value="保存">
-          
+          <input id="save" name="save" type="button" class="btnbg4" value="保存">
         </security:authorize></td>
       </tr>
     </table>
   </form:form></div>
   <div class="tr mgt10"><!-- <a onclick=""><img src='<pss:path type="bgcolor"/>/img/img2_bt.gif' width="15" height="15" /></a> --></div>
   <div class="mgt10">
-  <div class="mgt10 da_top"><span>变压器信息</span> 
-    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-      <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-        width="16" height="16" style="cursor: pointer;" /></a></h1>
-    </security:authorize>
-  </div>
+  <div class="mgt10 da_top"><span>变压器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openTransformer('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="tranInfo">
     <thead>
       <tr>
-        <th>名称</th>
-        <th>容量(kVA)</th>
-        <th>型号</th>
-        <th>安装地址</th>
+        <th width="14%">变压器名称</th>
+        <th width="14%">容量(kVA)</th>
+        <th width="14%">变压器型号</th>
+        <th width="14%">额定高压</th>
+        <th width="14%">额定低压</th>
+        <th width="14%">安装地址</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -122,15 +127,15 @@ var contextPath  = '${ctx}';
         <tr id="tran_${tran.equipId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${tran.tranName}</td>
           <td>&nbsp;${tran.plateCap}</td>
-          <td>&nbsp;<pss:code code="${tran.modelNo}" codeCate="TRAN_CODE" /></td>
+          <td>&nbsp;<pss:code code="${tran.modelNo}" codeCate="<%=SystemConst.CODE_TRAN_CODE%>" /></td>
+          <td>&nbsp;<pss:code code="${tran.rvHv}" codeCate="<%=SystemConst.CODE_VOLT_GRADE%>" /></td>
+          <td>&nbsp;<pss:code code="${tran.rvLv}" codeCate="<%=SystemConst.CODE_VOLT_GRADE%>" /></td>
           <td>&nbsp;${tran.instAddr}</td>
-          <td>
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-              <a onclick="deleteTranInfo('${tran.equipId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteTranInfo('${tran.equipId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;
           <a onclick="updateTranInfo('${tran.equipId}')">修改</a>
-            </security:authorize>
-          &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showTranInfo('${tran.equipId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -138,21 +143,21 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>台区考核表信息</span>
-    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_10">
-      <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-        width="16" height="16" /></a></h1>
-    </security:authorize>
-  </div>
+  <div class="mgt10 da_top"><span>台区考核表信息</span> <security:authorize
+    ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_10">
+    <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>计量点名称</th>
-        <th>表地址</th>
-        <th>测量点序号</th>
-        <th>采集终端</th>
-        <th>运行状态</th>
+        <th width="14%">计量点名称</th>
+        <th width="14%">表地址</th>
+        <th width="14%">测量点序号</th>
+        <th width="14%">采集终端</th>
+        <th width="14%">运行状态</th>
+        <th width="14%">总倍率</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -164,13 +169,12 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${mpInfo.gpInfos[0].gpSn}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
           <td>&nbsp;<pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
-          <td>
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-              <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_10">/&nbsp;<a
-                onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
-            </security:authorize>
-          &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td>&nbsp;${mpInfo.meterInfo.tFactor}</td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteMpInfo('${mpInfo.mpId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_10">/&nbsp;<a
+              onclick="updateMpInfo('${mpInfo.mpId}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showMpInfo('${mpInfo.mpId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -178,20 +182,21 @@ var contextPath  = '${ctx}';
     </tbody>
   </table>
   </div>
-  <div class="mgt10 da_top"><span>保护开关信息</span> 
-    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_12">
-      <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-        width="16" height="16" /></a></h1>
-    </security:authorize>
-  </div>
+  <div class="mgt10 da_top"><span>保护开关信息</span> <security:authorize
+    ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_12">
+    <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>资产编号</th>
-        <th>漏保地址</th>
-        <th>测量点序号</th>
-        <th>计划试跳</th>
+        <th width="14%">资产编号</th>
+        <th width="14%">漏保地址</th>
+        <th width="14%">测量点序号</th>
+        <th width="14%">漏保型号</th>
+        <th width="14%">额定电流</th>
+        <th width="14%">计划试跳</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -201,6 +206,8 @@ var contextPath  = '${ctx}';
           <td>&nbsp;${ps.assetNo}</td>
           <td>&nbsp;${ps.gpInfo.gpAddr}</td>
           <td>&nbsp;${ps.gpInfo.gpSn}</td>
+          <td>&nbsp;<pss:code code="${ps.modelCode}" codeCate="<%=SystemConst.CODE_PS_MODEL%>" /></td>
+          <td>&nbsp;<pss:code code="${ps.ratedEc}" codeCate="<%=SystemConst.CODE_RATED_EC%>" /></td>
           <td><c:choose>
             <c:when test="${ps.autoTest==1}">
           ${ps.testDay}日${ps.testTime}时
@@ -209,13 +216,11 @@ var contextPath  = '${ctx}';
                           无
           </c:otherwise>
           </c:choose></td>
-          <td>
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1,ROLE_AUTHORITY_12">
-              <a onclick="deletePsInfo('${ps.psId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
-                onclick="updatePsInfo('${ps.psId}')">修改</a>
-            </security:authorize>
-          &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1,ROLE_AUTHORITY_12">
+            <a onclick="deletePsInfo('${ps.psId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
+              onclick="updatePsInfo('${ps.psId}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showPsInfo('${ps.psId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -224,21 +229,20 @@ var contextPath  = '${ctx}';
   </table>
   </div>
   <!-- 集中器信息 -->
-  <div class="mgt10 da_top"><span>集中器信息</span> 
-    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-      <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-        width="16" height="16" style="cursor: pointer;" /></a></h1>
-    </security:authorize>
-  </div>
+  <div class="mgt10 da_top"><span>集中器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+      height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>资产号</th>
-        <th>逻辑地址</th>
-        <th>终端类型</th>
-        <th>相线</th>
-        <th>运行状态</th>
+        <th width="14%">资产编号</th>
+        <th width="14%">逻辑地址</th>
+        <th width="14%">终端类型</th>
+        <th width="14%">通讯类型</th>
+        <th width="14%">相线</th>
+        <th width="14%">运行状态</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -247,16 +251,15 @@ var contextPath  = '${ctx}';
         <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${term.assetNo}</td>
           <td>&nbsp;${term.logicalAddr}</td>
-          <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE %>" /></td>
+          <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE%>" /></td>
+          <td>&nbsp;<pss:code code="${term.commMode}" codeCate="<%=SystemConst.CODE_COMM_MODE%>" /></td>
           <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
           <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
-          <td>
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-              <a onclick="deleteTermInfo('${term.termId}')">删除</a>
-            </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-                onclick="updateTermInfo('${term.termId}')">修改</a>
-            </security:authorize>
-          &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteTermInfo('${term.termId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updateTermInfo('${term.termId}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
               onclick="showTermInfo('${term.termId}')">查看</a>
           </security:authorize></td>
         </tr>
@@ -265,18 +268,16 @@ var contextPath  = '${ctx}';
   </table>
   </div>
   <!-- 操作员信息 -->
-  <div class="mgt10 da_top"><span>操作员信息</span> 
-    <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-      <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
-        width="16" height="16" style="cursor: pointer;" /></a></h1>
-    </security:authorize>
-  </div>
+  <div class="mgt10 da_top"><span>操作员信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+      height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
   <div class="da_con">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th>姓名</th>
-        <th>电话号码</th>
+        <th width="30%">姓名</th>
+        <th width="30%">电话号码</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -285,12 +286,9 @@ var contextPath  = '${ctx}';
         <tr id="user_${user.empNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${user.name}</td>
           <td>&nbsp;${user.mobile}</td>
-          <td>
-            <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-              <a onclick="deleteUserInfo('${user.empNo}')">删除</a>
-            </security:authorize>
-            &nbsp;
-          </td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteUserInfo('${user.empNo}')">删除</a>
+          </security:authorize> &nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
