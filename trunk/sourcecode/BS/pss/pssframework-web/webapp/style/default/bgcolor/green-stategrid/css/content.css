@@ -43,9 +43,7 @@ ul,li {
     list-style-type: none;
 }
 
-a {
-    text-decoration: none;
-}
+	
 
 img {
     border: 0;
@@ -1151,6 +1149,19 @@ tr.dicontent {
     color: #333;
     border-right: 1px #c3cfd4 solid;
     border-bottom: 1px #c3cfd4 solid;
+}
+
+
+.da_con table tbody tr td a:HOVER {
+  cursor: hand;
+}
+
+a{
+	 cursor: hand;
+}
+a:HOVER{
+	text-decoration:underline;
+	 cursor: hand;
 }
 
 /*index.htm*/
