@@ -64,4 +64,9 @@ public class ResourceInfoManager extends BaseManager<ResourceInfo, Long> {
 
 	}
 
+	public List<ResourceInfo> findAllValid() {
+		return resourceInfoDao.findAllValid();
+
+	}
+
 }

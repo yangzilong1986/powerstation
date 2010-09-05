@@ -48,11 +48,19 @@ public class FunTreeInfoController extends BaseSpringController {
 	@Autowired
 	private RoleInfoManager roleInfoManager;
 
+	/**
+	 * 提供系统可以选择的功能树
+	 * @param modelAndView
+	 * @param pRequest
+	 * @param pResponse
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/checktree")
-	public ModelAndView showCheckTree(ModelAndView modelAndView, HttpServletRequest pRequest,
+	public ModelAndView showValidFunCheckTree(ModelAndView modelAndView, HttpServletRequest pRequest,
 			HttpServletResponse pResponse) throws Exception {
 
-		List<ResourceInfo> resourceInfos = resourceInfoManager.findAll();
+		List<ResourceInfo> resourceInfos = resourceInfoManager.findAllValid();
 
 		String checkedBox = pRequest.getParameter("checked");
 
