@@ -8,7 +8,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <!-- 用于select查询公用抽取的列 -->
     <sql id="realTimeReadingInfoColumns">
         <!-- 目前只是台区 -->
-        <if test="true">tg.tg_no as objNo, tg.tg_name as objName, '台区' as objType,</if>
+        <if test="true">tg.tg_no as objNo, tg.tg_name as objName, '2' as objType,</if>
         te.logical_addr as logicalAddr, mp.mp_no as mpNo, gp.gp_sn as gpSn,gp.gp_id as gpId
     </sql>
     <sql id="realTimeReadingInfoDynamicWhere">
