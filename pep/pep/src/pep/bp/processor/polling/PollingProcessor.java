@@ -30,7 +30,7 @@ public class PollingProcessor implements Runnable{
     private final int CIRCLE_UNIT_MONTH =3;
 
     //日任务启动时间点
-    private final int STARTUP_TIME = 23;
+    private final int STARTUP_TIME = 1;//凌晨1点启动
 
     private PepCommunicatorInterface pepCommunicator;
     private Trigger triggerHour,triggerDay;
@@ -50,9 +50,9 @@ public class PollingProcessor implements Runnable{
             //小时任务
             JobDetail jobDetailHour = new JobDetail("PollingJobHour", null, PollingJobProxy.class);
             jobDetailHour.getJobDataMap().put("PollingJob",new PollingJob(pepCommunicator,CIRCLE_UNIT_HOUR));
-            triggerHour = TriggerUtils.makeHourlyTrigger(); // 每一个小时触发一次
+            triggerHour = TriggerUtils.makeHourlyTrigger(STARTUP_TIME, 0); // 每一个小时触发一次
             //triggerHour = TriggerUtils.makeMinutelyTrigger(3);
-            triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
+          //  triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
             triggerHour.setName("triggerHour");
 //            JobDetail jobDetailDay = new JobDetail("PollingJobDay", null, PollingJob.class);
 //            jobDetailDay.getJobDataMap().put("circleUnit", CIRCLE_UNIT_DAY);
