@@ -563,7 +563,7 @@ public class Converter {
             packetdata.putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A29")) {
             packetdata.putBcdInt(Long.parseLong(DataItemValue), 1);
-        } else if (Format.equals("DATE_LOUBAO")) {
+        }else if (Format.equals("DATE_LOUBAO")) {
             try {
                 packetdata.put(UtilsBp.String2DateArray(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
             } catch (ParseException ex) {

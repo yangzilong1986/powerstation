@@ -207,4 +207,10 @@ public class UtilsBp {
         }
         return (source + strAdd(chr, lenleft));
     }
+
+    public static String Reverse(String source){
+        StringBuffer sb  = new StringBuffer(source);
+        sb.reverse();
+        return  sb.toString();
+    }
 }
