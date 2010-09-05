@@ -14,7 +14,7 @@
 </script>
 </head>
 <body>
-<div class="graphContainer" style="border: 1px #85C0B4 solid; width: 100%; height:expression(((document.documentElement.clientHeight||document.body.clientHeight)));">
+<div class="graphContainer" style="width: 100%; height:expression(((document.documentElement.clientHeight||document.body.clientHeight)));">
   <c:out value='${chart}' escapeXml="false" />
 </div>
 </body>
