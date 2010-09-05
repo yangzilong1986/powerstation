@@ -338,16 +338,6 @@ public class BcdUtils {
         return sb.toString();
     }
 
-    public static String bytesToBitSetString_HighBefore(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            byte b = bytes[i];
-            String bitStr = Integer.toBinaryString(b);
-            int Len = bitStr.length();
-            sb.append(bitStr.substring(Len-8,Len));
-        }
-        return sb.toString();
-    }
 
     public static String IntToBitSetString(int value) {
         StringBuilder sb = new StringBuilder();

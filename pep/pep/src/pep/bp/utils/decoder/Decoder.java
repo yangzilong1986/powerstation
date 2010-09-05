@@ -40,7 +40,6 @@ public abstract class Decoder {
                 String Format = dataItem.getFormat();
                 int bitnumber = dataItem.getBitNumber();
                 String IsGroupEnd = dataItem.getIsGroupEnd();
-                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("0"));
                 if (Format.equals("BIN")) {
                     dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
                 } else if (Format.equals("IPPORT")) {
@@ -50,10 +49,10 @@ public abstract class Decoder {
                 } else if (Format.equals("TEL")) {
                     dataItems.put(DataItemCode, dataBuffer.getTEL());
                 } else if (Format.equals("BS8")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8(lowBitBefore)));
+                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("GROUP_BS8")) {
                     if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8(lowBitBefore);
+                        GroupValue = dataBuffer.getBS8();
                     }
                     dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
                     GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
@@ -158,7 +157,6 @@ public abstract class Decoder {
                 String Format = dataItem.getFormat();
                 int bitnumber = dataItem.getBitNumber();
                 String IsGroupEnd = dataItem.getIsGroupEnd();
-                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("0"));
                 if (Format.equals("BIN")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
                 } else if (Format.equals("IPPORT")) {
@@ -168,10 +166,10 @@ public abstract class Decoder {
                 } else if (Format.equals("TEL")) {
                     dataMap.put(DataItemCode, dataBuffer.getTEL());
                 } else if (Format.equals("BS8")) {
-                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS8(lowBitBefore)));
+                    dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("GROUP_BS8")) {
                     if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8(lowBitBefore);
+                        GroupValue = dataBuffer.getBS8();
                     }
                     dataMap.put(DataItemCode, GroupValue.substring(0, bitnumber));
                     GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
