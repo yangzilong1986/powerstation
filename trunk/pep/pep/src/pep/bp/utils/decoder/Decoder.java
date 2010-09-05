@@ -40,7 +40,7 @@ public abstract class Decoder {
                 String Format = dataItem.getFormat();
                 int bitnumber = dataItem.getBitNumber();
                 String IsGroupEnd = dataItem.getIsGroupEnd();
-                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("1"));
+                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("0"));
                 if (Format.equals("BIN")) {
                     dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
                 } else if (Format.equals("IPPORT")) {
@@ -158,7 +158,7 @@ public abstract class Decoder {
                 String Format = dataItem.getFormat();
                 int bitnumber = dataItem.getBitNumber();
                 String IsGroupEnd = dataItem.getIsGroupEnd();
-                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("1"));
+                boolean lowBitBefore = (dataItem.getLowBitBefore().equals("0"));
                 if (Format.equals("BIN")) {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBin(Len)));
                 } else if (Format.equals("IPPORT")) {
