@@ -150,6 +150,7 @@ var contextPath  = '${ctx}';
       <tr>
         <th>计量点名称</th>
         <th>表地址</th>
+        <th>测量点序号</th>
         <th>采集终端</th>
         <th>运行状态</th>
         <th>操作</th>
@@ -160,6 +161,7 @@ var contextPath  = '${ctx}';
         <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${mpInfo.mpName}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].gpAddr}</td>
+          <td>&nbsp;${mpInfo.gpInfos[0].gpSn}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].terminalInfo.logicalAddr}</td>
           <td>&nbsp;<pss:code code="${mpInfo.statusCode}" codeCate="<%=SystemConst.CODE_METER_STATUS %>" /></td>
           <td>
@@ -188,6 +190,7 @@ var contextPath  = '${ctx}';
       <tr>
         <th>资产编号</th>
         <th>漏保地址</th>
+        <th>测量点序号</th>
         <th>计划试跳</th>
         <th>操作</th>
       </tr>
@@ -197,6 +200,7 @@ var contextPath  = '${ctx}';
         <tr id="ps_${ps.psId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${ps.assetNo}</td>
           <td>&nbsp;${ps.gpInfo.gpAddr}</td>
+          <td>&nbsp;${ps.gpInfo.gpSn}</td>
           <td><c:choose>
             <c:when test="${ps.autoTest==1}">
           ${ps.testDay}日${ps.testTime}时
