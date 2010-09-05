@@ -49,10 +49,10 @@ public abstract class Decoder {
                 } else if (Format.equals("TEL")) {
                     dataItems.put(DataItemCode, dataBuffer.getTEL());
                 } else if (Format.equals("BS8")) {
-                    dataItems.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
+                    dataItems.put(DataItemCode, dataBuffer.getBS8());
                 } else if (Format.equals("GROUP_BS8")) {
                     if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8();
+                        GroupValue = UtilsBp.Reverse(dataBuffer.getBS8());
                     }
                     dataItems.put(DataItemCode, GroupValue.substring(0, bitnumber));
                     GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
@@ -169,7 +169,7 @@ public abstract class Decoder {
                     dataMap.put(DataItemCode, String.valueOf(dataBuffer.getBS8()));
                 } else if (Format.equals("GROUP_BS8")) {
                     if (GroupValue.length() == 0) {
-                        GroupValue = dataBuffer.getBS8();
+                        GroupValue = UtilsBp.Reverse(dataBuffer.getBS8());
                     }
                     dataMap.put(DataItemCode, GroupValue.substring(0, bitnumber));
                     GroupValue = GroupValue.substring(bitnumber, GroupValue.length());
