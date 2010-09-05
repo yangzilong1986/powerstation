@@ -11,7 +11,7 @@
 <body>
 <div class="footer cb">
 <p align="right">操作员：<security:authentication property="principal" var="loginUser"></security:authentication>${loginUser.username}
-&nbsp; 登陆时间： <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${loginUser.loginTime}"></fmt:formatDate><span></span></p>
+&nbsp; 登录时间： <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${loginUser.loginTime}"></fmt:formatDate><span></span></p>
 <p style="width: 8px"></p>
 </div>
 </body>
