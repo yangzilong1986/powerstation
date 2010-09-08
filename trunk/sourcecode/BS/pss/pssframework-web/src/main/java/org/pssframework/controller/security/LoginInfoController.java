@@ -32,8 +32,8 @@ public class LoginInfoController extends BaseSpringController {
 		String errorId = request.getParameter(ERROR_ID);
 		String succId = request.getParameter(SUCC_ID);
 
-		modelAndView.addObject("error", errorId);
-		modelAndView.addObject("succ", succId);
+		modelAndView.addObject(ERROR_ID, errorId);
+		modelAndView.addObject(SUCC_ID, succId);
 
 		return modelAndView;
 	}
