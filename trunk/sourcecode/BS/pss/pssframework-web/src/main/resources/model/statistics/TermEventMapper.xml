@@ -25,7 +25,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<otherwise><![CDATA[ AND e.ex_time BETWEEN null]]></otherwise>
 		</choose>
 		<choose>
-			<when test="edate != null"><![CDATA[ AND to_date(#{edate},'yyyy-mm-dd') ]]></when>
+			<when test="edate != null"><![CDATA[ AND to_date(#{edate},'yyyy-mm-dd')+1 ]]></when>
 			<otherwise><![CDATA[ and null]]></otherwise>
 		</choose>
 	</sql>
