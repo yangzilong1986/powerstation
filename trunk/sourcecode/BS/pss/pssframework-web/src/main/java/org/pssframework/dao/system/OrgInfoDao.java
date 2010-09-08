@@ -23,7 +23,7 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	
 	public static final String ORG_ID = "orgId";
 
-	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1  and t.orgNo LIKE  a.orgNo /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
+	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1  and t.orgNo LIKE  a.orgNo || '%' /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
 
 	private OperatorDetails user;
 
@@ -69,7 +69,7 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	 * 获取登陆者orgId
 	 * @return
 	 */
-	private Long getCurUsrOrgId() {
+	public Long getCurUsrOrgId() {
 		Long orgId = 0L;
 
 		user = SpringSecurityUtils.getCurrentUser();
