@@ -8,7 +8,10 @@ import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.model.system.UserInfo;
+import org.pssframework.security.OperatorDetails;
 import org.springframework.stereotype.Repository;
+import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
 /**
  * @author Administrator
@@ -16,8 +19,16 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
+	
+	public static final String ORG_ID = "orgId";
 
-	private static final String OrgList = " FROM OrgInfo t WHERE 1=1  /~ and t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId='[orgid]') ~/ ORDER BY t.orgNo";
+	private static final String OrgList = " FROM OrgInfo t WHERE 1=1  /~ and t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId='[orgId]') ~/ ORDER BY t.orgNo";
+
+	private OperatorDetails user;
+
+	private UserInfo userInfo;
+
+	private UserInfoDao userInfoDao;
 
 	@Override
 	public Class<?> getEntityClass() {
@@ -36,7 +47,11 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 		}
 	}
 
-	public List<OrgInfo> findByPageRequest(Map<String, ?> mapRequest) {
+	@SuppressWarnings("rawtypes")
+	public List<OrgInfo> findByPageRequest(Map mapRequest) {
+		if (!mapRequest.containsKey(ORG_ID)) {
+			mapRequest.put(ORG_ID, getCurUsrOrgId());
+		}
 		return findAll(OrgList, mapRequest);
 	}
 
@@ -45,7 +60,28 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	 * @return OrgInfo
 	 */
 	public OrgInfo getOrgInfo(String orgId) {
-		return (OrgInfo) findByProperty("orgId", getEntityClass());
+		return (OrgInfo) findByProperty(ORG_ID, getEntityClass());
+	}
+
+	/**
+	 * 获取登陆者orgId
+	 * @return
+	 */
+	private Long getCurUsrOrgId() {
+		Long orgId = 0L;
+
+		user = SpringSecurityUtils.getCurrentUser();
+
+		userInfo = userInfoDao.findUniqueByStaffNo(user.getUsername());
+
+		OrgInfo orginfo = userInfo.getOrgInfo();
+
+		if (orginfo != null) {
+			orgId = orginfo.getOrgId();
+		}
+
+		return orgId;
+
 	}
 
 }
