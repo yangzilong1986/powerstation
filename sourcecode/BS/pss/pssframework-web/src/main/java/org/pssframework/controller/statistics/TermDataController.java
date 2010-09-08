@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.pssframework.controller.BaseSpringController;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.OrgInfo;
@@ -20,7 +22,6 @@ import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.statistics.StatisticsManager;
 import org.pssframework.service.statistics.StatisticsType;
 import org.pssframework.service.system.OrgInfoManager;
-import org.pssframework.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -110,8 +111,8 @@ public class TermDataController extends BaseSpringController {
 		Map mapRequest = new LinkedHashMap();
 		mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
 		mav.addObject(TGLIST, this.getTgOrgOptions(mapRequest));
-		mav.addObject(SDATE, DateUtils.getCurrentDate());
-		mav.addObject(EDATE, DateUtils.getCurrentDate());
+		mav.addObject(SDATE, DateFormatUtils.ISO_DATE_FORMAT.format(DateUtils.addDays(new Date(), -1)));
+		mav.addObject(EDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
 	}
 
 	private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
