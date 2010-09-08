@@ -21,8 +21,6 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	private static final String STAFFNO = "staffNo";
 
-	private static final String LOGINNAME = "loginName";
-
 	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 "
 			+ "/~ and ('[showAllAccount]'= 'true' or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/"
 			+ "/~ and t.empNo not in ([empNos]) ~/";
@@ -52,7 +50,7 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 	 * 在修改对象的情景下,如果属性新修改的值(value)等于属性原来的值(orgValue)则不作比较.
 	 */
 	public boolean isPropertyUniqueLoginName(final Object newValue, final Object oldValue) {
-		return isPropertyUnique(LOGINNAME, newValue, oldValue);
+		return isPropertyUnique(STAFFNO, newValue, oldValue);
 	}
 
 	@SuppressWarnings("rawtypes")
