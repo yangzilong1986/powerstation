@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
+import org.pssframework.dao.system.OrgInfoDao;
 import org.pssframework.model.archive.TgInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
@@ -20,7 +22,13 @@ import cn.org.rapid_framework.page.PageRequest;
 @Repository
 public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 
-	private static final String hql = "from TgInfo t where  1=1 " + "/~ and t.tgId = '[tgid]' ~/";
+	public static final String TG_ID = "tgId";
+
+	private static final String hql = "from TgInfo t where  1=1 " + "/~ and t.tgId = '[tgId]' ~/"
+			+ "/~ and t.orgInfo.orgId like '[orgId]' || '%' ~/";
+
+	@Autowired
+	private OrgInfoDao orgInfoDao;
 
 	@Override
 	public Class<?> getEntityClass() {
@@ -48,6 +56,9 @@ public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 	}
 
 	public <X> List<X> findByPageRequest(Map pageRequest) {
+		if (!pageRequest.containsKey(OrgInfoDao.ORG_ID)) {
+			pageRequest.put(OrgInfoDao.ORG_ID, orgInfoDao.getCurUsrOrgId());
+		}
 		return findAll(hql, pageRequest);
 	}
 
