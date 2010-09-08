@@ -10,6 +10,7 @@ import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.security.OperatorDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
@@ -22,12 +23,13 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	
 	public static final String ORG_ID = "orgId";
 
-	private static final String OrgList = " FROM OrgInfo t WHERE 1=1  /~ and t.orgNo LIKE (SELECT a.orgNo FROM OrgInfo a WHERE a.orgId='[orgId]') ~/ ORDER BY t.orgNo";
+	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1  and t.orgNo LIKE  a.orgNo /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
 
 	private OperatorDetails user;
 
 	private UserInfo userInfo;
 
+	@Autowired
 	private UserInfoDao userInfoDao;
 
 	@Override
