@@ -85,7 +85,7 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 	@Transactional(readOnly = true)
 	public UserInfo findUserByLoginName(String loginName) {
-		return userInfoDao.findUniqueBy("staffNo", loginName);
+		return userInfoDao.findUniqueByStaffNo(loginName);
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 	 */
 	@Transactional(readOnly = true)
 	public boolean isLoginNameUnique(String newLoginName, String oldLoginName) {
-		return userInfoDao.isPropertyUnique("loginName", newLoginName, oldLoginName);
+		return userInfoDao.isPropertyUniqueLoginName(newLoginName, oldLoginName);
 	}
 
 	@SuppressWarnings("rawtypes")
