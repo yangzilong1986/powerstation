@@ -1,12 +1,13 @@
 package org.pssframework.service.psmanage;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
+import org.pssframework.dao.psmanage.PSTreeNodeDao;
 import org.pssframework.model.psmanage.PSTreeNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
+    @Autowired
+    private PSTreeNodeDao psTreeNodeDao;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -30,9 +33,9 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
      * @return
      */
     public List<PSTreeNode> findPSTreeByTgId(Long tgId) {
-        List<PSTreeNode> list = new LinkedList<PSTreeNode>();
-
-        if((new Long(1)).equals(tgId)) {
+        List<PSTreeNode> list = psTreeNodeDao.findPSTreeByTg(tgId);
+        
+        /*if((new Long(1)).equals(tgId)) {
             // TG 1
             PSTreeNode psTreeNode1 = new PSTreeNode();
             psTreeNode1.setTreeNodeType("TG");
@@ -164,7 +167,7 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
             psTreeNode1.setChildren(list1Children);
 
             list.add(psTreeNode1);
-        }
+        }*/
 
         return list;
     }
