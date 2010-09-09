@@ -9,6 +9,7 @@
         select 'TG' as treeNodeType, T.TG_ID as treeNodeId, T.TG_NAME as treeNodeName
           from G_TG T
           where T.TG_ID = #{tgId}
+          order by T.TG_NAME
         ]]>
     </sql>
     
@@ -19,29 +20,32 @@
          where T.TERM_ID = R.TERM_ID
            and R.OBJ_TYPE = '2'
            and R.OBJ_ID = #{tgId}
+         order by T.LOGICAL_ADDR
         ]]>
     </sql>
     
     <sql id="PsNodesSQL">
         <![CDATA[
-        select 'PS' as treeNodeType, T.PS_ID as treeNodeId, t.PS_NAME as treeNodeName
-          from C_PS T
-         where T.TERM_ID = #{termId}
+        select 'PS' as treeNodeType, T.PS_ID as treeNodeId, T.PS_NAME as treeNodeName
+          from C_PS T, C_GP G
+         where G.GP_ID = T.GP_ID
+           and T.TERM_ID = #{termId}
+         order by G.GP_SN
         ]]>
     </sql>
     
     <!-- 查询台区节点 -->
-    <select id="getTgNodesByTgId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+    <select id="getTgNodesByTgId" parameterType="java.lang.Long" resultMap="PSTreeNodeResult">
         <include refid="TgNodesSQL" />
     </select>
     
     <!-- 查询终端节点 -->
-    <select id="getTerminalNodesByTgId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+    <select id="getTerminalNodesByTgId" parameterType="java.lang.Long" resultMap="PSTreeNodeResult">
         <include refid="TerminalNodesSQL" />
     </select>
     
     <!-- 查询终端节点 -->
-    <select id="getPsNodesByTermId" parameterType="java.util.Map" resultMap="PSTreeNodeResult">
+    <select id="getPsNodesByTermId" parameterType="java.lang.Long" resultMap="PSTreeNodeResult">
         <include refid="PsNodesSQL" />
     </select>
 </mapper>
