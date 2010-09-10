@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <title>台区档案录入</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
+
 <script type="text/javascript">
 	//弹出式窗口
 	var opwindow = null; //记录打开浏览窗口的对象
@@ -29,6 +31,8 @@
 						/ 2
 						+ ', toolbar=no, menubar=no, scrollbars=yes, resizable=no, location=no, status=no');
 	}
+
+    
 
 	var contextPath = '${ctx}';
 </script>
@@ -143,6 +147,46 @@
     </tbody>
   </table>
   </div>
+  <!-- 集中器信息 -->
+  <div class="mgt10 da_top"><span>集中器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
+    <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
+      height="16" style="cursor: pointer;" /></a></h1>
+  </security:authorize></div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th width="14%">资产编号</th>
+        <th width="14%">逻辑地址</th>
+        <th width="14%">终端类型</th>
+        <th width="14%">通讯类型</th>
+        <th width="14%">相线</th>
+        <th width="14%">运行状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${termlist}" var="term" varStatus="status">
+        <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>&nbsp;${term.assetNo}</td>
+          <td>&nbsp;${term.logicalAddr}</td>
+          <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE%>" /></td>
+          <td>&nbsp;<pss:code code="${term.commMode}" codeCate="<%=SystemConst.CODE_COMM_MODE%>" /></td>
+          <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
+          <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteTermInfo('${term.termId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
+              onclick="updateTermInfo('${term.termId}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showTermInfo('${term.termId}')">查看</a>
+          </security:authorize></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  
   <div class="mgt10 da_top"><span>台区考核表信息</span> <security:authorize
     ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_10">
     <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
@@ -228,46 +272,7 @@
     </tbody>
   </table>
   </div>
-  <!-- 集中器信息 -->
-  <div class="mgt10 da_top"><span>集中器信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
-    <h1><a onclick="openTerm('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
-      height="16" style="cursor: pointer;" /></a></h1>
-  </security:authorize></div>
-  <div class="da_con">
-  <table border="0" cellpadding="0" cellspacing="0" width="100%">
-    <thead>
-      <tr>
-        <th width="14%">资产编号</th>
-        <th width="14%">逻辑地址</th>
-        <th width="14%">终端类型</th>
-        <th width="14%">通讯类型</th>
-        <th width="14%">相线</th>
-        <th width="14%">运行状态</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <c:forEach items="${termlist}" var="term" varStatus="status">
-        <tr id="term_${term.termId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>&nbsp;${term.assetNo}</td>
-          <td>&nbsp;${term.logicalAddr}</td>
-          <td>&nbsp;<pss:code code="${term.termType}" codeCate="<%=SystemConst.CODE_TERM_TYPE%>" /></td>
-          <td>&nbsp;<pss:code code="${term.commMode}" codeCate="<%=SystemConst.CODE_COMM_MODE%>" /></td>
-          <td>&nbsp;<pss:code code="${term.wiringMode}" codeCate="<%=SystemConst.CODE_WIRING_MODE %>" /></td>
-          <td>&nbsp;<pss:code code="${term.runStatus}" codeCate="<%=SystemConst.CODE_RUN_STATUS %>" /></td>
-          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
-            <a onclick="deleteTermInfo('${term.termId}')">删除</a>
-          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2">/&nbsp;<a
-              onclick="updateTermInfo('${term.termId}')">修改</a>
-          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
-              onclick="showTermInfo('${term.termId}')">查看</a>
-          </security:authorize></td>
-        </tr>
-      </c:forEach>
-    </tbody>
-  </table>
-  </div>
-  <!-- 操作员信息 -->
+    <!-- 操作员信息 -->
   <div class="mgt10 da_top"><span>操作员信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
     <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
       height="16" style="cursor: pointer;" /></a></h1>
