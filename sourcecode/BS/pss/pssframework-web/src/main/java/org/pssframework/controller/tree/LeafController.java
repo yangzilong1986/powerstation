@@ -23,7 +23,6 @@ import net.jcreate.e3.tree.support.RequestUtil;
 import net.jcreate.e3.tree.support.WebTreeBuilder;
 import net.jcreate.e3.tree.support.WebTreeDynamicNode;
 
-import org.pssframework.base.BaseQuery;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.UserInfo;
@@ -39,6 +38,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 
@@ -60,11 +60,12 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 	private final String LIST_ACTION = "redirect:/tree";
 
-	private final String PARENT_ID = "parentId";
+	private final String PARENT_ID = "leafParentId";
 
-	private final String PARENT_TYPE = "parentType";
+	private final String PARENT_TYPE = "leafParentType";
 
 	private final static String ROOT_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon03.gif";
+	private final static String ORG_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon03.gif";
 
 	private final static String TG_IMG = "/style/default/bgcolor/green-stategrid/img/tree_icon08.gif";
 
@@ -99,11 +100,11 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	/** 显示 */
+	@ResponseBody
 	@RequestMapping(value = "/{id}")
-	public ModelAndView show(@PathVariable java.lang.Long id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		loadExtSubOrgs(request, response);
-		return null;
+	public String show(@PathVariable java.lang.Long id, LeafInfo leafInfo, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		return loadExtSubsTree(request, leafInfo);
 	}
 
 	/** 编辑 */
@@ -133,7 +134,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	private String showExtLoadTree(final HttpServletRequest pRequest, final HttpServletResponse pResponse) {
-		Long parentID = 4L;
+		Long parentID = 0L;
 
 		user = SpringSecurityUtils.getCurrentUser();
 
@@ -141,12 +142,16 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 		OrgInfo orginfo = userInfo.getOrgInfo();
 
-		if (orginfo != null) {
-			parentID = orginfo.getOrgId();
+		if (userInfo.getEmpNo() != 0L) {
+			if (orginfo != null) {
+				parentID = orginfo.getOrgId();
+			}
+		} else {
+
 		}
 
 		WebTreeDynamicNode rootNode = new WebTreeDynamicNode(orginfo.getOrgName(), SystemConst.TREE_ORG + "_"
-				+ orginfo.getOrgId(), new UserDataUncoder() {
+				+ parentID, new UserDataUncoder() {
 
 			public Object getParentID(Object arg0) throws UncodeException {
 				// TODO Auto-generated method stub
@@ -177,14 +182,12 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 	}
 
 	@SuppressWarnings("unchecked")
-	public void loadExtSubOrgs(final HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+	public String loadExtSubsTree(final HttpServletRequest pRequest, LeafInfo leafInfo) throws Exception {
 
-		final String parentID = pRequest.getParameter(PARENT_ID);
-		final String parentTYPE = pRequest.getParameter(PARENT_TYPE);
+		final Long parentID = leafInfo.getLeafParentId();
+		final String parentTYPE = leafInfo.getLeafParentType();
 
-		BaseQuery leafQuery = new org.pssframework.query.tree.LeafQuery();
-
-		PageRequest pageRequest = bindPageRequest(pRequest, leafQuery, DEFAULT_SORT_COLUMNS);
+		PageRequest pageRequest = bindPageRequest(pRequest, leafInfo, DEFAULT_SORT_COLUMNS);
 
 		Page nodesPages = leafInfoManager.findByPageRequest(pageRequest);
 
@@ -194,16 +197,18 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 				LeafInfo leaf = (LeafInfo) pUserData;
 				WebTreeDynamicNode result = new WebTreeDynamicNode(leaf.getLeafName(), leaf.getLeafType() + "_"
 						+ leaf.getLeafId());
-				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "&" + PARENT_ID + "=" + leaf.getLeafId()
+				result.setSubTreeURL(getUrl("/tree/" + leaf.getLeafId() + "?" + PARENT_ID + "=" + leaf.getLeafId()
 						+ "&" + PARENT_TYPE + "=" + leaf.getLeafType() + "&random=" + Math.random()));
 
-				result.setValue(leaf.getLeafId());
+				result.setValue(String.valueOf(leaf.getLeafId()));
 				result.setTip(leaf.getLeafName());
 
 				//台区
 				if (SystemConst.TREE_TG.equals(leaf.getLeafType())) {
 					result.setIcon(getUrl(TG_IMG));
 					result.setAction("javascript:showTg(" + leaf.getLeafId() + ")");
+				} else if (SystemConst.TREE_ORG.equals(leaf.getLeafType())) {
+					result.setIcon(getUrl(ORG_IMG));
 				}
 
 				return result;
@@ -231,10 +236,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 
 		String treeScript = treeBuilder.getTreeScript();
 
-		pResponse.setBufferSize(1024 * 10);
-		pResponse.setContentType("text/json;charset=utf-8");
-		pResponse.getWriter().write(treeScript);
-		pResponse.flushBuffer();
+		return treeScript;
 
 	}
 

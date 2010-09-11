@@ -41,10 +41,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.archive.TranInfo;
+import org.pssframework.service.archive.GpInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
@@ -60,6 +62,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Administrator 漏保
@@ -92,6 +95,9 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 	@Autowired
 	private TgInfoManager tgInfoManager;
+
+	@Autowired
+	private GpInfoManger gpInfoManger;
 
 	/** 保存新增,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(method = RequestMethod.POST)
@@ -356,5 +362,27 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			istAddr = tranInfo.getInstAddr();
 		}
 		return istAddr;
+	}
+
+	/**
+	 *校验测量点序号
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/checkGpSn")
+	public String checkGpSn(PsInfo psInfo) throws Exception {
+		GpInfo model = psInfo.getGpInfo();
+		model.setTerminalInfo(psInfo.getTerminalInfo());
+		return this.gpInfoManger.checkGpSnRePeat(model);
+	}
+
+	/**
+	 *校验测量地址序号
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/checkGpAddr")
+	public String checkGpAddr(PsInfo psInfo) throws Exception {
+		GpInfo model = psInfo.getGpInfo();
+		model.setTerminalInfo(psInfo.getTerminalInfo());
+		return this.gpInfoManger.checkGpAddrRePeat(model);
 	}
 }

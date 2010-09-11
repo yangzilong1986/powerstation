@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -66,7 +65,7 @@ public class UserInfo extends BaseEntity {
 	@Column(name = "DEPT_NO")
 	private Long deptNo;
 
-	@ManyToOne(targetEntity = OrgInfo.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = OrgInfo.class)
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
 	// ORG_ID not null,
 	private OrgInfo orgInfo;

@@ -20,10 +20,12 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
  */
 @Repository
 public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
-	
+
 	public static final String ORG_ID = "orgId";
 
-	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1  and t.orgNo LIKE  a.orgNo || '%' /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
+	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1   and t.orgNo LIKE  a.orgNo || '%' /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
+
+	private static final String AdminOrgList = "FROM OrgInfo";
 
 	private OperatorDetails user;
 
@@ -52,6 +54,8 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	@SuppressWarnings("rawtypes")
 	public List<OrgInfo> findByPageRequest(Map mapRequest) {
 		if (!mapRequest.containsKey(ORG_ID)) {
+			if (getCurUsrOrgId() == null)
+				return findAll(AdminOrgList, mapRequest);
 			mapRequest.put(ORG_ID, getCurUsrOrgId());
 		}
 		return findAll(OrgList, mapRequest);
@@ -70,7 +74,7 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 	 * @return
 	 */
 	public Long getCurUsrOrgId() {
-		Long orgId = 0L;
+		Long orgId = null;
 
 		user = SpringSecurityUtils.getCurrentUser();
 
@@ -78,6 +82,8 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 
 		OrgInfo orginfo = userInfo.getOrgInfo();
 
+		if (userInfo.getEmpNo() == 0L)
+			return null;
 		if (orginfo != null) {
 			orgId = orginfo.getOrgId();
 		}

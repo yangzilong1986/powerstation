@@ -3,13 +3,14 @@
  */
 package org.pssframework.model.tree;
 
-import org.pssframework.base.BaseEntity;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.pssframework.base.BaseQuery;
 
 /**
  * @author Baocj
  *
  */
-public class LeafInfo extends BaseEntity {
+public class LeafInfo extends BaseQuery {
 
 	/**
 	 * 
@@ -19,7 +20,7 @@ public class LeafInfo extends BaseEntity {
 	/**
 	 * String id
 	 */
-	private String leafId;
+	private Long leafId;
 
 	/**
 	 * String type
@@ -32,51 +33,9 @@ public class LeafInfo extends BaseEntity {
 	private String leafName;
 
 	/**
-	 * @return the leafParentId
-	 */
-	public String getLeafParentId() {
-		return leafParentId;
-	}
-
-	/**
-	 * @param leafParentId the leafParentId to set
-	 */
-	public void setLeafParentId(String leafParentId) {
-		this.leafParentId = leafParentId;
-	}
-
-	/**
-	 * @return the leafParentType
-	 */
-	public String getLeafParentType() {
-		return leafParentType;
-	}
-
-	/**
-	 * @param leafParentType the leafParentType to set
-	 */
-	public void setLeafParentType(String leafParentType) {
-		this.leafParentType = leafParentType;
-	}
-
-	/**
-	 * @return the leafParentName
-	 */
-	public String getLeafParentName() {
-		return leafParentName;
-	}
-
-	/**
-	 * @param leafParentName the leafParentName to set
-	 */
-	public void setLeafParentName(String leafParentName) {
-		this.leafParentName = leafParentName;
-	}
-
-	/**
 	 * String id
 	 */
-	private String leafParentId;
+	private Long leafParentId;
 
 	/**
 	 * String type
@@ -91,15 +50,36 @@ public class LeafInfo extends BaseEntity {
 	/**
 	 * @return the leafId
 	 */
-	public String getLeafId() {
+	public Long getLeafId() {
 		return leafId;
 	}
 
 	/**
-	 * @param leafId the leafId to set
+	 * @return the leafName
 	 */
-	public void setLeafId(String leafId) {
-		this.leafId = leafId;
+	public String getLeafName() {
+		return leafName;
+	}
+
+	/**
+	 * @return the leafParentId
+	 */
+	public Long getLeafParentId() {
+		return leafParentId;
+	}
+
+	/**
+	 * @return the leafParentName
+	 */
+	public String getLeafParentName() {
+		return leafParentName;
+	}
+
+	/**
+	 * @return the leafParentType
+	 */
+	public String getLeafParentType() {
+		return leafParentType;
 	}
 
 	/**
@@ -110,10 +90,10 @@ public class LeafInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param leafType the leafType to set
+	 * @param leafId the leafId to set
 	 */
-	public void setLeafType(String leafType) {
-		this.leafType = leafType;
+	public void setLeafId(Long leafId) {
+		this.leafId = leafId;
 	}
 
 	/**
@@ -124,10 +104,36 @@ public class LeafInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the leafName
+	 * @param leafParentId the leafParentId to set
 	 */
-	public String getLeafName() {
-		return leafName;
+	public void setLeafParentId(Long leafParentId) {
+		this.leafParentId = leafParentId;
+	}
+
+	/**
+	 * @param leafParentName the leafParentName to set
+	 */
+	public void setLeafParentName(String leafParentName) {
+		this.leafParentName = leafParentName;
+	}
+
+	/**
+	 * @param leafParentType the leafParentType to set
+	 */
+	public void setLeafParentType(String leafParentType) {
+		this.leafParentType = leafParentType;
+	}
+
+	/**
+	 * @param leafType the leafType to set
+	 */
+	public void setLeafType(String leafType) {
+		this.leafType = leafType;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }
