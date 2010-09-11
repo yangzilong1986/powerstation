@@ -17,6 +17,7 @@
  */
 
 var ValidationDefaultOptions = function(){};
+var golbResult = "";
 ValidationDefaultOptions.prototype = {
 	onSubmit : true, //是否监听form的submit事件
 	onReset : true, //是否监听form的reset事件
@@ -323,7 +324,7 @@ Validation.prototype = {
 			var elements = $A(Form.getElements(this.form));
 			for(var i = 0; i < elements.length; i++) {
 				var input = elements[i];
-				Event.observe(input, 'blur', function(ev) { Validation.validateElement(Event.element(ev),{useTitle : useTitles, onElementValidate : callback}); });
+				Event.observe(input, 'change', function(ev) { Validation.validateElement(Event.element(ev),{useTitle : useTitles, onElementValidate : callback}); });
 			}
 		}
 	},
@@ -362,6 +363,8 @@ Validation.prototype = {
 		var elements = $A(Form.getElements(this.form))
 		for(var i = 0; i < elements.length; i++)
 			Validation.reset(elements[i]);
+	},result:function(){
+		return golbResult;
 	}
 }
 
@@ -377,8 +380,9 @@ Object.extend(Validation, {
 			var value = cn[i];
 			var test = Validation.test(value,elm,options.useTitle);
 			options.onElementValidate(test, elm);
-			if(!test) return false;
+			if(!test) { golbResult = false; return false};
 		}
+		golbResult = true;
 		return true;
 	},
 	newErrorMsgAdvice : function(name,elm,errorMsg) {
