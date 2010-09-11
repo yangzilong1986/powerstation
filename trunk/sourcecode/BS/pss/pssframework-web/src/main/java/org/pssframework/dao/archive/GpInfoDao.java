@@ -10,6 +10,8 @@ import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.archive.GpInfo;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Administrator
  *
@@ -17,8 +19,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GpInfoDao extends BaseHibernateDao<GpInfo, java.lang.Long> {
 
-	private static final String hql = "";
+	private static final String gpListByTerm = "from GpInfo t where 1=1  /~and  t.terminalInfo.termId = [termId]~/";
 
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -32,6 +35,13 @@ public class GpInfoDao extends BaseHibernateDao<GpInfo, java.lang.Long> {
 
 	@SuppressWarnings("unchecked")
 	public <X> List<X> findByPageRequest(Map mapRequest) {
-		return findAll(hql, mapRequest);
+		return findAll((String) mapRequest.get("HQL"), mapRequest);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<GpInfo> findByTermId(Long termId) {
+		Map mapRequest = Maps.newHashMap();
+		mapRequest.put("termId", termId);
+		return findAll(gpListByTerm, mapRequest);
 	}
 }

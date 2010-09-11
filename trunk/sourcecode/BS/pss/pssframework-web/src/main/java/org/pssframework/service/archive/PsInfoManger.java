@@ -3,7 +3,6 @@
  */
 package org.pssframework.service.archive;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +26,9 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	@Autowired
 	private PsInfoDao psInfoDao;
+
+	@Autowired
+	private GpInfoManger gpInfoManger;
 
 	@Override
 	protected EntityDao getEntityDao() {
@@ -65,36 +67,7 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	public boolean checkGpsn(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
-
-		boolean bolRep = false;
-
-		List<GpInfo> gpInfos = new LinkedList<GpInfo>();
-
-		try {
-			gpInfos = psInfo.getTerminalInfo().getGpInfos();
-
-		} catch (NullPointerException e) {
-
-			logger.info("该漏保没有关联终端");
-
-			return bolRep;
-		}
-
-		if (gpInfos != null && gpInfos.size() > 0) {
-
-			for (GpInfo gpInfo : gpInfos) {
-
-				if (gpInfo.getGpSn().equals(gpInfoIn.getGpSn())) {
-
-					bolRep = true;
-
-					logger.info("终端{}测量点序号重复", gpInfo.getTerminalInfo().getTermId());
-
-					break;
-				}
-			}
-		}
-		return bolRep;
+		return gpInfoManger.checkGpSnRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpSn());
 	}
 
 	private void setCheckboxAutoTest(PsInfo model) {

@@ -63,23 +63,12 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 
 		}
 
-		// List<GpInfo> gpInfos = gpInfosIn.getTerminalInfo().getGpInfos();
-
-		// for (GpInfo gpInfo : gpInfos) {
-		//
-		// if (gpInfo.getGpSn() == gpInfoIn.getGpSn()) {
-		//
-		// bolRep = true;
-		//
-		// break;
-		// }
-		// }
-		// }
 		return bolRep;
 	}
 
 	@Override
 	public void saveOrUpdate(MpInfo entity) throws org.springframework.dao.DataAccessException {
+
 		setTotalTimes(entity);
 
 		setOrgInfo(entity);
@@ -165,6 +154,9 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 
 		for (GpInfo gpInfo : model.getGpInfos()) {
 
+			// TODO 默认485
+			gpInfo.setGpChar("1");
+
 			if (gpInfo.getSucratCptId() == null || "".equals(gpInfo.getSucratCptId())) {
 				gpInfo.setSucratCptId("0");
 			}
@@ -174,4 +166,5 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 		}
 
 	}
+
 }

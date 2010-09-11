@@ -21,6 +21,7 @@ public class TerminalInfoDao extends BaseHibernateDao<TerminalInfo, Long> {
 			+ "/~ and g.objId = '[tgid]' and g.objType=2 ~/" + "/~ and g.objId = '[biguserid]' and g.objType=1 ~/"
 			+ "/~ and g.objId = '[userid]' and g.objType=3 ~/" + "/~ and g.objId = '[subsd]' and g.objType=4 ~/";
 
+
     @SuppressWarnings("unchecked")
     @Override
     public Class getEntityClass() {

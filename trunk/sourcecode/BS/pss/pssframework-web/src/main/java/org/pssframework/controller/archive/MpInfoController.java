@@ -37,6 +37,7 @@ import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.TerminalInfo;
+import org.pssframework.service.archive.GpInfoManger;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
@@ -50,6 +51,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Administrator 计量点
@@ -78,12 +80,15 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
 
+	@Autowired
+	private GpInfoManger gpInfoManger;
+
 	/**
 	 * 列表
 	 */
 	@RequestMapping
 	public String index(ModelMap modelMap, HttpServletRequest request, HttpServletResponse response,
-	                    org.pssframework.query.archive.MpQuery mpQuery) {
+			org.pssframework.query.archive.MpQuery mpQuery) {
 
 		return VIEW;
 	}
@@ -93,7 +98,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String create(ModelMap modelMap, @Valid MpInfo model, BindingResult errors, HttpServletRequest request,
-	                     HttpServletResponse response) throws Exception {
+			HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
 
@@ -146,7 +151,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public String update(ModelMap modelMap, @PathVariable Long id, @Valid MpInfo mpInfo, BindingResult errors,
-	                     HttpServletRequest request, HttpServletResponse response) throws Exception {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 		if (errors.hasErrors()) {
@@ -294,5 +299,25 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 	 */
 	private boolean checkGpsn(MpInfo info) {
 		return mpInfoManger.checkGpSn(info);
+	};
+
+	/**
+	 *校验测量点序号
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/checkGpSn")
+	public String checkGpSn(MpInfo mpInfo) throws Exception {
+		GpInfo model = mpInfo.getGpInfos().get(0);
+		return this.gpInfoManger.checkGpSnRePeat(model);
+	}
+
+	/**
+	 *校验测量地址序号
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/checkGpAddr")
+	public String checkGpAddr(MpInfo mpInfo) throws Exception {
+		GpInfo model = mpInfo.getGpInfos().get(0);
+		return this.gpInfoManger.checkGpAddrRePeat(model);
 	}
 }
