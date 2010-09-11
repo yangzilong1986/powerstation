@@ -235,8 +235,8 @@ deletetginfo = function(id,selectedNode){
            type:'post',
            cache: false,
            success: function(json){
-   	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
-       var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+   	        var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+            var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
               alert(msg);
               if(isSucc){
               refreshParentNode(selectedNode)
