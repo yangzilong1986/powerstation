@@ -18,7 +18,19 @@
     
     <!--使用如下两个class激活@RequestMapping annotation  -->
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<property name="messageConverters">
+	     <list>
+  			 <bean class = "org.springframework.http.converter.StringHttpMessageConverter">
+   				<property name = "supportedMediaTypes">
+   					 <list>
+    					 <value>text/plain;charset=UTF-8</value>
+    				 </list>
+   				</property>
+  			 </bean>
+ 		 </list>
+	</property>
+	</bean>
     
     <!-- 根据客户端的不同的请求决定不同的view进行响应, 如 /blog/1.json /blog/1.xml -->
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
