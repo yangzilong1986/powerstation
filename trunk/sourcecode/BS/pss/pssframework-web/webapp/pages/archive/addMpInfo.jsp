@@ -76,6 +76,29 @@ function meterState(){
 	   }
    }
 }
+
+
+function callMessage(type,msg){
+  $.msgbox({
+        content:{type:type, content:msg},
+        drag:false,
+        width:300,
+        height:120,
+        autoClose: 4 //自动关闭
+    });
+}
+
+
+function lpad (object,lenth) {
+    var value = object.value;
+    var len = lenth-value.length;
+    var s = new Array(len);
+    for(var i = 0; i< len;i++){
+      s[i] = '0';
+    }
+    object.value = s.join('')+value;
+}
+
 </script>
 </head>
 <body>
@@ -105,9 +128,9 @@ function meterState(){
       <tr height="30px">
         <td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="${disabled}" />
+          <form:input path="gpInfos[0].gpSn" id="gpSn" cssClass="required validate-number" disabled="${disabled}" onfocus="checkGpSn()"/>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].gpSn" cssClass="required validate-number" disabled="${disabled}" />
+          <form:input path="gpInfos[0].gpSn" id="gpSn" cssClass="required validate-number validate-ajax-${ctx}/archive/mpinfo/checkGpSn.json" disabled="${disabled}"/>
         </security:authorize></td>
         <td width="13%" class="green" align="right"><font color="red">* </font>计量点名称：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
@@ -143,7 +166,7 @@ function meterState(){
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="${disabled}" />
+          <form:input path="gpInfos[0].gpAddr" onchange="lpad(this,12)" maxlength="12" cssClass="required validate-number validate-ajax-${ctx}/archive/mpinfo/checkGpAddr.json" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
@@ -158,10 +181,10 @@ function meterState(){
         <td class="green" align="right">所属终端：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" onchange="checkGpSn()"/>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:select path="gpInfos[0].terminalInfo.termId" items="${termList}" id="termId" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" cssClass="validate-ajax-${ctx}/archive/mpinfo/checkGpSn.json validate-ajax-${ctx}/archive/mpinfo/checkGpAddr.json"/>
         </security:authorize></td>
         <td class="green" align="right"><font color="red">* </font>资产号：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
@@ -288,14 +311,13 @@ function meterState(){
 </form:form>
 </body>
 <script>
-val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function(result,form) {
- return result;
-}}
-);
-
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
+   return result;
+  }}
+  );
 $(function(){
 jQuery("#save").click(function(){
-    if(val.validate()){
+    if(val.result()){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatempinfo();
@@ -307,9 +329,9 @@ jQuery("#save").click(function(){
     }else{
       jQuery(this).attr("disabled","");
     }
-    })
+    });
       
-})
+});
 
 
 
@@ -317,7 +339,7 @@ getData= function(type){
 var data;
   data = jQuery("form[id=mpinfo]").serialize(); 
 return data;
-}
+};
 
 addmpinfo = function(){
   var psFormData = getData('add');
@@ -335,17 +357,17 @@ addmpinfo = function(){
            alert(msg);
            if(isSucc){
              opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
-             closeWin()
+             closeWin();
            }
          },error:function(e){
              alert(e.message);
          }
        });
   }
-}
+};
 
 updatempinfo = function(){
-  var psFormData = getData("update");
+    var psFormData = getData("update");
     var url="${ctx}/archive/mpinfo/${mpinfo.mpId}.json?_method=put";
     if(confirm("确定要更新该电表?")){
       jQuery.ajax({
@@ -360,19 +382,79 @@ updatempinfo = function(){
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
-               closeWin()
+               closeWin();
              }
            },error:function(e){
-             alert("error")
+             alert("error");
                alert(e.getMessage());
            }
          });
     }
-}
+};
 
-function   closeWin() 
+function closeWin() 
 { 
-        window.close(); 
+    window.close(); 
 } 
+/**********************************************************************************/
+//todo
+function checkGpSn(){
+
+  if($("#termId").val() != null && $("#gpSn").val()!= null){
+	  ajaxCheckGpSn();
+  }else{
+	  return false;
+  }
+};
+
+function ajaxCheckGpSn(){
+    var urldata= {'gpSn':$("#gpSn").val(),'terminalInfo.termId':$("#termId").val()};
+	var url="${ctx}/archive/mpinfo/checkGpSn.json";
+      jQuery.ajax({
+           url: url,
+           data:urldata,
+           dataType:'json',
+           type:'post',
+           cache: false,
+           success: function(json){
+    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+          if(isSucc){
+      	 callMessage('alert',msg);
+          }
+           },error:function(e){
+               callMessage('error',"校验出错");
+           },beforeSend:function(e){
+        	   callMessage('alert',"校验中……");
+           }
+         });
+    };
+
+
+
+    function ajaxCheckGpAddr(){
+        var urldata= {'gpAddr':$("#gpAddr").val(),'terminalInfo.termId':$("#termId").val(),'rand':Math.radmon()};
+    	var url="${ctx}/archive/mpinfo/checkGpAddr.json";
+        
+          jQuery.ajax({
+               url: url,
+               data:urldata,
+               dataType:'json',
+               type:'post',
+               cache: false,
+               success: function(json){
+        	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+                 alert(msg);
+                 if(isSucc){
+                  
+                 }
+               },error:function(e){
+                 alert("error");
+                   alert(e.getMessage());
+               }
+             });
+        };
+
 </script>
 </html>

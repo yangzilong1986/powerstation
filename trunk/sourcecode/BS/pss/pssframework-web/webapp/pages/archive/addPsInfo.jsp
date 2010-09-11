@@ -45,6 +45,15 @@ function meterState(){
 }
 
 
+function lpad (object,lenth) {
+    var value = object.value;
+    var len = lenth-value.length;
+    var s = new Array(len);
+    for(var i = 0; i< len;i++){
+      s[i] = '0';
+    }
+    object.value = s.join('')+value;
+}
 
 
 </script>
@@ -82,7 +91,7 @@ function meterState(){
             itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" cssClass="validate-ajax-${ctx}/archive/psinfo/checkGpSn.json validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json"/>
         </security:authorize></td>
       </tr>
       <tr height="30px">
@@ -90,13 +99,13 @@ function meterState(){
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
+          <form:input path="gpInfo.gpAddr" maxlength="12" onchange="lpad(this,12)" disabled="${disabled}" cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json"/>
         </security:authorize></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
+          <form:input path="gpInfo.gpSn" cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpSn.json" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
@@ -221,10 +230,10 @@ function meterState(){
 </div>
 </body>
 <script>
-val =  new Validation(document.forms[0],{onSubmit:true,onFormValidate : function(result,form) {
- return result;
-}}
-);
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
+	   return result;
+	  }}
+	  );
 
 checkBox  = function(){
    if($("#autoTest").attr("checked")){
@@ -251,7 +260,7 @@ if('${_type}' == "new"){
 }
 	
 jQuery("#save").click(function(){
-    if(val.validate()){
+    if(val.result()){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatepsinfo();
