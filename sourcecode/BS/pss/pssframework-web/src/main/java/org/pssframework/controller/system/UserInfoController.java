@@ -48,6 +48,8 @@ import org.springside.modules.security.springsecurity.SpringSecurityUtils;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Administrator
  *
@@ -98,6 +100,8 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 				UserInfo userLogin = this.userInfoManager.findUserByLoginName(staffNo);
 
 				orgInfo = userLogin.getOrgInfo();
+
+				modelAndView.addObject("userInfo", userLogin);
 
 			}
 
@@ -279,7 +283,7 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 	}
 
 	private List<OrgInfo> getOrgInfo() {
-		List<OrgInfo> orgInfoList = orgInfoManager.findAll();
+		List<OrgInfo> orgInfoList = orgInfoManager.findByPageRequest(Maps.newHashMap());
 		return orgInfoList;
 	}
 
