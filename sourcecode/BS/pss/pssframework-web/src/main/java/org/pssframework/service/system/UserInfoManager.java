@@ -145,4 +145,14 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 
 		this.saveOrUpdate(userInfo);
 	}
+
+	public String checkUsrRePeat(UserInfo userInfo) {
+		String msg = "";
+		if (isLoginNameUnique(userInfo.getStaffNo(), userInfo.getOldStaffNo())) {
+
+		} else {
+			msg = "账户名[" + userInfo.getStaffNo() + "]已存在";
+		}
+		return msg;
+	}
 }

@@ -46,14 +46,6 @@ public class UserInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 3676801718128622302L;
 
-	public UserInfo() {
-
-	}
-
-	public UserInfo(Long empNo) {
-		this.empNo = empNo;
-	}
-
 	/*
 	 * EMP_NO NUMBER(16) not null, is '本实体记录的唯一标识'
 	 */
@@ -65,7 +57,7 @@ public class UserInfo extends BaseEntity {
 	@Column(name = "DEPT_NO")
 	private Long deptNo;
 
-	@ManyToOne(targetEntity = OrgInfo.class)
+	@ManyToOne
 	@JoinColumn(name = "ORG_ID", nullable = false, referencedColumnName = "ORG_ID")
 	// ORG_ID not null,
 	private OrgInfo orgInfo;
@@ -73,6 +65,9 @@ public class UserInfo extends BaseEntity {
 	// STAFF_NO VARCHAR2(16), is '工号， 营销业务人员的服务工号';
 	@Column(length = 16, nullable = false, name = "STAFF_NO")
 	private String staffNo;
+
+	@Transient
+	private String oldStaffNo;
 
 	// PASSWD VARCHAR2(50),
 	@Column(length = 50, nullable = false, name = "PASSWD")
@@ -151,53 +146,34 @@ public class UserInfo extends BaseEntity {
 	@Transient
 	private Long tgId;
 
-	/**
-	 * @return the tgId
-	 */
-	public Long getTgId() {
-		return tgId;
-	}
-
-	/**
-	 * @param tgId the tgId to set
-	 */
-	public void setTgId(Long tgId) {
-		this.tgId = tgId;
-	}
-
 	@Transient
 	private String oldPasswd;
 
-	/**
-	 * @return the oldPasswd
-	 */
-	public String getOldPasswd() {
-		return oldPasswd;
-	}
-
-	/**
-	 * @param oldPasswd the oldPasswd to set
-	 */
-	public void setOldPasswd(String oldPasswd) {
-		this.oldPasswd = oldPasswd;
-	}
-
-	/**
-	 * @return the newPasswd
-	 */
-	public String getNewPasswd() {
-		return newPasswd;
-	}
-
-	/**
-	 * @param newPasswd the newPasswd to set
-	 */
-	public void setNewPasswd(String newPasswd) {
-		this.newPasswd = newPasswd;
-	}
-
 	@Transient
 	private String newPasswd;
+
+	public UserInfo() {
+
+	}
+
+	public UserInfo(Long empNo) {
+		this.empNo = empNo;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final UserInfo UserInfoObj = (UserInfo) obj;
+
+		return new EqualsBuilder().append(this.getStaffNo(), UserInfoObj.getStaffNo()).isEquals();
+
+	}
 
 	/**
 	 * @return the accountNonExpired
@@ -264,6 +240,27 @@ public class UserInfo extends BaseEntity {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the newPasswd
+	 */
+	public String getNewPasswd() {
+		return newPasswd;
+	}
+
+	/**
+	 * @return the oldPasswd
+	 */
+	public String getOldPasswd() {
+		return oldPasswd;
+	}
+
+	/**
+	 * @return the oldStaffNo
+	 */
+	public String getOldStaffNo() {
+		return oldStaffNo;
 	}
 
 	public OrgInfo getOrgInfo() {
@@ -340,6 +337,13 @@ public class UserInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the tgId
+	 */
+	public Long getTgId() {
+		return tgId;
+	}
+
+	/**
 	 * @return the workTypeCode
 	 */
 	public String getWorkTypeCode() {
@@ -349,6 +353,10 @@ public class UserInfo extends BaseEntity {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	public boolean isShowAllAccount() {
+		return showAllAccount;
 	}
 
 	/**
@@ -423,6 +431,27 @@ public class UserInfo extends BaseEntity {
 		this.name = name;
 	}
 
+	/**
+	 * @param newPasswd the newPasswd to set
+	 */
+	public void setNewPasswd(String newPasswd) {
+		this.newPasswd = newPasswd;
+	}
+
+	/**
+	 * @param oldPasswd the oldPasswd to set
+	 */
+	public void setOldPasswd(String oldPasswd) {
+		this.oldPasswd = oldPasswd;
+	}
+
+	/**
+	 * @param oldStaffNo the oldStaffNo to set
+	 */
+	public void setOldStaffNo(String oldStaffNo) {
+		this.oldStaffNo = oldStaffNo;
+	}
+
 	public void setOrgInfo(OrgInfo orgInfo) {
 		this.orgInfo = orgInfo;
 	}
@@ -481,12 +510,23 @@ public class UserInfo extends BaseEntity {
 		this.roleNames = roleNames;
 	}
 
+	public void setShowAllAccount(boolean showAllAccount) {
+		this.showAllAccount = showAllAccount;
+	}
+
 	/**
 	 * @param staffNo
 	 *            the staffNo to set
 	 */
 	public void setStaffNo(String staffNo) {
 		this.staffNo = staffNo;
+	}
+
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(Long tgId) {
+		this.tgId = tgId;
 	}
 
 	/**
@@ -504,29 +544,6 @@ public class UserInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	public void setShowAllAccount(boolean showAllAccount) {
-		this.showAllAccount = showAllAccount;
-	}
-
-	public boolean isShowAllAccount() {
-		return showAllAccount;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final UserInfo UserInfoObj = (UserInfo) obj;
-
-		return new EqualsBuilder().append(this.getStaffNo(), UserInfoObj.getStaffNo()).isEquals();
-
 	}
 
 }
