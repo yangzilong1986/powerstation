@@ -126,7 +126,7 @@ function lpad (object,lenth) {
       style="display: block; overflow-y: auto; overflow-x: auto; height: expression((( document.documentElement.clientHeight | document.body.clientHeight) - 700 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
-        <td width="13%" class="green" align="right"><font color="red">* </font>序 号：</td>
+        <td width="13%" class="green" align="right"><font color="red">* </font>测量点序 号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:input path="gpInfos[0].gpSn" id="gpSn" cssClass="required validate-number" disabled="${disabled}" onfocus="checkGpSn()"/>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
