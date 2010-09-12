@@ -256,6 +256,8 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 			tginfo.setChaDate(new Date());
 			
+			tginfo.setOrgInfo(null);
+
 			bind(request, tginfo);
 
 			this.tgInfoManager.update(tginfo);
