@@ -119,7 +119,14 @@ deleteUser = function(){
          <script type="text/javascript">
          document.getElementById('orgId').value='${userInfo.orgInfo.orgId}';
          </script>
-			<td colspan="2"><form:checkbox path="showAllAccount" onclick="changeList()"/>显示全部
+			<td colspan="2">
+      
+      <security:authentication property="principal" var="loginUser"/>
+      <c:set value="${loginUser.roleInfoList}" var="roles"></c:set>
+       <c:forEach items="${roles}" var = "role">
+       <c:if test="${role.roleId==0}">
+      <form:checkbox path="showAllAccount" onclick="changeList()"/>显示全部</c:if>
+      </c:forEach>
 			</td>
 		</tr>
 		<tr height="25">
