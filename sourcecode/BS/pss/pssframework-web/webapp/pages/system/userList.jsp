@@ -107,13 +107,18 @@ deleteUser = function(){
 </script>
 </head>
 <body>
-<form:form action="${ctx}/system/user/list" modelAttribute="userInfo" method="get">
+<form:form name="system/user/list" modelAttribute="userInfo" method="get">
 	<div id="tool">
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr height="25">
 			<td><spring:message code="system.user.ssdw" />：</td>
-			<td><form:select path="orgInfo.orgId" items="${orgInfo}" id="orgId" itemLabel="orgName"
-				itemValue="orgId" cssStyle="width:150px;" onchange="changeOrg()"/></td>
+			<td>
+        <form:select path="orgInfo.orgId" items="${orglist}" id="orgId" itemLabel="orgName" itemValue="orgId"
+          onchange="changeOrg()"  cssStyle="width:150px;" />
+         
+         <script type="text/javascript">
+         document.getElementById('orgId').value='${userInfo.orgInfo.orgId}';
+         </script>
 			<td colspan="2"><form:checkbox path="showAllAccount" onclick="changeList()"/>显示全部
 			</td>
 		</tr>
