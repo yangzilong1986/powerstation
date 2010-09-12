@@ -160,8 +160,7 @@ $(function(){
     var type ='${_type}';
     showUsernfo();
 	$("[name=queding2][type=button]").click(function(){
-
-		if(val.result()){
+		if(val.validate()){
 		      $(this).attr("disabled","disabled");
 		      
 	          if( checkPassword()){
