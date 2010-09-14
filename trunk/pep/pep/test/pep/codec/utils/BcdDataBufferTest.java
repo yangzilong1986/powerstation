@@ -37,4 +37,32 @@ public class BcdDataBufferTest {
          assertTrue(TestUtils.byteArrayEquals(buff.getValue(),pd.getValue()));
     }
 
+    @Test
+    public void testGetBits(){
+         BcdDataBuffer buff = new BcdDataBuffer();
+         buff.rewind();
+         buff.putByte((byte)1);
+         buff.putByte((byte)11);
+         buff.putByte((byte)9);
+         buff.rewind();
+         int firstByte = buff.getByte();
+         long bits3 = buff.getBits(3);
+         long bits4 = buff.getBits(1);
+         int thirdByte = buff.getByte();
+         assertEquals(firstByte,1);
+         assertEquals(bits3,3L);
+         assertEquals(thirdByte,9);
+         assertEquals(bits4,1);
+         
+         buff.rewind();
+         assertEquals(buff.getByte(),1);
+         assertEquals(buff.getBits(3),3);
+         assertEquals(buff.getBits(5),1);
+         
+         buff.rewind();
+         assertEquals(buff.getByte(),1);
+         assertEquals(buff.getBits(3),3);
+         assertEquals(buff.getBits(9),0x0121);
+         assertEquals(buff.getBits(4),0);
+    }
 }
