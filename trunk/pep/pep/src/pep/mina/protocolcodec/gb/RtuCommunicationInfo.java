@@ -131,10 +131,6 @@ public class RtuCommunicationInfo {
     }
 
     public void sendPacket(int sequence, PmPacket packet) {
-        //if (this.getSession() == null) {
-        //LOGGER.info("Send packet: "+this.rtua+" not online");
-        //RtuRespPacketQueue.instance().addPacket(new SequencedPmPacket(sequence, packet, SequencedPmPacket.Status.NOT_ONLINE));
-        //} else {
         this.unsendPacket.add(new SeqPacket(sequence, packet));
         if (this.idle) {
             sendNextPacket(false);
@@ -211,8 +207,10 @@ public class RtuCommunicationInfo {
                 synchronized (this) {
                     this.idle = true;
                 }
+                LOGGER.info(rtua+" Timeout, send next packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 sendNextPacket(false);
             } else {
+                LOGGER.info(rtua+" Timeout, resend packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 doSendPacket();
             }
         }
