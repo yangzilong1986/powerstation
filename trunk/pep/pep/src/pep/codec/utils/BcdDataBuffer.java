@@ -12,8 +12,10 @@ import org.apache.mina.core.buffer.IoBuffer;
  * @author luxiaochung
  */
 public class BcdDataBuffer {
-    private IoBuffer dataBuff;
-
+    protected IoBuffer dataBuff;
+    private int reserveBitCount = 0;
+    private long lastByte;
+    
     public BcdDataBuffer(){
         super();
         dataBuff = IoBuffer.allocate(20, false);
@@ -34,6 +36,7 @@ public class BcdDataBuffer {
      * 清除原来的数据
      */
     public BcdDataBuffer clear(){
+        this.reserveBitCount = 0;
         dataBuff.clear();
         dataBuff.limit(dataBuff.position());
         return this;
@@ -44,6 +47,7 @@ public class BcdDataBuffer {
      * @return
      */
     public BcdDataBuffer rewind(){
+        this.reserveBitCount = 0;
         dataBuff.rewind();
         return this;
     }
@@ -55,6 +59,7 @@ public class BcdDataBuffer {
     }
 
     public BcdDataBuffer setValue(byte[] bytes){
+        this.reserveBitCount = 0;
         dataBuff.clear().put(bytes);
         dataBuff.limit(dataBuff.position());
         return this;
@@ -66,6 +71,7 @@ public class BcdDataBuffer {
     }
 
     public int getByte(){
+        this.reserveBitCount = 0;
         return dataBuff.get();
     }
 
@@ -75,6 +81,7 @@ public class BcdDataBuffer {
     }
 
     public byte[] getBytes(int len){
+        this.reserveBitCount = 0;
         byte[] bytes = new byte[len];
         dataBuff.get(bytes);
         return bytes;
@@ -138,5 +145,30 @@ public class BcdDataBuffer {
 
     public int restBytes(){
         return this.dataBuff.limit()-this.dataBuff.position();
+    }
+    
+    public long getBits(int bitCount){ //bitCount bigin with 1
+        long bits;
+        if (bitCount<=this.reserveBitCount){
+            this.reserveBitCount -= bitCount;
+            bits = this.lastByte & (~(-1L << bitCount));
+            this.lastByte = this.lastByte >>> (8-this.reserveBitCount);
+            return bits;
+        }
+        
+        bits = this.lastByte;
+        int bytes = (bitCount-this.reserveBitCount-1)/8+1;
+        long base = 1<<this.reserveBitCount;
+        this.reserveBitCount = 8-((bitCount-this.reserveBitCount)%8); 
+        
+        for (int i=0; i<bytes;i++){
+            this.lastByte = (this.dataBuff.get()+0x100)%0x100;
+            bits = bits+this.lastByte*base;
+            base *= 0x100;
+        }
+        
+        bits = bits & (~(-1L << bitCount));
+        this.lastByte = this.lastByte >>> (8-this.reserveBitCount);
+        return bits;
     }
 }
