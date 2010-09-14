@@ -12,58 +12,20 @@ import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.mina.core.buffer.IoBuffer;
+import pep.codec.utils.BcdDataBuffer;
 import pep.codec.utils.BcdUtils;
 
 /**
  *
  * @author luxiaochung
  */
-public class PmPacketData{
-    private IoBuffer dataBuff;
-
+public class PmPacketData extends BcdDataBuffer{
     public PmPacketData(){
         super();
-        dataBuff = IoBuffer.allocate(0, false);
-        dataBuff.setAutoExpand(true);
     }
 
     public PmPacketData(IoBuffer rowIoBuffer){
-        super();
-        dataBuff = rowIoBuffer;
-    }
-
-    public IoBuffer getRowIoBuffer(){
-        return dataBuff;
-    }
-
-    /**
-     * 清除原来的数据
-     */
-    public PmPacketData clear(){
-        dataBuff.clear();
-        dataBuff.limit(dataBuff.position());
-        return this;
-    }
-
-    /**
-     * 回绕到开头，当一系列put或setValue后要从头读取时需要回绕到开头
-     * @return
-     */
-    public PmPacketData rewind(){
-        dataBuff.rewind();
-        return this;
-    }
-
-    public byte[] getValue(){
-        byte[] rslt = new byte[dataBuff.position()]; //不能取limit(); luxiaochung
-        dataBuff.rewind().get(rslt);
-        return rslt;
-    }
-
-    public PmPacketData setValue(byte[] bytes){
-        dataBuff.clear().put(bytes);
-        dataBuff.limit(dataBuff.position());
-        return this;
+        super(rowIoBuffer);
     }
 
     public PmPacketData put(byte b){
@@ -74,8 +36,6 @@ public class PmPacketData{
     public byte get(){
         return dataBuff.get();
     }
-
-    
 
     public PmPacketData putBin(long value,int length){
         byte[] b = new byte[length];
@@ -114,17 +74,6 @@ public class PmPacketData{
         dataBuff.get(bytes);
         dt.setValue(bytes);
         return this;
-    }
-
-    public void putWord(int value){
-        dataBuff.put((byte)(value % 0x100));
-        dataBuff.put((byte)(value / 0x100));
-    }
-
-    public int getWord(){
-        byte valueLow = dataBuff.get();
-        byte valueHigh = dataBuff.get();
-        return valueHigh*0x100 + valueLow;
     }
 
     public long getBin(int len){
@@ -537,38 +486,4 @@ public class PmPacketData{
     public boolean HaveDate(){
         return (this.dataBuff.limit()-this.dataBuff.position() >6);
     }
-
-    public int restBytes(){
-        return this.dataBuff.limit()-this.dataBuff.position();
-    }
-
-    public long getBcdInt(int len){
-        byte [] intBytes = getBytes(len);
-        return BcdUtils.bcdToInt(intBytes, 0, len);
-    }
-
-    public PmPacketData putBcdInt(long value, int len){
-        return this.put(BcdUtils.intTobcd(value, len));
-    }
-
-    //dec 比表示小数位
-    public double getBcdFloat(int len, int dec){
-        long intValue = this.getBcdInt(len);
-        double floatValue = intValue;
-        for (int i=0; i<dec; i++)
-            floatValue /= 10;
-        return floatValue;
-    }
-
-    public PmPacketData putBcdFloat(double floatValue, int len, int dec){
-        long intValue = Math.round(floatValue*Math.pow(10, dec));
-        return putBcdInt(intValue, len);
-    }
-
-    public byte[] getBytes(int len){
-        byte[] bytes = new byte[len];
-        dataBuff.get(bytes);
-        return bytes;
-    }
-
 }
