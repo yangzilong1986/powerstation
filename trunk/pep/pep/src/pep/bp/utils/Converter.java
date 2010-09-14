@@ -171,6 +171,8 @@ public class Converter {
             packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
             packet.getControlCode().setDownDirectFrameCount((byte) 0);
             packet.getSeq().setIsTpvAvalibe(true);
+            packet.getSeq().setIsFirstFrame(true);
+            packet.getSeq().setIsFinishFrame(true);
 
             commandMark.append(commandItem.getIdentifier() + "#");
             PmPacket376DA da = new PmPacket376DA(obj.getMpSn());
