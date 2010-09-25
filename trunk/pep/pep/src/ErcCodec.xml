@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ErcCodec.xml
+    Created on : 2010年9月19日, 下午2:29
+    Author     : luxiaochung
+    Description:
+       为国网事件解析提供数据结构.
+-->
+
+<root>
+    <erc id="1" title="数据初始化和版本变更记录">
+        <dataItem id="" decode="Bit" length="1" descripe="参数及数据区初始化" />
+        <dataItem id="" decode="Bit" length="1" descripe="终端版本变更" />
+        <dataItem id="" decode="Asc" length="4" descripe="变更前软件版本号" />
+        <dataItem id="" decode="Asc" length="4" descripe="变更前软件版本号" />
+    </erc>
+</root>
