@@ -97,7 +97,7 @@ public class FusionChartsCreator {
      *                JavaScript
      */
     public static String createChart(String chartSWF, String strURL,
-	    String strXML, String chartId, int chartWidth, int chartHeight,
+	    String strXML, String chartId, String chartWidth, String chartHeight,
 	    boolean debugMode, boolean registerWithJS) {
 	StringBuffer strBuf = new StringBuffer();
 	// First we create a new DIV for each chart. We specify the name of DIV

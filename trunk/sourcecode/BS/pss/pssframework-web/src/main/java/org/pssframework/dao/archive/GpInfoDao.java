@@ -19,7 +19,7 @@ import com.google.common.collect.Maps;
 @Repository
 public class GpInfoDao extends BaseHibernateDao<GpInfo, java.lang.Long> {
 
-	private static final String gpListByTerm = "from GpInfo t where 1=1  /~and  t.terminalInfo.termId = [termId]~/";
+    private static final String gpListByTerm = "from GpInfo t where 1=1  /~and  t.terminalInfo.termId = [termId]~/ order by t.gpSn";
 
 	
 	/*

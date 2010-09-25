@@ -34,7 +34,8 @@ import cn.org.rapid_framework.page.PageRequest;
 public class PSEventQueryController extends BaseSpringController {
     private static final String VIEW_NAME = "/statistics/psEventQuery";
     private static final String VIEW_EVENT = "/statistics/eventQuery";
-    private static final String QDATE = "qdate";
+    private static final String SDATE = "sdate";
+    private static final String EDATE = "edate";
     private static final String ORGLIST = "orglist";
     private static final String TGLIST = "tglist";
 
@@ -96,7 +97,8 @@ public class PSEventQueryController extends BaseSpringController {
         Map mapRequest = new LinkedHashMap();
         mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
         mav.addObject(TGLIST, this.getTgOrgOptions(mapRequest));
-        mav.addObject(QDATE, DateUtils.getCurrentDate());
+        mav.addObject(SDATE, DateUtils.getCurrentDate());
+        mav.addObject(EDATE, DateUtils.getCurrentDate());
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {

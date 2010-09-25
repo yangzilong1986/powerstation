@@ -16,13 +16,13 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
             <when test="psId != null"><![CDATA[and p.PS_ID = #{psId}]]></when>
         </choose>
         <choose>
-            <when test="orgId != null"><![CDATA[and p.ORG_ID = #{orgId}]]></when>
+            <when test="orgId != null and orgId != 0"><![CDATA[and p.ORG_ID = #{orgId}]]></when>
         </choose>
         <choose>
             <when test="tgId != null and tgId != -1"><![CDATA[and p.OBJECT_ID = #{tgId} and p.GP_TYPE = '2']]></when>
         </choose>
         <choose>
-            <when test="ddate != null"><![CDATA[and e.TRIGTIME >= to_date(#{ddate},'yyyy-mm-dd') and e.TRIGTIME < to_date(#{ddate},'yyyy-mm-dd') + 1]]></when>
+            <when test="sdate != null and edate != null"><![CDATA[and e.TRIGTIME >= to_date(#{sdate},'yyyy-mm-dd') and e.TRIGTIME < to_date(#{edate},'yyyy-mm-dd') + 1]]></when>
             <otherwise><![CDATA[and e.TRIGTIME is null]]></otherwise>
         </choose>
     </sql>

@@ -42,9 +42,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Short[] primArray2ObjArray(short[] primArray) {
-	    if(primArray == null) {
-	        return null;
-	    }
+	    if(primArray == null)
+            return null;
 	    Short[] objArray = new Short[primArray.length];
 	    for(int i = 0; i < primArray.length; i++) {
 	        objArray[i] = new Short(primArray[i]);
@@ -58,9 +57,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static short[] objArray2PrimArray(Short[] objArray) {
-	    if(objArray == null) {
-	        return null;
-	    }
+	    if(objArray == null)
+            return null;
 	    short[] primArray = new short[objArray.length];
 	    for(int i = 0; i < objArray.length; i++) {
 	        primArray[i] = objArray[i].shortValue();
@@ -74,9 +72,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Integer[] primArray2ObjArray(int[] primArray) {
-	    if(primArray == null) {
-	        return null;
-	    }
+	    if(primArray == null)
+            return null;
 	    Integer[] objArray = new Integer[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Integer(primArray[i]);
@@ -90,9 +87,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static int[] objArray2PrimArray(Integer[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         int[] primArray = new int[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].intValue();
@@ -106,9 +102,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Long[] primArray2ObjArray(long[] primArray) {
-        if(primArray == null) {
+        if(primArray == null)
             return null;
-        }
         Long[] objArray = new Long[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Long(primArray[i]);
@@ -122,9 +117,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static long[] objArray2PrimArray(Long[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         long[] primArray = new long[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].longValue();
@@ -138,9 +132,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Float[] primArray2ObjArray(float[] primArray) {
-        if(primArray == null) {
+        if(primArray == null)
             return null;
-        }
         Float[] objArray = new Float[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Float(primArray[i]);
@@ -154,9 +147,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static float[] objArray2PrimArray(Float[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         float[] primArray = new float[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].floatValue();
@@ -170,9 +162,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Double[] primArray2ObjArray(double[] primArray) {
-        if(primArray == null) {
+        if(primArray == null)
             return null;
-        }
         Double[] objArray = new Double[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Double(primArray[i]);
@@ -186,9 +177,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static double[] objArray2PrimArray(Double[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         double[] primArray = new double[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].doubleValue();
@@ -202,9 +192,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Character[] primArray2ObjArray(char[] primArray) {
-        if(primArray == null) {
+        if(primArray == null)
             return null;
-        }
         Character[] objArray = new Character[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Character(primArray[i]);
@@ -218,9 +207,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static char[] objArray2PrimArray(Character[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         char[] primArray = new char[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].charValue();
@@ -234,9 +222,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static Boolean[] primArray2ObjArray(boolean[] primArray) {
-        if(primArray == null) {
+        if(primArray == null)
             return null;
-        }
         Boolean[] objArray = new Boolean[primArray.length];
         for(int i = 0; i < primArray.length; i++) {
             objArray[i] = new Boolean(primArray[i]);
@@ -250,9 +237,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static boolean[] objArray2PrimArray(Boolean[] objArray) {
-        if(objArray == null) {
+        if(objArray == null)
             return null;
-        }
         boolean[] primArray = new boolean[objArray.length];
         for(int i = 0; i < objArray.length; i++) {
             primArray[i] = objArray[i].booleanValue();
@@ -319,8 +305,9 @@ public class DataConverter {
 	 * @param map
 	 * @return
 	 */
-	public static net.sf.json.JSONObject map2JSONObject(java.util.Map map) {
-	    Iterator iterator = map.keySet().iterator();
+    @SuppressWarnings("unchecked")
+    public static net.sf.json.JSONObject map2JSONObject(java.util.Map map) {
+        Iterator iterator = map.keySet().iterator();
 	    Object key = null;
 	    Object value = null;
 	    net.sf.json.JSONObject json = new net.sf.json.JSONObject();
@@ -337,6 +324,7 @@ public class DataConverter {
      * @param map
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static net.sf.json.JSONObject map2json(java.util.Map map) {
         Iterator iterator = map.keySet().iterator();
         Object key = null;
@@ -374,9 +362,8 @@ public class DataConverter {
     }
     
     public static String hexs2Ascii(String hexs) {
-        if(hexs == null) {
+        if(hexs == null)
             return null;
-        }
         byte[] bytearray = hexs.getBytes();
         StringBuffer sbAscii = new StringBuffer();
         StringBuffer sb = new StringBuffer();
@@ -416,9 +403,8 @@ public class DataConverter {
 	 * @return
 	 */
 	public static long hex2Int(String hexs) {
-	    if(hexs == null || hexs.length() == 0) {
-	        return 0;
-	    }
+	    if(hexs == null || hexs.length() == 0)
+            return 0;
 	    int i_digit = 0;
 	    long result = 0;
 	    for(int i = hexs.length(); i > 0; i--, i_digit++) {

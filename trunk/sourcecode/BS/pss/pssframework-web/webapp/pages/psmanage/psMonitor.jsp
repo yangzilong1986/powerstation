@@ -42,19 +42,19 @@ function mySwitchTab(prefix, order, cnts) {
 }
 
 function queryEvent() {
-    var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/eventQuery?psId=' + $("#psId").val() + '&ddate=' + $("#ddate").val();
+    var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/eventQuery?psId=' + $("#psId").val() + '&sdate=' + $("#sdate").val() + '&edate=' + $("#edate").val() + '&r=' + Math.random();
     //alert(url);
     document.getElementById("fdata").src = url;
 }
 
 function queryEcCurv() {
     if(showMode3 == "grids") {
-        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery?psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
+        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery?psId=' + $("#psId1").val() + '&sdate=' + $("#sdate1").val() + '&edate=' + $("#edate1").val() + '&r=' + Math.random();
         //alert(url);
         document.getElementById("fdata1").src = url;
     }
     else if(showMode3 == "chart") {
-        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery_Chart?caption=漏保数据曲线&chartType=1&chartCategory=3&width=0&height=0&psId=' + $("#psId1").val() + '&ddate=' + $("#ddate1").val();
+        var url = '<pss:path type="webapp"/>' + '/psmanage/psmon/ecCurvQuery_Chart?caption=漏保数据曲线&chartType=1&chartCategory=3&width=0&height=0&psId=' + $("#psId1").val() + '&sdate=' + $("#sdate1").val() + '&edate=' + $("#edate1").val() + '&r=' + Math.random();
         //alert(url);
         document.getElementById("fdata1").src = url;
     }
@@ -1693,10 +1693,14 @@ function chg8000C04F08(obj) {
       <div style="vertical-align:middle; height: 30px;">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="50" height="30" align="right" class="green">时 间：</td>
+            <td width="70" height="30" align="right" class="green">开始日期：</td>
             <td width="120" align="left">
               <input type="hidden" id="psId" name="psId" value="${psInfo.psId}" />
-              <input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+              <input type="text" class="input_time" id="sdate" name="sdate" value="${sdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+            </td>
+            <td width="70" align="right" class="green">结束日期：</td>
+            <td width="120" align="left">
+              <input type="text" class="input_time" id="edate" name="edate" value="${edate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
             </td>
             <td width="100" align="center">
               <img id="eventInquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
@@ -1715,10 +1719,14 @@ function chg8000C04F08(obj) {
       <div style="vertical-align:middle; height: 30px;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="50" height="30" align="right" class="green">时 间：</td>
+            <td width="70" height="30" align="right" class="green">开始日期：</td>
             <td width="120" align="left">
               <input type="hidden" id="psId1" name="psId1" value="${psInfo.psId}" />
-              <input type="text" class="input_time" id="ddate1" name="ddate1" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+              <input type="text" class="input_time" id="sdate1" name="sdate1" value="${sdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+            </td>
+            <td width="70" align="right" class="green">结束日期：</td>
+            <td width="120" align="left">
+              <input type="text" class="input_time" id="edate1" name="edate1" value="${edate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
             </td>
             <td width="100" align="center">
               <img id="ecCurvInquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />

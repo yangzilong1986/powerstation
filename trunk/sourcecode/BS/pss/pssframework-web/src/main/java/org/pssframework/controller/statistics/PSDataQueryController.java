@@ -35,7 +35,8 @@ import cn.org.rapid_framework.page.PageRequest;
 public class PSDataQueryController extends BaseSpringController {
     private static final String VIEW_NAME = "/statistics/psDataQuery";
     private static final String VIEW_EC = "/statistics/psEcCurvQuery";
-    private static final String QDATE = "qdate";
+    private static final String SDATE = "sdate";
+    private static final String EDATE = "edate";
     private static final String ORGLIST = "orglist";
     private static final String TGLIST = "tglist";
 
@@ -121,7 +122,8 @@ public class PSDataQueryController extends BaseSpringController {
         Map mapRequest = new LinkedHashMap();
         mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
         mav.addObject(TGLIST, this.getTgOrgOptions(mapRequest));
-        mav.addObject(QDATE, DateUtils.getCurrentDate());
+        mav.addObject(SDATE, DateUtils.getCurrentDate());
+        mav.addObject(EDATE, DateUtils.getCurrentDate());
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {

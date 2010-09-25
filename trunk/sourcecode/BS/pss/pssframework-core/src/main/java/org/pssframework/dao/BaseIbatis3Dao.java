@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.support.DaoSupport;
 import org.springframework.util.Assert;
 
-import cn.org.rapid_framework.beanutils.BeanUtils;
 import cn.org.rapid_framework.beanutils.PropertyUtils;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
@@ -92,7 +91,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	public void save(E entity) {
 		prepareObjectForSaveOrUpdate(entity);
-		Object primaryKey = getSqlSessionTemplate().insert(getInsertQuery(), entity);
+		//Object primaryKey = getSqlSessionTemplate().insert(getInsertQuery(), entity);
 	}
 
 	/**
@@ -100,7 +99,7 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	public void update(E entity) {
 		prepareObjectForSaveOrUpdate(entity);
-		Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
+		//Object primaryKey = getSqlSessionTemplate().update(getUpdateQuery(), entity);
 	}
 
 	public void batchDelete(Collection<E> entities) {
@@ -108,8 +107,6 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	public void batchUpdate(Collection<E> entities) {
-		// TODO Auto-generated method stub
-		//		
 		//		try { 
 		//
 		//	           if (list != null) { 
@@ -153,7 +150,6 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	}
 
 	public void batchInsert(Collection<E> entities) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -188,7 +184,25 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		Assert.notNull(statementName);
 		return getPrefix().concat(".").concat(statementName);
 	}
-
+	
+	/**
+	 * 
+	 * @param statementName
+	 * @param pageRequest
+	 * @return
+	 */
+	protected Page chartQuery(final String statementName, PageRequest pageRequest) {
+	    Assert.notNull(statementName);
+	    Page page = new Page(pageRequest, 0);
+        Map filters = creatFilters(pageRequest, page);
+        Number totalCount = countQuery(filters);
+        if(totalCount == null || totalCount.intValue() <= 0) {
+            return page;
+        }
+        page = new Page(pageRequest, totalCount.intValue());
+        return queryChart(statementName, filters, page);
+	}
+	
 	/**
 	 * 
 	 * @param statementName
@@ -224,7 +238,8 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 * @param filters
 	 * @return
 	 */
-	private Number countQuery(final Map filters) {
+	@SuppressWarnings("unchecked")
+    private Number countQuery(final Map filters) {
 		Number totalCount = (Number) this.getSqlSessionTemplate().selectOne(getCountQuery(), filters);
 
 		return totalCount;
@@ -250,6 +265,20 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		return filters;
 	}
 
+    /**
+     * 
+     * @param statementName
+     * @param filters
+     * @param page
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private Page queryChart(final String statementName, final Map filters, Page page) {
+        List list = getSqlSessionTemplate().selectList(getQuery(statementName), filters, page.getFirstResult(), page.getPageSize());
+        page.setResult(list);
+        return page;
+    }
+
 	/**
 	 * 
 	 * @param statementName
@@ -259,7 +288,6 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 	 */
 	@SuppressWarnings("unchecked")
 	private Page queryPage(final String statementName, final Map filters, Page page) {
-
 		List list = getSqlSessionTemplate().selectList(getQuery(statementName), filters, page.getFirstResult(),
 				page.getPageSize());
 		page.setResult(list);
@@ -335,11 +363,12 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 			});
 		}
 
-		public int batchUpdate(final String statement, final List parameters) {
+		@SuppressWarnings("unchecked")
+        public int batchUpdate(final String statement, final List parameters) {
 			return (Integer) execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
 					for (Object o : parameters) {
-						session.update(statement, 0);
+						session.update(statement, o);
 					}
 					return null;
 				}

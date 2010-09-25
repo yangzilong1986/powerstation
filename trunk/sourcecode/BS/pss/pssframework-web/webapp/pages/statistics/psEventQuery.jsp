@@ -52,9 +52,17 @@ function queryData() {
               </c:forEach>
             </select>
           </td>
-          <td width="100" align="right" class="green">时 间：</td>
+          <td width="100" align="center"></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="100" align="right" class="green" height="30">开始日期：</td>
           <td width="120" align="left">
-            <input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+            <input type="text" class="input_time" id="sdate" name="sdate" value="${sdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
+          </td>
+          <td width="100" align="right" class="green">结束日期：</td>
+          <td width="120" align="left">
+            <input type="text" class="input_time" id="edate" name="edate" value="${edate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
           </td>
           <td width="100" align="center">
             <img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" width="62" height="21" style="cursor: pointer;" />
@@ -68,7 +76,7 @@ function queryData() {
           <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">跳闸信息</li>
         </ul>
       </div>
-      <div align="center" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-65));">
+      <div align="center" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-95));">
         <iframe id="fdata" scrolling="auto" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe>
       </div>
     </form:form>

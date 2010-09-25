@@ -22,7 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 
-	@Override
+    @SuppressWarnings("unchecked")
+    @Override
 	protected EntityDao getEntityDao() {
 		return this.entityDao;
 	}
@@ -36,7 +37,8 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 		return orgList;
 	}
 
-	public List<OrgInfo> findByPageRequest(Map mapRequest) {
+    @SuppressWarnings("unchecked")
+    public List<OrgInfo> findByPageRequest(Map mapRequest) {
 
 		List<OrgInfo> list = new LinkedList<OrgInfo>();
 		list = entityDao.findByPageRequest(mapRequest);

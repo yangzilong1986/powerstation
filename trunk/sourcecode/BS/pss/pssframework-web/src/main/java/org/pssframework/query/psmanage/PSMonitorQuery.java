@@ -12,6 +12,10 @@ public class PSMonitorQuery extends BaseQuery {
 
     private String ddate;
 
+    private String sdate;
+
+    private String edate;
+
     public Long getPsId() {
         return psId;
     }
@@ -26,5 +30,21 @@ public class PSMonitorQuery extends BaseQuery {
 
     public void setDdate(String ddate) {
         this.ddate = ddate;
+    }
+
+    public String getSdate() {
+        return sdate;
+    }
+
+    public void setSdate(String sdate) {
+        this.sdate = sdate;
+    }
+
+    public String getEdate() {
+        return edate;
+    }
+
+    public void setEdate(String edate) {
+        this.edate = edate;
     }
 }

@@ -16,7 +16,8 @@
 <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/psmanage/psmon/eventQuery" modelAttribute="psMonitorQuery">
   <input type="hidden" id="psId" name="psId" value="${psMonitorQuery.psId}" />
-  <input type="hidden" id="ddate" name="ddate" value="${psMonitorQuery.ddate}" />
+  <input type="hidden" id="sdate" name="sdate" value="${psMonitorQuery.sdate}" />
+  <input type="hidden" id="edate" name="edate" value="${psMonitorQuery.edate}" />
   <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
     <thead class="tableHeader">
       <tr>

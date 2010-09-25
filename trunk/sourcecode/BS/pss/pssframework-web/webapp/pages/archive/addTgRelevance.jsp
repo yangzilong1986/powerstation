@@ -8,6 +8,22 @@
 
 <title>台区档案录入</title>
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
+<style type="text/css">
+a {
+    text-decoration: underline;
+    color: #16528B;
+}
+
+a:active {
+    text-decoration: underline;
+    color: #FF0000;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #16528B;
+}
+</style>
 
 <script type="text/javascript">
 	//弹出式窗口
