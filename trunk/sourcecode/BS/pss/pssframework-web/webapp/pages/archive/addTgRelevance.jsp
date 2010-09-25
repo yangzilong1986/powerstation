@@ -353,9 +353,9 @@ jQuery(function(){
     if(val.validate()){
         jQuery(this).attr("disabled","disabled");
 
-        if($("#_type").val()=="edit"){
+        if($("#tgId").val()){
         	updatetginfo();
-        }else if($("#_type").val()=="new"){
+        }else {
         	addtginfo();
         }
         
