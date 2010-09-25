@@ -23,9 +23,9 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 
 	public static final String ORG_ID = "orgId";
 
-	private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1   and t.orgNo LIKE  a.orgNo || '%' /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgNo";
+    private static final String OrgList = "select t FROM OrgInfo t,OrgInfo a WHERE 1=1   and t.orgNo LIKE  a.orgNo || '%' /~ AND a.orgId = [orgId] ~/ ORDER BY t.orgType, t.orgNo";
 
-	private static final String AdminOrgList = "FROM OrgInfo";
+    private static final String AdminOrgList = "FROM OrgInfo ORDER BY orgType, orgNo";
 
 	private OperatorDetails user;
 
@@ -51,8 +51,8 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List<OrgInfo> findByPageRequest(Map mapRequest) {
+    @SuppressWarnings("unchecked")
+    public List<OrgInfo> findByPageRequest(Map mapRequest) {
 		if (!mapRequest.containsKey(ORG_ID)) {
 			if (getCurUsrOrgId() == null)
 				return findAll(AdminOrgList, mapRequest);

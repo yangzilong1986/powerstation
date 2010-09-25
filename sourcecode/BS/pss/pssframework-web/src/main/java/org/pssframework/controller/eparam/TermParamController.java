@@ -1,5 +1,7 @@
 package org.pssframework.controller.eparam;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +45,10 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
         ModelAndView result = new ModelAndView();
         result.addObject("termParamInfo", termParamInfo);
         result.setViewName("/eparam/showTermParam");
+
+        Map mapRequest = new LinkedHashMap();
+        getInitOption(result, mapRequest);
+
         return result;
     }
 
@@ -124,5 +130,33 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
             }
         }
         return result;
+    }
+
+    /**
+     * 
+     * @param model
+     * @param mapRequest
+     */
+    private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+        model.addObject("gpList", this.getGpOptions(mapRequest));
+        model.addObject("agList", this.getAgOptions(mapRequest));
+    }
+    
+    /**
+     * 
+     * @param mapRequest
+     * @return
+     */
+    private List<?> getGpOptions(Map<String, ?> mapRequest) {
+        return null;
+    }
+
+    /**
+     * 
+     * @param mapRequest
+     * @return
+     */
+    private List<?> getAgOptions(Map<String, ?> mapRequest) {
+        return null;
     }
 }

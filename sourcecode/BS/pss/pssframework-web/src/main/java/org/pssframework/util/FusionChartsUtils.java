@@ -26,9 +26,8 @@ public class FusionChartsUtils {
             String className) {
         String chart = getChartData(results, mapSeriesNames, mapParams, className);
         String chartCode = "";
-        chartCode = FusionChartsCreator.createChart(mapParams.get("contextPath") + "/FusionCharts/" + LINE, "",
- chart,
-                                                    "chart", 800, 500, false, false); // 生成图形
+        chartCode = FusionChartsCreator.createChart(mapParams.get("contextPath") + "/FusionCharts/" + LINE, "", chart,
+                "chart", "100%", "100%", false, false); // 生成图形
         return chartCode;
     }
 

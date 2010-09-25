@@ -32,7 +32,7 @@ public class TagUtils {
     /**
      * Maps lowercase JSP scope names to their PageContext integer constant values.
      */
-    private static final Map scopes = new HashMap();
+    private static final Map<String, Integer> scopes = new HashMap<String, Integer>();
 
     /**
      * Initialize the scope names map and the encode variable with the Java 1.4 method if available.

@@ -144,7 +144,8 @@ public class PSMonitorController extends BaseSpringController {
         mav.addObject("psModel", codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode()));
         mav.addObject("commModeGm", codeInfoManager.getCodeInfo("COMM_MODE_GM", psInfo.getCommModeGm()));
         mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
-        mav.addObject("qdate", DateUtils.getCurrentDate());
+        mav.addObject("sdate", DateUtils.getCurrentDate());
+        mav.addObject("edate", DateUtils.getCurrentDate());
 
         return mav;
     }
@@ -158,7 +159,6 @@ public class PSMonitorController extends BaseSpringController {
     private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
         model.addObject("orglist", this.getOrgOptions(mapRequest));
         model.addObject("tglist", this.getTgOrgOptions(mapRequest));
-        model.addObject("qdate", DateUtils.getCurrentDate());
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {

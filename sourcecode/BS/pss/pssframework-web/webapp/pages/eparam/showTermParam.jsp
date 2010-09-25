@@ -38,95 +38,139 @@ function folder(imgObj, itemId) {
     }
 }
 
-function setup(cate) {
-    disableOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"coList":').append('[{');
-    sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
-    sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
-    sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
-    sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+function chkSelected(type, cate) {
+    if($("#cLogicalAddr").val() == '') {
+        alert('请输入要设置终端的逻辑地址');
+        return false;
+    }
+    
+    var cilist = '';
     if(cate == 1) {        // 终端参数
-        sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+        var cilist = getSelectedCheckboxs1();
     }
     else if(cate == 2) {   // 测量点参数
-        sb_dto.append('"mpSn":"' + $("#gpSn").val() + '"').append(',');
+        var cilist = getSelectedCheckboxs2();
     }
     else if(cate == 4) {   // 直流模拟量参数
-        sb_dto.append('"mpSn":"' + $("#agSn").val() + '"').append(',');
+        var cilist = getSelectedCheckboxs4();
     }
-    sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = "";
-    if(cate == 1) {        // 终端参数
-        cilist = getSelectedCheckboxs1();
-    }
-    else if(cate == 2) {   // 测量点参数
-        cilist = getSelectedCheckboxs2();
-    }
-    else if(cate == 4) {   // 直流模拟量参数
-        cilist = getSelectedCheckboxs4();
-    }
-    //alert(cilist);
-    $("#opcilist").val(cilist);
-    var ciarray = cilist.split(',');
-    for(var i = 0; i < ciarray.length; i++) {
-        //alert($("tr[ci='" + ciarray[i] + "']").length);
-        if(i > 0) {
-            sb_dto.append('{');
+
+    if(cilist == '') {
+        if(type == 'setup') {   // 设置
+            alert('请选择要设置的参数');
+            return false;
         }
-        sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
-        sb_dto.append('"datacellParam":').append('[').append('{');
-        //var sb = new StringBuffer();
-        for(var j = 0; j < $("tr[ci='" + ciarray[i] + "']").length; j++) {
-            //alert($($("tr[ci='10040001']")[j]).attr("di"));
-            if(j > 0) {
+        else {                  // 读取
+            alert('请选择要读取的参数');
+            return false;
+        }
+    }
+
+    if(type == 'setup') {   // 设置
+        if(!confirm("确定要对终端[" + $("#cLogicalAddr").val() + "]设置所选的参数吗？")) {
+            return false;
+        }
+    }
+    else {                  // 读取
+        if(!confirm("确定要对终端[" + $("#cLogicalAddr").val() + "]读取所选的参数吗？")) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function setup(cate) {
+    if(chkSelected('setup', cate)) {
+        disableOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"mtoType":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"coList":').append('[{');
+        sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+        sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+        sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+        if(cate == 1) {        // 终端参数
+            sb_dto.append('"mpSn":"' + $("#mpSn").val() + '"').append(',');
+        }
+        else if(cate == 2) {   // 测量点参数
+            sb_dto.append('"mpSn":"' + $("#gpSn").val() + '"').append(',');
+        }
+        else if(cate == 4) {   // 直流模拟量参数
+            sb_dto.append('"mpSn":"' + $("#agSn").val() + '"').append(',');
+        }
+        sb_dto.append('"commandItems":').append('[').append('{');
+        var cilist = "";
+        if(cate == 1) {        // 终端参数
+            cilist = getSelectedCheckboxs1();
+        }
+        else if(cate == 2) {   // 测量点参数
+            cilist = getSelectedCheckboxs2();
+        }
+        else if(cate == 4) {   // 直流模拟量参数
+            cilist = getSelectedCheckboxs4();
+        }
+        //alert(cilist);
+        $("#opcilist").val(cilist);
+        var ciarray = cilist.split(',');
+        for(var i = 0; i < ciarray.length; i++) {
+            //alert($("tr[ci='" + ciarray[i] + "']").length);
+            if(i > 0) {
                 sb_dto.append('{');
             }
-            sb_dto.append('"dataItemCode":"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '"').append(',');
-            sb_dto.append('"dataItemValue":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
-            if(j < $("tr[ci='" + ciarray[i] + "']").length - 1) {
+            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+            sb_dto.append('"datacellParam":').append('[').append('{');
+            //var sb = new StringBuffer();
+            for(var j = 0; j < $("tr[ci='" + ciarray[i] + "']").length; j++) {
+                //alert($($("tr[ci='10040001']")[j]).attr("di"));
+                if(j > 0) {
+                    sb_dto.append('{');
+                }
+                sb_dto.append('"dataItemCode":"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '"').append(',');
+                sb_dto.append('"dataItemValue":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
+                if(j < $("tr[ci='" + ciarray[i] + "']").length - 1) {
+                    sb_dto.append('}').append(',');
+                }
+                //sb.append(',"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
+            }
+            sb_dto.append('}').append(']');
+            //alert(sb.toString().substring(1));
+            
+            if(i < ciarray.length - 1) {
                 sb_dto.append('}').append(',');
             }
-            //sb.append(',"' + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di") + '":"' + $("#" + $($("tr[ci='" + ciarray[i] + "']")[j]).attr("di")).val() + '"');
         }
         sb_dto.append('}').append(']');
-        //alert(sb.toString().substring(1));
-        
-        if(i < ciarray.length - 1) {
-            sb_dto.append('}').append(',');
-        }
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        //alert(sb_dto.toString());
+        //alert(escape(sb_dto.toString()));
+        initOpResult('正在设置...');
+        var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "type": "setup"
+        };
+        $.ajax({
+            type: 'POST',
+            //contentType: 'application/json',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'setup', " + cate + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResult('下发失败...');
+                enableOperation();
+            }
+        });
     }
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    //alert(sb_dto.toString());
-    //alert(escape(sb_dto.toString()));
-    initOpResult('正在设置...');
-    var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "type": "setup"
-    };
-    $.ajax({
-        type: 'POST',
-        //contentType: 'application/json',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'setup', " + cate + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发失败...');
-            enableOperation();
-        }
-    });
 }
 
 function fetchResult(collectId, fetchCount, type, cate) {
@@ -183,7 +227,15 @@ function showResult(resultMap, type, cate) {
         var result = resultMap[logicalAddr + '#' + mpSn + "#" + ciarray[i]];
         if(typeof result != "undefined") {
             if(type == 'setup') {
-                $("#ciop" + ciarray[i]).html(result);
+                if(result == "1") {
+                    $("#ciop" + ciarray[i]).html("设置成功");
+                }
+                else if(result == "2") {
+                    $("#ciop" + ciarray[i]).html("设置失败");
+                }
+                else {
+                    $("#ciop" + ciarray[i]).html("未知[" + result + "]");
+                }
             }
             else {
                 $("#ciop" + ciarray[i]).html("读取成功");
@@ -211,96 +263,98 @@ function showResult(resultMap, type, cate) {
 }
 
 function read(cate) {
-    disableOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects":').append('[{');
-    sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
-    sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
-    sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
-    sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
-    if(cate == 1) {        // 终端参数
-        sb_dto.append('"mpSn":["' + $("#mpSn").val() + '"]').append(',');
-    }
-    else if(cate == 2) {   // 测量点参数
-        sb_dto.append('"mpSn":["' + $("#gpSn").val() + '"]').append(',');
-    }
-    else if(cate == 4) {   // 直流模拟量参数
-        sb_dto.append('"mpSn":["' + $("#agSn").val() + '"]').append(',');
-    }
-    sb_dto.append('"commandItems":').append('[').append('{');
-    var cilist = "";
-    if(cate == 1) {        // 终端参数
-        cilist = getSelectedCheckboxs1();
-    }
-    else if(cate == 2) {   // 测量点参数
-        cilist = getSelectedCheckboxs2();
-    }
-    else if(cate == 4) {   // 直流模拟量参数
-        cilist = getSelectedCheckboxs4();
-    }
-    //alert(cilist);
-    $("#opcilist").val(cilist);
-    var ciarray = cilist.split(',');
-    for(var i = 0; i < ciarray.length; i++) {
-        //alert($("tr[ci='" + ciarray[i] + "']").length);
-        if(i > 0) {
-            sb_dto.append('{');
+    if(chkSelected('read', cate)) {
+        disableOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects":').append('[{');
+        sb_dto.append('"logicalAddr":"' + $("#cLogicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+        sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+        sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+        if(cate == 1) {        // 终端参数
+            sb_dto.append('"mpSn":["' + $("#mpSn").val() + '"]').append(',');
         }
-        
-        if('10040010' == ciarray[i]) {
-            //sb_dto.append('"identifier":"' + ciarray[i] + '"');
-            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
-            sb_dto.append('"datacellParam":').append('{');
-            sb_dto.append('"1004001001": "1"');
-            sb_dto.append('}').append(',');
-            sb_dto.append('"circleDataItems":').append('{');
-            sb_dto.append('"dataItemGroups":').append('[').append('{');
-            sb_dto.append('"dataItemList":').append('[').append('{');
-            sb_dto.append('"dataItemCode": "10040010020001"').append(',');
-            sb_dto.append('"dataItemValue": "1"');
-            sb_dto.append('}').append(']');
-            sb_dto.append('}').append(']');
-            sb_dto.append('}');
+        else if(cate == 2) {   // 测量点参数
+            sb_dto.append('"mpSn":["' + $("#gpSn").val() + '"]').append(',');
         }
-        else {
-            sb_dto.append('"identifier":"' + ciarray[i] + '"');
+        else if(cate == 4) {   // 直流模拟量参数
+            sb_dto.append('"mpSn":["' + $("#agSn").val() + '"]').append(',');
         }
-        
-        if(i < ciarray.length - 1) {
-            sb_dto.append('}').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        var cilist = "";
+        if(cate == 1) {        // 终端参数
+            cilist = getSelectedCheckboxs1();
         }
+        else if(cate == 2) {   // 测量点参数
+            cilist = getSelectedCheckboxs2();
+        }
+        else if(cate == 4) {   // 直流模拟量参数
+            cilist = getSelectedCheckboxs4();
+        }
+        //alert(cilist);
+        $("#opcilist").val(cilist);
+        var ciarray = cilist.split(',');
+        for(var i = 0; i < ciarray.length; i++) {
+            //alert($("tr[ci='" + ciarray[i] + "']").length);
+            if(i > 0) {
+                sb_dto.append('{');
+            }
+            
+            if('10040010' == ciarray[i]) {
+                //sb_dto.append('"identifier":"' + ciarray[i] + '"');
+                sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+                sb_dto.append('"datacellParam":').append('{');
+                sb_dto.append('"1004001001": "1"');
+                sb_dto.append('}').append(',');
+                sb_dto.append('"circleDataItems":').append('{');
+                sb_dto.append('"dataItemGroups":').append('[').append('{');
+                sb_dto.append('"dataItemList":').append('[').append('{');
+                sb_dto.append('"dataItemCode": "10040010020001"').append(',');
+                sb_dto.append('"dataItemValue": "1"');
+                sb_dto.append('}').append(']');
+                sb_dto.append('}').append(']');
+                sb_dto.append('}');
+            }
+            else {
+                sb_dto.append('"identifier":"' + ciarray[i] + '"');
+            }
+            
+            if(i < ciarray.length - 1) {
+                sb_dto.append('}').append(',');
+            }
+        }
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        //alert(sb_dto.toString());
+        //alert(escape(sb_dto.toString()));
+        initOpResult('正在读取...');
+        var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "type": "read",
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            //contentType: 'application/json',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'read', " + cate + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResult('下发失败...');
+                enableOperation();
+            }
+        });
     }
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    //alert(sb_dto.toString());
-    //alert(escape(sb_dto.toString()));
-    initOpResult('正在读取...');
-    var url = '<pss:path type="webapp"/>/eparam/termparam/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "type": "read",
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        //contentType: 'application/json',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchResult(" + data.collectId + ", " + data.fetchCount + ", 'read', " + cate + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResult('下发失败...');
-            enableOperation();
-        }
-    });
 }
 
 function initOpResult(msg) {
@@ -890,6 +944,14 @@ function getSelectedCheckboxs4() {
           <div style="float: right; padding-right: 10px;">
             <select id="gpSn" name="gpSn">
               <option value="1">测量点1</option>
+              <option value="2">测量点2</option>
+              <option value="3">测量点3</option>
+              <option value="4">测量点4</option>
+              <option value="5">测量点5</option>
+              <option value="6">测量点6</option>
+              <option value="7">测量点7</option>
+              <option value="8">测量点8</option>
+              <option value="9">测量点9</option>
             </select>
           </div>
         </div>

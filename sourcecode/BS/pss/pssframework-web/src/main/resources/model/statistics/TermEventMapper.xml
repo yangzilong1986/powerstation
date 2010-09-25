@@ -15,7 +15,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<when test="logicalAddr != null"><![CDATA[ and term.LOGICAL_ADDR like  '%'||#{logicalAddr}||'%']]></when>
 		</choose>
 		<choose>
-			<when test="orgId != null"><![CDATA[ and term.ORG_ID = #{orgId}]]></when>
+			<when test="orgId != null and orgId != 0"><![CDATA[ and term.ORG_ID = #{orgId}]]></when>
 		</choose>
 		<choose>
 			<when test="tgId != null and tgId != -1"><![CDATA[ and term.tg_id = #{tgId}]]></when>

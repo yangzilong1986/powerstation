@@ -17,7 +17,8 @@
 <form:form action="${ctx}/statistics/psDataQuery/ec" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
-  <form:hidden path="ddate" />
+  <form:hidden path="sdate" />
+  <form:hidden path="edate" />
   <table style="width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1000?'1000px':((document.documentElement.clientWidth||document.body.clientWidth)-2));" width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
     <thead class="tableHeader">
       <tr>

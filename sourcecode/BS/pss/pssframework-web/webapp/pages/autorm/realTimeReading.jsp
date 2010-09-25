@@ -420,7 +420,7 @@ function insertCurData(key,value){
 function deleteDataitemTd() {
     var rows = document.all.object_table.rows;
     var cells = rows.item(0).cells.length;
-    for(var j = cells - 1; j > 7; j--) {
+    for(var j = cells - 1; j > 6; j--) {
         for(var i = 0; i < rows.length; i++) {
             rows[i].deleteCell(j);
         }
