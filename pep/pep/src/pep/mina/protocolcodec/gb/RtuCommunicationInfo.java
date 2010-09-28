@@ -199,6 +199,9 @@ public class RtuCommunicationInfo {
         if (this.currentSendTicket == null) {
             return;
         }
+        if (this.idle){
+            return;
+        }
         if (checkTime.getTime() - this.currentSendTicket.getTime() >= RtuCommunicationInfo.TIME_OUT) {
             if (this.currentSendTimes > this.maxRetryTimes) {
                 RtuRespPacketQueue.instance().addPacket(
