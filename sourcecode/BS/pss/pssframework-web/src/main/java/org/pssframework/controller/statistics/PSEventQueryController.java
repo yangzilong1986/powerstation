@@ -8,10 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseSpringController;
-import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.query.statistics.StatisticsQuery;
-import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.statistics.StatisticsManager;
 import org.pssframework.service.statistics.StatisticsType;
 import org.pssframework.service.system.OrgInfoManager;
@@ -37,13 +35,9 @@ public class PSEventQueryController extends BaseSpringController {
     private static final String SDATE = "sdate";
     private static final String EDATE = "edate";
     private static final String ORGLIST = "orglist";
-    private static final String TGLIST = "tglist";
 
     @Autowired
     private OrgInfoManager orgInfoManager;
-
-    @Autowired
-    private TgInfoManager tgInfoManager;
 
     @Autowired
     private StatisticsManager statisticsManager;
@@ -96,16 +90,11 @@ public class PSEventQueryController extends BaseSpringController {
     private void initPageParams(ModelAndView mav) {
         Map mapRequest = new LinkedHashMap();
         mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
-        mav.addObject(TGLIST, this.getTgOrgOptions(mapRequest));
         mav.addObject(SDATE, DateUtils.getCurrentDate());
         mav.addObject(EDATE, DateUtils.getCurrentDate());
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
         return this.orgInfoManager.findByPageRequest(mapRequest);
-    }
-
-    private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
-        return tgInfoManager.findByPageRequest(mapRequest);
     }
 }

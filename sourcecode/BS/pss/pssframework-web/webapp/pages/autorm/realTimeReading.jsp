@@ -161,7 +161,37 @@ $(document).ready(function() {
     $("#inquiryBtn").click( function() {
         $("#userInfo").submit();
     });
+
+    chgOrgId('init');
 });
+
+function chgOrgId(type) {
+    var url = '<pss:path type="webapp"/>/linkage/cblinkage/tgLinkedByOrg';
+    
+    var selectedTg = '';
+    if(type == 'init') {
+        if('${pageRequest.objId}' == '' || '${pageRequest.objId}' == null || '${pageRequest.objId}' == 'null') {
+            selectedTg = '-1';
+        }
+        else {
+            selectedTg = '${pageRequest.objId}';
+        }
+    }
+    else {
+        selectedTg = '-1';
+    }
+    
+    var params = {
+            formId: 'objId',
+            formName: 'objId',
+            orgId: $("#orgId").val(), 
+            tgId: selectedTg
+    };
+    $("#tdLinkedByOrg").load(url, params, function(){
+        //alert($("#tdLinkedByOrg").html());
+        //alert($("#objId").val());
+    });
+}
 </script>
 </head>
 <body>
@@ -172,22 +202,14 @@ $(document).ready(function() {
         <tr>
           <td width="100" height="30" class="green" align="right">单 位：</td>
           <td width="120">
-            <select name="orgId" style="width: 140px;">
+            <select id="orgId" name="orgId" style="width: 140px;" onchange="chgOrgId('chg')">
               <c:forEach var="item" items="${orglist}">
                 <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
               </c:forEach>
             </select>
           </td>
           <td width="100" class="green" align="right">台 区：</td>
-          <td width="120">
-            <select name="objId" style="width: 140px;">
-              <option value="-1">所有台区</option>
-              <c:set value="${model.objId}" var="tg"></c:set>
-              <c:forEach var="item" items="${tglist}">
-                <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
-              </c:forEach>
-            </select>
-          </td>
+          <td width="120" id="tdLinkedByOrg"></td>
           <td width="100" class="green" align="right">逻辑地址：</td>
           <td width="120" class="dom"><input value="${pageRequest.logicalAddr}" name="logicalAddr" id="logicalAddr1" style="width: 140px; height: 20px;"/></td>
           <td width="100" align="right">

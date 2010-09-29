@@ -158,15 +158,10 @@ public class PSMonitorController extends BaseSpringController {
      */
     private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
         model.addObject("orglist", this.getOrgOptions(mapRequest));
-        model.addObject("tglist", this.getTgOrgOptions(mapRequest));
     }
 
     private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
         return this.orgInfoManager.findByPageRequest(mapRequest);
-    }
-
-    private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
-        return tgInfoManager.findByPageRequest(mapRequest);
     }
 
     private TranInfo getTranInfo(Long tgId) {

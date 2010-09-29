@@ -13,12 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.pssframework.controller.BaseSpringController;
-import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.query.statistics.StatisticsQuery;
-import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.statistics.StatisticsManager;
 import org.pssframework.service.statistics.StatisticsType;
 import org.pssframework.service.system.OrgInfoManager;
@@ -40,19 +37,15 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/termData")
 public class TermDataController extends BaseSpringController {
-
-	private static final String VIEW_NAME = "/statistics/termDataQuery";
+	private static final String RAWTYPES = "rawtypes";
+    private static final String VIEW_NAME = "/statistics/termDataQuery";
 	private static final String VIEW_NAME_EVENT = "/statistics/termEventQuery";
 	private static final String SDATE = "sdate";
 	private static final String EDATE = "edate";
 	private static final String ORGLIST = "orglist";
-	private static final String TGLIST = "tglist";
 
 	@Autowired
 	private OrgInfoManager orgInfoManager;
-
-	@Autowired
-	private TgInfoManager tgInfoManager;
 
 	@Autowired
 	private StatisticsManager statisticsManager;
@@ -82,7 +75,7 @@ public class TermDataController extends BaseSpringController {
 		return mav;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", RAWTYPES })
 	@RequestMapping("/event")
 	public ModelAndView showEvent(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
 			StatisticsQuery statisticsQuery) {
@@ -110,16 +103,11 @@ public class TermDataController extends BaseSpringController {
 	private void initPageParams(ModelAndView mav) {
 		Map mapRequest = new LinkedHashMap();
 		mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
-		mav.addObject(TGLIST, this.getTgOrgOptions(mapRequest));
-		mav.addObject(SDATE, DateFormatUtils.ISO_DATE_FORMAT.format(DateUtils.addDays(new Date(), -1)));
+        mav.addObject(SDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
 		mav.addObject(EDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
 	}
 
 	private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
 		return this.orgInfoManager.findByPageRequest(mapRequest);
-	}
-
-	private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
-		return tgInfoManager.findByPageRequest(mapRequest);
 	}
 }
