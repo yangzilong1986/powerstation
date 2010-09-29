@@ -22,11 +22,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		</choose>
 		<choose>
 			<when test="sdate != null"><![CDATA[ AND e.ex_time >= to_date(#{sdate},'yyyy-mm-dd') ]]></when>
-			<otherwise><![CDATA[ AND e.ex_time >= null]]></otherwise>
 		</choose>
 		<choose>
-			<when test="edate != null"><![CDATA[ AND e.ex_time< to_date(#{edate},'yyyy-mm-dd') ]]></when>
-			<otherwise><![CDATA[ AND e.ex_time < null]]></otherwise>
+			<when test="edate != null"><![CDATA[ AND e.ex_time< to_date(#{edate},'yyyy-mm-dd')+1 ]]></when>
 		</choose>
 	</sql>
 	<select id="count" resultType="long">

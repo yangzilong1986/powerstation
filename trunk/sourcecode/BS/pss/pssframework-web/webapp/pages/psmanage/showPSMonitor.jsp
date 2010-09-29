@@ -10,14 +10,46 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    chgOrgId('init');
+
     $("#inquiryBtn").click( function() {
         var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
         $("#psTreeFrame").attr("src", urlInquiry);
     });
-
-    var urlTree = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
-    $("#psTreeFrame").attr("src", urlTree);
 });
+
+function chgOrgId(type) {
+    var url = '<pss:path type="webapp"/>/linkage/cblinkage/tgLinkedByOrg';
+    
+    var selectedTg = '';
+    if(type == 'init') {
+        if('${pageRequest.objId}' == '' || '${pageRequest.objId}' == null || '${pageRequest.objId}' == 'null') {
+            selectedTg = '-1';
+        }
+        else {
+            selectedTg = '${pageRequest.objId}';
+        }
+    }
+    else {
+        selectedTg = '-1';
+    }
+    
+    var params = {
+            formId: 'objId',
+            formName: 'objId',
+            actionChange: 'changeTg()',
+            orgId: $("#orgId").val(), 
+            tgId: selectedTg
+    };
+    $("#tdLinkedByOrg").load(url, params, function(){
+        //alert($("#tdLinkedByOrg").html());
+        //alert($("#objId").val());
+        if(type == 'init') {
+            var urlTree = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
+            $("#psTreeFrame").attr("src", urlTree);
+        }
+    });
+}
 
 function changeTg() {
     var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
@@ -33,22 +65,14 @@ function changeTg() {
         <tr>
           <td width="100" height="30" class="green" align="right">单 位：</td>
           <td width="120">
-            <select name="orgId" style="width: 140px;">
+            <select id="orgId" name="orgId" style="width: 140px;" onchange="chgOrgId('chg')">
               <c:forEach var="item" items="${orglist}">
                 <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
               </c:forEach>
             </select>
           </td>
           <td width="100" class="green" align="right">台 区：</td>
-          <td width="120">
-            <select id="objId" name="objId" style="width: 140px;" onchange="changeTg();">
-              <c:set value="${model.objId}" var="tg"></c:set>
-              <option value="-1">请选择台区</option>
-              <c:forEach var="item" items="${tglist}">
-                <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
-              </c:forEach>
-            </select>
-          </td>
+          <td width="120" id="tdLinkedByOrg"></td>
           <td width="100" align="right">
             <img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" />
           </td>

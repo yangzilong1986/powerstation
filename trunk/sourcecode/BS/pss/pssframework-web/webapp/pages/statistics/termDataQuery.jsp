@@ -17,10 +17,11 @@
 	};
 
 	$(document).ready(function() {
+	    chgOrgId('init');
+	    
 		$("#inquiryBtn").click(function() {
 			queryData(gType);
 		});
-		queryData(gType);
 	});
 
 	function queryData(index) {
@@ -50,6 +51,37 @@
 		gType = index;
 		queryData(index);
 	};
+
+	function chgOrgId(type) {
+	    var url = '<pss:path type="webapp"/>/linkage/cblinkage/tgLinkedByOrg';
+	    
+	    var selectedTg = '';
+	    if(type == 'init') {
+	        if('${pageRequest.tgId}' == '' || '${pageRequest.tgId}' == null || '${pageRequest.tgId}' == 'null') {
+	            selectedTg = '-1';
+	        }
+	        else {
+	            selectedTg = '${pageRequest.tgId}';
+	        }
+	    }
+	    else {
+	        selectedTg = '-1';
+	    }
+	    
+	    var params = {
+	            formId: 'tgId',
+	            formName: 'tgId',
+	            orgId: $("#orgId").val(), 
+	            tgId: selectedTg
+	    };
+	    $("#tdLinkedByOrg").load(url, params, function(){
+	        //alert($("#tdLinkedByOrg").html());
+	        //alert($("#tgId").val());
+	        if(type == 'init') {
+	            queryData(gType);
+	        }
+	    });
+	}
 </script>
 </head>
 <body>
@@ -59,26 +91,21 @@
     <div id="inquiry" style="margin-top: 5px;">
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="100" align="right" class="green">单 位：</td>
-        <td width="120" align="left"><select name="orgId" style="width: 140px;">
+        <td width="100" align="right" class="green" height="30">单 位：</td>
+        <td width="120" align="left"><select id="orgId" name="orgId" style="width: 140px;" onchange="chgOrgId('chg')">
           <c:forEach var="item" items="${orglist}">
             <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if>
               value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
           </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">台 区：</td>
-        <td width="120" align="left"><select name="tgId" style="width: 140px;">
-          <option value="-1">所有台区</option>
-          <c:forEach var="item" items="${tglist}">
-            <option <c:if test="${item.tgId eq pageRequest.tgId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out
-              value="${item.tgName}" /></option>
-          </c:forEach>
-        </select></td>
+        <td width="120" align="left" id="tdLinkedByOrg"></td>
         <td width="100" align="right" class="green">逻辑地址：</td>
         <td width="120" align="left"><input type="text" name="logicalAddr" style="height: 20px;"/></td>
+        <td>&nbsp;</td>
       </tr>
       <tr>
-        <td width="100" align="right" class="green">开始时间：</td>
+        <td width="100" align="right" class="green" height="30">开始时间：</td>
         <td width="120" align="left"><input type="text" class="input_time" id="sdate" name="sdate" value="${sdate}"
           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly"
           style="cursor: pointer; height: 22px; width: 152px;" /></td>
@@ -86,9 +113,10 @@
         <td width="120" align="left"><input type="text" class="input_time" id="edate" name="edate" value="${edate}"
           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly"
           style="cursor: pointer; height: 22px; width: 152px;" /></td>
-        <td width="100" align="center"><img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif"
+        <td width="100" align="right"><img id="inquiryBtn" src="<pss:path type="bgcolor"/>/img/inquiry.gif"
           width="62" height="21" style="cursor: pointer;" /></td>
         <td width="120">&nbsp;</td>
+        <td>&nbsp;</td>
       </tr>
     </table>
     </div>
@@ -97,10 +125,8 @@
       <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">终端事件数据</li>
     </ul>
     </div>
-    <div align="center"
-      style="height: expression(((   document.documentElement.clientHeight ||   document.body.clientHeight) -83 ) );">
-    <iframe id="fdata" scrolling="auto" frameborder="0"
-      style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe></div>
+    <div align="center" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-95));">
+    <iframe id="fdata" scrolling="auto" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%"></iframe></div>
   </form:form>
 </ul>
 </div>

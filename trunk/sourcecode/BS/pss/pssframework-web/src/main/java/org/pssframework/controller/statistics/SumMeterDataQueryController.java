@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.pssframework.controller.BaseSpringController;
-import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.OrgInfo;
-import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.OrgInfoManager;
 import org.pssframework.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,46 +24,34 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/statistics/sumMeterDataQuery")
 public class SumMeterDataQueryController extends BaseSpringController {
-	private static final String VIEW_NAME = "/statistics/sumMeterDataQuery";
+    private static final String VIEW_NAME = "/statistics/sumMeterDataQuery";
 
-	@Autowired
-	private OrgInfoManager orgInfoManager;
+    @Autowired
+    private OrgInfoManager orgInfoManager;
 
-	@Autowired
-	private TgInfoManager tgInfoManager;
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+        modelAndView.setViewName(VIEW_NAME);
 
-	@RequestMapping
-	public ModelAndView list(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
-		modelAndView.setViewName(VIEW_NAME);
-
-		Map mapRequest = new LinkedHashMap();
-
-		getInitOption(modelAndView, mapRequest);
+        Map mapRequest = new LinkedHashMap();
+        getInitOption(modelAndView, mapRequest);
         modelAndView.addObject("qdate", DateUtils.getCurrentDate());
 
-		return modelAndView;
-	}
+        return modelAndView;
+    }
 
-	/**
-	 * 下拉框
-	 *
-	 * @param model
-	 * @param mapRequest
-	 */
-	private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+    /**
+     * 下拉框
+     *
+     * @param model
+     * @param mapRequest
+     */
+    private void getInitOption(ModelAndView model, Map<String, ?> mapRequest) {
+        model.addObject("orglist", this.getOrgOptions(mapRequest));
+    }
 
-		model.addObject("orglist", this.getOrgOptions(mapRequest));
-
-		model.addObject("tglist", this.getTgOrgOptions(mapRequest));
-
-	}
-
-	private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
-		return this.orgInfoManager.findByPageRequest(mapRequest);
-	}
-
-	private List<TgInfo> getTgOrgOptions(Map<String, ?> mapRequest) {
-		return tgInfoManager.findByPageRequest(mapRequest);
-	}
-
+    private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
+        return this.orgInfoManager.findByPageRequest(mapRequest);
+    }
 }

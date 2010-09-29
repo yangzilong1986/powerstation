@@ -12,7 +12,7 @@
 <script type="text/javascript">
 var type='{_type}';
 $(function(){
-	changeType(0);
+    chgOrgId('init');
 })
 
 var contextPath = "${ctx}";
@@ -61,6 +61,36 @@ function changeType(obj) {
     document.getElementById("data").src = url;
 }
 
+function chgOrgId(type) {
+    var url = '<pss:path type="webapp"/>/linkage/cblinkage/tgLinkedByOrg';
+    
+    var selectedTg = '';
+    if(type == 'init') {
+        if('${pageRequest.tgId}' == '' || '${pageRequest.tgId}' == null || '${pageRequest.tgId}' == 'null') {
+            selectedTg = '-1';
+        }
+        else {
+            selectedTg = '${pageRequest.tgId}';
+        }
+    }
+    else {
+        selectedTg = '-1';
+    }
+    
+    var params = {
+            formId: 'tgId',
+            formName: 'tgId',
+            orgId: $("#orgId").val(), 
+            tgId: selectedTg
+    };
+    $("#tdLinkedByOrg").load(url, params, function(){
+        //alert($("#tdLinkedByOrg").html());
+        //alert($("#tgId").val());
+        if(type == 'init') {
+            changeType(0);
+        }
+    });
+}
 </script>
 </head>
 <body>
@@ -71,18 +101,13 @@ function changeType(obj) {
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td width="100" align="right" class="green" height="30">单 位：</td>
-        <td width="120" align="left"><select name="orgId" style="width: 140px;">
+        <td width="120" align="left"><select id="orgId" name="orgId" style="width: 140px;" onchange="chgOrgId('chg')">
           <c:forEach var="item" items="${orglist}">
             <option <c:if test="${item.orgId eq pageRequest.orgId}">selected</c:if> value="<c:out value="${item.orgId}"/>"><c:out value="${item.orgName}" /></option>
           </c:forEach>
         </select></td>
         <td width="100" align="right" class="green">台 区：</td>
-        <td width="120" align="left"><select name="tgId" style="width: 140px;">
-          <option value="-1">所有台区</option>
-          <c:forEach var="item" items="${tglist}">
-            <option <c:if test="${item.tgId eq pageRequest.objId}">selected</c:if> value="<c:out value="${item.tgId}"/>"><c:out value="${item.tgName}" /></option>
-          </c:forEach>
-        </select></td>
+        <td width="120" align="left" id="tdLinkedByOrg"></td>
         <td width="100" align="right" class="green">时间：</td>
         <td width="120"><input type="text" class="input_time" id="ddate" name="ddate" value="${qdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 23px; width: 152px;" /></td>
         <td width="100" align="center">
