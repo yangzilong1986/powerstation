@@ -38,7 +38,6 @@ public class TerminalInfoManger extends BaseManager<TerminalInfo, Long> {
 		return terminalInfoDao;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<TerminalInfo> findByPageRequest(Map mapRequest) {
 
 		return terminalInfoDao.findByPageRequest(mapRequest);

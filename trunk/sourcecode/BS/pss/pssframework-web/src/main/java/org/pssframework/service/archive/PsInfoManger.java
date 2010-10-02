@@ -67,7 +67,16 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	public boolean checkGpsn(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
+		if (gpInfoIn.getGpSn() == gpInfoIn.getGpSnOld())
+			return false;
 		return gpInfoManger.checkGpSnRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpSn());
+	}
+
+	public boolean checkGpAddr(PsInfo psInfo) {
+		GpInfo gpInfoIn = psInfo.getGpInfo();
+		if (gpInfoIn.getGpAddr() == gpInfoIn.getGpAddrOld())
+			return false;
+		return gpInfoManger.checkGpAddrRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpAddr());
 	}
 
 	private void setCheckboxAutoTest(PsInfo model) {
