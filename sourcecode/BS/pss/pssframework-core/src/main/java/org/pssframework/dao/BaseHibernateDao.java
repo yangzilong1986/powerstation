@@ -318,7 +318,7 @@ public abstract class BaseHibernateDao<E, PK extends Serializable> extends Hiber
 		});
 	}
 
-	public List<E> findAllBy(final String propertyName, final Object value) {
+	public List<E> findAllByProperty(final String propertyName, final Object value) {
 		return getHibernateTemplate().executeFind(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				return session.createCriteria(getEntityClass()).add(Restrictions.eq(propertyName, value)).list();
