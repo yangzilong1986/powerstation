@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -75,6 +76,9 @@ public class GpInfo extends BaseEntity {
 	@Column(name = "GP_SN")
 	private Long gpSn;
 
+	@Transient
+	private Long gpSnOld;
+
 	// GP_CHAR VARCHAR2(5),'见编码GP_CHAR'
 	@Column(name = "GP_CHAR", length = 5)
 	private String gpChar;
@@ -90,6 +94,9 @@ public class GpInfo extends BaseEntity {
 	// GP_ADDR VARCHAR2(20),is '通讯地址';
 	@Column(name = "GP_ADDR", length = 12)
 	private String gpAddr;
+
+	@Transient
+	private String gpAddrOld;
 
 	// CT_TIMES NUMBER,
 	@Column(name = "CT_TIMES")
@@ -124,15 +131,15 @@ public class GpInfo extends BaseEntity {
 	private String sucratCptId;
 
 	// LINE_ID NUMBER,
-	@Column(name = " LINE_ID")
+	@Column(name = "LINE_ID")
 	private Long lineId;
 
 	// MAS_METER_SN NUMBER,
-	@Column(name = "MAS_METER_SN ")
+	@Column(name = "MAS_METER_SN")
 	private Long masMeterSn;
 
 	// TRAN_ID NUMBER,
-	@Column(name = "TRAN_ID ")
+	@Column(name = "TRAN_ID")
 	private Long tranId;
 
 	// LASTTIME_STAMP DATE default SYSDATEis '最后表结构修改时间戳';
@@ -169,6 +176,13 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the gpAddrOld
+	 */
+	public String getGpAddrOld() {
+		return gpAddrOld;
+	}
+
+	/**
 	 * @return the gpChar
 	 */
 	public String getGpChar() {
@@ -187,6 +201,13 @@ public class GpInfo extends BaseEntity {
 	 */
 	public Long getGpSn() {
 		return gpSn;
+	}
+
+	/**
+	 * @return the gpSnOld
+	 */
+	public Long getGpSnOld() {
+		return gpSnOld;
 	}
 
 	/**
@@ -267,6 +288,13 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the psInfo
+	 */
+	public PsInfo getPsInfo() {
+		return psInfo;
+	}
+
+	/**
 	 * @return the ptTimes
 	 */
 	public Long getPtTimes() {
@@ -285,6 +313,13 @@ public class GpInfo extends BaseEntity {
 	 */
 	public TerminalInfo getTerminalInfo() {
 		return terminalInfo;
+	}
+
+	/**
+	 * @return the tgInfo
+	 */
+	public TgInfo getTgInfo() {
+		return tgInfo;
 	}
 
 	/**
@@ -332,6 +367,13 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param gpAddrOld the gpAddrOld to set
+	 */
+	public void setGpAddrOld(String gpAddrOld) {
+		this.gpAddrOld = gpAddrOld;
+	}
+
+	/**
 	 * @param gpChar
 	 *            the gpChar to set
 	 */
@@ -353,6 +395,13 @@ public class GpInfo extends BaseEntity {
 	 */
 	public void setGpSn(Long gpSn) {
 		this.gpSn = gpSn;
+	}
+
+	/**
+	 * @param gpSnOld the gpSnOld to set
+	 */
+	public void setGpSnOld(Long gpSnOld) {
+		this.gpSnOld = gpSnOld;
 	}
 
 	/**
@@ -444,6 +493,14 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param psInfo
+	 *            the psInfo to set
+	 */
+	public void setPsInfo(PsInfo psInfo) {
+		this.psInfo = psInfo;
+	}
+
+	/**
 	 * @param ptTimes
 	 *            the ptTimes to set
 	 */
@@ -468,6 +525,13 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param tgInfo the tgInfo to set
+	 */
+	public void setTgInfo(TgInfo tgInfo) {
+		this.tgInfo = tgInfo;
+	}
+
+	/**
 	 * @param tranId
 	 *            the tranId to set
 	 */
@@ -478,34 +542,5 @@ public class GpInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @param psInfo
-	 *            the psInfo to set
-	 */
-	public void setPsInfo(PsInfo psInfo) {
-		this.psInfo = psInfo;
-	}
-
-	/**
-	 * @return the psInfo
-	 */
-	public PsInfo getPsInfo() {
-		return psInfo;
-	}
-
-	/**
-	 * @param tgInfo the tgInfo to set
-	 */
-	public void setTgInfo(TgInfo tgInfo) {
-		this.tgInfo = tgInfo;
-	}
-
-	/**
-	 * @return the tgInfo
-	 */
-	public TgInfo getTgInfo() {
-		return tgInfo;
 	}
 }

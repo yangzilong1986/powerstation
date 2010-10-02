@@ -222,5 +222,11 @@ public final class SystemConst {
 	 */
 	public static final String CODE_DAY_LIST = "DAY_LIST";
 
+	/**
+	 * SWITCH_VALUE_TYPE
+	 * 开关量状态属性
+	 */
+
+	public static final String CODE_SWITCH_VALUE_TYPE = "SWITCH_VALUE_TYPE";
 	/***********************************************************************************/
 }

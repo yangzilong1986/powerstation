@@ -12,6 +12,8 @@ import org.pssframework.dao.archive.GpInfoDao;
 import org.pssframework.dao.archive.TerminalInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.service.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ import cn.org.rapid_framework.page.PageRequest;
  */
 @Service
 public class GpInfoManger extends BaseManager<GpInfo, Long> {
+
+	protected static final Logger logger = LoggerFactory.getLogger(GpInfoManger.class);
 
 	@Autowired
 	private GpInfoDao gpInfoDao;
@@ -99,9 +103,9 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 
 	}
 
-	public boolean termIdIsNull(Long termId) {
+	public static boolean termIdIsNull(Long termId) {
 		if (termId == null) {
-			this.logger.info("没有关联终端");
+			logger.info("没有关联终端");
 			throw new ServiceException("没有关联终端");
 		} else
 			return false;

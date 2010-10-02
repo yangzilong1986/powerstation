@@ -30,12 +30,14 @@ import javax.validation.Valid;
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.PsInfo;
+import org.pssframework.model.archive.SwitchValueInfo;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
+import org.pssframework.service.archive.SwitchValueInfoManager;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
 import org.pssframework.service.system.CodeInfoManager;
@@ -79,6 +81,9 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	@Autowired
 	private MpInfoManger mpInfoManger;
 
+	@Autowired
+	private SwitchValueInfoManager switchValueInfoManager;
+
 	/** binder用于bean属性的设置 */
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -101,14 +106,21 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		return VIEW;
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<OrgInfo> getOrgOptions(Map mapRequest) {
 		return this.orgInfoManager.findByPageRequest(mapRequest);
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<CodeInfo> getStatusOptions(Map mapRequest) {
 		return this.codeInfoManager.findByPageRequest(mapRequest);
+	}
+
+	private List<SwitchValueInfo> getSwitchValueList(Map<String, ?> mapRequest) {
+
+		List<SwitchValueInfo> switchValuelist = this.switchValueInfoManager.findByPageRequest(mapRequest);
+		if (switchValuelist == null || switchValuelist.size() <= 0) {
+			switchValuelist = new LinkedList<SwitchValueInfo>();
+		}
+		return switchValuelist;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -325,9 +337,10 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		// modelAndView.addObject("tranlist", getTranList(mapRequest));
 		modelMap.addAttribute("pslist", this.getPsList(mapRequest));
 		modelMap.addAttribute("termlist", this.getTerminalList(mapRequest));
-		// modelMap.addObject("mplist", this.getMpList(mapRequest));
+		modelMap.addAttribute("swtichvaluelist", this.getSwitchValueList(mapRequest));
 
 	}
+
 
 	/**
 	 * 重叠部分

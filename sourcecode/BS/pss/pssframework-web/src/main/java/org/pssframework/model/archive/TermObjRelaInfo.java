@@ -40,32 +40,17 @@ public class TermObjRelaInfo extends BaseEntity {
 	@JoinColumn(name = "TERM_ID", referencedColumnName = "TERM_ID")
 	private TerminalInfo terminalInfo;
 
-	/**
-	 * @return the termObjId
-	 */
-	public Long getTermObjId() {
-		return termObjId;
-	}
+	@Column(name = "OBJ_TYPE")
+	private String objType;
+
+	@Column(name = "OBJ_ID")
+	private Long objId;
 
 	/**
-	 * @param termObjId the termObjId to set
+	 * @return the objId
 	 */
-	public void setTermObjId(Long termObjId) {
-		this.termObjId = termObjId;
-	}
-
-	/**
-	 * @return the terminalInfo
-	 */
-	public TerminalInfo getTerminalInfo() {
-		return terminalInfo;
-	}
-
-	/**
-	 * @param terminalInfo the terminalInfo to set
-	 */
-	public void setTerminalInfo(TerminalInfo terminalInfo) {
-		this.terminalInfo = terminalInfo;
+	public Long getObjId() {
+		return objId;
 	}
 
 	/**
@@ -76,17 +61,22 @@ public class TermObjRelaInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param objType the objType to set
+	 * @return the terminalInfo
 	 */
-	public void setObjType(String objType) {
-		this.objType = objType;
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
 	}
 
 	/**
-	 * @return the objId
+	 * @return the termObjId
 	 */
-	public Long getObjId() {
-		return objId;
+	public Long getTermObjId() {
+		return termObjId;
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/**
@@ -96,15 +86,25 @@ public class TermObjRelaInfo extends BaseEntity {
 		this.objId = objId;
 	}
 
-	@Column(name = "OBJ_TYPE")
-	private String objType;
+	/**
+	 * @param objType the objType to set
+	 */
+	public void setObjType(String objType) {
+		this.objType = objType;
+	}
 
-	@Column(name = "OBJ_ID")
-	private Long objId;
+	/**
+	 * @param terminalInfo the terminalInfo to set
+	 */
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+	/**
+	 * @param termObjId the termObjId to set
+	 */
+	public void setTermObjId(Long termObjId) {
+		this.termObjId = termObjId;
 	}
 
 	@Override
