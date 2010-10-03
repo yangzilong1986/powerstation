@@ -1,7 +1,10 @@
+<%@page import="org.pssframework.service.archive.TerminalInfoManger"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
 <%@include file="../../commons/meta.jsp"%>
 <%@page import="org.pssframework.support.system.SystemConst"%>
+<%@page import="org.pssframework.service.archive.TerminalInfoManger"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -242,6 +245,8 @@ a:hover {
     </tbody>
   </table>
   </div>
+  
+  <!-- 保护开关 -->
   <div class="mgt10 da_top"><span>保护开关信息</span> <security:authorize
     ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_12">
     <h1><a onclick="openPsInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
@@ -288,6 +293,46 @@ a:hover {
     </tbody>
   </table>
   </div>
+  
+  
+  <!-- 开关量 --> 
+  <div class="mgt10 da_top"><span>开关量信息</span> <security:authorize
+    ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_12">
+    <h1><a onclick="openSwitchValueInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th width="14%">开关量编号</th>
+        <th width="14%">开关量名称</th>
+        <th width="14%">开关量属性</th>
+        <th width="14%">终端地址</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${swtichvaluelist}" var="swtich" varStatus="status">
+        <tr id="switch_${swtich.switchValueId.terminalInfo.termId}_${swtich.switchValueId.switchNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>&nbsp;${swtich.switchValueId.switchNo}</td>
+          <td>&nbsp;${swtich.switchValueName}</td>
+          <td>&nbsp;<pss:code code="${swtich.switchType}" codeCate="<%=SystemConst.CODE_SWITCH_VALUE_TYPE%>" /></td>
+          <td>&nbsp;${swtich.switchValueId.terminalInfo.logicalAddr}</td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1,ROLE_AUTHORITY_12">
+            <a onclick="deleteSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
+              onclick="updateSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">查看</a>
+          </security:authorize></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  
+  
     <!-- 操作员信息 -->
   <div class="mgt10 da_top"><span>操作员信息</span> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3">
     <h1><a onclick="openUser('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif' width="16"
@@ -517,6 +562,62 @@ updatePsInfo=function(psId){
 };
 showPsInfo=function(psId){
     var url = "${ctx}/archive/psinfo/"+psId+"?gpInfo.objectId="+$("#tgId").val();
+    windowPopup(url, 960, 575);
+};
+
+/*******************************************************************/
+  //打开开关量
+ function openSwitchValueInfo(tgId){
+	 
+	  if(!$("#tgId").val()){
+	    alert("请先建台区");return;
+	  }
+     var url = contextPath + "/archive/switchvalueinfo/new?tgId="+ $("#tgId").val();
+     windowPopup(url, 960, 575);
+  } 
+ 
+deleteSwitchValueInfo=function(temId,switchNo){
+   if(temId==null || temId =="" 
+		   || switchNo ==null || switchNo ==""){
+     return;
+   } 
+
+   var url = "${ctx}/archive/switchvalueinfo.json?_method=delete&switchNo="+switchNo+"&terminalInfo.termId="+temId;
+   if (confirm("确定要删除该开关量?")) {
+       $.ajax({
+           url: url,
+           dataType:'json',
+           type:'POST',
+           cache: false,
+           success: function(json) {
+    	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+               alert(msg);
+               if(isSucc){
+                $("#switch_"+temId+"_"+switchNo).remove();
+               }
+           },error:function(e) {
+               alert("delete error");
+           }
+       });
+   }
+  };
+
+updateSwitchValueInfo=function(temId,switchNo){
+	 if(temId==null || temId =="" 
+		   || switchNo ==null || switchNo ==""){
+   return;
+ } 
+     var url = "${ctx}/archive/switchvalueinfo/edit?switchNo="+switchNo+"&terminalInfo.termId="+temId;
+     windowPopup(url, 960, 575);
+};
+
+showSwitchValueInfo=function(temId,switchNo){
+	 if(temId==null || temId =="" 
+		   || switchNo ==null || switchNo ==""){
+   	return;
+ } 
+    var url = "${ctx}/archive/switchvalueinfo?switchNo="+switchNo+"&terminalInfo.termId="+temId;
     windowPopup(url, 960, 575);
 };
 /*******************************************************************/
