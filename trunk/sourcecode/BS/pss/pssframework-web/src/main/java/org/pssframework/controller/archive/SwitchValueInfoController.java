@@ -31,7 +31,9 @@ import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.SwitchValueInfo;
 import org.pssframework.model.archive.SwitchValueInfoPK;
 import org.pssframework.model.archive.TerminalInfo;
+import org.pssframework.model.archive.TgInfo;
 import org.pssframework.service.archive.SwitchValueInfoManager;
+import org.pssframework.service.archive.TermObjRelaInfoManager;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -120,6 +123,8 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 
 		result.addAttribute("switchvalueinfo", switchValueInfo);
 
+		requestMap.put("termid", switchValueInfoPK.getTerminalInfo().getTermId());
+
 		this.CommonPart(result, requestMap);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
@@ -138,6 +143,8 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 
 		result.addAttribute("switchvalueinfo", switchValueInfo);
 
+		requestMap.put("termid", switchValueInfoPK.getTerminalInfo().getTermId());
+
 		this.CommonPart(result, requestMap);
 
 		result.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_SHOW);
@@ -155,9 +162,9 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 
 		Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
 
-		requestMap.put("tgid", tgid);
+		requestMap.put("tgId", tgid);
 
-		modelMap.addAttribute("tgId", tgid);
+		modelMap.addAttribute("tgid", tgid);
 
 		modelMap.addAttribute("switchvalueinfo", model);
 
@@ -234,7 +241,14 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 	@SuppressWarnings("rawtypes")
 	private void CommonPart(ModelMap result, Map<String, Comparable> mapRequest) {
 
-		List<TerminalInfo> termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
+		List<TerminalInfo> termlist = Lists.newArrayList();
+		if (mapRequest.get("tgid") == null) {
+			Long tgid = this.getTgInfo(mapRequest).getTgId();
+			result.addAttribute("tgId", tgid);
+			mapRequest.put("tgid", tgid);
+		}
+
+		termlist = this.terminalInfoManger.findByPageRequest(mapRequest);
 
 		result.addAttribute("termList", termlist);
 
@@ -261,6 +275,17 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 	@RequestMapping(value = "/checkSwtichNo")
 	public String checkSwtichNoByAjax(SwitchValueInfo switchValueInfo) throws Exception {
 		return switchValueInfoManager.checkSwtichNoRePeat(switchValueInfo);
+	}
+
+	@Autowired
+	private TermObjRelaInfoManager termObjRelaInfoManager;
+
+	private TgInfo getTgInfo(Map con) {
+		List<TgInfo> tginfos = Lists.newArrayList();
+		tginfos = termObjRelaInfoManager.findTgInfo(con);
+		for (TgInfo tginfo : tginfos)
+			return tginfo;
+		return tginfos.get(0);
 	}
 
 }

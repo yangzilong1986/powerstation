@@ -35,16 +35,16 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 	public boolean checkSwtichNo(SwitchValueInfo switchValueInfo) {
 		SwitchValueInfoPK switchValueInfoPK = switchValueInfo.getSwitchValueId();
 		if (compareOld(switchValueInfo))
-			return checkSwtichNoRePeat(switchValueInfoPK.getTermId(), switchValueInfoPK.getSwitchNo());
+			return checkSwtichNoRePeat(switchValueInfoPK);
 		else
-			return true;
+			return false;
 
 	}
 
 	private boolean compareOld(SwitchValueInfo switchValueInfo) {
 		SwitchValueInfoPK switchValueInfoPK = switchValueInfo.getSwitchValueId();
 		if (switchValueInfoPK.getSwitchNo() == switchValueInfo.getSwitchNoOld()
-				&& switchValueInfoPK.getTermId() == switchValueInfo.getTermIdOld())
+				&& switchValueInfoPK.getTerminalInfo().getTermId() == switchValueInfo.getTermIdOld())
 			return false;
 		else
 			return true;
@@ -84,22 +84,23 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 	 * @param gpSn
 	 * @return
 	 */
-	public boolean checkSwtichNoRePeat(Long termId, Long switchNo) {
+	public boolean checkSwtichNoRePeat(SwitchValueInfoPK switchValueInfoPK) {
 
 		boolean ret = false;
-		if (!GpInfoManger.termIdIsNull(termId)) {
-			SwitchValueInfoPK switchValueInfoPK = new SwitchValueInfoPK(termId);
+		if (switchValueInfoPK.getTerminalInfo() == null)
+			return ret;
+		if (!GpInfoManger.termIdIsNull(switchValueInfoPK.getTerminalInfo().getTermId())) {
 			List<SwitchValueInfo> switchValueInfos = switchValueInfoDao.findAllByProperty("switchValueId",
 					switchValueInfoPK);
 			for (SwitchValueInfo switchValueInfo : switchValueInfos) {
-				if (switchValueInfo.getSwitchValueId().getSwitchNo() == switchNo) {
+				if (switchValueInfo.getSwitchValueId().getSwitchNo() == switchValueInfoPK.getSwitchNo()) {
 					ret = true;
 					break;
 				}
 			}
 			return ret;
 		} else
-			return GpInfoManger.termIdIsNull(termId);
+			return GpInfoManger.termIdIsNull(switchValueInfoPK.getTerminalInfo().getTermId());
 	}
 
 	public boolean checkGpSnRePeat(List<GpInfo> dbGpInfos, Long gpSn) {

@@ -5,6 +5,8 @@ package org.pssframework.model.archive;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -25,38 +27,38 @@ public class SwitchValueInfoPK extends BaseEntity {
 	 */
 	private static final long serialVersionUID = 6481563042067392610L;
 
-	//TERM_ID
-	@Column(name = "TERM_ID", nullable = false)
-	private Long termId;
+	@ManyToOne
+	@JoinColumn(name = "TERM_ID", nullable = false)
+	private TerminalInfo terminalInfo;
 
 	//SWITCH_NO
 	@Column(name = "SWITCH_NO", nullable = false)
 	private Long switchNo;
 
-	public SwitchValueInfoPK(Long termId, Long swithNo) {
-		this.termId = termId;
+	public SwitchValueInfoPK(TerminalInfo terminalInfo, Long swithNo) {
+		this.terminalInfo = terminalInfo;
 		this.switchNo = swithNo;
 	}
 
-	public SwitchValueInfoPK(Long termId) {
-		this.termId = termId;
+	public SwitchValueInfoPK(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
 	}
 
 	public SwitchValueInfoPK() {
 	}
 
 	/**
-	 * @return the termId
+	 * @return the terminalInfo
 	 */
-	public Long getTermId() {
-		return termId;
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
 	}
 
 	/**
-	 * @param termId the termId to set
+	 * @param terminalInfo the terminalInfo to set
 	 */
-	public void setTermId(Long termId) {
-		this.termId = termId;
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
 	}
 
 	/**
