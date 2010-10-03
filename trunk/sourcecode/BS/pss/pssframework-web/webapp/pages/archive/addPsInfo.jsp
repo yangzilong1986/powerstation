@@ -55,6 +55,18 @@ function lpad (object,lenth) {
     object.value = s.join('')+value;
 }
 
+function lpadString (str,lenth) {
+    var value = str;
+    var len = lenth-value.length;
+    var s = new Array(len);
+    for(var i = 0; i< len;i++){
+      s[i] = '0';
+    }
+    str = s.join('')+value;
+    return str;
+}
+
+
 
 </script>
 </head>
@@ -63,7 +75,7 @@ function lpad (object,lenth) {
 <ul class="default" id="electric_Con_1" style="padding: 5px;">
   <div class="tab"><span>漏电保护器</span></div>
   <div class="da_mid"
-    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth || document.body.clientWidth) -10 ); height: expression(((      document.documentElement.clientHeight ||   document.body.clientHeight) -35 ) );">
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((     document.documentElement.clientWidth ||   document.body.clientWidth) -10 ); height: expression(((        document.documentElement.clientHeight ||     document.body.clientHeight) -35 ) );">
   <div><form:form action="/archive/psinfo" modelAttribute="psinfo">
     <input type="hidden" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
       value="${_type}" />
@@ -76,43 +88,59 @@ function lpad (object,lenth) {
       </c:otherwise>
     </c:choose>
     <form:hidden path="gpInfo.objectId" />
-    <div id="main">
+    <div id="main"><input type="hidden" id="channelType" name="channelType" value="1" /> <input type="hidden"
+      id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
+    <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>资产编号：</td>
-        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td width="30%"><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="assetNo" cssClass="required input2" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="assetNo" cssClass="required input2" disabled="${disabled}" />
         </security:authorize></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
-        <td width="30%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td width="30%"><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
             itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
-            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" cssClass="validate-ajax-${ctx}/archive/psinfo/checkGpSn.json validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json"/>
+            itemValue="termId" cssStyle="width:155px;" disabled="${disabled}"
+            cssClass="validate-ajax-${ctx}/archive/psinfo/checkGpSn.json validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><!-- gpAddr --> <input type="hidden" name="gpInfo.gpAddrOld" value="${psinfo.gpInfo.gpAddr}" /> <security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpAddr" maxlength="12" onchange="lpad(this,12)" disabled="${disabled}" cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json"/>
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <form:input path="gpInfo.gpAddr" maxlength="12" onchange="lpad(this,12)" disabled="${disabled}"
+            cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json" />
         </security:authorize></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><!-- gpsn --> <input type="hidden" name="gpInfo.gpSnOld" value="${psinfo.gpInfo.gpSn}" /><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpSn" cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpSn.json" disabled="${disabled}" />
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <form:input path="gpInfo.gpSn"
+            cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpSn.json"
+            disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">漏保名称：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">安装地址：</td>
@@ -120,13 +148,15 @@ function lpad (object,lenth) {
       </tr>
       <tr height="30px">
         <td align="right" class="green">试跳时间：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <span><form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;</span><span
-            id="time"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name"
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <span><form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;</span>
+          <span id="time"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name"
             itemValue="code" disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}"
             id="testTime" itemLabel="name" itemValue="code" disabled="${disabled}" />点</span>
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <span><form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;<span
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <form:checkbox path="autoTest" id="autoTest" title="自动试跳" value="1" disabled="${disabled}" />自动试跳&nbsp;<span
             id="time"><form:select path="testDay" items="${dayList}" id="testTime" itemLabel="name"
             itemValue="code" disabled="${disabled}" />日&nbsp;<form:select path="testTime" items="${clockList}"
             id="testTime" itemLabel="name" itemValue="code" disabled="${disabled}" />点</span>
@@ -139,54 +169,66 @@ function lpad (object,lenth) {
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td align="right" class="green">通信方式：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="commModeGm" items="${commModeList}" id="commModeGm" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">漏保型号：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="modelCode" items="${psModelList}" id="modelCode" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">波特率：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code" cssStyle="width:155px;"
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <form:select path="btl" items="${btlList}" itemLabel="name" itemValue="code" cssStyle="width:155px;"
             disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="btl" items="${btlList}" id="btl" itemLabel="name" itemValue="code" cssStyle="width:155px;"
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+          <form:select path="btl" items="${btlList}" itemLabel="name" itemValue="code" cssStyle="width:155px;"
             disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">额定电流：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="ratedEc" items="${ratedEcList}" id="ratedEc" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td align="right" class="green">规约：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">漏保类型：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        <td><security:authorize
+          ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+        </security:authorize><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:select path="psType" items="${psTypeList}" id="psType" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
@@ -198,7 +240,8 @@ function lpad (object,lenth) {
         <td><form:select path="offDelayGear" items="${offDelayGearList}" id="offDelayGear" itemLabel="name"
           itemValue="code" cssStyle="width:145px;" disabled="true" /></td>
         <td align="right" class="green">剩余电流档位：</td>
-        <td><form:select path="remcGear" items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
+        <td><form:select path="remcGear" 
+        items="${remcGearList}" id="remcGear" itemLabel="name" itemValue="code"
           cssStyle="width:165px;" disabled="true" /></td>
       </tr>
       <!--  
@@ -219,9 +262,11 @@ function lpad (object,lenth) {
     </table>
     </div>
   </form:form></div>
-  <div style="text-align: center"><br></br>
-  <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
+  <div style="text-align: center" id="msg"><br></br>
+  <security:authorize
+    ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
     <c:if test="${_type!='show'}">
+      <input type="button" id="f10" value="参数下发" class="btnbg4" />
       <input type="button" id="save" value="保 存" class="btnbg4" />
     </c:if>
   </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
@@ -230,6 +275,20 @@ function lpad (object,lenth) {
 </div>
 </body>
 <script>
+function StringBuffer() {
+    this.data = [];
+}
+
+StringBuffer.prototype.append = function() {
+    this.data.push(arguments[0]);
+    return this;
+};
+
+StringBuffer.prototype.toString = function() {
+    return this.data.join("");
+};
+
+
 val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
 	   return result;
 	  }}
@@ -243,8 +302,214 @@ checkBox  = function(){
    }
 };
 
+function getOptionText(id){
+	if(!$("#"+id)){
+		alert("没有指定的dom");
+		return '';
+	}
+	
+	return $("#"+id+" option[selected]").text();
+	
+}
+
+function akeySetupTermParamF10(){
+	   var sb_dto = new StringBuffer();
+	   
+	    sb_dto.append('{');
+	    sb_dto.append('"collectObjects":').append('[');
+	    for(var loop = 0; loop < 1; loop++) {
+	        if(loop != 0) {
+	            sb_dto.append(',');
+	        }
+	        var logicalAddr;
+	        var gpsn;
+	        var equipProtocol;
+	       	var channelType;
+	        var baudrate;
+	        var gpAddr;
+	        
+	      	        
+	        logicalAddr = getOptionText("termAddr");
+	        gpsn = $("#gpInfo.gpSn").val();
+	        equipProtocol = $("#gpInfo.protocolNo").val();
+	        baudrate = getOptionText("btl");
+	        gpAddr = $("gpInfo.gpAddr").val();
+	        
+	        sb_dto.append('{');
+	        sb_dto.append('"logicalAddr":"' + logicalAddr + '"').append(',');
+	        sb_dto.append('"equipProtocol":"' + equipProtocol + '"').append(',');
+	        sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+	        sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+	        sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+	        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+	        sb_dto.append('"mpSn":["' + gpsn + '"]').append(',');
+	        sb_dto.append('"commandItems":').append('[').append('{');
+	        var ciarray = ['1004001'];
+	        for(var i = 0; i < ciarray.length; i++) {
+	            if(i > 0) {
+	                sb_dto.append('{');
+	            }
+	            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+	            sb_dto.append('"circleLevel":"' + 1 + '"').append(',');
+	            
+	            sb_dto.append('"datacellParam":').append('[');
+	          /*  
+	               *<"1004001001", String>      : 本次电能表/交流采样装置配置数量
+	       	 *     *<"10040010020001", String>  : 本次配置第0001块电能表/交流采样装置序号 【默认与所属测量点号相同】
+	       	 *     *<"10040010030001", String>  : 本次配置第0001块电能表/交流采样装置所属测量点号
+	       	 *     *<"10040010040001", String>  : 本次配置第0001块电能表/交流采样装置通信波特率 C_METER.BAUDRATE
+	       	 *     *<"10040010050001", String>  : 本次配置第0001块电能表/交流采样装置通信端口号 C_GP.PORT
+	       	 *     *<"10040010060001", String>  : 本次配置第0001块电能表/交流采样装置通信协议类型 C_GP.PROTOCOL_NO
+	       	 *     *<"10040010070001", String>  : 本次配置第0001块电能表/交流采样装置通信地址  C_GP.GP_ADDR
+	       	 */
+				
+	       	 	var gpFully = "";
+	       	 	gpFully = lpadString(gpsn, 4);
+	       	 	
+	       	 	sb_dto.append('{');
+	       	    sb_dto.append('"1004001001": "1"');
+	       	    sb_dto.append("}").append(',');
+	            
+	       	 	sb_dto.append('{');
+	       	    sb_dto.append('"1004001002'+gpFully+'": "'+gpsn+'"');
+	       	    sb_dto.append("}").append(',');
+	       	 	
+	       	    sb_dto.append('{');
+	     	    sb_dto.append('"1004001003'+gpFully+'": "'+gpsn+'"');
+	       	    sb_dto.append("}").append(',');
+	       	    
+	       	 	sb_dto.append('{');
+	     	    sb_dto.append('"1004001004'+gpFully+'": "'+baudrate+'"');
+	       	    sb_dto.append("}").append(',');
+	       	    
+	       	 	sb_dto.append('{');
+	     	    sb_dto.append('"1004001005'+gpFully+'": "1"');
+	       	    sb_dto.append("}").append(',');
+	       	    
+	       	 	sb_dto.append('{');
+	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"');
+	       	    sb_dto.append("}").append(',');
+	       	    
+	       	 	sb_dto.append('{');
+	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"');
+	     	   	sb_dto.append("}");
+	     	  	sb_dto.append(']');
+	            
+	            if(i < ciarray.length - 1) {
+	                sb_dto.append('}').append(',');
+	            }
+	        }
+	        
+	        sb_dto.append('}').append(']');
+	        sb_dto.append('}');
+	    }
+	    
+	    sb_dto.append(']}');
+	    
+	    var url = '<pss:path type="webapp"/>/archive/psinfo/akeySetupTermParamF10.json';
+	    $.ajax({
+	        type: 'POST',
+	        url: url,
+	        data: "dto=" + sb_dto.toString(),
+	        dataType: 'json',
+	        beforeSend:function(){
+	        	toggleButton();
+	        },
+	        success: function(data) {
+	            fetchReturnResult(data, 10, 100);
+	        },
+	        
+	        error: function() {
+	        }
+	    });
+
+	   
+}
+
+function fetchReturnResult(appIds, sFetchCount, commanditems) {
+    var iFetchCount = 0;
+    try {
+        iFetchCount = parseInt(sFetchCount);
+    }
+    catch(e) {
+        iFetchCount = 0;
+    }
+    var params = {
+            "collectId": appIds,
+            "fetchCount": iFetchCount,
+            "random":Math.random()
+    };
+    
+    var url = '<pss:path type="webapp"/>/archive/psinfo/backAkeySetupTermParamF10.json';
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        success: function(data) {
+            
+        	if(!data){
+        		  if(iFetchCount > 0) {
+                      setTimeout("fetchReturnResult('" + appIds + "', " + (iFetchCount - 1) +", '"+ commanditems+ "')", 3000);
+                  }else{
+                	  $("#msg").html("setup timeout");
+                  	  toggleButton();
+                  }
+        	}
+            else {
+            	$("#msg").html("setup sessful");
+            	toggleButton();
+            }
+        },
+        error:function(){
+               //alert("error")
+        	toggleButton;
+          }
+    });
+
+    if(iFetchCount == 0) {
+    	 $("#msg").html("setup timeout");
+     	  toggleButton();
+        //alert("操作结束");
+    }
+}
+
+
+
+function toggleButton(){
+	$("type=button").toggle(function () {
+	    $(this).attr("disabled","true");
+	  },
+	  function () {
+	    $(this).attr("disabled","");
+	  }
+	  );
+};
+	
+
+function initOpResult(msg) {
+    var cilist = $("#opcilist").val();
+    var ciarray = cilist.split(',');
+    for(var i = 0; i < ciarray.length; i++) {
+        $("#ciop" + ciarray[i]).html(msg);
+    }
+}
+
 $(function(){
+	
+	$("#msg").beforeSend(function(e,xhr,o) { 
+	    $(this).html("正在请求"+o.url); 
+	}).ajaxSuccess(function(e,xhr,o) { 
+	    $(this).html(o.url+"请求成功"); 
+	}).ajaxError(function(e,xhr,o) { 
+	    $(this).html(o.url+"请求失败"); 
+	}); 
+	
   checkBox();
+  
+ $("f10").click(function(){
+	 akeySetupTermParamF10();
+ });
 
   $("#autoTest").click(function(){
       if($(this).attr("checked")){
@@ -328,22 +593,21 @@ updatepsinfo = function(){
            success: function(json){
     	  var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
-             alert(msg);
-             if(isSucc){
-          	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
-          	 closeWin();
-             }
-           },
-           error:function(XmlHttpRequest)
-           {
-           alert("更新失败;"+XmlHttpRequest.responseText +  XmlHttpRequest.statusText);
-           }
-         });
-    }
-};
-function   closeWin() 
-{ 
-        window.close(); 
-} ;
+							alert(msg);
+							if (isSucc) {
+								opener.location.href = "${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
+								closeWin();
+							}
+						},
+						error : function(XmlHttpRequest) {
+							alert("更新失败;" + XmlHttpRequest.responseText
+									+ XmlHttpRequest.statusText);
+						}
+					});
+		}
+	};
+	function closeWin() {
+		window.close();
+	};
 </script>
 </html>

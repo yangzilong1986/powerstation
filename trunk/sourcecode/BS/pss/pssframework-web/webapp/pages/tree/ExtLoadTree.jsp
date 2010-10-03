@@ -263,7 +263,7 @@ remove = function(){
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
 <input type="button" value="查找节点" onclick="remove()" />-->
-<div id="tree" style="overflow: auto; height: 100%; width: 100%;" /></div>
+<div id="tree" style=" height: 100%; width: 180px;" /></div>
 ${leafInfo}
 </BODY>
 </HTML>
