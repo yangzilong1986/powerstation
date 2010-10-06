@@ -496,14 +496,14 @@ function initOpResult(msg) {
 }
 
 $(function(){
-	
+	/*
 	$("#msg").beforeSend(function(e,xhr,o) { 
 	    $(this).html("正在请求"+o.url); 
 	}).ajaxSuccess(function(e,xhr,o) { 
 	    $(this).html(o.url+"请求成功"); 
 	}).ajaxError(function(e,xhr,o) { 
 	    $(this).html(o.url+"请求失败"); 
-	}); 
+	}); */
 	
   checkBox();
   
