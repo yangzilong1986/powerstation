@@ -74,7 +74,7 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	public boolean checkGpAddr(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
-		if (gpInfoIn.getGpAddr() == gpInfoIn.getGpAddrOld())
+		if (gpInfoIn.getGpAddr().equals(gpInfoIn.getGpAddrOld()))
 			return false;
 		return gpInfoManger.checkGpAddrRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpAddr());
 	}
