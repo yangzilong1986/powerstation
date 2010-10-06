@@ -5,8 +5,8 @@ package org.pssframework.model.archive;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.pssframework.base.BaseEntity;
@@ -23,9 +23,8 @@ public class AnalogueInfo extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 4469888225478750148L;
-
+	@Id
 	@OneToOne
-	@PrimaryKeyJoinColumn(name = "GP_ID")
 	private GpInfo gpInfo;
 
 	//量程起始值RANGE_BEGIN
