@@ -76,7 +76,7 @@ import pep.bp.realinterface.mto.MessageTranObject;
  * @author Administrator 模拟量
  */
 @Controller
-@RequestMapping("/archive/psinfo")
+@RequestMapping("/archive/analogueinfo")
 public class AnalogueInfoController extends BaseRestSpringController<AnalogueInfo, java.lang.Long> {
 
 	private static final String VIEW = "/archive/addAnalogueInfo";
