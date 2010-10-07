@@ -276,6 +276,12 @@ function lpadString (str,lenth) {
 </div>
 </body>
 <script>
+
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
+	   return result;
+	  }}
+	  );
+	  
 function StringBuffer() {
     this.data = [];
 }
@@ -290,10 +296,7 @@ StringBuffer.prototype.toString = function() {
 };
 
 
-val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
-	   return result;
-	  }}
-	  );
+
 
 checkBox  = function(){
    if($("#autoTest").attr("checked")){
