@@ -281,7 +281,8 @@ val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormVali
   
 $(function(){
 jQuery("#save").click(function(){
-    if(val.result()){
+	var ret = val.result();
+    if(ret=="true" || ""==ret){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatempinfo();

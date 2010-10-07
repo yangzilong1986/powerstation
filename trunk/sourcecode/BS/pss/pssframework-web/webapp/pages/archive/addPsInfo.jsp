@@ -528,7 +528,8 @@ if('${_type}' == "new"){
 }
 	
 jQuery("#save").click(function(){
-    if(val.result()){
+	var ret = val.result();
+    if(ret=="true" || ""==ret){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatepsinfo();
