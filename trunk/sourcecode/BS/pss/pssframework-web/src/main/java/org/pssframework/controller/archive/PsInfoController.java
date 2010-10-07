@@ -452,7 +452,7 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/akeySetupTermParamF10")
-	public Long akeySetupTermParamF10(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String akeySetupTermParamF10(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String jsonString = request.getParameter("dto");
 
@@ -473,22 +473,24 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		logger.info("collectId : " + collectId);
 
-		return collectId;
+		return String.valueOf(collectId);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/backAkeySetupTermParamF10")
-	public boolean backAkeySetupTermParamF10(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String backAkeySetupTermParamF10(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		String strCollectId = request.getParameter("collectId");
-		boolean ret = false;
+		String ret = "";
 		if (strCollectId != null) {
 			long collectId = Integer.parseInt(strCollectId);
 			Map<String, String> resultMap = realTimeProxy376.getReturnByWriteParameter(collectId);
 			if (resultMap.containsValue("1")) {
-				ret = true;
+				ret = "1";
 			} else if (resultMap.containsValue("2")) {
-				ret = false;
+				ret = "2";
+			} else {
+				ret = "";
 			}
 			logger.info("resultMap : " + resultMap.toString());
 		}
