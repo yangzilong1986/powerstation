@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>迷途知返 jquery.msgbox Test</TITLE>
+<META content="text/html; charset=UTF-8" http-equiv=Content-Type>
+<STYLE>#test SPAN {
+	PADDING: 4px; BACKGROUND-COLOR: #006699; MARGIN: 2px; FLOAT: left; color:white
+}
+#test,textarea {
+	FONT-SIZE: 12px
+}
+</STYLE>
+<LINK rel=stylesheet type=text/css href="jquery.msgbox.css">
+<SCRIPT type=text/javascript src="jquery.min.js"></SCRIPT>
+<SCRIPT type=text/javascript src="jquery.dragndrop.min.js"></SCRIPT>
+<SCRIPT type=text/javascript src="jquery.msgbox.js"></SCRIPT>
+
+<SCRIPT language=JavaScript type=text/javascript>  
+$(function(){   
+
+	$("#test input").click(function(){
+		var index = $("#test input").index($(this));
+		eval($("#test textarea").eq(index).val());
+	});
+
+});   
+  
+</SCRIPT>
+
+<META></HEAD>
+<BODY>
+<DIV id=test><SPAN>从iframe关闭jquery.msgbox<BR><TEXTAREA id=textarea rows=12 cols=30 name=textarea>top.$mb
+        .setHeight(550)
+        .setWidth(650)
+        .setTitle("Public functions demo")
+        .setWrapperClass("msgbox_wrapper1")
+        .setTitleClass("msgbox_title1")
+        .setCloseClass("msgbox_close1")
+        .setTitleWrapperClass("msgbox_title_wrapper1")
+        .setMainClass("msgbox_main1")
+        .setBgClass("msgbox_bg1")
+        .setButtonClass("msgbox_button1")
+        .setInputboxClass("msgbox_inputbox1")
+        .setContent({type:'text', content:'Hello, world!'})
+        .setBgOpacity(.9)
+        .setOnClose(function(){alert(1)})
+        .setAnimation(3)
+        .setCloseIcon("Close")
+        .setAutoClose(30);
+</TEXTAREA> <BR><INPUT id=button value=运行 type=button name=button> 
+提示：可修改部分代码后运行</SPAN><SPAN>从iframe关闭jquery.msgbox<BR><TEXTAREA id=textarea rows=12 cols=30 name=textarea>
+top.$mb.close();
+</TEXTAREA> 
+<BR><INPUT id=button value=运行 type=button name=button> 
+提示：可修改部分代码后运行</SPAN></DIV></BODY></HTML>
