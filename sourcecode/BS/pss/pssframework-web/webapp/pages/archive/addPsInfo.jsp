@@ -277,10 +277,7 @@ function lpadString (str,lenth) {
 </body>
 <script>
 
-val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
-	   return result;
-	  }}
-	  );
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {return result;}});
 	  
 function StringBuffer() {
     this.data = [];
