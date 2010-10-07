@@ -45,6 +45,7 @@ public class JuintTest {
 
 	@Before
 	public void one() {
+
 		jsonString = "{\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"GW_376\",\"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
 		//jsonString = "{\"mtoType\":\"GW_376\",\"collectObjects\":[{\"logicalAddr\":\"96123456\",\"equipProtocol\":\"100\",   \"channelType\":\"1\",\"pwAlgorith\":\"0\",\"pwContent\":\"8888\",\"mpExpressMode\":\"3\",\"mpSn\":[\"0\"],\"commandItems\":[{\"identifier\":\"100C0025\"}]}]}";
 	}
@@ -131,6 +132,13 @@ public class JuintTest {
 
 	}
 
+	@Test
+	public void testSub() {
+		String te = "10040010";
+		String s = te.substring(4, 6);
+		System.out.println(s);
+	}
+
 	public void testBeanCopy() {
 
 		OrgInfo orgInfo1 = new OrgInfo();
@@ -187,7 +195,7 @@ public class JuintTest {
 		httpServletResponse.setCharacterEncoding("utf-8");
 		httpServletResponse.setContentType("application/json");
 		mapper.writeValue(httpServletResponse.getOutputStream(), testMap);
-		System.out.println(mapper.writeValueAsString(testMap));
+		//System.out.println(mapper.writeValueAsString(testMap));
 	}
 
 	private static byte[] shortToByteArray(short s) {
