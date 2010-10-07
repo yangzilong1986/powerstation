@@ -117,19 +117,19 @@ function lpadString (str,lenth) {
         <td align="right" class="green"><font color="red">* </font>漏保地址：</td>
         <td><!-- gpAddr --> <input type="hidden" name="gpInfo.gpAddrOld" value="${psinfo.gpInfo.gpAddr}" /> <security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
+          <form:input path="gpInfo.gpAddr" id="gpAddr" maxlength="20" cssClass="required input2" disabled="${disabled}" />
         </security:authorize><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpAddr" maxlength="12" onchange="lpad(this,12)" disabled="${disabled}"
+          <form:input path="gpInfo.gpAddr" id="gpAddr" maxlength="12" onchange="lpad(this,12)" disabled="${disabled}"
             cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpAddr.json" />
         </security:authorize></td>
         <td align="right" class="green"><font color="red">* </font>测量点序号：</td>
         <td><!-- gpsn --> <input type="hidden" name="gpInfo.gpSnOld" value="${psinfo.gpInfo.gpSn}" /><security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
+          <form:input path="gpInfo.gpSn"  id="gpSn" cssClass="required input2 validate-number" disabled="${disabled}" />
         </security:authorize><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="gpInfo.gpSn"
+          <form:input path="gpInfo.gpSn" id="gpSn"
             cssClass="required validate-number validate-ajax-${ctx}/archive/psinfo/checkGpSn.json"
             disabled="${disabled}" />
         </security:authorize></td>
@@ -215,11 +215,11 @@ function lpadString (str,lenth) {
         <td align="right" class="green">规约：</td>
         <td><security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
+          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocolNo" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocol" itemLabel="name" itemValue="code"
+          <form:select path="gpInfo.protocolNo" items="${protocolList}" id="protocolNo" itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td align="right" class="green">漏保类型：</td>
@@ -262,11 +262,12 @@ function lpadString (str,lenth) {
     </table>
     </div>
   </form:form></div>
-  <div style="text-align: center" id="msg"><br></br>
+  <div style="text-align: center" id="msg"></div>
+  <div style="text-align: center" ><br></br>
   <security:authorize
     ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
     <c:if test="${_type!='show'}">
-      <input type="button" id="f10" value="参数下发" class="btnbg4" />
+      <input type="button" id="f10" value="参数下发" class="btnbg4" disabled="disabled"/>
       <input type="button" id="save" value="保 存" class="btnbg4" />
     </c:if>
   </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
@@ -328,12 +329,11 @@ function akeySetupTermParamF10(){
 	        var baudrate;
 	        var gpAddr;
 	        
-	      	        
 	        logicalAddr = getOptionText("termAddr");
-	        gpsn = $("#gpInfo.gpSn").val();
-	        equipProtocol = $("#gpInfo.protocolNo").val();
+	        gpsn = $("#gpSn").val();
+	        equipProtocol = $("#protocolNo").val();
 	        baudrate = getOptionText("btl");
-	        gpAddr = $("gpInfo.gpAddr").val();
+	        gpAddr = $("#gpAddr").val();
 	        
 	        sb_dto.append('{');
 	        sb_dto.append('"logicalAddr":"' + logicalAddr + '"').append(',');
@@ -344,7 +344,8 @@ function akeySetupTermParamF10(){
 	        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
 	        sb_dto.append('"mpSn":["' + gpsn + '"]').append(',');
 	        sb_dto.append('"commandItems":').append('[').append('{');
-	        var ciarray = ['1004001'];
+	        var ciarray = ['10040010'];
+	       
 	        for(var i = 0; i < ciarray.length; i++) {
 	            if(i > 0) {
 	                sb_dto.append('{');
@@ -352,7 +353,9 @@ function akeySetupTermParamF10(){
 	            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
 	            sb_dto.append('"circleLevel":"' + 1 + '"').append(',');
 	            
-	            sb_dto.append('"datacellParam":').append('[');
+	            sb_dto.append('"datacellParam":').append('{');
+	            
+	            
 	          /*  
 	               *<"1004001001", String>      : 本次电能表/交流采样装置配置数量
 	       	 *     *<"10040010020001", String>  : 本次配置第0001块电能表/交流采样装置序号 【默认与所属测量点号相同】
@@ -364,36 +367,23 @@ function akeySetupTermParamF10(){
 	       	 */
 				
 	       	 	var gpFully = "";
+	          
 	       	 	gpFully = lpadString(gpsn, 4);
 	       	 	
-	       	 	sb_dto.append('{');
-	       	    sb_dto.append('"1004001001": "1"');
-	       	    sb_dto.append("}").append(',');
+	       	
+	       	    sb_dto.append('"1004001001": "1"').append(',');
 	            
-	       	 	sb_dto.append('{');
-	       	    sb_dto.append('"1004001002'+gpFully+'": "'+gpsn+'"');
-	       	    sb_dto.append("}").append(',');
+	       	    sb_dto.append('"1004001002'+gpFully+'": "'+gpsn+'"').append(',');
 	       	 	
-	       	    sb_dto.append('{');
-	     	    sb_dto.append('"1004001003'+gpFully+'": "'+gpsn+'"');
-	       	    sb_dto.append("}").append(',');
+	     	    sb_dto.append('"1004001003'+gpFully+'": "'+gpsn+'"').append(',');
 	       	    
-	       	 	sb_dto.append('{');
-	     	    sb_dto.append('"1004001004'+gpFully+'": "'+baudrate+'"');
-	       	    sb_dto.append("}").append(',');
+	     	    sb_dto.append('"1004001004'+gpFully+'": "'+baudrate+'"').append(',');
 	       	    
-	       	 	sb_dto.append('{');
-	     	    sb_dto.append('"1004001005'+gpFully+'": "1"');
-	       	    sb_dto.append("}").append(',');
+	     	    sb_dto.append('"1004001005'+gpFully+'": "1"').append(',');
 	       	    
-	       	 	sb_dto.append('{');
-	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"');
-	       	    sb_dto.append("}").append(',');
+	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"').append(',');
 	       	    
-	       	 	sb_dto.append('{');
-	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"');
-	     	   	sb_dto.append("}");
-	     	  	sb_dto.append(']');
+	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"').append("}");
 	            
 	            if(i < ciarray.length - 1) {
 	                sb_dto.append('}').append(',');
@@ -406,6 +396,7 @@ function akeySetupTermParamF10(){
 	    
 	    sb_dto.append(']}');
 	    
+	    
 	    var url = '<pss:path type="webapp"/>/archive/psinfo/akeySetupTermParamF10.json';
 	    $.ajax({
 	        type: 'POST',
@@ -413,13 +404,21 @@ function akeySetupTermParamF10(){
 	        data: "dto=" + sb_dto.toString(),
 	        dataType: 'json',
 	        beforeSend:function(){
+	        	$("#msg").html("下发中……");
 	        	toggleButton();
 	        },
 	        success: function(data) {
-	            fetchReturnResult(data, 10, 100);
+	        	if("-1" !=data){
+	        		fetchReturnResult(data, 10, 100);
+	        	}else{
+	        		$("#msg").html("调用出错");
+	            	toggleButton(true);
+	        	}
 	        },
 	        
 	        error: function() {
+	        	$("#msg").html("下发失败");
+	        	alert('error');
 	        }
 	    });
 
@@ -446,44 +445,48 @@ function fetchReturnResult(appIds, sFetchCount, commanditems) {
         type: "POST",
         url: url,
         data: params,
+        beforeSend:function(){
+        	$("#msg").html("获取中……");
+        	toggleButton();
+        },
         success: function(data) {
-            
-        	if(!data){
+        	if(""==data){
         		  if(iFetchCount > 0) {
                       setTimeout("fetchReturnResult('" + appIds + "', " + (iFetchCount - 1) +", '"+ commanditems+ "')", 3000);
                   }else{
-                	  $("#msg").html("setup timeout");
-                  	  toggleButton();
+                	  $("#msg").html("设置超时");
+                  	  toggleButton(true);
                   }
         	}
-            else {
-            	$("#msg").html("setup sessful");
-            	toggleButton();
+            else if("1"==data) {
+            	$("#msg").html("设置成功");
+            	toggleButton(true);
+            }else{
+            	$("#msg").html("设置失败");
+            	toggleButton(true);
             }
         },
         error:function(){
-               //alert("error")
-        	toggleButton;
+              alert("error");
+        	toggleButton(true);
           }
     });
 
     if(iFetchCount == 0) {
-    	 $("#msg").html("setup timeout");
-     	  toggleButton();
+    	 $("#msg").html("设置超时");
+     	  toggleButton(true);
         //alert("操作结束");
     }
 }
 
 
 
-function toggleButton(){
-	$("type=button").toggle(function () {
-	    $(this).attr("disabled","true");
-	  },
-	  function () {
-	    $(this).attr("disabled","");
-	  }
-	  );
+function toggleButton(data){
+	if(data){
+		    $("#f10").attr("disabled","");
+	}else{
+		 $("#f10").attr("disabled","true");
+	}
 };
 	
 
@@ -507,7 +510,7 @@ $(function(){
 	
   checkBox();
   
- $("f10").click(function(){
+ $("#f10").click(function(){
 	 akeySetupTermParamF10();
  });
 
@@ -571,7 +574,12 @@ addpsinfo = function(){
            alert(msg);
            if(isSucc){
         	   opener.location.href ="${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
-        	   closeWin();
+        	   toggleButton(true);
+        	   if(confirm("是否需要一键下发参数?")){
+					 akeySetupTermParamF10();
+				 }else{
+					 closeWin();
+				 }
            }
          },error:function(XmlHttpRequest,textStatus, errorThrown){
         	 alert("新建失败;"+XmlHttpRequest.responseText);
@@ -596,7 +604,13 @@ updatepsinfo = function(){
 							alert(msg);
 							if (isSucc) {
 								opener.location.href = "${ctx}/archive/tginfo/${psinfo.gpInfo.objectId}/edit";
-								closeWin();
+								toggleButton(true);
+								 if(confirm("是否需要一键下发参数?")){
+									 akeySetupTermParamF10();
+								 }else{
+									 closeWin();
+								 }
+								
 							}
 						},
 						error : function(XmlHttpRequest) {

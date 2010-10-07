@@ -9,73 +9,6 @@
 <link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 <script type="text/javascript">
 
-//所属终端
-function addTerminal(){
-   var tgId=$("input[name='tgId']").val();
-   var sqlCode="";
-   if(tgFlag==1){
-     sqlCode="AL_ARCHIVE_0050";//配变台区页面
-   }else{
-     sqlCode="AL_ARCHIVE_0022";//低压集中器页面
-   }
-   var params = {
-                 "sqlCode":sqlCode,
-                 "pageRows":20,
-                 "objectId":tgId,
-                 "logicalAddr":""
-               };
-   var url=contextPath+"/archive/termListQuery.do?action=normalMode&"+ jQuery.param(params) + "&r=" + parseInt(Math.random() * 1000);
-   showDialogBox("终端定位",url, 495, 800);
-}
-//保存电表信息
-function save(){
-    var url=contextPath+"/archive/meterAction.do?action=updateMeter";
-      if(totalMeterCheck()){
-        $("#save").attr("disabled",true);
-        var data = jQuery("#main").dataForAjax({
-            });
-        if(data){
-            jQuery.ajax({
-                type:'post',
-                url:url,
-                data:data,
-                dataType:'json',
-                success:function(json){
-                    var msg=json['msg'];
-                    $("#save").attr("disabled",false);
-                    if(msg=="1"){
-                       alert("保存成功");
-                       parent.GB_hide();
-                       if(tgFlag=="1"){
-                         //top.getMainFrameObj().location.href=contextPath+"/archive/addTgAction.do?action=showDeviceInfoByTgID";
-                         //动态加载台区关联设备信息
-						top.getMainFrameObj().loadTgRelevevance();
-                       }else{
-                      	 //top.getMainFrameObj().location.href=contextPath+"/archive/addLowCustAction.do?action=showDeviceInfoByTgID";
-                      	 top.getMainFrameObj().loadTgRelevevance();
-                       }
-                    }else if(msg=="2"){
-                       alert("该资产编号已经存在");
-                    }else{
-                       alert("保存失败");
-                    }
-                }
-            });
-        }
-      }
-}
-
-//连接远传表
-function meterState(){
-   var meterState=$("#meterType").val();
-   var mpId = $("input[name='mpId']").val();
-   if(mpId == ''){ //新增电表
-       if(meterState=="1"){
-	      var url="${ctx}/jsp/archive/remoteMeterTg.jsp?tgFlag="+tgFlag;
-	      window.location.href=url;
-	   }
-   }
-}
 
 
 function callMessage(type,msg){
@@ -99,6 +32,30 @@ function lpad (object,lenth) {
     object.value = s.join('')+value;
 }
 
+function lpadString (str,lenth) {
+    var value = str;
+    var len = lenth-value.length;
+    var s = new Array(len);
+    for(var i = 0; i< len;i++){
+      s[i] = '0';
+    }
+    str = s.join('')+value;
+    return str;
+}
+
+
+function StringBuffer() {
+    this.data = [];
+}
+
+StringBuffer.prototype.append = function() {
+    this.data.push(arguments[0]);
+    return this;
+};
+
+StringBuffer.prototype.toString = function() {
+    return this.data.join("");
+};
 </script>
 </head>
 <body>
@@ -121,7 +78,9 @@ function lpad (object,lenth) {
     <div class="tab"><span>总表信息</span></div>
     <div class="da_mid"
       style="display: block; overflow-y: auto; overflow-x: auto; width: expression((document.documentElement.clientWidth ||document.body.clientWidth) -10 ); height: expression(((document.documentElement.clientHeight ||document.body.clientHeight) -35 ) );">
-    <div class="tab"><span>重要信息</span></div>
+    <div class="tab"><span>重要信息</span><input type="hidden" id="channelType" name="channelType" value="1" /> <input type="hidden"
+      id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
+    <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" /></div>
     <div id="485Show" class="da_mid"
       style="display: block; overflow-y: auto; overflow-x: auto; height: expression((( document.documentElement.clientHeight | document.body.clientHeight) - 700 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -164,18 +123,18 @@ function lpad (object,lenth) {
         </security:authorize></td>
         <td class="green" align="right"><font color="red">* </font>表 地 址：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].gpAddr" cssClass="required" disabled="${disabled}" />
+          <form:input path="gpInfos[0].gpAddr" id="gpAddr" cssClass="required" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].gpAddr" onchange="lpad(this,12)" maxlength="12" cssClass="required validate-number validate-ajax-${ctx}/archive/mpinfo/checkGpAddr.json" disabled="${disabled}" />
+          <form:input path="gpInfos[0].gpAddr" id="gpAddr" onchange="lpad(this,12)" maxlength="12" cssClass="required validate-number validate-ajax-${ctx}/archive/mpinfo/checkGpAddr.json" disabled="${disabled}" />
         </security:authorize></td>
       </tr>
       <tr height="30px">
         <td class="green" align="right">表 规 约：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="protocolNo" itemLabel="name"
             itemValue="code" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="commNo" itemLabel="name"
+          <form:select path="meterInfo.commNo" items="${protocolMeterList}" id="protocolNo" itemLabel="name"
             itemValue="code" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td class="green" align="right">所属终端：</td>
@@ -215,17 +174,17 @@ function lpad (object,lenth) {
       <tr height="30px">
         <td width="13%" class="green" align="right">计量方式：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
+          <form:select path="measMode" items="${measModeList}"  itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="measMode" items="${measModeList}" id="measMode" itemLabel="name" itemValue="code"
+          <form:select path="measMode" items="${measModeList}"  itemLabel="name" itemValue="code"
             cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize></td>
         <td width="13%" class="green" align="right">端 口 号：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].port" disabled="${disabled}"></form:input>
+          <form:input path="gpInfos[0].port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:input>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfos[0].port" disabled="${disabled}"></form:input>
+          <form:input path="gpInfos[0].port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:input>
         </security:authorize></td>
         <td width="13%" class="green" align="right">波 特 率：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
@@ -299,9 +258,11 @@ function lpad (object,lenth) {
       </tr>
     </table>
     </div>
+    <div style="text-align: center" id="msg"></div>
     <div style="text-align: center"><br />
     <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
       <c:if test="${_type!='show'}">
+      <input type="button" id="f10" value="参数下发" class="btnbg4" disabled="disabled"/>
         <input type="button" id="save" value="保 存" class="btnbg4" />
       </c:if>
     </security:authorize>&nbsp;<input type="button" id="close" value="关闭" class="btnbg4" onclick="closeWin()" /></div>
@@ -311,10 +272,13 @@ function lpad (object,lenth) {
 </form:form>
 </body>
 <script>
+
 val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
    return result;
   }}
   );
+  
+  
 $(function(){
 jQuery("#save").click(function(){
     if(val.result()){
@@ -330,9 +294,202 @@ jQuery("#save").click(function(){
       jQuery(this).attr("disabled","");
     }
     });
+    
+    
+$("#f10").click(function(){
+	 akeySetupTermParamF10();
+});
       
 });
 
+
+
+function getOptionText(id){
+	if(!$("#"+id)){
+		alert("没有指定的dom");
+		return '';
+	}
+	
+	return $("#"+id+" option[selected]").text();
+	
+}
+
+function akeySetupTermParamF10(){
+	   var sb_dto = new StringBuffer();
+	   
+	    sb_dto.append('{');
+	    sb_dto.append('"collectObjects":').append('[');
+	    for(var loop = 0; loop < 1; loop++) {
+	        if(loop != 0) {
+	            sb_dto.append(',');
+	        }
+	        var logicalAddr;
+	        var gpsn;
+	        var equipProtocol;
+	       	var channelType;
+	        var baudrate;
+	        var gpAddr;
+	        var port;
+	        
+	        logicalAddr = getOptionText("termId");
+	        gpsn = $("#gpSn").val();
+	        equipProtocol = $("#protocolNo").val();
+	        baudrate = getOptionText("btl");
+	        gpAddr = $("#gpAddr").val();
+	        port = $("#prot").val();
+	       
+	        
+	        sb_dto.append('{');
+	        sb_dto.append('"logicalAddr":"' + logicalAddr + '"').append(',');
+	        sb_dto.append('"equipProtocol":"' + equipProtocol + '"').append(',');
+	        sb_dto.append('"channelType":"' + $("#channelType").val() + '"').append(',');
+	        sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
+	        sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
+	        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
+	        sb_dto.append('"mpSn":["' + gpsn + '"]').append(',');
+	        sb_dto.append('"commandItems":').append('[').append('{');
+	        var ciarray = ['10040010'];
+	       
+	        for(var i = 0; i < ciarray.length; i++) {
+	            if(i > 0) {
+	                sb_dto.append('{');
+	            }
+	            sb_dto.append('"identifier":"' + ciarray[i] + '"').append(',');
+	            sb_dto.append('"circleLevel":"' + 1 + '"').append(',');
+	            
+	            sb_dto.append('"datacellParam":').append('{');
+	            
+	            
+	          /*  
+	               *<"1004001001", String>      : 本次电能表/交流采样装置配置数量
+	       	 *     *<"10040010020001", String>  : 本次配置第0001块电能表/交流采样装置序号 【默认与所属测量点号相同】
+	       	 *     *<"10040010030001", String>  : 本次配置第0001块电能表/交流采样装置所属测量点号
+	       	 *     *<"10040010040001", String>  : 本次配置第0001块电能表/交流采样装置通信波特率 C_METER.BAUDRATE
+	       	 *     *<"10040010050001", String>  : 本次配置第0001块电能表/交流采样装置通信端口号 C_GP.PORT
+	       	 *     *<"10040010060001", String>  : 本次配置第0001块电能表/交流采样装置通信协议类型 C_GP.PROTOCOL_NO
+	       	 *     *<"10040010070001", String>  : 本次配置第0001块电能表/交流采样装置通信地址  C_GP.GP_ADDR
+	       	 */
+				
+	       	 	var gpFully = "";
+	          
+	       	 	gpFully = lpadString(gpsn, 4);
+	       	 	
+	       	
+	       	    sb_dto.append('"1004001001": "1"').append(',');
+	            
+	       	    sb_dto.append('"1004001002'+gpFully+'": "'+gpsn+'"').append(',');
+	       	 	
+	     	    sb_dto.append('"1004001003'+gpFully+'": "'+gpsn+'"').append(',');
+	       	    
+	     	    sb_dto.append('"1004001004'+gpFully+'": "'+baudrate+'"').append(',');
+	       	    
+	     	    sb_dto.append('"1004001005'+gpFully+'": "'+port+'"').append(',');
+	       	    
+	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"').append(',');
+	       	    
+	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"').append("}");
+	            
+	            if(i < ciarray.length - 1) {
+	                sb_dto.append('}').append(',');
+	            }
+	        }
+	        
+	        sb_dto.append('}').append(']');
+	        sb_dto.append('}');
+	    }
+	    
+	    sb_dto.append(']}');
+	    
+	    var url = '<pss:path type="webapp"/>/archive/mpinfo/akeySetupTermParamF10.json';
+	    $.ajax({
+	        type: 'POST',
+	        url: url,
+	        data: "dto=" + sb_dto.toString(),
+	        dataType: 'json',
+	        beforeSend:function(){
+	        	$("#msg").html("下发中……");
+	        	toggleButton();
+	        },
+	        success: function(data) {
+	        	if("-1" !=data){
+	        		fetchReturnResult(data, 10, 100);
+	        	}else{
+	            	$("#msg").html("调用出错");
+	            	toggleButton(true);
+	        	}
+	        },
+	        
+	        error: function() {
+	        	alert('error');
+	        }
+	    });
+
+	   
+}
+
+function fetchReturnResult(appIds, sFetchCount, commanditems) {
+    var iFetchCount = 0;
+    try {
+        iFetchCount = parseInt(sFetchCount);
+    }
+    catch(e) {
+        iFetchCount = 0;
+    }
+    var params = {
+            "collectId": appIds,
+            "fetchCount": iFetchCount,
+            "random":Math.random()
+    };
+    
+    var url = '<pss:path type="webapp"/>/archive/mpinfo/backAkeySetupTermParamF10.json';
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        beforeSend:function(){
+        	$("#msg").html("获取中……");
+        	toggleButton();
+        },
+        success: function(data) {
+        	if(""==data){
+        		  if(iFetchCount > 0) {
+                      setTimeout("fetchReturnResult('" + appIds + "', " + (iFetchCount - 1) +", '"+ commanditems+ "')", 3000);
+                  }else{
+                	  $("#msg").html("设置超时");
+                  	  toggleButton(true);
+                  }
+        	}
+            else if("1"==data) {
+            	$("#msg").html("设置成功");
+            	toggleButton(true);
+            }else{
+            	$("#msg").html("设置失败");
+            	toggleButton(true);
+            }
+        },
+        error:function(){
+              alert("error");
+        	toggleButton(true);
+          }
+    });
+
+    if(iFetchCount == 0) {
+    	 $("#msg").html("设置超时");
+     	  toggleButton(true);
+        //alert("操作结束");
+    }
+}
+
+
+function toggleButton(data){
+	if(data){
+		    $("#f10").attr("disabled","");
+	}else{
+		 $("#f10").attr("disabled","true");
+	}
+};
+	
 
 
 getData= function(type){
@@ -357,7 +514,12 @@ addmpinfo = function(){
            alert(msg);
            if(isSucc){
              opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
-             closeWin();
+             toggleButton(true);
+      	   if(confirm("是否需要一键下发参数?")){
+					 akeySetupTermParamF10();
+				 }else{
+					 closeWin();
+				 }
            }
          },error:function(e){
              alert(e.message);
@@ -382,10 +544,15 @@ updatempinfo = function(){
              alert(msg);
              if(isSucc){
                opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
-               closeWin();
+               toggleButton(true);
+        	   if(confirm("是否需要一键下发参数?")){
+					 akeySetupTermParamF10();
+				 }else{
+					 closeWin();
+				 }
              }
            },error:function(e){
-             alert("error");
+             	alert("error");
                alert(e.getMessage());
            }
          });
