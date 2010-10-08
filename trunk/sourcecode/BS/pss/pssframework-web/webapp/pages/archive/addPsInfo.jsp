@@ -293,8 +293,6 @@ StringBuffer.prototype.toString = function() {
 };
 
 
-
-
 checkBox  = function(){
    if($("#autoTest").attr("checked")){
      $("#time").show();
@@ -522,14 +520,15 @@ $(function(){
     	  $("#time").hide();
       }
     });
+  
 if('${_type}' == "new"){
 	//$("#detail_tile").hide();
 	$("#detail").hide();
 }
 	
-jQuery("#save").click(function(){
+$("#save").click(function(){
 	var ret = val.result();
-    if(ret=="true" || ""==ret){
+    if(ret==true || ""==ret){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatepsinfo();
