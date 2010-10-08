@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -29,40 +26,32 @@ import cn.org.rapid_framework.page.PageRequest;
  * @author Administrator
  *
  */
-
 @Controller
 @RequestMapping("/statistics/eifreezeday")
 public class EiFreezeDayController extends BaseSpringController {
+    private static final String VIEW_NAME = "/statistics/eiFreezeDayQuery";
 
-	private static final String VIEW_NAME = "/statistics/eiFreezeDayQuery";
-	@Autowired
-	private StatisticsManager statisticsManager;
+    @Autowired
+    private StatisticsManager statisticsManager;
 
-	// 默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = null;
+    // 默认多列排序,example: username desc,createTime asc
+    protected static final String DEFAULT_SORT_COLUMNS = null;
 
-	/** binder用于bean属性的设置 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
+    /** binder用于bean属性的设置 */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping
-	public ModelAndView show(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			StatisticsQuery statisticsQuery) {
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
-
-		modelAndView.setViewName(VIEW_NAME);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public ModelAndView show(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+            StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+        Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
+        modelAndView.setViewName(VIEW_NAME);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
+    }
 }

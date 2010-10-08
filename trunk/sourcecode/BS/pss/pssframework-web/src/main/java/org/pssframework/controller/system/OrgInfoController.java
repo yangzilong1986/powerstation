@@ -18,32 +18,25 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/system/org")
 public class OrgInfoController extends BaseRestSpringController<OrgInfo, Long> {
 
-	//默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = null;
+    //默认多列排序,example: username desc,createTime asc
+    protected static final String DEFAULT_SORT_COLUMNS = null;
 
-	private OrgInfoManager orgInfoManager;
+    private OrgInfoManager orgInfoManager;
 
-	/** 
-	 * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
-	 **/
-	public void setOrgInfoManager(OrgInfoManager manager) {
-		this.orgInfoManager = manager;
-	}
+    /** 
+     * 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性
+     **/
+    public void setOrgInfoManager(OrgInfoManager manager) {
+        this.orgInfoManager = manager;
+    }
 
-
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response, OrgInfo model) {
-
-		Map fiterMap = new HashMap();
-
-		List orglist = this.orgInfoManager.findByPageRequest(fiterMap);
-
-		ModelAndView result = new ModelAndView();
-
-		result.addObject("orginfo", orglist);
-
-		result.setViewName("/system/orgList");
-
-		return result;
-	}
-
+    @SuppressWarnings("unchecked")
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, OrgInfo model) {
+        Map fiterMap = new HashMap();
+        List orglist = this.orgInfoManager.findByPageRequest(fiterMap);
+        ModelAndView result = new ModelAndView();
+        result.addObject("orginfo", orglist);
+        result.setViewName("/system/orgList");
+        return result;
+    }
 }

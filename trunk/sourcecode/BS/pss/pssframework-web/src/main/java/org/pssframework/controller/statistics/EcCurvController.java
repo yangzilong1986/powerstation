@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -32,56 +29,59 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/eccurv")
 public class EcCurvController extends BaseSpringController {
+    private static final String VIEW_EC = "/statistics/ecCurvQuery";
+    private static final String VIEW_VT = "/statistics/vtCurvQuery";
 
-	private static final String VIEW_EC = "/statistics/ecCurvQuery";
-	private static final String VIEW_VT = "/statistics/vtCurvQuery";
-	@Autowired
-	private StatisticsManager statisticsManager;
+    @Autowired
+    private StatisticsManager statisticsManager;
 
-	// 默认多列排序,example: username desc,createTime asc
+    // 默认多列排序,example: username desc,createTime asc
     protected static final String DEFAULT_SORT_COLUMNS = "dataTime asc";
 
-	/** binder用于bean属性的设置 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
+    /** binder用于bean属性的设置 */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("/ec")
-	public ModelAndView showEc(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			StatisticsQuery statisticsQuery) {
+    /**
+     * 
+     * @param modelAndView
+     * @param request
+     * @param response
+     * @param statisticsQuery
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/ec")
+    public ModelAndView showEc(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+            StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+        Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
+        modelAndView.setViewName(VIEW_EC);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
 
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+    }
 
-		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
-
-		modelAndView.setViewName(VIEW_EC);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("/vt")
-	public ModelAndView showVt(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			StatisticsQuery statisticsQuery) {
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
-
-		modelAndView.setViewName(VIEW_VT);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
+    /**
+     * 
+     * @param modelAndView
+     * @param request
+     * @param response
+     * @param statisticsQuery
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/vt")
+    public ModelAndView showVt(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+            StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+        Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EcCurv);//获取数据模型
+        modelAndView.setViewName(VIEW_VT);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
+    }
 }

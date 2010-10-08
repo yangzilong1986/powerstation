@@ -23,7 +23,6 @@ public class PSTreeManager extends BaseManager<PSTreeNode, Serializable> {
     @SuppressWarnings("unchecked")
     @Override
     protected EntityDao getEntityDao() {
-        // TODO Auto-generated method stub
         return null;
     }
 

@@ -182,6 +182,7 @@ function chgOrgId(type) {
     }
     
     var params = {
+            defType: 1,
             formId: 'objId',
             formName: 'objId',
             orgId: $("#orgId").val(), 

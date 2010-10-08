@@ -17,35 +17,33 @@ import cn.org.rapid_framework.page.PageRequest;
  * @author Administrator
  *
  */
+@SuppressWarnings("unchecked")
 @Repository
 public class StatisticsDao extends BaseIbatis3Dao {
+    private static String pre = "";
 
-	private static String pre = "";
+    @Override
+    public void saveOrUpdate(Object entity) throws DataAccessException {
 
-	@Override
-	public void saveOrUpdate(Object entity) throws DataAccessException {
+    }
 
-	}
+    @Override
+    public String getPrefix() {
+        return pre;
+    }
 
-	@Override
-	public String getPrefix() {
-		return pre;
-	}
+    public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
+        setPreFix(statisticsType);
+        return pageQuery("pageSelect", pageRequest);
+    }
 
-	@SuppressWarnings("rawtypes")
-	public Page findByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
-		setPreFix(statisticsType);
-		return pageQuery("pageSelect", pageRequest);
-	}
-
-    @SuppressWarnings("rawtypes")
     public Page findChartByPageRequest(PageRequest<Map> pageRequest, StatisticsType statisticsType) {
         setPreFix(statisticsType);
         pageRequest.setPageSize(Integer.MAX_VALUE);
         return pageQuery("chartSelect", pageRequest);
     }
 
-	private void setPreFix(StatisticsType statisticsType) {
-		pre = statisticsType.toString();
-	}
+    private void setPreFix(StatisticsType statisticsType) {
+        pre = statisticsType.toString();
+    }
 }

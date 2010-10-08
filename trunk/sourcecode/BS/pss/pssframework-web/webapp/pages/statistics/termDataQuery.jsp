@@ -69,6 +69,7 @@
 	    }
 	    
 	    var params = {
+	            defType: 1,
 	            formId: 'tgId',
 	            formName: 'tgId',
 	            orgId: $("#orgId").val(), 

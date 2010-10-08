@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -32,36 +29,29 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/eicurv")
 public class EiCurvController extends BaseSpringController {
+    private static final String VIEW_NAME = "/statistics/eiCurvQuery";
 
-	private static final String VIEW_NAME = "/statistics/eiCurvQuery";
-	@Autowired
-	private StatisticsManager statisticsManager;
+    @Autowired
+    private StatisticsManager statisticsManager;
 
-	// 默认多列排序,example: username desc,createTime asc
+    // 默认多列排序,example: username desc,createTime asc
     protected static final String DEFAULT_SORT_COLUMNS = "dataTime asc";
 
-	/** binder用于bean属性的设置 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
+    /** binder用于bean属性的设置 */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping
-	public ModelAndView show(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			StatisticsQuery statisticsQuery) {
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EiCurv);//获取数据模型
-
-		modelAndView.setViewName(VIEW_NAME);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public ModelAndView show(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+            StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+        Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.EiCurv);//获取数据模型
+        modelAndView.setViewName(VIEW_NAME);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
+    }
 }

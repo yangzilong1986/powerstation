@@ -48,6 +48,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
         return page;
     }
 
+    @SuppressWarnings("unchecked")
     public Map<String, Object> readRealTimeData(String gpIds, Map<String, Object> commandItemMap, String dataDensity,
             String dataPoints, String dataTime, int fetchCount) throws ServiceException {
         // 设置超时时间
@@ -204,6 +205,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
         return map;
     }
 
+    @SuppressWarnings("unchecked")
     public Map gdConcRTMR(String gpIds, Map commandItemMap, int fetchCount) throws ServiceException {
         // TODO Auto-generated method stub
         // 设置超时时间
@@ -215,7 +217,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
             String[] keys = null;
             String[] values = null;
             String protocolNo = null;
-            String gpChar = null;
+            //String gpChar = null;
             String sAppId = null;
             String commanditemCodes = null;
             while(commandItemIterator.hasNext()) {
@@ -225,14 +227,14 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
                 values = value.split("#");
                 if(keys.length == 2) {
                     protocolNo = keys[0];
-                    gpChar = keys[1];
+                    //gpChar = keys[1];
                 }
                 if(values.length == 2) {
                     sAppId = values[0];
                     commanditemCodes = values[1];
                 }
 
-                boolean bSend = false;
+                //boolean bSend = false;
                 List concentratorObjects = null;// getConcentratorObjects(gpIds, protocolNo, gpChar);
                 if(concentratorObjects != null && concentratorObjects.size() > 0) {
                     if("126".equals(protocolNo)) { // 广东集抄规约[126]
@@ -245,7 +247,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
                             // bSend = true;
                         }
                         catch(Exception _e) {
-                            bSend = false;
+                            //bSend = false;
                         }
                     }
                 }
@@ -269,11 +271,12 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * @return
      * @throws ServiceException
      */
+    @SuppressWarnings("unchecked")
     public List getCollectObjects(String gpIds, String protocolNo, String gpChar) throws ServiceException {
         logger.info("protocolNo   : " + protocolNo);
         logger.info("gpChar       : " + gpChar);
         logger.info("gpIds       : " + (gpIds != null && !"".equals(gpIds.trim()) ? gpIds.trim() : "-1"));
-        String sqlCode = "AL_AUTORM_1002";
+        //String sqlCode = "AL_AUTORM_1002";
         Map paramsPage = new HashMap();
         paramsPage.put("protocolNo", protocolNo);
         paramsPage.put("gpChar", gpChar);
@@ -445,10 +448,12 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * concentratorObjects; } return null; }
      */
 
+    @SuppressWarnings("unchecked")
     public Map getReturnByRRTD(Long[] appIds) throws ServiceException {
         return getReturnByRRTD(appIds, null);
     }
 
+    @SuppressWarnings("unchecked")
     public Map getReturnByRRTD(Long[] appIdArray, String fetchCount) throws ServiceException {
         Map result = new HashMap();
         if(appIdArray != null) {
@@ -547,6 +552,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * @param message
      * @return
      */
+    @SuppressWarnings( { "unchecked", "unused" })
     private Map getReadMessages(List collectObjects, String message) {
         if(collectObjects != null) {
             Map map = new HashMap();
@@ -565,6 +571,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
             return null;
     }
 
+    @SuppressWarnings("unchecked")
     public Map getCurveReturnByRRTD(String appIds, String fetchCount, String timeData, String dataGap, String points,
             String proNo) throws ServiceException {
         Map result = new HashMap();
@@ -678,18 +685,18 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
     private String valueConver(Map<String, String> valueMap, String commd, String proNo) {
         StringBuffer value = new StringBuffer();
         if(valueMap != null) {
-            Iterator iterator = valueMap.keySet().iterator();
-            while(iterator.hasNext()) {
-                String key = (String) iterator.next();
-                String val = (String) valueMap.get(key);
-                String groupRm = getGroupRmByCommdAndProNo(commd, proNo);
+            //Iterator iterator = valueMap.keySet().iterator();
+            //while(iterator.hasNext()) {
+            //String key = (String) iterator.next();
+                //String val = (String) valueMap.get(key);
+                //String groupRm = getGroupRmByCommdAndProNo(commd, proNo);
                 /*
                  * if (DATAGROUP_RM_CURVE.equals(groupRm) || DATAGROUP_RM_HOUR.equals(groupRm)) { //曲线数据或小时数据
                  * value.append(ToolHelper.stringToDateFormat(key, "yyyyMMddHHmmss", "yyyy-MM-dd HH:mm:ss") + " = " +
                  * (("-1".equals(val)) ? "无效值" : val) + " <br/>"); } else { value.append((("-1".equals(val)) ? "无效值" :
                  * val) + " <br/>"); }
                  */
-            }
+            //}
         }
         return value.toString();
     }
@@ -766,6 +773,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * @param proNo
      * @return
      */
+    @SuppressWarnings("unchecked")
     private String getDataTimeType(String[] commanditemCodes, String proNo) {
         String result = "";
         try {
@@ -774,16 +782,16 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
                 Map paramsPage = new HashMap();
                 paramsPage.put("commCode", commd);
                 paramsPage.put("proNo", proNo);
-                String sqlCode = "AL_AUTORM_3001";
-                List resultList = null;// sqlManager.getObjectsList(sqlCode, paramsPage, 0, 1);
-                for(Iterator iterator = resultList.iterator(); iterator.hasNext();) {
-                    Object[] object = (Object[]) iterator.next();
-                    String dataRm = (String) object[0];
+                //String sqlCode = "AL_AUTORM_3001";
+                //List resultList = null;// sqlManager.getObjectsList(sqlCode, paramsPage, 0, 1);
+                //for(Iterator iterator = resultList.iterator(); iterator.hasNext();) {
+                //    Object[] object = (Object[]) iterator.next();
+                //    String dataRm = (String) object[0];
                     /*
                      * if (DATAGROUP_RM_DAY.equals(dataRm)) { //日冻结 result = "F012"; } else if
                      * (DATAGROUP_RM_MONTH.equals(dataRm)) { //月冻结 result = "F013"; } else { result = "F011"; }
                      */
-                }
+                //}
             }
         }
         catch(Exception e) {
@@ -800,6 +808,7 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * @param proNo
      * @return
      */
+    @SuppressWarnings( { "unused", "unchecked" })
     private String getGroupRmByCommdAndProNo(String commd, String proNo) {
         String result = "";
         try {
@@ -808,12 +817,12 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
                 paramsPage.put("commCode", commd);
                 paramsPage.put("proNo", proNo);
                 String sqlCode = "AL_AUTORM_3001";
-                List resultList = null; // sqlManager.getObjectsList(sqlCode, paramsPage, 0, 1);
-                for(Iterator iterator = resultList.iterator(); iterator.hasNext();) {
-                    Object[] object = (Object[]) iterator.next();
-                    String dataRm = (String) object[0];
-                    result = dataRm;
-                }
+                //List resultList = null; // sqlManager.getObjectsList(sqlCode, paramsPage, 0, 1);
+                //for(Iterator iterator = resultList.iterator(); iterator.hasNext();) {
+                //    Object[] object = (Object[]) iterator.next();
+                //    String dataRm = (String) object[0];
+                //    result = dataRm;
+                //}
             }
         }
         catch(Exception e) {
@@ -849,7 +858,6 @@ public class RealTimeReadingManager extends BaseManager<RealTimeReadingInfo, Lon
      * @throws Exception
      */
     public long send(MessageTranObject mto_376) throws Exception {
-
         return this.realTimeProxy376.readData(mto_376);
     }
 }

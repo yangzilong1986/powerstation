@@ -19,12 +19,10 @@ public class FusionChartsUtils {
      * @param results
      * @param mapSeriesNames
      * @param mapParams
-     * @param className
      * @return
      */
-    public static String getChart(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams,
-            String className) {
-        String chart = getChartData(results, mapSeriesNames, mapParams, className);
+    public static String getChart(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams) {
+        String chart = getChartData(results, mapSeriesNames, mapParams);
         String chartCode = "";
         chartCode = FusionChartsCreator.createChart(mapParams.get("contextPath") + "/FusionCharts/" + LINE, "", chart,
                 "chart", "100%", "100%", false, false); // 生成图形
@@ -36,12 +34,10 @@ public class FusionChartsUtils {
      * @param results
      * @param mapSeriesNames
      * @param mapParams
-     * @param className
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static String getChartData(List<?> results, Map<String, String> mapSeriesNames,
-            Map<String, String> mapParams, String className) {
+    public static String getChartData(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams) {
         if(mapSeriesNames == null)
             return null;
         int msnCnt = mapSeriesNames.keySet().size();
@@ -59,15 +55,17 @@ public class FusionChartsUtils {
         }
         
         List<String[]> values = null;
+        int k = 0;
         if(results != null) {
             values = new ArrayList<String[]>();
             Iterator iterator = results.iterator();
             if(iterator != null) {
-                while(iterator.hasNext()) {
+                while(iterator.hasNext() && k < 1000) {
+                    k++;
                     String[] ss = new String[seriesCodes.length + 1];
                     Object o = (Object) iterator.next();
                     try {
-                        ss[0] = regularDataTime((Date) invokeMethod(o, "getDataTime", null), "HH:mm");
+                        ss[0] = regularDataTime((Date) invokeMethod(o, "getDataTime", null), "[dd日HH时]");
                     }
                     catch(Exception e) {
                         e.printStackTrace();
@@ -85,9 +83,14 @@ public class FusionChartsUtils {
             }
         }
         
+        int labelStep = 1;
+        if(k > 12) {
+            labelStep = k / 12;
+        }
+        
 
-        return getChartData(mapParams.get("caption"), 1, mapParams.get("contextPath"), seriesNames, colors, values, 0,
-                            0, null, null);
+        return getChartData(mapParams.get("caption"), labelStep, mapParams.get("contextPath"), seriesNames, colors,
+                values, 0, 0, null, null);
     }
 
     private static String regularDataTime(Date d, String r) {

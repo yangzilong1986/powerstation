@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -32,8 +29,8 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/powercruv")
 public class PowerCruvController extends BaseSpringController {
-
 	private static final String VIEW_NAME = "/statistics/powerCurvQuery";
+
 	@Autowired
 	private StatisticsManager statisticsManager;
 
@@ -46,22 +43,15 @@ public class PowerCruvController extends BaseSpringController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping
+    @SuppressWarnings("unchecked")
+    @RequestMapping
 	public ModelAndView showPowerCrur(ModelAndView modelAndView, HttpServletRequest request,
 			HttpServletResponse response, StatisticsQuery statisticsQuery) {
-
 		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
 		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.PowerCruv);//获取数据模型
-
 		modelAndView.setViewName(VIEW_NAME);
-
 		modelAndView.addObject("page", page);
-
 		modelAndView.addObject("pageRequest", pageRequest);
-
 		return modelAndView;
-
 	}
 }

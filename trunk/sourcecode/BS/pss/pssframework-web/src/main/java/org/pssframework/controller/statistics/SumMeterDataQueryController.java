@@ -36,7 +36,7 @@ public class SumMeterDataQueryController extends BaseSpringController {
 
         Map mapRequest = new LinkedHashMap();
         getInitOption(modelAndView, mapRequest);
-        modelAndView.addObject("qdate", DateUtils.getCurrentDate());
+        modelAndView.addObject("qdate", DateUtils.getYestDate());
 
         return modelAndView;
     }
