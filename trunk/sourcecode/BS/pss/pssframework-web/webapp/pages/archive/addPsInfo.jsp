@@ -405,7 +405,7 @@ function akeySetupTermParamF10(){
 	     	    
 	     	    sb_dto.append('"1004001015'+gpFully+'": "0000"').append(',');
 	     	    
-	     	    sb_dto.append('"1004001016'+gpFully+'": "0000"').append(',');
+	     	    sb_dto.append('"1004001016'+gpFully+'": "0000"');
 	     	    
 	     	   /****************************************************************/
 	     	    
