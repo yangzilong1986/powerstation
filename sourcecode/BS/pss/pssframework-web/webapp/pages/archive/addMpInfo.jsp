@@ -388,7 +388,28 @@ function akeySetupTermParamF10(){
 	       	    
 	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"').append(',');
 	       	    
-	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"').append("}");
+	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"').append(',');
+	     	    
+	     	    
+	     	   /****************************************************************/
+	     	    sb_dto.append('"1004001008'+gpFully+'": "000000000000"').append(',');
+	     	    
+	     	    
+	     	    sb_dto.append('"1004001010'+gpFully+'": "000100"').append(',');
+	     	    
+	     	    sb_dto.append('"1004001012'+gpFully+'": "10"').append(',');
+	     	    
+	     	    sb_dto.append('"1004001013'+gpFully+'": "11"').append(',');
+	     	    
+	     	    sb_dto.append('"1004001014'+gpFully+'": "000000000000"').append(',');
+	     	    
+	     	    sb_dto.append('"1004001015'+gpFully+'": "0000"').append(',');
+	     	    
+	     	    sb_dto.append('"1004001016'+gpFully+'": "0000"').append(',');
+	     	    
+	     	   /****************************************************************/
+	     	   
+	     	   sb_dto.append("}");
 	            
 	            if(i < ciarray.length - 1) {
 	                sb_dto.append('}').append(',');
