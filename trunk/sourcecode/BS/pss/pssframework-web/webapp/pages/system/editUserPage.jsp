@@ -35,7 +35,8 @@
     </tr>
     <tr>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.mm" />：</td>
-      <td align="left"><form:password path="passwd" id="passwd" showPassword="true" cssStyle="width:150"
+      <td align="left"><input type="hidden" id="oldPasswd" name="oldPasswd" value="${user.passwd}">
+      <form:password path="passwd" id="passwd" showPassword="true" cssStyle="width:150"
         cssClass="required input2 min-length-5" /></td>
       <td align="right"><font color="#ff0000">*</font><spring:message code="system.user.qrmm" />：</td>
       <td align="left"><input type="password" name="passwd_rep" id="passwd_rep" value="${user.passwd}"
