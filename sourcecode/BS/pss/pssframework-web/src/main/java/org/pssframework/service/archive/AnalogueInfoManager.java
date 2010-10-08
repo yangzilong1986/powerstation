@@ -21,6 +21,6 @@ public class AnalogueInfoManager extends BaseManager<AnalogueInfo, Long> {
 	@Override
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return analogueInfoDao;
 	}
 }

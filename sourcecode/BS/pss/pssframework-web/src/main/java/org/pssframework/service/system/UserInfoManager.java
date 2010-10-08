@@ -57,8 +57,11 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 			throw new ServiceException("不能修改超级管理员用户");
 		}
 
-		String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
-		entity.setPasswd(shaPassword);
+		if (!entity.getOldPasswd().equals(entity.getPasswd())) {
+			String shaPassword = encoder.encodePassword(entity.getPasswd(), null);
+			entity.setPasswd(shaPassword);
+		}
+		
 		setRole(entity);
 
 		userInfoDao.saveOrUpdate(entity);
