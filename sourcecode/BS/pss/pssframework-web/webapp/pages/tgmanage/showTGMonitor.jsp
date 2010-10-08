@@ -5,20 +5,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>漏保监测</title>
+<title>台区监测</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     chgOrgId('init');
-
+    
     $("#inquiryBtn").click( function() {
-        if($("#objId").val() == '-1' || $("#objId").val() == '') {
+        if($("#tgId").val() == '-1' || $("#tgId").val() == '') {
             alert("请选择台区");
             return;
         }
-        var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
-        $("#psTreeFrame").attr("src", urlInquiry);
+        var urlInquiry = '<pss:path type="webapp"/>' + '/tgmanage/tgmon/tgmonitor/' + $("#tgId").val();
+        $("#tgMonitorFrame").attr("src", urlInquiry);
     });
 });
 
@@ -27,11 +27,11 @@ function chgOrgId(type) {
     
     var selectedTg = '';
     if(type == 'init') {
-        if('${pageRequest.objId}' == '' || '${pageRequest.objId}' == null || '${pageRequest.objId}' == 'null') {
+        if('${pageRequest.tgId}' == '' || '${pageRequest.tgId}' == null || '${pageRequest.tgId}' == 'null') {
             selectedTg = '-1';
         }
         else {
-            selectedTg = '${pageRequest.objId}';
+            selectedTg = '${pageRequest.tgId}';
         }
     }
     else {
@@ -40,8 +40,8 @@ function chgOrgId(type) {
     
     var params = {
             defType: 2,
-            formId: 'objId',
-            formName: 'objId',
+            formId: 'tgId',
+            formName: 'tgId',
             actionChange: 'changeTg()',
             orgId: $("#orgId").val(), 
             tgId: selectedTg
@@ -49,16 +49,11 @@ function chgOrgId(type) {
     $("#tdLinkedByOrg").load(url, params, function(){
         //alert($("#tdLinkedByOrg").html());
         //alert($("#objId").val());
-        if(type == 'init') {
-            var urlTree = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
-            $("#psTreeFrame").attr("src", urlTree);
-        }
     });
 }
 
 function changeTg() {
-    var urlInquiry = '<pss:path type="webapp"/>' + '/psmanage/psmon/pstree/' + $("#objId").val();
-    $("#psTreeFrame").attr("src", urlInquiry);
+    $("#inquiryBtn").click();
 }
 </script>
 </head>
@@ -84,24 +79,15 @@ function changeTg() {
         </tr>
       </table>
     </div>
-    <div id="bg" style="height: 30px; text-align: center;">
-      <ul id="datamenu_Option" class="cb font1">
-        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;">漏保监测</li>
-      </ul>
-    </div>
     <div class="datamenu_lcon" id="datamenu_Con">
       <ul class=default id=datamenu_Con_0>
         <div class="content">
           <div id="cont_1">
-            <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-65));">
+            <div style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight)-35));">
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td width="120" height="100%">
-                    <iframe id="psTreeFrame" name="psTreeFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
-                  </td>
-                  <td width="3" height="100%" style="background-color: #bbdcd8;"></td>
-                  <td>
-                    <iframe id="psMonitorFrame" name="psMonitorFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+                  <td height="100%">
+                    <iframe id="tgMonitorFrame" name="tgMonitorFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                 </tr>
               </table>

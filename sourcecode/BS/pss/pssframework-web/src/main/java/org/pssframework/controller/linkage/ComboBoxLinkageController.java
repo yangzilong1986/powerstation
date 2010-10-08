@@ -52,6 +52,7 @@ public class ComboBoxLinkageController extends BaseSpringController {
         }
         mapRequest.remove("tgId");
         List<TgInfo> tglist = tgInfoManager.findByPageRequest(mapRequest);
+        mav.addObject("defType", mapRequest.get("defType"));
         mav.addObject("formId", mapRequest.get("formId"));
         mav.addObject("formName", mapRequest.get("formName"));
         mav.addObject("actionChange", mapRequest.get("actionChange"));

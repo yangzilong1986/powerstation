@@ -425,8 +425,7 @@ public class PSMonitorController extends BaseSpringController {
         mapParams.put("chartType", chartType);
         mapParams.put("width", width);
         mapParams.put("height", height);
-        mav.addObject("chart", FusionChartsUtils.getChart(page.getResult(), mapSeriesNames, mapParams,
-                                                          "org.pssframework.model.statistics.PsEcCurv"));
+        mav.addObject("chart", FusionChartsUtils.getChart(page.getResult(), mapSeriesNames, mapParams));
         mav.setViewName(VIEW_ECCURV_QUERY_CHART);
         return mav;
     }

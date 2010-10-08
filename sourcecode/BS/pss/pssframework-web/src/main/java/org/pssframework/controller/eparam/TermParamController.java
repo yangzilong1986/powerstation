@@ -33,6 +33,7 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
 	@Autowired
 	private ICollectInterface realTimeProxy376;
 
+    @SuppressWarnings("unchecked")
     @RequestMapping
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, TermParamInfo model) {
         Long termId = null;

@@ -10,22 +10,22 @@
 <link type="text/css" rel="stylesheet" href="${ctx}/widgets/simpletable/simpletable.css" />
 <script type="text/javascript" src="${ctx}/widgets/simpletable/simpletable.js"></script>
 <script type="text/javascript">
-var type='{_type}';
-$(function(){
+var type = '{_type}';
+$(function() {
     chgOrgId('init');
-})
+});
 
 var contextPath = "${ctx}";
 
-getFrom = function(){
-    var data = $("form[0]").serialize(); 
+getFrom = function() {
+    var data = $("form[0]").serialize();
     return data;
 }
 
-var lastQueryType =0;
+var lastQueryType = 0;
 function changeType(obj) {
-    if(obj == undefined){
-  	  obj = lastQueryType;
+    if(obj == undefined) {
+        obj = lastQueryType;
     }
     var lastTd = document.getElementById("datamenu_Option_" + lastQueryType);
     var nowTd = document.getElementById("datamenu_Option_" + obj);
@@ -34,7 +34,7 @@ function changeType(obj) {
     lastQueryType = obj;
     var url = contextPath;
     if(lastQueryType == 0) {  // 表码数据
-    	url += "/statistics/eicurv?"+getFrom();
+        url += "/statistics/eicurv?"+getFrom();
     }
     if(lastQueryType == 1) {  // 功率数据
         url += "/statistics/powercruv?"+getFrom();
@@ -57,7 +57,7 @@ function changeType(obj) {
     if(lastQueryType == 7) {  // 电流越限数据
         url += "/statistics/ecurStatisDay?"+getFrom();
     }
-   
+    
     document.getElementById("data").src = url;
 }
 
@@ -78,6 +78,7 @@ function chgOrgId(type) {
     }
     
     var params = {
+            defType: 1,
             formId: 'tgId',
             formName: 'tgId',
             orgId: $("#orgId").val(), 
@@ -90,6 +91,17 @@ function chgOrgId(type) {
             changeType(0);
         }
     });
+}
+
+var showMode = 'grid';  // grid / pict
+function showGridMode() {
+    
+}
+
+function showPictMode() {
+    if($("#tgId").val() == '-1') {
+        alert('请选择单个台区进行查看');
+    }
 }
 </script>
 </head>
@@ -118,16 +130,22 @@ function chgOrgId(type) {
     </table>
     </div>
     <div id="bg" style="height: 30px; text-align: center;">
-    <ul id="datamenu_Option" class="cb font1">
-      <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">表码数据</li>
-      <li id=datamenu_Option_1 style="cursor: pointer;" onclick="changeType(1)">功率数据</li>
-      <li id=datamenu_Option_2 style="cursor: pointer;" onclick="changeType(2)">功率因数</li>
-      <li id=datamenu_Option_3 style="cursor: pointer;" onclick="changeType(3)">电压数据</li>
-      <li id=datamenu_Option_4 style="cursor: pointer;" onclick="changeType(4)">电流数据</li>
-      <li id=datamenu_Option_5 style="cursor: pointer;" onclick="changeType(5)">电压统计数据</li>
-      <li id=datamenu_Option_6 style="cursor: pointer;" onclick="changeType(6)">不平衡数据</li>
-      <li id=datamenu_Option_7 style="cursor: pointer;" onclick="changeType(7)">电流越限数据</li>
-    </ul>
+      <ul id="datamenu_Option" class="cb font1">
+        <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">表码数据</li>
+        <li id=datamenu_Option_1 style="cursor: pointer;" onclick="changeType(1)">功率数据</li>
+        <li id=datamenu_Option_2 style="cursor: pointer;" onclick="changeType(2)">功率因数</li>
+        <li id=datamenu_Option_3 style="cursor: pointer;" onclick="changeType(3)">电压数据</li>
+        <li id=datamenu_Option_4 style="cursor: pointer;" onclick="changeType(4)">电流数据</li>
+        <li id=datamenu_Option_5 style="cursor: pointer;" onclick="changeType(5)">电压统计数据</li>
+        <li id=datamenu_Option_6 style="cursor: pointer;" onclick="changeType(6)">不平衡数据</li>
+        <li id=datamenu_Option_7 style="cursor: pointer;" onclick="changeType(7)">电流越限数据</li>
+      </ul>
+      <div id="bngMonitor" style="float: right;">
+        <img src="<pss:path type="bgcolor"/>/img/grids.png" onclick="showGridMode()" width="16" height="16" alt="表格" style="cursor: pointer; border: 1px #DBDBDB solid;" />
+        &nbsp;&nbsp;&nbsp; 
+        <img src="<pss:path type="bgcolor"/>/img/chart.png" onclick="showPictMode()" width="16" height="16" alt="图形" style="cursor: pointer; border: 0px #DBDBDB solid;" />
+        &nbsp;&nbsp;&nbsp; 
+      </div>
     </div>
     <div align="center" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-65));">
       <iframe id="data" scrolling="auto" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%;"></iframe>

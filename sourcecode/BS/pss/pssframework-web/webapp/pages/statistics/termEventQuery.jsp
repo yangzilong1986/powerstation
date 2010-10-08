@@ -30,7 +30,7 @@
         <th sortColumn="logicalAddr">逻辑地址</th>
         <th sortColumn="exTime">发生时间</th>
         <th sortColumn="exName">异常名称</th>
-        <th >查看</th>
+        <!-- <th >查看</th> -->
       </tr>
     </thead>
     <tbody class="tableBody" id="dataBody">
@@ -41,7 +41,7 @@
           <td><c:out value='${item.logicalAddr}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.exTime}"></fmt:formatDate> &nbsp;</td>
           <td><c:out value='${item.exName}' />&nbsp;</td>
-          <td>&nbsp;</td>
+          <!-- <td>&nbsp;</td> -->
         </tr>
       </c:forEach>
     </tbody>

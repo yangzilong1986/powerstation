@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -37,77 +34,69 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/termData")
 public class TermDataController extends BaseSpringController {
-	private static final String RAWTYPES = "rawtypes";
     private static final String VIEW_NAME = "/statistics/termDataQuery";
-	private static final String VIEW_NAME_EVENT = "/statistics/termEventQuery";
-	private static final String SDATE = "sdate";
-	private static final String EDATE = "edate";
-	private static final String ORGLIST = "orglist";
+    private static final String VIEW_NAME_EVENT = "/statistics/termEventQuery";
+    private static final String SDATE = "sdate";
+    private static final String EDATE = "edate";
+    private static final String ORGLIST = "orglist";
 
-	@Autowired
-	private OrgInfoManager orgInfoManager;
+    @Autowired
+    private OrgInfoManager orgInfoManager;
 
-	@Autowired
-	private StatisticsManager statisticsManager;
+    @Autowired
+    private StatisticsManager statisticsManager;
 
-	// 默认多列排序,example: username desc,createTime asc
-	protected static final String DEFAULT_SORT_COLUMNS = "exTime asc";
+    // 默认多列排序,example: username desc,createTime asc
+    protected static final String DEFAULT_SORT_COLUMNS = "exTime desc";
 
-	/** binder用于bean属性的设置 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
+    /** binder用于bean属性的设置 */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
-	/**
-	 * 
-	 * @param mav
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping
-	public ModelAndView index(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		mav.setViewName(VIEW_NAME);
-		initPageParams(mav);
-		return mav;
-	}
+    /**
+     * 
+     * @param mav
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping
+    public ModelAndView index(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME);
+        initPageParams(mav);
+        return mav;
+    }
 
-	@SuppressWarnings({ "unchecked", RAWTYPES })
-	@RequestMapping("/event")
-	public ModelAndView showEvent(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
-			StatisticsQuery statisticsQuery) {
+    @SuppressWarnings("unchecked")
+    @RequestMapping("/event")
+    public ModelAndView showEvent(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
+            StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
+        Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.TermEvent);//获取数据模型
+        modelAndView.setViewName(VIEW_NAME_EVENT);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
+    }
 
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
-		Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.TermEvent);//获取数据模型
-
-		modelAndView.setViewName(VIEW_NAME_EVENT);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
-
-	/**
-	 * 初始化页面参数
-	 * 
-	 * @param mav
-	 */
-	@SuppressWarnings("unchecked")
-	private void initPageParams(ModelAndView mav) {
-		Map mapRequest = new LinkedHashMap();
-		mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
+    /**
+     * 初始化页面参数
+     * 
+     * @param mav
+     */
+    @SuppressWarnings("unchecked")
+    private void initPageParams(ModelAndView mav) {
+        Map mapRequest = new LinkedHashMap();
+        mav.addObject(ORGLIST, this.getOrgOptions(mapRequest));
         mav.addObject(SDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
-		mav.addObject(EDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
-	}
+        mav.addObject(EDATE, DateFormatUtils.ISO_DATE_FORMAT.format(new Date()));
+    }
 
-	private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
-		return this.orgInfoManager.findByPageRequest(mapRequest);
-	}
+    private List<OrgInfo> getOrgOptions(Map<String, ?> mapRequest) {
+        return this.orgInfoManager.findByPageRequest(mapRequest);
+    }
 }

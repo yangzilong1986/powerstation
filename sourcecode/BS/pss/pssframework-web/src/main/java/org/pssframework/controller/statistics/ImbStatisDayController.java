@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.pssframework.controller.statistics;
 
 import java.text.SimpleDateFormat;
@@ -31,36 +28,29 @@ import cn.org.rapid_framework.page.PageRequest;
 @Controller
 @RequestMapping("/statistics/imbStatisDay")
 public class ImbStatisDayController extends BaseSpringController {
-
     private static final String VIEW_NAME = "/statistics/imbStatisDayQuery";
-	@Autowired
-	private StatisticsManager statisticsManager;
 
-	// 默认多列排序,example: username desc,createTime asc
+    @Autowired
+    private StatisticsManager statisticsManager;
+
+    // 默认多列排序,example: username desc,createTime asc
     protected static final String DEFAULT_SORT_COLUMNS = "dataTime asc";
 
-	/** binder用于bean属性的设置 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-	}
+    /** binder用于bean属性的设置 */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping
-	public ModelAndView showPowerCrur(ModelAndView modelAndView, HttpServletRequest request,
-			HttpServletResponse response, StatisticsQuery statisticsQuery) {
-
-		PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
-
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public ModelAndView showPowerCrur(ModelAndView modelAndView, HttpServletRequest request,
+            HttpServletResponse response, StatisticsQuery statisticsQuery) {
+        PageRequest<Map> pageRequest = bindPageRequest(request, statisticsQuery, DEFAULT_SORT_COLUMNS);
         Page page = this.statisticsManager.findByPageRequest(pageRequest, StatisticsType.ImbStatisDay);// 获取数据模型
-
-		modelAndView.setViewName(VIEW_NAME);
-
-		modelAndView.addObject("page", page);
-
-		modelAndView.addObject("pageRequest", pageRequest);
-
-		return modelAndView;
-
-	}
+        modelAndView.setViewName(VIEW_NAME);
+        modelAndView.addObject("page", page);
+        modelAndView.addObject("pageRequest", pageRequest);
+        return modelAndView;
+    }
 }
