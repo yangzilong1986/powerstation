@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>电力用户用电信息采集系统</title>
+<title>低压漏保及配变管理系统</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/container.css" />
 <script src="${ctx}/scripts/jquery.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/validate/jquery.validate.js" type="text/javascript"></script>
@@ -57,8 +57,6 @@ function checkUser() {
     return true
 }
 $(function(){
-	
-	 
 /*
 	 $("#submit1").click( function() {
 		 alert(12);
@@ -82,15 +80,11 @@ $(document).ready( function() {
         }
     });
 
-   
-    
     $("#submit1").click( function() {
         if(checkUser()) {
             $("#loginForm").submit();
         }
     });
-
-    
 });
 
 
@@ -137,16 +131,16 @@ function refreshCaptcha() {
       class="input1 required" style="width: 180px;" /></td>
   </tr>
   <!-- 
-          <tr>
-            <td height="30" align="right" class="fontw">单&nbsp;&nbsp;&nbsp;&nbsp;位：</td>
-            <td>
-                <select class="font1" name="select" size="1" style="width:185px; height:24px;">
-                    <option value="2" selected >省电力局</option>
-                    <option value="1">省电力局</option>
-                </select>
-            </td>
-          </tr>
-           -->
+  <tr>
+    <td height="30" align="right" class="fontw">单&nbsp;&nbsp;&nbsp;&nbsp;位：</td>
+    <td>
+        <select class="font1" name="select" size="1" style="width:185px; height:24px;">
+            <option value="2" selected >省电力局</option>
+            <option value="1">省电力局</option>
+        </select>
+    </td>
+  </tr>
+   -->
   <tr>
     <td align="right" class="fontw">验证码：</td>
     <td height="30" align="left" style="position: relative;"><input type='text' name='j_captcha' id="j_captcha"

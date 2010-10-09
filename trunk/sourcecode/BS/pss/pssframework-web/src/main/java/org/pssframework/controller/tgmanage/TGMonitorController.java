@@ -27,6 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class TGMonitorController extends BaseSpringController {
     private static final String VIEW_NAME_FRM = "/tgmanage/showTGMonitor";
     private static final String VIEW_NAME_MON = "/tgmanage/tgMonitor";
+    private static final String VIEW_NAME_MON_TM = "/tgmanage/mon_TotalMeter";
+    private static final String VIEW_NAME_MON_PS = "/tgmanage/mon_PS";
+    private static final String VIEW_NAME_MON_AQ = "/tgmanage/mon_Analog";
+    private static final String VIEW_NAME_MON_SW = "/tgmanage/mon_Switch";
     //private static final String VIEW_NAME_TRE = "/tgmanage/tgTree";
 
     @Autowired
@@ -74,6 +78,62 @@ public class TGMonitorController extends BaseSpringController {
         mav.addObject("tmlist", tmlist);
         mav.addObject("pslist", pslist);
         mav.addObject("aqlist", aqlist);
+        return mav;
+    }
+
+    /**
+     * 总表监测
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/tm")
+    public ModelAndView _tm(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME_MON_TM);
+        return mav;
+    }
+
+    /**
+     * 漏保开关监测
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/ps")
+    public ModelAndView _ps(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME_MON_PS);
+        return mav;
+    }
+
+    /**
+     * 油温监测
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/aq")
+    public ModelAndView _aq(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME_MON_AQ);
+        return mav;
+    }
+
+    /**
+     * 油温监测
+     * @param mav
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/sw")
+    public ModelAndView _sw(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        mav.setViewName(VIEW_NAME_MON_SW);
         return mav;
     }
 

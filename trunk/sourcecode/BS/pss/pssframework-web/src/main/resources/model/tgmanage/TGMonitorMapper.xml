@@ -6,7 +6,7 @@
     
     <sql id="TotalMeterCombBoxSQL">
         <![CDATA[
-        select GP.GP_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN as VUE, MP.MP_NAME || '（局号：' || M.ASSET_NO || '）' as NME
+        select GP.GP_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, MP.MP_NAME || '（局号：' || M.ASSET_NO || '）' as NME
           from C_METER M, C_MP MP, C_GP GP, C_TERMINAL T
          where M.METER_ID = MP.METER_ID
            and MP.MP_ID = GP.MP_ID
@@ -19,7 +19,7 @@
     
     <sql id="PSCombBoxSQL">
         <![CDATA[
-        select PS.PS_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_ADDR || '#' || GP.PROTOCOL_NO || '#' || GP.PORT || '#' || PS.MODEL_CODE as VUE, PS.PS_NAME || '（' || GP.GP_ADDR || '）' as NME
+        select PS.PS_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_ADDR || '#' || GP.PROTOCOL_NO || '#' || GP.PORT || '#' || PS.MODEL_CODE || '#' as VUE, PS.PS_NAME || '（' || GP.GP_ADDR || '）' as NME
           from C_PS PS, C_GP GP, C_TERMINAL T
          where PS.GP_ID = GP.GP_ID
            and T.TERM_ID = GP.TERM_ID
@@ -31,7 +31,7 @@
     
     <sql id="AnalogCombBoxSQL">
         <![CDATA[
-        select GP.GP_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN as VUE, GP.GP_SN as NME
+        select GP.GP_ID || ',' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, GP.GP_SN as NME
           from C_GP GP, C_TERMINAL T
          where T.TERM_ID = GP.TERM_ID
            and GP.GP_CHAR = '8'
