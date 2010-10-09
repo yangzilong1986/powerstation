@@ -39,9 +39,10 @@ function showBar(firstLevel) {
     parent.menu.showBar(firstLevel);
 }
 
-function logout(){
- if( confirm("确认退出系统？"))
-  top.location="${ctx}/j_spring_security_logout";
+function logout() {
+    if( confirm("确认退出系统？")) {
+        top.location="${ctx}/j_spring_security_logout";
+    }
 }
 </script>
 </head>

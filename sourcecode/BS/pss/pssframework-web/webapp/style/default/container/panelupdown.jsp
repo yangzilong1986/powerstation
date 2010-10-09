@@ -12,14 +12,14 @@
 <script type="text/javascript">
 var stretch = true;
 function stretchPanel() {
-    /*if(stretch == true) {
-        parent.frames['mainframeset'].rows = '0,8,26,*,8';
+    if(stretch == true) {
+        parent.frames['mainframeset'].rows = '0,8,26,*,24';
         stretch = false;
     }
     else {
-        parent.frames['mainframeset'].rows = '81,8,26,*,8';
+        parent.frames['mainframeset'].rows = '81,8,26,*,24';
         stretch = true;
-    }*/
+    }
 }
 </script>
 </head>
