@@ -24,10 +24,10 @@
         <th>序号</th>
         <th sortColumn="assetNo">资产编号</th>
         <th sortColumn="dataTime">数据时间</th>
-        <th sortColumn="PActTotal">正向有功总</th>
-        <th sortColumn="PReactTotal">正向无功总</th>
-        <th sortColumn="IActTotal">反向有功总</th>
-        <th sortColumn="IReactTotal">反向无功总</th>
+        <th sortColumn="PActTotal">正向有功总(kWh)</th>
+        <th sortColumn="PReactTotal">正向无功总(kvarh)</th>
+        <th sortColumn="IActTotal">反向有功总(kWh)</th>
+        <th sortColumn="IReactTotal">反向无功总(kvarh)</th>
       </tr>
     </thead>
     <tbody class="tableBody" id="dataBody">

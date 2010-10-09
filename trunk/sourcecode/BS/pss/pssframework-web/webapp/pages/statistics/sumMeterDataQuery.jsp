@@ -34,28 +34,28 @@ function changeType(obj) {
     lastQueryType = obj;
     var url = contextPath;
     if(lastQueryType == 0) {  // 表码数据
-        url += "/statistics/eicurv?"+getFrom();
+        url += "/statistics/eicurv?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 1) {  // 功率数据
-        url += "/statistics/powercruv?"+getFrom();
+        url += "/statistics/powercruv?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 2) {  // 功率因数
-        url += "/statistics/pfcruv?"+getFrom();
+        url += "/statistics/pfcruv?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 3) {  // 电压数据
-        url += "/statistics/eccurv/vt?"+getFrom();
+        url += "/statistics/eccurv/vt?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 4) {  // 电流数据
-        url += "/statistics/eccurv/ec?"+getFrom();
+        url += "/statistics/eccurv/ec?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 5) {  // 电压统计数据
-        url += "/statistics/voltStatisDay?"+getFrom();
+        url += "/statistics/voltStatisDay?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 6) {  // 不平衡数据
-        url += "/statistics/imbStatisDay?"+getFrom();
+        url += "/statistics/imbStatisDay?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     if(lastQueryType == 7) {  // 电流越限数据
-        url += "/statistics/ecurStatisDay?"+getFrom();
+        url += "/statistics/ecurStatisDay?showMode=" + showMode + "&" + getFrom() + "&random=" + Math.random();
     }
     
     document.getElementById("data").src = url;
@@ -81,6 +81,7 @@ function chgOrgId(type) {
             defType: 1,
             formId: 'tgId',
             formName: 'tgId',
+            actionChange: 'changeTg()',
             orgId: $("#orgId").val(), 
             tgId: selectedTg
     };
@@ -93,15 +94,24 @@ function chgOrgId(type) {
     });
 }
 
-var showMode = 'grid';  // grid / pict
+function changeTg() {
+    changeType();
+}
+
+var showMode = 'grids';  // grids / chart
 function showGridMode() {
-    
+    showMode = 'grids';
+    changeType(lastQueryType);
 }
 
 function showPictMode() {
+    showMode = 'chart';
     if($("#tgId").val() == '-1') {
+        showMode = 'grids';
         alert('请选择单个台区进行查看');
+        return;
     }
+    changeType(lastQueryType);
 }
 </script>
 </head>

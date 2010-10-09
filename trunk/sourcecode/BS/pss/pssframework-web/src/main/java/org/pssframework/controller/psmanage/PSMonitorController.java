@@ -419,7 +419,7 @@ public class PSMonitorController extends BaseSpringController {
         String chartType = request.getParameter("chartType");
         String width = request.getParameter("width");
         String height = request.getParameter("height");
-        Map<String, String> mapParams = new HashMap<String, String>();
+        Map<String, String> mapParams = new LinkedHashMap<String, String>();
         mapParams.put("caption", "漏保数据曲线");
         mapParams.put("contextPath", request.getContextPath());
         mapParams.put("chartType", chartType);

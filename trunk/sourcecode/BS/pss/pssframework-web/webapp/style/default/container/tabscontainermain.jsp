@@ -11,6 +11,7 @@
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/easyui/jquery.js"></script>
 <script type="text/javascript" src="<pss:path type="bgcolor"/>/plugin/easyui/jquery.easyui.js"></script>
 <script type="text/javascript">
+var selectedTabTitle = null;
 function showTab(tabTitle, url) {
     var exists = $('#MultiTaskTabs').tabs('exists', tabTitle);
     if(exists) {
@@ -23,6 +24,7 @@ function showTab(tabTitle, url) {
             closable: true
         });
     }
+    selectedTabTitle = tabTitle;
 }
 
 $().ready(function() {
@@ -32,10 +34,14 @@ $().ready(function() {
         content: '<iframe scrolling="auto" frameborder="0" src="' + url + '" width="100%" height="100%"></iframe>',
         closable: false
     });
+    selectedTabTitle = '首页';
 
     $('#MultiTaskTabs').tabs('resize');
+    //alert(1);
     $(window).resize(function() {
+        //alert(2);
         $('#MultiTaskTabs').tabs('resize');
+        $('#MultiTaskTabs').tabs('select', selectedTabTitle);
     });
 });
 </script>

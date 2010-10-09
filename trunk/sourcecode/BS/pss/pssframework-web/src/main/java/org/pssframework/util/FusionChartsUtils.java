@@ -65,7 +65,12 @@ public class FusionChartsUtils {
                     String[] ss = new String[seriesCodes.length + 1];
                     Object o = (Object) iterator.next();
                     try {
-                        ss[0] = regularDataTime((Date) invokeMethod(o, "getDataTime", null), "[dd日HH时]");
+                        if(mapParams.get("timelabel") != null && !"".equals(mapParams.get("timelabel"))) {
+                            ss[0] = regularDataTime((Date) invokeMethod(o, "getDataTime", null), mapParams.get("timelabel"));
+                        }
+                        else {
+                            ss[0] = regularDataTime((Date) invokeMethod(o, "getDataTime", null), "[dd日HH时]");
+                        }
                     }
                     catch(Exception e) {
                         e.printStackTrace();
