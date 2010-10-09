@@ -52,8 +52,6 @@ function changeFod(obj) {
         <div onmouseover=changeFod(this)><a id="a1001" href="#" onclick="selectMenu('1001', '/autorm/realTimeReading'); return false;">数据召测</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_1002">
         <div onmouseover=changeFod(this)><a id="a1002" href="#" onclick="selectMenu('1002', '/psmanage/psmon/frame'); return false;">漏保监测</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_1003">
-        <div onmouseover=changeFod(this)><a id="a1003" href="#" onclick="selectMenu('1003', '/tgmanage/tgmon/frame'); return false;">台区监测</a></div></security:authorize>
       </div>
     </dt>
   </dl>

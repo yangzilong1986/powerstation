@@ -11,11 +11,59 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/effects.js"></script>
 <script type="text/javascript">
 var setupFlag = false;
+var monObject = 0;  // 监测对象默认为总表
 
 function mySwitchTab(prefix, order, cnts) {
     SwitchTab(prefix, order, cnts);
+    monObject = order;
+    initMonitorPage();
     return true;
 }
+
+function initMonitorPage() {
+    var url = "<pss:path type="webapp"/>/tgmanage/tgmon";
+    if(monObject == 0) {      //总表监测
+        if($("#totalMeter").val() == "" || $("#totalMeter").val() == null || $("#totalMeter").val() == "null") {
+            alert("该台区下没有总表档案");
+            return;
+        }
+        var params = $("#totalMeter").val().split("#");
+        url += "/tm?gpId=" + params[0] + "&logicalAddr=" + params[1] + "&protocolNo=" + params[2] + "&gpSn=" + params[3];
+        $("#mframe0").attr("src", url);
+    }
+    else if(monObject == 1) { //漏保开关监测
+        if($("#ps").val() == "" || $("#ps").val() == null || $("#ps").val() == "null") {
+            alert("该台区下没有漏保开关档案");
+            return;
+        }
+        var params = $("#ps").val().split("#");
+        url += "/ps?psId=" + params[0] + "&logicalAddr=" + params[1] + "&protocolNo=" + params[2] + "&meterAddr=" + params[3] + "&meterType=" + params[4] + "&port=" + params[5] + "&psModel=" + params[6];
+        $("#mframe1").attr("src", url);
+    }
+    else if(monObject == 2) { //油温监测
+        if($("#analog").val() == "" || $("#analog").val() == null || $("#analog").val() == "null") {
+            alert("该台区下没有直流模拟量档案");
+            return;
+        }
+        var params = $("#analog").val().split("#");
+        url += "/aq?gpId=" + params[0] + "&logicalAddr=" + params[1] + "&protocolNo=" + params[2] + "&gpSn=" + params[3];
+        $("#mframe2").attr("src", url);
+    }
+    else if(monObject == 3) { //开关量监测
+        alert("该功能尚未实现!");
+        if($("#term").val() == "" || $("#term").val() == null || $("#term").val() == "null") {
+            alert("该台区下没有集中器档案");
+            return;
+        }
+        url += "/sw/" + $("#term").val();
+        //$("#mframe3").attr("src", url);
+        return;
+    }
+}
+
+$(document).ready(function() {
+    initMonitorPage();
+});
 </script>
 </head>
 <body style="overflow: auto;">
