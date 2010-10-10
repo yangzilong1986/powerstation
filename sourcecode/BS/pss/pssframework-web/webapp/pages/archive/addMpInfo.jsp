@@ -86,7 +86,10 @@ StringBuffer.prototype.toString = function() {
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="13%" class="green" align="right"><font color="red">* </font>测量点序号：</td>
-        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
+        <td width="20%">
+        <!-- gpAddr 、gpSn --> <input type="hidden" name="gpInfos[0].gpAddrOld" value="${mpinfo.gpInfos[0].gpAddr}" /> 
+        <input type="hidden" name="gpInfo.gpSnOld" value="${mpinfo.gpInfos[0].gpSn}" />
+        <security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:input path="gpInfos[0].gpSn" id="gpSn" cssClass="required validate-number" disabled="${disabled}" onfocus="checkGpSn()"/>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:input path="gpInfos[0].gpSn" id="gpSn" cssClass="required validate-number validate-ajax-${ctx}/archive/mpinfo/checkGpSn.json" disabled="${disabled}"/>
