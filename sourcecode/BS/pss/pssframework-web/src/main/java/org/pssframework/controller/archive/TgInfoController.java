@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
+import org.pssframework.model.archive.AnalogueInfo;
 import org.pssframework.model.archive.MpInfo;
 import org.pssframework.model.archive.PsInfo;
 import org.pssframework.model.archive.SwitchValueInfo;
@@ -35,6 +36,7 @@ import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
+import org.pssframework.service.archive.AnalogueInfoManager;
 import org.pssframework.service.archive.MpInfoManger;
 import org.pssframework.service.archive.PsInfoManger;
 import org.pssframework.service.archive.SwitchValueInfoManager;
@@ -83,6 +85,9 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 
 	@Autowired
 	private SwitchValueInfoManager switchValueInfoManager;
+
+	@Autowired
+	private AnalogueInfoManager analogueInfoManager;
 
 	/** binder用于bean属性的设置 */
 	@InitBinder
@@ -139,6 +144,15 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 			pslist = new LinkedList<PsInfo>();
 		}
 		return pslist;
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<AnalogueInfo> getAnalogueList(Map mapRequest) {
+		List<AnalogueInfo> analogueInfolist = this.analogueInfoManager.findByPageRequest(mapRequest);
+		if (analogueInfolist == null || analogueInfolist.size() <= 0) {
+			analogueInfolist = new LinkedList<AnalogueInfo>();
+		}
+		return analogueInfolist;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -338,6 +352,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		modelMap.addAttribute("pslist", this.getPsList(mapRequest));
 		modelMap.addAttribute("termlist", this.getTerminalList(mapRequest));
 		modelMap.addAttribute("swtichvaluelist", this.getSwitchValueList(mapRequest));
+		modelMap.addAttribute("analoguelist", this.getAnalogueList(mapRequest));
 
 	}
 

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class AnalogueInfoDao extends BaseHibernateDao<AnalogueInfo, Long> {
-	private String hql = "select t from AnalogueInfo t, TermObjRelaInfo g where 1=1  and t.switchValueId.terminalInfo.termId = g.terminalInfo.termId "
+	private String hql = "select t from AnalogueInfo t, TermObjRelaInfo g where 1=1  and t.gpInfo.terminalInfo.termId = g.terminalInfo.termId "
 			+ "/~ and g.objType='2' and g.objId = '[tgid]' ~/" + "/~ and g.objType='1' and g.objId = '[custid]' ~/";
 
 	@Override

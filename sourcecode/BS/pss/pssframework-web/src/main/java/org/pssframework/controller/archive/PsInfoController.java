@@ -118,10 +118,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 		String msg = MSG_CREATED_SUCCESS;
 		Long psId = 0L;
 
-		if (checkGpsn(model)) {
-			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, GP_IS_REPEAT);
+		if (!checkGp(model, modelMap))
 			return VIEW;
-		}
 
 		try {
 			this.psInfoManager.saveOrUpdate(model);
@@ -227,23 +225,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 			logger.debug("bind psinfo {} from request", psinfo);
 
-			if (checkGpsn(psinfo)) {
-
-				logger.error("the gpSn repeat");
-				modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-						"the gpSn repeat");
+			if (!checkGp(psinfo, modelMap))
 				return VIEW;
-
-			}
-
-			if (checkGpAddr(psinfo)) {
-
-				logger.error("the gpAddr repeat");
-				modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-						"the gpAddr repeat");
-				return VIEW;
-
-			}
 
 			PsInfo psInfoDb = this.psInfoManager.getById(id);
 			bind(request, psInfoDb);
@@ -495,6 +478,31 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 			logger.info("resultMap : " + resultMap.toString());
 		}
 		return ret;
+	}
+
+	//checkgp
+	private boolean checkGp(PsInfo psinfo, ModelMap modelMap) {
+		boolean ret = true;
+
+		if (checkGpsn(psinfo)) {
+
+			logger.error("the gpSn repeat");
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					"the gpSn repeat");
+			return ret = false;
+
+		}
+
+		if (checkGpAddr(psinfo)) {
+
+			logger.error("the gpAddr repeat");
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					"the gpAddr repeat");
+			return false;
+
+		}
+		return ret;
+
 	}
 
 }

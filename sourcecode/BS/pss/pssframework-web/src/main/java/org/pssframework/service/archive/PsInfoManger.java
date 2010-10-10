@@ -35,18 +35,12 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 		return psInfoDao;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<PsInfo> findByPageRequest(Map mapRequest) {
 		return psInfoDao.findByPageRequest(mapRequest);
 	}
 
 	@Override
 	public void saveOrUpdate(PsInfo model) throws DataAccessException {
-		// 默认485
-		model.getGpInfo().setGpChar("1");
-
-		// 台区
-		model.getGpInfo().setGpType("2");
 
 		setCheckboxAutoTest(model);
 
@@ -67,16 +61,15 @@ public class PsInfoManger extends BaseManager<PsInfo, Long> {
 
 	public boolean checkGpsn(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
-		if (gpInfoIn.getGpSn() == gpInfoIn.getGpSnOld())
-			return false;
-		return gpInfoManger.checkGpSnRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpSn());
+
+		return gpInfoManger.checkGpSnRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpSn(), "1",
+				gpInfoIn.getGpSnOld());
 	}
 
 	public boolean checkGpAddr(PsInfo psInfo) {
 		GpInfo gpInfoIn = psInfo.getGpInfo();
-		if (gpInfoIn.getGpAddr().equals(gpInfoIn.getGpAddrOld()))
-			return false;
-		return gpInfoManger.checkGpAddrRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpAddr());
+		return gpInfoManger.checkGpAddrRePeat(psInfo.getTerminalInfo().getTermId(), gpInfoIn.getGpAddr(), "1",
+				gpInfoIn.getGpAddrOld());
 	}
 
 	private void setCheckboxAutoTest(PsInfo model) {

@@ -3,6 +3,9 @@
  */
 package org.pssframework.service.archive;
 
+import java.util.List;
+import java.util.Map;
+
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.AnalogueInfoDao;
@@ -22,5 +25,9 @@ public class AnalogueInfoManager extends BaseManager<AnalogueInfo, Long> {
 	protected EntityDao getEntityDao() {
 		// TODO Auto-generated method stub
 		return analogueInfoDao;
+	}
+
+	public List<AnalogueInfo> findByPageRequest(Map mapRequest) {
+		return analogueInfoDao.findByPageRequest(mapRequest);
 	}
 }

@@ -3,20 +3,6 @@
  */
 package org.pssframework.controller.archive;
 
-import static org.pssframework.support.system.SystemConst.CODE_BTL;
-import static org.pssframework.support.system.SystemConst.CODE_CLOCK_LIST;
-import static org.pssframework.support.system.SystemConst.CODE_COMM_MODE_GM;
-import static org.pssframework.support.system.SystemConst.CODE_CT_RATIO;
-import static org.pssframework.support.system.SystemConst.CODE_DAY_LIST;
-import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_GEAR;
-import static org.pssframework.support.system.SystemConst.CODE_OFF_DELAY_VALUE;
-import static org.pssframework.support.system.SystemConst.CODE_PROTOCOL_METER;
-import static org.pssframework.support.system.SystemConst.CODE_PS_MODEL;
-import static org.pssframework.support.system.SystemConst.CODE_PS_TYPE;
-import static org.pssframework.support.system.SystemConst.CODE_PT_RATIO;
-import static org.pssframework.support.system.SystemConst.CODE_RATED_EC;
-import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR;
-import static org.pssframework.support.system.SystemConst.CODE_REMC_GEAR_VALUE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_IS_SUCC;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_AJAX_MESSAGE;
 import static org.pssframework.support.system.SystemConst.CONTROLLER_METHOD_TYPE;
@@ -72,16 +58,18 @@ import pep.bp.realinterface.ICollectInterface;
 import pep.bp.realinterface.mto.MTO_376;
 import pep.bp.realinterface.mto.MessageTranObject;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Administrator 模拟量
  */
 @Controller
 @RequestMapping("/archive/analogueinfo")
-public class AnalogueInfoController extends BaseRestSpringController<AnalogueInfo, java.lang.Long> {
+public class AnalogueInfoController extends BaseRestSpringController<AnalogueInfo, Long> {
 
 	private static final String VIEW = "/archive/addAnalogueInfo";
 
-	private static final String FORWARD = "/archive/psinfo";
+	private static final String FORWARD = "/archive/analogueinfo";
 
 	//该终端下测量点序号重复
 	private static final String GP_IS_REPEAT = "该终端下测量点序号重复";
@@ -116,15 +104,16 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 			@Valid AnalogueInfo model) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_CREATED_SUCCESS;
-		Long psId = 0L;
-
-		if (checkGpsn(model)) {
-			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, GP_IS_REPEAT);
-			return VIEW;
-		}
+		Long gpId = 0L;
 
 		try {
+
+			if (!checkGp(model, modelMap))
+				return VIEW;
+
 			this.analogueInfoManager.saveOrUpdate(model);
+
+			gpId = model.getGpInfo().getGpId();
 			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_SUCCESS);
 		} catch (DataAccessException e) {
 			this.logger.error(e.getLocalizedMessage());
@@ -138,7 +127,7 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 			//Flash.current().error(CONTROLLER_AJAX_MESSAGE, MSG_CREATED_FAIL);
 		}
 		modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, isSucc).addAttribute(CONTROLLER_AJAX_MESSAGE, msg)
-				.addAttribute("psId", psId);
+				.addAttribute("gpId", gpId);
 		return VIEW;
 	}
 
@@ -147,15 +136,14 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
+
 		AnalogueInfo analogueInfo = this.analogueInfoManager.getById(id);
 
-		Map requestMap = new HashMap();
+		Map requestMap = Maps.newHashMap();
 
 		requestMap.put("tgid", analogueInfo.getGpInfo().getObjectId());
 
-		result.addAttribute("istAddr", getPsAddr(analogueInfo.getGpInfo().getObjectId()));
-
-		result.addAttribute("psinfo", analogueInfo);
+		result.addAttribute("analogueinfo", analogueInfo);
 
 		this.CommonPart(result, requestMap);
 
@@ -169,15 +157,14 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	@RequestMapping(value = "/{id}")
 	public String show(ModelMap result, @PathVariable Long id) throws Exception {
 
+
 		AnalogueInfo analogueInfo = this.analogueInfoManager.getById(id);
 
 		Map requestMap = new HashMap();
 
 		requestMap.put("tgid", analogueInfo.getGpInfo().getObjectId());
 
-		result.addAttribute("istAddr", getPsAddr(analogueInfo.getGpInfo().getObjectId()));
-
-		result.addAttribute("psinfo", analogueInfo);
+		result.addAttribute("analogueinfo", analogueInfo);
 
 		this.CommonPart(result, requestMap);
 
@@ -198,9 +185,7 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 		requestMap.put("tgid", tgid);
 
-		modelMap.addAttribute("istAddr", getPsAddr(tgid));
-
-		modelMap.addAttribute("psinfo", model);
+		modelMap.addAttribute("analogueinfo", model);
 
 		this.CommonPart(modelMap, requestMap);
 
@@ -211,8 +196,8 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String update(ModelMap modelMap, @Valid AnalogueInfo psinfo, BindingResult errors, @PathVariable Long id,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String update(ModelMap modelMap, @Valid AnalogueInfo analogueinfo, BindingResult errors,
+			@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
 
@@ -224,28 +209,16 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 		try {
 
-			logger.debug("bind psinfo {} from request", psinfo);
+			logger.debug("bind analogueinfo {} from request", analogueinfo);
 
-			if (checkGpsn(psinfo)) {
-
-				logger.error("the gpSn repeat");
-				modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-						"the gpSn repeat");
+			if (!checkGp(analogueinfo, modelMap))
 				return VIEW;
 
-			}
-
-			if (checkGpAddr(psinfo)) {
-
-				logger.error("the gpAddr repeat");
-				modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-						"the gpAddr repeat");
-				return VIEW;
-
-			}
 
 			AnalogueInfo analogueInfoDb = this.analogueInfoManager.getById(id);
+
 			bind(request, analogueInfoDb);
+
 			this.analogueInfoManager.update(analogueInfoDb);
 
 		} catch (Exception e) {
@@ -287,81 +260,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 		result.addAttribute("termList", termlist);
 
-		// RATED_EC 额定电流
-		mapRequest.put("codecate", CODE_RATED_EC);
-
-		result.addAttribute("ratedEcList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// RATED_EC 剩余电流档位
-		mapRequest.put("codecate", CODE_REMC_GEAR);
-
-		result.addAttribute("remcGearList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 剩余电流档位当前值 REMC_GEAR_VALUE
-
-		mapRequest.put("codecate", CODE_REMC_GEAR_VALUE);
-
-		result.addAttribute("remcGearValueList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// -漏电分断延迟档位 OFF_DELAY_GEAR
-		mapRequest.put("codecate", CODE_OFF_DELAY_GEAR);
-
-		result.addAttribute("offDelayGearList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// -漏电分断延迟时间 OFF_DELAY_VALUE
-
-		mapRequest.put("codecate", CODE_OFF_DELAY_VALUE);
-
-		result.addAttribute("offDelayValueList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 漏保类型
-		mapRequest.put("codecate", CODE_PS_TYPE);
-
-		result.addAttribute("psTypeList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 通讯方式
-		mapRequest.put("codecate", CODE_COMM_MODE_GM);
-
-		result.addAttribute("commModeList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 波特率
-		mapRequest.put("codecate", CODE_BTL);
-
-		result.addAttribute("btlList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 漏保型号
-		mapRequest.put("codecate", CODE_PS_MODEL);
-
-		result.addAttribute("psModelList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// CT
-		mapRequest.put("codecate", CODE_CT_RATIO);
-
-		result.addAttribute("ctList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// PT
-		mapRequest.put("codecate", CODE_PT_RATIO);
-
-		result.addAttribute("ptList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// TODO
-		/*
-		 * 这里先采用电表规约
-		 */
-		mapRequest.put("codecate", CODE_PROTOCOL_METER);
-
-		result.addAttribute("protocolList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 日
-		mapRequest.put("codecate", CODE_DAY_LIST);
-
-		result.addAttribute("dayList", this.codeInfoManager.findByPageRequest(mapRequest));
-
-		// 时
-		mapRequest.put("codecate", CODE_CLOCK_LIST);
-
-		result.addAttribute("clockList", this.codeInfoManager.findByPageRequest(mapRequest));
-
 	}
 
 	/**
@@ -370,7 +268,7 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	 * @return
 	 */
 	private boolean checkGpsn(AnalogueInfo analogueInfo) {
-		return gpInfoManger.checkGpSnRePeat(analogueInfo.getGpInfo()).equals("") ? true : false;
+		return !gpInfoManger.checkGpSnRePeat(analogueInfo.getGpInfo()).equals("");
 	}
 
 	/**
@@ -379,7 +277,7 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	 * @return
 	 */
 	private boolean checkGpAddr(AnalogueInfo analogueInfo) {
-		return gpInfoManger.checkGpAddrRePeat(analogueInfo.getGpInfo()).equals("") ? true : false;
+		return !gpInfoManger.checkGpAddrRePeat(analogueInfo.getGpInfo()).equals("");
 
 	}
 
@@ -490,6 +388,31 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 			logger.info("resultMap : " + resultMap.toString());
 		}
 		return ret;
+	}
+
+	//checkgp
+	private boolean checkGp(AnalogueInfo analogueinfo, ModelMap modelMap) {
+		boolean ret = true;
+
+		if (checkGpsn(analogueinfo)) {
+
+			logger.error("the gpSn repeat");
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					"the gpSn repeat");
+			return ret = false;
+
+		}
+
+		if (checkGpAddr(analogueinfo)) {
+
+			logger.error("the gpAddr repeat");
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
+					"the gpAddr repeat");
+			return false;
+
+		}
+		return ret;
+
 	}
 
 }
