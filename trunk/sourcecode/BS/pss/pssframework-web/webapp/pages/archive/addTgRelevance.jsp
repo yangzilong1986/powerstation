@@ -205,7 +205,7 @@ a:hover {
     </tbody>
   </table>
   </div>
-  
+  <!-- 考核表信息 -->
   <div class="mgt10 da_top"><span>台区考核表信息</span> <security:authorize
     ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_10">
     <h1><a onclick="openMeterInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
@@ -294,6 +294,43 @@ a:hover {
   </table>
   </div>
   
+  <!--模拟量信息 -->
+  <div class="mgt10 da_top"><span>模拟量信息</span> <security:authorize
+    ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_10">
+    <h1><a onclick="openAnalogueInfo('${tginfo.tgId}')"><img src='<pss:path type="bgcolor"/>/img/bt_add.gif'
+      width="16" height="16" /></a></h1>
+  </security:authorize></div>
+  <div class="da_con">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th width="14%">模拟量名称</th>
+        <th width="14%">测量点地址</th>
+        <th width="14%">测量点序号</th>
+        <th width="14%">采集终端</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <c:forEach items="${analoguelist}" var="analogueInfo" varStatus="status">
+        <tr id="analogue_${analogueInfo.gpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>&nbsp;${analogueInfo.analogueName}</td>
+          <td>&nbsp;${analogueInfo.gpInfo.gpAddr}</td>
+          <td>&nbsp;${analogueInfo.gpInfo.gpSn}</td>
+          <td>&nbsp;${analogueInfo.gpInfo.terminalInfo.logicalAddr}</td>
+          <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+            <a onclick="deleteAnalogueInfo('${analogueInfo.gpId}')">删除</a>
+          </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_10">/&nbsp;<a
+              onclick="updateAnalogueInfo('${analogueInfo.gpId}')">修改</a>
+          </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
+              onclick="showAnalogueInfo('${analogueInfo.gpId}')">查看</a>
+          </security:authorize></td>
+        </tr>
+      </c:forEach>
+    </tbody>
+  </table>
+  </div>
+  
   
   <!-- 开关量 --> 
   <div class="mgt10 da_top"><span>开关量信息</span> <security:authorize
@@ -308,7 +345,7 @@ a:hover {
         <th width="14%">开关量编号</th>
         <th width="14%">开关量名称</th>
         <th width="14%">开关量属性</th>
-        <th width="14%">终端地址</th>
+        <th width="14%">采集终端</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -754,6 +791,54 @@ showTermInfo=function(termId){
 updateTgOpInfo=function(userId){
      var url = "${ctx}/archive/tgopinfo/"+userId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
+};
+/*******************************************************************/
+ 
+ //模拟量
+function openAnalogueInfo(tgId){
+
+	  if(!$("#tgId").val()){
+	    alert("请先建台区");return;
+	  }
+	   var url = "${ctx}/archive/analogueinfo/new?gpInfo.objectId="+$("#tgId").val();
+	   windowPopup(url, 960, 575);
+}
+
+deleteAnalogueInfo=function(gpId){
+     if(gpId==null || gpId ==""){
+       return;
+     } 
+
+     var url = "${ctx}/archive/analogueinfo/"+gpId+".json?_method=delete";
+     if (confirm("确定要删除该模拟量?")) {
+         $.ajax({
+             url: url,
+             dataType:'json',
+             type:'POST',
+             cache: false,
+             success: function(json) {
+        	   var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+               var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+                 alert(msg);
+                 if(isSucc){
+                  $("#analogue_"+gpId).remove();
+                 }
+             },error:function(e) {
+                 alert("delete error");
+                 alert(e.message);
+             }
+         });
+     }
+};
+
+updateAnalogueInfo=function(gpId){
+     var url = "${ctx}/archive/analogueinfo/"+gpId+"/edit?tgInfo.tgId="+$("#tgId").val();
+     windowPopup(url, 960, 575);
+};
+
+showAnalogueInfo=function(gpId){
+    var url = "${ctx}/archive/analogueinfo/"+gpId+"?tgInfo.tgId="+$("#tgId").val();
+    windowPopup(url, 960, 575);
 };
 /*******************************************************************/
 

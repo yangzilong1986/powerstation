@@ -73,6 +73,7 @@ StringBuffer.prototype.toString = function() {
   <form:hidden path="tgInfo.tgId" />
   <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
   <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
+   <input type="hidden" name="gpInfos[0].gpChar" id="gpInfos[0].gpChar" value="1">
   <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
   <ul class=default id=electric_Con_1>
     <div class="tab"><span>总表信息</span></div>

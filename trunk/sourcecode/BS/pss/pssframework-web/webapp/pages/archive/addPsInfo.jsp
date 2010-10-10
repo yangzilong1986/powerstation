@@ -88,6 +88,8 @@ function lpadString (str,lenth) {
       </c:otherwise>
     </c:choose>
     <form:hidden path="gpInfo.objectId" />
+      <input type="hidden" name="gpInfo.gpType" id="gpInfo.gpType" value="2">
+ 	  <input type="hidden" name="gpInfo.gpChar" id="gpInfo.gpChar" value="1">
     <div id="main"><input type="hidden" id="channelType" name="channelType" value="1" /> <input type="hidden"
       id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
     <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" />
