@@ -3,12 +3,17 @@
  */
 package org.pssframework.model.archive;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -23,9 +28,34 @@ public class AnalogueInfo extends BaseEntity {
 	 * 
 	 */
 	private static final long serialVersionUID = 4469888225478750148L;
+
 	@Id
-	@OneToOne
+	@Column(name = "GP_ID")
+	@GeneratedValue(generator = "pkGenerator")
+	@GenericGenerator(name = "pkGenerator", strategy = "foreign", parameters = @Parameter(name = "property", value = "gpInfo"))
+	private Long gpId;
+
+	/**
+	 * @return the gpId
+	 */
+	public Long getGpId() {
+		return gpId;
+	}
+
+	/**
+	 * @param gpId the gpId to set
+	 */
+	public void setGpId(Long gpId) {
+		this.gpId = gpId;
+	}
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
 	private GpInfo gpInfo;
+
+	//ANALOGUE_NAME名称
+	@Column(name = "ANALOGUE_NAME")
+	private String analogueName;
 
 	//量程起始值RANGE_BEGIN
 	@Column(name = "RANGE_BEGIN")
@@ -44,6 +74,7 @@ public class AnalogueInfo extends BaseEntity {
 	private String minValue;
 
 	//冻结密度FREEZ_DENSITY
+	@Column(name = "FREEZ_DENSITY")
 	private String freezDensity;
 
 	/**
@@ -86,6 +117,20 @@ public class AnalogueInfo extends BaseEntity {
 	 */
 	public String getRangeEnd() {
 		return rangeEnd;
+	}
+
+	/**
+	 * @return the analogueName
+	 */
+	public String getAnalogueName() {
+		return analogueName;
+	}
+
+	/**
+	 * @param analogueName the analogueName to set
+	 */
+	public void setAnalogueName(String analogueName) {
+		this.analogueName = analogueName;
 	}
 
 	/**

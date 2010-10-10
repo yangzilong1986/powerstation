@@ -51,16 +51,40 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 		return null;
 	}
 
+	/**
+	 * 485
+	 * @param dbGpInfos
+	 * @param gpSn
+	 * @return
+	 */
 	public boolean checkGpSnRePeat(List<GpInfo> dbGpInfos, Long gpSn) {
+		return checkGpSnRePeat(dbGpInfos, gpSn, "1");
+	}
+
+	public boolean checkGpSnRePeat(List<GpInfo> dbGpInfos, Long gpSn, String gpChar) {
 		boolean ret = false;
 
+		if (gpChar == null) {
+			gpChar = "1";
+		}
 		for (GpInfo gpInfo : dbGpInfos) {
-			if (gpInfo.getGpSn().equals(gpSn)) {
+			if (gpInfo.getGpSn().equals(gpSn) && gpChar.equals(gpInfo.getGpChar())) {
 				ret = true;
 				break;
 			}
 		}
 		return ret;
+	}
+
+	/**
+	 * 检测序号 485
+	 * @param termId
+	 * @param gpSn
+	 * @return
+	 */
+	public boolean checkGpSnRePeat(Long termId, Long gpSn) {
+
+		return checkGpSnRePeat(termId, gpSn, "1");
 	}
 
 	/**
@@ -69,24 +93,37 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 	 * @param gpSn
 	 * @return
 	 */
-	public boolean checkGpSnRePeat(Long termId, Long gpSn) {
+	public boolean checkGpSnRePeat(Long termId, Long gpSn, String gpChar) {
 
-		if (!termIdIsNull(termId))
-			return checkGpSnRePeat(gpInfoDao.findByTermId(termId), gpSn);
-		else
-			return termIdIsNull(termId);
+		return checkGpSnRePeat(termId, gpSn, gpChar, null);
 	}
 
-	public boolean checkGpAddrRePeat(List<GpInfo> dbGpInfos, String gpAddr) {
-		boolean ret = false;
+	/**
+	 * 检测序号
+	 * @param termId
+	 * @param gpSn
+	 * @return
+	 */
+	public boolean checkGpSnRePeat(Long termId, Long gpSn, String gpChar, Long gpSnOld) {
+		if (compareOldGpSn(gpSn, gpSnOld)) {
+			if (!termIdIsNull(termId))
+				return checkGpSnRePeat(gpInfoDao.findByTermId(termId), gpSn, gpChar);
+			else
+				return false;
+		} else
+			return false;
+	}
 
-		for (GpInfo gpInfo : dbGpInfos) {
-			if (gpAddr.equals(gpInfo.getGpAddr())) {
-				ret = true;
-				break;
-			}
-		}
-		return ret;
+	/**
+	 * 检测表地址 485
+	 * @param termId
+	 * @param gpSn
+	 * @return
+	 */
+	protected boolean checkGpAddrRePeat(Long termId, String gpAddr) {
+
+		return checkGpAddrRePeat(termId, gpAddr, "1");
+
 	}
 
 	/**
@@ -95,12 +132,53 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 	 * @param gpSn
 	 * @return
 	 */
-	public boolean checkGpAddrRePeat(Long termId, String gpAddr) {
-		if (!termIdIsNull(termId))
-			return checkGpAddrRePeat(gpInfoDao.findByTermId(termId), gpAddr);
-		else
-			return termIdIsNull(termId);
+	protected boolean checkGpAddrRePeat(Long termId, String gpAddr, String gpChar) {
 
+		return checkGpAddrRePeat(termId, gpAddr, gpAddr, null);
+
+	}
+
+	/**
+	 * 检测表地址
+	 * @param termId
+	 * @param gpSn
+	 * @return
+	 */
+	protected boolean checkGpAddrRePeat(Long termId, String gpAddr, String gpChar, String gpAddrOld) {
+
+		if (compareOldGpAddr(gpAddr, gpAddrOld)) {
+			if (!termIdIsNull(termId))
+				return checkGpAddrRePeat(gpInfoDao.findByTermId(termId), gpAddr, gpChar);
+			else
+				return false;
+		} else
+			return false;
+
+	}
+
+	/**
+	 * 485
+	 * @param dbGpInfos
+	 * @param gpAddr
+	 * @return
+	 */
+	private boolean checkGpAddrRePeat(List<GpInfo> dbGpInfos, String gpAddr) {
+		return checkGpAddrRePeat(dbGpInfos, gpAddr, "1");
+	}
+
+	private boolean checkGpAddrRePeat(List<GpInfo> dbGpInfos, String gpAddr, String gpChar) {
+		boolean ret = false;
+
+		if (gpChar == null) {
+			gpChar = "1";
+		}
+		for (GpInfo gpInfo : dbGpInfos) {
+			if (gpAddr.equals(gpInfo.getGpAddr()) && gpChar.equals(gpInfo.getGpChar())) {
+				ret = true;
+				break;
+			}
+		}
+		return ret;
 	}
 
 	public static boolean termIdIsNull(Long termId) {
@@ -109,6 +187,28 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 			throw new ServiceException("没有关联终端");
 		} else
 			return false;
+	}
+
+	private boolean compareOldGpSn(GpInfo gpInfo) {
+		return compareOldGpSn(gpInfo.getGpSn(), gpInfo.getGpSnOld());
+	}
+
+	private boolean compareOldGpSn(Long gpSn, Long gpSnOld) {
+		if (gpSn == gpSnOld)
+			return false;
+		else
+			return true;
+	}
+
+	private boolean compareOldGpAddr(GpInfo gpInfo) {
+		return compareOldGpAddr(gpInfo.getGpAddr(), gpInfo.getGpAddrOld());
+	}
+
+	private boolean compareOldGpAddr(String gpAddr, String gpAddrOld) {
+		if (gpAddr.equals(gpAddrOld))
+			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -126,7 +226,9 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 		} else {
 
 			try {
-				isSucc = checkGpAddrRePeat(model.getTerminalInfo().getTermId(), model.getGpAddr());
+
+				isSucc = checkGpAddrRePeat(model.getTerminalInfo().getTermId(), model.getGpAddr(), model.getGpChar(),
+						model.getGpAddrOld());
 
 				if (isSucc) {
 					msg = "该终端下" + model.getGpAddr() + "号测量地址已存在，请重新输入或切换终端";
@@ -154,7 +256,9 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 		} else {
 
 			try {
-				isSucc = checkGpSnRePeat(model.getTerminalInfo().getTermId(), model.getGpSn());
+
+				isSucc = checkGpSnRePeat(model.getTerminalInfo().getTermId(), model.getGpSn(), model.getGpChar(),
+						model.getGpSnOld());
 
 				if (isSucc) {
 					msg = "该终端下" + model.getGpSn() + "号测量点已存在，请重新输入或切换终端";
@@ -165,5 +269,4 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 		}
 		return msg;
 	}
-
 }

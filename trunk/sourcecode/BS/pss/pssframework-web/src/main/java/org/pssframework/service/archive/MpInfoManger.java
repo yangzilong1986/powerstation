@@ -154,9 +154,6 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 
 		for (GpInfo gpInfo : model.getGpInfos()) {
 
-			// TODO 默认485
-			gpInfo.setGpChar("1");
-
 			if (gpInfo.getSucratCptId() == null || "".equals(gpInfo.getSucratCptId())) {
 				gpInfo.setSucratCptId("0");
 			}
