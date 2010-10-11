@@ -20,6 +20,9 @@ public class TGMonitorManager extends BaseManager<HashMap<String, String>, Seria
     @Autowired
     private TGMonitorDao tgMonitorDao;
 
+    /**
+     * 
+     */
     @SuppressWarnings("unchecked")
     @Override
     protected EntityDao getEntityDao() {

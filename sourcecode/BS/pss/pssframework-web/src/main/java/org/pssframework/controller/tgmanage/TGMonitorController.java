@@ -265,6 +265,11 @@ public class TGMonitorController extends BaseSpringController {
         return orgInfoManager.findByPageRequest(mapRequest);
     }
 
+    /**
+     * 
+     * @param mapSeriesNames
+     * @param chartCategory
+     */
     private void initChartSeriesNames(Map<String, String> mapSeriesNames, String chartCategory) {
         if("01".equals(chartCategory)) {        // 电压曲线
             mapSeriesNames.put("2101", "A相电压#FF0000");
