@@ -87,7 +87,7 @@ function changeTg() {
               <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td height="100%">
-                    <iframe id="tgMonitorFrame" name="tgMonitorFrame" src="" scrolling="auto" width="100%" height="100%" frameborder="0"></iframe>
+                    <iframe id="tgMonitorFrame" name="tgMonitorFrame" src="" scrolling="no" width="100%" height="100%" frameborder="0"></iframe>
                   </td>
                 </tr>
               </table>

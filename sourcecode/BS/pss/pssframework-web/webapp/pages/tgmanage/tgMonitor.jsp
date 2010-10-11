@@ -14,6 +14,22 @@ var setupFlag = false;
 var monObject = 0;  // 监测对象默认为总表
 
 function mySwitchTab(prefix, order, cnts) {
+    if(cntMonitor0 > 0) {
+        alert("正在监测总表...");
+        return false;
+    }
+    if(cntMonitor1 > 1) {
+        alert("正在监测漏保开关...");
+        return false;
+    }
+    if(cntMonitor2 > 1) {
+        alert("正在监测油温...");
+        return false;
+    }
+    if(cntMonitor3 > 1) {
+        alert("正在监测开关量...");
+        return false;
+    }
     SwitchTab(prefix, order, cnts);
     monObject = order;
     initMonitorPage();
@@ -52,7 +68,7 @@ function initMonitorPage() {
     else if(monObject == 3) { //开关量监测
         alert("该功能尚未实现!");
         if($("#term").val() == "" || $("#term").val() == null || $("#term").val() == "null") {
-            alert("该台区下没有集中器档案");
+            //alert("该台区下没有集中器档案");
             return;
         }
         url += "/sw/" + $("#term").val();
@@ -63,7 +79,72 @@ function initMonitorPage() {
 
 $(document).ready(function() {
     initMonitorPage();
+
+    $("#startMonitoringBtn0").attr("disabled", false);
+    $("#endMonitoringBtn0").attr("disabled", true);
+
+    $("#startMonitoringBtn1").attr("disabled", false);
+    $("#endMonitoringBtn1").attr("disabled", true);
+
+    $("#startMonitoringBtn2").attr("disabled", false);
+    $("#endMonitoringBtn2").attr("disabled", true);
+
+    $("#startMonitoringBtn3").attr("disabled", false);
+    $("#endMonitoringBtn3").attr("disabled", true);
 });
+
+var cntMonitor0 = 0;
+var cntMonitor1 = 0;
+var cntMonitor2 = 0;
+var cntMonitor3 = 0;
+// 开始监测 总表
+function startMonitoring0() {
+    cntMonitor0 = 10;
+    $("#startMonitoringBtn0").attr("disabled", true);
+    $("#endMonitoringBtn0").attr("disabled", false);
+}
+// 结束监测 总表
+function endMonitoring0() {
+    cntMonitor0 = 0;
+    $("#startMonitoringBtn0").attr("disabled", false);
+    $("#endMonitoringBtn0").attr("disabled", true);
+}
+// 开始监测 漏保开关
+function startMonitoring1() {
+    cntMonitor1 = 10;
+    $("#startMonitoringBtn1").attr("disabled", true);
+    $("#endMonitoringBtn1").attr("disabled", false);
+}
+// 结束监测 漏保开关
+function endMonitoring1() {
+    cntMonitor1 = 0;
+    $("#startMonitoringBtn1").attr("disabled", false);
+    $("#endMonitoringBtn1").attr("disabled", true);
+}
+// 开始监测 油温监测仪
+function startMonitoring2() {
+    cntMonitor2 = 10;
+    $("#startMonitoringBtn2").attr("disabled", true);
+    $("#endMonitoringBtn2").attr("disabled", false);
+}
+// 结束监测 油温监测仪
+function endMonitoring2() {
+    cntMonitor2 = 0;
+    $("#startMonitoringBtn2").attr("disabled", false);
+    $("#endMonitoringBtn2").attr("disabled", true);
+}
+// 开始监测 开关量
+function startMonitoring3() {
+    cntMonitor3 = 10;
+    $("#startMonitoringBtn3").attr("disabled", true);
+    $("#endMonitoringBtn3").attr("disabled", false);
+}
+// 结束监测 开关量
+function endMonitoring3() {
+    cntMonitor3 = 0;
+    $("#startMonitoringBtn3").attr("disabled", false);
+    $("#endMonitoringBtn3").attr("disabled", true);
+}
 </script>
 </head>
 <body style="overflow: auto;">

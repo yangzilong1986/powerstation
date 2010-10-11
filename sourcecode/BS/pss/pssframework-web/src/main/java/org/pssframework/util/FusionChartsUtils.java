@@ -13,6 +13,22 @@ import org.apache.commons.lang.StringUtils;
 public class FusionChartsUtils {
     public static final String LINE = "MSLine.swf";         // 曲线图
     public static final String COLUMN = "MSColumn2D.swf";   // 柱状图
+    
+    /**
+     * 
+     * @param results
+     * @param mapSeriesNames
+     * @param mapParams
+     * @return
+     */
+    public static String getChart(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams,
+            String chartId, boolean isRealTime, String xAxisName, String yAxisName) {
+        String chart = getChartData(results, mapSeriesNames, mapParams, isRealTime, xAxisName, yAxisName);
+        String chartCode = "";
+        chartCode = FusionChartsCreator.createChart(mapParams.get("contextPath") + "/FusionCharts/" + LINE, "", chart,
+                chartId, "100%", "100%", false, false); // 生成图形
+        return chartCode;
+    }
 
     /**
      * 
@@ -22,7 +38,7 @@ public class FusionChartsUtils {
      * @return
      */
     public static String getChart(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams) {
-        String chart = getChartData(results, mapSeriesNames, mapParams);
+        String chart = getChartData(results, mapSeriesNames, mapParams, false, null, null);
         String chartCode = "";
         chartCode = FusionChartsCreator.createChart(mapParams.get("contextPath") + "/FusionCharts/" + LINE, "", chart,
                 "chart", "100%", "100%", false, false); // 生成图形
@@ -37,7 +53,8 @@ public class FusionChartsUtils {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static String getChartData(List<?> results, Map<String, String> mapSeriesNames, Map<String, String> mapParams) {
+    public static String getChartData(List<?> results, Map<String, String> mapSeriesNames,
+            Map<String, String> mapParams, boolean isRealTime, String xAxisName, String yAxisName) {
         if(mapSeriesNames == null)
             return null;
         int msnCnt = mapSeriesNames.keySet().size();
@@ -95,7 +112,7 @@ public class FusionChartsUtils {
         
 
         return getChartData(mapParams.get("caption"), labelStep, mapParams.get("contextPath"), seriesNames, colors,
-                values, 0, 0, null, null);
+                values, 0, 0, isRealTime, xAxisName, yAxisName);
     }
 
     private static String regularDataTime(Date d, String r) {
@@ -141,14 +158,23 @@ public class FusionChartsUtils {
      * @return
      */
     public static String getChartData(String caption, int labelStep, String contextPath, String[] seriesNames,
-            String[] colors, List<?> values, int width, int height, String xAxisName, String yAxisName) {
+            String[] colors, List<?> values, int width, int height, boolean isRealTime, String xAxisName,
+            String yAxisName) {
         StringBuffer chart = new StringBuffer();
         String chartDis = "";
         if(values != null && values.size() > 0) {           // 有数据初始化图形数据
-            chartDis = "<chart caption='" + caption + "'"
-                    + " labelStep='" + labelStep + "'"
-                    + addChartUtils(xAxisName, yAxisName)
-                    + " anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>";
+            if(isRealTime) {
+                chartDis = "<chart caption='" + caption + "'"
+                        + " labelStep='2'"
+                        + addChartUtils(xAxisName, yAxisName)
+                        + " anchorRadius='0' animation='0' lineThickness='0' showRealTimeValue='1' numDisplaySets='8' showValues='0' showLabels='1'>";
+            }
+            else {
+                chartDis = "<chart caption='" + caption + "'"
+                        + " labelStep='" + labelStep + "'"
+                        + addChartUtils(xAxisName, yAxisName)
+                        + " anchorRadius='2' animation='1' lineThickness='1' showRealTimeValue='1' showValues='0' showLabels='1'>";
+            }
             chart.append(chartDis);
             chart.append("<categories>");
             StringBuffer[] lines = new StringBuffer[seriesNames.length];
@@ -173,8 +199,14 @@ public class FusionChartsUtils {
             }
         }
         else { // 没有数据则初始化空白图形
-            chartDis = "<chart caption='" + caption + "'"
-                    + " anchorRadius='0' animation='1' lineThickness='0' showRealTimeValue='1' showValues='0' showLabels='0'>";
+            if(isRealTime) {
+                chartDis = "<chart caption='" + caption + "'"
+                        + " anchorRadius='0' animation='0' lineThickness='0' showRealTimeValue='1' numDisplaySets='8' showValues='0' showLabels='0'>";
+            }
+            else {
+                chartDis = "<chart caption='" + caption + "'"
+                        + " anchorRadius='0' animation='1' lineThickness='0' showRealTimeValue='1' showValues='0' showLabels='0'>";
+            }
             chart.append(chartDis);
             chart.append("<categories >");
             StringBuffer[] lines = new StringBuffer[seriesNames.length];
