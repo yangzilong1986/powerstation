@@ -55,4 +55,5 @@
     <select id="getAnalogCombBoxByTgId" parameterType="java.lang.Long" resultMap="TGMonitorCombBoxResult">
         <include refid="AnalogCombBoxSQL" />
     </select>
+    
 </mapper>
