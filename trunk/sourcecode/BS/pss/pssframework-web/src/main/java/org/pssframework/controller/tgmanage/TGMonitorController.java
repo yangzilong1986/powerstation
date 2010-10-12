@@ -71,13 +71,12 @@ public class TGMonitorController extends BaseSpringController {
     public ModelAndView _tgmonitor(ModelAndView mav, @PathVariable Long id) throws Exception {
         mav.setViewName(VIEW_NAME_MON);
         logger.info("tgId : " + id);
-        logger.info("VIEW_NAME_MON : " + VIEW_NAME_MON);
         List tmlist = tgMonitorManager.findCombBoxByTg(id, "getTotalMeterCombBoxByTgId");
         List pslist = tgMonitorManager.findCombBoxByTg(id, "getPSCombBoxByTgId");
         List aqlist = tgMonitorManager.findCombBoxByTg(id, "getAnalogCombBoxByTgId");
-        //logger.info("tmlist : " + tmlist.toString());
-        //logger.info("pslist : " + pslist.toString());
-        //logger.info("aqlist : " + aqlist.toString());
+        logger.info("tmlist : " + tmlist.toString());
+        logger.info("pslist : " + pslist.toString());
+        logger.info("aqlist : " + aqlist.toString());
         mav.addObject("tmlist", tmlist);
         mav.addObject("pslist", pslist);
         mav.addObject("aqlist", aqlist);
