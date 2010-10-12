@@ -37,11 +37,7 @@ public class TGMonitorManager extends BaseManager<HashMap<String, String>, Seria
      */
     @SuppressWarnings("unchecked")
     public List findCombBoxByTg(Long tgId, String statementName) {
-        logger.info("---findCombBoxByTg---");
-        logger.info("tgId : " + tgId);
-        logger.info("statementName : " + statementName);
         List list = tgMonitorDao.findCombBoxByTg(tgId, statementName);
-        logger.info("list size : " + list.size());
         return list;
     }
 }

@@ -33,9 +33,7 @@ public class TGMonitorDao extends BaseIbatis3Dao<HashMap<String, String>, Serial
      * @return
      */
     public List findCombBoxByTg(Long tgId, String statementName) {
-        logger.info("statementName : " + statementName);
         List list = getSqlSessionTemplate().selectList(getQuery(statementName), tgId, 0, Integer.MAX_VALUE);
-        logger.info("list : " + list.toString());
         return list;
     }
 }
