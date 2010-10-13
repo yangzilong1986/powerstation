@@ -121,7 +121,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		try {
 			for (GpInfo gpInfo : model.getGpInfos()) {
-				gpInfo.setObjectId(model.getTgInfo().getTgId());
+				gpInfo.setObjectId(model.getTgId());
 				gpInfo.setMpInfo(model);
 			}
 			this.mpInfoManger.saveOrUpdate(model);
@@ -196,7 +196,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		Map requestMap = new HashMap();
 
-		requestMap.put("tgid", model.getTgInfo().getTgId());
+		requestMap.put("tgid", model.getTgId());
 
 		result.addAttribute("mpinfo", model);
 
@@ -218,7 +218,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		MpInfo model = mpInfoManger.getById(id);
 
-		requestMap.put("tgid", model.getTgInfo().getTgId());
+		requestMap.put("tgid", model.getTgId());
 
 		result.addAttribute("mpinfo", model);
 
@@ -240,7 +240,7 @@ public class MpInfoController extends BaseRestSpringController<MpInfo, java.lang
 
 		MpInfo model = mpInfoManger.getById(id);
 
-		requestMap.put("tgid", model.getTgInfo().getTgId());
+		requestMap.put("tgid", model.getTgId());
 
 		result.addAttribute("mpinfo", model);
 

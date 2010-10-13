@@ -62,11 +62,11 @@ public class TgInfo extends BaseEntity {
 	@OneToMany(mappedBy = "tgInfo", cascade = CascadeType.ALL)
 	private List<TranInfo> tranInfos;
 
-	@OneToMany(targetEntity = MpInfo.class, mappedBy = "tgInfo")
-	private List<MpInfo> mpInfos;
+	//	@OneToMany(targetEntity = MpInfo.class, mappedBy = "tgInfo")
+	//	private List<MpInfo> mpInfos;
 
-	@OneToMany(targetEntity = GpInfo.class, mappedBy = "tgInfo")
-	private List<GpInfo> gpInfos;
+	//	@OneToMany(targetEntity = GpInfo.class, mappedBy = "tgInfo")
+	//	private List<GpInfo> gpInfos;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tgInfo")
 	private List<LineTgRelaInfo> lineTgRelaInfos;
@@ -326,31 +326,31 @@ public class TgInfo extends BaseEntity {
 	 * @param mpInfos
 	 *            the mpInfos to set
 	 */
-	public void setMpInfos(List<MpInfo> mpInfos) {
-		this.mpInfos = mpInfos;
-	}
+	//	public void setMpInfos(List<MpInfo> mpInfos) {
+	//		this.mpInfos = mpInfos;
+	//	}
 
 	/**
 	 * @return the mpInfos
 	 */
-	public List<MpInfo> getMpInfos() {
-		return mpInfos;
-	}
+	//	public List<MpInfo> getMpInfos() {
+	//		return mpInfos;
+	//	}
 
 	/**
 	 * @param gpInfos
 	 *            the gpInfos to set
 	 */
-	public void setGpInfos(List<GpInfo> gpInfos) {
-		this.gpInfos = gpInfos;
-	}
+	//	public void setGpInfos(List<GpInfo> gpInfos) {
+	//		this.gpInfos = gpInfos;
+	//	}
 
 	/**
 	 * @return the gpInfos
 	 */
-	public List<GpInfo> getGpInfos() {
-		return gpInfos;
-	}
+	//	public List<GpInfo> getGpInfos() {
+	//		return gpInfos;
+	//	}
 
 	/**
 	 * @param lineTgRelaInfos the lineTgRelaInfos to set

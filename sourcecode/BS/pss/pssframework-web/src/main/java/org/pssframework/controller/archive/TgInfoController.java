@@ -349,6 +349,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 	 */
 	private void getRelevance(ModelMap modelMap, Map<String, ?> mapRequest) {
 		// modelAndView.addObject("tranlist", getTranList(mapRequest));
+		modelMap.addAttribute("mplist", this.getMpList(mapRequest));
 		modelMap.addAttribute("pslist", this.getPsList(mapRequest));
 		modelMap.addAttribute("termlist", this.getTerminalList(mapRequest));
 		modelMap.addAttribute("swtichvaluelist", this.getSwitchValueList(mapRequest));
