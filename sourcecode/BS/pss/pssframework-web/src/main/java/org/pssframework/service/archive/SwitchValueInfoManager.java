@@ -32,6 +32,11 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 		return switchValueInfoDao;
 	}
 
+	@Override
+	public SwitchValueInfo getById(SwitchValueInfoPK switchValueInfoPK) {
+		return switchValueInfoDao.getById(switchValueInfoPK);
+	}
+
 	public boolean checkSwtichNo(SwitchValueInfo switchValueInfo) {
 		SwitchValueInfoPK switchValueInfoPK = switchValueInfo.getSwitchValueId();
 		if (compareOld(switchValueInfo))
