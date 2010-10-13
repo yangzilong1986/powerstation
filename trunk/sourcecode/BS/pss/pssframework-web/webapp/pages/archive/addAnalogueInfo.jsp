@@ -58,7 +58,7 @@ StringBuffer.prototype.toString = function() {
       <c:set var="disabled" value="true"></c:set>
     </c:otherwise>
   </c:choose>
-  <form:hidden path="gpInfo.objectId" />
+  <input type="hidden" name="gpInfo.objectId" id="gpInfo.objectId" value="${analogueinfo.gpInfo.objectId}">
   <input type="hidden" name="gpInfo.gpType" id="gpInfo.gpType" value="2">
   <input type="hidden" name="gpInfo.gpChar" id="gpInfo.gpChar" value="8">
   <div class="electric_lcon" id="electric_Con" style="">
@@ -99,23 +99,7 @@ StringBuffer.prototype.toString = function() {
         
       </tr>
       <tr height="30px">
-      <!--  
-        <td class="green" align="right">CT变比：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="gpInfo.ctTimes" items="${ctList}" id="ctTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize></td>
-        <td class="green" align="right">PT变比：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:select path="gpInfo.ptTimes" items="${ptList}" id="ptTimes" itemLabel="name" itemValue="code"
-            cssStyle="width:155px;" disabled="${disabled}" />
-        </security:authorize></td>-->
+     
         <td class="green" align="right"><font color="red">* </font>测量点地址：</td>
         <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:input path="gpInfo.gpAddr" id="gpAddr" cssClass="required" disabled="${disabled}" />

@@ -70,8 +70,8 @@ StringBuffer.prototype.toString = function() {
       <c:set var="disabled" value="true"></c:set>
     </c:otherwise>
   </c:choose>
-  <form:hidden path="tgInfo.tgId" />
-  <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgInfo.tgId}">
+  <form:hidden path="tgId" />
+  <input type="hidden" name="gpInfos[0].objectId" id="gpInfos[0].objectId" value="${mpinfo.tgId}">
   <input type="hidden" name="gpInfos[0].gpType" id="gpInfos[0].gpType" value="2">
    <input type="hidden" name="gpInfos[0].gpChar" id="gpInfos[0].gpChar" value="1">
   <div class="electric_lcon" id="electric_Con" style="margin: 5px;">
@@ -539,7 +539,7 @@ addmpinfo = function(){
          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
            alert(msg);
            if(isSucc){
-             opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
+             opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgId}/edit";
              toggleButton(true);
       	   if(confirm("是否需要一键下发参数?")){
 					 akeySetupTermParamF10();
@@ -569,7 +569,7 @@ updatempinfo = function(){
           var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
              alert(msg);
              if(isSucc){
-               opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgInfo.tgId}/edit";
+               opener.location.href ="${ctx}/archive/tginfo/${mpinfo.tgId}/edit";
                toggleButton(true);
         	   if(confirm("是否需要一键下发参数?")){
 					 akeySetupTermParamF10();

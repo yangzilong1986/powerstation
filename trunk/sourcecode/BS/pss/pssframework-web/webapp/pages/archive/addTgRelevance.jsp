@@ -225,7 +225,7 @@ a:hover {
       </tr>
     </thead>
     <tbody>
-      <c:forEach items="${tginfo.mpInfos}" var="mpInfo" varStatus="status">
+      <c:forEach items="${mplist}" var="mpInfo" varStatus="status">
         <tr id="mp_${mpInfo.mpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${mpInfo.mpName}</td>
           <td>&nbsp;${mpInfo.gpInfos[0].gpAddr}</td>
@@ -664,7 +664,7 @@ function openMeterInfo(tgId){
 	  if(!$("#tgId").val()){
 	    alert("请先建台区");return;
 	  }
-	   var url = "${ctx}/archive/mpinfo/new?tgInfo.tgId="+$("#tgId").val();
+	   var url = "${ctx}/archive/mpinfo/new?tgId="+$("#tgId").val();
 	   windowPopup(url, 960, 575);
 }
 
@@ -696,12 +696,12 @@ deleteMpInfo=function(mpId){
 };
 
 updateMpInfo=function(mpId){
-     var url = "${ctx}/archive/mpinfo/"+mpId+"/edit?tgInfo.tgId="+$("#tgId").val();
+     var url = "${ctx}/archive/mpinfo/"+mpId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
 };
 
 showMpInfo=function(mpId){
-    var url = "${ctx}/archive/mpinfo/"+mpId+"?tgInfo.tgId="+$("#tgId").val();
+    var url = "${ctx}/archive/mpinfo/"+mpId+"?tgId="+$("#tgId").val();
     windowPopup(url, 960, 575);
 };
 /*******************************************************************/
@@ -832,12 +832,12 @@ deleteAnalogueInfo=function(gpId){
 };
 
 updateAnalogueInfo=function(gpId){
-     var url = "${ctx}/archive/analogueinfo/"+gpId+"/edit?tgInfo.tgId="+$("#tgId").val();
+     var url = "${ctx}/archive/analogueinfo/"+gpId+"/edit?tgId="+$("#tgId").val();
      windowPopup(url, 960, 575);
 };
 
 showAnalogueInfo=function(gpId){
-    var url = "${ctx}/archive/analogueinfo/"+gpId+"?tgInfo.tgId="+$("#tgId").val();
+    var url = "${ctx}/archive/analogueinfo/"+gpId+"?tgId="+$("#tgId").val();
     windowPopup(url, 960, 575);
 };
 /*******************************************************************/
