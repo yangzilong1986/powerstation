@@ -14,22 +14,42 @@ var setupFlag = false;
 var monObject = 0;  // 监测对象默认为总表
 
 function mySwitchTab(prefix, order, cnts) {
-    if(cntMonitor0 > 0) {
-        alert("正在监测总表...");
-        return false;
+    try {
+        if(mframe0.cntMonitor > 0) {
+            alert("正在监测总表...");
+            return false;
+        }
     }
-    if(cntMonitor1 > 1) {
-        alert("正在监测漏保开关...");
-        return false;
+    catch(e) {
     }
-    if(cntMonitor2 > 1) {
-        alert("正在监测油温...");
-        return false;
+
+    try {
+        if(mframe1.cntMonitor > 1) {
+            alert("正在监测漏保开关...");
+            return false;
+        }
     }
-    if(cntMonitor3 > 1) {
-        alert("正在监测开关量...");
-        return false;
+    catch(e) {
     }
+
+    try {
+        if(mframe2.cntMonitor > 1) {
+            alert("正在监测油温...");
+            return false;
+        }
+    }
+    catch(e) {
+    }
+
+    try {
+        if(mframe3.cntMonitor > 1) {
+            alert("正在监测开关量...");
+            return false;
+        }
+    }
+    catch(e) {
+    }
+
     SwitchTab(prefix, order, cnts);
     monObject = order;
     initMonitorPage();
@@ -93,55 +113,51 @@ $(document).ready(function() {
     $("#endMonitoringBtn3").attr("disabled", true);
 });
 
-var cntMonitor0 = 0;
-var cntMonitor1 = 0;
-var cntMonitor2 = 0;
-var cntMonitor3 = 0;
 // 开始监测 总表
 function startMonitoring0() {
-    cntMonitor0 = 10;
     $("#startMonitoringBtn0").attr("disabled", true);
     $("#endMonitoringBtn0").attr("disabled", false);
+    mframe0.startMonitoring();
 }
 // 结束监测 总表
 function endMonitoring0() {
-    cntMonitor0 = 0;
+    mframe0.endMonitoring();
     $("#startMonitoringBtn0").attr("disabled", false);
     $("#endMonitoringBtn0").attr("disabled", true);
 }
 // 开始监测 漏保开关
 function startMonitoring1() {
-    cntMonitor1 = 10;
     $("#startMonitoringBtn1").attr("disabled", true);
     $("#endMonitoringBtn1").attr("disabled", false);
+    mframe1.startMonitoring();
 }
 // 结束监测 漏保开关
 function endMonitoring1() {
-    cntMonitor1 = 0;
+    mframe1.endMonitoring();
     $("#startMonitoringBtn1").attr("disabled", false);
     $("#endMonitoringBtn1").attr("disabled", true);
 }
 // 开始监测 油温监测仪
 function startMonitoring2() {
-    cntMonitor2 = 10;
     $("#startMonitoringBtn2").attr("disabled", true);
     $("#endMonitoringBtn2").attr("disabled", false);
+    mframe2.startMonitoring();
 }
 // 结束监测 油温监测仪
 function endMonitoring2() {
-    cntMonitor2 = 0;
+    mframe2.endMonitoring();
     $("#startMonitoringBtn2").attr("disabled", false);
     $("#endMonitoringBtn2").attr("disabled", true);
 }
 // 开始监测 开关量
 function startMonitoring3() {
-    cntMonitor3 = 10;
     $("#startMonitoringBtn3").attr("disabled", true);
     $("#endMonitoringBtn3").attr("disabled", false);
+    mframe3.startMonitoring();
 }
 // 结束监测 开关量
 function endMonitoring3() {
-    cntMonitor3 = 0;
+    mframe3.endMonitoring();
     $("#startMonitoringBtn3").attr("disabled", false);
     $("#endMonitoringBtn3").attr("disabled", true);
 }
@@ -164,7 +180,7 @@ function endMonitoring3() {
           <tr>
             <td width="70" height="30" align="right" class="green">总　表：</td>
             <td width="120" align="left">
-              <select id="totalMeter" name="totalMeter" onchange="chgTotalMeter()">
+              <select id="totalMeter" name="totalMeter" onchange="initMonitorPage()">
                 <c:forEach var="item" items="${tmlist}">
                   <option value="<c:out value="${item.VUE}"/>"><c:out value="${item.NME}" /></option>
                 </c:forEach>
@@ -191,7 +207,7 @@ function endMonitoring3() {
           <tr>
             <td width="70" height="30" align="right" class="green">漏保开关：</td>
             <td width="120" align="left">
-              <select id="ps" name="ps" onchange="chgPS()">
+              <select id="ps" name="ps" onchange="initMonitorPage()">
                 <c:forEach var="item" items="${pslist}">
                   <option value="<c:out value="${item.VUE}"/>"><c:out value="${item.NME}" /></option>
                 </c:forEach>
@@ -218,7 +234,7 @@ function endMonitoring3() {
           <tr>
             <td width="80" height="30" align="right" class="green">油温监测仪：</td>
             <td width="120" align="left">
-              <select id="analog" name="analog" onchange="chgAnalog()">
+              <select id="analog" name="analog" onchange="initMonitorPage()">
                 <c:forEach var="item" items="${aqlist}">
                   <option value="<c:out value="${item.VUE}"/>"><c:out value="${item.NME}" /></option>
                 </c:forEach>
