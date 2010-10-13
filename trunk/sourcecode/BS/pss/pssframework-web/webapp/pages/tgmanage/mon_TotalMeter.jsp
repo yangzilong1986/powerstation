@@ -10,8 +10,19 @@
 <script type="text/javascript">
 var cntMonitor = 0;
 $(document).ready(function() {
-    
+    setTimeout("chgRadioChart('01');", 500);
 });
+
+function chgRadioChart(index) {
+    for(var i = 1; i <= 5; i++) {
+        if(('0' + i) == index) {
+            $("#divChart0" + i).css("display", "block");
+        }
+        else {
+            $("#divChart0" + i).css("display", "none");
+        }
+    }
+}
 
 function startMonitoring() {
     cntMonitor = 10;
@@ -143,31 +154,36 @@ function refreshChart(chartId, chartXML) {
 </script>
 </head>
 <body>
-<div class="graphContainer" style="width: 100%; border: 0; height:expression(((document.documentElement.clientHeight||document.body.clientHeight)));">
-  <div>
-    <input type="hidden" id="gpId" name="gpId" value="${param.gpId}" />
-    <input type="hidden" id="logicalAddr" name="logicalAddr" value="${param.logicalAddr}" />
-    <input type="hidden" id="protocolNo" name="protocolNo" value="${param.protocolNo}" />
-    <input type="hidden" id="gpSn" name="gpSn" value="${param.gpSn}" />
-    <input type="hidden" id="chartValues01" name="chartValues01" value="" />
-    <input type="hidden" id="chartValues02" name="chartValues02" value="" />
-    <input type="hidden" id="chartValues03" name="chartValues03" value="" />
-    <input type="hidden" id="chartValues04" name="chartValues04" value="" />
-    <input type="hidden" id="chartValues05" name="chartValues05" value="" />
-  </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 222px;">
+<div style="text-align: right; padding-right: 10px; height: 25px; vertical-align: middle;">
+  <input type="hidden" id="gpId" name="gpId" value="${param.gpId}" />
+  <input type="hidden" id="logicalAddr" name="logicalAddr" value="${param.logicalAddr}" />
+  <input type="hidden" id="protocolNo" name="protocolNo" value="${param.protocolNo}" />
+  <input type="hidden" id="gpSn" name="gpSn" value="${param.gpSn}" />
+  <input type="hidden" id="chartValues01" name="chartValues01" value="" />
+  <input type="hidden" id="chartValues02" name="chartValues02" value="" />
+  <input type="hidden" id="chartValues03" name="chartValues03" value="" />
+  <input type="hidden" id="chartValues04" name="chartValues04" value="" />
+  <input type="hidden" id="chartValues05" name="chartValues05" value="" />
+  <input type="radio" id="radioChart01" name="radioChart" value="01" onclick="chgRadioChart('01')" checked="checked" />电压曲线
+  <input type="radio" id="radioChart02" name="radioChart" value="02" onclick="chgRadioChart('02')" />电流曲线
+  <input type="radio" id="radioChart03" name="radioChart" value="03" onclick="chgRadioChart('03')" />有功功率曲线
+  <input type="radio" id="radioChart04" name="radioChart" value="04" onclick="chgRadioChart('04')" />无功功率曲线
+  <input type="radio" id="radioChart05" name="radioChart" value="05" onclick="chgRadioChart('05')" />功率因数曲线
+</div>
+<div class="graphContainer" style="width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
+  <div id="divChart01" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart01}' escapeXml="false" />
   </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 222px;">
+  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart02}' escapeXml="false" />
   </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 222px;">
+  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart03}' escapeXml="false" />
   </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 222px;">
+  <div id="divChart04" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart04}' escapeXml="false" />
   </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 222px;">
+  <div id="divChart05" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart05}' escapeXml="false" />
   </div>
 </div>
