@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -134,9 +133,12 @@ public class MpInfo extends BaseEntity {
 
 	// TG_ID NUMBER(16),is '台区的唯一标识';
 
-	@ManyToOne
-	@JoinColumn(name = "TG_ID")
-	private TgInfo tgInfo;
+	//	@ManyToOne
+	//	@JoinColumn(name = "TG_ID")
+	//	private TgInfo tgInfo;
+
+	@Column(name = "TG_ID")
+	private Long tgId;
 
 	// EXCHG_TYPE_CODE VARCHAR2(8),is
 	// '标明计量点的电量交换对象，包括：01发电企业、02区域电网、03省级企业、04地市企业、05趸售单位等';
@@ -593,22 +595,36 @@ public class MpInfo extends BaseEntity {
 	/**
 	 * @param tgInfo the tgInfo to set
 	 */
-	public void setTgInfo(TgInfo tgInfo) {
-		this.tgInfo = tgInfo;
-	}
+	//	public void setTgInfo(TgInfo tgInfo) {
+	//		this.tgInfo = tgInfo;
+	//	}
 
 	/**
 	 * @return the tgInfo
 	 */
-	public TgInfo getTgInfo() {
-		return tgInfo;
-	}
+	//	public TgInfo getTgInfo() {
+	//		return tgInfo;
+	//	}
 
 	/**
 	 * @param statusCode the statusCode to set
 	 */
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	/**
+	 * @return the tgId
+	 */
+	public Long getTgId() {
+		return tgId;
+	}
+
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(Long tgId) {
+		this.tgId = tgId;
 	}
 
 	/**

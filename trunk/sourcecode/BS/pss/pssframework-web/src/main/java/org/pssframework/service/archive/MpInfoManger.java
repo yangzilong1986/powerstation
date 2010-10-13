@@ -84,11 +84,11 @@ public class MpInfoManger extends BaseManager<MpInfo, Long> {
 	 * @param entity
 	 */
 	private void setOrgInfo(MpInfo entity) {
-		TgInfo tgInfo = entity.getTgInfo();
+		//TgInfo tgInfo = entity.getTgInfo();
 
-		Long tgId = tgInfo.getTgId();
+		Long tgId = entity.getTgId();
 
-		tgInfo = tgInfoDao.getById(tgId);
+		TgInfo tgInfo = tgInfoDao.getById(tgId);
 
 		OrgInfo orgInfo = tgInfo.getOrgInfo();
 

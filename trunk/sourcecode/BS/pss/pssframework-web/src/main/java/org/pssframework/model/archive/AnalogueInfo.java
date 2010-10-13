@@ -49,7 +49,7 @@ public class AnalogueInfo extends BaseEntity {
 		this.gpId = gpId;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST })
 	@PrimaryKeyJoinColumn
 	private GpInfo gpInfo;
 

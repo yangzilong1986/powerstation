@@ -50,9 +50,9 @@ public class GpInfo extends BaseEntity {
 	@OneToOne(mappedBy = "gpInfo")
 	private PsInfo psInfo;
 
-	@ManyToOne(targetEntity = TgInfo.class)
-	@JoinColumn(name = "OBJECT_ID", referencedColumnName = "TG_ID", insertable = false, updatable = false)
-	private TgInfo tgInfo;
+	//	@ManyToOne(targetEntity = TgInfo.class)
+	//	@JoinColumn(name = "OBJECT_ID", referencedColumnName = "TG_ID", insertable = false, updatable = false)
+	//	private TgInfo tgInfo;
 
 	@Column(name = "OBJECT_ID", nullable = false)
 	// OBJECT_ID NUMBER not null,is
@@ -318,9 +318,9 @@ public class GpInfo extends BaseEntity {
 	/**
 	 * @return the tgInfo
 	 */
-	public TgInfo getTgInfo() {
-		return tgInfo;
-	}
+	//	public TgInfo getTgInfo() {
+	//		return tgInfo;
+	//	}
 
 	/**
 	 * @return the tranId
@@ -527,9 +527,9 @@ public class GpInfo extends BaseEntity {
 	/**
 	 * @param tgInfo the tgInfo to set
 	 */
-	public void setTgInfo(TgInfo tgInfo) {
-		this.tgInfo = tgInfo;
-	}
+	//	public void setTgInfo(TgInfo tgInfo) {
+	//		this.tgInfo = tgInfo;
+	//	}
 
 	/**
 	 * @param tranId
