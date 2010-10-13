@@ -162,9 +162,9 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 
 		Map<String, Comparable> requestMap = new HashMap<String, Comparable>();
 
-		requestMap.put("tgId", tgid);
+		requestMap.put("tgid", tgid);
 
-		modelMap.addAttribute("tgid", tgid);
+		modelMap.addAttribute("tgId", tgid);
 
 		modelMap.addAttribute("switchvalueinfo", model);
 

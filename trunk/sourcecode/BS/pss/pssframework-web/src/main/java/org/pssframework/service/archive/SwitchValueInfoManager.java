@@ -90,10 +90,9 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 		if (switchValueInfoPK.getTerminalInfo() == null)
 			return ret;
 		if (!GpInfoManger.termIdIsNull(switchValueInfoPK.getTerminalInfo().getTermId())) {
-			List<SwitchValueInfo> switchValueInfos = switchValueInfoDao.findAllByProperty("switchValueId",
-					switchValueInfoPK);
+			List<SwitchValueInfo> switchValueInfos = switchValueInfoDao.findAllByPK(switchValueInfoPK);
 			for (SwitchValueInfo switchValueInfo : switchValueInfos) {
-				if (switchValueInfo.getSwitchValueId().getSwitchNo() == switchValueInfoPK.getSwitchNo()) {
+				if (switchValueInfo.getSwitchValueId().getSwitchNo().equals(switchValueInfoPK.getSwitchNo())) {
 					ret = true;
 					break;
 				}
