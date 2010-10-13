@@ -167,10 +167,10 @@ function endMonitoring3() {
 <div>
   <div class="jc_tab">
     <ul id=jc_Option>
-      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onclick="return mySwitchTab('jc_',0,4)">总表监测</li>
+      <li class="curr" id=jc_Option_0 style="cursor: pointer;" onclick="return mySwitchTab('jc_',0,4)">台区用电监测</li>
       <li id=jc_Option_1 style="cursor: pointer;" onclick="return mySwitchTab('jc_',1,4)">漏保开关监测</li>
-      <li id=jc_Option_2 style="cursor: pointer;" onclick="return mySwitchTab('jc_',2,4)">油温监测</li>
-      <li id=jc_Option_3 style="cursor: pointer;" onclick="return mySwitchTab('jc_',3,4)">开关量监测</li>
+      <li id=jc_Option_2 style="cursor: pointer;" onclick="return mySwitchTab('jc_',2,4)">温度状态监测</li>
+      <li id=jc_Option_3 style="cursor: pointer;" onclick="return mySwitchTab('jc_',3,4)">开关量状态监测</li>
     </ul>
   </div>
   <div class="jc_con" id=jc_Con>

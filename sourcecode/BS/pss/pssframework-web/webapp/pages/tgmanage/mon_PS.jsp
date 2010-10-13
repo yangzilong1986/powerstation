@@ -10,8 +10,19 @@
 <script type="text/javascript">
 var cntMonitor = 0;
 $(document).ready(function() {
-    
+    setTimeout("chgRadioChart('02');", 500);
 });
+
+function chgRadioChart(index) {
+    for(var i = 2; i <= 3; i++) {
+        if(('0' + i) == index) {
+            $("#divChart0" + i).css("display", "block");
+        }
+        else {
+            $("#divChart0" + i).css("display", "none");
+        }
+    }
+}
 
 function startMonitoring() {
     cntMonitor = 10;
@@ -141,22 +152,24 @@ function refreshChart(chartId, chartXML) {
 </script>
 </head>
 <body>
-<div class="graphContainer" style="width: 100%; border: 0; height:expression(((document.documentElement.clientHeight||document.body.clientHeight)));">
-  <div>
-    <input type="hidden" id="psId" name="psId" value="${param.psId}" />
-    <input type="hidden" id="logicalAddr" name="logicalAddr" value="${param.logicalAddr}" />
-    <input type="hidden" id="protocolNo" name="protocolNo" value="${param.protocolNo}" />
-    <input type="hidden" id="meterAddr" name="meterAddr" value="${param.meterAddr}" />
-    <input type="hidden" id="meterType" name="meterType" value="${param.meterType}" />
-    <input type="hidden" id="port" name="port" value="${param.port}" />
-    <input type="hidden" id="psModel" name="psModel" value="${param.psModel}" />
-    <input type="hidden" id="chartValues02" name="chartValues02" value="" />
-    <input type="hidden" id="chartValues03" name="chartValues03" value="" />
-  </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 300px;">
+<div style="text-align: right; padding-right: 10px; height: 25px; vertical-align: middle;">
+  <input type="hidden" id="psId" name="psId" value="${param.psId}" />
+  <input type="hidden" id="logicalAddr" name="logicalAddr" value="${param.logicalAddr}" />
+  <input type="hidden" id="protocolNo" name="protocolNo" value="${param.protocolNo}" />
+  <input type="hidden" id="meterAddr" name="meterAddr" value="${param.meterAddr}" />
+  <input type="hidden" id="meterType" name="meterType" value="${param.meterType}" />
+  <input type="hidden" id="port" name="port" value="${param.port}" />
+  <input type="hidden" id="psModel" name="psModel" value="${param.psModel}" />
+  <input type="hidden" id="chartValues02" name="chartValues02" value="" />
+  <input type="hidden" id="chartValues03" name="chartValues03" value="" />
+  <input type="radio" id="radioChart02" name="radioChart" value="02" onclick="chgRadioChart('02')" checked="checked" />电流曲线
+  <input type="radio" id="radioChart03" name="radioChart" value="03" onclick="chgRadioChart('03')" />剩余电流曲线
+</div>
+<div class="graphContainer" style="width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
+  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart02}' escapeXml="false" />
   </div>
-  <div style="float: left; margin: 2px; width: 49%; height: 300px;">
+  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: none;">
     <c:out value='${initChart03}' escapeXml="false" />
   </div>
 </div>
