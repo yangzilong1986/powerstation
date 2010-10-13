@@ -10,7 +10,7 @@
 <script type="text/javascript">
 var cntMonitor = 0;
 $(document).ready(function() {
-    setTimeout("chgRadioChart('02');", 500);
+    setTimeout("chgRadioChart('02');", 1000);
 });
 
 function chgRadioChart(index) {
@@ -165,11 +165,11 @@ function refreshChart(chartId, chartXML) {
   <input type="radio" id="radioChart02" name="radioChart" value="02" onclick="chgRadioChart('02')" checked="checked" />电流曲线
   <input type="radio" id="radioChart03" name="radioChart" value="03" onclick="chgRadioChart('03')" />剩余电流曲线
 </div>
-<div class="graphContainer" style="width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
-  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: none;">
+<div class="graphContainer" style="overflow: hidden; width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
+  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart02}' escapeXml="false" />
   </div>
-  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: none;">
+  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart03}' escapeXml="false" />
   </div>
 </div>

@@ -10,7 +10,7 @@
 <script type="text/javascript">
 var cntMonitor = 0;
 $(document).ready(function() {
-    setTimeout("chgRadioChart('01');", 500);
+    setTimeout("chgRadioChart('01');", 1000);
 });
 
 function chgRadioChart(index) {
@@ -170,20 +170,20 @@ function refreshChart(chartId, chartXML) {
   <input type="radio" id="radioChart04" name="radioChart" value="04" onclick="chgRadioChart('04')" />无功功率曲线
   <input type="radio" id="radioChart05" name="radioChart" value="05" onclick="chgRadioChart('05')" />功率因数曲线
 </div>
-<div class="graphContainer" style="width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
-  <div id="divChart01" style="float: left; width: 100%; height: 100%; display: none;">
+<div class="graphContainer" style="overflow: hidden; width: 100%; border: 0; height:expression((document.documentElement.clientHeight||document.body.clientHeight)-25);">
+  <div id="divChart01" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart01}' escapeXml="false" />
   </div>
-  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: none;">
+  <div id="divChart02" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart02}' escapeXml="false" />
   </div>
-  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: none;">
+  <div id="divChart03" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart03}' escapeXml="false" />
   </div>
-  <div id="divChart04" style="float: left; width: 100%; height: 100%; display: none;">
+  <div id="divChart04" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart04}' escapeXml="false" />
   </div>
-  <div id="divChart05" style="float: left; width: 100%; height: 100%; display: none;">
+  <div id="divChart05" style="float: left; width: 100%; height: 100%; display: block;">
     <c:out value='${initChart05}' escapeXml="false" />
   </div>
 </div>
