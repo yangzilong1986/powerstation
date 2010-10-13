@@ -19,7 +19,7 @@
     
     <sql id="PSCombBoxSQL">
         <![CDATA[
-        select PS.PS_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_ADDR || '#' || GP.PROTOCOL_NO || '#' || GP.PORT || '#' || PS.MODEL_CODE || '#' as VUE, PS.PS_NAME || '（' || GP.GP_ADDR || '）' as NME
+        select PS.PS_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_ADDR || '#' || GP.PROTOCOL_NO || '#' || '1' || '#' || PS.MODEL_CODE || '#' as VUE, PS.PS_NAME || '（' || GP.GP_ADDR || '）' as NME
           from C_PS PS, C_GP GP, C_TERMINAL T
          where PS.GP_ID = GP.GP_ID
            and T.TERM_ID = GP.TERM_ID
