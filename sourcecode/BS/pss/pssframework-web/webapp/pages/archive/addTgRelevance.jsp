@@ -351,17 +351,17 @@ a:hover {
     </thead>
     <tbody>
       <c:forEach items="${swtichvaluelist}" var="swtich" varStatus="status">
-        <tr id="switch_${swtich.switchValueId.terminalInfo.termId}_${swtich.switchValueId.switchNo}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
-          <td>&nbsp;${swtich.switchValueId.switchNo}</td>
+        <tr id="switch_${swtich.switchId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
+          <td>&nbsp;${swtich.switchNo}</td>
           <td>&nbsp;${swtich.switchValueName}</td>
           <td>&nbsp;<pss:code code="${swtich.switchType}" codeCate="<%=SystemConst.CODE_SWITCH_VALUE_TYPE%>" /></td>
-          <td>&nbsp;${swtich.switchValueId.terminalInfo.logicalAddr}</td>
+          <td>&nbsp;${swtich.terminalInfo.logicalAddr}</td>
           <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1,ROLE_AUTHORITY_12">
-            <a onclick="deleteSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">删除</a>
+            <a onclick="deleteSwitchValueInfo('${swtich.switchId}')">删除</a>
           </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">/&nbsp;<a
-              onclick="updateSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">修改</a>
+              onclick="updateSwitchValueInfo('${swtich.switchId}')">修改</a>
           </security:authorize> &nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_4">/&nbsp;<a
-              onclick="showSwitchValueInfo('${swtich.switchValueId.terminalInfo.termId}','${swtich.switchValueId.switchNo}')">查看</a>
+              onclick="showSwitchValueInfo('${swtich.switchId}')">查看</a>
           </security:authorize></td>
         </tr>
       </c:forEach>
@@ -613,13 +613,11 @@ showPsInfo=function(psId){
      windowPopup(url, 960, 575);
   } 
  
-deleteSwitchValueInfo=function(temId,switchNo){
-   if(temId==null || temId =="" 
-		   || switchNo ==null || switchNo ==""){
-     return;
-   } 
-
-   var url = "${ctx}/archive/switchvalueinfo.json?_method=delete&switchNo="+switchNo+"&terminalInfo.termId="+temId;
+deleteSwitchValueInfo=function(switchId){
+	 if(switchId==null || switchId =="" ){
+		   	return;
+		 } 
+   var url = "${ctx}/archive/switchvalueinfo/"+switchId+".json?_method=delete";
    if (confirm("确定要删除该开关量?")) {
        $.ajax({
            url: url,
@@ -631,7 +629,7 @@ deleteSwitchValueInfo=function(temId,switchNo){
            var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
                alert(msg);
                if(isSucc){
-                $("#switch_"+temId+"_"+switchNo).remove();
+                $("#switch_"+switchId).remove();
                }
            },error:function(e) {
                alert("delete error");
@@ -640,21 +638,19 @@ deleteSwitchValueInfo=function(temId,switchNo){
    }
   };
 
-updateSwitchValueInfo=function(temId,switchNo){
-	 if(temId==null || temId =="" 
-		   || switchNo ==null || switchNo ==""){
-   return;
- } 
-     var url = "${ctx}/archive/switchvalueinfo/edit?switchNo="+switchNo+"&terminalInfo.termId="+temId;
+updateSwitchValueInfo=function(switchId){
+	 if(switchId==null || switchId =="" ){
+		   	return;
+		 } 
+	 var url = "${ctx}/archive/switchvalueinfo/"+switchId+"/edit";
      windowPopup(url, 960, 575);
 };
 
-showSwitchValueInfo=function(temId,switchNo){
-	 if(temId==null || temId =="" 
-		   || switchNo ==null || switchNo ==""){
+showSwitchValueInfo=function(switchId){
+	 if(switchId==null || switchId =="" ){
    	return;
  } 
-    var url = "${ctx}/archive/switchvalueinfo?switchNo="+switchNo+"&terminalInfo.termId="+temId;
+    var url = "${ctx}/archive/switchvalueinfo/"+switchId;
     windowPopup(url, 960, 575);
 };
 /*******************************************************************/
