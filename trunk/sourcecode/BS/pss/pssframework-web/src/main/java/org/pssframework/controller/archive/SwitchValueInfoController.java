@@ -202,7 +202,9 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 			}
 
 			TerminalInfo tm = new TerminalInfo();
+
 			tm.setTermId(switchvalueinfo.getTermIdOld());
+
 			switchvalueinfo.getSwitchValueId().setTerminalInfo(tm);
 
 			switchvalueinfo.getSwitchValueId().setSwitchNo(switchvalueinfo.getSwitchNoOld());
@@ -210,6 +212,7 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 			SwitchValueInfo switchValueInfoDb = this.switchValueInfoManager.getById(switchvalueinfo.getSwitchValueId());
 
 			bind(request, switchValueInfoDb);
+
 			this.switchValueInfoManager.update(switchValueInfoDb);
 
 		} catch (Exception e) {
