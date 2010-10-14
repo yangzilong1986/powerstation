@@ -439,6 +439,8 @@ public class PsInfoController extends BaseRestSpringController<PsInfo, java.lang
 
 		String jsonString = request.getParameter("dto");
 
+		logger.info(jsonString);
+
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		MessageTranObject mto_376 = null;
