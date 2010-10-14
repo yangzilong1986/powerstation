@@ -53,29 +53,29 @@ function lpadString (str,lenth) {
       </c:otherwise>
     </c:choose>
     <input type="hidden" name="tgId" value="${tgId}">
-    <input type="hidden" name="termIdOld" value="${switchvalueinfo.switchValueId.terminalInfo.termId}">
-    <input type="hidden" name="switchNoOld" value="${switchvalueinfo.switchValueId.switchNo}">
+    <input type="hidden" name="termIdOld" value="${switchvalueinfo.terminalInfo.termId}">
+    <input type="hidden" name="switchNoOld" value="${switchvalueinfo.switchNo}">
     <div id="main">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="20%" align="right" class="green"><font color="red">* </font>开关量编号：</td>
         <td width="30%"><security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="switchValueId.switchNo" cssClass="required input2 validate-number" disabled="${disabled}" />
+          <form:input path="switchNo" cssClass="required input2 validate-number" disabled="${disabled}" />
         </security:authorize><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:input path="switchValueId.switchNo"
+          <form:input path="switchNo"
             cssClass="required input2 validate-number validate-ajax-${ctx}/archive/switchvalueinfo/checkSwtichNo.json"
             disabled="${disabled}" />
         </security:authorize></td>
         <td width="20%" align="right" class="green">集中器地址：</td>
         <td width="30%"><security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="switchValueId.terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
+          <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
             itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" />
         </security:authorize><security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
-          <form:select path="switchValueId.terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
+          <form:select path="terminalInfo.termId" items="${termList}" id="termAddr" itemLabel="logicalAddr"
             itemValue="termId" cssStyle="width:155px;" disabled="${disabled}"
             cssClass="validate-ajax-${ctx}/archive/switchvalueinfo/checkSwitchNo.json" />
         </security:authorize></td>
@@ -298,12 +298,8 @@ function fetchReturnResult(appIds, sFetchCount, commanditems) {
 
 $(function(){
 
-  if('${_type}' == "new"){
-  	//$("#detail_tile").hide();
-  	$("#detail").hide();
-  }
-	
-  jQuery("#save").click(function(){
+  $("#save").click(function(){
+	  
       if(val.result()){
           jQuery(this).attr("disabled","disabled");
           if($("#_type").val()=="edit"){
@@ -357,7 +353,7 @@ addswitchvalueinfo = function(){
 
 updateswitchvalueinfo = function(){
   var psFormData = getData("update");
-    var url="${ctx}/archive/switchvalueinfo.json?_method=put";
+    var url="${ctx}/archive/switchvalueinfo/${switchvalueinfo.switchId}.json?_method=put";
     if(confirm("确定要更新该开关量?")){
       jQuery.ajax({
          url: url,
