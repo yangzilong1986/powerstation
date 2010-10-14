@@ -42,8 +42,11 @@ public class TerminalInfo extends BaseEntity {
 	 */
 	private static final long serialVersionUID = -2619191629996760464L;
 
-	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class)
+	@OneToMany(mappedBy = "terminalInfo", targetEntity = GpInfo.class, cascade = CascadeType.ALL)
 	private List<GpInfo> gpInfos;
+
+	@OneToMany(mappedBy = "terminalInfo", targetEntity = SwitchValueInfo.class, cascade = CascadeType.ALL)
+	private List<SwitchValueInfo> switchValueInfos;
 
 	@OneToMany(mappedBy = "terminalInfo", cascade = CascadeType.ALL)
 	private List<TermObjRelaInfo> termObjRelas;
@@ -323,13 +326,6 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the psInfos
-	 */
-	// public List<PsInfo> getPsInfos() {
-	// return psInfos;
-	// }
-
-	/**
 	 * @return the runStatusAddr
 	 */
 	public String getRunStatus() {
@@ -344,10 +340,32 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the psInfos
+	 */
+	// public List<PsInfo> getPsInfos() {
+	// return psInfos;
+	// }
+
+	/**
+	 * @return the switchValueInfos
+	 */
+	public List<SwitchValueInfo> getSwitchValueInfos() {
+		return switchValueInfos;
+	}
+
+	/**
 	 * @return the termId
 	 */
 	public Long getTermId() {
 		return termId;
+	}
+
+	/**
+	 * @return the termObjRelas
+	 */
+	public List<TermObjRelaInfo> getTermObjRelas() {
+
+		return termObjRelas;
 	}
 
 	/**
@@ -552,10 +570,24 @@ public class TerminalInfo extends BaseEntity {
 	}
 
 	/**
+	 * @param switchValueInfos the switchValueInfos to set
+	 */
+	public void setSwitchValueInfos(List<SwitchValueInfo> switchValueInfos) {
+		this.switchValueInfos = switchValueInfos;
+	}
+
+	/**
 	 * @param termId the termId to set
 	 */
 	public void setTermId(Long termId) {
 		this.termId = termId;
+	}
+
+	/**
+	 * @param termObjRelas the termObjRelas to set
+	 */
+	public void setTermObjRelas(List<TermObjRelaInfo> termObjRelas) {
+		this.termObjRelas = termObjRelas;
 	}
 
 	/**
@@ -575,21 +607,6 @@ public class TerminalInfo extends BaseEntity {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @param termObjRelas the termObjRelas to set
-	 */
-	public void setTermObjRelas(List<TermObjRelaInfo> termObjRelas) {
-		this.termObjRelas = termObjRelas;
-	}
-
-	/**
-	 * @return the termObjRelas
-	 */
-	public List<TermObjRelaInfo> getTermObjRelas() {
-
-		return termObjRelas;
 	}
 
 }

@@ -29,7 +29,6 @@ import javax.validation.Valid;
 
 import org.pssframework.controller.BaseRestSpringController;
 import org.pssframework.model.archive.SwitchValueInfo;
-import org.pssframework.model.archive.SwitchValueInfoPK;
 import org.pssframework.model.archive.TerminalInfo;
 import org.pssframework.model.archive.TgInfo;
 import org.pssframework.service.archive.SwitchValueInfoManager;
@@ -44,6 +43,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +56,7 @@ import com.google.common.collect.Maps;
  */
 @Controller
 @RequestMapping("/archive/switchvalueinfo")
-public class SwitchValueInfoController extends BaseRestSpringController<SwitchValueInfo, SwitchValueInfoPK> {
+public class SwitchValueInfoController extends BaseRestSpringController<SwitchValueInfo, Long> {
 
 	private static final String VIEW = "/archive/addSwitchValueInfo";
 
@@ -112,18 +112,19 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 		return VIEW;
 	}
 
-	/** 编辑 */
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/edit")
-	public String edit(ModelMap result, SwitchValueInfoPK switchValueInfoPK) throws Exception {
+	/**
+	 * 编辑
+	 */
+	@RequestMapping(value = "/{id}/edit")
+	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
-		SwitchValueInfo switchValueInfo = this.switchValueInfoManager.getById(switchValueInfoPK);
+		SwitchValueInfo switchValueInfo = this.switchValueInfoManager.getById(id);
 
 		Map requestMap = Maps.newHashMap();
 
 		result.addAttribute("switchvalueinfo", switchValueInfo);
 
-		requestMap.put("termid", switchValueInfoPK.getTerminalInfo().getTermId());
+		requestMap.put("termid", switchValueInfo.getTerminalInfo().getTermId());
 
 		this.CommonPart(result, requestMap);
 
@@ -135,15 +136,15 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 	/** 查看 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping
-	public String show(ModelMap result, SwitchValueInfoPK switchValueInfoPK) throws Exception {
+	public String show(ModelMap result, @PathVariable Long id) throws Exception {
 
-		SwitchValueInfo switchValueInfo = this.switchValueInfoManager.getById(switchValueInfoPK);
+		SwitchValueInfo switchValueInfo = this.switchValueInfoManager.getById(id);
 
 		Map requestMap = Maps.newHashMap();
 
 		result.addAttribute("switchvalueinfo", switchValueInfo);
 
-		requestMap.put("termid", switchValueInfoPK.getTerminalInfo().getTermId());
+		requestMap.put("termid", switchValueInfo.getTerminalInfo().getTermId());
 
 		this.CommonPart(result, requestMap);
 
@@ -176,8 +177,9 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 	}
 
 	/** 保存更新,@Valid标注spirng在绑定对象时自动为我们验证对象属性并存放errors在BindingResult  */
-	@RequestMapping(method = RequestMethod.PUT)
-	public String update(ModelMap modelMap, @Valid SwitchValueInfo switchvalueinfo, BindingResult errors,
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public String update(ModelMap modelMap, @PathVariable Long id, @Valid SwitchValueInfo switchvalueinfo,
+			BindingResult errors,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		boolean isSucc = true;
 		String msg = MSG_UPDATE_SUCCESS;
@@ -201,19 +203,11 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 
 			}
 
-			TerminalInfo tm = new TerminalInfo();
-
-			tm.setTermId(switchvalueinfo.getTermIdOld());
-
-			switchvalueinfo.getSwitchValueId().setTerminalInfo(tm);
-
-			switchvalueinfo.getSwitchValueId().setSwitchNo(switchvalueinfo.getSwitchNoOld());
-
-			SwitchValueInfo switchValueInfoDb = this.switchValueInfoManager.getById(switchvalueinfo.getSwitchValueId());
+			SwitchValueInfo switchValueInfoDb = this.switchValueInfoManager.getById(id);
 
 			bind(request, switchValueInfoDb);
 
-			this.switchValueInfoManager.update(switchValueInfoDb);
+			this.switchValueInfoManager.saveOrUpdate(switchValueInfoDb);
 
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
@@ -225,13 +219,13 @@ public class SwitchValueInfoController extends BaseRestSpringController<SwitchVa
 	}
 
 	/** 删除 */
-	@RequestMapping(method = RequestMethod.DELETE)
-	public String delete(ModelMap modelMap, SwitchValueInfoPK switchValueInfoPK) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public String delete(ModelMap modelMap, @PathVariable Long id) {
 		boolean isSucc = true;
 		String msg = MSG_DELETE_SUCCESS;
 
 		try {
-			this.switchValueInfoManager.removeById(switchValueInfoPK);
+			this.switchValueInfoManager.removeById(id);
 			//Flash.current().success(CONTROLLER_AJAX_MESSAGE, msg);
 		} catch (Exception e) {
 			this.logger.error(e.getLocalizedMessage());

@@ -4,11 +4,18 @@
 package org.pssframework.model.archive;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
 
 /**
@@ -17,15 +24,68 @@ import org.pssframework.base.BaseEntity;
  */
 @Entity
 @Table(name = "C_SWITCH_VALUE")
+@SequenceGenerator(sequenceName = "SEQ_C_switch", name = "SEQ_C_switch", allocationSize = 1)
 public class SwitchValueInfo extends BaseEntity {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -416125951250273937L;
 
-	// 联合主键   
-	@EmbeddedId
-	private SwitchValueInfoPK switchValueId;
+	@Column(name = "SWITCH_ID", unique = true, nullable = false)
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_C_switch")
+	// SWITCH_ID NUMBER not null,is '开关量(leakage protection switch)';
+	private Long switchId;
+
+	@ManyToOne
+	@JoinColumn(name = "TERM_ID", nullable = false)
+	private TerminalInfo terminalInfo;
+
+	//SWITCH_NO
+	@Column(name = "SWITCH_NO", nullable = false)
+	private Long switchNo;
+
+	/**
+	 * @return the switchId
+	 */
+	public Long getSwitchId() {
+		return switchId;
+	}
+
+	/**
+	 * @param switchId the switchId to set
+	 */
+	public void setSwitchId(Long switchId) {
+		this.switchId = switchId;
+	}
+
+	/**
+	 * @return the terminalInfo
+	 */
+	public TerminalInfo getTerminalInfo() {
+		return terminalInfo;
+	}
+
+	/**
+	 * @param terminalInfo the terminalInfo to set
+	 */
+	public void setTerminalInfo(TerminalInfo terminalInfo) {
+		this.terminalInfo = terminalInfo;
+	}
+
+	/**
+	 * @return the switchNo
+	 */
+	public Long getSwitchNo() {
+		return switchNo;
+	}
+
+	/**
+	 * @param switchNo the switchNo to set
+	 */
+	public void setSwitchNo(Long switchNo) {
+		this.switchNo = switchNo;
+	}
 
 	//开关量属性：置1常开触点。置0：常闭触点。SWITCH_TYPE
 	@Column(name = "SWITCH_TYPE")
@@ -53,13 +113,6 @@ public class SwitchValueInfo extends BaseEntity {
 	 */
 	public String getSwitchType() {
 		return switchType;
-	}
-
-	/**
-	 * @return the switchValueId
-	 */
-	public SwitchValueInfoPK getSwitchValueId() {
-		return switchValueId;
 	}
 
 	/**
@@ -105,13 +158,6 @@ public class SwitchValueInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param switchValueId the switchValueId to set
-	 */
-	public void setSwitchValueId(SwitchValueInfoPK switchValueId) {
-		this.switchValueId = switchValueId;
-	}
-
-	/**
 	 * @param switchValueName the switchValueName to set
 	 */
 	public void setSwitchValueName(String switchValueName) {
@@ -123,13 +169,6 @@ public class SwitchValueInfo extends BaseEntity {
 	 */
 	public void setSwithType(String switchType) {
 		this.switchType = switchType;
-	}
-
-	/**
-	 * @param switchValueId the switchValueId to set
-	 */
-	public void setSwithValueId(SwitchValueInfoPK switchValueId) {
-		this.switchValueId = switchValueId;
 	}
 
 	/**
@@ -146,4 +185,14 @@ public class SwitchValueInfo extends BaseEntity {
 		this.termIdOld = termIdOld;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 }

@@ -4,7 +4,6 @@
 package org.pssframework.model.archive;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -19,7 +18,6 @@ import org.pssframework.base.BaseEntity;
  * @author djs-baocj
  *
  */
-@Embeddable
 public class SwitchValueInfoPK extends BaseEntity {
 
 	/**
