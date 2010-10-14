@@ -332,7 +332,7 @@ function akeySetupTermParamF10(){
 	        logicalAddr = getOptionText("termAddr");
 	        gpsn = $("#gpSn").val();
 	        equipProtocol = $("#protocolNo").val();
-	        baudrate = getOptionText("btl");
+	        baudrate = $("#btl").val();
 	        gpAddr = $("#gpAddr").val();
 	        
 	        sb_dto.append('{');
@@ -342,7 +342,7 @@ function akeySetupTermParamF10(){
 	        sb_dto.append('"pwAlgorith":"' + $("#pwAlgorith").val() + '"').append(',');
 	        sb_dto.append('"pwContent":"' + $("#pwContent").val() + '"').append(',');
 	        sb_dto.append('"mpExpressMode":"' + $("#mpExpressMode").val() + '"').append(',');
-	        sb_dto.append('"mpSn":["' + gpsn + '"]').append(',');
+	        sb_dto.append('"mpSn":["' + 0 + '"]').append(',');
 	        sb_dto.append('"commandItems":').append('[').append('{');
 	        var ciarray = ['10040010'];
 	       
@@ -377,41 +377,102 @@ function akeySetupTermParamF10(){
 	       	 	var gpFully = "";
 	          
 	       	 	gpFully = lpadString(gpsn, 4);
-	       	 	
+	       	 	gpFully = '0001';
 	       	
-	       	    sb_dto.append('"1004001001": "1"').append(',');
-	            
-	       	    sb_dto.append('"1004001002'+gpFully+'": "'+gpsn+'"').append(',');
+	       	    sb_dto.append('"1004001001": "1"');
+	       	    sb_dto.append("}").append(',');
+	       	    
+	       	 	sb_dto.append('"circleDataItems":').append('{');
 	       	 	
-	     	    sb_dto.append('"1004001003'+gpFully+'": "'+gpsn+'"').append(',');
+	       	 	sb_dto.append('"dataItemGroups":').append('[{');
+	       	 	
+	       	 	sb_dto.append('"dataItemList":').append('[');
+	       	 	
+	       	 	
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001002'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\""+gpsn+"\"");
+	       	    sb_dto.append("}");
+	       	 	sb_dto.append(',');
 	       	    
-	     	    sb_dto.append('"1004001004'+gpFully+'": "'+baudrate+'"').append(',');
-	       	    
-	     	    sb_dto.append('"1004001005'+gpFully+'": "1"').append(',');
-	       	    
-	     	    sb_dto.append('"1004001006'+gpFully+'": "'+equipProtocol+'"').append(',');
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001003'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\""+gpsn+"\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+	       	 	
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001004'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\""+baudrate+"\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001005'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"1\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+	       	 	
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001006'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\""+equipProtocol+"\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	     	   
+	       	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001007'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\""+gpAddr+"\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
 	     	    
-	     	    sb_dto.append('"1004001007'+gpFully+'": "'+gpAddr+'"').append(',');
 	     	    
 	       	    /****************************************************************/
-	     	    sb_dto.append('"1004001008'+gpFully+'": "000000000000"').append(',');
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001008'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"000000000000\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
 	     	    
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001010'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"000100\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001012'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"10\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001013'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"11\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001014'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"000000000000\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
+	       	 	
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001015'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"0000\"");
+	       	 	sb_dto.append("}");
+	       	 	sb_dto.append(',');
 	     	    
-	     	    sb_dto.append('"1004001010'+gpFully+'": "000100"').append(',');
-	     	    
-	     	    sb_dto.append('"1004001012'+gpFully+'": "10"').append(',');
-	     	    
-	     	    sb_dto.append('"1004001013'+gpFully+'": "11"').append(',');
-	     	    
-	     	    sb_dto.append('"1004001014'+gpFully+'": "000000000000"').append(',');
-	     	    
-	     	    sb_dto.append('"1004001015'+gpFully+'": "0000"').append(',');
-	     	    
-	     	    sb_dto.append('"1004001016'+gpFully+'": "0000"');
-	     	    
+           	 	sb_dto.append('{');
+	       	 	sb_dto.append('"dataItemCode":').append('"1004001016'+gpFully).append('",');
+	       	 	sb_dto.append('"dataItemValue":').append("\"0000\"");
+	       	 	sb_dto.append("}");
 	     	   /****************************************************************/
 	     	    
-	     	    sb_dto.append("}");
+	     	    sb_dto.append("]}");
+	     	   	sb_dto.append("]}");
 	            
 	            if(i < ciarray.length - 1) {
 	                sb_dto.append('}').append(',');
