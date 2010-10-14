@@ -11,7 +11,6 @@ import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.SwitchValueInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.model.archive.SwitchValueInfo;
-import org.pssframework.model.archive.SwitchValueInfoPK;
 import org.pssframework.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchValueInfoPK> {
+public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, Long> {
 
 	@Autowired
 	private SwitchValueInfoDao switchValueInfoDao;
@@ -32,24 +31,17 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 		return switchValueInfoDao;
 	}
 
-	@Override
-	public SwitchValueInfo getById(SwitchValueInfoPK switchValueInfoPK) {
-		return switchValueInfoDao.getById(switchValueInfoPK);
-	}
-
 	public boolean checkSwtichNo(SwitchValueInfo switchValueInfo) {
-		SwitchValueInfoPK switchValueInfoPK = switchValueInfo.getSwitchValueId();
 		if (compareOld(switchValueInfo))
-			return checkSwtichNoRePeat(switchValueInfoPK);
+			return checkSwtichNoRePeatByEnetity(switchValueInfo);
 		else
 			return false;
 
 	}
 
 	private boolean compareOld(SwitchValueInfo switchValueInfo) {
-		SwitchValueInfoPK switchValueInfoPK = switchValueInfo.getSwitchValueId();
-		if (switchValueInfoPK.getSwitchNo() == switchValueInfo.getSwitchNoOld()
-				&& switchValueInfoPK.getTerminalInfo().getTermId() == switchValueInfo.getTermIdOld())
+		if (switchValueInfo.getSwitchNo() == switchValueInfo.getSwitchNoOld()
+				&& switchValueInfo.getTerminalInfo().getTermId() == switchValueInfo.getTermIdOld())
 			return false;
 		else
 			return true;
@@ -74,7 +66,7 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 				isSucc = checkSwtichNo(switchValueInfo);
 
 				if (isSucc) {
-					msg = "该终端下" + switchValueInfo.getSwitchValueId().getSwitchNo() + "号开关量已存在，请重新输入或切换终端";
+					msg = "该终端下" + switchValueInfo.getSwitchNo() + "号开关量已存在，请重新输入或切换终端";
 				}
 			} catch (ServiceException e) {
 				msg = e.getMessage();
@@ -89,22 +81,23 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, SwitchV
 	 * @param gpSn
 	 * @return
 	 */
-	public boolean checkSwtichNoRePeat(SwitchValueInfoPK switchValueInfoPK) {
+	public boolean checkSwtichNoRePeatByEnetity(SwitchValueInfo switchValueInfo) {
 
 		boolean ret = false;
-		if (switchValueInfoPK.getTerminalInfo() == null)
+		if (switchValueInfo.getTerminalInfo() == null)
 			return ret;
-		if (!GpInfoManger.termIdIsNull(switchValueInfoPK.getTerminalInfo().getTermId())) {
-			List<SwitchValueInfo> switchValueInfos = switchValueInfoDao.findAllByPK(switchValueInfoPK);
-			for (SwitchValueInfo switchValueInfo : switchValueInfos) {
-				if (switchValueInfo.getSwitchValueId().getSwitchNo().equals(switchValueInfoPK.getSwitchNo())) {
+		if (!GpInfoManger.termIdIsNull(switchValueInfo.getTerminalInfo().getTermId())) {
+			List<SwitchValueInfo> switchValueInfos = switchValueInfoDao.findAllByProperty("terminalInfo",
+					switchValueInfo.getTerminalInfo());
+			for (SwitchValueInfo switchValueInfoDb : switchValueInfos) {
+				if (switchValueInfoDb.getSwitchNo().equals(switchValueInfo.getSwitchNo())) {
 					ret = true;
 					break;
 				}
 			}
 			return ret;
 		} else
-			return GpInfoManger.termIdIsNull(switchValueInfoPK.getTerminalInfo().getTermId());
+			return GpInfoManger.termIdIsNull(switchValueInfo.getTerminalInfo().getTermId());
 	}
 
 	public boolean checkGpSnRePeat(List<GpInfo> dbGpInfos, Long gpSn) {
