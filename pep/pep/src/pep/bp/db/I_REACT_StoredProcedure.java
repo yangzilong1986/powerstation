@@ -17,15 +17,15 @@ import org.springframework.jdbc.object.StoredProcedure;
  * @author Thinkpad
  */
 public class I_REACT_StoredProcedure extends StoredProcedure {
-    private static final String SPROC_NAME = "PRC_INSERT_P_REACT";
+    private static final String SPROC_NAME = "PRC_INSERT_I_REACT";
     private static final String LOGICADDRESS_PARA = "p_logicAddress";
     private static final String SN_PARA = "p_sn";
     private static final String DATETIME_PARA = "p_DateTime";
-    private static final String REACT_TOTAL_PARA = "p_react_total";
-    private static final String REACT_SHARP_PARA = "p_react_sharp";
-    private static final String REACT_PEAK_PARA = "p_react_peak";
-    private static final String REACT_LEVEL_PARA = "p_react_level";
-    private static final String REACT_VALLEY_PARA = "p_react_valley";
+    private static final String REACT_TOTAL_PARA = "p_i_react_total";
+    private static final String REACT_SHARP_PARA = "p_i_react_sharp";
+    private static final String REACT_PEAK_PARA = "p_i_react_peak";
+    private static final String REACT_LEVEL_PARA = "p_i_react_level";
+    private static final String REACT_VALLEY_PARA = "p_i_react_valley";
     public I_REACT_StoredProcedure(){
 
     }
