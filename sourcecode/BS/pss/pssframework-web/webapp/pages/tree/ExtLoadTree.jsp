@@ -166,8 +166,9 @@ function treeRenderBeforeHandler(pTree){
                     handler : function(){
                   	  node = selectedNode.id;
                   	  type = node.split("_")[0];
-                  	  uid  = node.split("_")[1]; 
-                    	 deleteorginfo(uid,selectedNode);
+                  	  uid  = node.split("_")[1];
+                    deleteorginfo(uid,selectedNode);
+                  		 
                    }
               	<security:authorize ifNotGranted="ROLE_AUTHORITY_1"> ,disabled:true</security:authorize>
 
@@ -276,6 +277,10 @@ deletetginfo = function(id,selectedNode){
 
 
 deleteorginfo = function(id,selectedNode){
+	if(id==0){
+		alert('不能删除最高部门');
+		return;
+	}
 	  var ret = false;
 	    var url="${ctx}/system/orginfo/"+id+'.json?_method=delete';
 	    if(confirm("确定删除该部门 【"+selectedNode.text+"】?")){
@@ -313,7 +318,7 @@ remove = function(){
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
 <input type="button" value="查找节点" onclick="remove()" />-->
-<div id="tree" style=" height: 100%; width: 180px;" /></div>
+<div id="tree" style="height: 100%; width: 180px;" /></div>
 ${leafInfo}
 </BODY>
 </HTML>
