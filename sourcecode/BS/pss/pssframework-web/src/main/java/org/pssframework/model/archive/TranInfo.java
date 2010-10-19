@@ -55,7 +55,6 @@ public class TranInfo extends BaseEntity {
 	private OrgInfo orgInfo;
 
 	// private String orgId;
-
 	@Column(name = "CONS_ID", length = 16)
 	// CONS_ID NUMBER(16),用电客户的内部唯一标识
 	private Long consId;
