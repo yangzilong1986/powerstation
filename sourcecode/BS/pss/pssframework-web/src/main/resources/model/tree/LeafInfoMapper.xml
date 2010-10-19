@@ -79,9 +79,10 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   
   <sql id="LeafInfoDynamic">
    <![CDATA[
-  select o.org_id as leafId, o.org_name as leafName, 'ORG' as leafType
+  select * from(select o.org_id as leafId, o.org_name as leafName, 'ORG' as leafType
     from o_org o
     where o.p_org_id = #{leafParentId} and 'ORG' = #{leafParentType}
+    order by sort_no)
     union
   select l.line_id as leafId,l.line_name as leafName,'LINE' as leafType
   from g_line l, g_line_tg_rela r, g_tg t
