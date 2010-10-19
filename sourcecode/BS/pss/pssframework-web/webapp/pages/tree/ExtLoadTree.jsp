@@ -17,6 +17,11 @@ function showTg(tdId) {
 	  parent.parent.tabscontainermain.showTab("台区档案", url);
 }
 
+function showOrg(orgId) {
+	 var url = "${ctx}/system/orginfo/"+orgId;
+	  parent.parent.tabscontainermain.showTab("部门档案", url);
+}
+
 //当节点对象和树对象构造完了、执行render之前，会调用该方法
 //所以可以在这做函数注册处理.
 function treeRenderBeforeHandler(pTree){
@@ -110,11 +115,13 @@ function treeRenderBeforeHandler(pTree){
                       handler : function(){
                      	  node = selectedNode.id;
                      	  type = node.split("_")[0];
-                     	  uid  = node.split("_")[1]; 
+                     	  uid  = node.split("_")[1];
+                     	  url = "${ctx}/system/orginfo/new?parentOrgInfo.orgId="+uid;
+                   	  	  parent.parent.tabscontainermain.showTab("部门档案", url);
                       },
                      id:'newOrg',
-                     text:'新增部门',
-                     disabled: true
+                     text:'新增部门'
+                     <security:authorize ifNotGranted="ROLE_AUTHORITY_3"> ,disabled:true</security:authorize>
                 },
                 {
                 	  handler : function(){
@@ -143,23 +150,41 @@ function treeRenderBeforeHandler(pTree){
                     id:'edit',
                     text : '修改部门',
                     handler : function(){
-                    },
-                    disabled: true
-                    
+                	   node = selectedNode.id;
+                	  type = node.split("_")[0];
+                	  uid  = node.split("_")[1]; 
+          	          url = "${ctx}/system/orginfo/"+uid+"/edit";
+               	      parent.parent.tabscontainermain.showTab("部门档案", url);
+                    }
+                <security:authorize ifNotGranted="ROLE_AUTHORITY_2"> ,disabled:true</security:authorize>
+
+                
                 },                  
                 {
                     id:'delete',
                     text : '删除部门',
                     handler : function(){
-                    },
-                    disabled: true
+                  	  node = selectedNode.id;
+                  	  type = node.split("_")[0];
+                  	  uid  = node.split("_")[1]; 
+                    	 deleteorginfo(uid,selectedNode);
+                   }
+              	<security:authorize ifNotGranted="ROLE_AUTHORITY_1"> ,disabled:true</security:authorize>
+
                 },
                 {
                     id:'view',
                     text : '查看部门',
                     handler : function(){
-                    },
-                    disabled: true
+                  	  node = selectedNode.id;
+                  	  type = node.split("_")[0];
+                  	  uid  = node.split("_")[1]; 
+               	       url = "${ctx}/system/orginfo/"+uid;
+                  	  parent.parent.tabscontainermain.showTab("部门档案", url);
+                     
+                  }
+              <security:authorize ifNotGranted="ROLE_AUTHORITY_4"> ,disabled:true</security:authorize>
+
                 }
                 ]
             });
@@ -222,7 +247,6 @@ function treeRenderBeforeHandler(pTree){
 
 searchNode = function(){
  var name= document.getElementById("node").value;alert(name);
- 
 }
 
 deletetginfo = function(id,selectedNode){
@@ -248,6 +272,31 @@ deletetginfo = function(id,selectedNode){
     }
     return ret;
 }
+
+
+deleteorginfo = function(id,selectedNode){
+	  var ret = false;
+	    var url="${ctx}/system/orginfo/"+id+'.json?_method=delete';
+	    if(confirm("确定删除该部门?")){
+	      jQuery.ajax({
+	           url: url,
+	           dataType:'json',
+	           type:'post',
+	           cache: false,
+	           success: function(json){
+	   	        var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+	            var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+	              alert(msg);
+	              if(isSucc){
+	              refreshParentNode(selectedNode);
+	              }
+	           },error:function(e){
+	               alert(e.getMessage());
+	           }
+	         });
+	    }
+	    return ret;
+	}
 
 
 remove = function(){
