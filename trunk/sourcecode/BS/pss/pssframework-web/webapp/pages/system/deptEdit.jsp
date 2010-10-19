@@ -66,10 +66,12 @@
         </security:authorize></td>
       </tr>
       <tr height="30">
-        <td width="100%" colspan="6" align="right"><security:authorize
+        <td width="100%" colspan="6" align="right">
+        <c:if test="${orginfo.orgId!=0}">
+        <security:authorize
           ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2">
           <input id="save" name="save" type="button" class="btnbg4" value="保存">
-        </security:authorize></td>
+        </security:authorize></c:if></td>
       </tr>
     </table>
   </form:form>
