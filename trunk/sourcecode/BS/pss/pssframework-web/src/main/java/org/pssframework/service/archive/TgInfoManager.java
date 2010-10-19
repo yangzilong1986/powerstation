@@ -74,7 +74,7 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void removeById(Long id) throws DataAccessException {
-		Assert.isNull(id, "部门id不能为空");
+		Assert.notNull(id, "台区id不能为空");
 		TgInfo tg = this.getById(id);
 
 		List<TranInfo> trans = tg.getTranInfos();
