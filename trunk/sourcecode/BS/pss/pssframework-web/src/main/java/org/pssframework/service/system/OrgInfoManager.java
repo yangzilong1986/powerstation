@@ -74,7 +74,7 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 			String sNo = StringUtils.substringAfter(orgNo, pOrgInfo.getOrgNo());
 			Integer iNo = Integer.parseInt(sNo) + 1;
 
-			return pOrgInfo.getOrgNo() + StringUtils.leftPad(String.valueOf(iNo), 2, '0');
+			return pOrgInfo.getOrgNo() + StringUtils.leftPad(String.valueOf(iNo), 3, '0');
 		}
 
 	}
