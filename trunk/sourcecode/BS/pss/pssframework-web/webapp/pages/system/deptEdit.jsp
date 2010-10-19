@@ -1,106 +1,169 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-
+<%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
-
-
+<%@include file="../../commons/meta.jsp"%>
+<%@page import="org.pssframework.support.system.SystemConst"%>
 <html>
 <head>
-<meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title><bean:message bundle="system" key="dept.edit.title" /></title>
-<link href="<peis:contextPath/>/css/window.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<peis:contextPath/>/js/jquery.js"></script>
-<script type="text/javascript">
-function checkForm(obj) {
-    var patrn = /^[0-9]*$/;
-    if(!patrn.test($("#orgNo").val())) {
-        alert("单位编号必须输入数字");
-        $("#orgNo").focus();
-        return false;
-    }
-    else {
-        return validateOrgForm(obj);
-    }
-}
-</script>
+<title>部门档案</title>
+<link href='<pss:path type="bgcolor"/>/css/content.css' type="text/css" rel="stylesheet" />
 </head>
 <body>
-<html:form action="/system/orgAddAction" onsubmit="return checkForm(this)" target="hideframe">
-  <html:hidden property="action" />
-  <div id="body">
-    <div class="tab">
-      <ul>
-        <li id="tab_1" class="tab_on">
-          <a href="#" onClick="return false;" onFocus="blur()"><bean:message bundle="system" key="dept.edit.title" /></a>
-        </li>
-        <li class="clear"></li>
-      </ul>
-    </div>
-    <div id="main"  style="width:expression(((document.documentElement.clientWidth||document.body.clientWidth)-18));">
-      <div id="tool">
-        <table width="100%" border=0 cellpadding=0 cellspacing=0 align=center class="e_detail_t">
-          <tr align="center">
-            <td class="contentLeft">　</td>
-            <td>
-              <table width="100%" align="center" border="0" cellpadding="0"cellspacing="1">
-                <tr>
-                  <td colspan="4" style="height: 20px;"></td>
-                </tr>
-                <tr>
-                  <td width="15%">
-                    <bean:message bundle="system" key="dept.dwbh" />（<font color="#ff0000">*</font>）：
-                    <html:hidden property="id" />
-                    <input type="hidden" name="oldOrgNo" value='<bean:write name="orgForm" property="orgNo"/>' />
-                  </td>
-                  <td width="35%">
-                    <html:text styleId="orgNo" property="orgNo" disabled="disabled" />
-                    <logic:equal name="orgForm" property="action" value="save"></logic:equal>
-                  </td>
-                  <td width="15%"><bean:message bundle="system" key="dept.dwmc" />（<font color="#ff0000">*</font>）：</td>
-                  <td width="35%"><html:text property="orgName" /></td>
-                </tr>
-                <tr>
-                  <td><bean:message bundle="system" key="dept.dwlx" />：</td>
-                  <td>
-                    <peis:selectlist name="orgType" sql="COMMON0032" extendProperty="class='mainSelect'" value="" />
-                  </td>
-                  <td><bean:message bundle="system" key="dept.sjdwmc" />：</td>
-                  <td>
-                    <bean:write name="orgForm" property="upOrgName" />
-                    <html:hidden property="orgUpper" />
-                  </td>
-                </tr>
-                <tr>
-                  <td><bean:message bundle="system" key="dept.sjdwlx" />：</td>
-                  <td><bean:write name="orgForm" property="upOrgTypeName" /></td>
-                  <td><bean:message bundle="system" key="dept.pxh" />（<font color="#ff0000">*</font>）：</td>
-                  <td><html:text property="orgSort" /></td>
-                </tr>
-                <tr>
-                  <td colspan="4" style="height: 20px;"></td>
-                </tr>
-                <tr>
-                  <td  align="center" colspan="4">
-                    <html:submit styleClass="input1">
-                      <bean:message bundle="system" key="button.qd" />
-                    </html:submit>
-                    &nbsp;&nbsp;
-                    <input type="button" name="cancel2" value='<bean:message bundle="system" key="button.qx"/>' class="input1" onclick="top.GB_hide()" />
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="4" style="height: 20px;"></td>
-                </tr>
-              </table>
-            </td>
-            <td class="contentRight">　</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-  <iframe name="hideframe" src="" scrolling="no" width="0" height="0" frameborder="0"> </iframe>
-</html:form>
-<html:javascript formName="orgForm" />
+<div class="electric_lcon" id=electric_Con>
+<ul class="default" id="electric_Con_1" style="padding: 5px;">
+  <div class="tab"><span>部门信息</span></div>
+  <div class="da_mid"
+    style="display: block; overflow-y: auto; overflow-x: auto; width: expression((   document.documentElement.clientWidth ||             document.body.clientWidth) -10 ); height: expression(((             document.documentElement.clientHeight ||             document.body.clientHeight) -35 ) );">
+  <form:form action="/system/orginfo" modelAttribute="orginfo">
+    <input type="hidden" name="<%=SystemConst.CONTROLLER_METHOD_TYPE%>" id="<%=SystemConst.CONTROLLER_METHOD_TYPE%>"
+      value="${_type}">
+    <c:choose>
+      <c:when test="${_type=='edit' || _type=='new'}">
+        <c:set var="disabled" value="false"></c:set>
+      </c:when>
+      <c:otherwise>
+        <c:set var="disabled" value="true"></c:set>
+      </c:otherwise>
+    </c:choose>
+    <table width="95%" border="0" cellspacing="0" cellpadding="0">
+      <form:hidden path="orgId" />
+      <tr height="30">
+        <td width="15%" align="right" class="green"><spring:message code="system.dept.dwbh" />（<font
+          color="#ff0000">*</font>）： <input type="hidden" name="oldOrgNo" value='${orginfo.orgNo}' /></td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="orgNo" cssClass="required input2" maxlength="20" cssStyle="width:155px;" disabled="true" />
+        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="orgNo" cssClass="required input2 validate-ajax-${ctx}/system/orginfo/checkOrgNo.json" maxlength="20" cssStyle="width:155px;" readonly="true"/>
+        </security:authorize></td>
+        <td width="10%" align="right" class="green"><spring:message code="system.dept.dwmc" />（<font
+          color="#ff0000">*</font>）：</td>
+        <td width="25%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="orgName" disabled="true" />
+        </security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="orgName" cssClass="required" />
+        </security:authorize></td>
+        <td width="10%" align="right" class="green"><spring:message code="system.dept.dwlx" />：</td>
+        <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="orgType" itemLabel="name" itemValue="code" onchange="" items="${orgtype}"
+            cssStyle="width:155px;" disabled="true" />
+        </security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:select path="orgType" itemLabel="name" itemValue="code" onchange="" items="${orgtype}"
+            cssStyle="width:155px;"></form:select>
+        </security:authorize></td>
+      </tr>
+      <tr height="30">
+      <form:hidden path="parentOrgInfo.orgId"/>
+        <td align="right" class="green"><spring:message code="system.dept.sjdwmc" />：</td>
+        <td>${orginfo.parentOrgInfo.orgName}</td>
+        <td align="right" class="green"><spring:message code="system.dept.sjdwlx" />：</td>
+        <td><pss:code code="${orginfo.parentOrgInfo.orgType}" codeCate="<%=SystemConst.CODE_ORG_TYPE%>" /></td>
+        <td align="right" class="green"><spring:message code="system.dept.pxh" />（<font color="#ff0000">*</font>）：</td>
+        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="sortNo" disabled="true" />
+        </security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1">
+          <form:input path="sortNo"
+            cssClass="required validate-number validate-ajax-${ctx}/system/orginfo/checkSortNo.json" />
+        </security:authorize></td>
+      </tr>
+      <tr height="30">
+        <td width="100%" colspan="6" align="right"><security:authorize
+          ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2">
+          <input id="save" name="save" type="button" class="btnbg4" value="保存">
+        </security:authorize></td>
+      </tr>
+    </table>
+  </form:form>
+</ul>
+</div>
 </body>
+<script>
+val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {
+ return result;
+}}
+);
+$(function(){
+  $("#save").click(function(){
+	  var ret = val.result();
+	  if(ret==""){
+		  val.validate();
+	  }
+		 if(ret==true){
+          $(this).attr("disabled","disabled");
+          if($("#orgId").val()){
+            updateorginfo();
+          }else {
+            addorginfo();
+          }
+          
+          $(this).attr("disabled","");
+      }else{
+        $(this).attr("disabled","");
+      }
+      });
+        
+  });
+
+
+
+  getData= function(type){
+  var data;
+    data = $("form[id=orginfo]").serialize(); 
+  return data;
+  };
+
+  addorginfo = function(){
+    var psFormData = getData('add');
+    var url="${ctx}/system/orginfo.json";
+    if(confirm("确定要保存该部门?")){
+      $.ajax({
+           url: url,
+           data:psFormData,
+           dataType:'json',
+           type:'POST',
+           cache: false,
+           success: function(json){
+        var msg = json['<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>'];
+          var isSucc = json['<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>'];
+             alert(msg);
+             if(isSucc){
+                 $("#orgId").val(json['orgId']);
+                 parent.parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
+             }
+           },error:function(e){
+           }
+         });
+    }
+  };
+
+  updateorginfo = function(){
+    var psFormData = getData("update");
+    var orgId =$("#orgId").val();
+      var url="${ctx}/system/orginfo/"+orgId+".json?_method=put";
+      if(confirm("确定要更新该部门?")){
+        $.ajax({
+             url: url,
+             data:psFormData,
+             dataType:'json',
+             type:'post',
+             cache: false,
+             success: function(json){
+           var msg = json["<%=SystemConst.CONTROLLER_AJAX_MESSAGE%>"];
+           var isSucc = json["<%=SystemConst.CONTROLLER_AJAX_IS_SUCC%>"];
+							alert(msg);
+							if (isSucc) {
+								parent.parent.tabscontainerleft.tree.location.href = "${ctx}/tree";
+							}
+						},
+						error : function(e) {
+							alert("error")
+							alert(e.getMessage());
+						}
+					});
+		}
+	}
+
+	function closeWin() {
+		window.close();
+	}
+</script>
 </html>
