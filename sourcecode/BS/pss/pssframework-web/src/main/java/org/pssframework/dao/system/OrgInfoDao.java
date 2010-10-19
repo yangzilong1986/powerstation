@@ -86,6 +86,7 @@ public class OrgInfoDao<X> extends BaseHibernateDao<OrgInfo, Long> {
 
 		OrgInfo orginfo = userInfo.getOrgInfo();
 
+		//admin的场合
 		if (userInfo.getEmpNo() == 0L)
 			return null;
 		if (orginfo != null) {
