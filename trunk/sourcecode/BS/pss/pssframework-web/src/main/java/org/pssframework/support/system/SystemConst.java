@@ -228,5 +228,12 @@ public final class SystemConst {
 	 */
 
 	public static final String CODE_SWITCH_VALUE_TYPE = "SWITCH_VALUE_TYPE";
+
+	/**
+	 * ORG_TYPE
+	 * 部门类型
+	 */
+
+	public static final String CODE_ORG_TYPE = "ORG_TYPE";
 	/***********************************************************************************/
 }

@@ -11,17 +11,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.archive.LineInfo;
 import org.pssframework.model.archive.TgInfo;
-import org.pssframework.model.archive.TranInfo;
 
 /**
  * @author Administrator
@@ -49,7 +52,7 @@ public class OrgInfo extends BaseEntity {
 	private List<TgInfo> tgInfos;
 
 	@OneToMany(mappedBy = "orgInfo")
-	private List<TranInfo> tranInfos;
+	private List<LineInfo> lineInfos;
 
 	/*
 	 * VARCHAR2(16) not null, comment on column O_ORG.ORG_NO is '本实体记录的唯一标识，
@@ -58,17 +61,18 @@ public class OrgInfo extends BaseEntity {
 	@Column(length = 16, nullable = false, name = "ORG_NO")
 	private String orgNo;
 
+	@Transient
+	private String oldOrgNo;
+
 	/*
 	 * comment on column O_ORG.ORG_NAME is '供电单位详细的名称'; VARCHAR2(256),
 	 */
 	@Column(length = 256, name = "ORG_NAME")
 	private String orgName;
 
-	/*
-	 * comment on column O_ORG.P_ORG_ID is '直接上级供电单位编号';NUMBER(16)
-	 */
-	@Column(name = "P_ORG_ID")
-	private Long pOrgId;
+	@ManyToOne
+	@JoinColumn(name = "P_ORG_ID", referencedColumnName = "ORG_ID")
+	private OrgInfo parentOrgInfo;
 
 	/*
 	 * comment on column O_ORG.ORG_TYPE VARCHAR2(8), is '单位类别：国网公司、
@@ -101,11 +105,26 @@ public class OrgInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the lineInfos
+	 */
+	public List<LineInfo> getLineInfos() {
+		return lineInfos;
+	}
+
+	/**
+	 * @return the oldOrgNo
+	 */
+	public String getOldOrgNo() {
+		return oldOrgNo;
+	}
+
+	/**
 	 * @return the orgId
 	 */
 	public Long getOrgId() {
 		return orgId;
 	}
+
 
 	/**
 	 * @return the orgName
@@ -129,10 +148,10 @@ public class OrgInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the pOrgId
+	 * @return the parentOrgInfo
 	 */
-	public Long getpOrgId() {
-		return pOrgId;
+	public OrgInfo getParentOrgInfo() {
+		return parentOrgInfo;
 	}
 
 	/**
@@ -145,9 +164,9 @@ public class OrgInfo extends BaseEntity {
 	/**
 	 * @return the tgInfos
 	 */
-	// public List<TgInfo> getTgInfos() {
-	// return tgInfos;
-	// }
+	public List<TgInfo> getTgInfos() {
+		return tgInfos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -160,6 +179,20 @@ public class OrgInfo extends BaseEntity {
 	 */
 	public void setLasttimeStamp(Date lasttimeStamp) {
 		this.lasttimeStamp = lasttimeStamp;
+	}
+
+	/**
+	 * @param lineInfos the lineInfos to set
+	 */
+	public void setLineInfos(List<LineInfo> lineInfos) {
+		this.lineInfos = lineInfos;
+	}
+
+	/**
+	 * @param oldOrgNo the oldOrgNo to set
+	 */
+	public void setOldOrgNo(String oldOrgNo) {
+		this.oldOrgNo = oldOrgNo;
 	}
 
 	/**
@@ -195,11 +228,10 @@ public class OrgInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param pOrgNo
-	 *            the pOrgNo to set
+	 * @param parentOrgInfo the parentOrgInfo to set
 	 */
-	public void setpOrgNo(Long pOrgId) {
-		this.pOrgId = pOrgId;
+	public void setParentOrgInfo(OrgInfo parentOrgInfo) {
+		this.parentOrgInfo = parentOrgInfo;
 	}
 
 	/**
@@ -213,41 +245,13 @@ public class OrgInfo extends BaseEntity {
 	/**
 	 * @param tgInfos the tgInfos to set
 	 */
-	// public void setTgInfos(List<TgInfo> tgInfos) {
-	// this.tgInfos = tgInfos;
-	// }
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @param tgInfos the tgInfos to set
-	 */
 	public void setTgInfos(List<TgInfo> tgInfos) {
 		this.tgInfos = tgInfos;
 	}
 
-	/**
-	 * @return the tgInfos
-	 */
-	public List<TgInfo> getTgInfos() {
-		return tgInfos;
-	}
-
-	/**
-	 * @param tranInfos the tranInfos to set
-	 */
-	public void setTranInfos(List<TranInfo> tranInfos) {
-		this.tranInfos = tranInfos;
-	}
-
-	/**
-	 * @return the tranInfos
-	 */
-	public List<TranInfo> getTranInfos() {
-		return tranInfos;
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

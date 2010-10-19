@@ -209,6 +209,7 @@ public class LeafController extends BaseRestSpringController<LeafInfo, java.lang
 					result.setAction("javascript:showTg(" + leaf.getLeafId() + ")");
 				} else if (SystemConst.TREE_ORG.equals(leaf.getLeafType())) {
 					result.setIcon(getUrl(ORG_IMG));
+					result.setAction("javascript:showOrg(" + leaf.getLeafId() + ")");
 				}
 
 				return result;

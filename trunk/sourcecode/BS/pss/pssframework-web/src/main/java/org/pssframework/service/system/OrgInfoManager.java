@@ -13,6 +13,8 @@ import org.apache.commons.lang.StringUtils;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.OrgInfoDao;
+import org.pssframework.model.archive.LineInfo;
+import org.pssframework.model.archive.TgInfo;
 import org.pssframework.model.system.CodeInfo;
 import org.pssframework.model.system.OrgInfo;
 import org.pssframework.service.ServiceException;
@@ -104,18 +106,41 @@ public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
 		OrgInfo org = this.getById(orgId);
 
 		//获取该子部门
-		List subOrgs = Lists.newArrayList();
+		List<OrgInfo> subOrgs = Lists.newArrayList();
 		subOrgs = this.entityDao.findAllByProperty("parentOrgInfo", org);
-		
-		List tglst = org.getTgInfos();
-		
+
+		List<TgInfo> tglst = org.getTgInfos();
+
+		List<LineInfo> linList = org.getLineInfos();
+
 		if (CollectionUtils.isNotEmpty(subOrgs))
-			throw new ServiceException("该部门下存在子部门，请删除子部门");
-		
+			throw new ServiceException("该部门下存在子部门，请先删除关联部门");
+
+		if (CollectionUtils.isNotEmpty(linList))
+			throw new ServiceException("该部门下存在线路，请先删除关联线路");
+
 		if (CollectionUtils.isNotEmpty(tglst))
-			throw new ServiceException("该部门下存在台区，请删除台区");
+			throw new ServiceException("该部门下存在台区，请先删除关联台区");
 
 		this.entityDao.delete(org);
 
+	}
+
+	public String checkOrgNoRePeat(OrgInfo orgInfo) {
+		String chk = "";
+		if (orgInfo.getOldOrgNo() == null || orgInfo.getOrgNo().equals(orgInfo.getOldOrgNo()))
+			return chk;
+
+		if (findByOrgNo(orgInfo.getOrgNo()) == null)
+			return chk;
+		else {
+			chk = "该部门号重复，请重新输入";
+		}
+
+		return chk;
+	}
+
+	public OrgInfo findByOrgNo(String orgNo) {
+		return this.entityDao.findByProperty("orgNo", orgNo);
 	}
 }

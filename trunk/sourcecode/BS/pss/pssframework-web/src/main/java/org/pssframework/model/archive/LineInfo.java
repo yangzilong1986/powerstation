@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +20,7 @@ import javax.persistence.TemporalType;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.pssframework.base.BaseEntity;
+import org.pssframework.model.system.OrgInfo;
 
 /**
 1) 描述线路基本信息，主要属性包括线路编码、线路名称、线损计算方式、单位长度线路电阻、单位长度线路电抗
@@ -51,9 +54,10 @@ public class LineInfo extends BaseEntity {
 	// LINE_NAME VARCHAR2(256) not null,
 	private String LineName;
 
-	@Column(name = "ORG_ID", length = 16, nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "ORG_ID")
 	// ORG_ID VARCHAR2(16) not null,
-	private Long orgId;
+	private OrgInfo orgInfo;
 
 	@Column(name = "VOLT_CODE", length = 8)
 	// VOLT_CODE VARCHAR2(8),
@@ -112,10 +116,10 @@ public class LineInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the orgId
+	 * @return the orgInfo
 	 */
-	public Long getOrgId() {
-		return orgId;
+	public OrgInfo getOrgInfo() {
+		return orgInfo;
 	}
 
 	/**
@@ -180,10 +184,10 @@ public class LineInfo extends BaseEntity {
 	}
 
 	/**
-	 * @param orgId the orgId to set
+	 * @param orgInfo the orgInfo to set
 	 */
-	public void setOrgId(Long orgId) {
-		this.orgId = orgId;
+	public void setOrgInfo(OrgInfo orgInfo) {
+		this.orgInfo = orgInfo;
 	}
 
 	/**
