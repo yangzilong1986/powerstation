@@ -161,8 +161,13 @@ public class OrgInfoController extends BaseRestSpringController<OrgInfo, Long> {
 
 		Map<String, Object> mapRequest = new HashMap<String, Object>();
 
-		mapRequest.put("code", orginfo.getParentOrgInfo().getOrgType());
+		if (orginfo.getParentOrgInfo() == null) {
+			mapRequest.put("code", "00");
+		} else {
+			mapRequest.put("code", orginfo.getParentOrgInfo().getOrgType());
+		}
 
+		
 		this.CommonPart(model, mapRequest);
 
 		model.addAttribute(CONTROLLER_METHOD_TYPE, CONTROLLER_METHOD_TYPE_EDIT);
@@ -222,7 +227,11 @@ public class OrgInfoController extends BaseRestSpringController<OrgInfo, Long> {
 
 		Map<String, Object> mapRequest = new HashMap<String, Object>();
 
-		mapRequest.put("code", orginfo.getParentOrgInfo().getOrgType());
+		if (orginfo.getParentOrgInfo() == null) {
+			mapRequest.put("code", "00");
+		} else {
+			mapRequest.put("code", orginfo.getParentOrgInfo().getOrgType());
+		}
 
 		this.CommonPart(model, mapRequest);
 
