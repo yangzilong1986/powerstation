@@ -250,9 +250,10 @@ searchNode = function(){
 }
 
 deletetginfo = function(id,selectedNode){
+	alert()
   var ret = false;
     var url="${ctx}/archive/tginfo/"+id+'.json?_method=delete';
-    if(confirm("确定删除该台区?")){
+    if(confirm("确定删除该台区 【"+selectedNode.text+"】?")){
       jQuery.ajax({
            url: url,
            dataType:'json',
@@ -277,7 +278,7 @@ deletetginfo = function(id,selectedNode){
 deleteorginfo = function(id,selectedNode){
 	  var ret = false;
 	    var url="${ctx}/system/orginfo/"+id+'.json?_method=delete';
-	    if(confirm("确定删除该部门?")){
+	    if(confirm("确定删除该部门 【"+selectedNode.text+"】?")){
 	      jQuery.ajax({
 	           url: url,
 	           dataType:'json',
