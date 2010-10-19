@@ -40,8 +40,6 @@ public class StringUtilsTest {
 	@Test
 	public void testleftPad() {
 		String te = "1";
-		System.out.println(StringUtils.leftPad(String.valueOf(te), 3, '0'));
-
 		Assert.assertEquals("001", StringUtils.leftPad(String.valueOf(te), 3, '0'));
 
 		String sNo = StringUtils.stripStart("A099", "A");
