@@ -154,6 +154,10 @@ function treeRenderBeforeHandler(pTree){
                 	  type = node.split("_")[0];
                 	  uid  = node.split("_")[1]; 
           	          url = "${ctx}/system/orginfo/"+uid+"/edit";
+          	          if(uid=='0'){
+          	        	  alert("不能修改最高部门 【"+selectedNode.text+"】");
+          	        	  return;
+          	          }
                	      parent.parent.tabscontainermain.showTab("部门档案", url);
                     }
                 <security:authorize ifNotGranted="ROLE_AUTHORITY_2"> ,disabled:true</security:authorize>
@@ -251,7 +255,6 @@ searchNode = function(){
 }
 
 deletetginfo = function(id,selectedNode){
-	alert()
   var ret = false;
     var url="${ctx}/archive/tginfo/"+id+'.json?_method=delete';
     if(confirm("确定删除该台区 【"+selectedNode.text+"】?")){
@@ -278,7 +281,7 @@ deletetginfo = function(id,selectedNode){
 
 deleteorginfo = function(id,selectedNode){
 	if(id==0){
-		alert('不能删除最高部门');
+		alert("不能删除最高部门 【"+selectedNode.text+"】");
 		return;
 	}
 	  var ret = false;
