@@ -15,4 +15,6 @@ import pep.bp.model.PSDAO;
 public interface PSService {
     public List<PSDAO> getTestPSList(String testDay,String testHour);
 
+    public int getPsId(String LogicAddr, int GP_SN);
+
 }

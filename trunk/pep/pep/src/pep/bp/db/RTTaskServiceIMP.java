@@ -4,6 +4,7 @@
  */
 package pep.bp.db;
 
+import java.util.Date;
 import java.util.List;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -155,4 +156,52 @@ public class RTTaskServiceIMP implements RTTaskService {
             return -1;
         }
     }
+
+    @Override
+    public List<RealTimeTaskDAO> getTripTasks(){
+         try {
+            //清空已经同步的试跳任务记录
+            String SQL = "delete from r_realtime_task a";
+            SQL += " where exists(select 1 from r_trip_plan b where a.task_id = b.task_id)";
+            SQL += " and a.task_type = 2";
+            jdbcTemplate.update(SQL.toString());
+
+            //查询未同步试跳任务
+            SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
+            SQL += " from r_realtime_task a";
+            SQL += " where not exists(select 1 from r_trip_plan b where a.task_id = b.task_id)";
+            SQL += " and a.task_type = 2";
+            List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
+
+            return results;
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public boolean InsertTripTaskInfo(int ps_id,String date,Date postTime,Date acceptTime,String tripResult,int task_Id)
+    {
+        try {
+            //清空已经同步的试跳任务记录
+            String SQL = "select count(*) from R_TRIP_PLAN a";
+            SQL += " where PS_ID = ?";
+            SQL += " and DDATE = ?";
+            int recordNum = jdbcTemplate.queryForInt(SQL, new Object[]{ps_id, date});
+
+            if(recordNum > 0 ){
+
+            }
+            else{
+                jdbcTemplate.update("insert into  R_TRIP_PLAN(PS_ID,DDATE,POST_TIME,ACCEPT_TIME,TRIP_RESULT,TASK_ID) values(?,?,?,?,?,?)",
+                    new Object[]{ps_id, date,postTime, acceptTime,tripResult, task_Id });
+            }
+            return true;
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return false;
+        }
+    }
+
 }

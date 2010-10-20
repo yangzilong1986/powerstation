@@ -34,7 +34,7 @@ public class PSServiceIMP implements  PSService{
      public List<PSDAO> getTestPSList(String testDay,String testHour){
          try {
             //主站轮召任务
-            StringBuffer sbSQL = new StringBuffer();
+            StringBuilder sbSQL = new StringBuilder();
             sbSQL.append("select logical_addr,gp_sn,gp_addr,test_day,test_time");
             sbSQL.append(" from V_PS");
             sbSQL.append(" where test_day = ?");
@@ -52,5 +52,27 @@ public class PSServiceIMP implements  PSService{
         }
      }
 
+    @Override
+    public int getPsId(String LogicAddr, int GP_SN){
+        try {
+            //主站轮召任务
+            StringBuilder sbSQL = new StringBuilder();
+            sbSQL.append("select a.ps_id");
+            sbSQL.append(" from c_ps a,c_gp b,c_terminal c");
+            sbSQL.append(" where a.term_id = c.term_id");
+            sbSQL.append(" and a.gp_id = b.gp_id");
+            sbSQL.append(" and b.gp_sn = ?");
+            sbSQL.append(" and c.logical_addr = ?");
+
+            String SQL = sbSQL.toString();
+          //  List rs = jdbcTemplate.queryForList(SQL);
+            int result = jdbcTemplate.queryForInt(SQL, new Object[]{GP_SN,LogicAddr});
+
+            return result;
+        } catch (DataAccessException dataAccessException) {
+            log.error(dataAccessException.getMessage());
+            return -1;
+        }
+    }
     
 }
