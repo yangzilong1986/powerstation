@@ -31,6 +31,15 @@ public class UtilsBp {
     }
 
     @SuppressWarnings("static-access")
+    public static String getThisDay_YYYYMMDD(){
+        Calendar   cal   =   Calendar.getInstance();
+        int Year = Calendar.getInstance().get(Calendar.YEAR);
+        int Month = Calendar.getInstance().get(Calendar.MONTH);
+        int Day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        return Year+lPad(String.valueOf(Month),"0",2)+lPad(String.valueOf(Day),"0",2);
+    }
+
+    @SuppressWarnings("static-access")
     public static String getThisHour(){
         Calendar   cal   =   Calendar.getInstance();
         int Hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -169,7 +178,7 @@ public class UtilsBp {
         if (i < 0) {
             return mainString;
         }
-        StringBuffer mainSb = new StringBuffer(mainString);
+        StringBuilder mainSb = new StringBuilder(mainString);
         while (i >= 0) {
             mainSb.replace(i, i + oldString.length(), newString);
             i = mainString.lastIndexOf(oldString, i - 1);
@@ -180,7 +189,7 @@ public class UtilsBp {
     //指定的字符串累加
     public static String strAdd(String chr, int len) {
         if (len > 0) {
-            StringBuffer ret = new StringBuffer(len);
+            StringBuilder ret = new StringBuilder(len);
             for (int i = 0; i < len; i++) {
                 ret.append(chr);
             }
@@ -209,7 +218,7 @@ public class UtilsBp {
     }
 
     public static String Reverse(String source){
-        StringBuffer sb  = new StringBuffer(source);
+        StringBuilder sb  = new StringBuilder(source);
         sb.reverse();
         return  sb.toString();
     }
