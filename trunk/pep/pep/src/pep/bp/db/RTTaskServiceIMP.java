@@ -172,7 +172,13 @@ public class RTTaskServiceIMP implements RTTaskService {
             SQL += " where not exists(select 1 from r_trip_plan b where a.task_id = b.task_id)";
             SQL += " and a.task_type = 2";
             List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
-
+            for(RealTimeTaskDAO  task : results){
+                SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
+                SQL += " from R_REALTIME_TASK_RECV";
+                SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
+                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
+                task.setRecvMsgs(recvs);
+             }
             return results;
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
@@ -191,7 +197,8 @@ public class RTTaskServiceIMP implements RTTaskService {
             int recordNum = jdbcTemplate.queryForInt(SQL, new Object[]{ps_id, date});
 
             if(recordNum > 0 ){
-
+                jdbcTemplate.update("update  R_TRIP_PLAN set TRIP_RESULT = ?,POST_TIME = ? where PS_ID=? and DDATE=?",
+                    new Object[]{tripResult,postTime,ps_id, date });
             }
             else{
                 jdbcTemplate.update("insert into  R_TRIP_PLAN(PS_ID,DDATE,POST_TIME,ACCEPT_TIME,TRIP_RESULT,TASK_ID) values(?,?,?,?,?,?)",

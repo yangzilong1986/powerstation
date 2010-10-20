@@ -4,9 +4,7 @@
 package pep.bp.processor.planManager;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 import org.quartz.Job;
@@ -87,6 +85,7 @@ public class PlanJob implements Job {
                 }
             }
         }
+        checkPlan();
     }
 
     private void DoPlan(PepCommunicatorInterface pepCommunicator, PSDAO ps) throws BPException {
@@ -118,12 +117,12 @@ public class PlanJob implements Job {
                 task.setSequencecode(rtTaskService.getSequnce());
                 task.setLogicAddress(ps.getLogicAddress());
                 task.setTask_type("2");
+                task.setGpMark(ps.getGp_sn()+"#");
                 this.rtTaskService.insertTask(task);
 
                 // pepCommunicator.SendPacket(this.getsequenceCode(), pack);
                 log.info("向终端：[" + ps.getLogicAddress() + "] 下发计划试跳报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(pack.getValue()));
-            }
-            checkPlan();
+            }         
         }
     }
 
@@ -159,15 +158,17 @@ public class PlanJob implements Job {
                     int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
                     Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
                     for (int i = 0; i < GpArray.length; i++) {
-                        int ps_id = this.psService.getPsId(logicAddress, i);
-                        String date = UtilsBp.getThisDay_YYYYMMDD();
-                        String tripResult = "2";
-                        if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0x84) {
-                            tripResult = String.valueOf(1);//确认
-                        } else if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0xC1) {
-                            tripResult = String.valueOf(2);//否认
+                        int ps_id = this.psService.getPsId(logicAddress, Integer.parseInt(GpArray[i]));
+                        if(ps_id != -1){
+                            String date = UtilsBp.getThisDay_YYYYMMDD();
+                            String tripResult = "2";
+                            if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0x84) {
+                                tripResult = String.valueOf(1);//确认
+                            } else if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0xC1) {
+                                tripResult = String.valueOf(2);//否认
+                            }
+                            this.rtTaskService.InsertTripTaskInfo(ps_id, date,  postTime, acceptTime, tripResult, task_id);
                         }
-                        this.rtTaskService.InsertTripTaskInfo(ps_id, date,  postTime, acceptTime, tripResult, task_id);
                     }
                 }
             }
