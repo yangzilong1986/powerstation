@@ -3,7 +3,10 @@
  */
 package pep.bp.processor.planManager;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.quartz.Job;
@@ -23,6 +26,7 @@ import pep.bp.db.PSService;
 import pep.bp.db.RTTaskService;
 
 import pep.bp.model.PSDAO;
+import pep.bp.model.RTTaskRecvDAO;
 import pep.bp.model.RealTimeTaskDAO;
 
 import pep.bp.realinterface.mto.CollectObject_TransMit;
@@ -33,7 +37,11 @@ import pep.bp.utils.Converter;
 import pep.bp.utils.MeterType;
 import pep.bp.utils.SerialPortPara;
 import pep.bp.utils.UtilsBp;
+import pep.codec.protocol.gb.PmPacketData;
+import pep.codec.protocol.gb.gb376.PmPacket376DA;
+import pep.codec.protocol.gb.gb376.PmPacket376DT;
 import pep.codec.utils.BcdUtils;
+import pep.meter645.Gb645MeterPacket;
 import pep.system.SystemConst;
 
 /**
@@ -112,11 +120,57 @@ public class PlanJob implements Job {
                 task.setTask_type("2");
                 this.rtTaskService.insertTask(task);
 
-               // pepCommunicator.SendPacket(this.getsequenceCode(), pack);
+                // pepCommunicator.SendPacket(this.getsequenceCode(), pack);
                 log.info("向终端：[" + ps.getLogicAddress() + "] 下发计划试跳报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(pack.getValue()));
             }
+            checkPlan();
         }
+    }
 
+    private void checkPlan() {
+        List<RealTimeTaskDAO> tasks = this.rtTaskService.getTripTasks();
+        StringBuilder sb = new StringBuilder();
+        for (RealTimeTaskDAO task : tasks) {
+            String logicAddress = task.getLogicAddress();
+            String gpMark = task.getGpMark();
+            Date postTime = task.getPosttime();
+            int task_id = task.getTaskId();
+            String[] GpArray = null;
+            if (null != gpMark) {
+                GpArray = task.getGpMark().split("#");
+            }
 
+            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            PmPacket376 packet = new PmPacket376();
+            for (RTTaskRecvDAO recv : recvs) {
+                Date acceptTime = recv.getRecvTime();
+                byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
+                packet.setValue(msg, 0);
+                PmPacketData dataBuf = packet.getDataBuffer();
+                dataBuf.rewind();
+                dataBuf.getDA(new PmPacket376DA());
+                dataBuf.getDT(new PmPacket376DT());
+                byte afn = packet.getAfn();
+                if (afn == 0X10) {  //透明转发，特殊处理
+                    long port = dataBuf.getBin(1);//终端通信端口号
+                    long len = dataBuf.getBin(2);//透明转发内容字节数k
+                    byte[] databuff = new byte[(int) len];
+                    dataBuf.getRowIoBuffer().get(databuff);
+                    int head = Gb645MeterPacket.getMsgHeadOffset(databuff, 0);
+                    Gb645MeterPacket packet645 = Gb645MeterPacket.getPacket(databuff, head);
+                    for (int i = 0; i < GpArray.length; i++) {
+                        int ps_id = this.psService.getPsId(logicAddress, i);
+                        String date = UtilsBp.getThisDay_YYYYMMDD();
+                        String tripResult = "2";
+                        if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0x84) {
+                            tripResult = String.valueOf(1);//确认
+                        } else if (BcdUtils.byteToUnsigned(packet645.getControlCode().getValue()) == 0xC1) {
+                            tripResult = String.valueOf(2);//否认
+                        }
+                        this.rtTaskService.InsertTripTaskInfo(ps_id, date,  postTime, acceptTime, tripResult, task_id);
+                    }
+                }
+            }
+        }
     }
 }
