@@ -4,6 +4,7 @@
  */
 
 package pep.bp.db;
+import java.util.Date;
 import java.util.List;
 import pep.bp.model.RealTimeTaskDAO;
 /**
@@ -50,4 +51,16 @@ public interface RTTaskService {
      * @return
      */
     public int getSequnce();
+
+    /**
+     * 获取未同步的试跳任务记录
+     * @return
+     */
+    public List<RealTimeTaskDAO> getTripTasks();
+
+    /**
+     * 同步的试跳任务记录
+     * @return
+     */
+    public boolean InsertTripTaskInfo(int ps_id,String date,Date postTime,Date acceptTime,String tripResult,int task_Id);
 }
