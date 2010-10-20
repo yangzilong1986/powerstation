@@ -174,7 +174,7 @@ public class Converter {
             packet.getSeq().setIsFirstFrame(true);
             packet.getSeq().setIsFinishFrame(true);
 
-            commandMark.append(commandItem.getIdentifier() + "#");
+            commandMark.append(commandItem.getIdentifier()).append("#");
             PmPacket376DA da = new PmPacket376DA(obj.getMpSn());
             PmPacket376DT dt = new PmPacket376DT(1);
 
