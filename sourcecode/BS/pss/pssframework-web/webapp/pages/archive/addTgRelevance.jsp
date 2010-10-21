@@ -305,9 +305,10 @@ a:hover {
     <thead>
       <tr>
         <th width="14%">模拟量名称</th>
-        <th width="14%">测量点地址</th>
         <th width="14%">测量点序号</th>
         <th width="14%">采集终端</th>
+        <th width="14%">量程起始值</th>
+        <th width="14%">量程结束值</th>
         <th>操作</th>
       </tr>
     </thead>
@@ -315,9 +316,10 @@ a:hover {
       <c:forEach items="${analoguelist}" var="analogueInfo" varStatus="status">
         <tr id="analogue_${analogueInfo.gpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${analogueInfo.analogueName}</td>
-          <td>&nbsp;${analogueInfo.gpInfo.gpAddr}</td>
           <td>&nbsp;${analogueInfo.gpInfo.gpSn}</td>
           <td>&nbsp;${analogueInfo.gpInfo.terminalInfo.logicalAddr}</td>
+          <td>&nbsp;${analogueInfo.rangeBegin}</td>
+          <td>&nbsp;${analogueInfo.rangeEnd}</td>
           <td><security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
             <a onclick="deleteAnalogueInfo('${analogueInfo.gpId}')">删除</a>
           </security:authorize>&nbsp;<security:authorize ifAnyGranted="ROLE_AUTHORITY_2,ROLE_AUTHORITY_10">/&nbsp;<a

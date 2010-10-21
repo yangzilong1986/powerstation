@@ -73,13 +73,11 @@ StringBuffer.prototype.toString = function() {
       style="display: block; overflow-y: auto; overflow-x: auto; height: expression((( document.documentElement.clientHeight | document.body.clientHeight) - 700 ) );">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
-        <td width="13%" class="green" align="right"><font color="red">* </font>测量点序号：</td>
-        <td width="20%"><!-- gpAddr 、gpSn --> <input type="hidden" name="gpInfo.gpAddrOld" value="${analogueinfo.gpInfo.gpAddr}" /> 
-        <input type="hidden" name="gpInfo.gpSnOld" value="${analogueinfo.gpInfo.gpSn}" />
-        <security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.gpSn" id="gpSn" cssClass="required validate-number" disabled="${disabled}" onfocus="checkGpSn()"/>
+        <td  width="13%" class="green" align="right"><font color="red">* </font>端 口 号：</td>
+        <td width="13%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
+          <form:select path="gpInfo.port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:select>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.gpSn" id="gpSn" cssClass="required validate-number validate-ajax-${ctx}/archive/analogueinfo/checkGpSn.json" disabled="${disabled}"/>
+          <form:select path="gpInfo.port" disabled="${disabled}" id="port" items="${ports}" itemLabel="key" itemValue="value" cssClass="required validate-number int-range-1-8 validate-ajax-${ctx}/archive/analogueinfo/checkPort.json"></form:select>
         </security:authorize></td>
         <td width="13%" class="green" align="right"><font color="red">* </font>模拟量名称：</td>
         <td width="20%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
@@ -97,21 +95,6 @@ StringBuffer.prototype.toString = function() {
             itemValue="termId" cssStyle="width:155px;" disabled="${disabled}" cssClass="validate-ajax-${ctx}/archive/analogueinfo/checkGpSn.json validate-ajax-${ctx}/archive/analogueinfo/checkGpAddr.json"/>
         </security:authorize></td>
         
-      </tr>
-      <tr height="30px">
-     
-        <td class="green" align="right"><font color="red">* </font>测量点地址：</td>
-        <td><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.gpAddr" id="gpAddr" cssClass="required" disabled="${disabled}" />
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.gpAddr" id="gpAddr" onchange="lpad(this,12)" maxlength="12" cssClass="required validate-number validate-ajax-${ctx}/archive/analogueinfo/checkGpAddr.json" disabled="${disabled}" />
-        </security:authorize></td>
-               <td  class="green" align="right"><font color="red">* </font>端 口 号：</td>
-        <td ><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:input>
-        </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
-          <form:input path="gpInfo.port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:input>
-        </security:authorize></td>
       </tr>
        <tr height="30px">
           <td  class="green" align="right">量程起始值：</td>
