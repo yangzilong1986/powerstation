@@ -305,7 +305,7 @@ a:hover {
     <thead>
       <tr>
         <th width="14%">模拟量名称</th>
-        <th width="14%">测量点序号</th>
+        <th width="14%">端口号</th>
         <th width="14%">采集终端</th>
         <th width="14%">量程起始值</th>
         <th width="14%">量程结束值</th>
