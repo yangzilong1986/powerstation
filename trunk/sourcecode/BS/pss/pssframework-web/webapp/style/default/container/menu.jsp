@@ -110,9 +110,8 @@ function changeFod(obj) {
       <div id="Fod">
       <security:authorize ifAnyGranted="ROLE_RESOURCE_5001">
         <div onmouseover=changeFod(this)><a id="a5001" href="#" onclick="selectMenu('5001', '/system/permission');">权限管理</a></div></security:authorize>
-        <security:authorize ifAnyGranted="ROLE_RESOURCE_5002">
+         <!--<security:authorize ifAnyGranted="ROLE_RESOURCE_5002">
         <div onmouseover=changeFod(this)><a id="a5002" href="#" onclick="selectMenu('5002', ''); return false;">单位管理</a></div></security:authorize>
-       <!--  
         <security:authorize ifAnyGranted="ROLE_RESOURCE_5003">
         <div onmouseover=changeFod(this)><a id="a5003" href="#" onclick="selectMenu('5003', ''); return false;">编码管理</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_5004">
