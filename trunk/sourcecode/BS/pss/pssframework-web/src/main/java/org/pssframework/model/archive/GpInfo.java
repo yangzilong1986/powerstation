@@ -106,6 +106,9 @@ public class GpInfo extends BaseEntity {
 	@Column(name = "PT_TIMES")
 	private Long ptTimes;
 
+	@Transient
+	private String odlPort;
+
 	// PORT VARCHAR2(20),
 	@Column(name = "PORT", length = 20)
 	private String port;
@@ -267,6 +270,13 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
+	 * @return the odlPort
+	 */
+	public String getOdlPort() {
+		return odlPort;
+	}
+
+	/**
 	 * @return the pluseConstant
 	 */
 	public Long getPluseConstant() {
@@ -316,18 +326,18 @@ public class GpInfo extends BaseEntity {
 	}
 
 	/**
-	 * @return the tgInfo
-	 */
-	//	public TgInfo getTgInfo() {
-	//		return tgInfo;
-	//	}
-
-	/**
 	 * @return the tranId
 	 */
 	public Long getTranId() {
 		return tranId;
 	}
+
+	/**
+	 * @return the tgInfo
+	 */
+	//	public TgInfo getTgInfo() {
+	//		return tgInfo;
+	//	}
 
 	@Override
 	public int hashCode() {
@@ -466,6 +476,13 @@ public class GpInfo extends BaseEntity {
 	 */
 	public void setObjectId(Long objectId) {
 		this.objectId = objectId;
+	}
+
+	/**
+	 * @param odlPort the odlPort to set
+	 */
+	public void setOdlPort(String odlPort) {
+		this.odlPort = odlPort;
 	}
 
 	/**

@@ -40,7 +40,6 @@ import org.pssframework.service.archive.AnalogueInfoManager;
 import org.pssframework.service.archive.GpInfoManger;
 import org.pssframework.service.archive.TerminalInfoManger;
 import org.pssframework.service.archive.TgInfoManager;
-import org.pssframework.service.system.CodeInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.DataAccessException;
@@ -71,9 +70,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 	private static final String FORWARD = "/archive/analogueinfo";
 
-	//该终端下测量点序号重复
-	private static final String GP_IS_REPEAT = "该终端下测量点序号重复";
-
 	/** binder用于bean属性的设置 */
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -82,9 +78,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 	@Autowired
 	private AnalogueInfoManager analogueInfoManager;
-
-	@Autowired
-	private CodeInfoManager codeInfoManager;
 
 	@Autowired
 	private TerminalInfoManger terminalInfoManger;
@@ -136,7 +129,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	@RequestMapping(value = "/{id}/edit")
 	public String edit(ModelMap result, @PathVariable Long id) throws Exception {
 
-
 		AnalogueInfo analogueInfo = this.analogueInfoManager.getById(id);
 
 		Map requestMap = Maps.newHashMap();
@@ -156,7 +148,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/{id}")
 	public String show(ModelMap result, @PathVariable Long id) throws Exception {
-
 
 		AnalogueInfo analogueInfo = this.analogueInfoManager.getById(id);
 
@@ -214,7 +205,6 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 			if (!checkGp(analogueinfo, modelMap))
 				return VIEW;
 
-
 			AnalogueInfo analogueInfoDb = this.analogueInfoManager.getById(id);
 
 			bind(request, analogueInfoDb);
@@ -260,6 +250,8 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 		result.addAttribute("termList", termlist);
 
+		result.addAttribute("ports", this.analogueInfoManager.get1To8Ports());
+
 	}
 
 	/**
@@ -289,6 +281,16 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 			istAddr = tranInfo.getInstAddr();
 		}
 		return istAddr;
+	}
+
+	/**
+	 *校验测量点端口
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/checkPort")
+	public String checkPortByAjax(AnalogueInfo analogueInfo) throws Exception {
+		GpInfo model = analogueInfo.getGpInfo();
+		return this.gpInfoManger.checkPortRePeat(model);
 	}
 
 	/**
@@ -394,25 +396,20 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 	private boolean checkGp(AnalogueInfo analogueinfo, ModelMap modelMap) {
 		boolean ret = true;
 
-		if (checkGpsn(analogueinfo)) {
+		if (checkPort(analogueinfo)) {
 
-			logger.error("the gpSn repeat");
-			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-					"the gpSn repeat");
+			logger.error("the port repeat");
+			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE, "端口重复");
 			return ret = false;
 
 		}
 
-		if (checkGpAddr(analogueinfo)) {
-
-			logger.error("the gpAddr repeat");
-			modelMap.addAttribute(CONTROLLER_AJAX_IS_SUCC, false).addAttribute(CONTROLLER_AJAX_MESSAGE,
-					"the gpAddr repeat");
-			return false;
-
-		}
 		return ret;
 
+	}
+
+	private boolean checkPort(AnalogueInfo analogueinfo) {
+		return !gpInfoManger.checkPortRePeat(analogueinfo.getGpInfo()).equals("");
 	}
 
 }
