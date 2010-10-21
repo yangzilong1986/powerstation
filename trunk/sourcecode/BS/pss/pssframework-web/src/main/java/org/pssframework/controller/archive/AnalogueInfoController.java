@@ -209,7 +209,7 @@ public class AnalogueInfoController extends BaseRestSpringController<AnalogueInf
 
 			bind(request, analogueInfoDb);
 
-			this.analogueInfoManager.update(analogueInfoDb);
+			this.analogueInfoManager.saveOrUpdate(analogueInfoDb);
 
 		} catch (Exception e) {
 			this.logger.error(e.getMessage());
