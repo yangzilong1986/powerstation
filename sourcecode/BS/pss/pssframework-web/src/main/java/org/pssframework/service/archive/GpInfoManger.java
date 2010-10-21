@@ -269,4 +269,66 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 		}
 		return msg;
 	}
+
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
+	public String checkPortRePeat(GpInfo model) {
+		boolean isSucc = false;
+
+		String msg = "";
+
+		if (model == null || model.getTerminalInfo() == null || model.getPort() == null) {
+			msg = "";
+		} else {
+
+			try {
+
+				isSucc = checkPortRePeat(model.getTerminalInfo().getTermId(), model.getPort(), model.getGpChar(),
+						model.getOdlPort());
+
+				if (isSucc) {
+					msg = "该终端下" + model.getPort() + "号端口已存在，请重新输入或切换终端";
+				}
+			} catch (ServiceException e) {
+				msg = e.getMessage();
+			}
+		}
+		return msg;
+	}
+
+	private boolean checkPortRePeat(Long termId, String port, String gpChar, String odlPort) {
+
+		if (compareOldPort(port, odlPort)) {
+			if (!termIdIsNull(termId))
+				return checkPortRePeat(gpInfoDao.findByTermId(termId), port, gpChar);
+			else
+				return false;
+		} else
+			return false;
+	}
+
+	private boolean checkPortRePeat(List<GpInfo> dbGpInfos, String port, String gpChar) {
+		boolean ret = false;
+
+		if (gpChar == null) {
+			gpChar = "1";
+		}
+		for (GpInfo gpInfo : dbGpInfos) {
+			if (port.equals(gpInfo.getPort()) && gpChar.equals(gpInfo.getGpChar())) {
+				ret = true;
+				break;
+			}
+		}
+		return ret;
+	}
+
+	private boolean compareOldPort(String port, String odlPort) {
+		if (port.equals(odlPort))
+			return false;
+		else
+			return true;
+	}
 }
