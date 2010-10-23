@@ -187,6 +187,7 @@ public class Converter {
             packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
 
             //645规约组帧
+            if(null == obj.getMeterAddr()) continue;
             Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
             pack.setControlCode(true, false, false, (byte) obj.getFuncode());
             byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8)));
