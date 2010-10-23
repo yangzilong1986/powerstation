@@ -39,7 +39,7 @@ public class TaskServiceIMP implements  TaskService{
             sbSQL.append("select a.logical_addr,a.gp_char,a.gp_sn,a.task_id,a.protocol_no,a.sys_object,a.startup_flag,");
             sbSQL.append("a.time_interval,a.base_time_gw,a.sendup_cycle_gw,a.sendup_unit_gw,a.ext_cnt_gw,");
             sbSQL.append("b.start_time_master,b.end_time_master,b.exec_cycle_master,b.exec_unit_master,b.AFN,c.gp_addr");
-            sbSQL.append(" from r_term_task a,r_task b, c_gp c , c_terminal d");
+            sbSQL.append(" from r_term_task a,r_task b, v_gp c , c_terminal d");
             sbSQL.append(" where a.task_id = b.task_id");
             sbSQL.append(" and a.protocol_no = b.protocol_no");
             sbSQL.append(" and c.term_id = d.term_id");
