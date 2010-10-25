@@ -342,6 +342,13 @@ public abstract class BaseIbatis3Dao<E, PK extends Serializable> extends DaoSupp
 		public Object selectOne(final String statement, final Object parameter) {
 			return execute(new SqlSessionCallback() {
 				public Object doInSession(SqlSession session) {
+                    //System.out.println("-------------selectOne--------------");
+                    //System.out.println("statement : " + statement);
+                    //System.out.println("parameter : " + parameter.toString());
+                    //IbatisSql ibatisSql = getIbatisSql(statement, parameter);
+                    //System.out.println("ibatisSql.sql        : " + ibatisSql.getSql());
+                    //System.out.println("ibatisSql.parameters : " + ibatisSql.getParameters().toString());
+                    //System.out.println("ibatisSql.resultClass: " + ibatisSql.getResultClass().getName());
 					return session.selectOne(statement, parameter);
 				}
 			});
