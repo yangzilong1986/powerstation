@@ -10,7 +10,8 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 public class PasswordEncoderTest {
 	private PasswordEncoder encoder = new ShaPasswordEncoder();
-	private String ps = "123456";
+	private String ps = "QL@admin123";
+
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -22,6 +23,9 @@ public class PasswordEncoderTest {
 
 	@Test
 	public void encoder() {
+		//admin = d033e22ae348aeb5660fc2140aec35850c4da997
+		//QL@admin123
+		String s = "d033e22ae348aeb5660fc2140aec35850c4da997";
 		System.out.println(encoder.encodePassword(ps, null));
 	}
 
