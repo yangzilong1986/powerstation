@@ -24,7 +24,7 @@ $(document).ready(function() {
 });
 
 function queryData() {
-    var url = '<pss:path type="webapp"/>' + '/statistics/psEventQuery/event?' + getFrom();
+    var url = '<pss:path type="webapp"/>' + '/statistics/tripQuery/tripRecord?' + getFrom();
     //alert(url);
     document.getElementById("fdata").src = url;
 }
@@ -62,7 +62,7 @@ function chgOrgId(type) {
 <body>
 <div class="electric_lcon" id="electric_Con">
   <ul class="default" id="electric_Con_0">
-    <form:form name="psEventQueryForm" modelAttribute="psdata">
+    <form:form name="tripQueryForm" modelAttribute="psdata">
       <div id="inquiry" style="margin-top: 5px;">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>

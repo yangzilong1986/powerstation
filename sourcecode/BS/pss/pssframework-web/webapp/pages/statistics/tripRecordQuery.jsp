@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
-<form:form action="${ctx}/statistics/psEventQuery/event" modelAttribute="statisticsQuery">
+<form:form action="${ctx}/statistics/tripQuery/tripRecord" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
   <form:hidden path="sdate" />
@@ -23,24 +23,24 @@
     <thead class="tableHeader">
       <tr>
         <th>序号</th>
-        <th sortColumn="LOGICAL_ADDR">逻辑地址</th>
+        <th sortColumn="logical_addr">逻辑地址</th>
         <th sortColumn="assetNo">资产编号</th>
-        <th sortColumn="DDATE">试跳日期</th>
+        <th sortColumn="ddate">试跳日期</th>
         <th sortColumn="post_time">下发时间</th>
         <th sortColumn="accept_time">接收时间</th>
-        <th sortColumn="TRIP_RESULT">试跳结果</th>
+        <th sortColumn="trip_result">试跳结果</th>
       </tr>
     </thead>
     <tbody class="tableBody" id="dataBody">
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
-          <td><c:out value='${item.LOGICAL_ADDR}' />&nbsp;</td>
+          <td><c:out value='${item.logical_addr}' />&nbsp;</td>
           <td><c:out value='${item.assetNo}' />&nbsp;</td>
-          <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.DDATE}"></fmt:formatDate> &nbsp;</td>
+          <td><c:out value='${item.ddate}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.post_time}"></fmt:formatDate> &nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.accept_time}"></fmt:formatDate> &nbsp;</td>
-          <td><c:if test="${item.closed eq 0}"><c:out value='${item.TRIP_RESULT}' /></c:if>&nbsp;</td>
+          <td><c:out value='${item.trip_result}' />&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
