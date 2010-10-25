@@ -22,60 +22,60 @@ public class TripRecord implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
-    public String getLogical_addr() {
+    public String getlogical_addr() {
         return logical_addr;
     }
 
-    public void setLogical_addr(String logicalAddr) {
+    public void setlogical_addr(String logicalAddr) {
         logical_addr = logicalAddr;
     }
 
-    public String getAssetNo() {
+    public String getassetNo() {
         return assetNo;
     }
 
-    public void setAssetNo(String assetNo) {
+    public void setassetNo(String assetNo) {
         this.assetNo = assetNo;
     }
 
-    public String getDdate() {
+    public String getddate() {
         return ddate;
     }
 
-    public void setDdate(String ddate) {
+    public void setddate(String ddate) {
         this.ddate = ddate;
     }
 
-    public Date getPost_Time() {
-        return Post_Time;
+    public Date getpost_time() {
+        return post_time;
     }
 
-    public void setPost_Time(Date postTime) {
-        Post_Time = postTime;
+    public void setpost_time(Date postTime) {
+        post_time = postTime;
     }
 
-    public Date getAccept_Time() {
-        return Accept_Time;
+    public Date getaccept_time() {
+        return accept_time;
     }
 
-    public void setAccept_Time(Date acceptTime) {
-        Accept_Time = acceptTime;
+    public void setaccept_time(Date acceptTime) {
+        accept_time = acceptTime;
     }
 
-    public String getTripResult() {
-        return TripResult;
+    public String gettrip_result() {
+        return trip_result;
     }
 
-    public void setTripResult(String tripResult) {
-        TripResult = tripResult;
+    public void settrip_result(String tripResult) {
+        trip_result = tripResult;
     }
 
     private String logical_addr;
     private String assetNo;
     private String ddate;
-    private Date Post_Time;
-    private Date Accept_Time;
-    private String TripResult;
+    private Date post_time;
+    private Date accept_time;
+    private String trip_result;
 
 
 }

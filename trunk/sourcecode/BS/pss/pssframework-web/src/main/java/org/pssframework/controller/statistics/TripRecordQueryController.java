@@ -70,7 +70,7 @@ public class TripRecordQueryController extends BaseSpringController {
      * @return
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/event")
+    @RequestMapping(value = "/tripRecord")
     public ModelAndView _event(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             StatisticsQuery sq) throws Exception {
         PageRequest<Map> pageRequest = bindPageRequest(request, sq, DEFAULT_SORT_COLUMNS);
