@@ -100,8 +100,10 @@ function changeFod(obj) {
         <div onmouseover=changeFod(this)><a id="a4002" href="#" onclick="selectMenu('4002', '/statistics/sumMeterDataQuery'); return false;">总表数据</a></div></security:authorize>
         <security:authorize ifAnyGranted="ROLE_RESOURCE_4003">
         <div onmouseover=changeFod(this)><a id="a4003" href="#" onclick="selectMenu('4003', '/statistics/psDataQuery'); return false;">开关数据</a></div></security:authorize>
-              <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_4004">
         <div onmouseover=changeFod(this)><a id="a4004" href="#" onclick="selectMenu('4004', '/statistics/termData'); return false;">终端事件</a></div></security:authorize>
+        <security:authorize ifAnyGranted="ROLE_RESOURCE_4005">
+        <div onmouseover=changeFod(this)><a id="a4005" href="#" onclick="selectMenu('4005', '/statistics/tripQuery'); return false;">计划试跳记录</a></div></security:authorize>
       </div>
     </dt>
   </dl>
