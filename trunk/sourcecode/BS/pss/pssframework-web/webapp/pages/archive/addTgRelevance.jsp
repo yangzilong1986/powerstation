@@ -316,7 +316,7 @@ a:hover {
       <c:forEach items="${analoguelist}" var="analogueInfo" varStatus="status">
         <tr id="analogue_${analogueInfo.gpId}" <c:if test="${status.count%2==0}">bgcolor="#f3f3f3"</c:if>>
           <td>&nbsp;${analogueInfo.analogueName}</td>
-          <td>&nbsp;${analogueInfo.gpInfo.gpSn}</td>
+          <td>&nbsp;${analogueInfo.gpInfo.port}</td>
           <td>&nbsp;${analogueInfo.gpInfo.terminalInfo.logicalAddr}</td>
           <td>&nbsp;${analogueInfo.rangeBegin}</td>
           <td>&nbsp;${analogueInfo.rangeEnd}</td>
