@@ -76,6 +76,8 @@ public class TermParamController extends BaseRestSpringController<TermParamInfo,
             String dtoJSONString = request.getParameter("dto");
             logger.info("dtoJSONString : " + dtoJSONString);
             MessageTranObject mto = ConverterUtils.jsonString2MessageTranObject(dtoJSONString);
+            //ObjectMapper objectMapper = new ObjectMapper();
+            //logger.info("mto json : " + objectMapper.writeValueAsString(mto));
             long collectId = realTimeProxy376.writeParameters(mto);
             logger.info("collectId : " + collectId);
             result.addObject("collectId", collectId);

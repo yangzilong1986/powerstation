@@ -31,13 +31,24 @@
     
     <sql id="AnalogCombBoxSQL">
         <![CDATA[
-        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, GP.GP_SN as NME
+        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.PORT || '#' as VUE, GP.GP_SN as NME
           from C_GP GP, C_TERMINAL T
          where T.TERM_ID = GP.TERM_ID
            and GP.GP_CHAR = '8'
            and GP.GP_TYPE = '2'
            and GP.OBJECT_ID = #{tgId}
          order by T.LOGICAL_ADDR, GP.GP_SN
+        ]]>
+    </sql>
+    
+    <sql id="SwitchCombBoxSQL">
+        <![CDATA[
+        select T.TERM_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO as VUE, '集中器地址：' || T.LOGICAL_ADDR as NME
+          from C_TERMINAL T, C_TERM_OBJ_RELA R
+         where T.TERM_ID = R.TERM_ID
+           and R.OBJ_TYPE = '2'
+           and R.OBJ_ID = #{tgId}
+         order by T.LOGICAL_ADDR
         ]]>
     </sql>
     
