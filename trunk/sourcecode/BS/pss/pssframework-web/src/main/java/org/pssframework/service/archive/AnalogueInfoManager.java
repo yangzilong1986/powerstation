@@ -10,7 +10,6 @@ import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.AnalogueInfoDao;
 import org.pssframework.model.archive.AnalogueInfo;
-import org.pssframework.model.archive.GpInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -50,9 +49,13 @@ public class AnalogueInfoManager extends BaseManager<AnalogueInfo, Long> {
 	}
 
 	@Override
+	/**
+	 * 保存或者更新
+	 */
 	public void saveOrUpdate(AnalogueInfo entity) throws DataAccessException {
-		GpInfo gpInfo = entity.getGpInfo();
-		gpInfo.setGpSn(Long.parseLong(gpInfo.getPort()));
+		//TODO 暂时不把gpsn输入
+		//		GpInfo gpInfo = entity.getGpInfo();
+		//		gpInfo.setGpSn(Long.parseLong(gpInfo.getPort()));
 		super.saveOrUpdate(entity);
 	}
 
