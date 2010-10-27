@@ -31,13 +31,13 @@
     
     <sql id="AnalogCombBoxSQL">
         <![CDATA[
-        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.PORT || '#' as VUE, GP.GP_SN as NME
+        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.PORT || '#' as VUE, GP.PORT as NME
           from C_GP GP, C_TERMINAL T
          where T.TERM_ID = GP.TERM_ID
            and GP.GP_CHAR = '8'
            and GP.GP_TYPE = '2'
            and GP.OBJECT_ID = #{tgId}
-         order by T.LOGICAL_ADDR, GP.GP_SN
+         order by T.LOGICAL_ADDR, GP.PORT
         ]]>
     </sql>
     
