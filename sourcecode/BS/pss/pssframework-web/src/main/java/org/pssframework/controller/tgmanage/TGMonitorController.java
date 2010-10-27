@@ -569,6 +569,7 @@ public class TGMonitorController extends BaseSpringController {
             
             sbvalue.append(categoryLabel);
             sbvalue.append("," + getMapValue(map1));
+            sbvalue.append(",");
         }
 
         StringBuffer sb = new StringBuffer();
