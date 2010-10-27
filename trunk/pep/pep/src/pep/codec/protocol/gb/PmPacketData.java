@@ -484,6 +484,6 @@ public class PmPacketData extends BcdDataBuffer{
     }
 
     public boolean HaveDate(){
-        return (this.dataBuff.limit()-this.dataBuff.position() >6);
+        return (this.dataBuff.limit()-this.dataBuff.position() >=6);
     }
 }
