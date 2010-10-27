@@ -314,7 +314,7 @@ public class CastorUtil {
 
         ProtocolCommandItem CommandItem30 = new ProtocolCommandItem();
         CommandItem30.setCommandCode("100C0073");
-        CommandItem30.AddDataItem(new ProtocolDataItem("100C007301", 2, "A2", 0,"直流模拟量实时数据",""));
+        CommandItem30.AddDataItem(new ProtocolDataItem("BE16", 2, "A2", 0,"直流模拟量实时数据",""));
 
         ProtocolCommandItem CommandItem31 = new ProtocolCommandItem();
         CommandItem31.setCommandCode("100C0129");
