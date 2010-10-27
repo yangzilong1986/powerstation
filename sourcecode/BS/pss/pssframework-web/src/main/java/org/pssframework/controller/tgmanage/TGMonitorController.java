@@ -313,6 +313,11 @@ public class TGMonitorController extends BaseSpringController {
         String logicalAddr = request.getParameter("logicalAddr");
         String gpSn = request.getParameter("gpSn");
         String commandItem = request.getParameter("commandItem");
+        logger.info("collectId : " + collectId);
+        logger.info("monType : " + monType);
+        logger.info("logicalAddr : " + logicalAddr);
+        logger.info("gpSn : " + gpSn);
+        logger.info("commandItem : " + commandItem);
         ModelAndView mav = new ModelAndView();
         if("TotalMeter".equals(monType)) {
             String chartHistoryValues01 = request.getParameter("chartHistoryValues01");
@@ -321,6 +326,7 @@ public class TGMonitorController extends BaseSpringController {
             String chartHistoryValues04 = request.getParameter("chartHistoryValues04");
             String chartHistoryValues05 = request.getParameter("chartHistoryValues05");
             Map<String, Map<String, String>> resultMap = realTimeProxy376.getReturnByReadData(collectId);
+            logger.info("resultMap[" + collectId + "] : " + resultMap.toString());
             if(!resultMap.isEmpty()) {
                 String chartValues01 = joinChartValues(chartHistoryValues01, resultMap, logicalAddr, gpSn, commandItem, "01");
                 String chartValues02 = joinChartValues(chartHistoryValues02, resultMap, logicalAddr, gpSn, commandItem, "02");
@@ -358,6 +364,7 @@ public class TGMonitorController extends BaseSpringController {
             String chartHistoryValues02 = request.getParameter("chartHistoryValues02");
             String chartHistoryValues03 = request.getParameter("chartHistoryValues03");
             Map<String, Map<String, String>> resultMap = realTimeProxy376.readTransmitPara(collectId);
+            logger.info("resultMap[" + collectId + "] : " + resultMap.toString());
             if(!resultMap.isEmpty()) {
                 String chartValues02 = joinChartValues(chartHistoryValues02, resultMap, logicalAddr, gpSn, commandItem, "12");
                 String chartValues03 = joinChartValues(chartHistoryValues03, resultMap, logicalAddr, gpSn, commandItem, "13");
@@ -379,6 +386,7 @@ public class TGMonitorController extends BaseSpringController {
         else if("Analog".equals(monType)) {
             String chartHistoryValues01 = request.getParameter("chartHistoryValues01");
             Map<String, Map<String, String>> resultMap = realTimeProxy376.getReturnByReadData(collectId);
+            logger.info("resultMap[" + collectId + "] : " + resultMap.toString());
             if(!resultMap.isEmpty()) {
                 String chartValues01 = joinChartValues(chartHistoryValues01, resultMap, logicalAddr, gpSn, commandItem, "21");
                 mav.addObject("chartValues01", chartValues01);
