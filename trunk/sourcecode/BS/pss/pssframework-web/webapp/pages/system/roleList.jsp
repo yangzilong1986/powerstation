@@ -124,11 +124,19 @@ function fresh(Id) {
 	<table>
 		<tr>
 			<td>
-     <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
+      <security:authentication property="principal" var="loginUser"></security:authentication>
+      
+      <c:forEach items="${loginUser.roleInfoList}" var="role">
+      <c:if test="${role.roleId eq 0}">
+           <security:authorize ifAnyGranted="ROLE_AUTHORITY_1">
       <input type="button" id="new" class="btnbg4" value='<spring:message code="system.button.xz"/>'
-				onclick="newRole()" /></security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_2"><input type="button" class="btnbg4" id="edit"
-				value='<spring:message code="system.button.bj"/>' onclick="editRole()" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3"> <input type="button" class="btnbg4"
-				id="delete" value='<spring:message code="system.button.sc"/>' onclick="deleteRole()" /></security:authorize></td>
+        onclick="newRole()" /></security:authorize> <security:authorize ifAnyGranted="ROLE_AUTHORITY_2"><input type="button" class="btnbg4" id="edit"
+        value='<spring:message code="system.button.bj"/>' onclick="editRole()" /></security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3"> <input type="button" class="btnbg4"
+        id="delete" value='<spring:message code="system.button.sc"/>' onclick="deleteRole()" /></security:authorize>
+      </c:if>
+      
+      </c:forEach>
+</td>
 		</tr>
 	</table>
 	</div>
