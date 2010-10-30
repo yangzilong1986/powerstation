@@ -140,9 +140,9 @@ function fresh(Id) {
 	<table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
 		<thead class="tableHeader">
 			<tr style="height: 20px;">
-				<th width="30px;"><spring:message code="system.role.xh"/></th>
+				<th width="20px;"><spring:message code="system.role.xh"/></th>
 				<!-- 排序时为th增加sortColumn即可,new SimpleTable('sortColumns')会为tableHeader自动增加排序功能; -->
-				<th sortColumn="roleName" width="130px;"><spring:message code="system.role.jsmc" /></th>
+				<th sortColumn="roleName" width="100px;"><spring:message code="system.role.jsmc" /></th>
 				<th sortColumn="roleRemark">角色备注</th>
 			</tr>
 		</thead>
