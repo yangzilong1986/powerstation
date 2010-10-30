@@ -6,12 +6,14 @@ import java.util.Map;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.system.UserInfoDao;
+import org.pssframework.model.system.OrgInfo;
 import org.pssframework.model.system.RoleInfo;
 import org.pssframework.model.system.UserInfo;
 import org.pssframework.service.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.security.springsecurity.SpringSecurityUtils;
@@ -158,4 +160,16 @@ public class UserInfoManager extends BaseManager<UserInfo, Long> {
 		}
 		return msg;
 	}
+
+	public UserInfo getCurUser() {
+		UserDetails user = SpringSecurityUtils.getCurrentUser();
+		UserInfo userInfo = findUserByLoginName(user.getUsername());
+		return userInfo;
+	}
+
+	public OrgInfo getCurUserOrgInfo() {
+		OrgInfo orginfo = getCurUser().getOrgInfo();
+		return orginfo;
+	}
+
 }
