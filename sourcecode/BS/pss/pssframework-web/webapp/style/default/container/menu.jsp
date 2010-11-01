@@ -76,8 +76,8 @@ function changeFod(obj) {
   <dl id="dl03" style="display: none;">
     <dt>
       <div id="Fod">
-      <security:authorize ifAnyGranted="ROLE_RESOURCE_3001">
-        <div onmouseover=changeFod(this)><a id="a3001" href="#" onclick="selectMenu('3001', '/archive/tginfo'); return false;">台区档案</a></div></security:authorize>
+      <!--<security:authorize ifAnyGranted="ROLE_RESOURCE_3001">
+        <div onmouseover=changeFod(this)><a id="a3001" href="#" onclick="selectMenu('3001', '/archive/tginfo'); return false;">台区档案</a></div></security:authorize> -->
        <security:authorize ifAnyGranted="ROLE_RESOURCE_3002">
         <div onmouseover=changeFod(this)><a id="a3002" href="#" onclick="selectMenu('3002', '/eparam/termparam'); return false;">终端参数</a></div></security:authorize>
        <security:authorize ifAnyGranted="ROLE_RESOURCE_3003">
