@@ -24,8 +24,8 @@ public class TgInfoDao extends BaseHibernateDao<TgInfo, java.lang.Long> {
 
 	public static final String TG_ID = "tgId";
 
-	private static final String hql = "from TgInfo t where  1=1 " + "/~ and t.tgId = '[tgId]' ~/"
-			+ "/~ and t.orgInfo.orgId like '[orgId]' || '%' ~/";
+	private static final String hql = "select t from TgInfo t,OrgInfo o where  1=1 and t.orgInfo.orgNo like o.orgNo || '%'"
+			+ "/~ and t.tgId = '[tgId]' ~/" + "/~ and o.orgId =  '[orgId]' ~/";
 
 	@Autowired
 	private OrgInfoDao orgInfoDao;
