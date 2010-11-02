@@ -41,7 +41,7 @@ public class SwitchValueInfoManager extends BaseManager<SwitchValueInfo, Long> {
 
 	private boolean compareOld(SwitchValueInfo switchValueInfo) {
 		if (switchValueInfo.getSwitchNo() == switchValueInfo.getSwitchNoOld()
-				&& switchValueInfo.getTerminalInfo().getTermId() == switchValueInfo.getTermIdOld())
+				&& switchValueInfo.getTerminalInfo().getTermId().equals(switchValueInfo.getTermIdOld()))
 			return false;
 		else
 			return true;
