@@ -74,7 +74,8 @@ StringBuffer.prototype.toString = function() {
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td  width="13%" class="green" align="right"><font color="red">* </font>端 口 号：</td>
-        <td width="13%"><security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
+        <td width="13%"><input type="hidden" name="gpInfo.odlPort" value="${analogueinfo.gpInfo.port}">
+        <security:authorize ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:select path="gpInfo.port" disabled="${disabled}" id="port" cssClass="required validate-number"></form:select>
         </security:authorize><security:authorize ifAnyGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_10">
           <form:select path="gpInfo.port" disabled="${disabled}" id="port" items="${ports}" itemLabel="key" itemValue="value" cssClass="required validate-number int-range-1-8 validate-ajax-${ctx}/archive/analogueinfo/checkPort.json"></form:select>
