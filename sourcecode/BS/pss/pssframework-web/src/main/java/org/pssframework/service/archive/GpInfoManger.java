@@ -9,7 +9,6 @@ import java.util.Map;
 import org.pssframework.base.BaseManager;
 import org.pssframework.base.EntityDao;
 import org.pssframework.dao.archive.GpInfoDao;
-import org.pssframework.dao.archive.TerminalInfoDao;
 import org.pssframework.model.archive.GpInfo;
 import org.pssframework.service.ServiceException;
 import org.slf4j.Logger;
@@ -31,9 +30,6 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 
 	@Autowired
 	private GpInfoDao gpInfoDao;
-
-	@Autowired
-	private TerminalInfoDao terminalInfoDao;
 
 	@Override
 	protected EntityDao getEntityDao() {
@@ -68,10 +64,21 @@ public class GpInfoManger extends BaseManager<GpInfo, Long> {
 			gpChar = "1";
 		}
 		for (GpInfo gpInfo : dbGpInfos) {
-			if (gpInfo.getGpSn().equals(gpSn) && gpChar.equals(gpInfo.getGpChar())) {
-				ret = true;
-				break;
+			//增加对gpsn的null的判断
+
+			//增加直流模拟量中gpsn为null的判断
+			if (gpChar.equals("8")) {
+				if (gpInfo.getGpSn().equals(gpSn) && gpChar.equals(gpInfo.getGpChar())) {
+					ret = true;
+					break;
+				}
+			} else {
+				if (gpInfo.getGpSn() != null && gpInfo.getGpSn().equals(gpSn) && gpChar.equals(gpInfo.getGpChar())) {
+					ret = true;
+					break;
+				}
 			}
+
 		}
 		return ret;
 	}
