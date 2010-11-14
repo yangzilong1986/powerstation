@@ -83,8 +83,10 @@ $(document).ready( function() {
 	   if(opener != null){
 		   closeWin();
 		   opener.top.location.href = url;
-	   }else{
-		  // location.href = url;
+	   }
+	   if(parent.parent.tabscontainermain != null){
+		   //alert(parent.parent.tabscontainermain.location)
+		   top.location.href = url;
 	   }
    }catch(e){
 	   
