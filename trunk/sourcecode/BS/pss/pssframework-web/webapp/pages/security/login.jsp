@@ -54,17 +54,8 @@ function checkUser() {
         return false;
     }
 
-    return true
+    return true;
 }
-$(function(){
-/*
-	 $("#submit1").click( function() {
-		 alert(12);
-		 $("#loginForm").validate();
-		 alert(123)
-		 $("#loginForm").submit();
-	 })*/
-})
 
 $(document).ready( function() {
     if(isIE()) {
@@ -85,8 +76,25 @@ $(document).ready( function() {
             $("#loginForm").submit();
         }
     });
+    
+    //判断是够存在父页面
+    var url ='${pageContext.request.contextPath}/pss-web/j_spring_security_logout';
+   try{
+	   if(opener != null){
+		   closeWin();
+		   opener.top.location.href = url;
+	   }else{
+		  // location.href = url;
+	   }
+   }catch(e){
+	   
+   }
+    
 });
 
+function closeWin() {
+	window.close();
+};
 
 function refreshCaptcha() {
 	$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha.jpg?' + Math.floor(Math.random()*100)).fadeIn();
