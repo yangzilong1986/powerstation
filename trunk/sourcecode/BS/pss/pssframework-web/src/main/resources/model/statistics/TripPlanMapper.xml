@@ -7,7 +7,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <!-- 用于select查询公用抽取的列 -->
     <sql id="TripRecordColumns">
         <![CDATA[
-        logical_addr, asset_no, ddate, post_time, accept_time, trip_result
+        tg_name, asset_no, gp_addr, ddate, post_time, accept_time, trip_result
         ]]>
     </sql>
     <sql id="TripRecordDynamicWhere">
