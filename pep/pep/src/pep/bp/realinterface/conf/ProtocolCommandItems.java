@@ -56,7 +56,7 @@ public class ProtocolCommandItems {
     }
 
     public void FillMap() {
-        if (this.commandItemMap.size() == 0) {
+        if (this.commandItemMap.isEmpty()) {
             for (ProtocolCommandItem commandItem : commandItems) {
                 commandItem.FillMap();
                 this.commandItemMap.put(commandItem.getCommandCode(), commandItem);
