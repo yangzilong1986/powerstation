@@ -51,7 +51,7 @@ public class PlanManager implements Runnable{
             //小时任务
             JobDetail jobDetailHour = new JobDetail("PlanJobHour", null, PlanJobProxy.class);
             jobDetailHour.getJobDataMap().put("PlanJob",new PlanJob(pepCommunicator,CIRCLE_UNIT_HOUR));
-            triggerHour = TriggerUtils.makeHourlyTrigger(8); // 每一个小时触发一次
+            triggerHour = TriggerUtils.makeHourlyTrigger(1); // 每一个小时触发一次
            // triggerHour = TriggerUtils.makeMinutelyTrigger(3);
             triggerHour.setStartTime(TriggerUtils.getEvenMinuteDate(new Date())); //从下一个分钟开始
             triggerHour.setName("triggerHour_Plan");
