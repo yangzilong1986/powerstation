@@ -240,7 +240,7 @@ public class DataServiceIMP implements DataService{
     @Override
      public void insertEvent(String rtua, PmPacket376EventBase event){
         try {
-            this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), UtilsBp.Date2String(event.getEventTime()));
+            this.eventStoredProcedure.execute(rtua, 0, String.valueOf(event.GetEventCode()), UtilsBp.Date2String(event.getEventTime()),event.getEventDetail());
         } catch (Exception e) {
             log.error("错误信息：", e.fillInStackTrace());
         }
