@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ClassTwoDataCodec.xml
+    Created on : 2010年8月13日, 上午12:26
+    Author     : luxiaochung
+    Description:
+        为解析二类数据建立数据结构
+-->
+
+<root>
+    <fn id="27" itemId="100D0027" title="日冻结日电压统计数据" timeTag="Td_d" >
+        <subitem subItemId="BE40" codec="BIN" len="2" />
+        <subitem subItemId="BE41" codec="BIN" len="2" />
+        <subitem subItemId="BE42" codec="BIN" len="2" />
+        <subitem subItemId="BE43" codec="BIN" len="2" />
+        <subitem subItemId="BE44" codec="BIN" len="2" />
+        <subitem subItemId="BE45" codec="BIN" len="2" />
+        <subitem subItemId="BE46" codec="BIN" len="2" />
+        <subitem subItemId="BE47" codec="BIN" len="2" />
+        <subitem subItemId="BE48" codec="BIN" len="2" />
+        <subitem subItemId="BE49" codec="BIN" len="2" />
+        <subitem subItemId="BE4A" codec="BIN" len="2" />
+        <subitem subItemId="BE4B" codec="BIN" len="2" />
+        <subitem subItemId="BE4C" codec="BIN" len="2" />
+        <subitem subItemId="BE4D" codec="BIN" len="2" />
+        <subitem subItemId="BE4E" codec="BIN" len="2" />
+        <subitem subItemId="BE4F" codec="A7" />
+        <subitem subItemId="BE50" codec="A18" />
+        <subitem subItemId="BE51" codec="A7" />
+        <subitem subItemId="BE52" codec="A18" />
+        <subitem subItemId="BE53" codec="A7" />
+        <subitem subItemId="BE54" codec="A18" />
+        <subitem subItemId="BE55" codec="A7" />
+        <subitem subItemId="BE56" codec="A18" />
+        <subitem subItemId="BE57" codec="A7" />
+        <subitem subItemId="BE58" codec="A18" />
+        <subitem subItemId="BE59" codec="A7" />
+        <subitem subItemId="BE5A" codec="A18" />
+        <subitem subItemId="BE5B" codec="A7" />
+        <subitem subItemId="BE5C" codec="A7" />
+        <subitem subItemId="BE5D" codec="A7" />
+    </fn>
+
+    <fn id="28" itemId="100D0028" title="日冻结日不平衡度越限累计时间" timeTag="Td_d" >
+        <subitem subItemId="BE5E" codec="BIN" len="2" />
+        <subitem subItemId="BE5F" codec="BIN" len="2" />
+        <subitem subItemId="2D01" codec="A5" />
+        <subitem subItemId="2D02" codec="A18" />
+        <subitem subItemId="2D03" codec="A5" />
+        <subitem subItemId="2D04" codec="A18" />
+    </fn>
+
+    <fn id="29" itemId="100D0029" title="日冻结日电流越限数据" timeTag="Td_d" >
+        <subitem subItemId="BE60" codec="BIN" len="2" />
+        <subitem subItemId="BE61" codec="BIN" len="2" />
+        <subitem subItemId="BE62" codec="BIN" len="2" />
+        <subitem subItemId="BE63" codec="BIN" len="2" />
+        <subitem subItemId="BE64" codec="BIN" len="2" />
+        <subitem subItemId="BE65" codec="BIN" len="2" />
+        <subitem subItemId="BE66" codec="BIN" len="2" />
+        <subitem subItemId="BE67" codec="A25" />
+        <subitem subItemId="BE68" codec="A18" />
+        <subitem subItemId="BE69" codec="A25" />
+        <subitem subItemId="BE6A" codec="A18" />
+        <subitem subItemId="BE6B" codec="A25" />
+        <subitem subItemId="BE6C" codec="A18" />
+        <subitem subItemId="BE6D" codec="A25" />
+        <subitem subItemId="BE6E" codec="A18" />
+    </fn>
+
+    <fn id="81" itemId="100D0081" title="测量点有功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2300" codec="A9" />
+    </fn>
+
+    <fn id="82" itemId="100D0082" title="测量点A相有功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2301" codec="A9" />
+    </fn>
+
+    <fn id="83" itemId="100D0083" title="测量点B相有功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2302" codec="A9" />
+    </fn>
+
+    <fn id="84" itemId="100D0084" title="测量点C相有功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2303" codec="A9" />
+    </fn>
+
+    <fn id="85" itemId="100D0085" title="测量点无功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2400" codec="A9" />
+    </fn>
+
+    <fn id="86" itemId="100D0086" title="测量点A相无功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2401" codec="A9" />
+    </fn>
+
+    <fn id="87" itemId="100D0087" title="测量点B相无功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2402" codec="A9" />
+    </fn>
+
+    <fn id="88" itemId="100D0088" title="测量点C相无功功率曲线" timeTag="Td_c" >
+        <subitem subItemId="2403" codec="A9" />
+    </fn>
+
+    <fn id="89" itemId="100D0089" title="测量点A相电压曲线" timeTag="Td_c" >
+        <subitem subItemId="2101" codec="A7" />
+    </fn>
+
+    <fn id="90" itemId="100D0090" title="测量点B相电压曲线" timeTag="Td_c" >
+        <subitem subItemId="2102" codec="A7" />
+    </fn>
+
+    <fn id="91" itemId="100D0091" title="测量点C相电压曲线" timeTag="Td_c" >
+        <subitem subItemId="2103" codec="A7" />
+    </fn>
+
+    <fn id="92" itemId="100D0092" title="测量点A相电流曲线" timeTag="Td_c" >
+        <subitem subItemId="2201" codec="A25" />
+    </fn>
+
+    <fn id="93" itemId="100D0093" title="测量点B相电流曲线" timeTag="Td_c" >
+        <subitem subItemId="2202" codec="A25" />
+    </fn>
+
+    <fn id="94" itemId="100D0094" title="测量点C相电流曲线" timeTag="Td_c" >
+        <subitem subItemId="2203" codec="A25" />
+    </fn>
+
+    <fn id="101" itemId="100D0101" title="测量点正向有功总电能示值曲线" timeTag="Td_c" >
+        <subitem subItemId="0100" codec="A11" />
+    </fn>
+
+    <fn id="102" itemId="100D0102" title="测量点正向无功总电能示值曲线" timeTag="Td_c" >
+        <subitem subItemId="A000" codec="A11" />
+    </fn>
+
+    <fn id="103" itemId="100D0103" title="测量点反向有功总电能示值曲线" timeTag="Td_c" >
+        <subitem subItemId="0200" codec="A11" />
+    </fn>
+
+    <fn id="104" itemId="100D0104" title="测量点反向无功总电能示值曲线" timeTag="Td_c" >
+        <subitem subItemId="A100" codec="A11" />
+    </fn>
+
+    <fn id="105" itemId="100D0105" title="测量点功率因数曲线" timeTag="Td_c" >
+        <subitem subItemId="2600" codec="A5" />
+    </fn>
+    
+    <fn id="106" itemId="100D0106" title="测量点A相功率因数曲线" timeTag="Td_c" >
+        <subitem subItemId="2601" codec="A5" />
+    </fn>
+
+    <fn id="107" itemId="100D0107" title="测量点B相功率因数曲线" timeTag="Td_c" >
+        <subitem subItemId="2602" codec="A5" />
+    </fn>
+
+    <fn id="108" itemId="100D0108" title="测量点C相功率因数曲线" timeTag="Td_c" >
+        <subitem subItemId="2603" codec="A5" />
+    </fn>
+
+    <fn id="193" itemId="100D0193" title="正向有功最大需量及发生时间" timeTag="Td_m" >
+        <subitem subItemId="1100" codec="A23" />
+        <subitem subItemId="B100" codec="A17" />
+    </fn>
+
+    <fn id="194" itemId="100D0194" title="月冻结正向无功最大需量及发生时间" timeTag="Td_m" >
+        <subitem subItemId="1C00" codec="A23" />
+        <subitem subItemId="BC00" codec="A17" />
+    </fn>
+
+    <fn id="195" itemId="100D0195" title="月冻结反向有功最大需量及发生时间" timeTag="Td_m" >
+        <subitem subItemId="1200" codec="A23" />
+        <subitem subItemId="B200" codec="A17" />
+    </fn>
+
+    <fn id="196" itemId="100D0196" title="月冻结反向无功最大需量及发生时间" timeTag="Td_m" >
+        <subitem subItemId="1D00" codec="A23" />
+        <subitem subItemId="BD00" codec="A17" />
+    </fn>
+</root>
