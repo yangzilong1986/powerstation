@@ -34,7 +34,7 @@ public class UtilsBp {
     public static String getThisDay_YYYYMMDD(){
         Calendar   cal   =   Calendar.getInstance();
         int Year = Calendar.getInstance().get(Calendar.YEAR);
-        int Month = Calendar.getInstance().get(Calendar.MONTH);
+        int Month = Calendar.getInstance().get(Calendar.MONTH)+1;
         int Day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         return Year+lPad(String.valueOf(Month),"0",2)+lPad(String.valueOf(Day),"0",2);
     }
