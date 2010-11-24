@@ -23,8 +23,9 @@
     <thead class="tableHeader">
       <tr>
         <th>序号</th>
-        <th sortColumn="logical_addr">逻辑地址</th>
-        <th sortColumn="assetNo">资产编号</th>
+        <th sortColumn="tg_name">台区名</th>
+        <th sortColumn="asset_no">漏保编号</th>
+        <th sortColumn="gp_addr">漏保地址</th>
         <th sortColumn="ddate">试跳日期</th>
         <th sortColumn="post_time">下发时间</th>
         <th sortColumn="accept_time">接收时间</th>
@@ -35,8 +36,9 @@
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
-          <td><c:out value='${item.logical_addr}' />&nbsp;</td>
-          <td><c:out value='${item.assetNo}' />&nbsp;</td>
+          <td><c:out value='${item.tg_name}' />&nbsp;</td>
+          <td><c:out value='${item.asset_no}' />&nbsp;</td>
+          <td><c:out value='${item.gp_addr}' />&nbsp;</td>
           <td><c:out value='${item.ddate}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.post_time}"></fmt:formatDate> &nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.accept_time}"></fmt:formatDate> &nbsp;</td>
