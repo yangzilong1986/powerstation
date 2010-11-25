@@ -28,6 +28,9 @@ public class PsEvent implements Serializable {
     private BigDecimal psId;
     private String psName;
     private String assetNo;
+    private BigDecimal tgId;
+    private String tgNo;
+    private String tgName;
     private int eventCode;
     private String eventName;
     private Date trigTime;
@@ -76,6 +79,30 @@ public class PsEvent implements Serializable {
 
     public void setAssetNo(String assetNo) {
         this.assetNo = assetNo;
+    }
+
+    public BigDecimal getTgId() {
+        return tgId;
+    }
+
+    public void setTgId(BigDecimal tgId) {
+        this.tgId = tgId;
+    }
+
+    public String getTgNo() {
+        return tgNo;
+    }
+
+    public void setTgNo(String tgNo) {
+        this.tgNo = tgNo;
+    }
+
+    public String getTgName() {
+        return tgName;
+    }
+
+    public void setTgName(String tgName) {
+        this.tgName = tgName;
     }
 
     public int getEventCode() {

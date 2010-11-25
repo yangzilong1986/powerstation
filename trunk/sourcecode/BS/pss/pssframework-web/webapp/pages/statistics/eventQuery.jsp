@@ -23,6 +23,7 @@
     <thead class="tableHeader">
       <tr>
         <th>序号</th>
+        <th sortColumn="tgName">台区</th>
         <th sortColumn="assetNo">资产编号</th>
         <th sortColumn="trigTime">跳闸时间</th>
         <th sortColumn="eventName">动作类型</th>
@@ -36,6 +37,7 @@
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
+          <td><c:out value='${item.tgName}' />&nbsp;</td>
           <td><c:out value='${item.assetNo}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate> &nbsp;</td>
           <td><c:if test="${item.closed eq 1}">合闸成功</c:if><c:if test="${item.closed eq 0}"><c:out value='${item.eventName}' /></c:if>&nbsp;</td>
