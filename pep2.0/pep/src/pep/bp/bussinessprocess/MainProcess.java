@@ -1,6 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @Description:业务处理器主入口
+ * @author lijun
+ * @date 2010-11-25 11:22:08
  */
 package pep.bp.bussinessprocess;
 
@@ -14,10 +15,6 @@ import pep.bp.processor.*;
 import pep.bp.processor.planManager.PlanManager;
 import pep.mina.common.PepCommunicatorInterface;
 
-/**
- *
- * @author Thinkpad
- */
 public class MainProcess {
 
     private static int rtTaskSenderMaxNumber = 1;
