@@ -23,9 +23,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.PSService;
 import pep.bp.db.RTTaskService;
 
-import pep.bp.model.PSDAO;
-import pep.bp.model.RTTaskRecvDAO;
-import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.model.PS;
+import pep.bp.model.RTTaskRecv;
+import pep.bp.model.RealTimeTask;
 
 import pep.bp.realinterface.mto.CollectObject_TransMit;
 import pep.bp.realinterface.mto.CommandItem;
@@ -75,9 +75,9 @@ public class PlanJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         String currentDay = UtilsBp.getThisDay();
         String currentHour = UtilsBp.getThisHour();
-        List<PSDAO> psList = psService.getTestPSList(currentDay, currentHour);
+        List<PS> psList = psService.getTestPSList(currentDay, currentHour);
         if (null != psList) {
-            for (PSDAO ps : psList) {
+            for (PS ps : psList) {
                 try {
                     DoPlan(this.pepCommunicator, ps);
                 } catch (BPException ex) {
@@ -88,7 +88,7 @@ public class PlanJob implements Job {
         checkPlan();
     }
 
-    private void DoPlan(PepCommunicatorInterface pepCommunicator, PSDAO ps) throws BPException {
+    private void DoPlan(PepCommunicatorInterface pepCommunicator, PS ps) throws BPException {
         CommandItem Item = new CommandItem();
         Item.setIdentifier("8000C037");
         CollectObject_TransMit object_trans = new CollectObject_TransMit();
@@ -112,7 +112,7 @@ public class PlanJob implements Job {
             for (PmPacket376 pack : packetList) {
                 //pack.getAddress().setMastStationId((byte) 2);
 
-                RealTimeTaskDAO task = new RealTimeTaskDAO();
+                RealTimeTask task = new RealTimeTask();
                 task.setSendmsg(BcdUtils.binArrayToString(pack.getValue()));
                 task.setSequencecode(rtTaskService.getSequnce());
                 task.setLogicAddress(ps.getLogicAddress());
@@ -127,9 +127,9 @@ public class PlanJob implements Job {
     }
 
     private void checkPlan() {
-        List<RealTimeTaskDAO> tasks = this.rtTaskService.getTripTasks();
+        List<RealTimeTask> tasks = this.rtTaskService.getTripTasks();
         StringBuilder sb = new StringBuilder();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String gpMark = task.getGpMark();
             Date postTime = task.getPosttime();
@@ -139,9 +139,9 @@ public class PlanJob implements Job {
                 GpArray = task.getGpMark().split("#");
             }
 
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 Date acceptTime = recv.getRecvTime();
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
