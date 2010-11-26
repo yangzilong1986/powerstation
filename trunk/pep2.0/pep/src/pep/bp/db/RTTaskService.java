@@ -6,7 +6,7 @@
 package pep.bp.db;
 import java.util.Date;
 import java.util.List;
-import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.model.RealTimeTask;
 /**
  *
  * @author Thinkpad
@@ -16,28 +16,28 @@ public interface RTTaskService {
      * 插入一条任务记录
      * @param task
      */
-    public void insertTask(RealTimeTaskDAO task);
+    public void insertTask(RealTimeTask task);
 
     /**
      *插入多条任务记录
      * @param Tasks
      */
-    public void insertTasks(List<RealTimeTaskDAO> Tasks);
+    public void insertTasks(List<RealTimeTask> Tasks);
 
     /**
      * 获取未处理的任务记录
      * @return
      */
-    public List<RealTimeTaskDAO> getTasks();
+    public List<RealTimeTask> getTasks();
 
     /**
      * 
      * @param sequnceCode
      * @return
      */
-    public RealTimeTaskDAO getTask(long sequnceCode);
+    public RealTimeTask getTask(long sequnceCode);
 
-    public List<RealTimeTaskDAO> getTasks(long sequnceCode);
+    public List<RealTimeTask> getTasks(long sequnceCode);
     /**
      * 更新接收报文
      * @param sequnceCode
@@ -56,7 +56,7 @@ public interface RTTaskService {
      * 获取未同步的试跳任务记录
      * @return
      */
-    public List<RealTimeTaskDAO> getTripTasks();
+    public List<RealTimeTask> getTripTasks();
 
     /**
      * 同步的试跳任务记录

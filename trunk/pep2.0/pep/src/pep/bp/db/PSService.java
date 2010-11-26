@@ -6,14 +6,14 @@
 package pep.bp.db;
 
 import java.util.List;
-import pep.bp.model.PSDAO;
+import pep.bp.model.PS;
 
 /**
  *
  * @author Thinkpad
  */
 public interface PSService {
-    public List<PSDAO> getTestPSList(String testDay,String testHour);
+    public List<PS> getTestPSList(String testDay,String testHour);
 
     public int getPsId(String LogicAddr, int GP_SN);
 

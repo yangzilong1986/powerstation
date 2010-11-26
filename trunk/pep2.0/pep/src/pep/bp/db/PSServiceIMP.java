@@ -13,7 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import pep.bp.model.PSDAO;
+import pep.bp.model.PS;
 import pep.bp.model.PSRowMapper;
 
 
@@ -31,7 +31,7 @@ public class PSServiceIMP implements  PSService{
     }
 
     @Override
-     public List<PSDAO> getTestPSList(String testDay,String testHour){
+     public List<PS> getTestPSList(String testDay,String testHour){
          try {
             //主站轮召任务
             StringBuilder sbSQL = new StringBuilder();
@@ -43,7 +43,7 @@ public class PSServiceIMP implements  PSService{
 
             String SQL = sbSQL.toString();
           //  List rs = jdbcTemplate.queryForList(SQL);
-            List<PSDAO> results = (List<PSDAO>) jdbcTemplate.query(SQL,new Object[]{testDay,testHour}, new PSRowMapper());
+            List<PS> results = (List<PS>) jdbcTemplate.query(SQL,new Object[]{testDay,testHour}, new PSRowMapper());
 
             return results;
         } catch (DataAccessException dataAccessException) {
