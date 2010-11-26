@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Thinkpad
  */
-public class CommanddItemDAO {
+public class CommanddItem {
     private String protocol_no;
     private String commandItemCode;
 

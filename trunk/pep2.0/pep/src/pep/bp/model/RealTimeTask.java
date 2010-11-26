@@ -14,27 +14,27 @@ import java.util.List;
  *
  * @author Thinkpad
  */
-public class RealTimeTaskDAO {
+public class RealTimeTask {
     private int taskId;
     private int sequenceCode;
     private String logicAddress;
     private String sendMsg;
-    private List<RTTaskRecvDAO> recvMsgs;
+    private List<RTTaskRecv> recvMsgs;
     private Date postTime;
     private String taskStatus = "0"; //默认未处理
     private String gpMark;//测量点标志：1#2#3#
     private String commandMark;//命令项标志：10040009#10040010
     private String task_type;
 
-    public RealTimeTaskDAO(){
-        this.recvMsgs = new ArrayList<RTTaskRecvDAO>();
+    public RealTimeTask(){
+        this.recvMsgs = new ArrayList<RTTaskRecv>();
     }
 
     public void setSendmsg(String sendMsg) {
         this.sendMsg = sendMsg;
     }
 
-    public void addRecvmsg(RTTaskRecvDAO recvMsg) {
+    public void addRecvmsg(RTTaskRecv recvMsg) {
         this.getRecvMsgs().add(recvMsg);
     }
 
@@ -89,14 +89,14 @@ public class RealTimeTaskDAO {
         this.logicAddress = logicAddress;
     }
 
-    public void setRecvMsgs(List<RTTaskRecvDAO> recvs){
+    public void setRecvMsgs(List<RTTaskRecv> recvs){
         this.recvMsgs = recvs;
     }
 
     /**
      * @return the recvMsgs
      */
-    public List<RTTaskRecvDAO> getRecvMsgs() {
+    public List<RTTaskRecv> getRecvMsgs() {
         return recvMsgs;
     }
 

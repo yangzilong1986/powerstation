@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class PSRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException{
-        PSDAO ps = new PSDAO();
+        PS ps = new PS();
         ps.setGp_sn(rs.getInt("gp_sn"));
         ps.setLogicAddress(rs.getString("LOGICAL_ADDR"));
         ps.setGp_addr(rs.getString("gp_addr"));
