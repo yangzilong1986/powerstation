@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import pep.bp.db.RTTaskService;
-import pep.bp.model.RTTaskRecvDAO;
-import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.model.RTTaskRecv;
+import pep.bp.model.RealTimeTask;
 import pep.bp.realinterface.conf.ProtocolConfig;
 import pep.bp.realinterface.conf.ProtocolDataItem;
 
@@ -51,9 +51,9 @@ public class RealTimeProxy376 implements ICollectInterface {
         return taskService.getSequnce();
     }
 
-    private List<RealTimeTaskDAO> Encode(MessageTranObject MTO, int sequenceCode, byte AFN) {
+    private List<RealTimeTask> Encode(MessageTranObject MTO, int sequenceCode, byte AFN) {
         MTO_376 mto = (MTO_376) MTO;
-        List<RealTimeTaskDAO> tasks = new ArrayList<RealTimeTaskDAO>();
+        List<RealTimeTask> tasks = new ArrayList<RealTimeTask>();
         StringBuffer gpMark = new StringBuffer();
         StringBuffer commandMark = new StringBuffer();
 
@@ -64,7 +64,7 @@ public class RealTimeProxy376 implements ICollectInterface {
 
                 List<PmPacket376> packetList = converter.CollectObject2PacketList(obj, AFN, gpMark, commandMark, cmdItemNum);
                 for (PmPacket376 packet : packetList) {
-                    RealTimeTaskDAO task = new RealTimeTaskDAO();
+                    RealTimeTask task = new RealTimeTask();
                     task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
                     task.setSequencecode(sequenceCode);
                     task.setLogicAddress(obj.getLogicalAddr());
@@ -79,11 +79,11 @@ public class RealTimeProxy376 implements ICollectInterface {
         return tasks;
     }
 
-    private List<RealTimeTaskDAO> Encode_TransMit(MessageTranObject MTO, int sequenceCode) {
+    private List<RealTimeTask> Encode_TransMit(MessageTranObject MTO, int sequenceCode) {
         MTO_376 mto = (MTO_376) MTO;
         List<PmPacket376> packetList = new ArrayList<PmPacket376>();
 
-        List<RealTimeTaskDAO> tasks = new ArrayList<RealTimeTaskDAO>();
+        List<RealTimeTask> tasks = new ArrayList<RealTimeTask>();
         ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象
         StringBuilder gpMark = new StringBuilder();
         StringBuilder commandMark = new StringBuilder();
@@ -148,7 +148,7 @@ public class RealTimeProxy376 implements ICollectInterface {
                     packetList.add(packet);
                 }
                 for (PmPacket376 packet : packetList) {
-                    RealTimeTaskDAO task = new RealTimeTaskDAO();
+                    RealTimeTask task = new RealTimeTask();
                     task.setSendmsg(BcdUtils.binArrayToString(packet.getValue()));
                     task.setSequencecode(sequenceCode);
                     task.setLogicAddress(obj.getTerminalAddr());
@@ -177,8 +177,8 @@ public class RealTimeProxy376 implements ICollectInterface {
 
             } else {
                 int sequenceCode = getID();
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_SETPARA);
-                for (RealTimeTaskDAO task : tasks) {
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_SETPARA);
+                for (RealTimeTask task : tasks) {
                     this.taskService.insertTask(task);
                 }
                 return sequenceCode;
@@ -205,8 +205,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_GETPARA);
-                for (RealTimeTaskDAO task : tasks) {
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_GETPARA);
+                for (RealTimeTask task : tasks) {
                     this.taskService.insertTask(task);
                 }
                 return sequenceCode;
@@ -234,8 +234,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_RESET);
-                for (RealTimeTaskDAO task : tasks) {
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_RESET);
+                for (RealTimeTask task : tasks) {
                     this.taskService.insertTask(task);
                 }
                 return sequenceCode;
@@ -263,8 +263,8 @@ public class RealTimeProxy376 implements ICollectInterface {
                 return FAILCODE;
             } else {
                 int sequenceCode = getID();
-                List<RealTimeTaskDAO> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_READDATA1);
-                for (RealTimeTaskDAO task : tasks) {
+                List<RealTimeTask> tasks = this.Encode(MTO, sequenceCode, AFNType.AFN_READDATA1);
+                for (RealTimeTask task : tasks) {
                     this.taskService.insertTask(task);
                 }
                 return sequenceCode;
@@ -292,8 +292,8 @@ public class RealTimeProxy376 implements ICollectInterface {
             } else {
                 int sequenceCode = getID();
 
-                List<RealTimeTaskDAO> tasks = this.Encode_TransMit(MTO, sequenceCode);
-                for (RealTimeTaskDAO task : tasks) {
+                List<RealTimeTask> tasks = this.Encode_TransMit(MTO, sequenceCode);
+                for (RealTimeTask task : tasks) {
                     this.taskService.insertTask(task);
                 }
                 return sequenceCode;
@@ -315,11 +315,11 @@ public class RealTimeProxy376 implements ICollectInterface {
      */
     @Override
     public Map<String, String> getReturnByWriteParameter(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, String> results = new HashMap<String, String>();
         try {
-            for (RealTimeTaskDAO task : tasks) {
+            for (RealTimeTask task : tasks) {
                 String logicAddress = task.getLogicAddress();
                 String gpMark = task.getGpMark();
                 String[] GpArray = null;
@@ -328,9 +328,9 @@ public class RealTimeProxy376 implements ICollectInterface {
                 }
 
                 String[] CommandArray = task.getCommandMark().split("#");
-                List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+                List<RTTaskRecv> recvs = task.getRecvMsgs();
                 PmPacket376 packet = new PmPacket376();
-                for (RTTaskRecvDAO recv : recvs) {
+                for (RTTaskRecv recv : recvs) {
                     byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                     packet.setValue(msg, 0);
                     PmPacketData dataBuf = packet.getDataBuffer();
@@ -362,10 +362,10 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     @Override
     public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, String> results = new HashMap<String, String>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String gpMark = task.getGpMark();
             String[] GpArray = null;
@@ -374,9 +374,9 @@ public class RealTimeProxy376 implements ICollectInterface {
             }
 
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 PmPacketData dataBuf = packet.getDataBuffer();
@@ -428,16 +428,16 @@ public class RealTimeProxy376 implements ICollectInterface {
      */
     @Override
     public Map<String, Map<String, String>> getReturnByReadParameter(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> results = new HashMap<String, Map<String, String>>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String[] GpArray = task.getGpMark().split("#");
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 converter.decodeData(packet, results);
@@ -476,16 +476,16 @@ public class RealTimeProxy376 implements ICollectInterface {
      */
     @Override
     public Map<String, Map<String, String>> getReturnByReadData(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String[] GpArray = task.getGpMark().split("#");
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 converter.decodeData(packet, tempMap);
@@ -496,16 +496,16 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     @Override
     public Map<String, Map<String, String>> readTransmitPara(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String[] GpArray = task.getGpMark().split("#");
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 converter.decodeData_TransMit(packet, tempMap,false);
@@ -516,16 +516,16 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     @Override
     public Map<String, Map<String, String>> readTransmitWriteBack(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String[] GpArray = task.getGpMark().split("#");
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 converter.decodeData_TransMit(packet, tempMap,true);
@@ -538,16 +538,16 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     @Override
     public Map<String, Map<String, String>> readTransmitData(long appId) throws Exception {
-        List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
+        List<RealTimeTask> tasks = this.taskService.getTasks(appId);
         StringBuffer sb = new StringBuffer();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
-        for (RealTimeTaskDAO task : tasks) {
+        for (RealTimeTask task : tasks) {
             String logicAddress = task.getLogicAddress();
             String[] GpArray = task.getGpMark().split("#");
             String[] CommandArray = task.getCommandMark().split("#");
-            List<RTTaskRecvDAO> recvs = task.getRecvMsgs();
+            List<RTTaskRecv> recvs = task.getRecvMsgs();
             PmPacket376 packet = new PmPacket376();
-            for (RTTaskRecvDAO recv : recvs) {
+            for (RTTaskRecv recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
                 converter.decodeData(packet, tempMap);
