@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import pep.bp.db.TaskService;
-import pep.bp.model.CommanddItemDAO;
+import pep.bp.model.CommanddItem;
 
-import pep.bp.model.TermTaskDAO;
+import pep.bp.model.TermTask;
 import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CollectObject_TransMit;
 import pep.bp.realinterface.mto.CommandItem;
@@ -63,9 +63,9 @@ public class PollingJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        List<TermTaskDAO> TermTaskList = taskService.getPollingTask(circleUnit);
+        List<TermTask> TermTaskList = taskService.getPollingTask(circleUnit);
         if (null != TermTaskList) {
-            for (TermTaskDAO task : TermTaskList) {
+            for (TermTask task : TermTaskList) {
                 try {
                     DoTask(this.pepCommunicator, task);
                 } catch (BPException ex) {
@@ -75,9 +75,9 @@ public class PollingJob implements Job {
         }
     }
 
-    private void DoTask(PepCommunicatorInterface pepCommunicator, TermTaskDAO task) throws BPException {
-        List<CommanddItemDAO> CommandItemList = task.getCommandItemList();
-        for (CommanddItemDAO commandItemDao : CommandItemList) {
+    private void DoTask(PepCommunicatorInterface pepCommunicator, TermTask task) throws BPException {
+        List<CommanddItem> CommandItemList = task.getCommandItemList();
+        for (CommanddItem commandItemDao : CommandItemList) {
             CollectObject object = new CollectObject();
             CommandItem Item = new CommandItem();
             String CommandCode = commandItemDao.getCommandItemCode();
