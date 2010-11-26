@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Thinkpad
  */
-public class TermTaskDAO {
+public class TermTask {
     private String logicAddress;
     private String gp_char;
     private int gp_sn;
@@ -32,11 +32,11 @@ public class TermTaskDAO {
     private int exec_unit_master;
     private byte aFN;
     private String gp_addr;
-    private List<CommanddItemDAO> commandItemList;
+    private List<CommanddItem> commandItemList;
 
 
-    public TermTaskDAO(){
-        this.commandItemList = new ArrayList<CommanddItemDAO>();
+    public TermTask(){
+        this.commandItemList = new ArrayList<CommanddItem>();
     }
     /**
      * @return the logicAddress
@@ -209,14 +209,14 @@ public class TermTaskDAO {
     /**
      * @return the commandItemList
      */
-    public List<CommanddItemDAO> getCommandItemList() {
+    public List<CommanddItem> getCommandItemList() {
         return commandItemList;
     }
 
     /**
      * @param commandItemList the commandItemList to set
      */
-    public void setCommandItemList(List<CommanddItemDAO> commandItemList) {
+    public void setCommandItemList(List<CommanddItem> commandItemList) {
         this.commandItemList = commandItemList;
     }
 

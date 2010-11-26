@@ -16,7 +16,7 @@ public class RTTaskRecvRowMapper implements RowMapper {
 
     @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException {
-        RTTaskRecvDAO recv = new RTTaskRecvDAO();
+        RTTaskRecv recv = new RTTaskRecv();
         recv.setTaskId(rs.getInt("TASK_ID"));
         recv.setSequenceCode(rs.getInt("SEQUENCE_CODE"));
         recv.setLogicAddress(rs.getString("LOGICAL_ADDR"));

@@ -10,7 +10,7 @@ package pep.bp.model;
  *
  * @author Thinkpad
  */
-public class PSDAO {
+public class PS {
     private String logicAddress;
     private int gp_sn;
     private String gp_addr;
@@ -19,7 +19,7 @@ public class PSDAO {
 
 
 
-    public PSDAO(){
+    public PS(){
     }
 
     /**
