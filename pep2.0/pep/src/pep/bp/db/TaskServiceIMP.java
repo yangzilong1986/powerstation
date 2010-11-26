@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import pep.bp.model.CommanddItemDAO;
+import pep.bp.model.CommanddItem;
 import pep.bp.model.CommandItemRowMapper;
-import pep.bp.model.TermTaskDAO;
+import pep.bp.model.TermTask;
 import pep.bp.model.TermTaskRowMapper;
 
 /**
@@ -32,7 +32,7 @@ public class TaskServiceIMP implements  TaskService{
     }
 
     @Override
-     public List<TermTaskDAO> getPollingTask(int CircleUnit){
+     public List<TermTask> getPollingTask(int CircleUnit){
          try {
             //主站轮召任务
             StringBuffer sbSQL = new StringBuffer();
@@ -50,18 +50,18 @@ public class TaskServiceIMP implements  TaskService{
             sbSQL.append(" and b.exec_unit_master = "+CircleUnit);//周期单位
             String SQL = sbSQL.toString();
           //  List rs = jdbcTemplate.queryForList(SQL);
-            List<TermTaskDAO> results = (List<TermTaskDAO>) jdbcTemplate.query(SQL, new TermTaskRowMapper());
+            List<TermTask> results = (List<TermTask>) jdbcTemplate.query(SQL, new TermTaskRowMapper());
 
             //获取任务命令项
             
-            for (TermTaskDAO task : results) {
+            for (TermTask task : results) {
                 sbSQL.delete(0,sbSQL.length());
                 sbSQL.append("select PROTOCOL_NO,COMMANDITEM_CODE");
                 sbSQL.append(" from R_TASK_DATAITEM");
                 sbSQL.append(" where protocol_no = ?");
                 sbSQL.append(" and SYS_OBJECT = ?");
                 sbSQL.append(" and task_id = ?");
-                List<CommanddItemDAO> commandItemList = (List<CommanddItemDAO>) jdbcTemplate.query(sbSQL.toString(), new Object[]{task.getProtocol_No(),task.getSystem_Object(),task.getTaskId()},new CommandItemRowMapper());
+                List<CommanddItem> commandItemList = (List<CommanddItem>) jdbcTemplate.query(sbSQL.toString(), new Object[]{task.getProtocol_No(),task.getSystem_Object(),task.getTaskId()},new CommandItemRowMapper());
                 task.setCommandItemList(commandItemList);
             }
             return results;

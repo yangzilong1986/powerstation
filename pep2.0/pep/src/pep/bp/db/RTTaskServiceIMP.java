@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import pep.bp.model.RTTaskRecvDAO;
-import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.model.RTTaskRecv;
+import pep.bp.model.RealTimeTask;
 import pep.bp.model.RTTaskRecvRowMapper;
 import pep.bp.model.RTTaskRowMapper;
 
@@ -32,7 +32,7 @@ public class RTTaskServiceIMP implements RTTaskService {
     }
 
     @Override
-    public void insertTask(RealTimeTaskDAO task) {
+    public void insertTask(RealTimeTask task) {
         try {
             jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK,TASK_TYPE) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?,?)",
                     new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark(),task.getTask_type()});
@@ -46,8 +46,8 @@ public class RTTaskServiceIMP implements RTTaskService {
      * @param Tasks
      */
     @Override
-    public void insertTasks(List<RealTimeTaskDAO> Tasks) {
-        for (RealTimeTaskDAO task : Tasks) {
+    public void insertTasks(List<RealTimeTask> Tasks) {
+        for (RealTimeTask task : Tasks) {
             try {
                 jdbcTemplate.update("insert into  R_REALTIME_TASK(TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,GP_MARK,COMMAND_MARK,TASK_TYPE) values(SEQ_REALTIME_TASK.nextval,?,?,?,?,?,?)",
                         new Object[]{task.getSequencecode(), task.getLogicAddress(), task.getSendmsg(),task.getGpMark(),task.getCommandMark(),task.getTask_type()});
@@ -62,15 +62,15 @@ public class RTTaskServiceIMP implements RTTaskService {
      * @return
      */
     @Override
-    public List<RealTimeTaskDAO> getTasks() {
+    public List<RealTimeTask> getTasks() {
         try {
             //查询未处理任务
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where TASK_STATUS = '0'";
-            List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
             //更新任务状态
-            for (RealTimeTaskDAO task : results) {
+            for (RealTimeTask task : results) {
 //                SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
 //                SQL += " from R_REALTIME_TASK_RECV";
 //                SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
@@ -87,19 +87,19 @@ public class RTTaskServiceIMP implements RTTaskService {
     }
 
     @Override
-    public RealTimeTaskDAO getTask(long sequnceCode) {
+    public RealTimeTask getTask(long sequnceCode) {
         try {
             //查询未处理任务
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where SEQUENCE_CODE = ? ";
-            List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
             if (results.size() > 0) {
-                RealTimeTaskDAO task = (RealTimeTaskDAO) (results.get(0));
+                RealTimeTask task = (RealTimeTask) (results.get(0));
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
                 return task;
             } else {
@@ -112,19 +112,19 @@ public class RTTaskServiceIMP implements RTTaskService {
     }
 
     @Override
-    public List<RealTimeTaskDAO> getTasks(long sequnceCode) {
+    public List<RealTimeTask> getTasks(long sequnceCode) {
         try {
             //查询未处理任务
             String SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task";
             SQL += " where SEQUENCE_CODE = ?";
-            List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new Object[]{sequnceCode}, new RTTaskRowMapper());
             //更新任务状态
-            for (RealTimeTaskDAO task : results) {
+            for (RealTimeTask task : results) {
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
             }
 
@@ -158,7 +158,7 @@ public class RTTaskServiceIMP implements RTTaskService {
     }
 
     @Override
-    public List<RealTimeTaskDAO> getTripTasks(){
+    public List<RealTimeTask> getTripTasks(){
          try {
             //清空已经同步的试跳任务记录
             String SQL = "delete from r_realtime_task a";
@@ -171,12 +171,12 @@ public class RTTaskServiceIMP implements RTTaskService {
             SQL += " from r_realtime_task a";
             SQL += " where not exists(select 1 from r_trip_plan b where a.task_id = b.task_id)";
             SQL += " and a.task_type = 2";
-            List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
-            for(RealTimeTaskDAO  task : results){
+            List<RealTimeTask> results = (List<RealTimeTask>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
+            for(RealTimeTask  task : results){
                 SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,RECV_MSG,RECV_TIME";
                 SQL += " from R_REALTIME_TASK_RECV";
                 SQL += " where TASK_ID = ? AND LOGICAL_ADDR = ?";
-                List<RTTaskRecvDAO> recvs = (List<RTTaskRecvDAO>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
+                List<RTTaskRecv> recvs = (List<RTTaskRecv>) jdbcTemplate.query(SQL, new Object[]{task.getTaskId(), task.getLogicAddress()},new RTTaskRecvRowMapper());
                 task.setRecvMsgs(recvs);
              }
             return results;
