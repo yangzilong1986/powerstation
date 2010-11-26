@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pep.bp.db.RTTaskService;
-import pep.bp.model.RealTimeTaskDAO;
+import pep.bp.model.RealTimeTask;
 import pep.codec.protocol.gb.PmPacket;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.utils.BcdUtils;
@@ -44,10 +44,10 @@ public class RealTimeSender extends BaseProcessor {
             } catch (InterruptedException ex) {
                 java.util.logging.Logger.getLogger(RealTimeSender.class.getName()).log(Level.SEVERE, null, ex);
             }
-            List<RealTimeTaskDAO> tasks = taskService.getTasks();
+            List<RealTimeTask> tasks = taskService.getTasks();
             //log.info("读到任务："+tasks.size());
             if (null != tasks) {
-                for (RealTimeTaskDAO task : tasks) {
+                for (RealTimeTask task : tasks) {
                     PmPacket packet = new PmPacket376();
                     packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
                 //    log.info("开始往下发队列中发送报文："+task.getSendmsg());
