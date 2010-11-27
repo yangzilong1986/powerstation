@@ -50,6 +50,7 @@ import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Baocj
@@ -98,6 +99,7 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 		return VIEW_QUERY_TG;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping
 	public ModelAndView userList(ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response,
 			UserQuery tgUserQuery) {
@@ -126,6 +128,10 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 		tgUserQuery.setEmpNos(tgInfo.getEmpNos());
 
+		Map mapIn = Maps.newHashMap();
+
+		modelAndView.addObject("orgInfo", getOrgInfo(mapIn));
+
 		getUserList(modelAndView, request, response, tgUserQuery);
 
 		modelAndView.setViewName(VIEW_QUERY_TG);
@@ -140,8 +146,6 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 		PageRequest<Map> pageRequest = bindPageRequest(request, baseQuery, DEFAULT_SORT_COLUMNS);
 
 		Page page = this.userInfoManager.findByPageRequest(pageRequest);//获取数据模型
-
-		modelAndView.addObject("orgInfo", getOrgInfo());
 
 		modelAndView.addObject("page", page);
 
@@ -301,8 +305,8 @@ public class TgOpInfoController extends BaseRestSpringController<UserInfo, java.
 
 	}
 
-	private List<OrgInfo> getOrgInfo() {
-		List<OrgInfo> orgInfoList = orgInfoManager.findAll();
+	private List<OrgInfo> getOrgInfo(Map mapRequest) {
+		List<OrgInfo> orgInfoList = orgInfoManager.findByPageRequest(mapRequest);
 		return orgInfoList;
 	}
 
