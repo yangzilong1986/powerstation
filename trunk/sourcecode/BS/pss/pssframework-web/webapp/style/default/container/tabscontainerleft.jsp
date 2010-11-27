@@ -9,6 +9,6 @@
 <title>Object View Container</title>
 </head>
 <body>
-<iframe id="tree" name="tree" height="730" src='${ctx}/tree'></iframe>
+<iframe id="tree" name="tree" height="730" width="195" src='${ctx}/tree' style="background-color: red"></iframe>
 </body>
 </html>
