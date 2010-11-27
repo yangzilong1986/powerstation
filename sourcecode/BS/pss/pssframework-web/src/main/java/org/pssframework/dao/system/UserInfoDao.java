@@ -21,9 +21,9 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	private static final String STAFFNO = "staffNo";
 
-	private static final String PAGE_USER_INFO = "from UserInfo t where 1=1 "
-			+ "/~ and ('[showAllAccount]'= 'true' or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/"
-			+ "/~ and t.empNo not in ([empNos]) ~/";
+	private static final String PAGE_USER_INFO = "select t from UserInfo t where 1=1 "
+			+ "/~ and (('[showAllAccount]'= 'true' and t.orgInfo.parentOrgInfo.orgId='[orgId]') or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/"
+			+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
 
 	@SuppressWarnings("rawtypes")
 	@Override
