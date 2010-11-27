@@ -1,10 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../../commons/taglibs.jsp"%>
-<%@include file="../../commons/meta.jsp"%>
 <%@page import="org.pssframework.support.system.SystemConst"%>
 <HTML>
 <HEAD>
-<link type="text/css" rel="stylesheet" href='<c:url value="/e3/commons/ext/resources/css/ext-all.css"/>' />
 <script src="<c:url value="/e3/commons/ext/adapter/ext/ext-base.js"/>"></script>
 <script src="<c:url value="/e3/commons/ext/ext-all.js"/>"></script>
 <script>
@@ -321,7 +319,7 @@ remove = function(){
 <input type="button" value="刷新父亲节点" onclick="refreshParentNode()" />
 <input type="text" name="node" id="node">
 <input type="button" value="查找节点" onclick="remove()" />-->
-<div id="tree" style="height: 100%; width: 180px;" /></div>
+
 ${leafInfo}
 </BODY>
 </HTML>
