@@ -16,6 +16,10 @@ var contextPath = "${ctx}";
 var sSelectedUserID = "";
 function selectRow(sUserID, oRow) {
     sSelectedUserID = sUserID;
+
+    if(!sSelectedUserID || "" == sSelectedUserID){
+    	return;
+    }
     var url = contextPath + '/system/user/' + sSelectedUserID + '?random=' + Math.random();
     parent.document.frames["userManager"].location.href = url;
     selectSingleRow(oRow);
