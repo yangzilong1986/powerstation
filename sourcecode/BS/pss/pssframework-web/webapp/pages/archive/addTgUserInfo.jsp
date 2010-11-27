@@ -110,7 +110,7 @@ function   closeWin()
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
-          <td><input type="checkbox" name="checkedUser" value="<c:out value="${item.empNo}"/>"></td>
+          <td><input type="checkbox" name="checkedUser" value="${item.empNo}"></td>
           <td><c:out value='${item.name}' />&nbsp;</td>
           <td><c:out value='${item.mobile}' />&nbsp;</td>
         </tr>
