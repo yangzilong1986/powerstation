@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import pep.bp.model.Dto;
 import pep.bp.model.Dto.DtoItem;
@@ -28,7 +28,7 @@ import pep.codec.protocol.gb.gb376.PmPacket376EventBase;
 @Transactional
 public class DataServiceIMP implements DataService{
     private final static Logger log = LoggerFactory.getLogger(DataServiceIMP.class);
-    private JdbcTemplate jdbcTemplate;
+    private SimpleJdbcTemplate simpleJdbcTemplate;
 
     private P_ACT_StoredProcedure p_actStoredProcedure;
     private P_REACT_StoredProcedure p_reactStoredProcedure;
@@ -50,12 +50,12 @@ public class DataServiceIMP implements DataService{
     private PSStatus_StoredProcedure psStatusStoredProcedur;
 
     public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.simpleJdbcTemplate = new SimpleJdbcTemplate(dataSource);
     }
 
-    public DataSource getDataSource(){
-        return this.jdbcTemplate.getDataSource();
-    }
+//    public DataSource getDataSource(){
+//        return this.simpleJdbcTemplate.getDataSource();
+//    }
 
     @Override
     public void insertRecvData(Dto dto) {
