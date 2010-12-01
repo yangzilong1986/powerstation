@@ -19,13 +19,15 @@ public class PmPacket376EventDecoderTest {
 
     @Test
     public void testSomeMethod() {
-        String msg ="68A600A60068C400000000000E7700000100B900000124173818030810000100000000000000FFFF263818020308103C16";
+        String msg ="687200720068C410101300000E7000000100030000010E0A14102911105109291110A416";
         byte[] msgBytes = BcdUtils.stringToByteArray(msg);
         int head = PmPacket376.getMsgHeadOffset(msgBytes, 0);
         PmPacket376 pack = new PmPacket376();
         pack.setValue(msgBytes,head);
         pack.getDataBuffer().rewind();
+        System.out.println(pack.toString());
         List<PmPacket376EventBase> events = PmPacket376EventDecoder.decode(new BcdDataBuffer(pack.getDataBuffer().getRowIoBuffer()));
+
     }
 
 }
