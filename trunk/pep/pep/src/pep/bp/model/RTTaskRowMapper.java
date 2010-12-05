@@ -24,7 +24,7 @@ public class RTTaskRowMapper implements RowMapper {
         task.setStatestatus(rs.getString("TASK_STATUS"));
         task.setGpMark(rs.getString("GP_MARK"));
         task.setCommandMark(rs.getString("COMMAND_MARK"));
-        task.setPosttime(rs.getDate("POST_TIME"));
+        task.setPosttime(rs.getTimestamp("POST_TIME"));
         return task;
     }
 

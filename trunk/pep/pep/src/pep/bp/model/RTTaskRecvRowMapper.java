@@ -21,7 +21,7 @@ public class RTTaskRecvRowMapper implements RowMapper {
         recv.setSequenceCode(rs.getInt("SEQUENCE_CODE"));
         recv.setLogicAddress(rs.getString("LOGICAL_ADDR"));
         recv.setRecvMsg(rs.getString("RECV_MSG"));
-        recv.setRecvTime(rs.getDate("RECV_TIME"));
+        recv.setRecvTime(rs.getTimestamp("RECV_TIME"));
         return recv;
     }
 }
