@@ -197,8 +197,8 @@ public class RTTaskServiceIMP implements RTTaskService {
             int recordNum = jdbcTemplate.queryForInt(SQL, new Object[]{ps_id, date});
 
             if(recordNum > 0 ){
-                jdbcTemplate.update("update  R_TRIP_PLAN set TRIP_RESULT = ?,POST_TIME = ? where PS_ID=? and DDATE=?",
-                    new Object[]{tripResult,postTime,ps_id, date });
+                jdbcTemplate.update("update  R_TRIP_PLAN set TRIP_RESULT = ?,POST_TIME = ?,ACCEPT_TIME = ? where PS_ID=? and DDATE=?",
+                    new Object[]{tripResult,postTime,acceptTime,ps_id, date });
             }
             else{
                 jdbcTemplate.update("insert into  R_TRIP_PLAN(PS_ID,DDATE,POST_TIME,ACCEPT_TIME,TRIP_RESULT,TASK_ID) values(?,?,?,?,?,?)",
