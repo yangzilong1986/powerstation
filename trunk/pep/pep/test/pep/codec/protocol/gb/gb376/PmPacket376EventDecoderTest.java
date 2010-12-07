@@ -19,7 +19,7 @@ public class PmPacket376EventDecoderTest {
 
     @Test
     public void testSomeMethod() {
-        String msg ="687200720068C410101300000E7000000100030000010E0A14102911105109291110A416";
+        String msg ="689E009E0068C412965534000E7000000100020000020E0A3110071210321007121010093310071210800235903116";
         byte[] msgBytes = BcdUtils.stringToByteArray(msg);
         int head = PmPacket376.getMsgHeadOffset(msgBytes, 0);
         PmPacket376 pack = new PmPacket376();
