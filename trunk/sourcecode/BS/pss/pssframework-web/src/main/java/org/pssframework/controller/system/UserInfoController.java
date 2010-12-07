@@ -256,6 +256,8 @@ public class UserInfoController extends BaseRestSpringController<UserInfo, Long>
 
             orgId = orgInfo.getOrgId();
             baseQuery.setOrgId(orgId);
+        }else{
+			baseQuery.setOrgId(userInfo.getOrgInfo().getOrgId());
         }
 
         getUserList(modelAndView, request, response, baseQuery);
