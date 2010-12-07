@@ -149,4 +149,10 @@ public class UtilsBpTest {
         fail("The test case is a prototype.");
     }
 
+    @Test
+    public void testgetThisDay_YYYYMMDD(){
+        String result = UtilsBp.getThisDay_YYYYMMDD();
+        assertEquals("20101124", result);
+    }
+
 }
