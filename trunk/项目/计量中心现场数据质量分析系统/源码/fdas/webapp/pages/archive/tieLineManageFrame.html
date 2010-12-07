@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>联络线档案管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript">
+/**
+ * 
+ * @param {int} objectType    : 对象类型
+ * @param {String} objectId   : 对象编号
+ * @param {String} objectName : 对象名称
+ * @param {String} orgType    : 部门类型
+ */
+function nodeEvent(objectType, objectId, objectName, orgType) {
+	 //alert(objectType + ", " + objectId + ", " + objectName + ", " + orgType);
+}
+/**
+ * 
+ */
+function switchPanel(value) {
+    if(value == "show") {
+        $("#showPanel").css("display", "none");
+        $("#hidePanel").css("display", "block");
+        $("#treePanel").css("display", "block");
+    }
+    else if(value == "hide") {
+        $("#showPanel").css("display", "block");
+        $("#hidePanel").css("display", "none");
+        $("#treePanel").css("display", "none");
+    }
+}
+
+function swapImage(id, imgSrc) {
+    $("#" + id).attr("src", imgSrc);
+}
+
+$(document).ready( function() {
+    switchPanel("show");
+});
+</script>
+</head>
+<body>
+<div id="body">
+  <div id="tab" class="tab3">
+    <ul>
+      <li id="tab_1" class="tab_on"><a href="templet03_main1.html" onclick="return false;" onfocus="blur()" target="mainframe">联络线档案维护</a></li>
+      <li class="clear"></li>
+    </ul>
+    <h1><a href="#"><img src="../../img/bt_help.gif" width="14" height="15" /></a></h1>
+  </div>
+  <div id="main2" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 42));">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+      <tr>
+        <td width="200" valign="top" id="treePanel">
+          <iframe name="treeframe" width="100%" height="100%" frameborder="0" scrolling="auto" src="tieLineManageTree.html"></iframe>
+        </td>
+        <td width="8" class="bg_panel" valign="middle">
+          <table width="100%" height="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td id="hidePanel" valign="middle"><img src="../../img/bt_hide.gif" alt="隐藏对象树" id="bt_hide" width="8" height="54" border="0" id="bt_hide" style="cursor:pointer;" onclick="switchPanel('hide')" onmouseover="swapImage('bt_hide', '../../img/bt_hide_o.gif');" onmouseout="swapImage('bt_hide', '../../img/bt_hide.gif');"></td>
+            </tr>
+            <tr>
+              <td id="showPanel" valign="middle"><img src="../../img/bt_show.gif" alt="显示对象树" id="bt_show" width="8" height="54" border="0" id="bt_show" style="cursor:pointer;" onclick="switchPanel('show')" onmouseover="swapImage('bt_show', '../../img/bt_show_o.gif');" onmouseout="swapImage('bt_show', '../../img/bt_show.gif');"></td>
+            </tr>
+          </table>
+        </td>
+        <td class="pad10">
+          <iframe name="mainframe" width="100%" height="100%" frameborder="0" scrolling="no" src="tieLineManageMain.html"></iframe>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

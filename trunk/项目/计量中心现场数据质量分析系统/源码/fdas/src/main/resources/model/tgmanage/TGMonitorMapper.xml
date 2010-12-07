@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+                        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="TGMonitor">
+    <resultMap id="TGMonitorCombBoxResult" type="java.util.HashMap" />
+    
+    <sql id="TotalMeterCombBoxSQL">
+        <![CDATA[
+        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, MP.MP_NAME || '（局号：' || M.ASSET_NO || '）' as NME
+          from C_METER M, C_MP MP, C_GP GP, C_TERMINAL T
+         where M.METER_ID = MP.METER_ID
+           and MP.MP_ID = GP.MP_ID
+           and T.TERM_ID = GP.TERM_ID
+           and GP.GP_TYPE = '2'
+           and GP.OBJECT_ID = #{tgId}
+          order by MP.MP_NAME, M.ASSET_NO
+        ]]>
+    </sql>
+    
+    <sql id="PSCombBoxSQL">
+        <![CDATA[
+        select PS.PS_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_ADDR || '#' || GP.PROTOCOL_NO || '#' || '1' || '#' || PS.MODEL_CODE || '#' as VUE, PS.PS_NAME || '（' || GP.GP_ADDR || '）' as NME
+          from C_PS PS, C_GP GP, C_TERMINAL T
+         where PS.GP_ID = GP.GP_ID
+           and T.TERM_ID = GP.TERM_ID
+           and GP.GP_TYPE = '2'
+           and GP.OBJECT_ID = #{tgId}
+         order by PS.PS_NAME, GP.GP_ADDR
+        ]]>
+    </sql>
+    
+    <sql id="AnalogCombBoxSQL">
+        <![CDATA[
+        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.PORT || '#' as VUE, GP.PORT as NME
+          from C_GP GP, C_TERMINAL T
+         where T.TERM_ID = GP.TERM_ID
+           and GP.GP_CHAR = '8'
+           and GP.GP_TYPE = '2'
+           and GP.OBJECT_ID = #{tgId}
+         order by T.LOGICAL_ADDR, GP.PORT
+        ]]>
+    </sql>
+    
+    <sql id="SwitchCombBoxSQL">
+        <![CDATA[
+        select T.TERM_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO as VUE, '集中器地址：' || T.LOGICAL_ADDR as NME
+          from C_TERMINAL T, C_TERM_OBJ_RELA R
+         where T.TERM_ID = R.TERM_ID
+           and R.OBJ_TYPE = '2'
+           and R.OBJ_ID = #{tgId}
+         order by T.LOGICAL_ADDR
+        ]]>
+    </sql>
+    
+    <!-- 得到总表下拉框 -->
+    <select id="getTotalMeterCombBoxByTgId" parameterType="java.lang.Long" resultMap="TGMonitorCombBoxResult">
+        <include refid="TotalMeterCombBoxSQL" />
+    </select>
+    
+    <!-- 得到漏电开关下拉框 -->
+    <select id="getPSCombBoxByTgId" parameterType="java.lang.Long" resultMap="TGMonitorCombBoxResult">
+        <include refid="PSCombBoxSQL" />
+    </select>
+    
+    <!-- 得到油温监测仪下拉框 -->
+    <select id="getAnalogCombBoxByTgId" parameterType="java.lang.Long" resultMap="TGMonitorCombBoxResult">
+        <include refid="AnalogCombBoxSQL" />
+    </select>
+    
+</mapper>

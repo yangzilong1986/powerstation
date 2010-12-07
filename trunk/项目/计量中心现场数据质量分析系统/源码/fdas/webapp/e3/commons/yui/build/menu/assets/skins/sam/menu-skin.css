@@ -1,0 +1,458 @@
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.3.1
+*/
+/* MenuBar style rules */
+
+ .yuimenubar {
+
+    border: solid 1px #808080;
+    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 0;
+
+}
+
+/* 
+    The following two style rules cause a MenuBar's UL to clear its 
+    floating LIs.
+*/
+
+ .yuimenubar .bd,
+ .yuimenubar ul {
+
+    *zoom: 1;   /* For IE */
+
+}
+
+ .yuimenubar>.bd>ul:after {
+
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+
+}
+
+
+/* MenuBarItem style rules */
+
+ .yuimenubaritem {
+
+    float: left;
+
+}
+
+  .yuimenubaritem {
+
+    border-right: solid 1px #ccc;
+
+}
+
+ .yuimenubaritemlabel {
+
+    display: block;
+    *display: inline-block; /* For IE */
+    font-size: 93%;  /* 12px */
+    line-height: 2;  /* ~24px */
+    *line-height: 1.9; /* For IE */
+    padding: 0 10px;
+    color: #000;
+    text-decoration: none;
+    outline: none;
+    cursor: default;
+    border-style: solid;
+    border-color: #808080;
+    border-width: 1px 0;
+    position: relative;
+    margin: -1px 0;
+
+}
+
+  .yuimenubaritemlabel {
+
+    padding-right: 20px;
+
+}
+
+ .yuimenubaritemlabel .submenuindicator {
+    
+    /*
+        Set height and width to 1px so screen readers announce the content of 
+        the element.
+    */
+
+    width: 1px;
+    height: 1px;
+    top: 0;
+    left: 0;
+
+}
+
+  .yuimenubaritemlabel .submenuindicator {
+    
+    top: 50%;
+    right: 8px;
+    left: auto; /* Override "left" property set by previous style rule */
+    margin-top: -3px;
+    height: 4px;
+    width: 7px;
+    text-indent: 8px;
+    background-position: -16px -856px;
+
+}
+
+
+/* MenuBarItem states */
+
+/* Selected MenuBarItem */
+
+ .yuimenubaritem a.selected {
+
+    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -1700px;
+    border-color: #7D98B8;
+
+}
+
+  .yuimenubaritem a.selected {
+
+    border-left-width: 1px;
+    margin-left: -1px;
+    *left: -1px;    /* For IE */
+
+}
+
+ .yuimenubar a.selected .submenuindicator {
+
+    background: transparent;
+
+}
+
+  a.selected .submenuindicator {
+
+    /*
+        Reset the value of the "background" property since it is set to 
+        "transparent" by the previous rule.
+    */
+
+    background: url(../../../../assets/skins/sam/sprite.png) repeat-x -16px -856px;
+
+}
+
+
+/* Disabled  MenuBarItem */
+
+ .yuimenubaritem a.disabled {
+
+    cursor: default;
+    color: #A6A6A6;
+
+}
+
+  .yuimenubaritem a.disabled .submenuindicator {
+
+    background-position: -16px -881px;
+
+}
+
+
+/* Menu style rules */
+
+ .yuimenu .bd {
+
+    border: solid 1px #808080;
+    background-color: #fff;
+    
+}
+
+ .yuimenu ul {
+
+    padding: 3px 0;
+    border-width: 1px 0 0 0;
+    border-color: #ccc;
+    border-style: solid;
+
+}
+
+ .yuimenu ul.first-of-type {
+
+    border-width: 0;
+
+}
+
+
+/* Group titles */
+
+ .yuimenu h6 { 
+
+    font-size: 93%;  /* 12px */
+    font-weight: bold;
+    line-height: 1.5;  /* 18px */
+    *line-height: 1.45; /* For IE */
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px 0 0 0;
+    color: #a4a4a4;    
+    padding: 3px 10px 0 10px;
+
+}
+
+ .yuimenu ul.hastitle,
+ .yuimenu h6.first-of-type {
+
+    border-width: 0;
+
+}
+
+
+/* Top and bottom scroll controls */
+
+ .yuimenu .yui-menu-body-scrolled {
+
+    border-color: #ccc #808080;
+    overflow: hidden;
+
+}
+
+ .yuimenu .topscrollbar,
+ .yuimenu .bottomscrollbar {
+
+    height: 16px;
+    border: solid 1px #808080;
+    background: #fff url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;
+
+}
+
+ .yuimenu .topscrollbar {
+
+    border-bottom-width: 0;
+    background-position: center -950px;
+
+}
+
+ .yuimenu .topscrollbar_disabled {
+
+    background-position: center -975px;
+
+}
+
+ .yuimenu .bottomscrollbar {
+
+    border-top-width: 0;
+    background-position: center -850px;
+
+}
+
+ .yuimenu .bottomscrollbar_disabled {
+
+    background-position: center -875px;
+
+}
+
+
+/* MenuItem style rules */
+
+ .yuimenuitemlabel {
+
+    font-size: 93%;  /* 12px */
+    line-height: 1.5;  /* 18px */
+    *line-height: 1.45; /* For IE */
+    padding: 0 20px;
+    display: block;
+    color: #000;
+    text-decoration: none;
+    outline: none;
+    position: relative;
+
+    /* 
+        Need to set the "position" property to "static" for IE otherwise the
+        MenuItem instances will not respect the value of the "overflow" 
+        property that is applied to its body element (see the above 
+        " .yuimenu .yui-menu-body-scrolled" rule) when it 
+        is scrolled.
+    */
+
+    *position: static;
+    cursor: default;
+
+}
+
+ .yuimenuitemlabel .helptext {
+
+    font-style: normal;
+    display: block;
+    margin: -1.5em 0 0 10em;
+    *margin-top: -1.45em;  /* For IE*/
+    
+}
+
+ .yuimenuitemlabel .submenuindicator,
+ .yuimenuitemlabel .checkedindicator,
+ .yuimenubaritemlabel .submenuindicator {
+    
+    position: absolute;
+    overflow: hidden;
+    background: url(../../../../assets/skins/sam/sprite.png) no-repeat;
+
+}
+
+/*
+    Set special values for the "position" and "display" properties for IE since
+    it is necessary to position the submenu and checked indicator nodes 
+    differently since their parent element isn't relatively positioned.
+*/
+
+ .yuimenuitemlabel .submenuindicator,
+ .yuimenuitemlabel .checkedindicator {
+
+    *position: static;
+    *display: inline-block;
+
+}
+
+ .yuimenuitemlabel .submenuindicator {
+
+    top: 50%;
+    right: 8px;
+    margin-top: -3px;
+    height: 7px;
+    width: 4px;
+    text-indent: 5px;
+    background-position: 0 -906px;
+
+}
+
+ .yuimenuitemlabel .checkedindicator {
+
+    top: 50%;
+    left: 8px;
+    margin-top: -3px;
+    height: 7px;
+    width: 7px;
+    text-indent: 8px;
+    background-position: 0 -1006px;
+
+}
+
+
+/* Menu states */
+
+/* Visible Menu */
+
+/*
+    The following three rules are used to position the submenu and checked
+    indicator nodes for IE since their parent element isn't 
+    relatively positioned.
+*/
+
+ .visible .yuimenuitemlabel .submenuindicator {
+
+    *float: right;
+    *margin: -1em 8px 0 8px;
+
+}
+
+ .visible .yuimenuitem .hassubmenu {
+
+    *padding-right: 0;
+
+}
+
+ .visible .yuimenuitemlabel .checkedindicator {
+
+    *float: left;
+    *margin: -1em 0 0 -12px;
+
+}
+
+ .yui-menu-shadow-visible {
+
+    top: 2px;
+    right: -3px;
+    left: -3px;
+    bottom: -3px;
+    background-color: #000;
+    opacity: .12;
+    *filter: alpha(opacity=12);  /* For IE */
+    visibility: visible;
+
+}
+
+ .visible .bd,
+ .visible .yuimenuitem {
+
+    _zoom: 1;   /* For IE 7 Quirks Mode and IE 6 Standards and Quirks Mode */
+
+}
+
+ .visible .yuimenuitemlabel {
+
+    *zoom: 1;   /* For IE */
+
+}
+
+
+/* MenuItem states */
+
+/* Selected MenuItem */
+
+ .yuimenuitem a.selected {
+
+    /*
+        Use "background" over "background-color" to clear background image 
+        set by the ".yuimenubaritem a.selected" rule.
+    */
+
+    background: #B3D4FF;
+
+}
+
+/*
+    Redefine the background for MenuItem instances that are children of
+    a Menubar since the 
+    " .yuimenubar a.selected .submenuindicator" rule sets the 
+    "background" property to "transparent"
+*/
+
+ .yuimenubar .yuimenuitem a.selected .submenuindicator {
+
+    background: url(../../../../assets/skins/sam/sprite.png) no-repeat 0 -906px;
+
+}
+
+/*
+    Remove borders and margin added by the style rule 
+    "  .yuimenubaritem a.selected"
+*/
+
+  .yuimenuitem a.selected {
+
+    border-width: 0;
+    margin: 0;
+    *left: 0;   /* For IE */
+
+}
+
+
+/* Disabled MenuItem */
+
+ .yuimenuitem a.disabled {
+
+    cursor: default;
+    color: #A6A6A6;
+
+}
+
+ .yuimenuitem a.disabled .submenuindicator {
+
+    background-position: 0 -931px;
+
+}
+
+ .yuimenuitem a.disabled .checkedindicator {
+
+    background-position: 0 -1031px;
+
+}

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+    Copyright (c) 2010 PSS Corporation and others.
+    All rights reserved. This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License v1.0
+    which accompanies this distribution, and is available at
+    http://www.eclipse.org/legal/epl-v10.html
+   
+    Contributors:
+        PSS Corporation - initial API and implementation
+ -->
+
+<skin name="E3003" >
+	<processor type="net.jcreate.e3.table.skin.processor.VelocityTemplateProcessor"/>
+	<!--边线颜色--> 
+	<constant name="borderColor" value="#0080C0"/>
+	<!-- 表头颜色 -->
+	<constant name="headerColor" value="#eee" />
+	<!-- 导航条颜色 -->
+	<constant name="navColor" value="#99CCFF"/>
+	<!-- 禁用颜色 -->
+	<constant name="disabledColor" value="gray"/>
+	
+	<!-- 行背景颜色 -->    
+	<constant name="row0BGColor" value="#FFFFFF"/>
+	<constant name="row1BGColor" value="#FFFFFF"/>
+	<constant name="row2BGColor" value="#FFFFFF"/>
+	<constant name="row3BGColor" value="#FFFFFF"/>
+	<constant name="row4BGColor" value="#FFFFFF"/>
+	<constant name="row5BGColor" value="#FFFFFF"/>
+	<constant name="row6BGColor" value="#FFFFFF"/>
+	<constant name="row7BGColor" value="#FFFFFF"/>
+	<constant name="row8BGColor" value="#FFFFFF"/>
+	<constant name="row9BGColor" value="#FFFFFF"/>
+	<!-- 行前景颜色-->
+	<constant name="row0Color" value="black"/>
+	<constant name="row1Color" value="black"/>
+	<constant name="row2Color" value="black"/>
+	<constant name="row3Color" value="black"/>
+	<constant name="row4Color" value="black"/>
+	<constant name="row5Color" value="black"/>
+	<constant name="row6Color" value="black"/>
+	<constant name="row7Color" value="black"/>
+	<constant name="row8Color" value="black"/>
+	<constant name="row9Color" value="black"/>
+	<constant name="goPageStyle" value="width:24px;height:18px"/>
+
+    <!-- 没数据时行的前景颜色和背景颜色 -->	
+	<constant name="noDataRowColor" value="black"/>
+	<constant name="nowDataRowBGColor" value="#FFFFFF"/>
+	
+	<!-- 行高-->
+	<constant name="rowHeight" value="20px"/>
+	<!-- 表头高度 -->
+	<constant name="headerHeight" value="20px"/>
+	<!--导航条高度 -->
+	<constant name="navHeight" value="22px"/>
+	<!--行颜色总数,如果只有一种颜色为1,如果有2种为2,依次类推 -->
+	<constant name="colorNum" value="1"/>
+	
+	<constant name="firstOn" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.firstText")}]]></value>
+	</constant>
+	<constant name="firstOff" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.firstText")}]]></value>
+	</constant>
+	
+	<constant name="lastOn" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.lastText")}]]></value>
+	</constant>
+	<constant name="lastOff" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.lastText")}]]></value>
+	</constant>
+	
+	<constant name="prevOn" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.prevText")}]]></value>
+	</constant>
+	<constant name="prevOff" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.prevText")}]]></value>
+	</constant>
+	
+	<constant name="nextOn" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.nextText")}]]></value>
+	</constant>
+	<constant name="nextOff" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.nextText")}]]></value>
+	</constant>
+	
+	<constant name="go" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.go")}]]></value>
+	</constant>
+	<constant name="goPage" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.goPage")}]]></value>
+	</constant>
+	<constant name="invalidPage" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.invalidPage")}]]></value>
+	</constant>
+	<constant name="invalidPageScope" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.invalidPageScope")}]]></value>
+	</constant>
+	<constant name="page" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.page")}]]></value>
+	</constant>
+	
+	<constant name="cellTextAlign" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.cellTextAlign")}]]></value>
+	</constant>
+	
+	<constant name="headTextAlign" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.headTextAlign")}]]></value>
+	</constant>
+	
+	
+	
+	
+  	<!--分割符-->
+	<constant name="separator"  value=" "/>
+	<!-- 摘要 -->
+	<constant name="sumText" exeTwice="true" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.sumText")}]]></value>
+	</constant>
+ 
+  <template name="scriptBegin" ><content><![CDATA[
+<!--e3.begin of refresh zone:${table.id}-->
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+  <html>
+    <head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+  <!-- 样式定义 -->
+   <style>
+     .e3table {width:100%; FONT: 9pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     .e3table .caption{ background-color:#FFFFFF;text-align: center; FONT: 10pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     /*background-color确定表格边的颜色.*/
+     .e3table table.listPage {width:100%;background-color:$res_borderColor; FONT: 10pt  "宋体","tahoma", "arial", "helvetica", "sans-serif";}
+     .e3table table.listPage tr.navigation {text-align: left;background-color: ${res_navColor}; height:${res_navHeight}} 
+     .e3table table.listPage tr.head {text-align: center;background-color:${res_headerColor} ;height:${res_headerHeight}}
+     .e3table table.listPage tr.head td{word-break:keep-all;text-align: ${res_headTextAlign};}
+     .e3table table.listPage tr td{padding-left : 5px;padding-right : 5px;text-align: ${res_cellTextAlign};}
+     .e3table table.listPage tr.row0 {text-align: center; color: ${res_row0Color}; background-color:${res_row0BGColor};height:${res_rowHeight}} 
+     .e3table table.listPage tr.row1 {text-align: center; color: ${res_row1Color}; background-color:${res_row1BGColor};height:${res_rowHeight}}
+     .e3table table.listPage tr.row2 {text-align: center; color: ${res_row2Color}; background-color:${res_row2BGColor};height:${res_rowHeight}} 
+     .e3table table.listPage tr.row3 {text-align: center; color: ${res_row3Color}; background-color:${res_row3BGColor};height:${res_rowHeight}}
+     .e3table table.listPage tr.row4 {text-align: center; color: ${res_row4Color}; background-color:${res_row4BGColor};height:${res_rowHeight}} 
+     .e3table table.listPage tr.row5 {text-align: center; color: ${res_row5Color}; background-color:${res_row5BGColor};height:${res_rowHeight}}
+     .e3table table.listPage tr.row6 {text-align: center; color: ${res_row6Color}; background-color:${res_row6BGColor};height:${res_rowHeight}} 
+     .e3table table.listPage tr.row7 {text-align: center; color: ${res_row7Color}; background-color:${res_row8BGColor};height:${res_rowHeight}}
+     .e3table table.listPage tr.row8 {text-align: center; color: ${res_row8Color}; background-color:${res_row8BGColor};height:${res_rowHeight}} 
+     .e3table table.listPage tr.row9 {text-align: center; color: ${res_row9Color}; background-color:${res_row9BGColor};height:${res_rowHeight}}
+     
+     .e3table table.listPage tr.noDataRow {text-align: center; color: ${res_noDataRowColor}; background-color:${res_nowDataRowBGColor}; height:${res_rowHeight} }
+     
+     
+     
+     /* 页面字体链接样式*/
+     .e3table tr.navigation  A {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.navigation  A:visited {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.navigation  A:hover {COLOR: #000000;  TEXT-DECORATION: underline}
+     .e3table tr.head  A {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.head  A:visited {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table tr.head  A:hover {COLOR: #000000;  TEXT-DECORATION: underline}
+     
+     .e3table .disabledText {COLOR: ${res_disabledColor};}  
+     .e3table tr.head  A {COLOR: #000000; TEXT-DECORATION: none}
+     .e3table input.e3_go_the_page{ ${res_goPageStyle} }
+    </style>   
+    </head>
+    <body>
+  ]]></content></template>	
+  <template name="scriptEnd" ><content><![CDATA[
+  </body>
+  </html>
+  <!--e3.end of refresh zone:${table.id}-->
+  ]]></content></template>	
+   
+<template name="topNavigation" ><content><![CDATA[
+  ]]></content></template>	  
+  
+<template name="bottomNavigation" ><content><![CDATA[
+  ]]></content></template>	  
+  
+  
+  <template name="docBegin" ><content><![CDATA[
+
+     <table class="e3table" cellspacing="0" cellpadding="0" #if (${table.style} ) style="${table.style}" #end>
+  ]]></content></template>	
+  <template name="docEnd" ><content><![CDATA[
+     </table>
+     
+  ]]></content></template>	
+  
+
+  <template name="caption" ><content><![CDATA[
+  <tr><td>
+    <table width="100%" border="0">
+      <tr>
+        <td>
+          <div class="caption">${caption}</div>           
+        </td>
+      </tr>
+    </table>
+   </td></tr> 
+  ]]></content></template>	
+
+  <template name="paramsForm" ><content><![CDATA[
+  ]]></content></template>	
+
+
+  <template name="tableBegin" ><content><![CDATA[
+    <tr><td>  
+      <table class="listPage"  cellspacing="1" style="position:relative; top:1" >
+  ]]></content></template>	
+  <template name="tableEnd" ><content><![CDATA[     
+    </table>
+   </td></tr>    
+  ]]></content></template>	
+  
+  
+
+  <template name="columnGroupsBegin" ><content><![CDATA[
+    <tr class="head">
+  ]]></content></template>	
+  <template name="columnGroupsEnd" ><content><![CDATA[
+     </tr>
+  ]]></content></template>	
+  <template name="columnGroupBegin" ><content><![CDATA[<td colspan="${columnGroup.columns.size()}" #if ($columnGroup.styleClass ) class="$columnGroup.styleClass" #end  #if ($columnGroup.style ) style="$columnGroup.style" #end>]]></content></template>	
+  <template name="columnGroup" ><content><![CDATA[${title}]]></content></template>	
+  <template name="columnGroupEnd" ><content><![CDATA[</td>]]></content></template>	
+
+
+  <template name="headerBegin" ><content><![CDATA[
+    <tr class="head">
+  ]]></content></template>	
+  <template name="headerEnd" ><content><![CDATA[
+     </tr>
+  ]]></content></template>	 
+  
+  <!--fast模式不执行-->
+  <template name="columnBegin" ><content><![CDATA[<td #if ($column.width ) width="$column.width" #end  #if ($column.headerStyle ) class="$column.headerStyleClass" #end  #if ($column.headerStyle ) style="$column.headerStyle" #end>]]></content></template>	
+  <template name="column" ><content><![CDATA[  
+#if ($column.hidden == false && $excludes.contains( $column.getProperty() ) == false )  
+    <td #if ($column.width ) width="$column.width" #end  #if ($column.headerStyle ) class="$column.headerStyle" #end  #if ($column.headerStyle ) style="$column.headerStyle" #end>
+      ${title}
+   </td>  
+#end   
+  ]]></content></template>
+  <!--fast模式不执行-->	
+  <template name="columnEnd" ><content><![CDATA[</td>]]></content></template>	
+  
+  
+  
+
+  <template name="bodyBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="bodyEnd" ><content><![CDATA[
+#foreach($row in $rows)
+#set ( $rowNo = $row.rowIndex % $_e3Tools.toInt($res_colorNum) ) 
+     <tr ${row.AttributesAsString} class="row${rowNo}" >    
+#foreach($cell in $row.cells )
+#if ($cell.column.hidden == false && $excludes.contains( $cell.column.getProperty() ) == false )
+     <td ${cell.AttributesAsString} nowrap="true" colspan="${cell.colspan}" rowspan="${cell.rowspan}" #if ($cell.column.style ) style="$cell.column.style" #end #if ($cell.column.styleClass ) style="$cell.column.styleClass" #end>${cell.value}</td>
+#end     
+#end          
+     </tr>
+#end  
+  ]]></content></template>	
+  
+  <template name="noDataRow" ><content><![CDATA[
+    <tr class="noDataRow"><td colspan="${columnNum}">${noDataTip}</td></tr>
+  ]]></content></template>	
+  
+  
+<!--fast模式不执行-->  
+  <template name="rowBegin" ><content><![CDATA[
+     #set ( $rowNo = $row.rowIndex % $_e3Tools.toInt($res_colorNum) ) 
+     <tr ${row.AttributesAsString} class="row${rowNo}" >
+  ]]></content></template>	
+  <template name="rowEnd" ><content><![CDATA[
+     </tr>
+  ]]></content></template>	  
+  
+  
+  <!--fast模式不执行-->
+  <template name="cellBegin" ><content><![CDATA[<td ${cell.AttributesAsString}>]]></content></template>	
+  <template name="cell" ><content><![CDATA[<td ${cell.AttributesAsString}>${cellValue}</td>]]></content></template>
+  <!--fast模式不执行-->
+  <template name="cellEnd" ><content><![CDATA[</td>]]></content></template>	
+  	
+  
+</skin>

@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编码编辑</title>
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+</script>
+</head>
+ 
+<body>
+  <div id="body">
+    <div class="tab">
+      <ul>
+        <li id="tab_1" class="tab_on">
+          <a href="#" onClick="return false;" onFocus="blur()">编码编辑</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div id="main"  style="width:expression(((document.documentElement.clientWidth||document.body.clientWidth) - 18));">
+      <div id="tool">
+        <table width="100%" border=0 cellpadding=0 cellspacing=0 align=center class="e_detail_t">
+          <tr align="center">
+            <td class="contentLeft">　</td>
+            <td>
+              <table width="100%" align="center" border="0" cellpadding="0"cellspacing="1" >
+                <tr align="center">
+                  <td width="40%">编码类别:</td>
+                  <td width="60%">CT_RATIO</td>
+                  <td colspan="7"></td>
+                </tr>
+                <tr align="center">
+                  <td>编码值:<font color="#ff0000">*</font></td>
+                  <td ><input type="text" name="code" value=""></td>
+                  <td colspan="7"></td>
+                </tr>
+                <tr align="center">
+                  <td>编码说明:<font color="#ff0000">*</font></td>
+                  <td ><input type="text" name="name" value=""></td>
+                  <td colspan="7"></td>
+                </tr>
+                <tr>
+                  <td  align="center" colspan="2">
+                    <input type="submit" value="确定" class="input1" onclick="parent.GB_hide()"/>&nbsp;&nbsp;&nbsp;
+                    <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+                  </td>
+                  <td colspan="7"></td>
+                </tr>
+              </table>
+            </td>
+            <td class="contentRight">　</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

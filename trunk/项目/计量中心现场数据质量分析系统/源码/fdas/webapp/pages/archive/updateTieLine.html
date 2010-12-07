@@ -1,0 +1,113 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>线路编辑</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<link rel="stylesheet" type="text/css" href="../../css/archiveCss.css" />
+<link rel="stylesheet" type="text/css" href="../../css/greybox.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  //供电单位
+  $.handelCombox('orgTar','orgNo');
+  $("#orgNo").val(440810);
+  //电压等级
+  $.handelCombox('voltGradeTar','voltGrade');
+  $("#voltGrade").val(1);
+  //变电站
+  $.handelCombox('subsTar1','subsNo','id="subsNo1"');
+  $("#subsNo1").val(1);
+  $.handelCombox('subsTar2','subsNo','id="subsNo2"');
+  $("#subsNo2").val(2);
+  $.handelCombox('subsTar3','subsNo','id="subsNo3"');
+  $("#subsNo3").val(-1);
+});
+//保存线路信息
+function save(){
+   if(lineCheck()){
+      parent.GB_hide();
+   }
+}
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>联络线信息</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+       <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+       <td width="15%" class="label"><font color="red">* </font>联络线编号：</td>
+       <td width="25%" class="dom">
+         <input type="text" id="lineNo" name="lineNo" value="86">
+       </td>
+       <td width="15%" class="label"><font color="red">* </font>联络线名称：</td>
+       <td width="25%" class="dom"><input type="text" id="lineName" name="lineName" value="110KV霞宝线"></td>
+      </tr>
+      <tr>
+       <td width="15%" class="label">管理单位：</td>
+       <td width="25%" class="dom" id="orgTar"></td>
+       <td width="15%" class="label">电压等级：</td>
+       <td width="25%" class="dom" id="voltGradeTar"></td>
+      </tr>
+      <tr>
+       <td width="15%" class="label">线路类型：</td>
+       <td width="25%" class="dom">
+          <select name="lineType" id="lineType">
+            <option value="0">主线</option>
+            <option value="1">支线</option>
+          </select>
+       </td>
+       <td width="15%" class="label">上线线路：</td>
+       <td width="25%" class="dom">
+          <select name="lastLine" id="lastLine">
+            <option value=""></option>
+          </select>
+       </td>
+      </tr>
+      <tr>
+       <td width="15%" class="label"><font color="red">* </font>线损阀值：</td>
+       <td width="25%" class="dom">
+         <input type="text" id="lineThreshold" name="lineThreshold" value="5" style="width:130"/>%
+       </td>
+       <td width="15%" class="label">所属变电站1：</td>
+       <td width="25%" class="dom" id="subsTar1"></td>
+      </tr>
+      <tr>
+       <td width="15%" class="label">所属变电站2：</td>
+       <td width="25%" class="dom" id="subsTar2"></td>
+       <td width="15%" class="label">所属变电站3：</td>
+       <td width="25%" class="dom" id="subsTar3"></td>
+      </tr>
+      <tr>
+       <td width="15%" class="label">线路状态：</td>
+       <td width="25%" class="dom">
+          <select name="lineStatus" id="lineStatus">
+            <option value="01">投入</option>
+            <option value="02">不投入</option>
+            <option value="03">故障</option>
+            <option value="04">检修</option>
+          </select>
+       </td>
+       <td colspan="2"></td>
+      </tr>
+      <tr>
+         <td rowspan="3" class="label">备　注：</td>
+          <td class="dom" colspan="3">
+            <textarea class="input_textarea3" name="remark" style="width:450;height:80"></textarea>
+          </td>
+      </tr>
+     </table>
+    </div>
+  </div>
+  <div class="guidePanel">
+    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+  </div>
+</div>
+</body>
+</html>

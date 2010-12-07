@@ -1,0 +1,175 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>角色列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+    <script type="text/javascript" language="javascript">
+    var contextPath = "../..";      
+    var sSelectedRoleID = "";   
+    function selectRow(sRoleID, oRow) {
+        sSelectedRoleID = sRoleID;
+        selectSingleRow(oRow);
+    }
+  
+    //列表变更
+    function changeList(type) {
+        if(type != 1){
+            parent.document.getElementById("new").disabled = true;
+            parent.document.getElementById("edit").disabled = true;
+            parent.document.getElementById("delete").disabled=true;
+        }
+        else{
+            parent.document.getElementById("new").disabled = false;
+            parent.document.getElementById("edit").disabled = false;
+            parent.document.getElementById("delete").disabled = false;
+        }
+        document.forms[0].submit();
+    }
+  
+  
+    function init(){
+    }   
+    </script>
+  </head>
+ 
+  <body onload="init()">
+    <div id="body">
+      <div class="content">
+        <div id="cont_1">   
+          <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 34));">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <thead>
+                <tr> 
+                  <th>序号</th>
+                  <th>角色名称</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="100"  align="center" class="trmainstyle" onclick="selectRow('100', this)" style="cursor: pointer;">
+                  <td>
+                  1
+                  </td>
+                  <td>
+                    管理员
+                  </td>
+                </tr>
+                
+                <tr id="189"  align="center" class="trmainstyle" onclick="selectRow('189', this)" style="cursor: pointer;">
+                  <td>
+                    2
+                  </td>
+                  <td>
+                      开发角色
+                  </td>
+                </tr>
+            
+                <tr id="249"  align="center" class="trmainstyle" onclick="selectRow('249', this)" style="cursor: pointer;">
+                  <td>
+                      3
+                  </td>
+                  <td>
+                      变电站站长
+                  </td>
+                </tr>
+            
+                <tr id="250"  align="center" class="trmainstyle" onclick="selectRow('250', this)" style="cursor: pointer;">
+                  <td>
+                      4
+                  </td>
+                  <td>
+                      操作员
+                  </td>
+                </tr>
+            
+                <tr id="269"  align="center" class="trmainstyle" onclick="selectRow('269', this)" style="cursor: pointer;">
+                  <td>
+                      5
+                  </td>
+                  <td>
+                      省公司主站管理员
+                  </td>
+                </tr>
+            
+                <tr id="389"  align="center" class="trmainstyle" onclick="selectRow('389', this)" style="cursor: pointer;">
+                  <td>
+                      6
+                  </td>
+                  <td>
+                      zhangyu test
+                  </td>
+                </tr>
+            
+                <tr id="409"  align="center" class="trmainstyle" onclick="selectRow('409', this)" style="cursor: pointer;">
+                  <td>
+                      7
+                  </td>
+                  <td>
+                      地市公司管理员
+                  </td>
+                </tr>
+            
+                <tr id="429"  align="center" class="trmainstyle" onclick="selectRow('429', this)" style="cursor: pointer;">
+                  <td>
+                      8
+                  </td>
+                  <td>
+                      地市公司领导
+                  </td>
+                </tr>
+            
+                <tr id="449"  align="center" class="trmainstyle" onclick="selectRow('449', this)" style="cursor: pointer;">
+                  <td>
+                      9
+                  </td>
+                  <td>
+                      liu
+                  </td>
+                </tr>
+            
+                <tr id="469"  align="center" class="trmainstyle" onclick="selectRow('469', this)" style="cursor: pointer;">
+                  <td>
+                      10
+                  </td>
+                  <td>
+                      超级用户
+                  </td>
+                </tr>
+            
+                <tr id="489"  align="center" class="trmainstyle" onclick="selectRow('489', this)" style="cursor: pointer;">
+                  <td>
+                      11
+                  </td>
+                  <td>
+                      A
+                  </td>
+                </tr>
+            
+                <tr id="549"  align="center" class="trmainstyle" onclick="selectRow('549', this)" style="cursor: pointer;">
+                  <td>
+                      12
+                  </td>
+                  <td>
+                      test
+                  </td>
+                </tr>
+            
+                <tr id="589"  align="center" class="trmainstyle" onclick="selectRow('589', this)" style="cursor: pointer;">
+                  <td>
+                      13
+                  </td>
+                  <td>
+                      jinrui
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="nullContainer"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

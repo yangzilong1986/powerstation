@@ -1,0 +1,205 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>群组管理</title>
+<link rel="stylesheet" type="text/css" href="../../css/mainframe.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/autorm/common.js"></script>
+<script type="text/javascript" language="javascript">
+var contextPath = "../..";
+var sSelectedGroupID = "";   
+function selectRow(sGroupID, oRow) {
+    sSelectedGroupID = sGroupID;
+    selectedRow = oRow;
+    selectSingleRow(oRow);
+    var groupName = oRow.cells(1).innerHTML;
+    var groupAttr = oRow.cells(2).innerHTML;
+    var groupType = oRow.cells(3).innerHTML;
+    var groupCreater = oRow.cells(4).innerHTML;
+    if("系统管理员" == groupCreater){
+        parent.groupContent.document.getElementById("edit").style.display = "";
+        parent.groupContent.document.getElementById("delete").style.display = "";
+        parent.groupContent.document.getElementById("authorize").style.display = "";
+    }
+    else{
+        parent.groupContent.document.getElementById("edit").style.display = "none";
+        parent.groupContent.document.getElementById("delete").style.display = "none";
+        parent.groupContent.document.getElementById("authorize").style.display = "none";
+    }
+    parent.groupContent.document.getElementById("groupName").value = groupName;
+    if("私有" == groupAttr){
+        parent.groupContent.document.getElementById("shareFlag").checked = false;
+    }
+    else {
+        parent.groupContent.document.getElementById("shareFlag").checked = true;
+    }
+    if("专变群组" == groupType){
+        //parent.groupContent.SCHEME_LIST.document.location = "schemeList.html";
+        parent.groupContent.document.getElementById("groupType").value = "1";
+    }
+    else {
+        //parent.groupContent.SCHEME_LIST.document.location = "schemeList.html";
+        parent.groupContent.document.getElementById("groupType").value = "4";
+    }
+    parent.groupContent.document.getElementById("save").style.display = "none";
+    parent.groupContent.document.getElementById("addUser").style.display = "none";
+    parent.groupContent.document.getElementById("delUser").style.display = "none";
+    parent.groupContent.groupName.disabled = true;       
+    parent.groupContent.shareFlag.disabled = true;
+    parent.groupContent.groupType.disabled = true;
+    parent.groupContent.remark.disabled = true;
+}
+
+var selectedRow;
+function deleteRow(){
+    if(selectedRow == null){
+        return;
+    }
+    var index = selectedRow.rowIndex;
+    var objTable = document.getElementById("object_table");
+    objTable.deleteRow(index);
+}
+
+function insertRow(groupName, shareFlag, groupType){
+    var objTable = document.getElementById("object_table");
+    var rowNum = objTable.rows.length;
+    var addRow = objTable.insertRow(objTable.rows.length);
+    $(addRow).mouseover(function () { this.style.cursor='pointer'; });
+    $(addRow).click(function () { selectSingleRow(this); selectRow("", this); });
+    var cell1 = addRow.insertCell(0);
+    cell1.innerHTML = rowNum;
+    var cell2 = addRow.insertCell(1);
+    cell2.innerHTML = groupName;
+    var cell3 = addRow.insertCell(2);
+    cell3.innerHTML = shareFlag;
+    var cell4 = addRow.insertCell(3);
+    cell4.innerHTML = groupType;
+    var cell5 = addRow.insertCell(4);
+    cell5.innerHTML = "系统管理员";
+    setTableStyle();
+}
+
+//新增群组  
+function newGroup() {
+    parent.groupContent.document.getElementById("edit").style.display = "none";
+    parent.groupContent.document.getElementById("delete").style.display = "none";
+    parent.groupContent.document.getElementById("authorize").style.display = "none";
+    parent.groupContent.document.getElementById("save").style.display = "";
+    parent.groupContent.document.getElementById("addUser").style.display = "none";
+    parent.groupContent.document.getElementById("delUser").style.display = "none";
+    parent.groupContent.groupName.disabled = false;       
+    parent.groupContent.shareFlag.disabled = false;
+    parent.groupContent.groupType.disabled = false;
+    parent.groupContent.remark.disabled = false;
+    parent.groupContent.document.getElementById("groupName").value = "";
+    parent.groupContent.method = "add";
+}
+
+function fresh(){
+    parent.content.location.href=contextPath+'/system/groupAction.do?action=getGroupList&sqlcode=AL_SYSTEM_0100&random='+ Math.random();
+}
+</script>
+</head>
+ 
+<body>
+<div id="body">
+  <input type="hidden" name="action" value="getGroupList">
+  <input type="hidden" name="pageType" value="page">
+  <input name="pageRows" id="pageRows"  type=hidden value="" >
+  <input type="hidden" name="sqlcode" value="AL_SYSTEM_0100">
+  <div id="tool">
+    <table width="100%" align="center" border="0" cellpadding="0" cellspacing="1">
+      <tr>
+        <td width="66" class="label">群组名称：</td>
+        <td width="120" class="dom"><input type="text" name="groupName" value=""></td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="submit" value="查询" class="input1"> 
+          <input type="button" name="new" class="input2" value='新建群组' onclick="newGroup()" />
+        </td>
+      </tr>
+    </table>
+    <div class="clear"></div>
+  </div>
+ 
+  <div class="content">
+    <div id="cont_1">
+      <div id="tableContainer" class="tableContainer" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 66));">
+        <table id="object_table" border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>群组名称</th>
+              <th>群组属性</th>
+              <th>群组类别</th>
+              <th>创建人</th>
+            </tr>
+          </thead>
+          <tbody> 
+            <tr id="tr_181" class="trmainstyle" onclick="selectRow('181', this)" style="cursor:pointer;">
+              <td>1</td>
+              <td>group 1</td>
+              <td>私有</td>
+              <td>终端群组</td>
+              <td>系统管理员</td>
+            </tr>
+            
+            <tr id="tr_182" class="trmainstyle" onclick="selectRow('182', this)" style="cursor:pointer;">
+              <td>2</td>
+              <td>group 2</td>
+              <td>私有</td>
+              <td>终端群组</td>
+              <td>系统管理员</td>
+            </tr>
+        
+            <tr id="tr_202" class="trmainstyle" onclick="selectRow('202', this)" style="cursor:pointer;">
+              <td>3</td>
+              <td>group 3</td>
+              <td>公有</td>
+              <td>专变群组</td>
+              <td>沈国辉</td>
+            </tr>
+        
+            <tr id="tr_221" class="trmainstyle" onclick="selectRow('221', this)" style="cursor:pointer;">
+              <td>4</td>
+              <td>group 4</td>
+              <td>公有</td>
+              <td>终端群组</td>
+              <td>沈国辉</td>
+            </tr>
+        
+            <tr id="tr_225" class="trmainstyle" onclick="selectRow('225', this)" style="cursor:pointer;">
+              <td>5</td>
+              <td>group 5</td>
+              <td>公有</td>
+              <td>专变群组</td>
+              <td>沈国辉</td>
+            </tr>
+        
+            <tr id="tr_286" class="trmainstyle" onclick="selectRow('286', this)" style="cursor:pointer;">
+              <td>6</td>
+              <td>group 6</td>
+              <td>私有</td>
+              <td>专变群组</td>
+              <td>系统管理员</td>
+            </tr>
+        
+            <tr id="tr_341" class="trmainstyle" onclick="selectRow('341', this)" style="cursor:pointer;">
+              <td>7</td>
+              <td>group 7</td>
+              <td>私有</td>
+              <td>专变群组</td>
+              <td>开发者</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pageContainer">
+        &nbsp;第<span class="orange">1</span>页 / 共<span class="orange">1</span>页　转到：<input type="text" id="page" name="page" value="1" /> <img align="middle" src="../../img/bt_go.gif" width="35" height="21" border="0" style="cursor: pointer;" />　<a href="#"><img src="../../img/page_home.gif" class="pointer" title="返回起始页" /></a>　<a href="#"><img src="../../img/page_prew.gif" class="pointer" title="上一页" /></a>　<a href="#"><img src="../../img/page_next.gif" class="pointer" title="下一页" /></a>　<a href="#"><img src="../../img/page_end.gif" class="pointer" title="返回末页" /></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
