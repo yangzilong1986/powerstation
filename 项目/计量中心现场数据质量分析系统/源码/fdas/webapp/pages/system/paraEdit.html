@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>参数编辑</title>
+<link href="../../css/window.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+</script>
+</head>
+ 
+<body>
+  <div id="body">
+    <div class="tab">
+      <ul>
+        <li id="tab_1" class="tab_on">
+          <a href="#" onClick="return false;" onFocus="blur()">参数编辑</a>
+        </li>
+        <li class="clear"></li>
+      </ul>
+    </div>
+    <div id="main"  style="width:expression(((document.documentElement.clientWidth||document.body.clientWidth) - 18));">
+      <div id="tool">
+        <table width="100%" border=0 cellpadding=0 cellspacing=0 align=center class="e_detail_t">
+          <tr align="center">
+            <td class="contentLeft">　</td>
+            <td>
+              <table width="100%" align="center" border="0" cellpadding="0" cellspacing="1" >
+                <tr align="center">
+                  <td width="40%">参数名称：</td>
+                  <td width="60%" align="left">CONTROL_NUM</td>
+                </tr>
+                <tr align="center">
+                  <td>单位名称：</td>
+                  <td align="left"></td>
+                </tr>
+                <tr align="center">
+                  <td>参数值：<font color="#ff0000">*</font></td>        
+                  <td align="left">       
+                    <input type="text" name="PValue" value="5">
+                  </td>
+                </tr>
+                <tr align="center">
+                  <td>备注：<font color="#ff0000">*</font></td>
+                  <td align="left"><textarea name="remark" cols="35" rows="5">控制执行返回结果读取次数</textarea></td>
+                </tr>
+                <tr>
+                  <td  align="center" colspan="2">
+                    <input type="submit" value="确定" class="input1" onclick="parent.GB_hide()"/>&nbsp;&nbsp;&nbsp;
+                    <input type="button" name="cancel2" value='取消' class="input1" onclick="parent.GB_hide()"/>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td class="contentRight">　</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

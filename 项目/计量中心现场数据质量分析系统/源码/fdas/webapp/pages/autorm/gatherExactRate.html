@@ -1,0 +1,284 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>采集准确率</title>
+<link rel="stylesheet" type="text/css" href="../../css/dataframe.css"/>
+<script type="text/javascript" language="javascript" src="../../js/autorm/calendar.js"></script>
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEX.js"></script>
+<script type="text/javascript" language="javascript" src="../../FusionCharts/FusionCharts.js"></script>   
+<script type="text/javascript" language="javascript"> 
+var contextPath = "../..";
+ 
+$(document).ready(function(){
+    //img的绑定事件
+    $('img').click(function(){
+        if($(this).attr("src").indexOf("plus1.gif")!=-1){
+            $(this).attr("src", contextPath + "/img/tree2/minus1.gif");
+            //alert("显示");
+            var trs = $(this).parent().parent().nextAll().each(function(i){
+                if($(this).attr("lastflag")){
+                    $(this).attr("class", "styleShow");
+                }
+                else return false; //跳出循环
+            });
+        }
+        else if($(this).attr("src").indexOf("minus1.gif")!=-1){
+            $(this).attr("src", contextPath + "/img/tree2/plus1.gif");
+            //alert("隐藏");
+            var trs = $(this).parent().parent().nextAll().each(function(){
+                if($(this).attr("lastflag")){
+                    $(this).attr("class", "styleHidden");
+                }
+                else return false; //跳出循环
+            });
+        }
+    });
+});
+    
+</script>
+</head>
+ 
+<body>
+<div class="graphContainer" style="height: expression(((document.documentElement.clientHeight||document.body.clientHeight) - 34));">
+  <!-- START Script Block for Chart-->
+  <div id='chartDiv' align='center'>
+          Chart.
+  </div>
+  <script type='text/javascript'>
+    var chart_chart = new FusionCharts('../../FusionCharts/MSColumn3D.swf', 'chart', '800', '275', '0', '0');
+    // Provide entire XML data using dataXML method
+    chart_chart.setDataXML("<chart caption='抄表准确率' shownames='1' showvalues='0'><categories><category label='广州市电力公司'/><category label='深圳市电力公司'/><category label='湛江市电力公司'/></categories><dataset seriesName='抄表准确率' color='AFD8F8' showValues='0'><set value='0.8'/><set value='0.5'/><set value='0.8'/></dataset></chart>");
+    // Finally, render the chart.
+    chart_chart.render("chartDiv");
+  </script>
+  <!--END Script Block for Chart-->
+        
+  <input type="hidden" name="mothed" value="detail">
+  <input type="hidden" name="sjmd" value="10">
+  <input type="hidden" name="sjlx" value="">
+  <input type="hidden" name="ckfs" value="">
+  <input type="hidden" name="tjsj" value="2009-9-20">
+  <input type="hidden" name="sqlcode" value="CBCGL0002">
+  <input type="hidden" name="org_no" value="4">       
+  <input type="hidden" name="year" value="2009">
+  <input type="hidden" name="month" value="8">
+  <input type="hidden" name="sblx" value="">
+  <input type="hidden" name="txfs" value="">
+  <div id="tableContainer" class="tableContainer" style="width: expression((document.documentElement.clientWidth||document.body.clientWidth)-22);">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th width="5%">&nbsp;</th>
+          <th width="20%">供电单位（终端厂家）</th>
+          <th width="15%">应抄电表数</th> 
+          <th width="15%">实抄电表数</th> 
+          <th width="15%">实抄正确数</th>
+          <th width="15%">不正确数</th>
+          <th width="15%">准确率(%)</th>
+        </tr>
+      </thead>
+      <tbody>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+                广州市电力公司
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              30
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              80.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+           &nbsp;&nbsp;&nbsp;&nbsp;杭州百富
+           </td>
+           <td style="text-align: left;">
+              30
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              15
+           </td>
+           <td style="text-align: left;">
+              5
+           </td>
+           <td style="text-align: left;">
+              80.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;湖南威胜
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              15
+           </td>
+           <td style="text-align: left;">
+              5
+           </td>
+           <td style="text-align: left;">
+              80.0
+           </td>
+         </tr>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+              深圳市电力公司
+           </td>
+           <td style="text-align: left;">
+              100
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              30
+           </td>
+           <td style="text-align: left;">
+              30
+           </td>
+           <td style="text-align: left;">
+              50.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;湖南威胜
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              15
+           </td>
+           <td style="text-align: left;">
+              5
+           </td>
+           <td style="text-align: left;">
+              75.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+              &nbsp;&nbsp;&nbsp;&nbsp;浙江华力
+           </td>
+           <td style="text-align: left;">
+              50
+           </td>
+           <td style="text-align: left;">
+              40
+           </td>
+           <td style="text-align: left;">
+              15
+           </td>
+           <td style="text-align: left;">
+              25
+           </td>
+           <td style="text-align: left;">
+              37.5
+           </td>
+         </tr>
+         <tr align="left">
+           <td>
+             <img src="../../img/tree2/plus1.gif" style="cursor:pointer;"/>
+           </td>
+           <td style="text-align: left;">
+              湛江市电力公司
+           </td>
+           <td style="text-align: left;">
+              200
+           </td>
+           <td style="text-align: left;">
+              150
+           </td>
+           <td style="text-align: left;">
+              120
+           </td>
+           <td style="text-align: left;">
+              30
+           </td>
+           <td style="text-align: left;">
+              80.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+            &nbsp;&nbsp;&nbsp;&nbsp;杭州百富
+           </td>
+           <td style="text-align: left;">
+              100
+           </td>
+           <td style="text-align: left;">
+              80
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              20
+           </td>
+           <td style="text-align: left;">
+              75.0
+           </td>
+         </tr>
+         <tr class="styleHidden" lastflag="00">
+           <td></td>
+           <td style="text-align: left;" nowrap="nowrap">
+              &nbsp;&nbsp;&nbsp;&nbsp;湖南威胜
+           </td>
+           <td style="text-align: left;">
+              100
+           </td>
+           <td style="text-align: left;">
+              70
+           </td>
+           <td style="text-align: left;">
+              60
+           </td>
+           <td style="text-align: left;">
+              10
+           </td>
+           <td style="text-align: left;">
+              85.7
+           </td>
+         </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="pageContainer">
+  <a href="#"><img src="../../img/bt_excel.gif" width="16" height="16" title="导出Excel" /></a>　 
+</div>
+</html>

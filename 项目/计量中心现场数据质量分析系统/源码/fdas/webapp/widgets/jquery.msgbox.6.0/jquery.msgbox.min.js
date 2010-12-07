@@ -1,0 +1,35 @@
+/**
+ *	jquery.msgbox 5.0 - 2010-04-17
+ *
+ *  Author: pwwang
+ *  Website: pwwang.com
+ *  Note: All the stuff written by pwwang
+ *	      Feel free to do whatever you want with this file
+ *        Please keep the distribution
+ *
+ **/
+
+(function($){$.msgbox=function(o){if(typeof(o)=='string'){o={content:o}}
+var opts=o||{};opts.width=o.width||360;opts.height=o.height||200,opts.autoClose=o.autoClose||0;opts.title=o.title||'提示',opts.wrapperClass=o.wrapperClass||'msgbox_wrapper';opts.titleClass=o.titleClass||'msgbox_title';opts.closeClass=o.closeClass||'msgbox_close';opts.titleWrapperClass=o.titleWrapperClass||'msgbox_title_wrapper';opts.mainClass=o.mainClass||'msgbox_main';opts.bgClass=o.bgClass||'msgbox_bg';opts.buttonClass=o.buttonClass||'msgbox_button';opts.inputboxClass=o.inputboxClass||'msgbox_inputbox';opts.type=o.type||'text';opts.content=o.content||'Hello, world!';opts.onClose=o.onClose||function(){};opts.closeImg=o.closeImg||'';opts.bgOpacity=o.bgOpacity||0.6;opts.onAjaxed=o.onAjaxed||function(){};opts.onInputed=o.onInputed||function(){};opts.enableDrag=typeof o.enableDrag!='boolean'?true:o.enableDrag;opts.bgAnimate=typeof o.bgAnimate!='boolean'?true:o.bgAnimate;opts.boxAnimate=typeof o.boxAnimate!='boolean'?true:o.boxAnimate;var returnValue=false;var relTop=0;var relLeft=0;var $background=$("<div>").attr('id','jMsgboxBg').css({'position':'absolute','top':'0','left':'0','z-index':'9999','opacity':'0'}).addClass(opts.bgClass).appendTo('body').dblclick(closeMe).click(function(){flashTitle(0.5,4,80);});if(opts.bgAnimate)
+$background.animate({'opacity':opts.bgOpacity});else
+$background.css('opacity',opts.bgOpacity);var $wrapper=$("<div>").attr('id','jMsgboxBox').css({'width':opts.width+'px','height':opts.height+'px','position':'absolute','z-index':'10000','display':'none'}).addClass(opts.wrapperClass).appendTo('body');if(opts.boxAnimate)
+$wrapper.slideDown("slow");else
+$wrapper.css('display','');var $titleWrapper=$('<ul><li>提示</li><li>关闭</li></ul>').addClass(opts.titleWrapperClass).appendTo($wrapper);var $titleLi=$("li:first",$titleWrapper).html(opts.title).addClass(opts.titleClass);var $closeLi=$titleLi.next().addClass(opts.closeClass).mousedown(closeMe)
+if(opts.closeImg!='')
+$closeLi.html("<img src="+opts.closeImg+" border=0 />");var $main=$(document.createElement("div")).addClass(opts.mainClass).appendTo($wrapper);$main.height(opts.height-$titleWrapper.outerHeight(true)-$main.outerHeight(true)+$main.height());function closeMe(){if(opts.boxAnimate)
+$wrapper.slideUp('slow');else $wrapper.remove();if(opts.bgAnimate)
+$background.fadeOut();else $background.remove();opts.onClose(returnValue);}
+function isVisible(){return $background.is(":visible")&&$wrapper.is(":visible");}
+function autoCloseMe(autoClose){if(autoClose>0&&isVisible()){autoCloseStr=autoClose+" 秒后关闭 ...";$titleLi.html(opts.title+" &nbsp; "+autoCloseStr);autoClose--;if(autoClose==0)
+closeMe();setTimeout(function(){autoCloseMe(autoClose)},1000);}}
+function resetPosition(){$background.css({'width':document.documentElement.scrollWidth+'px','height':document.documentElement.scrollHeight+'px'});relLeft=($(window).width()-opts.width)/2;relTop=($(window).height()-opts.height)/2;fixBox();}
+function flashTitle(opacity,times,interval,flag){if(times>0){flag=!flag;op=flag?opacity:1;$titleWrapper.css('opacity',op);setTimeout(function(){flashTitle(opacity,times-1,interval,flag)},interval);}}
+function fixBox(){$wrapper.css({'top':$(window).scrollTop()+relTop+'px','left':$(window).scrollLeft()+relLeft+'px'});}
+function msgbox(){switch(opts.type){case'input':$main.html(opts.content);var $inputbox=$("<input type='text' />").appendTo($main).addClass(opts.inputboxClass);var $buttonWrapper=$("<div>").css({'text-align':'center','padding':'15px 0'}).appendTo($main);var $yesButton=$("<input type=button value=' OK '>").appendTo($buttonWrapper).addClass(opts.buttonClass).after(" &nbsp; &nbsp; ").click(function(){opts.onInputed($inputbox.val());closeMe();});var $noButton=$("<input type=button value=' Cancel '>").appendTo($buttonWrapper).addClass(opts.buttonClass).click(closeMe);break;case'alert':$main.html(opts.content);var $buttonWrapper=$("<div>").css({'text-align':'center','padding':'15px 0'}).appendTo($main);var $OKButton=$("<input type=button value=' OK '>").appendTo($buttonWrapper).addClass(opts.buttonClass).click(closeMe);break;case'confirm':$main.html(opts.content);var $buttonWrapper=$("<div>").css({'text-align':'center','padding':'15px 0'}).appendTo($main);var $yesButton=$("<input type=button value=' Yes '>").appendTo($buttonWrapper).addClass(opts.buttonClass).after(" &nbsp; &nbsp; ").click(function(){returnValue=true;closeMe();});var $noButton=$("<input type=button value=' No '>").appendTo($buttonWrapper).addClass(opts.buttonClass).click(function(){returnValue=false;closeMe();});break;case'get':case'ajax':case'url':$main.text("Loading ...").load(opts.content,'',function(data){(opts.onAjaxed)(data);});break;case'iframe':$("<iframe frameborder=0 marginheight=0 marginwidth=0></iframe>").appendTo($main).attr({'width':'100%','height':'100%','scrolling':'auto','src':opts.content});break;default:$main.html(opts.content);}}
+resetPosition();$(window).load(resetPosition).resize(resetPosition).scroll(fixBox);msgbox();if(opts.autoClose>0)
+autoCloseMe(opts.autoClose);o.outClose=closeMe;if(opts.enableDrag)
+$wrapper.Drags({handler:$titleWrapper,onMove:function(){$(window).unbind('scroll')},onDrop:function(){relTop=$wrapper.getCss('top')-$(window).scrollTop();relLeft=$wrapper.getCss('left')-$(window).scrollLeft();$(window).scroll(fixBox);}});return this;}
+$.closemsgbox=function(o){o=o||window.document;if(o.constructor=='[object HTMLDocument]')
+o={document:o};var opts=o||{};opts.document=o.document||window.document;opts.bgAnimate=typeof o.bgAnimate=='undefined'?true:o.bgAnimate;opts.boxAnimate=typeof o.boxAnimate=='undefined'?true:o.boxAnimate;opts.onClose=o.onClose||function(){};var $wrapper=$(o.getElementById('jMsgboxBox'));var $background=$(o.getElementById('jMsgboxBg'));if(opts.boxAnimate)
+$wrapper.slideUp('slow');else $wrapper.remove();if(opts.bgAnimate)
+$background.fadeOut();else $background.remove();opts.onClose();}})(jQuery);

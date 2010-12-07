@@ -1,0 +1,210 @@
+<html>
+  <head>   
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>编码详细</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mainframe.css"/>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/frame/component.js"></script>
+    <script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+    <script type="text/javascript">
+    var contextPath = "../..";  
+    var errorType = '请选择要编辑的编码类别';  
+    var errorCode = '请选择要编辑的编码';
+    var errorDelCode = '请选择要删除的编码';
+    var confirmDel = '确定要删除吗?';
+    var sSelectedCodeId = "";   
+    function selectRow(sCodeId, oRow) {
+        sSelectedCodeId= sCodeId;
+        selectSingleRow(oRow);
+    }   
+        
+    //新增编码
+    function newCode() {
+        var codeCate = parent.codeList.sSelectedCodeCate;
+        var codeType = parent.codeList.document.forms[0].codeType.value;
+        if(codeCate == "") {
+            alert(errorType);
+            return;
+        }
+        var str_url = "../../jsp/system/codeEdit.html";
+        //windowPopup(str_url, 450, 250);
+        top.showDialogBox("新增编码", str_url, 575, 900);
+    }
+    
+    //编辑编码
+    function editCode() {
+        var codeCate = parent.codeList.sSelectedCodeCate;
+        if(codeCate == "") {
+            alert(errorType);
+            return;
+        }
+        if(sSelectedCodeId == "") {
+            alert(errorCode);
+            return;
+        }
+        var str_url = "../../jsp/system/codeEdit.html";
+        top.showDialogBox("编辑编码", str_url, 575, 900);
+    }
+    
+    //查看编码
+    function viewCode() {
+        var codeCate = parent.codeList.sSelectedCodeCate;
+        if(codeCate == "") {
+            alert(errorType);
+            return;
+        }
+        if(sSelectedCodeId == "") {
+            alert(errorCode);
+            return;
+        }
+        var str_url = contextPath + "/system/codeAction.do?action=beforeEdit&code=" + sSelectedCodeId + "&codeCate=" + codeCate + "&isEdit=false&random=" + Math.random();
+        windowPopup(str_url, 450, 250);
+    }
+  
+    //删除编码
+    function deleteCode() {
+        var codeCate = parent.codeList.sSelectedCodeCate;
+        if(codeCate == "") {
+            alert(errorType);
+            return;
+        }
+        if(sSelectedCodeId == "") {
+            alert(errorDelCode);
+            return;
+        }
+        if(confirm(confirmDel)) {
+            
+        }
+    }
+    
+    function fresh(){
+        parent.fresh();
+    }
+    </script>
+  </head>
+  
+  <body>
+    <div class="pad5">
+      <input type="button" id="new" class="input1" value='新增' onclick="newCode()" />
+      <input type="button" id="edit" class="input1" value='编辑' onclick="editCode()" />
+      <input type="button" id="delete" class="input1" value='删除' onclick="deleteCode()" />
+    </div>
+    <div class="data1"><span>编码值</span></div>
+    <div class="data1_con">
+      <div class="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 72));">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>
+                序号
+              </th>
+              <th>
+                编码类别
+              </th>
+              <th>
+                编码值
+              </th>
+              <th>
+                编码说明
+              </th>
+              <th>
+                备注
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="center" class="trmainstyle" onclick="selectRow('A', this)" style="cursor: pointer;">
+              <td>
+                1
+              </td>
+              <td>
+                ALARM_GRADE
+              </td>
+              <td>
+                A
+              </td>
+              <td>
+                A
+              </td>
+              <td>
+                预警等级
+              </td>
+            </tr>
+          
+            <tr align="center" class="trmainstyle" onclick="selectRow('B', this)" style="cursor: pointer;">
+              <td>
+                2
+              </td>
+              <td>
+                ALARM_GRADE
+              </td>
+              <td>
+                B
+              </td>
+              <td>
+                B
+              </td>
+              <td>
+                预警等级
+              </td>
+            </tr>
+          
+            <tr align="center" class="trmainstyle" onclick="selectRow('C', this)" style="cursor: pointer;">
+              <td>
+                3
+              </td>
+              <td>
+                ALARM_GRADE
+              </td>
+              <td>
+                C
+              </td>
+              <td>
+                C
+              </td>
+              <td>
+                预警等级
+              </td>
+            </tr>
+          
+            <tr align="center" class="trmainstyle" onclick="selectRow('D', this)" style="cursor: pointer;">
+              <td>
+                4
+              </td>
+              <td>
+                ALARM_GRADE
+              </td>
+              <td>
+                D
+              </td>
+              <td>
+                D
+              </td>
+              <td>
+                预警等级
+              </td>
+            </tr>
+          
+            <tr align="center" class="trmainstyle" onclick="selectRow('E', this)" style="cursor: pointer;">
+              <td>
+                5
+              </td>
+              <td>
+                ALARM_GRADE
+              </td>
+              <td>
+                E
+              </td>
+              <td>
+                E
+              </td>
+              <td>
+                预警等级
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

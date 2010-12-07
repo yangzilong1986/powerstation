@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>密码修改</title>
+<link href="../../css/main.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="javascript"> 
+var errorNoPasswd = '原密码不能为空！';
+var errorNoNewPasswd = '新密码不能为空！';
+var errorNewPasswdLength = '新密码长度必须大于5位！';
+var errorNoConPasswd = '确认新密码不能为空！';
+var errorPasswdDiff = '两次输入的新密码不同！';
+
+//提交处理
+function submitDisposal() {
+    if(document.all.oldPassword.value == "") {
+        alert(errorNoPasswd);
+        return false;
+    }
+    if(document.all.newPassword.value == "") {
+        alert(errorNoNewPasswd);
+        return false;
+    }
+    if(document.all.newPassword.value.length<5) {
+        alert(errorNewPasswdLength);
+        return false;
+    }
+    if(document.all.affirmPassword.value == "") {
+        alert(errorNoConPasswd);
+        return false;
+    }
+ 
+    if(document.all.newPassword.value != document.all.affirmPassword.value) {
+        alert(errorPasswdDiff);
+        return false;
+    }
+ 
+    return true;
+}
+function fresh(){
+    parent.changeType(4);
+}
+</script>
+</head>
+
+<body>
+  <input type="hidden" name="action" value="changePassword"/>
+  <div id="main" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 244));">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="100%" height="30" colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="40%" height="40" align="right">请输入原密码(O)：<font color="#ff0000">*</font></td>
+        <td width="60%" align="left">
+          <input type="password" name="oldPassword" value="" class="mainInput"/>
+        </td>
+      </tr>
+      <tr>
+        <td height="40" align="right">请输入新密码(N)：<font color="#ff0000">*</font></td>
+        <td align="left">
+          <input type="password" name="newPassword" value="" class="mainInput"/>
+        </td>
+      </tr>
+      <tr>
+        <td height="40" align="right">请确认新密码(C)：<font color="#ff0000">*</font></td>
+        <td align="left">
+          <input type="password" name="affirmPassword" value="" class="mainInput"/>
+        </td>
+      </tr>
+      <tr>
+        <td width="100%" height="30" colspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="100%" height="50" colspan="2" align="center">
+          <input type="submit" value="确定" class="input3"> &nbsp;
+          <input type="reset" value="取消" class="input3">
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

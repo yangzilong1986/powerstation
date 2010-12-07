@@ -1,0 +1,108 @@
+@CHARSET "UTF-8";
+* { margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+ul { margin: 0; padding: 0; }
+ul, li { list-style-type: none; }
+a { text-decoration: none; }
+table a { text-decoration: none; cursor: hand}
+img { border: 0; }
+.disNone { display: none; }
+.cb { clear: both; }
+.cle { font: 0px/0px sans-serif; clear: both; display: block; }
+
+.tc { text-align: center; }
+.tr { text-align: right; }
+.tl { text-align: left; }
+.fl { float: left; }
+.fr { float: right; }
+
+.pad5 { padding: 5px; }
+.pad10 { padding: 10px; }
+.pad15 { padding: 15px; }
+.pad20 { padding: 20px; }
+.pad25 { padding: 25px; }
+.pad30 { padding: 30px; }
+.pad40 { padding: 40px; }
+.pt5 { padding-top: 5px; }
+.pt10 { padding-top: 10px; }
+.pt20 { padding-top: 20px; }
+.pt30 { padding-top: 30px; }
+.pt40 { padding-top: 40px; }
+.mgl15 { margin-left: 15px; }
+
+.font1 { font-family: "宋体"; color: #104f4f; }
+.font2 { font-family: "宋体"; color: #333; }
+.font3 { font-family: "宋体"; color: #474747; }
+.fontw { font-size: 14px; color: #fff; font-weight: bold; }
+.green { color: #0c6051; }
+.white { color:#fff; }
+
+/*login*/
+.login_bg { background: url(../img/bg_login.jpg) no-repeat; width: 1024px; height: 500px; margin: 0 auto; padding-top: 130px; }
+.login_bg1 { background: url(../img/login_bg1.png) no-repeat; width: 584px; height: 312px; margin: 0 auto; }
+* html .login_bg1 { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="style/default/bgcolor/green-stategrid/img/login_bg1.png"); background:none; width:584px; height:312px; margin:0 auto; }
+.input1 { border: 1px #9f9f9f solid; height: 22px; background: none; line-height: 22px; color: #fff; font-family: Arial, Helvetica, sans-serif; padding-left: 5px; }
+
+.bg_panel_left { background: url(../img/bg_panel_left.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
+.bg_panel_right { background: url(../img/bg_panel_right.gif) repeat-y; width: 8px; height: 100%; overflow: hidden; }
+
+#border_bot { height: 8px; background: url(../img/cexpandbtn_top_bg.gif) repeat-x; }
+#border_bot_l { float: left; width: 8px; height: 8px; background: url(../img/border_l_b.gif) no-repeat; }
+#border_bot_r { float: right; width: 8px; height: 8px; background: url(../img/border_r_b.gif) no-repeat; }
+
+.panel_upanddown { background: url(../img/cexpandbtn_top_bg.gif) repeat-x; clear: both; height: 8px; }
+.panel_upanddown p { text-align: center; padding-top: 2px; }
+
+.bg_top { background: url(../img/bg_top.jpg) no-repeat #0d4d4d; height: 81px; padding-left: 1px; }
+#logo { float: left; padding-top: 13px; }
+#top_r { float: right; width: 465px; padding-top: 6px; }
+#top_r_t { float: right; height: 55px; padding-right: 7px; }
+#top_r_t ul { overflow: hidden; }
+#top_r_t ul li { float: left; width: 65px; height: 55px; text-align: center; font-family: "宋体"; font-size: 14px; font-weight: bold; margin-left: 25px; }
+#top_r_t ul li a { color: #fff; display: block; margin-top: 5px; line-height: 15px; }
+#top_r_t ul li a:hover { text-decoration: underline; }
+#top_menu { clear: both; height: 16px; padding-right: 12px; }
+#top_menu ul { overflow: hidden; }
+#top_menu ul li { float: right; margin-left: 8px; width: 16px; }
+
+/*菜单CSS开始*/
+#menu { height: 26px; background: url(../img/bg_menu.gif) repeat-x; }
+#menu dl { overflow: hidden; margin: 0; width: 100%; }
+#menu dt { height: 26px; overflow: hidden; }
+#menu dd { margin: 0; padding: 0; z-index: 99; }
+#menu dd a { background: url(../img/fod_menu.gif) no-repeat bottom; display: block; width: 84px; padding-left: 18px; height: 29px; line-height: 29px; text-decoration: none; color: #333; }
+#menu dd a:active { background: url(../img/fod_menu.gif) no-repeat bottom #9fd5cf; text-decoration: none; color: #333; }
+#menu dd a:hover { background: url(../img/fod_menu.gif) no-repeat bottom #9fd5cf; text-decoration: none; color: #333; }
+#menu #Fod { float: left; overflow: hidden; }
+#menu #Fod div { float: left; font-family: "宋体"; line-height: 26px; width: 100px; text-align: center; }
+#menu #Fod div.s { background: url(../img/nav_bg02.gif) repeat-x; width: 100px; height: 26px; }
+#menu #Fod a { color: #d3fcfc; text-decoration: none; }
+#menu #Fod a:hover { color: #d3fcfc; }
+#menu #Fod div.s a { color: #d3fcfc; text-decoration: none; }
+#menu #Fod div.s a:hover { color: #d3fcfc; text-decoration: none; }
+.dis { display: block; }
+.undis { display: none; }
+.menu1 {z-index: 99; position: absolute; left: 0; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu2 {z-index: 99; position: absolute; left: 97px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu3 {z-index: 99; position: absolute; left: 197px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu4 {z-index: 99; position: absolute; left: 297px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu5 {z-index: 99; position: absolute; left: 397px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu6 {z-index: 99; position: absolute; left: 497px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu7 {z-index: 99; position: absolute; left: 597px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu8 {z-index: 99; position: absolute; left: 697px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+.menu9 {z-index: 99; position: absolute; left: 797px; top: 26px; border-left: 1px #4fa599 solid; border-right: 1px #4fa599 solid; border-bottom: 1px #4fa599 solid; width:104px; background: #f3f3f3; padding: 1px; }
+/*菜单CSS结束*/
+
+.footer{height:23px; background:url(../img/footer_bg.gif) repeat-x; border-top:#104f4f 1px solid; border-right:#104f4f 1px solid;  border-left:#104f4f 1px solid; border-bottom:#358989 1px solid; color:#fff; line-height:23px; font-family:"宋体"; }
+.footer p{padding-left:15px;}
+.footer p span,.footer p span a{ color:#95ef34; padding-left:5px;}
+.footer p span a:hover{ text-decoration:underline;}

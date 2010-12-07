@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>采集器信息</title>
+<link rel="stylesheet" type="text/css" href="../../css/window.css" />
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script type="text/javascript" src="../../js/frame/tableEx.js"></script>
+<script type="text/javascript" src="../../js/frame/component.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveCheck.js"></script>
+<script type="text/javascript" src="../../js/archive/archiveComm.js"></script>
+<script type="text/javascript" src="../../js/frame/const.js"></script>
+<script type="text/javascript">
+//初始化加载
+$(function(){
+ //厂家
+ $.handelCombox('madeFacTar','divFactory1');
+})
+//保存采集器信息
+function save(){
+   if(GMCheck()){
+      parent.GB_hide();
+   }
+}
+</script>
+</head>
+<body style="overflow: hidden;">
+<div id="main" style="height: 100%;">
+  <div class="tab"><em>采集器信息</em></div>
+  <div class="tab_con" style="height:expression(((document.documentElement.clientHeight||document.body.clientHeight) - 80));">
+    <div class="main">
+    <table border="0" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+          <td width="13%" class="label"><font color="red">* </font>资产编号：</td>
+          <td width="20%" class="dom"><input type="text" id="assetNoGM" name="assetNoGM" value="D23213432"/></td>
+          <td width="13%" class="label"><font color="red">* </font>采集器地址：</td>
+          <td width="20%" class="dom"><input type="text" id="logicalAddrGM" name="logicalAddrGM" value="12322234"/></td>
+          <td width="13%" class="label">通讯方式：</td>
+          <td width="21%" class="dom">
+            <select name="commMode" id="commMode">
+              <option value="1">485方式</option>
+              <option value="2">载波</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="label">抄表周期：</td>
+          <td class="dom"><input type="text" name="rm" id="rm" style="width: 130" value="10"/>分</td>
+          <td class="label">型　号：</td>
+          <td class="dom">
+            <select name="modelCode" id="modelCode">
+              <option value="1">BF001</option>
+              <option value="2">BF002</option>
+            </select>
+          </td>
+          <td class="label">厂　家：</td>
+          <td class="dom" id="madeFacTar"></td>
+        </tr>
+        <tr>
+          <td class="label">所属集中器：</td>
+          <td class="dom">
+            <select name="wiringMode" id="wiringMode">
+            </select>
+          </td>
+          <td class="label">安装日期：</td>
+          <td class="dom_date">
+           <input type="text" id="installDate" name="installDate"
+            value="2009-09-01" />
+          </td>
+          <td class="label">状　态：</td>
+          <td class="dom">
+            <select name="curStatus" id="curStatus">
+                <option value="1">运行</option>
+                <option value="2">待调</option>
+                <option value="6">故障</option>
+                <option value="7">停运</option>
+            </select>
+          </td>
+        </tr>
+       <tr>
+          <td class="label">安装单位：</td>
+          <td class="dom" colspan="5">
+            <input type="text" name="installFac" style="width:612;" />
+          </td>
+        </tr>
+        <tr>
+          <td class="label">备　注：</td>
+          <td class="dom" colspan="5">
+            <input type="text" name="remark" style="width:612;" />
+          </td>
+        </tr>
+     </table>
+    </div>
+  </div>
+  <div class="guidePanel">
+    <input class="input1" type="button" id="save" value="保 存" onclick="save();" />
+  </div>
+</div>
+</body>
+</html>

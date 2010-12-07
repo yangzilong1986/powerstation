@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin name="E3002" >   
+	<processor type="net.jcreate.e3.table.skin.processor.VelocityTemplateProcessor"/>
+	<constant name="displayMsg" dynamic="true" >
+ 	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.displayMsg")}]]></value>
+	</constant>
+	<constant name="loadingMsg" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.loadingMsg")}]]></value>
+	</constant>
+	<constant name="emptyReload" dynamic="true" >
+ 	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.emptyReload")}]]></value>
+	</constant>
+	<constant name="cellTextAlign" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.cellTextAlign")}]]></value>
+	</constant>
+	<constant name="timeout" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.timeout")}]]></value>
+	</constant>
+	<constant name="errMsgPrefix" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.errMsgPrefix")}]]></value>
+	</constant>
+	<constant name="errMsgTitle" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.errMsgTitle")}]]></value>
+	</constant>
+	<constant name="ok" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.ok")}]]></value>
+	</constant>
+	<constant name="errMsgWidth" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.errMsgWidth")}]]></value>
+	</constant>
+	<constant name="extHome" dynamic="true" >
+	  <value><![CDATA[${messageResource.getMessage("e3.table.ext.extHome")}]]></value>
+	</constant>
+	
+	
+	
+	
+	
+	 
+	 
+  <template name="scriptBegin" ><content><![CDATA[
+#if ( ${table.exported} == false )  
+    <link rel="stylesheet" type="text/css" href="${contextPath}${res_extHome}/resources/css/ext-all.css" />
+ 	<script type="text/javascript" src="${contextPath}${res_extHome}/adapter/ext/ext-base.js"></script>
+ 	<script type="text/javascript" src="${contextPath}${res_extHome}/ext-all.js"></script>
+#end 	  
+  ]]></content></template>
+  	
+  <template name="scriptEnd" ><content><![CDATA[
+  ]]></content></template>	
+   
+<template name="topNavigation" ><content><![CDATA[
+  ]]></content></template>	  
+  
+<template name="bottomNavigation" ><content><![CDATA[
+]]></content></template>	  
+  
+  
+  <template name="docBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="docEnd" ><content><![CDATA[
+  ]]></content></template>	
+  
+
+  <template name="caption" ><content><![CDATA[
+  ]]></content></template>	
+
+  <template name="paramsForm" ><content><![CDATA[
+  ]]></content></template>	
+
+
+  <template name="tableBegin" ><content><![CDATA[
+  ]]></content></template>
+  	
+  <template name="tableEnd" ><content><![CDATA[     
+  ]]></content></template>	
+  
+  
+
+  <template name="columnGroupsBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="columnGroupBegin" ><content><![CDATA[]]></content></template>	
+  <template name="columnGroup" ><content><![CDATA[]]></content></template>	
+  <template name="columnGroupEnd" ><content><![CDATA[]]></content></template>	
+
+
+  <template name="headerBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="headerEnd" ><content><![CDATA[
+  ]]></content></template>	 
+  
+  <!--fast模式不执行-->
+  <template name="columnBegin" ><content><![CDATA[
+  ]]></content></template>	  
+  <template name="column" ><content><![CDATA[
+  ]]></content></template>
+  
+  <!--fast模式不执行-->	
+  <template name="columnEnd" ><content><![CDATA[
+  ]]></content></template>	
+  
+  
+  
+
+  <template name="bodyBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="bodyEnd" ><content><![CDATA[
+#macro (exportData)
+##生成数据
+{  
+totalProperty:${pageInfo.total},root:[
+#foreach($row in $rows)
+
+#if ( $row.last )
+{
+#foreach($cell in $row.cells )
+#if ( $cell.last )
+   ${cell.column.property} : '${tools.escapeJs( $cell.getValue() )}'
+#else
+   ${cell.column.property} : '${tools.escapeJs( $cell.getValue() )}',
+#end
+#end
+}
+#else
+{
+#foreach($cell in $row.cells )
+#if ( $cell.last )
+   ${cell.column.property} : '${tools.escapeJs( $cell.getValue() )}'
+#else
+   ${cell.column.property} : '${tools.escapeJs( $cell.getValue() )}',
+#end
+#end
+},
+#end
+#end
+                      ]
+}
+#end  
+#if ( ${table.exported} == false )  
+   
+   <div id="${table.id}E3GridZone"></div>
+   
+<script>
+var ${table.id}E3ExtGrid;
+var ${table.id}E3ExtStore;
+
+function refresh_${table.id}(){
+  //已经初始化.这个方法通用用与表格数据被删除或者更新后，来更新数据.
+  if ( ${table.id}E3ExtStore != undefined ) {
+    ${table.id}E3ExtStore.reload();
+  }
+}
+
+ 
+ 
+Ext.onReady(function(){
+  Ext.SSL_SECURE_URL= '${contextPath}${res_extHome}/resources/images/default/s.gif'; 
+  Ext.BLANK_IMAGE_URL= '${contextPath}${res_extHome}/resources/images/default/s.gif';
+  
+  var e3Config = {
+    emptyReload : ${res_emptyReload},
+    loadingMsg  : '${res_loadingMsg}',
+    errMsgPrefix : '${res_errMsgPrefix}',
+    errMsgTitle : '${res_errMsgTitle}',
+    ok : '${res_ok}',
+    errMsgWidth : ${res_errMsgWidth},
+    timeout     : ${res_timeout}
+  }
+  
+    if ( typeof(${table.id}E3ConfigHandler) == 'function' ){   
+      ${table.id}E3ConfigHandler( e3Config );
+    }     
+  
+  
+  var firstData =
+  #exportData()
+  ;
+
+  //扩展Store,其目的是要解决当数据为空时,loading按纽不停转动的问题.  
+  Ext.data.StoreEx = function(pConfig){
+    Ext.data.StoreEx.superclass.constructor.call(this, pConfig);
+  };
+  Ext.extend(  Ext.data.StoreEx ,   Ext.data.Store, {
+    load : function(options){
+          if ( e3Config.emptyReload == false &&  firstData.totalProperty == 0 ){
+            return false;
+          }
+          return Ext.data.StoreEx.superclass.load.call(this,options);
+    }
+   }); 
+   
+    
+Ext.data.HttpProxy_net_jcreate_e3_tableEx_${table.id} = function(pHttpProxy, pMemoryProxy){
+    Ext.data.HttpProxy_net_jcreate_e3_tableEx_${table.id}.superclass.constructor.call(this);
+    this.httpProxy = pHttpProxy;
+    this.memoryProxy = pMemoryProxy;
+    this.firstLoad = true;
+};
+
+Ext.extend( Ext.data.HttpProxy_net_jcreate_e3_tableEx_${table.id}, Ext.data.DataProxy, 
+  {
+    load : function(params, reader, callback, scope, arg){
+
+       if ( this.firstLoad ) {
+        this.firstLoad = false;
+        //如果内存里没有数据，则会到服务器上取。如果采用传统的ajax编写方式，就会存在这种情况
+        //当时如果确实读取数据没有记录，就会出现连续读2次的数据库的情况，不过这种情况只有当
+        //没有找到记录，并且是第一次装载页面时才会出现，所以这个问题基本上可以忽略. 
+        if ( firstData.totalProperty != 0 ){
+           return this.memoryProxy.load(params, reader, callback, scope,arg);
+        } else { 
+           //如果第一次没有装载数据，默认是调用uri获取数据，如果设置emptyReload为false时，则不显示数据
+           if ( e3Config.emptyReload == true ){
+              return this.httpProxy.load(params, reader, callback, scope,arg);
+           } else {
+             ;//do nothing
+             return false;
+           }
+        }         
+      }else {
+        return this.httpProxy.load(params, reader, callback, scope,arg);
+      }
+    }
+ });
+   
+   var conn =new Ext.data.Connection(
+       {
+         timeout : e3Config.timeout,
+         url:'${table.uri}'
+       }
+       );
+
+  
+
+
+  var httpProxy = new Ext.data.HttpProxy(
+    conn
+  ) ;
+  
+  var memoryProxy = new  Ext.data.MemoryProxy( firstData );
+  var proxyEx = new Ext.data.HttpProxy_net_jcreate_e3_tableEx_${table.id}(httpProxy, memoryProxy);
+  var store = new Ext.data.StoreEx({
+    remoteSort: true,
+    proxy:  proxyEx ,
+    reader: new Ext.data.JsonReader(
+     {
+       totalProperty: 'totalProperty',
+       root: 'root'
+     }, 
+     [
+#foreach($col in $cols)
+#if ( $col.last )
+    {name: '${col.property}'}
+#else
+    {name: '${col.property}'},
+#end
+#end    
+    ]
+    )
+});
+${table.id}E3ExtStore = store;
+    // create the Grid
+    var columnModel =
+     [
+#foreach($col in $cols)
+#if ( $col.last )
+         {align : #if(${col.align}) '${col.align}' #else '${res_cellTextAlign}' #end , header: "${col.title}",  hidden: ${col.hidden}, sortable: ${col.sortable}, #if(${col.width}) width : ${tools.width( ${col.width} )} , #end dataIndex: '${col.property}', id: '${col.property}'}
+#else
+         {align : #if(${col.align}) '${col.align}' #else '${res_cellTextAlign}' #end , header: "${col.title}",  hidden: ${col.hidden},sortable: ${col.sortable},  #if(${col.width}) width : ${tools.width( ${col.width} )} , #end dataIndex: '${col.property}',  id: '${col.property}'},
+#end
+#end       
+        ];
+    var cm = new Ext.grid.ColumnModel(columnModel);  
+    
+     var initConfig={
+        el : '${table.id}E3GridZone',
+        store: store,         
+        sm: new Ext.grid.RowSelectionModel({singleSelect:true}),   
+        cm: cm,
+        stripeRows: true,
+#if($lastCol)  autoExpandColumn : '${lastCol.property}', #end
+        bodyStyle : 'width:100%;',
+        #if(${table.width}) width : ${tools.width( ${table.width} )} ,   #else autoWidth  : true , #end 
+        #if(${table.height}) height : ${tools.width( ${table.height} )}, #else autoHeight : true , #end
+        title:'${table.caption}' ,
+#if( $tableDirector.showTopToolbar )   
+    tbar: new Ext.PagingToolbar({
+        pageSize: ${pageInfo.pageSize},
+        store: store,
+        paramNames :{start: 'net_jcreate_e3_table_html_start_${table.id}', limit : 'net_jcreate_e3_table_html_pageSize_${table.id}' },
+        displayInfo: true,
+        displayMsg: '${res_displayMsg}',
+        emptyMsg: "${table.noDataTip}"
+    }),
+#end    
+        
+#if( $tableDirector.showBottomToolbar )        
+        bbar: new Ext.PagingToolbar({
+        pageSize: ${pageInfo.pageSize},
+        paramNames :{start: 'net_jcreate_e3_table_html_start_${table.id}', limit : 'net_jcreate_e3_table_html_pageSize_${table.id}' }, 
+        store: store,
+        displayInfo: true,
+        displayMsg: '${res_displayMsg}',
+        emptyMsg: "${table.noDataTip}"
+    }),
+#end    
+      
+      1 : 1
+     
+     };
+    
+    //用户可以定义一个confinHandler来设置一些额外的配置 
+    if ( typeof(${table.id}ConfigHandler) == 'function' ){   
+      ${table.id}ConfigHandler( initConfig );
+    }     
+    
+     var grid = new Ext.grid.GridPanel(
+        initConfig
+    );
+    ${table.id}E3ExtGrid = grid;
+    store.paramNames.sort = 'net_jcreate_e3_table_html_sortProperty_${table.id}';
+    store.paramNames.dir = 'net_jcreate_e3_table_html_sortDir_${table.id}';
+
+#set( $start = "net_jcreate_e3_table_html_start_${table.id}"    )
+#set( $pageSize = "net_jcreate_e3_table_html_pageSize_${table.id}"  )
+#set( $sortName = "net_jcreate_e3_table_html_sortName_${table.id}"  )
+
+var sortProperty2Name = { };
+
+#foreach ($col in $cols)
+#if ( $col.sortable )
+  sortProperty2Name.${col.property} = "${col.sortName}"; 
+#end    
+#end
+    
+    
+        
+    //refresh,sort,load都会追加这些参数.业务参数在这传递,在load方法里传递服务器取不到.
+    //start,pageSize不需要传递，过滤掉.(在load方法里已经传递)
+    var isFirstLoadData = true;
+    
+       var bsParams ={
+#foreach ($param in $params)   
+#if( ${param.name} == ${start} || ${param.name} == ${pageSize}  || ${param.name} == ${sortName})
+
+#else
+           "${param.name}"  : "${param.value}",
+#end 
+
+#end
+             net_jcreate_e3_table_html_exported_${table.id}: 'true',
+             net_jcreate_e3_table_html_refreshZone: '${table.id}'
+       };
+     
+    store.on('beforeload', function() {
+       if ( e3Config.emptyReload == false && ( firstData.totalProperty == 0 ) ){
+          return false;
+       } 
+       if ( isFirstLoadData == false ){
+         if ( conn.url == 'null' || conn.url=='' || conn.url=='?'){
+           return false;
+         }
+       }
+       //覆盖之前的参数
+       Ext.apply(bsParams,store.baseParams);
+       //把覆盖后的参数给store.
+       Ext.apply(store.baseParams,bsParams);
+         //追加排序名参数.   
+         var sortState = store.getSortState();
+         if ( sortState !=undefined ){
+           var sortField =  sortState.field ;
+           var sortName = eval("sortProperty2Name." + sortField);
+           Ext.apply(store.baseParams,{"net_jcreate_e3_table_html_sortName_${table.id}" : sortName});
+         }   
+         //这行代码必须是最后一行.
+         isFirstLoadData = false;          
+    });
+         
+    
+    if ( typeof(${table.id}RenderBeforeHandler) == 'function' ){   
+      ${table.id}RenderBeforeHandler( grid );
+    }    
+    
+     conn.on('beforerequest', function(pConn,  pOptions) {
+          var maskObj = Ext.get( initConfig.el );
+          maskObj.mask(e3Config.loadingMsg,'x-mask-loading');
+     });
+      
+     conn.on('requestcomplete', function(pConn, pResponse, pOptions) {
+     var maskObj = Ext.get( initConfig.el );
+     maskObj.unmask();
+       eval("var json =" +  pResponse.responseText ) ;
+       if ( json.msg != undefined ){
+       Ext.MessageBox.show({
+        title: e3Config.errMsgTitle,
+        msg: json.msg ,
+        buttons:{"ok": e3Config.ok},
+        width: e3Config.errMsgWidth,
+        icon:Ext.MessageBox.ERROR,
+        closable:true,
+        multiline:false
+       });       
+       }  
+     });
+        
+     conn.on('requestexception', function(pConn, pResponse, pOptions) {
+       var maskObj = Ext.get( initConfig.el );
+       maskObj.unmask();
+       var errMsg;
+       if ( pResponse.responseText != undefined ){
+         errMsg = e3Config.errMsgPrefix + pResponse.responseText;
+       } else {
+         errMsg = e3Config.errMsgPrefix + pResponse.statusText;
+       }
+      Ext.MessageBox.show({
+        title: e3Config.errMsgTitle,
+        msg: errMsg,
+        buttons:{"ok": e3Config.ok},
+        width:e3Config.errMsgWidth,
+        icon:Ext.MessageBox.ERROR,
+        closable:true,
+        multiline:false
+       });       
+   
+     });
+    
+    
+    grid.render();
+    //start pageSize必须在这设置
+    store.load({params:{
+       ${start} : ${pageInfo.start},
+       ${pageSize} : ${pageInfo.pageSize}
+    }});
+    
+    
+    if ( typeof(${table.id}RenderAfterHandler) == 'function' ){    
+      ${table.id}RenderAfterHandler( grid );
+    }
+    grid.getSelectionModel().selectFirstRow();
+});
+</script>
+#end
+
+#if ( ${table.exported} == true )
+<!--e3.begin of refresh zone:${table.id}-->
+#exportData()
+<!--e3.end of refresh zone:${table.id}-->
+#end
+  ]]></content></template>	
+  
+  <template name="noDataRow" ><content><![CDATA[
+  ]]></content></template>	
+   
+
+   
+<!--fast模式不执行-->  
+  <template name="rowBegin" ><content><![CDATA[
+  ]]></content></template>	
+  <template name="rowEnd" ><content><![CDATA[
+  ]]></content></template>	  
+  
+  
+  <!--fast模式不执行-->
+  <template name="cellBegin" ><content><![CDATA[<td ${cell.AttributesAsString}>]]></content></template>	
+  <template name="cell" ><content><![CDATA[<td ${cell.AttributesAsString}>${cellValue}</td>]]></content></template>
+  <!--fast模式不执行-->
+  <template name="cellEnd" ><content><![CDATA[</td>]]></content></template>	
+  	
+  
+</skin>
