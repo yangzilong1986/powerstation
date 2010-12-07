@@ -619,10 +619,15 @@ public class RealTimeProxy376Test {
    // @Test
     public void testTransmitMsg() throws Exception {    
        Map datacellParams1 = new TreeMap();
-       datacellParams1.put("C012", "2010-08-15 22:39:30");//漏电保护装置校时
+       datacellParams1.put("8001C04F01", "2");//保护器型号ID
+       datacellParams1.put("8001C04F02", "00000001");
+       datacellParams1.put("8001C04F03", "0");
+       datacellParams1.put("8001C04F04", "0");
+       datacellParams1.put("8001C04F05", "0");
+       datacellParams1.put("8001C04F06", "01111111");
         
         CommandItem commandItem = new CommandItem();
-        commandItem.setIdentifier("8000C012");
+        commandItem.setIdentifier("8001C04F");
         commandItem.setDatacellParam(datacellParams1);
         
         CollectObject_TransMit cob = new CollectObject_TransMit();
@@ -667,7 +672,7 @@ public class RealTimeProxy376Test {
 //    @Test
     public void testreadTransmitPara() throws Exception {
         @SuppressWarnings("static-access")
-         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(7789);
+         Map<String, Map<String, String>> resultMap = this.proxy.readTransmitPara(8294);
          assertTrue(resultMap.size() > 0 );
     }
 
