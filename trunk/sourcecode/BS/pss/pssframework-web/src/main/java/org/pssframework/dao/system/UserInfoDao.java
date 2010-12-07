@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.pssframework.dao.BaseHibernateDao;
 import org.pssframework.model.system.UserInfo;
+import org.pssframework.query.system.UserQuery;
 import org.springframework.stereotype.Repository;
 
 import cn.org.rapid_framework.page.Page;
@@ -55,7 +56,24 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	@SuppressWarnings("rawtypes")
 	public Page findByPageRequest(PageRequest<Map> pageRequest) {
-		return pageQuery(PAGE_USER_INFO, pageRequest);
+		UserQuery userQ = new UserQuery();
+		if (pageRequest instanceof UserQuery) {
+			userQ = (UserQuery) pageRequest;
+		}
+		;
+
+		String all = "select t from UserInfo t, OrgInfo  p where 1=1 and t.orgInfo.orgNo like p.orgNo ||'%' /~ and p.orgId = [orgId] ~/"
+				+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
+		String not_all = "select t from UserInfo t where 1=1 /~ and t.orgInfo.orgId = [orgId] ~/"
+				+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
+		String QUERY_SQL = "from UserInfo";
+		if (!userQ.isShowAllAccount()) {
+			QUERY_SQL = not_all;
+		} else {
+			QUERY_SQL = all;
+		}
+
+		return pageQuery(QUERY_SQL, pageRequest);
 	}
 
 	public UserInfo findUniqueByStaffNo(String value) {
