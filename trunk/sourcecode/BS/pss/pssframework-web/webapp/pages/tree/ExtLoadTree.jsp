@@ -3,6 +3,7 @@
 <%@page import="org.pssframework.support.system.SystemConst"%>
 <HTML>
 <HEAD>
+<%@include file="../../commons/meta.jsp"%>
 <script src="<c:url value="/e3/commons/ext/adapter/ext/ext-base.js"/>"></script>
 <script src="<c:url value="/e3/commons/ext/ext-all.js"/>"></script>
 <script>
