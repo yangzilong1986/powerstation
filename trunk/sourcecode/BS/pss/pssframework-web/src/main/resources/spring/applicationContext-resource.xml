@@ -26,7 +26,7 @@
   </bean>
 
   <!-- 数据源定义,使用Apache DBCP 连接池 -->
-  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+  <!--  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="${jdbc.driver}" />
     <property name="url" value="${jdbc.url}" />
     <property name="username" value="${jdbc.username}" />
@@ -34,7 +34,26 @@
     <property name="initialSize" value="${dbcp.initialSize}"></property>
     <property name="maxActive" value="${dbcp.maxActive}"></property>
     <property name="maxIdle" value="${dbcp.maxIdle}"></property>
-  </bean>
+  </bean>-->
+  
+    <!-- 数据源定义,使用C3P0连接池 -->
+  	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}"></property>
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}"></property>
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}"></property>
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}"></property>
+		<property name="minPoolSize" value="${c3p0.minPoolSize}"></property>
+		<property name="acquireRetryDelay" value="1000"></property>
+		<property name="acquireRetryAttempts" value="60"></property>
+		<property name="breakAfterAcquireFailure" value="false"></property>
+	</bean>
+
   <!--
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> <property
     name="jndiName"><value>java:comp/env/jdbc/ds</value></property> </bean> <bean id="dataSource"
