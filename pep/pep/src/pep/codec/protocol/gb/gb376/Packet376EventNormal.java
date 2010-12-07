@@ -16,6 +16,6 @@ public class Packet376EventNormal extends PmPacket376EventBase{
 
     @Override
     protected void DecodeEventDetail(BcdDataBuffer eventData, int len) {
-        this.eventDetail = BcdUtils.binArrayToString(eventData.getBytes(eventData.restBytes()));
+        this.eventDetail = BcdUtils.binArrayToString(eventData.getBytes(len));
     }
 }
