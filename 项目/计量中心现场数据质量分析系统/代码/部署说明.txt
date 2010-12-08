@@ -1,0 +1,5 @@
+1、安装JDK1.6
+2、安装Tomcat 6：将apache-tomcat-6.0.29.zip文件拷贝解压缩即可
+3、将fdas包拷贝到D:\Servers\Application\apache-tomcat-6.0.29\webapps\目录下，并解压缩
+4、修改数据源文件\fdas\WEB-INF\classes\application.properties
+5、启动Tomcat
