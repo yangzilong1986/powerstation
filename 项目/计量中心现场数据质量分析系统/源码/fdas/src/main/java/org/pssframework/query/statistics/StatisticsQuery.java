@@ -26,6 +26,8 @@ public class StatisticsQuery extends BaseQuery {
 	
 	private String logicalAddr;
 
+    private String dbjh;
+
 	/**
 	 * @return the sdate
 	 */
@@ -109,4 +111,12 @@ public class StatisticsQuery extends BaseQuery {
 	public void setOrgId(Long orgId) {
 		this.orgId = orgId;
 	}
+
+    public String getDbjh() {
+        return dbjh;
+    }
+
+    public void setDbjh(String dbjh) {
+        this.dbjh = dbjh;
+    }
 }

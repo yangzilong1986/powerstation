@@ -13,6 +13,9 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     <sql id="FdasDataAnalysisDynamicWhere">
         <!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
         <choose>
+            <when test="dbjh != null and dbjh != ''">and da.DBJH like '%' || #{dbjh} || '%'</when>
+        </choose>
+        <choose>
             <when test="sdate != null and edate != null"><![CDATA[and da.JYRQ >= to_date(#{sdate},'yyyy-mm-dd') and da.JYRQ < to_date(#{edate},'yyyy-mm-dd') + 1]]></when>
             <otherwise><![CDATA[and da.JYRQ is null]]></otherwise>
         </choose>
