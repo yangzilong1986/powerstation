@@ -6,7 +6,7 @@
     
     <sql id="TotalMeterCombBoxSQL">
         <![CDATA[
-        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, MP.MP_NAME || '（局号：' || M.ASSET_NO || '）' as NME
+        select GP.GP_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO || '#' || GP.GP_SN || '#' as VUE, MP.MP_NAME || '' || M.ASSET_NO || '）' as NME
           from C_METER M, C_MP MP, C_GP GP, C_TERMINAL T
          where M.METER_ID = MP.METER_ID
            and MP.MP_ID = GP.MP_ID
@@ -43,7 +43,7 @@
     
     <sql id="SwitchCombBoxSQL">
         <![CDATA[
-        select T.TERM_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO as VUE, '集中器地址：' || T.LOGICAL_ADDR as NME
+        select T.TERM_ID || '#' || T.LOGICAL_ADDR || '#' || T.PROTOCOL_NO as VUE, '' || T.LOGICAL_ADDR as NME
           from C_TERMINAL T, C_TERM_OBJ_RELA R
          where T.TERM_ID = R.TERM_ID
            and R.OBJ_TYPE = '2'
