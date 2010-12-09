@@ -15,6 +15,7 @@
 <body>
 <div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/fdas/dataAnalysisQuery/query" modelAttribute="statisticsQuery">
+  <form:hidden path="dbjh" />
   <form:hidden path="sdate" />
   <form:hidden path="edate" />
   <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
@@ -46,7 +47,7 @@
           <td><c:out value='${item.cxdl}' />&nbsp;</td>
           <td><c:out value='${item.glys}' />&nbsp;</td>
           <td><c:out value='${item.pjwc}' />&nbsp;</td>
-          <td><c:out value='${item.njwc}' />&nbsp;</td>
+          <td><c:if test="${item.njwc gt 0}"><span style="color:red;"></c:if><c:if test="${item.njwc eq 0}"><span style="color:black;"></c:if><c:if test="${item.njwc lt 0}"><span style="color:green;"></c:if><c:out value='${item.njwc}' /></span>&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>

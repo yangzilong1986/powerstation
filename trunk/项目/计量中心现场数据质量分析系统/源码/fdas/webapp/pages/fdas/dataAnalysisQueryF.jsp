@@ -37,7 +37,11 @@ function queryData() {
       <div id="inquiry" style="margin-top: 5px;">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td width="100" align="right" class="green" height="30">开始日期：</td>
+          <td width="100" align="right" class="green" height="30">电表局号：</td>
+          <td width="120" align="left">
+            <input type="text" class="input2" id="dbjh" name="dbjh" value="${dbjh}" style="height: 22px; width: 152px;" />
+          </td>
+          <td width="100" align="right" class="green">开始日期：</td>
           <td width="120" align="left">
             <input type="text" class="input_time" id="sdate" name="sdate" value="${sdate}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'%y-%M-%d'})" readonly="readonly" style="cursor: pointer; height: 22px; width: 152px;" />
           </td>
