@@ -2,7 +2,7 @@
 "-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
 "http://castor.exolab.org/mapping.dtd">
 <mapping>
-    <description>协议数据项配置的映射文件</description>
+    <description></description>
     <class name="pep.bp.realinterface.conf.ProtocolCommandItems" >
         <map-to xml="ProtocolCommandItems"/>
         <field name="CommandItems" collection="arraylist" type="pep.bp.realinterface.conf.ProtocolCommandItem">
