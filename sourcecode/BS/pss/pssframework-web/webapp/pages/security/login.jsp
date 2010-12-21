@@ -79,19 +79,21 @@ $(document).ready( function() {
     
     //判断是够存在父页面
     var url ='${pageContext.request.contextPath}/j_spring_security_logout';
-   try{
-	   if(opener != null){
-		   closeWin();
-		   opener.top.location.href = url;
-	   }
-	   if(parent.parent.tabscontainermain != null){
-		   //alert(parent.parent.tabscontainermain.location)
-		   top.location.href = url;
-	   }
-   }catch(e){
-	   
-   }
     
+    if('${error}' == 3 || '${error}' ==4){
+     try{
+  	   if(opener != null){
+  		   closeWin();
+  		   opener.top.location.href = url;
+  	   }
+  	   if(parent.parent.tabscontainermain != null){
+  		   //alert(parent.parent.tabscontainermain.location)
+  		   top.location.href = url;
+  	   }
+     }catch(e){
+  	   
+     }
+    }
 });
 
 function closeWin() {
