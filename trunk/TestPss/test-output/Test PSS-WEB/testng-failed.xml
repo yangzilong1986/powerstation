@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" configfailurepolicy="skip" verbose="1" name="Failed suite [Test PSS-WEB]" skipfailedinvocationcounts="false" annotations="JDK" data-provider-thread-count="10">
+  <parameter name="login_para" value="/resources/login_para.xml"/>
+  <test verbose="1" name="Test Login(failed)" junit="false" annotations="JDK">
+    <parameter name="login_para" value="/resources/login_para.xml"/>
+    <classes>
+      <class name="tpss.testCases.TestLoginTestCase">
+        <methods>
+          <include name="stop"/>
+          <include name="testLogin" invocation-numbers="0"/>
+          <include name="setup"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

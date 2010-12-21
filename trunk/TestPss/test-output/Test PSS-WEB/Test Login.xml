@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite hostname="THINKPAD" name="tpss.testCases.TestLoginTestCase" tests="1" failures="1" timestamp="21 Dec 2010 00:58:18 GMT" time="35.078" errors="0">
+  <testcase name="testLogin on instance null(tpss.testCases.TestLoginTestCase)" time="30.297" classname="tpss.testCases.TestLoginTestCase">
+    <failure type="com.thoughtworks.selenium.SeleniumException" message="Timed out after 30000ms">
+      <![CDATA[com.thoughtworks.selenium.SeleniumException: Timed out after 30000ms
+	at com.thoughtworks.selenium.HttpCommandProcessor.throwAssertionFailureExceptionOrError(HttpCommandProcessor.java:97)
+	at com.thoughtworks.selenium.HttpCommandProcessor.doCommand(HttpCommandProcessor.java:91)
+	at com.thoughtworks.selenium.DefaultSelenium.open(DefaultSelenium.java:335)
+	at tpss.tasks.TestLoginTasks.openSite(TestLoginTasks.java:50)
+	at tpss.testCases.TestLoginTestCase.testLogin(TestLoginTestCase.java:65)
+	at tpss.testCases.pssSuite.main(pssSuite.java:86)
+... Removed 22 stack frames]]>
+    </failure>
+  </testcase>
+</testsuite>
