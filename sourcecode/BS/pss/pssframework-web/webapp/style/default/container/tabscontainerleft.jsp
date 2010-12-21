@@ -11,6 +11,6 @@
 <title>Object View Container</title>
 </head>
 <body>
-<iframe id="tree" name="tree"  src='${ctx}/tree'></iframe>
+<iframe id="tree" name="tree" scrolling="auto" frameborder="0" src='${ctx}/tree' width="100%" height="100%"></iframe>
 </body>
 </html>
