@@ -78,7 +78,7 @@ $(document).ready( function() {
     });
     
     //判断是够存在父页面
-    var url ='${pageContext.request.contextPath}/pss-web/j_spring_security_logout';
+    var url ='${pageContext.request.contextPath}/j_spring_security_logout';
    try{
 	   if(opener != null){
 		   closeWin();
