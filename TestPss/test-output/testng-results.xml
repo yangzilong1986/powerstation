@@ -1,0 +1,62 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Test PSS-WEB" duration-ms="35078" started-at="2010-12-21T08:57:43Z" finished-at="2010-12-21T08:58:18Z">
+    <groups>
+    </groups>
+    <test name="Test Login" duration-ms="35078" started-at="2010-12-21T08:57:43Z" finished-at="2010-12-21T08:58:18Z">
+      <class name="tpss.testCases.TestLoginTestCase">
+        <test-method status="PASS" signature="setup()" name="setup on instance null(tpss.testCases.TestLoginTestCase)" is-config="true" duration-ms="4265" started-at="2010-12-21T08:57:43Z" finished-at="2010-12-21T08:57:48Z">
+        </test-method>
+        <test-method status="FAIL" signature="testLogin(java.lang.String)" name="testLogin on instance null(tpss.testCases.TestLoginTestCase)" duration-ms="30297" started-at="2010-12-21T08:57:48Z" finished-at="2010-12-21T08:58:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[/resources/login_para.xml]]>
+              </value>
+            </param>
+          </params>
+          <exception class="com.thoughtworks.selenium.SeleniumException">
+            <message>
+              <![CDATA[Timed out after 30000ms]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[com.thoughtworks.selenium.SeleniumException: Timed out after 30000ms
+	at com.thoughtworks.selenium.HttpCommandProcessor.throwAssertionFailureExceptionOrError(HttpCommandProcessor.java:97)
+	at com.thoughtworks.selenium.HttpCommandProcessor.doCommand(HttpCommandProcessor.java:91)
+	at com.thoughtworks.selenium.DefaultSelenium.open(DefaultSelenium.java:335)
+	at tpss.tasks.TestLoginTasks.openSite(TestLoginTasks.java:50)
+	at tpss.testCases.TestLoginTestCase.testLogin(TestLoginTestCase.java:65)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodHelper.invokeMethod(MethodHelper.java:641)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:677)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:850)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1154)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:137)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:121)
+	at org.testng.TestRunner.runWorkers(TestRunner.java:1108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:737)
+	at org.testng.TestRunner.run(TestRunner.java:596)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:315)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:272)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:221)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1027)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:964)
+	at org.testng.TestNG.run(TestNG.java:896)
+	at tpss.testCases.pssSuite.main(pssSuite.java:86)
+]]>
+            </full-stacktrace>
+          </exception>
+        </test-method>
+        <test-method status="PASS" signature="stop()" name="stop on instance null(tpss.testCases.TestLoginTestCase)" is-config="true" duration-ms="500" started-at="2010-12-21T08:58:18Z" finished-at="2010-12-21T08:58:18Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

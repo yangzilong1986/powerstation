@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fvt_element>
+	<!-- Login Info-->
+	<arg id="AuthCode">
+		<value>RPWT54321</value>
+	</arg>
+	<arg id="UserName">
+		<value>admin</value>
+	</arg>
+	<arg id="Password">
+		<value>QL@admin123</value>
+	</arg>
+</fvt_element>
