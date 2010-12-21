@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="E:/BACKUP/TOOLS/develop/JAVA/testng-5.14.1/testng-5.14.1.jar"/>
-	<classpathentry kind="lib" path="E:/BACKUP/TOOLS/develop/JAVA/selenium-remote-control-1.0.3/selenium-java-client-driver-1.0.1/selenium-java-client-driver.jar"/>
-	<classpathentry kind="lib" path="E:/BACKUP/TOOLS/develop/JAVA/selenium-remote-control-1.0.3/selenium-server-1.0.3/selenium-server.jar"/>
+	<classpathentry kind="lib" path="D:/WORK/GLK/google_code/TestPss/libs/testng-5.14.1.jar"/>
+	<classpathentry kind="lib" path="D:/WORK/GLK/google_code/TestPss/libs/selenium-java-client-driver.jar"/>
+	<classpathentry kind="lib" path="D:/WORK/GLK/google_code/TestPss/libs/selenium-server.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

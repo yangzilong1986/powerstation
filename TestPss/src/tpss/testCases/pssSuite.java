@@ -5,7 +5,7 @@
 * Company:     topsoft 
 * @author:     lj  
 * @version:    1.0  
-* Create at:   2010-12-17 ÉÏÎç10:09:03  
+* Create at:   2010-12-17 ï¿½ï¿½ï¿½ï¿½10:09:03  
 *  
 * Modification History:  
 * Date         Author      Version     Description  
@@ -27,7 +27,7 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import tpss.tasks.TestLoginTasks;
+
 
 
 
@@ -70,7 +70,7 @@ public class pssSuite extends SeleneseTestCase{
 
         suite.setParameters(para);
 
-        //µÇÂ¼²âÊÔ
+        //ç™»å½•
         XmlTest testQuery = new XmlTest(suite);
         testQuery.setName("Test Login");
         List<XmlClass> queryClasses = new ArrayList<XmlClass>();
