@@ -27,120 +27,122 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Administrator
- *
+ * 
  */
 @Service
 public class OrgInfoManager extends BaseManager<OrgInfo, Long> {
+    @SuppressWarnings("rawtypes")
+    @Override
+    protected EntityDao getEntityDao() {
+        return this.entityDao;
+    }
 
-	@Override
-	protected EntityDao getEntityDao() {
-		return this.entityDao;
-	}
+    @Autowired
+    private OrgInfoDao<?> entityDao;
 
-	@Autowired
-	private OrgInfoDao<?> entityDao;
+    public List<OrgInfo> getOrgList(Long orgId) {
+        List<OrgInfo> orgList = new ArrayList<OrgInfo>();
+        // orgList = entityDao.findBy(orgId);
+        return orgList;
+    }
 
-	public List<OrgInfo> getOrgList(Long orgId) {
-		List<OrgInfo> orgList = new ArrayList<OrgInfo>();
-		// orgList = entityDao.findBy(orgId);
-		return orgList;
-	}
+    @SuppressWarnings("rawtypes")
+    public List<OrgInfo> findByPageRequest(Map mapRequest) {
 
-	@SuppressWarnings("rawtypes")
-	public List<OrgInfo> findByPageRequest(Map mapRequest) {
+        List<OrgInfo> list = new LinkedList<OrgInfo>();
+        list = entityDao.findByPageRequest(mapRequest);
+        if(list == null || list.size() == 0) {
+            list = new LinkedList<OrgInfo>();
+        }
+        return list;
 
-		List<OrgInfo> list = new LinkedList<OrgInfo>();
-		list = entityDao.findByPageRequest(mapRequest);
-		if (list == null || list.size() == 0) {
-			list = new LinkedList<OrgInfo>();
-		}
-		return list;
+    }
 
-	}
+    /**
+     * 查询该部门下可用的orgNo
+     * 
+     * @param pOrgInfo
+     * @return
+     */
+    public String findPurposeOrgNo(OrgInfo pOrgInfo) {
+        pOrgInfo = this.getById(pOrgInfo.getOrgId());
+        String orgNo = this.entityDao.findPurposeOrgNo(pOrgInfo);
 
-	/**
-	 * 查询该部门下可用的orgNo
-	 * @param pOrgInfo
-	 * @return
-	 */
-	public String findPurposeOrgNo(OrgInfo pOrgInfo) {
-		pOrgInfo = this.getById(pOrgInfo.getOrgId());
-		String orgNo = this.entityDao.findPurposeOrgNo(pOrgInfo);
+        // 第一个创建部门的情况
+        if(orgNo == null || "".equals(orgNo) || orgNo.length() == 1)
+            return orgNo = pOrgInfo.getOrgNo() + "001";
+        else {
+            String sNo = StringUtils.substringAfter(orgNo, pOrgInfo.getOrgNo());
+            Integer iNo = Integer.parseInt(sNo) + 1;
 
-		//第一个创建部门的情况
-		if (orgNo == null || "".equals(orgNo) || orgNo.length() == 1)
-			return orgNo = pOrgInfo.getOrgNo() + "001";
-		else {
-			String sNo = StringUtils.substringAfter(orgNo, pOrgInfo.getOrgNo());
-			Integer iNo = Integer.parseInt(sNo) + 1;
+            return pOrgInfo.getOrgNo() + StringUtils.leftPad(String.valueOf(iNo), 3, '0');
+        }
 
-			return pOrgInfo.getOrgNo() + StringUtils.leftPad(String.valueOf(iNo), 3, '0');
-		}
+    }
 
-	}
+    @SuppressWarnings("rawtypes")
+    public List<CodeInfo> findOrgTypes(Map mapRequest) {
+        return entityDao.findOrgTypes(mapRequest);
+    }
 
-	public List<CodeInfo> findOrgTypes(Map mapRequest) {
-		return entityDao.findOrgTypes(mapRequest);
-	}
+    public String checkSortNoRePeat(OrgInfo orgInfo) {
+        String msg = "";
+        if(checkSortNoRePeat(orgInfo.getParentOrgInfo().getOrgId(), orgInfo.getSortNo())) {
+            msg = "该部门的" + orgInfo.getSortNo() + "号排序地址已存在，请重新输入";
+        }
+        return msg;
+    }
 
-	public String checkSortNoRePeat(OrgInfo orgInfo) {
-		String msg = "";
-		if (checkSortNoRePeat(orgInfo.getParentOrgInfo().getOrgId(), orgInfo.getSortNo())) {
-			msg = "该部门的" + orgInfo.getSortNo() + "号排序地址已存在，请重新输入";
-		}
-		return msg;
-	}
+    public boolean checkSortNoRePeat(Long orgId, Long sortNo) {
+        List<OrgInfo> listOrg = Lists.newArrayList();
+        listOrg = this.entityDao.findSortNoRePeat(orgId, sortNo);
+        if(listOrg == null || listOrg.size() == 0)
+            return false;
+        return true;
+    }
 
-	public boolean checkSortNoRePeat(Long orgId, Long sortNo) {
-		List<OrgInfo> listOrg = Lists.newArrayList();
-		listOrg = this.entityDao.findSortNoRePeat(orgId, sortNo);
-		if (listOrg == null || listOrg.size() == 0)
-			return false;
-		return true;
-	}
+    @Override
+    public void removeById(Long orgId) throws DataAccessException {
+        Assert.notNull(orgId, "orgId 不能为null");
+        // 获取该部门
+        OrgInfo org = this.getById(orgId);
 
-	@Override
-	public void removeById(Long orgId) throws DataAccessException {
-		Assert.notNull(orgId, "orgId 不能为null");
-		//获取该部门
-		OrgInfo org = this.getById(orgId);
+        // 获取该子部门
+        List<OrgInfo> subOrgs = Lists.newArrayList();
+        subOrgs = this.entityDao.findAllByProperty("parentOrgInfo", org);
 
-		//获取该子部门
-		List<OrgInfo> subOrgs = Lists.newArrayList();
-		subOrgs = this.entityDao.findAllByProperty("parentOrgInfo", org);
+        List<TgInfo> tglst = org.getTgInfos();
 
-		List<TgInfo> tglst = org.getTgInfos();
+        List<LineInfo> linList = org.getLineInfos();
 
-		List<LineInfo> linList = org.getLineInfos();
+        if(CollectionUtils.isNotEmpty(subOrgs))
+            throw new ServiceException("该部门下存在子部门，请先删除关联部门");
 
-		if (CollectionUtils.isNotEmpty(subOrgs))
-			throw new ServiceException("该部门下存在子部门，请先删除关联部门");
+        if(CollectionUtils.isNotEmpty(linList))
+            throw new ServiceException("该部门下存在线路，请先删除关联线路");
 
-		if (CollectionUtils.isNotEmpty(linList))
-			throw new ServiceException("该部门下存在线路，请先删除关联线路");
+        if(CollectionUtils.isNotEmpty(tglst))
+            throw new ServiceException("该部门下存在台区，请先删除关联台区");
 
-		if (CollectionUtils.isNotEmpty(tglst))
-			throw new ServiceException("该部门下存在台区，请先删除关联台区");
+        this.entityDao.delete(org);
 
-		this.entityDao.delete(org);
+    }
 
-	}
+    public String checkOrgNoRePeat(OrgInfo orgInfo) {
+        String chk = "";
+        if(orgInfo.getOldOrgNo() == null || orgInfo.getOrgNo().equals(orgInfo.getOldOrgNo()))
+            return chk;
 
-	public String checkOrgNoRePeat(OrgInfo orgInfo) {
-		String chk = "";
-		if (orgInfo.getOldOrgNo() == null || orgInfo.getOrgNo().equals(orgInfo.getOldOrgNo()))
-			return chk;
+        if(findByOrgNo(orgInfo.getOrgNo()) == null)
+            return chk;
+        else {
+            chk = "该部门号重复，请重新输入";
+        }
 
-		if (findByOrgNo(orgInfo.getOrgNo()) == null)
-			return chk;
-		else {
-			chk = "该部门号重复，请重新输入";
-		}
+        return chk;
+    }
 
-		return chk;
-	}
-
-	public OrgInfo findByOrgNo(String orgNo) {
-		return this.entityDao.findByProperty("orgNo", orgNo);
-	}
+    public OrgInfo findByOrgNo(String orgNo) {
+        return this.entityDao.findByProperty("orgNo", orgNo);
+    }
 }
