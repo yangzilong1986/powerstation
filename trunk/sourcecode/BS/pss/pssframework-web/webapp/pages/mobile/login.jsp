@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>低压漏保及配变管理系统</title>
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -20,7 +21,8 @@ $(document).ready(function() {
 });
 
 function login() {
-    alert("login");
+    //alert("login");
+    top.location = "<pss:path type="webapp"/>" + "/mobile/clp";
 }
 
 function reset() {

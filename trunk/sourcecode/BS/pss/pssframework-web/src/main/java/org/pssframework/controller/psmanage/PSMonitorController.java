@@ -86,7 +86,7 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/frame")
     public ModelAndView _frame(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -334,7 +334,7 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/eventQuery")
     public ModelAndView _eventQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             PSMonitorQuery psMonitorQuery) throws Exception {
@@ -356,7 +356,7 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/ecCurvQuery")
     public ModelAndView _ecCurvQuery(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             PSMonitorQuery psMonitorQuery) throws Exception {
@@ -402,7 +402,7 @@ public class PSMonitorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @RequestMapping(value = "/ecCurvQuery_Chart")
     public ModelAndView _ecCurvQuery_Chart(ModelAndView mav, HttpServletRequest request, HttpServletResponse response,
             PSMonitorQuery psMonitorQuery) throws Exception {
