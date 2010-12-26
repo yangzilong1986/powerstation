@@ -22,12 +22,12 @@ $(document).ready(function() {
 
 function parameterSetting() {
     //alert("parameterSetting");
-    top.location = "<pss:path type="webapp"/>" + "/mobile/lps?psId=" + psId + "&random=" + Math.random();
+    top.location = "<pss:path type="webapp"/>" + "/mobile/lps?psId=${param.psId}&random=" + Math.random();
 }
 
 function tripping() {
     //alert("tripping");
-    top.location = "<pss:path type="webapp"/>" + "/mobile/lpt?psId=" + psId + "&random=" + Math.random();
+    top.location = "<pss:path type="webapp"/>" + "/mobile/lpt?psId=${param.psId}&random=" + Math.random();
 }
 </script>
 </head>
