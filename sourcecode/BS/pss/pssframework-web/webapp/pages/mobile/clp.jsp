@@ -11,25 +11,33 @@
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 function selectOrg(orgId) {
-    alert(orgId);
+    //alert(orgId);
+    top.location = "<pss:path type="webapp"/>" + "/mobile/clp?orgId=" + orgId + "&tgid=-1&random=" + Math.random();
 }
 
 function selectTg(tgId) {
-    alert(tgId);
+    //alert(tgId);
+    if('${param.orgId}' == '' || '${param.orgId}' == 'null') {
+        top.location = "<pss:path type="webapp"/>" + "/mobile/clp?orgId=0&tgid=" + tgId + "&random=" + Math.random();
+    }
+    else {
+        top.location = "<pss:path type="webapp"/>" + "/mobile/clp?orgId=${param.orgId}&tgid=" + tgId + "&random=" + Math.random();
+    }
 }
 
 function selectPs(psId) {
-    alert(psId);
+    //alert(psId);
+    top.location = "<pss:path type="webapp"/>" + "/mobile/lpt?psId=" + psId + "&random=" + Math.random();
 }
 </script>
 </head>
 <body>
-<div align="right"><a>退出</a></div>
-<div><input type="text"" id="s" name="s" value="" /> <input type="button" id="btnSearch" value="搜索" /></div>
-<div>单&nbsp; 位：</div>
+<div align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
+<!-- <div><input type="text"" id="s" name="s" value="" /> <input type="button" id="btnSearch" value="搜索" /></div> -->
+<div>漏&nbsp; 保：</div>
 <div>
-  <c:forEach var="item" items="${orglist}">
-    <a href="javascript: selectOrg('<c:out value="${item.orgId}"/>');"><c:out value="${item.orgName}" /></a>&nbsp;&nbsp;&nbsp; 
+  <c:forEach var="item" items="${pslist}">
+    <a href="javascript: selectPs('<c:out value="${item.psId}"/>');"><c:out value="${item.psName}" /></a>&nbsp;&nbsp;&nbsp; 
   </c:forEach>
 </div>
 <div>台&nbsp; 区：</div>
@@ -38,10 +46,10 @@ function selectPs(psId) {
     <a href="javascript: selectTg('<c:out value="${item.tgId}"/>');"><c:out value="${item.tgName}" /></a>&nbsp;&nbsp;&nbsp; 
   </c:forEach>
 </div>
-<div>漏&nbsp; 保：</div>
+<div>单&nbsp; 位：</div>
 <div>
-  <c:forEach var="item" items="${pslist}">
-    <a href="javascript: selectPs('<c:out value="${item.psId}"/>');"><c:out value="${item.psName}" /></a>&nbsp;&nbsp;&nbsp; 
+  <c:forEach var="item" items="${orglist}">
+    <a href="javascript: selectOrg('<c:out value="${item.orgId}"/>');"><c:out value="${item.orgName}" /></a>&nbsp;&nbsp;&nbsp; 
   </c:forEach>
 </div>
 </body>
