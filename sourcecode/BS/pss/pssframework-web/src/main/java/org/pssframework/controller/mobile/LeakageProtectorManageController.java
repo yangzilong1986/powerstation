@@ -17,9 +17,9 @@ import org.springframework.web.util.WebUtils;
  * 
  */
 @Controller
-@RequestMapping("/mobile/lps")
-public class LeakageProtectorParameterSettingController extends BaseSpringController {
-    private static final String VIEW_NAME = "/mobile/lps";
+@RequestMapping("/mobile/lpm")
+public class LeakageProtectorManageController extends BaseSpringController {
+    private static final String VIEW_NAME = "/mobile/lpm";
 
     /**
      * 

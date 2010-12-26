@@ -27,7 +27,7 @@ function selectTg(tgId) {
 
 function selectPs(psId) {
     //alert(psId);
-    top.location = "<pss:path type="webapp"/>" + "/mobile/lpt?psId=" + psId + "&random=" + Math.random();
+    top.location = "<pss:path type="webapp"/>" + "/mobile/lpm?psId=" + psId + "&random=" + Math.random();
 }
 </script>
 </head>
