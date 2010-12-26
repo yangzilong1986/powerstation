@@ -7,6 +7,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>低压漏保及配变管理系统</title>
+<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#btnLogin").click( function() {
+        login();
+    });
+    
+    $("#btnReset").click( function() {
+        reset();
+    });
+});
+
+function login() {
+    alert("login");
+}
+
+function reset() {
+    $("#j_username").val("");
+    $("#j_password").val("");
+}
+</script>
 </head>
 <body>
 <div>
@@ -26,7 +47,7 @@
     </td>
   </tr>
   <tr>
-    <td height="30" colspan="2" align="center">密&nbsp;&nbsp;&nbsp;&nbsp;码：
+    <td height="30" colspan="2" align="center">密　码：
       <input type="password" name="j_password" id="j_password" class="input1 required" style="width: 120px;" />
     </td>
   </tr>
@@ -35,8 +56,8 @@
   </tr>
   <tr>
     <td height="40" colspan="2" align="center">
-      <input type="button" value=" 登 录 " style="font-size: 16px;" />
-      <input type="button" value=" 重 置 " style="font-size: 16px;" />
+      <input id="btnLogin" type="button" value=" 登 录 " style="font-size: 16px;" />
+      <input id="btnReset" type="button" value=" 重 置 " style="font-size: 16px;" />
     </td>
   </tr>
   <tr>
