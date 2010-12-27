@@ -44,7 +44,7 @@ public class CheckCaptcha extends BaseSpringController {
 			}
 
 		} catch (CaptchaServiceException e) {
-			logger.error(e.getMessage(), e);
+			logger.error("验证码出错，原因{}", e);
 		}
 		return ret;
 	}
