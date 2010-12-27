@@ -14,7 +14,7 @@
 <script src="${ctx}/scripts/validate/jquery.validate.js" type="text/javascript"></script>
 <script src="${ctx}/scripts/validate/messages_cn.js" type="text/javascript"></script>
 <script type="text/javascript">
-
+ var check = '0';
 function isIE() {
     if($.browser.msie && $.browser.version == '6.0') { return true; }
     return false;
@@ -50,7 +50,7 @@ function checkUser() {
         return false;
     }else if($("#j_captcha").val() == ""){
     	alert("请输入验证码");
-        $("#j_captcha").focus();
+        //$("#j_captcha").focus();
         return false;
     }
 
@@ -65,8 +65,12 @@ $(document).ready( function() {
     $(document).keydown( function(e) {
         var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
         if(keyCode == 13) {
-            if(checkUser()) {
+        	$("#j_captcha").blur();
+            if(checkUser()&& check=='1') {
+            	
                 $("#loginForm").submit();
+            }else if(check=='0'){
+            	
             }
         }
     });
@@ -94,8 +98,50 @@ $(document).ready( function() {
   	   
      }
     }
+    ;
+    
+    $("#j_captcha").blur(function(){
+        jQuery.ajax({
+            url: '${ctx}/security/checkCaptcha.json',
+            data:getData(),
+            dataType:'json',
+            type:'POST',
+            cache: false,
+            success: function(json){
+              
+             
+             check = json;
+             if(json=='1'){
+           	   toggleButton(true);
+             }else{
+            	 alert("验证码不对，请重输入！");
+            	 refreshCaptcha();
+            	 $("#j_captcha").focus();
+            	 
+            	 toggleButton();
+             }
+       
+              
+            },error:function(XmlHttpRequest,textStatus, errorThrown){
+           	 alert(XmlHttpRequest.responseText);
+           	toggleButton();
+            }
+          });
+    })
 });
+function toggleButton(data){
+	if(data){
+		    $("#submit1").attr("disabled","");
+	}else{
+		 $("#submit1").attr("disabled","true");
+	}
+};
 
+getData= function(){
+	var data;
+	  data = jQuery("form[id=loginForm]").serialize(); 
+	return data;
+	};
 function closeWin() {
 	window.close();
 };
@@ -135,7 +181,7 @@ function refreshCaptcha() {
   <tr>
     <td width="39%" height="30" align="right" class="fontw">用户名：</td>
     <td width="61%" align="left" style="position: relative;"><input type="text" name="j_username" id="j_username"
-      class="input1 required" style="width: 180px;" /></td>
+      class="input1 required" style="width: 180px;" value="${SPRING_SECURITY_LAST_USERNAME}"/></td>
   </tr>
   <tr>
     <td height="30" align="right" class="fontw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
