@@ -99,10 +99,10 @@
 		<url-pattern>/security/jcaptcha.jpg</url-pattern>
 	</filter-mapping>
 	<!-- jcaptcha登录表单处理URL. 必须放在springSecurityFilter的filter-mapping定义之前 -->
-	<filter-mapping>
+	<!--<filter-mapping>
 		<filter-name>jcaptchaFilter</filter-name>
 		<url-pattern>/j_spring_security_check</url-pattern>
-	</filter-mapping>
+	</filter-mapping>  -->
 	<!-- SpringSecurity filter -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
