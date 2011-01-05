@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="refresh" content="5; url=${ctx}/mobile/clp" />
+<meta http-equiv="refresh" content="1; url=${ctx}/mobile/clp" />
 <title>低压漏保及配变管理系统</title>
 </head>
 <body>
