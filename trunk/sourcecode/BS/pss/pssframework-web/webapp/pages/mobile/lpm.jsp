@@ -38,7 +38,7 @@ function tripping() {
   <input id="btnParameterSetting" type="button" value="漏保参数设置" style="font-size: 24px; width: 160px; height: 60px; vertical-align: middle;" />
 </div>
 <div style="height: 80px; text-align: center; vertical-align: bottom;">
-  <input id="btnTripping" type="button" value="远程跳合闸" style="font-size: 24px; width: 160px; height: 60px; vertical-align: middle;" />
+  <input id="btnTripping" type="button" value="远程分合闸" style="font-size: 24px; width: 160px; height: 60px; vertical-align: middle;" />
 </div>
 <div style="height: 30px;"></div>
 </body>

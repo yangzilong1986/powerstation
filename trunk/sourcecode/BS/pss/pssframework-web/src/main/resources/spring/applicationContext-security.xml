@@ -9,6 +9,8 @@
 	<s:http auto-config="true" use-expressions="true">
 		<s:intercept-url pattern="/scripts/**" filters="none" />
 		<s:intercept-url pattern="/style/default/bgcorlor/**" filters="none" />
+        <s:intercept-url pattern="/pages/mobile/**" filters="none" />
+        <s:intercept-url pattern="/mobile/**" filters="none" />
 		<s:intercept-url pattern="/homepage/**" access="isAuthenticated()" />
 		<s:intercept-url pattern="/main.jsp" access="isAuthenticated()" />
 		<s:intercept-url pattern="/system/**" access="isAuthenticated()" />

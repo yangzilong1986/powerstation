@@ -14,9 +14,10 @@ import org.pssframework.model.system.UserInfo;
 import org.pssframework.security.OperatorDetails;
 import org.pssframework.service.system.UserInfoManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,7 @@ import com.google.common.collect.Sets;
 public class MobileLoginController extends BaseSpringController {
     private static final String VIEW_NAME = "/mobile/login";
     private static final String VIEW_MAIN_NAME = "/mobile/main";
+    private static final String MESSAGE = "message";
 
     @Autowired
     private UserInfoManager userInfoManager;
@@ -65,11 +67,22 @@ public class MobileLoginController extends BaseSpringController {
     public ModelAndView login(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String username = request.getParameter("j_username");
-        // String password = request.getParameter("j_password");
+        String password = request.getParameter("j_password");
 
         UserInfo user = userInfoManager.findUserByLoginName(username);
-        if(user == null)
-            throw new UsernameNotFoundException("用户" + username + " 不存在");
+        if(user == null) {
+            mav.setViewName(VIEW_NAME);
+            mav.addObject(MESSAGE, "用户名[" + username + "]不存在!");
+            return mav;
+        }
+
+        PasswordEncoder encoder = new ShaPasswordEncoder();
+        String shaPassword = encoder.encodePassword(password, null);
+        if(shaPassword == null || !shaPassword.equals(user.getPasswd())) {
+            mav.setViewName(VIEW_NAME);
+            mav.addObject(MESSAGE, "密码错误!");
+            return mav;
+        }
 
         Set<GrantedAuthority> grantedAuths = obtainGrantedAuthorities(user);
 

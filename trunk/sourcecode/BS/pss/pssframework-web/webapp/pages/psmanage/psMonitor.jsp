@@ -711,7 +711,7 @@ function fetchRemoteTestResult(collectId, fetchCount) {
         success: function(data) {
             var b = showResultRemote(data.resultMap);
             if(!b && fetchCount > 0) {
-                setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+                setTimeout("fetchRemoteTestResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
             }
             else if(b) {
                 enableRemoteOperation();
