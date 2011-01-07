@@ -18,6 +18,10 @@
         $("#btnClosing").click(function() {
             remoteSwitching();
         });
+
+        $("#btnTesting").click(function() {
+            remoteTesting();
+        });
     });
 
     var bResultRemote = false;
@@ -25,11 +29,13 @@
         bResultRemote = false;
         $("#btnTripping").attr("disabled", true);
         $("#btnClosing").attr("disabled", true);
+        $("#btnTesting").attr("disabled", true);
     }
 
     function enableRemoteOperation() {
         $("#btnTripping").attr("disabled", false);
         $("#btnClosing").attr("disabled", false);
+        $("#btnTesting").attr("disabled", false);
     }
 
     function initOpResultRemote(msg) {
@@ -58,10 +64,10 @@
             result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C036"];
             if(typeof result != "undefined") {
                 if(result == "1") {
-                    result = "开关跳合闸成功";
+                    result = "开关分合闸成功";
                 }
                 else if(result == "2") {
-                    result = "开关跳合闸失败";
+                    result = "开关分合闸失败";
                 }
                 $("#resultRemote").html(result);
                 bResultRemote = true;
@@ -73,7 +79,7 @@
         }
     }
 
-    //开关跳闸
+    //开关分闸
     function remoteTriping() {
         disableRemoteOperation();
         var sb_dto = new StringBuffer();
@@ -102,7 +108,7 @@
         sb_dto.append('}').append(']');
         sb_dto.append('}]');
         sb_dto.append('}');
-        initOpResultRemote('正在开关跳闸...');
+        initOpResultRemote('正在开关分闸...');
         var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
         var params = {
             "dto" : sb_dto.toString(),
@@ -119,7 +125,7 @@
                 setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
             },
             error : function(XmlHttpRequest, textStatus, errorThrown) {
-                initOpResultRemote('下发开关跳闸命令失败...');
+                initOpResultRemote('下发开关分闸命令失败...');
                 enableRemoteOperation();
             }
         });
@@ -145,7 +151,7 @@
                     enableRemoteOperation();
                 }
                 else {
-                    initOpResultRemote('下发开关跳闸命令超时');
+                    initOpResultRemote('下发开关分闸命令超时');
                     enableRemoteOperation();
                 }
             },
@@ -235,6 +241,84 @@
         });
     }
 
+    // 开关试跳
+    function remoteTesting() {
+        disableRemoteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C037"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultRemote('正在试验跳...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+            "dto" : sb_dto.toString(),
+            "mtoType" : $("#protocolNo").val()
+        };
+        $.ajax({
+            type : 'POST',
+            url : url,
+            data : jQuery.param(params),
+            dataType : 'json',
+            success : function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchRemoteTestingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error : function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultRemote('下发试验跳命令失败...');
+                enableRemoteOperation();
+            }
+        });
+    }
+
+    function fetchRemoteTestingResult(collectId, fetchCount) {
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/up.json';
+        var params = {
+            "collectId" : collectId,
+            "type" : "RemoteTest"
+        };
+        $.ajax({
+            type : 'POST',
+            url : url,
+            data : jQuery.param(params),
+            dataType : 'json',
+            success : function(data) {
+                var b = showResultRemote(data.resultMap);
+                if(!b && fetchCount > 0) {
+                    setTimeout("fetchRemoteTestingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+                }
+                else if(b) {
+                    enableRemoteOperation();
+                }
+                else {
+                    initOpResultRemote('下发试验跳命令超时');
+                    enableRemoteOperation();
+                }
+            },
+            error : function() {
+            }
+        });
+    }
+
     function StringBuffer() {
         this.data = [];
     }
@@ -252,7 +336,7 @@
         var result = $.trim(meterAddr);
         var lens = result.length;
         if(lens < 12) {
-            for(var i = 0; i < (12 - lens); i++) {
+            for( var i = 0; i < (12 - lens); i++) {
                 result = '0' + result;
             }
         }
@@ -283,10 +367,13 @@
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
 <div style="height: 60px; text-align: center; vertical-align: bottom;">
-  <input id="btnTripping" type="button" value=" 跳 闸 " style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+  <input id="btnTripping" type="button" value="远程分闸" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
 </div>
 <div style="height: 60px; text-align: center; vertical-align: bottom;">
-  <input id="btnClosing" type="button" value=" 合 闸 " style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+  <input id="btnClosing" type="button" value="远程合闸" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+</div>
+<div style="height: 60px; text-align: center; vertical-align: bottom;">
+  <input id="btnTesting" type="button" value="远程试跳" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
 </div>
 <div id="resultRemote" style="height: 50px;"></div>
 </body>

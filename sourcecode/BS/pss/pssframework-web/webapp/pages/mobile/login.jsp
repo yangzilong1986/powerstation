@@ -14,10 +14,12 @@ function check() {
     var o_password = document.getElementById('j_password');
     if(o_username == null || o_username.value == "") {
         alert("请输入用户名");
+        o_username.foucs();
         return false;
     }
     if(o_password == null || o_password == "") {
         alert("请输入密码");
+        o_password.foucs();
         return false;
     }
     return true;
@@ -70,5 +72,6 @@ function reset() {
 </table>
 </form>
 </div>
+<div>${message}</div>
 </body>
 </html>
