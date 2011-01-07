@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $("#btnParameterSetting").click( function() {
-        parameterSetting();
+        //parameterSetting();
     });
     
     $("#btnTripping").click( function() {
