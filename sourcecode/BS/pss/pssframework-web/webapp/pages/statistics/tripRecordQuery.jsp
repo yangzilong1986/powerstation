@@ -13,12 +13,12 @@
 </script>
 </head>
 <body>
-<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/statistics/tripQuery/tripRecord" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
   <form:hidden path="sdate" />
   <form:hidden path="edate" />
+  <div id="tbl-container" class="tbl-container" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
   <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
     <thead class="tableHeader">
       <tr>
@@ -32,7 +32,8 @@
         <th sortColumn="trip_result">试跳结果</th>
       </tr>
     </thead>
-    <tbody class="tableBody" id="dataBody">
+
+    <tbody class="tableBody" id="dataBody" >
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
@@ -47,8 +48,8 @@
       </c:forEach>
     </tbody>
   </table>
+  </div>
 </form:form>
-</div>
 <div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
