@@ -879,6 +879,7 @@ div.tableContainer {
     overflow-x: auto;
 }
 
+
 div.tableContainer table thead tr {
     position: relative;
     top: expression(parentNode.parentNode.parentNode.scrollTop);
@@ -1195,3 +1196,36 @@ a:HOVER{
 .jc_sub{background:url(../img/jc_sub.gif) no-repeat; width:69px; height:23px; color:#333; text-align:center; line-height:23px; cursor:pointer; border:0;}
 
 .input_nostyle{border:0; height:13px; vertical-align:middle; width:13px; background:none;}
+
+/*表格定行、定列*/
+div#tbl-container {
+border: 1px #85C0B4 solid;
+margin: 0;
+padding: 0;
+clear: both;
+overflow-x: hide;
+overflow-y: auto;
+scrollbar-base-color:#ffeaff;
+}
+
+thead th, thead th.locked	{
+text-align: center;
+border-right: 1px solid silver;
+position:relative;
+cursor: default; 
+}
+	
+thead th {
+top: expression(document.getElementById("tbl-container").scrollTop-2); /*IE5+ only*/
+z-index: 20;
+}
+
+thead th.locked {z-index: 30;}
+
+td.locked,  th.locked{
+border-right: 1px solid silver;
+left: expression(parentNode.parentNode.parentNode.parentNode.scrollLeft); /*IE5+ only*/
+position: relative;
+z-index: 10;
+}
+
