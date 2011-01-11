@@ -13,11 +13,12 @@
 </script>
 </head>
 <body>
-<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/statistics/powercruv" modelAttribute="statisticsQuery">
 <form:hidden path="tgId"/>
 <form:hidden path="orgId"/>
 <form:hidden path="ddate"/>
+<div id="tbl-container" style=" height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
+
 <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
   <thead class="tableHeader">
     <tr>
@@ -52,8 +53,8 @@
     </c:forEach>
   </tbody>
 </table>
-</form:form>
 </div>
+</form:form>
 <div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
