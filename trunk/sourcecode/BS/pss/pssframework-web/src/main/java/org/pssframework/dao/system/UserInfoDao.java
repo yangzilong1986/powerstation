@@ -24,7 +24,7 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 
 	private static final String PAGE_USER_INFO = "select t from UserInfo t where 1=1 "
 			+ "/~ and (('[showAllAccount]'= 'true' and t.orgInfo.parentOrgInfo.orgId='[orgId]') or ('[showAllAccount]'= 'false' and t.orgInfo.orgId = '[orgId]' ))~/"
-			+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
+			+ "/~ and t.empNo not in ([empNos]) ~/" + "/~ order by [sortColumns]~/";//" order by t.orgInfo.orgType,t.orgInfo.sortNo";
 
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -63,9 +63,12 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 		;
 
 		String all = "select t from UserInfo t, OrgInfo  p where 1=1 and t.orgInfo.orgNo like p.orgNo ||'%' /~ and p.orgId = [orgId] ~/"
-				+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
+				+ "/~ and t.empNo not in ([empNos]) ~/" + "/~ order by [sortColumns] ~/";
+		//" order by t.orgInfo.orgType,t.orgInfo.sortNo";
+
 		String not_all = "select t from UserInfo t where 1=1 /~ and t.orgInfo.orgId = [orgId] ~/"
-				+ "/~ and t.empNo not in ([empNos]) ~/" + " order by t.orgInfo.orgType,t.orgInfo.sortNo";
+				+ "/~ and t.empNo not in ([empNos]) ~/" + "/~ order by [sortColumns] ~/";
+		//" order by t.orgInfo.orgType,t.orgInfo.sortNo";
 		String QUERY_SQL = "from UserInfo";
 		if (!userQ.isShowAllAccount()) {
 			QUERY_SQL = not_all;
@@ -73,6 +76,9 @@ public class UserInfoDao extends BaseHibernateDao<UserInfo, Long> {
 			QUERY_SQL = all;
 		}
 
+		if (pageRequest.getSortColumns() == null) {
+			pageRequest.setSortColumns("t.orgInfo.orgType,t.orgInfo.sortNo");
+		}
 		return pageQuery(QUERY_SQL, pageRequest);
 	}
 
