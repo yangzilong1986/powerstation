@@ -151,11 +151,11 @@ deleteUser = function(){
 		<thead class="tableHeader">
 			<tr style="height: 20px;">
 				<th ><spring:message code="system.user.xh" /></th>
-				<th ><spring:message code="system.user.zh" /></th>
-				<th ><spring:message code="system.user.mc" /></th>
+				<th sortColumn="STAFF_NO"><spring:message code="system.user.zh" /></th>
+				<th sortColumn="name"><spring:message code="system.user.mc" /></th>
 			</tr>
 		</thead>
-		<tbody id="dataBody">
+		<tbody id="dataBody" class="tableBody" >
 			<c:forEach items="${page.result}" var="item" varStatus="status">
 				<tr style="height: 20px;" id="${item.empNo}" class="${status.count % 2 == 0 ? 'odd' : 'even'}" onclick="selectRow('${item.empNo}', this)"
 					style="cursor: pointer;">
