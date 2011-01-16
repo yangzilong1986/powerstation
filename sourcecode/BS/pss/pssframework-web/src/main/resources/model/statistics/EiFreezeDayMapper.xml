@@ -10,7 +10,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 	<sql id="EiFreezeDayDynamicWhere">
 		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
 		<choose>
-			<when test="orgId != null and orgId != 0">and m.orgId = #{orgId}</when>
+			<when test="orgId != null and orgId != 0">and exists (select 1 from o_org s,o_org p where p.org_Id = #{orgId} and s.org_no like p.org_no||'%' and s.org_id = m.org_id )</when>
 		</choose>
 		<choose>
 			<when test="tgId != null and tgId != -1">and object_Id = #{tgId} and gp_type='2'</when>

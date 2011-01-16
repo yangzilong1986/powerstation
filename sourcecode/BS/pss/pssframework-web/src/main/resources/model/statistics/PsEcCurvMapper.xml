@@ -12,7 +12,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
             <when test="psId != null">and m.PS_ID = #{psId}</when>
         </choose>
         <choose>
-            <when test="orgId != null and orgId != 0">and m.org_Id = #{orgId}</when>
+            <when test="orgId != null and orgId != 0">and exists (select 1 from o_org s,o_org p where p.org_Id = #{orgId} and s.org_no like p.org_no||'%' and s.org_id = m.org_id )</when>
         </choose>
         <choose>
             <when test="tgId != null and tgId != -1">and m.object_Id = #{tgId} and m.gp_type='2'</when>
