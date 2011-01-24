@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>低压漏保及配变管理系统</title>
-<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/mobile.css" />
 <script type="text/javascript">
 function check() {
     var o_username = document.getElementById('j_username');

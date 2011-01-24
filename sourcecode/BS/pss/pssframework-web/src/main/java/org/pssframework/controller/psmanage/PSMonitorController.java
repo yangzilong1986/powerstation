@@ -190,7 +190,13 @@ public class PSMonitorController extends BaseSpringController {
         long collectId = realTimeProxy376.transmitMsg(mto);
         logger.info("collectId : " + collectId);
         result.addObject("collectId", collectId);
-        result.addObject("fetchCount", 10);
+        String sFetchCount = request.getParameter("fetchCount");
+        if(sFetchCount != null && sFetchCount.trim().length() > 0) {
+            result.addObject("fetchCount", Integer.valueOf(sFetchCount).intValue());
+        }
+        else {
+            result.addObject("fetchCount", 10);
+        }
         return result;
     }
 

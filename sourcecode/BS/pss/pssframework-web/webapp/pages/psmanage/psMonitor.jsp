@@ -360,10 +360,10 @@ function showResultReadC04F(resultMap) {
             $("#rmtTripImg").attr('src', '<pss:path type="bgcolor"/>/img/pss-off.png');
             msgStatus += "分闸；\r";
             if(result['8000C04F02'] == '0') {
-                msgStatus += "未锁死；\r";
+                msgStatus += "未闭锁；\r";
             }
             else if(result['8000C04F02'] == '1') {
-                msgStatus += "锁死；\r";
+                msgStatus += "闭锁；\r";
             }
 
             if(result['8000C04F03'] == '00') {

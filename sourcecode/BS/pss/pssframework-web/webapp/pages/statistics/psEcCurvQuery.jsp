@@ -27,7 +27,7 @@
         <th sortColumn="assetNo">资产编号</th>
         <th sortColumn="dataTime">数据时间</th>
         <th sortColumn="closed">开关状态</th>
-        <th sortColumn="locked">是否锁定</th>
+        <th sortColumn="locked">是否闭锁</th>
         <th sortColumn="phase">故障相位</th>
         <th sortColumn="actionType">动作类型</th>
         <th sortColumn="voltA">A相电压</th>
@@ -46,7 +46,7 @@
           <td><c:out value='${item.assetNo}' />&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.dataTime}"></fmt:formatDate> &nbsp;</td>
           <td><c:if test="${item.opened eq 0}">合闸</c:if><c:if test="${item.opened eq 1}">分闸</c:if>&nbsp;</td>
-          <td><c:if test="${item.opened eq 1}"><c:if test="${item.locked eq 1}">锁死</c:if><c:if test="${item.locked eq 0}">未锁死</c:if></c:if>&nbsp;</td>
+          <td><c:if test="${item.opened eq 1}"><c:if test="${item.locked eq 1}">闭锁</c:if><c:if test="${item.locked eq 0}">未闭锁</c:if></c:if>&nbsp;</td>
           <td><c:if test="${item.opened eq 1}"><c:if test="${item.phase eq '00'}">无效</c:if><c:if test="${item.phase eq '01'}">A相</c:if><c:if test="${item.phase eq '10'}">B相</c:if><c:if test="${item.phase eq '11'}">C相</c:if></c:if>&nbsp;</td>
           <td><c:if test="${item.opened eq 0}">合闸</c:if><c:if test="${item.opened eq 1}"><c:set var="key" value="${item.actionType}"></c:set><c:out value="${actionTypeMap[key]}" /></c:if>&nbsp;</td>
           <td><c:out value='${item.voltA}' />&nbsp;</td>

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>低压漏保及配变管理系统</title>
-<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/mobile.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
 function selectOrg(orgId) {
@@ -33,7 +33,6 @@ function selectPs(psId) {
 </head>
 <body>
 <div align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
-<!-- <div><input type="text"" id="s" name="s" value="" /> <input type="button" id="btnSearch" value="搜索" /></div> -->
 <div>漏&nbsp; 保：</div>
 <div>
   <c:forEach var="item" items="${pslist}">
