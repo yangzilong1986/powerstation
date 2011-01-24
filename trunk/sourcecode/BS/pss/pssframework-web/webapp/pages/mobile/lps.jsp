@@ -8,6 +8,8 @@
 <title>低压漏保及配变管理系统</title>
 </head>
 <body>
-漏保参数设置
+<div align="left" style="float: left">漏保名称：${psInfo.psName}</div>
+<div align="right" style="float: right;"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
+<div>漏保参数设置</div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>低压漏保及配变管理系统</title>
-<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/content.css" />
+<link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/mobile.css" />
 <script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -44,7 +44,6 @@
     }
 
     function showResultRemote(resultMap) {
-        //alert(resultMap);
         var logicalAddr = $("#logicalAddr").val();
         var meterAddr = $("#meterAddr").val();
         var result = null;
@@ -63,10 +62,16 @@
         else {
             result = resultMap[logicalAddr + '#' + fillTopsMeterAddr(meterAddr) + "#" + "8000C036"];
             if(typeof result != "undefined") {
-                if(result == "1") {
-                    result = "开关分合闸成功";
+                var r = result['C04001'];
+                if(typeof r != "undefined") {
+                    if(r == "1") {
+                        result = "开关分闸成功";
+                    }
+                    else if(r == "0") {
+                        result = "开关合闸成功";
+                    }
                 }
-                else if(result == "2") {
+                else {
                     result = "开关分合闸失败";
                 }
                 $("#resultRemote").html(result);
@@ -112,7 +117,9 @@
         var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
         var params = {
             "dto" : sb_dto.toString(),
-            "mtoType" : $("#protocolNo").val()
+            "mtoType" : $("#protocolNo").val(),
+            "fetchCount": 3,
+            "random": Math.random()
         };
         $.ajax({
             type : 'POST',
@@ -122,7 +129,7 @@
             success : function(data) {
                 //alert(data.collectId);
                 //alert(data.fetchCount);
-                setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+                setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 7000);
             },
             error : function(XmlHttpRequest, textStatus, errorThrown) {
                 initOpResultRemote('下发开关分闸命令失败...');
@@ -145,7 +152,7 @@
             success : function(data) {
                 var b = showResultRemote(data.resultMap);
                 if(!b && fetchCount > 0) {
-                    setTimeout("fetchRemoteTripingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+                    setTimeout("fetchRemoteTripingResult(" + collectId + ", " + (fetchCount - 1) + ")", 7000);
                 }
                 else if(b) {
                     enableRemoteOperation();
@@ -193,7 +200,9 @@
         var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
         var params = {
             "dto" : sb_dto.toString(),
-            "mtoType" : $("#protocolNo").val()
+            "mtoType" : $("#protocolNo").val(),
+            "fetchCount": 3,
+            "random": Math.random()
         };
         $.ajax({
             type : 'POST',
@@ -203,10 +212,10 @@
             success : function(data) {
                 //alert(data.collectId);
                 //alert(data.fetchCount);
-                setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+                setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 7000);
             },
             error : function(XmlHttpRequest, textStatus, errorThrown) {
-                initOpResultRemote('下发开关合闸命令失败...');
+                initOpResultRemote('下发开关合闸命令失败');
                 enableRemoteOperation();
             }
         });
@@ -226,7 +235,7 @@
             success : function(data) {
                 var b = showResultRemote(data.resultMap);
                 if(!b && fetchCount > 0) {
-                    setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+                    setTimeout("fetchRemoteSwitchingResult(" + collectId + ", " + (fetchCount - 1) + ")", 7000);
                 }
                 else if(b) {
                     enableRemoteOperation();
@@ -271,7 +280,9 @@
         var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
         var params = {
             "dto" : sb_dto.toString(),
-            "mtoType" : $("#protocolNo").val()
+            "mtoType" : $("#protocolNo").val(),
+            "fetchCount": 3,
+            "random": Math.random()
         };
         $.ajax({
             type : 'POST',
@@ -281,7 +292,7 @@
             success : function(data) {
                 //alert(data.collectId);
                 //alert(data.fetchCount);
-                setTimeout("fetchRemoteTestingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+                setTimeout("fetchRemoteTestingResult(" + data.collectId + ", " + data.fetchCount + ")", 7000);
             },
             error : function(XmlHttpRequest, textStatus, errorThrown) {
                 initOpResultRemote('下发试验跳命令失败...');
@@ -304,7 +315,7 @@
             success : function(data) {
                 var b = showResultRemote(data.resultMap);
                 if(!b && fetchCount > 0) {
-                    setTimeout("fetchRemoteTestingResult(" + collectId + ", " + (fetchCount - 1) + ")", 3000);
+                    setTimeout("fetchRemoteTestingResult(" + collectId + ", " + (fetchCount - 1) + ")", 7000);
                 }
                 else if(b) {
                     enableRemoteOperation();
@@ -349,7 +360,8 @@
 </script>
 </head>
 <body>
-<div align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
+<div align="left" style="float: left">漏保名称：${psInfo.psName}</div>
+<div align="right" style="float: right;"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
 <div style="height: 50px;">
   <input type="hidden" id="psId" name="psId" value="${param.psId}" />
   <input type="hidden" id="protocolNo" name="protocolNo" value="${psInfo.terminalInfo.protocolNo}" />
@@ -367,13 +379,13 @@
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
 <div style="height: 60px; text-align: center; vertical-align: bottom;">
-  <input id="btnTripping" type="button" value="远程分闸" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+  <input id="btnTripping" type="button" value="远程分闸" style="font-size: 18px; width: 120px; height: 40px; vertical-align: middle;" />
 </div>
 <div style="height: 60px; text-align: center; vertical-align: bottom;">
-  <input id="btnClosing" type="button" value="远程合闸" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+  <input id="btnClosing" type="button" value="远程合闸" style="font-size: 18px; width: 120px; height: 40px; vertical-align: middle;" />
 </div>
 <div style="height: 60px; text-align: center; vertical-align: bottom;">
-  <input id="btnTesting" type="button" value="远程试跳" style="font-size: 24px; width: 120px; height: 40px; vertical-align: middle;" />
+  <input id="btnTesting" type="button" value="漏电动作试跳" style="font-size: 18px; width: 120px; height: 40px; vertical-align: middle;" />
 </div>
 <div id="resultRemote" style="height: 50px;"></div>
 </body>
