@@ -51,6 +51,10 @@ public class ChooseLeakageProtectorController extends BaseSpringController {
             throws Exception {
         mav.setViewName(VIEW_NAME);
         Map mapRequest = WebUtils.getParametersStartingWith(request, "");
+        String orgId = (String) mapRequest.get("orgId");
+        if(orgId != null && ("".equals(orgId.trim()) || "null".equals(orgId.trim()))) {
+            mapRequest.remove("orgId");
+        }
         logger.info("mapRequest : " + mapRequest.toString());
         mav.addObject(ORGLIST, orgInfoManager.findByPageRequest(mapRequest));
         mav.addObject(TGLIST, tgInfoManager.findByPageRequest(mapRequest));

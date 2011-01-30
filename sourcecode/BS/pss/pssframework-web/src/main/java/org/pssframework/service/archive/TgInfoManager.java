@@ -80,7 +80,7 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
         List<TranInfo> trans = tg.getTranInfos();
         Map mapIn = Maps.newHashMap();
-        mapIn.put("tgid", id);
+        mapIn.put("tgId", id);
         List<TerminalInfo> terms = this.terminalInfoDao.findByPageRequest(mapIn);
 
         List<PsInfo> psInfos = this.psInfoDao.findByPageRequest(mapIn);

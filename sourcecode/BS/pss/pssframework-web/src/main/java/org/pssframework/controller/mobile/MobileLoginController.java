@@ -34,7 +34,6 @@ import com.google.common.collect.Sets;
 @RequestMapping("/mobile")
 public class MobileLoginController extends BaseSpringController {
     private static final String VIEW_NAME = "/mobile/login";
-    private static final String VIEW_MAIN_NAME = "/mobile/main";
     private static final String MESSAGE = "message";
 
     @Autowired
@@ -69,6 +68,18 @@ public class MobileLoginController extends BaseSpringController {
         String username = request.getParameter("j_username");
         String password = request.getParameter("j_password");
 
+        if(username == null || (username != null && username.trim().length() == 0)) {
+            mav.setViewName(VIEW_NAME);
+            mav.addObject(MESSAGE, "请输入用户名!");
+            return mav;
+        }
+
+        if(password == null || (password != null && password.trim().length() == 0)) {
+            mav.setViewName(VIEW_NAME);
+            mav.addObject(MESSAGE, "请输入密码!");
+            return mav;
+        }
+
         UserInfo user = userInfoManager.findUserByLoginName(username);
         if(user == null) {
             mav.setViewName(VIEW_NAME);
@@ -101,8 +112,9 @@ public class MobileLoginController extends BaseSpringController {
 
         SpringSecurityUtils.saveUserDetailsToContext(userDetails, (HttpServletRequest) request);
 
-        mav.setViewName(VIEW_MAIN_NAME);
-        return mav;
+        getServletContext().getRequestDispatcher("/mobile/clp").forward(request, response);
+        // mav.setViewName(VIEW_MAIN_NAME);
+        return null;
     }
 
     /**
