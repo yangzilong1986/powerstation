@@ -37,10 +37,10 @@
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
 <div style="height: 40px; text-align: center; vertical-align: bottom;">
-  <input id="btnParameterSetting" type="button" value="漏保参数设置" style="font-size: 14px; width: 120px; height: 30px; vertical-align: middle;" />
+  <a href="${ctx}/mobile/lps?psId=${param.psId}" style="border: 1px #AED5D4 solid; font-size: 14px; padding: 5px; text-decoration: none;">漏保参数设置</a>
 </div>
 <div style="height: 40px; text-align: center; vertical-align: bottom;">
-  <input id="btnTripping" type="button" value="远 程 分 合 闸" style="font-size: 14px; width: 120px; height: 30px; vertical-align: middle;" />
+  <a href="${ctx}/mobile/lpt?psId=${param.psId}" style="border: 1px #AED5D4 solid; font-size: 14px; padding: 5px; text-decoration: none;">远 程 分 合 闸</a>
 </div>
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
