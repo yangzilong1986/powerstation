@@ -118,7 +118,7 @@ public class LeakageProtectorManageController extends BaseSpringController {
             long collectId = realTimeProxy376.transmitMsg(mto);
 
             Map<String, Map<String, String>> resultMap = null;
-            int i = 3;
+            int i = 5;
             while(i > 0
                     && (resultMap == null || (resultMap != null && !resultMap.containsKey(psInfo.getTerminalInfo()
                             .getLogicalAddr()
@@ -126,21 +126,29 @@ public class LeakageProtectorManageController extends BaseSpringController {
                             + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr())
                             + "#"
                             + "8000B66F")))) {
-                Thread.sleep(10 * 1000);
+                try {
+                    Thread.sleep(3 * 1000);
+                }
+                catch(InterruptedException _ie) {
+                }
                 resultMap = realTimeProxy376.readTransmitPara(collectId);
                 i--;
             }
 
             LeakageProtectorDataObject lpdo = new LeakageProtectorDataObject();
-            Map result = resultMap.get(psInfo.getTerminalInfo().getLogicalAddr() + "#"
-                    + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr()) + "#" + "8000B66F");
-            lpdo.setVoltA((String) result.get("B611"));
-            lpdo.setVoltB((String) result.get("B612"));
-            lpdo.setVoltC((String) result.get("B613"));
-            lpdo.setEcurA((String) result.get("B621"));
-            lpdo.setEcurB((String) result.get("B622"));
-            lpdo.setEcurC((String) result.get("B623"));
-            lpdo.setEcurR((String) result.get("B660"));
+            if(resultMap != null) {
+                Map result = resultMap.get(psInfo.getTerminalInfo().getLogicalAddr() + "#"
+                        + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr()) + "#" + "8000B66F");
+                if(result != null) {
+                    lpdo.setVoltA((String) result.get("B611"));
+                    lpdo.setVoltB((String) result.get("B612"));
+                    lpdo.setVoltC((String) result.get("B613"));
+                    lpdo.setEcurA((String) result.get("B621"));
+                    lpdo.setEcurB((String) result.get("B622"));
+                    lpdo.setEcurC((String) result.get("B623"));
+                    lpdo.setEcurR((String) result.get("B660"));
+                }
+            }
 
             sb_dto = new StringBuffer();
             sb_dto.append("{");
@@ -171,7 +179,7 @@ public class LeakageProtectorManageController extends BaseSpringController {
             collectId = realTimeProxy376.transmitMsg(mto);
 
             resultMap = null;
-            i = 3;
+            i = 5;
             while(i > 0
                     && (resultMap == null || (resultMap != null && !resultMap.containsKey(psInfo.getTerminalInfo()
                             .getLogicalAddr()
@@ -179,86 +187,94 @@ public class LeakageProtectorManageController extends BaseSpringController {
                             + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr())
                             + "#"
                             + "8000C04F")))) {
-                Thread.sleep(10 * 1000);
+                try {
+                    Thread.sleep(3 * 1000);
+                }
+                catch(InterruptedException _ie) {
+                }
                 resultMap = realTimeProxy376.readTransmitPara(collectId);
                 i--;
             }
 
-            result = resultMap.get(psInfo.getTerminalInfo().getLogicalAddr() + "#"
-                    + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr()) + "#" + "8000C04F");
-            lpdo.setErWorkingValue((String) result.get("8000C04F07"));
-            lpdo.setTimeBlock((String) result.get("8000C04F09"));
-            lpdo.setEcurRating((String) result.get("8000C04F05"));
-            String msgStatus = "";
-            if("0".equals((String) result.get("8000C04F01"))) {
-                msgStatus += "合闸；\r";
-            }
-            else if("1".equals((String) result.get("8000C04F01"))) {
-                msgStatus += "分闸；\r";
-                if("0".equals((String) result.get("8000C04F02"))) {
-                    msgStatus += "未闭锁；\r";
-                }
-                else if("1".equals((String) result.get("8000C04F02"))) {
-                    msgStatus += "闭锁；\r";
-                }
+            if(resultMap != null) {
+                Map result = resultMap.get(psInfo.getTerminalInfo().getLogicalAddr() + "#"
+                        + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr()) + "#" + "8000C04F");
+                if(result != null) {
+                    lpdo.setErWorkingValue((String) result.get("8000C04F07"));
+                    lpdo.setTimeBlock((String) result.get("8000C04F09"));
+                    lpdo.setEcurRating((String) result.get("8000C04F05"));
+                    String msgStatus = "";
+                    if("0".equals((String) result.get("8000C04F01"))) {
+                        msgStatus += "合闸；\r";
+                    }
+                    else if("1".equals((String) result.get("8000C04F01"))) {
+                        msgStatus += "分闸；\r";
+                        if("0".equals((String) result.get("8000C04F02"))) {
+                            msgStatus += "未闭锁；\r";
+                        }
+                        else if("1".equals((String) result.get("8000C04F02"))) {
+                            msgStatus += "闭锁；\r";
+                        }
 
-                if("00".equals((String) result.get("8000C04F03"))) {
-                    msgStatus += "相位：无效；\r";
-                }
-                else if("01".equals((String) result.get("8000C04F03"))) {
-                    msgStatus += "相位：A相；\r";
-                }
-                else if("10".equals((String) result.get("8000C04F03"))) {
-                    msgStatus += "相位：B相；\r";
-                }
-                else if("11".equals((String) result.get("8000C04F03"))) {
-                    msgStatus += "相位：C相；\r";
-                }
+                        if("00".equals((String) result.get("8000C04F03"))) {
+                            msgStatus += "相位：无效；\r";
+                        }
+                        else if("01".equals((String) result.get("8000C04F03"))) {
+                            msgStatus += "相位：A相；\r";
+                        }
+                        else if("10".equals((String) result.get("8000C04F03"))) {
+                            msgStatus += "相位：B相；\r";
+                        }
+                        else if("11".equals((String) result.get("8000C04F03"))) {
+                            msgStatus += "相位：C相；\r";
+                        }
 
-                if("0000".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "漏电跳闸";
-                }
-                else if("0001".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "突变跳闸";
-                }
-                else if("0010".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "特波跳闸";
-                }
-                else if("0011".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "过载跳闸";
-                }
-                else if("0100".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "过压跳闸";
-                }
-                else if("0101".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "欠压跳闸";
-                }
-                else if("0110".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "短路跳闸";
-                }
-                else if("0111".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "手动跳闸";
-                }
-                else if("1000".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "停电跳闸";
-                }
-                else if("1001".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "互感器故障跳闸";
-                }
-                else if("1010".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "远程跳闸";
-                }
-                else if("1011".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "其它原因跳闸";
-                }
-                else if("1100".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "合闸过程中";
-                }
-                else if("1101".equals((String) result.get("8000C04F04"))) {
-                    msgStatus += "合闸失败";
+                        if("0000".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "漏电跳闸";
+                        }
+                        else if("0001".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "突变跳闸";
+                        }
+                        else if("0010".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "特波跳闸";
+                        }
+                        else if("0011".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "过载跳闸";
+                        }
+                        else if("0100".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "过压跳闸";
+                        }
+                        else if("0101".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "欠压跳闸";
+                        }
+                        else if("0110".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "短路跳闸";
+                        }
+                        else if("0111".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "手动跳闸";
+                        }
+                        else if("1000".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "停电跳闸";
+                        }
+                        else if("1001".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "互感器故障跳闸";
+                        }
+                        else if("1010".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "远程跳闸";
+                        }
+                        else if("1011".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "其它原因跳闸";
+                        }
+                        else if("1100".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "合闸过程中";
+                        }
+                        else if("1101".equals((String) result.get("8000C04F04"))) {
+                            msgStatus += "合闸失败";
+                        }
+                    }
+                    lpdo.setEstatus(msgStatus);
                 }
             }
-            lpdo.setEstatus(msgStatus);
 
             mav.addObject("result", lpdo);
         }

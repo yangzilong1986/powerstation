@@ -9,7 +9,14 @@
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/mobile.css" />
 </head>
 <body>
-<div align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
+<div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="50%" height="20" align="left"></td>
+      <td width="50%" align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></td>
+    </tr>
+  </table>
+</div>
 <div>漏&nbsp; 保：</div>
 <div>&nbsp;&nbsp;&nbsp; 
   <c:forEach var="item" items="${pslist}">
