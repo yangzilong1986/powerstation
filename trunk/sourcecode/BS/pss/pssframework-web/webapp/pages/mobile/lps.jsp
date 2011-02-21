@@ -7,15 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>低压漏保及配变管理系统</title>
 <link type="text/css" rel="stylesheet" href="<pss:path type="bgcolor"/>/css/mobile.css" />
-<script type="text/javascript" src="<pss:path type="webapp"/>/scripts/jquery.js"></script>
-<script type="text/javascript">
-
-</script>
 </head>
 <body>
-<div align="left" style="float: left">漏保名称：${psInfo.psName}</div>
-<div align="right" style="float: right;"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></div>
-<div style="height: 50px;">
+<div>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="50%" height="20" align="left">漏保名称：${psInfo.psName}</td>
+      <td width="50%" align="right">
+        <a href="<pss:path type="webapp"/>/mobile/lpm?psId=${param.psId}"> 返 回 </a>
+        &nbsp;&nbsp;&nbsp; 
+        <a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div style="height: 20px;">
   <input type="hidden" id="psId" name="psId" value="${param.psId}" />
   <input type="hidden" id="protocolNo" name="protocolNo" value="${psInfo.terminalInfo.protocolNo}" />
   <input type="hidden" id="logicalAddr" name="logicalAddr" value="${psInfo.terminalInfo.logicalAddr}" />
@@ -69,21 +75,23 @@
     <tr>
       <td height="25" align="right">漏电分断延迟时间值：</td>
       <td align="left">
-        <input rci="8000C04F" rdi="8000C04F09" type="text" value="" style="width: 95px; height: 20px;" /> mS
+        <input rci="8000C04F" rdi="8000C04F09" type="text" value="${result.rlcGearValue}" style="width: 95px; height: 20px;" /> <span class="red"><strong>mS</strong></span>
       </td>
     </tr>
     <tr>
       <td height="25" align="right">额定负载电流档位值：</td>
       <td align="left">
-        <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="" style="width: 105px; height: 20px;" /> A
+        <input rci="8000C04F" rdi="8000C04F05" sci="8001C04F" sdi="8001C04F03" type="text" value="${result.rlcGearValue}" style="width: 105px; height: 20px;" /> <span class="red"><strong>A</strong></span>
       </td>
     </tr>
   </table>
 </div>
-<div style="height: 30px; text-align: center; vertical-align: bottom;">
-  <input id="btnReading" type="button" value=" 读 取 " style="font-size: 14px; width: 60px; height: 30px; vertical-align: middle;" />
-  <input id="btnSetting" type="button" value=" 设 置 " style="font-size: 14px; width: 60px; height: 30px; vertical-align: middle;" />
+<div style="height: 20px;">&nbsp;</div>
+<div style="height: 50px; text-align: center; vertical-align: bottom;">
+  <a href="${ctx}/mobile/lps/r?psId=${param.psId}" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px 13px; text-decoration: none;"> 读 取 </a>
+  &nbsp;&nbsp;&nbsp; 
+  <a href="${ctx}/mobile/lps/s?psId=${param.psId}" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px 13px; text-decoration: none;"> 设 置 </a>
 </div>
-<div id="result" style="height: 50px;"></div>
+<div id="result" style="height: 30px;">${resultMsg}</div>
 </body>
 </html>

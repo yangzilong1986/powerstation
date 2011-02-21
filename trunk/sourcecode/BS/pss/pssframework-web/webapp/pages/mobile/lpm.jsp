@@ -16,7 +16,11 @@
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="50%" height="20" align="left">漏保名称：${psInfo.psName}</td>
-      <td width="50%" align="right"><a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a></td>
+      <td width="50%" align="right">
+        <!-- <a href="<pss:path type="webapp"/>/mobile/clp"> 返 回 </a>
+        &nbsp;&nbsp;&nbsp;  -->
+        <a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a>
+      </td>
     </tr>
   </table>
 </div>
@@ -37,10 +41,10 @@
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
 <div style="height: 40px; text-align: center; vertical-align: bottom;">
-  <a href="${ctx}/mobile/lps?psId=${param.psId}" style="border: 1px #AED5D4 solid; font-size: 14px; padding: 5px; text-decoration: none;">漏保参数设置</a>
+  <a href="${ctx}/mobile/lps?psId=${param.psId}" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px; text-decoration: none;">漏保参数设置</a>
 </div>
 <div style="height: 40px; text-align: center; vertical-align: bottom;">
-  <a href="${ctx}/mobile/lpt?psId=${param.psId}" style="border: 1px #AED5D4 solid; font-size: 14px; padding: 5px; text-decoration: none;">远 程 分 合 闸</a>
+  <a href="${ctx}/mobile/lpt?psId=${param.psId}" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px; text-decoration: none;">远 程 分 合 闸</a>
 </div>
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
