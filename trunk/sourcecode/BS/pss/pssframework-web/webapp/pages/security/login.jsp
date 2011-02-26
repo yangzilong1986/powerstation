@@ -116,7 +116,7 @@ $(document).ready( function() {
              }else{
             	 alert("验证码不对，请重输入！");
             	 refreshCaptcha();
-            	 $("#j_captcha").focus();
+            	 //$("#j_captcha").focus();
             	 
             	 toggleButton();
              }
