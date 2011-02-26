@@ -18,7 +18,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 			<when test="orgId != null and orgId != 0"><![CDATA[ and term.ORG_ID = #{orgId}]]></when>
 		</choose>
 		<choose>
-			<when test="tgId != null and tgId != -1"><![CDATA[ and exists (select 1 from o_org s,o_org p where p.org_Id = #{orgId} and s.org_no like p.org_no||'%' and s.org_id = term.org_id )]]></when>
+			<when test="tgId != null and tgId != -1"><![CDATA[ and term.tg_id = #{tgId} ]]></when>
 		</choose>
 		<choose>
 			<when test="sdate != null"><![CDATA[ AND e.ex_time >= to_date(#{sdate},'yyyy-mm-dd') ]]></when>
