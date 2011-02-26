@@ -206,9 +206,10 @@ function refreshCaptcha() {
       src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
       onclick="javascript:refreshCaptcha()" /></span></td>
   </tr>
+   
   <tr>
-    <td height="30"></td>
-    <td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>
+    <td height="10"></td>
+     <!--<td align="left" class="fontw"><input type="checkbox" name="_spring_security_remember_me" /> 两周内记住我</td>-->
   </tr>
   <tr>
     <td height="50">&nbsp;</td>
