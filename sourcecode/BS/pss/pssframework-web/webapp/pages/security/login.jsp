@@ -48,7 +48,7 @@ function checkUser() {
         alert("请输入密码");
         $("#j_password").focus();
         return false;
-    }else if($("#j_captcha").val() == ""){
+    }else if($("#j_captcha").val() == "" || check=='0'){
     	alert("请输入验证码");
         //$("#j_captcha").focus();
         return false;
@@ -113,11 +113,12 @@ $(document).ready( function() {
              check = json;
              if(json=='1'){
            	   toggleButton(true);
+           		check = '1';
              }else{
             	 alert("验证码不对，请重输入！");
             	 refreshCaptcha();
             	 //$("#j_captcha").focus();
-            	 
+            	 check = '0';
             	 toggleButton();
              }
        
