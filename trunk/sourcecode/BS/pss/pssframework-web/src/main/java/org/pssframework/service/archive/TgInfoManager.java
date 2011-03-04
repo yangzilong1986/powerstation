@@ -80,7 +80,11 @@ public class TgInfoManager extends BaseManager<TgInfo, Long> {
 
         List<TranInfo> trans = tg.getTranInfos();
         Map mapIn = Maps.newHashMap();
+
+		//此处添加tgId、tgid的多种设置
         mapIn.put("tgId", id);
+		mapIn.put("tgid", id);
+
         List<TerminalInfo> terms = this.terminalInfoDao.findByPageRequest(mapIn);
 
         List<PsInfo> psInfos = this.psInfoDao.findByPageRequest(mapIn);
