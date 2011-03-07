@@ -48,7 +48,7 @@ function checkUser() {
         alert("请输入密码");
         $("#j_password").focus();
         return false;
-    }else if($("#j_captcha").val() == "" || check=='0'){
+    }else if($("#j_captcha").val() == "" ){
     	alert("请输入验证码");
         //$("#j_captcha").focus();
         return false;
