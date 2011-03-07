@@ -40,18 +40,26 @@ function checkUser() {
         return true;
     }*/
     if($("#j_username").val() == "") {
-        alert("请输入用户名");
+        $("#name").html("请输入用户名");
         $("#j_username").focus();
         return false;
+    }else{
+    	 $("#name").html("");
     }
-    else if($("#j_password").val() == "") {
-        alert("请输入密码");
+    
+    if($("#j_password").val() == "") {
+        $("#password").html("请输入密码");
         $("#j_password").focus();
         return false;
-    }else if($("#j_captcha").val() == "" ){
-    	alert("请输入验证码");
-        //$("#j_captcha").focus();
+    }else{
+    	 $("#password").html("");
+    }
+    	
+  	if($("#j_captcha").val() == "" ){
+  		 $("#captcha").html("请输入验证码");
         return false;
+    }else{
+    	$("#captcha").html("");
     }
 
     return true;
@@ -63,24 +71,38 @@ $(document).ready( function() {
     }
 
     $(document).keydown( function(e) {
+    	
         var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
         if(keyCode == 13) {
-        	$("#j_captcha").blur();
-            if(checkUser()&& check=='1') {
-            	
-                $("#loginForm").submit();
-            }else if(check=='0'){
-            	
-            }
-        }
-    });
-
-    $("#submit1").click( function() {
-        if(checkUser()) {
-            $("#loginForm").submit();
+        	if(!checkUser()){
+        		return false;
+        	}
+        	 if(check =='1'){
+        		$("#loginForm").submit();
+        	}
+            
         }
     });
     
+    /* $("form:first").submit(function(){
+    	
+    });*/
+
+   $("#submit1").click( function() {
+	    if(check =='0'){
+   		$("#j_captcha").blur();
+ 		}
+	   if(checkUser() && check =='1') {
+	            $("#loginForm").submit();
+	        }else{
+	        	return false;
+	        } 
+    });
+   
+   
+
+
+	
     //判断是够存在父页面
     var url ='${pageContext.request.contextPath}/j_spring_security_logout';
     
@@ -109,23 +131,19 @@ $(document).ready( function() {
             cache: false,
             success: function(json){
               
-             
              check = json;
              if(json=='1'){
-           	   toggleButton(true);
            		check = '1';
+           		$("#captcha").html("正确");
              }else{
-            	 alert("验证码不对，请重输入！");
+            	 $("#captcha").html("验证码不对，请重输入！");
             	 refreshCaptcha();
-            	 //$("#j_captcha").focus();
             	 check = '0';
-            	 toggleButton();
              }
        
               
             },error:function(XmlHttpRequest,textStatus, errorThrown){
            	 alert(XmlHttpRequest.responseText);
-           	toggleButton();
             }
           });
     })
@@ -147,6 +165,11 @@ function closeWin() {
 	window.close();
 };
 
+
+ function checkSubmit(){
+	
+	}
+        
 function refreshCaptcha() {
 	$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha.jpg?' + Math.floor(Math.random()*100)).fadeIn();
 }
@@ -154,7 +177,7 @@ function refreshCaptcha() {
 </head>
 <body bgcolor="#042f2f" style="text-align: center;">
 <!-- <form id="loginForm" action="<pss:path type="style"/>/container/main.jsp" method="post"> -->
-<form id="loginForm" action="${ctx}/j_spring_security_check" method="post">
+<form id="loginForm" action="${ctx}/j_spring_security_check" method="post" >
 <div class="login_bg">
 <div class="login_bg1">
 <div class="pt30 tc"><img src="<pss:path type="bgcolor"/>/img/login_logo1.png" /></div>
@@ -177,17 +200,17 @@ function refreshCaptcha() {
     <div class="error"><font color="white">成功注销.</font></div>
   </c:when>
   <c:otherwise></c:otherwise>
-</c:choose> ${SPRING_SECURITY_LAST_EXCEPTION.message}
-<table width="100%" border="0" cellpadding="0" cellspacing="0">
+</c:choose> 
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
   <tr>
-    <td width="39%" height="30" align="right" class="fontw">用户名：</td>
-    <td width="61%" align="left" style="position: relative;"><input type="text" name="j_username" id="j_username"
-      class="input1 required" style="width: 180px;" value="${SPRING_SECURITY_LAST_USERNAME}"/></td>
+    <td width="39%" height="30" align="right" class="fontw" >用户名：</td>
+    <td  align="left" style="position: relative;"><input type="text" name="j_username" id="j_username"
+      class="input1 required" style="width: 180px;" tabindex="1" value="${SPRING_SECURITY_LAST_USERNAME}"/>&nbsp;&nbsp;<span id="name" style="width: 150px;color: white;"></span></td>
   </tr>
   <tr>
     <td height="30" align="right" class="fontw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
     <td align="left" style="position: relative;"><input type="password" name="j_password" id="j_password"
-      class="input1 required" style="width: 180px;" /></td>
+      class="input1 required" style="width: 180px;" tabindex="2" />&nbsp;&nbsp;<span id="password" style="width: 150px;color: white;"></span></td>
   </tr>
   <!-- 
   <tr>
@@ -203,9 +226,9 @@ function refreshCaptcha() {
   <tr>
     <td align="right" class="fontw">验证码：</td>
     <td height="30" align="left" style="position: relative;"><input type='text' name='j_captcha' id="j_captcha"
-      style="width: 63px;" class="input1 required" />&nbsp; <span> <img id="captchaImg"
+      style="width: 63px;" class="input1 required" tabindex="3" />&nbsp; <span> <img id="captchaImg"
       src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
-      onclick="javascript:refreshCaptcha()" /></span></td>
+      onclick="javascript:refreshCaptcha()" /></span>&nbsp;&nbsp;<span id="captcha" style="width: 150px;color: white;"></span></td>
   </tr>
    
   <tr>
@@ -214,8 +237,8 @@ function refreshCaptcha() {
   </tr>
   <tr>
     <td height="50">&nbsp;</td>
-    <td align="left" style="position: relative;"><a href="#"><img id="submit1"
-      src="<pss:path type="bgcolor"/>/img/login_bt1.png" width="75" height="42" /></a><a href="#"><img
+    <td align="left" style="position: relative;"><a href="#" tabindex="4"><img id="submit1"
+      src="<pss:path type="bgcolor"/>/img/login_bt1.png" width="75" height="42" /></a><a href="#" tabindex="5"><img
       src="<pss:path type="bgcolor"/>/img/login_bt2.png" width="75" height="42" class="mgl15" /></a></td>
   </tr>
 </table>
