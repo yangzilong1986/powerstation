@@ -167,11 +167,101 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                 Map result = resultMap.get(psInfo.getTerminalInfo().getLogicalAddr() + "#"
                         + fillTopsMeterAddr(psInfo.getGpInfo().getGpAddr()) + "#" + "8000C04F");
                 if(result != null) {
-                    lppo.setRcGear((String) result.get("8000C04F06"));
-                    lppo.setCbdGear((String) result.get("8000C04F08"));
-                    lppo.setRcGearValue((String) result.get("8000C04F07"));
-                    lppo.setCbdGearValue((String) result.get("8000C04F09"));
-                    lppo.setRlcGearValue((String) result.get("8000C04F05"));
+                    lppo.setTsStatus((String) result.get("8000C04F01"));            // 分合状态
+                    lppo.setIsAtresia((String) result.get("8000C04F02"));           // 是否闭锁
+                    lppo.setPhase((String) result.get("8000C04F03"));               // 相位
+                    lppo.setActionType((String) result.get("8000C04F04"));          // 动作类型
+                    lppo.setRlcGearValue((String) result.get("8000C04F05"));        // 额定负载电流档位值
+                    lppo.setRcGear((String) result.get("8000C04F06"));              // 剩余电流档位
+                    lppo.setRcGearValue((String) result.get("8000C04F07"));         // 剩余电流当前档位值
+                    lppo.setCbdGear((String) result.get("8000C04F08"));             // 漏电分断延迟档位
+                    // lppo.setCbdGearValue((String) result.get("8000C04F09"));     // 漏电分断延迟时间值
+                    lppo.setFuncSetupBytes((String) result.get("8000C04F10"));      // 开关功能设定字
+                    lppo.setLpModelId((String) result.get("8000C04F11"));           // 保护器型号ID
+
+                    if("1".equals(lppo.getLpModelId()) || "3".equals(lppo.getLpModelId())
+                            || "5".equals(lppo.getLpModelId()) || "7".equals(lppo.getLpModelId())) {
+                        if("1".equals(lppo.getCbdGear())) {
+                            lppo.setCbdGearValue("200");
+                        }
+                        else {
+                            lppo.setCbdGearValue("300");
+                        }
+                    }
+                    else if("2".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                            || "6".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())) {
+                        if("1".equals(lppo.getCbdGear())) {
+                            lppo.setCbdGearValue("300");
+                        }
+                        else {
+                            lppo.setCbdGearValue("500");
+                        }
+                    }
+                    else if("101".equals(lppo.getLpModelId())) {
+                        if("1".equals(lppo.getCbdGear())) {
+                            lppo.setCbdGearValue("200");
+                        }
+                        else {
+                            lppo.setCbdGearValue("500");
+                        }
+                    }
+
+                    if(lppo.getFuncSetupBytes() != null && lppo.getFuncSetupBytes().length() == 8) {
+                        for(int n = 1; n <= 8; n++) {
+                            if(lppo.getFuncSetupBytes().charAt(n - 1) == '1') {
+                                if(n == 1) {
+                                    lppo.setFuncSetupByte1("1");
+                                }
+                                else if(n == 2) {
+                                    lppo.setFuncSetupByte2("1");
+                                }
+                                else if(n == 3) {
+                                    lppo.setFuncSetupByte3("1");
+                                }
+                                else if(n == 4) {
+                                    lppo.setFuncSetupByte4("1");
+                                }
+                                else if(n == 5) {
+                                    lppo.setFuncSetupByte5("1");
+                                }
+                                else if(n == 6) {
+                                    lppo.setFuncSetupByte6("1");
+                                }
+                                else if(n == 7) {
+                                    lppo.setFuncSetupByte7("1");
+                                }
+                                else if(n == 8) {
+                                    lppo.setFuncSetupByte8("1");
+                                }
+                            }
+                            else {
+                                if(n == 1) {
+                                    lppo.setFuncSetupByte1("0");
+                                }
+                                else if(n == 2) {
+                                    lppo.setFuncSetupByte2("0");
+                                }
+                                else if(n == 3) {
+                                    lppo.setFuncSetupByte3("0");
+                                }
+                                else if(n == 4) {
+                                    lppo.setFuncSetupByte4("0");
+                                }
+                                else if(n == 5) {
+                                    lppo.setFuncSetupByte5("0");
+                                }
+                                else if(n == 6) {
+                                    lppo.setFuncSetupByte6("0");
+                                }
+                                else if(n == 7) {
+                                    lppo.setFuncSetupByte7("0");
+                                }
+                                else if(n == 8) {
+                                    lppo.setFuncSetupByte8("0");
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -203,7 +293,7 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
             CodeInfo psModel = codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode());
             mav.addObject("psModel", psModel);
             mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
-
+            
             StringBuffer sb_dto = new StringBuffer();
             sb_dto.append("{");
             sb_dto.append("\"collectObjects_Transmit\":").append("[{");
@@ -226,12 +316,11 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
             sb_dto.append("\"identifier\":").append("\"8001C04F\"").append(",");
             sb_dto.append("\"datacellParam\":").append("{");
             sb_dto.append("\"8001C04F01\": \"" + psModel.getCode() + "\"").append(",");
-            sb_dto.append("\"8001C04F02\": \"11100000\"").append(",");
-            sb_dto.append("\"8001C04F03\": \"" + "\"").append(",");
-            sb_dto.append("\"8001C04F04\": \"" + "\"").append(",");
-            sb_dto.append("\"8001C04F05\": \"" + "\"").append(",");
-            sb_dto.append("\"8001C04F06\": \"00000000\"")
-            ;
+            sb_dto.append("\"8001C04F02\": \"11100001\"").append(",");
+            sb_dto.append("\"8001C04F03\": \"" + (String) mapRequest.get("S_8001C04F03") + "\"").append(",");
+            sb_dto.append("\"8001C04F04\": \"" + (String) mapRequest.get("S_8001C04F04") + "\"").append(",");
+            sb_dto.append("\"8001C04F05\": \"" + (String) mapRequest.get("S_8001C04F05") + "\"").append(",");
+            sb_dto.append("\"8001C04F06\": \"" + "111111" + (String) mapRequest.get("S_8000C04F10_07") + (String) mapRequest.get("S_8000C04F10_08") + "\"");
             sb_dto.append("}");
             sb_dto.append("}").append("]");
             sb_dto.append("}]");
