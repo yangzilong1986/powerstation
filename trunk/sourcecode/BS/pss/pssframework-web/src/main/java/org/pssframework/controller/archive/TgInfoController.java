@@ -177,6 +177,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", 0L);
+        mapRequest.put("tgId", 0L);
 
 		this.CommonPart(model, mapRequest);
 
@@ -254,6 +255,7 @@ public class TgInfoController extends BaseRestSpringController<TgInfo, java.lang
 		mapRequest.put("codecate", CODE_TG_STATUS);
 
 		mapRequest.put("tgid", id);
+        mapRequest.put("tgId", id);
 
 		this.CommonPart(model, mapRequest);
 

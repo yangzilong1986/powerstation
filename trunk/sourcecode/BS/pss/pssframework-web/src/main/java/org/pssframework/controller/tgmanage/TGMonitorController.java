@@ -563,7 +563,7 @@ public class TGMonitorController extends BaseSpringController {
         }
         else if("21".equals(chartCategory)) {   // 温度曲线
             // BE16 温度
-            Map<String, String> map1 = maps.get(keyPrefix + "#BE16");
+            Map<String, String> map1 = maps.get(keyPrefix + "#100C007301");
 
             String categoryLabel = getTimelable(new Date(), "HH:mm:ss");
             
