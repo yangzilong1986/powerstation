@@ -40,14 +40,18 @@
   <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
-<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s?psId=${param.psId}" method="post">
+<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s?psId=${param.psId}&modelId=${result.lpModelId}" method="post">
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td width="48%" height="25" align="right">额定负载电流值：</td>
+      <td width="48%" height="25" align="right">额定过载保护电流值：</td>
       <td width="52%" align="left">
         <input id="S_8001C04F03" name="S_8001C04F03" type="text" value="${result.rlcGearValue}" style="width: 105px; height: 20px;" /> <span class="red"><strong>A</strong></span>
       </td>
+    </tr>
+    <tr>
+      <td height="25" align="right"></td>
+      <td align="left">${hintRLCGearValue}</td>
     </tr>
     <tr>
       <td height="25" align="right">剩余电流档位：</td>

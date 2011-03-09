@@ -262,6 +262,19 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                             }
                         }
                     }
+
+                    if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "范围：60A~250A");
+                    }
+                    else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "范围：20A~100A");
+                    }
+                    else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "范围：200A~400A");
+                    }
+                    else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "范围：200A~600A");
+                    }
                 }
             }
 
@@ -286,6 +299,42 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
         Map mapRequest = WebUtils.getParametersStartingWith(request, "");
         logger.info("mapRequest : " + mapRequest.toString());
         String sPsId = (String) mapRequest.get("psId");
+        String sModelId = (String) mapRequest.get("modelId");
+
+        String rlcGearValue = (String) mapRequest.get("S_8001C04F03");
+        int v = 0;
+        try {
+            v = Integer.parseInt(rlcGearValue);
+        }
+        catch(Exception _e) {
+            mav.addObject("resultMsg", "输入值非法");
+            return mav;
+        }
+        if("1".equals(sModelId) || "2".equals(sModelId)) {
+            if(v < 60 || v > 250) {
+                mav.addObject("resultMsg", "额定过载保护电流值超出范围60A~250A");
+                return mav;
+            }
+        }
+        else if("3".equals(sModelId) || "4".equals(sModelId)) {
+            if(v < 20 || v > 100) {
+                mav.addObject("resultMsg", "额定过载保护电流值超出范围20A~100A");
+                return mav;
+            }
+        }
+        else if("5".equals(sModelId) || "6".equals(sModelId)) {
+            if(v < 200 || v > 400) {
+                mav.addObject("resultMsg", "额定过载保护电流值超出范围200A~400A");
+                return mav;
+            }
+        }
+        else if("7".equals(sModelId) || "8".equals(sModelId)) {
+            if(v < 200 || v > 600) {
+                mav.addObject("resultMsg", "额定过载保护电流值超出范围200A~600A");
+                return mav;
+            }
+        }
+
         if(sPsId != null) {
             Long psId = Long.parseLong(sPsId);
             PsInfo psInfo = psInfoManger.getById(psId);
