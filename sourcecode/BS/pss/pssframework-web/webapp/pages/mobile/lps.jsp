@@ -44,7 +44,7 @@
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td width="48%" height="25" align="right">额定负载电流档位值：</td>
+      <td width="48%" height="25" align="right">额定负载电流值：</td>
       <td width="52%" align="left">
         <input id="S_8001C04F03" name="S_8001C04F03" type="text" value="${result.rlcGearValue}" style="width: 105px; height: 20px;" /> <span class="red"><strong>A</strong></span>
       </td>
@@ -112,7 +112,7 @@
       </td>
     </tr>
     <tr>
-      <td height="25" align="right">特波动作值启用状态：</td>
+      <td height="25" align="right">特波启用状态：</td>
       <td align="left">
         <select id="S_8000C04F10_08" name="S_8000C04F10_08" style="width: 120px; height: 22px;">
           <c:if test="${result.funcSetupByte8 == '1'}"><option value="1" selected="selected">启用</option></c:if>
