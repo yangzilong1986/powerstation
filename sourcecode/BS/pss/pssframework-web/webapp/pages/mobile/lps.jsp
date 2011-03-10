@@ -40,7 +40,9 @@
   <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
   <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
 </div>
-<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s?psId=${param.psId}&modelId=${result.lpModelId}" method="post">
+<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s?psId=${param.psId}" method="post">
+<input type="hidden" id="psModel" name="psModel" value="${result.lpModelId}" />
+<input type="hidden" id="S_8000C04F10" name="S_8000C04F10" value="${result.funcSetupBytes}" />
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -107,22 +109,22 @@
     <tr>
       <td height="25" align="right">告警功能启用状态：</td>
       <td align="left">
-        <select id="S_8000C04F10_07" name="S_8000C04F10_07" style="width: 120px; height: 22px;">
-          <c:if test="${result.funcSetupByte7 == '1'}"><option value="1" selected="selected">启用</option></c:if>
-          <c:if test="${result.funcSetupByte7 != '1'}"><option value="1">启用</option></c:if>
-          <c:if test="${result.funcSetupByte7 == '0'}"><option value="0" selected="selected">停用</option></c:if>
-          <c:if test="${result.funcSetupByte7 != '0'}"><option value="0">停用</option></c:if>
+        <select id="stateAlarm" name="stateAlarm" style="width: 120px; height: 22px;">
+          <c:if test="${result.funcSetupByte4 == '0'}"><option value="1" selected="selected">启用</option></c:if>
+          <c:if test="${result.funcSetupByte4 != '0'}"><option value="1">启用</option></c:if>
+          <c:if test="${result.funcSetupByte4 == '1'}"><option value="0" selected="selected">停用</option></c:if>
+          <c:if test="${result.funcSetupByte4 != '1'}"><option value="0">停用</option></c:if>
         </select>
       </td>
     </tr>
     <tr>
-      <td height="25" align="right">特波启用状态：</td>
+      <td height="25" align="right">特波功能启用状态：</td>
       <td align="left">
-        <select id="S_8000C04F10_08" name="S_8000C04F10_08" style="width: 120px; height: 22px;">
-          <c:if test="${result.funcSetupByte8 == '1'}"><option value="1" selected="selected">启用</option></c:if>
-          <c:if test="${result.funcSetupByte8 != '1'}"><option value="1">启用</option></c:if>
-          <c:if test="${result.funcSetupByte8 == '0'}"><option value="0" selected="selected">停用</option></c:if>
-          <c:if test="${result.funcSetupByte8 != '0'}"><option value="0">停用</option></c:if>
+        <select id="stateElliott" name="stateElliott" style="width: 120px; height: 22px;">
+          <c:if test="${result.funcSetupByte5 == '1'}"><option value="1" selected="selected">启用</option></c:if>
+          <c:if test="${result.funcSetupByte5 != '1'}"><option value="1">启用</option></c:if>
+          <c:if test="${result.funcSetupByte5 == '0'}"><option value="0" selected="selected">停用</option></c:if>
+          <c:if test="${result.funcSetupByte5 != '0'}"><option value="0">停用</option></c:if>
         </select>
       </td>
     </tr>

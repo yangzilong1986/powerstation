@@ -264,16 +264,16 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                     }
 
                     if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())) {
-                        mav.addObject("hintRLCGearValue", "范围：60A~250A");
+                        mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
                     }
                     else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())) {
-                        mav.addObject("hintRLCGearValue", "范围：20A~100A");
+                        mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
                     }
                     else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())) {
-                        mav.addObject("hintRLCGearValue", "范围：200A~400A");
+                        mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
                     }
                     else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())) {
-                        mav.addObject("hintRLCGearValue", "范围：200A~600A");
+                        mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
                     }
                 }
             }
@@ -312,25 +312,25 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
         }
         if("1".equals(sModelId) || "2".equals(sModelId)) {
             if(v < 60 || v > 250) {
-                mav.addObject("resultMsg", "额定过载保护电流值超出范围60A~250A");
+                mav.addObject("resultMsg", "额定过载保护电流值超出设定范围60A~250A");
                 return mav;
             }
         }
         else if("3".equals(sModelId) || "4".equals(sModelId)) {
             if(v < 20 || v > 100) {
-                mav.addObject("resultMsg", "额定过载保护电流值超出范围20A~100A");
+                mav.addObject("resultMsg", "额定过载保护电流值超出设定范围20A~100A");
                 return mav;
             }
         }
         else if("5".equals(sModelId) || "6".equals(sModelId)) {
             if(v < 200 || v > 400) {
-                mav.addObject("resultMsg", "额定过载保护电流值超出范围200A~400A");
+                mav.addObject("resultMsg", "额定过载保护电流值超出设定范围200A~400A");
                 return mav;
             }
         }
         else if("7".equals(sModelId) || "8".equals(sModelId)) {
             if(v < 200 || v > 600) {
-                mav.addObject("resultMsg", "额定过载保护电流值超出范围200A~600A");
+                mav.addObject("resultMsg", "额定过载保护电流值超出设定范围200A~600A");
                 return mav;
             }
         }
@@ -369,7 +369,9 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
             sb_dto.append("\"8001C04F03\": \"" + (String) mapRequest.get("S_8001C04F03") + "\"").append(",");
             sb_dto.append("\"8001C04F04\": \"" + (String) mapRequest.get("S_8001C04F04") + "\"").append(",");
             sb_dto.append("\"8001C04F05\": \"" + (String) mapRequest.get("S_8001C04F05") + "\"").append(",");
-            sb_dto.append("\"8001C04F06\": \"" + "111111" + (String) mapRequest.get("S_8000C04F10_07") + (String) mapRequest.get("S_8000C04F10_08") + "\"");
+            sb_dto.append("\"8001C04F06\": \""
+                    + handleFuncSetupBytes((String) mapRequest.get("S_8000C04F10"),
+                            (String) mapRequest.get("stateAlarm"), (String) mapRequest.get("stateElliott")) + "\"");
             sb_dto.append("}");
             sb_dto.append("}").append("]");
             sb_dto.append("}]");
@@ -446,7 +448,16 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
 
             return result;
         }
-        else
+        else {
             return "000000000000";
+        }
+    }
+
+    private String handleFuncSetupBytes(String s8000C04F10, String stateAlarm, String stateElliott) {
+        if(s8000C04F10 != null && s8000C04F10.length() == 8) {
+            s8000C04F10 = s8000C04F10.substring(0, 3) + ("1".equals(stateAlarm) ? "0" : "1")
+                    + ("1".equals(stateElliott) ? "1" : "0") + s8000C04F10.substring(5, 8);
+        }
+        return s8000C04F10;
     }
 }
