@@ -882,7 +882,7 @@ div.tableContainer {
 
 div.tableContainer table thead tr {
     position: relative;
-    top: expression(parentNode.parentNode.parentNode.scrollTop);
+    top: try{expression(parentNode.parentNode.parentNode.scrollTop);}catch(e){};
     z-index: 20;
 }
 
@@ -1208,21 +1208,21 @@ overflow-y: auto;
 scrollbar-base-color:#ffeaff;
 }
 
-thead th, thead th.locked	{
+div#tbl-container thead th, thead th.locked	{
 text-align: center;
 border-right: 1px solid silver;
 position:relative;
 cursor: default; 
 }
 	
-thead th {
+div#tbl-container thead th {
 top: expression(document.getElementById("tbl-container").scrollTop-2); /*IE5+ only*/
 z-index: 20;
 }
 
-thead th.locked {z-index: 30;}
+div#tbl-container thead th.locked {z-index: 30;}
 
-td.locked,  th.locked{
+div#tbl-container td.locked,  th.locked{
 border-right: 1px solid silver;
 left: expression(parentNode.parentNode.parentNode.parentNode.scrollLeft); /*IE5+ only*/
 position: relative;
