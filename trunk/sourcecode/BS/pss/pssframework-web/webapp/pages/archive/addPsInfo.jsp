@@ -137,7 +137,7 @@ function lpadString (str,lenth) {
         </security:authorize></td>
       </tr>
       <tr height="30px">
-        <td align="right" class="green">漏保名称：</td>
+        <td align="right" class="green"><font color="red">* </font>漏保名称：</td>
         <td><security:authorize
           ifNotGranted="ROLE_AUTHORITY_3,ROLE_AUTHORITY_2,ROLE_AUTHORITY_1,ROLE_AUTHORITY_11,ROLE_AUTHORITY_12">
           <form:input path="psName" cssClass="required input2" disabled="${disabled}" />
@@ -279,7 +279,7 @@ function lpadString (str,lenth) {
 </body>
 <script>
 
-val =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {return result;}});
+var checkVal =  new Validation(document.forms[0],{immediate:true,onSubmit:true,onFormValidate : function(result,form) {return result;}});
 	  
 function StringBuffer() {
     this.data = [];
@@ -618,8 +618,8 @@ if('${_type}' == "new"){
 }
 	
 $("#save").click(function(){
-	var ret = val.result();
-    if(ret==true || ""==ret){
+	var ret = checkVal.validate();
+    if(ret){
         jQuery(this).attr("disabled","disabled");
         if($("#_type").val()=="edit"){
           updatepsinfo();
