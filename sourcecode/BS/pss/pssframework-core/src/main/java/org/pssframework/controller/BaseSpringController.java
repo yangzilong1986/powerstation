@@ -30,7 +30,7 @@ import cn.org.rapid_framework.beanutils.BeanUtils;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
-public class BaseSpringController extends MultiActionController {
+public abstract class BaseSpringController extends MultiActionController  {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 	protected final static String CREATED_SUCCESS = "创建成功";
 	protected final static String UPDATE_SUCCESS = "更新成功";
@@ -110,4 +110,5 @@ public class BaseSpringController extends MultiActionController {
 		return (T) value;
 	}
 
+	
 }
