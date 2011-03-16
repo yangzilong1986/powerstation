@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : ErcCodec.xml
+    Created on : 2010年9月19日, 下午2:29
+    Author     : luxiaochung
+    Description:
+       为国网事件解析提供数据结构.
+-->
+
+<root>
+    <erc id="1" title="数据初始化和版本变更记录">
+        <dataItem id="" decode="Bit" length="1" descripe="参数及数据区初始化" />
+        <dataItem id="" decode="Bit" length="1" descripe="终端版本变更" />
+        <dataItem id="" decode="Asc" length="4" descripe="变更前软件版本号" />
+        <dataItem id="" decode="Asc" length="4" descripe="变更前软件版本号" />
+    </erc>
+    <erc id="2" title="参数丢失记录">
+        <dataItem id="" decode="Bit" length="1" descripe="终端参数丢失" />
+        <dataItem id="" decode="Bit" length="1" descripe="测量点参数丢失" />
+    </erc>
+    <erc id="3" title="参数变更记录">
+        <dataItem id="" decode="BIN" length="1" descripe="启动站地址" />
+        <while_not_end>
+            <dataItem id="" decode="LongWord" descripe="变更参数数据单元标识{i}"/>
+        </while_not_end>
+    </erc>
+    <erc id="4" title="状态量变位记录">
+        <dataItem id="" decode="BS8" descripe="状态变位" />
+        <dataItem id="" decode="BS8" descripe="变位前状态" />
+    </erc>
+    <erc id="5" title="遥控跳闸记录">
+        <dataItem id="" decode="BS8" descripe="跳闸轮次" />
+        <dataItem id="" decode="A2" descripe="跳闸时功率" />
+        <dataItem id="" decode="A2" descripe="跳闸后两分钟功率" />
+    </erc>
+    <erc id="6" title="功控跳闸记录">
+        <dataItem id="" decode="Bit" length="6" descripe="总加组号" />
+        <dataItem id="" decode="BS8" descripe="跳闸轮次" />
+        <dataItem id="" decode="Bit" length="1" descripe="时段控" />
+        <dataItem id="" decode="Bit" length="1" descripe="厂休控" />
+        <dataItem id="" decode="Bit" length="1" descripe="营业报停控" />
+        <dataItem id="" decode="Bit" length="1" descripe="当前功率下浮控" />
+        <dataItem id="" decode="A2" descripe="跳闸前功率" />
+        <dataItem id="" decode="A2" descripe="跳闸后两分钟功率" />
+        <dataItem id="" decode="A2" descripe="跳闸时功率定值" />
+    </erc>
+    <erc id="7" title="电控跳闸记录">
+        <dataItem id="" decode="Bit" length="6" descripe="总加组号" />
+        <dataItem id="" decode="BS8" descripe="跳闸轮次" />
+        <dataItem id="" decode="Bit" length="1" descripe="月电控" />
+        <dataItem id="" decode="Bit" length="1" descripe="购电控" />
+        <dataItem id="" decode="A3" descripe="跳闸时电能量" />
+        <dataItem id="" decode="A3" descripe="跳闸时电能量定值" />
+    </erc>
+    <erc id="8" title="电能表参数变更记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="4" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="费率时段变化" />
+        <dataItem id="" decode="Bit" length="1" descripe="编程时间更改" />
+        <dataItem id="" decode="Bit" length="1" descripe="抄表日更改" />
+        <dataItem id="" decode="Bit" length="1" descripe="脉冲常数更改" />
+        <dataItem id="" decode="Bit" length="1" descripe="互感器倍率更改" />
+        <dataItem id="" decode="Bit" length="1" descripe="最大需量清零" />
+    </erc>
+    <erc id="9" title="电流回路异常记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="异常类型" />
+        <dataItem id="" decode="A7" descripe="发生时的Ua/Uab" />
+        <dataItem id="" decode="A7" descripe="发生时的Ub" />
+        <dataItem id="" decode="A7" descripe="发生时的Uc/Ucb" />
+        <dataItem id="" decode="A25" descripe="发生时的Ia" />
+        <dataItem id="" decode="A25" descripe="发生时的Ib" />
+        <dataItem id="" decode="A25" descripe="发生时的Ic" />
+        <dataItem id="" decode="A14" descripe="发生时的正向有功总电能示值" />
+    </erc>
+    <erc id="10" title="电压回路异常记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="异常类型" />
+        <dataItem id="" decode="A7" descripe="发生时的Ua/Uab" />
+        <dataItem id="" decode="A7" descripe="发生时的Ub" />
+        <dataItem id="" decode="A7" descripe="发生时的Uc/Ucb" />
+        <dataItem id="" decode="A25" descripe="发生时的Ia" />
+        <dataItem id="" decode="A25" descripe="发生时的Ib" />
+        <dataItem id="" decode="A25" descripe="发生时的Ic" />
+        <dataItem id="" decode="A14" descripe="发生时的正向有功总电能示值" />
+    </erc>
+    <erc id="11" title="相序异常记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="A5" descripe="Ua/Uab角" />
+        <dataItem id="" decode="A5" descripe="Ub角" />
+        <dataItem id="" decode="A5" descripe="Uc/Ucb角" />
+        <dataItem id="" decode="A5" descripe="Ia角" />
+        <dataItem id="" decode="A5" descripe="Ib角" />
+        <dataItem id="" decode="A5" descripe="Ic角" />
+        <dataItem id="" decode="A14" descripe="发生时的正向有功总电能示值" />
+    </erc>
+    <erc id="12" title="电能表时间超差记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+    </erc>
+    <erc id="13" title="电能表故障信息记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="编程次数或最大需量清零次数变化" />
+        <dataItem id="" decode="Bit" length="1" descripe="断相次数变化" />
+        <dataItem id="" decode="Bit" length="1" descripe="失压次数变化" />
+        <dataItem id="" decode="Bit" length="1" descripe="停电次数变化" />
+        <dataItem id="" decode="Bit" length="1" descripe="电池失压" />
+    </erc>
+    <erc id="14" title="终端停/上电记录">
+        <dataItem id="" decode="A15" descripe="停电发生时间" />
+        <dataItem id="" decode="A15" descripe="上电时间" />
+    </erc>
+    <erc id="15" title="谐波越限告警记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="4" descripe="保留" />
+        <dataItem id="" alias="isDianliu" decode="Bit" length="1" descripe="电流/电压" />
+        <dataItem id="" decode="BS24" descripe="谐波越限标志" />
+        <if condetion="$isDianliu">
+            <dataItem id="" decode="A5" descripe="总畸变电压含有率" />
+        </if>
+        <else>
+            <dataItem id="" decode="A6" descripe="总畸变电流" />
+        </else>
+        <loop count="19" from="2">
+            <if condetion="$isDianliu">
+                <dataItem id="" decode="A5" descripe="{i}次畸变电压含有率" />
+            </if>
+            <else>
+                <dataItem id="" decode="A6" descripe="{i}次畸变电流" />
+            </else>
+        </loop>
+    </erc>
+    <erc id="16" title="直流模拟量越限记录">
+        <dataItem id="" decode="Bit" length="6" descripe="直流模拟量端口号" />
+        <dataItem id="" decode="Bit" length="1" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A2" descripe="越限时直流模拟量数据" />
+    </erc>
+    <erc id="17" title="电压/电流不平衡度越限记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="电压不平衡越限" />
+        <dataItem id="" decode="Bit" length="1" descripe="电流不平衡越限" />
+        <dataItem id="" decode="A5" descripe="发生时的电压不平衡度" />
+        <dataItem id="" decode="A5" descripe="发生时的电流不平衡度" />
+        <dataItem id="" decode="A7" descripe="发生时的Ua/Uab" />
+        <dataItem id="" decode="A7" descripe="发生时的Ub" />
+        <dataItem id="" decode="A7" descripe="发生时的Uc/Ucb" />
+        <dataItem id="" decode="A25" descripe="发生时的Ia" />
+        <dataItem id="" decode="A25" descripe="发生时的Ib" />
+        <dataItem id="" decode="A25" descripe="发生时的Ic" />
+    </erc>
+    <erc id="18" title="电容器投切自锁记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="过压" />
+        <dataItem id="" decode="Bit" length="1" descripe="装置故障" />
+        <dataItem id="" decode="Bit" length="1" descripe="执行回路故障" />
+        <dataItem id="" decode="BS16" descripe="电容器组标志" />
+        <dataItem id="" decode="A5" descripe="越限发生时功率因数" />
+        <dataItem id="" decode="A23" descripe="越限发生时无功功率" />
+        <dataItem id="" decode="A7" descripe="越限发生时电压" />
+    </erc>
+    <erc id="19" title="购电参数设置记录">
+        <dataItem id="" decode="Bit" length="6" descripe="总加组号" />
+        <dataItem id="" decode="LongWord" descripe="购电单号" />
+        <dataItem id="" decode="BIN" descripe="追加/刷新" />
+        <dataItem id="" decode="A3" descripe="购电量值" />
+        <dataItem id="" decode="A3" descripe="报警门限" />
+        <dataItem id="" decode="A3" descripe="跳闸门限" />
+        <dataItem id="" decode="A3" descripe="本次购电前剩余电能量" />
+        <dataItem id="" decode="A3" descripe="本次购电后剩余电能量" />
+    </erc>
+    <erc id="20" title="消息认证错误记录">
+        <dataItem id="" decode="BIN" length="16" descripe="消息认证码PW" />
+        <dataItem id="" decode="Byte" descripe="启动站地址MSA" />
+    </erc>
+    <erc id="21" title="终端故障记录">
+        <dataItem id="" decode="Byte" descripe="终端故障编码" />
+    </erc>
+    <erc id="22" title="有功总电量差动越限事件记录">
+        <dataItem id="" decode="Bit" length="6" descripe="电能量差动组号" />
+        <dataItem id="" decode="Bit" length="1" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起至标志" />
+        <dataItem id="" decode="A3" descripe="越限时对比总加组有功总电能量" />
+        <dataItem id="" decode="A3" descripe="越限时参照总加组有功总电能量" />
+        <dataItem id="" decode="Byte" descripe="越限时差动越限相对偏差值" />
+        <dataItem id="" decode="A3" descripe="越限时差动越限绝对偏差值" />
+        <dataItem id="" alias="COUNT1" decode="Byte" descripe="对比的总加组测量点数量" />
+        <loop count="$COUNT1">
+            <dataItem id="" decode="A14" descripe="越限时对比总加组第{i}测量点有功总电能示数" />
+        </loop>
+        <dataItem id="" alias="COUNT2" decode="Byte" descripe="参照的总加组测量点数量" />
+        <loop count="$COUNT2">
+            <dataItem id="" decode="A14" descripe="越限时参照总加组第{i}测量点有功总电能示数" />
+        </loop>
+    </erc>
+    <erc id="23" title="电控告警时间记录">
+        <dataItem id="" decode="Bit" length="6" descripe="总加组号" />
+        <dataItem id="" decode="BS8" descripe="投入轮次" />
+        <dataItem id="" decode="Bit" length="2" descripe="电控类别" />
+        <dataItem id="" decode="A3" descripe="告警时电能量" />
+        <dataItem id="" decode="A3" descripe="告警时电控定值" />
+    </erc>
+    <erc id="24" title="电压越限记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="越限类型" />
+        <dataItem id="" decode="A7" descripe="发生时的Ua/Uab" />
+        <dataItem id="" decode="A7" descripe="发生时的Ub" />
+        <dataItem id="" decode="A7" descripe="发生时的Uc/Ucb" />
+    </erc>
+    <erc id="25" title="电流越限记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="越限类型" />
+        <dataItem id="" decode="A25" descripe="发生时的Ia" />
+        <dataItem id="" decode="A25" descripe="发生时的Ib" />
+        <dataItem id="" decode="A25" descripe="发生时的Ic" />
+    </erc>
+    <erc id="26" title="视在功率越限记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="Bit" length="6" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="越限类型" />
+        <dataItem id="" decode="A23" descripe="发生时的视在功率" />
+        <dataItem id="" decode="A23" descripe="发生时的视在功率定值" />
+    </erc>
+    <erc id="27" title="电能表示度下降记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A14" descripe="下降前电能表正向有功总电能示数" />
+        <dataItem id="" decode="A14" descripe="下降后电能表正向有功总电能示数" />
+    </erc>
+    <erc id="28" title="电能量超差记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A14" descripe="超差时对应正向有功总电能示数" />
+        <dataItem id="" decode="A14" descripe="超差时正向有功总电能示数" />
+        <dataItem id="" decode="A22" descripe="电能量超差阀值" />
+    </erc>
+    <erc id="29" title="电能表飞走记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A14" descripe="飞走前正向有功总电能示数" />
+        <dataItem id="" decode="A14" descripe="飞走后正向有功总电能示数" />
+        <dataItem id="" decode="A22" descripe="电能表飞走阀值" />
+    </erc>
+    <erc id="30" title="电能表停走记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A14" descripe="停走发生时正向有功总电能示数" />
+        <dataItem id="" decode="Byte" descripe="停走阀值" />
+    </erc>
+    <erc id="31" title="终端485抄表失败记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="A15" descripe="最近一次抄表成功时间" />
+        <dataItem id="" decode="A14" descripe="最近一次抄表成功正向有功总电能示值" />
+        <dataItem id="" decode="A11" descripe="最近一次抄表成功正向无功总电能示值" />
+    </erc>
+    <erc id="32" title="终端与主站通信流量超门限事件记录">
+        <dataItem id="" decode="LongWord" descripe="当月已发生的通信流量" />
+        <dataItem id="" decode="LongWord" descripe="月通信流量阀值" />
+    </erc>
+    <erc id="33" title="电表运行状态字变位事件记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志1" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志2" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志3" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志4" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志5" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志6" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字变位标志7" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字1" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字2" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字3" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字4" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字5" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字6" />
+        <dataItem id="" decode="BS16" descripe="电能表运行状态字7" />
+    </erc>
+    <erc id="34" title="CT异常事件记录">
+        <dataItem id="" decode="Bit" length="12" descripe="测量点号" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="1" descripe="起止标志" />
+        <dataItem id="" decode="Bit" length="1" descripe="A相" />
+        <dataItem id="" decode="Bit" length="1" descripe="B相" />
+        <dataItem id="" decode="Bit" length="1" descripe="C相" />
+        <dataItem id="" decode="Bit" length="3" descripe="备用" />
+        <dataItem id="" decode="Bit" length="2" descripe="越限类型" />
+    </erc>
+    <erc id="35" title="发现未知电能表事件记录">
+        <dataItem id="" decode="Bit" length="6" descripe="终端通信端口号" />
+        <dataItem id="COUNT" decode="Byte" descripe="发现块数" />
+        <loop count="" alias="$COUNT">
+            <dataItem id="" decode="A12" descripe="电能表通信地址" />
+            <dataItem id="" decode="Bit" length="4" descripe="载波信号品质" />
+            <dataItem id="" decode="Bit" length="1" descripe="备用" />
+            <dataItem id="" decode="Bit" length="1" descripe="A相" />
+            <dataItem id="" decode="Bit" length="1" descripe="B相" />
+            <dataItem id="" decode="Bit" length="1" descripe="C相" />
+            <dataItem id="" decode="Bit" length="2" descripe="电能表通信协议" />
+        </loop>
+    </erc>
+</root>
