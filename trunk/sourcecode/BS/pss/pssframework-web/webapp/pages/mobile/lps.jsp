@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:if test="${param.read != 'true'}">
+<c:if test="${param.read != 'true' && set != 'true'}">
 <meta http-equiv="refresh" content="2; url=${ctx}/mobile/lps/r?psId=${param.psId}&read=true" />
 </c:if>
 <title>低压漏保及配变管理系统</title>
@@ -24,24 +24,10 @@
     </tr>
   </table>
 </div>
-<div style="height: 20px;">
-  <input type="hidden" id="psId" name="psId" value="${param.psId}" />
-  <input type="hidden" id="protocolNo" name="protocolNo" value="${psInfo.terminalInfo.protocolNo}" />
-  <input type="hidden" id="logicalAddr" name="logicalAddr" value="${psInfo.terminalInfo.logicalAddr}" />
-  <input type="hidden" id="meterAddr" name="meterAddr" value="${psInfo.gpInfo.gpAddr}" />
-  <input type="hidden" id="meterType" name="meterType" value="100" />
-  <input type="hidden" id="port" name="port" value="1" />
-  <input type="hidden" id="baudrate" name="baudrate" value="110" />
-  <input type="hidden" id="stopbit" name="stopbit" value="1" />
-  <input type="hidden" id="checkbit" name="checkbit" value="0" />
-  <input type="hidden" id="odd_even_bit" name="odd_even_bit" value="1" />
-  <input type="hidden" id="databit" name="databit" value="8" />
-  <input type="hidden" id="waitforPacket" name="waitforPacket" value="10" />
-  <input type="hidden" id="waitforByte" name="waitforByte" value="5" />
-  <input type="hidden" id="psModel" name="psModel" value="${psModel.code}" />
-</div>
-<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s?psId=${param.psId}" method="post">
-<input type="hidden" id="psModel" name="psModel" value="${result.lpModelId}" />
+<div style="height: 20px;"></div>
+<form id="lpsForm" name="lpsForm" action="${ctx}/mobile/lps/s" method="post">
+<input type="hidden" id="psId" name="psId" value="${psInfo.psId}" />
+<input type="hidden" id="modelId" name="modelId" value="${result.lpModelId}" />
 <input type="hidden" id="S_8000C04F10" name="S_8000C04F10" value="${result.funcSetupBytes}" />
 <div align="center">
   <table width="90%" border="0" cellspacing="0" cellpadding="0">
@@ -75,7 +61,7 @@
     <tr>
       <td height="25" align="right">剩余电流当前档位值：</td>
       <td align="left">
-        <select style="width: 120px; height: 22px;" disabled="disabled">
+        <select style="width: 95px; height: 22px;" disabled="disabled">
           <c:if test="${result.rcGear == '1'}"><option value="1" selected="selected">100</option></c:if>
           <c:if test="${result.rcGear != '1'}"><option value="1">1</option></c:if>
           <c:if test="${result.rcGear == '2'}"><option value="2" selected="selected">300</option></c:if>
@@ -87,6 +73,7 @@
           <c:if test="${result.rcGear == '5'}"><option value="5" selected="selected">自动档位值</option></c:if>
           <c:if test="${result.rcGear != '5'}"><option value="5">自动档位值</option></c:if>
         </select>
+         <span class="red"><strong>mA</strong></span>
       </td>
     </tr>
     <tr>
@@ -103,7 +90,7 @@
     <tr>
       <td height="25" align="right">漏电分断延迟时间值：</td>
       <td align="left">
-        <input type="text" value="${result.cbdGearValue}" disabled="disabled" style="width: 95px; height: 20px;" /> <span class="red"><strong>mS</strong></span>
+        <input id="cbdGearValue" name="cbdGearValue" type="text" value="${result.cbdGearValue}" disabled="disabled" style="width: 95px; height: 20px;" /> <span class="red"><strong>mS</strong></span>
       </td>
     </tr>
     <tr>

@@ -86,6 +86,27 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
             mav.addObject("commModeGm", codeInfoManager.getCodeInfo("COMM_MODE_GM", psInfo.getCommModeGm()));
             mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
             logger.info("mapRequest : " + mapRequest.toString());
+
+            LeakageProtectorParameterObject lppo = new LeakageProtectorParameterObject();
+            lppo.setLpModelId(psInfo.getModelCode());
+
+            if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())
+                    || "01".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
+            }
+            else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                    || "03".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
+            }
+            else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                    || "05".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
+            }
+            else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                    || "07".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
+            }
+            mav.addObject("result", lppo);
         }
         catch(Exception _e) {
             logger.error("", _e.fillInStackTrace());
@@ -180,7 +201,9 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                     lppo.setLpModelId((String) result.get("8000C04F11"));           // 保护器型号ID
 
                     if("1".equals(lppo.getLpModelId()) || "3".equals(lppo.getLpModelId())
-                            || "5".equals(lppo.getLpModelId()) || "7".equals(lppo.getLpModelId())) {
+                            || "5".equals(lppo.getLpModelId()) || "7".equals(lppo.getLpModelId())
+                            || "01".equals(lppo.getLpModelId()) || "03".equals(lppo.getLpModelId())
+                            || "05".equals(lppo.getLpModelId()) || "07".equals(lppo.getLpModelId())) {
                         if("1".equals(lppo.getCbdGear())) {
                             lppo.setCbdGearValue("200");
                         }
@@ -189,7 +212,9 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                         }
                     }
                     else if("2".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
-                            || "6".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())) {
+                            || "6".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                            || "02".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())
+                            || "06".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
                         if("1".equals(lppo.getCbdGear())) {
                             lppo.setCbdGearValue("300");
                         }
@@ -263,18 +288,62 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                         }
                     }
 
-                    if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())) {
+                    if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())
+                            || "01".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())) {
                         mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
                     }
-                    else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())) {
+                    else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                            || "03".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())) {
                         mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
                     }
-                    else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())) {
+                    else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                            || "05".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())) {
                         mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
                     }
-                    else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())) {
+                    else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                            || "07".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
                         mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
                     }
+                }
+                else {
+                    lppo.setLpModelId(psInfo.getModelCode());
+
+                    if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())
+                            || "01".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
+                    }
+                    else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                            || "03".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
+                    }
+                    else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                            || "05".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
+                    }
+                    else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                            || "07".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
+                        mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
+                    }
+                }
+            }
+            else {
+                lppo.setLpModelId(psInfo.getModelCode());
+
+                if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())
+                        || "01".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())) {
+                    mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
+                }
+                else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                        || "03".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())) {
+                    mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
+                }
+                else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                        || "05".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())) {
+                    mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
+                }
+                else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                        || "07".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
+                    mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
                 }
             }
 
@@ -301,6 +370,68 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
         String sPsId = (String) mapRequest.get("psId");
         String sModelId = (String) mapRequest.get("modelId");
 
+        if(sPsId != null) {
+            Long psId = Long.parseLong(sPsId);
+            PsInfo psInfo = psInfoManger.getById(psId);
+            mav.addObject("psInfo", psInfo);
+            CodeInfo psModel = codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode());
+            mav.addObject("psModel", psModel);
+            mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
+        }
+        LeakageProtectorParameterObject lppo = new LeakageProtectorParameterObject();
+        lppo.setRlcGearValue((String) mapRequest.get("S_8001C04F03")); // 额定负载电流档位值
+        lppo.setRcGear((String) mapRequest.get("S_8001C04F04")); // 剩余电流档位
+        lppo.setCbdGear((String) mapRequest.get("S_8001C04F05")); // 漏电分断延迟档位
+        lppo.setFuncSetupBytes((String) mapRequest.get("S_8000C04F10")); // 开关功能设定字
+        lppo.setLpModelId((String) mapRequest.get("modelId")); // 保护器型号ID
+
+        if("1".equals(lppo.getLpModelId()) || "3".equals(lppo.getLpModelId()) || "5".equals(lppo.getLpModelId())
+                || "7".equals(lppo.getLpModelId()) || "01".equals(lppo.getLpModelId())
+                || "03".equals(lppo.getLpModelId()) || "05".equals(lppo.getLpModelId())
+                || "07".equals(lppo.getLpModelId())) {
+            if("1".equals(lppo.getCbdGear())) {
+                lppo.setCbdGearValue("200");
+            }
+            else {
+                lppo.setCbdGearValue("300");
+            }
+        }
+        else if("2".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                || "8".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())
+                || "04".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())
+                || "08".equals(lppo.getLpModelId())) {
+            if("1".equals(lppo.getCbdGear())) {
+                lppo.setCbdGearValue("300");
+            }
+            else {
+                lppo.setCbdGearValue("500");
+            }
+        }
+        else if("101".equals(lppo.getLpModelId())) {
+            if("1".equals(lppo.getCbdGear())) {
+                lppo.setCbdGearValue("200");
+            }
+            else {
+                lppo.setCbdGearValue("500");
+            }
+        }
+
+        if("0".equals(mapRequest.get("stateAlarm"))) {
+            lppo.setFuncSetupByte4("1");
+        }
+        else {
+            lppo.setFuncSetupByte4("0");
+        }
+
+        if("0".equals(mapRequest.get("stateElliott"))) {
+            lppo.setFuncSetupByte5("0");
+        }
+        else {
+            lppo.setFuncSetupByte5("1");
+        }
+
+        mav.addObject("result", lppo);
+
         String rlcGearValue = (String) mapRequest.get("S_8001C04F03");
         int v = 0;
         try {
@@ -308,29 +439,38 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
         }
         catch(Exception _e) {
             mav.addObject("resultMsg", "输入值非法");
+            mav.addObject("set", "true");
             return mav;
         }
-        if("1".equals(sModelId) || "2".equals(sModelId)) {
+        if("1".equals(sModelId) || "2".equals(sModelId) || "01".equals(sModelId) || "02".equals(sModelId)) {
             if(v < 60 || v > 250) {
+                mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
                 mav.addObject("resultMsg", "额定过载保护电流值超出设定范围60A~250A");
+                mav.addObject("set", "true");
                 return mav;
             }
         }
-        else if("3".equals(sModelId) || "4".equals(sModelId)) {
+        else if("3".equals(sModelId) || "4".equals(sModelId) || "03".equals(sModelId) || "04".equals(sModelId)) {
             if(v < 20 || v > 100) {
+                mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
                 mav.addObject("resultMsg", "额定过载保护电流值超出设定范围20A~100A");
+                mav.addObject("set", "true");
                 return mav;
             }
         }
-        else if("5".equals(sModelId) || "6".equals(sModelId)) {
+        else if("5".equals(sModelId) || "6".equals(sModelId) || "05".equals(sModelId) || "06".equals(sModelId)) {
             if(v < 200 || v > 400) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
                 mav.addObject("resultMsg", "额定过载保护电流值超出设定范围200A~400A");
+                mav.addObject("set", "true");
                 return mav;
             }
         }
-        else if("7".equals(sModelId) || "8".equals(sModelId)) {
+        else if("7".equals(sModelId) || "8".equals(sModelId) || "07".equals(sModelId) || "08".equals(sModelId)) {
             if(v < 200 || v > 600) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
                 mav.addObject("resultMsg", "额定过载保护电流值超出设定范围200A~600A");
+                mav.addObject("set", "true");
                 return mav;
             }
         }
@@ -342,7 +482,7 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
             CodeInfo psModel = codeInfoManager.getCodeInfo("PS_MODEL", psInfo.getModelCode());
             mav.addObject("psModel", psModel);
             mav.addObject("psType", codeInfoManager.getCodeInfo("PS_TYPE", psInfo.getPsType()));
-            
+
             StringBuffer sb_dto = new StringBuffer();
             sb_dto.append("{");
             sb_dto.append("\"collectObjects_Transmit\":").append("[{");
@@ -419,7 +559,77 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
                 resultMsg = "下发设置开关参数命令超时";
             }
 
+            lppo = new LeakageProtectorParameterObject();
+            lppo.setRlcGearValue((String) mapRequest.get("S_8001C04F03")); // 额定负载电流档位值
+            lppo.setRcGear((String) mapRequest.get("S_8001C04F04")); // 剩余电流档位
+            lppo.setCbdGear((String) mapRequest.get("S_8001C04F05")); // 漏电分断延迟档位
+            lppo.setFuncSetupBytes((String) mapRequest.get("S_8000C04F10")); // 开关功能设定字
+            lppo.setLpModelId((String) mapRequest.get("modelId")); // 保护器型号ID
+
+            if("1".equals(lppo.getLpModelId()) || "3".equals(lppo.getLpModelId())
+                    || "5".equals(lppo.getLpModelId()) || "7".equals(lppo.getLpModelId())
+                    || "01".equals(lppo.getLpModelId()) || "03".equals(lppo.getLpModelId())
+                    || "05".equals(lppo.getLpModelId()) || "07".equals(lppo.getLpModelId())) {
+                if("1".equals(lppo.getCbdGear())) {
+                    lppo.setCbdGearValue("200");
+                }
+                else {
+                    lppo.setCbdGearValue("300");
+                }
+            }
+            else if("2".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                    || "6".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                    || "02".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())
+                    || "06".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
+                if("1".equals(lppo.getCbdGear())) {
+                    lppo.setCbdGearValue("300");
+                }
+                else {
+                    lppo.setCbdGearValue("500");
+                }
+            }
+            else if("101".equals(lppo.getLpModelId())) {
+                if("1".equals(lppo.getCbdGear())) {
+                    lppo.setCbdGearValue("200");
+                }
+                else {
+                    lppo.setCbdGearValue("500");
+                }
+            }
+
+            if("0".equals(mapRequest.get("stateAlarm"))) {
+                lppo.setFuncSetupByte4("1");
+            }
+            else {
+                lppo.setFuncSetupByte4("0");
+            }
+
+            if("0".equals(mapRequest.get("stateElliott"))) {
+                lppo.setFuncSetupByte5("0");
+            }
+            else {
+                lppo.setFuncSetupByte5("1");
+            }
+
+            if("1".equals(lppo.getLpModelId()) || "2".equals(lppo.getLpModelId())
+                    || "01".equals(lppo.getLpModelId()) || "02".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：60A~250A");
+            }
+            else if("3".equals(lppo.getLpModelId()) || "4".equals(lppo.getLpModelId())
+                    || "03".equals(lppo.getLpModelId()) || "04".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：20A~100A");
+            }
+            else if("5".equals(lppo.getLpModelId()) || "6".equals(lppo.getLpModelId())
+                    || "05".equals(lppo.getLpModelId()) || "06".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~400A");
+            }
+            else if("7".equals(lppo.getLpModelId()) || "8".equals(lppo.getLpModelId())
+                    || "07".equals(lppo.getLpModelId()) || "08".equals(lppo.getLpModelId())) {
+                mav.addObject("hintRLCGearValue", "设定范围：200A~600A");
+            }
+            mav.addObject("result", lppo);
             mav.addObject("resultMsg", resultMsg);
+            mav.addObject("set", "true");
         }
         return mav;
     }
@@ -448,9 +658,8 @@ public class LeakageProtectorParameterSettingController extends BaseSpringContro
 
             return result;
         }
-        else {
+        else
             return "000000000000";
-        }
     }
 
     private String handleFuncSetupBytes(String s8000C04F10, String stateAlarm, String stateElliott) {
