@@ -18,7 +18,7 @@ import pep.bp.realinterface.mto.CollectObject;
 import pep.bp.realinterface.mto.CommandItem;
 import pep.codec.protocol.gb.PmPacketData;
 import pep.codec.protocol.gb.gb376.PmPacket376;
-import pep.codec.utils.BcdUtils;
+import pep.common.test.testUtils;
 
 /**
  *
@@ -112,16 +112,13 @@ public class ConverterTest {
     @Test
     public void testDecodeData() {
         String Msg = "68, A6, 00, A6, 00, 68, 88, 12, 96, 56, 34, 02, 10, 76, 00, 00, 01, 00, 00, 1A, 00, 68, 01, 00, 00, 00, 00, 00, 68, 81, 0E, 82, F3, C0, A3, 33, 34, 33, 34, 35, 33, 38, 33, 35, 33, 41, 16, F5, 16";
-        byte[] msg = BcdUtils.stringToByteArray(Msg);
-        
-        PmPacket376 packet = new PmPacket376();
-        packet.setValue(msg, 0);
+        PmPacket376 packet = testUtils.getPacket(Msg);
         Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
         this.converter.decodeData_TransMit(packet, resultMap,false);
         Iterator iterator1 = resultMap.keySet().iterator();
         while (iterator1.hasNext()) {
             String key = (String) iterator1.next();
-            assertTrue(key.equals("96123456#0#8000C04F"));
+            assertTrue(key.equals("96123456#000000000001#8000C04F"));
             Map<String,String> dataMap = resultMap.get(key);
             Iterator iterator2 = resultMap.keySet().iterator();
              while (iterator2.hasNext())

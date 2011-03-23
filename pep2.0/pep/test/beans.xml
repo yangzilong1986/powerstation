@@ -50,19 +50,116 @@
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    
+
     <bean id="converter" class="pep.bp.utils.Converter">
-	 <property name="config" ref="protocolConfig"/>
-         <property name="decoder" ref="decoder"/>
+        <property name="config" ref="protocolConfig"/>
+        <property name="decoder" ref="decoder"/>
     </bean>
 
     <bean id="decoder" class="pep.bp.utils.decoder.Decoder376">
         <property name="config" ref="protocolConfig"/>
     </bean>
 
+    <bean id="p_actDataStoredProcedure" class="pep.bp.db.P_ACT_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="p_reactDataStoredProcedure" class="pep.bp.db.P_REACT_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="i_actDataStoredProcedure" class="pep.bp.db.I_ACT_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="i_reactDataStoredProcedure" class="pep.bp.db.I_REACT_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="powerCurvStoredProcedure" class="pep.bp.db.PowerCurv_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="powerCurvStoredProcedure2" class="pep.bp.db.PowerCurv_StoredProcedure2">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eccurvStoredProcedure" class="pep.bp.db.ECCURV_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eccurvStoredProcedure2" class="pep.bp.db.ECCURV_StoredProcedure2">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="eventStoredProcedure" class="pep.bp.db.EventStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="louBaoEventStoredProcedure" class="pep.bp.db.LouBaoEventStoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="dayEcurStatisStoredProcedur" class="pep.bp.db.DAY_ECUR_STATIS_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="dayVoltStatisStoredProcedur" class="pep.bp.db.DAY_VOLT_STATIS_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="dayimbStatisStoredProcedur" class="pep.bp.db.DAY_IMB_STATIS_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="pfcurvStoredProcedur" class="pep.bp.db.PFCURV_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+    <bean id="psStatusStoredProcedur" class="pep.bp.db.PSStatus_StoredProcedure">
+        <constructor-arg  index="0" ref ="dataSource"></constructor-arg>
+    </bean>
+
+
     <bean id="rtTaskService" class="pep.bp.db.RTTaskServiceIMP">
         <property name="dataSource" ref="dataSource" />
+
     </bean>
+
+    <bean id="taskService" class="pep.bp.db.TaskServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+
+    </bean>
+
+    <bean id="psService" class="pep.bp.db.PSServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="smsService" class="pep.bp.db.SMSServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="dataService" class="pep.bp.db.DataServiceIMP">
+        <property name="dataSource" ref="dataSource" />
+        <property name="p_actStoredProcedure" ref="p_actDataStoredProcedure" />
+        <property name="p_reactStoredProcedure" ref="p_reactDataStoredProcedure" />
+        <property name="i_actStoredProcedure" ref="i_actDataStoredProcedure" />
+        <property name="i_reactStoredProcedure" ref="i_reactDataStoredProcedure" />
+        <property name="eccurvStoredProcedure" ref="eccurvStoredProcedure" />
+        <property name="eccurvStoredProcedure2" ref="eccurvStoredProcedure2" />
+        <property name="eventStoredProcedure" ref="eventStoredProcedure" />
+        <property name="loubaoEventStoredProcedure" ref="louBaoEventStoredProcedure" />
+        <property name="powerCurvStoredProcedure" ref="powerCurvStoredProcedure" />
+        <property name="powerCurvStoredProcedure2" ref="powerCurvStoredProcedure2" />
+        <property name="ecurStatisStoredProcedur" ref="dayEcurStatisStoredProcedur" />
+        <property name="voltStatisStoredProcedur" ref="dayVoltStatisStoredProcedur" />
+        <property name="imbStatisStoredProcedur" ref="dayimbStatisStoredProcedur" />
+        <property name="pfcurvStoredProcedur" ref="pfcurvStoredProcedur" />
+        <property name="psStatusStoredProcedur" ref="psStatusStoredProcedur" />
+
+
+    </bean>
+
     <bean id="realTimeProxy376" class="pep.bp.realinterface.RealTimeProxy376">
         <property name="taskService" ref="rtTaskService" />
         <property name="converter" ref="converter" />
@@ -76,9 +173,11 @@
 
     <bean id="protocolConfig" class="pep.bp.realinterface.conf.ProtocolConfig" scope="singleton">
         <constructor-arg index="0"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config-mapping.xml"></constructor-arg>
+                         value="protocol-data-config-mapping.xml">
+        </constructor-arg>
         <constructor-arg index="1"
-                         value="classpath:/pep/bp/realinterface/conf/protocol-data-config.xml"></constructor-arg>
+                         value="protocol-data-config.xml">
+        </constructor-arg>
     </bean>
 
 
