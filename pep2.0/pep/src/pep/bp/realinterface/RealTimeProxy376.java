@@ -3,6 +3,7 @@
  */
 package pep.bp.realinterface;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.Date;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -79,7 +80,7 @@ public class RealTimeProxy376 implements ICollectInterface {
         return tasks;
     }
 
-    private List<RealTimeTaskDAO> Encode_TransMit(MessageTranObject MTO, int sequenceCode) {
+    private List<RealTimeTaskDAO> Encode_TransMit(MessageTranObject MTO, int sequenceCode) throws IOException {
         MTO_376 mto = (MTO_376) MTO;
         List<PmPacket376> packetList = new ArrayList<PmPacket376>();
 
@@ -316,7 +317,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, String> getReturnByWriteParameter(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, String> results = new HashMap<String, String>();
         try {
             for (RealTimeTaskDAO task : tasks) {
@@ -363,7 +364,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, String> getReturnByWriteParameter_TransMit(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, String> results = new HashMap<String, String>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -429,7 +430,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, Map<String, String>> getReturnByReadParameter(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, Map<String, String>> results = new HashMap<String, Map<String, String>>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -477,7 +478,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, Map<String, String>> getReturnByReadData(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -497,7 +498,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, Map<String, String>> readTransmitPara(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -517,7 +518,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, Map<String, String>> readTransmitWriteBack(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -539,7 +540,7 @@ public class RealTimeProxy376 implements ICollectInterface {
     @Override
     public Map<String, Map<String, String>> readTransmitData(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         Map<String, Map<String, String>> tempMap = new HashMap<String, Map<String, String>>();
         for (RealTimeTaskDAO task : tasks) {
             String logicAddress = task.getLogicAddress();
@@ -556,7 +557,7 @@ public class RealTimeProxy376 implements ICollectInterface {
         return Deal2DataMap(tempMap);
     }
 
-    private Map<String, Map<String, String>> Deal2DataMap(Map<String, Map<String, String>> sourceMap) {
+    private Map<String, Map<String, String>> Deal2DataMap(Map<String, Map<String, String>> sourceMap) throws IOException {
         String dataItemCode = "";
         Map<String, Map<String, String>> results = new TreeMap<String, Map<String, String>>();
         ProtocolConfig config = ProtocolConfig.getInstance();//获取配置文件对象

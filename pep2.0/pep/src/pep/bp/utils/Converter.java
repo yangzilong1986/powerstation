@@ -77,10 +77,10 @@ public class Converter {
             int[] MpSn = obj.getMpSn();
 
             for (int i = 0; i <= MpSn.length - 1; i++) {
-                gpMark.append(MpSn[i] + "#");
+                gpMark.append(MpSn[i]).append("#");
                 List<CommandItem> CommandItems = obj.getCommandItems();
                 for (CommandItem commandItem : CommandItems) {
-                    commandMark.append(commandItem.getIdentifier() + "#");
+                    commandMark.append(commandItem.getIdentifier()).append("#");
                     PmPacket376DA da = new PmPacket376DA(MpSn[i]);
                     PmPacket376DT dt = new PmPacket376DT();
                     int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
@@ -113,7 +113,7 @@ public class Converter {
         int DataBuffLen = SystemConst.MAX_PACKET_LEN - 16 - 22;//[68+L+L+68+C+A+AFN+SEQ+TP+PW+CS+16]
         for (int i = 0; i <= MpSn.length - 1; i++) {
             gpMark.delete(0, gpMark.length());
-            gpMark.append(String.valueOf(MpSn[i]) + "#");
+            gpMark.append(String.valueOf(MpSn[i])).append("#");
             List<CommandItem> CommandItems = obj.getCommandItems();
             for (CommandItem commandItem : CommandItems) {
 
@@ -125,7 +125,7 @@ public class Converter {
                         packet = new PmPacket376();
                         preSetPacket(packet, AFN, obj.getLogicalAddr());
                     }
-                    commandMark.append(commandItem.getIdentifier() + "#");
+                    commandMark.append(commandItem.getIdentifier()).append("#");
                     PmPacket376DA da = new PmPacket376DA(MpSn[i]);
                     PmPacket376DT dt = new PmPacket376DT();
                     int fn = Integer.parseInt(commandItem.getIdentifier().substring(4, 8));//10+03+0002(protocolcode+afn+fn)
@@ -577,11 +577,11 @@ public class Converter {
     }
 
     public void decodeData(PmPacket376 packet, Map<String, Map<String, String>> results) {
-        this.decoder.decode(packet, results);
+        results = this.decoder.decode(packet);
     }
 
     public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results,boolean IsWriteBack) {
-        this.decoder.decode_TransMit(packet, results,IsWriteBack);
+        results = this.decoder.decode_TransMit(packet, IsWriteBack);
     }
 
     public void decodeData_TransMit(PmPacket376 packet, Dto postData) {

@@ -50,6 +50,7 @@ public class CastorUtil {
             File file = new File(dataResource);
             Reader reader = new FileReader(file);
             Unmarshaller unmarshaller = new Unmarshaller(map);
+
             try {
                 return unmarshaller.unmarshal(reader);
             } finally {

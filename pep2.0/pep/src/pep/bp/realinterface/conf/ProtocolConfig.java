@@ -38,18 +38,18 @@ public class ProtocolConfig {
                     commandItems = (ProtocolCommandItems) CastorUtil.unmarshal(resource1.getURL(), resource2.getURI());
                     commandItems.FillMap();
                 } catch (IOException iOException) {
-                    iOException.printStackTrace();
+                   throw iOException;
                 }
             }
 	}
 
-	public static ProtocolConfig getInstance() {
+	public static ProtocolConfig getInstance() throws IOException {
 		if (instance == null) {
 			try {
 				instance = new ProtocolConfig(PROTOCOL_DATA_CONFIG_MAPPING, PROTOCOL_DATA_CONFIG);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw e;
 			}
 			commandItems.FillMap();
 		}
