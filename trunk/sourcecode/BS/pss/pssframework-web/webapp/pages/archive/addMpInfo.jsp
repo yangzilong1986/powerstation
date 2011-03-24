@@ -83,7 +83,7 @@ StringBuffer.prototype.toString = function() {
       id="pwAlgorith" name="pwAlgorith" value="0" /> <input type="hidden" id="pwContent" name="pwContent" value="8888" />
     <input type="hidden" id="mpExpressMode" name="mpExpressMode" value="3" /></div>
     <div id="485Show" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; height: expression((( document.documentElement.clientHeight | document.body.clientHeight) - 700 ) );">
+      style="display: block; overflow-y: auto; overflow-x: auto;">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="13%" class="green" align="right"><font color="red">* </font>测量点序号：</td>
@@ -173,7 +173,7 @@ StringBuffer.prototype.toString = function() {
       </script>
     <div class="tab"><span>一般信息</span></div>
     <div id="pulseShow" class="da_mid"
-      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto; height: expression(((                                 document.documentElement.clientHeight ||                                 document.body.clientHeight) -                                   600 ) );">
+      style="display: block; overflow-y: auto; overflow-x: auto; display: block; overflow-y: auto; overflow-x: auto;">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr height="30px">
         <td width="13%" class="green" align="right">计量方式：</td>
