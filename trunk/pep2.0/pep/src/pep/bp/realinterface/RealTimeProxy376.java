@@ -471,7 +471,7 @@ public class RealTimeProxy376 implements ICollectInterface {
 
     /**
      * 获取实时召测返回结果
-     * @param appId
+     * @param appId:任务序列号，调用readData时返回，是前台交互的唯一认证
      * @return
      * @throws Exception
      */
@@ -495,6 +495,12 @@ public class RealTimeProxy376 implements ICollectInterface {
         return Deal2DataMap(tempMap);
     }
 
+    /**
+     * 透明转发读参数，如：读漏保参数
+     * @param appId
+     * @return
+     * @throws Exception
+     */
     @Override
     public Map<String, Map<String, String>> readTransmitPara(long appId) throws Exception {
         List<RealTimeTaskDAO> tasks = this.taskService.getTasks(appId);
@@ -509,7 +515,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             for (RTTaskRecvDAO recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
-                converter.decodeData_TransMit(packet, tempMap,false);
+                converter.decodeData_TransMit(packet, tempMap);
             }
         }
         return tempMap;
@@ -529,7 +535,7 @@ public class RealTimeProxy376 implements ICollectInterface {
             for (RTTaskRecvDAO recv : recvs) {
                 byte[] msg = BcdUtils.stringToByteArray(recv.getRecvMsg());
                 packet.setValue(msg, 0);
-                converter.decodeData_TransMit(packet, tempMap,true);
+                converter.decodeData_TransMit_WriteBack(packet, tempMap);
             }
         }
         return tempMap;

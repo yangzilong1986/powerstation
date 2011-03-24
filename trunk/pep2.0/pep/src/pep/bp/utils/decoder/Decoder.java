@@ -24,13 +24,14 @@ public abstract class Decoder {
     
 
 
-    public abstract Map<String, Map<String, String>> decode(Object pack);
+    public abstract Map<String, Map<String, String>> decode2Map(Object pack);
 
-    public abstract void decode(Object pack, Dto dto);
+    public abstract void decode2dto(Object pack, Dto dto);
 
-    public abstract Map<String, Map<String, String>> decode_TransMit(Object pack, boolean IsWriteBack);
+    public abstract Map<String, Map<String, String>> decode2Map_TransMit(Object pack);
+    public abstract Map<String, Map<String, String>> decode2Map_TransMit_WriteBack(Object pack);
 
-    public abstract void decode_TransMit(Object pack, Dto dto);
+    public abstract void decode2dto_TransMit(Object pack, Dto dto);
     /**
      * @return the config
      */

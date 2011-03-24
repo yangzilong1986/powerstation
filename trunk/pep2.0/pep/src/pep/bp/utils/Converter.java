@@ -577,19 +577,23 @@ public class Converter {
     }
 
     public void decodeData(PmPacket376 packet, Map<String, Map<String, String>> results) {
-        results = this.decoder.decode(packet);
+        results = this.decoder.decode2Map(packet);
     }
 
-    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results,boolean IsWriteBack) {
-        results = this.decoder.decode_TransMit(packet, IsWriteBack);
+    public void decodeData_TransMit(PmPacket376 packet, Map<String, Map<String, String>> results) {
+        results = this.decoder.decode2Map_TransMit(packet);
+    }
+
+    public void decodeData_TransMit_WriteBack(PmPacket376 packet, Map<String, Map<String, String>> results) {
+        results = this.decoder.decode2Map_TransMit_WriteBack(packet);
     }
 
     public void decodeData_TransMit(PmPacket376 packet, Dto postData) {
-        this.decoder.decode_TransMit(packet, postData);
+        this.decoder.decode2dto_TransMit(packet, postData);
     }
 
     public void decodeDataDB(PmPacket376 packet, Dto postData) {
-        this.decoder.decode(packet, postData);
+        this.decoder.decode2dto(packet, postData);
     }
 
     /**
