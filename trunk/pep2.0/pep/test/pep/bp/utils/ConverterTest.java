@@ -69,14 +69,6 @@ public class ConverterTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of CollectObject_TransMit2PacketList method, of class Converter.
-     */
-
-
-    /**
-     * Test of putDataBuf method, of class Converter.
-     */
   //  @Test
     public void testPutDataBuf() {
         System.out.println("putDataBuf");
@@ -88,9 +80,6 @@ public class ConverterTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of FillDataBuffer method, of class Converter.
-     */
  //   @Test
     public void testFillDataBuffer() {
         System.out.println("FillDataBuffer");
@@ -114,7 +103,7 @@ public class ConverterTest {
         String Msg = "68, A6, 00, A6, 00, 68, 88, 12, 96, 56, 34, 02, 10, 76, 00, 00, 01, 00, 00, 1A, 00, 68, 01, 00, 00, 00, 00, 00, 68, 81, 0E, 82, F3, C0, A3, 33, 34, 33, 34, 35, 33, 38, 33, 35, 33, 41, 16, F5, 16";
         PmPacket376 packet = testUtils.getPacket(Msg);
         Map<String,Map<String,String>> resultMap = new HashMap<String,Map<String,String>>();
-        this.converter.decodeData_TransMit(packet, resultMap,false);
+        this.converter.decodeData_TransMit(packet, resultMap);
         Iterator iterator1 = resultMap.keySet().iterator();
         while (iterator1.hasNext()) {
             String key = (String) iterator1.next();
