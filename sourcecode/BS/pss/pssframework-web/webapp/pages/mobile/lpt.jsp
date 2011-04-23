@@ -46,6 +46,9 @@
 <div style="height: 50px; text-align: center; vertical-align: bottom;">
   <a href="${ctx}/mobile/lpt/rt?psId=${param.psId}" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px; text-decoration: none;">漏电动作试跳</a>
 </div>
+<div style="height: 50px; text-align: center; vertical-align: bottom;">
+  <a href="${ctx}/mobile/lpm/rlpd?psId=${param.psId}&read=true" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px; text-decoration: none;">读取开关状态</a>
+</div>
 <div id="resultRemote" style="height: 30px;">${resultMsg}</div>
 </body>
 </html>

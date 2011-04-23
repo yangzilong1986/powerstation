@@ -108,6 +108,9 @@
     </tr>
   </table>
 </div>
+<div style="height: 50px; text-align: center; vertical-align: bottom;">
+  <a href="${ctx}/mobile/lpm/rlpd?psId=${param.psId}&read=true" style="background-color: #E3EEFB; border: 1px #AED5D4 solid; font-size: 14px; font-weight: bold; padding: 5px; text-decoration: none;"> 读　取 </a>
+</div>
 <div style="height: 10px;"></div>
 </body>
 </html>
