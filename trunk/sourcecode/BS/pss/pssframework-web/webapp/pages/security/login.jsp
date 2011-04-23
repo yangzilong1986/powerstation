@@ -171,7 +171,7 @@ function closeWin() {
 	}
         
 function refreshCaptcha() {
-	$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha.jpg?' + Math.floor(Math.random()*100)).fadeIn();
+	$('#captchaImg').hide().attr('src','${ctx}/security/jcaptcha?' + Math.floor(Math.random()*100)).fadeIn();
 }
 </script>
 </head>
@@ -227,7 +227,7 @@ function refreshCaptcha() {
     <td align="right" class="fontw">验证码：</td>
     <td height="30" align="left" style="position: relative;"><input type='text' name='j_captcha' id="j_captcha"
       style="width: 63px;" class="input1 required" tabindex="3" />&nbsp; <span> <img id="captchaImg"
-      src="${ctx}/security/jcaptcha.jpg" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
+      src="${ctx}/security/jcaptcha" width="110" height="26" style="vertical-align: bottom; cursor: pointer"
       onclick="javascript:refreshCaptcha()" /></span>&nbsp;&nbsp;<span id="captcha" style="width: 150px;color: white;"></span></td>
   </tr>
    
