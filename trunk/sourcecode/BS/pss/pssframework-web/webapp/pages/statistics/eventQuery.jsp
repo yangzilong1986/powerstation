@@ -18,8 +18,7 @@
   <form:hidden path="orgId" />
   <form:hidden path="sdate" />
   <form:hidden path="edate" />
-  <div id="tbl-container" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-31));">
-  
+  <div id="tbl-container" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
   <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
     <thead class="tableHeader">
       <tr>
@@ -52,7 +51,6 @@
   </table>
   </div>
 </form:form>
-
 <div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">

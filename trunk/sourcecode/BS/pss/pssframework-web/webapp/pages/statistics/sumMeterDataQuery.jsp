@@ -139,7 +139,7 @@ function showPictMode() {
       </tr>
     </table>
     </div>
-    <div id="bg" style="height: 30px; text-align: center;">
+    <div id="bg" style="height: 30px; text-align: center; white-space:nowrap;">
       <ul id="datamenu_Option" class="cb font1">
         <li id=datamenu_Option_0 style="cursor: pointer;" onclick="changeType(0)">表码数据</li>
         <li id=datamenu_Option_1 style="cursor: pointer;" onclick="changeType(1)">功率数据</li>
@@ -150,12 +150,12 @@ function showPictMode() {
         <li id=datamenu_Option_6 style="cursor: pointer;" onclick="changeType(6)">不平衡数据</li>
         <li id=datamenu_Option_7 style="cursor: pointer;" onclick="changeType(7)">电流越限数据</li>
       </ul>
-      <div id="bngMonitor" style="float: right;">
-        <img src="<pss:path type="bgcolor"/>/img/grids.png" onclick="showGridMode()" width="16" height="16" alt="表格" style="cursor: pointer; border: 1px #DBDBDB solid;" />
-        &nbsp;&nbsp;&nbsp; 
-        <img src="<pss:path type="bgcolor"/>/img/chart.png" onclick="showPictMode()" width="16" height="16" alt="图形" style="cursor: pointer; border: 0px #DBDBDB solid;" />
-        &nbsp;&nbsp;&nbsp; 
-      </div>
+    </div>
+    <div id="bngMonitor" align="right" style="width: 100%; position: absolute; text-align: right; margin-top: -26px;">
+      <img src="<pss:path type="bgcolor"/>/img/grids.png" onclick="showGridMode()" width="16" height="16" alt="表格" style="cursor: pointer; border: 1px #DBDBDB solid;" />
+      &nbsp;&nbsp;&nbsp; 
+      <img src="<pss:path type="bgcolor"/>/img/chart.png" onclick="showPictMode()" width="16" height="16" alt="图形" style="cursor: pointer; border: 0px #DBDBDB solid;" />
+      &nbsp;&nbsp;&nbsp; 
     </div>
     <div align="center" style="height: expression(((document.documentElement.clientHeight || document.body.clientHeight)-65));">
       <iframe id="data" scrolling="auto" frameborder="0" style="display: block; overflow-y: hidden; overflow-x: hidden; width: 100%; height: 100%;"></iframe>

@@ -488,54 +488,56 @@ function showResultRemote(resultMap) {
 
 // 开关跳闸
 function remoteTriping() {
-    disableRemoteOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C036"').append(',');
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"8000C03601": "50"');
-    sb_dto.append('}');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultRemote('正在开关跳闸...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown) {
-            initOpResultRemote('下发开关跳闸命令失败...');
-            enableRemoteOperation();
-        }
-    });
+    if(confirm("确定要对该漏保进行跳闸？")) {
+        disableRemoteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C036"').append(',');
+        sb_dto.append('"datacellParam":').append('{');
+        sb_dto.append('"8000C03601": "50"');
+        sb_dto.append('}');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultRemote('正在开关跳闸...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchRemoteTripingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultRemote('下发开关跳闸命令失败...');
+                enableRemoteOperation();
+            }
+        });
+    }
 }
 
 function fetchRemoteTripingResult(collectId, fetchCount) {
@@ -569,54 +571,56 @@ function fetchRemoteTripingResult(collectId, fetchCount) {
 
 // 开关合闸
 function remoteSwitching() {
-    disableRemoteOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C036"').append(',');
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"8000C03601": "5F"');
-    sb_dto.append('}');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultRemote('正在开关合闸...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown) {
-            initOpResultRemote('下发开关合闸命令失败...');
-            enableRemoteOperation();
-        }
-    });
+    if(confirm("确定要对该漏保进行合闸？")) {
+        disableRemoteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C036"').append(',');
+        sb_dto.append('"datacellParam":').append('{');
+        sb_dto.append('"8000C03601": "5F"');
+        sb_dto.append('}');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultRemote('正在开关合闸...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchRemoteSwitchingResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultRemote('下发开关合闸命令失败...');
+                enableRemoteOperation();
+            }
+        });
+    }
 }
 
 function fetchRemoteSwitchingResult(collectId, fetchCount) {
@@ -650,51 +654,53 @@ function fetchRemoteSwitchingResult(collectId, fetchCount) {
 
 // 开关试跳
 function remoteTest() {
-    disableRemoteOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C037"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultRemote('正在试验跳...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchRemoteTestResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown) {
-            initOpResultRemote('下发试验跳命令失败...');
-            enableRemoteOperation();
-        }
-    });
+    if(confirm("确定要对该漏保进行试跳？")) {
+        disableRemoteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C037"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultRemote('正在试验跳...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchRemoteTestResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultRemote('下发试验跳命令失败...');
+                enableRemoteOperation();
+            }
+        });
+    }
 }
 
 function fetchRemoteTestResult(collectId, fetchCount) {
@@ -781,51 +787,53 @@ function showResultTime(resultMap, type) {
 
 // 时钟读取
 function timeRead() {
-    disableTimeOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"1"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C012"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultTime('正在读取时钟...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchTimeReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown) {
-            initOpResultTime('下发读取时钟命令失败...');
-            enableTimeOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的时钟进行读取？")) {
+        disableTimeOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"1"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C012"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultTime('正在读取时钟...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchTimeReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultTime('下发读取时钟命令失败...');
+                enableTimeOperation();
+            }
+        });
+    }
 }
 
 function fetchTimeReadResult(collectId, fetchCount) {
@@ -859,54 +867,56 @@ function fetchTimeReadResult(collectId, fetchCount) {
 
 // 时钟设置
 function timeSetup() {
-    disableTimeOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C012"').append(',');
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"C012": "' + $("#computerTime").val() + '"');
-    sb_dto.append('}');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultTime('正在校时...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchTimeSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown) {
-            initOpResultTime('下发校时命令失败...');
-            enableTimeOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的时钟进行设置？")) {
+        disableTimeOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C012"').append(',');
+        sb_dto.append('"datacellParam":').append('{');
+        sb_dto.append('"C012": "' + $("#computerTime").val() + '"');
+        sb_dto.append('}');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultTime('正在校时...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchTimeSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown) {
+                initOpResultTime('下发校时命令失败...');
+                enableTimeOperation();
+            }
+        });
+    }
 }
 
 function fetchTimeSetupResult(collectId, fetchCount) {
@@ -997,51 +1007,53 @@ function showResultFuncSetupByte(resultMap, type) {
 
 // 功能设定字读取
 function funcSetupByteRead() {
-    disableFuncSetupByteOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"1"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C04F"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultFuncSetupByte('正在读取功能设定字...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchFuncSetupByteReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResultFuncSetupByte('下发读取功能设定字命令失败...');
-            enableFuncSetupByteOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的功能设定字进行读取？")) {
+        disableFuncSetupByteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"1"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C04F"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultFuncSetupByte('正在读取功能设定字...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchFuncSetupByteReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResultFuncSetupByte('下发读取功能设定字命令失败...');
+                enableFuncSetupByteOperation();
+            }
+        });
+    }
 }
 
 function fetchFuncSetupByteReadResult(collectId, fetchCount) {
@@ -1075,59 +1087,61 @@ function fetchFuncSetupByteReadResult(collectId, fetchCount) {
 
 // 功能设定字设置
 function funcSetupByteSetup() {
-    disableFuncSetupByteOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8001C04F"').append(',');
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');   // 保护器型号ID
-    sb_dto.append('"8001C04F02": "00000001"').append(',');                      // 有效定义
-    sb_dto.append('"8001C04F03": "0"').append(',');                             //
-    sb_dto.append('"8001C04F04": "0"').append(',');                             //
-    sb_dto.append('"8001C04F05": "0"').append(',');                             //
-    sb_dto.append('"8001C04F06": "' + getFuncSetupBytes() + '"');               // 开关功能设定字
-    sb_dto.append('}');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultFuncSetupByte('正在设置功能设定字...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchFuncSetupByteSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResultFuncSetupByte('下发设置功能设定字命令失败...');
-            enableFuncSetupByteOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的功能设定字进行设置？")) {
+        disableFuncSetupByteOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8001C04F"').append(',');
+        sb_dto.append('"datacellParam":').append('{');
+        sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');   // 保护器型号ID
+        sb_dto.append('"8001C04F02": "00000001"').append(',');                      // 有效定义
+        sb_dto.append('"8001C04F03": "0"').append(',');                             //
+        sb_dto.append('"8001C04F04": "0"').append(',');                             //
+        sb_dto.append('"8001C04F05": "0"').append(',');                             //
+        sb_dto.append('"8001C04F06": "' + getFuncSetupBytes() + '"');               // 开关功能设定字
+        sb_dto.append('}');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultFuncSetupByte('正在设置功能设定字...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchFuncSetupByteSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResultFuncSetupByte('下发设置功能设定字命令失败...');
+                enableFuncSetupByteOperation();
+            }
+        });
+    }
 }
 
 function fetchFuncSetupByteSetupResult(collectId, fetchCount) {
@@ -1261,51 +1275,53 @@ function showResultPSTotalParams(resultMap, type) {
 
 // 读开关全部参数
 function psTotalParamsRead() {
-    disablePSTotalParamsOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"1"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8000C04F"');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultPSTotalParams('正在读开关全部参数...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchPSTotalParamsReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResultPSTotalParams('下发读开关全部参数命令失败...');
-            enablePSTotalParamsOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的参数进行读取？")) {
+        disablePSTotalParamsOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"1"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8000C04F"');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultPSTotalParams('正在读开关全部参数...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchPSTotalParamsReadResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResultPSTotalParams('下发读开关全部参数命令失败...');
+                enablePSTotalParamsOperation();
+            }
+        });
+    }
 }
 
 function fetchPSTotalParamsReadResult(collectId, fetchCount) {
@@ -1339,59 +1355,61 @@ function fetchPSTotalParamsReadResult(collectId, fetchCount) {
 
 // 写开关全部参数
 function psTotalParamsSetup() {
-    disablePSTotalParamsOperation();
-    var sb_dto = new StringBuffer();
-    sb_dto.append('{');
-    sb_dto.append('"collectObjects_Transmit":').append('[{');
-    sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
-    sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
-    sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
-    sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
-    sb_dto.append('"funcode":"4"').append(',');
-    sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
-    sb_dto.append('"serialPortPara":').append('{');
-    sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
-    sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
-    sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
-    sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
-    sb_dto.append('"databit":"' + $("#databit").val() + '"');
-    sb_dto.append('}').append(',');
-    sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
-    sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
-    sb_dto.append('"commandItems":').append('[').append('{');
-    sb_dto.append('"identifier":').append('"8001C04F"').append(',');//$("input[type=checkbox][name='itemId2']")
-    sb_dto.append('"datacellParam":').append('{');
-    sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');                                   // 保护器型号ID
-    sb_dto.append('"8001C04F02": "11100000"').append(',');                                                      // 有效定义
-    sb_dto.append('"8001C04F03": "' + $("input[sci='8001C04F'][sdi='8001C04F03']").val() + '"').append(',');    // 额定负载电流档位值
-    sb_dto.append('"8001C04F04": "' + $("select[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');   // 剩余电流档位
-    sb_dto.append('"8001C04F05": "' + $("select[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');   // 漏电分断延迟档位
-    sb_dto.append('"8001C04F06": "00000000"');                                                      // 
-    sb_dto.append('}');
-    sb_dto.append('}').append(']');
-    sb_dto.append('}]');
-    sb_dto.append('}');
-    initOpResultPSTotalParams('正在写开关全部参数...');
-    var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
-    var params = {
-            "dto": sb_dto.toString(),
-            "mtoType": $("#protocolNo").val()
-    };
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: jQuery.param(params),
-        dataType: 'json',
-        success: function(data) {
-            //alert(data.collectId);
-            //alert(data.fetchCount);
-            setTimeout("fetchPSTotalParamsSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
-        },
-        error: function(XmlHttpRequest, textStatus, errorThrown){
-            initOpResultPSTotalParams('下发写开关全部参数命令失败...');
-            enablePSTotalParamsOperation();
-        }
-    });
+    if(confirm("确定要对该漏保的参数进行设置？")) {
+        disablePSTotalParamsOperation();
+        var sb_dto = new StringBuffer();
+        sb_dto.append('{');
+        sb_dto.append('"collectObjects_Transmit":').append('[{');
+        sb_dto.append('"terminalAddr":"' + $("#logicalAddr").val() + '"').append(',');
+        sb_dto.append('"equipProtocol":"' + $("#protocolNo").val() + '"').append(',');
+        sb_dto.append('"meterAddr":"' + $("#meterAddr").val() + '"').append(',');
+        sb_dto.append('"meterType":"' + $("#meterType").val() + '"').append(',');
+        sb_dto.append('"funcode":"4"').append(',');
+        sb_dto.append('"port":"' + $("#port").val() + '"').append(',');
+        sb_dto.append('"serialPortPara":').append('{');
+        sb_dto.append('"baudrate":"' + $("#baudrate").val() + '"').append(',');
+        sb_dto.append('"stopbit":"' + $("#stopbit").val() + '"').append(',');
+        sb_dto.append('"checkbit":"' + $("#checkbit").val() + '"').append(',');
+        sb_dto.append('"odd_even_bit":"' + $("#odd_even_bit").val() + '"').append(',');
+        sb_dto.append('"databit":"' + $("#databit").val() + '"');
+        sb_dto.append('}').append(',');
+        sb_dto.append('"waitforPacket":"' + $("#waitforPacket").val() + '"').append(',');
+        sb_dto.append('"waitforByte":"' + $("#waitforByte").val() + '"').append(',');
+        sb_dto.append('"commandItems":').append('[').append('{');
+        sb_dto.append('"identifier":').append('"8001C04F"').append(',');//$("input[type=checkbox][name='itemId2']")
+        sb_dto.append('"datacellParam":').append('{');
+        sb_dto.append('"8001C04F01": "' + $("#psModel").val() + '"').append(',');                                   // 保护器型号ID
+        sb_dto.append('"8001C04F02": "11100000"').append(',');                                                      // 有效定义
+        sb_dto.append('"8001C04F03": "' + $("input[sci='8001C04F'][sdi='8001C04F03']").val() + '"').append(',');    // 额定负载电流档位值
+        sb_dto.append('"8001C04F04": "' + $("select[sci='8001C04F'][sdi='8001C04F04']").val() + '"').append(',');   // 剩余电流档位
+        sb_dto.append('"8001C04F05": "' + $("select[sci='8001C04F'][sdi='8001C04F05']").val() + '"').append(',');   // 漏电分断延迟档位
+        sb_dto.append('"8001C04F06": "00000000"');                                                      // 
+        sb_dto.append('}');
+        sb_dto.append('}').append(']');
+        sb_dto.append('}]');
+        sb_dto.append('}');
+        initOpResultPSTotalParams('正在写开关全部参数...');
+        var url = '<pss:path type="webapp"/>/psmanage/psmon/down.json';
+        var params = {
+                "dto": sb_dto.toString(),
+                "mtoType": $("#protocolNo").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: jQuery.param(params),
+            dataType: 'json',
+            success: function(data) {
+                //alert(data.collectId);
+                //alert(data.fetchCount);
+                setTimeout("fetchPSTotalParamsSetupResult(" + data.collectId + ", " + data.fetchCount + ")", 3000);
+            },
+            error: function(XmlHttpRequest, textStatus, errorThrown){
+                initOpResultPSTotalParams('下发写开关全部参数命令失败...');
+                enablePSTotalParamsOperation();
+            }
+        });
+    }
 }
 
 function fetchPSTotalParamsSetupResult(collectId, fetchCount) {
@@ -1525,10 +1543,12 @@ function chg8000C04F08(obj) {
                 <security:authorize ifAnyGranted="ROLE_AUTHORITY_8">
                   <input type="button" id="rmtTripBtn" value=" 跳 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTriping()" />
                   <input type="button" id="rmtSwitchBtn" value=" 合 闸 " style="width: 60px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteSwitching()" />
-               </security:authorize>
+                </security:authorize>
                 </div>
                 <div class="mgt5 tc" style="height: 30px;">
+                <security:authorize ifAnyGranted="ROLE_AUTHORITY_8">
                   <input type="button" id="rmtTestBtn" value=" 试 跳 " style="width: 122px; height: 25px; cursor: pointer; font-size: 14px; font-weight: normal;" onclick="remoteTest()" />
+                </security:authorize>
                 </div>
                 <div id="resultRemote" style="text-align: left;"></div>
               </td>
