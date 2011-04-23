@@ -17,8 +17,8 @@
     <tr>
       <td width="50%" height="20" align="left">漏保名称：${psInfo.psName}</td>
       <td width="50%" align="right">
-        <!-- <a href="<pss:path type="webapp"/>/mobile/clp"> 返 回 </a>
-        &nbsp;&nbsp;&nbsp;  -->
+        <a href="<pss:path type="webapp"/>/mobile/clp"> 返 回 </a>
+        &nbsp;&nbsp;&nbsp;
         <a href="<pss:path type="webapp"/>/mobile/"> 退 出 </a>
       </td>
     </tr>
