@@ -459,23 +459,22 @@ function getSelectedCheckboxs4() {
       <table border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="100" height="30" align="right" class="green">逻辑地址：</td>
-          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="96123455" style="width: 140px; height: 20px;"/></td>
+          <td width="120"><input id="cLogicalAddr" name="cLogicalAddr" class="input2" value="" style="width: 140px; height: 20px;"/></td>
           <td width="100" align="right">
-            <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" />
+            <!-- <img src="<pss:path type="bgcolor"/>/img/inquiry.gif" align="middle" width="62" height="21" onclick="return false;" style="cursor: pointer;" /> -->
           </td>
         </tr>
       </table>
     </div>
     <div id="bg" style="height: 30px; text-align: center;">
       <ul id=”datamenu_Option“ class="cb font1">
-        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',0,3)">终端参数</li>
-        <li id=datamenu_Option_1 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',1,3)">测量点参数</li>
-        <li id=datamenu_Option_2 style="cursor: pointer;" onmouseover="SwitchTab('datamenu_',2,3)">直流模拟量参数</li>
+        <li class="curr" id=datamenu_Option_0 style="cursor: pointer;" onclick="SwitchTab('datamenu_',0,3)">终端参数</li>
+        <li id=datamenu_Option_1 style="cursor: pointer;" onclick="SwitchTab('datamenu_',1,3)">测量点参数</li>
+        <li id=datamenu_Option_2 style="cursor: pointer;" onclick="SwitchTab('datamenu_',2,3)">直流模拟量参数</li>
       </ul>
     </div>
     <div style="display: none;">
       <input type="hidden" id="protocolNo" name="protocolNo" value="100" />
-      <!-- <input type="hidden" id="logicalAddr" name="logicalAddr" value="96123456" /> -->
       <input type="hidden" id="channelType" name="channelType" value="1" />
       <input type="hidden" id="pwAlgorith" name="pwAlgorith" value="0" />
       <input type="hidden" id="pwContent" name="pwContent" value="8888" />

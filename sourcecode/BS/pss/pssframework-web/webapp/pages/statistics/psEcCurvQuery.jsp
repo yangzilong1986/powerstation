@@ -19,8 +19,7 @@
   <form:hidden path="sdate" />
   <form:hidden path="edate" />
   <div id="tbl-container" style="width: 100%; height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
-  
-  <table style="width: expression((document.documentElement.clientWidth||document.body.clientWidth)<1000?'1000px':((document.documentElement.clientWidth||document.body.clientWidth)-2));" width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
+  <table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
     <thead class="tableHeader">
       <tr>
         <th>序号</th>

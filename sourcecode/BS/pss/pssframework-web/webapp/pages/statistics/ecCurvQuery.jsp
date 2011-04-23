@@ -13,7 +13,6 @@
 </script>
 </head>
 <body>
-
 <form:form action="${ctx}/statistics/eccurv/ec" modelAttribute="statisticsQuery">
   <form:hidden path="tgId" />
   <form:hidden path="orgId" />
@@ -45,7 +44,6 @@
   </table>
   </div>
 </form:form>
-
 <div><simpletable:pageToolbar page="${page}"></simpletable:pageToolbar></div>
 </body>
 <script type="text/javascript">
