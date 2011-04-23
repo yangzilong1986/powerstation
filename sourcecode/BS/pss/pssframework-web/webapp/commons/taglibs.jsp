@@ -7,4 +7,4 @@
 <%@ taglib uri="/WEB-INF/tld/extremecomponents.tld" prefix="ec"%>
 <%@ taglib uri="/WEB-INF/tld/pss.tld" prefix="pss"%>
 <%@ taglib prefix="e3t" uri="/e3/table/E3Table.tld"%>
-<c:set var="ctx" value="http://www.qldq.mobi:8080/${pageContext.request.contextPath}" />
+<c:set var="ctx" value="http://www.qldq.mobi:8080${pageContext.request.contextPath}" />
