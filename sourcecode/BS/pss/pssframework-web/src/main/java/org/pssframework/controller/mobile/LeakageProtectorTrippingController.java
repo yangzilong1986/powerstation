@@ -271,6 +271,7 @@ public class LeakageProtectorTrippingController extends BaseSpringController {
                     else {
                         if("1100".equals((String) result.get("C04004"))) {
                             resultMsg = "下发开关合闸命令成功";
+                            mav.addObject("goRlpd", true);
                         }
                         else {
                             resultMsg = "开关合闸失败";
@@ -369,7 +370,6 @@ public class LeakageProtectorTrippingController extends BaseSpringController {
                     }
                     else {
                         resultMsg = "开关试验跳失败";
-                        mav.addObject("goRlpd", true);
                     }
                 }
                 else {
