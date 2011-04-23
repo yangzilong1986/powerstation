@@ -96,7 +96,7 @@
 	<!-- jcaptcha图片生成URL. -->
 	<filter-mapping>
 		<filter-name>jcaptchaFilter</filter-name>
-		<url-pattern>/security/jcaptcha.jpg</url-pattern>
+		<url-pattern>/security/jcaptcha</url-pattern>
 	</filter-mapping>
 	<!-- jcaptcha登录表单处理URL. 必须放在springSecurityFilter的filter-mapping定义之前 -->
 	<!--<filter-mapping>
