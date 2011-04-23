@@ -369,6 +369,7 @@ public class LeakageProtectorTrippingController extends BaseSpringController {
                     }
                     else {
                         resultMsg = "开关试验跳失败";
+                        mav.addObject("goRlpd", true);
                     }
                 }
                 else {
