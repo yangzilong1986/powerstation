@@ -45,15 +45,19 @@ public class ChooseLeakageProtectorController extends BaseSpringController {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @RequestMapping
     public ModelAndView index(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         mav.setViewName(VIEW_NAME);
         Map mapRequest = WebUtils.getParametersStartingWith(request, "");
         String orgId = (String) mapRequest.get("orgId");
+        String tgId = (String) mapRequest.get("tgId");
         if(orgId != null && ("".equals(orgId.trim()) || "null".equals(orgId.trim()))) {
             mapRequest.remove("orgId");
+        }
+        if(tgId != null) {
+            mapRequest.put("tgid", tgId);
         }
         logger.info("mapRequest : " + mapRequest.toString());
         mav.addObject(ORGLIST, orgInfoManager.findByPageRequest(mapRequest));
