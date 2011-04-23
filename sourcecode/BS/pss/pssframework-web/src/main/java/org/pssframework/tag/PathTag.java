@@ -86,6 +86,8 @@ public class PathTag extends TagSupport {
                 pathText = contextPath + props.getProperty(this.property);
             }
 
+			pathText = props.getProperty("static_url") + pathText;
+
             TagUtils.getInstance().write(pageContext, pathText);
         }
         catch(Exception _e) {
