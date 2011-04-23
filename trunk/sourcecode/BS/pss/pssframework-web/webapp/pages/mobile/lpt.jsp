@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:if test="${goRlpd != 'true'}">
+<c:if test="${goRlpd == 'true'}">
 <meta http-equiv="refresh" content="2; url=${ctx}/mobile/lpm/rlpd?psId=${param.psId}&read=true" />
 </c:if>
 <title>低压漏保及配变管理系统</title>
