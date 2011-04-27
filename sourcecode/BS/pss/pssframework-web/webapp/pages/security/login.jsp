@@ -93,6 +93,7 @@ $(document).ready( function() {
    		$("#j_captcha").blur();
  		}
 	   if(checkUser() && check =='1') {
+		   $("#submit1").attr("img","<pss:path type="bgcolor"/>/img/jc_bt1.gif");
 	            $("#loginForm").submit();
 	        }else{
 	        	return false;
@@ -134,7 +135,7 @@ $(document).ready( function() {
              check = json;
              if(json=='1'){
            		check = '1';
-           		$("#captcha").html("正确");
+           		//$("#captcha").html("正确");
              }else{
             	 $("#captcha").html("验证码不对，请重输入！");
             	 refreshCaptcha();
@@ -237,7 +238,7 @@ function refreshCaptcha() {
   </tr>
   <tr>
     <td height="50">&nbsp;</td>
-    <td align="left" style="position: relative;"><a href="#" tabindex="4"><img id="submit1"
+    <td align="left" style="position: relative;" id="login_button"><a href="#" tabindex="4"><img id="submit1"
       src="<pss:path type="bgcolor"/>/img/login_bt1.png" width="75" height="42" /></a><a href="#" tabindex="5"><img
       src="<pss:path type="bgcolor"/>/img/login_bt2.png" width="75" height="42" class="mgl15" /></a></td>
   </tr>
