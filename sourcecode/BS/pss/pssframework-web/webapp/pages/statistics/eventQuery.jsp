@@ -56,7 +56,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
   // 分页需要依赖的初始化动作
-  window.simpleTable = new SimpleTable('statisticsQuery','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}');
+  window.simpleTable = new SimpleTable('statisticsQuery','${page.thisPageNumber}','${page.pageSize}','${pageRequest.sortColumns}','${page.exportReport}');
 });
 </script>
 </html>
