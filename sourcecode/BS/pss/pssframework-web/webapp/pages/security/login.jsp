@@ -74,19 +74,11 @@ $(document).ready( function() {
     	
         var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
         if(keyCode == 13) {
-        	if(!checkUser()){
-        		return false;
-        	}
-        	 if(check =='1'){
-        		$("#loginForm").submit();
-        	}
+        	$("#submit1").click();
             
         }
     });
     
-    /* $("form:first").submit(function(){
-    	
-    });*/
 
    $("#submit1").click( function() {
 	   
@@ -114,6 +106,7 @@ $(document).ready( function() {
 		             }
 		              
 		            },error:function(XmlHttpRequest,textStatus, errorThrown){
+		            	 $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
 		            }
 		          });
 		    //});
