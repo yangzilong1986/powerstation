@@ -92,22 +92,23 @@ $(document).ready( function() {
 	   
 	   $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt3.png");
 	   
-	   setTimeout("login()",1000);
+	   if(check =='0'){
+			$("#j_captcha").blur();
+			$("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
+		}
+    
+    
+   if(checkUser() && check =='1') {
+            $("#loginForm").submit();
+        }else{
+        	return false;
+        } 
     });
    
    
     function login(){
-    	 if(check =='0'){
-    			$("#j_captcha").blur();
-    			$("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
-  		}
- 	    
- 	    
- 	   if(checkUser() && check =='1') {
- 	            $("#loginForm").submit();
- 	        }else{
- 	        	return false;
- 	        } 
+    	
+    	
     }
 
 
