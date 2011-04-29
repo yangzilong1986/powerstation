@@ -150,9 +150,9 @@ deleteUser = function(){
 	<table width="100%" border="0" cellspacing="0" class="gridBody" id="object_table">
 		<thead class="tableHeader">
 			<tr style="height: 20px;">
-				<th ><spring:message code="system.user.xh" /></th>
-				<th sortColumn="STAFF_NO"><spring:message code="system.user.zh" /></th>
-				<th sortColumn="name"><spring:message code="system.user.mc" /></th>
+				<td ><spring:message code="system.user.xh" /></td>
+				<td sortColumn="STAFF_NO"><spring:message code="system.user.zh" /></td>
+				<td sortColumn="name"><spring:message code="system.user.mc" /></td>
 			</tr>
 		</thead>
 		<tbody id="dataBody" class="tableBody" >
