@@ -110,6 +110,7 @@ $(document).ready( function() {
 		            	 $("#captcha").html("验证码不对，请重输入！");
 		            	 refreshCaptcha();
 		            	 check = '0';
+		            	 $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
 		             }
 		              
 		            },error:function(XmlHttpRequest,textStatus, errorThrown){
