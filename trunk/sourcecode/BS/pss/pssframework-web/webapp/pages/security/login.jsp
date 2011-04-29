@@ -89,11 +89,16 @@ $(document).ready( function() {
     });*/
 
    $("#submit1").click( function() {
+	   
+	   $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt3.png");
+	   
 	    if(check =='0'){
-   		$("#j_captcha").blur();
+   			$("#j_captcha").blur();
+   			$("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
  		}
+	    
+	    
 	   if(checkUser() && check =='1') {
-		   $("#submit1").attr("img","<pss:path type="bgcolor"/>/img/jc_bt1.gif");
 	            $("#loginForm").submit();
 	        }else{
 	        	return false;
@@ -144,7 +149,6 @@ $(document).ready( function() {
        
               
             },error:function(XmlHttpRequest,textStatus, errorThrown){
-           	 alert(XmlHttpRequest.responseText);
             }
           });
     })
