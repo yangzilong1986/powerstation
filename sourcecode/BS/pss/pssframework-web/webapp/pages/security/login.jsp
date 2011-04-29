@@ -92,7 +92,7 @@ $(document).ready( function() {
 	   
 	   $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt3.png");
 	   
-	   setTimeout("login",1200);
+	   setTimeout("login()",1000);
     });
    
    
