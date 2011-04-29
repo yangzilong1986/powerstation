@@ -6,6 +6,8 @@ package org.pssframework.report;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.transformer.XLSTransformer;
 
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -54,11 +58,12 @@ public class Excel implements ExcelProcess {
 	public void exportData(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ParsePropertyException, InvalidFormatException {
 
+		String date = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
 		response.reset();
 		response.setContentType(contentType);
 		//we use action name plus timestamp as the filename
 		response.setHeader("Content-Disposition",
-				"attachment; filename=\"" + getExcelModel().getTitle() + "_" + System.currentTimeMillis() + ".xls\"");
+				"attachment; filename=\"" + getExcelModel().getTitle() + "_" +date + ".xls\"");
 		InputStream in = null;
 		Workbook workbook = new HSSFWorkbook();
 		try {
