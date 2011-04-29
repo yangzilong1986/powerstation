@@ -92,26 +92,35 @@ $(document).ready( function() {
 	   
 	   $("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt3.png");
 	   
-	   if(check =='0'){
-			$("#j_captcha").blur();
-			$("#submit1").attr("src","<pss:path type='bgcolor'/>/img/login_bt1.png");
-		}
-    
-    
-   if(checkUser() && check =='1') {
-            $("#loginForm").submit();
-        }else{
-        	return false;
-        } 
+	   if(checkUser() ){
+		   if($("#j_captcha")){
+		    //$("#j_captcha").blur(function(){
+		        jQuery.ajax({
+		            url: '${ctx}/security/checkCaptcha.json',
+		            data:getData(),
+		            dataType:'json',
+		            type:'POST',
+		            cache: false,
+		            success: function(json){
+		             check = json;
+		             if(json=='1'){
+		           		check = '1';
+		           	 	$("#loginForm").submit();
+		             }else{
+		            	 $("#captcha").html("验证码不对，请重输入！");
+		            	 refreshCaptcha();
+		            	 check = '0';
+		             }
+		              
+		            },error:function(XmlHttpRequest,textStatus, errorThrown){
+		            }
+		          });
+		    //});
+		   }
+	   }
+   
     });
    
-   
-    function login(){
-    	
-    	
-    }
-
-
 	
     //判断是够存在父页面
     var url ='${pageContext.request.contextPath}/j_spring_security_logout';
@@ -132,30 +141,7 @@ $(document).ready( function() {
     }
     ;
     
-    $("#j_captcha").blur(function(){
-        jQuery.ajax({
-            url: '${ctx}/security/checkCaptcha.json',
-            data:getData(),
-            dataType:'json',
-            type:'POST',
-            cache: false,
-            success: function(json){
-              
-             check = json;
-             if(json=='1'){
-           		check = '1';
-           		//$("#captcha").html("正确");
-             }else{
-            	 $("#captcha").html("验证码不对，请重输入！");
-            	 refreshCaptcha();
-            	 check = '0';
-             }
-       
-              
-            },error:function(XmlHttpRequest,textStatus, errorThrown){
-            }
-          });
-    })
+
 });
 function toggleButton(data){
 	if(data){
