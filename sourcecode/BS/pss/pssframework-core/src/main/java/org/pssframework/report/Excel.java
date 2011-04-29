@@ -6,7 +6,6 @@ package org.pssframework.report;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletContext;
@@ -17,11 +16,11 @@ import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.pssframework.report.model.ExcelModel;
+import org.springside.modules.utils.EncodeUtils;
 
 /**
  * @author Administrator
@@ -59,16 +58,17 @@ public class Excel implements ExcelProcess {
 			ParsePropertyException, InvalidFormatException {
 
 		String date = DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
+		String filename = getExcelModel().getTitle() + "_" + date;
+
 		response.reset();
 		response.setContentType(contentType);
 		//we use action name plus timestamp as the filename
-		response.setHeader("Content-Disposition",
-				"attachment; filename=\"" + getExcelModel().getTitle() + "_" +date + ".xls\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\""
+				+ new String(filename.getBytes("gbk"), "iso8859-1") + ".xls\"");
 		InputStream in = null;
 		Workbook workbook = new HSSFWorkbook();
 		try {
 			in = getTemplate(getExcelModel().getTemplatePath(), request.getSession().getServletContext());
-			
 
 			XLSTransformer transformer = new XLSTransformer();
 			transformer.setJexlInnerCollectionsAccess(true);
