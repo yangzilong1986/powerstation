@@ -8,172 +8,275 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class PsEvent implements Serializable {
-    /**
-     * serialVersionUID
-     */
-    private static final long serialVersionUID = 1191218069819208203L;
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1191218069819208203L;
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    private BigDecimal lbsjId;
-    private BigDecimal gpId;
-    private BigDecimal psId;
-    private String psName;
-    private String assetNo;
-    private BigDecimal tgId;
-    private String tgNo;
-    private String tgName;
-    private int eventCode;
-    private String eventName;
-    private Date trigTime;
-    private Date receiveTime;
-    private int closed;
-    private int locked;
-    private String phase;
-    private BigDecimal currentValue;
-    private int resetSent;
+	private BigDecimal lbsjId;
+	private BigDecimal gpId;
+	private BigDecimal psId;
+	private String psName;
+	private String assetNo;
+	private BigDecimal tgId;
+	private String tgNo;
+	private String tgName;
+	private String eventCode;
+	private String eventName;
+	private Date trigTime;
+	private Date receiveTime;
+	private String closed;
+	private String locked;
+	private String phase;
+	private BigDecimal currentValue;
+	private String resetSent;
 
-    public BigDecimal getLbsjId() {
-        return lbsjId;
-    }
+	/**
+	 * @return the lbsjId
+	 */
+	public BigDecimal getLbsjId() {
+		return lbsjId;
+	}
 
-    public void setLbsjId(BigDecimal lbsjId) {
-        this.lbsjId = lbsjId;
-    }
+	/**
+	 * @param lbsjId the lbsjId to set
+	 */
+	public void setLbsjId(BigDecimal lbsjId) {
+		this.lbsjId = lbsjId;
+	}
 
-    public BigDecimal getGpId() {
-        return gpId;
-    }
+	/**
+	 * @return the gpId
+	 */
+	public BigDecimal getGpId() {
+		return gpId;
+	}
 
-    public void setGpId(BigDecimal gpId) {
-        this.gpId = gpId;
-    }
+	/**
+	 * @param gpId the gpId to set
+	 */
+	public void setGpId(BigDecimal gpId) {
+		this.gpId = gpId;
+	}
 
-    public BigDecimal getPsId() {
-        return psId;
-    }
+	/**
+	 * @return the psId
+	 */
+	public BigDecimal getPsId() {
+		return psId;
+	}
 
-    public void setPsId(BigDecimal psId) {
-        this.psId = psId;
-    }
+	/**
+	 * @param psId the psId to set
+	 */
+	public void setPsId(BigDecimal psId) {
+		this.psId = psId;
+	}
 
-    public String getPsName() {
-        return psName;
-    }
+	/**
+	 * @return the psName
+	 */
+	public String getPsName() {
+		return psName;
+	}
 
-    public void setPsName(String psName) {
-        this.psName = psName;
-    }
+	/**
+	 * @param psName the psName to set
+	 */
+	public void setPsName(String psName) {
+		this.psName = psName;
+	}
 
-    public String getAssetNo() {
-        return assetNo;
-    }
+	/**
+	 * @return the assetNo
+	 */
+	public String getAssetNo() {
+		return assetNo;
+	}
 
-    public void setAssetNo(String assetNo) {
-        this.assetNo = assetNo;
-    }
+	/**
+	 * @param assetNo the assetNo to set
+	 */
+	public void setAssetNo(String assetNo) {
+		this.assetNo = assetNo;
+	}
 
-    public BigDecimal getTgId() {
-        return tgId;
-    }
+	/**
+	 * @return the tgId
+	 */
+	public BigDecimal getTgId() {
+		return tgId;
+	}
 
-    public void setTgId(BigDecimal tgId) {
-        this.tgId = tgId;
-    }
+	/**
+	 * @param tgId the tgId to set
+	 */
+	public void setTgId(BigDecimal tgId) {
+		this.tgId = tgId;
+	}
 
-    public String getTgNo() {
-        return tgNo;
-    }
+	/**
+	 * @return the tgNo
+	 */
+	public String getTgNo() {
+		return tgNo;
+	}
 
-    public void setTgNo(String tgNo) {
-        this.tgNo = tgNo;
-    }
+	/**
+	 * @param tgNo the tgNo to set
+	 */
+	public void setTgNo(String tgNo) {
+		this.tgNo = tgNo;
+	}
 
-    public String getTgName() {
-        return tgName;
-    }
+	/**
+	 * @return the tgName
+	 */
+	public String getTgName() {
+		return tgName;
+	}
 
-    public void setTgName(String tgName) {
-        this.tgName = tgName;
-    }
+	/**
+	 * @param tgName the tgName to set
+	 */
+	public void setTgName(String tgName) {
+		this.tgName = tgName;
+	}
 
-    public int getEventCode() {
-        return eventCode;
-    }
+	/**
+	 * @return the eventCode
+	 */
+	public String getEventCode() {
+		return eventCode;
+	}
 
-    public void setEventCode(int eventCode) {
-        this.eventCode = eventCode;
-    }
+	/**
+	 * @param eventCode the eventCode to set
+	 */
+	public void setEventCode(String eventCode) {
+		this.eventCode = eventCode;
+	}
 
-    public String getEventName() {
-        return eventName;
-    }
+	/**
+	 * @return the eventName
+	 */
+	public String getEventName() {
+		return eventName;
+	}
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
+	/**
+	 * @param eventName the eventName to set
+	 */
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
 
-    public Date getTrigTime() {
-        return trigTime;
-    }
+	/**
+	 * @return the trigTime
+	 */
+	public Date getTrigTime() {
+		return trigTime;
+	}
 
-    public void setTrigTime(Date trigTime) {
-        this.trigTime = trigTime;
-    }
+	/**
+	 * @param trigTime the trigTime to set
+	 */
+	public void setTrigTime(Date trigTime) {
+		this.trigTime = trigTime;
+	}
 
-    public Date getReceiveTime() {
-        return receiveTime;
-    }
+	/**
+	 * @return the receiveTime
+	 */
+	public Date getReceiveTime() {
+		return receiveTime;
+	}
 
-    public void setReceiveTime(Date receiveTime) {
-        this.receiveTime = receiveTime;
-    }
+	/**
+	 * @param receiveTime the receiveTime to set
+	 */
+	public void setReceiveTime(Date receiveTime) {
+		this.receiveTime = receiveTime;
+	}
 
-    public int getClosed() {
-        return closed;
-    }
+	/**
+	 * @return the closed
+	 */
+	public String getClosed() {
+		return closed;
+	}
 
-    public void setClosed(int closed) {
-        this.closed = closed;
-    }
+	/**
+	 * @param closed the closed to set
+	 */
+	public void setClosed(String closed) {
+		this.closed = closed;
+	}
 
-    public int getLocked() {
-        return locked;
-    }
+	/**
+	 * @return the locked
+	 */
+	public String getLocked() {
+		return locked;
+	}
 
-    public void setLocked(int locked) {
-        this.locked = locked;
-    }
+	/**
+	 * @param locked the locked to set
+	 */
+	public void setLocked(String locked) {
+		this.locked = locked;
+	}
 
-    public String getPhase() {
-        return phase;
-    }
+	/**
+	 * @return the phase
+	 */
+	public String getPhase() {
+		return phase;
+	}
 
-    public void setPhase(String phase) {
-        this.phase = phase;
-    }
+	/**
+	 * @param phase the phase to set
+	 */
+	public void setPhase(String phase) {
+		this.phase = phase;
+	}
 
-    public BigDecimal getCurrentValue() {
-        return currentValue;
-    }
+	/**
+	 * @return the currentValue
+	 */
+	public BigDecimal getCurrentValue() {
+		return currentValue;
+	}
 
-    public void setCurrentValue(BigDecimal currentValue) {
-        this.currentValue = currentValue;
-    }
+	/**
+	 * @param currentValue the currentValue to set
+	 */
+	public void setCurrentValue(BigDecimal currentValue) {
+		this.currentValue = currentValue;
+	}
 
-    public int getResetSent() {
-        return resetSent;
-    }
+	/**
+	 * @return the resetSent
+	 */
+	public String getResetSent() {
+		return resetSent;
+	}
 
-    public void setResetSent(int resetSent) {
-        this.resetSent = resetSent;
-    }
+	/**
+	 * @param resetSent the resetSent to set
+	 */
+	public void setResetSent(String resetSent) {
+		this.resetSent = resetSent;
+	}
+
 }
