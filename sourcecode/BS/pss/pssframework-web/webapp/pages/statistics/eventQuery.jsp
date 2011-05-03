@@ -39,7 +39,7 @@
           <td>${page.thisPageFirstElementNumber + status.index}</td>
           <td>${item.tgName}&nbsp;</td>
           <td>${item.assetNo}&nbsp;</td>
-          <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate> &nbsp;</td>
+          <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate>&nbsp;</td>
           <td>${item.eventName}&nbsp;</td>
           <td>${item.phase}&nbsp;</td>
           <td>${item.closed}&nbsp;</td>
