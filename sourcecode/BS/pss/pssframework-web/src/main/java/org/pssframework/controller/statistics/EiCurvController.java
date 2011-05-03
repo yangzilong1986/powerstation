@@ -103,6 +103,7 @@ public class EiCurvController extends BaseSpringController {
 		Excel excel;
 		ExcelModel excelModel;
 		excelModel = new ExcelModel(VIEW_NAME);
+		excelModel.setTitle("表码数据");
 		excelModel.setDataMap(dataMap);
 		excel = new Excel(excelModel);
 
