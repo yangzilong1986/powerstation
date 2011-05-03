@@ -37,14 +37,14 @@
       <c:forEach items="${page.result}" var="item" varStatus="status">
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
-          <td>${item.tgName}</td>
-          <td>${item.assetNo}</td>
+          <td>${item.tgName}&nbsp;</td>
+          <td>${item.assetNo}&nbsp;</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate> &nbsp;</td>
-          <td>${item.eventName}</td>
-          <td>${item.phase}</td>
-          <td>${item.closed}</td>
-          <td>${item.locked}</td>
-          <td>${item.currentValue}</td>
+          <td>${item.eventName}&nbsp;</td>
+          <td>${item.phase}&nbsp;</td>
+          <td>${item.closed}&nbsp;</td>
+          <td>${item.locked}&nbsp;</td>
+          <td>${item.currentValue}&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
