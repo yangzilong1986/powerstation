@@ -13,7 +13,7 @@
 </script>
 </head>
 <body>
-<div class="tableContainer" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
+<div id="tbl-container" style="height: expression(((document.documentElement.clientHeight ||document.body.clientHeight)-29));">
 <form:form action="${ctx}/psmanage/psmon/eventQuery" modelAttribute="psMonitorQuery">
   <input type="hidden" id="psId" name="psId" value="${psMonitorQuery.psId}" />
   <input type="hidden" id="sdate" name="sdate" value="${psMonitorQuery.sdate}" />
