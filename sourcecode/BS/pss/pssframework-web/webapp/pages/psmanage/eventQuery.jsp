@@ -35,11 +35,11 @@
         <tr class="${status.count % 2 == 0 ? 'odd' : 'even'}">
           <td>${page.thisPageFirstElementNumber + status.index}</td>
           <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${item.trigTime}"></fmt:formatDate> &nbsp;</td>
-          <td><c:if test="${item.closed eq 1}">合闸成功</c:if><c:if test="${item.closed eq 0}"><c:out value='${item.eventName}' /></c:if>&nbsp;</td>
-          <td><c:if test="${item.closed eq 0}"><c:out value='${item.phase}' /></c:if>&nbsp;</td>
-          <td><c:if test="${item.closed eq 1}">合闸</c:if><c:if test="${item.closed eq 0}">分闸</c:if>&nbsp;</td>
-          <td><c:if test="${item.closed eq 0}"><c:if test="${item.locked eq 1}">闭锁</c:if><c:if test="${item.locked eq 0}">未闭锁</c:if></c:if>&nbsp;</td>
-          <td><c:if test="${item.closed eq 0}"><c:out value='${item.currentValue}' /></c:if>&nbsp;</td>
+          <td>${item.eventName}&nbsp;</td>
+          <td>${item.phase}&nbsp;</td>
+          <td>${item.closed}&nbsp;</td>
+          <td>${item.locked}&nbsp;</td>
+          <td>${item.currentValue}&nbsp;</td>
         </tr>
       </c:forEach>
     </tbody>
