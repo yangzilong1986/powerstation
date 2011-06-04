@@ -23,6 +23,10 @@ public class RtuRespPacketQueue {
         return theInstance;
     }
 
+    public int size(){
+        return receiveRturespPacketQueue.size();
+    }
+
     private RtuRespPacketQueue(){
         receiveRturespPacketQueue = new ConcurrentLinkedQueue<SequencedPmPacket>();
     }

@@ -23,6 +23,10 @@ public class RtuAutoUploadPacketQueue {
         }
         return theInstance;
     }
+
+    public int size(){
+        return this.receiveRtuAutoUploadPacketQueue.size();
+    }
     
     private RtuAutoUploadPacketQueue(){
         receiveRtuAutoUploadPacketQueue = new ConcurrentLinkedQueue<PmPacket>();
