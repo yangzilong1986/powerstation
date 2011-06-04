@@ -40,7 +40,6 @@ public class ResponseDealer extends BaseProcessor {
             //检查返回
             try {
                 SequencedPmPacket packet = respQueue.PollPacket();
-
                 if ((packet.status == Status.SUSSESS) || (packet.status == Status.TO_BE_CONTINUE)) {
                     if (packet.pack.getAddress().getMastStationId() == RtuCommunicationInfo.AUTO_CALL_TASK_HOSTID)//主动轮召任务返回处理
                     {
@@ -51,6 +50,8 @@ public class ResponseDealer extends BaseProcessor {
                     } else //实时召测任务返回处理
                     {
                         taskService.insertRecvMsg(packet.sequence, packet.pack.getAddress().getRtua(), BcdUtils.binArrayToString(packet.pack.getValue()));
+                        log.info("入库内容：对终端：["+packet.pack.getAddress().getRtua()+"]实时召测任务：" + BcdUtils.binArrayToString(packet.pack.getValue()));
+                        log.info("当前接收队列长度："+respQueue.size());
                     }
                 }
             } catch (Exception ex) {
