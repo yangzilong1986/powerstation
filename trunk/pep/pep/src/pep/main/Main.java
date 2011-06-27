@@ -11,7 +11,6 @@ import java.util.Timer;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import pep.bp.bussinessprocess.MainProcess;
 import pep.bp.processor.SmsRespProcessor;
@@ -43,7 +42,7 @@ public class Main {
 
         Timer checkTimer = new Timer();
         RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker(rtuMap);
-        long timestamp = 20*1000;
+        long timestamp = 10*1000;
         checkTimer.schedule(checker, timestamp,timestamp);
 
         //启动业务处理器
