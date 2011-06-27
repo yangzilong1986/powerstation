@@ -210,10 +210,10 @@ public class RtuCommunicationInfo {
                 synchronized (this) {
                     this.idle = true;
                 }
-                LOGGER.info(rtua+" Timeout, send next packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                LOGGER.info(rtua+" Timeout, send next packet."+this.unsendPacket.size()+" packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 sendNextPacket(false);
             } else {
-                LOGGER.info(rtua+" Timeout, resend packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                LOGGER.info(rtua+" Timeout, resend packet. "+this.unsendPacket.size()+" packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 doSendPacket();
             }
         }
