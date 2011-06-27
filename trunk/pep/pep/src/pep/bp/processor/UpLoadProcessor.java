@@ -67,26 +67,29 @@ public class UpLoadProcessor extends BaseProcessor {
     }
 
     private void decodeAndSaveClassOneData(PmPacket376 packet) {
+        String rtua = packet.getAddress().getRtua();
         Dto dto = new Dto(packet.getAddress().getRtua(), packet.getAfn());
         this.converter.decodeDataDB(packet, dto);
         dataService.insertRecvData(dto);
-        log.info("入库内容：对终端：["+packet.getAddress().getRtua()+"]的1类数据轮召任务");
-        log.info("当前接收队列长度："+upLoadQueue.size());
+        log.info("入库内容：对终端：["+rtua+"]的1类数据轮召任务");
+        log.info("终端：["+rtua+"]当前等待入库报文数："+upLoadQueue.size());
     }
 
     private void decodeAndSaveClasTransMitData(PmPacket376 packet) {
+        String rtua = packet.getAddress().getRtua();
         Dto dto = new Dto(packet.getAddress().getRtua(), packet.getAfn());
         this.converter.decodeData_TransMit(packet, dto);
         dataService.insertRecvData(dto);
-        log.info("入库内容：对终端：["+packet.getAddress().getRtua()+"]的漏保类数据轮召任务");
-        log.info("当前接收队列长度："+upLoadQueue.size());
+        log.info("入库内容：对终端：["+rtua+"]的漏保类数据轮召任务");
+        log.info("终端：["+rtua+"]当前等待入库报文数："+upLoadQueue.size());
     }
 
     private void decodeAndSaveClassTwoData(PmPacket376 packet) {
+        String rtua = packet.getAddress().getRtua();
         Dto classTwoDto = ClassTwoDataDecoder.Decode(packet);
         dataService.insertRecvData(classTwoDto);
-        log.info("入库内容：对终端：["+packet.getAddress().getRtua()+"]的2类数据轮召任务");
-        log.info("当前接收队列长度："+upLoadQueue.size());
+        log.info("入库内容：对终端：["+rtua+"]的2类数据轮召任务");
+        log.info("终端：["+rtua+"]当前等待入库报文数："+upLoadQueue.size());
     }
 
     private void DecodeEventAndSave(PmPacket376 packet) {
