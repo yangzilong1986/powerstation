@@ -50,14 +50,14 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
     }
 
     @Override
-    public void SendPacket(int sequence, PmPacket packet) {
+    public void SendPacket(int sequence, PmPacket packet, int priorityLevel) {
         String rtua = packet.getAddress().getRtua();
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
             rtu = new RtuCommunicationInfo(rtua);
             rtuSessionMap.put(rtua, rtu);
         }
-        rtu.sendPacket(sequence, packet);
+        rtu.sendPacket(sequence, packet, priorityLevel);
     }
 
     @Override
