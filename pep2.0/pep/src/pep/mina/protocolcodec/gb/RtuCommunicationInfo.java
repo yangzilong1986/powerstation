@@ -138,7 +138,6 @@ public class RtuCommunicationInfo {
             LOGGER.info("Send packet: " + this.rtua + " not idle, sequence=" + sequence
                     + ", pack=" + packet.toString());
         }
-        //}
     }
 
     private void sendNextPacket(boolean forceSend) {
