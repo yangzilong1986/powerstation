@@ -26,7 +26,8 @@ public class RtuCommunicationInfo {
 
     private String rtua;
     private IoSession session;
-    private Queue<SeqPacket> unsendPacket;   //待发送帧队列
+    private Queue<SeqPacket> unsendPacket;   //待发送帧队列，低优先级
+    private Queue<SeqPacket> unsendPacket0;  //待发送帧队列，高优先级 
     private byte currentSeq;        //下一个主动发送帧的帧序号
     private boolean idle;           //是否可以发送下行帧
     private byte currentRespSeq;    //当前等待回复的帧序号
@@ -65,6 +66,7 @@ public class RtuCommunicationInfo {
         lastEc1 = 0;
         lastEc2 = 0;
         unsendPacket = new ConcurrentLinkedQueue<SeqPacket>();
+        unsendPacket0 = new ConcurrentLinkedQueue<SeqPacket>();
     }
 
     public RtuCommunicationInfo(String rtua, IoSession session) {
@@ -123,26 +125,34 @@ public class RtuCommunicationInfo {
     public void callRtuEventRecord(EventCountor ec) {
         PmPacket376 pack1 = PmPacket376Factroy.makeCallEventRecordPacket(RtuCommunicationInfo.EC_CALL_HOST_ID,
                 this.rtua, 1, this.lastEc1, ec.getEc1());
-        sendPacket(0, pack1);
+        sendPacket(0, pack1,0);
 
         PmPacket376 pack2 = PmPacket376Factroy.makeCallEventRecordPacket(RtuCommunicationInfo.EC_CALL_HOST_ID,
                 this.rtua, 2, this.lastEc2, ec.getEc2());
-        sendPacket(0, pack2);
+        sendPacket(0, pack2,0);
     }
 
-    public void sendPacket(int sequence, PmPacket packet) {
-        this.unsendPacket.add(new SeqPacket(sequence, packet));
+    public void sendPacket(int sequence, PmPacket packet, int priorityLevel) {
+        addPacket(sequence, packet, priorityLevel);
         if (this.idle) {
             sendNextPacket(false);
         } else {
             LOGGER.info("Send packet: " + this.rtua + " not idle, sequence=" + sequence
                     + ", pack=" + packet.toString());
         }
+        //}
+    }
+
+    private void addPacket(int sequence, PmPacket packet, int priorityLevel) {
+        if (priorityLevel==0)
+            this.unsendPacket0.add(new SeqPacket(sequence, packet));
+        else
+            this.unsendPacket.add(new SeqPacket(sequence, packet));
     }
 
     private void sendNextPacket(boolean forceSend) {
         if (this.idle) {
-            SeqPacket seqPacket = unsendPacket.poll();
+            SeqPacket seqPacket = pollPacket();
             if (seqPacket != null) {
                 this.idle = false;
                 this.currentSequence = seqPacket.sequence;
@@ -161,6 +171,14 @@ public class RtuCommunicationInfo {
                 this.doSendPacket();
             }
         }
+    }
+
+    private SeqPacket pollPacket() {
+        SeqPacket seqPacket = unsendPacket0.poll();
+        if (seqPacket==null)
+            return seqPacket;
+        else
+            return unsendPacket.poll();
     }
 
     private void doSendPacket() {
@@ -209,10 +227,10 @@ public class RtuCommunicationInfo {
                 synchronized (this) {
                     this.idle = true;
                 }
-                LOGGER.info(rtua+" Timeout, send next packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                LOGGER.info(rtua+" Timeout, send next packet."+this.unsendPacket0.size()+"priority packets "+this.unsendPacket.size()+" other packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 sendNextPacket(false);
             } else {
-                LOGGER.info(rtua+" Timeout, resend packet. checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                LOGGER.info(rtua+" Timeout, resend packet. "+this.unsendPacket0.size()+"priority packets "+this.unsendPacket.size()+" other packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
                 doSendPacket();
             }
         }
