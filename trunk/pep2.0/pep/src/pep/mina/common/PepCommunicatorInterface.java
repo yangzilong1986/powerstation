@@ -17,8 +17,9 @@ public interface PepCommunicatorInterface {
      * 返回时，从RtuRespPacketQueue取得终端返回的报文，队列中的对象也包括这个存根
      * @param sequence
      * @param packet
+     * @param priorityLevel 优先级，0为最优先
      */
-    public  void SendPacket(int sequence, PmPacket packet);
+    public  void SendPacket(int sequence, PmPacket packet, int priorityLevel);
 
     /**
      * 主动上送时，报文放入RtuAutoUploadPacketQueue队列，包括不是主动上送的事件，
