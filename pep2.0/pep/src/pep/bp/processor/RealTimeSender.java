@@ -40,7 +40,7 @@ public class RealTimeSender extends BaseProcessor {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException ex) {
                 java.util.logging.Logger.getLogger(RealTimeSender.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -51,7 +51,7 @@ public class RealTimeSender extends BaseProcessor {
                     PmPacket packet = new PmPacket376();
                     packet.setValue(BcdUtils.stringToByteArray(task.getSendmsg()), 0);
                 //    log.info("开始往下发队列中发送报文："+task.getSendmsg());
-                    pepCommunicator.SendPacket(task.getTaskId(), packet);
+                    pepCommunicator.SendPacket(task.getTaskId(), packet,0);
                     log.info("往下发队列中发送报文完成："+task.getSendmsg());
                 }
             }

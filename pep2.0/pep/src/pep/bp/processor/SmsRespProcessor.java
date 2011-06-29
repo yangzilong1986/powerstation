@@ -34,6 +34,6 @@ public class SmsRespProcessor {
         PmPacket376 pack = PmPacket376Factroy.makeDirectCommunicationPacket(
                RtuCommunicationInfo.LOUBAO_OPRATE_HOSTID, rtua, 
                (byte)1, (byte)0, (byte)0, (byte)0, lbPacket.getValue());
-       rtuMap.SendPacket(0, pack); 
+       rtuMap.SendPacket(0, pack,0);
     }
 }
