@@ -39,14 +39,17 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         rtuConnectEventHandler.removeRtuConnectListener(listener);
     }
 
+    @Override
     public RtuAutoUploadPacketQueue getRtuAutoUploadPacketQueueInstance() {
         return this.autoUploadPacketQueue;
     }
 
+    @Override
     public RtuRespPacketQueue getRtuRespPacketQueueInstance() {
         return RtuRespPacketQueue.instance();
     }
 
+    @Override
     public void SendPacket(int sequence, PmPacket packet) {
         String rtua = packet.getAddress().getRtua();
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
@@ -57,6 +60,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         rtu.sendPacket(sequence, packet);
     }
 
+    @Override
     public synchronized void checkUndespPackets() {
         Date checkTime;
         checkTime = new Date();
