@@ -67,7 +67,7 @@ public class PollingJob implements Job {
         if (null != TermTaskList) {
             for (TermTaskDAO task : TermTaskList) {
                 try {
-                    DoTask(this.pepCommunicator, task);
+                    DoTask(task);
                 } catch (BPException ex) {
                     java.util.logging.Logger.getLogger(PollingJob.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -75,7 +75,7 @@ public class PollingJob implements Job {
         }
     }
 
-    private void DoTask(PepCommunicatorInterface pepCommunicator, TermTaskDAO task) throws BPException {
+    private void DoTask(TermTaskDAO task) throws BPException {
         List<CommanddItemDAO> CommandItemList = task.getCommandItemList();
         for (CommanddItemDAO commandItemDao : CommandItemList) {
             CollectObject object = new CollectObject();
@@ -109,7 +109,7 @@ public class PollingJob implements Job {
                 if(null != packetList){
                     for(PmPacket376 pack:packetList){
                         pack.getAddress().setMastStationId((byte) 2);
-                        pepCommunicator.SendPacket(this.getsequenceCode(), pack);
+                        this.pepCommunicator.SendPacket(this.getsequenceCode(), pack,1);
                         log.info("向终端：["+task.getLogicAddress()+"] 下发轮召报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(pack.getValue()));
                     }
                 }
@@ -119,7 +119,7 @@ public class PollingJob implements Job {
                 PmPacket376 packet = new PmPacket376();
                 packet.getAddress().setMastStationId((byte) 2);
                 converter.CollectObject2Packet(object, packet, task.getAFN(), new StringBuffer(), new StringBuffer());
-                pepCommunicator.SendPacket(this.getsequenceCode(), packet);
+                pepCommunicator.SendPacket(this.getsequenceCode(), packet,1);
                 log.info("向终端：["+task.getLogicAddress()+"] 下发轮召报文（命令项;" + Item.getIdentifier() + "）：" + BcdUtils.binArrayToString(packet.getValue()));
             }            
         }
