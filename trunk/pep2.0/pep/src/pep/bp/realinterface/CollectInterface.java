@@ -9,7 +9,7 @@ import pep.bp.realinterface.mto.*;
  *
  * @author Thinkpad
  */
-public interface ICollectInterface {
+public interface CollectInterface {
     /**
      * 参数设置
      * @param MTO 消息传输对象

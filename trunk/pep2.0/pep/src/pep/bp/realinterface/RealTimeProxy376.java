@@ -31,7 +31,7 @@ import pep.meter645.Gb645MeterPacket;
  *
  * @author Thinkpad
  */
-public class RealTimeProxy376 implements ICollectInterface {
+public class RealTimeProxy376 implements CollectInterface {
 
     private static int ID;
     private final int FAILCODE = -1;
