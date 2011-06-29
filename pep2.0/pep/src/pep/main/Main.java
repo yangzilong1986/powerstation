@@ -43,7 +43,7 @@ public class Main {
 
         Timer checkTimer = new Timer();
         RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker(rtuMap);
-        long timestamp = 20*1000;
+        long timestamp = 10*1000;
         checkTimer.schedule(checker, timestamp,timestamp);
 
         //启动业务处理器
