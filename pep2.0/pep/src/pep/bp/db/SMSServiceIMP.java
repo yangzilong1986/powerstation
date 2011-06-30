@@ -29,6 +29,7 @@ public class SMSServiceIMP implements SmsService {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @Override
     public List<SMSDAO> getRecvSMS() {
 
         try {
@@ -46,6 +47,7 @@ public class SMSServiceIMP implements SmsService {
 
     }
 
+    @Override
     public void deleteRecvSMS(int smsid) {
         try {
             StringBuilder sbSQL = new StringBuilder();
