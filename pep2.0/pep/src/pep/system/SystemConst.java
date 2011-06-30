@@ -16,6 +16,7 @@ public class SystemConst {
     public static final String TERMTASK_BEAN = "taskService";
     public static final String DATASERVICE_BEAN = "dataService";
     public static final String SMSSERVICE_BEAN = "smsService";
+    public static final String COMMLOG_BEAN = "commLogService";
 
 
     //----------------------------------------------Parse Parameters ------------------
