@@ -1,616 +1,616 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ProtocolCommandItems>
     <CommandItem CommandCode="10040001">
-        <DataItem DataItemCode="1004000101" Length="1" Format="BIN" BitNumber="0" Description="ÖÕ¶ËÊý´«»úÑÓÊ±Ê±¼äRTS" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000102" Length="1" Format="BIN" BitNumber="0" Description="ÖÕ¶Ë×÷ÎªÆô¶¯Õ¾ÔÊÐí·¢ËÍ´«ÊäÑÓÊ±Ê±¼ä" DefaultValue="15" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000103" Length="1" Format="BIN" BitNumber="0" Description="ÖÕ¶ËµÈ´ý´Ó¶¯Õ¾ÏìÓ¦µÄ³¬Ê±Ê±¼ä" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000104" Length="1" Format="BIN" BitNumber="0" Description="ÖÕ¶ËµÈ´ý´Ó¶¯Õ¾ÏìÓ¦µÄÖØ·¢´ÎÊý" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000106" Length="1" Format="BS8" BitNumber="0" Description="ÐèÒªÖ÷Õ¾È·ÈÏµÄÍ¨ÐÅ·þÎñ£¨CON=1£©µÄ±êÖ¾" DefaultValue="00000111" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000107" Length="1" Format="BIN" BitNumber="0" Description="ÐÄÌøÖÜÆÚ" DefaultValue="15" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000101" Length="1" Format="BIN" BitNumber="0" Description="ç»ˆç«¯æ•°ä¼ æœºå»¶æ—¶æ—¶é—´RTS" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000102" Length="1" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ä½œä¸ºå¯åŠ¨ç«™å…è®¸å‘é€ä¼ è¾“å»¶æ—¶æ—¶é—´" DefaultValue="15" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000103" Length="1" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ç­‰å¾…ä»ŽåŠ¨ç«™å“åº”çš„è¶…æ—¶æ—¶é—´" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000104" Length="1" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ç­‰å¾…ä»ŽåŠ¨ç«™å“åº”çš„é‡å‘æ¬¡æ•°" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000106" Length="1" Format="BS8" BitNumber="0" Description="éœ€è¦ä¸»ç«™ç¡®è®¤çš„é€šä¿¡æœåŠ¡ï¼ˆCON=1ï¼‰çš„æ ‡å¿—" DefaultValue="00000111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000107" Length="1" Format="BIN" BitNumber="0" Description="å¿ƒè·³å‘¨æœŸ" DefaultValue="15" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040003">
-        <DataItem DataItemCode="1004000301" Length="6" Format="IPPORT" BitNumber="0" Description="Ö÷ÓÃIPµØÖ·ºÍ¶Ë¿Ú" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000302" Length="6" Format="IPPORT" BitNumber="0" Description="±¸ÓÃIPµØÖ·ºÍ¶Ë¿Ú" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000301" Length="6" Format="IPPORT" BitNumber="0" Description="ä¸»ç”¨IPåœ°å€å’Œç«¯å£" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000302" Length="6" Format="IPPORT" BitNumber="0" Description="å¤‡ç”¨IPåœ°å€å’Œç«¯å£" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
         <DataItem DataItemCode="1004000303" Length="16" Format="ASCII" BitNumber="0" Description="APN" DefaultValue="cmdz.zj" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040004">
-        <DataItem DataItemCode="1004000401" Length="8" Format="TEL" BitNumber="0" Description="Ö÷Õ¾µç»°ºÅÂë»òÖ÷Õ¾ÊÖ»úºÅÂë" DefaultValue="13147863416" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000402" Length="8" Format="TEL" BitNumber="0" Description="¶ÌÐÅÖÐÐÄºÅÂë" DefaultValue="123456" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000401" Length="8" Format="TEL" BitNumber="0" Description="ä¸»ç«™ç”µè¯å·ç æˆ–ä¸»ç«™æ‰‹æœºå·ç " DefaultValue="13147863416" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000402" Length="8" Format="TEL" BitNumber="0" Description="çŸ­ä¿¡ä¸­å¿ƒå·ç " DefaultValue="123456" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040005">
-        <DataItem DataItemCode="1004000501" Length="1" Format="BIN" BitNumber="0" Description="ÏûÏ¢ÈÏÖ¤·½°¸ºÅ" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000502" Length="2" Format="HEX" BitNumber="0" Description="ÏûÏ¢ÈÏÖ¤·½°¸²ÎÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000501" Length="1" Format="BIN" BitNumber="0" Description="æ¶ˆæ¯è®¤è¯æ–¹æ¡ˆå·" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000502" Length="2" Format="HEX" BitNumber="0" Description="æ¶ˆæ¯è®¤è¯æ–¹æ¡ˆå‚æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040007">
-        <DataItem DataItemCode="1004000701" Length="4" Format="IP" BitNumber="0" Description="ÖÕ¶ËIPµØÖ·" DefaultValue="127.0.0.1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000702" Length="4" Format="IP" BitNumber="0" Description="×ÓÍøÑÚÂëµØÖ·" DefaultValue="255.255.255.0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000703" Length="4" Format="IP" BitNumber="0" Description="Íø¹ØµØÖ·" DefaultValue="127.0.0.1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000704" Length="1" Format="BIN" BitNumber="0" Description="´úÀí·þÎñÆ÷´úÀíÀàÐÍ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000705" Length="6" Format="IPPORT" BitNumber="0" Description="´úÀí·þÎñÆ÷µØÖ·ºÍ¶Ë¿Ú" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000706" Length="1" Format="BIN" BitNumber="0" Description="´úÀí·þÎñÆ÷Á¬½Ó·½Ê½" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000707" Length="1" Format="BIN" BitNumber="0" Description="´úÀí·þÎñÆ÷ÓÃ»§Ãû³¤¶È" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000708" Length="20" Format="ASCII" BitNumber="0" Description="´úÀí·þÎñÆ÷ÓÃ»§Ãû" DefaultValue="admin" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000709" Length="1" Format="BIN" BitNumber="0" Description="´úÀí·þÎñÆ÷ÃÜÂë³¤¶È" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000710" Length="20" Format="ASCII" BitNumber="0" Description="´úÀí·þÎñÆ÷ÃÜÂë" DefaultValue="test" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000711" Length="2" Format="BIN" BitNumber="0" Description="ÖÕ¶ËÕìÌý¶Ë¿Ú" DefaultValue="80" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000701" Length="4" Format="IP" BitNumber="0" Description="ç»ˆç«¯IPåœ°å€" DefaultValue="127.0.0.1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000702" Length="4" Format="IP" BitNumber="0" Description="å­ç½‘æŽ©ç åœ°å€" DefaultValue="255.255.255.0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000703" Length="4" Format="IP" BitNumber="0" Description="ç½‘å…³åœ°å€" DefaultValue="127.0.0.1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000704" Length="1" Format="BIN" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨ä»£ç†ç±»åž‹" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000705" Length="6" Format="IPPORT" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨åœ°å€å’Œç«¯å£" DefaultValue="127.0.0.1:80" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000706" Length="1" Format="BIN" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨è¿žæŽ¥æ–¹å¼" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000707" Length="1" Format="BIN" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨ç”¨æˆ·åé•¿åº¦" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000708" Length="20" Format="ASCII" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨ç”¨æˆ·å" DefaultValue="admin" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000709" Length="1" Format="BIN" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨å¯†ç é•¿åº¦" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000710" Length="20" Format="ASCII" BitNumber="0" Description="ä»£ç†æœåŠ¡å™¨å¯†ç " DefaultValue="test" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000711" Length="2" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ä¾¦å¬ç«¯å£" DefaultValue="80" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040008">
-        <DataItem DataItemCode="1004000801" Length="1" Format="GROUP_BS8" BitNumber="1" Description="¹¤×÷Ä£Ê½£¨TCP/UDP£©" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000802" Length="1" Format="GROUP_BS8" BitNumber="1" Description="±¸ÓÃ" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000803" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÖÕ¶Ë¹¤×÷Ä£Ê½" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000804" Length="1" Format="GROUP_BS8" BitNumber="2" Description="±¸ÓÃ" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000805" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÖÕ¶Ë¹¤×÷ÔÚ¿Í»§»úÄ£Ê½ÏÂµÄÈýÖÖÔÚÏßÄ£Ê½" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000806" Length="2" Format="BIN" BitNumber="0" Description="¿Í»§»úÄ£Ê½ÏÂÓÀ¾ÃÔÚÏß¡¢Ê±¶ÎÔÚÏßÄ£Ê½ÖØ²¦¼ä¸ô" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000807" Length="1" Format="BIN" BitNumber="0" Description="±»¶¯¼¤»îÄ£Ê½ÖØ²¦´ÎÊý" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000808" Length="1" Format="BIN" BitNumber="0" Description="¿Í»§»úÄ£Ê½ÏÂ±»¶¯¼¤»îÄ£Ê½Á¬ÐøÎÞÍ¨ÐÅ×Ô¶¯¶ÏÏßÊ±¼ä" DefaultValue="30" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000809" Length="3" Format="BS24" BitNumber="0" Description="¿Í»§»úÄ£Ê½ÏÂÊ±¶ÎÔÚÏßÄ£Ê½ÔÊÐíÔÚÏßÊ±¶Î±êÖ¾" DefaultValue="111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000801" Length="1" Format="GROUP_BS8" BitNumber="1" Description="å·¥ä½œæ¨¡å¼ï¼ˆTCP/UDPï¼‰" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000802" Length="1" Format="GROUP_BS8" BitNumber="1" Description="å¤‡ç”¨" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000803" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç»ˆç«¯å·¥ä½œæ¨¡å¼" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000804" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å¤‡ç”¨" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000805" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç»ˆç«¯å·¥ä½œåœ¨å®¢æˆ·æœºæ¨¡å¼ä¸‹çš„ä¸‰ç§åœ¨çº¿æ¨¡å¼" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000806" Length="2" Format="BIN" BitNumber="0" Description="å®¢æˆ·æœºæ¨¡å¼ä¸‹æ°¸ä¹…åœ¨çº¿ã€æ—¶æ®µåœ¨çº¿æ¨¡å¼é‡æ‹¨é—´éš”" DefaultValue="10" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000807" Length="1" Format="BIN" BitNumber="0" Description="è¢«åŠ¨æ¿€æ´»æ¨¡å¼é‡æ‹¨æ¬¡æ•°" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000808" Length="1" Format="BIN" BitNumber="0" Description="å®¢æˆ·æœºæ¨¡å¼ä¸‹è¢«åŠ¨æ¿€æ´»æ¨¡å¼è¿žç»­æ— é€šä¿¡è‡ªåŠ¨æ–­çº¿æ—¶é—´" DefaultValue="30" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000809" Length="3" Format="BS24" BitNumber="0" Description="å®¢æˆ·æœºæ¨¡å¼ä¸‹æ—¶æ®µåœ¨çº¿æ¨¡å¼å…è®¸åœ¨çº¿æ—¶æ®µæ ‡å¿—" DefaultValue="111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040009">
-        <DataItem DataItemCode="1004000901" Length="8" Format="BS64" BitNumber="0" Description="ÊÂ¼þ¼ÇÂ¼ÓÐÐ§±êÖ¾Î»" DefaultValue="1111111111111111111111111111111111111111111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004000902" Length="8" Format="BS64" BitNumber="0" Description="ÊÂ¼þÖØÒªÐÔµÈ¼¶±êÖ¾Î»" DefaultValue="1111111111111111111111111111111111111111111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000901" Length="8" Format="BS64" BitNumber="0" Description="äº‹ä»¶è®°å½•æœ‰æ•ˆæ ‡å¿—ä½" DefaultValue="1111111111111111111111111111111111111111111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004000902" Length="8" Format="BS64" BitNumber="0" Description="äº‹ä»¶é‡è¦æ€§ç­‰çº§æ ‡å¿—ä½" DefaultValue="1111111111111111111111111111111111111111111111111111111111111111" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040012">
-        <DataItem DataItemCode="1004001201" Length="1" Format="BS8" BitNumber="0" Description="×´Ì¬Á¿½ÓÈë±êÖ¾Î»" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001202" Length="1" Format="BS8" BitNumber="0" Description="×´Ì¬Á¿ÊôÐÔ±êÖ¾Î»" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001201" Length="1" Format="BS8" BitNumber="0" Description="çŠ¶æ€é‡æŽ¥å…¥æ ‡å¿—ä½" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001202" Length="1" Format="BS8" BitNumber="0" Description="çŠ¶æ€é‡å±žæ€§æ ‡å¿—ä½" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040016">
-        <DataItem DataItemCode="1004001601" Length="32" Format="ASCII" BitNumber="0" Description="ÐéÄâ×¨ÍøÓÃ»§Ãû" DefaultValue="cmdz" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001602" Length="32" Format="ASCII" BitNumber="0" Description="ÐéÄâ×¨ÍøÃÜÂë" DefaultValue="cmdz.zj" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001601" Length="32" Format="ASCII" BitNumber="0" Description="è™šæ‹Ÿä¸“ç½‘ç”¨æˆ·å" DefaultValue="cmdz" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001602" Length="32" Format="ASCII" BitNumber="0" Description="è™šæ‹Ÿä¸“ç½‘å¯†ç " DefaultValue="cmdz.zj" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040017">
-        <DataItem DataItemCode="1004001701" Length="2" Format="A2" BitNumber="0" Description="ÖÕ¶Ë±£°²¶¨Öµ" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001701" Length="2" Format="A2" BitNumber="0" Description="ç»ˆç«¯ä¿å®‰å®šå€¼" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040010">
-        <DataItem DataItemCode="1004001001" Length="2" Format="BIN" BitNumber="0" Description="±¾´ÎµçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÅäÖÃÊýÁ¿" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001002" Length="2" Format="BIN" BitNumber="0" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÐòºÅ" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001003" Length="2" Format="BIN" BitNumber="0" Description="ËùÊô²âÁ¿µãºÅ" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001004" Length="1" Format="GROUP_BIN" BitNumber="3" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÍ¨ÐÅ²¨ÌØÂÊ" DefaultValue="6" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001005" Length="1" Format="GROUP_BIN" BitNumber="5" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÍ¨ÐÅ¶Ë¿ÚºÅ" DefaultValue="1" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001006" Length="1" Format="BIN" BitNumber="0" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÍ¨ÐÅÐ­ÒéÀàÐÍ" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001007" Length="6" Format="A12" BitNumber="0" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÍ¨ÐÅµØÖ·" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001008" Length="6" Format="HEX" BitNumber="0" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÍ¨ÐÅÃÜÂë" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001009" Length="1" Format="GROUP_BS8" BitNumber="2" Description="±¸ÓÃ" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001010" Length="1" Format="GROUP_BS8" BitNumber="6" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃµçÄÜ·ÑÂÊ¸öÊý" DefaultValue="000001" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001011" Length="1" Format="GROUP_BS8" BitNumber="4" Description="±¸ÓÃ" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001012" Length="1" Format="GROUP_BS8" BitNumber="2" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÓÐ¹¦µçÄÜÊ¾ÖµµÄÕûÊýÎ»¸öÊý" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001013" Length="1" Format="GROUP_BS8" BitNumber="2" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃÓÐ¹¦µçÄÜÊ¾ÖµµÄÐ¡ÊýÎ»¸öÊý" DefaultValue="00" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001014" Length="6" Format="A12" BitNumber="0" Description="µçÄÜ±í/½»Á÷²ÉÑù×°ÖÃËùÊô²É¼¯Æ÷Í¨ÐÅµØÖ·" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001015" Length="1" Format="GROUP_BS8" BitNumber="4" Description="ÓÃ»§´óÀàºÅ" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004001016" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¼°ÓÃ»§Ð¡ÀàºÅ" DefaultValue="0000" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001001" Length="2" Format="BIN" BitNumber="0" Description="æœ¬æ¬¡ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é…ç½®æ•°é‡" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001002" Length="2" Format="BIN" BitNumber="0" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®åºå·" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001003" Length="2" Format="BIN" BitNumber="0" Description="æ‰€å±žæµ‹é‡ç‚¹å·" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001004" Length="1" Format="GROUP_BIN" BitNumber="3" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é€šä¿¡æ³¢ç‰¹çŽ‡" DefaultValue="6" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001005" Length="1" Format="GROUP_BIN" BitNumber="5" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é€šä¿¡ç«¯å£å·" DefaultValue="1" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001006" Length="1" Format="BIN" BitNumber="0" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é€šä¿¡åè®®ç±»åž‹" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001007" Length="6" Format="A12" BitNumber="0" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é€šä¿¡åœ°å€" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001008" Length="6" Format="HEX" BitNumber="0" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®é€šä¿¡å¯†ç " DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001009" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å¤‡ç”¨" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001010" Length="1" Format="GROUP_BS8" BitNumber="6" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®ç”µèƒ½è´¹çŽ‡ä¸ªæ•°" DefaultValue="000001" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001011" Length="1" Format="GROUP_BS8" BitNumber="4" Description="å¤‡ç”¨" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001012" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®æœ‰åŠŸç”µèƒ½ç¤ºå€¼çš„æ•´æ•°ä½ä¸ªæ•°" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001013" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®æœ‰åŠŸç”µèƒ½ç¤ºå€¼çš„å°æ•°ä½ä¸ªæ•°" DefaultValue="00" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001014" Length="6" Format="A12" BitNumber="0" Description="ç”µèƒ½è¡¨/äº¤æµé‡‡æ ·è£…ç½®æ‰€å±žé‡‡é›†å™¨é€šä¿¡åœ°å€" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001015" Length="1" Format="GROUP_BS8" BitNumber="4" Description="ç”¨æˆ·å¤§ç±»å·" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004001016" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠç”¨æˆ·å°ç±»å·" DefaultValue="0000" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040025">
-        <DataItem DataItemCode="1004002501" Length="2" Format="BIN" BitNumber="0" Description="µçÑ¹»¥¸ÐÆ÷±¶ÂÊ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002502" Length="2" Format="BIN" BitNumber="0" Description="µçÁ÷»¥¸ÐÆ÷±¶ÂÊ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002503" Length="2" Format="A7" BitNumber="0" Description="¶î¶¨µçÑ¹" DefaultValue="220" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002504" Length="1" Format="A22" BitNumber="0" Description="¶î¶¨µçÁ÷" DefaultValue="50" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002505" Length="3" Format="A23" BitNumber="0" Description="¶î¶¨¸ººÉ" DefaultValue="500" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002506" Length="1" Format="GROUP_BS8" BitNumber="4" Description="±¸ÓÃ" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002507" Length="1" Format="GROUP_BS8" BitNumber="2" Description="µ¥Ïà±í½ÓÏßÏà" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002508" Length="1" Format="GROUP_BS8" BitNumber="2" Description="µçÔ´½ÓÏß·½Ê½" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002501" Length="2" Format="BIN" BitNumber="0" Description="ç”µåŽ‹äº’æ„Ÿå™¨å€çŽ‡" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002502" Length="2" Format="BIN" BitNumber="0" Description="ç”µæµäº’æ„Ÿå™¨å€çŽ‡" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002503" Length="2" Format="A7" BitNumber="0" Description="é¢å®šç”µåŽ‹" DefaultValue="220" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002504" Length="1" Format="A22" BitNumber="0" Description="é¢å®šç”µæµ" DefaultValue="50" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002505" Length="3" Format="A23" BitNumber="0" Description="é¢å®šè´Ÿè·" DefaultValue="500" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002506" Length="1" Format="GROUP_BS8" BitNumber="4" Description="å¤‡ç”¨" DefaultValue="0000" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002507" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å•ç›¸è¡¨æŽ¥çº¿ç›¸" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002508" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç”µæºæŽ¥çº¿æ–¹å¼" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040026">
-        <DataItem DataItemCode="1004002601" Length="2" Format="A7" BitNumber="0" Description="µçÑ¹ºÏ¸ñÉÏÏÞ" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002602" Length="2" Format="A7" BitNumber="0" Description="µçÑ¹ºÏ¸ñÏÂÏÞ" DefaultValue="80" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002603" Length="2" Format="A7" BitNumber="0" Description="µçÑ¹¶ÏÏàÃÅÏÞ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002604" Length="2" Format="A7" BitNumber="0" Description="µçÑ¹ÉÏÉÏÏÞ£¨¹ýÑ¹ÃÅÏÞ£©" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002605" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002606" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002607" Length="2" Format="A7" BitNumber="0" Description="µçÑ¹ÏÂÏÂÏÞ£¨Ç·Ñ¹ÃÅÏÞ£©" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002608" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002609" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002610" Length="3" Format="A25" BitNumber="0" Description="ÏàµçÁ÷ÉÏÉÏÏÞ£¨¹ýÁ÷ÃÅÏÞ£©" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002611" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002612" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002613" Length="3" Format="A25" BitNumber="0" Description="ÏàµçÁ÷ÉÏÏÞ£¨¶î¶¨µçÁ÷ÃÅÏÞ£©" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002614" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002615" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002616" Length="3" Format="A25" BitNumber="0" Description="ÁãÐòµçÁ÷ÉÏÏÞ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002617" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002618" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002619" Length="3" Format="A23" BitNumber="0" Description="ÊÓÔÚ¹¦ÂÊÉÏÉÏÏÞ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002620" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002621" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002622" Length="3" Format="A23" BitNumber="0" Description="ÊÓÔÚ¹¦ÂÊÉÏÏÞ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002623" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002624" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002625" Length="2" Format="A5" BitNumber="0" Description="ÈýÏàµçÑ¹²»Æ½ºâÏÞÖµ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002626" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002627" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002628" Length="2" Format="A5" BitNumber="0" Description="ÈýÏàµçÁ÷²»Æ½ºâÏÞÖµ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002629" Length="1" Format="BIN" BitNumber="0" Description="Ô½ÏÞ³ÖÐøÊ±¼ä" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002630" Length="2" Format="A5" BitNumber="0" Description="Ô½ÏÞ»Ö¸´ÏµÊý" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004002631" Length="1" Format="BIN" BitNumber="0" Description="Á¬ÐøÊ§Ñ¹Ê±¼äÏÞÖµ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002601" Length="2" Format="A7" BitNumber="0" Description="ç”µåŽ‹åˆæ ¼ä¸Šé™" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002602" Length="2" Format="A7" BitNumber="0" Description="ç”µåŽ‹åˆæ ¼ä¸‹é™" DefaultValue="80" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002603" Length="2" Format="A7" BitNumber="0" Description="ç”µåŽ‹æ–­ç›¸é—¨é™" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002604" Length="2" Format="A7" BitNumber="0" Description="ç”µåŽ‹ä¸Šä¸Šé™ï¼ˆè¿‡åŽ‹é—¨é™ï¼‰" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002605" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002606" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002607" Length="2" Format="A7" BitNumber="0" Description="ç”µåŽ‹ä¸‹ä¸‹é™ï¼ˆæ¬ åŽ‹é—¨é™ï¼‰" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002608" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002609" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002610" Length="3" Format="A25" BitNumber="0" Description="ç›¸ç”µæµä¸Šä¸Šé™ï¼ˆè¿‡æµé—¨é™ï¼‰" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002611" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002612" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002613" Length="3" Format="A25" BitNumber="0" Description="ç›¸ç”µæµä¸Šé™ï¼ˆé¢å®šç”µæµé—¨é™ï¼‰" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002614" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002615" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002616" Length="3" Format="A25" BitNumber="0" Description="é›¶åºç”µæµä¸Šé™" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002617" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002618" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002619" Length="3" Format="A23" BitNumber="0" Description="è§†åœ¨åŠŸçŽ‡ä¸Šä¸Šé™" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002620" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002621" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002622" Length="3" Format="A23" BitNumber="0" Description="è§†åœ¨åŠŸçŽ‡ä¸Šé™" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002623" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002624" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002625" Length="2" Format="A5" BitNumber="0" Description="ä¸‰ç›¸ç”µåŽ‹ä¸å¹³è¡¡é™å€¼" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002626" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002627" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002628" Length="2" Format="A5" BitNumber="0" Description="ä¸‰ç›¸ç”µæµä¸å¹³è¡¡é™å€¼" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002629" Length="1" Format="BIN" BitNumber="0" Description="è¶Šé™æŒç»­æ—¶é—´" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002630" Length="2" Format="A5" BitNumber="0" Description="è¶Šé™æ¢å¤ç³»æ•°" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004002631" Length="1" Format="BIN" BitNumber="0" Description="è¿žç»­å¤±åŽ‹æ—¶é—´é™å€¼" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040061">
-        <DataItem DataItemCode="1004006101" Length="1" Format="BS8" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿½ÓÈë±êÖ¾Î»" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004006101" Length="1" Format="BS8" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡æŽ¥å…¥æ ‡å¿—ä½" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040081">
-        <DataItem DataItemCode="1004008101" Length="2" Format="A2" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿Á¿³ÌÆðÊ¼Öµ" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004008102" Length="2" Format="A2" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿Á¿³ÌÖÕÖ¹Öµ" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004008101" Length="2" Format="A2" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡é‡ç¨‹èµ·å§‹å€¼" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004008102" Length="2" Format="A2" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡é‡ç¨‹ç»ˆæ­¢å€¼" DefaultValue="11111111" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040082">
-        <DataItem DataItemCode="1004008201" Length="2" Format="A2" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿ÉÏÏÞ" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="1004008202" Length="2" Format="A2" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿ÏÂÏÞ" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004008201" Length="2" Format="A2" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡ä¸Šé™" DefaultValue="100" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004008202" Length="2" Format="A2" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡ä¸‹é™" DefaultValue="1" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="10040083">
-        <DataItem DataItemCode="1004008301" Length="1" Format="BIN" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿¶³½áÃÜ¶È" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="1004008301" Length="1" Format="BIN" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡å†»ç»“å¯†åº¦" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0002">
-        <DataItem DataItemCode="100C000201" Length="6" Format="A1" BitNumber="0" Description="ÖÕ¶ËÈÕÀúÊ±ÖÓ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000201" Length="6" Format="A1" BitNumber="0" Description="ç»ˆç«¯æ—¥åŽ†æ—¶é’Ÿ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0003">
-        <DataItem DataItemCode="100C000301" Length="31" Format="BS248" BitNumber="0" Description="ÖÕ¶Ë²ÎÊý×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000301" Length="31" Format="BS248" BitNumber="0" Description="ç»ˆç«¯å‚æ•°çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0004">
-        <DataItem DataItemCode="100C000401" Length="1" Format="GROUP_BS8" BitNumber="2" Description="±¸ÓÃ" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="100C000402" Length="1" Format="GROUP_BS8" BitNumber="2" Description="±¸ÓÃ" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="100C000403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÔÊÐí¨M½ûÖ¹Í¨»°" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="100C000404" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÔÊÐí¨M½ûÖ¹Ö÷¶¯ÉÏ±¨" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000401" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å¤‡ç”¨" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000402" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å¤‡ç”¨" DefaultValue="00" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å…è®¸âˆ•ç¦æ­¢é€šè¯" DefaultValue="01" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000404" Length="1" Format="GROUP_BS8" BitNumber="2" Description="å…è®¸âˆ•ç¦æ­¢ä¸»åŠ¨ä¸ŠæŠ¥" DefaultValue="01" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0007">
-        <DataItem DataItemCode="100C000701" Length="1" Format="BIN" BitNumber="0" Description="ÖØÒªÊÂ¼þ¼ÆÊýÆ÷EC1Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="100C000702" Length="1" Format="BIN" BitNumber="0" Description="Ò»°ãÊÂ¼þ¼ÆÊýÆ÷EC2Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000701" Length="1" Format="BIN" BitNumber="0" Description="é‡è¦äº‹ä»¶è®¡æ•°å™¨EC1å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000702" Length="1" Format="BIN" BitNumber="0" Description="ä¸€èˆ¬äº‹ä»¶è®¡æ•°å™¨EC2å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0008">
-        <DataItem DataItemCode="100C000801" Length="8" Format="BS64" BitNumber="0" Description="ÖÕ¶ËÊÂ¼þ±êÖ¾×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C000801" Length="8" Format="BS64" BitNumber="0" Description="ç»ˆç«¯äº‹ä»¶æ ‡å¿—çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0010">
-        <DataItem DataItemCode="100C001001" Length="4" Format="BIN" BitNumber="0" Description="ÖÕ¶ËÓëÖ÷Õ¾µ±ÈÕÍ¨ÐÅÁ÷Á¿" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="100C001002" Length="4" Format="BIN" BitNumber="0" Description="ÖÕ¶ËÓëÖ÷Õ¾µ±ÔÂÍ¨ÐÅÁ÷Á¿" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C001001" Length="4" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ä¸Žä¸»ç«™å½“æ—¥é€šä¿¡æµé‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C001002" Length="4" Format="BIN" BitNumber="0" Description="ç»ˆç«¯ä¸Žä¸»ç«™å½“æœˆé€šä¿¡æµé‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0025">
-        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ÖÕ¶Ë³­±íÊ±¼ä" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="2300" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°×ÜÓÐ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2301" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°AÏàÓÐ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2302" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°BÏàÓÐ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2303" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°CÏàÓÐ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2400" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°×ÜÎÞ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2401" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°AÏàÎÞ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2402" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°BÏàÎÞ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2403" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°CÏàÎÞ¹¦¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2600" Length="2" Format="A5" BitNumber="0" Description="µ±Ç°×Ü¹¦ÂÊÒòÊý" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2601" Length="2" Format="A5" BitNumber="0" Description="µ±Ç°AÏà¹¦ÂÊÒòÊý" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2602" Length="2" Format="A5" BitNumber="0" Description="µ±Ç°BÏà¹¦ÂÊÒòÊý" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2603" Length="2" Format="A5" BitNumber="0" Description="µ±Ç°CÏà¹¦ÂÊÒòÊý" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2101" Length="2" Format="A7" BitNumber="0" Description="µ±Ç°AÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2102" Length="2" Format="A7" BitNumber="0" Description="µ±Ç°BÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2103" Length="2" Format="A7" BitNumber="0" Description="µ±Ç°CÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2201" Length="3" Format="A25" BitNumber="0" Description="µ±Ç°AÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2202" Length="3" Format="A25" BitNumber="0" Description="µ±Ç°BÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2203" Length="3" Format="A25" BitNumber="0" Description="µ±Ç°CÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2204" Length="3" Format="A25" BitNumber="0" Description="µ±Ç°ÁãÐòµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2500" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°×ÜÊÓÔÚ¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2501" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°AÏàÊÓÔÚ¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2502" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°BÏàÊÓÔÚ¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="2503" Length="3" Format="A9" BitNumber="0" Description="µ±Ç°CÏàÊÓÔÚ¹¦ÂÊ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ç»ˆç«¯æŠ„è¡¨æ—¶é—´" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="2300" Length="3" Format="A9" BitNumber="0" Description="å½“å‰æ€»æœ‰åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2301" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Aç›¸æœ‰åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2302" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Bç›¸æœ‰åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2303" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Cç›¸æœ‰åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2400" Length="3" Format="A9" BitNumber="0" Description="å½“å‰æ€»æ— åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2401" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Aç›¸æ— åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2402" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Bç›¸æ— åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2403" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Cç›¸æ— åŠŸåŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2600" Length="2" Format="A5" BitNumber="0" Description="å½“å‰æ€»åŠŸçŽ‡å› æ•°" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2601" Length="2" Format="A5" BitNumber="0" Description="å½“å‰Aç›¸åŠŸçŽ‡å› æ•°" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2602" Length="2" Format="A5" BitNumber="0" Description="å½“å‰Bç›¸åŠŸçŽ‡å› æ•°" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2603" Length="2" Format="A5" BitNumber="0" Description="å½“å‰Cç›¸åŠŸçŽ‡å› æ•°" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2101" Length="2" Format="A7" BitNumber="0" Description="å½“å‰Aç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2102" Length="2" Format="A7" BitNumber="0" Description="å½“å‰Bç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2103" Length="2" Format="A7" BitNumber="0" Description="å½“å‰Cç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2201" Length="3" Format="A25" BitNumber="0" Description="å½“å‰Aç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2202" Length="3" Format="A25" BitNumber="0" Description="å½“å‰Bç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2203" Length="3" Format="A25" BitNumber="0" Description="å½“å‰Cç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2204" Length="3" Format="A25" BitNumber="0" Description="å½“å‰é›¶åºç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2500" Length="3" Format="A9" BitNumber="0" Description="å½“å‰æ€»è§†åœ¨åŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2501" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Aç›¸è§†åœ¨åŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2502" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Bç›¸è§†åœ¨åŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="2503" Length="3" Format="A9" BitNumber="0" Description="å½“å‰Cç›¸è§†åœ¨åŠŸçŽ‡" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0073">
-        <DataItem DataItemCode="BE16" Length="2" Format="A2" BitNumber="0" Description="Ö±Á÷Ä£ÄâÁ¿ÊµÊ±Êý¾Ý" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="100C007301" Length="2" Format="A2" BitNumber="0" Description="ç›´æµæ¨¡æ‹Ÿé‡å®žæ—¶æ•°æ®" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0129">
-        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ÖÕ¶Ë³­±íÊ±¼ä" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="·ÑÂÊÊýM" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0100" Length="5" Format="A14" BitNumber="0" Description="ÕýÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0101" Length="5" Format="A14" BitNumber="0" Description="·ÑÂÊ1ÕýÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0102" Length="5" Format="A14" BitNumber="0" Description="·ÑÂÊ2ÕýÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0103" Length="5" Format="A14" BitNumber="0" Description="·ÑÂÊ3ÕýÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0104" Length="5" Format="A14" BitNumber="0" Description="·ÑÂÊ4ÕýÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ç»ˆç«¯æŠ„è¡¨æ—¶é—´" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="è´¹çŽ‡æ•°M" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0100" Length="5" Format="A14" BitNumber="0" Description="æ­£å‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0101" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡1æ­£å‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0102" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡2æ­£å‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0103" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡3æ­£å‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0104" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡4æ­£å‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B611">
-        <DataItem DataItemCode="B611" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°AÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B611" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Aç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B612">
-        <DataItem DataItemCode="B612" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°BÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B612" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Bç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B613">
-        <DataItem DataItemCode="B613" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°CÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B613" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Cç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B621">
-        <DataItem DataItemCode="B621" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°AÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B621" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Aç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B622">
-        <DataItem DataItemCode="B622" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°BÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B622" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Bç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B623">
-        <DataItem DataItemCode="B623" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°CÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B623" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Cç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B660">
-        <DataItem DataItemCode="B660" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°Ê£ÓàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B660" Length="2" Format="A8" BitNumber="0" Description="å½“å‰å‰©ä½™ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000B66F">
-        <DataItem DataItemCode="8000B66F01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ºÏÕ¢/·ÖÕ¢" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000B66F02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ÊÇ·ñËøËÀ" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000B66F03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000B66F04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="B611" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°AÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B612" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°BÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B613" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°CÏàµçÑ¹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B621" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°AÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B622" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°BÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B623" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°CÏàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="B660" Length="2" Format="A8" BitNumber="0" Description="µ±Ç°Ê£ÓàµçÁ÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000B66F01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆé—¸/åˆ†é—¸" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000B66F02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="æ˜¯å¦é”æ­»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000B66F03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000B66F04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="B611" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Aç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B612" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Bç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B613" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Cç›¸ç”µåŽ‹" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B621" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Aç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B622" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Bç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B623" Length="2" Format="A8" BitNumber="0" Description="å½“å‰Cç›¸ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="B660" Length="2" Format="A8" BitNumber="0" Description="å½“å‰å‰©ä½™ç”µæµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C012">
-        <DataItem DataItemCode="C012" Length="2" Format="DATE_LOUBAO" BitNumber="0" Description="Â©µç±£»¤×°ÖÃÐ£Ê±" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C012" Length="2" Format="DATE_LOUBAO" BitNumber="0" Description="æ¼ç”µä¿æŠ¤è£…ç½®æ ¡æ—¶" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C040">
-        <DataItem DataItemCode="C04001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="C04002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="C04003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="C04004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="C04005" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="C04006" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C04001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="C04002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="C04003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="C04004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="C04005" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C04006" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C041">
-        <DataItem DataItemCode="C041" Length="2" Format="A8" BitNumber="0" Description="¸ºÔØµçÁ÷¶¯×÷µµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C041" Length="2" Format="A8" BitNumber="0" Description="è´Ÿè½½ç”µæµåŠ¨ä½œæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C042">
-        <DataItem DataItemCode="C042" Length="2" Format="A8" BitNumber="0" Description="Ê£ÓàµçÁ÷¶¯×÷µµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C042" Length="2" Format="A8" BitNumber="0" Description="å‰©ä½™ç”µæµåŠ¨ä½œæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C043">
-        <DataItem DataItemCode="C043" Length="2" Format="A8" BitNumber="0" Description="Ê£ÓàµçÁ÷¶¯×÷ÑÓÊ±µµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C043" Length="2" Format="A8" BitNumber="0" Description="å‰©ä½™ç”µæµåŠ¨ä½œå»¶æ—¶æ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C044">
-        <DataItem DataItemCode="C044" Length="2" Format="A8" BitNumber="0" Description="¿ª¹Ø¹¦ÄÜÆôÓÃÉè¶¨×Ö" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C044" Length="2" Format="A8" BitNumber="0" Description="å¼€å…³åŠŸèƒ½å¯ç”¨è®¾å®šå­—" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C045">
-        <DataItem DataItemCode="C045" Length="2" Format="A8" BitNumber="0" Description="²úÆ·ÀàID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="C045" Length="2" Format="A8" BitNumber="0" Description="äº§å“ç±»ID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C04F">
-        <DataItem DataItemCode="8000C04F01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ºÏÕ¢/·ÖÕ¢" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000C04F02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ÊÇ·ñËøËÀ" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000C04F03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000C04F04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000C04F05" Length="2" Format="A8" BitNumber="0" Description="¶î¶¨¸ºÔØµçÁ÷µµÎ»Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F06" Length="1" Format="A29" BitNumber="0" Description="Ê£ÓàµçÁ÷µµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F07" Length="2" Format="A8" BitNumber="0" Description="Ê£ÓàµçÁ÷µ±Ç°µµÎ»Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F08" Length="1" Format="A29" BitNumber="0" Description="Â©µç·Ö¶ÏÑÓ³ÙµµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F09" Length="2" Format="A8" BitNumber="0" Description="Â©µç·Ö¶ÏÑÓ³ÙÊ±¼äÖµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F10" Length="2" Format="BS8" BitNumber="0" Description="¿ª¹Ø¹¦ÄÜÉè¶¨×Ö" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000C04F11" Length="1" Format="BIN" BitNumber="0" Description="±£»¤Æ÷ÐÍºÅID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆé—¸/åˆ†é—¸" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000C04F02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="æ˜¯å¦é”æ­»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000C04F03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000C04F04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000C04F05" Length="2" Format="A8" BitNumber="0" Description="é¢å®šè´Ÿè½½ç”µæµæ¡£ä½å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F06" Length="1" Format="A29" BitNumber="0" Description="å‰©ä½™ç”µæµæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F07" Length="2" Format="A8" BitNumber="0" Description="å‰©ä½™ç”µæµå½“å‰æ¡£ä½å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F08" Length="1" Format="A29" BitNumber="0" Description="æ¼ç”µåˆ†æ–­å»¶è¿Ÿæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F09" Length="2" Format="A8" BitNumber="0" Description="æ¼ç”µåˆ†æ–­å»¶è¿Ÿæ—¶é—´å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F10" Length="2" Format="BS8" BitNumber="0" Description="å¼€å…³åŠŸèƒ½è®¾å®šå­—" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C04F11" Length="1" Format="BIN" BitNumber="0" Description="ä¿æŠ¤å™¨åž‹å·ID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E510">
-        <DataItem DataItemCode="8000E51001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51005" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51006" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51005" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51006" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E511">
-        <DataItem DataItemCode="8000E51101" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51102" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51103" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51104" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51105" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51106" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51101" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51102" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51103" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51104" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51105" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51106" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E512">
-        <DataItem DataItemCode="8000E51201" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51202" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51203" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51204" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51205" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51206" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51201" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51202" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51203" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51204" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51205" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51206" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E513">
-        <DataItem DataItemCode="8000E51301" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51005" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51006" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51301" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51005" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51006" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E514">
-        <DataItem DataItemCode="8000E51401" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51402" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51404" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51405" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51406" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51401" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51402" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51404" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51405" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51406" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E515">
-        <DataItem DataItemCode="8000E51501" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51502" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51503" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51504" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51505" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51506" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51501" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51502" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51503" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51504" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51505" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51506" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E516">
-        <DataItem DataItemCode="8000E51601" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51602" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51603" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51604" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51605" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51606" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51601" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51602" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51603" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51604" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51605" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51606" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E517">
-        <DataItem DataItemCode="8000E51701" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51702" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51703" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51704" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51705" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51706" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51701" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51702" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51703" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51704" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51705" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51706" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E518">
-        <DataItem DataItemCode="8000E51801" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51802" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51803" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51804" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51805" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51806" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51801" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51802" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51803" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51804" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51805" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51806" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E519">
-        <DataItem DataItemCode="8000E51901" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51902" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51903" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51904" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51905" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51906" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51901" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51902" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51903" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51904" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51905" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51906" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E51A">
-        <DataItem DataItemCode="8000E51A01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51A02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51A03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51A04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51A05" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51A06" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51A01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51A02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51A03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51A04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51A05" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51A06" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E51B">
-        <DataItem DataItemCode="8000E51B01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51B02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51B03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51B04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51B05" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51B06" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51B01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51B02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51B03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51B04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51B05" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51B06" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E51C">
-        <DataItem DataItemCode="8000E51C01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51C02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51C03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51C04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51C05" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51C06" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51C01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51C02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51C03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51C04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51C05" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51C06" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E51D">
-        <DataItem DataItemCode="8000E51D01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51D02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51D03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51D04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51D05" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51D06" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51D01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51D02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51D03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51D04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51D05" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51D06" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E51E">
-        <DataItem DataItemCode="8000E51E01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51E02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51E03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51E04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E51E05" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E51E06" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51E01" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51E02" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51E03" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51E04" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E51E05" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E51E06" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E520">
-        <DataItem DataItemCode="8000E52001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52005" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E52006" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52001" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52002" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52003" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52004" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52005" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52006" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E521">
-        <DataItem DataItemCode="8000E52101" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52102" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52103" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52104" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52105" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E52106" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52101" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52102" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52103" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52104" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52105" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52106" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E522">
-        <DataItem DataItemCode="8000E52201" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52202" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52203" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52204" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52205" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E52206" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52201" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52202" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52203" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52204" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52205" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52206" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E523">
-        <DataItem DataItemCode="8000E52301" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52302" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52303" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52304" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52305" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E52306" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52301" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52302" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52303" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52304" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52305" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52306" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000E524">
-        <DataItem DataItemCode="8000E52401" Length="1" Format="GROUP_BS8" BitNumber="1" Description="·ÖºÏÕ¢×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52402" Length="1" Format="GROUP_BS8" BitNumber="1" Description="ËøËÀ×´Ì¬" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ÏàÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52404" Length="1" Format="GROUP_BS8" BitNumber="4" Description="¶¯×÷ÀàÐÍ" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
-        <DataItem DataItemCode="8000E52405" Length="2" Format="A8" BitNumber="4" Description="¶¯×÷Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8000E52406" Length="4" Format="A1" BitNumber="4" Description="¶¯×÷Ê±¼ä" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52401" Length="1" Format="GROUP_BS8" BitNumber="1" Description="åˆ†åˆé—¸çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52402" Length="1" Format="GROUP_BS8" BitNumber="1" Description="é”æ­»çŠ¶æ€" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52403" Length="1" Format="GROUP_BS8" BitNumber="2" Description="ç›¸ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52404" Length="1" Format="GROUP_BS8" BitNumber="4" Description="åŠ¨ä½œç±»åž‹" DefaultValue="" IsGroupEnd="1" LowBitBefore="0"/>
+        <DataItem DataItemCode="8000E52405" Length="2" Format="A8" BitNumber="4" Description="åŠ¨ä½œå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000E52406" Length="4" Format="A1" BitNumber="4" Description="åŠ¨ä½œæ—¶é—´" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0130">
-        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ÖÕ¶Ë³­±íÊ±¼ä" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="·ÑÂÊÊýM" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A000" Length="5" Format="A11" BitNumber="0" Description="ÕýÏòÎÞ¹¦£¨×éºÏÎÞ¹¦1£©×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A001" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ1ÕýÏòÎÞ¹¦£¨×éºÏÎÞ¹¦1£©×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A002" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ2ÕýÏòÎÞ¹¦£¨×éºÏÎÞ¹¦1£©×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A003" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ3ÕýÏòÎÞ¹¦£¨×éºÏÎÞ¹¦1£©×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A004" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ4ÕýÏòÎÞ¹¦£¨×éºÏÎÞ¹¦1£©×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ç»ˆç«¯æŠ„è¡¨æ—¶é—´" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="è´¹çŽ‡æ•°M" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A000" Length="5" Format="A11" BitNumber="0" Description="æ­£å‘æ— åŠŸï¼ˆç»„åˆæ— åŠŸ1ï¼‰æ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A001" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡1æ­£å‘æ— åŠŸï¼ˆç»„åˆæ— åŠŸ1ï¼‰æ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A002" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡2æ­£å‘æ— åŠŸï¼ˆç»„åˆæ— åŠŸ1ï¼‰æ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A003" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡3æ­£å‘æ— åŠŸï¼ˆç»„åˆæ— åŠŸ1ï¼‰æ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A004" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡4æ­£å‘æ— åŠŸï¼ˆç»„åˆæ— åŠŸ1ï¼‰æ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C036">
-        <DataItem DataItemCode="8000C03601" Length="1" Format="HEX" BitNumber="1" Description="ÌøºÏÕ¢²Ù×÷" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8000C03601" Length="1" Format="HEX" BitNumber="1" Description="è·³åˆé—¸æ“ä½œ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="8000C037"/>
     <CommandItem CommandCode="8001C04F">
-        <DataItem DataItemCode="8001C04F01" Length="1" Format="BIN" BitNumber="0" Description="±£»¤Æ÷ÐÍºÅID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F02" Length="1" Format="BS8" BitNumber="0" Description="ÓÐÐ§¶¨Òå" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F03" Length="2" Format="A8" BitNumber="0" Description="¶î¶¨¸ºÔØµçÁ÷µµÎ»Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F04" Length="1" Format="A29" BitNumber="0" Description="Ê£ÓàµçÁ÷µµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F05" Length="1" Format="A29" BitNumber="0" Description="Â©µç·Ö¶ÏÑÓ³ÙµµÎ»" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F06" Length="1" Format="BS8" BitNumber="0" Description="¿ª¹Ø¹¦ÄÜÉè¶¨×Ö" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="8001C04F07" Length="1" Format="BIN" BitNumber="0" Description="±£Áô×Ö½Ú" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F01" Length="1" Format="BIN" BitNumber="0" Description="ä¿æŠ¤å™¨åž‹å·ID" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F02" Length="1" Format="BS8" BitNumber="0" Description="æœ‰æ•ˆå®šä¹‰" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F03" Length="2" Format="A8" BitNumber="0" Description="é¢å®šè´Ÿè½½ç”µæµæ¡£ä½å€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F04" Length="1" Format="A29" BitNumber="0" Description="å‰©ä½™ç”µæµæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F05" Length="1" Format="A29" BitNumber="0" Description="æ¼ç”µåˆ†æ–­å»¶è¿Ÿæ¡£ä½" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F06" Length="1" Format="BS8" BitNumber="0" Description="å¼€å…³åŠŸèƒ½è®¾å®šå­—" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="8001C04F07" Length="1" Format="BIN" BitNumber="0" Description="ä¿ç•™å­—èŠ‚" DefaultValue="0" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0132">
-        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ÖÕ¶Ë³­±íÊ±¼ä" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="·ÑÂÊÊýM" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A100" Length="5" Format="A11" BitNumber="0" Description="·´ÏòÎÞ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A101" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ1·´ÏòÎÞ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A102" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ2·´ÏòÎÞ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A103" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ3·´ÏòÎÞ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="A104" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ4·´ÏòÎÞ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ç»ˆç«¯æŠ„è¡¨æ—¶é—´" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="è´¹çŽ‡æ•°M" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A100" Length="5" Format="A11" BitNumber="0" Description="åå‘æ— åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A101" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡1åå‘æ— åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A102" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡2åå‘æ— åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A103" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡3åå‘æ— åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="A104" Length="5" Format="A11" BitNumber="0" Description="è´¹çŽ‡4åå‘æ— åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100C0131">
-        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ÖÕ¶Ë³­±íÊ±¼ä" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="·ÑÂÊÊýM" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0200" Length="5" Format="A11" BitNumber="0" Description="·´ÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0201" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ1·´ÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0202" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ2·´ÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0203" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ3·´ÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="0204" Length="5" Format="A11" BitNumber="0" Description="·ÑÂÊ4·´ÏòÓÐ¹¦×ÜµçÄÜÊ¾Öµ" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F000" Length="5" Format="A15" BitNumber="0" Description="ç»ˆç«¯æŠ„è¡¨æ—¶é—´" DefaultValue="" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F001" Length="1" Format="BIN" BitNumber="0" Description="è´¹çŽ‡æ•°M" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0200" Length="5" Format="A14" BitNumber="0" Description="åå‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0201" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡1åå‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0202" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡2åå‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0203" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡3åå‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="0204" Length="5" Format="A14" BitNumber="0" Description="è´¹çŽ‡4åå‘æœ‰åŠŸæ€»ç”µèƒ½ç¤ºå€¼" DefaultValue="" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0081">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0082">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0083">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0084">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0085">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0086">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0087">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0088">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0089">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0090">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0091">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0092">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0093">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0094">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0095">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0097">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0098">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0099">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0100">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0027">
-        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="ÈÕ¶³½áÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="æ—¥å†»ç»“ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0028">
-        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="ÈÕ¶³½áÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="æ—¥å†»ç»“ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0029">
-        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="ÈÕ¶³½áÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F012" Length="3" Format="A20" BitNumber="0" Description="æ—¥å†»ç»“ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0101">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0102">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0103">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0104">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0105">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0106">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0107">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
     <CommandItem CommandCode="100D0108">
-        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÊ±±ê" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
-        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝÃÜ¶È" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
-        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="ÇúÏßÀàÊý¾ÝµãÊý" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F011" Length="5" Format="A15" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®æ—¶æ ‡" DefaultValue="YESTERDAY" IsGroupEnd="1" LowBitBefore="1"/>
+        <DataItem DataItemCode="F002" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®å¯†åº¦" DefaultValue="3" IsGroupEnd="0" LowBitBefore="1"/>
+        <DataItem DataItemCode="F003" Length="1" Format="BIN" BitNumber="0" Description="æ›²çº¿ç±»æ•°æ®ç‚¹æ•°" DefaultValue="24" IsGroupEnd="0" LowBitBefore="1"/>
     </CommandItem>
 </ProtocolCommandItems>
