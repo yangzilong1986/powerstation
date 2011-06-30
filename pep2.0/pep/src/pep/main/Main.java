@@ -11,9 +11,10 @@ import java.util.Timer;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import pep.bp.bussinessprocess.MainProcess;
+import pep.bp.db.commLog.CommLogService;
+import pep.bp.db.commLog.CommLogWriter;
 import pep.bp.processor.SmsRespProcessor;
 import pep.mina.common.RtuUnrespPacketChecker;
 import pep.mina.protocolcodec.gb.PepGbCommunicator;
@@ -45,6 +46,11 @@ public class Main {
         RtuUnrespPacketChecker checker = new RtuUnrespPacketChecker(rtuMap);
         long timestamp = 10*1000;
         checkTimer.schedule(checker, timestamp,timestamp);
+
+        //启动通信日志记录器
+        Timer commLogTimer = new Timer();
+        CommLogWriter commLogWriter = CommLogWriter.getInstance();
+        checkTimer.schedule(commLogWriter, CommLogWriter.maxCacheTime,CommLogWriter.maxCacheTime);
 
         //启动业务处理器
         SmsRespProcessor.setRtuMap(rtuMap);
