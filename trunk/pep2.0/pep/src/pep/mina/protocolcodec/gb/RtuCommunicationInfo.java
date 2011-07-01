@@ -175,7 +175,7 @@ public class RtuCommunicationInfo {
 
     private SeqPacket pollPacket() {
         SeqPacket seqPacket = unsendPacket0.poll();
-        if (seqPacket==null)
+        if (seqPacket!=null)
             return seqPacket;
         else
             return unsendPacket.poll();
