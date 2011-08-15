@@ -8,16 +8,18 @@
 
 package pep.bp.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
+
 
 
 public class CommLogDAO {
     private String logicalAddress;
     private String message;
-    private Date recordTime;
+    private Time recordTime;
     private String direction;
 
-    public CommLogDAO(String logicalAddress,String message,Date recordTime,String direction){
+    public CommLogDAO(String logicalAddress,String message,Time recordTime,String direction){
         super();
         this.logicalAddress = logicalAddress;
         this.message = message;
@@ -56,14 +58,14 @@ public class CommLogDAO {
     /**
      * @return the recordTime
      */
-    public Date getRecordTime() {
+    public Time getRecordTime() {
         return recordTime;
     }
 
     /**
      * @param recordTime the recordTime to set
      */
-    public void setRecordTime(Date recordTime) {
+    public void setRecordTime(Time recordTime) {
         this.recordTime = recordTime;
     }
 
