@@ -19,12 +19,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import pep.bp.db.DataServiceIMP;
 import pep.bp.model.CommLogDAO;
 
-public class CommLogService  {
+public class CommLogService {
 
     private final static Logger log = LoggerFactory.getLogger(DataServiceIMP.class);
     private JdbcTemplate jdbcTemplate;
-    
-
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -35,7 +33,6 @@ public class CommLogService  {
     }
 
     public synchronized void insertLogs(final List<CommLogDAO> commLogList) {
-
             String sql = "INSERT INTO R_COMM_LOG(logical_addr,Message,record_time,direction) VALUES(?,?,?,?)";
             jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 
@@ -44,7 +41,7 @@ public class CommLogService  {
                     CommLogDAO commLog = commLogList.get(i);
                     ps.setString(1, commLog.getLogicalAddress());
                     ps.setString(2, commLog.getMessage());
-                    ps.setDate(3, (Date) commLog.getRecordTime());
+                    ps.setTime(3, commLog.getRecordTime());
                     ps.setString(4, commLog.getDirection());
                 }
 
@@ -53,8 +50,8 @@ public class CommLogService  {
                     return commLogList.size();
                 }
             });
-            log.info("本次插入通信日志"+commLogList.size()+"条");
-
+            if (commLogList.size() > 0) {
+                log.info("本次插入通信日志" + commLogList.size() + "条");
+            }
     }
-
 }

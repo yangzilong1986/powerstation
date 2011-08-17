@@ -7,8 +7,9 @@
  */
 package pep.bp.db.commLog;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class CommLogWriter extends TimerTask {
     protected ApplicationContext cxt;
     public static final int maxCacheTime = 10 * 1000;//最大缓存时间
     public static final int maxCacheSize = 100;//最大缓存报文条数
-    private static List<CommLogDAO> commLogList = new ArrayList<CommLogDAO>();
+    private static final List<CommLogDAO> commLogList = new ArrayList<CommLogDAO>();
     private static final CommLogWriter commLogWriterInstance = new CommLogWriter();
     private CommLogService commLogService;
 
@@ -49,13 +50,13 @@ public class CommLogWriter extends TimerTask {
         return commLogWriterInstance;
     }
 
-    public  void insertLog(String rtua, String message, String direction) {
-        synchronized(commLogList){
-            CommLogDAO commLog = new CommLogDAO(rtua, message, new Date(), direction);
+    public void insertLog(String rtua, String message, String direction) {
+        synchronized (commLogList) {
+            CommLogDAO commLog = new CommLogDAO(rtua, message, new Time(System.currentTimeMillis()), direction);
             commLogList.add(commLog);
-//        if (commLogList.size() >= maxCacheSize) {
-//            insertLogs();
-//        }
+//            if (commLogList.size() >= maxCacheSize) {
+//                insertLogs();
+//            }
         }
     }
 
