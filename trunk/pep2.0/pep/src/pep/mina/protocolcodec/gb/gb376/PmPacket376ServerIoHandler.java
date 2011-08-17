@@ -54,6 +54,8 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (!pack.getControlCode().getIsUpDirect()) {
             return;
         }
+        
+        commLogWriter.insertLog(rtua,BcdUtils.binArrayToString(pack.getValue()),"U" );
 
         registRtua(session, rtua);
 
@@ -63,7 +65,6 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         }
 
         rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
-        commLogWriter.insertLog(rtua,BcdUtils.binArrayToString(pack.getValue()),"U" );
         
     }
 
