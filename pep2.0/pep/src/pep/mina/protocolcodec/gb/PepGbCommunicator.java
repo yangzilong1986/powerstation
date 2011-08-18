@@ -55,26 +55,36 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         RtuCommunicationInfo rtu = getRtuCommunictionInfo(rtua);
         if (rtu == null) {
             rtu = new RtuCommunicationInfo(rtua);
-            rtuSessionMap.put(rtua, rtu);
+            synchronized(this){
+                rtuSessionMap.put(rtua, rtu);
+            }
         }
         rtu.sendPacket(sequence, packet, priorityLevel);
     }
 
     @Override
-    public synchronized void checkUndespPackets() {
+    public void checkUndespPackets() {
         Date checkTime;
         checkTime = new Date();
-        for (RtuCommunicationInfo rtu : rtuSessionMap.values()){
-            rtu.checkNotResponed(checkTime);
+        synchronized (this) {
+            for (RtuCommunicationInfo rtu : rtuSessionMap.values()) {
+                rtu.checkNotResponed(checkTime);
+            }
         }
     }
 
-    private synchronized void putRtuCommunicationInfo(String rtua, RtuCommunicationInfo rtuInfo) {
-        rtuSessionMap.put(rtua, rtuInfo);
+    private  void putRtuCommunicationInfo(String rtua, RtuCommunicationInfo rtuInfo) {
+        synchronized(this){
+            rtuSessionMap.put(rtua, rtuInfo);
+        }
     }
 
-    private synchronized RtuCommunicationInfo getRtuCommunictionInfo(String rtua) {
-        return rtuSessionMap.get(rtua);
+    private RtuCommunicationInfo getRtuCommunictionInfo(String rtua) {
+        RtuCommunicationInfo result;
+        synchronized(this){
+            result = rtuSessionMap.get(rtua);
+        }
+        return result;
     }
 
     public void rtuDisconnectted(String rtua) {
