@@ -45,6 +45,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         }
     }
 
+
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
@@ -100,7 +101,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (!((pack.getAfn() == 2) && (!showActTestPack))) {
             LOGGER.info("Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-            commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
+      //      commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
         }
     }
 
