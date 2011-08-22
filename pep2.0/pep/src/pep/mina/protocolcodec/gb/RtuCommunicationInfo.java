@@ -6,6 +6,7 @@ package pep.mina.protocolcodec.gb;
 import java.util.Date;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,9 @@ public class RtuCommunicationInfo {
     public final static byte LOUBAO_OPRATE_HOSTID = 4;
     private static final long TIME_OUT = 10 * 1000;
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
+
+    //add by lijun
+    private final static int reSendTimes = 3;
 
     private class SeqPacket {
 
@@ -193,7 +197,8 @@ public class RtuCommunicationInfo {
                 if (this.session != null) {
                     LOGGER.info("DoSend: " + rtua + " sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
-                    this.session.write(this.currentPacket);
+                    //this.session.write(this.currentPacket);
+                    sendPacket(this.currentPacket);
                 } else {
                     LOGGER.info("DoSend: " + rtua + " not online, sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
@@ -234,5 +239,21 @@ public class RtuCommunicationInfo {
                 doSendPacket();
             }
         }
+    }
+
+    /**
+     *  add by lijun 2011.8.22  单次发送重发
+     */
+    private void sendPacket(PmPacket packet){
+        if(null != packet){
+            WriteFuture future = this.session.write(packet);
+            future.awaitUninterruptibly();
+            if(future.isWritten()) {
+                LOGGER.info("DoSend: Successfully!");
+            }
+            else
+                LOGGER.info("DoSend: Failed!");
+        }
+
     }
 }
