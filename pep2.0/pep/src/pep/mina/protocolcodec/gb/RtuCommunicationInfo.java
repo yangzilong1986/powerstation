@@ -197,8 +197,8 @@ public class RtuCommunicationInfo {
                 if (this.session != null) {
                     LOGGER.info("DoSend: " + rtua + " sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
-                    //this.session.write(this.currentPacket);
-                    sendPacket(this.currentPacket);
+                    this.session.write(this.currentPacket);
+                    //sendPacket(this.currentPacket);
                 } else {
                     LOGGER.info("DoSend: " + rtua + " not online, sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
@@ -241,19 +241,22 @@ public class RtuCommunicationInfo {
         }
     }
 
-    /**
-     *  add by lijun 2011.8.22  单次发送重发
-     */
-    private void sendPacket(PmPacket packet){
-        if(null != packet){
-            WriteFuture future = this.session.write(packet);
-            future.awaitUninterruptibly();
-            if(future.isWritten()) {
-                LOGGER.info("DoSend: Successfully!");
-            }
-            else
-                LOGGER.info("DoSend: Failed!");
-        }
-
-    }
+//    /**
+//     *  add by lijun 2011.8.22  单次发送重发
+//     */
+//    private void sendPacket(PmPacket packet){
+//        if(null != packet){
+//            WriteFuture future = this.session.write(packet);
+//            future.awaitUninterruptibly(1000);
+//             if (future.getException() != null) {
+//                 LOGGER.error(future.getException().getMessage());
+//        }
+//            if(future.isWritten()) {
+//                LOGGER.info("DoSend: Successfully!");
+//            }
+//            else
+//                LOGGER.info("DoSend: Failed!");
+//        }
+//
+//    }
 }
