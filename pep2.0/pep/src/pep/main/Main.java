@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import java.util.Timer;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.executor.ExecutorFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import pep.bp.bussinessprocess.MainProcess;
@@ -35,7 +36,8 @@ public class Main {
         PmPacket376ServerIoHandler serverIoHandle = new PmPacket376ServerIoHandler(rtuMap);
         NioSocketAcceptor acceptor = new NioSocketAcceptor();
         acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );
-        acceptor.getFilterChain().addLast("protocol", new ProtocolCodecFilter(new PmPacket376CodecFactory()));       
+        acceptor.getFilterChain().addLast("protocol", new ProtocolCodecFilter(new PmPacket376CodecFactory()));
+
         acceptor.setDefaultLocalAddress(new InetSocketAddress(PORT));
         acceptor.setHandler(serverIoHandle);
         acceptor.bind();
