@@ -45,9 +45,6 @@ public class RtuCommunicationInfo {
     private static final long TIME_OUT = 10 * 1000;
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
-    //add by lijun
-    private final static int reSendTimes = 3;
-
     private class SeqPacket {
 
         private int sequence;
@@ -86,11 +83,9 @@ public class RtuCommunicationInfo {
         return this.session;
     }
 
-    public RtuCommunicationInfo setTcpSession(IoSession session) {
+    public synchronized RtuCommunicationInfo setTcpSession(IoSession session) {
         this.isTcp = true;
-        synchronized (this) {
-            this.session = session;
-        }
+        this.session = session;
         this.sendNextPacket(true);
         return this;
     }
@@ -99,7 +94,7 @@ public class RtuCommunicationInfo {
         this.session = null;
     }
 
-    public void receiveRtuUploadPacket(PmPacket packet) {
+    public synchronized void receiveRtuUploadPacket(PmPacket packet) {
         ControlCode ctrlCode = packet.getControlCode();
         Seq seq = packet.getSeq();
         if ((!ctrlCode.getIsOrgniger()) && ctrlCode.getIsUpDirect()
@@ -108,34 +103,30 @@ public class RtuCommunicationInfo {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
                         packet, SequencedPmPacket.Status.SUSSESS));
-                synchronized (this) {
-                    this.idle = true;
-                }
+                this.idle = true;
                 sendNextPacket(false);
             } else {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
                         packet, SequencedPmPacket.Status.TO_BE_CONTINUE));
-                synchronized (this) {
-                    this.currentRespSeq++;
-                    this.currentRespSeq &= 0x0F;
-                    this.currentSendTicket = new Date();
-                }
+                this.currentRespSeq++;
+                this.currentRespSeq &= 0x0F;
+                this.currentSendTicket = new Date();
             }
         }
     }
 
-    public void callRtuEventRecord(EventCountor ec) {
+    public synchronized void callRtuEventRecord(EventCountor ec) {
         PmPacket376 pack1 = PmPacket376Factroy.makeCallEventRecordPacket(RtuCommunicationInfo.EC_CALL_HOST_ID,
                 this.rtua, 1, this.lastEc1, ec.getEc1());
-        sendPacket(0, pack1,0);
+        sendPacket(0, pack1, 0);
 
         PmPacket376 pack2 = PmPacket376Factroy.makeCallEventRecordPacket(RtuCommunicationInfo.EC_CALL_HOST_ID,
                 this.rtua, 2, this.lastEc2, ec.getEc2());
-        sendPacket(0, pack2,0);
+        sendPacket(0, pack2, 0);
     }
 
-    public void sendPacket(int sequence, PmPacket packet, int priorityLevel) {
+    public synchronized void sendPacket(int sequence, PmPacket packet, int priorityLevel) {
         addPacket(sequence, packet, priorityLevel);
         if (this.idle) {
             sendNextPacket(false);
@@ -143,14 +134,14 @@ public class RtuCommunicationInfo {
             LOGGER.info("Send packet: " + this.rtua + " not idle, sequence=" + sequence
                     + ", pack=" + packet.toString());
         }
-        //}
     }
 
     private void addPacket(int sequence, PmPacket packet, int priorityLevel) {
-        if (priorityLevel==0)
+        if (priorityLevel == 0) {
             this.unsendPacket0.add(new SeqPacket(sequence, packet));
-        else
+        } else {
             this.unsendPacket.add(new SeqPacket(sequence, packet));
+        }
     }
 
     private void sendNextPacket(boolean forceSend) {
@@ -169,8 +160,8 @@ public class RtuCommunicationInfo {
                 this.idle = true;
             }
         } else {
-            boolean firstSent = this.currentSendTimes==1;
-            if ((forceSend)&&(!firstSent)&&(new Date().getTime() - this.currentSendTicket.getTime()>1000)) {
+            boolean firstSent = this.currentSendTimes == 1;
+            if ((forceSend) && (!firstSent) && (new Date().getTime() - this.currentSendTicket.getTime() > 1000)) {
                 this.doSendPacket();
             }
         }
@@ -178,10 +169,11 @@ public class RtuCommunicationInfo {
 
     private SeqPacket pollPacket() {
         SeqPacket seqPacket = unsendPacket0.poll();
-        if (seqPacket!=null)
+        if (seqPacket != null) {
             return seqPacket;
-        else
+        } else {
             return unsendPacket.poll();
+        }
     }
 
     private void doSendPacket() {
@@ -197,7 +189,6 @@ public class RtuCommunicationInfo {
                     LOGGER.info("DoSend: " + rtua + " sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
                     this.session.write(this.currentPacket);
-                    //sendPacket(this.currentPacket);
                 } else {
                     LOGGER.info("DoSend: " + rtua + " not online, sequence="
                             + this.currentSequence + ", pack=" + this.currentPacket.toString());
@@ -216,11 +207,11 @@ public class RtuCommunicationInfo {
      * 到达重复发送检查点，重复发送是由外部定时器发起的，到达一个检查节拍时
      * 向所有Rtu通讯对象发送到达重复检查点消息
      */
-    public void checkNotResponed(Date checkTime) {
+    public synchronized void checkNotResponed(Date checkTime) {
         if (this.currentSendTicket == null) {
             return;
         }
-        if (this.idle){
+        if (this.idle) {
             return;
         }
         if (checkTime.getTime() - this.currentSendTicket.getTime() >= RtuCommunicationInfo.TIME_OUT) {
@@ -228,34 +219,13 @@ public class RtuCommunicationInfo {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence, this.currentPacket,
                         SequencedPmPacket.Status.TIME_OUT));
-                synchronized (this) {
-                    this.idle = true;
-                }
-                LOGGER.info(rtua+" Timeout, send next packet."+this.unsendPacket0.size()+"priority packets "+this.unsendPacket.size()+" other packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                this.idle = true;
+                LOGGER.info(rtua + " Timeout, send next packet." + this.unsendPacket0.size() + "priority packets " + this.unsendPacket.size() + " other packets waiting for sending" + " checkTime=" + checkTime.toString() + ", lastSendime=" + this.currentSendTicket.toString());
                 sendNextPacket(false);
             } else {
-                LOGGER.info(rtua+" Timeout, resend packet. "+this.unsendPacket0.size()+"priority packets "+this.unsendPacket.size()+" other packets waiting for sending"+" checkTime="+checkTime.toString()+", lastSendime="+ this.currentSendTicket.toString());
+                LOGGER.info(rtua + " Timeout, resend packet. " + this.unsendPacket0.size() + "priority packets " + this.unsendPacket.size() + " other packets waiting for sending" + " checkTime=" + checkTime.toString() + ", lastSendime=" + this.currentSendTicket.toString());
                 doSendPacket();
             }
         }
     }
-
-//    /**
-//     *  add by lijun 2011.8.22  单次发送重发
-//     */
-//    private void sendPacket(PmPacket packet){
-//        if(null != packet){
-//            WriteFuture future = this.session.write(packet);
-//            future.awaitUninterruptibly(1000);
-//             if (future.getException() != null) {
-//                 LOGGER.error(future.getException().getMessage());
-//        }
-//            if(future.isWritten()) {
-//                LOGGER.info("DoSend: Successfully!");
-//            }
-//            else
-//                LOGGER.info("DoSend: Failed!");
-//        }
-//
-//    }
 }
