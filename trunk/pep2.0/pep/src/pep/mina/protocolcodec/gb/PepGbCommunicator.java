@@ -101,6 +101,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
             rtu = new RtuCommunicationInfo(rtua, null);
             putRtuCommunicationInfo(rtua, rtu);
         }
+        rtu.setTcpSession(session);
 
         if (!pack.getControlCode().getIsOrgniger()) {
             rtu.receiveRtuUploadPacket(pack);
@@ -111,10 +112,6 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
         if ((pack.getControlCode().getIsUpDirect()) && (pack.getControlCode().getUpDirectIsAppealCall())) {//要求访问
             rtu.callRtuEventRecord(pack.getEC());
         }
-
-        //if ((rtu.getSession() == null)||(rtu.getSession()!=session)) {
-            rtu.setTcpSession(session);
-        //}
     }
     
     private void addAutoUploadPacket(PmPacket pack){
