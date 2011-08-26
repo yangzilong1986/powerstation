@@ -63,6 +63,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
             PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
             session.write(respPack);
+            LOGGER.info("session : "+session.toString());
         }
 
         rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
@@ -99,9 +100,9 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     public void messageSent(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
         if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-            LOGGER.info("Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
+            LOGGER.info("session : "+session.toString()+", Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-      //      commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
+            commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
         }
     }
 
