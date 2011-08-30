@@ -40,7 +40,6 @@ public class ResponseDealer extends BaseProcessor {
             //检查返回
             try {
                 SequencedPmPacket packet = respQueue.PollPacket();
-
                 if ((packet.status == Status.SUSSESS) || (packet.status == Status.TO_BE_CONTINUE)) {
                     if (packet.pack.getAddress().getMastStationId() == RtuCommunicationInfo.AUTO_CALL_TASK_HOSTID)//主动轮召任务返回处理
                     {
