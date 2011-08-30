@@ -99,6 +99,7 @@ public class RtuCommunicationInfo {
         Seq seq = packet.getSeq();
         if ((!ctrlCode.getIsOrgniger()) && ctrlCode.getIsUpDirect()
                 && (seq.getSeq() == this.currentRespSeq)) { //上行响应帧
+            LOGGER.info("向后台发送收到的响应帧"+packet.toString());
             if (seq.getIsFinishFrame()) {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
@@ -113,6 +114,9 @@ public class RtuCommunicationInfo {
                 this.currentRespSeq &= 0x0F;
                 this.currentSendTicket = new Date();
             }
+        }
+        else{
+           LOGGER.info("非预期的终端响应帧，非响应帧或者非上行帧或者seq不一致"+packet.toString());
         }
     }
 

@@ -35,6 +35,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
+        LOGGER.info("session ("+session.toString()+")closed");
         if (session.getAttribute(SESSION_RTUS) != null) {
             TreeSet<String> rtus = (TreeSet<String>) session.getAttribute(SESSION_RTUS);
             for (String rtua : rtus) {
@@ -50,7 +51,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     public void messageReceived(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
         String rtua = pack.getAddress().getRtua();
-        showReceivePacket(rtua,pack);
+        showReceivePacket(session,rtua,pack);
 
         if (!pack.getControlCode().getIsUpDirect()) {
             return;
@@ -63,7 +64,6 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (pack.getControlCode().getIsOrgniger()) {//主动上送
             PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
             session.write(respPack);
-            LOGGER.info("session : "+session.toString());
         }
 
         rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
@@ -78,9 +78,9 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         return isActiveTestPack(pack)&&(!showActTestPack);
     }
 
-    private void showReceivePacket(String rtua, PmPacket376 pack){
+    private void showReceivePacket(IoSession session, String rtua, PmPacket376 pack){
         if (!needNotShow(pack)){
-            LOGGER.info("Receive from rtua<" + rtua + ">: " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
+            LOGGER.info("Receive from rtua<" + rtua + "> session("+session.toString()+"): " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
         }
     }
 
@@ -100,7 +100,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     public void messageSent(IoSession session, Object message) throws Exception {
         PmPacket376 pack = (PmPacket376) message;
         if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-            LOGGER.info("session : "+session.toString()+", Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
+            LOGGER.info("session ( "+session.toString()+"), Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
             commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
         }
@@ -109,5 +109,6 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     @Override
     public void exceptionCaught(IoSession session, Throwable thrml){
         LOGGER.info("Catch a exception: "+ thrml.getMessage());
+        session.close(true); //close immediately.
     }
 }
