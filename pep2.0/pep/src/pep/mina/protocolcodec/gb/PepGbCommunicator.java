@@ -9,6 +9,8 @@ import pep.mina.common.RtuAutoUploadPacketQueue;
 import java.util.Map;
 import java.util.TreeMap;
 import org.apache.mina.core.session.IoSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pep.codec.protocol.gb.PmPacket;
 import pep.mina.common.PepCommunicatorInterface;
 import pep.mina.common.RtuConnectEventHandler;
@@ -24,6 +26,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
     private Map<String, RtuCommunicationInfo> rtuSessionMap;
     private RtuConnectEventHandler rtuConnectEventHandler;
     private RtuAutoUploadPacketQueue autoUploadPacketQueue;  //接收到的报文或不在线/超时错误返回报文
+    private final static Logger LOGGER = LoggerFactory.getLogger(PepGbCommunicator.class);
 
     public PepGbCommunicator() {
         rtuSessionMap = new TreeMap<String, RtuCommunicationInfo>();
@@ -117,6 +120,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
     private void addAutoUploadPacket(PmPacket pack){
         if (pack.getAfn() != 2) //主动上送
         {
+            LOGGER.info("向业务层发送收到的终端主动上送报文："+pack.toString());
             autoUploadPacketQueue.addPacket(pack);
         }
     }
