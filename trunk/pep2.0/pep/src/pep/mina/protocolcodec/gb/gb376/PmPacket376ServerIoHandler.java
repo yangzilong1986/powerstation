@@ -49,25 +49,26 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
-        PmPacket376 pack = (PmPacket376) message;
-        String rtua = pack.getAddress().getRtua();
-        showReceivePacket(session,rtua,pack);
+        if (message != null) {
+            PmPacket376 pack = ((PmPacket376) message).clone();
+            String rtua = pack.getAddress().getRtua();
+            showReceivePacket(session, rtua, pack);
 
-        if (!pack.getControlCode().getIsUpDirect()) {
-            return;
+            if (!pack.getControlCode().getIsUpDirect()) {
+                return;
+            }
+
+            commLogWriter.insertLog(rtua, BcdUtils.binArrayToString(pack.getValue()), "U");
+
+            registRtua(session, rtua);
+
+            if (pack.getControlCode().getIsOrgniger()) {//主动上送
+                PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
+                session.write(respPack);
+            }
+
+            rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
         }
-        
-        commLogWriter.insertLog(rtua,BcdUtils.binArrayToString(pack.getValue()),"U" );
-
-        registRtua(session, rtua);
-
-        if (pack.getControlCode().getIsOrgniger()) {//主动上送
-            PmPacket376 respPack = PmPacket376Factroy.makeAcKnowledgementPack(pack, 3, (byte) 0);
-            session.write(respPack);
-        }
-
-        rtuMap.rtuReceiveTcpPacket(rtua, session, pack);
-        
     }
 
     private boolean isActiveTestPack(PmPacket376 pack){
@@ -98,11 +99,13 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     @Override
     public void messageSent(IoSession session, Object message) throws Exception {
-        PmPacket376 pack = (PmPacket376) message;
-        if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-            LOGGER.info("session ( "+session.toString()+"), Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
-                    + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-            commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
+        if (message != null) {
+            PmPacket376 pack = ((PmPacket376) message).clone();
+            if (!((pack.getAfn() == 2) && (!showActTestPack))) {
+                LOGGER.info("session ( " + session.toString() + "), Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
+                        + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
+                commLogWriter.insertLog(pack.getAddress().getRtua(), BcdUtils.binArrayToString(pack.getValue()), "D");
+            }
         }
     }
 
