@@ -7,7 +7,6 @@
  */
 package pep.bp.db.commLog;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,25 +24,28 @@ public class CommLogWriter extends TimerTask {
     protected ApplicationContext cxt;
     public static final int maxCacheTime = 10 * 1000;//最大缓存时间
     public static final int maxCacheSize = 100;//最大缓存报文条数
-    private static final List<CommLogDAO> commLogList = new ArrayList<CommLogDAO>();
+    private final List<CommLogDAO> commLogList;
     private static final CommLogWriter commLogWriterInstance = new CommLogWriter();
     private CommLogService commLogService;
 
     private CommLogWriter() {
         super();
+        commLogList = new ArrayList<CommLogDAO>();
         cxt = new ClassPathXmlApplicationContext(SystemConst.SPRING_BEANS);
         commLogService = (CommLogService) cxt.getBean(SystemConst.COMMLOG_BEAN);
         log.info("启动通信日志记录器....");
     }
 
     private void insertLogs() {
-        synchronized (commLogList) {
+        List<CommLogDAO> worklist = new ArrayList<CommLogDAO>();
+        synchronized (this.commLogList) {
             try {
-                commLogService.insertLogs(commLogList);
+                worklist.addAll(commLogList);
             } finally {
-                CommLogWriter.commLogList.clear();
+                commLogList.clear();
             }
         }
+        commLogService.insertLogs(worklist);
     }
 
     public static CommLogWriter getInstance() {
@@ -51,7 +53,7 @@ public class CommLogWriter extends TimerTask {
     }
 
     public void insertLog(String rtua, String message, String direction) {
-        synchronized (commLogList) {
+        synchronized (this.commLogList) {
             CommLogDAO commLog = new CommLogDAO(rtua, message, new Time(System.currentTimeMillis()), direction);
             commLogList.add(commLog);
 //            if (commLogList.size() >= maxCacheSize) {
