@@ -108,5 +108,6 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     @Override
     public void exceptionCaught(IoSession session, Throwable thrml){
         LOGGER.info("Catch a exception: "+ thrml.getMessage());
+        session.close(true);
     }
 }

@@ -33,7 +33,7 @@ public class Main {
         PepGbCommunicator rtuMap = new PepGbCommunicator();
         PmPacket376ServerIoHandler serverIoHandle = new PmPacket376ServerIoHandler(rtuMap);
         NioSocketAcceptor acceptor = new NioSocketAcceptor();
-        acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );
+        //acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );
         acceptor.getFilterChain().addLast("protocol", new ProtocolCodecFilter(new PmPacket376CodecFactory()));
 
         acceptor.setDefaultLocalAddress(new InetSocketAddress(PORT));
