@@ -234,6 +234,11 @@ abstract public class PmPacket {
         return -1;
     }
 
+    public static int getMsgEndOffset(byte[] msg, int head){
+           int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0x0100) >> 2;
+           return head+len+7;
+    }
+
     private static int getHeadOffset(byte[] msg, int beginIndex, byte protocolVersion) {
         int head = -1;
 
