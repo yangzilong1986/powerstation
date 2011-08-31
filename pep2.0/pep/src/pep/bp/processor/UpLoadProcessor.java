@@ -50,16 +50,16 @@ public class UpLoadProcessor extends BaseProcessor {
                 PmPacket376 packet = (PmPacket376) upLoadQueue.PollPacket();
                 if (packet.getAfn() == 0x0C) {
                     decodeAndSaveClassOneData(packet);
-                    log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
+                    //log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else if(packet.getAfn() == 0x10){
                     decodeAndSaveClasTransMitData(packet);
-                    log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
+                   // log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else if (packet.getAfn() == 0x0D) {
                     decodeAndSaveClassTwoData(packet);
-                    log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
+                   // log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else if (packet.getAfn() == 0x0E) {
                     DecodeEventAndSave(packet);
-                    log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
+                 //   log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else {
                     log.error("收到不支持的主动上送报文类" + BcdUtils.binArrayToString(packet.getValue()));
                 }

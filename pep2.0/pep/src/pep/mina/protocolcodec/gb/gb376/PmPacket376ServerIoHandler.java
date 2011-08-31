@@ -26,7 +26,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
     private final static String SESSION_RTUS = PmPacket376ServerIoHandler.class.getName() + ".rtus";
     private final static Logger LOGGER = LoggerFactory.getLogger(PmPacket376ServerIoHandler.class);
     //add by lijun
-    private CommLogWriter  commLogWriter = CommLogWriter.getInstance();
+  //  private CommLogWriter  commLogWriter = CommLogWriter.getInstance();
 
     public PmPacket376ServerIoHandler(PepGbCommunicator rtuMap) {
         super();
@@ -35,7 +35,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     @Override
     public void sessionClosed(IoSession session) throws Exception {
-        LOGGER.info("session ("+session.toString()+")closed");
+      //  LOGGER.info("session ("+session.toString()+")closed");
         if (session.getAttribute(SESSION_RTUS) != null) {
             TreeSet<String> rtus = (TreeSet<String>) session.getAttribute(SESSION_RTUS);
             for (String rtua : rtus) {
@@ -58,7 +58,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
                 return;
             }
 
-            commLogWriter.insertLog(rtua, BcdUtils.binArrayToString(pack.getValue()), "U");
+          //  commLogWriter.insertLog(rtua, BcdUtils.binArrayToString(pack.getValue()), "U");
 
             registRtua(session, rtua);
 
@@ -81,7 +81,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
 
     private void showReceivePacket(IoSession session, String rtua, PmPacket376 pack){
         if (!needNotShow(pack)){
-            LOGGER.info("Receive from rtua<" + rtua + "> session("+session.toString()+"): " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
+            LOGGER.info("Receive from rtua<" + rtua + "> : " + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
         }
     }
 
@@ -102,9 +102,9 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (message != null) {
             PmPacket376 pack = ((PmPacket376) message).clone();
             if (!((pack.getAfn() == 2) && (!showActTestPack))) {
-                LOGGER.info("session ( " + session.toString() + "), Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
+                LOGGER.info("Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                         + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-                commLogWriter.insertLog(pack.getAddress().getRtua(), BcdUtils.binArrayToString(pack.getValue()), "D");
+   //             commLogWriter.insertLog(pack.getAddress().getRtua(), BcdUtils.binArrayToString(pack.getValue()), "D");
             }
         }
     }
