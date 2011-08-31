@@ -15,7 +15,6 @@ import pep.codec.protocol.gb.EventCountor;
 import pep.codec.protocol.gb.Seq;
 import pep.codec.protocol.gb.gb376.PmPacket376;
 import pep.codec.protocol.gb.gb376.PmPacket376Factroy;
-import pep.codec.utils.BcdUtils;
 import pep.mina.common.RtuRespPacketQueue;
 import pep.mina.common.SequencedPmPacket;
 
@@ -100,7 +99,7 @@ public class RtuCommunicationInfo {
         Seq seq = packet.getSeq();
         if ((!ctrlCode.getIsOrgniger()) && ctrlCode.getIsUpDirect()
                 && (seq.getSeq() == this.currentRespSeq)) { //上行响应帧
-            LOGGER.info("向后台发送收到的响应帧"+BcdUtils.binArrayToString(packet.getValue()));
+            LOGGER.info("向后台发送收到的响应帧"+packet.toString());
             if (seq.getIsFinishFrame()) {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,
@@ -117,7 +116,7 @@ public class RtuCommunicationInfo {
             }
         }
         else{
-           LOGGER.info("非预期的终端响应帧，非响应帧或者非上行帧或者seq不一致"+BcdUtils.binArrayToString(packet.getValue()));
+           LOGGER.info("非预期的终端响应帧，非响应帧或者非上行帧或者seq不一致"+packet.toString());
         }
     }
 
@@ -137,7 +136,7 @@ public class RtuCommunicationInfo {
             sendNextPacket(false);
         } else {
             LOGGER.info("Send packet: " + this.rtua + " not idle, sequence=" + sequence
-                    + ", pack=" +BcdUtils.binArrayToString(packet.getValue()));
+                    + ", pack=" + packet.toString());
         }
     }
 
@@ -192,11 +191,11 @@ public class RtuCommunicationInfo {
             if (this.currentSendTimes <= maxRetryTimes) {
                 if (this.session != null) {
                     LOGGER.info("DoSend: " + rtua + " sequence="
-                            + this.currentSequence + ", pack=" + BcdUtils.binArrayToString(this.currentPacket.getValue()));
+                            + this.currentSequence + ", pack=" + this.currentPacket.toString());
                     this.session.write(this.currentPacket);
                 } else {
                     LOGGER.info("DoSend: " + rtua + " not online, sequence="
-                            + this.currentSequence + ", pack=" + BcdUtils.binArrayToString(this.currentPacket.getValue()));
+                            + this.currentSequence + ", pack=" + this.currentPacket.toString());
                 }
 
                 if (!this.currentPacket.getControlCode().getIsOrgniger()) {
