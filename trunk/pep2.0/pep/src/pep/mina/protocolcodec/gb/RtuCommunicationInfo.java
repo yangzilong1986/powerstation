@@ -42,7 +42,7 @@ public class RtuCommunicationInfo {
     private static final byte EC_CALL_HOST_ID = 3;   //读取3类数据时使用的主站ID
     public final static byte AUTO_CALL_TASK_HOSTID = 2;
     public final static byte LOUBAO_OPRATE_HOSTID = 4;
-    private static final long TIME_OUT = 10 * 1000;
+    private static final long TIME_OUT = 20 * 1000;
     private final static Logger LOGGER = LoggerFactory.getLogger(RtuCommunicationInfo.class);
 
     private class SeqPacket {
@@ -60,7 +60,7 @@ public class RtuCommunicationInfo {
         super();
         this.rtua = rtua;
         currentSeq = 0;
-        maxRetryTimes = 2;
+        maxRetryTimes = 3;
         session = null;
         idle = true;
         lastEc1 = 0;
@@ -99,7 +99,7 @@ public class RtuCommunicationInfo {
         Seq seq = packet.getSeq();
         if ((!ctrlCode.getIsOrgniger()) && ctrlCode.getIsUpDirect()
                 && (seq.getSeq() == this.currentRespSeq)) { //上行响应帧
-            LOGGER.info("向后台发送收到的响应帧"+packet.toString());
+            //LOGGER.info("向后台发送收到的响应帧"+packet.toString());
             if (seq.getIsFinishFrame()) {
                 RtuRespPacketQueue.instance().addPacket(
                         new SequencedPmPacket(this.currentSequence,

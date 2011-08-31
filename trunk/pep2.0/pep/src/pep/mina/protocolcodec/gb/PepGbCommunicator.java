@@ -120,7 +120,7 @@ public class PepGbCommunicator implements PepCommunicatorInterface {
     private void addAutoUploadPacket(PmPacket pack){
         if (pack.getAfn() != 2) //主动上送
         {
-            LOGGER.info("向业务层发送收到的终端主动上送报文："+pack.toString());
+         //   LOGGER.info("向业务层发送收到的终端主动上送报文："+pack.toString());
             autoUploadPacketQueue.addPacket(pack);
         }
     }

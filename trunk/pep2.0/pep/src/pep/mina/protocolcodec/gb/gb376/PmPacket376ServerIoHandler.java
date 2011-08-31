@@ -56,7 +56,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
             return;
         }
         
-        commLogWriter.insertLog(rtua,BcdUtils.binArrayToString(pack.getValue()),"U" );
+        //commLogWriter.insertLog(rtua,BcdUtils.binArrayToString(pack.getValue()),"U" );
 
         registRtua(session, rtua);
 
@@ -101,7 +101,7 @@ public class PmPacket376ServerIoHandler extends IoHandlerAdapter {
         if (!((pack.getAfn() == 2) && (!showActTestPack))) {
             LOGGER.info(" Had Sent to rtua<" + pack.getAddress().getRtua() + ">: "
                     + BcdUtils.binArrayToString(pack.getValue()) + '\n' + pack.toString());
-            commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
+           // commLogWriter.insertLog(pack.getAddress().getRtua(),BcdUtils.binArrayToString(pack.getValue()),"D" );
         }
     }
 
