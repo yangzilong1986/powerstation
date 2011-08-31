@@ -27,7 +27,7 @@ public class PmPacket376Decoder extends CumulativeProtocolDecoder  {
         int len = in.remaining();       //有效byte数
         byte[] recieve = new byte[len];
         in.get(recieve);
-        LOGGER.info("====>"+BcdUtils.binArrayToString(recieve));
+        //LOGGER.info("====>"+BcdUtils.binArrayToString(recieve));
         int firstIndex = 0;
         int head = PmPacket376.getMsgHeadOffset(recieve,firstIndex);
         if (head!=-1) {
