@@ -1,0 +1,30 @@
+2011-06-30 10:59:14,187 NioProcessor-1 WARN  logging.LoggingFilter - EXCEPTION :
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:25)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:237)
+	at sun.nio.ch.IOUtil.read(IOUtil.java:210)
+	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:236)
+	at org.apache.mina.transport.socket.nio.NioProcessor.read(NioProcessor.java:202)
+	at org.apache.mina.transport.socket.nio.NioProcessor.read(NioProcessor.java:42)
+	at org.apache.mina.core.polling.AbstractPollingIoProcessor.read(AbstractPollingIoProcessor.java:620)
+	at org.apache.mina.core.polling.AbstractPollingIoProcessor.process(AbstractPollingIoProcessor.java:598)
+	at org.apache.mina.core.polling.AbstractPollingIoProcessor.process(AbstractPollingIoProcessor.java:587)
+	at org.apache.mina.core.polling.AbstractPollingIoProcessor.access$400(AbstractPollingIoProcessor.java:61)
+	at org.apache.mina.core.polling.AbstractPollingIoProcessor$Processor.run(AbstractPollingIoProcessor.java:969)
+	at org.apache.mina.util.NamePreservingRunnable.run(NamePreservingRunnable.java:64)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+2011-06-30 11:18:06,000 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:24:43,062 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:24:44,265 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:35:15,312 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:35:26,734 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:28,984 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:31,328 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:34,218 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:36,968 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:37,343 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:44:42,406 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
+2011-06-30 11:54:25,234 pool-3-thread-4 ERROR processor.ResponseDealer - 非法BCD字符
