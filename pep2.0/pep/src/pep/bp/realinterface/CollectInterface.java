@@ -7,7 +7,7 @@ import java.util.*;
 import pep.bp.realinterface.mto.*;
 /**
  *
- * @author Thinkpad
+ * @author LiJun
  */
 public interface CollectInterface {
     /**
