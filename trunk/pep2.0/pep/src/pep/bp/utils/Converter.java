@@ -157,68 +157,76 @@ public class Converter {
     }
 
     public List<PmPacket376> CollectObject_TransMit2PacketList(CollectObject_TransMit obj, StringBuffer commandMark) {
-        List<PmPacket376> results = new ArrayList<PmPacket376>();
-        List<CommandItem> CommandItems = obj.getCommandItems();
+        try {
+            List<PmPacket376> results = new ArrayList<PmPacket376>();
+            List<CommandItem> CommandItems = obj.getCommandItems();
 
-        for (CommandItem commandItem : CommandItems) {
+            for (CommandItem commandItem : CommandItems) {
 
-            PmPacket376 packet = new PmPacket376();
-            packet.setAfn(AFNType.AFN_TRANSMIT);//AFN
-            packet.getAddress().setRtua(obj.getTerminalAddr()); //逻辑地址
-            packet.getControlCode().setIsUpDirect(false);
-            packet.getControlCode().setIsOrgniger(true);
-            packet.getControlCode().setFunctionKey((byte) 1);
-            packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
-            packet.getControlCode().setDownDirectFrameCount((byte) 0);
-            packet.getSeq().setIsTpvAvalibe(true);
-            packet.getSeq().setIsFirstFrame(true);
-            packet.getSeq().setIsFinishFrame(true);
+                PmPacket376 packet = new PmPacket376();
+                packet.setAfn(AFNType.AFN_TRANSMIT);//AFN
+                packet.getAddress().setRtua(obj.getTerminalAddr()); //逻辑地址
+                packet.getControlCode().setIsUpDirect(false);
+                packet.getControlCode().setIsOrgniger(true);
+                packet.getControlCode().setFunctionKey((byte) 1);
+                packet.getControlCode().setIsDownDirectFrameCountAvaliable(true);
+                packet.getControlCode().setDownDirectFrameCount((byte) 0);
+                packet.getSeq().setIsTpvAvalibe(true);
+                packet.getSeq().setIsFirstFrame(true);
+                packet.getSeq().setIsFinishFrame(true);
 
-            commandMark.append(commandItem.getIdentifier()).append("#");
-            PmPacket376DA da = new PmPacket376DA(obj.getMpSn());
-            PmPacket376DT dt = new PmPacket376DT(1);
+                commandMark.append(commandItem.getIdentifier()).append("#");
+                PmPacket376DA da = new PmPacket376DA(obj.getMpSn());
+                PmPacket376DT dt = new PmPacket376DT(1);
 
-            //376规约组帧
-            packet.getDataBuffer().putDA(da);
-            packet.getDataBuffer().putDT(dt);
-            packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
-            packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
-            packet.getDataBuffer().put((byte) obj.getWaitforPacket());//透明转发接收等待报文超时时间
-            packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
+                //376规约组帧
+                packet.getDataBuffer().putDA(da);
+                packet.getDataBuffer().putDT(dt);
+                packet.getDataBuffer().putBin(obj.getPort(), 1);//终端通信端口号
+                packet.getDataBuffer().putBS8(obj.getSerialPortPara().toString());//透明转发通信控制字
+                packet.getDataBuffer().put((byte) obj.getWaitforPacket());//透明转发接收等待报文超时时间
+                packet.getDataBuffer().putBin(obj.getWaitforByte(), 1);//透明转发接收等待字节超时时间
 
-            //645规约组帧
-            if(null == obj.getMeterAddr()) continue;
-            Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
-            pack.setControlCode(true, false, false, (byte) obj.getFuncode());
-            byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8)));
-            pack.getDataAsPmPacketData().put(DI);
-            Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
-            Map<String, String> dataItemMap = commandItem.getDatacellParam();
-            if (dataItemMap != null) {
-                Iterator iterator = DataItemMap_Config.keySet().iterator();
-                while (iterator.hasNext()) {
-                    String DataItemCode = (String) iterator.next();
-                    ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
-                    String DataItemValue = dataItem.getDefaultValue();
-                    if ((dataItemMap != null) && (dataItemMap.containsKey(DataItemCode))) {
-                        DataItemValue = dataItemMap.get(DataItemCode);
-                    }
-                    String Format = dataItem.getFormat();
-                    String IsGroupEnd = dataItem.getIsGroupEnd();
-                    int Length = dataItem.getLength();
-                    int bitnumber = dataItem.getBitNumber();
-                    this.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                //645规约组帧
+                if (null == obj.getMeterAddr()) {
+                    continue;
                 }
-            }
-            // pack.getDataAsPmPacketData().rewind();
-            packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
-            packet.getDataBuffer().put(pack.getValue());
+                Gb645MeterPacket pack = new Gb645MeterPacket(obj.getMeterAddr());
+                pack.setControlCode(true, false, false, (byte) obj.getFuncode());
+                byte[] DI = BcdUtils.reverseBytes(BcdUtils.stringToByteArray(commandItem.getIdentifier().substring(4, 8)));
+                pack.getDataAsPmPacketData().put(DI);
+                Map<String, ProtocolDataItem> DataItemMap_Config = config.getDataItemMap(commandItem.getIdentifier());
+                Map<String, String> dataItemMap = commandItem.getDatacellParam();
+                if (dataItemMap != null) {
+                    Iterator iterator = DataItemMap_Config.keySet().iterator();
+                    while (iterator.hasNext()) {
+                        String DataItemCode = (String) iterator.next();
+                        ProtocolDataItem dataItem = DataItemMap_Config.get(DataItemCode);
+                        String DataItemValue = dataItem.getDefaultValue();
+                        if ((dataItemMap != null) && (dataItemMap.containsKey(DataItemCode))) {
+                            DataItemValue = dataItemMap.get(DataItemCode);
+                        }
+                        String Format = dataItem.getFormat();
+                        String IsGroupEnd = dataItem.getIsGroupEnd();
+                        int Length = dataItem.getLength();
+                        int bitnumber = dataItem.getBitNumber();
+                        this.FillDataBuffer(pack.getDataAsPmPacketData(), Format, DataItemValue, IsGroupEnd, Length, bitnumber);
+                    }
+                }
+                // pack.getDataAsPmPacketData().rewind();
+                packet.getDataBuffer().putBin(pack.getValue().length, 2);//透明转发内容字节数k
+                packet.getDataBuffer().put(pack.getValue());
 
-            packet.setAuthorize(new Authorize());
-            packet.setTpv(new TimeProtectValue());//时间标签
-            results.add(packet);
+                packet.setAuthorize(new Authorize());
+                packet.setTpv(new TimeProtectValue());//时间标签
+                results.add(packet);
+            }
+            return results;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
         }
-        return results;
+
     }
 
     private Boolean IsSeqValid(CommandItem commandItem) {
@@ -393,7 +401,9 @@ public class Converter {
             String DataItemCode = dataItem.getDataItemCode();
             DataItemValue = dataItem.getDefaultValue();
             if (DataItemValue.equals("YESTERDAY")) //抄上一天
+            {
                 DataItemValue = UtilsBp.getYeasterday();
+            }
 
             if (dataItemMap != null) {
                 if (dataItemMap.containsKey(DataItemCode)) {
@@ -566,7 +576,7 @@ public class Converter {
             packetdata.putA27(new DataTypeA27(Long.parseLong(DataItemValue)));
         } else if (Format.equals("A29")) {
             packetdata.putBcdInt(Long.parseLong(DataItemValue), 1);
-        }else if (Format.equals("DATE_LOUBAO")) {
+        } else if (Format.equals("DATE_LOUBAO")) {
             try {
                 packetdata.put(UtilsBp.String2DateArray(DataItemValue, "yyyy-MM-dd HH:mm:ss"));
             } catch (ParseException ex) {
