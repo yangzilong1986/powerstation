@@ -59,7 +59,7 @@ public class UpLoadProcessor extends BaseProcessor {
                    // log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else if (packet.getAfn() == 0x0E) {
                     DecodeEventAndSave(packet);
-                 //   log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
+                    log.info("对报文： " + BcdUtils.binArrayToString(packet.getValue())+" 做入库处理成功");
                 } else {
                     log.error("收到不支持的主动上送报文类" + BcdUtils.binArrayToString(packet.getValue()));
                 }
