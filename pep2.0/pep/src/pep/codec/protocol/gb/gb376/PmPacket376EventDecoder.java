@@ -18,7 +18,7 @@ public class PmPacket376EventDecoder {
     public static List<PmPacket376EventBase> decode(BcdDataBuffer data) {
         List<PmPacket376EventBase> eventList = new ArrayList<PmPacket376EventBase>();
         if (data.restBytes() >= 8) {
-            data.getBytes(4); //afn
+            //data.getBytes(4); //afn
             data.getBytes(4); //event contex
             while (data.restBytes() >= 7) {
                 byte erc = (byte) data.getByte();
@@ -26,8 +26,12 @@ public class PmPacket376EventDecoder {
                 if (data.restBytes() < eventlen) {
                     break;
                 }
-                Date eventTime = data.getDate("MIHHDDMMYY");
-                eventlen -= 5;
+                if(erc!=14)
+                {
+                  Date eventTime = data.getDate("MIHHDDMMYY");
+                  eventlen -= 5;
+                }
+                
                 PmPacket376EventBase event;
                 if (erc == 36) {
                     event = new Packet376Event36();
@@ -35,7 +39,8 @@ public class PmPacket376EventDecoder {
                     event = new Packet376EventNormal();
                 }
                 event.erc = erc;
-                event.eventTime = eventTime;
+                if(erc==14)
+                    event.eventTime = new java.util.Date();
                 event.DecodeEventDetail(data, eventlen);
                 eventList.add(event);
             }
