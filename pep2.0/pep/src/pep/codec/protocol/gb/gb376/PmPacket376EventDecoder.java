@@ -16,6 +16,7 @@ import pep.codec.utils.BcdDataBuffer;
 public class PmPacket376EventDecoder {
 
     public static List<PmPacket376EventBase> decode(BcdDataBuffer data) {
+        Date eventTime =new java.util.Date();
         List<PmPacket376EventBase> eventList = new ArrayList<PmPacket376EventBase>();
         if (data.restBytes() >= 8) {
             //data.getBytes(4); //afn
@@ -28,7 +29,7 @@ public class PmPacket376EventDecoder {
                 }
                 if(erc!=14)
                 {
-                  Date eventTime = data.getDate("MIHHDDMMYY");
+                  eventTime = data.getDate("MIHHDDMMYY");
                   eventlen -= 5;
                 }
                 
@@ -39,8 +40,7 @@ public class PmPacket376EventDecoder {
                     event = new Packet376EventNormal();
                 }
                 event.erc = erc;
-                if(erc==14)
-                    event.eventTime = new java.util.Date();
+                event.eventTime = eventTime;
                 event.DecodeEventDetail(data, eventlen);
                 eventList.add(event);
             }
