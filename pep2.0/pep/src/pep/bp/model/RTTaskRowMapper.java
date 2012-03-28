@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author Thinkpad
  */
+
 public class RTTaskRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int index) throws SQLException{

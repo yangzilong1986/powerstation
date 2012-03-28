@@ -7,6 +7,7 @@ package pep.bp.db;
 
 import java.util.List;
 import javax.sql.DataSource;
+import javax.swing.tree.RowMapper;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.dao.DataAccessException;
@@ -43,7 +44,7 @@ public class PSServiceIMP implements  PSService{
 
             String SQL = sbSQL.toString();
           //  List rs = jdbcTemplate.queryForList(SQL);
-            List<PSDAO> results = (List<PSDAO>) jdbcTemplate.query(SQL,new Object[]{testDay,testHour}, new PSRowMapper());
+            List<PSDAO> results = jdbcTemplate.query(SQL,new Object[]{testDay,testHour}, new PSRowMapper());
 
             return results;
         } catch (DataAccessException dataAccessException) {
