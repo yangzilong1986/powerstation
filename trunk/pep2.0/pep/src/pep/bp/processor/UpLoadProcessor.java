@@ -100,7 +100,7 @@ public class UpLoadProcessor extends BaseProcessor {
             List<PmPacket376EventBase> events = PmPacket376EventDecoder.decode(new BcdDataBuffer(data.getRowIoBuffer()));
 
             for (PmPacket376EventBase event : events) {
-                if (event.GetEventCode() == 36) {
+                if (event.GetEventCode() == 36) {//漏保事件
                     Packet376Event36 event36 = (Packet376Event36) event;
                     saveLoubaoEvent(rtua, event36);
                 } else {
