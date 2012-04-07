@@ -166,10 +166,11 @@ public class RTTaskServiceIMP implements RTTaskService {
             SQL += " and a.task_type = 2";
             jdbcTemplate.update(SQL.toString());
 
-            //查询未同步试跳任务
+            //查询当天未同步试跳任务
             SQL = "select TASK_ID,SEQUENCE_CODE,LOGICAL_ADDR,SEND_MSG,POST_TIME,TASK_STATUS,GP_MARK,COMMAND_MARK";
             SQL += " from r_realtime_task a";
             SQL += " where not exists(select 1 from r_trip_plan b where a.task_id = b.task_id)";
+            SQL += " and to_char(post_time,'YYYYMMDD') =to_char(sysdate,'YYYYMMDD')";
             SQL += " and a.task_type = 2";
             List<RealTimeTaskDAO> results = (List<RealTimeTaskDAO>) jdbcTemplate.query(SQL, new RTTaskRowMapper());
             for(RealTimeTaskDAO  task : results){
