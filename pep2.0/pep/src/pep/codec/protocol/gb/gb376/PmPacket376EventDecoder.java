@@ -29,7 +29,7 @@ public class PmPacket376EventDecoder {
                 }
                 if(erc!=14)
                 {
-                  eventTime = data.getDate("SSMIHHDDMMYY");
+                  eventTime = data.getDate("MIHHDDMMYY");
                   eventlen -= 5;
                 }
                 
