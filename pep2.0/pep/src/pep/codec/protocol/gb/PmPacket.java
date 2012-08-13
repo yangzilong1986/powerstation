@@ -134,7 +134,7 @@ abstract public class PmPacket {
         int head = PmPacket.getMsgHeadOffset(msg, getProtocolVersion(), firstIndex);
         if (head != -1) {
             int auxPassedBytes = 0;
-            int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0xFF) >> 2;
+            int len = (BcdUtils.byteToUnsigned(msg[head + 1]) + BcdUtils.byteToUnsigned(msg[head + 2]) * 0x100) >> 2;
             controlCode.setValue(msg[head + 6]);
             address.setValue(msg, head + 7);
             afn = msg[head + 12];
