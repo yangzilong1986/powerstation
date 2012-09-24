@@ -41,6 +41,8 @@ public class DataServiceIMP implements DataService{
     private PowerCurv_StoredProcedure powerCurvStoredProcedure;
     private PowerCurv_StoredProcedure2 powerCurvStoredProcedure2;
 
+    private HUMITURE_StoredProcedure humitureStoredProcedure;
+
     private EventStoredProcedure eventStoredProcedure;
     private LouBaoEventStoredProcedure loubaoEventStoredProcedure;
     private DAY_ECUR_STATIS_StoredProcedure ecurStatisStoredProcedur;
@@ -95,15 +97,21 @@ public class DataServiceIMP implements DataService{
                 }
 
                 if(commandItemCode.equals("100C0025")){//当前三相及总有/无功功率、功率因数，三相电压、电流、零序电流、视在功率
-                    insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //電壓/電流曲線
+                    this.insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //電壓/電流曲線
                                      dataItemMap.get("2201"),dataItemMap.get("2202"),dataItemMap.get("2203"),
                                      dataItemMap.get("2204"),"",dataItemMap.get("2101"),
-                                     dataItemMap.get("2102"),dataItemMap.get("2103"));
+                                     dataItemMap.get("2102"),dataItemMap.get("2103"),"00");
 
                     this.insert_POWER_CRUV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,  //功率曲線
                             dataItemMap.get("2300"),dataItemMap.get("2301"),dataItemMap.get("2302"),
                             dataItemMap.get("2303"),dataItemMap.get("2400"),dataItemMap.get("2401"),
-                            dataItemMap.get("2402"),dataItemMap.get("2403"));continue;
+                            dataItemMap.get("2402"),dataItemMap.get("2403"));
+
+                    //功率因数
+                    this.getPfcurvStoredProcedur().insert_power_factor(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2600"));
+                    this.getPfcurvStoredProcedur().insert_power_factor_a(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2601"));
+                    this.getPfcurvStoredProcedur().insert_power_factor_b(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2602"));
+                    this.getPfcurvStoredProcedur().insert_power_factor_c(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,dataItemMap.get("2603"));continue;
                 }
             }
 
@@ -215,10 +223,14 @@ public class DataServiceIMP implements DataService{
                     this.insertData_EC_CURV(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //電壓/電流曲線
                                      dataItemMap.get("B621"),dataItemMap.get("B622"),dataItemMap.get("B623"),"",
                                      dataItemMap.get("B660"),dataItemMap.get("B611"),
-                                     dataItemMap.get("B612"),dataItemMap.get("B613"));
+                                     dataItemMap.get("B612"),dataItemMap.get("B613"),
+                                     dataItemMap.get("8000B66F03"));
                     this.psStatusStoredProcedur.execute(dto.getLogicAddress(),dtoItem.gp,dtoItem.dataTime,   //漏保状态
                                      dataItemMap.get("8000B66F01"),dataItemMap.get("8000B66F02"),
                                      dataItemMap.get("8000B66F03"),dataItemMap.get("8000B66F04"));
+                }
+                if(commandItemCode.equals("100C0073")){//模拟量实时数据（温度）
+                    this.humitureStoredProcedure.execute(dto.getLogicAddress(),dtoItem.gp,"0",dataItemMap.get("BE16"));
                 }
             }
         }
@@ -294,11 +306,11 @@ public class DataServiceIMP implements DataService{
     //电压电流曲线
     private void insertData_EC_CURV(String logicalAddress,int gpSn,String dataDate,
             String ECUR_A,String ECUR_B,String ECUR_C,String ECUR_L,String ECUR_S,
-            String VOLT_A,String VOLT_B,String VOLT_C)
+            String VOLT_A,String VOLT_B,String VOLT_C,String PHASE)
     {
 
         try {
-            this.eccurvStoredProcedure.execute(logicalAddress, gpSn, dataDate, ECUR_A, ECUR_B, ECUR_C, ECUR_L, ECUR_S, VOLT_A, VOLT_B, VOLT_C);
+            this.eccurvStoredProcedure.execute(logicalAddress, gpSn, dataDate, ECUR_A, ECUR_B, ECUR_C, ECUR_L, ECUR_S, VOLT_A, VOLT_B, VOLT_C,PHASE);
         } catch (Exception e) {
             log.error("错误信息：", e.fillInStackTrace());
         }
@@ -319,6 +331,18 @@ public class DataServiceIMP implements DataService{
                     react_power_total, react_power_a, react_power_b, react_power_c);
         } catch (DataAccessException dataAccessException) {
             log.error(dataAccessException.getMessage());
+        }
+    }
+
+
+    //温度和湿度
+    private void insertData_HUMITURE(String logicalAddress,int gpSn,String humiture, String temperature)
+    {
+
+        try {
+            this.humitureStoredProcedure.execute(logicalAddress, gpSn, humiture, temperature);
+        } catch (Exception e) {
+            log.error("错误信息：", e.fillInStackTrace());
         }
     }
 
