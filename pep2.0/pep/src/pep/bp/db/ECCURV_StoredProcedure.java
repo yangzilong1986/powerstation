@@ -31,6 +31,7 @@ public class ECCURV_StoredProcedure extends StoredProcedure {
     private static final String VOLT_A_PARA = "p_volt_a";
     private static final String VOLT_B_PARA = "p_volt_b";
     private static final String VOLT_C_PARA = "p_volt_c";
+    private static final String PHASE_PARA = "p_phase";
 
     public ECCURV_StoredProcedure(){
         
@@ -49,13 +50,14 @@ public class ECCURV_StoredProcedure extends StoredProcedure {
             declareParameter(new SqlParameter(VOLT_A_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(VOLT_B_PARA,Types.VARCHAR));
             declareParameter(new SqlParameter(VOLT_C_PARA,Types.VARCHAR));
+            declareParameter(new SqlParameter(PHASE_PARA,Types.VARCHAR));
             compile();
     }
 
 
     public Map execute(String logicalAddress,int gpSn,String dataDate,
                         String ECUR_A,String ECUR_B,String ECUR_C,String ECUR_L,String ECUR_S,
-                        String VOLT_A,String VOLT_B,String VOLT_C)
+                        String VOLT_A,String VOLT_B,String VOLT_C,String PHASE)
     {
             Map<String,Object> inputs = new HashMap<String,Object>();
             inputs.put(LOGICADDRESS_PARA, logicalAddress);
@@ -69,6 +71,7 @@ public class ECCURV_StoredProcedure extends StoredProcedure {
             inputs.put(VOLT_A_PARA, VOLT_A);
             inputs.put(VOLT_B_PARA, VOLT_B);
             inputs.put(VOLT_C_PARA, VOLT_C);
+            inputs.put(PHASE_PARA, PHASE);
             return super.execute(inputs);
      }
 
